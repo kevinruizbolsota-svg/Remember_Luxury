@@ -159,6 +159,11 @@
   #input{flex:1;background:none;border:none;color:var(--texto);font-size:1.05rem;font-family:inherit;resize:none;outline:none;max-height:160px;padding:8px 0}
   #send{background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;border:none;border-radius:10px;width:44px;font-size:18px;cursor:pointer}
   #send:disabled{opacity:.4;cursor:default}
+  .iconbtn{background:var(--panel2);color:var(--oro);border:1px solid var(--border);border-radius:10px;width:44px;font-size:18px;cursor:pointer;transition:all .2s}
+  .iconbtn:hover{border-color:var(--oro);background:rgba(232,200,106,.1)}
+  .iconbtn.on{background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;border-color:var(--oro)}
+  #micBtn.rec{background:#c0392b;color:#fff;border-color:#e06;animation:pulseRec 1s infinite}
+  @keyframes pulseRec{0%,100%{box-shadow:0 0 0 0 rgba(224,0,102,.5)}50%{box-shadow:0 0 0 8px rgba(224,0,102,0)}}
   .overlay{position:absolute;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:50}
   .loginbox{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:36px;width:340px;text-align:center}
   .loginbox h2{color:var(--oro);margin-bottom:6px;font-family:'Cinzel',serif;letter-spacing:2px}
@@ -280,10 +285,18 @@
       <span class="title">KYBALIO</span>
       <select id="agente">
         <option value="GENERAL">General</option>
-        <option value="VENDEDOR">Vendedor / Ventas</option>
-        <option value="FILOSOFIA">Filosofia / Kybalion</option>
-        <option value="SOPORTE">Soporte</option>
+        <option value="FILOSOFIA">KYBALIO / Filosofia</option>
+        <option value="VENDEDOR">Vendedor de elite</option>
+        <option value="PROGRAMADOR">Programador senior</option>
+        <option value="INGRESOS">Estratega de ingresos</option>
+        <option value="TRADING">Analista de mercados</option>
+        <option value="FUENTES">Cazador de fuentes</option>
+        <option value="COPY">Copywriter / Contenido</option>
+        <option value="TRADUCTOR">Traductor</option>
+        <option value="CONSEJERO">Consejero personal</option>
+        <option value="SOPORTE">Soporte tecnico</option>
       </select>
+      <button id="speakBtn" class="iconbtn" onclick="toggleSpeak()" title="Leer las respuestas en voz alta" style="width:40px;font-size:16px;">&#128263;</button>
       <span class="cerrar" onclick="cerrarPortal()">&larr; Volver a la web</span>
     </div>
     <div id="messages"><div class="welcome"><h1>Hola</h1><p>Soy KYBALIO, el cerebro de La Ciudadela. Elige un proyecto arriba y escribe tu mensaje.</p></div></div>
@@ -298,7 +311,8 @@
         <span class="chip" onclick="quick('Resume de forma clara y breve: ')">&#128196; Resumir</span>
       </div>
       <div class="inputwrap">
-        <textarea id="input" rows="1" placeholder="Escribe tu mensaje... (Enter envia, Shift+Enter salta linea)"></textarea>
+        <textarea id="input" rows="1" placeholder="Escribe o habla por voz con el microfono..."></textarea>
+        <button id="micBtn" class="iconbtn" onclick="startMic()" title="Hablar por voz">&#127908;</button>
         <button id="send" onclick="sendMsg()" title="Enviar">&#10148;</button>
       </div>
     </div>
@@ -339,11 +353,34 @@
   function renderMsgs(){var m=document.getElementById("messages");m.innerHTML="";var c=chats[current];if(!c||!c.msgs.length){m.innerHTML="<div class=\"welcome\"><h1>Hola, "+escapeHtml(user)+"</h1><p>Elige un proyecto arriba y escribe tu mensaje.</p></div>";return;}for(var i=0;i<c.msgs.length;i++){addBubble(c.msgs[i].role,c.msgs[i].text,false);}m.scrollTop=m.scrollHeight;}
   function addBubble(role,text,scroll){var m=document.getElementById("messages");if(m.querySelector(".welcome"))m.innerHTML="";var d=document.createElement("div");d.className="msg";var isU=role==="user";d.innerHTML="<div class=\"avatar "+(isU?"u":"b")+"\">"+(isU?escapeHtml(user.charAt(0).toUpperCase()):"K")+"</div><div class=\"bubble\"><div class=\"who\">"+(isU?escapeHtml(user):"KYBALIO")+"</div>"+escapeHtml(text)+"</div>";m.appendChild(d);if(scroll)m.scrollTop=m.scrollHeight;return d;}
   function escapeHtml(t){var e=document.createElement("div");e.textContent=t;return e.innerHTML;}
-  function sendMsg(){var inp=document.getElementById("input");var text=inp.value.trim();if(!text||!current)return;var c=chats[current];c.msgs.push({role:"user",text:text});if(c.title==="Nueva conversacion")c.title=text.slice(0,34);inp.value="";inp.style.height="auto";addBubble("user",text,true);save();renderHist();var typing=addBubble("bot","",true);typing.querySelector(".bubble").innerHTML="<div class=\"who\">KYBALIO</div><span class=\"dots\"><span>.</span><span>.</span><span>.</span></span>";document.getElementById("send").disabled=true;fetch(WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:user,sesion:current,agente:document.getElementById("agente").value,mensaje:text})}).then(function(r){return r.json();}).then(function(data){var resp=(data&&(data.respuesta||data.output))||"(sin respuesta)";typing.remove();c.msgs.push({role:"bot",text:resp});addBubble("bot",resp,true);save();}).catch(function(){typing.remove();var err="No pude conectar con el cerebro. Revisa que el Portal Central este publicado.";c.msgs.push({role:"bot",text:err});addBubble("bot",err,true);save();}).finally(function(){document.getElementById("send").disabled=false;});}
+  function sendMsg(){var inp=document.getElementById("input");var text=inp.value.trim();if(!text||!current)return;var c=chats[current];c.msgs.push({role:"user",text:text});if(c.title==="Nueva conversacion")c.title=text.slice(0,34);inp.value="";inp.style.height="auto";addBubble("user",text,true);save();renderHist();var typing=addBubble("bot","",true);typing.querySelector(".bubble").innerHTML="<div class=\"who\">KYBALIO</div><span class=\"dots\"><span>.</span><span>.</span><span>.</span></span>";document.getElementById("send").disabled=true;fetch(WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:user,sesion:current,agente:document.getElementById("agente").value,mensaje:text})}).then(function(r){return r.json();}).then(function(data){var resp=(data&&(data.respuesta||data.output))||"(sin respuesta)";typing.remove();c.msgs.push({role:"bot",text:resp});addBubble("bot",resp,true);save();if(window.__speak)speak(resp);}).catch(function(){typing.remove();var err="No pude conectar con el cerebro. Revisa que el Portal Central este publicado.";c.msgs.push({role:"bot",text:err});addBubble("bot",err,true);save();}).finally(function(){document.getElementById("send").disabled=false;});}
   function toggleSide(){document.getElementById("sidebar").classList.toggle("hidden");}
   function quick(prefijo){var i=document.getElementById("input");i.value=prefijo;i.focus();i.style.height="auto";i.style.height=Math.min(i.scrollHeight,160)+"px";i.setSelectionRange(i.value.length,i.value.length);}
   var inp=document.getElementById("input");inp.addEventListener("input",function(){this.style.height="auto";this.style.height=Math.min(this.scrollHeight,160)+"px";});inp.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMsg();}});
   document.getElementById("nameInput").addEventListener("keydown",function(e){if(e.key==="Enter")doLogin();});
+
+  /* ---- VOZ: HABLAR (micro -> texto) ---- */
+  var __rec=null;
+  function startMic(){
+    var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+    if(!SR){alert("Tu navegador no soporta dictado por voz. Usa Chrome en el celular o el PC.");return;}
+    var btn=document.getElementById("micBtn");
+    if(__rec){try{__rec.stop();}catch(e){}__rec=null;btn.classList.remove("rec");return;}
+    __rec=new SR();__rec.lang="es-CO";__rec.interimResults=true;__rec.continuous=false;
+    var inp=document.getElementById("input");var base=inp.value;
+    btn.classList.add("rec");
+    __rec.onresult=function(ev){var t="";for(var i=ev.resultIndex;i<ev.results.length;i++){t+=ev.results[i][0].transcript;}inp.value=(base?base+" ":"")+t;inp.style.height="auto";inp.style.height=Math.min(inp.scrollHeight,160)+"px";};
+    __rec.onerror=function(){btn.classList.remove("rec");__rec=null;};
+    __rec.onend=function(){btn.classList.remove("rec");__rec=null;var v=inp.value.trim();if(v)sendMsg();};
+    try{__rec.start();}catch(e){btn.classList.remove("rec");__rec=null;}
+  }
+  /* ---- VOZ: ESCUCHAR (texto -> voz) ---- */
+  window.__speak=(localStorage.getItem("ciudadela_speak")==="1");
+  function refreshSpeakBtn(){var b=document.getElementById("speakBtn");if(!b)return;if(window.__speak){b.classList.add("on");b.innerHTML="&#128266;";b.title="Voz activada: leo las respuestas";}else{b.classList.remove("on");b.innerHTML="&#128263;";b.title="Voz desactivada: toca para que lea en voz alta";}}
+  function toggleSpeak(){window.__speak=!window.__speak;localStorage.setItem("ciudadela_speak",window.__speak?"1":"0");refreshSpeakBtn();if(!window.__speak&&window.speechSynthesis){window.speechSynthesis.cancel();}else{speak("Voz activada.");}}
+  function speak(txt){if(!window.speechSynthesis)return;try{window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1;u.pitch=1;var vs=window.speechSynthesis.getVoices();var pref=vs.find(function(v){return /es/i.test(v.lang)&&/(male|hombre|jorge|diego|pablo|google espa)/i.test(v.name);})||vs.find(function(v){return /es/i.test(v.lang);});if(pref)u.voice=pref;window.speechSynthesis.speak(u);}catch(e){}}
+  refreshSpeakBtn();
+  if(window.speechSynthesis){window.speechSynthesis.onvoiceschanged=function(){};}
 
   /* ---- MUSICA ---- */
   var playlist=[],curTrack=-1;

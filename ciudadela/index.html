@@ -6,88 +6,142 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>REMEMBER LUXURY</title>
+<title>REMEMBER LUXURY &mdash; La Ciudadela</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --oro1:#b8860b; --oro2:#ffd700; --oro3:#8a6508; --neg:#0a0a0a;
+    --oro-claro:#f7e9bf;
+    --oro:#e8c86a;
+    --oro-med:#c8a24a;
+    --oro-osc:#8a6a24;
+    --bg:#0b0b0d;
+    --bg2:#141118;
+    --texto:#e9ddc4;
+    --tenue:#b8a982;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
-    font-family:Georgia,'Times New Roman',serif;
-    background:radial-gradient(circle at 50% 0%,#1a1408 0%,#0a0a0a 55%,#000 100%);
-    color:#f5e6b8;min-height:100vh;overflow-x:hidden;
+    font-family:'Cormorant Garamond',Georgia,serif;
+    background:var(--bg);
+    color:var(--texto);
+    min-height:100vh;overflow-x:hidden;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
   }
-  .oro-text{
-    background:linear-gradient(180deg,#fff6cf 0%,var(--oro2) 30%,var(--oro1) 55%,#7a5a06 100%);
+  h1,h2,h3,.marca,.btn{font-family:'Cinzel',serif}
+  .oro{
+    background:linear-gradient(92deg,#8a6a24 0%,#e8c86a 25%,#fff6d6 50%,#e8c86a 75%,#8a6a24 100%);
+    background-size:200% auto;
     -webkit-background-clip:text;background-clip:text;color:transparent;
-    text-shadow:0 2px 4px rgba(0,0,0,.5);
+    animation:brilloOro 6s linear infinite;
   }
-  .btn-oro{
-    display:inline-block;cursor:pointer;border:none;text-decoration:none;
-    padding:16px 38px;border-radius:16px;font-size:1.05rem;font-weight:bold;letter-spacing:1px;
-    color:#3a2a02;font-family:Georgia,serif;
-    background:linear-gradient(180deg,#ffe98a 0%,var(--oro2) 40%,var(--oro1) 70%,var(--oro3) 100%);
-    box-shadow:0 10px 22px rgba(0,0,0,.6),inset 0 2px 3px rgba(255,255,255,.7),inset 0 -4px 8px rgba(90,60,0,.6);
-    transition:transform .25s ease,box-shadow .25s ease;
+  @keyframes brilloOro{to{background-position:200% center}}
+  .hairline{width:70px;height:1px;background:linear-gradient(90deg,transparent,var(--oro),transparent);margin:22px auto}
+  .btn{
+    display:inline-block;cursor:pointer;text-decoration:none;
+    padding:15px 40px;font-size:.82rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+    color:#1a1409;border:none;border-radius:2px;
+    background:linear-gradient(180deg,#f4e2a0 0%,#e8c86a 45%,#c8a24a 100%);
+    box-shadow:0 8px 24px rgba(0,0,0,.5),inset 0 1px 1px rgba(255,255,255,.6);
+    transition:transform .3s ease,box-shadow .3s ease;
   }
-  .btn-oro:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 18px 34px rgba(0,0,0,.7),inset 0 2px 3px rgba(255,255,255,.8)}
+  .btn:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(232,200,106,.35),inset 0 1px 1px rgba(255,255,255,.7)}
+  .btn.ghost{
+    background:transparent;color:var(--oro);border:1px solid var(--oro-med);
+    box-shadow:none;
+  }
+  .btn.ghost:hover{background:rgba(232,200,106,.08);color:#fff6d6}
+
+  /* NAV */
   nav{
     position:fixed;top:0;left:0;width:100%;z-index:100;
     display:flex;justify-content:space-between;align-items:center;
-    padding:14px 6vw;
-    background:linear-gradient(180deg,rgba(20,16,6,.96),rgba(10,8,3,.85));
-    border-bottom:2px solid var(--oro1);
-    box-shadow:0 4px 20px rgba(0,0,0,.7);
-    backdrop-filter:blur(6px);
+    padding:20px 7vw;transition:padding .3s,background .3s;
   }
-  nav .marca{font-size:1.35rem;font-weight:bold;letter-spacing:2px}
+  nav.scrolled{padding:12px 7vw;background:rgba(11,11,13,.9);border-bottom:1px solid rgba(232,200,106,.2);backdrop-filter:blur(10px)}
+  nav .marca{font-size:1.15rem;font-weight:700;letter-spacing:4px}
   nav .links a{
-    color:#f0dfa0;text-decoration:none;margin-left:26px;font-size:1rem;
-    transition:color .2s;border-bottom:1px solid transparent;
+    color:var(--tenue);text-decoration:none;margin-left:32px;font-size:.78rem;letter-spacing:2px;
+    text-transform:uppercase;font-family:'Cinzel',serif;transition:color .25s;position:relative;
   }
-  nav .links a:hover{color:var(--oro2);border-bottom:1px solid var(--oro2)}
-  section{padding:120px 6vw 90px;position:relative}
+  nav .links a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--oro);transition:width .3s}
+  nav .links a:hover{color:var(--oro)}
+  nav .links a:hover::after{width:100%}
+  @media(max-width:760px){nav .links{display:none}}
+
+  /* HERO */
   #hero{
     min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+    padding:0 7vw;position:relative;
+    background:
+      radial-gradient(ellipse at 50% 30%,rgba(232,200,106,.10),transparent 60%),
+      radial-gradient(ellipse at 50% 120%,rgba(200,162,74,.12),transparent 55%),
+      var(--bg);
   }
-  #hero h1{font-size:clamp(3rem,11vw,8rem);letter-spacing:4px;line-height:1;margin-bottom:18px;
-    animation:brillo 4s ease-in-out infinite;}
-  #hero .sub{font-size:clamp(1.1rem,3vw,1.9rem);color:#d8c483;margin-bottom:44px;font-style:italic}
-  @keyframes brillo{0%,100%{filter:drop-shadow(0 0 6px rgba(255,215,0,.25))}50%{filter:drop-shadow(0 0 26px rgba(255,215,0,.65))}}
-  .titulo-sec{font-size:clamp(2rem,6vw,3.5rem);text-align:center;margin-bottom:40px;letter-spacing:2px}
-  #ciudadela p{max-width:820px;margin:0 auto;font-size:1.25rem;line-height:2;text-align:center;color:#e7d6a2}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:34px;max-width:1100px;margin:0 auto}
+  #hero::before{
+    content:'';position:absolute;inset:0;
+    background-image:radial-gradient(rgba(232,200,106,.06) 1px,transparent 1px);
+    background-size:26px 26px;opacity:.5;pointer-events:none;
+  }
+  #hero .eyebrow{font-family:'Cinzel',serif;letter-spacing:6px;font-size:.72rem;color:var(--oro-med);text-transform:uppercase;margin-bottom:24px;position:relative}
+  #hero h1{font-size:clamp(2.8rem,10vw,7rem);font-weight:900;letter-spacing:6px;line-height:1.05;position:relative;
+    text-shadow:0 2px 30px rgba(232,200,106,.15)}
+  #hero .sub{font-size:clamp(1.15rem,3vw,1.7rem);font-style:italic;color:var(--tenue);margin:20px 0 40px;position:relative}
+  #hero .cta{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;position:relative}
+  .scroll-ind{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);color:var(--oro-med);font-size:1.4rem;animation:flota 2s ease-in-out infinite}
+  @keyframes flota{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
+
+  /* SECCIONES */
+  section{padding:110px 7vw;position:relative}
+  .sec-head{text-align:center;margin-bottom:60px}
+  .sec-head .eyebrow{font-family:'Cinzel',serif;letter-spacing:5px;font-size:.7rem;color:var(--oro-med);text-transform:uppercase}
+  .sec-head h2{font-size:clamp(1.9rem,5vw,3rem);font-weight:700;letter-spacing:3px;margin-top:10px}
+  #ciudadela{background:linear-gradient(180deg,var(--bg),var(--bg2),var(--bg))}
+  #ciudadela p{max-width:760px;margin:0 auto;font-size:1.35rem;line-height:1.9;text-align:center;color:var(--texto)}
+  #ciudadela p .destacado{color:var(--oro);font-style:italic}
+
+  /* SERVICIOS */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;max-width:1140px;margin:0 auto}
   .card{
-    background:linear-gradient(160deg,#2a2008 0%,#161206 100%);
-    border:2px solid var(--oro1);border-radius:22px;padding:38px 28px;text-align:center;
-    box-shadow:0 14px 30px rgba(0,0,0,.6),inset 0 1px 2px rgba(255,215,0,.25);
-    transition:transform .35s ease,box-shadow .35s ease;transform-style:preserve-3d;perspective:800px;
+    background:linear-gradient(160deg,rgba(232,200,106,.06),rgba(20,17,24,.4));
+    border:1px solid rgba(232,200,106,.18);border-radius:6px;padding:44px 30px;text-align:center;
+    transition:transform .4s ease,box-shadow .4s ease,border-color .4s;
+    position:relative;overflow:hidden;
   }
-  .card:hover{transform:rotateX(6deg) rotateY(-6deg) translateY(-8px);box-shadow:0 26px 50px rgba(0,0,0,.75),0 0 24px rgba(255,215,0,.3)}
-  .card .ico{font-size:3.2rem;margin-bottom:16px;display:block}
-  .card h3{font-size:1.4rem;margin-bottom:14px}
-  .card p{font-size:1rem;line-height:1.7;color:#d8c483}
-  #contacto{text-align:center}
-  #contacto p{font-size:1.2rem;color:#e7d6a2;margin-bottom:34px}
+  .card::before{content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,246,214,.14),transparent);transition:left .6s}
+  .card:hover{transform:translateY(-10px);border-color:var(--oro);box-shadow:0 24px 50px rgba(0,0,0,.5)}
+  .card:hover::before{left:130%}
+  .card .ico{font-size:2.6rem;margin-bottom:20px;display:block}
+  .card h3{font-size:1.05rem;letter-spacing:1.5px;margin-bottom:16px;font-weight:500}
+  .card p{font-size:1.1rem;line-height:1.7;color:var(--tenue)}
+
+  /* CONTACTO */
+  #contacto{text-align:center;background:linear-gradient(180deg,var(--bg),var(--bg2))}
+  #contacto p{font-size:1.3rem;color:var(--tenue);margin:0 auto 38px;max-width:600px}
+
   footer{
-    text-align:center;padding:40px 6vw;border-top:2px solid var(--oro1);
-    background:linear-gradient(180deg,#0a0803,#000);color:#c9b477;font-size:.95rem;letter-spacing:1px;
+    text-align:center;padding:44px 7vw;border-top:1px solid rgba(232,200,106,.15);
+    color:var(--tenue);font-size:.85rem;letter-spacing:2px;font-family:'Cinzel',serif;text-transform:uppercase;
   }
   .btn-borrar{
-    position:fixed;bottom:22px;right:22px;z-index:200;
-    padding:12px 20px;font-size:.9rem;border-radius:14px;cursor:pointer;border:none;color:#3a2a02;font-weight:bold;
-    background:linear-gradient(180deg,#ffe98a,var(--oro1));
-    box-shadow:0 8px 18px rgba(0,0,0,.6),inset 0 2px 2px rgba(255,255,255,.6);
-    transition:transform .2s;
+    position:fixed;bottom:20px;right:20px;z-index:200;
+    padding:10px 18px;font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;border-radius:2px;cursor:pointer;
+    color:var(--oro);background:rgba(11,11,13,.8);border:1px solid rgba(232,200,106,.3);
+    font-family:'Cinzel',serif;backdrop-filter:blur(6px);transition:all .25s;
   }
-  .btn-borrar:hover{transform:scale(1.06)}
+  .btn-borrar:hover{background:rgba(232,200,106,.12);color:#fff6d6}
+
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.on{opacity:1;transform:none}
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="marca oro-text">REMEMBER LUXURY</div>
+<nav id="nav">
+  <div class="marca oro">REMEMBER LUXURY</div>
   <div class="links">
     <a href="#hero">Inicio</a>
     <a href="#ciudadela">La Ciudadela</a>
@@ -97,55 +151,80 @@
 </nav>
 
 <section id="hero">
-  <h1 class="oro-text">REMEMBER LUXURY</h1>
-  <p class="sub oro-text">La Ciudadela del Lujo y la Elegancia</p>
-  <a href="#ciudadela" class="btn-oro">Descubre mas</a>
+  <div class="eyebrow">La Ciudadela del Lujo</div>
+  <h1 class="oro">REMEMBER LUXURY</h1>
+  <p class="sub">Donde las ideas se vuelven oro.</p>
+  <div class="cta">
+    <a href="#servicios" class="btn">Descubre</a>
+    <a href="#contacto" class="btn ghost">Contacto</a>
+  </div>
+  <div class="scroll-ind">&#8964;</div>
 </section>
 
 <section id="ciudadela">
-  <h2 class="titulo-sec oro-text">La Ciudadela</h2>
-  <p>Un imperio digital de inteligencias que crean, aprenden y generan abundancia. Cada agente es una mente viva al servicio de una vision: unir el arte, el conocimiento y la tecnologia para construir riqueza real, con elegancia y proposito. Bienvenido al reino donde las ideas se vuelven oro.</p>
+  <div class="sec-head reveal">
+    <div class="eyebrow">Nuestra Esencia</div>
+    <h2 class="oro">La Ciudadela</h2>
+    <div class="hairline"></div>
+  </div>
+  <p class="reveal">Un <span class="destacado">imperio digital de inteligencias</span> que crean, aprenden y generan abundancia. Cada agente es una mente viva al servicio de una vision: unir el arte, el conocimiento y la tecnologia para construir riqueza real, con elegancia y proposito.</p>
 </section>
 
 <section id="servicios">
-  <h2 class="titulo-sec oro-text">Servicios</h2>
+  <div class="sec-head reveal">
+    <div class="eyebrow">Lo que hacemos</div>
+    <h2 class="oro">Servicios</h2>
+    <div class="hairline"></div>
+  </div>
   <div class="grid">
-    <div class="card">
-      <span class="ico">🎨</span>
-      <h3 class="oro-text">Creacion de contenido con IA</h3>
-      <p>Imagenes, videos y textos de alto impacto generados por inteligencia artificial para tu marca.</p>
+    <div class="card reveal">
+      <span class="ico">&#127912;</span>
+      <h3 class="oro">Contenido con IA</h3>
+      <p>Imagenes, videos y textos de alto impacto, creados por inteligencia artificial para tu marca.</p>
     </div>
-    <div class="card">
-      <span class="ico">⚙️</span>
-      <h3 class="oro-text">Automatizacion de negocios</h3>
+    <div class="card reveal">
+      <span class="ico">&#9881;</span>
+      <h3 class="oro">Automatizacion</h3>
       <p>Procesos que trabajan solos las 24 horas: ventas, cobros, reportes y flujos completos.</p>
     </div>
-    <div class="card">
-      <span class="ico">🤝</span>
-      <h3 class="oro-text">Agentes vendedores 24/7</h3>
-      <p>Asistentes inteligentes que atienden, califican y cierran clientes en cualquier momento.</p>
+    <div class="card reveal">
+      <span class="ico">&#129309;</span>
+      <h3 class="oro">Vendedores 24/7</h3>
+      <p>Agentes inteligentes que atienden, califican y cierran clientes en cualquier momento.</p>
     </div>
-    <div class="card">
-      <span class="ico">🌐</span>
-      <h3 class="oro-text">Paginas web a medida</h3>
-      <p>Sitios elegantes y veloces, disenados y publicados por la propia inteligencia de la Ciudadela.</p>
+    <div class="card reveal">
+      <span class="ico">&#127760;</span>
+      <h3 class="oro">Webs a medida</h3>
+      <p>Sitios elegantes y veloces, disenados y publicados por la propia Ciudadela.</p>
     </div>
   </div>
 </section>
 
 <section id="contacto">
-  <h2 class="titulo-sec oro-text">Contacto</h2>
-  <p>Listo para llevar tu proyecto al siguiente nivel? Hablemos.</p>
-  <a href="mailto:kevin.ruiz.calle@gmail.com" class="btn-oro">Escribenos</a>
+  <div class="sec-head reveal">
+    <div class="eyebrow">Hablemos</div>
+    <h2 class="oro">Contacto</h2>
+    <div class="hairline"></div>
+  </div>
+  <p class="reveal">Listo para llevar tu proyecto al siguiente nivel? Escribenos y construyamos algo extraordinario.</p>
+  <a href="mailto:kevin.ruiz.calle@gmail.com" class="btn reveal">Escribenos</a>
 </section>
 
 <footer>
-  REMEMBER LUXURY &copy; 2026 &mdash; La Ciudadela del Lujo y la Elegancia
+  Remember Luxury &copy; 2026 &mdash; La Ciudadela del Lujo y la Elegancia
 </footer>
 
 <button class="btn-borrar" onclick="borrarHistorial()">Borrar historial</button>
 
 <script>
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){
+    if(window.scrollY>40){nav.classList.add('scrolled')}else{nav.classList.remove('scrolled')}
+  });
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('on')} });
+  },{threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
   function borrarHistorial(){
     if(confirm('Seguro que quieres borrar el historial guardado en este navegador?')){
       try{ localStorage.clear(); sessionStorage.clear(); }catch(e){}

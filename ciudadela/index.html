@@ -71,6 +71,9 @@ body{font-family:Georgia,Times,serif;background:var(--bg);color:var(--txt);displ
 .track .del{color:var(--muted);cursor:pointer;font-size:15px}
 .track .del:hover{color:#e06}
 .mempty{color:var(--muted);font-size:13px;text-align:center;padding:24px 16px;line-height:1.6}
+.genres{display:flex;flex-wrap:wrap;gap:6px;padding:4px 12px 10px;border-bottom:1px solid var(--border)}
+.genres .g{background:var(--panel2);border:1px solid var(--border);color:var(--txt);border-radius:14px;padding:5px 11px;font-size:12px;cursor:pointer}
+.genres .g:hover{border-color:var(--accent);color:var(--accent)}
 </style>
 </head>
 <body>
@@ -109,7 +112,8 @@ body{font-family:Georgia,Times,serif;background:var(--bg);color:var(--txt);displ
 <div id="music">
 <div class="mhead"><h3>&#9835; Mi Musica</h3><button class="x" onclick="toggleMusic()">&times;</button></div>
 <div class="player"><div id="ytplayer"></div><div class="np" id="np">Elige una cancion de tu lista</div></div>
-<div class="addrow"><input id="ytlink" placeholder="Pega un link de YouTube..."><button onclick="addTrack()">+</button></div>
+<div class="addrow"><input id="ytlink" placeholder="Pega link de cancion o ALBUM/playlist..."><button onclick="addTrack()">+</button></div>
+<div class="genres" id="genres"></div>
 <div class="plist" id="plist"></div>
 </div>
 <script>
@@ -134,14 +138,18 @@ var inp=document.getElementById("input");inp.addEventListener("input",function()
 document.getElementById("nameInput").addEventListener("keydown",function(e){if(e.key==="Enter")doLogin();});
 var playlist=[],curTrack=-1;
 function mkey(){return "ciudadela_music_"+user;}
-function loadMusic(){var raw=localStorage.getItem(mkey());playlist=raw?JSON.parse(raw):[];renderPlaylist();}
+function loadMusic(){var raw=localStorage.getItem(mkey());playlist=raw?JSON.parse(raw):[];renderGenres();renderPlaylist();}
 function saveMusic(){localStorage.setItem(mkey(),JSON.stringify(playlist));}
 function toggleMusic(){document.getElementById("music").classList.toggle("open");}
+var GENRES=[["Reguetton","reggaeton mix"],["USA","usa hits mix"],["Colombia","musica colombiana mix"],["Desahogo","musica para desahogo"],["Guaracha","guaracha aleteo mix"],["Romantica","baladas romanticas mix"],["Salsa","salsa clasica mix"],["Trap","trap latino mix"],["Vallenato","vallenato mix"],["Lo mas Chimba","perreo mix 2024"]];
 function ytId(url){var m=url.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([A-Za-z0-9_-]{11})/);return m?m[1]:null;}
-function addTrack(){var el=document.getElementById("ytlink");var url=el.value.trim();var id=ytId(url);if(!id){alert("Pega un link valido de YouTube");return;}playlist.push({id:id,title:"Cancion "+(playlist.length+1),url:url});el.value="";saveMusic();renderPlaylist();}
+function ytPl(url){var m=url.match(/[?&]list=([A-Za-z0-9_-]+)/);return m?m[1]:null;}
+function addTrack(){var el=document.getElementById("ytlink");var url=el.value.trim();var pl=ytPl(url);var id=ytId(url);if(pl){playlist.push({plist:pl,id:id,title:"Album / Playlist ("+(playlist.length+1)+")",url:url});}else if(id){playlist.push({id:id,title:"Cancion "+(playlist.length+1),url:url});}else{alert("Pega un link valido de YouTube (cancion o playlist)");return;}el.value="";saveMusic();renderPlaylist();}
 function delTrack(i,e){e.stopPropagation();playlist.splice(i,1);if(curTrack===i){curTrack=-1;document.getElementById("ytplayer").innerHTML="";document.getElementById("np").textContent="Elige una cancion de tu lista";}saveMusic();renderPlaylist();}
-function playTrack(i){curTrack=i;var t=playlist[i];document.getElementById("ytplayer").innerHTML="<iframe src=\"https://www.youtube.com/embed/"+t.id+"?autoplay=1\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>";document.getElementById("np").textContent="Sonando: "+t.title;renderPlaylist();}
-function renderPlaylist(){var p=document.getElementById("plist");if(!playlist.length){p.innerHTML="<div class=\"mempty\">Tu lista esta vacia.<br>Pega arriba el link de YouTube de tu cancion favorita y dale +.</div>";return;}p.innerHTML="";for(var i=0;i<playlist.length;i++){(function(i){var t=playlist[i];var d=document.createElement("div");d.className="track"+(i===curTrack?" playing":"");d.innerHTML="<span>&#9835;</span><span class=\"t\">"+escapeHtml(t.title)+"</span><span class=\"del\">&times;</span>";d.querySelector(".t").onclick=function(){playTrack(i);};d.querySelector(".del").onclick=function(e){delTrack(i,e);};p.appendChild(d);})(i);}}
+function playTrack(i){curTrack=i;var t=playlist[i];var src;if(t.plist){src="https://www.youtube.com/embed/"+(t.id||"videoseries")+"?autoplay=1&list="+t.plist;}else{src="https://www.youtube.com/embed/"+t.id+"?autoplay=1";}document.getElementById("ytplayer").innerHTML="<iframe src=\""+src+"\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>";document.getElementById("np").textContent=(t.plist?"Album: ":"Sonando: ")+t.title;renderPlaylist();}
+function playGenre(q){document.getElementById("ytplayer").innerHTML="<iframe src=\"https://www.youtube.com/embed?listType=search&list="+encodeURIComponent(q)+"&autoplay=1\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>";document.getElementById("np").textContent="Genero: "+q;}
+function renderGenres(){var g=document.getElementById("genres");g.innerHTML="";for(var i=0;i<GENRES.length;i++){(function(x){var b=document.createElement("span");b.className="g";b.textContent=x[0];b.onclick=function(){playGenre(x[1]);};g.appendChild(b);})(GENRES[i]);}}
+function renderPlaylist(){var p=document.getElementById("plist");if(!playlist.length){p.innerHTML="<div class=\"mempty\">Toca un genero arriba para escuchar, o pega el link de una cancion o ALBUM de YouTube y dale +.</div>";return;}p.innerHTML="";for(var i=0;i<playlist.length;i++){(function(i){var t=playlist[i];var d=document.createElement("div");d.className="track"+(i===curTrack?" playing":"");d.innerHTML="<span>"+(t.plist?"&#128193;":"&#9835;")+"</span><span class=\"t\">"+escapeHtml(t.title)+"</span><span class=\"del\">&times;</span>";d.querySelector(".t").onclick=function(){playTrack(i);};d.querySelector(".del").onclick=function(e){delTrack(i,e);};p.appendChild(d);})(i);}}
 (function(){var saved=localStorage.getItem("ciudadela_user");if(saved){user=saved;document.getElementById("login").style.display="none";start();loadMusic();}})();
 </script>
 </body>

@@ -463,204 +463,454 @@ window.ORA_CFG={
 };
 </script>
 
-<!-- ===================== AGENTE KYBALIO (autonomo, reutilizable) ===================== -->
+<!-- ===================== AVATAR KYBALIO (identico al inicio) ===================== -->
 <style>
-  #oraFab{position:fixed;bottom:22px;right:22px;z-index:9000;width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;
-    background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;box-shadow:0 10px 30px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;transition:transform .25s}
-  #oraFab:hover{transform:translateY(-4px) scale(1.06)}
-  #oraFab svg{width:38px;height:38px;display:block}
-  #oraFab .pulse{position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 0 rgba(232,200,106,.6);animation:oraP 2.2s infinite}
-  @keyframes oraP{0%{box-shadow:0 0 0 0 rgba(232,200,106,.55)}70%{box-shadow:0 0 0 16px rgba(232,200,106,0)}100%{box-shadow:0 0 0 0 rgba(232,200,106,0)}}
-  #oraWidget{position:fixed;bottom:92px;right:22px;z-index:9001;width:min(360px,94vw);height:min(540px,78vh);
-    background:#141117;border:1px solid rgba(232,200,106,.32);border-radius:16px;box-shadow:0 24px 70px rgba(0,0,0,.65);display:none;flex-direction:column;overflow:hidden;
-    transform-origin:100% 100%;animation:oraPop .28s cubic-bezier(.34,1.4,.5,1);font-family:'Cormorant Garamond',Georgia,serif}
-  #oraWidget.open{display:flex}
-  @keyframes oraPop{0%{opacity:0;transform:translateY(16px) scale(.85)}100%{opacity:1;transform:none}}
-  #oraWidget .oh{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid #2a2530;background:linear-gradient(180deg,rgba(232,200,106,.1),transparent)}
-  #oraWidget .oh .av{width:34px;height:34px;border-radius:50%;overflow:hidden;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.4)}
-  #oraWidget .oh .av svg{width:100%;height:100%;display:block}
-  #oraWidget .oh.talk .av{animation:oraTalk 1s infinite}
-  @keyframes oraTalk{0%,100%{box-shadow:0 0 0 0 rgba(232,200,106,.5)}50%{box-shadow:0 0 0 8px rgba(232,200,106,0)}}
-  #oraWidget .oh .nm{font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:1px;color:#e8c86a}
-  #oraWidget .oh .st{font-size:.64rem;color:#b8a982}
-  #oraWidget .oh .x{margin-left:auto;background:none;border:none;color:#b8a982;font-size:22px;cursor:pointer}
-  #oraWidget .oh .x:hover{color:#e8c86a}
-  #oraBody{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
-  #oraBody .hint{color:#b8a982;font-size:.8rem;line-height:1.5;font-style:italic;text-align:center;padding:10px}
-  .om{display:flex;gap:8px;max-width:92%}
-  .om .b{padding:10px 13px;border-radius:13px;font-size:.85rem;line-height:1.55;letter-spacing:.2px}
-  .om.u{align-self:flex-end;flex-direction:row-reverse}
-  .om.u .b{background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;border-bottom-right-radius:4px}
-  .om.k .b{background:#1c1922;color:#e9ddc4;border:1px solid #2a2530;border-bottom-left-radius:4px}
-  .om .b p{margin:0 0 7px}.om .b p:last-child{margin:0}
-  .om .b strong{color:#e8c86a;font-weight:600}.om .b em{color:#c8a24a;font-style:italic}
-  .om .b ul{margin:4px 0 6px;padding-left:16px}.om .b li{margin:2px 0}
-  .om .b a{color:#e8c86a;text-decoration:underline;word-break:break-word}
-  .om .avm{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-family:'Cinzel',serif}
-  .om.u .avm{background:#1c1922;color:#e8c86a}
-  .om.k .avm{background:radial-gradient(circle at 40% 35%,#f4e2a0,#c8a24a);color:#1a1409}
-  .oacts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-  .oact{display:inline-flex;align-items:center;gap:5px;background:rgba(232,200,106,.1);border:1px solid rgba(232,200,106,.35);color:#e8c86a;border-radius:8px;padding:5px 11px;font-size:.72rem;font-family:'Cinzel',serif;letter-spacing:.4px;cursor:pointer;transition:all .2s;text-decoration:none}
-  .oact:hover{background:rgba(232,200,106,.2);border-color:#e8c86a;transform:translateY(-1px)}
-  .odots span{animation:oraBlink 1.2s infinite;color:#b8a982}
-  .odots span:nth-child(2){animation-delay:.2s}.odots span:nth-child(3){animation-delay:.4s}
-  @keyframes oraBlink{0%,80%{opacity:.2}40%{opacity:1}}
-  #oraFoot{border-top:1px solid #2a2530;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
-  .otoggle{display:flex;align-items:center;gap:9px;cursor:pointer;background:#1c1922;border:1px solid #2a2530;border-radius:22px;padding:8px 16px;transition:all .2s;user-select:none;align-self:center}
-  .otoggle:hover{border-color:#c8a24a}.otoggle.on{border-color:#e8c86a;background:rgba(232,200,106,.1)}
-  .otoggle .sw{width:38px;height:20px;border-radius:12px;background:#2a2530;position:relative;transition:.2s;flex-shrink:0}
-  .otoggle .sw::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#b8a982;transition:.2s}
-  .otoggle.on .sw{background:linear-gradient(180deg,#f4e2a0,#c8a24a)}.otoggle.on .sw::after{transform:translateX(18px);background:#1a1409}
-  .otoggle .lbl{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.5px;color:#e9ddc4;white-space:nowrap}
-  #oraMicLbl{font-size:.66rem;color:#b8a982;text-align:center}
-  .ochat{display:flex;gap:8px}
-  .ochat input{flex:1;background:#1c1922;border:1px solid #2a2530;border-radius:20px;color:#e9ddc4;padding:9px 14px;font-family:inherit;font-size:.9rem;outline:none}
-  .ochat input:focus{border-color:#c8a24a}
-  .ochat button{width:38px;border:none;border-radius:50%;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;font-size:15px;cursor:pointer;flex-shrink:0}
-  @media(max-width:560px){#oraWidget{right:10px;bottom:84px;width:min(340px,94vw)}#oraFab{right:14px;bottom:16px}}
+  #robot{position:fixed;bottom:18px;left:18px;z-index:9135;width:74px;height:118px;cursor:pointer;filter:drop-shadow(0 10px 16px rgba(0,0,0,.55));transition:transform .5s cubic-bezier(.4,0,.2,1)}
+  #robot:hover{transform:translateY(-5px) scale(1.05)}
+  #robot .rb-svg{width:100%;height:100%;display:block;overflow:visible}
+  #robot .bocadillo{position:absolute;bottom:104px;left:0;max-width:190px;background:#141117;border:1px solid rgba(232,200,106,.4);border-radius:11px;padding:8px 11px;font-size:.72rem;color:#e9ddc4;line-height:1.38;box-shadow:0 10px 26px rgba(0,0,0,.5);opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s;pointer-events:none;font-family:'Cormorant Garamond',Georgia,serif}
+  #robot .bocadillo::after{content:'';position:absolute;bottom:-7px;left:22px;border:7px solid transparent;border-top-color:#141117}
+  #robot.talk .bocadillo{opacity:1;transform:none}
+  #robot .rb-nave{opacity:0;transform:translateY(14px) scale(.6);transform-origin:60px 175px;transition:opacity .5s,transform .5s}
+  #robot.nave .rb-nave{opacity:1;transform:none}
+  #robot.nave .rb-svg{animation:navevuelo 3.6s ease-in-out infinite}
+  @keyframes navevuelo{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
+  #robot.nave .rb-body{animation:none!important;transform:translateY(6px) scale(.86);transition:transform .5s}
+  #robot.nave .rb-legL,#robot.nave .rb-legR{animation:none!important;transform:rotate(0)}
+  #robot .rb-thrust{opacity:0;transform-origin:60px 176px}
+  #robot.nave .rb-thrust{opacity:1;animation:navThrust .35s ease-in-out infinite}
+  @keyframes navThrust{0%,100%{transform:scaleY(.8) scaleX(.95);opacity:.7}50%{transform:scaleY(1.3) scaleX(1.05);opacity:1}}
+  #robot.walk .rb-legL{animation:pasoL .55s ease-in-out infinite}
+  #robot.walk .rb-legR{animation:pasoR .55s ease-in-out infinite}
+  @keyframes pasoL{0%,100%{transform:rotate(11deg)}50%{transform:rotate(-11deg)}}
+  @keyframes pasoR{0%,100%{transform:rotate(-11deg)}50%{transform:rotate(11deg)}}
+  #robot .rb-legL{transform-origin:50% 0%}
+  #robot .rb-legR{transform-origin:50% 0%}
+  #robot .rb-arm{transform-origin:50% 8%;animation:brazo 2.6s ease-in-out infinite}
+  @keyframes brazo{0%,100%{transform:rotate(5deg)}50%{transform:rotate(-5deg)}}
+  #robot .rb-eye{animation:parpadeo 4.5s infinite}
+  @keyframes parpadeo{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+  #robot .rb-eye{transform-origin:center;transform-box:fill-box}
+  #robot .rb-glow{animation:glowRobot 2.5s ease-in-out infinite}
+  @keyframes glowRobot{0%,100%{opacity:.5}50%{opacity:1}}
+  #robot .rb-hair{animation:rbHair 5s ease-in-out infinite}
+  @keyframes rbHair{0%,100%{transform:translateX(0)}50%{transform:translateX(.6px)}}
+  #robot .rb-body{animation:rbFloat 3.6s ease-in-out infinite}
+  @keyframes rbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+  #robot .rb-cape{transform-origin:60px 60px;animation:rbCape 4s ease-in-out infinite}
+  @keyframes rbCape{0%,100%{transform:skewX(0)}50%{transform:skewX(2deg)}}
+  @media(max-width:560px){#robot{width:58px;height:94px;bottom:12px;left:10px}#robot .bocadillo{bottom:84px;max-width:150px;font-size:.68rem}}
+
+  #vozWidget{position:fixed;bottom:132px;left:18px;width:min(340px,90vw);height:min(500px,72vh);background:#141117;border:1px solid rgba(232,200,106,.32);border-radius:15px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:9400;display:none;flex-direction:column;overflow:hidden;transform-origin:14px 100%;animation:vwPop .28s cubic-bezier(.34,1.4,.5,1);font-family:'Cormorant Garamond',Georgia,serif}
+  #vozWidget.open{display:flex}
+  @keyframes vwPop{0%{opacity:0;transform:translateY(18px) scale(.85)}100%{opacity:1;transform:none}}
+  #vozWidget::after{content:'';position:absolute;bottom:-9px;left:26px;border:9px solid transparent;border-top-color:#141117;filter:drop-shadow(0 2px 1px rgba(0,0,0,.3))}
+  @media(max-width:560px){#vozWidget{bottom:104px;left:8px;width:min(320px,94vw);height:min(440px,66vh)}}
+  #vozWidget .vw-head{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid #2a2530;background:linear-gradient(180deg,rgba(232,200,106,.08),transparent)}
+  #vozWidget .vw-orb{width:34px;height:34px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 0 0 rgba(232,200,106,.5),0 2px 8px rgba(0,0,0,.4)}
+  #vozWidget .vw-orb.talk{animation:orbPulse 1s infinite}
+  #vozWidget .vw-orb .av-eye{animation:avParpadeo 4s infinite}
+  #vozWidget .vw-orb.talk .av-eye{animation:avParpadeo 4s infinite,avHabla .5s ease-in-out infinite}
+  @keyframes avParpadeo{0%,92%,100%{opacity:1}96%{opacity:.15}}
+  @keyframes avHabla{0%,100%{filter:drop-shadow(0 0 1px #8fe9ff)}50%{filter:drop-shadow(0 0 4px #8fe9ff)}}
+  @keyframes orbPulse{0%,100%{box-shadow:0 0 0 0 rgba(232,200,106,.5)}50%{box-shadow:0 0 0 12px rgba(232,200,106,0)}}
+  #vozWidget .vw-nm{font-size:.74rem;font-family:'Cinzel',serif;letter-spacing:.8px;color:#e8c86a}
+  #vozWidget .vw-st{font-size:.62rem;color:#b8a982}
+  #vozWidget .vw-x{margin-left:auto;background:none;border:none;color:#b8a982;font-size:22px;cursor:pointer}
+  #vozWidget .vw-x:hover{color:#e8c86a}
+  #vozWidget .vw-body{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+  #vozWidget .vw-hint{color:#b8a982;font-size:.74rem;line-height:1.5;font-style:italic;text-align:center;padding:10px}
+  #vozWidget .vw-msg{display:flex;gap:8px;max-width:90%}
+  #vozWidget .vw-msg .b{padding:10px 13px;border-radius:13px;font-size:.82rem;line-height:1.55;letter-spacing:.2px}
+  #vozWidget .vw-msg.bot .b{font-size:.85rem}
+  #vozWidget .vw-msg .b p{margin:0 0 7px}
+  #vozWidget .vw-msg .b p:last-child{margin-bottom:0}
+  #vozWidget .vw-msg .b strong{color:#e8c86a;font-weight:600}
+  #vozWidget .vw-msg .b em{color:#c8a24a;font-style:italic}
+  #vozWidget .vw-msg .b ul{margin:4px 0 6px;padding-left:16px}
+  #vozWidget .vw-msg .b li{margin:2px 0}
+  #vozWidget .vw-msg .b a{color:#e8c86a;text-decoration:underline;word-break:break-word}
+  #vozWidget .vw-acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  #vozWidget .vw-act{display:inline-flex;align-items:center;gap:5px;background:rgba(232,200,106,.1);border:1px solid rgba(232,200,106,.35);color:#e8c86a;border-radius:8px;padding:5px 11px;font-size:.72rem;font-family:'Cinzel',serif;letter-spacing:.4px;cursor:pointer;transition:all .2s;text-decoration:none}
+  #vozWidget .vw-act:hover{background:rgba(232,200,106,.2);border-color:#e8c86a;transform:translateY(-1px)}
+  #vozWidget .vw-act .ai{font-size:.85rem}
+  #vozWidget .vw-msg.user{align-self:flex-end;flex-direction:row-reverse}
+  #vozWidget .vw-msg.user .b{background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;border-bottom-right-radius:4px}
+  #vozWidget .vw-msg.bot .b{background:#1c1922;color:#e9ddc4;border:1px solid #2a2530;border-bottom-left-radius:4px}
+  #vozWidget .vw-av{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-family:'Cinzel',serif}
+  #vozWidget .vw-msg.user .vw-av{background:#1c1922;color:#e8c86a}
+  #vozWidget .vw-msg.bot .vw-av{background:radial-gradient(circle at 40% 35%,#f4e2a0,#c8a24a);color:#1a1409}
+  #vozWidget .vw-interim{align-self:flex-end;max-width:88%;font-size:.8rem;font-style:italic;color:#b8a982;padding:2px 12px;text-align:right}
+  #vozWidget .vw-foot{border-top:1px solid #2a2530;padding:12px 14px;display:flex;flex-direction:column;align-items:center;gap:8px;position:relative}
+  #vozWidget .vw-live{width:100%;display:flex;align-items:center;justify-content:center;gap:10px}
+  #vozWidget .vw-toggle{display:flex;align-items:center;gap:9px;cursor:pointer;background:#1c1922;border:1px solid #2a2530;border-radius:22px;padding:8px 16px;transition:all .2s;user-select:none}
+  #vozWidget .vw-toggle:hover{border-color:#c8a24a}
+  #vozWidget .vw-toggle.on{border-color:#e8c86a;background:rgba(232,200,106,.1)}
+  #vozWidget .vw-toggle .sw{width:38px;height:20px;border-radius:12px;background:#2a2530;position:relative;transition:background .2s;flex-shrink:0}
+  #vozWidget .vw-toggle .sw::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#b8a982;transition:transform .2s,background .2s}
+  #vozWidget .vw-toggle.on .sw{background:linear-gradient(180deg,#f4e2a0,#c8a24a)}
+  #vozWidget .vw-toggle.on .sw::after{transform:translateX(18px);background:#1a1409}
+  #vozWidget .vw-toggle .lbl{font-size:.72rem;color:#e9ddc4;font-family:'Cinzel',serif;letter-spacing:.5px;white-space:nowrap}
+  #vozWidget .vw-mic-lbl{font-size:.68rem;color:#b8a982;letter-spacing:.5px;text-align:center}
+  #vozWidget .vw-chat{width:100%;display:flex;gap:8px;margin-top:4px}
+  #vozWidget .vw-chat input{flex:1;background:#1c1922;border:1px solid #2a2530;border-radius:20px;color:#e9ddc4;padding:9px 14px;font-family:inherit;font-size:.9rem;outline:none}
+  #vozWidget .vw-chat input:focus{border-color:#c8a24a}
+  #vozWidget .vw-chat button{width:38px;border:none;border-radius:50%;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;font-size:15px;cursor:pointer;flex-shrink:0}
+  #vozWidget .vw-dots span{animation:vwblink 1.2s infinite;color:#b8a982}
+  #vozWidget .vw-dots span:nth-child(2){animation-delay:.2s}#vozWidget .vw-dots span:nth-child(3){animation-delay:.4s}
+  @keyframes vwblink{0%,80%{opacity:.2}40%{opacity:1}}
 </style>
-<button id="oraFab" onclick="oraToggle()" title="Habla con KYBALIO, tu oraculo">
-  <span class="pulse"></span>
-  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-    <path d="M14 20 Q14 10 24 10 Q34 10 34 20 L34 30 Q34 39 24 39 Q14 39 14 30 Z" fill="#1a1409" opacity=".22"/>
-    <circle cx="19" cy="23" r="2.6" fill="#1a1409"/><circle cx="29" cy="23" r="2.6" fill="#1a1409"/>
-    <path d="M18 31 Q24 35 30 31" fill="none" stroke="#1a1409" stroke-width="2.2" stroke-linecap="round"/>
-    <line x1="24" y1="10" x2="24" y2="5" stroke="#1a1409" stroke-width="2"/><circle cx="24" cy="4" r="2" fill="#1a1409"/>
+
+<div id="robot" class="walk" onclick="abrirVoz()" title="Habla con KYBALIO, tu guia de IA">
+  <div class="bocadillo" id="rbBocadillo">Hola, soy KYBALIO. Tocame y te resuelvo cualquier duda.</div>
+  <svg class="rb-svg" viewBox="0 0 120 190" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="rbMetal" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff3cf"/><stop offset=".5" stop-color="#e8c86a"/><stop offset="1" stop-color="#a9812f"/>
+      </linearGradient>
+      <linearGradient id="rbMetal2" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#f4e2a0"/><stop offset="1" stop-color="#8a6a24"/>
+      </linearGradient>
+      <radialGradient id="rbAura" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="rgba(232,200,106,.4)"/><stop offset="1" stop-color="rgba(232,200,106,0)"/>
+      </radialGradient>
+      <radialGradient id="rbPiel" cx="42%" cy="32%" r="72%">
+        <stop offset="0" stop-color="#ffe0bd"/><stop offset=".6" stop-color="#eec19a"/><stop offset="1" stop-color="#d19a6d"/>
+      </radialGradient>
+      <linearGradient id="rbTunica" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#2b3040"/><stop offset=".5" stop-color="#191d29"/><stop offset="1" stop-color="#0b0d14"/>
+      </linearGradient>
+      <linearGradient id="rbTunicaL" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#333a4d"/><stop offset=".5" stop-color="#1a1e2a"/><stop offset="1" stop-color="#0d0f16"/>
+      </linearGradient>
+      <linearGradient id="rbCapa" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#4a3712"/><stop offset="1" stop-color="#171003"/>
+      </linearGradient>
+      <linearGradient id="rbPelo" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#4a3620"/><stop offset=".55" stop-color="#2c1f12"/><stop offset="1" stop-color="#160f08"/>
+      </linearGradient>
+      <linearGradient id="rbPant" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#20242f"/><stop offset="1" stop-color="#0a0c11"/>
+      </linearGradient>
+      <filter id="rbEyeGlow" x="-120%" y="-120%" width="340%" height="340%">
+        <feGaussianBlur stdDeviation="1.1" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="rbSoft" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation=".5"/>
+      </filter>
+      <linearGradient id="navHull" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#eaf6ff"/><stop offset=".45" stop-color="#a9c9e0"/><stop offset="1" stop-color="#5a7488"/>
+      </linearGradient>
+      <linearGradient id="navHull2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#8fb0c8"/><stop offset="1" stop-color="#33485a"/>
+      </linearGradient>
+      <radialGradient id="navDome" cx="50%" cy="40%" r="70%">
+        <stop offset="0" stop-color="#d7f2ff"/><stop offset=".6" stop-color="#5aa8d8"/><stop offset="1" stop-color="#123246"/>
+      </radialGradient>
+      <linearGradient id="navEnergy" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#8fe9ff" stop-opacity="0"/><stop offset=".5" stop-color="#8fe9ff"/><stop offset="1" stop-color="#8fe9ff" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="navFlame" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#bfeaff"/><stop offset=".5" stop-color="#5ab6ff"/><stop offset="1" stop-color="#5ab6ff" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <g class="rb-nave">
+      <g class="rb-thrust">
+        <path d="M40 176 Q60 200 80 176 Q60 190 40 176 Z" fill="url(#navFlame)" opacity=".9"/>
+        <path d="M48 176 Q60 192 72 176 Q60 184 48 176 Z" fill="#bfeaff" opacity=".8"/>
+      </g>
+      <ellipse cx="60" cy="186" rx="30" ry="4" fill="rgba(120,200,255,.18)"/>
+      <path d="M22 172 Q60 200 98 172 Q92 162 60 162 Q28 162 22 172 Z" fill="url(#navHull2)"/>
+      <path d="M18 168 Q60 150 102 168 Q104 172 100 175 Q60 190 20 175 Q16 172 18 168 Z" fill="url(#navHull)" stroke="#bfeaff" stroke-width=".8"/>
+      <path d="M24 170 Q60 182 96 170" fill="none" stroke="url(#navEnergy)" stroke-width="1.4" class="rb-glow"/>
+      <path d="M18 168 L4 178 L20 174 Z" fill="url(#navHull2)" stroke="#8fd8ff" stroke-width=".5"/>
+      <path d="M102 168 L116 178 L100 174 Z" fill="url(#navHull2)" stroke="#8fd8ff" stroke-width=".5"/>
+      <path d="M42 162 Q60 144 78 162 Q60 170 42 162 Z" fill="url(#navDome)" stroke="#cfeeff" stroke-width="1"/>
+      <ellipse cx="54" cy="156" rx="5" ry="3" fill="#ffffff" opacity=".55"/>
+      <circle cx="30" cy="171" r="2.4" fill="#8fe9ff" class="rb-glow"/>
+      <circle cx="60" cy="176" r="2.6" fill="#fff6d6" class="rb-glow"/>
+      <circle cx="90" cy="171" r="2.4" fill="#8fe9ff" class="rb-glow"/>
+      <rect x="50" y="167" width="20" height="2" rx="1" fill="rgba(0,0,0,.25)"/>
+    </g>
+    <circle cx="60" cy="80" r="60" fill="url(#rbAura)" class="rb-glow"/>
+    <g class="rb-body">
+    <g class="rb-legL"><path d="M50 138 L48 172 Q48 176 53 176 L57 176 Q59 176 59 172 L59 138 Z" fill="url(#rbPant)"/><path d="M46 172 L61 172 L62 180 Q62 183 58 183 L48 183 Q45 183 45 180 Z" fill="#241a0d"/><rect x="45" y="178" width="17" height="3" rx="1.5" fill="url(#rbMetal2)"/></g>
+    <g class="rb-legR"><path d="M61 138 L61 172 Q61 176 63 176 L67 176 Q72 176 72 172 L70 138 Z" fill="url(#rbPant)"/><path d="M59 172 L74 172 L75 180 Q75 183 72 183 L62 183 Q58 183 58 180 Z" fill="#241a0d"/><rect x="58" y="178" width="17" height="3" rx="1.5" fill="url(#rbMetal2)"/></g>
+    <g class="rb-cape">
+    <path d="M40 66 Q20 108 26 148 L40 140 Q37 104 46 74 Z" fill="url(#rbCapa)"/>
+    <path d="M80 66 Q100 108 94 148 L80 140 Q83 104 74 74 Z" fill="url(#rbCapa)"/>
+    <path d="M46 74 Q42 108 44 140" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>
+    <path d="M74 74 Q78 108 76 140" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>
+    </g>
+    <g class="rb-arm"><path d="M31 70 Q26 72 27 82 L30 112 Q30 118 36 118 L40 118 Q44 116 43 108 L41 74 Q40 68 34 68 Z" fill="url(#rbTunicaL)"/><ellipse cx="38" cy="120" rx="5" ry="6" fill="url(#rbPiel)"/></g>
+    <path d="M89 70 Q94 72 93 82 L90 112 Q90 118 84 118 L80 118 Q76 116 77 108 L79 74 Q80 68 86 68 Z" fill="url(#rbTunicaL)"/><ellipse cx="82" cy="120" rx="5" ry="6" fill="url(#rbPiel)"/>
+    <path d="M42 66 Q37 64 38 76 L40 128 Q40 138 51 138 L69 138 Q80 138 80 128 L82 76 Q83 64 78 66 Z" fill="url(#rbTunica)" stroke="url(#rbMetal)" stroke-width="1.4"/>
+    <path d="M54 80 L52 128" stroke="rgba(0,0,0,.28)" stroke-width="1.4" fill="none"/>
+    <path d="M66 80 L68 128" stroke="rgba(0,0,0,.28)" stroke-width="1.4" fill="none"/>
+    <path d="M60 78 L60 126" stroke="rgba(255,255,255,.05)" stroke-width="1.4" fill="none"/>
+    <path d="M51 64 L60 82 L69 64 Z" fill="url(#rbPiel)"/>
+    <rect x="43" y="118" width="34" height="7" rx="2" fill="url(#rbMetal2)"/>
+    <rect x="55" y="116" width="10" height="11" rx="2.5" fill="url(#rbMetal)" stroke="#7a5c1c" stroke-width=".6"/>
+    <circle cx="60" cy="121.5" r="2.4" fill="#3a2c0e"/>
+    <circle cx="60" cy="98" r="4.6" fill="url(#rbMetal)" class="rb-glow"/>
+    <path d="M60 95 L61.4 98 L60 101 L58.6 98 Z" fill="#3a2c0e"/>
+    <path d="M40 66 Q42 58 51 60 L49 70 Q44 68 40 70 Z" fill="url(#rbMetal2)"/>
+    <path d="M80 66 Q78 58 69 60 L71 70 Q76 68 80 70 Z" fill="url(#rbMetal2)"/>
+    <rect x="55" y="54" width="10" height="11" rx="3" fill="url(#rbPiel)"/>
+    <ellipse cx="60" cy="55" rx="6" ry="2.2" fill="rgba(0,0,0,.18)"/>
+    <g class="rb-hair">
+    <path d="M39 34 Q35 6 60 4 Q85 6 81 34 L81 48 Q84 26 60 24 Q36 26 39 48 Z" fill="url(#rbPelo)"/>
+    <path d="M42 32 Q42 12 60 11 Q78 12 78 32 Q78 44 72 50 Q66 55 60 55 Q54 55 48 50 Q42 44 42 32 Z" fill="url(#rbPiel)"/>
+    <path d="M48 48 Q60 56 72 48 Q68 53 60 54 Q52 53 48 48 Z" fill="rgba(180,120,80,.25)" filter="url(#rbSoft)"/>
+    <path d="M42 34 Q37 33 38 39 Q40 43 43 41 Z" fill="url(#rbPiel)"/>
+    <path d="M78 34 Q83 33 82 39 Q80 43 77 41 Z" fill="url(#rbPiel)"/>
+    <path d="M41 30 Q40 8 60 7 Q80 8 79 30 Q76 20 66 17 Q64 24 58 25 Q49 25 44 22 Q42 26 41 30 Z" fill="url(#rbPelo)"/>
+    <path d="M60 7 Q70 9 74 18" fill="none" stroke="rgba(0,0,0,.3)" stroke-width="1"/>
+    </g>
+    <path d="M48 27 Q52 25 56 27" fill="none" stroke="#3a2a17" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M64 27 Q68 25 72 27" fill="none" stroke="#3a2a17" stroke-width="1.8" stroke-linecap="round"/>
+    <g class="rb-eye">
+    <ellipse cx="53" cy="33" rx="3.6" ry="2.6" fill="#fff"/>
+    <ellipse cx="67" cy="33" rx="3.6" ry="2.6" fill="#fff"/>
+    <g filter="url(#rbEyeGlow)">
+      <circle cx="53.3" cy="33.2" r="1.9" fill="#3d6ea0"/>
+      <circle cx="66.7" cy="33.2" r="1.9" fill="#3d6ea0"/>
+    </g>
+    <circle cx="53.3" cy="33.2" r=".9" fill="#0c1a2b"/>
+    <circle cx="66.7" cy="33.2" r=".9" fill="#0c1a2b"/>
+    <circle cx="54" cy="32.4" r=".6" fill="#fff"/>
+    <circle cx="67.4" cy="32.4" r=".6" fill="#fff"/>
+    </g>
+    <path d="M49.4 31.4 Q53 29.4 56.6 31.4" fill="none" stroke="rgba(90,60,40,.5)" stroke-width=".9"/>
+    <path d="M63.4 31.4 Q67 29.4 70.6 31.4" fill="none" stroke="rgba(90,60,40,.5)" stroke-width=".9"/>
+    <path d="M60 34 Q58.4 40 59 42 Q60 43.4 61 42 Q61.6 40 60 34" fill="none" stroke="rgba(150,95,60,.55)" stroke-width="1.2" stroke-linecap="round"/>
+    <ellipse cx="60" cy="42.4" rx="2.4" ry="1.1" fill="rgba(150,95,60,.28)"/>
+    <path d="M54 47 Q60 51 66 47" fill="none" stroke="#b06a45" stroke-width="1.7" stroke-linecap="round"/>
+    <path d="M56 46.6 Q60 48.4 64 46.6" fill="none" stroke="rgba(255,235,220,.55)" stroke-width="1" stroke-linecap="round"/>
+    <path d="M43 21 Q60 13 77 21" fill="none" stroke="url(#rbMetal)" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="60" cy="15" r="2.3" fill="#fff6d6" class="rb-glow"/>
+    </g>
   </svg>
-</button>
-<div id="oraWidget">
-  <div class="oh" id="oraHead">
-    <div class="av">
-      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-        <defs><radialGradient id="oaF" cx="42%" cy="36%" r="72%"><stop offset="0" stop-color="#fff8e1"/><stop offset="1" stop-color="#c8a24a"/></radialGradient>
-        <linearGradient id="oaV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f3550"/><stop offset="1" stop-color="#06131f"/></linearGradient></defs>
-        <circle cx="24" cy="24" r="23" fill="url(#oaF)"/>
+</div>
+
+<div id="vozWidget">
+  <div class="vw-head">
+    <div class="vw-orb" id="vwOrb">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+        <defs>
+          <radialGradient id="avFace" cx="42%" cy="36%" r="72%">
+            <stop offset="0" stop-color="#fff8e1"/><stop offset="1" stop-color="#c8a24a"/>
+          </radialGradient>
+          <linearGradient id="avVisor" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#0f3550"/><stop offset="1" stop-color="#06131f"/>
+          </linearGradient>
+        </defs>
+        <circle cx="24" cy="24" r="23" fill="url(#avFace)"/>
         <path d="M13 20 Q13 9 24 9 Q35 9 35 20 L35 30 Q35 39 24 39 Q13 39 13 30 Z" fill="#141019"/>
-        <path d="M16 20 Q16 15 24 15 Q32 15 32 20 L32 27 Q32 31 24 31 Q16 31 16 27 Z" fill="url(#oaV)"/>
-        <circle cx="20.5" cy="23" r="2.2" fill="#8fe9ff"/><circle cx="27.5" cy="23" r="2.2" fill="#8fe9ff"/>
-        <line x1="24" y1="9" x2="24" y2="4" stroke="#fff8e1" stroke-width="1.6"/><circle cx="24" cy="3.4" r="1.8" fill="#fff8e1"/>
+        <path d="M16 20 Q16 15 24 15 Q32 15 32 20 L32 27 Q32 31 24 31 Q16 31 16 27 Z" fill="url(#avVisor)"/>
+        <circle class="av-eye" cx="20.5" cy="23" r="2.2" fill="#8fe9ff"/>
+        <circle class="av-eye" cx="27.5" cy="23" r="2.2" fill="#8fe9ff"/>
+        <line x1="24" y1="9" x2="24" y2="4" stroke="#fff8e1" stroke-width="1.6"/>
+        <circle cx="24" cy="3.4" r="1.8" fill="#fff8e1"/>
       </svg>
     </div>
-    <div><div class="nm">KYBALIO &middot; Oraculo</div><div class="st" id="oraState">Activa Manos libres y hablame</div></div>
-    <button class="x" onclick="oraClose()">&times;</button>
+    <div class="vw-id">
+      <div class="vw-nm">KYBALIO &middot; Agente de Voz</div>
+      <div class="vw-st" id="vwState">Activa Manos libres y hablame</div>
+    </div>
+    <button class="vw-x" onclick="cerrarVoz()">&times;</button>
   </div>
-  <div id="oraBody"><div class="hint" id="oraHint"></div></div>
-  <div id="oraFoot">
-    <div class="otoggle" id="oraHands" onclick="oraToggleHands()"><span class="sw"></span><span class="lbl" id="oraHandsLbl">Manos libres</span></div>
-    <div id="oraMicLbl">Pulsa &laquo;Manos libres&raquo; y hablame, o escribe abajo</div>
-    <div class="ochat"><input id="oraText" placeholder="Escribe tu mensaje..." onkeydown="if(event.key==='Enter')oraSendText()"><button onclick="oraSendText()">&#10148;</button></div>
+  <div class="vw-body" id="vwBody">
+    <div class="vw-hint" id="vwHint">Soy KYBALIO, el oraculo de Orionix. Activa <b>Manos libres</b> y hablame con naturalidad: te escucho, te respondo en voz alta, te explico cada detalle y te llevo a cualquier parte de la web.</div>
+  </div>
+  <div class="vw-foot">
+    <div class="vw-live">
+      <div class="vw-toggle" id="vwHandsToggle" onclick="vozToggleHands()" title="Pulsa para empezar a hablar">
+        <span class="sw"></span><span class="lbl" id="vwHandsLbl">Manos libres</span>
+      </div>
+    </div>
+    <div class="vw-mic-lbl" id="vwMicLbl">Pulsa &laquo;Manos libres&raquo; y hablame, o escribe abajo</div>
+    <div class="vw-chat">
+      <input id="vwText" placeholder="Escribe tu mensaje..." onkeydown="if(event.key==='Enter')vozEnviarTexto()">
+      <button onclick="vozEnviarTexto()" title="Enviar">&#10148;</button>
+    </div>
   </div>
 </div>
+
 <script>
 (function(){
   var CFG=window.ORA_CFG||{};
   var WEBHOOK=CFG.webhook||"https://kevinruiz.app.n8n.cloud/webhook/portal-central";
   var AGENTE=CFG.agente||"VENDEDOR";
-  var MAP=CFG.map||[];         /* [{k:[..],label,icon,run,desc}] */
-  var HINT=CFG.hint||"Soy KYBALIO, el oraculo. Activa Manos libres y hablame, o escribe: te explico todo y te llevo a cualquier parte.";
+  var MAP=CFG.map||[];
+  var QUICK=CFG.quick||[];
+  var HINT=CFG.hint||"";
   var LOCAL=CFG.local||function(){return "Soy el oraculo de Orionix. Puedo explicarte cada seccion y llevarte a donde quieras.";};
-  var ses="ora"+Date.now(), started=false;
-  var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  var rec=null,listening=false,hands=false,speaking=false,thinking=false,buf="",silT=null,interimEl=null,want=false,watch=null,audioReady=false;
-  document.getElementById("oraHint").textContent=HINT.replace(/\*\*/g,"");
+  var FRASES=CFG.frases||[
+    "Hola, soy KYBALIO. Tocame y te resuelvo cualquier duda.",
+    "Preguntame lo que quieras, te escucho.",
+    "Puedo llevarte a cualquier parte de la web.",
+    "Necesitas ayuda? Solo hablame.",
+    "Estoy aqui para guiarte, paso a paso."
+  ];
+  if(HINT){var hn=document.getElementById("vwHint");if(hn)hn.innerHTML=HINT.replace(/\*\*/g,"");}
 
-  function esc(t){var e=document.createElement("div");e.textContent=t;return e.innerHTML;}
-  function fmt(t){var e=esc(t);
-    e=e.replace(/(https?:\/\/[^\s<]+)/g,function(u){return '<a href="'+u+'" target="_blank" rel="noopener">'+u+'</a>';});
-    e=e.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/(^|[^*])\*([^*\n]+)\*/g,'$1<em>$2</em>');
-    var ls=e.split(/\n/),out="",inL=false;
-    for(var i=0;i<ls.length;i++){var l=ls[i].trim();
-      if(/^([-*\u2022])\s+/.test(l)){if(!inL){out+="<ul>";inL=true;}out+="<li>"+l.replace(/^([-*\u2022])\s+/,"")+"</li>";}
-      else{if(inL){out+="</ul>";inL=false;}if(l)out+="<p>"+l+"</p>";}}
-    if(inL)out+="</ul>";return out||("<p>"+e+"</p>");}
-  function setState(t){var s=document.getElementById("oraState");if(s)s.textContent=t;}
-  function add(role,text,acts){var b=document.getElementById("oraBody");var h=b.querySelector(".hint");if(h)h.remove();
-    var d=document.createElement("div");d.className="om "+(role==="u"?"u":"k");
-    d.innerHTML='<div class="avm">'+(role==="u"?"&#128100;":"K")+'</div><div class="b">'+(role==="u"?("<p>"+esc(text)+"</p>"):fmt(text))+'</div>';
-    b.appendChild(d);
-    if(role!=="u"&&acts&&acts.length){var w=d.querySelector(".b");var wr=document.createElement("div");wr.className="oacts";
-      acts.forEach(function(a){var el;if(a.href){el=document.createElement("a");el.href=a.href;el.target="_blank";el.rel="noopener";}else{el=document.createElement("span");el.onclick=a.run;}
-        el.className="oact";el.innerHTML='<span>'+(a.icon||"&#10148;")+'</span>'+a.label;wr.appendChild(el);});
-      w.appendChild(wr);}
-    b.scrollTop=b.scrollHeight;return d;}
-  function typing(){var b=document.getElementById("oraBody");var d=document.createElement("div");d.className="om k";
-    d.innerHTML='<div class="avm">K</div><div class="b odots"><span>.</span><span>.</span><span>.</span></div>';b.appendChild(d);b.scrollTop=b.scrollHeight;return d;}
-  function showInterim(t){var b=document.getElementById("oraBody");if(!interimEl){interimEl=document.createElement("div");interimEl.className="om u";interimEl.style.opacity=".6";interimEl.innerHTML='<div class="avm">&#128100;</div><div class="b"><p></p></div>';b.appendChild(interimEl);}interimEl.querySelector("p").textContent=t;b.scrollTop=b.scrollHeight;}
-  function clearInterim(){if(interimEl){interimEl.remove();interimEl=null;}}
+  var vwSession="voz"+Date.now(), vwStarted=false;
+  var VW_SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  var vwRecog=null,vwListening=false,vwHands=false,vwSpeaking=false,vwThinking=false,vwFinalBuf="",vwSilenceTimer=null,vwInterimEl=null,vwWantListen=false;
 
-  function suger(txt){var n=(txt||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");var a=[],u={};
-    for(var i=0;i<MAP.length;i++){var s=MAP[i];for(var j=0;j<s.k.length;j++){if(n.indexOf(s.k[j])>=0){if(!u[s.label]){a.push(s);u[s.label]=1;}break;}}}
-    return a.slice(0,3);}
-
-  /* ---- voz ---- */
+  /* ---- voces ---- */
   window.__voces=window.__voces||[];
   function cargarVoces(){if(window.speechSynthesis){var v=window.speechSynthesis.getVoices();if(v&&v.length)window.__voces=v;}}
   if(window.speechSynthesis){cargarVoces();window.speechSynthesis.onvoiceschanged=cargarVoces;setTimeout(cargarVoces,300);setTimeout(cargarVoces,1200);setTimeout(cargarVoces,3000);
     setInterval(function(){try{if(window.speechSynthesis.speaking&&window.speechSynthesis.paused)window.speechSynthesis.resume();}catch(e){}},4000);}
-  function mejorVoz(){var vs=window.__voces.length?window.__voces:(window.speechSynthesis?window.speechSynthesis.getVoices():[]);if(!vs.length)return null;
+  function mejorVozEs(){var vs=window.__voces.length?window.__voces:(window.speechSynthesis?window.speechSynthesis.getVoices():[]);if(!vs||!vs.length)return null;
     return vs.find(function(v){return /es(-|_)?(es|419|mx|us|co)/i.test(v.lang)&&/(google|microsoft)/i.test(v.name);})||vs.find(function(v){return /^es/i.test(v.lang)&&/google/i.test(v.name);})||vs.find(function(v){return /^es/i.test(v.lang);})||vs[0];}
-  function warmup(){try{if(window.speechSynthesis){window.speechSynthesis.cancel();window.speechSynthesis.resume();}cargarVoces();
-    if(!audioReady&&window.speechSynthesis){var u=new SpeechSynthesisUtterance(" ");u.volume=0;window.speechSynthesis.speak(u);audioReady=true;}}catch(e){}}
-  ["click","touchstart","keydown"].forEach(function(ev){document.addEventListener(ev,function _w(){warmup();},{once:true,passive:true});});
+  window.__audioListo=window.__audioListo||false;
+  function vozWarmup(){try{if(window.speechSynthesis){window.speechSynthesis.cancel();window.speechSynthesis.resume();}cargarVoces();
+    if(!window.__audioListo&&window.speechSynthesis){var u=new SpeechSynthesisUtterance(" ");u.volume=0;window.speechSynthesis.speak(u);window.__audioListo=true;}}catch(e){}}
+  ["click","touchstart","keydown"].forEach(function(ev){document.addEventListener(ev,function _wu(){vozWarmup();},{once:true,passive:true});});
 
-  function hablar(txt,tt){
-    if(!window.speechSynthesis){if(hands)startListen();return;}
-    stopListen(false);
-    if((!window.__voces||!window.__voces.length)&&(tt||0)<4){cargarVoces();setTimeout(function(){hablar(txt,(tt||0)+1);},300);return;}
-    try{window.speechSynthesis.cancel();setTimeout(function(){try{
-      var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1.02;u.pitch=1;u.volume=1;
-      var p=mejorVoz();if(p){u.voice=p;u.lang=p.lang||"es-ES";}
-      speaking=true;document.getElementById("oraHead").classList.add("talk");setState("KYBALIO esta hablando...");
-      u.onend=function(){speaking=false;document.getElementById("oraHead").classList.remove("talk");if(hands){setTimeout(startListen,180);}else{setState("Pulsa Manos libres para seguir");}};
-      u.onerror=function(){speaking=false;document.getElementById("oraHead").classList.remove("talk");if(hands)setTimeout(startListen,180);};
-      window.speechSynthesis.speak(u);
-      setTimeout(function(){try{if(window.speechSynthesis.paused)window.speechSynthesis.resume();}catch(e){}},220);
-      setTimeout(function(){if(speaking&&!window.speechSynthesis.speaking&&!window.speechSynthesis.pending&&(tt||0)<2){speaking=false;hablar(txt,(tt||0)+1);}},700);
-    }catch(e){speaking=false;if(hands)startListen();}},140);}catch(e){speaking=false;if(hands)startListen();}}
-  function stopSpeak(){if(window.speechSynthesis)window.speechSynthesis.cancel();speaking=false;document.getElementById("oraHead").classList.remove("talk");}
+  /* ---- helpers UI ---- */
+  function vwEsc(t){var e=document.createElement("div");e.textContent=t;return e.innerHTML;}
+  function vwSetState(t){var s=document.getElementById("vwState");if(s)s.textContent=t;}
+  function vwFormat(text){var esc=vwEsc(text);
+    esc=esc.replace(/(https?:\/\/[^\s<]+)/g,function(u){return '<a href="'+u+'" target="_blank" rel="noopener">'+u+'</a>';});
+    esc=esc.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/(^|[^*])\*([^*\n]+)\*/g,'$1<em>$2</em>');
+    var lines=esc.split(/\n/);var out="";var inList=false;
+    for(var i=0;i<lines.length;i++){var ln=lines[i].trim();
+      if(/^([-*\u2022])\s+/.test(ln)){if(!inList){out+="<ul>";inList=true;}out+="<li>"+ln.replace(/^([-*\u2022])\s+/,"")+"</li>";}
+      else{if(inList){out+="</ul>";inList=false;}if(ln)out+="<p>"+ln+"</p>";}}
+    if(inList)out+="</ul>";return out||("<p>"+esc+"</p>");}
+  function vwActions(el,acciones){if(!acciones||!acciones.length)return;
+    var bWrap=el.querySelector(".b");var w=document.createElement("div");w.className="vw-acts";
+    acciones.forEach(function(a){var el2;
+      if(a.href){el2=document.createElement("a");el2.href=a.href;el2.target="_blank";el2.rel="noopener";}
+      else{el2=document.createElement("span");el2.onclick=(a.run||a.fn);}
+      el2.className="vw-act";el2.innerHTML='<span class="ai">'+(a.icon||"&#10148;")+'</span>'+a.label;w.appendChild(el2);});
+    bWrap.appendChild(w);}
+  function vwAdd(role,text,acciones){var b=document.getElementById("vwBody");var h=b.querySelector(".vw-hint");if(h)h.remove();
+    var d=document.createElement("div");d.className="vw-msg "+(role==="user"?"user":"bot");
+    d.innerHTML='<div class="vw-av">'+(role==="user"?"&#128100;":"K")+'</div><div class="b">'+(role==="user"?("<p>"+vwEsc(text)+"</p>"):vwFormat(text))+'</div>';
+    b.appendChild(d);if(role!=="user")vwActions(d,acciones);b.scrollTop=b.scrollHeight;return d;}
+  function vwTyping(){var b=document.getElementById("vwBody");var d=document.createElement("div");d.className="vw-msg bot";d.innerHTML='<div class="vw-av">K</div><div class="b vw-dots"><span>.</span><span>.</span><span>.</span></div>';b.appendChild(d);b.scrollTop=b.scrollHeight;return d;}
+  function vwShowInterim(t){var b=document.getElementById("vwBody");if(!vwInterimEl){vwInterimEl=document.createElement("div");vwInterimEl.className="vw-interim";b.appendChild(vwInterimEl);}vwInterimEl.textContent=t?("\u201c"+t+"\u201d"):"";b.scrollTop=b.scrollHeight;}
+  function vwClearInterim(){if(vwInterimEl){vwInterimEl.remove();vwInterimEl=null;}}
 
-  function ensureRec(){if(!SR)return null;if(rec)return rec;
-    var r=new SR();r.lang="es-ES";r.continuous=true;r.interimResults=true;r.maxAlternatives=1;
-    r.onstart=function(){listening=true;};r.onaudiostart=function(){listening=true;};
-    r.onresult=function(ev){var it="";for(var i=ev.resultIndex;i<ev.results.length;i++){var tr=ev.results[i][0].transcript;if(ev.results[i].isFinal){buf+=tr+" ";}else{it+=tr;}}
-      showInterim((buf+it).trim());if(silT)clearTimeout(silT);silT=setTimeout(flush,1100);};
-    r.onerror=function(ev){if(ev.error==="not-allowed"||ev.error==="service-not-allowed"){hands=false;refreshHands();setState("Permite el microfono");document.getElementById("oraMicLbl").textContent="Permite el Microfono en el candado de la barra y reintenta";alert("Debes PERMITIR el microfono en Chrome (candado de la barra de direcciones) y volver a pulsar Manos libres.");}};
-    r.onend=function(){listening=false;if(want&&hands&&!speaking&&!thinking){setTimeout(startListen,180);}};
-    rec=r;return r;}
-  function armWatch(){if(watch)clearInterval(watch);watch=setInterval(function(){if(hands&&want&&!listening&&!speaking&&!thinking){startListen();}},1200);}
-  function startListen(){if(!SR||!hands||listening||speaking||thinking)return;var r=ensureRec();if(!r)return;buf="";want=true;
-    try{r.start();listening=true;document.getElementById("oraHead").classList.add("talk");setState("Escuchando... hablame");document.getElementById("oraMicLbl").textContent="Te escucho... habla con naturalidad";}catch(e){listening=true;}}
-  function stopListen(hard){want=false;if(silT){clearTimeout(silT);silT=null;}if(rec){try{rec.stop();}catch(e){}}listening=false;if(!speaking)document.getElementById("oraHead").classList.remove("talk");if(hard)clearInterim();}
-  function flush(){var t=buf.trim();buf="";if(!t)return;clearInterim();stopListen(false);add("u",t);if(comando(t))return;thinking=true;setState("KYBALIO esta pensando...");enviar(t);}
+  function vwSugerir(texto){var n=(texto||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");var acts=[],usados={};
+    for(var i=0;i<MAP.length;i++){var s=MAP[i];for(var j=0;j<s.k.length;j++){if(n.indexOf(s.k[j])>=0){if(!usados[s.label]){acts.push(s);usados[s.label]=1;}break;}}}
+    return acts.slice(0,3);}
 
-  function refreshHands(){var b=document.getElementById("oraHands"),l=document.getElementById("oraHandsLbl");if(b)b.classList.toggle("on",hands);if(l)l.textContent=hands?"Escuchando":"Manos libres";}
-  window.oraToggleHands=function(){if(!SR){alert("Tu navegador no permite voz. Usa Google Chrome en PC o Android.");return;}
-    hands=!hands;refreshHands();
-    if(hands){warmup();want=true;armWatch();hablar("Hola, soy KYBALIO, tu oraculo. Te escucho: dime que quieres saber o a donde te llevo.");setTimeout(function(){if(!speaking)startListen();},1000);}
-    else{stopSpeak();stopListen(true);if(watch){clearInterval(watch);watch=null;}setState("Manos libres desactivado");document.getElementById("oraMicLbl").textContent="Pulsa Manos libres y hablame, o escribe abajo";}};
+  /* ---- abrir / cerrar ---- */
+  window.abrirVoz=function(){var w=document.getElementById("vozWidget");w.classList.add("open");var rb=document.getElementById("robot");if(rb){rb.classList.remove("talk","nave");rb.classList.add("walk");}
+    vozWarmup();
+    if(!vwStarted){vwStarted=true;
+      if(!VW_SR){document.getElementById("vwMicLbl").innerHTML="Para voz usa Google Chrome en tu PC o celular.";}
+      vwAdd("bot",HINT||"Hola, soy **KYBALIO**, el oraculo de Orionix. Activa **Manos libres** y hablame, o escribe: te explico todo y te llevo a cualquier parte.",QUICK);
+    }
+    if(VW_SR&&!vwHands){vwHands=true;refreshHandsBtn();
+      vozHablar("Hola, soy KYBALIO. Te escucho, dime en que puedo ayudarte.");
+      setTimeout(function(){if(!vwSpeaking)vwStartListen();},1400);}
+  };
+  window.cerrarVoz=function(){document.getElementById("vozWidget").classList.remove("open");vozStopSpeak();vwStopListen(true);vwHands=false;refreshHandsBtn();};
 
-  function comando(txt){var n=(txt||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  /* ---- reconocimiento ---- */
+  function vwEnsureRecog(){if(!VW_SR)return null;if(vwRecog)return vwRecog;
+    var r=new VW_SR();r.lang="es-ES";r.continuous=true;r.interimResults=true;r.maxAlternatives=1;
+    r.onresult=function(ev){var interim="";for(var i=ev.resultIndex;i<ev.results.length;i++){var tr=ev.results[i][0].transcript;if(ev.results[i].isFinal){vwFinalBuf+=tr+" ";}else{interim+=tr;}}
+      vwShowInterim((vwFinalBuf+interim).trim());if(vwSilenceTimer)clearTimeout(vwSilenceTimer);vwSilenceTimer=setTimeout(function(){vwFlush();},1100);};
+    r.onstart=function(){vwListening=true;};r.onaudiostart=function(){vwListening=true;};
+    r.onerror=function(ev){if(ev.error==="not-allowed"||ev.error==="service-not-allowed"){vwHands=false;refreshHandsBtn();vwSetState("Permite el microfono en el navegador");
+        document.getElementById("vwMicLbl").textContent="Toca el candado de la barra de direcciones y permite el Microfono";
+        alert("Debes PERMITIR el microfono. Toca el candado (o el icono de camara/microfono) en la barra de direcciones de Chrome, elige Microfono = Permitir, y vuelve a pulsar Manos libres.");}};
+    r.onend=function(){vwListening=false;if(vwWantListen&&vwHands&&!vwSpeaking&&!vwThinking){setTimeout(vwStartListen,180);}};
+    vwRecog=r;return r;}
+  var vwWatch=null;
+  function vwArmWatch(){if(vwWatch)clearInterval(vwWatch);vwWatch=setInterval(function(){if(vwHands&&vwWantListen&&!vwListening&&!vwSpeaking&&!vwThinking){vwStartListen();}},1200);}
+  function vwStartListen(){if(!VW_SR||!vwHands||vwListening||vwSpeaking||vwThinking)return;var r=vwEnsureRecog();if(!r)return;vwFinalBuf="";vwWantListen=true;
+    try{r.start();vwListening=true;var o=document.getElementById("vwOrb");if(o)o.classList.add("talk");vwSetState("Escuchando... hablame");document.getElementById("vwMicLbl").textContent="Te escucho... habla con naturalidad";}
+    catch(e){vwListening=true;}}
+  function vwStopListen(hard){vwWantListen=false;if(vwSilenceTimer){clearTimeout(vwSilenceTimer);vwSilenceTimer=null;}if(vwRecog){try{vwRecog.stop();}catch(e){}}vwListening=false;var o=document.getElementById("vwOrb");if(o&&!vwSpeaking)o.classList.remove("talk");if(hard){vwClearInterim();}}
+  function vwFlush(){var t=vwFinalBuf.trim();vwFinalBuf="";if(!t){return;}vwClearInterim();vwStopListen(false);vwAdd("user",t);if(vozComando(t))return;vwThinking=true;vwSetState("KYBALIO esta pensando...");vozEnviar(t);}
+
+  window.vozToggleHands=function(){if(!VW_SR){alert("Tu navegador no permite reconocimiento de voz. Usa Google Chrome en PC o Android.");return;}
+    vwHands=!vwHands;refreshHandsBtn();
+    if(vwHands){vozWarmup();vwWantListen=true;vwArmWatch();
+      vozHablar("Hola, te escucho. Dime en que puedo ayudarte o pideme abrir cualquier parte de la web.");
+      setTimeout(function(){if(!vwSpeaking)vwStartListen();},1000);}
+    else{vozStopSpeak();vwStopListen(true);if(vwWatch){clearInterval(vwWatch);vwWatch=null;}vwSetState("Manos libres desactivado");document.getElementById("vwMicLbl").textContent="Pulsa \u00abManos libres\u00bb y hablame";}};
+  function refreshHandsBtn(){var b=document.getElementById("vwHandsToggle");var l=document.getElementById("vwHandsLbl");if(b)b.classList.toggle("on",vwHands);if(l)l.textContent=vwHands?"Escuchando":"Manos libres";}
+
+  function vozStopSpeak(){if(window.speechSynthesis)window.speechSynthesis.cancel();vwSpeaking=false;var o=document.getElementById("vwOrb");if(o)o.classList.remove("talk");}
+  function vozHablar(txt,_intentos){
+    if(!window.speechSynthesis){if(vwHands)vwStartListen();return;}
+    vwStopListen(false);
+    if((!window.__voces||!window.__voces.length)&&(_intentos||0)<4){cargarVoces();setTimeout(function(){vozHablar(txt,(_intentos||0)+1);},300);return;}
+    try{window.speechSynthesis.cancel();
+      setTimeout(function(){try{
+        var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1.02;u.pitch=1;u.volume=1;
+        var pref=mejorVozEs();if(pref){u.voice=pref;u.lang=pref.lang||"es-ES";}
+        vwSpeaking=true;var o=document.getElementById("vwOrb");if(o)o.classList.add("talk");vwSetState("KYBALIO esta hablando...");
+        u.onend=function(){vwSpeaking=false;var o2=document.getElementById("vwOrb");if(o2)o2.classList.remove("talk");if(vwHands){setTimeout(vwStartListen,180);}else{vwSetState("Pulsa \u00abManos libres\u00bb para seguir");}};
+        u.onerror=function(){vwSpeaking=false;var o3=document.getElementById("vwOrb");if(o3)o3.classList.remove("talk");if(vwHands)setTimeout(vwStartListen,180);};
+        window.speechSynthesis.speak(u);
+        setTimeout(function(){try{if(window.speechSynthesis.paused)window.speechSynthesis.resume();}catch(e){}},220);
+        setTimeout(function(){if(vwSpeaking&&!window.speechSynthesis.speaking&&!window.speechSynthesis.pending&&(_intentos||0)<2){vwSpeaking=false;vozHablar(txt,(_intentos||0)+1);}},700);
+      }catch(e2){vwSpeaking=false;if(vwHands)vwStartListen();}},140);
+    }catch(e){vwSpeaking=false;if(vwHands)vwStartListen();}}
+
+  window.vozEnviarTexto=function(){var inp=document.getElementById("vwText");var t=(inp.value||"").trim();if(!t)return;inp.value="";vwAdd("user",t);if(vozComando(t))return;vwThinking=true;vwSetState("KYBALIO esta pensando...");vozEnviar(t);};
+
+  function vozEnviar(texto){var typing=vwTyping();
+    fetch(WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:"Visitante",sesion:vwSession,agente:AGENTE,mensaje:texto})})
+      .then(function(r){return r.json();}).then(function(data){vwThinking=false;var resp=(data&&(data.respuesta||data.output))||"";if(!resp){resp=LOCAL(texto);}typing.remove();var acts=vwSugerir(texto+" "+resp);vwAdd("bot",resp,acts);vozHablar(resp);})
+      .catch(function(){typing.remove();vwThinking=false;var resp=LOCAL(texto);vwAdd("bot",resp,vwSugerir(texto+" "+resp));vozHablar(resp);});}
+
+  function vozComando(texto){var n=(texto||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
     function h(){for(var i=0;i<arguments.length;i++){if(n.indexOf(arguments[i])>=0)return true;}return false;}
-    var abrir=h("abre","abrir","muestra","muestrame","llevame","lleva","ve a","ir a","quiero ver","ver","entra");
-    for(var i=0;i<MAP.length;i++){var s=MAP[i];for(var j=0;j<s.k.length;j++){if(n.indexOf(s.k[j])>=0){
-      add("k",s.resp||("Te llevo a "+s.label+"."));
-      if(window.speechSynthesis){try{window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(s.resp||("Te llevo a "+s.label));u.lang="es-ES";var p=mejorVoz();if(p)u.voice=p;u.onend=function(){setTimeout(s.run,120);};window.speechSynthesis.speak(u);}catch(e){setTimeout(s.run,250);}}else{setTimeout(s.run,300);}
-      return true;}}}
+    var abrir=h("abre","abrir","muestra","muestrame","ensename","llevame","lleva","ve a","vamos a","ir a","entra","entrar","quiero ver","ver la","ver el");
+    for(var i=0;i<MAP.length;i++){var s=MAP[i];if(!s.run&&!s.fn)continue;var run=s.run||s.fn;
+      for(var j=0;j<s.k.length;j++){if(n.indexOf(s.k[j])>=0){
+        var resp=s.resp||("Te llevo a "+s.label+".");
+        vwAdd("bot",resp);
+        if(window.speechSynthesis){try{window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(resp);u.lang="es-ES";u.rate=1.03;var pref=mejorVozEs();if(pref)u.voice=pref;u.onend=function(){setTimeout(run,150);};window.speechSynthesis.speak(u);}catch(e){setTimeout(run,300);}}
+        else{setTimeout(run,400);}
+        return true;}}}
     return false;}
 
-  function enviar(texto){var tp=typing();
-    fetch(WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:"Visitante",sesion:ses,agente:AGENTE,mensaje:texto})})
-      .then(function(r){return r.json();}).then(function(d){thinking=false;var resp=(d&&(d.respuesta||d.output))||"";if(!resp)resp=LOCAL(texto);tp.remove();add("k",resp,suger(texto+" "+resp));hablar(resp);})
-      .catch(function(){tp.remove();thinking=false;var resp=LOCAL(texto);add("k",resp,suger(texto+" "+resp));hablar(resp);});}
-  window.oraSendText=function(){var inp=document.getElementById("oraText");var t=(inp.value||"").trim();if(!t)return;inp.value="";add("u",t);if(comando(t))return;thinking=true;setState("KYBALIO esta pensando...");enviar(t);};
+  refreshHandsBtn();
 
-  window.oraToggle=function(){var w=document.getElementById("oraWidget");if(w.classList.contains("open")){oraClose();return;}
-    w.classList.add("open");warmup();
-    if(!started){started=true;add("k",HINT,(CFG.quick||[]));}
-    if(SR&&!hands){hands=true;refreshHands();want=true;armWatch();hablar("Hola, soy KYBALIO, tu oraculo. Te escucho, dime en que puedo ayudarte.");setTimeout(function(){if(!speaking)startListen();},1300);}};
-  window.oraClose=function(){document.getElementById("oraWidget").classList.remove("open");stopSpeak();stopListen(true);if(watch){clearInterval(watch);watch=null;}hands=false;refreshHands();};
+  /* ---- PERSONAJE: frases + saludo ---- */
+  (function(){var r=document.getElementById("robot");if(!r)return;var idx=0,boc=document.getElementById("rbBocadillo");
+    setTimeout(function(){r.classList.add("talk");setTimeout(function(){r.classList.remove("talk");},4200);},1600);
+    setInterval(function(){idx=(idx+1)%FRASES.length;if(boc)boc.textContent=FRASES[idx];r.classList.add("talk");setTimeout(function(){r.classList.remove("talk");},4200);},14000);
+    r.addEventListener("mouseenter",function(){r.classList.add("talk");});
+  })();
+})();
+
+/* ============ MOVIMIENTO DEL ROBOT (independiente y a prueba de fallos) ============ */
+(function(){
+  function init(){
+    var r=document.getElementById("robot");
+    if(!r){return setTimeout(init,300);}
+    var curX=18,curB=18,tgtX=18,tgtB=18,run=false,lastY=window.pageYOffset||0,timer=null;
+    function widgetAbierto(){var w=document.getElementById("vozWidget");return w&&w.classList.contains("open");}
+    function nave(on){if(on){if(widgetAbierto())return;r.classList.remove("walk");r.classList.add("nave");}else{r.classList.remove("nave");r.classList.add("walk");}}
+    function calc(){var de=document.documentElement,bd=document.body;var sh=Math.max(de.scrollHeight,bd.scrollHeight);var max=(sh-window.innerHeight)||1;var sy=window.pageYOffset||de.scrollTop||bd.scrollTop||0;var p=Math.min(1,Math.max(0,sy/max));var rw=r.offsetWidth||74;tgtX=18+(window.innerWidth-rw-36)*p;tgtB=18+Math.sin(p*Math.PI)*Math.min(240,window.innerHeight*0.32);}
+    function loop(){curX+=(tgtX-curX)*0.14;curB+=(tgtB-curB)*0.14;r.style.left=curX.toFixed(1)+"px";r.style.bottom=curB.toFixed(1)+"px";r.style.right="auto";r.style.top="auto";if(Math.abs(tgtX-curX)>0.4||Math.abs(tgtB-curB)>0.4){requestAnimationFrame(loop);}else{run=false;}}
+    function kick(){if(!run){run=true;requestAnimationFrame(loop);}}
+    function onScroll(){calc();kick();var sy=window.pageYOffset||0;if(Math.abs(sy-lastY)>3){lastY=sy;nave(true);if(timer)clearTimeout(timer);timer=setTimeout(function(){nave(false);},900);}}
+    calc();curX=tgtX;curB=tgtB;r.style.left=curX+"px";r.style.bottom=curB+"px";r.style.right="auto";r.style.top="auto";
+    window.addEventListener("scroll",onScroll,{passive:true});
+    window.addEventListener("resize",function(){calc();kick();});
+    document.addEventListener("scroll",onScroll,{passive:true});
+    setInterval(function(){var sy=window.pageYOffset||0;if(sy!==lastY){onScroll();}},250);
+  }
+  if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init);}else{init();}
 })();
 </script>
+<!-- ===================== FIN AVATAR KYBALIO ===================== -->
+
 
 </body>
 </html>

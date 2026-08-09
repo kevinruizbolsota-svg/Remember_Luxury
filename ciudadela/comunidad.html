@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>La Ciudadela | Comunidad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --oro:#e8c86a;--oro-med:#c8a24a;--oro-osc:#8a6a24;
+    --bg:#0b0b0d;--bg2:#141118;--panel:#141117;--panel2:#1c1922;--border:#2a2530;
+    --texto:#e9ddc4;--tenue:#b8a982;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--bg);color:var(--texto);min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4,.cinzel,.marca{font-family:'Cinzel',serif}
+  .oro{background:linear-gradient(92deg,#8a6a24,#e8c86a 25%,#fff6d6 50%,#e8c86a 75%,#8a6a24);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 6s linear infinite}
+  @keyframes brilloOro{to{background-position:200% center}}
+  ::-webkit-scrollbar{width:9px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:6px}
+
+  /* ===== TOPBAR ===== */
+  .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:16px;padding:12px 20px;background:rgba(11,11,13,.94);border-bottom:1px solid rgba(232,200,106,.2);backdrop-filter:blur(10px)}
+  .topbar .marca{font-size:1.05rem;letter-spacing:3px;font-weight:700}
+  .topbar .search{flex:1;max-width:420px;margin:0 6px}
+  .topbar .search input{width:100%;padding:10px 16px;border-radius:22px;border:1px solid var(--border);background:var(--panel2);color:var(--texto);font-family:inherit;font-size:15px;outline:none}
+  .topbar .search input:focus{border-color:var(--oro)}
+  .topbar .tabs{display:flex;gap:6px}
+  .topbar .tabs .t{width:46px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:10px;cursor:pointer;font-size:20px;color:var(--tenue);transition:all .2s}
+  .topbar .tabs .t:hover{background:var(--panel2)}
+  .topbar .tabs .t.active{color:var(--oro);background:rgba(232,200,106,.1);box-shadow:inset 0 -2px 0 var(--oro)}
+  .topbar .me{width:38px;height:38px;border-radius:50%;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:700;cursor:pointer}
+  .topbar .volver{color:var(--tenue);cursor:pointer;font-size:13px;text-decoration:underline;font-family:'Cinzel',serif;white-space:nowrap}
+
+  /* ===== LAYOUT ===== */
+  .wrap{display:grid;grid-template-columns:260px 1fr 300px;gap:20px;max-width:1240px;margin:0 auto;padding:20px}
+  @media(max-width:1000px){.wrap{grid-template-columns:1fr 320px}.left{display:none}}
+  @media(max-width:760px){.wrap{grid-template-columns:1fr;padding:14px}.right{display:none}}
+  .side{position:sticky;top:78px;align-self:start}
+  .menu a{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:10px;color:var(--texto);text-decoration:none;cursor:pointer;transition:background .2s;font-size:1.05rem}
+  .menu a:hover{background:var(--panel2)}
+  .menu a .ic{font-size:1.3rem;width:26px;text-align:center}
+  .menu .sep{height:1px;background:var(--border);margin:12px 6px}
+  .menu h5{color:var(--tenue);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;font-family:'Cinzel',serif;margin:10px 14px 6px}
+
+  /* ===== FEED CENTRAL ===== */
+  .destellos{display:flex;gap:12px;overflow-x:auto;padding:4px 2px 14px}
+  .destellos::-webkit-scrollbar{height:0}
+  .dcard{flex:0 0 108px;height:180px;border-radius:14px;position:relative;cursor:pointer;overflow:hidden;border:1px solid var(--border);background:linear-gradient(160deg,var(--panel2),var(--panel))}
+  .dcard.add{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:14px}
+  .dcard.add .plus{position:absolute;top:118px;left:50%;transform:translateX(-50%);width:38px;height:38px;border-radius:50%;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;display:flex;align-items:center;justify-content:center;font-size:24px;border:3px solid var(--panel)}
+  .dcard.add .top{position:absolute;top:0;left:0;right:0;height:118px;background:radial-gradient(circle at 50% 40%,rgba(232,200,106,.18),transparent 70%)}
+  .dcard.add span.txt{font-size:.78rem;color:var(--texto);text-align:center;font-family:'Cinzel',serif}
+  .dcard . author{position:absolute;top:8px;left:8px;width:34px;height:34px;border-radius:50%;border:3px solid var(--oro);background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:'Cinzel',serif;font-size:14px}
+  .dcard .body{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.4rem}
+  .dcard .nm{position:absolute;bottom:8px;left:8px;right:8px;font-size:.78rem;color:#fff;text-shadow:0 1px 4px #000}
+
+  .composer{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px;margin:6px 0 18px}
+  .composer .row1{display:flex;gap:12px;align-items:center}
+  .composer .ava{width:42px;height:42px;border-radius:50%;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:700}
+  .composer textarea{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:22px;color:var(--texto);padding:12px 18px;font-family:inherit;font-size:1.1rem;resize:none;outline:none;max-height:200px}
+  .composer textarea:focus{border-color:var(--oro)}
+  .composer .row2{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+  .composer .chip{display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:20px;background:var(--panel2);border:1px solid var(--border);color:var(--tenue);cursor:pointer;font-size:.95rem;transition:all .2s}
+  .composer .chip:hover{border-color:var(--oro);color:var(--oro)}
+  .composer .pub{margin-left:auto;padding:10px 26px;border:none;border-radius:20px;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;font-family:'Cinzel',serif;font-weight:700;letter-spacing:1px;cursor:pointer}
+  .composer .pub:disabled{opacity:.5;cursor:default}
+
+  .post{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:18px}
+  .post .head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .post .ava{width:44px;height:44px;border-radius:50%;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:700;flex-shrink:0}
+  .post .nm{font-family:'Cinzel',serif;color:var(--oro);letter-spacing:.5px}
+  .post .meta{color:var(--tenue);font-size:.82rem}
+  .post .del{margin-left:auto;color:var(--tenue);cursor:pointer;font-size:1.1rem}
+  .post .del:hover{color:#e06}
+  .post .txt{font-size:1.18rem;line-height:1.7;white-space:pre-wrap;margin-bottom:12px}
+  .post .tag{display:inline-block;font-size:.8rem;color:var(--oro);background:rgba(232,200,106,.1);border:1px solid rgba(232,200,106,.25);border-radius:14px;padding:2px 12px;margin-bottom:12px;font-family:'Cinzel',serif;letter-spacing:1px}
+  .post .stat{display:flex;justify-content:space-between;color:var(--tenue);font-size:.85rem;padding:6px 2px;border-bottom:1px solid var(--border)}
+  .post .actions{display:flex;gap:6px;padding-top:8px}
+  .post .act{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;border-radius:10px;cursor:pointer;color:var(--tenue);transition:all .2s;font-size:1rem;user-select:none}
+  .post .act:hover{background:var(--panel2)}
+  .post .act.on{color:var(--oro)}
+  .comments{margin-top:12px;display:none}
+  .comments.open{display:block}
+  .comments .crow{display:flex;gap:10px;margin-top:10px}
+  .comments .cava{width:32px;height:32px;border-radius:50%;background:var(--panel2);color:var(--oro);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:700;font-size:13px;flex-shrink:0}
+  .comments .cbub{background:var(--panel2);border-radius:14px;padding:9px 14px;font-size:1.02rem}
+  .comments .cbub .cn{color:var(--oro);font-family:'Cinzel',serif;font-size:.78rem;margin-bottom:2px}
+  .comments .cinput{display:flex;gap:10px;margin-top:12px}
+  .comments .cinput input{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:18px;color:var(--texto);padding:9px 16px;font-family:inherit;font-size:1rem;outline:none}
+  .comments .cinput input:focus{border-color:var(--oro)}
+  .comments .cinput button{background:none;border:none;color:var(--oro);font-size:20px;cursor:pointer}
+
+  /* ===== DERECHA ===== */
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:18px}
+  .card h4{color:var(--oro);font-size:.8rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+  .member{display:flex;align-items:center;gap:12px;padding:8px 0;cursor:pointer}
+  .member .ava{width:40px;height:40px;border-radius:50%;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:700}
+  .member .info .nm{font-family:'Cinzel',serif;color:var(--texto);font-size:.95rem}
+  .member .info .rl{color:var(--tenue);font-size:.8rem}
+  .prov{font-style:italic;font-size:1.15rem;line-height:1.7;color:var(--texto)}
+  .prov .a{color:var(--oro);font-family:'Cinzel',serif;font-size:.85rem;display:block;margin-top:10px;font-style:normal}
+
+  /* ===== LOGIN ===== */
+  #login{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center}
+  #login .box{background:var(--panel);border:1px solid rgba(232,200,106,.3);border-radius:16px;padding:40px;width:360px;max-width:92vw;text-align:center}
+  #login .box .crown{font-size:48px;margin-bottom:8px}
+  #login .box h2{color:var(--oro);letter-spacing:2px;margin-bottom:6px}
+  #login .box p{color:var(--tenue);font-size:.95rem;margin-bottom:20px}
+  #login .box input{width:100%;padding:13px;background:var(--panel2);border:1px solid var(--border);border-radius:10px;color:var(--texto);font-size:15px;font-family:inherit;margin-bottom:14px;text-align:center}
+  #login .box button{width:100%;padding:13px;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;border:none;border-radius:10px;font-family:'Cinzel',serif;font-weight:700;letter-spacing:1px;cursor:pointer;font-size:14px}
+
+  /* ===== VISOR DESTELLOS ===== */
+  #visor{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center}
+  #visor.open{display:flex}
+  #visor .vbox{width:min(420px,92vw);height:min(76vh,720px);background:linear-gradient(160deg,var(--panel2),var(--panel));border-radius:18px;position:relative;display:flex;align-items:center;justify-content:center;border:1px solid var(--border)}
+  #visor .vbody{font-size:3.4rem;text-align:center;padding:30px}
+  #visor .vtxt{position:absolute;bottom:30px;left:20px;right:20px;text-align:center;font-size:1.3rem;color:#fff;text-shadow:0 1px 6px #000}
+  #visor .vauthor{position:absolute;top:16px;left:16px;display:flex;align-items:center;gap:10px;color:#fff}
+  #visor .vauthor .a{width:36px;height:36px;border-radius:50%;border:2px solid var(--oro);background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:700}
+  #visor .vclose{position:absolute;top:16px;right:20px;color:#fff;font-size:30px;cursor:pointer;background:none;border:none}
+
+  .empty{text-align:center;color:var(--tenue);padding:50px 20px;font-style:italic;font-size:1.1rem}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--oro);color:var(--oro);padding:12px 24px;border-radius:24px;font-family:'Cinzel',serif;letter-spacing:1px;z-index:400;opacity:0;transition:opacity .3s;pointer-events:none}
+  .toast.show{opacity:1}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <div class="box">
+    <div class="crown">&#128081;</div>
+    <h2 class="oro">La Comunidad</h2>
+    <p>Une tu voz a la Ciudadela. Escribe tu nombre para entrar a la tribu.</p>
+    <input id="nameInput" placeholder="Tu nombre" autocomplete="off">
+    <button onclick="doLogin()">Entrar a la Comunidad</button>
+  </div>
+</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="marca oro">CIUDADELA</div>
+  <div class="search"><input id="buscar" placeholder="Buscar en la comunidad..."></div>
+  <div class="tabs">
+    <div class="t active" data-v="feed" title="Inicio">&#127968;</div>
+    <div class="t" data-v="miembros" title="Miembros">&#128101;</div>
+    <div class="t" data-v="perfil" title="Mi perfil">&#128100;</div>
+  </div>
+  <div class="me" id="meAva" onclick="go('perfil')"></div>
+  <span class="volver" onclick="volver()">&larr; Volver</span>
+</div>
+
+<div class="wrap">
+  <!-- IZQUIERDA -->
+  <aside class="side left">
+    <div class="menu">
+      <a onclick="go('feed')"><span class="ic">&#127968;</span> Inicio</a>
+      <a onclick="go('miembros')"><span class="ic">&#128101;</span> Miembros</a>
+      <a onclick="go('perfil')"><span class="ic">&#128100;</span> Mi Perfil</a>
+      <a onclick="filtrar('Logro')"><span class="ic">&#127942;</span> Logros</a>
+      <a onclick="filtrar('Habito')"><span class="ic">&#128293;</span> Habitos</a>
+      <a onclick="filtrar('Reflexion')"><span class="ic">&#128302;</span> Reflexiones</a>
+      <div class="sep"></div>
+      <h5>Accesos</h5>
+      <a onclick="volver()"><span class="ic">&#127760;</span> La Ciudadela</a>
+      <a onclick="abrirExterno('portal')"><span class="ic">&#128172;</span> Portal KYBALIO</a>
+      <a onclick="abrirExterno('templo')"><span class="ic">&#9733;</span> Mi Templo</a>
+      <a onclick="abrirExterno('tienda')"><span class="ic">&#128081;</span> Tienda</a>
+    </div>
+  </aside>
+
+  <!-- CENTRO -->
+  <main class="center">
+    <!-- FEED -->
+    <section id="v-feed">
+      <div class="destellos" id="destellos"></div>
+      <div class="composer">
+        <div class="row1">
+          <div class="ava" id="compAva"></div>
+          <textarea id="postText" rows="1" placeholder="Comparte tu evolucion, un habito, un logro..."></textarea>
+        </div>
+        <div class="row2">
+          <span class="chip" onclick="setTag('Logro')">&#127942; Logro</span>
+          <span class="chip" onclick="setTag('Habito')">&#128293; Habito</span>
+          <span class="chip" onclick="setTag('Reflexion')">&#128302; Reflexion</span>
+          <span class="chip" onclick="nuevoDestello()">&#10024; Destello</span>
+          <button class="pub" id="pubBtn" onclick="publicar()">Publicar</button>
+        </div>
+      </div>
+      <div id="feed"></div>
+    </section>
+
+    <!-- MIEMBROS -->
+    <section id="v-miembros" style="display:none">
+      <div class="card"><h4>Miembros de la Ciudadela</h4><div id="miembrosList"></div></div>
+    </section>
+
+    <!-- PERFIL -->
+    <section id="v-perfil" style="display:none">
+      <div class="card" style="text-align:center;padding:34px">
+        <div class="ava" id="perfilAva" style="width:90px;height:90px;margin:0 auto 14px;font-size:2rem;border-radius:50%;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:700"></div>
+        <h2 class="oro" id="perfilNom" style="letter-spacing:2px"></h2>
+        <p style="color:var(--tenue);margin-top:6px">Miembro de La Ciudadela &middot; Forjando su diamante</p>
+        <div style="display:flex;justify-content:center;gap:34px;margin-top:22px">
+          <div><div class="oro" style="font-size:1.8rem;font-family:'Cinzel',serif" id="stPosts">0</div><div style="color:var(--tenue);font-size:.75rem;letter-spacing:1px;text-transform:uppercase">Publicaciones</div></div>
+          <div><div class="oro" style="font-size:1.8rem;font-family:'Cinzel',serif" id="stLikes">0</div><div style="color:var(--tenue);font-size:.75rem;letter-spacing:1px;text-transform:uppercase">Reacciones</div></div>
+          <div><div class="oro" style="font-size:1.8rem;font-family:'Cinzel',serif" id="stDest">0</div><div style="color:var(--tenue);font-size:.75rem;letter-spacing:1px;text-transform:uppercase">Destellos</div></div>
+        </div>
+        <button class="pub" style="margin-top:24px;padding:10px 26px;border:none;border-radius:20px;background:var(--panel2);color:var(--tenue);cursor:pointer;font-family:'Cinzel',serif" onclick="logout()">Cerrar sesion</button>
+      </div>
+      <h4 style="color:var(--oro);margin:0 0 12px 4px;letter-spacing:2px;font-size:.8rem;text-transform:uppercase">Mis publicaciones</h4>
+      <div id="perfilFeed"></div>
+    </section>
+  </main>
+
+  <!-- DERECHA -->
+  <aside class="side right">
+    <div class="card">
+      <h4>&#128302; Proverbio de KYBALIO</h4>
+      <div class="prov" id="proverbio"></div>
+    </div>
+    <div class="card">
+      <h4>&#128101; Nuevos en la tribu</h4>
+      <div id="sugeridos"></div>
+    </div>
+    <div class="card">
+      <h4>&#128293; Reto del dia</h4>
+      <p style="color:var(--texto);font-size:1.1rem;line-height:1.7" id="reto"></p>
+    </div>
+  </aside>
+</div>
+
+<!-- VISOR DESTELLOS -->
+<div id="visor">
+  <div class="vbox">
+    <button class="vclose" onclick="cerrarVisor()">&times;</button>
+    <div class="vauthor"><span class="a" id="visorAva"></span><span id="visorNom"></span></div>
+    <div class="vbody" id="visorBody"></div>
+    <div class="vtxt" id="visorTxt"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  var user="",tag="",posts=[],destellos=[],reacted={};
+  var PROVERBIOS=[
+    ["El diamante se forja bajo presion. Tu tambien.","KYBALIO"],
+    ["No busques ser mejor que otros, se mejor que ayer.","KYBALIO"],
+    ["La disciplina es el puente entre tus suenos y la realidad.","KYBALIO"],
+    ["Cada habito que repites, esculpe la persona que seras.","KYBALIO"],
+    ["El que domina sus manianas, domina su vida.","KYBALIO"],
+    ["Tu mente es un templo. Cuida lo que entra en el.","KYBALIO"]
+  ];
+  var RETOS=[
+    "Escribe 3 cosas por las que estas agradecido hoy.",
+    "Bebe 2 litros de agua y muevete 20 minutos.",
+    "Apaga el telefono 1 hora y solo respira.",
+    "Haz una cosa que has estado posponiendo.",
+    "Lee 10 paginas de un buen libro.",
+    "Manda un mensaje de aliento a alguien que amas."
+  ];
+  var SUGERIDOS=[["Sofia","Aprendiz de habitos"],["Andres","Forjando disciplina"],["Lucia","Buscando su version 2.0"],["Mateo","Nuevo en la tribu"]];
+
+  function ini(n){return (n||"?").charAt(0).toUpperCase();}
+  function K(){return "comunidad_posts";}
+  function KD(){return "comunidad_destellos";}
+  function KR(){return "comunidad_react_"+user;}
+  function load(){posts=JSON.parse(localStorage.getItem(K())||"[]");destellos=JSON.parse(localStorage.getItem(KD())||"[]");reacted=JSON.parse(localStorage.getItem(KR())||"{}");}
+  function save(){localStorage.setItem(K(),JSON.stringify(posts));}
+  function saveD(){localStorage.setItem(KD(),JSON.stringify(destellos));}
+  function saveR(){localStorage.setItem(KR(),JSON.stringify(reacted));}
+  function esc(t){var e=document.createElement("div");e.textContent=t;return e.innerHTML;}
+  function toast(m){var t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},1800);}
+  function uid(){return "p"+Date.now()+Math.floor(Math.random()*999);}
+  function hace(ts){var s=Math.floor((Date.now()-ts)/1000);if(s<60)return "hace un momento";var m=Math.floor(s/60);if(m<60)return "hace "+m+" min";var h=Math.floor(m/60);if(h<24)return "hace "+h+" h";var d=Math.floor(h/24);return "hace "+d+" d";}
+
+  function doLogin(){var n=document.getElementById("nameInput").value.trim();if(!n)return;user=n;localStorage.setItem("ciudadela_user",n);document.getElementById("login").style.display="none";arranque();}
+  function logout(){localStorage.removeItem("ciudadela_user");location.reload();}
+  function arranque(){
+    document.getElementById("meAva").textContent=ini(user);
+    document.getElementById("compAva").textContent=ini(user);
+    load();
+    if(!posts.length)seed();
+    render();renderDest();renderMiembros();renderPerfil();
+    document.getElementById("proverbio").innerHTML=(function(){var p=PROVERBIOS[Math.floor(Math.random()*PROVERBIOS.length)];return '"'+p[0]+'"<span class="a">&mdash; '+p[1]+'</span>';})();
+    document.getElementById("reto").textContent=RETOS[Math.floor(Math.random()*RETOS.length)];
+    var sg=document.getElementById("sugeridos");sg.innerHTML="";SUGERIDOS.forEach(function(m){var d=document.createElement("div");d.className="member";d.innerHTML='<div class="ava">'+ini(m[0])+'</div><div class="info"><div class="nm">'+esc(m[0])+'</div><div class="rl">'+esc(m[1])+'</div></div>';sg.appendChild(d);});
+  }
+  function seed(){
+    posts=[
+      {id:uid(),autor:"KYBALIO",txt:"Bienvenidos a La Comunidad de la Ciudadela. Este es el lugar donde forjamos diamantes: cada dia, cada habito, cada paso. Comparte tu evolucion y eleva a los demas.",tag:"Reflexion",ts:Date.now()-3600000,likes:12,coments:[{n:"Sofia",t:"Que hermoso proyecto!"}]},
+      {id:uid(),autor:"Andres",txt:"Dia 30 sin fallar mi rutina de la maniana. Me siento otra persona. La disciplina si cambia la vida.",tag:"Logro",ts:Date.now()-7200000,likes:8,coments:[]}
+    ];
+    destellos=[{id:uid(),autor:"KYBALIO",emoji:"&#128081;",txt:"Hoy es un gran dia para evolucionar"}];
+    save();saveD();
+  }
+
+  /* ---- PUBLICAR ---- */
+  function setTag(t){tag=(tag===t?"":t);var chips=document.querySelectorAll(".composer .chip");chips.forEach(function(c){c.style.background="";c.style.color="";c.style.borderColor="";});if(tag){document.querySelectorAll(".composer .chip").forEach(function(c){if(c.textContent.indexOf(t)>=0){c.style.borderColor="var(--oro)";c.style.color="var(--oro)";}});toast("Etiqueta: "+t);}}
+  function publicar(){var el=document.getElementById("postText");var t=el.value.trim();if(!t){toast("Escribe algo primero");return;}posts.unshift({id:uid(),autor:user,txt:t,tag:tag,ts:Date.now(),likes:0,coments:[]});save();el.value="";el.style.height="auto";tag="";setTag("");render();renderPerfil();toast("Publicado en la Ciudadela");}
+  function borrarPost(id){posts=posts.filter(function(p){return p.id!==id;});save();render();renderPerfil();}
+  function like(id){var p=posts.find(function(x){return x.id===id;});if(!p)return;if(reacted[id]){p.likes--;delete reacted[id];}else{p.likes++;reacted[id]=1;}save();saveR();render();renderPerfil();}
+  function toggleComents(id){var c=document.getElementById("cm-"+id);if(c)c.classList.toggle("open");}
+  function comentar(id){var inp=document.getElementById("ci-"+id);var t=inp.value.trim();if(!t)return;var p=posts.find(function(x){return x.id===id;});p.coments.push({n:user,t:t});save();inp.value="";render();var c=document.getElementById("cm-"+id);if(c)c.classList.add("open");}
+
+  function postHTML(p){
+    var liked=reacted[p.id]?" on":"";
+    var mine=(p.autor===user)?'<span class="del" onclick="borrarPost(\''+p.id+'\')">&#128465;</span>':'';
+    var tagH=p.tag?'<span class="tag">'+esc(p.tag)+'</span>':'';
+    var cH="";p.coments.forEach(function(c){cH+='<div class="crow"><div class="cava">'+ini(c.n)+'</div><div class="cbub"><div class="cn">'+esc(c.n)+'</div>'+esc(c.t)+'</div></div>';});
+    return '<div class="post"><div class="head"><div class="ava">'+ini(p.autor)+'</div><div><div class="nm">'+esc(p.autor)+'</div><div class="meta">'+hace(p.ts)+'</div></div>'+mine+'</div>'+tagH+'<div class="txt">'+esc(p.txt)+'</div>'+
+      '<div class="stat"><span>&#10024; '+p.likes+'</span><span>'+p.coments.length+' comentarios</span></div>'+
+      '<div class="actions"><div class="act'+liked+'" onclick="like(\''+p.id+'\')">&#10024; Elevar</div><div class="act" onclick="toggleComents(\''+p.id+'\')">&#128172; Comentar</div><div class="act" onclick="compartir(\''+p.id+'\')">&#10150; Compartir</div></div>'+
+      '<div class="comments" id="cm-'+p.id+'">'+cH+'<div class="cinput"><input id="ci-'+p.id+'" placeholder="Escribe un comentario..." onkeydown="if(event.key===\'Enter\')comentar(\''+p.id+'\')"><button onclick="comentar(\''+p.id+'\')">&#10148;</button></div></div></div>';
+  }
+  function render(){var q=(document.getElementById("buscar").value||"").toLowerCase();var f=document.getElementById("feed");var list=posts.filter(function(p){var ok=true;if(q)ok=(p.txt.toLowerCase().indexOf(q)>=0||p.autor.toLowerCase().indexOf(q)>=0);if(ok&&window.__filtro)ok=(p.tag===window.__filtro);return ok;});if(!list.length){f.innerHTML='<div class="empty">No hay publicaciones aun. Se el primero en compartir tu evolucion.</div>';return;}f.innerHTML=list.map(postHTML).join("");}
+  function filtrar(t){window.__filtro=(window.__filtro===t?null:t);go('feed');render();toast(window.__filtro?("Filtro: "+t):"Mostrando todo");}
+  function compartir(id){var p=posts.find(function(x){return x.id===id;});if(navigator.share){navigator.share({title:"La Ciudadela",text:p.txt}).catch(function(){});}else{toast("Enlace copiado (simulado)");}}
+
+  /* ---- DESTELLOS ---- */
+  function renderDest(){var d=document.getElementById("destellos");var add='<div class="dcard add" onclick="nuevoDestello()"><div class="top"></div><div class="plus">+</div><span class="txt" style="position:absolute;bottom:12px;left:0;right:0">Crear<br>Destello</span></div>';var cards=destellos.map(function(x,i){return '<div class="dcard" onclick="verDestello('+i+')"><div class="author">'+ini(x.autor)+'</div><div class="body">'+x.emoji+'</div><div class="nm">'+esc(x.autor)+'</div></div>';}).join("");d.innerHTML=add+cards;}
+  function nuevoDestello(){var t=prompt("Escribe tu Destello (aparecera como una historia):");if(!t)return;var emojis=["&#10024;","&#128293;","&#127775;","&#128081;","&#128302;","&#127942;"];destellos.unshift({id:uid(),autor:user,emoji:emojis[Math.floor(Math.random()*emojis.length)],txt:t});saveD();renderDest();renderPerfil();toast("Destello publicado");}
+  function verDestello(i){var x=destellos[i];if(!x)return;document.getElementById("visorAva").textContent=ini(x.autor);document.getElementById("visorNom").textContent=x.autor;document.getElementById("visorBody").innerHTML=x.emoji;document.getElementById("visorTxt").textContent=x.txt;document.getElementById("visor").classList.add("open");}
+  function cerrarVisor(){document.getElementById("visor").classList.remove("open");}
+
+  /* ---- MIEMBROS / PERFIL ---- */
+  function renderMiembros(){var autores={};posts.forEach(function(p){autores[p.autor]=(autores[p.autor]||0)+1;});SUGERIDOS.forEach(function(m){if(!autores[m[0]])autores[m[0]]=0;});var l=document.getElementById("miembrosList");l.innerHTML="";Object.keys(autores).forEach(function(a){var d=document.createElement("div");d.className="member";d.innerHTML='<div class="ava">'+ini(a)+'</div><div class="info"><div class="nm">'+esc(a)+'</div><div class="rl">'+autores[a]+' publicaciones</div></div>';l.appendChild(d);});}
+  function renderPerfil(){document.getElementById("perfilAva").textContent=ini(user);document.getElementById("perfilNom").textContent=user;var mine=posts.filter(function(p){return p.autor===user;});var likes=mine.reduce(function(a,p){return a+p.likes;},0);var dest=destellos.filter(function(d){return d.autor===user;}).length;document.getElementById("stPosts").textContent=mine.length;document.getElementById("stLikes").textContent=likes;document.getElementById("stDest").textContent=dest;document.getElementById("perfilFeed").innerHTML=mine.length?mine.map(postHTML).join(""):'<div class="empty">Aun no has publicado. Comparte tu primer paso.</div>';}
+
+  /* ---- NAV ---- */
+  function go(v){["feed","miembros","perfil"].forEach(function(x){document.getElementById("v-"+x).style.display=(x===v?"block":"none");});document.querySelectorAll(".topbar .tabs .t").forEach(function(t){t.classList.toggle("active",t.getAttribute("data-v")===v);});if(v==="miembros")renderMiembros();if(v==="perfil")renderPerfil();window.scrollTo(0,0);}
+  document.querySelectorAll(".topbar .tabs .t").forEach(function(t){t.onclick=function(){go(t.getAttribute("data-v"));};});
+  document.getElementById("buscar").addEventListener("input",render);
+  var pt=document.getElementById("postText");pt.addEventListener("input",function(){this.style.height="auto";this.style.height=Math.min(this.scrollHeight,200)+"px";});
+  document.getElementById("nameInput").addEventListener("keydown",function(e){if(e.key==="Enter")doLogin();});
+
+  function volver(){ if(window.parent&&window.parent!==window){ try{window.parent.postMessage({ciudadela:"cerrar-comunidad"},"*");return;}catch(e){} } location.href="index.html"; }
+  function abrirExterno(q){ if(window.parent&&window.parent!==window){ try{window.parent.postMessage({ciudadela:"abrir",destino:q},"*");return;}catch(e){} } }
+
+  /* ---- ARRANQUE ---- */
+  (function(){var s=localStorage.getItem("ciudadela_user");if(s){user=s;document.getElementById("login").style.display="none";arranque();}else{setTimeout(function(){document.getElementById("nameInput").focus();},100);}})();
+</script>
+</body>
+</html>

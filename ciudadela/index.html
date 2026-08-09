@@ -105,8 +105,75 @@
   #hero h1{font-size:clamp(1.5rem,4vw,2.6rem);font-weight:400;letter-spacing:6px;line-height:1.1;position:relative;text-shadow:0 2px 30px rgba(232,200,106,.12)}
   #hero .sub{font-size:clamp(1rem,2.2vw,1.3rem);font-style:italic;color:var(--tenue);margin:16px 0 34px;position:relative}
   #hero .cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;position:relative}
-  .scroll-ind{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);color:var(--oro-med);font-size:1.4rem;animation:flota 2s ease-in-out infinite}
+  .scroll-ind{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);color:var(--oro-med);font-size:1.4rem;animation:flota 2s ease-in-out infinite;z-index:3}
   @keyframes flota{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
+
+  /* ===================== COSMOS: DESCENSO A LA FUENTE (Urantia) ===================== */
+  /* Capa de fondo fija: universo con nebulosa. El TEMA (color) cambia en cada recarga via body[data-cielo] */
+  #cosmos{position:fixed;inset:0;z-index:-2;background:#04040a;overflow:hidden;transition:background 1.2s}
+  #cosmos .neb{position:absolute;inset:-20%;background:
+      radial-gradient(closest-side,var(--neb1),transparent) no-repeat,
+      radial-gradient(closest-side,var(--neb2),transparent) no-repeat,
+      radial-gradient(closest-side,var(--neb3),transparent) no-repeat;
+    background-position:20% 15%,80% 40%,50% 85%;
+    background-size:60% 60%,55% 55%,70% 70%;
+    filter:blur(20px);opacity:.85;animation:nebFloat 40s ease-in-out infinite alternate}
+  @keyframes nebFloat{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(-3%,-4%,0) scale(1.12)}}
+  #cosmosStars{position:fixed;inset:0;z-index:-1;pointer-events:none}
+  /* Luz divina inferior: crece a medida que se hace scroll (--divina 0..1 via JS) */
+  #divina{position:fixed;left:50%;bottom:-30vh;transform:translateX(-50%);width:120vw;height:90vh;z-index:-1;pointer-events:none;
+    background:radial-gradient(ellipse at 50% 100%,rgba(255,246,214,calc(.55*var(--divina,0))),rgba(232,200,106,calc(.28*var(--divina,0))) 35%,transparent 70%);
+    opacity:calc(.25 + .75*var(--divina,0));transition:opacity .3s}
+  /* rayos divinos */
+  #rayos{position:fixed;left:50%;bottom:-10vh;transform:translateX(-50%);width:140vw;height:120vh;z-index:-1;pointer-events:none;opacity:calc(.5*var(--divina,0));
+    background:repeating-conic-gradient(from 0deg at 50% 100%,rgba(255,246,214,.10) 0deg,transparent 4deg 12deg);mix-blend-mode:screen;animation:girarRayos 90s linear infinite}
+  @keyframes girarRayos{to{transform:translateX(-50%) rotate(360deg)}}
+
+  /* Temas de cielo (aleatorios por recarga) */
+  body[data-cielo="1"]{--neb1:rgba(90,60,180,.5);--neb2:rgba(40,90,200,.4);--neb3:rgba(200,120,60,.35)}
+  body[data-cielo="2"]{--neb1:rgba(200,60,120,.45);--neb2:rgba(120,40,160,.4);--neb3:rgba(60,120,200,.35)}
+  body[data-cielo="3"]{--neb1:rgba(40,140,150,.45);--neb2:rgba(30,80,180,.4);--neb3:rgba(150,200,120,.28)}
+  body[data-cielo="4"]{--neb1:rgba(180,120,40,.45);--neb2:rgba(150,40,60,.4);--neb3:rgba(90,40,160,.35)}
+  body[data-cielo="5"]{--neb1:rgba(60,60,120,.5);--neb2:rgba(120,120,200,.35);--neb3:rgba(200,180,120,.3)}
+  body[data-cielo="6"]{--neb1:rgba(20,120,90,.45);--neb2:rgba(160,60,180,.4);--neb3:rgba(230,180,90,.32)}
+
+  /* El fondo de cada seccion es translucido para dejar ver el cosmos */
+  body{background:transparent!important}
+  #hero{background:radial-gradient(ellipse at 50% 30%,rgba(232,200,106,.10),transparent 60%),radial-gradient(ellipse at 50% 120%,rgba(200,162,74,.10),transparent 55%),transparent!important}
+  #ciudadela,#servicios,#destacados,#cifras,#testimonios,#agentes,#planes,#contacto,#newsletter{background:transparent!important}
+  /* velo que oscurece progresivamente al bajar = descenso a lo profundo */
+  section,footer.pro{position:relative}
+  section::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(4,4,10,.35),rgba(4,4,10,.72));pointer-events:none}
+  /* "portales" divisores entre secciones: aros de luz al descender */
+  .portal-sep{position:relative;height:0;overflow:visible;z-index:2}
+  .portal-sep i{position:absolute;left:50%;top:-14px;transform:translateX(-50%);width:120px;height:28px;border-radius:50%;border:1px solid rgba(232,200,106,.4);box-shadow:0 0 30px rgba(232,200,106,.25),inset 0 0 20px rgba(232,200,106,.15);opacity:.7}
+  .prof-label{text-align:center;font-family:'Cinzel',serif;letter-spacing:6px;font-size:.6rem;color:var(--oro-med);text-transform:uppercase;opacity:.7;margin-bottom:8px}
+
+  /* ===================== PERSONAJE ROBOT (guia de IA) ===================== */
+  #robot{position:fixed;bottom:18px;right:20px;z-index:135;width:96px;height:120px;cursor:pointer;filter:drop-shadow(0 10px 18px rgba(0,0,0,.55));transition:transform .3s}
+  #robot:hover{transform:translateY(-4px) scale(1.04)}
+  #robot .rb-svg{width:100%;height:100%;display:block;overflow:visible}
+  #robot .bocadillo{position:absolute;bottom:104px;right:0;max-width:230px;background:var(--panel);border:1px solid rgba(232,200,106,.4);border-radius:12px;padding:10px 13px;font-size:.82rem;color:var(--texto);line-height:1.4;box-shadow:0 10px 30px rgba(0,0,0,.5);opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s;pointer-events:none}
+  #robot .bocadillo::after{content:'';position:absolute;bottom:-8px;right:26px;border:8px solid transparent;border-top-color:var(--panel)}
+  #robot.talk .bocadillo{opacity:1;transform:none}
+  #robot .rb-nave{opacity:0;transition:opacity .5s}
+  #robot.nave .rb-nave{opacity:1}
+  #robot.nave{animation:navevuelo 4s ease-in-out infinite}
+  @keyframes navevuelo{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  /* piernas caminando */
+  #robot.walk .rb-legL{animation:pasoL .5s ease-in-out infinite}
+  #robot.walk .rb-legR{animation:pasoR .5s ease-in-out infinite}
+  @keyframes pasoL{0%,100%{transform:rotate(14deg)}50%{transform:rotate(-14deg)}}
+  @keyframes pasoR{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
+  #robot .rb-legL{transform-origin:50% 0%}
+  #robot .rb-legR{transform-origin:50% 0%}
+  #robot .rb-arm{transform-origin:50% 0%;animation:brazo 2.4s ease-in-out infinite}
+  @keyframes brazo{0%,100%{transform:rotate(6deg)}50%{transform:rotate(-6deg)}}
+  #robot .rb-eye{animation:parpadeo 4s infinite}
+  @keyframes parpadeo{0%,92%,100%{opacity:1}96%{opacity:.2}}
+  #robot .rb-glow{animation:glowRobot 2.5s ease-in-out infinite}
+  @keyframes glowRobot{0%,100%{opacity:.5}50%{opacity:1}}
+  @media(max-width:560px){#robot{width:76px;height:96px;bottom:14px;right:14px}#robot .bocadillo{bottom:84px;max-width:180px;font-size:.76rem}}
 
   section{padding:110px 7vw;position:relative}
   .sec-head{text-align:center;margin-bottom:60px}
@@ -422,6 +489,11 @@
 </style>
 </head>
 <body>
+<!-- ===================== COSMOS (fondo universo + descenso divino) ===================== -->
+<div id="cosmos"><div class="neb"></div></div>
+<canvas id="cosmosStars"></canvas>
+<div id="rayos"></div>
+<div id="divina"></div>
 
 <!-- ===================== LOADER ===================== -->
 <div id="loader">
@@ -482,7 +554,9 @@
   <p class="reveal">Un <span class="destacado">imperio digital de inteligencias</span> que crean, aprenden y generan abundancia. Cada agente es una mente viva al servicio de una vision: unir el arte, el conocimiento y la tecnologia para construir riqueza real, con elegancia y proposito.</p>
 </section>
 
+<div class="portal-sep"><i></i></div>
 <section id="servicios">
+  <div class="prof-label">Primer circulo &middot; Los dones</div>
   <div class="sec-head reveal">
     <div class="eyebrow">Lo que hacemos</div>
     <h2 class="oro">Servicios</h2>
@@ -520,7 +594,9 @@
   </div>
 </section>
 
+<div class="portal-sep"><i></i></div>
 <section id="testimonios">
+  <div class="prof-label">Circulo de las voces</div>
   <div class="sec-head reveal">
     <div class="eyebrow">Voces de la Ciudadela</div>
     <h2 class="oro">Testimonios</h2>
@@ -534,7 +610,9 @@
 </section>
 
 <!-- ===================== AGENTES IA (estilo agencia) ===================== -->
+<div class="portal-sep"><i></i></div>
 <section id="agentes">
+  <div class="prof-label">Circulo de las mentes vivas</div>
   <div class="sec-head reveal">
     <div class="eyebrow">Tu equipo que nunca duerme</div>
     <h2 class="oro">Agentes de Inteligencia Artificial</h2>
@@ -579,7 +657,9 @@
 </section>
 
 <!-- ===================== PLANES / PRECIOS ===================== -->
+<div class="portal-sep"><i></i></div>
 <section id="planes">
+  <div class="prof-label">Circulo de la alianza</div>
   <div class="sec-head reveal">
     <div class="eyebrow">Inversion</div>
     <h2 class="oro">Planes de Agentes IA</h2>
@@ -625,7 +705,9 @@
   <p class="reveal" style="text-align:center;color:var(--tenue);margin-top:26px;font-size:.95rem">Precios orientativos. En la llamada definimos el plan exacto para tu negocio.</p>
 </section>
 
+<div class="portal-sep"><i></i></div>
 <section id="contacto">
+  <div class="prof-label">El centro &middot; La Fuente</div>
   <div class="sec-head reveal">
     <div class="eyebrow">Hablemos</div>
     <h2 class="oro">Contacto</h2>
@@ -712,7 +794,50 @@
 </div>
 
 <!-- ===================== AGENTE DE VOZ (widget) ===================== -->
-<button id="vozFab" class="fab" onclick="abrirVoz()" title="Habla con el Agente de Voz">&#127908;</button>
+<!-- ===================== PERSONAJE ROBOT (guia de IA) ===================== -->
+<div id="robot" class="walk" onclick="abrirVoz()" title="Habla con KYBALIO, tu guia de IA">
+  <div class="bocadillo" id="rbBocadillo">Hola, soy KYBALIO. Tocame y te resuelvo cualquier duda.</div>
+  <svg class="rb-svg" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="rbMetal" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f4e2a0"/><stop offset="1" stop-color="#c8a24a"/>
+      </linearGradient>
+      <radialGradient id="rbAura" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="rgba(232,200,106,.55)"/><stop offset="1" stop-color="rgba(232,200,106,0)"/>
+      </radialGradient>
+    </defs>
+    <!-- nave (oculta salvo modo nave) -->
+    <g class="rb-nave">
+      <ellipse cx="50" cy="112" rx="42" ry="12" fill="url(#rbMetal)" opacity=".9"/>
+      <ellipse cx="50" cy="108" rx="30" ry="8" fill="#1c1922"/>
+      <circle cx="30" cy="112" r="3" fill="#fff6d6" class="rb-glow"/>
+      <circle cx="50" cy="115" r="3" fill="#fff6d6" class="rb-glow"/>
+      <circle cx="70" cy="112" r="3" fill="#fff6d6" class="rb-glow"/>
+    </g>
+    <!-- aura -->
+    <circle cx="50" cy="52" r="46" fill="url(#rbAura)" class="rb-glow"/>
+    <!-- piernas -->
+    <g class="rb-legL"><rect x="40" y="86" width="8" height="26" rx="4" fill="url(#rbMetal)"/><rect x="38" y="110" width="13" height="6" rx="3" fill="#8a6a24"/></g>
+    <g class="rb-legR"><rect x="52" y="86" width="8" height="26" rx="4" fill="url(#rbMetal)"/><rect x="49" y="110" width="13" height="6" rx="3" fill="#8a6a24"/></g>
+    <!-- brazos -->
+    <g class="rb-arm"><rect x="20" y="48" width="7" height="30" rx="3.5" fill="url(#rbMetal)"/><circle cx="23.5" cy="80" r="4" fill="#fff6d6"/></g>
+    <rect x="73" y="48" width="7" height="30" rx="3.5" fill="url(#rbMetal)"/><circle cx="76.5" cy="80" r="4" fill="#fff6d6"/>
+    <!-- torso -->
+    <rect x="30" y="44" width="40" height="46" rx="12" fill="#1c1922" stroke="url(#rbMetal)" stroke-width="2"/>
+    <circle cx="50" cy="64" r="7" fill="url(#rbMetal)" class="rb-glow"/>
+    <rect x="42" y="78" width="16" height="4" rx="2" fill="#8a6a24"/>
+    <!-- cuello -->
+    <rect x="46" y="38" width="8" height="8" fill="#8a6a24"/>
+    <!-- cabeza -->
+    <rect x="32" y="12" width="36" height="30" rx="12" fill="#1c1922" stroke="url(#rbMetal)" stroke-width="2"/>
+    <rect x="38" y="22" width="24" height="10" rx="5" fill="#0b0b0d"/>
+    <circle class="rb-eye" cx="45" cy="27" r="3" fill="#fff6d6"/>
+    <circle class="rb-eye" cx="55" cy="27" r="3" fill="#fff6d6"/>
+    <!-- antena -->
+    <line x1="50" y1="12" x2="50" y2="4" stroke="url(#rbMetal)" stroke-width="2"/>
+    <circle cx="50" cy="3" r="3" fill="#fff6d6" class="rb-glow"/>
+  </svg>
+</div>
 <div id="vozWidget">
   <div class="vw-head">
     <div class="vw-orb" id="vwOrb"><span>&#127908;</span></div>
@@ -969,6 +1094,68 @@
     resize();make();draw();window.addEventListener("resize",function(){resize();make();});
   })();
 
+  /* ---- COSMOS: cielo aleatorio por recarga ---- */
+  (function(){ var n=Math.floor(Math.random()*6)+1; document.body.setAttribute("data-cielo", n); })();
+
+  /* ---- COSMOS: campo de estrellas con parallax + profundidad ---- */
+  (function(){
+    var c=document.getElementById("cosmosStars");if(!c)return;var ctx=c.getContext("2d");var W,H,ps=[];
+    function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;make();}
+    function make(){ps=[];var n=Math.min(220,Math.floor(W/6));for(var i=0;i<n;i++){ps.push({x:Math.random()*W,y:Math.random()*H,z:Math.random()*1+.2,r:Math.random()*1.4+.2,a:Math.random()*.6+.25,tw:Math.random()*6.28});}}
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      var sc=window.scrollY||0;
+      for(var i=0;i<ps.length;i++){var p=ps[i];
+        var y=(p.y - sc*p.z*0.15); y=((y%H)+H)%H; /* parallax: las cercanas se mueven mas */
+        p.tw+=0.02; var tw=0.6+0.4*Math.sin(p.tw);
+        ctx.beginPath();ctx.arc(p.x,y,p.r*p.z*1.2,0,6.28);
+        ctx.fillStyle="rgba(255,246,214,"+(p.a*tw)+")";ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    resize();draw();window.addEventListener("resize",resize);
+  })();
+
+  /* ---- DESCENSO A LA FUENTE: --divina crece con el scroll ---- */
+  (function(){
+    function upd(){
+      var doc=document.documentElement;
+      var max=(doc.scrollHeight-window.innerHeight)||1;
+      var p=Math.min(1,Math.max(0,(window.scrollY||0)/max));
+      /* curva: la luz divina se enciende fuerte en el ultimo tercio (llegar a la Fuente) */
+      var d=Math.pow(p,1.6);
+      document.body.style.setProperty("--divina", d.toFixed(3));
+    }
+    window.addEventListener("scroll",upd,{passive:true});window.addEventListener("resize",upd);upd();
+  })();
+
+  /* ---- PERSONAJE ROBOT: camina, a veces vuela en nave, saluda ---- */
+  (function(){
+    var r=document.getElementById("robot");if(!r)return;
+    var frases=[
+      "Hola, soy KYBALIO. Tocame y te resuelvo cualquier duda.",
+      "Quieres ver los planes? Solo preguntame.",
+      "Puedo llevarte a la tienda, al templo o al portal.",
+      "Estamos descendiendo hacia la Fuente. Sigueme.",
+      "Necesitas un Agente IA para tu negocio? Hablemos."
+    ];
+    var idx=0, boc=document.getElementById("rbBocadillo");
+    /* saludo inicial */
+    setTimeout(function(){ r.classList.add("talk"); setTimeout(function(){r.classList.remove("talk");},4200); },1600);
+    /* frases cada cierto tiempo */
+    setInterval(function(){
+      idx=(idx+1)%frases.length; if(boc)boc.textContent=frases[idx];
+      r.classList.add("talk"); setTimeout(function(){r.classList.remove("talk");},4200);
+    },14000);
+    /* alterna caminar / nave */
+    setInterval(function(){
+      if(Math.random()<0.4){ r.classList.remove("walk"); r.classList.add("nave"); if(boc)boc.textContent="Explorando el cosmos en mi nave... tocame para volver."; }
+      else { r.classList.remove("nave"); r.classList.add("walk"); }
+    },9000);
+    /* al pasar el raton, saluda */
+    r.addEventListener("mouseenter",function(){ r.classList.add("talk"); });
+  })();
+
   /* ---- CAPTURA DE LEADS (formulario + modal + newsletter) ---- */
   var LEAD_WEBHOOK="https://kevinruiz.app.n8n.cloud/webhook/lead-ciudadela";
   function postLead(payload){return fetch(LEAD_WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});}
@@ -996,11 +1183,11 @@
   var VW_SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   var vwRecog=null, vwListening=false, vwHands=false, vwSpeaking=false, vwThinking=false, vwFinalBuf="", vwSilenceTimer=null, vwInterimEl=null, vwWantListen=false;
 
-  function abrirVoz(){var w=document.getElementById("vozWidget");w.classList.add("open");document.getElementById("vozFab").style.display="none";
+  function abrirVoz(){var w=document.getElementById("vozWidget");w.classList.add("open");var rb=document.getElementById("robot");if(rb)rb.style.display="none";
     if(!vwStarted){vwStarted=true;
       if(!VW_SR){document.getElementById("vwMicLbl").innerHTML="Para voz usa Google Chrome en tu PC o celular.";}
       setTimeout(function(){vwAdd("bot","Hola, soy KYBALIO. Pulsa \u201cManos libres\u201d y hablame: te escucho y te respondo en voz alta. Puedo abrirte cualquier parte de la web: dime por ejemplo \u201cabre la tienda\u201d, \u201cmuestrame los planes\u201d o \u201clleva a agentes\u201d.");},300);}}
-  function cerrarVoz(){document.getElementById("vozWidget").classList.remove("open");document.getElementById("vozFab").style.display="flex";vozStopSpeak();vwStopListen(true);vwHands=false;refreshHandsBtn();}
+  function cerrarVoz(){document.getElementById("vozWidget").classList.remove("open");var rb=document.getElementById("robot");if(rb)rb.style.display="block";vozStopSpeak();vwStopListen(true);vwHands=false;refreshHandsBtn();}
   function vwEsc(t){var e=document.createElement("div");e.textContent=t;return e.innerHTML;}
   function vwSetState(t){var s=document.getElementById("vwState");if(s)s.textContent=t;}
   function vwAdd(role,text){var b=document.getElementById("vwBody");var h=b.querySelector(".vw-hint");if(h)h.remove();

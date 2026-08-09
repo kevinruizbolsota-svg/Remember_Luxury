@@ -884,6 +884,18 @@
       <linearGradient id="rbHead" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#26222e"/><stop offset="1" stop-color="#100d16"/>
       </linearGradient>
+      <linearGradient id="rbPiel" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f4d3ad"/><stop offset="1" stop-color="#d9ac7c"/>
+      </linearGradient>
+      <linearGradient id="rbTunica" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#20232e"/><stop offset="1" stop-color="#0c0e15"/>
+      </linearGradient>
+      <linearGradient id="rbCapa" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#3a2c0e"/><stop offset="1" stop-color="#1a1305"/>
+      </linearGradient>
+      <linearGradient id="rbPelo" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#3a2b1a"/><stop offset="1" stop-color="#1c140b"/>
+      </linearGradient>
       <filter id="rbEyeGlow" x="-120%" y="-120%" width="340%" height="340%">
         <feGaussianBlur stdDeviation="1.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
       </filter>
@@ -900,44 +912,58 @@
     <circle cx="60" cy="70" r="56" fill="url(#rbAura)" class="rb-glow"/>
 
     <g class="rb-body">
-    <!-- piernas -->
-    <g class="rb-legL"><rect x="47" y="120" width="11" height="30" rx="5.5" fill="url(#rbMetal2)"/><rect x="44" y="146" width="17" height="9" rx="4" fill="#8a6a24"/></g>
-    <g class="rb-legR"><rect x="62" y="120" width="11" height="30" rx="5.5" fill="url(#rbMetal2)"/><rect x="59" y="146" width="17" height="9" rx="4" fill="#8a6a24"/></g>
-    <!-- brazos -->
-    <g class="rb-arm"><rect x="24" y="62" width="9" height="40" rx="4.5" fill="url(#rbMetal2)"/><circle cx="28.5" cy="104" r="6" fill="url(#rbMetal)"/></g>
-    <rect x="87" y="62" width="9" height="40" rx="4.5" fill="url(#rbMetal2)"/><circle cx="91.5" cy="104" r="6" fill="url(#rbMetal)"/>
-    <!-- torso: tronco humanoide con hombros y cintura -->
-    <path d="M40 60 Q36 58 36 68 L38 108 Q38 118 48 118 L72 118 Q82 118 82 108 L84 68 Q84 58 80 60 Z" fill="url(#rbHead)" stroke="url(#rbMetal)" stroke-width="2.2"/>
-    <!-- brillo lateral del torso -->
-    <path d="M42 64 Q40 66 41 74 L43 104 Q43 110 46 112 Q42 100 42 84 Z" fill="rgba(255,255,255,.10)"/>
-    <!-- pecho: nucleo brillante -->
-    <circle cx="60" cy="84" r="9" fill="#0b0b0d" stroke="url(#rbMetal)" stroke-width="2"/>
-    <circle cx="60" cy="84" r="4.5" fill="url(#rbMetal)" class="rb-glow"/>
-    <!-- detalles del torso -->
-    <rect x="50" y="102" width="20" height="4" rx="2" fill="#3a2f14"/>
-    <line x1="60" y1="94" x2="60" y2="100" stroke="#3a2f14" stroke-width="2"/>
-    <!-- hombros -->
-    <circle cx="40" cy="64" r="7" fill="url(#rbMetal)"/>
-    <circle cx="80" cy="64" r="7" fill="url(#rbMetal)"/>
+    <!-- piernas con pantalon -->
+    <g class="rb-legL"><rect x="47" y="120" width="12" height="30" rx="5" fill="url(#rbTunica)"/><rect x="44" y="147" width="18" height="8" rx="4" fill="#2a1f10"/></g>
+    <g class="rb-legR"><rect x="61" y="120" width="12" height="30" rx="5" fill="url(#rbTunica)"/><rect x="59" y="147" width="18" height="8" rx="4" fill="#2a1f10"/></g>
+    <!-- capa detras -->
+    <path d="M38 60 Q22 96 30 128 L44 122 Q40 92 46 66 Z" fill="url(#rbCapa)"/>
+    <path d="M82 60 Q98 96 90 128 L76 122 Q80 92 74 66 Z" fill="url(#rbCapa)"/>
+    <!-- brazos con manga y mano de piel -->
+    <g class="rb-arm"><rect x="26" y="62" width="10" height="38" rx="5" fill="url(#rbTunica)"/><circle cx="31" cy="102" r="5.5" fill="url(#rbPiel)"/></g>
+    <rect x="84" y="62" width="10" height="38" rx="5" fill="url(#rbTunica)"/><circle cx="89" cy="102" r="5.5" fill="url(#rbPiel)"/>
+    <!-- torso: tunica -->
+    <path d="M40 60 Q36 58 37 68 L40 112 Q40 120 50 120 L70 120 Q80 120 80 112 L83 68 Q84 58 80 60 Z" fill="url(#rbTunica)" stroke="url(#rbMetal)" stroke-width="1.8"/>
+    <!-- cuello en V de la tunica -->
+    <path d="M50 58 L60 76 L70 58 Z" fill="url(#rbPiel)"/>
+    <!-- cinturon dorado -->
+    <rect x="42" y="104" width="36" height="6" rx="2" fill="url(#rbMetal2)"/>
+    <rect x="56" y="103" width="8" height="8" rx="2" fill="url(#rbMetal)"/>
+    <!-- broche/emblema en el pecho -->
+    <circle cx="60" cy="86" r="5" fill="url(#rbMetal)" class="rb-glow"/>
+    <!-- hombreras doradas -->
+    <path d="M38 60 Q40 54 48 56 L46 64 Q42 62 38 64 Z" fill="url(#rbMetal2)"/>
+    <path d="M82 60 Q80 54 72 56 L74 64 Q78 62 82 64 Z" fill="url(#rbMetal2)"/>
     <!-- cuello -->
-    <rect x="54" y="50" width="12" height="10" rx="3" fill="#8a6a24"/>
-    <!-- cabeza redondeada tipo casco -->
-    <path d="M42 20 Q42 8 60 8 Q78 8 78 20 L78 40 Q78 52 60 52 Q42 52 42 40 Z" fill="url(#rbHead)" stroke="url(#rbMetal)" stroke-width="2.4"/>
-    <!-- brillo superior del casco -->
-    <path d="M48 14 Q60 9 72 14 Q66 12 60 12 Q54 12 48 14 Z" fill="rgba(255,255,255,.25)"/>
-    <!-- visor -->
-    <path d="M47 24 Q47 18 60 18 Q73 18 73 24 L73 34 Q73 40 60 40 Q47 40 47 34 Z" fill="url(#rbVisor)"/>
-    <path d="M49 23 Q60 20 71 23 Q60 22 49 23 Z" fill="rgba(255,255,255,.18)"/>
+    <rect x="55" y="49" width="10" height="10" rx="3" fill="url(#rbPiel)"/>
+    <!-- ===== ROSTRO HUMANO ===== -->
+    <!-- pelo detras -->
+    <path d="M40 30 Q38 8 60 6 Q82 8 80 30 L80 40 Q82 22 60 20 Q38 22 40 40 Z" fill="url(#rbPelo)"/>
+    <!-- cara -->
+    <ellipse cx="60" cy="30" rx="19" ry="21" fill="url(#rbPiel)"/>
+    <!-- orejas -->
+    <circle cx="41" cy="31" r="3.6" fill="url(#rbPiel)"/>
+    <circle cx="79" cy="31" r="3.6" fill="url(#rbPiel)"/>
+    <!-- pelo encima (flequillo) -->
+    <path d="M41 26 Q42 9 60 8 Q78 9 79 26 Q72 16 60 16 Q48 16 41 26 Z" fill="url(#rbPelo)"/>
+    <!-- cejas -->
+    <rect x="48" y="24" width="9" height="2.2" rx="1.1" fill="#2b2013"/>
+    <rect x="63" y="24" width="9" height="2.2" rx="1.1" fill="#2b2013"/>
+    <!-- ojos -->
     <g filter="url(#rbEyeGlow)">
-      <circle class="rb-eye" cx="53" cy="29" r="3.2" fill="#8fe9ff"/>
-      <circle class="rb-eye" cx="67" cy="29" r="3.2" fill="#8fe9ff"/>
+      <ellipse class="rb-eye" cx="52.5" cy="30" rx="3.4" ry="3.8" fill="#ffffff"/>
+      <ellipse class="rb-eye" cx="67.5" cy="30" rx="3.4" ry="3.8" fill="#ffffff"/>
     </g>
-    <!-- orejeras -->
-    <rect x="39" y="27" width="4" height="10" rx="2" fill="url(#rbMetal)"/>
-    <rect x="77" y="27" width="4" height="10" rx="2" fill="url(#rbMetal)"/>
-    <!-- antena -->
-    <line x1="60" y1="8" x2="60" y2="0" stroke="url(#rbMetal)" stroke-width="2.2"/>
-    <circle cx="60" cy="-1" r="3.4" fill="#fff6d6" class="rb-glow"/>
+    <circle class="rb-eye" cx="52.8" cy="30.5" r="2" fill="#4a6b8a"/>
+    <circle class="rb-eye" cx="67.2" cy="30.5" r="2" fill="#4a6b8a"/>
+    <circle cx="53.4" cy="29.6" r="0.7" fill="#fff"/>
+    <circle cx="67.8" cy="29.6" r="0.7" fill="#fff"/>
+    <!-- nariz -->
+    <path d="M60 32 L58 38 Q60 40 62 38 Z" fill="#d09b6a"/>
+    <!-- sonrisa -->
+    <path d="M53 42 Q60 48 67 42" fill="none" stroke="#a8603f" stroke-width="2" stroke-linecap="round"/>
+    <!-- diadema dorada (toque IA) -->
+    <path d="M43 20 Q60 12 77 20" fill="none" stroke="url(#rbMetal)" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="60" cy="14.5" r="2.6" fill="#fff6d6" class="rb-glow"/>
     </g>
   </svg>
 </div>
@@ -1271,7 +1297,7 @@
       var sp=6+Math.random()*5;
       fugaces.push({x:startX,y:startY,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp,life:1,len:60+Math.random()*70});
     }
-    function make(){ps=[];var n=Math.min(220,Math.floor(W/6));for(var i=0;i<n;i++){ps.push({x:Math.random()*W,y:Math.random()*H,z:Math.random()*1+.2,r:Math.random()*1.4+.2,a:Math.random()*.6+.25,tw:Math.random()*6.28});}}
+    function make(){ps=[];var n=Math.min(520,Math.floor(W/3));for(var i=0;i<n;i++){ps.push({x:Math.random()*W,y:Math.random()*H,z:Math.random()*1+.2,r:Math.random()*1.5+.2,a:Math.random()*.6+.25,tw:Math.random()*6.28,app:Math.random()});}}
     function drawPlanet(p){
       var sc=window.scrollY||0;
       var pr=Math.min(W,H)*p.r;
@@ -1396,11 +1422,14 @@
       mw.addColorStop(1,"rgba(80,90,160,0)");
       ctx.fillStyle=mw;ctx.fillRect(-W,-H*0.22,W*2,H*0.44);
       ctx.restore();
+      /* al bajar aparecen mas estrellas y brillan mas (umbral de aparicion) */
+      var revela=0.35+0.65*scrollP; var brillo=0.75+0.55*scrollP;
       for(var i=0;i<ps.length;i++){var p=ps[i];
+        if(p.app>revela)continue; /* estas solo se muestran mas abajo */
         var y=(p.y - sc*p.z*0.15); y=((y%H)+H)%H; /* parallax: las cercanas se mueven mas */
         p.tw+=0.02; var tw=0.6+0.4*Math.sin(p.tw);
         ctx.beginPath();ctx.arc(p.x,y,p.r*p.z*1.2,0,6.28);
-        ctx.fillStyle="rgba(255,246,214,"+(p.a*tw)+")";ctx.fill();
+        ctx.fillStyle="rgba(255,246,214,"+Math.min(1,p.a*tw*brillo)+")";ctx.fill();
       }
       /* estrellas fugaces que caen hacia la Fuente */
       if(Math.random()<0.012)nuevaFugaz();

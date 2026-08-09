@@ -345,10 +345,9 @@
   /* ===== LOADER PREMIUM ===== */
   #loader{position:fixed;inset:0;z-index:2000;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .8s,visibility .8s}
   #loader.done{opacity:0;visibility:hidden}
-  #loader .crown{line-height:0;animation:crownPulse 1.9s ease-in-out infinite;filter:drop-shadow(0 0 14px rgba(232,200,106,.55))}
-  #loader .crown svg{display:block}
-  #loader .lname{margin-top:14px;font-family:'Cinzel',serif;font-weight:400;letter-spacing:5px;font-size:.72rem}
-  #loader .lbar{margin-top:22px;width:180px;height:2px;background:rgba(232,200,106,.15);border-radius:2px;overflow:hidden}
+  #loader .lname{font-family:'Cinzel',serif;font-weight:500;letter-spacing:14px;text-indent:14px;font-size:clamp(1.8rem,7vw,3.4rem);animation:namePulse 2.2s ease-in-out infinite;filter:drop-shadow(0 0 16px rgba(232,200,106,.35))}
+  @keyframes namePulse{0%,100%{opacity:.82;transform:scale(1)}50%{opacity:1;transform:scale(1.03)}}
+  #loader .lbar{margin-top:30px;width:220px;height:2px;background:rgba(232,200,106,.15);border-radius:2px;overflow:hidden}
   #loader .lbar i{display:block;height:100%;width:40%;background:linear-gradient(90deg,transparent,var(--oro),transparent);animation:load 1.1s linear infinite}
   @keyframes crownPulse{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-8px) scale(1.06)}}
   @keyframes load{0%{transform:translateX(-120%)}100%{transform:translateX(320%)}}
@@ -605,36 +604,6 @@
 
 <!-- ===================== LOADER ===================== -->
 <div id="loader">
-  <div class="crown">
-    <svg viewBox="0 0 120 96" width="72" height="58" aria-hidden="true">
-      <defs>
-        <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#fbe7b6"/>
-          <stop offset="0.45" stop-color="#e8c86a"/>
-          <stop offset="1" stop-color="#b8942f"/>
-        </linearGradient>
-        <linearGradient id="cg2" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#fff4cf"/>
-          <stop offset="1" stop-color="#d9b24e"/>
-        </linearGradient>
-      </defs>
-      <!-- cuerpo de la corona -->
-      <path d="M14 30 L30 62 L60 24 L90 62 L106 30 L98 78 L22 78 Z"
-            fill="url(#cg)" stroke="#8a6a1e" stroke-width="1.2" stroke-linejoin="round"/>
-      <!-- banda inferior -->
-      <rect x="20" y="76" width="80" height="10" rx="3" fill="url(#cg2)" stroke="#8a6a1e" stroke-width="1"/>
-      <!-- puntas -->
-      <circle cx="14" cy="30" r="5.5" fill="url(#cg2)" stroke="#8a6a1e" stroke-width="1"/>
-      <circle cx="60" cy="22" r="6" fill="url(#cg2)" stroke="#8a6a1e" stroke-width="1"/>
-      <circle cx="106" cy="30" r="5.5" fill="url(#cg2)" stroke="#8a6a1e" stroke-width="1"/>
-      <!-- gemas -->
-      <circle cx="42" cy="70" r="3.4" fill="#7fb2ff" stroke="#5a3f10" stroke-width="0.8"/>
-      <circle cx="60" cy="68" r="4" fill="#ff6f8b" stroke="#5a3f10" stroke-width="0.8"/>
-      <circle cx="78" cy="70" r="3.4" fill="#7fe0a8" stroke="#5a3f10" stroke-width="0.8"/>
-      <!-- brillo -->
-      <path d="M22 78 L98 78" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
-    </svg>
-  </div>
   <div class="lname oro">ORIONIX</div>
   <div class="lbar"><i></i></div>
 </div>

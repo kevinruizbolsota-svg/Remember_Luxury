@@ -357,7 +357,8 @@
     -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 1px),#000 100%);animation:ringSpin 14s linear infinite reverse}
   @keyframes ringSpin{to{transform:translate(-50%,-58%) rotate(360deg)}}
   /* nombre revelado letra a letra */
-  #loader .lname{position:relative;font-family:'Cinzel',serif;font-weight:500;letter-spacing:clamp(8px,3vw,20px);text-indent:clamp(8px,3vw,20px);font-size:clamp(2rem,9vw,4.6rem);margin:0;display:flex;color:transparent;background:linear-gradient(180deg,#fff6db 0%,#f0d488 45%,#c79a35 100%);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 0 22px rgba(232,200,106,.35))}
+  #loader .lname{position:relative;font-family:'Cinzel',serif;font-weight:500;letter-spacing:clamp(8px,3vw,20px);text-indent:clamp(8px,3vw,20px);font-size:clamp(2rem,9vw,4.6rem);margin:0;display:flex;color:transparent;background:linear-gradient(110deg,#c79a35 0%,#f0d488 30%,#fff8e6 50%,#f0d488 70%,#c79a35 100%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 0 26px rgba(232,200,106,.4));animation:goldShift 4s ease-in-out infinite}
+  @keyframes goldShift{0%,100%{background-position:0% center}50%{background-position:120% center}}
   #loader .lname span{display:inline-block;opacity:0;transform:translateY(26px) rotateX(-70deg);filter:blur(6px);animation:letterIn .9s cubic-bezier(.2,.8,.2,1) forwards}
   #loader .lname span:nth-child(1){animation-delay:.15s}
   #loader .lname span:nth-child(2){animation-delay:.28s}
@@ -370,12 +371,13 @@
   /* barrido de luz sobre el nombre */
   #loader .lname .sweep{position:absolute;top:0;left:-30%;width:30%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.85),transparent);mix-blend-mode:screen;filter:blur(3px);opacity:0;animation:sweep 2.6s ease-in-out 1.2s infinite}
   @keyframes sweep{0%{left:-30%;opacity:0}12%{opacity:.9}45%{left:120%;opacity:0}100%{left:120%;opacity:0}}
-  #loader .intro-tagline{margin-top:20px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.85rem,2.6vw,1.25rem);letter-spacing:2px;color:rgba(232,225,205,.85);opacity:0;transform:translateY(10px);animation:fadeUp 1.1s ease 1.35s forwards}
+  #loader .intro-tagline{margin-top:20px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.9rem,2.7vw,1.3rem);letter-spacing:2px;color:rgba(236,228,208,.9);text-align:center;opacity:0;transform:translateY(10px);animation:fadeUp 1.1s ease 1.35s forwards}
+  #loader .intro-tagline .tag2{display:block;margin-top:6px;font-size:.72em;letter-spacing:4px;font-style:normal;text-transform:uppercase;color:rgba(232,200,106,.75);opacity:0;transform:translateY(8px);animation:fadeUp 1s ease 2s forwards}
   @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
   #loader .lbar{margin-top:26px;width:clamp(160px,30vw,240px);height:2px;background:rgba(232,200,106,.12);border-radius:2px;overflow:hidden;opacity:0;animation:fadeUp .8s ease 1.6s forwards}
   #loader .lbar i{display:block;height:100%;width:40%;background:linear-gradient(90deg,transparent,var(--oro),#fff6db,var(--oro),transparent);animation:load 1.3s ease-in-out infinite}
   @keyframes load{0%{transform:translateX(-120%)}100%{transform:translateX(320%)}}
-  @media(prefers-reduced-motion:reduce){#loader .lname span,#loader .intro-tagline,#loader .lbar{animation-duration:.01s;opacity:1;transform:none}#loader .intro-ring,#loader .lname .sweep{animation:none}}
+  @media(prefers-reduced-motion:reduce){#loader .lname,#loader .lname span,#loader .intro-tagline,#loader .intro-tagline .tag2,#loader .lbar{animation-duration:.01s!important;opacity:1;transform:none}#loader .intro-ring,#loader .lname .sweep{animation:none}}
 
   /* ===== PARTICULAS HERO ===== */
   #stars{position:absolute;inset:0;z-index:0;pointer-events:none}
@@ -636,7 +638,7 @@
       <span>O</span><span>R</span><span>I</span><span>O</span><span>N</span><span>I</span><span>X</span>
       <i class="sweep"></i>
     </h1>
-    <div class="intro-tagline">Donde la inteligencia se vuelve arte.</div>
+    <div class="intro-tagline">Donde la inteligencia se vuelve arte.<span class="tag2">Bienvenido a una nueva era.</span></div>
     <div class="lbar"><i></i></div>
   </div>
 </div>
@@ -1385,48 +1387,84 @@
   /* ---- LOADER ---- */
   (function(){
     var cv=document.getElementById("introCanvas"); if(!cv) return;
-    var ctx=cv.getContext("2d"), W,H,DPR=Math.min(window.devicePixelRatio||1,2), t0=performance.now(), raf, done=false;
-    function size(){ W=cv.clientWidth; H=cv.clientHeight; cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0); }
+    var ctx=cv.getContext("2d"), W,H,CX,CY,DPR=Math.min(window.devicePixelRatio||1,2), t0=performance.now(), raf, done=false;
+    var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+    function size(){ W=cv.clientWidth; H=cv.clientHeight; CX=W/2; CY=H*0.42; cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0); }
     size(); window.addEventListener("resize",size);
-    var N=180, ps=[];
+    // 1) estrellas que convergen (constelacion)
+    var N=200, ps=[];
     for(var i=0;i<N;i++){
-      var ang=Math.random()*Math.PI*2, rad=Math.max(W,H)*(0.5+Math.random()*0.7);
-      ps.push({ ox:W/2+Math.cos(ang)*rad, oy:H/2+Math.sin(ang)*rad,
-        tx:W/2+(Math.random()-0.5)*Math.min(W,H)*0.9, ty:H*0.42+(Math.random()-0.5)*Math.min(W,H)*0.5,
-        x:0,y:0, s:0.6+Math.random()*1.8, tw:Math.random()*Math.PI*2, sp:0.6+Math.random()*1.6 });
+      var ang=Math.random()*Math.PI*2, rad=Math.max(W,H)*(0.5+Math.random()*0.75);
+      ps.push({ ox:CX+Math.cos(ang)*rad, oy:CY+Math.sin(ang)*rad,
+        tx:CX+(Math.random()-0.5)*Math.min(W,H)*0.95, ty:CY+(Math.random()-0.5)*Math.min(W,H)*0.55,
+        x:0,y:0, s:0.6+Math.random()*1.9, tw:Math.random()*Math.PI*2, sp:0.6+Math.random()*1.7, hue:Math.random() });
     }
+    // 2) hiperespacio (estrellas en warp radial)
+    var M=140, warp=[];
+    function seedWarp(k){ var a=Math.random()*Math.PI*2, r=Math.random()*40; warp[k]={a:a, r:r, pr:r, v:1.5+Math.random()*4, len:6+Math.random()*30}; }
+    for(var k=0;k<M;k++) seedWarp(k);
+    // 3) particulas en orbita
+    var O=46, orb=[];
+    for(var o=0;o<O;o++){ orb.push({ a:Math.random()*Math.PI*2, rad:60+Math.random()*150, sp:(0.4+Math.random()*0.9)*(Math.random()<0.5?1:-1), s:0.8+Math.random()*1.6, hue:Math.random() }); }
     function ease(p){ return 1-Math.pow(1-p,3); }
     function frame(now){
       var el=(now-t0)/1000, gather=Math.min(el/1.6,1), e=ease(gather);
       ctx.clearRect(0,0,W,H);
-      // nebulosa sutil
-      var g=ctx.createRadialGradient(W/2,H*0.42,10,W/2,H*0.42,Math.max(W,H)*0.55);
-      g.addColorStop(0,"rgba(60,80,140,"+(0.10*e)+")"); g.addColorStop(1,"rgba(0,0,0,0)");
+      var maxR=Math.max(W,H);
+      // fondo: nebulosa doble
+      var g=ctx.createRadialGradient(CX,CY,10,CX,CY,maxR*0.6);
+      g.addColorStop(0,"rgba(70,90,155,"+(0.12*e)+")"); g.addColorStop(0.4,"rgba(120,90,160,"+(0.05*e)+")"); g.addColorStop(1,"rgba(0,0,0,0)");
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+      // capa hiperespacio (fuerte al inicio, se calma al converger)
+      var warpAmt=Math.max(0,1-el/1.8);
+      if(!reduce && warpAmt>0.02){
+        ctx.lineCap="round";
+        for(var w=0;w<warp.length;w++){ var s=warp[w]; s.pr=s.r; s.r+=s.v*(1+warpAmt*3);
+          var x1=CX+Math.cos(s.a)*s.pr, y1=CY+Math.sin(s.a)*s.pr, x2=CX+Math.cos(s.a)*(s.r+s.len), y2=CY+Math.sin(s.a)*(s.r+s.len);
+          var al=0.5*warpAmt*Math.min(1,s.r/120);
+          ctx.strokeStyle="rgba(200,220,255,"+al+")"; ctx.lineWidth=1.1; ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+          if(s.r>maxR*0.75) seedWarp(w);
+        }
+      }
+      // capa constelacion
       for(var i=0;i<ps.length;i++){
         var p=ps[i];
         p.x=p.ox+(p.tx-p.ox)*e; p.y=p.oy+(p.ty-p.oy)*e;
         p.tw+=0.05*p.sp; var fl=0.5+0.5*Math.sin(p.tw);
-        // lineas de constelacion al converger
         for(var j=i+1;j<i+4 && j<ps.length;j++){
           var q=ps[j], dx=p.x-q.x, dy=p.y-q.y, d=Math.sqrt(dx*dx+dy*dy);
-          if(d<70*e){ ctx.strokeStyle="rgba(232,200,106,"+(0.10*e*(1-d/70))+")"; ctx.lineWidth=0.6; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke(); }
+          if(d<78*e){ ctx.strokeStyle="rgba(232,200,106,"+(0.11*e*(1-d/78))+")"; ctx.lineWidth=0.6; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke(); }
         }
-        var a=(0.35+0.6*fl)*(0.4+0.6*e), col=i%7===0?"180,210,255":"255,224,160";
+        var a=(0.35+0.6*fl)*(0.4+0.6*e), col=p.hue<0.16?"180,210,255":(p.hue>0.9?"255,255,255":"255,224,160");
         ctx.beginPath(); ctx.arc(p.x,p.y,p.s*(0.6+0.6*e),0,6.283);
         ctx.fillStyle="rgba("+col+","+a+")"; ctx.shadowColor="rgba(232,200,106,0.7)"; ctx.shadowBlur=6*e; ctx.fill(); ctx.shadowBlur=0;
       }
-      // destello central al completar
-      if(gather>=1){ var pulse=0.5+0.5*Math.sin((el-1.6)*3); var rg=ctx.createRadialGradient(W/2,H*0.42,0,W/2,H*0.42,120);
-        rg.addColorStop(0,"rgba(255,245,215,"+(0.18*pulse)+")"); rg.addColorStop(1,"rgba(255,245,215,0)");
-        ctx.fillStyle=rg; ctx.beginPath(); ctx.arc(W/2,H*0.42,120,0,6.283); ctx.fill(); }
+      // ondas de choque expansivas al converger
+      if(gather>=1){
+        var tb=el-1.6;
+        for(var rr=0;rr<3;rr++){ var ph=(tb*0.6 - rr*0.33); if(ph>0){ var rad=(ph%1)*maxR*0.5; var op=0.28*(1-(ph%1));
+          ctx.strokeStyle="rgba(232,200,106,"+op+")"; ctx.lineWidth=1.4; ctx.beginPath(); ctx.arc(CX,CY,rad,0,6.283); ctx.stroke(); } }
+        // orbitas
+        if(!reduce) for(var o2=0;o2<orb.length;o2++){ var ob=orb[o2]; ob.a+=ob.sp*0.02;
+          var ox=CX+Math.cos(ob.a)*ob.rad, oy=CY+Math.sin(ob.a)*ob.rad*0.6;
+          var oc=ob.hue<0.3?"180,210,255":"255,224,160";
+          ctx.beginPath(); ctx.arc(ox,oy,ob.s,0,6.283); ctx.fillStyle="rgba("+oc+","+(0.5+0.3*Math.sin(el*3+o2))+")"; ctx.shadowColor="rgba(232,200,106,0.8)"; ctx.shadowBlur=8; ctx.fill(); ctx.shadowBlur=0; }
+        // nucleo pulsante
+        var pulse=0.5+0.5*Math.sin(tb*3); var rg=ctx.createRadialGradient(CX,CY,0,CX,CY,140);
+        rg.addColorStop(0,"rgba(255,247,220,"+(0.22*pulse)+")"); rg.addColorStop(0.5,"rgba(232,200,106,"+(0.10*pulse)+")"); rg.addColorStop(1,"rgba(255,245,215,0)");
+        ctx.fillStyle=rg; ctx.beginPath(); ctx.arc(CX,CY,140,0,6.283); ctx.fill();
+      }
+      // estallido final (flash) justo antes de cerrar
+      if(el>2.55){ var fp=Math.min((el-2.55)/0.35,1); var fg=ctx.createRadialGradient(CX,CY,0,CX,CY,maxR);
+        fg.addColorStop(0,"rgba(255,250,235,"+(0.55*fp)+")"); fg.addColorStop(0.3,"rgba(255,240,205,"+(0.25*fp)+")"); fg.addColorStop(1,"rgba(255,240,205,0)");
+        ctx.fillStyle=fg; ctx.fillRect(0,0,W,H); }
       if(!done) raf=requestAnimationFrame(frame);
     }
     raf=requestAnimationFrame(frame);
     window.addEventListener("load",function(){ setTimeout(function(){
       var l=document.getElementById("loader"); if(l) l.classList.add("done");
       setTimeout(function(){ done=true; cancelAnimationFrame(raf); },1100);
-    },2900); });
+    },3100); });
   })();
 
   /* ---- MENU MOVIL ---- */

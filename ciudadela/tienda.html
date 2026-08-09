@@ -269,6 +269,7 @@ async function cargar(){
     const d = await r.json();
     PRODUCTOS = (d.productos||[]);
   }catch(e){ PRODUCTOS = []; }
+  window.PRODUCTOS = PRODUCTOS;
   pintarCategorias(); pintarRibbon(); pintarSearchCats();
   pintarDestacados(); pintarSecciones(); pintarVideos();
 }
@@ -455,11 +456,18 @@ window.ORA_CFG={
   ],
   local:function(texto){var n=(texto||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
     function h(){for(var i=0;i<arguments.length;i++){if(n.indexOf(arguments[i])>=0)return true;}return false;}
-    if(h("agente","ia","vendedor")) return "En la tienda tienes nuestros **Agentes de IA**: *Vendedor* (atiende y cierra 24/7), *WhatsApp*, *Voz* y *Seguimiento*. Cada uno trabaja por ti sin descanso. Quieres que te muestre el catalogo?";
-    if(h("precio","cuanto","cuesta","vale","pagar")) return "Cada producto muestra su precio en su ficha. Puedo abrirte el **catalogo** o el **carrito** para que veas totales. Que prefieres?";
-    if(h("envio","entrega","digital","descarga")) return "Nuestros productos son en su mayoria **digitales**: los recibes y activamos contigo. Te muestro lo destacado?";
-    if(h("hola","buenas")) return "Hola, soy **KYBALIO**, el oraculo de la Tienda. Te explico cualquier producto y te llevo donde quieras: catalogo, destacados, videos o carrito.";
-    return "Soy el oraculo de la Tienda Orionix. Puedo explicarte cada producto y llevarte al **catalogo**, **destacados**, **videos** o **carrito**. Dime que buscas.";}
+    /* lee los productos REALES cargados en la tienda para no inventar */
+    var P=(window.PRODUCTOS&&window.PRODUCTOS.length)?window.PRODUCTOS:[];
+    function listaReal(){ if(!P.length) return ""; var t="\n"; for(var i=0;i<Math.min(P.length,6);i++){var p=P[i];t+="- **"+(p.nombre||p.titulo||"Producto")+"**"+(p.precio?(" \u2014 "+p.precio+(p.moneda?(" "+p.moneda):"")):"")+"\n";} return t; }
+    if(h("promo","oferta","descuento","rebaja","cupon")){
+      return P.length ? ("Estas son las promociones y precios **reales** que hay ahora mismo en la tienda:"+listaReal()+"No invento ofertas: si no aparece aqui, no existe. Te abro el catalogo para verlas en detalle?") 
+                      : "No tengo promociones activas confirmadas en este momento. Prefiero decirte la verdad antes que inventar una oferta. Si quieres, te dejo con un asesor por WhatsApp para ver posibilidades reales.";
+    }
+    if(h("agente","ia","vendedor","whatsapp","voz","seguimiento")) return "Nuestros **Agentes de IA** reales son: *Vendedor* (atiende y cierra 24/7), *WhatsApp*, *Voz* y *Seguimiento*. Estan construidos con **n8n** (workflows, nodos, webhooks) conectados al cerebro KYBALIO. Te muestro el catalogo con lo que hay disponible?";
+    if(h("precio","cuanto","cuesta","vale","pagar")){ return P.length ? ("Estos son los precios **reales** en la tienda:"+listaReal()+"Te abro el catalogo o el carrito?") : "Cada producto muestra su precio real en su ficha. Te abro el **catalogo** para verlos."; }
+    if(h("envio","entrega","digital","descarga")) return "La mayoria de productos son **digitales**: los recibes y los activamos contigo, sin envio fisico. Te muestro lo destacado?";
+    if(h("hola","buenas")) return "Hola, soy **KYBALIO**, el oraculo de la Tienda Orionix. Solo te hablo de productos, agentes y precios **reales**. Que quieres ver: catalogo, destacados, videos o carrito?";
+    return "Soy el oraculo de la Tienda Orionix y solo hablo con la verdad: te muestro los **productos y precios reales**, los **agentes de IA** disponibles y te llevo al **catalogo**, **destacados**, **videos** o **carrito**. Dime que buscas.";}
 };
 </script>
 
@@ -599,19 +607,19 @@ window.ORA_CFG={
         <feGaussianBlur stdDeviation=".5"/>
       </filter>
       <linearGradient id="navHull" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#eaf6ff"/><stop offset=".45" stop-color="#a9c9e0"/><stop offset="1" stop-color="#5a7488"/>
+        <stop offset="0" stop-color="#fbf3ff"/><stop offset=".4" stop-color="#c9b6e6"/><stop offset="1" stop-color="#6b5a8c"/>
       </linearGradient>
       <linearGradient id="navHull2" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#8fb0c8"/><stop offset="1" stop-color="#33485a"/>
+        <stop offset="0" stop-color="#b6a3d6"/><stop offset="1" stop-color="#3a2f56"/>
       </linearGradient>
       <radialGradient id="navDome" cx="50%" cy="40%" r="70%">
-        <stop offset="0" stop-color="#d7f2ff"/><stop offset=".6" stop-color="#5aa8d8"/><stop offset="1" stop-color="#123246"/>
+        <stop offset="0" stop-color="#f3e9ff"/><stop offset=".6" stop-color="#9a7fd0"/><stop offset="1" stop-color="#2a1f45"/>
       </radialGradient>
       <linearGradient id="navEnergy" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#8fe9ff" stop-opacity="0"/><stop offset=".5" stop-color="#8fe9ff"/><stop offset="1" stop-color="#8fe9ff" stop-opacity="0"/>
+        <stop offset="0" stop-color="#f4e2a0" stop-opacity="0"/><stop offset=".5" stop-color="#f4e2a0"/><stop offset="1" stop-color="#f4e2a0" stop-opacity="0"/>
       </linearGradient>
       <linearGradient id="navFlame" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#bfeaff"/><stop offset=".5" stop-color="#5ab6ff"/><stop offset="1" stop-color="#5ab6ff" stop-opacity="0"/>
+        <stop offset="0" stop-color="#e6d4ff"/><stop offset=".5" stop-color="#a678ff"/><stop offset="1" stop-color="#a678ff" stop-opacity="0"/>
       </linearGradient>
     </defs>
     <g class="rb-nave">
@@ -621,16 +629,16 @@ window.ORA_CFG={
       </g>
       <ellipse cx="60" cy="186" rx="30" ry="4" fill="rgba(120,200,255,.18)"/>
       <path d="M22 172 Q60 200 98 172 Q92 162 60 162 Q28 162 22 172 Z" fill="url(#navHull2)"/>
-      <path d="M18 168 Q60 150 102 168 Q104 172 100 175 Q60 190 20 175 Q16 172 18 168 Z" fill="url(#navHull)" stroke="#bfeaff" stroke-width=".8"/>
-      <path d="M24 170 Q60 182 96 170" fill="none" stroke="url(#navEnergy)" stroke-width="1.4" class="rb-glow"/>
-      <path d="M18 168 L4 178 L20 174 Z" fill="url(#navHull2)" stroke="#8fd8ff" stroke-width=".5"/>
-      <path d="M102 168 L116 178 L100 174 Z" fill="url(#navHull2)" stroke="#8fd8ff" stroke-width=".5"/>
-      <path d="M42 162 Q60 144 78 162 Q60 170 42 162 Z" fill="url(#navDome)" stroke="#cfeeff" stroke-width="1"/>
-      <ellipse cx="54" cy="156" rx="5" ry="3" fill="#ffffff" opacity=".55"/>
-      <circle cx="30" cy="171" r="2.4" fill="#8fe9ff" class="rb-glow"/>
+      <path d="M18 168 Q60 150 102 168 Q104 172 100 175 Q60 190 20 175 Q16 172 18 168 Z" fill="url(#navHull)" stroke="#f4e2a0" stroke-width=".9"/>
+      <path d="M24 170 Q60 182 96 170" fill="none" stroke="url(#navEnergy)" stroke-width="1.6" class="rb-glow"/>
+      <path d="M18 168 L4 178 L20 174 Z" fill="url(#navHull2)" stroke="#d9c6f2" stroke-width=".5"/>
+      <path d="M102 168 L116 178 L100 174 Z" fill="url(#navHull2)" stroke="#d9c6f2" stroke-width=".5"/>
+      <path d="M42 162 Q60 144 78 162 Q60 170 42 162 Z" fill="url(#navDome)" stroke="#efe3ff" stroke-width="1"/>
+      <ellipse cx="54" cy="156" rx="5" ry="3" fill="#ffffff" opacity=".5"/>
+      <circle cx="30" cy="171" r="2.4" fill="#c8a24a" class="rb-glow"/>
       <circle cx="60" cy="176" r="2.6" fill="#fff6d6" class="rb-glow"/>
-      <circle cx="90" cy="171" r="2.4" fill="#8fe9ff" class="rb-glow"/>
-      <rect x="50" y="167" width="20" height="2" rx="1" fill="rgba(0,0,0,.25)"/>
+      <circle cx="90" cy="171" r="2.4" fill="#a678ff" class="rb-glow"/>
+      <rect x="50" y="167" width="20" height="2" rx="1" fill="rgba(40,20,60,.3)"/>
     </g>
     <circle cx="60" cy="80" r="60" fill="url(#rbAura)" class="rb-glow"/>
     <g class="rb-body">
@@ -757,7 +765,7 @@ window.ORA_CFG={
 
   var vwSession="voz"+Date.now(), vwStarted=false;
   var VW_SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  var vwRecog=null,vwListening=false,vwHands=false,vwSpeaking=false,vwThinking=false,vwFinalBuf="",vwSilenceTimer=null,vwInterimEl=null,vwWantListen=false;
+  var vwRecog=null,vwListening=false,vwHands=false,vwSpeaking=false,vwThinking=false,vwFinalBuf="",vwSilenceTimer=null,vwMaxTimer=null,vwInterimEl=null,vwWantListen=false;
 
   /* ---- voces ---- */
   window.__voces=window.__voces||[];
@@ -818,7 +826,10 @@ window.ORA_CFG={
   function vwEnsureRecog(){if(!VW_SR)return null;if(vwRecog)return vwRecog;
     var r=new VW_SR();r.lang="es-ES";r.continuous=true;r.interimResults=true;r.maxAlternatives=1;
     r.onresult=function(ev){var interim="";for(var i=ev.resultIndex;i<ev.results.length;i++){var tr=ev.results[i][0].transcript;if(ev.results[i].isFinal){vwFinalBuf+=tr+" ";}else{interim+=tr;}}
-      vwShowInterim((vwFinalBuf+interim).trim());if(vwSilenceTimer)clearTimeout(vwSilenceTimer);vwSilenceTimer=setTimeout(function(){vwFlush();},1100);};
+      vwShowInterim((vwFinalBuf+interim).trim());
+      /* MODO ANALISIS: al detectar habla, arranca tope de seguridad; y espera ~2.6s de silencio antes de responder */
+      if((vwFinalBuf+interim).trim()){vwSetState("Escuchando... (analizando)");if(!vwMaxTimer){vwMaxTimer=setTimeout(function(){vwMaxTimer=null;vwFlush();},13000);}}
+      if(vwSilenceTimer)clearTimeout(vwSilenceTimer);vwSilenceTimer=setTimeout(function(){vwFlush();},2600);};
     r.onstart=function(){vwListening=true;};r.onaudiostart=function(){vwListening=true;};
     r.onerror=function(ev){if(ev.error==="not-allowed"||ev.error==="service-not-allowed"){vwHands=false;refreshHandsBtn();vwSetState("Permite el microfono en el navegador");
         document.getElementById("vwMicLbl").textContent="Toca el candado de la barra de direcciones y permite el Microfono";
@@ -830,8 +841,8 @@ window.ORA_CFG={
   function vwStartListen(){if(!VW_SR||!vwHands||vwListening||vwSpeaking||vwThinking)return;var r=vwEnsureRecog();if(!r)return;vwFinalBuf="";vwWantListen=true;
     try{r.start();vwListening=true;var o=document.getElementById("vwOrb");if(o)o.classList.add("talk");vwSetState("Escuchando... hablame");document.getElementById("vwMicLbl").textContent="Te escucho... habla con naturalidad";}
     catch(e){vwListening=true;}}
-  function vwStopListen(hard){vwWantListen=false;if(vwSilenceTimer){clearTimeout(vwSilenceTimer);vwSilenceTimer=null;}if(vwRecog){try{vwRecog.stop();}catch(e){}}vwListening=false;var o=document.getElementById("vwOrb");if(o&&!vwSpeaking)o.classList.remove("talk");if(hard){vwClearInterim();}}
-  function vwFlush(){var t=vwFinalBuf.trim();vwFinalBuf="";if(!t){return;}vwClearInterim();vwStopListen(false);vwAdd("user",t);if(vozComando(t))return;vwThinking=true;vwSetState("KYBALIO esta pensando...");vozEnviar(t);}
+  function vwStopListen(hard){vwWantListen=false;if(vwSilenceTimer){clearTimeout(vwSilenceTimer);vwSilenceTimer=null;}if(vwMaxTimer){clearTimeout(vwMaxTimer);vwMaxTimer=null;}if(vwRecog){try{vwRecog.stop();}catch(e){}}vwListening=false;var o=document.getElementById("vwOrb");if(o&&!vwSpeaking)o.classList.remove("talk");if(hard){vwClearInterim();}}
+  function vwFlush(){if(vwMaxTimer){clearTimeout(vwMaxTimer);vwMaxTimer=null;}if(vwSilenceTimer){clearTimeout(vwSilenceTimer);vwSilenceTimer=null;}var t=vwFinalBuf.trim();vwFinalBuf="";if(!t){return;}vwClearInterim();vwStopListen(false);vwAdd("user",t);vwSetState("KYBALIO esta analizando...");if(vozComando(t))return;vwThinking=true;vwSetState("KYBALIO esta pensando...");vozEnviar(t);}
 
   window.vozToggleHands=function(){if(!VW_SR){alert("Tu navegador no permite reconocimiento de voz. Usa Google Chrome en PC o Android.");return;}
     vwHands=!vwHands;refreshHandsBtn();
@@ -888,23 +899,47 @@ window.ORA_CFG={
   })();
 })();
 
-/* ============ MOVIMIENTO DEL ROBOT (independiente y a prueba de fallos) ============ */
+/* ============ MOVIMIENTO POR LOS BORDES + NAVE (nunca el centro) ============ */
 (function(){
   function init(){
     var r=document.getElementById("robot");
     if(!r){return setTimeout(init,300);}
-    var curX=18,curB=18,tgtX=18,tgtB=18,run=false,lastY=window.pageYOffset||0,timer=null;
+    var M=16, curX=M,curY=M,tgtX=M,tgtY=M,run=false,lastY=window.pageYOffset||0,driftPhase=Math.random(),navTimer=null;
     function widgetAbierto(){var w=document.getElementById("vozWidget");return w&&w.classList.contains("open");}
     function nave(on){if(on){if(widgetAbierto())return;r.classList.remove("walk");r.classList.add("nave");}else{r.classList.remove("nave");r.classList.add("walk");}}
-    function calc(){var de=document.documentElement,bd=document.body;var sh=Math.max(de.scrollHeight,bd.scrollHeight);var max=(sh-window.innerHeight)||1;var sy=window.pageYOffset||de.scrollTop||bd.scrollTop||0;var p=Math.min(1,Math.max(0,sy/max));var rw=r.offsetWidth||74;tgtX=18+(window.innerWidth-rw-36)*p;tgtB=18+Math.sin(p*Math.PI)*Math.min(240,window.innerHeight*0.32);}
-    function loop(){curX+=(tgtX-curX)*0.14;curB+=(tgtB-curB)*0.14;r.style.left=curX.toFixed(1)+"px";r.style.bottom=curB.toFixed(1)+"px";r.style.right="auto";r.style.top="auto";if(Math.abs(tgtX-curX)>0.4||Math.abs(tgtB-curB)>0.4){requestAnimationFrame(loop);}else{run=false;}}
+    /* Punto sobre el PERIMETRO del viewport (solo bordes y rincones). p:0..1 recorre inferior->derecha->superior->izquierda */
+    function perim(p){
+      var w=window.innerWidth,h=window.innerHeight,rw=r.offsetWidth||74,rh=r.offsetHeight||118;
+      var minX=M,maxX=Math.max(M,w-rw-M),minY=74,maxY=Math.max(74,h-rh-M);
+      p=((p%1)+1)%1; var t;
+      if(p<0.30){ t=p/0.30; return {x:minX+(maxX-minX)*t,y:maxY}; }        /* borde inferior  -> derecha */
+      if(p<0.55){ t=(p-0.30)/0.25; return {x:maxX,y:maxY+(minY-maxY)*t}; } /* borde derecho   -> arriba  */
+      if(p<0.80){ t=(p-0.55)/0.25; return {x:maxX+(minX-maxX)*t,y:minY}; } /* borde superior  -> izq     */
+      t=(p-0.80)/0.20; return {x:minX,y:minY+(maxY-minY)*t};               /* borde izquierdo -> abajo    */
+    }
+    function calc(){
+      var de=document.documentElement,bd=document.body;
+      var sh=Math.max(de.scrollHeight,bd.scrollHeight),max=(sh-window.innerHeight)||1;
+      var sy=window.pageYOffset||de.scrollTop||bd.scrollTop||0;
+      var p=Math.min(1,Math.max(0,sy/max));
+      var pos=perim(driftPhase+p*0.85); tgtX=pos.x; tgtY=pos.y;
+    }
+    function loop(){
+      curX+=(tgtX-curX)*0.09; curY+=(tgtY-curY)*0.09;
+      r.style.left=curX.toFixed(1)+"px"; r.style.top=curY.toFixed(1)+"px"; r.style.right="auto"; r.style.bottom="auto";
+      if(Math.abs(tgtX-curX)>0.4||Math.abs(tgtY-curY)>0.4){requestAnimationFrame(loop);}else{run=false;}
+    }
     function kick(){if(!run){run=true;requestAnimationFrame(loop);}}
-    function onScroll(){calc();kick();var sy=window.pageYOffset||0;if(Math.abs(sy-lastY)>3){lastY=sy;nave(true);if(timer)clearTimeout(timer);timer=setTimeout(function(){nave(false);},900);}}
-    calc();curX=tgtX;curB=tgtB;r.style.left=curX+"px";r.style.bottom=curB+"px";r.style.right="auto";r.style.top="auto";
+    function viaje(){ nave(true); if(navTimer)clearTimeout(navTimer); navTimer=setTimeout(function(){nave(false);},1300); }
+    function onScroll(){calc();kick();var sy=window.pageYOffset||0;if(Math.abs(sy-lastY)>3){lastY=sy;viaje();}}
+    calc();curX=tgtX;curY=tgtY;
+    r.style.left=curX+"px";r.style.top=curY+"px";r.style.right="auto";r.style.bottom="auto";
     window.addEventListener("scroll",onScroll,{passive:true});
     window.addEventListener("resize",function(){calc();kick();});
     document.addEventListener("scroll",onScroll,{passive:true});
     setInterval(function(){var sy=window.pageYOffset||0;if(sy!==lastY){onScroll();}},250);
+    /* deriva tranquila por los bordes aunque no haya scroll: llama la nave y viaja al siguiente rincon */
+    setInterval(function(){ if(widgetAbierto())return; driftPhase=(driftPhase+0.16)%1; calc(); kick(); viaje(); },5200);
   }
   if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init);}else{init();}
 })();

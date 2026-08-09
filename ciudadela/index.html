@@ -712,13 +712,11 @@
   </div>
   <div class="vw-foot">
     <div class="vw-live">
-      <div class="vw-toggle" id="vwHandsToggle" onclick="vozToggleHands()" title="Habla sin pulsar botones">
-        <span class="sw"></span><span class="lbl">Manos libres</span>
+      <div class="vw-toggle" id="vwHandsToggle" onclick="vozToggleHands()" title="Pulsa para empezar a hablar">
+        <span class="sw"></span><span class="lbl" id="vwHandsLbl">Manos libres</span>
       </div>
-      <button id="vwMic" class="vw-mic" onclick="vozMic()" title="Pulsar para hablar"><span>&#127908;</span></button>
-      <button id="vwStop" class="vw-stop" onclick="vozStopSpeak()" title="Silenciar voz">&#128263;</button>
     </div>
-    <div class="vw-mic-lbl" id="vwMicLbl">Pulsa el microfono y hablame</div>
+    <div class="vw-mic-lbl" id="vwMicLbl">Pulsa &laquo;Manos libres&raquo; y empieza a hablar</div>
   </div>
 </div>
 
@@ -982,8 +980,8 @@
   function abrirVoz(){var w=document.getElementById("vozWidget");w.classList.add("open");document.getElementById("vozFab").style.display="none";
     if(!vwStarted){vwStarted=true;
       if(!VW_SR){document.getElementById("vwMicLbl").innerHTML="Para voz usa Google Chrome en tu PC o celular.";}
-      setTimeout(function(){vwAdd("bot","Hola, soy KYBALIO. Activa Manos libres o pulsa el microfono y hablame. Puedo responderte en voz y abrirte cualquier parte de la web: dime por ejemplo \u201cabre la tienda\u201d, \u201cmuestrame los planes\u201d o \u201clleva a agentes\u201d.");},300);}}
-  function cerrarVoz(){document.getElementById("vozWidget").classList.remove("open");document.getElementById("vozFab").style.display="flex";vozStopSpeak();vwStopListen(true);}
+      setTimeout(function(){vwAdd("bot","Hola, soy KYBALIO. Pulsa \u201cManos libres\u201d y hablame: te escucho y te respondo en voz alta. Puedo abrirte cualquier parte de la web: dime por ejemplo \u201cabre la tienda\u201d, \u201cmuestrame los planes\u201d o \u201clleva a agentes\u201d.");},300);}}
+  function cerrarVoz(){document.getElementById("vozWidget").classList.remove("open");document.getElementById("vozFab").style.display="flex";vozStopSpeak();vwStopListen(true);vwHands=false;refreshHandsBtn();}
   function vwEsc(t){var e=document.createElement("div");e.textContent=t;return e.innerHTML;}
   function vwSetState(t){var s=document.getElementById("vwState");if(s)s.textContent=t;}
   function vwAdd(role,text){var b=document.getElementById("vwBody");var h=b.querySelector(".vw-hint");if(h)h.remove();
@@ -1025,23 +1023,24 @@
   }
   function vwStartListen(){
     if(!VW_SR)return;
+    if(!vwHands)return;
     if(vwListening||vwSpeaking||vwThinking)return;
     var r=vwEnsureRecog();if(!r)return;
     vwFinalBuf="";vwWantListen=true;
-    try{r.start();vwListening=true;document.getElementById("vwMic").classList.add("rec");vwSetState(vwHands?"Escuchando... (manos libres)":"Escuchando...");document.getElementById("vwMicLbl").textContent=vwHands?"Hablame, te escucho":"Pulsa para terminar";}
+    try{r.start();vwListening=true;var o=document.getElementById("vwOrb");if(o)o.classList.add("talk");vwSetState("Escuchando... hablame");document.getElementById("vwMicLbl").textContent="Te escucho... habla con naturalidad";}
     catch(e){/* ya iniciado */}
   }
   function vwStopListen(hard){
     vwWantListen=false;if(vwSilenceTimer){clearTimeout(vwSilenceTimer);vwSilenceTimer=null;}
     if(vwRecog){try{vwRecog.stop();}catch(e){}}
-    vwListening=false;document.getElementById("vwMic").classList.remove("rec");
+    vwListening=false;var o=document.getElementById("vwOrb");if(o&&!vwSpeaking)o.classList.remove("talk");
     if(hard){vwClearInterim();}
   }
   function vwFlush(){
     var t=vwFinalBuf.trim();vwFinalBuf="";
     if(!t){return;}
     vwClearInterim();
-    /* en manos libres detenemos el reconocimiento mientras responde para no auto-escucharse */
+    /* detenemos el reconocimiento mientras responde para no auto-escucharse */
     vwStopListen(false);
     vwAdd("user",t);
     /* 1) intenta ejecutar un comando de navegacion */
@@ -1050,34 +1049,38 @@
     vwThinking=true;vwSetState("KYBALIO esta pensando...");vozEnviar(t);
   }
 
-  function vozMic(){
-    if(!VW_SR){alert("Tu navegador no permite reconocimiento de voz. Usa Google Chrome.");return;}
-    vozStopSpeak();
-    if(vwListening){vwStopListen(false);vwFlush();vwSetState("En pausa");document.getElementById("vwMicLbl").textContent="Pulsa el microfono y hablame";return;}
-    vwStartListen();
-  }
+  /* Un solo boton: al activar Manos libres arranca la conversacion (voz + escucha) */
   function vozToggleHands(){
+    if(!VW_SR){alert("Tu navegador no permite reconocimiento de voz por voz. Usa Google Chrome en PC o Android.");return;}
     vwHands=!vwHands;refreshHandsBtn();
-    if(vwHands){vozStopSpeak();vwStartListen();}
-    else{vwStopListen(true);vwSetState("Manos libres desactivado");document.getElementById("vwMicLbl").textContent="Pulsa el microfono y hablame";}
+    if(vwHands){
+      /* desbloquea la voz del navegador dentro del mismo clic del usuario */
+      try{window.speechSynthesis.cancel();window.speechSynthesis.resume();}catch(e){}
+      vozHablar("Hola, te escucho. Dime en que puedo ayudarte o pideme abrir cualquier parte de la web.");
+      /* si el navegador no reproduce voz, igual empezamos a escuchar */
+      setTimeout(function(){ if(!vwSpeaking) vwStartListen(); },1200);
+    } else {
+      vozStopSpeak();vwStopListen(true);vwSetState("Manos libres desactivado");
+      document.getElementById("vwMicLbl").textContent="Pulsa \u00abManos libres\u00bb y empieza a hablar";
+    }
   }
-  function refreshHandsBtn(){var b=document.getElementById("vwHandsToggle");if(b)b.classList.toggle("on",vwHands);}
+  function refreshHandsBtn(){var b=document.getElementById("vwHandsToggle");var l=document.getElementById("vwHandsLbl");if(b)b.classList.toggle("on",vwHands);if(l)l.textContent=vwHands?"Escuchando":"Manos libres";}
 
   function vozStopSpeak(){if(window.speechSynthesis)window.speechSynthesis.cancel();vwSpeaking=false;var o=document.getElementById("vwOrb");if(o)o.classList.remove("talk");}
   function vozHablar(txt){
-    if(!window.speechSynthesis){return;}
+    if(!window.speechSynthesis){ if(vwHands)vwStartListen(); return; }
     try{window.speechSynthesis.cancel();
       var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1.03;u.pitch=1;
       var vs=window.speechSynthesis.getVoices();
       var pref=vs.find(function(v){return /es/i.test(v.lang)&&/(jorge|diego|pablo|google espa|microsoft.*spanish)/i.test(v.name);})||vs.find(function(v){return /es/i.test(v.lang);});
       if(pref)u.voice=pref;
-      vwSpeaking=true;document.getElementById("vwOrb").classList.add("talk");vwSetState("KYBALIO esta hablando...");
-      u.onend=function(){vwSpeaking=false;document.getElementById("vwOrb").classList.remove("talk");
-        if(vwHands&&vwWantListen!==null){vwSetState("Escuchando... (manos libres)");vwStartListen();}
-        else{vwSetState("Toca el microfono para seguir");}
+      vwSpeaking=true;var o=document.getElementById("vwOrb");if(o)o.classList.add("talk");vwSetState("KYBALIO esta hablando...");
+      u.onend=function(){vwSpeaking=false;var o2=document.getElementById("vwOrb");if(o2)o2.classList.remove("talk");
+        if(vwHands){vwStartListen();}else{vwSetState("Pulsa \u00abManos libres\u00bb para seguir");}
       };
+      u.onerror=function(){vwSpeaking=false;if(vwHands)vwStartListen();};
       window.speechSynthesis.speak(u);
-    }catch(e){vwSpeaking=false;}
+    }catch(e){vwSpeaking=false;if(vwHands)vwStartListen();}
   }
 
   function vozEnviar(texto){

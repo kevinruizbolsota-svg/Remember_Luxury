@@ -102,7 +102,15 @@
   #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 7vw;position:relative;background:radial-gradient(ellipse at 50% 30%,rgba(232,200,106,.10),transparent 60%),radial-gradient(ellipse at 50% 120%,rgba(200,162,74,.12),transparent 55%),var(--bg)}
   #hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(232,200,106,.06) 1px,transparent 1px);background-size:26px 26px;opacity:.5;pointer-events:none}
   #hero .eyebrow{font-family:'Cinzel',serif;letter-spacing:5px;font-size:.62rem;color:var(--oro-med);text-transform:uppercase;margin-bottom:18px;position:relative}
-  #hero h1{font-size:clamp(1.5rem,4vw,2.6rem);font-weight:400;letter-spacing:6px;line-height:1.1;position:relative;text-shadow:0 2px 30px rgba(232,200,106,.12)}
+  #hero h1{font-size:clamp(2.4rem,9vw,6.5rem);font-weight:500;letter-spacing:clamp(6px,2vw,18px);line-height:1;position:relative;
+    background:linear-gradient(120deg,#8a6d2a 0%,#f6e6ad 25%,#fff8e1 45%,#f6e6ad 60%,#b8912f 100%);
+    background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+    text-shadow:none;filter:drop-shadow(0 4px 40px rgba(232,200,106,.35));animation:brilloTitulo 6s linear infinite,latido 4.5s ease-in-out infinite}
+  #hero h1::after{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:120%;height:180%;z-index:-1;pointer-events:none;
+    background:radial-gradient(ellipse at 50% 50%,rgba(232,200,106,.22),transparent 68%);filter:blur(14px);animation:aura 5s ease-in-out infinite}
+  @keyframes brilloTitulo{to{background-position:220% center}}
+  @keyframes latido{0%,100%{filter:drop-shadow(0 4px 40px rgba(232,200,106,.30))}50%{filter:drop-shadow(0 6px 60px rgba(232,200,106,.55))}}
+  @keyframes aura{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(1)}50%{opacity:.9;transform:translate(-50%,-50%) scale(1.08)}}
   #hero .sub{font-size:clamp(1rem,2.2vw,1.3rem);font-style:italic;color:var(--tenue);margin:16px 0 34px;position:relative}
   #hero .cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;position:relative}
   .scroll-ind{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);color:var(--oro-med);font-size:1.4rem;animation:flota 2s ease-in-out infinite;z-index:3}
@@ -1101,6 +1109,14 @@
   (function(){
     var c=document.getElementById("cosmosStars");if(!c)return;var ctx=c.getContext("2d");var W,H,ps=[];
     function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;make();}
+    var fugaces=[];
+    function nuevaFugaz(){ /* estrella fugaz que desciende hacia la Fuente (abajo-centro) */
+      var startX=Math.random()*W; var startY=Math.random()*H*0.4;
+      var destX=W*0.5+(Math.random()*0.3-0.15)*W;
+      var ang=Math.atan2(H-startY,destX-startX);
+      var sp=6+Math.random()*5;
+      fugaces.push({x:startX,y:startY,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp,life:1,len:60+Math.random()*70});
+    }
     function make(){ps=[];var n=Math.min(220,Math.floor(W/6));for(var i=0;i<n;i++){ps.push({x:Math.random()*W,y:Math.random()*H,z:Math.random()*1+.2,r:Math.random()*1.4+.2,a:Math.random()*.6+.25,tw:Math.random()*6.28});}}
     function draw(){
       ctx.clearRect(0,0,W,H);
@@ -1110,6 +1126,17 @@
         p.tw+=0.02; var tw=0.6+0.4*Math.sin(p.tw);
         ctx.beginPath();ctx.arc(p.x,y,p.r*p.z*1.2,0,6.28);
         ctx.fillStyle="rgba(255,246,214,"+(p.a*tw)+")";ctx.fill();
+      }
+      /* estrellas fugaces que caen hacia la Fuente */
+      if(Math.random()<0.012)nuevaFugaz();
+      for(var j=fugaces.length-1;j>=0;j--){var f=fugaces[j];
+        var tx=f.x-f.vx*(f.len/8), ty=f.y-f.vy*(f.len/8);
+        var g=ctx.createLinearGradient(f.x,f.y,tx,ty);
+        g.addColorStop(0,"rgba(255,248,225,"+(0.9*f.life)+")");g.addColorStop(1,"rgba(255,248,225,0)");
+        ctx.strokeStyle=g;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(f.x,f.y);ctx.lineTo(tx,ty);ctx.stroke();
+        ctx.beginPath();ctx.arc(f.x,f.y,1.8*f.life,0,6.28);ctx.fillStyle="rgba(255,248,225,"+f.life+")";ctx.fill();
+        f.x+=f.vx;f.y+=f.vy;f.life-=0.012;
+        if(f.life<=0||f.y>H+40||f.x<-40||f.x>W+40)fugaces.splice(j,1);
       }
       requestAnimationFrame(draw);
     }

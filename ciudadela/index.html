@@ -1626,7 +1626,7 @@
   /* ================= AGENTE DE VOZ (reconocimiento nativo + manos libres + navegacion) ================= */
   var vwSession="voz"+Date.now(), vwStarted=false;
   var VW_SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  var vwRecog=null, vwListening=false, vwHands=false, vwSpeaking=false, vwThinking=false, vwFinalBuf="", vwSilenceTimer=null, vwMaxTimer=null, vwInterimEl=null, vwWantListen=false;
+  var vwRecog=null, vwListening=false, vwHands=false, vwSpeaking=false, vwThinking=false, vwFinalBuf="", vwLastInterim="", vwSilenceTimer=null, vwMaxTimer=null, vwInterimEl=null, vwWantListen=false;
 
   function abrirVoz(){var w=document.getElementById("vozWidget");w.classList.add("open");var rb=document.getElementById("robot");if(rb){rb.classList.remove("talk","nave");rb.classList.add("walk");}
     /* desbloquea la voz del navegador dentro del mismo gesto del usuario (audio unlock) */
@@ -1694,6 +1694,7 @@
         var tr=ev.results[i][0].transcript;
         if(ev.results[i].isFinal){vwFinalBuf+=tr+" ";}else{interim+=tr;}
       }
+      vwLastInterim=interim;
       vwShowInterim((vwFinalBuf+interim).trim());
       /* MODO ANALISIS: al detectar habla, arranca tope de seguridad y espera ~2.6s de silencio antes de responder */
       if((vwFinalBuf+interim).trim()){vwSetState("Escuchando... (analizando)");if(!vwMaxTimer){vwMaxTimer=setTimeout(function(){vwMaxTimer=null;vwFlush();},13000);}}
@@ -1737,12 +1738,12 @@
     vwWantListen=false;if(vwSilenceTimer){clearTimeout(vwSilenceTimer);vwSilenceTimer=null;}if(vwMaxTimer){clearTimeout(vwMaxTimer);vwMaxTimer=null;}
     if(vwRecog){try{vwRecog.stop();}catch(e){}}
     vwListening=false;var o=document.getElementById("vwOrb");if(o&&!vwSpeaking)o.classList.remove("talk");
-    if(hard){vwClearInterim();}
+    if(hard){vwClearInterim();vwLastInterim="";}
   }
   function vwFlush(){
     if(vwMaxTimer){clearTimeout(vwMaxTimer);vwMaxTimer=null;}if(vwSilenceTimer){clearTimeout(vwSilenceTimer);vwSilenceTimer=null;}
-    var t=vwFinalBuf.trim();vwFinalBuf="";
-    if(!t){return;}
+    var t=(vwFinalBuf.trim()||vwLastInterim.trim());vwFinalBuf="";vwLastInterim="";
+    if(!t){ if(vwHands&&!vwSpeaking){setTimeout(vwStartListen,200);} return; }
     vwClearInterim();
     /* detenemos el reconocimiento mientras responde para no auto-escucharse */
     vwStopListen(false);

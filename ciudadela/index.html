@@ -1697,19 +1697,25 @@
       /* MODO ANALISIS: al detectar habla, arranca tope de seguridad y espera ~2.6s de silencio antes de responder */
       if((vwFinalBuf+interim).trim()){vwSetState("Escuchando... (analizando)");if(!vwMaxTimer){vwMaxTimer=setTimeout(function(){vwMaxTimer=null;vwFlush();},13000);}}
       if(vwSilenceTimer)clearTimeout(vwSilenceTimer);
-      vwSilenceTimer=setTimeout(function(){vwFlush();},2600);
+      vwSilenceTimer=setTimeout(function(){vwFlush();},1700);
     };
     r.onstart=function(){ vwListening=true; };
     r.onaudiostart=function(){ vwListening=true; };
+    r.onspeechend=function(){/* Chrome detecto fin de habla: responde pronto si ya hay texto */ if((vwFinalBuf+vwLastInterim).trim()){if(vwSilenceTimer)clearTimeout(vwSilenceTimer);vwSilenceTimer=setTimeout(function(){vwFlush();},900);}};
     r.onerror=function(ev){
-      if(ev.error==="not-allowed"||ev.error==="service-not-allowed"){
+      var e=ev&&ev.error;
+      if(e==="not-allowed"||e==="service-not-allowed"){
         vwHands=false;refreshHandsBtn();vwSetState("Permite el microfono en el navegador");
         document.getElementById("vwMicLbl").textContent="Toca el candado de la barra de direcciones y permite el Microfono";
-        alert("Debes PERMITIR el microfono. Toca el candado (o el icono de camara/microfono) en la barra de direcciones de Chrome, elige Microfono = Permitir, y vuelve a pulsar Manos libres.");
-      }else if(ev.error==="no-speech"||ev.error==="aborted"||ev.error==="network"){/* transitorio: el watchdog reinicia */}
+        alert("Debes PERMITIR el microfono. Toca el candado (o el icono de camara/microfono) en la barra de direcciones de Chrome, elige Microfono = Permitir, y vuelve a pulsar Manos libres.");return;
+      }
+      /* no-speech / aborted / network / audio-capture: transitorio, seguimos escuchando */
+      vwListening=false;if(vwHands&&vwWantListen&&!vwSpeaking&&!vwThinking){setTimeout(vwStartListen,350);}
     };
     r.onend=function(){
       vwListening=false;
+      /* si Chrome cerro la sesion pero quedo texto sin responder, lo aprovechamos */
+      if((vwFinalBuf+vwLastInterim).trim()&&!vwSpeaking&&!vwThinking){vwFlush();return;}
       /* reinicia si seguimos en manos libres y no estamos hablando/pensando (conversacion fluida) */
       if(vwWantListen&&vwHands&&!vwSpeaking&&!vwThinking){setTimeout(vwStartListen,180);}
     };

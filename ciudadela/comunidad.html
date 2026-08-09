@@ -18,8 +18,7 @@
   html{scroll-behavior:smooth}
   body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--bg);color:var(--texto);min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased}
   h1,h2,h3,h4,.cinzel,.marca{font-family:'Cinzel',serif}
-  .oro{background:linear-gradient(92deg,#8a6a24,#e8c86a 25%,#fff6d6 50%,#e8c86a 75%,#8a6a24);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 6s linear infinite}
-  @keyframes brilloOro{to{background-position:200% center}}
+  .oro{color:var(--oro)}
   ::-webkit-scrollbar{width:9px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:6px}
 
   /* ===== TOPBAR ===== */
@@ -61,12 +60,13 @@
   .composer{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px;margin:6px 0 18px}
   .composer .row1{display:flex;gap:12px;align-items:center}
   .composer .ava{width:42px;height:42px;border-radius:50%;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:700}
-  .composer textarea{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:22px;color:var(--texto);padding:12px 18px;font-family:inherit;font-size:1.1rem;resize:none;outline:none;max-height:200px}
+  .composer textarea{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:6px;color:var(--texto);padding:11px 15px;font-family:inherit;font-size:1rem;resize:none;outline:none;max-height:200px}
   .composer textarea:focus{border-color:var(--oro)}
   .composer .row2{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
-  .composer .chip{display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:20px;background:var(--panel2);border:1px solid var(--border);color:var(--tenue);cursor:pointer;font-size:.95rem;transition:all .2s}
+  .composer .chip{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:4px;background:var(--panel2);border:1px solid var(--border);color:var(--tenue);cursor:pointer;font-size:.85rem;transition:all .15s}
   .composer .chip:hover{border-color:var(--oro);color:var(--oro)}
-  .composer .pub{margin-left:auto;padding:10px 26px;border:none;border-radius:20px;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;font-family:'Cinzel',serif;font-weight:700;letter-spacing:1px;cursor:pointer}
+  .composer .pub{margin-left:auto;padding:8px 20px;border:none;border-radius:4px;background:var(--oro-med);color:#17130a;font-family:'Cinzel',serif;font-weight:700;letter-spacing:.5px;cursor:pointer;font-size:.85rem;transition:background .15s}
+  .composer .pub:hover{background:var(--oro)}
   .composer .pub:disabled{opacity:.5;cursor:default}
 
   .post{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:18px}
@@ -76,18 +76,18 @@
   .post .meta{color:var(--tenue);font-size:.82rem}
   .post .del{margin-left:auto;color:var(--tenue);cursor:pointer;font-size:1.1rem}
   .post .del:hover{color:#e06}
-  .post .txt{font-size:1.18rem;line-height:1.7;white-space:pre-wrap;margin-bottom:12px}
-  .post .tag{display:inline-block;font-size:.8rem;color:var(--oro);background:rgba(232,200,106,.1);border:1px solid rgba(232,200,106,.25);border-radius:14px;padding:2px 12px;margin-bottom:12px;font-family:'Cinzel',serif;letter-spacing:1px}
+  .post .txt{font-size:1.05rem;line-height:1.65;white-space:pre-wrap;margin-bottom:12px}
+  .post .tag{display:inline-block;font-size:.72rem;color:var(--oro);background:rgba(232,200,106,.08);border:1px solid rgba(232,200,106,.2);border-radius:3px;padding:2px 9px;margin-bottom:12px;font-family:'Cinzel',serif;letter-spacing:1px}
   .post .stat{display:flex;justify-content:space-between;color:var(--tenue);font-size:.85rem;padding:6px 2px;border-bottom:1px solid var(--border)}
   .post .actions{display:flex;gap:6px;padding-top:8px}
-  .post .act{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;border-radius:10px;cursor:pointer;color:var(--tenue);transition:all .2s;font-size:1rem;user-select:none}
+  .post .act{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:8px;border-radius:4px;cursor:pointer;color:var(--tenue);transition:all .15s;font-size:.92rem;user-select:none}
   .post .act:hover{background:var(--panel2)}
   .post .act.on{color:var(--oro)}
   .comments{margin-top:12px;display:none}
   .comments.open{display:block}
   .comments .crow{display:flex;gap:10px;margin-top:10px}
   .comments .cava{width:32px;height:32px;border-radius:50%;background:var(--panel2);color:var(--oro);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:700;font-size:13px;flex-shrink:0}
-  .comments .cbub{background:var(--panel2);border-radius:14px;padding:9px 14px;font-size:1.02rem}
+  .comments .cbub{background:var(--panel2);border-radius:8px;padding:8px 13px;font-size:.95rem}
   .comments .cbub .cn{color:var(--oro);font-family:'Cinzel',serif;font-size:.78rem;margin-bottom:2px}
   .comments .cinput{display:flex;gap:10px;margin-top:12px}
   .comments .cinput input{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:18px;color:var(--texto);padding:9px 16px;font-family:inherit;font-size:1rem;outline:none}
@@ -105,27 +105,29 @@
   .prov .a{color:var(--oro);font-family:'Cinzel',serif;font-size:.85rem;display:block;margin-top:10px;font-style:normal}
 
   /* ===== LOGIN ESTILO FACEBOOK ===== */
-  #login{position:fixed;inset:0;z-index:200;background:radial-gradient(ellipse at 30% 20%,rgba(232,200,106,.08),transparent 60%),var(--bg);display:flex;align-items:center;justify-content:center;overflow-y:auto;padding:30px}
-  #login .split{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;max-width:1000px;width:100%;align-items:center}
-  @media(max-width:820px){#login .split{grid-template-columns:1fr;gap:30px;text-align:center}}
-  #login .hero-l .crown{font-size:56px;margin-bottom:10px;filter:drop-shadow(0 0 18px rgba(232,200,106,.5))}
-  #login .hero-l h1{font-size:clamp(2.4rem,6vw,3.6rem);letter-spacing:3px;line-height:1.1;margin-bottom:16px}
-  #login .hero-l p{color:var(--tenue);font-size:1.3rem;line-height:1.6;max-width:440px}
+  #login{position:fixed;inset:0;z-index:200;background:var(--bg);display:flex;align-items:center;justify-content:center;overflow-y:auto;padding:30px}
+  #login .split{display:grid;grid-template-columns:1.1fr .9fr;gap:52px;max-width:920px;width:100%;align-items:center}
+  @media(max-width:820px){#login .split{grid-template-columns:1fr;gap:26px;text-align:center}}
+  #login .hero-l .crown{font-size:40px;margin-bottom:12px;color:var(--oro)}
+  #login .hero-l h1{font-size:clamp(1.9rem,5vw,2.7rem);letter-spacing:4px;line-height:1.15;margin-bottom:14px;font-weight:700}
+  #login .hero-l p{color:var(--tenue);font-size:1.08rem;line-height:1.6;max-width:400px}
   @media(max-width:820px){#login .hero-l p{margin:0 auto}}
-  #login .box{background:var(--panel);border:1px solid rgba(232,200,106,.25);border-radius:16px;padding:30px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  #login .box{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:28px 26px;width:100%;max-width:370px;box-shadow:0 12px 40px rgba(0,0,0,.45)}
   @media(max-width:820px){#login .box{margin:0 auto}}
-  #login .box input{width:100%;padding:14px;background:var(--panel2);border:1px solid var(--border);border-radius:10px;color:var(--texto);font-size:16px;font-family:inherit;margin-bottom:13px;outline:none}
-  #login .box input:focus{border-color:var(--oro)}
-  #login .box .primary{width:100%;padding:14px;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;border:none;border-radius:10px;font-family:'Cinzel',serif;font-weight:700;letter-spacing:1px;cursor:pointer;font-size:15px}
-  #login .box .err{color:#e0518a;font-size:.9rem;margin-bottom:10px;min-height:18px;text-align:center}
-  #login .divider{display:flex;align-items:center;gap:12px;margin:18px 0;color:var(--tenue);font-size:.8rem}
+  #login .box input{width:100%;padding:11px 13px;background:var(--panel2);border:1px solid var(--border);border-radius:4px;color:var(--texto);font-size:14.5px;font-family:inherit;margin-bottom:11px;outline:none;transition:border-color .15s}
+  #login .box input:focus{border-color:var(--oro-med)}
+  #login .box .primary{width:100%;padding:11px;background:var(--oro-med);color:#17130a;border:none;border-radius:4px;font-family:'Cinzel',serif;font-weight:700;letter-spacing:.5px;cursor:pointer;font-size:13.5px;transition:background .15s}
+  #login .box .primary:hover{background:var(--oro)}
+  #login .box .err{color:#d16a8f;font-size:.85rem;margin-bottom:9px;min-height:16px;text-align:center}
+  #login .divider{display:flex;align-items:center;gap:10px;margin:15px 0;color:var(--tenue);font-size:.72rem;letter-spacing:1px;text-transform:uppercase}
   #login .divider::before,#login .divider::after{content:'';flex:1;height:1px;background:var(--border)}
-  #login .gmail{width:100%;padding:13px;background:#fff;color:#3c4043;border:none;border-radius:10px;font-family:inherit;font-weight:600;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px}
-  #login .gmail:hover{opacity:.92}
-  #login .gmail .g{font-size:18px;font-weight:800}
-  #login .switch{text-align:center;margin-top:18px;color:var(--tenue);font-size:.95rem}
-  #login .switch a{color:var(--oro);cursor:pointer;text-decoration:underline}
-  #login .box h3{color:var(--oro);font-family:'Cinzel',serif;letter-spacing:1px;margin-bottom:16px;text-align:center;font-size:1.2rem}
+  #login .gmail{width:100%;padding:10px;background:#fff;color:#3c4043;border:1px solid #dadce0;border-radius:4px;font-family:'Roboto',Arial,sans-serif;font-weight:500;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:11px;transition:background .15s,box-shadow .15s}
+  #login .gmail:hover{background:#f7f8f8;box-shadow:0 1px 3px rgba(60,64,67,.2)}
+  #login .gmail svg{width:17px;height:17px;flex-shrink:0}
+  #login .switch{text-align:center;margin-top:16px;color:var(--tenue);font-size:.88rem}
+  #login .switch a{color:var(--oro);cursor:pointer}
+  #login .switch a:hover{text-decoration:underline}
+  #login .box h3{color:var(--texto);font-family:'Cinzel',serif;letter-spacing:1px;margin-bottom:16px;text-align:center;font-size:1.05rem;font-weight:700}
 
   /* ===== VISOR DESTELLOS ===== */
   #visor{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center}
@@ -161,7 +163,7 @@
       <input id="loginPass" type="password" placeholder="Contrasena" autocomplete="current-password">
       <button class="primary" onclick="doLogin()">Entrar</button>
       <div class="divider">o</div>
-      <button class="gmail" onclick="gmailLogin()"><span class="g">G</span> Continuar con Gmail</button>
+      <button class="gmail" onclick="gmailLogin()"><svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg> Continuar con Google</button>
       <div class="switch">No tienes cuenta? <a onclick="showRegister()">Crear cuenta nueva</a></div>
     </div>
 
@@ -174,7 +176,7 @@
       <input id="regPass" type="password" placeholder="Crea una contrasena (min 4)" autocomplete="new-password">
       <button class="primary" onclick="doRegister()">Crear mi cuenta</button>
       <div class="divider">o</div>
-      <button class="gmail" onclick="gmailLogin()"><span class="g">G</span> Registrarme con Gmail</button>
+      <button class="gmail" onclick="gmailLogin()"><svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg> Registrarme con Google</button>
       <div class="switch">Ya tienes cuenta? <a onclick="showLogin()">Iniciar sesion</a></div>
     </div>
   </div>

@@ -167,6 +167,7 @@
 
   /* ===================== PERSONAJE ROBOT (guia de IA) ===================== */
   #robot{position:fixed;bottom:18px;left:18px;z-index:9135;width:52px;height:84px;cursor:pointer;filter:drop-shadow(0 8px 12px rgba(0,0,0,.55));transition:transform .5s cubic-bezier(.4,0,.2,1)}
+  body.overlay-abierto #robot,body.overlay-abierto #vozWidget{display:none!important}
   #robot:hover{transform:translateY(-5px) scale(1.05)}
   #robot .rb-svg{width:100%;height:100%;display:block;overflow:visible}
   #robot .bocadillo{display:none!important}
@@ -1211,15 +1212,16 @@
   var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('on')} }); },{threshold:0.15});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
   function scrollTo2(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
-  function abrirGaleria(){var g=document.getElementById('galeria');var f=document.getElementById('galeriaFrame');if(!f.src){f.src='../index.html';}g.classList.add('open');document.body.style.overflow='hidden';}
-  function cerrarGaleria(){document.getElementById('galeria').classList.remove('open');document.body.style.overflow='';}
-  function abrirTienda(){var g=document.getElementById('tienda');var f=document.getElementById('tiendaFrame');if(!f.src){f.src='tienda.html';}g.classList.add('open');document.body.style.overflow='hidden';}
-  function cerrarTienda(){document.getElementById('tienda').classList.remove('open');document.body.style.overflow='';}
-  function abrirComunidad(){var g=document.getElementById('comunidad');var f=document.getElementById('comunidadFrame');if(!f.src){f.src='comunidad.html';}g.classList.add('open');document.body.style.overflow='hidden';}
-  function cerrarComunidad(){document.getElementById('comunidad').classList.remove('open');document.body.style.overflow='';}
+  function _syncOverlay(){var abierto=!!document.querySelector('#galeria.open,#tienda.open,#comunidad.open,#portal.open');document.body.classList.toggle('overlay-abierto',abierto);}
+  function abrirGaleria(){var g=document.getElementById('galeria');var f=document.getElementById('galeriaFrame');if(!f.src){f.src='../index.html';}g.classList.add('open');document.body.style.overflow='hidden';_syncOverlay();}
+  function cerrarGaleria(){document.getElementById('galeria').classList.remove('open');document.body.style.overflow='';_syncOverlay();}
+  function abrirTienda(){var g=document.getElementById('tienda');var f=document.getElementById('tiendaFrame');if(!f.src){f.src='tienda.html';}g.classList.add('open');document.body.style.overflow='hidden';_syncOverlay();}
+  function cerrarTienda(){document.getElementById('tienda').classList.remove('open');document.body.style.overflow='';_syncOverlay();}
+  function abrirComunidad(){var g=document.getElementById('comunidad');var f=document.getElementById('comunidadFrame');if(!f.src){f.src='comunidad.html';}g.classList.add('open');document.body.style.overflow='hidden';_syncOverlay();}
+  function cerrarComunidad(){document.getElementById('comunidad').classList.remove('open');document.body.style.overflow='';_syncOverlay();}
   window.addEventListener('message',function(e){var d=e.data||{};if(d.ciudadela==='cerrar-comunidad'){cerrarComunidad();}else if(d.ciudadela==='abrir'){cerrarComunidad();if(d.destino==='portal')abrirPortal();else if(d.destino==='templo')abrirGaleria();else if(d.destino==='tienda')abrirTienda();}});
-  function abrirPortal(){document.getElementById('portal').classList.add('open');document.body.style.overflow='hidden';var s=localStorage.getItem('ciudadela_user');if(s){user=s;document.getElementById('login').style.display='none';start();loadMusic();}else{document.getElementById('login').style.display='flex';setTimeout(function(){document.getElementById('nameInput').focus();},100);}}
-  function cerrarPortal(){document.getElementById('portal').classList.remove('open');document.body.style.overflow='';}
+  function abrirPortal(){document.getElementById('portal').classList.add('open');document.body.style.overflow='hidden';_syncOverlay();var s=localStorage.getItem('ciudadela_user');if(s){user=s;document.getElementById('login').style.display='none';start();loadMusic();}else{document.getElementById('login').style.display='flex';setTimeout(function(){document.getElementById('nameInput').focus();},100);}}
+  function cerrarPortal(){document.getElementById('portal').classList.remove('open');document.body.style.overflow='';_syncOverlay();}
   function borrarHistorial(){ if(confirm('Seguro que quieres borrar el historial guardado en este navegador?')){ try{ localStorage.clear(); sessionStorage.clear(); }catch(e){} location.reload(); } }
 
   /* ---- CHAT KYBALIO ---- */

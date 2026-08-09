@@ -1957,12 +1957,12 @@
       var pos=perim(driftPhase+p*0.85); tgtX=pos.x; tgtY=pos.y;
     }
     function loop(){
-      curX+=(tgtX-curX)*0.045; curY+=(tgtY-curY)*0.045;
+      curX+=(tgtX-curX)*0.02; curY+=(tgtY-curY)*0.02;
       r.style.left=curX.toFixed(1)+"px"; r.style.top=curY.toFixed(1)+"px"; r.style.right="auto"; r.style.bottom="auto";
       if(Math.abs(tgtX-curX)>0.4||Math.abs(tgtY-curY)>0.4){ requestAnimationFrame(loop); } else { run=false; }
     }
     function kick(){ if(!run){ run=true; requestAnimationFrame(loop); } }
-    function viaje(){ nave(true); if(navTimer)clearTimeout(navTimer); navTimer=setTimeout(function(){nave(false);},1300); }
+    function viaje(){ nave(true); if(navTimer)clearTimeout(navTimer); navTimer=setTimeout(function(){nave(false);},3000); }
     function onScroll(){ calc(); kick(); var sy=window.pageYOffset||0; if(Math.abs(sy-lastY)>3){ lastY=sy; viaje(); } }
     calc(); curX=tgtX; curY=tgtY;
     r.style.left=curX+"px"; r.style.top=curY+"px"; r.style.right="auto"; r.style.bottom="auto";
@@ -1971,7 +1971,7 @@
     document.addEventListener("scroll",onScroll,{passive:true});
     setInterval(function(){ var sy=window.pageYOffset||0; if(sy!==lastY){ onScroll(); } },250);
     /* deriva tranquila por los bordes: llama la nave y viaja al siguiente rincon */
-    setInterval(function(){ if(widgetAbierto())return; driftPhase=(driftPhase+0.10)%1; calc(); kick(); viaje(); },9000);
+    setInterval(function(){ if(widgetAbierto())return; driftPhase=(driftPhase+0.06)%1; calc(); kick(); viaje(); },16000);
   }
   if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
 })();

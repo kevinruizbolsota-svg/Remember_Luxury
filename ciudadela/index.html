@@ -346,7 +346,10 @@
   #loader{position:fixed;inset:0;z-index:2000;background:radial-gradient(ellipse at 50% 42%,#0d1020 0%,#07080f 55%,#050509 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 1s ease,visibility 1s ease;overflow:hidden}
   #loader.done{opacity:0;visibility:hidden}
   #loader.done .intro-core{transform:scale(1.14);filter:blur(2px)}
-  #introCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  #introVid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0;transform:scale(1.18);filter:brightness(.9) contrast(1.05) saturate(1.1);animation:vidBang 3.2s cubic-bezier(.16,.7,.2,1) .35s forwards}
+  @keyframes vidBang{0%{opacity:0;transform:scale(1.9);filter:brightness(1.8) contrast(1.1) saturate(1.2)}30%{opacity:.85}100%{opacity:.92;transform:scale(1.04);filter:brightness(.9) contrast(1.05) saturate(1.1)}}
+  #loader::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 42%,rgba(5,6,14,.15) 0%,rgba(5,6,14,.55) 62%,rgba(3,3,8,.82) 100%)}
+  #introCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
   #loader .intro-core{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center}
   /* anillo tecnológico giratorio */
   #loader .intro-ring{position:absolute;top:50%;left:50%;width:clamp(220px,42vw,420px);height:clamp(220px,42vw,420px);transform:translate(-50%,-58%);border-radius:50%;pointer-events:none;
@@ -631,6 +634,9 @@
 
 <!-- ===================== LOADER ===================== -->
 <div id="loader">
+  <video id="introVid" autoplay muted loop playsinline preload="auto" poster="">
+    <source src="https://svs.gsfc.nasa.gov/vis/a030000/a031100/a031197/carina_nebula_720p30.mp4" type="video/mp4">
+  </video>
   <canvas id="introCanvas"></canvas>
   <div class="intro-core">
     <div class="intro-ring"></div>
@@ -1393,7 +1399,7 @@
     size(); window.addEventListener("resize",size);
     var maxR=function(){return Math.max(W,H);};
     // ===== BIG BANG NATURAL: polvo estelar de 1px que estalla y llena la pantalla =====
-    var N=reduce?260:(W*H>900000?900:640), ps=[];
+    var N=reduce?120:(W*H>900000?320:240), ps=[];
     function seedStar(){
       var ang=Math.random()*Math.PI*2, speed=(0.15+Math.pow(Math.random(),1.7)*2.6);
       var hue=Math.random();
@@ -1418,37 +1424,17 @@
     function frame(now){
       var el=(now-t0)/1000, dt=Math.min((now-last)/16.67,3); last=now;
       var R=maxR();
-      // rastro suave (menos agresivo = mas natural)
-      ctx.fillStyle="rgba(5,6,12,"+(el<0.9?0.34:0.28)+")"; ctx.fillRect(0,0,W,H);
-      // --- destello del Big Bang inicial (mas tenue y natural) ---
+      // canvas TRANSPARENTE (el universo real lo pone el video de fondo)
+      ctx.clearRect(0,0,W,H);
+      // --- destello del Big Bang inicial (breve, sobre el video) ---
       if(el<1.3){ var bp=1-el/1.3; var bg=ctx.createRadialGradient(CX,CY,0,CX,CY,R*(0.12+el*0.7));
-        bg.addColorStop(0,"rgba(255,248,232,"+(0.55*bp)+")"); bg.addColorStop(0.3,"rgba(240,214,160,"+(0.28*bp)+")"); bg.addColorStop(0.65,"rgba(120,110,180,"+(0.12*bp)+")"); bg.addColorStop(1,"rgba(0,0,0,0)");
+        bg.addColorStop(0,"rgba(255,248,232,"+(0.5*bp)+")"); bg.addColorStop(0.3,"rgba(240,214,160,"+(0.24*bp)+")"); bg.addColorStop(0.65,"rgba(120,110,180,"+(0.1*bp)+")"); bg.addColorStop(1,"rgba(0,0,0,0)");
         ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
       }
-      // --- ONDAS TIPO AURORA BOREAL: cortinas de luz suaves y onduladas ---
-      if(el>0.3){
-        var auroraOp=Math.min((el-0.3)/1.2,1)*0.5;
-        var bands=[[120,200,170],[110,150,220],[180,140,210]];
-        for(var b=0;b<bands.length;b++){
-          var c=bands[b];
-          ctx.beginPath();
-          var baseY=H*(0.30+b*0.12), amp=28+b*10, sy=el*0.5+b*1.7;
-          ctx.moveTo(0,baseY);
-          for(var xx=0;xx<=W;xx+=14){
-            var yy=baseY + Math.sin(xx*0.006 + sy)*amp + Math.sin(xx*0.013 - sy*0.7)*amp*0.4;
-            ctx.lineTo(xx,yy);
-          }
-          ctx.lineTo(W,baseY-160); ctx.lineTo(0,baseY-160); ctx.closePath();
-          var ag=ctx.createLinearGradient(0,baseY-160,0,baseY+20);
-          ag.addColorStop(0,"rgba("+c[0]+","+c[1]+","+c[2]+",0)");
-          ag.addColorStop(1,"rgba("+c[0]+","+c[1]+","+c[2]+","+(auroraOp*(0.5-b*0.12))+")");
-          ctx.fillStyle=ag; ctx.fill();
-        }
-        // onda expansiva anular tenue (una sola, elegante)
-        if(el<2.4){ var wr=(el-0.3)*R*0.5; var wo=Math.max(0,0.3-(el-0.3)*0.14);
-          ctx.strokeStyle="rgba(150,200,180,"+wo+")"; ctx.lineWidth=1.4; ctx.beginPath(); ctx.arc(CX,CY,wr,0,6.283); ctx.stroke(); }
-      }
-      // --- polvo estelar: vuela por TODA la pantalla, 1px, brillo natural ---
+      // onda expansiva anular tenue (una sola, elegante)
+      if(el>0.3 && el<2.4){ var wr=(el-0.3)*R*0.5; var wo=Math.max(0,0.28-(el-0.3)*0.14);
+        ctx.strokeStyle="rgba(150,200,180,"+wo+")"; ctx.lineWidth=1.4; ctx.beginPath(); ctx.arc(CX,CY,wr,0,6.283); ctx.stroke(); }
+      // --- polvo estelar sutil sobre el video (menos denso) ---
       var accel=el<1.3?1.5:1.0;
       for(var k=0;k<ps.length;k++){
         var p=ps[k];
@@ -1458,8 +1444,7 @@
         if(p.y< -6)p.y=H+6; else if(p.y>H+6)p.y=-6;
         p.tw+=0.035*p.sp*dt; var fl=0.5+0.5*Math.sin(p.tw);
         var col=p.hue<0.15?"170,195,235":(p.hue>0.92?"245,245,255":"235,220,190");
-        var a=(p.base+0.35*fl)*(el<1?0.7+0.3*el:1);
-        // sin shadowBlur = puntos limpios de 1px (natural, sin halo exagerado)
+        var a=(p.base+0.35*fl)*0.55*(el<1?0.7+0.3*el:1);
         ctx.fillStyle="rgba("+col+","+a+")";
         if(p.s<=1){ ctx.fillRect(p.x|0,p.y|0,1,1); }
         else { ctx.beginPath(); ctx.arc(p.x,p.y,p.s,0,6.283); ctx.fill(); }

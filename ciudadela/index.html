@@ -69,10 +69,13 @@
   .oro{background:linear-gradient(92deg,#8a6a24,#e8c86a 25%,#fff6d6 50%,#e8c86a 75%,#8a6a24);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 6s linear infinite}
   @keyframes brilloOro{to{background-position:200% center}}
   .hairline{width:70px;height:1px;background:linear-gradient(90deg,transparent,var(--oro),transparent);margin:22px auto}
-  .btn{display:inline-block;cursor:pointer;text-decoration:none;padding:11px 26px;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#1a1409;border:none;border-radius:3px;background:linear-gradient(180deg,#f4e2a0,#e8c86a 45%,#c8a24a);box-shadow:0 6px 18px rgba(0,0,0,.45),inset 0 1px 1px rgba(255,255,255,.6);transition:transform .3s,box-shadow .3s}
-  .btn:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(232,200,106,.35),inset 0 1px 1px rgba(255,255,255,.7)}
-  .btn.ghost{background:transparent;color:var(--oro);border:1px solid var(--oro-med);box-shadow:none}
-  .btn.ghost:hover{background:rgba(232,200,106,.08);color:#fff6d6}
+  .btn{position:relative;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;padding:12px 30px;font-size:.66rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--oro);border:1px solid var(--oro-med);border-radius:2px;background:transparent;overflow:hidden;transition:color .4s,border-color .4s;z-index:0}
+  .btn::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#f4e2a0,#e8c86a 45%,#c8a24a);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.4,0,.2,1)}
+  .btn:hover{color:#1a1409;border-color:var(--oro)}
+  .btn:hover::before{transform:scaleX(1)}
+  .btn.ghost{color:var(--tenue);border-color:var(--border)}
+  .btn.ghost::before{background:rgba(232,200,106,.12)}
+  .btn.ghost:hover{color:#fff6d6;border-color:var(--oro-med)}
 
   nav{position:fixed;top:0;left:0;width:100%;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 7vw;transition:padding .3s,background .3s}
   nav.scrolled{padding:12px 7vw;background:rgba(11,11,13,.9);border-bottom:1px solid rgba(232,200,106,.2);backdrop-filter:blur(10px)}

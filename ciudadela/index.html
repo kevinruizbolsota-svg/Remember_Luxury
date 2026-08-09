@@ -351,6 +351,48 @@
   .vw-dots span{animation:blink 1.2s infinite;color:var(--tenue)}
   .vw-dots span:nth-child(2){animation-delay:.2s}.vw-dots span:nth-child(3){animation-delay:.4s}
   @media(max-width:560px){#vozFab{bottom:150px}}
+
+  /* ===== PLANES ===== */
+  #planes{background:var(--bg)}
+  .pl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;max-width:1080px;margin:40px auto 0;align-items:stretch}
+  .pl-card{position:relative;background:linear-gradient(160deg,rgba(232,200,106,.05),rgba(20,17,24,.5));border:1px solid rgba(232,200,106,.16);border-radius:10px;padding:34px 26px;display:flex;flex-direction:column;transition:transform .4s,border-color .4s,box-shadow .4s}
+  .pl-card:hover{transform:translateY(-8px);border-color:var(--oro);box-shadow:0 22px 46px rgba(0,0,0,.5)}
+  .pl-card.destacada{border-color:var(--oro-med);box-shadow:0 0 0 1px rgba(232,200,106,.25)}
+  .pl-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;font-size:.62rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;font-family:'Cinzel',serif}
+  .pl-nm{font-family:'Cinzel',serif;color:var(--oro);letter-spacing:2px;font-size:1.1rem;text-align:center}
+  .pl-price{text-align:center;color:var(--tenue);font-size:.8rem;margin:14px 0 18px;line-height:1.4}
+  .pl-price b{color:var(--texto);font-size:2rem;font-family:'Cinzel',serif;font-weight:700}
+  .pl-price span{font-size:.85rem}
+  .pl-card ul{list-style:none;margin:0 0 22px;flex:1}
+  .pl-card ul li{color:var(--tenue);font-size:1rem;padding:8px 0;border-bottom:1px solid rgba(232,200,106,.08);position:relative;padding-left:22px}
+  .pl-card ul li::before{content:'\2726';position:absolute;left:0;color:var(--oro-med)}
+  .pl-card .btn{width:100%;justify-content:center}
+
+  /* ===== FORMULARIO LEAD ===== */
+  .lead-form{max-width:600px;margin:26px auto 0;display:flex;flex-direction:column;gap:12px}
+  .lead-form .lf-row{display:flex;gap:12px}
+  @media(max-width:520px){.lead-form .lf-row{flex-direction:column}}
+  .lead-form input,.lead-form textarea{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:6px;color:var(--texto);padding:12px 14px;font-family:inherit;font-size:1rem;outline:none;transition:border-color .2s;resize:none}
+  .lead-form input:focus,.lead-form textarea:focus{border-color:var(--oro-med)}
+  .lf-status{text-align:center;font-size:.9rem;min-height:18px;color:var(--oro)}
+
+  /* ===== NEWSLETTER ===== */
+  #newsletter{padding:60px 7vw;background:linear-gradient(180deg,var(--bg2),var(--bg))}
+  .nl-box{max-width:640px;margin:0 auto;text-align:center;background:linear-gradient(160deg,rgba(232,200,106,.06),rgba(20,17,24,.5));border:1px solid rgba(232,200,106,.18);border-radius:12px;padding:40px 30px}
+  .nl-box h3{font-size:1.3rem;font-weight:500;letter-spacing:1px;margin-bottom:8px}
+  .nl-box p{color:var(--tenue);margin-bottom:20px}
+  .nl-form{display:flex;gap:10px;max-width:440px;margin:0 auto;flex-wrap:wrap}
+  .nl-form input{flex:1;min-width:200px;background:var(--panel2);border:1px solid var(--border);border-radius:6px;color:var(--texto);padding:12px 14px;font-family:inherit;font-size:1rem;outline:none}
+  .nl-form input:focus{border-color:var(--oro-med)}
+
+  /* ===== MODAL LEAD ===== */
+  #leadModal{position:fixed;inset:0;z-index:1600;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px}
+  #leadModal.open{display:flex}
+  #leadModal .lm-box{width:min(480px,94vw);background:var(--panel);border:1px solid rgba(232,200,106,.3);border-radius:14px;padding:32px 28px;box-shadow:0 30px 80px rgba(0,0,0,.6);position:relative}
+  #leadModal .lm-x{position:absolute;top:14px;right:18px;background:none;border:none;color:var(--tenue);font-size:26px;cursor:pointer}
+  #leadModal .lm-x:hover{color:var(--oro)}
+  #leadModal h3{color:var(--oro);font-family:'Cinzel',serif;letter-spacing:1px;text-align:center;margin-bottom:6px;font-weight:500}
+  #leadModal .lm-sub{color:var(--tenue);text-align:center;font-size:.92rem;margin-bottom:20px}
 </style>
 </head>
 <body>
@@ -383,6 +425,7 @@
     <a onclick="scrollTo2('ciudadela')">La Ciudadela</a>
     <a onclick="scrollTo2('servicios')">Servicios</a>
     <a onclick="scrollTo2('agentes')">Agentes IA</a>
+    <a onclick="scrollTo2('planes')">Planes</a>
     <a onclick="scrollTo2('contacto')">Contacto</a>
     <a class="oro" style="color:var(--oro);font-weight:700" onclick="abrirComunidad()">Mi Templo</a>
     <a class="oro" style="color:var(--oro);font-weight:700" onclick="abrirTienda()">Tienda</a>
@@ -510,16 +553,90 @@
   </div>
 </section>
 
+<!-- ===================== PLANES / PRECIOS ===================== -->
+<section id="planes">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Inversion</div>
+    <h2 class="oro">Planes de Agentes IA</h2>
+    <div class="hairline"></div>
+  </div>
+  <div class="pl-grid">
+    <div class="pl-card reveal">
+      <div class="pl-nm">Esencia</div>
+      <div class="pl-price">Desde<br><b>197&euro;</b><span>/mes</span></div>
+      <ul>
+        <li>1 Agente IA (WhatsApp o Web)</li>
+        <li>Atencion 24/7 automatica</li>
+        <li>Respuestas con tu esencia</li>
+        <li>Reporte de conversaciones</li>
+      </ul>
+      <a class="btn ghost" onclick="abrirLead('Plan Esencia')">Empezar</a>
+    </div>
+    <div class="pl-card destacada reveal">
+      <div class="pl-badge">Mas elegido</div>
+      <div class="pl-nm">Imperio</div>
+      <div class="pl-price">Desde<br><b>497&euro;</b><span>/mes</span></div>
+      <ul>
+        <li>Hasta 3 Agentes IA</li>
+        <li>Vendedor + WhatsApp + Voz</li>
+        <li>Agenda citas y califica leads</li>
+        <li>CRM y seguimiento automatico</li>
+        <li>Soporte prioritario</li>
+      </ul>
+      <a class="btn" onclick="abrirLead('Plan Imperio')">Quiero este</a>
+    </div>
+    <div class="pl-card reveal">
+      <div class="pl-nm">Ciudadela</div>
+      <div class="pl-price"><b>A medida</b></div>
+      <ul>
+        <li>Agentes ilimitados</li>
+        <li>Integraciones a tu medida</li>
+        <li>Web + Tienda + Automatizacion</li>
+        <li>Estrategia completa contigo</li>
+      </ul>
+      <a class="btn ghost" onclick="abrirLead('Plan Ciudadela a medida')">Hablemos</a>
+    </div>
+  </div>
+  <p class="reveal" style="text-align:center;color:var(--tenue);margin-top:26px;font-size:.95rem">Precios orientativos. En la llamada definimos el plan exacto para tu negocio.</p>
+</section>
+
 <section id="contacto">
   <div class="sec-head reveal">
     <div class="eyebrow">Hablemos</div>
     <h2 class="oro">Contacto</h2>
     <div class="hairline"></div>
   </div>
-  <p class="reveal">Listo para llevar tu proyecto al siguiente nivel? Entra al portal y conversa con KYBALIO, o escribenos.</p>
-  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-    <a class="btn reveal" onclick="abrirPortal()">Hablar con KYBALIO</a>
-    <a href="mailto:kevin.ruiz.calle@gmail.com" class="btn ghost reveal">Escribenos</a>
+  <p class="reveal">Listo para llevar tu proyecto al siguiente nivel? Dejanos tus datos y te contactamos, o conversa con KYBALIO.</p>
+  <form id="leadForm" class="lead-form reveal" onsubmit="enviarLead(event)">
+    <input type="hidden" id="lf_interes" value="Contacto general">
+    <div class="lf-row">
+      <input id="lf_nombre" placeholder="Tu nombre" required>
+      <input id="lf_negocio" placeholder="Tu negocio">
+    </div>
+    <div class="lf-row">
+      <input id="lf_contacto" placeholder="WhatsApp / Telefono" required>
+      <input id="lf_email" type="email" placeholder="Tu correo">
+    </div>
+    <textarea id="lf_mensaje" rows="2" placeholder="Que necesitas? (opcional)"></textarea>
+    <button type="submit" class="btn" id="lf_btn" style="width:100%;justify-content:center">Enviar y reservar mi lugar</button>
+    <div class="lf-status" id="lf_status"></div>
+  </form>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:20px">
+    <a class="btn ghost reveal" onclick="abrirPortal()">Hablar con KYBALIO</a>
+    <a class="btn ghost reveal" onclick="abrirVoz()">Probar Agente de Voz</a>
+  </div>
+</section>
+
+<!-- ===================== NEWSLETTER ===================== -->
+<section id="newsletter">
+  <div class="nl-box reveal">
+    <h3 class="oro">Recibe las claves de La Ciudadela</h3>
+    <p>Estrategias de IA, automatizacion y ventas directo a tu correo. Sin spam, solo oro.</p>
+    <form class="nl-form" onsubmit="enviarNews(event)">
+      <input id="nl_email" type="email" placeholder="Tu mejor correo" required>
+      <button type="submit" class="btn">Suscribirme</button>
+    </form>
+    <div class="lf-status" id="nl_status"></div>
   </div>
 </section>
 
@@ -551,6 +668,23 @@
   </div>
   <div class="foot-bottom">Remember Luxury &copy; 2026 &mdash; La Ciudadela del Lujo y la Elegancia</div>
 </footer>
+
+<!-- ===================== MODAL LEAD ===================== -->
+<div id="leadModal">
+  <div class="lm-box">
+    <button class="lm-x" onclick="cerrarLead()">&times;</button>
+    <h3 id="lm_title">Reserva tu lugar</h3>
+    <p class="lm-sub">Dejanos tus datos y te contactamos para mostrarte tu Agente IA.</p>
+    <form class="lead-form" style="margin-top:0" onsubmit="enviarLeadModal(event)">
+      <input id="lm_nombre" placeholder="Tu nombre" required>
+      <input id="lm_negocio" placeholder="Tu negocio">
+      <input id="lm_contacto" placeholder="WhatsApp / Telefono" required>
+      <input id="lm_email" type="email" placeholder="Tu correo">
+      <button type="submit" class="btn" style="width:100%;justify-content:center">Enviar</button>
+      <div class="lf-status" id="lm_status"></div>
+    </form>
+  </div>
+</div>
 
 <!-- ===================== AGENTE DE VOZ (widget) ===================== -->
 <button id="vozFab" class="fab" onclick="abrirVoz()" title="Habla con el Agente de Voz">&#127908;</button>
@@ -802,6 +936,28 @@
     function draw(){ctx.clearRect(0,0,W,H);for(var i=0;i<ps.length;i++){var p=ps[i];ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.28);ctx.fillStyle="rgba(232,200,106,"+p.a+")";ctx.fill();p.y-=p.s;if(p.y<-5){p.y=H+5;p.x=Math.random()*W;}}requestAnimationFrame(draw);}
     resize();make();draw();window.addEventListener("resize",function(){resize();make();});
   })();
+
+  /* ---- CAPTURA DE LEADS (formulario + modal + newsletter) ---- */
+  var LEAD_WEBHOOK="https://kevinruiz.app.n8n.cloud/webhook/lead-ciudadela";
+  function postLead(payload){return fetch(LEAD_WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});}
+  function enviarLead(ev){ev.preventDefault();var btn=document.getElementById("lf_btn");var st=document.getElementById("lf_status");
+    var p={nombre:document.getElementById("lf_nombre").value,negocio:document.getElementById("lf_negocio").value,contacto:document.getElementById("lf_contacto").value,email:document.getElementById("lf_email").value,interes:document.getElementById("lf_interes").value,presupuesto:"",mensaje:document.getElementById("lf_mensaje").value,origen:"Formulario Contacto"};
+    btn.disabled=true;btn.textContent="Enviando...";st.textContent="";
+    postLead(p).then(function(r){return r.json();}).then(function(){window.location.href="gracias.html";})
+      .catch(function(){btn.disabled=false;btn.textContent="Enviar y reservar mi lugar";st.style.color="#d16a8f";st.textContent="No se pudo enviar. Escribenos por WhatsApp.";});}
+  function abrirLead(interes){document.getElementById("lm_title").textContent=interes||"Reserva tu lugar";document.getElementById("leadModal").classList.add("open");document.body.style.overflow="hidden";document.getElementById("lm_status").dataset.interes=interes||"Plan";}
+  function cerrarLead(){document.getElementById("leadModal").classList.remove("open");document.body.style.overflow="";}
+  function enviarLeadModal(ev){ev.preventDefault();var st=document.getElementById("lm_status");
+    var p={nombre:document.getElementById("lm_nombre").value,negocio:document.getElementById("lm_negocio").value,contacto:document.getElementById("lm_contacto").value,email:document.getElementById("lm_email").value,interes:st.dataset.interes||"Plan",presupuesto:"",origen:"Modal Planes"};
+    st.style.color="var(--oro)";st.textContent="Enviando...";
+    postLead(p).then(function(r){return r.json();}).then(function(){window.location.href="gracias.html";})
+      .catch(function(){st.style.color="#d16a8f";st.textContent="No se pudo enviar. Intenta por WhatsApp.";});}
+  function enviarNews(ev){ev.preventDefault();var st=document.getElementById("nl_status");var em=document.getElementById("nl_email").value;
+    st.style.color="var(--oro)";st.textContent="Suscribiendo...";
+    postLead({nombre:"Suscriptor",negocio:"",contacto:"",email:em,interes:"Newsletter",presupuesto:"",origen:"Newsletter"}).then(function(r){return r.json();}).then(function(){st.textContent="Listo! Revisa tu correo pronto.";document.getElementById("nl_email").value="";})
+      .catch(function(){st.style.color="#d16a8f";st.textContent="No se pudo suscribir. Intenta de nuevo.";});}
+  document.addEventListener("keydown",function(e){if(e.key==="Escape")cerrarLead();});
+  document.getElementById("leadModal").addEventListener("click",function(e){if(e.target===this)cerrarLead();});
 
   /* ---- AGENTE DE VOZ (widget conversacional por audio) ---- */
   var vwSession="voz"+Date.now(), vwMR=null, vwChunks=[], vwRec=false, vwStream=null, vwStarted=false;

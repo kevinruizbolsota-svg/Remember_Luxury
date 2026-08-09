@@ -1171,7 +1171,7 @@
     function rgba(c,a){return "rgba("+c[0]+","+c[1]+","+c[2]+","+a+")";}
     function mix(c,t){return [Math.round(c[0]+(255-c[0])*t),Math.round(c[1]+(255-c[1])*t),Math.round(c[2]+(255-c[2])*t)];}
     function dark(c,t){return [Math.round(c[0]*(1-t)),Math.round(c[1]*(1-t)),Math.round(c[2]*(1-t))];}
-    function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;make();makePlanets();}
+    function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;make();}
     var fugaces=[];
     function nuevaFugaz(){ /* estrella fugaz que desciende hacia la Fuente (abajo-centro) */
       var startX=Math.random()*W; var startY=Math.random()*H*0.4;
@@ -1305,16 +1305,12 @@
       mw.addColorStop(1,"rgba(80,90,160,0)");
       ctx.fillStyle=mw;ctx.fillRect(-W,-H*0.22,W*2,H*0.44);
       ctx.restore();
-      /* planetas al fondo (detras de estrellas cercanas) */
-      for(var q=0;q<planets.length;q++){drawPlanet(planets[q]);}
       for(var i=0;i<ps.length;i++){var p=ps[i];
         var y=(p.y - sc*p.z*0.15); y=((y%H)+H)%H; /* parallax: las cercanas se mueven mas */
         p.tw+=0.02; var tw=0.6+0.4*Math.sin(p.tw);
         ctx.beginPath();ctx.arc(p.x,y,p.r*p.z*1.2,0,6.28);
         ctx.fillStyle="rgba(255,246,214,"+(p.a*tw)+")";ctx.fill();
       }
-      /* el sol al que nos aproximamos al bajar */
-      drawSol();
       /* estrellas fugaces que caen hacia la Fuente */
       if(Math.random()<0.012)nuevaFugaz();
       for(var j=fugaces.length-1;j>=0;j--){var f=fugaces[j];

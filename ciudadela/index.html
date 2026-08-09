@@ -321,9 +321,8 @@
   <a onclick="mobGo('servicios')">Servicios</a>
   <a onclick="mobGo('destacados')">Tienda</a>
   <a onclick="mobGo('contacto')">Contacto</a>
-  <a class="oro" onclick="closeMob();abrirGaleria()">Mi Templo</a>
+  <a class="oro" onclick="closeMob();abrirComunidad()">Mi Templo</a>
   <a class="oro" onclick="closeMob();abrirTienda()">Tienda Completa</a>
-  <a class="oro" onclick="closeMob();abrirComunidad()">Comunidad</a>
   <a class="oro" onclick="closeMob();abrirPortal()">Entrar al Portal</a>
 </div>
 
@@ -335,9 +334,8 @@
     <a onclick="scrollTo2('ciudadela')">La Ciudadela</a>
     <a onclick="scrollTo2('servicios')">Servicios</a>
     <a onclick="scrollTo2('contacto')">Contacto</a>
-    <a class="oro" style="color:var(--oro);font-weight:700" onclick="abrirGaleria()">Mi Templo</a>
+    <a class="oro" style="color:var(--oro);font-weight:700" onclick="abrirComunidad()">Mi Templo</a>
     <a class="oro" style="color:var(--oro);font-weight:700" onclick="abrirTienda()">Tienda</a>
-    <a class="oro" style="color:var(--oro);font-weight:700" onclick="abrirComunidad()">Comunidad</a>
     <a onclick="abrirPortal()">Entrar</a>
   </div>
   <button class="hamburguesa" onclick="openMob()">&#9776;</button>
@@ -350,9 +348,8 @@
   <p class="sub">Donde las ideas se vuelven oro.</p>
   <div class="cta">
     <a class="btn" onclick="abrirPortal()">Entrar al Portal</a>
-    <a class="btn" onclick="abrirGaleria()">Mi Templo</a>
+    <a class="btn" onclick="abrirComunidad()">Mi Templo</a>
     <a class="btn" onclick="abrirTienda()">Tienda</a>
-    <a class="btn" onclick="abrirComunidad()">Comunidad</a>
     <a href="#servicios" class="btn ghost">Descubre</a>
   </div>
   <div class="scroll-ind">&#8964;</div>
@@ -446,7 +443,7 @@
       <h4>Explora</h4>
       <a onclick="scrollTo2('ciudadela')">La Ciudadela</a>
       <a onclick="scrollTo2('servicios')">Servicios</a>
-      <a onclick="abrirGaleria()">Mi Templo</a>
+      <a onclick="abrirComunidad()">Mi Templo</a>
       <a onclick="abrirTienda()">Tienda</a>
       <a onclick="abrirPortal()">Portal KYBALIO</a>
     </div>
@@ -491,10 +488,10 @@
 
 <div id="comunidad">
   <div class="galtop">
-    <span class="title">&#128101; COMUNIDAD &middot; LA CIUDADELA</span>
+    <span class="title">&#9733; MI TEMPLO</span>
     <span class="cerrar" onclick="cerrarComunidad()">Cerrar &times;</span>
   </div>
-  <iframe id="comunidadFrame" title="Comunidad de la Ciudadela"></iframe>
+  <iframe id="comunidadFrame" title="Mi Templo"></iframe>
 </div>
 
 <div id="portal">
@@ -693,9 +690,9 @@
   /* ---- PALETA DE COMANDOS (Ctrl/Cmd + K) ---- */
   var CMDS=[
     {i:"&#128172;",t:"Entrar al Portal KYBALIO",fn:function(){abrirPortal();}},
-    {i:"&#9733;",t:"Abrir Mi Templo (fotos y videos)",fn:function(){abrirGaleria();}},
+    {i:"&#9733;",t:"Abrir Mi Templo",fn:function(){abrirComunidad();}},
     {i:"&#128081;",t:"Abrir la Tienda",fn:function(){abrirTienda();}},
-    {i:"&#128101;",t:"Abrir la Comunidad",fn:function(){abrirComunidad();}},
+
     {i:"&#127970;",t:"Ir a Servicios",fn:function(){scrollTo2("servicios");}},
     {i:"&#128176;",t:"Ir a Tienda Destacada",fn:function(){scrollTo2("destacados");}},
     {i:"&#128278;",t:"Ir a Testimonios",fn:function(){scrollTo2("testimonios");}},

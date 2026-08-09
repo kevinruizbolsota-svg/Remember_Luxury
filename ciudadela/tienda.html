@@ -940,7 +940,7 @@ window.ORA_CFG={
   function init(){
     var r=document.getElementById("robot");
     if(!r){return setTimeout(init,300);}
-    var M=16, curX=M,curY=M,tgtX=M,tgtY=M,run=false,lastY=window.pageYOffset||0,driftPhase=Math.random(),navTimer=null;
+    var M=16, curP=Math.random(),tgtP=curP,run=false,lastY=window.pageYOffset||0,driftPhase=Math.random(),navTimer=null;
     function widgetAbierto(){var w=document.getElementById("vozWidget");return w&&w.classList.contains("open");}
     function nave(on){if(on){if(widgetAbierto())return;r.classList.remove("walk");r.classList.add("nave");}else{r.classList.remove("nave");r.classList.add("walk");}}
     /* Punto sobre el PERIMETRO del viewport (solo bordes y rincones). p:0..1 recorre inferior->derecha->superior->izquierda */
@@ -958,18 +958,20 @@ window.ORA_CFG={
       var sh=Math.max(de.scrollHeight,bd.scrollHeight),max=(sh-window.innerHeight)||1;
       var sy=window.pageYOffset||de.scrollTop||bd.scrollTop||0;
       var p=Math.min(1,Math.max(0,sy/max));
-      var pos=perim(driftPhase+p*0.85); tgtX=pos.x; tgtY=pos.y;
+      tgtP=driftPhase+p*0.85; /* destino como posicion sobre el perimetro */
     }
     function loop(){
-      curX+=(tgtX-curX)*0.006; curY+=(tgtY-curY)*0.006;
-      r.style.left=curX.toFixed(1)+"px"; r.style.top=curY.toFixed(1)+"px"; r.style.right="auto"; r.style.bottom="auto";
-      if(Math.abs(tgtX-curX)>0.15||Math.abs(tgtY-curY)>0.15){requestAnimationFrame(loop);}else{run=false;}
+      /* interpolamos SOBRE el perimetro (parametro p), asi nunca cruza el centro */
+      curP+=(tgtP-curP)*0.02;
+      var pos=perim(curP);
+      r.style.left=pos.x.toFixed(1)+"px"; r.style.top=pos.y.toFixed(1)+"px"; r.style.right="auto"; r.style.bottom="auto";
+      if(Math.abs(tgtP-curP)>0.0015){requestAnimationFrame(loop);}else{curP=tgtP;run=false;}
     }
     function kick(){if(!run){run=true;requestAnimationFrame(loop);}}
     function viaje(){ nave(true); if(navTimer)clearTimeout(navTimer); navTimer=setTimeout(function(){nave(false);},7000); }
     function onScroll(){calc();kick();var sy=window.pageYOffset||0;if(Math.abs(sy-lastY)>3){lastY=sy;viaje();}}
-    calc();curX=tgtX;curY=tgtY;
-    r.style.left=curX+"px";r.style.top=curY+"px";r.style.right="auto";r.style.bottom="auto";
+    calc();curP=tgtP;
+    var _p0=perim(curP);r.style.left=_p0.x+"px";r.style.top=_p0.y+"px";r.style.right="auto";r.style.bottom="auto";
     window.addEventListener("scroll",onScroll,{passive:true});
     window.addEventListener("resize",function(){calc();kick();});
     document.addEventListener("scroll",onScroll,{passive:true});

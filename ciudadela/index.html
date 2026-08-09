@@ -108,7 +108,7 @@
   #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 7vw;position:relative;background:radial-gradient(ellipse at 50% 30%,rgba(232,200,106,.10),transparent 60%),radial-gradient(ellipse at 50% 120%,rgba(200,162,74,.12),transparent 55%),var(--bg)}
   #hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(232,200,106,.06) 1px,transparent 1px);background-size:26px 26px;opacity:.5;pointer-events:none}
   #hero .eyebrow{font-family:'Cinzel',serif;letter-spacing:4px;font-size:.5rem;color:var(--oro-med);text-transform:uppercase;margin-bottom:12px;position:relative}
-  #hero h1{font-size:clamp(1.5rem,5vw,3.4rem);font-weight:500;letter-spacing:clamp(3px,1.2vw,10px);line-height:1;position:relative;
+  #hero h1{font-size:clamp(1.15rem,3.4vw,2.3rem);font-weight:400;letter-spacing:clamp(6px,2.4vw,20px);line-height:1;position:relative;text-indent:clamp(6px,2.4vw,20px);
     background:linear-gradient(120deg,#8a6d2a 0%,#f6e6ad 25%,#fff8e1 45%,#f6e6ad 60%,#b8912f 100%);
     background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
     text-shadow:none;filter:drop-shadow(0 4px 40px rgba(232,200,106,.35));animation:brilloTitulo 6s linear infinite,latido 4.5s ease-in-out infinite}
@@ -172,7 +172,7 @@
   .prof-label{text-align:center;font-family:'Cinzel',serif;letter-spacing:6px;font-size:.6rem;color:var(--oro-med);text-transform:uppercase;opacity:.7;margin-bottom:8px}
 
   /* ===================== PERSONAJE ROBOT (guia de IA) ===================== */
-  #robot{position:fixed;bottom:18px;left:18px;z-index:9135;width:52px;height:84px;cursor:pointer;filter:drop-shadow(0 8px 12px rgba(0,0,0,.55));transition:transform .5s cubic-bezier(.4,0,.2,1)}
+  #robot{position:fixed;bottom:18px;left:18px;z-index:9135;width:40px;height:64px;cursor:pointer;filter:drop-shadow(0 8px 12px rgba(0,0,0,.55));transition:transform .5s cubic-bezier(.4,0,.2,1)}
   body.overlay-abierto #robot,body.overlay-abierto #vozWidget{display:none!important}
   #robot:hover{transform:translateY(-5px) scale(1.05)}
   #robot .rb-svg{width:100%;height:100%;display:block;overflow:visible}
@@ -208,7 +208,7 @@
   @keyframes rbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
   #robot .rb-cape{transform-origin:60px 60px;animation:rbCape 4s ease-in-out infinite}
   @keyframes rbCape{0%,100%{transform:skewX(0)}50%{transform:skewX(2deg)}}
-  @media(max-width:560px){#robot{width:42px;height:68px;bottom:12px;left:10px}}
+  @media(max-width:560px){#robot{width:32px;height:52px;bottom:12px;left:10px}}
 
   section{padding:78px 7vw;position:relative}
   #planes,#contacto,#newsletter{padding-top:56px;padding-bottom:56px}

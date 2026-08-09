@@ -128,14 +128,22 @@
     filter:blur(38px);opacity:.55;animation:nebFloat 50s ease-in-out infinite alternate}
   @keyframes nebFloat{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(-3%,-4%,0) scale(1.12)}}
   #cosmosStars{position:fixed;inset:0;z-index:-1;pointer-events:none}
-  /* Luz divina inferior: crece a medida que se hace scroll (--divina 0..1 via JS) */
-  #divina{position:fixed;left:50%;bottom:-30vh;transform:translateX(-50%);width:120vw;height:90vh;z-index:-1;pointer-events:none;
-    background:radial-gradient(ellipse at 50% 100%,rgba(255,246,214,calc(.55*var(--divina,0))),rgba(232,200,106,calc(.28*var(--divina,0))) 35%,transparent 70%);
-    opacity:calc(.25 + .75*var(--divina,0));transition:opacity .3s}
-  /* rayos divinos */
-  #rayos{position:fixed;left:50%;bottom:-10vh;transform:translateX(-50%);width:140vw;height:120vh;z-index:-1;pointer-events:none;opacity:calc(.5*var(--divina,0));
-    background:repeating-conic-gradient(from 0deg at 50% 100%,rgba(255,246,214,.10) 0deg,transparent 4deg 12deg);mix-blend-mode:screen;animation:girarRayos 90s linear infinite}
-  @keyframes girarRayos{to{transform:translateX(-50%) rotate(360deg)}}
+  /* Halo divino inferior: brillo blanco tenue que crece al hacer scroll (--divina 0..1 via JS) */
+  #divina{position:fixed;left:50%;bottom:-24vh;transform:translateX(-50%);width:120vw;height:80vh;z-index:-1;pointer-events:none;
+    background:radial-gradient(ellipse at 50% 100%,rgba(255,255,255,calc(.30*var(--divina,0))),rgba(226,240,255,calc(.16*var(--divina,0))) 34%,transparent 68%);
+    opacity:calc(.2 + .8*var(--divina,0));transition:opacity .4s}
+  /* ===== SOL DE DIAMANTE (blanco, carcasa de diamante, brillo tenue) ===== */
+  #solDiamante{position:fixed;left:50%;bottom:-16vh;transform:translateX(-50%) scale(calc(.35 + .65*var(--divina,0)));transform-origin:50% 100%;
+    width:min(56vh,60vw);height:min(56vh,60vw);z-index:-1;pointer-events:none;opacity:calc(.15 + .85*var(--divina,0));transition:opacity .5s}
+  #solDiamante .halo{position:absolute;inset:-40%;border-radius:50%;
+    background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.55),rgba(210,235,255,.22) 40%,transparent 70%);
+    filter:blur(14px);animation:solRespira 6s ease-in-out infinite}
+  #solDiamante .gema{position:absolute;inset:0;animation:solGira 60s linear infinite}
+  #solDiamante .nucleo{position:absolute;left:50%;top:50%;width:42%;height:42%;transform:translate(-50%,-50%);border-radius:50%;
+    background:radial-gradient(circle at 42% 38%,#ffffff,#eaf4ff 55%,#cfe4ff 100%);
+    box-shadow:0 0 40px rgba(255,255,255,.85),0 0 90px rgba(200,230,255,.5);animation:solRespira 6s ease-in-out infinite}
+  @keyframes solGira{to{transform:rotate(360deg)}}
+  @keyframes solRespira{0%,100%{opacity:.85;filter:brightness(1)}50%{opacity:1;filter:brightness(1.12)}}
 
   /* Temas de cielo (aleatorios por recarga) */
   body[data-cielo="1"]{--neb1:rgba(90,60,180,.5);--neb2:rgba(40,90,200,.4);--neb3:rgba(200,120,60,.35)}
@@ -503,8 +511,49 @@
 <!-- ===================== COSMOS (fondo universo + descenso divino) ===================== -->
 <div id="cosmos"><div class="neb"></div></div>
 <canvas id="cosmosStars"></canvas>
-<div id="rayos"></div>
 <div id="divina"></div>
+<div id="solDiamante">
+  <div class="halo"></div>
+  <svg class="gema" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="dgFace" cx="42%" cy="38%" r="70%">
+        <stop offset="0" stop-color="#ffffff" stop-opacity=".95"/>
+        <stop offset="55%" stop-color="#dcefff" stop-opacity=".55"/>
+        <stop offset="100%" stop-color="#a9cff0" stop-opacity=".18"/>
+      </radialGradient>
+      <linearGradient id="dgEdge" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#ffffff" stop-opacity=".9"/>
+        <stop offset="1" stop-color="#bfe0ff" stop-opacity=".3"/>
+      </linearGradient>
+    </defs>
+    <g fill="url(#dgFace)" stroke="url(#dgEdge)" stroke-width="1.1" stroke-linejoin="round">
+      <!-- corona de facetas tipo brillante de diamante -->
+      <polygon points="100,8 128,30 100,52 72,30"/>
+      <polygon points="128,30 160,52 138,80 108,58"/>
+      <polygon points="72,30 40,52 62,80 92,58"/>
+      <polygon points="160,52 178,90 148,104 138,80"/>
+      <polygon points="40,52 22,90 52,104 62,80"/>
+      <polygon points="100,52 138,80 108,58"/>
+      <polygon points="100,52 62,80 92,58"/>
+      <polygon points="108,58 138,80 118,110 100,92"/>
+      <polygon points="92,58 62,80 82,110 100,92"/>
+      <polygon points="148,104 178,90 168,140 130,138"/>
+      <polygon points="52,104 22,90 32,140 70,138"/>
+      <polygon points="118,110 148,104 130,138 100,128"/>
+      <polygon points="82,110 52,104 70,138 100,128"/>
+      <polygon points="100,92 118,110 100,128 82,110"/>
+      <polygon points="130,138 168,140 100,192 100,128"/>
+      <polygon points="70,138 32,140 100,192 100,128"/>
+      <polygon points="130,138 100,128 100,192"/>
+      <polygon points="70,138 100,128 100,192"/>
+    </g>
+    <!-- destellos -->
+    <circle cx="82" cy="40" r="3.2" fill="#ffffff"/>
+    <circle cx="150" cy="96" r="2.4" fill="#ffffff" opacity=".8"/>
+    <circle cx="60" cy="120" r="2.2" fill="#ffffff" opacity=".7"/>
+  </svg>
+  <div class="nucleo"></div>
+</div>
 
 <!-- ===================== LOADER ===================== -->
 <div id="loader">
@@ -1094,9 +1143,20 @@
   window.__speak=(localStorage.getItem("ciudadela_speak")==="1");
   function refreshSpeakBtn(){var b=document.getElementById("speakBtn");if(!b)return;if(window.__speak){b.classList.add("on");b.innerHTML="&#128266;";b.title="Voz activada: leo las respuestas";}else{b.classList.remove("on");b.innerHTML="&#128263;";b.title="Voz desactivada: toca para que lea en voz alta";}}
   function toggleSpeak(){window.__speak=!window.__speak;localStorage.setItem("ciudadela_speak",window.__speak?"1":"0");refreshSpeakBtn();if(!window.__speak&&window.speechSynthesis){window.speechSynthesis.cancel();}else{speak("Voz activada.");}}
-  function speak(txt){if(!window.speechSynthesis)return;try{window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1;u.pitch=1;var vs=window.speechSynthesis.getVoices();var pref=vs.find(function(v){return /es/i.test(v.lang)&&/(male|hombre|jorge|diego|pablo|google espa)/i.test(v.name);})||vs.find(function(v){return /es/i.test(v.lang);});if(pref)u.voice=pref;window.speechSynthesis.speak(u);}catch(e){}}
+  function speak(txt){if(!window.speechSynthesis)return;try{window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1;u.pitch=1;var pref=(typeof mejorVozEs==="function")?mejorVozEs():null;if(pref)u.voice=pref;window.speechSynthesis.speak(u);setTimeout(function(){try{if(window.speechSynthesis.paused)window.speechSynthesis.resume();}catch(e){}},250);}catch(e){}}
   refreshSpeakBtn();
-  if(window.speechSynthesis){window.speechSynthesis.onvoiceschanged=function(){};}
+  /* ---- Cargador robusto de voces (getVoices suele venir vacio al inicio) ---- */
+  window.__voces=[];
+  function cargarVoces(){ if(window.speechSynthesis){ var v=window.speechSynthesis.getVoices(); if(v&&v.length)window.__voces=v; } }
+  if(window.speechSynthesis){ cargarVoces(); window.speechSynthesis.onvoiceschanged=cargarVoces; setTimeout(cargarVoces,300); setTimeout(cargarVoces,1200); }
+  function mejorVozEs(){
+    var vs=window.__voces&&window.__voces.length?window.__voces:(window.speechSynthesis?window.speechSynthesis.getVoices():[]);
+    if(!vs||!vs.length)return null;
+    return vs.find(function(v){return /es(-|_)?(es|419|mx|us|co)/i.test(v.lang)&&/(google|microsoft)/i.test(v.name);})
+        || vs.find(function(v){return /^es/i.test(v.lang)&&/google/i.test(v.name);})
+        || vs.find(function(v){return /^es/i.test(v.lang);})
+        || vs[0];
+  }
 
   /* ---- MUSICA ---- */
   var playlist=[],curTrack=-1;
@@ -1505,19 +1565,21 @@
   function refreshHandsBtn(){var b=document.getElementById("vwHandsToggle");var l=document.getElementById("vwHandsLbl");if(b)b.classList.toggle("on",vwHands);if(l)l.textContent=vwHands?"Escuchando":"Manos libres";}
 
   function vozStopSpeak(){if(window.speechSynthesis)window.speechSynthesis.cancel();vwSpeaking=false;var o=document.getElementById("vwOrb");if(o)o.classList.remove("talk");}
-  function vozHablar(txt){
+  function vozHablar(txt,_intentos){
     if(!window.speechSynthesis){ if(vwHands)vwStartListen(); return; }
+    /* si las voces aun no cargan, reintenta un par de veces */
+    if((!window.__voces||!window.__voces.length) && (_intentos||0)<3){ cargarVoces(); setTimeout(function(){vozHablar(txt,(_intentos||0)+1);},350); return; }
     try{window.speechSynthesis.cancel();
-      var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1.03;u.pitch=1;
-      var vs=window.speechSynthesis.getVoices();
-      var pref=vs.find(function(v){return /es/i.test(v.lang)&&/(jorge|diego|pablo|google espa|microsoft.*spanish)/i.test(v.name);})||vs.find(function(v){return /es/i.test(v.lang);});
-      if(pref)u.voice=pref;
+      var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1.02;u.pitch=1;u.volume=1;
+      var pref=mejorVozEs(); if(pref){u.voice=pref;u.lang=pref.lang||"es-ES";}
       vwSpeaking=true;var o=document.getElementById("vwOrb");if(o)o.classList.add("talk");vwSetState("KYBALIO esta hablando...");
       u.onend=function(){vwSpeaking=false;var o2=document.getElementById("vwOrb");if(o2)o2.classList.remove("talk");
         if(vwHands){vwStartListen();}else{vwSetState("Pulsa \u00abManos libres\u00bb para seguir");}
       };
       u.onerror=function(){vwSpeaking=false;if(vwHands)vwStartListen();};
       window.speechSynthesis.speak(u);
+      /* algunos navegadores pausan la cola: la reanudamos */
+      setTimeout(function(){try{if(window.speechSynthesis.paused)window.speechSynthesis.resume();}catch(e){}},250);
     }catch(e){vwSpeaking=false;if(vwHands)vwStartListen();}
   }
 
@@ -1566,7 +1628,7 @@
       /* habla y luego ejecuta la accion */
       if(window.speechSynthesis){
         try{window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(resp);u.lang="es-ES";u.rate=1.03;
-          var vs=window.speechSynthesis.getVoices();var pref=vs.find(function(v){return /es/i.test(v.lang);});if(pref)u.voice=pref;
+          var pref=mejorVozEs();if(pref)u.voice=pref;
           u.onend=function(){setTimeout(accion,150);};window.speechSynthesis.speak(u);
         }catch(e){setTimeout(accion,300);}
       } else {setTimeout(accion,400);}

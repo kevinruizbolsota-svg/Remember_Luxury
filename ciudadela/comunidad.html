@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>La Ciudadela | Comunidad</title>
+<title>Mi Templo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -204,7 +204,7 @@
   <div class="split">
     <div class="hero-l">
       <div class="crown">&#128081;</div>
-      <h1 class="oro">LA CIUDADELA</h1>
+      <h1 class="oro">MI TEMPLO</h1>
       <p>La comunidad donde forjamos diamantes. Conecta con la tribu, comparte tu evolucion y transforma tus habitos, todo con esencia.</p>
     </div>
 
@@ -238,10 +238,11 @@
 
 <!-- TOPBAR -->
 <div class="topbar">
-  <div class="marca oro">CIUDADELA</div>
-  <div class="search"><input id="buscar" placeholder="Buscar en la comunidad..."></div>
+  <div class="marca oro">MI TEMPLO</div>
+  <div class="search"><input id="buscar" placeholder="Buscar en Mi Templo..."></div>
   <div class="tabs">
     <div class="t active" data-v="feed" title="Inicio">&#127968;</div>
+    <div class="t" data-v="galeria" title="Galeria">&#127912;</div>
     <div class="t" data-v="miembros" title="Miembros">&#128101;</div>
     <div class="t" data-v="perfil" title="Mi perfil">&#128100;</div>
   </div>
@@ -261,16 +262,17 @@
   <aside class="side left">
     <div class="menu">
       <a onclick="go('feed')"><span class="ic">&#127968;</span> Inicio</a>
+      <a onclick="go('galeria')"><span class="ic">&#127912;</span> Galeria</a>
       <a onclick="go('miembros')"><span class="ic">&#128101;</span> Miembros</a>
       <a onclick="go('perfil')"><span class="ic">&#128100;</span> Mi Perfil</a>
+      <div class="sep"></div>
+      <h5>Explorar</h5>
       <a onclick="filtrar('Logro')"><span class="ic">&#127942;</span> Logros</a>
       <a onclick="filtrar('Habito')"><span class="ic">&#128293;</span> Habitos</a>
       <a onclick="filtrar('Reflexion')"><span class="ic">&#128302;</span> Reflexiones</a>
       <div class="sep"></div>
       <h5>Accesos</h5>
-      <a onclick="volver()"><span class="ic">&#127760;</span> La Ciudadela</a>
       <a onclick="abrirExterno('portal')"><span class="ic">&#128172;</span> Portal KYBALIO</a>
-      <a onclick="abrirExterno('templo')"><span class="ic">&#9733;</span> Mi Templo</a>
       <a onclick="abrirExterno('tienda')"><span class="ic">&#128081;</span> Tienda</a>
     </div>
   </aside>
@@ -300,8 +302,16 @@
     </section>
 
     <!-- MIEMBROS -->
+    <!-- GALERIA (fotos y videos) -->
+    <section id="v-galeria" style="display:none">
+      <div class="card" style="padding:0;overflow:hidden">
+        <h4 style="padding:16px 16px 0">&#127912; Mi Galeria &middot; Fotos, videos, musica y reels</h4>
+        <iframe id="galeriaFrame" title="Galeria" style="width:100%;height:78vh;border:0;border-radius:0 0 14px 14px;margin-top:12px"></iframe>
+      </div>
+    </section>
+
     <section id="v-miembros" style="display:none">
-      <div class="card"><h4>Miembros de la Ciudadela</h4><div id="miembrosList"></div></div>
+      <div class="card"><h4>Miembros del Templo</h4><div id="miembrosList"></div></div>
     </section>
 
     <!-- PERFIL -->
@@ -309,7 +319,7 @@
       <div class="card" style="text-align:center;padding:34px">
         <div class="ava" id="perfilAva" style="width:90px;height:90px;margin:0 auto 14px;font-size:2rem;border-radius:50%;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:700"></div>
         <h2 class="oro" id="perfilNom" style="letter-spacing:2px"></h2>
-        <p style="color:var(--tenue);margin-top:6px">Miembro de La Ciudadela &middot; Forjando su diamante</p>
+        <p style="color:var(--tenue);margin-top:6px">Miembro de Mi Templo &middot; Forjando su diamante</p>
         <div style="display:flex;justify-content:center;gap:34px;margin-top:22px">
           <div><div class="oro" style="font-size:1.8rem;font-family:'Cinzel',serif" id="stPosts">0</div><div style="color:var(--tenue);font-size:.75rem;letter-spacing:1px;text-transform:uppercase">Publicaciones</div></div>
           <div><div class="oro" style="font-size:1.8rem;font-family:'Cinzel',serif" id="stLikes">0</div><div style="color:var(--tenue);font-size:.75rem;letter-spacing:1px;text-transform:uppercase">Reacciones</div></div>
@@ -524,7 +534,7 @@
   }
   function render(){var q=(document.getElementById("buscar").value||"").toLowerCase();var f=document.getElementById("feed");var list=posts.filter(function(p){var ok=true;if(q)ok=(p.txt.toLowerCase().indexOf(q)>=0||p.autor.toLowerCase().indexOf(q)>=0);if(ok&&window.__filtro)ok=(p.tag===window.__filtro);return ok;});if(!list.length){f.innerHTML='<div class="empty">No hay publicaciones aun. Se el primero en compartir tu evolucion.</div>';return;}f.innerHTML=list.map(postHTML).join("");}
   function filtrar(t){window.__filtro=(window.__filtro===t?null:t);go('feed');render();toast(window.__filtro?("Filtro: "+t):"Mostrando todo");}
-  function compartir(id){var p=posts.find(function(x){return x.id===id;});if(navigator.share){navigator.share({title:"La Ciudadela",text:p.txt}).catch(function(){});}else{toast("Enlace copiado (simulado)");}}
+  function compartir(id){var p=posts.find(function(x){return x.id===id;});if(navigator.share){navigator.share({title:"Mi Templo",text:p.txt}).catch(function(){});}else{toast("Enlace copiado (simulado)");}}
 
   /* ---- DESTELLOS ---- */
   function renderDest(){var d=document.getElementById("destellos");var add='<div class="dcard add" onclick="nuevoDestello()"><div class="top"></div><div class="plus">+</div><span class="txt" style="position:absolute;bottom:12px;left:0;right:0">Crear<br>Destello</span></div>';var cards=destellos.map(function(x,i){return '<div class="dcard" onclick="verDestello('+i+')"><div class="author">'+ini(x.autor)+'</div><div class="body">'+x.emoji+'</div><div class="nm">'+esc(x.autor)+'</div></div>';}).join("");d.innerHTML=add+cards;}
@@ -537,7 +547,7 @@
   function renderPerfil(){document.getElementById("perfilAva").textContent=ini(user);document.getElementById("perfilNom").textContent=user;var mine=posts.filter(function(p){return p.autor===user;});var likes=mine.reduce(function(a,p){return a+p.likes;},0);var dest=destellos.filter(function(d){return d.autor===user;}).length;document.getElementById("stPosts").textContent=mine.length;document.getElementById("stLikes").textContent=likes;document.getElementById("stDest").textContent=dest;document.getElementById("perfilFeed").innerHTML=mine.length?mine.map(postHTML).join(""):'<div class="empty">Aun no has publicado. Comparte tu primer paso.</div>';}
 
   /* ---- NAV ---- */
-  function go(v){["feed","miembros","perfil"].forEach(function(x){document.getElementById("v-"+x).style.display=(x===v?"block":"none");});document.querySelectorAll(".topbar .tabs .t").forEach(function(t){t.classList.toggle("active",t.getAttribute("data-v")===v);});if(v==="miembros")renderMiembros();if(v==="perfil")renderPerfil();window.scrollTo(0,0);}
+  function go(v){["feed","galeria","miembros","perfil"].forEach(function(x){document.getElementById("v-"+x).style.display=(x===v?"block":"none");});document.querySelectorAll(".topbar .tabs .t").forEach(function(t){t.classList.toggle("active",t.getAttribute("data-v")===v);});if(v==="galeria"){var gf=document.getElementById("galeriaFrame");if(gf&&!gf.src)gf.src="../index.html";}if(v==="miembros")renderMiembros();if(v==="perfil")renderPerfil();window.scrollTo(0,0);}
 
   /* ---- GUARDAR PUBLICACIONES ---- */
   function guardarPost(id){if(saved[id]){delete saved[id];toast("Quitado de guardados");}else{saved[id]=1;toast("Guardado");}saveS();render();renderPerfil();}
@@ -560,7 +570,7 @@
 
   /* ---- CHAT ESTILO MESSENGER ---- */
   function seedChat(){chat=[
-    {me:false,t:"Bienvenido a La Ciudadela. Estoy aqui para acompanarte en tu evolucion."},
+    {me:false,t:"Bienvenido a Mi Templo. Estoy aqui para acompanarte en tu evolucion."},
     {me:false,t:"Cuentame, cual es el habito que quieres forjar hoy?"}
   ];saveC();}
   function renderChat(){var m=document.getElementById("chatMsgs");m.innerHTML=chat.map(function(x){return '<div class="mb '+(x.me?"me":"them")+'">'+esc(x.t)+'</div>';}).join("");m.scrollTop=m.scrollHeight;}

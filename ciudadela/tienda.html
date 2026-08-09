@@ -433,5 +433,234 @@ function pagar(){
 
 cargar();
 </script>
+<!-- ===== CONFIG DEL ORACULO PARA LA TIENDA ===== -->
+<script>
+window.ORA_CFG={
+  agente:"VENDEDOR",
+  webhook:"https://kevinruiz.app.n8n.cloud/webhook/portal-central",
+  hint:"Soy **KYBALIO**, el oraculo de la Tienda Orionix. Te explico cualquier producto, te comparo agentes IA, te muestro lo destacado, los videos, o te abro el carrito. Activa **Manos libres** y hablame, o escribe.",
+  quick:[
+    {label:"Ver catalogo",icon:"&#128722;",run:function(){scrollTo2('catalogo');}},
+    {label:"Lo destacado",icon:"&#11088;",run:function(){scrollTo2('destacados');}},
+    {label:"Abrir carrito",icon:"&#128230;",run:function(){abrirCarrito();}}
+  ],
+  map:[
+    {k:["catalogo","productos","todo","que venden","que hay"],label:"el catalogo",icon:"&#128722;",resp:"Te muestro todo el catalogo.",run:function(){scrollTo2('catalogo');}},
+    {k:["destacado","lo mas","mas vendido","recomendado","estrella"],label:"lo destacado",icon:"&#11088;",resp:"Mira lo mas deseado de la tienda.",run:function(){scrollTo2('destacados');}},
+    {k:["video","demo","ver funcionando"],label:"los videos",icon:"&#127909;",resp:"Aqui tienes los videos.",run:function(){scrollTo2('videos');}},
+    {k:["carrito","cofre","comprar","pagar","checkout","llevar"],label:"el carrito",icon:"&#128230;",resp:"Abro tu carrito.",run:function(){abrirCarrito();}},
+    {k:["agente","ia","vendedor","whatsapp","voz","seguimiento"],label:"los agentes IA",icon:"&#129302;",resp:"Te muestro nuestros agentes de IA en el catalogo.",run:function(){scrollTo2('catalogo');}},
+    {k:["inicio","orionix","home","volver","pagina principal"],label:"la pagina principal",icon:"&#127968;",resp:"Volviendo a Orionix.",run:function(){window.location.href='index.html';}},
+    {k:["whatsapp","asesor","humano","hablar con alguien"],label:"WhatsApp",icon:"&#128241;",href:"https://wa.me/573014410541?text=Hola%20Orionix,%20estoy%20en%20la%20tienda%20y%20quiero%20info"}
+  ],
+  local:function(texto){var n=(texto||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+    function h(){for(var i=0;i<arguments.length;i++){if(n.indexOf(arguments[i])>=0)return true;}return false;}
+    if(h("agente","ia","vendedor")) return "En la tienda tienes nuestros **Agentes de IA**: *Vendedor* (atiende y cierra 24/7), *WhatsApp*, *Voz* y *Seguimiento*. Cada uno trabaja por ti sin descanso. Quieres que te muestre el catalogo?";
+    if(h("precio","cuanto","cuesta","vale","pagar")) return "Cada producto muestra su precio en su ficha. Puedo abrirte el **catalogo** o el **carrito** para que veas totales. Que prefieres?";
+    if(h("envio","entrega","digital","descarga")) return "Nuestros productos son en su mayoria **digitales**: los recibes y activamos contigo. Te muestro lo destacado?";
+    if(h("hola","buenas")) return "Hola, soy **KYBALIO**, el oraculo de la Tienda. Te explico cualquier producto y te llevo donde quieras: catalogo, destacados, videos o carrito.";
+    return "Soy el oraculo de la Tienda Orionix. Puedo explicarte cada producto y llevarte al **catalogo**, **destacados**, **videos** o **carrito**. Dime que buscas.";}
+};
+</script>
+
+<!-- ===================== AGENTE KYBALIO (autonomo, reutilizable) ===================== -->
+<style>
+  #oraFab{position:fixed;bottom:22px;right:22px;z-index:9000;width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;
+    background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;box-shadow:0 10px 30px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;transition:transform .25s}
+  #oraFab:hover{transform:translateY(-4px) scale(1.06)}
+  #oraFab svg{width:38px;height:38px;display:block}
+  #oraFab .pulse{position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 0 rgba(232,200,106,.6);animation:oraP 2.2s infinite}
+  @keyframes oraP{0%{box-shadow:0 0 0 0 rgba(232,200,106,.55)}70%{box-shadow:0 0 0 16px rgba(232,200,106,0)}100%{box-shadow:0 0 0 0 rgba(232,200,106,0)}}
+  #oraWidget{position:fixed;bottom:92px;right:22px;z-index:9001;width:min(360px,94vw);height:min(540px,78vh);
+    background:#141117;border:1px solid rgba(232,200,106,.32);border-radius:16px;box-shadow:0 24px 70px rgba(0,0,0,.65);display:none;flex-direction:column;overflow:hidden;
+    transform-origin:100% 100%;animation:oraPop .28s cubic-bezier(.34,1.4,.5,1);font-family:'Cormorant Garamond',Georgia,serif}
+  #oraWidget.open{display:flex}
+  @keyframes oraPop{0%{opacity:0;transform:translateY(16px) scale(.85)}100%{opacity:1;transform:none}}
+  #oraWidget .oh{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid #2a2530;background:linear-gradient(180deg,rgba(232,200,106,.1),transparent)}
+  #oraWidget .oh .av{width:34px;height:34px;border-radius:50%;overflow:hidden;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  #oraWidget .oh .av svg{width:100%;height:100%;display:block}
+  #oraWidget .oh.talk .av{animation:oraTalk 1s infinite}
+  @keyframes oraTalk{0%,100%{box-shadow:0 0 0 0 rgba(232,200,106,.5)}50%{box-shadow:0 0 0 8px rgba(232,200,106,0)}}
+  #oraWidget .oh .nm{font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:1px;color:#e8c86a}
+  #oraWidget .oh .st{font-size:.64rem;color:#b8a982}
+  #oraWidget .oh .x{margin-left:auto;background:none;border:none;color:#b8a982;font-size:22px;cursor:pointer}
+  #oraWidget .oh .x:hover{color:#e8c86a}
+  #oraBody{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+  #oraBody .hint{color:#b8a982;font-size:.8rem;line-height:1.5;font-style:italic;text-align:center;padding:10px}
+  .om{display:flex;gap:8px;max-width:92%}
+  .om .b{padding:10px 13px;border-radius:13px;font-size:.85rem;line-height:1.55;letter-spacing:.2px}
+  .om.u{align-self:flex-end;flex-direction:row-reverse}
+  .om.u .b{background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;border-bottom-right-radius:4px}
+  .om.k .b{background:#1c1922;color:#e9ddc4;border:1px solid #2a2530;border-bottom-left-radius:4px}
+  .om .b p{margin:0 0 7px}.om .b p:last-child{margin:0}
+  .om .b strong{color:#e8c86a;font-weight:600}.om .b em{color:#c8a24a;font-style:italic}
+  .om .b ul{margin:4px 0 6px;padding-left:16px}.om .b li{margin:2px 0}
+  .om .b a{color:#e8c86a;text-decoration:underline;word-break:break-word}
+  .om .avm{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-family:'Cinzel',serif}
+  .om.u .avm{background:#1c1922;color:#e8c86a}
+  .om.k .avm{background:radial-gradient(circle at 40% 35%,#f4e2a0,#c8a24a);color:#1a1409}
+  .oacts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .oact{display:inline-flex;align-items:center;gap:5px;background:rgba(232,200,106,.1);border:1px solid rgba(232,200,106,.35);color:#e8c86a;border-radius:8px;padding:5px 11px;font-size:.72rem;font-family:'Cinzel',serif;letter-spacing:.4px;cursor:pointer;transition:all .2s;text-decoration:none}
+  .oact:hover{background:rgba(232,200,106,.2);border-color:#e8c86a;transform:translateY(-1px)}
+  .odots span{animation:oraBlink 1.2s infinite;color:#b8a982}
+  .odots span:nth-child(2){animation-delay:.2s}.odots span:nth-child(3){animation-delay:.4s}
+  @keyframes oraBlink{0%,80%{opacity:.2}40%{opacity:1}}
+  #oraFoot{border-top:1px solid #2a2530;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+  .otoggle{display:flex;align-items:center;gap:9px;cursor:pointer;background:#1c1922;border:1px solid #2a2530;border-radius:22px;padding:8px 16px;transition:all .2s;user-select:none;align-self:center}
+  .otoggle:hover{border-color:#c8a24a}.otoggle.on{border-color:#e8c86a;background:rgba(232,200,106,.1)}
+  .otoggle .sw{width:38px;height:20px;border-radius:12px;background:#2a2530;position:relative;transition:.2s;flex-shrink:0}
+  .otoggle .sw::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#b8a982;transition:.2s}
+  .otoggle.on .sw{background:linear-gradient(180deg,#f4e2a0,#c8a24a)}.otoggle.on .sw::after{transform:translateX(18px);background:#1a1409}
+  .otoggle .lbl{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.5px;color:#e9ddc4;white-space:nowrap}
+  #oraMicLbl{font-size:.66rem;color:#b8a982;text-align:center}
+  .ochat{display:flex;gap:8px}
+  .ochat input{flex:1;background:#1c1922;border:1px solid #2a2530;border-radius:20px;color:#e9ddc4;padding:9px 14px;font-family:inherit;font-size:.9rem;outline:none}
+  .ochat input:focus{border-color:#c8a24a}
+  .ochat button{width:38px;border:none;border-radius:50%;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;font-size:15px;cursor:pointer;flex-shrink:0}
+  @media(max-width:560px){#oraWidget{right:10px;bottom:84px;width:min(340px,94vw)}#oraFab{right:14px;bottom:16px}}
+</style>
+<button id="oraFab" onclick="oraToggle()" title="Habla con KYBALIO, tu oraculo">
+  <span class="pulse"></span>
+  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+    <path d="M14 20 Q14 10 24 10 Q34 10 34 20 L34 30 Q34 39 24 39 Q14 39 14 30 Z" fill="#1a1409" opacity=".22"/>
+    <circle cx="19" cy="23" r="2.6" fill="#1a1409"/><circle cx="29" cy="23" r="2.6" fill="#1a1409"/>
+    <path d="M18 31 Q24 35 30 31" fill="none" stroke="#1a1409" stroke-width="2.2" stroke-linecap="round"/>
+    <line x1="24" y1="10" x2="24" y2="5" stroke="#1a1409" stroke-width="2"/><circle cx="24" cy="4" r="2" fill="#1a1409"/>
+  </svg>
+</button>
+<div id="oraWidget">
+  <div class="oh" id="oraHead">
+    <div class="av">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <defs><radialGradient id="oaF" cx="42%" cy="36%" r="72%"><stop offset="0" stop-color="#fff8e1"/><stop offset="1" stop-color="#c8a24a"/></radialGradient>
+        <linearGradient id="oaV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f3550"/><stop offset="1" stop-color="#06131f"/></linearGradient></defs>
+        <circle cx="24" cy="24" r="23" fill="url(#oaF)"/>
+        <path d="M13 20 Q13 9 24 9 Q35 9 35 20 L35 30 Q35 39 24 39 Q13 39 13 30 Z" fill="#141019"/>
+        <path d="M16 20 Q16 15 24 15 Q32 15 32 20 L32 27 Q32 31 24 31 Q16 31 16 27 Z" fill="url(#oaV)"/>
+        <circle cx="20.5" cy="23" r="2.2" fill="#8fe9ff"/><circle cx="27.5" cy="23" r="2.2" fill="#8fe9ff"/>
+        <line x1="24" y1="9" x2="24" y2="4" stroke="#fff8e1" stroke-width="1.6"/><circle cx="24" cy="3.4" r="1.8" fill="#fff8e1"/>
+      </svg>
+    </div>
+    <div><div class="nm">KYBALIO &middot; Oraculo</div><div class="st" id="oraState">Activa Manos libres y hablame</div></div>
+    <button class="x" onclick="oraClose()">&times;</button>
+  </div>
+  <div id="oraBody"><div class="hint" id="oraHint"></div></div>
+  <div id="oraFoot">
+    <div class="otoggle" id="oraHands" onclick="oraToggleHands()"><span class="sw"></span><span class="lbl" id="oraHandsLbl">Manos libres</span></div>
+    <div id="oraMicLbl">Pulsa &laquo;Manos libres&raquo; y hablame, o escribe abajo</div>
+    <div class="ochat"><input id="oraText" placeholder="Escribe tu mensaje..." onkeydown="if(event.key==='Enter')oraSendText()"><button onclick="oraSendText()">&#10148;</button></div>
+  </div>
+</div>
+<script>
+(function(){
+  var CFG=window.ORA_CFG||{};
+  var WEBHOOK=CFG.webhook||"https://kevinruiz.app.n8n.cloud/webhook/portal-central";
+  var AGENTE=CFG.agente||"VENDEDOR";
+  var MAP=CFG.map||[];         /* [{k:[..],label,icon,run,desc}] */
+  var HINT=CFG.hint||"Soy KYBALIO, el oraculo. Activa Manos libres y hablame, o escribe: te explico todo y te llevo a cualquier parte.";
+  var LOCAL=CFG.local||function(){return "Soy el oraculo de Orionix. Puedo explicarte cada seccion y llevarte a donde quieras.";};
+  var ses="ora"+Date.now(), started=false;
+  var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  var rec=null,listening=false,hands=false,speaking=false,thinking=false,buf="",silT=null,interimEl=null,want=false,watch=null,audioReady=false;
+  document.getElementById("oraHint").textContent=HINT.replace(/\*\*/g,"");
+
+  function esc(t){var e=document.createElement("div");e.textContent=t;return e.innerHTML;}
+  function fmt(t){var e=esc(t);
+    e=e.replace(/(https?:\/\/[^\s<]+)/g,function(u){return '<a href="'+u+'" target="_blank" rel="noopener">'+u+'</a>';});
+    e=e.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/(^|[^*])\*([^*\n]+)\*/g,'$1<em>$2</em>');
+    var ls=e.split(/\n/),out="",inL=false;
+    for(var i=0;i<ls.length;i++){var l=ls[i].trim();
+      if(/^([-*\u2022])\s+/.test(l)){if(!inL){out+="<ul>";inL=true;}out+="<li>"+l.replace(/^([-*\u2022])\s+/,"")+"</li>";}
+      else{if(inL){out+="</ul>";inL=false;}if(l)out+="<p>"+l+"</p>";}}
+    if(inL)out+="</ul>";return out||("<p>"+e+"</p>");}
+  function setState(t){var s=document.getElementById("oraState");if(s)s.textContent=t;}
+  function add(role,text,acts){var b=document.getElementById("oraBody");var h=b.querySelector(".hint");if(h)h.remove();
+    var d=document.createElement("div");d.className="om "+(role==="u"?"u":"k");
+    d.innerHTML='<div class="avm">'+(role==="u"?"&#128100;":"K")+'</div><div class="b">'+(role==="u"?("<p>"+esc(text)+"</p>"):fmt(text))+'</div>';
+    b.appendChild(d);
+    if(role!=="u"&&acts&&acts.length){var w=d.querySelector(".b");var wr=document.createElement("div");wr.className="oacts";
+      acts.forEach(function(a){var el;if(a.href){el=document.createElement("a");el.href=a.href;el.target="_blank";el.rel="noopener";}else{el=document.createElement("span");el.onclick=a.run;}
+        el.className="oact";el.innerHTML='<span>'+(a.icon||"&#10148;")+'</span>'+a.label;wr.appendChild(el);});
+      w.appendChild(wr);}
+    b.scrollTop=b.scrollHeight;return d;}
+  function typing(){var b=document.getElementById("oraBody");var d=document.createElement("div");d.className="om k";
+    d.innerHTML='<div class="avm">K</div><div class="b odots"><span>.</span><span>.</span><span>.</span></div>';b.appendChild(d);b.scrollTop=b.scrollHeight;return d;}
+  function showInterim(t){var b=document.getElementById("oraBody");if(!interimEl){interimEl=document.createElement("div");interimEl.className="om u";interimEl.style.opacity=".6";interimEl.innerHTML='<div class="avm">&#128100;</div><div class="b"><p></p></div>';b.appendChild(interimEl);}interimEl.querySelector("p").textContent=t;b.scrollTop=b.scrollHeight;}
+  function clearInterim(){if(interimEl){interimEl.remove();interimEl=null;}}
+
+  function suger(txt){var n=(txt||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");var a=[],u={};
+    for(var i=0;i<MAP.length;i++){var s=MAP[i];for(var j=0;j<s.k.length;j++){if(n.indexOf(s.k[j])>=0){if(!u[s.label]){a.push(s);u[s.label]=1;}break;}}}
+    return a.slice(0,3);}
+
+  /* ---- voz ---- */
+  window.__voces=window.__voces||[];
+  function cargarVoces(){if(window.speechSynthesis){var v=window.speechSynthesis.getVoices();if(v&&v.length)window.__voces=v;}}
+  if(window.speechSynthesis){cargarVoces();window.speechSynthesis.onvoiceschanged=cargarVoces;setTimeout(cargarVoces,300);setTimeout(cargarVoces,1200);setTimeout(cargarVoces,3000);
+    setInterval(function(){try{if(window.speechSynthesis.speaking&&window.speechSynthesis.paused)window.speechSynthesis.resume();}catch(e){}},4000);}
+  function mejorVoz(){var vs=window.__voces.length?window.__voces:(window.speechSynthesis?window.speechSynthesis.getVoices():[]);if(!vs.length)return null;
+    return vs.find(function(v){return /es(-|_)?(es|419|mx|us|co)/i.test(v.lang)&&/(google|microsoft)/i.test(v.name);})||vs.find(function(v){return /^es/i.test(v.lang)&&/google/i.test(v.name);})||vs.find(function(v){return /^es/i.test(v.lang);})||vs[0];}
+  function warmup(){try{if(window.speechSynthesis){window.speechSynthesis.cancel();window.speechSynthesis.resume();}cargarVoces();
+    if(!audioReady&&window.speechSynthesis){var u=new SpeechSynthesisUtterance(" ");u.volume=0;window.speechSynthesis.speak(u);audioReady=true;}}catch(e){}}
+  ["click","touchstart","keydown"].forEach(function(ev){document.addEventListener(ev,function _w(){warmup();},{once:true,passive:true});});
+
+  function hablar(txt,tt){
+    if(!window.speechSynthesis){if(hands)startListen();return;}
+    stopListen(false);
+    if((!window.__voces||!window.__voces.length)&&(tt||0)<4){cargarVoces();setTimeout(function(){hablar(txt,(tt||0)+1);},300);return;}
+    try{window.speechSynthesis.cancel();setTimeout(function(){try{
+      var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1.02;u.pitch=1;u.volume=1;
+      var p=mejorVoz();if(p){u.voice=p;u.lang=p.lang||"es-ES";}
+      speaking=true;document.getElementById("oraHead").classList.add("talk");setState("KYBALIO esta hablando...");
+      u.onend=function(){speaking=false;document.getElementById("oraHead").classList.remove("talk");if(hands){setTimeout(startListen,180);}else{setState("Pulsa Manos libres para seguir");}};
+      u.onerror=function(){speaking=false;document.getElementById("oraHead").classList.remove("talk");if(hands)setTimeout(startListen,180);};
+      window.speechSynthesis.speak(u);
+      setTimeout(function(){try{if(window.speechSynthesis.paused)window.speechSynthesis.resume();}catch(e){}},220);
+      setTimeout(function(){if(speaking&&!window.speechSynthesis.speaking&&!window.speechSynthesis.pending&&(tt||0)<2){speaking=false;hablar(txt,(tt||0)+1);}},700);
+    }catch(e){speaking=false;if(hands)startListen();}},140);}catch(e){speaking=false;if(hands)startListen();}}
+  function stopSpeak(){if(window.speechSynthesis)window.speechSynthesis.cancel();speaking=false;document.getElementById("oraHead").classList.remove("talk");}
+
+  function ensureRec(){if(!SR)return null;if(rec)return rec;
+    var r=new SR();r.lang="es-ES";r.continuous=true;r.interimResults=true;r.maxAlternatives=1;
+    r.onstart=function(){listening=true;};r.onaudiostart=function(){listening=true;};
+    r.onresult=function(ev){var it="";for(var i=ev.resultIndex;i<ev.results.length;i++){var tr=ev.results[i][0].transcript;if(ev.results[i].isFinal){buf+=tr+" ";}else{it+=tr;}}
+      showInterim((buf+it).trim());if(silT)clearTimeout(silT);silT=setTimeout(flush,1100);};
+    r.onerror=function(ev){if(ev.error==="not-allowed"||ev.error==="service-not-allowed"){hands=false;refreshHands();setState("Permite el microfono");document.getElementById("oraMicLbl").textContent="Permite el Microfono en el candado de la barra y reintenta";alert("Debes PERMITIR el microfono en Chrome (candado de la barra de direcciones) y volver a pulsar Manos libres.");}};
+    r.onend=function(){listening=false;if(want&&hands&&!speaking&&!thinking){setTimeout(startListen,180);}};
+    rec=r;return r;}
+  function armWatch(){if(watch)clearInterval(watch);watch=setInterval(function(){if(hands&&want&&!listening&&!speaking&&!thinking){startListen();}},1200);}
+  function startListen(){if(!SR||!hands||listening||speaking||thinking)return;var r=ensureRec();if(!r)return;buf="";want=true;
+    try{r.start();listening=true;document.getElementById("oraHead").classList.add("talk");setState("Escuchando... hablame");document.getElementById("oraMicLbl").textContent="Te escucho... habla con naturalidad";}catch(e){listening=true;}}
+  function stopListen(hard){want=false;if(silT){clearTimeout(silT);silT=null;}if(rec){try{rec.stop();}catch(e){}}listening=false;if(!speaking)document.getElementById("oraHead").classList.remove("talk");if(hard)clearInterim();}
+  function flush(){var t=buf.trim();buf="";if(!t)return;clearInterim();stopListen(false);add("u",t);if(comando(t))return;thinking=true;setState("KYBALIO esta pensando...");enviar(t);}
+
+  function refreshHands(){var b=document.getElementById("oraHands"),l=document.getElementById("oraHandsLbl");if(b)b.classList.toggle("on",hands);if(l)l.textContent=hands?"Escuchando":"Manos libres";}
+  window.oraToggleHands=function(){if(!SR){alert("Tu navegador no permite voz. Usa Google Chrome en PC o Android.");return;}
+    hands=!hands;refreshHands();
+    if(hands){warmup();want=true;armWatch();hablar("Hola, soy KYBALIO, tu oraculo. Te escucho: dime que quieres saber o a donde te llevo.");setTimeout(function(){if(!speaking)startListen();},1000);}
+    else{stopSpeak();stopListen(true);if(watch){clearInterval(watch);watch=null;}setState("Manos libres desactivado");document.getElementById("oraMicLbl").textContent="Pulsa Manos libres y hablame, o escribe abajo";}};
+
+  function comando(txt){var n=(txt||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+    function h(){for(var i=0;i<arguments.length;i++){if(n.indexOf(arguments[i])>=0)return true;}return false;}
+    var abrir=h("abre","abrir","muestra","muestrame","llevame","lleva","ve a","ir a","quiero ver","ver","entra");
+    for(var i=0;i<MAP.length;i++){var s=MAP[i];for(var j=0;j<s.k.length;j++){if(n.indexOf(s.k[j])>=0){
+      add("k",s.resp||("Te llevo a "+s.label+"."));
+      if(window.speechSynthesis){try{window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(s.resp||("Te llevo a "+s.label));u.lang="es-ES";var p=mejorVoz();if(p)u.voice=p;u.onend=function(){setTimeout(s.run,120);};window.speechSynthesis.speak(u);}catch(e){setTimeout(s.run,250);}}else{setTimeout(s.run,300);}
+      return true;}}}
+    return false;}
+
+  function enviar(texto){var tp=typing();
+    fetch(WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:"Visitante",sesion:ses,agente:AGENTE,mensaje:texto})})
+      .then(function(r){return r.json();}).then(function(d){thinking=false;var resp=(d&&(d.respuesta||d.output))||"";if(!resp)resp=LOCAL(texto);tp.remove();add("k",resp,suger(texto+" "+resp));hablar(resp);})
+      .catch(function(){tp.remove();thinking=false;var resp=LOCAL(texto);add("k",resp,suger(texto+" "+resp));hablar(resp);});}
+  window.oraSendText=function(){var inp=document.getElementById("oraText");var t=(inp.value||"").trim();if(!t)return;inp.value="";add("u",t);if(comando(t))return;thinking=true;setState("KYBALIO esta pensando...");enviar(t);};
+
+  window.oraToggle=function(){var w=document.getElementById("oraWidget");if(w.classList.contains("open")){oraClose();return;}
+    w.classList.add("open");warmup();
+    if(!started){started=true;add("k",HINT,(CFG.quick||[]));}
+    if(SR&&!hands){hands=true;refreshHands();want=true;armWatch();hablar("Hola, soy KYBALIO, tu oraculo. Te escucho, dime en que puedo ayudarte.");setTimeout(function(){if(!speaking)startListen();},1300);}};
+  window.oraClose=function(){document.getElementById("oraWidget").classList.remove("open");stopSpeak();stopListen(true);if(watch){clearInterval(watch);watch=null;}hands=false;refreshHands();};
+})();
+</script>
+
 </body>
 </html>

@@ -118,14 +118,14 @@
 
   /* ===================== COSMOS: DESCENSO A LA FUENTE (Urantia) ===================== */
   /* Capa de fondo fija: universo con nebulosa. El TEMA (color) cambia en cada recarga via body[data-cielo] */
-  #cosmos{position:fixed;inset:0;z-index:-2;background:#04040a;overflow:hidden;transition:background 1.2s}
+  #cosmos{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 50% 20%,#0a0a16,#03030a 60%,#010104 100%);overflow:hidden;transition:background 1.2s}
   #cosmos .neb{position:absolute;inset:-20%;background:
       radial-gradient(closest-side,var(--neb1),transparent) no-repeat,
       radial-gradient(closest-side,var(--neb2),transparent) no-repeat,
       radial-gradient(closest-side,var(--neb3),transparent) no-repeat;
     background-position:20% 15%,80% 40%,50% 85%;
     background-size:60% 60%,55% 55%,70% 70%;
-    filter:blur(20px);opacity:.85;animation:nebFloat 40s ease-in-out infinite alternate}
+    filter:blur(38px);opacity:.55;animation:nebFloat 50s ease-in-out infinite alternate}
   @keyframes nebFloat{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(-3%,-4%,0) scale(1.12)}}
   #cosmosStars{position:fixed;inset:0;z-index:-1;pointer-events:none}
   /* Luz divina inferior: crece a medida que se hace scroll (--divina 0..1 via JS) */
@@ -151,7 +151,7 @@
   #ciudadela,#servicios,#destacados,#cifras,#testimonios,#agentes,#planes,#contacto,#newsletter{background:transparent!important}
   /* velo que oscurece progresivamente al bajar = descenso a lo profundo */
   section,footer.pro{position:relative}
-  section::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(4,4,10,.35),rgba(4,4,10,.72));pointer-events:none}
+  section::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(2,2,7,.55),rgba(2,2,7,.82));pointer-events:none}
   /* "portales" divisores entre secciones: aros de luz al descender */
   .portal-sep{position:relative;height:0;overflow:visible;z-index:2}
   .portal-sep i{position:absolute;left:50%;top:-14px;transform:translateX(-50%);width:120px;height:28px;border-radius:50%;border:1px solid rgba(232,200,106,.4);box-shadow:0 0 30px rgba(232,200,106,.25),inset 0 0 20px rgba(232,200,106,.15);opacity:.7}
@@ -556,6 +556,54 @@
   <div class="scroll-ind">&#8964;</div>
 </section>
 
+<section id="planes">
+  <div class="prof-label">Circulo de la alianza</div>
+  <div class="sec-head reveal">
+    <div class="eyebrow">Inversion</div>
+    <h2 class="oro">Planes de Agentes IA</h2>
+    <div class="hairline"></div>
+  </div>
+  <div class="pl-grid">
+    <div class="pl-card reveal">
+      <div class="pl-nm">Esencia</div>
+      <div class="pl-price">Desde<br><b>197&euro;</b><span>/mes</span></div>
+      <ul>
+        <li>1 Agente IA (WhatsApp o Web)</li>
+        <li>Atencion 24/7 automatica</li>
+        <li>Respuestas con tu esencia</li>
+        <li>Reporte de conversaciones</li>
+      </ul>
+      <a class="btn ghost" onclick="abrirLead('Plan Esencia')">Empezar</a>
+    </div>
+    <div class="pl-card destacada reveal">
+      <div class="pl-badge">Mas elegido</div>
+      <div class="pl-nm">Imperio</div>
+      <div class="pl-price">Desde<br><b>497&euro;</b><span>/mes</span></div>
+      <ul>
+        <li>Hasta 3 Agentes IA</li>
+        <li>Vendedor + WhatsApp + Voz</li>
+        <li>Agenda citas y califica leads</li>
+        <li>CRM y seguimiento automatico</li>
+        <li>Soporte prioritario</li>
+      </ul>
+      <a class="btn" onclick="abrirLead('Plan Imperio')">Quiero este</a>
+    </div>
+    <div class="pl-card reveal">
+      <div class="pl-nm">Ciudadela</div>
+      <div class="pl-price"><b>A medida</b></div>
+      <ul>
+        <li>Agentes ilimitados</li>
+        <li>Integraciones a tu medida</li>
+        <li>Web + Tienda + Automatizacion</li>
+        <li>Estrategia completa contigo</li>
+      </ul>
+      <a class="btn ghost" onclick="abrirLead('Plan Ciudadela a medida')">Hablemos</a>
+    </div>
+  </div>
+  <p class="reveal" style="text-align:center;color:var(--tenue);margin-top:26px;font-size:.95rem">Precios orientativos. En la llamada definimos el plan exacto para tu negocio.</p>
+</section>
+
+<div class="portal-sep"><i></i></div>
 <section id="ciudadela">
   <div class="sec-head reveal">
     <div class="eyebrow">Nuestra Esencia</div>
@@ -669,54 +717,6 @@
 
 <!-- ===================== PLANES / PRECIOS ===================== -->
 <div class="portal-sep"><i></i></div>
-<section id="planes">
-  <div class="prof-label">Circulo de la alianza</div>
-  <div class="sec-head reveal">
-    <div class="eyebrow">Inversion</div>
-    <h2 class="oro">Planes de Agentes IA</h2>
-    <div class="hairline"></div>
-  </div>
-  <div class="pl-grid">
-    <div class="pl-card reveal">
-      <div class="pl-nm">Esencia</div>
-      <div class="pl-price">Desde<br><b>197&euro;</b><span>/mes</span></div>
-      <ul>
-        <li>1 Agente IA (WhatsApp o Web)</li>
-        <li>Atencion 24/7 automatica</li>
-        <li>Respuestas con tu esencia</li>
-        <li>Reporte de conversaciones</li>
-      </ul>
-      <a class="btn ghost" onclick="abrirLead('Plan Esencia')">Empezar</a>
-    </div>
-    <div class="pl-card destacada reveal">
-      <div class="pl-badge">Mas elegido</div>
-      <div class="pl-nm">Imperio</div>
-      <div class="pl-price">Desde<br><b>497&euro;</b><span>/mes</span></div>
-      <ul>
-        <li>Hasta 3 Agentes IA</li>
-        <li>Vendedor + WhatsApp + Voz</li>
-        <li>Agenda citas y califica leads</li>
-        <li>CRM y seguimiento automatico</li>
-        <li>Soporte prioritario</li>
-      </ul>
-      <a class="btn" onclick="abrirLead('Plan Imperio')">Quiero este</a>
-    </div>
-    <div class="pl-card reveal">
-      <div class="pl-nm">Ciudadela</div>
-      <div class="pl-price"><b>A medida</b></div>
-      <ul>
-        <li>Agentes ilimitados</li>
-        <li>Integraciones a tu medida</li>
-        <li>Web + Tienda + Automatizacion</li>
-        <li>Estrategia completa contigo</li>
-      </ul>
-      <a class="btn ghost" onclick="abrirLead('Plan Ciudadela a medida')">Hablemos</a>
-    </div>
-  </div>
-  <p class="reveal" style="text-align:center;color:var(--tenue);margin-top:26px;font-size:.95rem">Precios orientativos. En la llamada definimos el plan exacto para tu negocio.</p>
-</section>
-
-<div class="portal-sep"><i></i></div>
 <section id="contacto">
   <div class="prof-label">El centro &middot; La Fuente</div>
   <div class="sec-head reveal">
@@ -819,9 +819,15 @@
       <radialGradient id="rbAura" cx="50%" cy="50%" r="50%">
         <stop offset="0" stop-color="rgba(232,200,106,.5)"/><stop offset="1" stop-color="rgba(232,200,106,0)"/>
       </radialGradient>
-      <radialGradient id="rbVisor" cx="50%" cy="40%" r="70%">
-        <stop offset="0" stop-color="#12324a"/><stop offset="1" stop-color="#05101c"/>
+      <radialGradient id="rbVisor" cx="50%" cy="38%" r="75%">
+        <stop offset="0" stop-color="#1a4a6b"/><stop offset=".6" stop-color="#0a2438"/><stop offset="1" stop-color="#04101c"/>
       </radialGradient>
+      <linearGradient id="rbHead" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#26222e"/><stop offset="1" stop-color="#100d16"/>
+      </linearGradient>
+      <filter id="rbEyeGlow" x="-120%" y="-120%" width="340%" height="340%">
+        <feGaussianBlur stdDeviation="1.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
     </defs>
     <!-- nave (oculta salvo modo nave) -->
     <g class="rb-nave">
@@ -842,7 +848,9 @@
     <g class="rb-arm"><rect x="24" y="62" width="9" height="40" rx="4.5" fill="url(#rbMetal2)"/><circle cx="28.5" cy="104" r="6" fill="url(#rbMetal)"/></g>
     <rect x="87" y="62" width="9" height="40" rx="4.5" fill="url(#rbMetal2)"/><circle cx="91.5" cy="104" r="6" fill="url(#rbMetal)"/>
     <!-- torso: tronco humanoide con hombros y cintura -->
-    <path d="M40 60 Q36 58 36 68 L38 108 Q38 118 48 118 L72 118 Q82 118 82 108 L84 68 Q84 58 80 60 Z" fill="#191621" stroke="url(#rbMetal)" stroke-width="2.2"/>
+    <path d="M40 60 Q36 58 36 68 L38 108 Q38 118 48 118 L72 118 Q82 118 82 108 L84 68 Q84 58 80 60 Z" fill="url(#rbHead)" stroke="url(#rbMetal)" stroke-width="2.2"/>
+    <!-- brillo lateral del torso -->
+    <path d="M42 64 Q40 66 41 74 L43 104 Q43 110 46 112 Q42 100 42 84 Z" fill="rgba(255,255,255,.10)"/>
     <!-- pecho: nucleo brillante -->
     <circle cx="60" cy="84" r="9" fill="#0b0b0d" stroke="url(#rbMetal)" stroke-width="2"/>
     <circle cx="60" cy="84" r="4.5" fill="url(#rbMetal)" class="rb-glow"/>
@@ -855,11 +863,16 @@
     <!-- cuello -->
     <rect x="54" y="50" width="12" height="10" rx="3" fill="#8a6a24"/>
     <!-- cabeza redondeada tipo casco -->
-    <path d="M42 20 Q42 8 60 8 Q78 8 78 20 L78 40 Q78 52 60 52 Q42 52 42 40 Z" fill="#191621" stroke="url(#rbMetal)" stroke-width="2.4"/>
+    <path d="M42 20 Q42 8 60 8 Q78 8 78 20 L78 40 Q78 52 60 52 Q42 52 42 40 Z" fill="url(#rbHead)" stroke="url(#rbMetal)" stroke-width="2.4"/>
+    <!-- brillo superior del casco -->
+    <path d="M48 14 Q60 9 72 14 Q66 12 60 12 Q54 12 48 14 Z" fill="rgba(255,255,255,.25)"/>
     <!-- visor -->
     <path d="M47 24 Q47 18 60 18 Q73 18 73 24 L73 34 Q73 40 60 40 Q47 40 47 34 Z" fill="url(#rbVisor)"/>
-    <circle class="rb-eye" cx="53" cy="29" r="3.4" fill="#7fe3ff"/>
-    <circle class="rb-eye" cx="67" cy="29" r="3.4" fill="#7fe3ff"/>
+    <path d="M49 23 Q60 20 71 23 Q60 22 49 23 Z" fill="rgba(255,255,255,.18)"/>
+    <g filter="url(#rbEyeGlow)">
+      <circle class="rb-eye" cx="53" cy="29" r="3.2" fill="#8fe9ff"/>
+      <circle class="rb-eye" cx="67" cy="29" r="3.2" fill="#8fe9ff"/>
+    </g>
     <!-- orejeras -->
     <rect x="39" y="27" width="4" height="10" rx="2" fill="url(#rbMetal)"/>
     <rect x="77" y="27" width="4" height="10" rx="2" fill="url(#rbMetal)"/>
@@ -1169,17 +1182,42 @@
       ctx.save();ctx.globalCompositeOperation="lighter";ctx.beginPath();ctx.arc(px,py,pr,0,6.28);ctx.fillStyle=lit;ctx.fill();ctx.restore();
       if(p.ring){ctx.save();ctx.translate(px,py);ctx.rotate(-0.5);ctx.scale(1,0.32);ctx.beginPath();ctx.arc(0,0,pr*1.7,0,6.28);ctx.lineWidth=pr*0.16;ctx.strokeStyle="rgba(232,200,106,.5)";ctx.stroke();ctx.restore();}
     }
+    var solT=0;
     function drawSol(){
       if(scrollP<=0.02)return;
+      solT+=0.02;
+      var pulso=1+0.03*Math.sin(solT);
       /* el sol nace desde abajo-centro y crece al descender */
-      var cx=W*0.5, cy=H + H*0.15 - (H*0.9)*scrollP;
-      var R=Math.min(W,H)*(0.12 + 0.55*scrollP);
+      var cx=W*0.5, cy=H + H*0.18 - (H*0.95)*scrollP;
+      var R=Math.min(W,H)*(0.10 + 0.5*scrollP)*pulso;
+      ctx.save();ctx.globalCompositeOperation="lighter";
+      /* 1) corona amplia y difusa */
+      var corona=ctx.createRadialGradient(cx,cy,R*0.4,cx,cy,R*2.6);
+      corona.addColorStop(0,"rgba(255,226,160,"+(0.22*scrollP)+")");
+      corona.addColorStop(0.5,"rgba(250,180,90,"+(0.10*scrollP)+")");
+      corona.addColorStop(1,"rgba(250,180,90,0)");
+      ctx.beginPath();ctx.arc(cx,cy,R*2.6,0,6.28);ctx.fillStyle=corona;ctx.fill();
+      /* 2) rayos suaves girando */
+      ctx.save();ctx.translate(cx,cy);ctx.rotate(solT*0.05);
+      for(var a=0;a<12;a++){ctx.rotate(6.283/12);
+        var ray=ctx.createLinearGradient(0,0,0,-R*2.2);
+        ray.addColorStop(0,"rgba(255,220,150,"+(0.06*scrollP)+")");ray.addColorStop(1,"rgba(255,220,150,0)");
+        ctx.beginPath();ctx.moveTo(-R*0.18,0);ctx.lineTo(R*0.18,0);ctx.lineTo(0,-R*2.2);ctx.closePath();ctx.fillStyle=ray;ctx.fill();
+      }
+      ctx.restore();
+      /* 3) halo medio */
       var g=ctx.createRadialGradient(cx,cy,R*0.15,cx,cy,R);
-      g.addColorStop(0,"rgba(255,252,240,"+(0.55+0.4*scrollP)+")");
-      g.addColorStop(0.35,"rgba(255,238,190,"+(0.4+0.4*scrollP)+")");
-      g.addColorStop(0.7,"rgba(240,196,110,"+(0.25*scrollP)+")");
-      g.addColorStop(1,"rgba(240,196,110,0)");
-      ctx.save();ctx.globalCompositeOperation="lighter";ctx.beginPath();ctx.arc(cx,cy,R,0,6.28);ctx.fillStyle=g;ctx.fill();ctx.restore();
+      g.addColorStop(0,"rgba(255,253,245,"+(0.6+0.35*scrollP)+")");
+      g.addColorStop(0.4,"rgba(255,236,185,"+(0.45+0.35*scrollP)+")");
+      g.addColorStop(0.75,"rgba(244,196,110,"+(0.3*scrollP)+")");
+      g.addColorStop(1,"rgba(244,196,110,0)");
+      ctx.beginPath();ctx.arc(cx,cy,R,0,6.28);ctx.fillStyle=g;ctx.fill();
+      /* 4) nucleo intenso */
+      var core=ctx.createRadialGradient(cx,cy,0,cx,cy,R*0.55);
+      core.addColorStop(0,"rgba(255,255,252,"+(0.85*scrollP+0.15)+")");
+      core.addColorStop(1,"rgba(255,246,220,0)");
+      ctx.beginPath();ctx.arc(cx,cy,R*0.55,0,6.28);ctx.fillStyle=core;ctx.fill();
+      ctx.restore();
     }
     function draw(){
       ctx.clearRect(0,0,W,H);

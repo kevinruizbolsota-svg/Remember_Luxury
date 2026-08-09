@@ -138,7 +138,7 @@
   #solDiamante .halo{position:absolute;inset:-40%;border-radius:50%;
     background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.55),rgba(210,235,255,.22) 40%,transparent 70%);
     filter:blur(14px);animation:solRespira 6s ease-in-out infinite}
-  #solDiamante .gema{position:absolute;inset:0;animation:solGira 60s linear infinite}
+  #solDiamante .gema{position:absolute;inset:0;border-radius:50%;overflow:hidden;filter:drop-shadow(0 0 22px rgba(255,255,255,.5));animation:solGira 60s linear infinite}
   #solDiamante .nucleo{position:absolute;left:50%;top:50%;width:42%;height:42%;transform:translate(-50%,-50%);border-radius:50%;
     background:radial-gradient(circle at 42% 38%,#ffffff,#eaf4ff 55%,#cfe4ff 100%);
     box-shadow:0 0 40px rgba(255,255,255,.85),0 0 90px rgba(200,230,255,.5);animation:solRespira 6s ease-in-out infinite}
@@ -422,8 +422,12 @@
   #vozWidget{position:fixed;bottom:22px;right:22px;width:min(400px,94vw);height:min(640px,86vh);background:var(--panel);border:1px solid rgba(232,200,106,.3);border-radius:16px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:400;display:none;flex-direction:column;overflow:hidden}
   #vozWidget.open{display:flex}
   .vw-head{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(232,200,106,.08),transparent)}
-  .vw-orb{width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#f4e2a0,#c8a24a);color:#1a1409;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;box-shadow:0 0 0 0 rgba(232,200,106,.5)}
+  .vw-orb{width:42px;height:42px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 0 0 rgba(232,200,106,.5),0 2px 10px rgba(0,0,0,.4)}
   .vw-orb.talk{animation:orbPulse 1s infinite}
+  .vw-orb .av-eye{animation:avParpadeo 4s infinite}
+  .vw-orb.talk .av-eye{animation:avParpadeo 4s infinite,avHabla .5s ease-in-out infinite}
+  @keyframes avParpadeo{0%,92%,100%{opacity:1}96%{opacity:.15}}
+  @keyframes avHabla{0%,100%{filter:drop-shadow(0 0 1px #8fe9ff)}50%{filter:drop-shadow(0 0 4px #8fe9ff)}}
   @keyframes orbPulse{0%,100%{box-shadow:0 0 0 0 rgba(232,200,106,.5)}50%{box-shadow:0 0 0 12px rgba(232,200,106,0)}}
   .vw-id .vw-nm{font-size:.8rem;font-family:'Cinzel',serif;letter-spacing:1px}
   .vw-id .vw-st{font-size:.68rem;color:var(--tenue)}
@@ -526,31 +530,37 @@
         <stop offset="1" stop-color="#bfe0ff" stop-opacity=".3"/>
       </linearGradient>
     </defs>
-    <g fill="url(#dgFace)" stroke="url(#dgEdge)" stroke-width="1.1" stroke-linejoin="round">
-      <!-- corona de facetas tipo brillante de diamante -->
-      <polygon points="100,8 128,30 100,52 72,30"/>
-      <polygon points="128,30 160,52 138,80 108,58"/>
-      <polygon points="72,30 40,52 62,80 92,58"/>
-      <polygon points="160,52 178,90 148,104 138,80"/>
-      <polygon points="40,52 22,90 52,104 62,80"/>
-      <polygon points="100,52 138,80 108,58"/>
-      <polygon points="100,52 62,80 92,58"/>
-      <polygon points="108,58 138,80 118,110 100,92"/>
-      <polygon points="92,58 62,80 82,110 100,92"/>
-      <polygon points="148,104 178,90 168,140 130,138"/>
-      <polygon points="52,104 22,90 32,140 70,138"/>
-      <polygon points="118,110 148,104 130,138 100,128"/>
-      <polygon points="82,110 52,104 70,138 100,128"/>
-      <polygon points="100,92 118,110 100,128 82,110"/>
-      <polygon points="130,138 168,140 100,192 100,128"/>
-      <polygon points="70,138 32,140 100,192 100,128"/>
-      <polygon points="130,138 100,128 100,192"/>
-      <polygon points="70,138 100,128 100,192"/>
+    <!-- disco base redondo del cristal -->
+    <circle cx="100" cy="100" r="92" fill="url(#dgFace)" stroke="url(#dgEdge)" stroke-width="1.4"/>
+    <!-- facetas radiales dentro del circulo (gema tallada redonda tipo brillante) -->
+    <g fill="url(#dgFace)" stroke="url(#dgEdge)" stroke-width="0.9" stroke-linejoin="round" opacity=".9">
+      <!-- corona exterior: 16 facetas triangulares hacia el borde -->
+      <polygon points="100,100 100,12 138,20"/>
+      <polygon points="100,100 138,20 168,42"/>
+      <polygon points="100,100 168,42 184,78"/>
+      <polygon points="100,100 184,78 188,100"/>
+      <polygon points="100,100 188,100 184,122"/>
+      <polygon points="100,100 184,122 168,158"/>
+      <polygon points="100,100 168,158 138,180"/>
+      <polygon points="100,100 138,180 100,188"/>
+      <polygon points="100,100 100,188 62,180"/>
+      <polygon points="100,100 62,180 32,158"/>
+      <polygon points="100,100 32,158 16,122"/>
+      <polygon points="100,100 16,122 12,100"/>
+      <polygon points="100,100 12,100 16,78"/>
+      <polygon points="100,100 16,78 32,42"/>
+      <polygon points="100,100 32,42 62,20"/>
+      <polygon points="100,100 62,20 100,12"/>
     </g>
+    <!-- mesa central octogonal (tabla del diamante) -->
+    <polygon points="100,58 130,72 142,100 130,128 100,142 70,128 58,100 70,72"
+             fill="url(#dgFace)" stroke="url(#dgEdge)" stroke-width="1.2" opacity=".95"/>
+    <polygon points="100,74 122,88 128,100 122,112 100,122 78,112 72,100 78,88"
+             fill="#ffffff" opacity=".28"/>
     <!-- destellos -->
-    <circle cx="82" cy="40" r="3.2" fill="#ffffff"/>
-    <circle cx="150" cy="96" r="2.4" fill="#ffffff" opacity=".8"/>
-    <circle cx="60" cy="120" r="2.2" fill="#ffffff" opacity=".7"/>
+    <circle cx="128" cy="60" r="3.4" fill="#ffffff"/>
+    <circle cx="160" cy="120" r="2.6" fill="#ffffff" opacity=".85"/>
+    <circle cx="66" cy="140" r="2.4" fill="#ffffff" opacity=".7"/>
   </svg>
   <div class="nucleo"></div>
 </div>
@@ -933,7 +943,28 @@
 </div>
 <div id="vozWidget">
   <div class="vw-head">
-    <div class="vw-orb" id="vwOrb"><span>&#127908;</span></div>
+    <div class="vw-orb" id="vwOrb">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+        <defs>
+          <radialGradient id="avFace" cx="42%" cy="36%" r="72%">
+            <stop offset="0" stop-color="#fff8e1"/><stop offset="1" stop-color="#c8a24a"/>
+          </radialGradient>
+          <linearGradient id="avVisor" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#0f3550"/><stop offset="1" stop-color="#06131f"/>
+          </linearGradient>
+        </defs>
+        <circle cx="24" cy="24" r="23" fill="url(#avFace)"/>
+        <!-- casco/cabeza -->
+        <path d="M13 20 Q13 9 24 9 Q35 9 35 20 L35 30 Q35 39 24 39 Q13 39 13 30 Z" fill="#141019"/>
+        <!-- visor -->
+        <path d="M16 20 Q16 15 24 15 Q32 15 32 20 L32 27 Q32 31 24 31 Q16 31 16 27 Z" fill="url(#avVisor)"/>
+        <circle class="av-eye" cx="20.5" cy="23" r="2.2" fill="#8fe9ff"/>
+        <circle class="av-eye" cx="27.5" cy="23" r="2.2" fill="#8fe9ff"/>
+        <!-- antena -->
+        <line x1="24" y1="9" x2="24" y2="4" stroke="#fff8e1" stroke-width="1.6"/>
+        <circle cx="24" cy="3.4" r="1.8" fill="#fff8e1"/>
+      </svg>
+    </div>
     <div class="vw-id">
       <div class="vw-nm oro">KYBALIO &middot; Agente de Voz</div>
       <div class="vw-st" id="vwState">Toca el microfono y hablame</div>

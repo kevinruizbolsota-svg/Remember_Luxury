@@ -124,6 +124,13 @@
   #galeria .galtop .cerrar{margin-left:auto;color:var(--tenue);cursor:pointer;font-size:13px;text-decoration:underline;font-family:'Cinzel',serif}
   #galeria .galtop .cerrar:hover{color:var(--oro)}
   #galeriaFrame{flex:1;width:100%;border:0}
+  #tienda{position:fixed;inset:0;z-index:600;background:var(--bg);display:none;flex-direction:column}
+  #tienda.open{display:flex}
+  #tienda .galtop{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--border);background:var(--panel)}
+  #tienda .galtop .title{font-size:15px;color:var(--oro);letter-spacing:2px;font-family:'Cinzel',serif}
+  #tienda .galtop .cerrar{margin-left:auto;color:var(--tenue);cursor:pointer;font-size:13px;text-decoration:underline;font-family:'Cinzel',serif}
+  #tienda .galtop .cerrar:hover{color:var(--oro)}
+  #tiendaFrame{flex:1;width:100%;border:0}
 
   /* ===== PORTAL KYBALIO ===== */
   #portal{position:fixed;inset:0;z-index:500;background:var(--bg);display:none}
@@ -218,6 +225,7 @@
     <a onclick="scrollTo2('servicios')">Servicios</a>
     <a onclick="scrollTo2('contacto')">Contacto</a>
     <a class="oro" style="color:var(--oro);font-weight:700" onclick="abrirGaleria()">Mi Templo</a>
+    <a class="oro" style="color:var(--oro);font-weight:700" onclick="abrirTienda()">Tienda</a>
     <a onclick="abrirPortal()">Entrar</a>
   </div>
 </nav>
@@ -229,6 +237,7 @@
   <div class="cta">
     <a class="btn" onclick="abrirPortal()">Entrar al Portal</a>
     <a class="btn" onclick="abrirGaleria()">Mi Templo</a>
+    <a class="btn" onclick="abrirTienda()">Tienda</a>
     <a href="#servicios" class="btn ghost">Descubre</a>
   </div>
   <div class="scroll-ind">&#8964;</div>
@@ -279,6 +288,14 @@
     <span class="cerrar" onclick="cerrarGaleria()">Cerrar &times;</span>
   </div>
   <iframe id="galeriaFrame" title="Galeria de fotos y videos"></iframe>
+</div>
+
+<div id="tienda">
+  <div class="galtop">
+    <span class="title">&#128081; TIENDA &middot; REMEMBER LUXURY</span>
+    <span class="cerrar" onclick="cerrarTienda()">Cerrar &times;</span>
+  </div>
+  <iframe id="tiendaFrame" title="Tienda Remember Luxury"></iframe>
 </div>
 
 <div id="portal">
@@ -355,6 +372,8 @@
   function scrollTo2(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
   function abrirGaleria(){var g=document.getElementById('galeria');var f=document.getElementById('galeriaFrame');if(!f.src){f.src='../index.html';}g.classList.add('open');document.body.style.overflow='hidden';}
   function cerrarGaleria(){document.getElementById('galeria').classList.remove('open');document.body.style.overflow='';}
+  function abrirTienda(){var g=document.getElementById('tienda');var f=document.getElementById('tiendaFrame');if(!f.src){f.src='tienda.html';}g.classList.add('open');document.body.style.overflow='hidden';}
+  function cerrarTienda(){document.getElementById('tienda').classList.remove('open');document.body.style.overflow='';}
   function abrirPortal(){document.getElementById('portal').classList.add('open');document.body.style.overflow='hidden';var s=localStorage.getItem('ciudadela_user');if(s){user=s;document.getElementById('login').style.display='none';start();loadMusic();}else{document.getElementById('login').style.display='flex';setTimeout(function(){document.getElementById('nameInput').focus();},100);}}
   function cerrarPortal(){document.getElementById('portal').classList.remove('open');document.body.style.overflow='';}
   function borrarHistorial(){ if(confirm('Seguro que quieres borrar el historial guardado en este navegador?')){ try{ localStorage.clear(); sessionStorage.clear(); }catch(e){} location.reload(); } }

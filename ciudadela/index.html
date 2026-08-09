@@ -1598,22 +1598,36 @@
     }
     function bajarNave(){ viajando=false; r.classList.remove("nave"); r.classList.add("walk"); if(boc)boc.textContent=frases[idx]; }
     /* ---- El robot VIAJA por toda la pagina segun el scroll ----
-       recorre en horizontal (izq->der) con un arco vertical, para que se note el viaje */
-    function moverConScroll(){
+       Se mueve con left/bottom (position:fixed) para NO chocar con las animaciones transform.
+       Recorrido horizontal (izq->der) con un arco vertical de vuelo. Interpolacion suave con rAF. */
+    var curX=18, curBottom=18, tgtX=18, tgtBottom=18, rafOn=false;
+    function calcTarget(){
       var doc=document.documentElement;
       var max=(doc.scrollHeight-window.innerHeight)||1;
       var p=Math.min(1,Math.max(0,(window.scrollY||0)/max));
       var rw=r.offsetWidth||74;
       /* recorrido horizontal por casi todo el ancho de la ventana */
-      var x=(window.innerWidth-rw-36)*p;
-      /* arco vertical: sube en el medio del recorrido y baja al final (vuelo) */
-      var y=-Math.sin(p*Math.PI)*Math.min(160,window.innerHeight*0.22);
-      r.style.transform="translate("+x.toFixed(0)+"px,"+y.toFixed(0)+"px)";
+      tgtX=18+(window.innerWidth-rw-36)*p;
+      /* arco vertical: se eleva en el medio del recorrido (vuelo) */
+      tgtBottom=18+Math.sin(p*Math.PI)*Math.min(240,window.innerHeight*0.32);
+    }
+    function animar(){
+      curX+=(tgtX-curX)*0.12;
+      curBottom+=(tgtBottom-curBottom)*0.12;
+      r.style.left=curX.toFixed(1)+"px";
+      r.style.bottom=curBottom.toFixed(1)+"px";
+      if(Math.abs(tgtX-curX)>0.5||Math.abs(tgtBottom-curBottom)>0.5){ requestAnimationFrame(animar); }
+      else { rafOn=false; r.style.left=tgtX.toFixed(1)+"px"; r.style.bottom=tgtBottom.toFixed(1)+"px"; }
+    }
+    function moverConScroll(){
+      calcTarget();
+      if(!rafOn){ rafOn=true; requestAnimationFrame(animar); }
       /* detecta movimiento real para activar la nave */
       if(Math.abs((window.scrollY||0)-ultimoY)>4){ ultimoY=window.scrollY||0; subirNave(); }
     }
     window.addEventListener("scroll",moverConScroll,{passive:true});
-    window.addEventListener("resize",moverConScroll);moverConScroll();
+    window.addEventListener("resize",moverConScroll);
+    calcTarget();curX=tgtX;curBottom=tgtBottom;r.style.left=curX+"px";r.style.bottom=curBottom+"px";
   })();
 
   /* ---- CAPTURA DE LEADS (formulario + modal + newsletter) ---- */

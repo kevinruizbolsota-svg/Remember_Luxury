@@ -58,17 +58,28 @@
   .dcard .body{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.4rem}
   .dcard .nm{position:absolute;bottom:8px;left:8px;right:8px;font-size:.78rem;color:#fff;text-shadow:0 1px 4px #000}
 
-  .composer{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px;margin:6px 0 18px}
-  .composer .row1{display:flex;gap:12px;align-items:center}
-  .composer .ava{width:42px;height:42px;border-radius:50%;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:700}
-  .composer textarea{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:6px;color:var(--texto);padding:11px 15px;font-family:inherit;font-size:1rem;resize:none;outline:none;max-height:200px}
-  .composer textarea:focus{border-color:var(--oro)}
-  .composer .row2{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
-  .composer .chip{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:4px;background:var(--panel2);border:1px solid var(--border);color:var(--tenue);cursor:pointer;font-size:.85rem;transition:all .15s}
-  .composer .chip:hover{border-color:var(--oro);color:var(--oro)}
-  .composer .pub{margin-left:auto;padding:8px 20px;border:none;border-radius:4px;background:var(--oro-med);color:#17130a;font-family:'Cinzel',serif;font-weight:700;letter-spacing:.5px;cursor:pointer;font-size:.85rem;transition:background .15s}
+  .composer{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin:6px 0 18px}
+  .composer .row1{display:flex;gap:10px;align-items:center}
+  .composer .ava{width:40px;height:40px;border-radius:50%;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:700;flex-shrink:0}
+  .composer textarea{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:20px;color:var(--texto);padding:10px 16px;font-family:inherit;font-size:1rem;resize:none;outline:none;max-height:200px;cursor:text}
+  .composer textarea:focus{border-color:var(--oro-med)}
+  .composer .sep-line{height:1px;background:var(--border);margin:12px 0 6px}
+  .composer .row2{display:flex;gap:4px;align-items:center;justify-content:space-between}
+  .composer .chip{display:flex;align-items:center;justify-content:center;gap:7px;padding:8px 10px;border-radius:6px;background:transparent;border:none;color:var(--tenue);cursor:pointer;font-size:.9rem;transition:background .15s;flex:1;font-family:inherit}
+  .composer .chip .em{font-size:1.15rem}
+  .composer .chip:hover{background:var(--panel2)}
+  .composer .row3{display:flex;justify-content:flex-end;margin-top:10px}
+  .composer .pub{padding:8px 26px;border:none;border-radius:6px;background:var(--oro-med);color:#17130a;font-family:'Cinzel',serif;font-weight:700;letter-spacing:.5px;cursor:pointer;font-size:.88rem;transition:background .15s}
   .composer .pub:hover{background:var(--oro)}
   .composer .pub:disabled{opacity:.5;cursor:default}
+  @media(max-width:520px){.composer .chip span.lbl{display:none}}
+
+  /* ===== CONTACTOS (estilo Facebook) ===== */
+  .contactos .ct{display:flex;align-items:center;gap:11px;padding:8px 6px;border-radius:8px;cursor:pointer;transition:background .15s}
+  .contactos .ct:hover{background:var(--panel2)}
+  .contactos .ct .ava{position:relative;width:36px;height:36px;border-radius:50%;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:700;font-size:14px;flex-shrink:0}
+  .contactos .ct .ava .dot{position:absolute;bottom:0;right:0;width:10px;height:10px;border-radius:50%;background:#5fb878;border:2px solid var(--panel)}
+  .contactos .ct .nm{font-size:.95rem;color:var(--texto)}
 
   .post{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:18px}
   .post .head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
@@ -267,13 +278,16 @@
       <div class="composer">
         <div class="row1">
           <div class="ava" id="compAva"></div>
-          <textarea id="postText" rows="1" placeholder="Comparte tu evolucion, un habito, un logro..."></textarea>
+          <textarea id="postText" rows="1" placeholder="Que estas pensando, Ciudadano?"></textarea>
         </div>
+        <div class="sep-line"></div>
         <div class="row2">
-          <span class="chip" onclick="setTag('Logro')">&#127942; Logro</span>
-          <span class="chip" onclick="setTag('Habito')">&#128293; Habito</span>
-          <span class="chip" onclick="setTag('Reflexion')">&#128302; Reflexion</span>
-          <span class="chip" onclick="nuevoDestello()">&#10024; Destello</span>
+          <button class="chip" onclick="setTag('Logro')"><span class="em">&#127942;</span><span class="lbl">Logro</span></button>
+          <button class="chip" onclick="setTag('Habito')"><span class="em">&#128293;</span><span class="lbl">Habito</span></button>
+          <button class="chip" onclick="setTag('Reflexion')"><span class="em">&#128302;</span><span class="lbl">Reflexion</span></button>
+          <button class="chip" onclick="nuevoDestello()"><span class="em">&#10024;</span><span class="lbl">Destello</span></button>
+        </div>
+        <div class="row3">
           <button class="pub" id="pubBtn" onclick="publicar()">Publicar</button>
         </div>
       </div>
@@ -316,6 +330,10 @@
     <div class="card">
       <h4>&#128293; Reto del dia</h4>
       <p style="color:var(--texto);font-size:1.1rem;line-height:1.7" id="reto"></p>
+    </div>
+    <div class="card">
+      <h4>&#128172; Contactos</h4>
+      <div class="contactos" id="contactos"></div>
     </div>
   </aside>
 </div>
@@ -457,7 +475,14 @@
     document.getElementById("proverbio").innerHTML=(function(){var p=PROVERBIOS[Math.floor(Math.random()*PROVERBIOS.length)];return '"'+p[0]+'"<span class="a">&mdash; '+p[1]+'</span>';})();
     document.getElementById("reto").textContent=RETOS[Math.floor(Math.random()*RETOS.length)];
     var sg=document.getElementById("sugeridos");sg.innerHTML="";SUGERIDOS.forEach(function(m){var d=document.createElement("div");d.className="member";d.innerHTML='<div class="ava">'+ini(m[0])+'</div><div class="info"><div class="nm">'+esc(m[0])+'</div><div class="rl">'+esc(m[1])+'</div></div>';sg.appendChild(d);});
+    renderContactos();
   }
+  function renderContactos(){
+    var c=document.getElementById("contactos");if(!c)return;
+    var gente=["KYBALIO","Sofia","Andres","Lucia","Mateo"];
+    c.innerHTML=gente.map(function(n){return '<div class="ct" onclick="abrirChatCon(\''+esc(n)+'\')"><div class="ava">'+ini(n)+'<span class="dot"></span></div><div class="nm">'+esc(n)+'</div></div>';}).join("");
+  }
+  function abrirChatCon(nombre){document.querySelector(".chat-box .chd .nm").textContent=nombre;document.querySelector(".chat-box .chd .ava").textContent=ini(nombre);var b=document.getElementById("chatBox");var f=document.getElementById("chatFab");b.classList.add("open");f.style.display="none";renderChat();}
   function seed(){
     posts=[
       {id:uid(),autor:"KYBALIO",txt:"Bienvenidos a La Comunidad de la Ciudadela. Este es el lugar donde forjamos diamantes: cada dia, cada habito, cada paso. Comparte tu evolucion y eleva a los demas.",tag:"Reflexion",ts:Date.now()-3600000,likes:12,coments:[{n:"Sofia",t:"Que hermoso proyecto!"}]},
@@ -468,7 +493,7 @@
   }
 
   /* ---- PUBLICAR ---- */
-  function setTag(t){tag=(tag===t?"":t);var chips=document.querySelectorAll(".composer .chip");chips.forEach(function(c){c.style.background="";c.style.color="";c.style.borderColor="";});if(tag){document.querySelectorAll(".composer .chip").forEach(function(c){if(c.textContent.indexOf(t)>=0){c.style.borderColor="var(--oro)";c.style.color="var(--oro)";}});toast("Etiqueta: "+t);}}
+  function setTag(t){tag=(tag===t?"":t);var chips=document.querySelectorAll(".composer .chip");chips.forEach(function(c){c.style.background="";c.style.color="";});if(tag){document.querySelectorAll(".composer .chip").forEach(function(c){if(c.textContent.indexOf(t)>=0){c.style.background="rgba(232,200,106,.12)";c.style.color="var(--oro)";}});toast("Etiqueta: "+t);}}
   function publicar(){var el=document.getElementById("postText");var t=el.value.trim();if(!t){toast("Escribe algo primero");return;}posts.unshift({id:uid(),autor:user,txt:t,tag:tag,ts:Date.now(),likes:0,coments:[]});save();el.value="";el.style.height="auto";tag="";setTag("");render();renderPerfil();toast("Publicado en la Ciudadela");}
   function borrarPost(id){posts=posts.filter(function(p){return p.id!==id;});save();render();renderPerfil();}
   function like(id){var p=posts.find(function(x){return x.id===id;});if(!p)return;if(reacted[id]){p.likes--;delete reacted[id];}else{p.likes++;reacted[id]=1;if(p.autor!==user)nuevaNotif("&#10024;","<b>"+esc(user)+"</b> elevo la publicacion de <b>"+esc(p.autor)+"</b>");}save();saveR();render();renderPerfil();}

@@ -473,12 +473,10 @@ window.ORA_CFG={
 
 <!-- ===================== AVATAR KYBALIO (identico al inicio) ===================== -->
 <style>
-  #robot{position:fixed;bottom:18px;left:18px;z-index:9135;width:74px;height:118px;cursor:pointer;filter:drop-shadow(0 10px 16px rgba(0,0,0,.55));transition:transform .5s cubic-bezier(.4,0,.2,1)}
+  #robot{position:fixed;bottom:18px;left:18px;z-index:9135;width:52px;height:84px;cursor:pointer;filter:drop-shadow(0 8px 12px rgba(0,0,0,.55));transition:transform .5s cubic-bezier(.4,0,.2,1)}
   #robot:hover{transform:translateY(-5px) scale(1.05)}
   #robot .rb-svg{width:100%;height:100%;display:block;overflow:visible}
-  #robot .bocadillo{position:absolute;bottom:104px;left:0;max-width:190px;background:#141117;border:1px solid rgba(232,200,106,.4);border-radius:11px;padding:8px 11px;font-size:.72rem;color:#e9ddc4;line-height:1.38;box-shadow:0 10px 26px rgba(0,0,0,.5);opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s;pointer-events:none;font-family:'Cormorant Garamond',Georgia,serif}
-  #robot .bocadillo::after{content:'';position:absolute;bottom:-7px;left:22px;border:7px solid transparent;border-top-color:#141117}
-  #robot.talk .bocadillo{opacity:1;transform:none}
+  #robot .bocadillo{display:none!important}
   #robot .rb-nave{opacity:0;transform:translateY(14px) scale(.6);transform-origin:60px 175px;transition:opacity .5s,transform .5s}
   #robot.nave .rb-nave{opacity:1;transform:none}
   #robot.nave .rb-svg{animation:navevuelo 3.6s ease-in-out infinite}
@@ -507,7 +505,7 @@ window.ORA_CFG={
   @keyframes rbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
   #robot .rb-cape{transform-origin:60px 60px;animation:rbCape 4s ease-in-out infinite}
   @keyframes rbCape{0%,100%{transform:skewX(0)}50%{transform:skewX(2deg)}}
-  @media(max-width:560px){#robot{width:58px;height:94px;bottom:12px;left:10px}#robot .bocadillo{bottom:84px;max-width:150px;font-size:.68rem}}
+  @media(max-width:560px){#robot{width:42px;height:68px;bottom:12px;left:10px}}
 
   #vozWidget{position:fixed;bottom:132px;left:18px;width:min(340px,90vw);height:min(500px,72vh);background:#141117;border:1px solid rgba(232,200,106,.32);border-radius:15px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:9400;display:none;flex-direction:column;overflow:hidden;transform-origin:14px 100%;animation:vwPop .28s cubic-bezier(.34,1.4,.5,1);font-family:'Cormorant Garamond',Georgia,serif}
   #vozWidget.open{display:flex}
@@ -930,7 +928,7 @@ window.ORA_CFG={
       var pos=perim(driftPhase+p*0.85); tgtX=pos.x; tgtY=pos.y;
     }
     function loop(){
-      curX+=(tgtX-curX)*0.09; curY+=(tgtY-curY)*0.09;
+      curX+=(tgtX-curX)*0.045; curY+=(tgtY-curY)*0.045;
       r.style.left=curX.toFixed(1)+"px"; r.style.top=curY.toFixed(1)+"px"; r.style.right="auto"; r.style.bottom="auto";
       if(Math.abs(tgtX-curX)>0.4||Math.abs(tgtY-curY)>0.4){requestAnimationFrame(loop);}else{run=false;}
     }
@@ -944,7 +942,7 @@ window.ORA_CFG={
     document.addEventListener("scroll",onScroll,{passive:true});
     setInterval(function(){var sy=window.pageYOffset||0;if(sy!==lastY){onScroll();}},250);
     /* deriva tranquila por los bordes aunque no haya scroll: llama la nave y viaja al siguiente rincon */
-    setInterval(function(){ if(widgetAbierto())return; driftPhase=(driftPhase+0.16)%1; calc(); kick(); viaje(); },5200);
+    setInterval(function(){ if(widgetAbierto())return; driftPhase=(driftPhase+0.10)%1; calc(); kick(); viaje(); },9000);
   }
   if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init);}else{init();}
 })();

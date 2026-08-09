@@ -166,32 +166,37 @@
   .prof-label{text-align:center;font-family:'Cinzel',serif;letter-spacing:6px;font-size:.6rem;color:var(--oro-med);text-transform:uppercase;opacity:.7;margin-bottom:8px}
 
   /* ===================== PERSONAJE ROBOT (guia de IA) ===================== */
-  #robot{position:fixed;bottom:20px;left:22px;z-index:135;width:104px;height:150px;cursor:pointer;filter:drop-shadow(0 12px 20px rgba(0,0,0,.55));transition:transform .5s cubic-bezier(.4,0,.2,1)}
-  #robot:hover{transform:translateY(-6px) scale(1.05)}
+  #robot{position:fixed;bottom:18px;left:18px;z-index:135;width:74px;height:118px;cursor:pointer;filter:drop-shadow(0 10px 16px rgba(0,0,0,.55));transition:transform .5s cubic-bezier(.4,0,.2,1)}
+  #robot:hover{transform:translateY(-5px) scale(1.05)}
   #robot .rb-svg{width:100%;height:100%;display:block;overflow:visible}
-  #robot .bocadillo{position:absolute;bottom:128px;left:0;max-width:230px;background:var(--panel);border:1px solid rgba(232,200,106,.4);border-radius:12px;padding:10px 13px;font-size:.82rem;color:var(--texto);line-height:1.4;box-shadow:0 10px 30px rgba(0,0,0,.5);opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s;pointer-events:none}
-  #robot .bocadillo::after{content:'';position:absolute;bottom:-8px;left:26px;border:8px solid transparent;border-top-color:var(--panel)}
+  #robot .bocadillo{position:absolute;bottom:104px;left:0;max-width:190px;background:var(--panel);border:1px solid rgba(232,200,106,.4);border-radius:11px;padding:8px 11px;font-size:.72rem;color:var(--texto);line-height:1.38;box-shadow:0 10px 26px rgba(0,0,0,.5);opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s;pointer-events:none}
+  #robot .bocadillo::after{content:'';position:absolute;bottom:-7px;left:22px;border:7px solid transparent;border-top-color:var(--panel)}
   #robot.talk .bocadillo{opacity:1;transform:none}
   #robot .rb-nave{opacity:0;transition:opacity .5s}
   #robot.nave .rb-nave{opacity:1}
   #robot.nave{animation:navevuelo 4s ease-in-out infinite}
   @keyframes navevuelo{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
   /* piernas caminando */
-  #robot.walk .rb-legL{animation:pasoL .5s ease-in-out infinite}
-  #robot.walk .rb-legR{animation:pasoR .5s ease-in-out infinite}
-  @keyframes pasoL{0%,100%{transform:rotate(14deg)}50%{transform:rotate(-14deg)}}
-  @keyframes pasoR{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
+  #robot.walk .rb-legL{animation:pasoL .55s ease-in-out infinite}
+  #robot.walk .rb-legR{animation:pasoR .55s ease-in-out infinite}
+  @keyframes pasoL{0%,100%{transform:rotate(11deg)}50%{transform:rotate(-11deg)}}
+  @keyframes pasoR{0%,100%{transform:rotate(-11deg)}50%{transform:rotate(11deg)}}
   #robot .rb-legL{transform-origin:50% 0%}
   #robot .rb-legR{transform-origin:50% 0%}
-  #robot .rb-arm{transform-origin:50% 0%;animation:brazo 2.4s ease-in-out infinite}
-  @keyframes brazo{0%,100%{transform:rotate(6deg)}50%{transform:rotate(-6deg)}}
-  #robot .rb-eye{animation:parpadeo 4s infinite}
-  @keyframes parpadeo{0%,92%,100%{opacity:1}96%{opacity:.2}}
+  #robot .rb-arm{transform-origin:50% 8%;animation:brazo 2.6s ease-in-out infinite}
+  @keyframes brazo{0%,100%{transform:rotate(5deg)}50%{transform:rotate(-5deg)}}
+  #robot .rb-eye{animation:parpadeo 4.5s infinite}
+  @keyframes parpadeo{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+  #robot .rb-eye{transform-origin:center;transform-box:fill-box}
   #robot .rb-glow{animation:glowRobot 2.5s ease-in-out infinite}
   @keyframes glowRobot{0%,100%{opacity:.5}50%{opacity:1}}
-  #robot .rb-body{animation:rbFloat 3.5s ease-in-out infinite}
-  @keyframes rbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-  @media(max-width:560px){#robot{width:80px;height:116px;bottom:14px;left:12px}#robot .bocadillo{bottom:100px;max-width:170px;font-size:.74rem}}
+  #robot .rb-hair{animation:rbHair 5s ease-in-out infinite}
+  @keyframes rbHair{0%,100%{transform:translateX(0)}50%{transform:translateX(.6px)}}
+  #robot .rb-body{animation:rbFloat 3.6s ease-in-out infinite}
+  @keyframes rbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+  #robot .rb-cape{transform-origin:60px 60px;animation:rbCape 4s ease-in-out infinite}
+  @keyframes rbCape{0%,100%{transform:skewX(0)}50%{transform:skewX(2deg)}}
+  @media(max-width:560px){#robot{width:58px;height:94px;bottom:12px;left:10px}#robot .bocadillo{bottom:84px;max-width:150px;font-size:.68rem}}
 
   section{padding:78px 7vw;position:relative}
   #planes,#contacto,#newsletter{padding-top:56px;padding-bottom:56px}
@@ -419,24 +424,28 @@
 
   /* ===== AGENTE DE VOZ (widget) ===== */
   #vozFab{bottom:160px;right:22px;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;font-size:24px}
-  #vozWidget{position:fixed;bottom:22px;right:22px;width:min(400px,94vw);height:min(640px,86vh);background:var(--panel);border:1px solid rgba(232,200,106,.3);border-radius:16px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:400;display:none;flex-direction:column;overflow:hidden}
+  #vozWidget{position:fixed;bottom:132px;left:18px;width:min(340px,90vw);height:min(500px,72vh);background:var(--panel);border:1px solid rgba(232,200,106,.32);border-radius:15px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:400;display:none;flex-direction:column;overflow:hidden;transform-origin:14px 100%;animation:vwPop .28s cubic-bezier(.34,1.4,.5,1)}
   #vozWidget.open{display:flex}
+  @keyframes vwPop{0%{opacity:0;transform:translateY(18px) scale(.85)}100%{opacity:1;transform:none}}
+  /* pico que apunta a la cabeza del bot */
+  #vozWidget::after{content:'';position:absolute;bottom:-9px;left:26px;border:9px solid transparent;border-top-color:var(--panel);filter:drop-shadow(0 2px 1px rgba(0,0,0,.3))}
+  @media(max-width:560px){#vozWidget{bottom:104px;left:8px;width:min(320px,94vw);height:min(440px,66vh)}}
   .vw-head{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(232,200,106,.08),transparent)}
-  .vw-orb{width:42px;height:42px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 0 0 rgba(232,200,106,.5),0 2px 10px rgba(0,0,0,.4)}
+  .vw-orb{width:34px;height:34px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 0 0 rgba(232,200,106,.5),0 2px 8px rgba(0,0,0,.4)}
   .vw-orb.talk{animation:orbPulse 1s infinite}
   .vw-orb .av-eye{animation:avParpadeo 4s infinite}
   .vw-orb.talk .av-eye{animation:avParpadeo 4s infinite,avHabla .5s ease-in-out infinite}
   @keyframes avParpadeo{0%,92%,100%{opacity:1}96%{opacity:.15}}
   @keyframes avHabla{0%,100%{filter:drop-shadow(0 0 1px #8fe9ff)}50%{filter:drop-shadow(0 0 4px #8fe9ff)}}
   @keyframes orbPulse{0%,100%{box-shadow:0 0 0 0 rgba(232,200,106,.5)}50%{box-shadow:0 0 0 12px rgba(232,200,106,0)}}
-  .vw-id .vw-nm{font-size:.8rem;font-family:'Cinzel',serif;letter-spacing:1px}
-  .vw-id .vw-st{font-size:.68rem;color:var(--tenue)}
+  .vw-id .vw-nm{font-size:.74rem;font-family:'Cinzel',serif;letter-spacing:.8px}
+  .vw-id .vw-st{font-size:.62rem;color:var(--tenue)}
   .vw-x{margin-left:auto;background:none;border:none;color:var(--tenue);font-size:22px;cursor:pointer}
   .vw-x:hover{color:var(--oro)}
   .vw-body{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
-  .vw-hint{color:var(--tenue);font-size:.82rem;line-height:1.55;font-style:italic;text-align:center;padding:12px}
+  .vw-hint{color:var(--tenue);font-size:.74rem;line-height:1.5;font-style:italic;text-align:center;padding:10px}
   .vw-msg{display:flex;gap:8px;max-width:88%}
-  .vw-msg .b{padding:9px 12px;border-radius:14px;font-size:.82rem;line-height:1.45}
+  .vw-msg .b{padding:8px 11px;border-radius:13px;font-size:.76rem;line-height:1.42}
   .vw-msg.user{align-self:flex-end;flex-direction:row-reverse}
   .vw-msg.user .b{background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;border-bottom-right-radius:4px}
   .vw-msg.bot .b{background:var(--panel2);color:var(--texto);border:1px solid var(--border);border-bottom-left-radius:4px}
@@ -453,7 +462,7 @@
   .vw-toggle .sw::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--tenue);transition:transform .2s,background .2s}
   .vw-toggle.on .sw{background:linear-gradient(180deg,#f4e2a0,#c8a24a)}
   .vw-toggle.on .sw::after{transform:translateX(18px);background:#1a1409}
-  .vw-toggle .lbl{font-size:.78rem;color:var(--texto);font-family:'Cinzel',serif;letter-spacing:.5px;white-space:nowrap}
+  .vw-toggle .lbl{font-size:.72rem;color:var(--texto);font-family:'Cinzel',serif;letter-spacing:.5px;white-space:nowrap}
   .vw-mic{width:52px;height:52px;border-radius:50%;border:none;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;font-size:22px;cursor:pointer;transition:transform .2s;box-shadow:0 8px 24px rgba(0,0,0,.4);flex-shrink:0}
   .vw-mic:hover{transform:scale(1.06)}
   .vw-mic.rec{background:#c0392b;color:#fff;animation:orbPulse 1s infinite}
@@ -867,103 +876,130 @@
 <!-- ===================== PERSONAJE ROBOT (guia de IA) ===================== -->
 <div id="robot" class="walk" onclick="abrirVoz()" title="Habla con KYBALIO, tu guia de IA">
   <div class="bocadillo" id="rbBocadillo">Hola, soy KYBALIO. Tocame y te resuelvo cualquier duda.</div>
-  <svg class="rb-svg" viewBox="0 0 120 170" xmlns="http://www.w3.org/2000/svg">
+  <svg class="rb-svg" viewBox="0 0 120 190" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="rbMetal" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#fff3cf"/><stop offset=".5" stop-color="#e8c86a"/><stop offset="1" stop-color="#a9812f"/>
       </linearGradient>
       <linearGradient id="rbMetal2" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#e8c86a"/><stop offset="1" stop-color="#8a6a24"/>
+        <stop offset="0" stop-color="#f4e2a0"/><stop offset="1" stop-color="#8a6a24"/>
       </linearGradient>
       <radialGradient id="rbAura" cx="50%" cy="50%" r="50%">
-        <stop offset="0" stop-color="rgba(232,200,106,.5)"/><stop offset="1" stop-color="rgba(232,200,106,0)"/>
+        <stop offset="0" stop-color="rgba(232,200,106,.4)"/><stop offset="1" stop-color="rgba(232,200,106,0)"/>
       </radialGradient>
-      <radialGradient id="rbVisor" cx="50%" cy="38%" r="75%">
-        <stop offset="0" stop-color="#1a4a6b"/><stop offset=".6" stop-color="#0a2438"/><stop offset="1" stop-color="#04101c"/>
+      <radialGradient id="rbPiel" cx="42%" cy="32%" r="72%">
+        <stop offset="0" stop-color="#ffe0bd"/><stop offset=".6" stop-color="#eec19a"/><stop offset="1" stop-color="#d19a6d"/>
       </radialGradient>
-      <linearGradient id="rbHead" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#26222e"/><stop offset="1" stop-color="#100d16"/>
-      </linearGradient>
-      <linearGradient id="rbPiel" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#f4d3ad"/><stop offset="1" stop-color="#d9ac7c"/>
-      </linearGradient>
       <linearGradient id="rbTunica" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#20232e"/><stop offset="1" stop-color="#0c0e15"/>
+        <stop offset="0" stop-color="#2b3040"/><stop offset=".5" stop-color="#191d29"/><stop offset="1" stop-color="#0b0d14"/>
+      </linearGradient>
+      <linearGradient id="rbTunicaL" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#333a4d"/><stop offset=".5" stop-color="#1a1e2a"/><stop offset="1" stop-color="#0d0f16"/>
       </linearGradient>
       <linearGradient id="rbCapa" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#3a2c0e"/><stop offset="1" stop-color="#1a1305"/>
+        <stop offset="0" stop-color="#4a3712"/><stop offset="1" stop-color="#171003"/>
       </linearGradient>
       <linearGradient id="rbPelo" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#3a2b1a"/><stop offset="1" stop-color="#1c140b"/>
+        <stop offset="0" stop-color="#4a3620"/><stop offset=".55" stop-color="#2c1f12"/><stop offset="1" stop-color="#160f08"/>
+      </linearGradient>
+      <linearGradient id="rbPant" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#20242f"/><stop offset="1" stop-color="#0a0c11"/>
       </linearGradient>
       <filter id="rbEyeGlow" x="-120%" y="-120%" width="340%" height="340%">
-        <feGaussianBlur stdDeviation="1.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        <feGaussianBlur stdDeviation="1.1" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="rbSoft" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation=".5"/>
       </filter>
     </defs>
     <!-- nave (oculta salvo modo nave) -->
     <g class="rb-nave">
-      <ellipse cx="60" cy="150" rx="50" ry="14" fill="url(#rbMetal)" opacity=".9"/>
-      <ellipse cx="60" cy="145" rx="34" ry="9" fill="#1c1922"/>
-      <circle cx="36" cy="150" r="3.4" fill="#fff6d6" class="rb-glow"/>
-      <circle cx="60" cy="153" r="3.4" fill="#fff6d6" class="rb-glow"/>
-      <circle cx="84" cy="150" r="3.4" fill="#fff6d6" class="rb-glow"/>
+      <ellipse cx="60" cy="172" rx="50" ry="13" fill="url(#rbMetal)" opacity=".9"/>
+      <ellipse cx="60" cy="168" rx="34" ry="8" fill="#1c1922"/>
+      <circle cx="36" cy="172" r="3.2" fill="#fff6d6" class="rb-glow"/>
+      <circle cx="60" cy="175" r="3.2" fill="#fff6d6" class="rb-glow"/>
+      <circle cx="84" cy="172" r="3.2" fill="#fff6d6" class="rb-glow"/>
     </g>
     <!-- aura -->
-    <circle cx="60" cy="70" r="56" fill="url(#rbAura)" class="rb-glow"/>
+    <circle cx="60" cy="80" r="60" fill="url(#rbAura)" class="rb-glow"/>
 
     <g class="rb-body">
-    <!-- piernas con pantalon -->
-    <g class="rb-legL"><rect x="47" y="120" width="12" height="30" rx="5" fill="url(#rbTunica)"/><rect x="44" y="147" width="18" height="8" rx="4" fill="#2a1f10"/></g>
-    <g class="rb-legR"><rect x="61" y="120" width="12" height="30" rx="5" fill="url(#rbTunica)"/><rect x="59" y="147" width="18" height="8" rx="4" fill="#2a1f10"/></g>
-    <!-- capa detras -->
-    <path d="M38 60 Q22 96 30 128 L44 122 Q40 92 46 66 Z" fill="url(#rbCapa)"/>
-    <path d="M82 60 Q98 96 90 128 L76 122 Q80 92 74 66 Z" fill="url(#rbCapa)"/>
-    <!-- brazos con manga y mano de piel -->
-    <g class="rb-arm"><rect x="26" y="62" width="10" height="38" rx="5" fill="url(#rbTunica)"/><circle cx="31" cy="102" r="5.5" fill="url(#rbPiel)"/></g>
-    <rect x="84" y="62" width="10" height="38" rx="5" fill="url(#rbTunica)"/><circle cx="89" cy="102" r="5.5" fill="url(#rbPiel)"/>
-    <!-- torso: tunica -->
-    <path d="M40 60 Q36 58 37 68 L40 112 Q40 120 50 120 L70 120 Q80 120 80 112 L83 68 Q84 58 80 60 Z" fill="url(#rbTunica)" stroke="url(#rbMetal)" stroke-width="1.8"/>
-    <!-- cuello en V de la tunica -->
-    <path d="M50 58 L60 76 L70 58 Z" fill="url(#rbPiel)"/>
-    <!-- cinturon dorado -->
-    <rect x="42" y="104" width="36" height="6" rx="2" fill="url(#rbMetal2)"/>
-    <rect x="56" y="103" width="8" height="8" rx="2" fill="url(#rbMetal)"/>
-    <!-- broche/emblema en el pecho -->
-    <circle cx="60" cy="86" r="5" fill="url(#rbMetal)" class="rb-glow"/>
-    <!-- hombreras doradas -->
-    <path d="M38 60 Q40 54 48 56 L46 64 Q42 62 38 64 Z" fill="url(#rbMetal2)"/>
-    <path d="M82 60 Q80 54 72 56 L74 64 Q78 62 82 64 Z" fill="url(#rbMetal2)"/>
-    <!-- cuello -->
-    <rect x="55" y="49" width="10" height="10" rx="3" fill="url(#rbPiel)"/>
-    <!-- ===== ROSTRO HUMANO ===== -->
-    <!-- pelo detras -->
-    <path d="M40 30 Q38 8 60 6 Q82 8 80 30 L80 40 Q82 22 60 20 Q38 22 40 40 Z" fill="url(#rbPelo)"/>
-    <!-- cara -->
-    <ellipse cx="60" cy="30" rx="19" ry="21" fill="url(#rbPiel)"/>
-    <!-- orejas -->
-    <circle cx="41" cy="31" r="3.6" fill="url(#rbPiel)"/>
-    <circle cx="79" cy="31" r="3.6" fill="url(#rbPiel)"/>
-    <!-- pelo encima (flequillo) -->
-    <path d="M41 26 Q42 9 60 8 Q78 9 79 26 Q72 16 60 16 Q48 16 41 26 Z" fill="url(#rbPelo)"/>
-    <!-- cejas -->
-    <rect x="48" y="24" width="9" height="2.2" rx="1.1" fill="#2b2013"/>
-    <rect x="63" y="24" width="9" height="2.2" rx="1.1" fill="#2b2013"/>
-    <!-- ojos -->
-    <g filter="url(#rbEyeGlow)">
-      <ellipse class="rb-eye" cx="52.5" cy="30" rx="3.4" ry="3.8" fill="#ffffff"/>
-      <ellipse class="rb-eye" cx="67.5" cy="30" rx="3.4" ry="3.8" fill="#ffffff"/>
+    <!-- piernas con pantalon y botas -->
+    <g class="rb-legL"><path d="M50 138 L48 172 Q48 176 53 176 L57 176 Q59 176 59 172 L59 138 Z" fill="url(#rbPant)"/><path d="M46 172 L61 172 L62 180 Q62 183 58 183 L48 183 Q45 183 45 180 Z" fill="#241a0d"/><rect x="45" y="178" width="17" height="3" rx="1.5" fill="url(#rbMetal2)"/></g>
+    <g class="rb-legR"><path d="M61 138 L61 172 Q61 176 63 176 L67 176 Q72 176 72 172 L70 138 Z" fill="url(#rbPant)"/><path d="M59 172 L74 172 L75 180 Q75 183 72 183 L62 183 Q58 183 58 180 Z" fill="#241a0d"/><rect x="58" y="178" width="17" height="3" rx="1.5" fill="url(#rbMetal2)"/></g>
+    <!-- capa detras con pliegues -->
+    <g class="rb-cape">
+    <path d="M40 66 Q20 108 26 148 L40 140 Q37 104 46 74 Z" fill="url(#rbCapa)"/>
+    <path d="M80 66 Q100 108 94 148 L80 140 Q83 104 74 74 Z" fill="url(#rbCapa)"/>
+    <path d="M46 74 Q42 108 44 140" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>
+    <path d="M74 74 Q78 108 76 140" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>
     </g>
-    <circle class="rb-eye" cx="52.8" cy="30.5" r="2" fill="#4a6b8a"/>
-    <circle class="rb-eye" cx="67.2" cy="30.5" r="2" fill="#4a6b8a"/>
-    <circle cx="53.4" cy="29.6" r="0.7" fill="#fff"/>
-    <circle cx="67.8" cy="29.6" r="0.7" fill="#fff"/>
+    <!-- brazos con manga larga y mano de piel -->
+    <g class="rb-arm"><path d="M31 70 Q26 72 27 82 L30 112 Q30 118 36 118 L40 118 Q44 116 43 108 L41 74 Q40 68 34 68 Z" fill="url(#rbTunicaL)"/><ellipse cx="38" cy="120" rx="5" ry="6" fill="url(#rbPiel)"/></g>
+    <path d="M89 70 Q94 72 93 82 L90 112 Q90 118 84 118 L80 118 Q76 116 77 108 L79 74 Q80 68 86 68 Z" fill="url(#rbTunicaL)"/><ellipse cx="82" cy="120" rx="5" ry="6" fill="url(#rbPiel)"/>
+    <!-- torso: tunica con pliegues -->
+    <path d="M42 66 Q37 64 38 76 L40 128 Q40 138 51 138 L69 138 Q80 138 80 128 L82 76 Q83 64 78 66 Z" fill="url(#rbTunica)" stroke="url(#rbMetal)" stroke-width="1.4"/>
+    <path d="M54 80 L52 128" stroke="rgba(0,0,0,.28)" stroke-width="1.4" fill="none"/>
+    <path d="M66 80 L68 128" stroke="rgba(0,0,0,.28)" stroke-width="1.4" fill="none"/>
+    <path d="M60 78 L60 126" stroke="rgba(255,255,255,.05)" stroke-width="1.4" fill="none"/>
+    <!-- cuello en V de la tunica -->
+    <path d="M51 64 L60 82 L69 64 Z" fill="url(#rbPiel)"/>
+    <!-- cinturon dorado con hebilla -->
+    <rect x="43" y="118" width="34" height="7" rx="2" fill="url(#rbMetal2)"/>
+    <rect x="55" y="116" width="10" height="11" rx="2.5" fill="url(#rbMetal)" stroke="#7a5c1c" stroke-width=".6"/>
+    <circle cx="60" cy="121.5" r="2.4" fill="#3a2c0e"/>
+    <!-- broche/emblema en el pecho -->
+    <circle cx="60" cy="98" r="4.6" fill="url(#rbMetal)" class="rb-glow"/>
+    <path d="M60 95 L61.4 98 L60 101 L58.6 98 Z" fill="#3a2c0e"/>
+    <!-- hombreras con detalle -->
+    <path d="M40 66 Q42 58 51 60 L49 70 Q44 68 40 70 Z" fill="url(#rbMetal2)"/>
+    <path d="M80 66 Q78 58 69 60 L71 70 Q76 68 80 70 Z" fill="url(#rbMetal2)"/>
+    <!-- cuello -->
+    <rect x="55" y="54" width="10" height="11" rx="3" fill="url(#rbPiel)"/>
+    <ellipse cx="60" cy="55" rx="6" ry="2.2" fill="rgba(0,0,0,.18)"/>
+    <!-- ===== ROSTRO HUMANO REALISTA ===== -->
+    <!-- pelo detras -->
+    <g class="rb-hair">
+    <path d="M39 34 Q35 6 60 4 Q85 6 81 34 L81 48 Q84 26 60 24 Q36 26 39 48 Z" fill="url(#rbPelo)"/>
+    <!-- cara -->
+    <path d="M42 32 Q42 12 60 11 Q78 12 78 32 Q78 44 72 50 Q66 55 60 55 Q54 55 48 50 Q42 44 42 32 Z" fill="url(#rbPiel)"/>
+    <!-- sombra mejillas/menton -->
+    <path d="M48 48 Q60 56 72 48 Q68 53 60 54 Q52 53 48 48 Z" fill="rgba(180,120,80,.25)" filter="url(#rbSoft)"/>
+    <!-- orejas -->
+    <path d="M42 34 Q37 33 38 39 Q40 43 43 41 Z" fill="url(#rbPiel)"/>
+    <path d="M78 34 Q83 33 82 39 Q80 43 77 41 Z" fill="url(#rbPiel)"/>
+    <!-- pelo encima (peinado con flequillo hacia un lado) -->
+    <path d="M41 30 Q40 8 60 7 Q80 8 79 30 Q76 20 66 17 Q64 24 58 25 Q49 25 44 22 Q42 26 41 30 Z" fill="url(#rbPelo)"/>
+    <path d="M60 7 Q70 9 74 18" fill="none" stroke="rgba(0,0,0,.3)" stroke-width="1"/>
+    </g>
+    <!-- cejas -->
+    <path d="M48 27 Q52 25 56 27" fill="none" stroke="#3a2a17" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M64 27 Q68 25 72 27" fill="none" stroke="#3a2a17" stroke-width="1.8" stroke-linecap="round"/>
+    <!-- ojos -->
+    <g class="rb-eye">
+    <ellipse cx="53" cy="33" rx="3.6" ry="2.6" fill="#fff"/>
+    <ellipse cx="67" cy="33" rx="3.6" ry="2.6" fill="#fff"/>
+    <g filter="url(#rbEyeGlow)">
+      <circle cx="53.3" cy="33.2" r="1.9" fill="#3d6ea0"/>
+      <circle cx="66.7" cy="33.2" r="1.9" fill="#3d6ea0"/>
+    </g>
+    <circle cx="53.3" cy="33.2" r=".9" fill="#0c1a2b"/>
+    <circle cx="66.7" cy="33.2" r=".9" fill="#0c1a2b"/>
+    <circle cx="54" cy="32.4" r=".6" fill="#fff"/>
+    <circle cx="67.4" cy="32.4" r=".6" fill="#fff"/>
+    </g>
+    <!-- parpados sombra -->
+    <path d="M49.4 31.4 Q53 29.4 56.6 31.4" fill="none" stroke="rgba(90,60,40,.5)" stroke-width=".9"/>
+    <path d="M63.4 31.4 Q67 29.4 70.6 31.4" fill="none" stroke="rgba(90,60,40,.5)" stroke-width=".9"/>
     <!-- nariz -->
-    <path d="M60 32 L58 38 Q60 40 62 38 Z" fill="#d09b6a"/>
+    <path d="M60 34 Q58.4 40 59 42 Q60 43.4 61 42 Q61.6 40 60 34" fill="none" stroke="rgba(150,95,60,.55)" stroke-width="1.2" stroke-linecap="round"/>
+    <ellipse cx="60" cy="42.4" rx="2.4" ry="1.1" fill="rgba(150,95,60,.28)"/>
     <!-- sonrisa -->
-    <path d="M53 42 Q60 48 67 42" fill="none" stroke="#a8603f" stroke-width="2" stroke-linecap="round"/>
+    <path d="M54 47 Q60 51 66 47" fill="none" stroke="#b06a45" stroke-width="1.7" stroke-linecap="round"/>
+    <path d="M56 46.6 Q60 48.4 64 46.6" fill="none" stroke="rgba(255,235,220,.55)" stroke-width="1" stroke-linecap="round"/>
     <!-- diadema dorada (toque IA) -->
-    <path d="M43 20 Q60 12 77 20" fill="none" stroke="url(#rbMetal)" stroke-width="2.4" stroke-linecap="round"/>
-    <circle cx="60" cy="14.5" r="2.6" fill="#fff6d6" class="rb-glow"/>
+    <path d="M43 21 Q60 13 77 21" fill="none" stroke="url(#rbMetal)" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="60" cy="15" r="2.3" fill="#fff6d6" class="rb-glow"/>
     </g>
   </svg>
 </div>
@@ -1200,12 +1236,30 @@
   window.__speak=(localStorage.getItem("ciudadela_speak")==="1");
   function refreshSpeakBtn(){var b=document.getElementById("speakBtn");if(!b)return;if(window.__speak){b.classList.add("on");b.innerHTML="&#128266;";b.title="Voz activada: leo las respuestas";}else{b.classList.remove("on");b.innerHTML="&#128263;";b.title="Voz desactivada: toca para que lea en voz alta";}}
   function toggleSpeak(){window.__speak=!window.__speak;localStorage.setItem("ciudadela_speak",window.__speak?"1":"0");refreshSpeakBtn();if(!window.__speak&&window.speechSynthesis){window.speechSynthesis.cancel();}else{speak("Voz activada.");}}
-  function speak(txt){if(!window.speechSynthesis)return;try{window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1;u.pitch=1;var pref=(typeof mejorVozEs==="function")?mejorVozEs():null;if(pref)u.voice=pref;window.speechSynthesis.speak(u);setTimeout(function(){try{if(window.speechSynthesis.paused)window.speechSynthesis.resume();}catch(e){}},250);}catch(e){}}
+  function speak(txt){if(!window.speechSynthesis)return;try{window.speechSynthesis.cancel();setTimeout(function(){try{var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1;u.pitch=1;var pref=(typeof mejorVozEs==="function")?mejorVozEs():null;if(pref)u.voice=pref;window.speechSynthesis.speak(u);setTimeout(function(){try{if(window.speechSynthesis.paused)window.speechSynthesis.resume();}catch(e){}},220);}catch(e){}},130);}catch(e){}}
   refreshSpeakBtn();
   /* ---- Cargador robusto de voces (getVoices suele venir vacio al inicio) ---- */
   window.__voces=[];
   function cargarVoces(){ if(window.speechSynthesis){ var v=window.speechSynthesis.getVoices(); if(v&&v.length)window.__voces=v; } }
-  if(window.speechSynthesis){ cargarVoces(); window.speechSynthesis.onvoiceschanged=cargarVoces; setTimeout(cargarVoces,300); setTimeout(cargarVoces,1200); }
+  if(window.speechSynthesis){ cargarVoces(); window.speechSynthesis.onvoiceschanged=cargarVoces; setTimeout(cargarVoces,300); setTimeout(cargarVoces,1200); setTimeout(cargarVoces,3000); }
+  /* algunos navegadores pausan la cola de speech; keep-alive periodico */
+  if(window.speechSynthesis){ setInterval(function(){ try{ if(window.speechSynthesis.speaking && window.speechSynthesis.paused) window.speechSynthesis.resume(); }catch(e){} }, 4000); }
+  /* ---- Desbloqueo de audio dentro de un gesto del usuario ---- */
+  window.__audioListo=false;
+  function vozWarmup(){
+    try{
+      if(window.speechSynthesis){ window.speechSynthesis.cancel(); window.speechSynthesis.resume(); }
+      cargarVoces();
+      if(!window.__audioListo && window.speechSynthesis){
+        /* utterance vacio silencioso para habilitar la sintesis en el primer gesto */
+        var u=new SpeechSynthesisUtterance(" ");u.volume=0;u.rate=1;
+        window.speechSynthesis.speak(u);
+        window.__audioListo=true;
+      }
+    }catch(e){}
+  }
+  /* primer toque/clic en cualquier parte tambien prepara el audio */
+  ["click","touchstart","keydown"].forEach(function(ev){document.addEventListener(ev,function _wu(){vozWarmup();},{once:true,passive:true});});
   function mejorVozEs(){
     var vs=window.__voces&&window.__voces.length?window.__voces:(window.speechSynthesis?window.speechSynthesis.getVoices():[]);
     if(!vs||!vs.length)return null;
@@ -1526,9 +1580,9 @@
   var VW_SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   var vwRecog=null, vwListening=false, vwHands=false, vwSpeaking=false, vwThinking=false, vwFinalBuf="", vwSilenceTimer=null, vwInterimEl=null, vwWantListen=false;
 
-  function abrirVoz(){var w=document.getElementById("vozWidget");w.classList.add("open");var rb=document.getElementById("robot");if(rb)rb.style.display="none";
-    /* desbloquea la voz del navegador dentro del mismo gesto del usuario */
-    try{window.speechSynthesis.cancel();window.speechSynthesis.resume();}catch(e){}
+  function abrirVoz(){var w=document.getElementById("vozWidget");w.classList.add("open");var rb=document.getElementById("robot");if(rb){rb.classList.remove("talk","nave");rb.classList.add("walk");}
+    /* desbloquea la voz del navegador dentro del mismo gesto del usuario (audio unlock) */
+    vozWarmup();
     if(!vwStarted){vwStarted=true;
       if(!VW_SR){document.getElementById("vwMicLbl").innerHTML="Para voz usa Google Chrome en tu PC o celular.";}
       vwAdd("bot","Hola, soy KYBALIO. Te escucho: hablame y te respondo en voz alta. Puedo abrirte cualquier parte de la web: dime por ejemplo \u201cabre la tienda\u201d, \u201cmuestrame los planes\u201d o \u201clleva a agentes\u201d.");
@@ -1539,7 +1593,7 @@
       setTimeout(function(){ if(!vwSpeaking) vwStartListen(); },1400);
     }
   }
-  function cerrarVoz(){document.getElementById("vozWidget").classList.remove("open");var rb=document.getElementById("robot");if(rb)rb.style.display="block";vozStopSpeak();vwStopListen(true);vwHands=false;refreshHandsBtn();}
+  function cerrarVoz(){document.getElementById("vozWidget").classList.remove("open");vozStopSpeak();vwStopListen(true);vwHands=false;refreshHandsBtn();}
   function vwEsc(t){var e=document.createElement("div");e.textContent=t;return e.innerHTML;}
   function vwSetState(t){var s=document.getElementById("vwState");if(s)s.textContent=t;}
   function vwAdd(role,text){var b=document.getElementById("vwBody");var h=b.querySelector(".vw-hint");if(h)h.remove();
@@ -1613,7 +1667,7 @@
     vwHands=!vwHands;refreshHandsBtn();
     if(vwHands){
       /* desbloquea la voz del navegador dentro del mismo clic del usuario */
-      try{window.speechSynthesis.cancel();window.speechSynthesis.resume();}catch(e){}
+      vozWarmup();
       vozHablar("Hola, te escucho. Dime en que puedo ayudarte o pideme abrir cualquier parte de la web.");
       /* si el navegador no reproduce voz, igual empezamos a escuchar */
       setTimeout(function(){ if(!vwSpeaking) vwStartListen(); },1200);
@@ -1627,19 +1681,32 @@
   function vozStopSpeak(){if(window.speechSynthesis)window.speechSynthesis.cancel();vwSpeaking=false;var o=document.getElementById("vwOrb");if(o)o.classList.remove("talk");}
   function vozHablar(txt,_intentos){
     if(!window.speechSynthesis){ if(vwHands)vwStartListen(); return; }
+    /* mientras habla NO debe estar escuchando (evita auto-eco) */
+    vwStopListen(false);
     /* si las voces aun no cargan, reintenta un par de veces */
-    if((!window.__voces||!window.__voces.length) && (_intentos||0)<3){ cargarVoces(); setTimeout(function(){vozHablar(txt,(_intentos||0)+1);},350); return; }
+    if((!window.__voces||!window.__voces.length) && (_intentos||0)<4){ cargarVoces(); setTimeout(function(){vozHablar(txt,(_intentos||0)+1);},300); return; }
     try{window.speechSynthesis.cancel();
-      var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1.02;u.pitch=1;u.volume=1;
-      var pref=mejorVozEs(); if(pref){u.voice=pref;u.lang=pref.lang||"es-ES";}
-      vwSpeaking=true;var o=document.getElementById("vwOrb");if(o)o.classList.add("talk");vwSetState("KYBALIO esta hablando...");
-      u.onend=function(){vwSpeaking=false;var o2=document.getElementById("vwOrb");if(o2)o2.classList.remove("talk");
-        if(vwHands){vwStartListen();}else{vwSetState("Pulsa \u00abManos libres\u00bb para seguir");}
-      };
-      u.onerror=function(){vwSpeaking=false;if(vwHands)vwStartListen();};
-      window.speechSynthesis.speak(u);
-      /* algunos navegadores pausan la cola: la reanudamos */
-      setTimeout(function(){try{if(window.speechSynthesis.paused)window.speechSynthesis.resume();}catch(e){}},250);
+      /* pequeña pausa: Chrome ignora speak() si va inmediatamente tras cancel() */
+      setTimeout(function(){
+        try{
+          var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1.02;u.pitch=1;u.volume=1;
+          var pref=mejorVozEs(); if(pref){u.voice=pref;u.lang=pref.lang||"es-ES";}
+          vwSpeaking=true;var o=document.getElementById("vwOrb");if(o)o.classList.add("talk");vwSetState("KYBALIO esta hablando...");
+          u.onend=function(){vwSpeaking=false;var o2=document.getElementById("vwOrb");if(o2)o2.classList.remove("talk");
+            if(vwHands){setTimeout(vwStartListen,180);}else{vwSetState("Pulsa \u00abManos libres\u00bb para seguir");}
+          };
+          u.onerror=function(){vwSpeaking=false;var o3=document.getElementById("vwOrb");if(o3)o3.classList.remove("talk");if(vwHands)setTimeout(vwStartListen,180);};
+          window.__lastUtter=u;
+          window.speechSynthesis.speak(u);
+          /* algunos navegadores pausan la cola: la reanudamos; y si no arranco, reintenta 1 vez */
+          setTimeout(function(){try{if(window.speechSynthesis.paused)window.speechSynthesis.resume();}catch(e){}},220);
+          setTimeout(function(){
+            if(vwSpeaking && !window.speechSynthesis.speaking && !window.speechSynthesis.pending && (_intentos||0)<2){
+              vwSpeaking=false; vozHablar(txt,(_intentos||0)+1);
+            }
+          },700);
+        }catch(e2){vwSpeaking=false;if(vwHands)vwStartListen();}
+      },140);
     }catch(e){vwSpeaking=false;if(vwHands)vwStartListen();}
   }
 

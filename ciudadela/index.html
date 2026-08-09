@@ -386,7 +386,7 @@
           .then(function(d){
             var t=(d&&d.texto?d.texto:"").trim();
             if(live)live.style.display="none";
-            if(t){ inp.value=(inp.value?inp.value+" ":"")+t; inp.style.height="auto"; inp.style.height=Math.min(inp.scrollHeight,160)+"px"; sendMsg(); }
+            if(t){ inp.value=(inp.value?inp.value+" ":"")+t; inp.style.height="auto"; inp.style.height=Math.min(inp.scrollHeight,160)+"px"; inp.focus(); try{inp.setSelectionRange(inp.value.length,inp.value.length);}catch(e){} }
             else{ alert("No se entendio el audio. Habla mas cerca del microfono e intenta de nuevo."); }
           })
           .catch(function(){ if(live)live.style.display="none"; alert("No pude transcribir el audio. Revisa tu conexion."); });

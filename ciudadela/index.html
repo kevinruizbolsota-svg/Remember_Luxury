@@ -116,6 +116,15 @@
   .btn-borrar{position:fixed;bottom:20px;left:20px;z-index:120;padding:10px 18px;font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;border-radius:2px;cursor:pointer;color:var(--oro);background:rgba(11,11,13,.8);border:1px solid rgba(232,200,106,.3);font-family:'Cinzel',serif;backdrop-filter:blur(6px);transition:all .25s}
   .btn-borrar:hover{background:rgba(232,200,106,.12);color:#fff6d6}
 
+  /* ===== GALERIA (portal fotos/videos) ===== */
+  #galeria{position:fixed;inset:0;z-index:600;background:var(--bg);display:none;flex-direction:column}
+  #galeria.open{display:flex}
+  #galeria .galtop{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--border);background:var(--panel)}
+  #galeria .galtop .title{font-size:15px;color:var(--oro);letter-spacing:2px;font-family:'Cinzel',serif}
+  #galeria .galtop .cerrar{margin-left:auto;color:var(--tenue);cursor:pointer;font-size:13px;text-decoration:underline;font-family:'Cinzel',serif}
+  #galeria .galtop .cerrar:hover{color:var(--oro)}
+  #galeriaFrame{flex:1;width:100%;border:0}
+
   /* ===== PORTAL KYBALIO ===== */
   #portal{position:fixed;inset:0;z-index:500;background:var(--bg);display:none}
   #portal.open{display:flex}
@@ -208,6 +217,7 @@
     <a onclick="scrollTo2('ciudadela')">La Ciudadela</a>
     <a onclick="scrollTo2('servicios')">Servicios</a>
     <a onclick="scrollTo2('contacto')">Contacto</a>
+    <a onclick="abrirGaleria()">Galeria</a>
     <a onclick="abrirPortal()">Entrar</a>
   </div>
 </nav>
@@ -262,6 +272,14 @@
 <footer>Remember Luxury &copy; 2026 &mdash; La Ciudadela del Lujo y la Elegancia</footer>
 
 <!-- ===================== PORTAL KYBALIO ===================== -->
+<div id="galeria">
+  <div class="galtop">
+    <span class="title">&#9733; GALERIA &middot; FOTOS Y VIDEOS</span>
+    <span class="cerrar" onclick="cerrarGaleria()">Cerrar &times;</span>
+  </div>
+  <iframe id="galeriaFrame" title="Galeria de fotos y videos"></iframe>
+</div>
+
 <div id="portal">
   <div id="login" class="overlay">
     <div class="loginbox">
@@ -334,6 +352,8 @@
   var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('on')} }); },{threshold:0.15});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
   function scrollTo2(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
+  function abrirGaleria(){var g=document.getElementById('galeria');var f=document.getElementById('galeriaFrame');if(!f.src){f.src='../index.html';}g.classList.add('open');document.body.style.overflow='hidden';}
+  function cerrarGaleria(){document.getElementById('galeria').classList.remove('open');document.body.style.overflow='';}
   function abrirPortal(){document.getElementById('portal').classList.add('open');document.body.style.overflow='hidden';var s=localStorage.getItem('ciudadela_user');if(s){user=s;document.getElementById('login').style.display='none';start();loadMusic();}else{document.getElementById('login').style.display='flex';setTimeout(function(){document.getElementById('nameInput').focus();},100);}}
   function cerrarPortal(){document.getElementById('portal').classList.remove('open');document.body.style.overflow='';}
   function borrarHistorial(){ if(confirm('Seguro que quieres borrar el historial guardado en este navegador?')){ try{ localStorage.clear(); sessionStorage.clear(); }catch(e){} location.reload(); } }

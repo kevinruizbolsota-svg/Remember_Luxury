@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
   :root{
     --oro:#e8c86a;--oro-med:#c8a24a;--oro-osc:#8a6a24;
@@ -350,16 +351,34 @@
     user=users[email].name;localStorage.setItem("ciudadela_user",user);localStorage.setItem("ciudadela_email",email);
     document.getElementById("login").style.display="none";arranque();
   }
-  function gmailLogin(){
-    /* Login real de Google pendiente de activar (requiere Google Client ID).
-       Por ahora pedimos el correo para simular la experiencia. */
-    var email=prompt("Continuar con Gmail\n\nEscribe tu correo de Gmail para entrar (el login real de Google se activara pronto):");
-    if(!email)return;email=email.trim().toLowerCase();
-    if(email.indexOf("@")<0){alert("Correo invalido.");return;}
+  /* ---- LOGIN REAL DE GOOGLE (Google Identity Services) ---- */
+  function KClientId(){return "ciudadela_google_client_id";}
+  function getClientId(){return localStorage.getItem(KClientId())||"";}
+  function decodeJwt(t){try{var p=t.split(".")[1].replace(/-/g,"+").replace(/_/g,"/");return JSON.parse(decodeURIComponent(escape(atob(p))));}catch(e){return null;}}
+  function entrarConGoogle(payload){
+    var email=(payload.email||"").trim().toLowerCase();
+    var nombre=payload.name||(email?email.split("@")[0]:"Miembro");
+    if(!email){alert("No se pudo leer el correo de Google.");return;}
     var users=getUsers();
-    if(!users[email]){var nm=email.split("@")[0];users[email]={name:nm,pass:"__gmail__",email:email};saveUsers(users);}
+    if(!users[email]){users[email]={name:nombre,pass:"__google__",email:email};saveUsers(users);}
+    else{users[email].name=nombre;saveUsers(users);}
     user=users[email].name;localStorage.setItem("ciudadela_user",user);localStorage.setItem("ciudadela_email",email);
     document.getElementById("login").style.display="none";arranque();
+  }
+  function iniciarGoogle(cid,onReady){
+    if(!window.google||!google.accounts||!google.accounts.id){setTimeout(function(){iniciarGoogle(cid,onReady);},300);return;}
+    google.accounts.id.initialize({client_id:cid,callback:function(resp){var d=decodeJwt(resp.credential);if(d)entrarConGoogle(d);else alert("Error al validar con Google.");}});
+    if(onReady)onReady();
+  }
+  function gmailLogin(){
+    var cid=getClientId();
+    if(!cid){
+      cid=prompt("Pega aqui tu Google Client ID\n\n(termina en .apps.googleusercontent.com)");
+      if(!cid)return;cid=cid.trim();
+      if(cid.indexOf(".apps.googleusercontent.com")<0){alert("Ese no parece un Client ID valido. Debe terminar en .apps.googleusercontent.com");return;}
+      localStorage.setItem(KClientId(),cid);
+    }
+    iniciarGoogle(cid,function(){ google.accounts.id.prompt(function(n){ if(n.isNotDisplayed()||n.isSkippedMoment()){ alert("Si no aparece la ventana de Google, revisa que en tu Client ID hayas puesto este origen autorizado:\n\nhttps://kevinruizbolsota-svg.github.io"); } }); });
   }
   function logout(){localStorage.removeItem("ciudadela_user");localStorage.removeItem("ciudadela_email");location.reload();}
   function arranque(){

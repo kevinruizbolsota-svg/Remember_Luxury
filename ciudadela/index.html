@@ -1597,15 +1597,18 @@
       viajeTimer=setTimeout(bajarNave,900); /* si deja de hacer scroll ~0.9s, aterriza */
     }
     function bajarNave(){ viajando=false; r.classList.remove("nave"); r.classList.add("walk"); if(boc)boc.textContent=frases[idx]; }
-    /* baja/sube suavemente con el scroll (acompana el descenso a la Fuente) */
+    /* ---- El robot VIAJA por toda la pagina segun el scroll ----
+       recorre en horizontal (izq->der) con un arco vertical, para que se note el viaje */
     function moverConScroll(){
       var doc=document.documentElement;
       var max=(doc.scrollHeight-window.innerHeight)||1;
       var p=Math.min(1,Math.max(0,(window.scrollY||0)/max));
-      /* recorre verticalmente la ventana segun el avance del scroll */
-      var margen=90;
-      var y=(window.innerHeight-margen)*p*0.72;
-      r.style.transform="translateY(-"+y.toFixed(0)+"px)";
+      var rw=r.offsetWidth||74;
+      /* recorrido horizontal por casi todo el ancho de la ventana */
+      var x=(window.innerWidth-rw-36)*p;
+      /* arco vertical: sube en el medio del recorrido y baja al final (vuelo) */
+      var y=-Math.sin(p*Math.PI)*Math.min(160,window.innerHeight*0.22);
+      r.style.transform="translate("+x.toFixed(0)+"px,"+y.toFixed(0)+"px)";
       /* detecta movimiento real para activar la nave */
       if(Math.abs((window.scrollY||0)-ultimoY)>4){ ultimoY=window.scrollY||0; subirNave(); }
     }

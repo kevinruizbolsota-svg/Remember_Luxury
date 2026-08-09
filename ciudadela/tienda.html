@@ -211,10 +211,10 @@
 <!-- ===== BANDA CTA ===== -->
 <div class="strip">
   <h2 class="oro">No sabes cual elegir?</h2>
-  <p>Habla con KYBALIO, nuestro agente de IA. Te recomienda el producto perfecto para ti en segundos.</p>
+  <p>Habla con KYBALIO, nuestro agente de IA (abajo a la izquierda). Te recomienda el agente perfecto para tu negocio en segundos.</p>
   <div class="cta">
-    <a class="btn" href="index.html">Hablar con KYBALIO</a>
-    <a class="btn ghost" href="https://wa.me/573014410541?text=Hola%20Remember%20Luxury,%20quiero%20info%20de%20la%20tienda" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+    <a class="btn" onclick="abrirVoz()">Hablar con KYBALIO</a>
+    <a class="btn ghost" href="https://wa.me/573014410541?text=Hola%20Orionix,%20quiero%20info%20de%20la%20tienda" target="_blank" rel="noopener">Escribir por WhatsApp</a>
   </div>
 </div>
 
@@ -262,12 +262,39 @@ function railMove(id,dir){var r=document.getElementById(id);if(r)r.scrollBy({lef
 function esc(t){var e=document.createElement("div");e.textContent=t==null?"":t;return e.innerHTML;}
 function stars(n){n=n||5;var s="";for(var i=0;i<5;i++)s+=(i<n?"\u2605":"\u2606");return s;}
 
+/* ===== CATALOGO REAL DE AGENTES (siempre visible; el webhook puede ampliarlo) ===== */
+const AGENTES_REALES = [
+  {categoria:"Agentes IA", nombre:"Agente Vendedor 24/7", precio:197, moneda:"EUR", rating:5, reviews:"popular",
+   descripcion:"Atiende, califica y responde a tus clientes de dia y de noche por chat/web. Construido en n8n + webhooks conectados al cerebro KYBALIO. Ideal para no perder ninguna venta.",
+   pago:"https://wa.me/573014410541?text=Hola%20Orionix,%20quiero%20el%20Agente%20Vendedor%2024/7"},
+  {categoria:"Agentes IA", nombre:"Agente de WhatsApp", precio:247, moneda:"EUR", rating:5, reviews:"top ventas",
+   descripcion:"Responde automaticamente en WhatsApp: preguntas frecuentes, precios, agenda y seguimiento. Deriva a un humano cuando hace falta. Perfecto para negocios que venden por WhatsApp.",
+   pago:"https://wa.me/573014410541?text=Hola%20Orionix,%20quiero%20el%20Agente%20de%20WhatsApp"},
+  {categoria:"Agentes IA", nombre:"Agente de Seguimiento", precio:167, moneda:"EUR", rating:5, reviews:"nuevo",
+   descripcion:"Recontacta a los interesados que no compraron: mensajes automaticos, recordatorios y ofertas. Recupera ventas que se estaban perdiendo. Se integra con tu CRM/base de datos.",
+   pago:"https://wa.me/573014410541?text=Hola%20Orionix,%20quiero%20el%20Agente%20de%20Seguimiento"},
+  {categoria:"Automatizacion", nombre:"Automatizacion de Cobros", precio:297, moneda:"EUR", rating:5, reviews:"recomendado",
+   descripcion:"Cobros con PayPal/enlace de pago, confirmacion automatica y registro de cada venta. Menos trabajo manual, cero pagos olvidados.",
+   pago:"https://wa.me/573014410541?text=Hola%20Orionix,%20quiero%20la%20Automatizacion%20de%20Cobros"},
+  {categoria:"Automatizacion", nombre:"Captura de Leads + Alertas", precio:147, moneda:"EUR", rating:5, reviews:"activo",
+   descripcion:"Formulario en tu web que guarda cada contacto y te avisa al instante por correo. El mismo sistema que ya corre en Orionix. Nunca mas un lead perdido.",
+   pago:"https://wa.me/573014410541?text=Hola%20Orionix,%20quiero%20Captura%20de%20Leads"},
+  {categoria:"Contenido con IA", nombre:"Contenido con IA (mensual)", precio:127, moneda:"EUR", rating:5, reviews:"mensual",
+   descripcion:"Textos, imagenes y guiones para redes generados con IA y tu esencia de marca. Publicaciones listas cada semana para no quedarte sin contenido.",
+   pago:"https://wa.me/573014410541?text=Hola%20Orionix,%20quiero%20Contenido%20con%20IA"},
+  {categoria:"Webs a medida", nombre:"Web Profesional Orionix", precio:490, moneda:"EUR", rating:5, reviews:"a medida",
+   descripcion:"Sitio elegante, veloz y optimizado (SEO) creado por Orionix, con agente de IA integrado. Como esta misma web. Entrega llave en mano.",
+   pago:"https://wa.me/573014410541?text=Hola%20Orionix,%20quiero%20una%20Web%20Profesional"}
+];
+
 async function cargar(){
   try{
     const r = await fetch(API, {cache:"no-store"});
     const d = await r.json();
     PRODUCTOS = (d.productos||[]);
   }catch(e){ PRODUCTOS = []; }
+  /* si el webhook no trae productos, usamos el catalogo real de agentes */
+  if(!PRODUCTOS.length){ PRODUCTOS = AGENTES_REALES.slice(); }
   window.PRODUCTOS = PRODUCTOS;
   pintarCategorias(); pintarRibbon(); pintarSearchCats();
   pintarDestacados(); pintarSecciones(); pintarVideos();

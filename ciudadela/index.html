@@ -101,8 +101,8 @@
 
   #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 7vw;position:relative;background:radial-gradient(ellipse at 50% 30%,rgba(232,200,106,.10),transparent 60%),radial-gradient(ellipse at 50% 120%,rgba(200,162,74,.12),transparent 55%),var(--bg)}
   #hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(232,200,106,.06) 1px,transparent 1px);background-size:26px 26px;opacity:.5;pointer-events:none}
-  #hero .eyebrow{font-family:'Cinzel',serif;letter-spacing:5px;font-size:.62rem;color:var(--oro-med);text-transform:uppercase;margin-bottom:18px;position:relative}
-  #hero h1{font-size:clamp(2.4rem,9vw,6.5rem);font-weight:500;letter-spacing:clamp(6px,2vw,18px);line-height:1;position:relative;
+  #hero .eyebrow{font-family:'Cinzel',serif;letter-spacing:4px;font-size:.5rem;color:var(--oro-med);text-transform:uppercase;margin-bottom:12px;position:relative}
+  #hero h1{font-size:clamp(1.5rem,5vw,3.4rem);font-weight:500;letter-spacing:clamp(3px,1.2vw,10px);line-height:1;position:relative;
     background:linear-gradient(120deg,#8a6d2a 0%,#f6e6ad 25%,#fff8e1 45%,#f6e6ad 60%,#b8912f 100%);
     background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
     text-shadow:none;filter:drop-shadow(0 4px 40px rgba(232,200,106,.35));animation:brilloTitulo 6s linear infinite,latido 4.5s ease-in-out infinite}
@@ -111,7 +111,7 @@
   @keyframes brilloTitulo{to{background-position:220% center}}
   @keyframes latido{0%,100%{filter:drop-shadow(0 4px 40px rgba(232,200,106,.30))}50%{filter:drop-shadow(0 6px 60px rgba(232,200,106,.55))}}
   @keyframes aura{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(1)}50%{opacity:.9;transform:translate(-50%,-50%) scale(1.08)}}
-  #hero .sub{font-size:clamp(1rem,2.2vw,1.3rem);font-style:italic;color:var(--tenue);margin:16px 0 34px;position:relative}
+  #hero .sub{font-size:clamp(.8rem,1.6vw,1rem);font-style:italic;color:var(--tenue);margin:12px 0 26px;position:relative}
   #hero .cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;position:relative}
   .scroll-ind{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);color:var(--oro-med);font-size:1.4rem;animation:flota 2s ease-in-out infinite;z-index:3}
   @keyframes flota{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}

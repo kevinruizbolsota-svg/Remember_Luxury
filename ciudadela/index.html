@@ -131,6 +131,13 @@
   #tienda .galtop .cerrar{margin-left:auto;color:var(--tenue);cursor:pointer;font-size:13px;text-decoration:underline;font-family:'Cinzel',serif}
   #tienda .galtop .cerrar:hover{color:var(--oro)}
   #tiendaFrame{flex:1;width:100%;border:0}
+  #comunidad{position:fixed;inset:0;z-index:600;background:var(--bg);display:none;flex-direction:column}
+  #comunidad.open{display:flex}
+  #comunidad .galtop{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--border);background:var(--panel)}
+  #comunidad .galtop .title{font-size:15px;color:var(--oro);letter-spacing:2px;font-family:'Cinzel',serif}
+  #comunidad .galtop .cerrar{margin-left:auto;color:var(--tenue);cursor:pointer;font-size:13px;text-decoration:underline;font-family:'Cinzel',serif}
+  #comunidad .galtop .cerrar:hover{color:var(--oro)}
+  #comunidadFrame{flex:1;width:100%;border:0}
 
   /* ===== PORTAL KYBALIO ===== */
   #portal{position:fixed;inset:0;z-index:500;background:var(--bg);display:none}
@@ -316,6 +323,7 @@
   <a onclick="mobGo('contacto')">Contacto</a>
   <a class="oro" onclick="closeMob();abrirGaleria()">Mi Templo</a>
   <a class="oro" onclick="closeMob();abrirTienda()">Tienda Completa</a>
+  <a class="oro" onclick="closeMob();abrirComunidad()">Comunidad</a>
   <a class="oro" onclick="closeMob();abrirPortal()">Entrar al Portal</a>
 </div>
 
@@ -329,6 +337,7 @@
     <a onclick="scrollTo2('contacto')">Contacto</a>
     <a class="oro" style="color:var(--oro);font-weight:700" onclick="abrirGaleria()">Mi Templo</a>
     <a class="oro" style="color:var(--oro);font-weight:700" onclick="abrirTienda()">Tienda</a>
+    <a class="oro" style="color:var(--oro);font-weight:700" onclick="abrirComunidad()">Comunidad</a>
     <a onclick="abrirPortal()">Entrar</a>
   </div>
   <button class="hamburguesa" onclick="openMob()">&#9776;</button>
@@ -343,6 +352,7 @@
     <a class="btn" onclick="abrirPortal()">Entrar al Portal</a>
     <a class="btn" onclick="abrirGaleria()">Mi Templo</a>
     <a class="btn" onclick="abrirTienda()">Tienda</a>
+    <a class="btn" onclick="abrirComunidad()">Comunidad</a>
     <a href="#servicios" class="btn ghost">Descubre</a>
   </div>
   <div class="scroll-ind">&#8964;</div>
@@ -479,6 +489,14 @@
   <iframe id="tiendaFrame" title="Tienda Remember Luxury"></iframe>
 </div>
 
+<div id="comunidad">
+  <div class="galtop">
+    <span class="title">&#128101; COMUNIDAD &middot; LA CIUDADELA</span>
+    <span class="cerrar" onclick="cerrarComunidad()">Cerrar &times;</span>
+  </div>
+  <iframe id="comunidadFrame" title="Comunidad de la Ciudadela"></iframe>
+</div>
+
 <div id="portal">
   <div id="login" class="overlay">
     <div class="loginbox">
@@ -555,6 +573,9 @@
   function cerrarGaleria(){document.getElementById('galeria').classList.remove('open');document.body.style.overflow='';}
   function abrirTienda(){var g=document.getElementById('tienda');var f=document.getElementById('tiendaFrame');if(!f.src){f.src='tienda.html';}g.classList.add('open');document.body.style.overflow='hidden';}
   function cerrarTienda(){document.getElementById('tienda').classList.remove('open');document.body.style.overflow='';}
+  function abrirComunidad(){var g=document.getElementById('comunidad');var f=document.getElementById('comunidadFrame');if(!f.src){f.src='comunidad.html';}g.classList.add('open');document.body.style.overflow='hidden';}
+  function cerrarComunidad(){document.getElementById('comunidad').classList.remove('open');document.body.style.overflow='';}
+  window.addEventListener('message',function(e){var d=e.data||{};if(d.ciudadela==='cerrar-comunidad'){cerrarComunidad();}else if(d.ciudadela==='abrir'){cerrarComunidad();if(d.destino==='portal')abrirPortal();else if(d.destino==='templo')abrirGaleria();else if(d.destino==='tienda')abrirTienda();}});
   function abrirPortal(){document.getElementById('portal').classList.add('open');document.body.style.overflow='hidden';var s=localStorage.getItem('ciudadela_user');if(s){user=s;document.getElementById('login').style.display='none';start();loadMusic();}else{document.getElementById('login').style.display='flex';setTimeout(function(){document.getElementById('nameInput').focus();},100);}}
   function cerrarPortal(){document.getElementById('portal').classList.remove('open');document.body.style.overflow='';}
   function borrarHistorial(){ if(confirm('Seguro que quieres borrar el historial guardado en este navegador?')){ try{ localStorage.clear(); sessionStorage.clear(); }catch(e){} location.reload(); } }
@@ -674,6 +695,7 @@
     {i:"&#128172;",t:"Entrar al Portal KYBALIO",fn:function(){abrirPortal();}},
     {i:"&#9733;",t:"Abrir Mi Templo (fotos y videos)",fn:function(){abrirGaleria();}},
     {i:"&#128081;",t:"Abrir la Tienda",fn:function(){abrirTienda();}},
+    {i:"&#128101;",t:"Abrir la Comunidad",fn:function(){abrirComunidad();}},
     {i:"&#127970;",t:"Ir a Servicios",fn:function(){scrollTo2("servicios");}},
     {i:"&#128176;",t:"Ir a Tienda Destacada",fn:function(){scrollTo2("destacados");}},
     {i:"&#128278;",t:"Ir a Testimonios",fn:function(){scrollTo2("testimonios");}},

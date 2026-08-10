@@ -1153,6 +1153,7 @@
       <div class="vw-nm oro">AXEL &middot; Agente de Voz</div>
       <div class="vw-st" id="vwState">Escribeme o pulsa el microfono</div>
     </div>
+    <button class="vw-x" id="vwMuteBtn" onclick="vozMute()" title="Silenciar la voz de AXEL" style="margin-right:4px">&#128266;</button>
     <button class="vw-x" onclick="cerrarVoz()">&times;</button>
   </div>
   <div class="vw-body" id="vwBody">
@@ -1397,6 +1398,10 @@
   }
   // Ajustes globales de "voz vieja, ronca y madura de hombre": tono grave + ritmo pausado
   var AXEL_PITCH=0.55, AXEL_RATE=0.9;
+  // Silenciar/activar la voz de AXEL (se recuerda entre visitas)
+  window.__vozMute=(localStorage.getItem("axel_voz_mute")==="1");
+  function refreshMuteBtn(){var b=document.getElementById("vwMuteBtn");if(!b)return;if(window.__vozMute){b.innerHTML="&#128263;";b.title="Voz de AXEL silenciada: toca para activarla";}else{b.innerHTML="&#128266;";b.title="Silenciar la voz de AXEL";}}
+  function vozMute(){window.__vozMute=!window.__vozMute;localStorage.setItem("axel_voz_mute",window.__vozMute?"1":"0");refreshMuteBtn();if(window.__vozMute&&window.speechSynthesis){try{window.speechSynthesis.cancel();}catch(e){}vwSpeaking=false;var o=document.getElementById("vwOrb");if(o)o.classList.remove("talk");vwSetState("Voz silenciada");}}
 
   /* ---- MUSICA ---- */
   var playlist=[],curTrack=-1;
@@ -1796,8 +1801,9 @@
   function abrirVoz(){var w=document.getElementById("vozWidget");w.classList.add("open");var rb=document.getElementById("robot");if(rb){rb.classList.remove("talk","nave");rb.classList.add("walk");}
     /* desbloquea la voz del navegador dentro del mismo gesto del usuario (audio unlock) */
     vozWarmup();
+    refreshMuteBtn();
     if(!vwStarted){vwStarted=true;
-      if(!VW_SR){document.getElementById("vwMicLbl").innerHTML="Para voz usa Google Chrome en tu PC o celular.";}
+      if(!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)){document.getElementById("vwMicLbl").innerHTML="Para hablar por voz usa Google Chrome en tu PC o celular.";}
       vwAdd("bot","Hola, soy **AXEL**, el oraculo de Orionix. Conozco cada rincon de la web: puedo *explicarte* cualquier seccion, resolver dudas y *llevarte* justo a donde quieras. Escribeme o pulsa el **microfono** y hablame, o dime por ejemplo \u201cmuestrame los planes\u201d.",[{label:"Ver Planes",icon:"&#128176;",fn:function(){cerrarVoz();scrollTo2("planes");}},{label:"Agentes IA",icon:"&#129302;",fn:function(){cerrarVoz();scrollTo2("agentes");}},{label:"Tienda",icon:"&#128717;",fn:function(){abrirTienda();}}]);
     }
     /* saluda por voz; el usuario habla pulsando el microfono */
@@ -1999,6 +2005,7 @@
 
   function vozStopSpeak(){if(window.speechSynthesis)window.speechSynthesis.cancel();vwSpeaking=false;var o=document.getElementById("vwOrb");if(o)o.classList.remove("talk");}
   function vozHablar(txt,_intentos){
+    if(window.__vozMute){ return; }
     if(!window.speechSynthesis){ if(vwHands)vwStartListen(); return; }
     /* mientras habla NO debe estar escuchando (evita auto-eco) */
     vwStopListen(false);
@@ -2042,8 +2049,12 @@
   function vwMic(){
     var btn=document.getElementById("vwMicBtn");
     var inp=document.getElementById("vwText");
+    /* Al grabar cortamos cualquier reconocimiento/escucha antiguo para no pelear por el microfono */
+    try{vwHands=false;vwWantListen=false;if(vwRecog){vwRecog.abort&&vwRecog.abort();}vwListening=false;if(vwWatch){clearInterval(vwWatch);vwWatch=null;}}catch(e){}
     if(__vwGrab){ __vwGrab=false; if(btn){btn.style.color="";btn.style.background="";} vwSetState("Transcribiendo..."); document.getElementById("vwMicLbl").textContent="Transcribiendo tu voz..."; try{__vwMr.stop();}catch(e){} return; }
     if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){alert("Tu navegador no permite grabar audio. Usa Google Chrome.");return;}
+    /* si AXEL esta hablando, callalo para que no se grabe a si mismo */
+    try{if(window.speechSynthesis)window.speechSynthesis.cancel();vwSpeaking=false;}catch(e){}
     navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
       __vwStream=stream;__vwChunks=[];
       try{__vwMr=new MediaRecorder(stream);}catch(e){__vwMr=new MediaRecorder(stream,{mimeType:"audio/webm"});}

@@ -99,6 +99,29 @@
   .cat-tile p{position:relative;z-index:2;color:rgba(255,255,255,.85);font-size:.78rem;line-height:1.5;margin-bottom:14px;letter-spacing:.5px;max-width:240px}
   .cat-tile .link{position:relative;z-index:2;color:#fff;font-size:.6rem;letter-spacing:2.5px;text-transform:uppercase;border-bottom:1px solid #fff;padding-bottom:3px}
 
+  /* ===== LOS MUNDOS ===== */
+  .mundos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px;padding:0 0 10px}
+  .mundo-tile{position:relative;aspect-ratio:4/5;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;justify-content:flex-end;padding:40px 30px;color:#fff}
+  .mundo-tile .mbg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 6s ease;z-index:0}
+  .mundo-tile:hover .mbg{transform:scale(1.06)}
+  .mundo-tile::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12) 0%,rgba(0,0,0,.25) 45%,rgba(0,0,0,.72) 100%);z-index:1;transition:background .4s}
+  .mundo-tile:hover::before{background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,.82))}
+  .mundo-tile .mc{position:relative;z-index:2}
+  .mundo-tile .mnum{font-size:.6rem;letter-spacing:3px;opacity:.75;margin-bottom:9px}
+  .mundo-tile h3{font-size:1.8rem;font-weight:500;letter-spacing:1px;margin-bottom:8px;line-height:1.05;color:#fff}
+  .mundo-tile p{font-size:.8rem;line-height:1.55;opacity:.9;margin-bottom:14px;max-width:280px}
+  .mundo-tile .mlink{font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;border-bottom:1px solid #fff;padding-bottom:3px;display:inline-block}
+  .m1 .mbg{background-image:url('https://images.unsplash.com/photo-1556909212-d5b604d0c90d?q=80&w=1200&auto=format&fit=crop')}
+  .m2 .mbg{background-image:url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1200&auto=format&fit=crop')}
+  .m3 .mbg{background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop')}
+  /* ===== ATELIER ===== */
+  #atelier{background:#111;color:#efece5;padding:90px 6vw;text-align:center;max-width:none;margin:0}
+  #atelier .mnum{font-size:.6rem;letter-spacing:3px;color:var(--oro);text-transform:uppercase;margin-bottom:14px}
+  #atelier h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:400;color:#fff;margin-bottom:16px}
+  #atelier p{color:#c9c4b8;max-width:600px;margin:0 auto 28px;font-size:.95rem;letter-spacing:.4px}
+  #atelier .btn{color:#fff;border-color:var(--oro)}
+  #atelier .btn:hover{background:var(--oro);color:#111}
+
   /* ===== PRODUCTOS: grid tipo pasarela / catalogo de moda ===== */
   .rail-wrap{position:relative;padding:0 5vw}
   .rail{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:38px 26px;overflow:visible;padding:10px 0 20px}
@@ -196,6 +219,25 @@
   </div>
 </div>
 
+<!-- ===== LOS MUNDOS ===== -->
+<section id="mundos">
+  <div class="rowhead"><h2>Los <span>Mundos</span></h2><p style="color:var(--gris);font-size:.82rem;letter-spacing:.3px;max-width:560px;margin:0 auto">Del objeto cotidiano a lo extraordinario. Tres universos dentro de una sola casa.</p></div>
+  <div class="mundos-grid">
+    <div class="mundo-tile m1" onclick="filtrarMundo('cotidiano')">
+      <div class="mbg"></div>
+      <div class="mc"><div class="mnum">MUNDO I</div><h3>Lo Cotidiano</h3><p>Tecnologia, hogar, moda y belleza, elevados.</p><span class="mlink">Explorar</span></div>
+    </div>
+    <div class="mundo-tile m2" onclick="filtrarMundo('aspiracional')">
+      <div class="mbg"></div>
+      <div class="mc"><div class="mnum">MUNDO II</div><h3>Lo Aspiracional</h3><p>Joyeria, gadgets premium y agentes de IA.</p><span class="mlink">Explorar</span></div>
+    </div>
+    <div class="mundo-tile m3" onclick="scrollTo2('atelier')">
+      <div class="mbg"></div>
+      <div class="mc"><div class="mnum">MUNDO III</div><h3>El Atelier a medida</h3><p>Autos, propiedades y experiencias unicas.</p><span class="mlink">Descubrir</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== CATEGORIAS ===== -->
 <section id="catalogo">
   <div class="rowhead"><h2>Las <span>Colecciones</span></h2></div>
@@ -212,6 +254,14 @@
 
 <!-- ===== SECCIONES POR CATALOGO (dinamicas) ===== -->
 <div id="secciones"></div>
+
+<!-- ===== ATELIER (Mundo III) ===== -->
+<section id="atelier">
+  <div class="mnum">Mundo III</div>
+  <h2 class="serif">El Atelier a medida</h2>
+  <p>Autos de lujo, propiedades y experiencias irrepetibles. No se compran con un clic: se conciben contigo, en privado. Cuentanos tu vision y la Maison la hara realidad.</p>
+  <a class="btn" href="https://wa.me/573014410541?text=Hola%20Orionix%2C%20quiero%20una%20consulta%20privada%20del%20Atelier" target="_blank" rel="noopener">Consulta privada por WhatsApp</a>
+</section>
 
 <!-- ===== VIDEOS ===== -->
 <section id="videos">
@@ -352,8 +402,10 @@ function pintarCategorias(){
 function pintarRibbon(){
   var rib = document.getElementById("ribbon");
   var cats = catsDisponibles();
-  rib.innerHTML = '<a class="menu" onclick="scrollTo2(\'catalogo\')">Colecciones</a>'
+  rib.innerHTML = '<a class="menu" onclick="scrollTo2(\'mundos\')">Los Mundos</a>'
+    + '<a onclick="scrollTo2(\'catalogo\')">Colecciones</a>'
     + cats.map(function(c){ return '<a onclick="filtrarCat(\''+esc(c).replace(/'/g,"")+'\')">'+esc(c)+'</a>'; }).join("")
+    + '<a onclick="scrollTo2(\'atelier\')">Atelier</a>'
     + '<a href="reels.html">El Desfile</a>'
     + '<a onclick="scrollTo2(\'destacados\')">Destacados</a>';
 }
@@ -447,6 +499,19 @@ function filtrarCat(c){
   document.querySelector("#destacados .rowhead h2").innerHTML = 'Categoria: <span>'+esc(c)+'</span>';
   if(!lista.length){ cont.innerHTML = placeholderCards(); }
   else { cont.innerHTML = lista.map(cardHTML).join(""); }
+  scrollTo2("destacados");
+}
+var MUNDO_COTIDIANO=["lo cotidiano","cotidiano","tecnologia","hogar","moda","ropa","belleza","electronics","electronica","computers","homeandkitchen","fashion","beauty","toys","books","productos"];
+var MUNDO_ASPIRACIONAL=["lo aspiracional","aspiracional","joyeria","joyas","premium","gadgets","motor","agentes ia","agente","sportsandoutdoors"];
+function enMundo(cat,lista){cat=(cat||"").toLowerCase();return lista.some(function(k){return cat.indexOf(k)>=0;});}
+function filtrarMundo(m){
+  var lista;
+  if(m==="cotidiano"){ lista = PRODUCTOS.filter(function(p){return enMundo(p.categoria,MUNDO_COTIDIANO)||!enMundo(p.categoria,MUNDO_ASPIRACIONAL);}); }
+  else { lista = PRODUCTOS.filter(function(p){return enMundo(p.categoria,MUNDO_ASPIRACIONAL);}); }
+  var titulo = (m==="cotidiano") ? "Mundo I &middot; Lo <span>Cotidiano</span>" : "Mundo II &middot; Lo <span>Aspiracional</span>";
+  var cont = document.getElementById("railDestacados");
+  document.querySelector("#destacados .rowhead h2").innerHTML = titulo;
+  cont.innerHTML = lista.length ? lista.map(cardHTML).join("") : placeholderCards();
   scrollTo2("destacados");
 }
 function verTodo(){

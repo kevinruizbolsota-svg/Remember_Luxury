@@ -274,7 +274,7 @@
       <a onclick="filtrar('Reflexion')"><span class="ic">&#128302;</span> Reflexiones</a>
       <div class="sep"></div>
       <h5>Accesos</h5>
-      <a onclick="abrirExterno('portal')"><span class="ic">&#128172;</span> Portal KYBALIO</a>
+      <a onclick="abrirExterno('portal')"><span class="ic">&#128172;</span> Portal AXEL</a>
       <a onclick="abrirExterno('tienda')"><span class="ic">&#128081;</span> Tienda</a>
     </div>
   </aside>
@@ -337,7 +337,7 @@
   <!-- DERECHA -->
   <aside class="side right">
     <div class="card">
-      <h4>&#128302; Proverbio de KYBALIO</h4>
+      <h4>&#128302; Proverbio de AXEL</h4>
       <div class="prov" id="proverbio"></div>
     </div>
     <div class="card">
@@ -370,7 +370,7 @@
 <div class="chat-box" id="chatBox">
   <div class="chd">
     <div class="ava">K</div>
-    <div><div class="nm">KYBALIO</div><div class="st">&#9679; En linea</div></div>
+    <div><div class="nm">AXEL</div><div class="st">&#9679; En linea</div></div>
     <button class="x" onclick="toggleChat()">&times;</button>
   </div>
   <div class="msgs" id="chatMsgs"></div>
@@ -385,12 +385,12 @@
 <script>
   var user="",tag="",posts=[],destellos=[],reacted={},saved={},notifs=[],chat=[];
   var PROVERBIOS=[
-    ["El diamante se forja bajo presion. Tu tambien.","KYBALIO"],
-    ["No busques ser mejor que otros, se mejor que ayer.","KYBALIO"],
-    ["La disciplina es el puente entre tus suenos y la realidad.","KYBALIO"],
-    ["Cada habito que repites, esculpe la persona que seras.","KYBALIO"],
-    ["El que domina sus manianas, domina su vida.","KYBALIO"],
-    ["Tu mente es un templo. Cuida lo que entra en el.","KYBALIO"]
+    ["El diamante se forja bajo presion. Tu tambien.","AXEL"],
+    ["No busques ser mejor que otros, se mejor que ayer.","AXEL"],
+    ["La disciplina es el puente entre tus suenos y la realidad.","AXEL"],
+    ["Cada habito que repites, esculpe la persona que seras.","AXEL"],
+    ["El que domina sus manianas, domina su vida.","AXEL"],
+    ["Tu mente es un templo. Cuida lo que entra en el.","AXEL"]
   ];
   var RETOS=[
     "Escribe 3 cosas por las que estas agradecido hoy.",
@@ -503,16 +503,16 @@
   }
   function renderContactos(){
     var c=document.getElementById("contactos");if(!c)return;
-    var gente=["KYBALIO","Sofia","Andres","Lucia","Mateo"];
+    var gente=["AXEL","Sofia","Andres","Lucia","Mateo"];
     c.innerHTML=gente.map(function(n){return '<div class="ct" onclick="abrirChatCon(\''+esc(n)+'\')"><div class="ava">'+ini(n)+'<span class="dot"></span></div><div class="nm">'+esc(n)+'</div></div>';}).join("");
   }
   function abrirChatCon(nombre){document.querySelector(".chat-box .chd .nm").textContent=nombre;document.querySelector(".chat-box .chd .ava").textContent=ini(nombre);var b=document.getElementById("chatBox");var f=document.getElementById("chatFab");b.classList.add("open");f.style.display="none";renderChat();}
   function seed(){
     posts=[
-      {id:uid(),autor:"KYBALIO",txt:"Bienvenidos a La Comunidad de la Ciudadela. Este es el lugar donde forjamos diamantes: cada dia, cada habito, cada paso. Comparte tu evolucion y eleva a los demas.",tag:"Reflexion",ts:Date.now()-3600000,likes:12,coments:[{n:"Sofia",t:"Que hermoso proyecto!"}]},
+      {id:uid(),autor:"AXEL",txt:"Bienvenidos a La Comunidad de la Ciudadela. Este es el lugar donde forjamos diamantes: cada dia, cada habito, cada paso. Comparte tu evolucion y eleva a los demas.",tag:"Reflexion",ts:Date.now()-3600000,likes:12,coments:[{n:"Sofia",t:"Que hermoso proyecto!"}]},
       {id:uid(),autor:"Andres",txt:"Dia 30 sin fallar mi rutina de la maniana. Me siento otra persona. La disciplina si cambia la vida.",tag:"Logro",ts:Date.now()-7200000,likes:8,coments:[]}
     ];
-    destellos=[{id:uid(),autor:"KYBALIO",emoji:"&#128081;",txt:"Hoy es un gran dia para evolucionar"}];
+    destellos=[{id:uid(),autor:"AXEL",emoji:"&#128081;",txt:"Hoy es un gran dia para evolucionar"}];
     save();saveD();
   }
 
@@ -558,7 +558,7 @@
   function seedNotifs(){notifs=[
     {id:uid(),ic:"&#10024;",tx:"<b>Sofia</b> reacciono a tu publicacion",tm:"hace 5 min",unread:true},
     {id:uid(),ic:"&#128172;",tx:"<b>Andres</b> comento en la comunidad",tm:"hace 1 h",unread:true},
-    {id:uid(),ic:"&#128081;",tx:"<b>KYBALIO</b> publico un nuevo Destello",tm:"hace 3 h",unread:false}
+    {id:uid(),ic:"&#128081;",tx:"<b>AXEL</b> publico un nuevo Destello",tm:"hace 3 h",unread:false}
   ];saveN();}
   function nuevaNotif(ic,tx){notifs.unshift({id:uid(),ic:ic,tx:tx,tm:"ahora",unread:true});saveN();renderNotifs();}
   function renderNotifs(){
@@ -596,7 +596,7 @@
 window.ORA_CFG={
   agente:"FILOSOFIA",
   webhook:"https://kevinruiz.app.n8n.cloud/webhook/portal-central",
-  hint:"Soy **KYBALIO**, el oraculo de Mi Templo. Te explico como funciona la comunidad: publicar logros, habitos y reflexiones, ver miembros, tu perfil o la galeria. Activa **Manos libres** y hablame, o escribe.",
+  hint:"Soy **AXEL**, el oraculo de Mi Templo. Te explico como funciona la comunidad: publicar logros, habitos y reflexiones, ver miembros, tu perfil o la galeria. Activa **Manos libres** y hablame, o escribe.",
   quick:[
     {label:"Ver Inicio",icon:"&#127968;",run:function(){try{go('feed');}catch(e){}}},
     {label:"Miembros",icon:"&#128101;",run:function(){try{go('miembros');}catch(e){}}},
@@ -610,7 +610,7 @@ window.ORA_CFG={
     {k:["logro","logros"],label:"Logros",icon:"&#127942;",resp:"Filtro los logros.",run:function(){try{filtrar('Logro');}catch(e){}}},
     {k:["habito","habitos","rutina"],label:"Habitos",icon:"&#128293;",resp:"Filtro los habitos.",run:function(){try{filtrar('Habito');}catch(e){}}},
     {k:["reflexion","reflexiones","pensamiento"],label:"Reflexiones",icon:"&#128302;",resp:"Filtro las reflexiones.",run:function(){try{filtrar('Reflexion');}catch(e){}}},
-    {k:["portal","kybalio completo","chat completo","conversar a fondo"],label:"el Portal KYBALIO",icon:"&#128172;",resp:"Abro el Portal de KYBALIO.",run:function(){try{abrirExterno('portal');}catch(e){}}},
+    {k:["portal","axel completo","chat completo","conversar a fondo"],label:"el Portal AXEL",icon:"&#128172;",resp:"Abro el Portal de AXEL.",run:function(){try{abrirExterno('portal');}catch(e){}}},
     {k:["tienda","comprar","productos"],label:"la Tienda",icon:"&#128081;",resp:"Te llevo a la tienda.",run:function(){try{abrirExterno('tienda');}catch(e){}}}
   ],
   local:function(texto){var n=(texto||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
@@ -619,12 +619,12 @@ window.ORA_CFG={
     if(h("logro","habito","reflexion","diamante","evoluc")) return "En Mi Templo compartimos nuestra evolucion: **Logros**, **Habitos** y **Reflexiones**. Asi forjamos diamantes juntos. Te filtro alguna categoria?";
     if(h("miembro","gente","tribu")) return "En **Miembros** ves a toda la tribu del templo y puedes chatear con ellos. Te llevo?";
     if(h("perfil","cuenta")) return "En **Mi Perfil** ves tus publicaciones y tu evolucion. Te lo abro?";
-    if(h("hola","buenas")) return "Hola, soy **KYBALIO**, el oraculo de Mi Templo. Te explico como publicar, ver miembros, tu perfil o la galeria. Que quieres hacer?";
+    if(h("hola","buenas")) return "Hola, soy **AXEL**, el oraculo de Mi Templo. Te explico como publicar, ver miembros, tu perfil o la galeria. Que quieres hacer?";
     return "Soy el oraculo de Mi Templo. Puedo explicarte la comunidad y llevarte al **Inicio**, **Galeria**, **Miembros**, **Perfil**, o al **Portal** y la **Tienda**. Dime.";}
 };
 </script>
 
-<!-- ===================== AVATAR KYBALIO (identico al inicio) ===================== -->
+<!-- ===================== AVATAR AXEL (identico al inicio) ===================== -->
 <style>
   #robot{position:fixed;bottom:18px;left:18px;z-index:9135;width:40px;height:64px;cursor:pointer;filter:drop-shadow(0 8px 12px rgba(0,0,0,.55));transition:transform .5s cubic-bezier(.4,0,.2,1)}
   #robot::before{content:'';position:absolute;left:50%;top:50%;width:150%;height:150%;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;z-index:-1;background:radial-gradient(circle,rgba(180,210,255,.55) 0%,rgba(232,200,106,.28) 38%,transparent 70%);opacity:0;transition:opacity 1.2s ease}
@@ -723,8 +723,8 @@ window.ORA_CFG={
   @keyframes vwblink{0%,80%{opacity:.2}40%{opacity:1}}
 </style>
 
-<div id="robot" class="walk" onclick="abrirVoz()" title="Habla con KYBALIO, tu guia de IA">
-  <div class="bocadillo" id="rbBocadillo">Hola, soy KYBALIO. Tocame y te resuelvo cualquier duda.</div>
+<div id="robot" class="walk" onclick="abrirVoz()" title="Habla con AXEL, tu guia de IA">
+  <div class="bocadillo" id="rbBocadillo">Hola, soy AXEL. Tocame y te resuelvo cualquier duda.</div>
   <svg class="rb-svg" viewBox="0 0 120 190" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="rbMetal" x1="0" y1="0" x2="0" y2="1">
@@ -877,13 +877,13 @@ window.ORA_CFG={
       </svg>
     </div>
     <div class="vw-id">
-      <div class="vw-nm">KYBALIO &middot; Agente de Voz</div>
+      <div class="vw-nm">AXEL &middot; Agente de Voz</div>
       <div class="vw-st" id="vwState">Activa Manos libres y hablame</div>
     </div>
     <button class="vw-x" onclick="cerrarVoz()">&times;</button>
   </div>
   <div class="vw-body" id="vwBody">
-    <div class="vw-hint" id="vwHint">Soy KYBALIO, el oraculo de Orionix. Activa <b>Manos libres</b> y hablame con naturalidad: te escucho, te respondo en voz alta, te explico cada detalle y te llevo a cualquier parte de la web.</div>
+    <div class="vw-hint" id="vwHint">Soy AXEL, el oraculo de Orionix. Activa <b>Manos libres</b> y hablame con naturalidad: te escucho, te respondo en voz alta, te explico cada detalle y te llevo a cualquier parte de la web.</div>
   </div>
   <div class="vw-foot">
     <div class="vw-live">
@@ -909,7 +909,7 @@ window.ORA_CFG={
   var HINT=CFG.hint||"";
   var LOCAL=CFG.local||function(){return "Soy el oraculo de Orionix. Puedo explicarte cada seccion y llevarte a donde quieras.";};
   var FRASES=CFG.frases||[
-    "Hola, soy KYBALIO. Tocame y te resuelvo cualquier duda.",
+    "Hola, soy AXEL. Tocame y te resuelvo cualquier duda.",
     "Preguntame lo que quieras, te escucho.",
     "Puedo llevarte a cualquier parte de la web.",
     "Necesitas ayuda? Solo hablame.",
@@ -955,7 +955,7 @@ window.ORA_CFG={
     var d=document.createElement("div");d.className="vw-msg "+(role==="user"?"user":"bot");
     d.innerHTML='<div class="vw-av">'+(role==="user"?"&#128100;":"K")+'</div><div class="b">'+(role==="user"?("<p>"+vwEsc(text)+"</p>"):vwFormat(text))+'</div>';
     b.appendChild(d);if(role!=="user")vwActions(d,acciones);b.scrollTop=b.scrollHeight;return d;}
-  function vwTyping(){var b=document.getElementById("vwBody");var d=document.createElement("div");d.className="vw-msg bot";d.innerHTML='<div class="vw-av">K</div><div class="b vw-dots"><span>.</span><span>.</span><span>.</span></div>';b.appendChild(d);b.scrollTop=b.scrollHeight;return d;}
+  function vwTyping(){var b=document.getElementById("vwBody");var d=document.createElement("div");d.className="vw-msg bot";d.innerHTML='<div class="vw-av">A</div><div class="b vw-dots"><span>.</span><span>.</span><span>.</span></div>';b.appendChild(d);b.scrollTop=b.scrollHeight;return d;}
   function vwShowInterim(t){var b=document.getElementById("vwBody");if(!vwInterimEl){vwInterimEl=document.createElement("div");vwInterimEl.className="vw-interim";b.appendChild(vwInterimEl);}vwInterimEl.textContent=t?("\u201c"+t+"\u201d"):"";b.scrollTop=b.scrollHeight;}
   function vwClearInterim(){if(vwInterimEl){vwInterimEl.remove();vwInterimEl=null;}}
 
@@ -968,10 +968,10 @@ window.ORA_CFG={
     vozWarmup();
     if(!vwStarted){vwStarted=true;
       if(!VW_SR){document.getElementById("vwMicLbl").innerHTML="Para voz usa Google Chrome en tu PC o celular.";}
-      vwAdd("bot",HINT||"Hola, soy **KYBALIO**, el oraculo de Orionix. Activa **Manos libres** y hablame, o escribe: te explico todo y te llevo a cualquier parte.",QUICK);
+      vwAdd("bot",HINT||"Hola, soy **AXEL**, el oraculo de Orionix. Activa **Manos libres** y hablame, o escribe: te explico todo y te llevo a cualquier parte.",QUICK);
     }
     if(VW_SR&&!vwHands){vwHands=true;refreshHandsBtn();
-      vozHablar("Hola, soy KYBALIO. Te escucho, dime en que puedo ayudarte.");
+      vozHablar("Hola, soy AXEL. Te escucho, dime en que puedo ayudarte.");
       setTimeout(function(){if(!vwSpeaking)vwStartListen();},1400);}
   };
   window.cerrarVoz=function(){document.getElementById("vozWidget").classList.remove("open");vozStopSpeak();vwStopListen(true);vwHands=false;refreshHandsBtn();};
@@ -1008,7 +1008,7 @@ window.ORA_CFG={
     /* usa lo final; si Chrome no marco nada como final, usa el provisional acumulado */
     var t=(vwFinalBuf.trim()||vwLastInterim.trim());vwFinalBuf="";vwLastInterim="";
     if(!t){ if(vwHands&&!vwSpeaking){setTimeout(vwStartListen,200);} return; }
-    vwClearInterim();vwStopListen(false);vwAdd("user",t);vwSetState("KYBALIO esta analizando...");if(vozComando(t))return;vwThinking=true;vwSetState("KYBALIO esta pensando...");vozEnviar(t);}
+    vwClearInterim();vwStopListen(false);vwAdd("user",t);vwSetState("AXEL esta analizando...");if(vozComando(t))return;vwThinking=true;vwSetState("AXEL esta pensando...");vozEnviar(t);}
 
   window.vozToggleHands=function(){if(!VW_SR){alert("Tu navegador no permite reconocimiento de voz. Usa Google Chrome en PC o Android.");return;}
     vwHands=!vwHands;refreshHandsBtn();
@@ -1027,7 +1027,7 @@ window.ORA_CFG={
       setTimeout(function(){try{
         var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1.02;u.pitch=1;u.volume=1;
         var pref=mejorVozEs();if(pref){u.voice=pref;u.lang=pref.lang||"es-ES";}
-        vwSpeaking=true;var o=document.getElementById("vwOrb");if(o)o.classList.add("talk");vwSetState("KYBALIO esta hablando...");
+        vwSpeaking=true;var o=document.getElementById("vwOrb");if(o)o.classList.add("talk");vwSetState("AXEL esta hablando...");
         u.onend=function(){vwSpeaking=false;var o2=document.getElementById("vwOrb");if(o2)o2.classList.remove("talk");if(vwHands){setTimeout(vwStartListen,180);}else{vwSetState("Pulsa \u00abManos libres\u00bb para seguir");}};
         u.onerror=function(){vwSpeaking=false;var o3=document.getElementById("vwOrb");if(o3)o3.classList.remove("talk");if(vwHands)setTimeout(vwStartListen,180);};
         window.speechSynthesis.speak(u);
@@ -1036,7 +1036,7 @@ window.ORA_CFG={
       }catch(e2){vwSpeaking=false;if(vwHands)vwStartListen();}},140);
     }catch(e){vwSpeaking=false;if(vwHands)vwStartListen();}}
 
-  window.vozEnviarTexto=function(){var inp=document.getElementById("vwText");var t=(inp.value||"").trim();if(!t)return;inp.value="";vwAdd("user",t);if(vozComando(t))return;vwThinking=true;vwSetState("KYBALIO esta pensando...");vozEnviar(t);};
+  window.vozEnviarTexto=function(){var inp=document.getElementById("vwText");var t=(inp.value||"").trim();if(!t)return;inp.value="";vwAdd("user",t);if(vozComando(t))return;vwThinking=true;vwSetState("AXEL esta pensando...");vozEnviar(t);};
 
   function vozEnviar(texto){var typing=vwTyping();
     fetch(WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:"Visitante",sesion:vwSession,agente:AGENTE,mensaje:texto})})
@@ -1112,7 +1112,7 @@ window.ORA_CFG={
   if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init);}else{init();}
 })();
 </script>
-<!-- ===================== FIN AVATAR KYBALIO ===================== -->
+<!-- ===================== FIN AVATAR AXEL ===================== -->
 
 
 </body>

@@ -395,13 +395,32 @@ function enviarAlCerebro(t){
   }
   intentar();
 }
+var FORJADOR="https://kevinruiz.app.n8n.cloud/webhook/forjar-pagina";
+function forjarPagina(desc){
+  var pensando=axelAdd("b","_El Arquitecto esta forjando tu pagina... (esto tarda unos segundos)_");
+  fetch(FORJADOR,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({instruccion:desc,nombre_archivo:""})})
+   .then(function(r){return r.json();})
+   .then(function(d){
+      pensando.remove();
+      if(d&&d.url){ axelAdd("b","Pagina forjada y publicada.\n\n"+(d.respuesta||"")+"\n\n[Abrir la pagina]("+d.url+")\n\n_Dale 1-2 minutos y abrela con Ctrl+F5._"); }
+      else { axelAdd("b","No pude forjar la pagina ahora mismo. Intentalo de nuevo en unos segundos."); }
+   })
+   .catch(function(){ pensando.remove(); axelAdd("b","No pude conectar con el Arquitecto (Forjador de Paginas)."); });
+}
 function axelSend(){
   var inp=document.getElementById("axelIn"); var t=(inp.value||"").trim(); if(!t) return; inp.value="";
-  axelAdd("u",t); enviarAlCerebro(t);
+  axelAdd("u",t);
+  var low=t.toLowerCase();
+  if(low.indexOf("/pagina")===0 || low.indexOf("/pag")===0){
+    var desc=t.replace(/^\/pa?g[a-z]*/i,"").trim();
+    if(!desc){ axelAdd("b","Escribe que pagina quieres. Ejemplo: /pagina una landing de ventas para un curso de meditacion"); return; }
+    forjarPagina(desc); return;
+  }
+  enviarAlCerebro(t);
 }
 // saludo inicial del director al cargar el log
 abrirChatInit();
-function abrirChatInit(){ var l=document.getElementById("axelLog"); if(l&&!l.children.length){ axelAdd("b","Soy **AXEL**, el Director de la Mesa. Dame una orden y reparto la mision a los agentes. _(Elige el motor de IA arriba del cuadro de texto.)_"); }
+function abrirChatInit(){ var l=document.getElementById("axelLog"); if(l&&!l.children.length){ axelAdd("b","Soy **AXEL**, el Director de la Mesa. Dame una orden y reparto la mision a los agentes. _Comandos: `/imagen` para crear una imagen, `/pagina` para forjar y publicar una web (ej: /pagina una landing de ventas)._"); }
   try{ var m=localStorage.getItem("orionix_motor"); var s=document.getElementById("axelModelo"); if(m&&s){ s.value=m; } }catch(e){} }
 
 /* ---- Fondo de estrellas ---- */

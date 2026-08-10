@@ -1167,6 +1167,7 @@
     <div class="vw-mic-lbl" id="vwMicLbl">Pulsa &laquo;Manos libres&raquo; y hablame, o escribe abajo</div>
     <div class="vw-chat">
       <input id="vwText" placeholder="Escribe tu mensaje..." onkeydown="if(event.key==='Enter')vozEnviarTexto()">
+      <button id="vwMicBtn" onclick="vozToggleHands()" title="Hablar por voz">&#127908;</button>
       <button onclick="vozEnviarTexto()" title="Enviar">&#10148;</button>
     </div>
   </div>
@@ -2002,7 +2003,7 @@
       document.getElementById("vwMicLbl").textContent="Pulsa \u00abManos libres\u00bb y hablame";
     }
   }
-  function refreshHandsBtn(){var b=document.getElementById("vwHandsToggle");var l=document.getElementById("vwHandsLbl");if(b)b.classList.toggle("on",vwHands);if(l)l.textContent=vwHands?"Escuchando":"Manos libres";}
+  function refreshHandsBtn(){var b=document.getElementById("vwHandsToggle");var l=document.getElementById("vwHandsLbl");if(b)b.classList.toggle("on",vwHands);if(l)l.textContent=vwHands?"Escuchando":"Manos libres";var mb=document.getElementById("vwMicBtn");if(mb){mb.style.color=vwHands?"#e8c86a":"";mb.style.background=vwHands?"rgba(232,200,106,.18)":"";mb.title=vwHands?"Escuchando... pulsa para parar":"Hablar por voz";}}
 
   function vozStopSpeak(){if(window.speechSynthesis)window.speechSynthesis.cancel();vwSpeaking=false;var o=document.getElementById("vwOrb");if(o)o.classList.remove("talk");}
   function vozHablar(txt,_intentos){

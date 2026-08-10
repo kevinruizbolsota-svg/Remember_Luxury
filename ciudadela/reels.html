@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>El Desfile · Orionix | Descubre piezas que enamoran</title>
+<meta name="description" content="El Desfile de Orionix: descubre productos increibles en un feed vertical. Deslizate, enamorate y consiguelos al instante.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--tinta:#111;--oro:#c8a24a;--oro2:#f4e2a0;}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow:hidden;background:#000;font-family:'Jost',-apple-system,'Segoe UI',sans-serif;color:#fff}
+  a{color:inherit;text-decoration:none}
+  .serif{font-family:'Cormorant Garamond',Georgia,serif}
+
+  /* Topbar minima */
+  .top{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent);pointer-events:none}
+  .top a,.top span{pointer-events:auto}
+  .brand{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:5px;font-size:1.1rem;text-transform:uppercase}
+  .brand small{display:block;font-size:.42rem;letter-spacing:4px;color:#bbb;font-family:'Jost',sans-serif;margin-top:2px}
+  .top .back{font-size:.66rem;letter-spacing:2px;text-transform:uppercase;color:#eee;border:1px solid rgba(255,255,255,.4);padding:7px 14px;border-radius:2px}
+
+  /* Feed vertical con snap */
+  .feed{height:100%;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch}
+  .feed::-webkit-scrollbar{display:none}
+  .reel{height:100vh;scroll-snap-align:start;position:relative;display:flex;align-items:flex-end;overflow:hidden}
+  .reel .bg{position:absolute;inset:0;background-position:center;background-size:cover;background-repeat:no-repeat;transform:scale(1.02);transition:transform 6s ease}
+  .reel.on .bg{transform:scale(1.12)}
+  .reel .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,.55) 78%,rgba(0,0,0,.85) 100%)}
+  .reel iframe{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;pointer-events:none}
+
+  /* Info del producto */
+  .info{position:relative;z-index:3;padding:0 78px 42px 24px;width:100%;max-width:640px}
+  .info .cat{display:inline-block;font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--oro2);border:1px solid rgba(200,162,74,.5);padding:3px 10px;border-radius:2px;margin-bottom:12px}
+  .info h2{font-family:'Cormorant Garamond',serif;font-size:2rem;line-height:1.1;font-weight:500;margin-bottom:8px;text-shadow:0 2px 20px rgba(0,0,0,.6)}
+  .info .desc{font-size:.9rem;color:#e9e6df;line-height:1.5;margin-bottom:14px;max-width:90%;text-shadow:0 1px 10px rgba(0,0,0,.6)}
+  .info .precio{font-size:1.15rem;letter-spacing:1px;margin-bottom:16px}
+  .info .precio small{font-size:.65rem;color:#cbb98a;letter-spacing:1px;margin-left:4px}
+  .info .cta{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;cursor:pointer;padding:12px 22px;font-size:.66rem;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;border-radius:3px;font-family:'Jost',sans-serif;transition:transform .2s,background .2s}
+  .btn:active{transform:scale(.96)}
+  .btn.oro{background:linear-gradient(180deg,var(--oro2),var(--oro));color:#1a1409;border:none}
+  .btn.line{background:rgba(0,0,0,.25);color:#fff;border:1px solid rgba(255,255,255,.5)}
+
+  /* Acciones laterales (like/guardar/compartir) estilo TikTok */
+  .acts{position:absolute;right:14px;bottom:120px;z-index:4;display:flex;flex-direction:column;gap:22px;align-items:center}
+  .act{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;user-select:none}
+  .act .ic{width:46px;height:46px;border-radius:50%;background:rgba(20,18,22,.55);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:20px;transition:transform .2s,background .2s}
+  .act:active .ic{transform:scale(.9)}
+  .act.on .ic{background:rgba(200,162,74,.25);border-color:var(--oro)}
+  .act .n{font-size:.6rem;color:#e6e2d8;letter-spacing:.5px}
+  .act.like.on .ic{color:#ff5b7f}
+
+  /* Indicador de scroll */
+  .hint{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:40;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.6);animation:up 1.8s ease-in-out infinite;pointer-events:none}
+  @keyframes up{0%,100%{transform:translateX(-50%) translateY(0);opacity:.5}50%{transform:translateX(-50%) translateY(-6px);opacity:1}}
+
+  .cargando{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;z-index:60;background:#000}
+  .cargando .c{font-family:'Cormorant Garamond',serif;font-size:1.6rem;letter-spacing:4px;color:var(--oro2)}
+  .cargando .s{font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:#888}
+  .spin{width:34px;height:34px;border:2px solid rgba(200,162,74,.25);border-top-color:var(--oro);border-radius:50%;animation:sp 1s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+
+  /* Filtro de mundos arriba */
+  .mundos{position:fixed;top:56px;left:0;right:0;z-index:45;display:flex;gap:8px;padding:8px 16px;overflow-x:auto;pointer-events:none}
+  .mundos::-webkit-scrollbar{display:none}
+  .mundos .m{pointer-events:auto;flex-shrink:0;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;padding:6px 13px;border-radius:20px;background:rgba(20,18,22,.5);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.16);color:#ddd;cursor:pointer}
+  .mundos .m.on{background:rgba(200,162,74,.22);border-color:var(--oro);color:var(--oro2)}
+
+  @media(min-width:900px){
+    .reel{justify-content:center}
+    .info{max-width:560px}
+    .info h2{font-size:2.4rem}
+  }
+</style>
+</head>
+<body>
+
+<div class="cargando" id="cargando">
+  <div class="spin"></div>
+  <div class="c">EL DESFILE</div>
+  <div class="s">Preparando las piezas</div>
+</div>
+
+<div class="top">
+  <a href="tienda.html" class="back">&#8249; Tienda</a>
+  <a href="index.html" class="brand" style="text-align:center">ORIONIX<small>El Desfile</small></a>
+  <span class="back" onclick="location.href='tienda.html'">Cofre &#128722;</span>
+</div>
+
+<div class="mundos" id="mundos"></div>
+
+<div class="feed" id="feed"></div>
+<div class="hint" id="hint">Desliza &#8593; para descubrir</div>
+
+<script>
+const API = "https://kevinruiz.app.n8n.cloud/webhook/tienda-productos";
+const WA = "https://wa.me/573014410541";
+let PRODUCTOS = [], FILTRO = "Todos";
+
+/* Piezas de respaldo si el webhook aun no trae nada */
+const DEMO = [
+  {nombre:"Auriculares Nocturne", categoria:"Tecnologia", precio:59, moneda:"EUR", descripcion:"Silencio absoluto. Sonido que envuelve como terciopelo.", imagen:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1200&auto=format&fit=crop", enlace:"", tienda:"amazon"},
+  {nombre:"Reloj Meridiano", categoria:"Accesorios", precio:189, moneda:"EUR", descripcion:"El tiempo, esculpido en acero. Una declaracion en tu muñeca.", imagen:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1200&auto=format&fit=crop", enlace:"", tienda:"amazon"},
+  {nombre:"Fragancia Nero", categoria:"Belleza", precio:120, moneda:"EUR", descripcion:"Ambar, cuero y una memoria que no se olvida.", imagen:"https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=1200&auto=format&fit=crop", enlace:"", tienda:"amazon"}
+];
+
+function money(p,m){ return (m==="USD"||!m?"$":"") + Number(p||0).toLocaleString() + (m&&m!=="USD"?(" "+m):""); }
+function esc(t){var e=document.createElement("div");e.textContent=t==null?"":t;return e.innerHTML;}
+function tiendaLabel(t){t=(t||"").toLowerCase();if(t.indexOf("amazon")>-1)return "Ver en Amazon";if(t.indexOf("aliexpress")>-1)return "Ver en AliExpress";if(t.indexOf("ebay")>-1)return "Ver en eBay";if(t.indexOf("hotmart")>-1)return "Conseguir ahora";return "Ver pieza";}
+function ytId(u){if(!u)return "";var m=String(u).match(/(?:v=|youtu\.be\/|embed\/)([A-Za-z0-9_-]{6,})/);return m?m[1]:"";}
+
+/* estado local (me gusta / guardado) */
+function LS(k,d){try{return JSON.parse(localStorage.getItem(k))||d;}catch(e){return d;}}
+function SS(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+let LIKES = LS("orx_reel_likes",{}), SAVES = LS("orx_reel_saves",{});
+
+async function cargar(){
+  try{ const r=await fetch(API,{cache:"no-store"}); const d=await r.json(); PRODUCTOS=(d.productos||[]); }catch(e){ PRODUCTOS=[]; }
+  if(!PRODUCTOS.length) PRODUCTOS=DEMO;
+  pintarMundos();
+  render();
+  document.getElementById("cargando").style.display="none";
+}
+
+function mundosDisponibles(){
+  var set=Array.from(new Set(PRODUCTOS.map(p=>p.categoria).filter(Boolean)));
+  return ["Todos"].concat(set);
+}
+function pintarMundos(){
+  var cont=document.getElementById("mundos");
+  cont.innerHTML=mundosDisponibles().map(function(m){
+    return '<div class="m'+(m===FILTRO?' on':'')+'" onclick="filtrar(\''+esc(m).replace(/'/g,"")+'\')">'+esc(m)+'</div>';
+  }).join("");
+}
+window.filtrar=function(m){ FILTRO=m; pintarMundos(); render(); var f=document.getElementById("feed"); if(f)f.scrollTo({top:0,behavior:"smooth"}); };
+
+function lista(){ return FILTRO==="Todos"?PRODUCTOS:PRODUCTOS.filter(function(p){return p.categoria===FILTRO;}); }
+
+function reelHTML(p,i){
+  var key = (p.nombre||"")+"|"+(p.precio||"");
+  var vid = ytId(p.video);
+  var media = vid
+    ? '<iframe src="https://www.youtube.com/embed/'+vid+'?autoplay=0&mute=1&loop=1&playlist='+vid+'&controls=0&modestbranding=1&rel=0" allow="autoplay; encrypted-media" loading="lazy"></iframe>'
+    : '<div class="bg" style="background-image:url(\''+esc(p.imagen||"")+'\')"></div>';
+  var enlace = p.enlace
+    ? '<a class="btn oro" href="'+esc(p.enlace)+'" target="_blank" rel="noopener sponsored">&#128717; '+tiendaLabel(p.tienda)+'</a>'
+    : '<a class="btn oro" href="'+WA+'?text='+encodeURIComponent("Hola Orionix, me interesa: "+(p.nombre||""))+'" target="_blank" rel="noopener">Consultar</a>';
+  return '<div class="reel" data-i="'+i+'">'
+    + media
+    + '<div class="veil"></div>'
+    + '<div class="acts">'
+      + '<div class="act like'+(LIKES[key]?' on':'')+'" onclick="like(this,\''+esc(key).replace(/'/g,"")+'\')"><div class="ic">&#10084;</div><div class="n" data-n>'+(LIKES[key]?"Te gusta":"Me gusta")+'</div></div>'
+      + '<div class="act save'+(SAVES[key]?' on':'')+'" onclick="guardar(this,\''+esc(key).replace(/'/g,"")+'\')"><div class="ic">&#128278;</div><div class="n">'+(SAVES[key]?"Guardado":"Guardar")+'</div></div>'
+      + '<div class="act" onclick="compartir(\''+esc(p.nombre||"")+'\')"><div class="ic">&#10148;</div><div class="n">Compartir</div></div>'
+    + '</div>'
+    + '<div class="info">'
+      + '<span class="cat">'+esc(p.categoria||"Pieza")+'</span>'
+      + '<h2>'+esc(p.nombre||"")+'</h2>'
+      + '<div class="desc">'+esc(p.descripcion||"")+'</div>'
+      + '<div class="precio">'+money(p.precio,p.moneda)+'<small>'+(p.moneda||"USD")+'</small></div>'
+      + '<div class="cta">'+enlace+'<a class="btn line" href="tienda.html">Ver mas piezas</a></div>'
+    + '</div>'
+  + '</div>';
+}
+
+function render(){
+  var f=document.getElementById("feed");
+  var L=lista();
+  f.innerHTML = L.length ? L.map(reelHTML).join("") : '<div class="reel"><div class="veil"></div><div class="info"><h2>Muy pronto</h2><div class="desc">Estamos preparando piezas para este mundo.</div><a class="btn oro" href="tienda.html">Volver a la tienda</a></div></div>';
+  observar();
+}
+
+/* activa animacion de la pieza visible */
+function observar(){
+  var reels=document.querySelectorAll(".reel");
+  if(!("IntersectionObserver" in window)){reels.forEach(function(r){r.classList.add("on");});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){e.target.classList.add("on");} else {e.target.classList.remove("on");} });},{threshold:.6});
+  reels.forEach(function(r){io.observe(r);});
+  var hint=document.getElementById("hint"); if(hint)setTimeout(function(){hint.style.display="none";},4000);
+}
+
+window.like=function(el,key){ LIKES[key]=!LIKES[key]; SS("orx_reel_likes",LIKES); el.classList.toggle("on",LIKES[key]); var n=el.querySelector("[data-n]"); if(n)n.textContent=LIKES[key]?"Te gusta":"Me gusta"; };
+window.guardar=function(el,key){ SAVES[key]=!SAVES[key]; SS("orx_reel_saves",SAVES); el.classList.toggle("on",SAVES[key]); el.querySelector(".n").textContent=SAVES[key]?"Guardado":"Guardar"; };
+window.compartir=function(nombre){ var url=location.href; if(navigator.share){navigator.share({title:"Orionix · "+nombre,text:"Mira esta pieza en Orionix",url:url}).catch(function(){});} else { var wa=WA+"?text="+encodeURIComponent("Mira esta pieza de Orionix: "+nombre+" "+url); window.open(wa,"_blank"); } };
+
+cargar();
+</script>
+</body>
+</html>

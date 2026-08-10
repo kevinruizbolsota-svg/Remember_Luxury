@@ -356,9 +356,9 @@
 <!-- ===== BANDA CTA ===== -->
 <div class="strip">
   <h2 class="oro">Asesoramiento Personal</h2>
-  <p>KYBALIO, nuestro asesor de IA, te acompaña para encontrar la pieza perfecta. Disponible ahora, abajo a la izquierda.</p>
+  <p>AXEL, nuestro asesor de IA, te acompaña para encontrar la pieza perfecta. Disponible ahora, abajo a la izquierda.</p>
   <div class="cta">
-    <a class="btn" onclick="abrirVoz()">Hablar con KYBALIO</a>
+    <a class="btn" onclick="abrirVoz()">Hablar con AXEL</a>
     <a class="btn ghost" href="https://wa.me/573014410541?text=Hola%20Orionix,%20quiero%20info%20de%20la%20tienda" target="_blank" rel="noopener">Escribir por WhatsApp</a>
   </div>
 </div>
@@ -550,7 +550,7 @@ function stars(n){n=n||5;var s="";for(var i=0;i<5;i++)s+=(i<n?"\u2605":"\u2606")
 /* ===== CATALOGO REAL DE AGENTES (siempre visible; el webhook puede ampliarlo) ===== */
 const AGENTES_REALES = [
   {categoria:"Agentes IA", nombre:"Agente Vendedor 24/7", precio:197, moneda:"EUR", rating:5, reviews:"popular",
-   descripcion:"Atiende, califica y responde a tus clientes de dia y de noche por chat/web. Construido en n8n + webhooks conectados al cerebro KYBALIO. Ideal para no perder ninguna venta.",
+   descripcion:"Atiende, califica y responde a tus clientes de dia y de noche por chat/web. Construido en n8n + webhooks conectados al cerebro AXEL. Ideal para no perder ninguna venta.",
    pago:"https://wa.me/573014410541?text=Hola%20Orionix,%20quiero%20el%20Agente%20Vendedor%2024/7"},
   {categoria:"Agentes IA", nombre:"Agente de WhatsApp", precio:247, moneda:"EUR", rating:5, reviews:"top ventas",
    descripcion:"Responde automaticamente en WhatsApp: preguntas frecuentes, precios, agenda y seguimiento. Deriva a un humano cuando hace falta. Perfecto para negocios que venden por WhatsApp.",
@@ -934,7 +934,7 @@ cargar();
 window.ORA_CFG={
   agente:"VENDEDOR",
   webhook:"https://kevinruiz.app.n8n.cloud/webhook/portal-central",
-  hint:"Soy **KYBALIO**, el oraculo de la Tienda Orionix. Te explico cualquier producto, te comparo agentes IA, te muestro lo destacado, los videos, o te abro el carrito. Activa **Manos libres** y hablame, o escribe.",
+  hint:"Soy **AXEL**, el oraculo de la Tienda Orionix. Te explico cualquier producto, te comparo agentes IA, te muestro lo destacado, los videos, o te abro el carrito. Activa **Manos libres** y hablame, o escribe.",
   quick:[
     {label:"Ver catalogo",icon:"&#128722;",run:function(){scrollTo2('catalogo');}},
     {label:"Lo destacado",icon:"&#11088;",run:function(){scrollTo2('destacados');}},
@@ -958,15 +958,15 @@ window.ORA_CFG={
       return P.length ? ("Estas son las promociones y precios **reales** que hay ahora mismo en la tienda:"+listaReal()+"No invento ofertas: si no aparece aqui, no existe. Te abro el catalogo para verlas en detalle?") 
                       : "No tengo promociones activas confirmadas en este momento. Prefiero decirte la verdad antes que inventar una oferta. Si quieres, te dejo con un asesor por WhatsApp para ver posibilidades reales.";
     }
-    if(h("agente","ia","vendedor","whatsapp","voz","seguimiento")) return "Nuestros **Agentes de IA** reales son: *Vendedor* (atiende y cierra 24/7), *WhatsApp*, *Voz* y *Seguimiento*. Estan construidos con **n8n** (workflows, nodos, webhooks) conectados al cerebro KYBALIO. Te muestro el catalogo con lo que hay disponible?";
+    if(h("agente","ia","vendedor","whatsapp","voz","seguimiento")) return "Nuestros **Agentes de IA** reales son: *Vendedor* (atiende y cierra 24/7), *WhatsApp*, *Voz* y *Seguimiento*. Estan construidos con **n8n** (workflows, nodos, webhooks) conectados al cerebro AXEL. Te muestro el catalogo con lo que hay disponible?";
     if(h("precio","cuanto","cuesta","vale","pagar")){ return P.length ? ("Estos son los precios **reales** en la tienda:"+listaReal()+"Te abro el catalogo o el carrito?") : "Cada producto muestra su precio real en su ficha. Te abro el **catalogo** para verlos."; }
     if(h("envio","entrega","digital","descarga")) return "La mayoria de productos son **digitales**: los recibes y los activamos contigo, sin envio fisico. Te muestro lo destacado?";
-    if(h("hola","buenas")) return "Hola, soy **KYBALIO**, el oraculo de la Tienda Orionix. Solo te hablo de productos, agentes y precios **reales**. Que quieres ver: catalogo, destacados, videos o carrito?";
+    if(h("hola","buenas")) return "Hola, soy **AXEL**, el oraculo de la Tienda Orionix. Solo te hablo de productos, agentes y precios **reales**. Que quieres ver: catalogo, destacados, videos o carrito?";
     return "Soy el oraculo de la Tienda Orionix y solo hablo con la verdad: te muestro los **productos y precios reales**, los **agentes de IA** disponibles y te llevo al **catalogo**, **destacados**, **videos** o **carrito**. Dime que buscas.";}
 };
 </script>
 
-<!-- ===================== AVATAR KYBALIO (identico al inicio) ===================== -->
+<!-- ===================== AVATAR AXEL (identico al inicio) ===================== -->
 <style>
   #robot{position:fixed;bottom:18px;left:18px;z-index:9135;width:40px;height:64px;cursor:pointer;filter:drop-shadow(0 8px 12px rgba(0,0,0,.55));transition:transform .5s cubic-bezier(.4,0,.2,1)}
   #robot::before{content:'';position:absolute;left:50%;top:50%;width:150%;height:150%;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;z-index:-1;background:radial-gradient(circle,rgba(180,210,255,.55) 0%,rgba(232,200,106,.28) 38%,transparent 70%);opacity:0;transition:opacity 1.2s ease}
@@ -1065,8 +1065,8 @@ window.ORA_CFG={
   @keyframes vwblink{0%,80%{opacity:.2}40%{opacity:1}}
 </style>
 
-<div id="robot" class="walk" onclick="abrirVoz()" title="Habla con KYBALIO, tu guia de IA">
-  <div class="bocadillo" id="rbBocadillo">Hola, soy KYBALIO. Tocame y te resuelvo cualquier duda.</div>
+<div id="robot" class="walk" onclick="abrirVoz()" title="Habla con AXEL, tu guia de IA">
+  <div class="bocadillo" id="rbBocadillo">Hola, soy AXEL. Tocame y te resuelvo cualquier duda.</div>
   <svg class="rb-svg" viewBox="0 0 120 190" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="rbMetal" x1="0" y1="0" x2="0" y2="1">
@@ -1219,13 +1219,13 @@ window.ORA_CFG={
       </svg>
     </div>
     <div class="vw-id">
-      <div class="vw-nm">KYBALIO &middot; Agente de Voz</div>
+      <div class="vw-nm">AXEL &middot; Agente de Voz</div>
       <div class="vw-st" id="vwState">Activa Manos libres y hablame</div>
     </div>
     <button class="vw-x" onclick="cerrarVoz()">&times;</button>
   </div>
   <div class="vw-body" id="vwBody">
-    <div class="vw-hint" id="vwHint">Soy KYBALIO, el oraculo de Orionix. Activa <b>Manos libres</b> y hablame con naturalidad: te escucho, te respondo en voz alta, te explico cada detalle y te llevo a cualquier parte de la web.</div>
+    <div class="vw-hint" id="vwHint">Soy AXEL, el oraculo de Orionix. Activa <b>Manos libres</b> y hablame con naturalidad: te escucho, te respondo en voz alta, te explico cada detalle y te llevo a cualquier parte de la web.</div>
   </div>
   <div class="vw-foot">
     <div class="vw-live">
@@ -1251,7 +1251,7 @@ window.ORA_CFG={
   var HINT=CFG.hint||"";
   var LOCAL=CFG.local||function(){return "Soy el oraculo de Orionix. Puedo explicarte cada seccion y llevarte a donde quieras.";};
   var FRASES=CFG.frases||[
-    "Hola, soy KYBALIO. Tocame y te resuelvo cualquier duda.",
+    "Hola, soy AXEL. Tocame y te resuelvo cualquier duda.",
     "Preguntame lo que quieras, te escucho.",
     "Puedo llevarte a cualquier parte de la web.",
     "Necesitas ayuda? Solo hablame.",
@@ -1297,7 +1297,7 @@ window.ORA_CFG={
     var d=document.createElement("div");d.className="vw-msg "+(role==="user"?"user":"bot");
     d.innerHTML='<div class="vw-av">'+(role==="user"?"&#128100;":"K")+'</div><div class="b">'+(role==="user"?("<p>"+vwEsc(text)+"</p>"):vwFormat(text))+'</div>';
     b.appendChild(d);if(role!=="user")vwActions(d,acciones);b.scrollTop=b.scrollHeight;return d;}
-  function vwTyping(){var b=document.getElementById("vwBody");var d=document.createElement("div");d.className="vw-msg bot";d.innerHTML='<div class="vw-av">K</div><div class="b vw-dots"><span>.</span><span>.</span><span>.</span></div>';b.appendChild(d);b.scrollTop=b.scrollHeight;return d;}
+  function vwTyping(){var b=document.getElementById("vwBody");var d=document.createElement("div");d.className="vw-msg bot";d.innerHTML='<div class="vw-av">A</div><div class="b vw-dots"><span>.</span><span>.</span><span>.</span></div>';b.appendChild(d);b.scrollTop=b.scrollHeight;return d;}
   function vwShowInterim(t){var b=document.getElementById("vwBody");if(!vwInterimEl){vwInterimEl=document.createElement("div");vwInterimEl.className="vw-interim";b.appendChild(vwInterimEl);}vwInterimEl.textContent=t?("\u201c"+t+"\u201d"):"";b.scrollTop=b.scrollHeight;}
   function vwClearInterim(){if(vwInterimEl){vwInterimEl.remove();vwInterimEl=null;}}
 
@@ -1310,10 +1310,10 @@ window.ORA_CFG={
     vozWarmup();
     if(!vwStarted){vwStarted=true;
       if(!VW_SR){document.getElementById("vwMicLbl").innerHTML="Para voz usa Google Chrome en tu PC o celular.";}
-      vwAdd("bot",HINT||"Hola, soy **KYBALIO**, el oraculo de Orionix. Activa **Manos libres** y hablame, o escribe: te explico todo y te llevo a cualquier parte.",QUICK);
+      vwAdd("bot",HINT||"Hola, soy **AXEL**, el oraculo de Orionix. Activa **Manos libres** y hablame, o escribe: te explico todo y te llevo a cualquier parte.",QUICK);
     }
     if(VW_SR&&!vwHands){vwHands=true;refreshHandsBtn();
-      vozHablar("Hola, soy KYBALIO. Te escucho, dime en que puedo ayudarte.");
+      vozHablar("Hola, soy AXEL. Te escucho, dime en que puedo ayudarte.");
       setTimeout(function(){if(!vwSpeaking)vwStartListen();},1400);}
   };
   window.cerrarVoz=function(){document.getElementById("vozWidget").classList.remove("open");vozStopSpeak();vwStopListen(true);vwHands=false;refreshHandsBtn();};
@@ -1350,7 +1350,7 @@ window.ORA_CFG={
     /* usa lo final; si Chrome no marco nada como final, usa el provisional acumulado */
     var t=(vwFinalBuf.trim()||vwLastInterim.trim());vwFinalBuf="";vwLastInterim="";
     if(!t){ if(vwHands&&!vwSpeaking){setTimeout(vwStartListen,200);} return; }
-    vwClearInterim();vwStopListen(false);vwAdd("user",t);vwSetState("KYBALIO esta analizando...");if(vozComando(t))return;vwThinking=true;vwSetState("KYBALIO esta pensando...");vozEnviar(t);}
+    vwClearInterim();vwStopListen(false);vwAdd("user",t);vwSetState("AXEL esta analizando...");if(vozComando(t))return;vwThinking=true;vwSetState("AXEL esta pensando...");vozEnviar(t);}
 
   window.vozToggleHands=function(){if(!VW_SR){alert("Tu navegador no permite reconocimiento de voz. Usa Google Chrome en PC o Android.");return;}
     vwHands=!vwHands;refreshHandsBtn();
@@ -1369,7 +1369,7 @@ window.ORA_CFG={
       setTimeout(function(){try{
         var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1.02;u.pitch=1;u.volume=1;
         var pref=mejorVozEs();if(pref){u.voice=pref;u.lang=pref.lang||"es-ES";}
-        vwSpeaking=true;var o=document.getElementById("vwOrb");if(o)o.classList.add("talk");vwSetState("KYBALIO esta hablando...");
+        vwSpeaking=true;var o=document.getElementById("vwOrb");if(o)o.classList.add("talk");vwSetState("AXEL esta hablando...");
         u.onend=function(){vwSpeaking=false;var o2=document.getElementById("vwOrb");if(o2)o2.classList.remove("talk");if(vwHands){setTimeout(vwStartListen,180);}else{vwSetState("Pulsa \u00abManos libres\u00bb para seguir");}};
         u.onerror=function(){vwSpeaking=false;var o3=document.getElementById("vwOrb");if(o3)o3.classList.remove("talk");if(vwHands)setTimeout(vwStartListen,180);};
         window.speechSynthesis.speak(u);
@@ -1378,7 +1378,7 @@ window.ORA_CFG={
       }catch(e2){vwSpeaking=false;if(vwHands)vwStartListen();}},140);
     }catch(e){vwSpeaking=false;if(vwHands)vwStartListen();}}
 
-  window.vozEnviarTexto=function(){var inp=document.getElementById("vwText");var t=(inp.value||"").trim();if(!t)return;inp.value="";vwAdd("user",t);if(vozComando(t))return;vwThinking=true;vwSetState("KYBALIO esta pensando...");vozEnviar(t);};
+  window.vozEnviarTexto=function(){var inp=document.getElementById("vwText");var t=(inp.value||"").trim();if(!t)return;inp.value="";vwAdd("user",t);if(vozComando(t))return;vwThinking=true;vwSetState("AXEL esta pensando...");vozEnviar(t);};
 
   function vozEnviar(texto){var typing=vwTyping();
     fetch(WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:"Visitante",sesion:vwSession,agente:AGENTE,mensaje:texto})})
@@ -1454,7 +1454,7 @@ window.ORA_CFG={
   if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init);}else{init();}
 })();
 </script>
-<!-- ===================== FIN AVATAR KYBALIO ===================== -->
+<!-- ===================== FIN AVATAR AXEL ===================== -->
 
 
 </body>

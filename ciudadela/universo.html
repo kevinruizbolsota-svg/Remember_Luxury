@@ -111,6 +111,10 @@
   .codewrap pre{margin:0;padding:14px 16px;overflow-x:auto;font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:.86rem;line-height:1.6}
   .codewrap pre code{color:#e6edff;white-space:pre}
   .tok-key{color:#c792ea}.tok-str{color:#c3e88d}.tok-num{color:#f78c6c}.tok-com{color:#5a6480;font-style:italic}.tok-fn{color:#82aaff}
+  .chatia{display:flex;align-items:center;gap:8px;padding:8px 16px 0;flex-shrink:0}
+  .chatia label{font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--oro);opacity:.85}
+  .chatia select{flex:1;background:rgba(255,255,255,.05);border:1px solid var(--linea);border-radius:8px;padding:8px 10px;color:#fff;font-family:inherit;font-size:.86rem;cursor:pointer}
+  .chatia select option{background:#0a0d1c;color:#fff}
   .chatin{display:flex;gap:10px;padding:14px 16px;border-top:1px solid var(--linea);flex-shrink:0}
   .chatin input{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--linea);border-radius:8px;padding:13px 14px;color:#fff;font-family:inherit;font-size:1rem}
   .chatin button{background:var(--oro);border:none;border-radius:8px;padding:0 22px;color:#1a1204;cursor:pointer;font-weight:700;font-size:1.1rem}
@@ -178,6 +182,17 @@
     <button class="x" onclick="document.getElementById('axelChat').classList.remove('open')">&times;</button>
   </div>
   <div class="chatlog" id="axelLog"></div>
+  <div class="chatia">
+    <label for="axelModelo">Motor</label>
+    <select id="axelModelo" title="Elige el motor de IA">
+      <option value="groq">Groq · Llama 3.3 (rápido)</option>
+      <option value="mistral">Mistral</option>
+      <option value="openrouter">OpenRouter</option>
+      <option value="claude">Claude (Anthropic)</option>
+      <option value="gemini">Gemini (Google)</option>
+      <option value="perplexity">Perplexity (web en vivo)</option>
+    </select>
+  </div>
   <div class="chatin">
     <input id="axelIn" placeholder="Da tu orden, Forjador..." onkeydown="if(event.key==='Enter')axelSend()">
     <button onclick="axelSend()">&#10148;</button>
@@ -345,9 +360,12 @@ function abrirChat(agenteId,nombre,rol,pico){
   // primer mensaje real para que el agente se presente si no es el director
   if(CHAT_AGENTE!=="director"){ enviarAlCerebro("Presentate brevemente y dime en que me puedes ayudar."); }
 }
+function motorElegido(){ var s=document.getElementById("axelModelo"); return s?s.value:"groq"; }
 function enviarAlCerebro(t){
   var pensando=axelAdd("b","_"+CHAT_NOMBRE+" esta pensando..._");
-  fetch(CEREBRO,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:"forjador",sesion:"universo-"+CHAT_AGENTE,agente:CHAT_AGENTE,mensaje:t})})
+  var motor=motorElegido();
+  try{ localStorage.setItem("orionix_motor", motor); }catch(e){}
+  fetch(CEREBRO,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:"forjador",sesion:"universo-"+CHAT_AGENTE,agente:CHAT_AGENTE,mensaje:t,motor:motor,proveedor:motor})})
    .then(function(r){return r.json();}).then(function(d){ pensando.remove(); axelAdd("b",(d&&(d.respuesta||d.output))||"(sin respuesta)"); })
    .catch(function(){ pensando.remove(); axelAdd("b","No pude conectar con el cerebro. Revisa que el Portal Central este publicado."); });
 }
@@ -357,7 +375,8 @@ function axelSend(){
 }
 // saludo inicial del director al cargar el log
 abrirChatInit();
-function abrirChatInit(){ var l=document.getElementById("axelLog"); if(l&&!l.children.length){ axelAdd("b","Soy **AXEL**, el Director de la Mesa. Dame una orden y reparto la mision a los agentes."); } }
+function abrirChatInit(){ var l=document.getElementById("axelLog"); if(l&&!l.children.length){ axelAdd("b","Soy **AXEL**, el Director de la Mesa. Dame una orden y reparto la mision a los agentes. _(Elige el motor de IA arriba del cuadro de texto.)_"); }
+  try{ var m=localStorage.getItem("orionix_motor"); var s=document.getElementById("axelModelo"); if(m&&s){ s.value=m; } }catch(e){} }
 
 /* ---- Fondo de estrellas ---- */
 (function stars(){

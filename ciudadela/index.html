@@ -1359,7 +1359,7 @@
   window.__speak=(localStorage.getItem("ciudadela_speak")==="1");
   function refreshSpeakBtn(){var b=document.getElementById("speakBtn");if(!b)return;if(window.__speak){b.classList.add("on");b.innerHTML="&#128266;";b.title="Voz activada: leo las respuestas";}else{b.classList.remove("on");b.innerHTML="&#128263;";b.title="Voz desactivada: toca para que lea en voz alta";}}
   function toggleSpeak(){window.__speak=!window.__speak;localStorage.setItem("ciudadela_speak",window.__speak?"1":"0");refreshSpeakBtn();if(!window.__speak&&window.speechSynthesis){window.speechSynthesis.cancel();}else{speak("Voz activada.");}}
-  function speak(txt){if(!window.speechSynthesis)return;try{window.speechSynthesis.cancel();setTimeout(function(){try{var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1;u.pitch=1;var pref=(typeof mejorVozEs==="function")?mejorVozEs():null;if(pref)u.voice=pref;window.speechSynthesis.speak(u);setTimeout(function(){try{if(window.speechSynthesis.paused)window.speechSynthesis.resume();}catch(e){}},220);}catch(e){}},130);}catch(e){}}
+  function speak(txt){if(!window.speechSynthesis)return;try{window.speechSynthesis.cancel();setTimeout(function(){try{var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=(typeof AXEL_RATE!=="undefined"?AXEL_RATE:0.9);u.pitch=(typeof AXEL_PITCH!=="undefined"?AXEL_PITCH:0.55);var pref=(typeof mejorVozEs==="function")?mejorVozEs():null;if(pref)u.voice=pref;window.speechSynthesis.speak(u);setTimeout(function(){try{if(window.speechSynthesis.paused)window.speechSynthesis.resume();}catch(e){}},220);}catch(e){}},130);}catch(e){}}
   refreshSpeakBtn();
   /* ---- Cargador robusto de voces (getVoices suele venir vacio al inicio) ---- */
   window.__voces=[];
@@ -1386,11 +1386,21 @@
   function mejorVozEs(){
     var vs=window.__voces&&window.__voces.length?window.__voces:(window.speechSynthesis?window.speechSynthesis.getVoices():[]);
     if(!vs||!vs.length)return null;
-    return vs.find(function(v){return /es(-|_)?(es|419|mx|us|co)/i.test(v.lang)&&/(google|microsoft)/i.test(v.name);})
-        || vs.find(function(v){return /^es/i.test(v.lang)&&/google/i.test(v.name);})
-        || vs.find(function(v){return /^es/i.test(v.lang);})
-        || vs[0];
+    var es=vs.filter(function(v){return /^es/i.test(v.lang);});
+    if(!es.length)es=vs;
+    // Nombres tipicos de voces masculinas en español (Windows/Google/Apple/Android)
+    var reHombre=/(jorge|diego|pablo|enrique|miguel|carlos|juan|raul|alvaro|gonzalo|dalisay|male|hombre|masculin|manuel|lucas|andres|sergio)/i;
+    var reMujer=/(mujer|female|femenin|elvira|helena|laura|paulina|monica|sabina|marisol|angelica|catalina|lucia|paloma|conchita|penelope)/i;
+    // 1) voz masculina explicita en español
+    var m=es.find(function(v){return reHombre.test(v.name);});
+    if(m)return m;
+    // 2) voz española que NO sea claramente femenina, priorizando motores de calidad
+    var noFem=es.filter(function(v){return !reMujer.test(v.name);});
+    var pool=noFem.length?noFem:es;
+    return pool.find(function(v){return /(google|microsoft)/i.test(v.name);}) || pool[0];
   }
+  // Ajustes globales de "voz vieja, ronca y madura de hombre": tono grave + ritmo pausado
+  var AXEL_PITCH=0.55, AXEL_RATE=0.9;
 
   /* ---- MUSICA ---- */
   var playlist=[],curTrack=-1;
@@ -2005,7 +2015,7 @@
       /* pequeña pausa: Chrome ignora speak() si va inmediatamente tras cancel() */
       setTimeout(function(){
         try{
-          var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1.02;u.pitch=1;u.volume=1;
+          var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=(typeof AXEL_RATE!=="undefined"?AXEL_RATE:0.9);u.pitch=(typeof AXEL_PITCH!=="undefined"?AXEL_PITCH:0.55);u.volume=1;
           var pref=mejorVozEs(); if(pref){u.voice=pref;u.lang=pref.lang||"es-ES";}
           vwSpeaking=true;var o=document.getElementById("vwOrb");if(o)o.classList.add("talk");vwSetState("AXEL esta hablando...");
           u.onend=function(){vwSpeaking=false;var o2=document.getElementById("vwOrb");if(o2)o2.classList.remove("talk");
@@ -2113,7 +2123,7 @@
       vwAdd("bot",resp);
       /* habla y luego ejecuta la accion */
       if(window.speechSynthesis){
-        try{window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(resp);u.lang="es-ES";u.rate=1.03;
+        try{window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(resp);u.lang="es-ES";u.rate=(typeof AXEL_RATE!=="undefined"?AXEL_RATE:0.9);u.pitch=(typeof AXEL_PITCH!=="undefined"?AXEL_PITCH:0.55);
           var pref=mejorVozEs();if(pref)u.voice=pref;
           u.onend=function(){setTimeout(accion,150);};window.speechSynthesis.speak(u);
         }catch(e){setTimeout(accion,300);}

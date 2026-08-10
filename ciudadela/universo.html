@@ -369,7 +369,7 @@ function cadenaMotores(preferido){
   return lista;
 }
 function pedirAMotor(t, motor){
-  return fetch(CEREBRO,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:"forjador",sesion:"universo-"+CHAT_AGENTE,agente:CHAT_AGENTE,mensaje:t,ia:motor,motor:motor,proveedor:motor})})
+  return fetch(CEREBRO,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:"forjador",sesion:"universo-"+CHAT_AGENTE,agente:(CHAT_AGENTE||"director").toUpperCase(),mensaje:t,ia:motor,motor:motor,proveedor:motor})})
     .then(function(r){ return r.json().catch(function(){return null;}); })
     .then(function(d){ var r=d&&(d.respuesta||d.output); return (r&&(""+r).trim())?(""+r):null; })
     .catch(function(){ return null; });

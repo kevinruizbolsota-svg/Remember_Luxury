@@ -1151,23 +1151,18 @@
     </div>
     <div class="vw-id">
       <div class="vw-nm oro">AXEL &middot; Agente de Voz</div>
-      <div class="vw-st" id="vwState">Activa Manos libres y hablame</div>
+      <div class="vw-st" id="vwState">Escribeme o pulsa el microfono</div>
     </div>
     <button class="vw-x" onclick="cerrarVoz()">&times;</button>
   </div>
   <div class="vw-body" id="vwBody">
-    <div class="vw-hint">Soy AXEL, el oraculo de Orionix. Activa <b>Manos libres</b> y hablame con naturalidad: te escucho, te respondo en voz alta, te explico cada detalle y te llevo a cualquier parte de la web.</div>
+    <div class="vw-hint">Soy AXEL, el oraculo de Orionix. Escribeme o pulsa el <b>microfono</b> y hablame: te respondo en voz alta, te explico cada detalle y te llevo a cualquier parte de la web.</div>
   </div>
   <div class="vw-foot">
-    <div class="vw-live">
-      <div class="vw-toggle" id="vwHandsToggle" onclick="vozToggleHands()" title="Pulsa para empezar a hablar">
-        <span class="sw"></span><span class="lbl" id="vwHandsLbl">Manos libres</span>
-      </div>
-    </div>
-    <div class="vw-mic-lbl" id="vwMicLbl">Pulsa &laquo;Manos libres&raquo; y hablame, o escribe abajo</div>
+    <div class="vw-mic-lbl" id="vwMicLbl">Escribe tu mensaje o pulsa el microfono para hablar</div>
     <div class="vw-chat">
       <input id="vwText" placeholder="Escribe tu mensaje..." onkeydown="if(event.key==='Enter')vozEnviarTexto()">
-      <button id="vwMicBtn" onclick="vozToggleHands()" title="Hablar por voz">&#127908;</button>
+      <button id="vwMicBtn" onclick="vwMic()" title="Hablar por voz">&#127908;</button>
       <button onclick="vozEnviarTexto()" title="Enviar">&#10148;</button>
     </div>
   </div>
@@ -1803,15 +1798,12 @@
     vozWarmup();
     if(!vwStarted){vwStarted=true;
       if(!VW_SR){document.getElementById("vwMicLbl").innerHTML="Para voz usa Google Chrome en tu PC o celular.";}
-      vwAdd("bot","Hola, soy **AXEL**, el oraculo de Orionix. Conozco cada rincon de la web: puedo *explicarte* cualquier seccion, resolver dudas y *llevarte* justo a donde quieras. Activa **Manos libres** y hablame, o dime por ejemplo \u201cmuestrame los planes\u201d.",[{label:"Ver Planes",icon:"&#128176;",fn:function(){cerrarVoz();scrollTo2("planes");}},{label:"Agentes IA",icon:"&#129302;",fn:function(){cerrarVoz();scrollTo2("agentes");}},{label:"Tienda",icon:"&#128717;",fn:function(){abrirTienda();}}]);
+      vwAdd("bot","Hola, soy **AXEL**, el oraculo de Orionix. Conozco cada rincon de la web: puedo *explicarte* cualquier seccion, resolver dudas y *llevarte* justo a donde quieras. Escribeme o pulsa el **microfono** y hablame, o dime por ejemplo \u201cmuestrame los planes\u201d.",[{label:"Ver Planes",icon:"&#128176;",fn:function(){cerrarVoz();scrollTo2("planes");}},{label:"Agentes IA",icon:"&#129302;",fn:function(){cerrarVoz();scrollTo2("agentes");}},{label:"Tienda",icon:"&#128717;",fn:function(){abrirTienda();}}]);
     }
-    /* saluda por voz y activa manos libres (voz <-> voz) automaticamente */
-    if(VW_SR && !vwHands){ vwHands=true; refreshHandsBtn();
-      vozHablar("Hola, soy AXEL. Te escucho, dime en que puedo ayudarte.");
-      setTimeout(function(){ if(!vwSpeaking) vwStartListen(); },1400);
-    }
+    /* saluda por voz; el usuario habla pulsando el microfono */
+    vozHablar("Hola, soy AXEL. Escribeme o pulsa el microfono y dime en que puedo ayudarte.");
   }
-  function cerrarVoz(){document.getElementById("vozWidget").classList.remove("open");vozStopSpeak();vwStopListen(true);vwHands=false;refreshHandsBtn();}
+  function cerrarVoz(){document.getElementById("vozWidget").classList.remove("open");vozStopSpeak();try{if(__vwGrab){__vwGrab=false;__vwMr&&__vwMr.stop();}}catch(e){}}
   /* Bienvenida automatica: el agente aparece y explica la pagina (una sola vez por sesion) */
   /* El bot se retira del centro al rincon y arranca su recorrido normal */
   window.axelRetirar=function(){
@@ -2044,6 +2036,43 @@
     vwAdd("user",t);
     if(vozComando(t))return;
     vwThinking=true;vwSetState("AXEL esta pensando...");vozEnviar(t);
+  }
+  /* ---- MICROFONO del chat de AXEL: graba -> transcribe (webhook) -> escribe en el input, igual que el portal ---- */
+  var __vwMr=null,__vwChunks=[],__vwGrab=false,__vwStream=null;
+  function vwMic(){
+    var btn=document.getElementById("vwMicBtn");
+    var inp=document.getElementById("vwText");
+    if(__vwGrab){ __vwGrab=false; if(btn){btn.style.color="";btn.style.background="";} vwSetState("Transcribiendo..."); document.getElementById("vwMicLbl").textContent="Transcribiendo tu voz..."; try{__vwMr.stop();}catch(e){} return; }
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){alert("Tu navegador no permite grabar audio. Usa Google Chrome.");return;}
+    navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
+      __vwStream=stream;__vwChunks=[];
+      try{__vwMr=new MediaRecorder(stream);}catch(e){__vwMr=new MediaRecorder(stream,{mimeType:"audio/webm"});}
+      __vwMr.ondataavailable=function(e){if(e.data&&e.data.size>0)__vwChunks.push(e.data);};
+      __vwMr.onstop=function(){
+        try{__vwStream.getTracks().forEach(function(t){t.stop();});}catch(e){}
+        var blob=new Blob(__vwChunks,{type:(__vwChunks[0]&&__vwChunks[0].type)||"audio/webm"});
+        var fr=new FileReader();
+        fr.onloadend=function(){
+          fetch(VOZ_WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({audio:fr.result})})
+          .then(function(r){return r.json();})
+          .then(function(d){
+            var t=(d&&d.texto?d.texto:"").trim();
+            document.getElementById("vwMicLbl").textContent="Escribe tu mensaje o pulsa el microfono para hablar";
+            vwSetState("");
+            if(t){ if(inp){inp.value=t;} vozEnviarTexto(); }
+            else{ alert("No se entendio el audio. Habla mas cerca del microfono e intenta de nuevo."); }
+          })
+          .catch(function(){ document.getElementById("vwMicLbl").textContent="Escribe tu mensaje o pulsa el microfono para hablar"; vwSetState(""); alert("No pude transcribir el audio. Revisa tu conexion."); });
+        };
+        fr.readAsDataURL(blob);
+      };
+      __vwGrab=true; if(btn){btn.style.color="#e8c86a";btn.style.background="rgba(232,200,106,.18)";}
+      document.getElementById("vwMicLbl").textContent="Grabando... pulsa el microfono otra vez al terminar";
+      vwSetState("Grabando...");
+      __vwMr.start();
+    }).catch(function(){
+      alert("Debes PERMITIR el microfono. Toca el candado (o el icono de camara/microfono) en la barra de direcciones de Chrome, activa el Microfono y recarga la pagina.");
+    });
   }
   /* ---- MAPA DE LA WEB: el oraculo conoce cada rincon ---- */
   var SITE_MAP=[

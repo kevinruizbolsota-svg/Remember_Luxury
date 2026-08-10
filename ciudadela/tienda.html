@@ -122,6 +122,36 @@
   #atelier .btn{color:#fff;border-color:var(--oro)}
   #atelier .btn:hover{background:var(--oro);color:#111}
 
+  /* ===== FICHA DE PRODUCTO (overlay) ===== */
+  #ficha{position:fixed;inset:0;background:var(--papel);z-index:9600;overflow-y:auto;transform:translateY(100%);transition:transform .45s cubic-bezier(.4,0,.2,1);opacity:0}
+  #ficha.open{transform:none;opacity:1}
+  .ficha-top{position:sticky;top:0;background:rgba(246,244,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea);display:flex;align-items:center;gap:16px;padding:16px 5vw;z-index:5}
+  .ficha-top .volver{cursor:pointer;font-size:.66rem;letter-spacing:2px;text-transform:uppercase;color:var(--tinta);display:flex;align-items:center;gap:8px}
+  .ficha-top .marca{margin-left:auto;font-family:'Cormorant Garamond',serif;letter-spacing:5px;text-transform:uppercase;font-size:1rem;font-weight:600}
+  .ficha-wrap{max-width:1300px;margin:0 auto;padding:40px 5vw 80px;display:grid;grid-template-columns:1.1fr 1fr;gap:56px}
+  @media(max-width:900px){.ficha-wrap{grid-template-columns:1fr;gap:30px;padding:24px 6vw 60px}}
+  .fgal .main{aspect-ratio:3/4;background:var(--papel2) center/cover no-repeat;display:flex;align-items:center;justify-content:center;font-size:5rem}
+  .fgal .thumbs{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .fgal .thumbs .t{width:70px;height:88px;background:var(--papel2) center/cover;cursor:pointer;border:1px solid var(--linea);opacity:.7;transition:.2s}
+  .fgal .thumbs .t:hover,.fgal .thumbs .t.act{opacity:1;border-color:var(--tinta)}
+  .finfo .fcat{font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--gris);margin-bottom:12px}
+  .finfo h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:500;line-height:1.1;margin-bottom:14px}
+  .finfo .fstars{color:var(--oro);font-size:.85rem;letter-spacing:2px;margin-bottom:18px}
+  .finfo .fstars small{color:var(--gris);margin-left:8px}
+  .finfo .fprecio{font-size:1.5rem;letter-spacing:1px;margin-bottom:6px}
+  .finfo .fprecio .antes{font-size:1rem;color:var(--gris);text-decoration:line-through;margin-left:10px}
+  .finfo .fdesc{color:var(--tinta2);font-size:.95rem;line-height:1.7;margin:22px 0;letter-spacing:.3px}
+  .finfo .fsens{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--tinta);line-height:1.5;margin:22px 0;padding-left:16px;border-left:2px solid var(--oro)}
+  .finfo .facc{display:flex;flex-direction:column;gap:12px;margin-top:26px}
+  .fchip{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--tinta2);border:1px solid var(--linea);padding:9px 16px;background:transparent;transition:.25s;width:fit-content}
+  .fchip:hover{border-color:var(--tinta);color:var(--tinta)}
+  .fchip.on{border-color:var(--oro);color:var(--oro)}
+  .fvid{max-width:1300px;margin:0 auto;padding:0 5vw 40px}
+  .fvid .frame{aspect-ratio:16/9;background:#000}
+  .fvid iframe{width:100%;height:100%;border:0}
+  .frel{max-width:1300px;margin:0 auto;padding:20px 5vw 60px}
+  .frel .rail{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:30px 20px}
+
   /* ===== PRODUCTOS: grid tipo pasarela / catalogo de moda ===== */
   .rail-wrap{position:relative;padding:0 5vw}
   .rail{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:38px 26px;overflow:visible;padding:10px 0 20px}
@@ -279,6 +309,37 @@
   </div>
 </div>
 
+<!-- ===== FICHA DE PRODUCTO ===== -->
+<div id="ficha">
+  <div class="ficha-top">
+    <span class="volver" onclick="cerrarFicha()">&#8592; Volver a la coleccion</span>
+    <span class="marca">Orionix</span>
+  </div>
+  <div class="ficha-wrap">
+    <div class="fgal">
+      <div class="main" id="fMain"></div>
+      <div class="thumbs" id="fThumbs"></div>
+    </div>
+    <div class="finfo">
+      <div class="fcat" id="fCat"></div>
+      <h1 id="fNombre"></h1>
+      <div class="fstars" id="fStars"></div>
+      <div class="fprecio" id="fPrecio"></div>
+      <div class="fsens" id="fSens"></div>
+      <div class="fdesc" id="fDesc"></div>
+      <div class="facc" id="fAcc"></div>
+    </div>
+  </div>
+  <div class="fvid" id="fVidWrap" style="display:none">
+    <div class="rowhead"><h2>El <span>Desfile</span> de esta pieza</h2></div>
+    <div class="frame"><iframe id="fVid" src="" title="Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+  </div>
+  <div class="frel">
+    <div class="rowhead"><h2>Tambien te <span>encantara</span></h2></div>
+    <div class="rail" id="fRel"></div>
+  </div>
+</div>
+
 <!-- ===== CARRITO ===== -->
 <div id="overlay" onclick="cerrarCarrito()"></div>
 <aside id="carrito">
@@ -423,9 +484,9 @@ function cardHTML(p){
   var off = p.antes ? ('<span class="badge-off">OFERTA</span>') : '';
   var antes = p.antes ? ('<span class="antes">'+money(p.antes,p.moneda)+'</span>') : '';
   return '<div class="card">'
-    + '<div class="img" '+img+'>'+emoji+'<span class="tag">'+esc(p.categoria||"Producto")+'</span>'+off+'</div>'
+    + '<div class="img" '+img+' onclick="abrirFicha('+idx+')">'+emoji+'<span class="tag">'+esc(p.categoria||"Producto")+'</span>'+off+'</div>'
     + '<div class="body">'
-    + '<h3>'+esc(p.nombre)+'</h3>'
+    + '<h3 onclick="abrirFicha('+idx+')" style="cursor:pointer">'+esc(p.nombre)+'</h3>'
     + '<div class="stars">'+stars(p.rating||5)+'<small>('+(p.reviews||"nuevo")+')</small></div>'
     + '<div class="desc">'+esc(p.descripcion||"")+'</div>'
     + '<div class="precio">'+money(p.precio,p.moneda)+' <small>'+(p.moneda||"USD")+'</small>'+antes+'</div>'
@@ -536,6 +597,70 @@ function pedirAsesor(){ window.location.href = "index.html"; }
 
 /* ---- carrito ---- */
 function agregar(i){ if(PRODUCTOS[i]){CARRITO.push(PRODUCTOS[i]); actualizar(); abrirCarrito();} }
+
+/* ===== FAVORITOS (compartidos con Mi Cuenta) ===== */
+var KEY_FAV="orionix_favoritos";
+function getFavs(){try{return JSON.parse(localStorage.getItem(KEY_FAV)||"[]");}catch(e){return [];}}
+function setFavs(f){localStorage.setItem(KEY_FAV,JSON.stringify(f));}
+function esFav(p){var f=getFavs();return f.some(function(x){return (x.nombre||"")===(p.nombre||"");});}
+function toggleFav(i){
+  var p=PRODUCTOS[i];if(!p)return;
+  var f=getFavs();
+  var pos=f.findIndex(function(x){return (x.nombre||"")===(p.nombre||"");});
+  if(pos>=0){f.splice(pos,1);}else{f.push({nombre:p.nombre,precio:p.precio,moneda:p.moneda,categoria:p.categoria,imagen:p.imagen,imagen_url:p.imagen,enlace:p.enlace});}
+  setFavs(f);
+  var btn=document.getElementById("fFavBtn");
+  if(btn){btn.classList.toggle("on",esFav(p));btn.innerHTML=(esFav(p)?"&#10022; Guardado":"&#9734; Guardar");}
+}
+
+/* ===== FICHA DE PRODUCTO ===== */
+var FICHA_ACTUAL=null;
+function ytId(url){
+  if(!url)return "";
+  var m=String(url).match(/(?:youtu\.be\/|v=|embed\/)([A-Za-z0-9_-]{6,})/);
+  return m?m[1]:(String(url).length<15?url:"");
+}
+function abrirFicha(i){
+  var p=PRODUCTOS[i];if(!p)return;
+  FICHA_ACTUAL=i;
+  document.getElementById("fCat").textContent=p.categoria||"Orionix";
+  document.getElementById("fNombre").textContent=p.nombre||"Producto";
+  document.getElementById("fStars").innerHTML=stars(p.rating||5)+'<small>('+(p.reviews||"nuevo")+')</small>';
+  var antes=p.antes?('<span class="antes">'+money(p.antes,p.moneda)+'</span>'):'';
+  document.getElementById("fPrecio").innerHTML=money(p.precio,p.moneda)+' '+(p.moneda||"USD")+antes;
+  document.getElementById("fSens").textContent=p.esencia||("Una pieza pensada para quienes distinguen lo esencial. "+(p.categoria||"Orionix")+" con la firma de la Maison.");
+  document.getElementById("fDesc").textContent=p.descripcion||"";
+  var main=document.getElementById("fMain");
+  if(p.imagen){main.style.backgroundImage="url('"+p.imagen+"')";main.textContent="";}else{main.style.backgroundImage="";main.textContent=(CAT_ICON[p.categoria]||"\uD83D\uDECD\uFE0F");}
+  // thumbs (misma imagen + variantes de la categoria)
+  var thumbs=[p.imagen].filter(Boolean);
+  PRODUCTOS.forEach(function(q){if(q.categoria===p.categoria&&q.imagen&&thumbs.indexOf(q.imagen)<0&&thumbs.length<4)thumbs.push(q.imagen);});
+  document.getElementById("fThumbs").innerHTML=thumbs.map(function(t,ti){return '<div class="t'+(ti===0?' act':'')+'" style="background-image:url(\''+esc(t)+'\')" onclick="fSetMain(\''+esc(t)+'\',this)"></div>';}).join("");
+  // acciones
+  var acc='';
+  if(p.enlace){acc+='<a class="btn wide" href="'+esc(p.enlace)+'" target="_blank" rel="noopener sponsored">'+tiendaLabel(p.tienda)+'</a>';}
+  else{acc+='<button class="btn wide" onclick="agregar('+i+')">Anadir al carrito</button>';if(p.pago){acc+='<a class="btn ghost wide" href="'+esc(p.pago)+'" target="_blank" rel="noopener">Comprar ahora</a>';}}
+  acc+='<button class="fchip'+(esFav(p)?' on':'')+'" id="fFavBtn" onclick="toggleFav('+i+')">'+(esFav(p)?"&#10022; Guardado":"&#9734; Guardar")+'</button>';
+  acc+='<a class="fchip" href="https://wa.me/573014410541?text='+encodeURIComponent("Hola Orionix, me interesa: "+(p.nombre||""))+'" target="_blank" rel="noopener">Consultar por WhatsApp</a>';
+  document.getElementById("fAcc").innerHTML=acc;
+  // video
+  var vid=ytId(p.video);
+  var vw=document.getElementById("fVidWrap");
+  if(vid){vw.style.display="block";document.getElementById("fVid").src="https://www.youtube.com/embed/"+vid;}
+  else{vw.style.display="none";document.getElementById("fVid").src="";}
+  // relacionados
+  var rel=PRODUCTOS.filter(function(q,qi){return qi!==i&&q.categoria===p.categoria;}).slice(0,4);
+  if(rel.length<4){PRODUCTOS.forEach(function(q,qi){if(qi!==i&&rel.indexOf(q)<0&&rel.length<4)rel.push(q);});}
+  document.getElementById("fRel").innerHTML=rel.map(cardHTML).join("");
+  document.getElementById("ficha").classList.add("open");
+  document.body.style.overflow="hidden";
+  window.scrollTo(0,0);
+}
+function fSetMain(url,el){
+  var main=document.getElementById("fMain");main.style.backgroundImage="url('"+url+"')";main.textContent="";
+  document.querySelectorAll("#fThumbs .t").forEach(function(t){t.classList.remove("act");});if(el)el.classList.add("act");
+}
+function cerrarFicha(){document.getElementById("ficha").classList.remove("open");document.getElementById("fVid").src="";document.body.style.overflow="";}
 function quitar(i){ CARRITO.splice(i,1); actualizar(); }
 function actualizar(){
   document.getElementById("badge").textContent = CARRITO.length;

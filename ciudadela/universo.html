@@ -81,16 +81,39 @@
   .pbtn:hover{background:var(--oro);color:#1a1204}
   .pbtn.solido{background:var(--oro);color:#1a1204}
   .nota{font-size:.72rem;color:var(--tenue);margin-top:12px;line-height:1.5}
-  /* Chat AXEL */
-  .chatwrap{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:30;width:min(92vw,560px);background:var(--panel);backdrop-filter:blur(12px);border:1px solid var(--linea);border-radius:12px;padding:12px;display:none}
-  .chatwrap.open{display:block}
-  .chatlog{max-height:200px;overflow-y:auto;margin-bottom:10px;font-size:.9rem;line-height:1.5}
-  .msg{margin:6px 0;padding:8px 12px;border-radius:8px}
-  .msg.u{background:rgba(232,200,106,.12);text-align:right}
-  .msg.b{background:rgba(255,255,255,.05)}
-  .chatin{display:flex;gap:8px}
-  .chatin input{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--linea);border-radius:6px;padding:10px;color:#fff;font-family:inherit;font-size:.9rem}
-  .chatin button{background:var(--oro);border:none;border-radius:6px;padding:0 16px;color:#1a1204;cursor:pointer;font-weight:700}
+  /* Chat AXEL — GRANDE */
+  .chatwrap{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:60;width:min(96vw,860px);height:min(86vh,760px);background:linear-gradient(180deg,rgba(10,13,28,.96),rgba(6,8,20,.98));backdrop-filter:blur(16px);border:1px solid var(--linea);border-radius:16px 16px 0 0;padding:0;display:none;flex-direction:column;box-shadow:0 -20px 80px rgba(0,0,0,.6)}
+  .chatwrap.open{display:flex}
+  .chathead{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--linea);flex-shrink:0}
+  .chathead .who{display:flex;align-items:center;gap:10px}
+  .chathead .av{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 38% 34%,#fff7df,#f4d98a 40%,#d9ac47 78%);display:flex;align-items:center;justify-content:center;font-weight:700;color:#3a2a06;font-size:.95rem}
+  .chathead .nm{color:var(--oro);letter-spacing:2px;font-size:.95rem}
+  .chathead .st{color:var(--tenue);font-size:.66rem;letter-spacing:1px}
+  .chathead .x{background:none;border:none;color:var(--tenue);font-size:1.6rem;cursor:pointer;line-height:1}
+  .chatlog{flex:1;overflow-y:auto;padding:18px;font-size:1.02rem;line-height:1.72}
+  .msg{margin:14px 0;padding:14px 18px;border-radius:12px;max-width:88%;word-wrap:break-word}
+  .msg.u{background:linear-gradient(180deg,rgba(232,200,106,.16),rgba(232,200,106,.08));border:1px solid rgba(232,200,106,.25);margin-left:auto}
+  .msg.b{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}
+  /* Markdown rico */
+  .msg h2{font-size:1.28rem;color:var(--oro);letter-spacing:.5px;margin:12px 0 8px;font-weight:700}
+  .msg h3{font-size:1.1rem;color:#f0d98a;margin:10px 0 6px;font-weight:700}
+  .msg p{margin:8px 0}
+  .msg strong{color:#fff2c8;font-weight:700}
+  .msg em{color:#cfd8ff;font-style:italic}
+  .msg ul,.msg ol{margin:8px 0 8px 22px}
+  .msg li{margin:4px 0}
+  .msg a{color:#7fb0ff;text-decoration:underline}
+  .msg code.inline{background:rgba(127,176,255,.14);color:#9ecbff;padding:1px 7px;border-radius:5px;font-family:"SFMono-Regular",Consolas,monospace;font-size:.9em}
+  .codewrap{margin:12px 0;border-radius:10px;overflow:hidden;border:1px solid rgba(127,176,255,.22);background:#0a0e1f}
+  .codebar{display:flex;justify-content:space-between;align-items:center;padding:7px 12px;background:rgba(127,176,255,.10);font-size:.68rem;letter-spacing:1px;color:#9ecbff;text-transform:uppercase}
+  .codebar button{background:none;border:1px solid rgba(158,203,255,.35);color:#9ecbff;border-radius:4px;font-size:.62rem;padding:3px 9px;cursor:pointer;letter-spacing:1px}
+  .codebar button:hover{background:rgba(158,203,255,.18)}
+  .codewrap pre{margin:0;padding:14px 16px;overflow-x:auto;font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:.86rem;line-height:1.6}
+  .codewrap pre code{color:#e6edff;white-space:pre}
+  .tok-key{color:#c792ea}.tok-str{color:#c3e88d}.tok-num{color:#f78c6c}.tok-com{color:#5a6480;font-style:italic}.tok-fn{color:#82aaff}
+  .chatin{display:flex;gap:10px;padding:14px 16px;border-top:1px solid var(--linea);flex-shrink:0}
+  .chatin input{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--linea);border-radius:8px;padding:13px 14px;color:#fff;font-family:inherit;font-size:1rem}
+  .chatin button{background:var(--oro);border:none;border-radius:8px;padding:0 22px;color:#1a1204;cursor:pointer;font-weight:700;font-size:1.1rem}
   .pie{position:fixed;bottom:6px;left:0;right:0;text-align:center;z-index:12;color:var(--tenue);font-size:.62rem;letter-spacing:2px;pointer-events:none}
 </style>
 </head>
@@ -102,7 +125,7 @@
   <div class="marca">ORIONIX · UNIVERSO</div>
   <div>
     <a href="index.html">&larr; Volver</a>
-    <a onclick="document.getElementById('axelChat').classList.toggle('open')" style="cursor:pointer">Hablar con AXEL</a>
+    <a onclick="abrirChat('director','AXEL','Director de la Mesa','A')" style="cursor:pointer">Hablar con AXEL</a>
   </div>
 </div>
 
@@ -117,7 +140,7 @@
     <div class="orbita o3"></div><div class="orbita o4"></div>
 
     <!-- Sol: AXEL Director -->
-    <div class="sol" onclick="document.getElementById('axelChat').classList.add('open')">
+    <div class="sol" onclick="abrirChat('director','AXEL','Director de la Mesa','A')">
       <b>AXEL</b><span>DIRECTOR</span>
     </div>
 
@@ -147,7 +170,14 @@
 
 <!-- Chat con AXEL (cerebro real portal-central) -->
 <div class="chatwrap" id="axelChat">
-  <div class="chatlog" id="axelLog"><div class="msg b">Soy AXEL, el Director de la Mesa. Dame una orden y reparto la mision a los agentes.</div></div>
+  <div class="chathead">
+    <div class="who">
+      <div class="av" id="axAv">A</div>
+      <div><div class="nm" id="axNom">AXEL</div><div class="st" id="axRol">Director de la Mesa</div></div>
+    </div>
+    <button class="x" onclick="document.getElementById('axelChat').classList.remove('open')">&times;</button>
+  </div>
+  <div class="chatlog" id="axelLog"></div>
   <div class="chatin">
     <input id="axelIn" placeholder="Da tu orden, Forjador..." onkeydown="if(event.key==='Enter')axelSend()">
     <button onclick="axelSend()">&#10148;</button>
@@ -239,23 +269,95 @@ function abrirPanel(id){
   document.getElementById("pNivel").style.width = a.nivel+"%";
   document.getElementById("pHerr").innerHTML = a.herr.map(function(h){return '<span class="chip">'+h+'</span>';}).join("");
   var btn = document.getElementById("pAccion");
-  btn.textContent = a.accion;
-  btn.className = "pbtn"+(a.estado==="on"?" solido":"");
-  btn.onclick = function(e){ e.preventDefault(); cerrarPanel(); if(a.estado==="on"){ document.getElementById("axelChat").classList.add("open"); document.getElementById("axelIn").value="Convoca al "+a.nom+": "; document.getElementById("axelIn").focus(); } else { alert(a.nom+" aun no ha despertado. Se activa en su fase correspondiente."); } };
+  btn.textContent = "Hablar con "+a.nom;
+  btn.className = "pbtn solido";
+  btn.onclick = function(e){ e.preventDefault(); cerrarPanel(); abrirChat(a.id, a.nom, a.rol, a.pico); };
   document.getElementById("pNota").textContent = a.nota;
   document.getElementById("panel").classList.add("open");
 }
 function cerrarPanel(){ document.getElementById("panel").classList.remove("open"); }
 
-/* ---- Chat con AXEL (cerebro real) ---- */
-function axelAdd(role,txt){ var l=document.getElementById("axelLog"); var d=document.createElement("div"); d.className="msg "+(role==="u"?"u":"b"); d.textContent=txt; l.appendChild(d); l.scrollTop=l.scrollHeight; }
+/* ---- Renderizador Markdown (titulos, negritas, listas, codigo con colores) ---- */
+function escHtml(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function pintarCodigo(code,lang){
+  var l=(lang||"").toLowerCase();
+  var h=escHtml(code);
+  // comentarios
+  h=h.replace(/(^|\n)(\s*(?:#|\/\/).*)/g,function(m,a,b){return a+'<span class="tok-com">'+b+'</span>';});
+  // strings
+  h=h.replace(/(&quot;[^&]*?&quot;|&#39;[^&]*?&#39;|"[^"]*"|'[^']*'|`[^`]*`)/g,'<span class="tok-str">$1</span>');
+  // numeros
+  h=h.replace(/\b(\d+\.?\d*)\b/g,'<span class="tok-num">$1</span>');
+  // palabras clave
+  var kw=["def","return","if","else","elif","for","while","in","import","from","class","function","const","let","var","new","await","async","try","except","catch","finally","print","echo","true","false","null","None","True","False","public","private","void","int","string","this","export","default"];
+  h=h.replace(new RegExp("\\b("+kw.join("|")+")\\b","g"),'<span class="tok-key">$1</span>');
+  return h;
+}
+function renderMD(src){
+  var out=[]; var lines=src.replace(/\r/g,"").split("\n"); var i=0; var listBuf=null,listType=null;
+  function flushList(){ if(listBuf){ out.push("<"+listType+">"+listBuf.join("")+"</"+listType+">"); listBuf=null; listType=null; } }
+  function inline(t){
+    t=escHtml(t);
+    t=t.replace(/`([^`]+)`/g,'<code class="inline">$1</code>');
+    t=t.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+    t=t.replace(/(^|[^*])\*([^*]+)\*/g,'$1<em>$2</em>');
+    t=t.replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+    t=t.replace(/(^|\s)(https?:\/\/[^\s<]+)/g,'$1<a href="$2" target="_blank" rel="noopener">$2</a>');
+    return t;
+  }
+  while(i<lines.length){
+    var ln=lines[i];
+    var fence=ln.match(/^```\s*(\w+)?\s*$/);
+    if(fence){ flushList(); var lang=fence[1]||"code"; var buf=[]; i++;
+      while(i<lines.length && !/^```\s*$/.test(lines[i])){ buf.push(lines[i]); i++; } i++;
+      var id="cb"+Math.random().toString(36).slice(2,8);
+      out.push('<div class="codewrap"><div class="codebar"><span>'+escHtml(lang)+'</span><button onclick="copiarCodigo(\''+id+'\')">Copiar</button></div><pre><code id="'+id+'">'+pintarCodigo(buf.join("\n"),lang)+'</code></pre></div>');
+      continue; }
+    var h2=ln.match(/^##\s+(.*)/), h3=ln.match(/^###\s+(.*)/);
+    if(h3){ flushList(); out.push("<h3>"+inline(h3[1])+"</h3>"); i++; continue; }
+    if(h2){ flushList(); out.push("<h2>"+inline(h2[1])+"</h2>"); i++; continue; }
+    var ol=ln.match(/^\s*\d+\.\s+(.*)/), ul=ln.match(/^\s*[-*]\s+(.*)/);
+    if(ol){ if(listType!=="ol"){flushList();listType="ol";listBuf=[];} listBuf.push("<li>"+inline(ol[1])+"</li>"); i++; continue; }
+    if(ul){ if(listType!=="ul"){flushList();listType="ul";listBuf=[];} listBuf.push("<li>"+inline(ul[1])+"</li>"); i++; continue; }
+    if(ln.trim()===""){ flushList(); i++; continue; }
+    flushList(); out.push("<p>"+inline(ln)+"</p>"); i++;
+  }
+  flushList();
+  return out.join("");
+}
+function copiarCodigo(id){ var el=document.getElementById(id); if(!el)return; var t=el.textContent||""; navigator.clipboard&&navigator.clipboard.writeText(t); }
+
+/* ---- Chat con AXEL / agentes (cerebro real) ---- */
+var CHAT_AGENTE="director", CHAT_NOMBRE="AXEL", CHAT_ROL="Director de la Mesa";
+function axelAdd(role,txt){ var l=document.getElementById("axelLog"); var d=document.createElement("div"); d.className="msg "+(role==="u"?"u":"b"); if(role==="u"){d.textContent=txt;} else {d.innerHTML=renderMD(txt);} l.appendChild(d); l.scrollTop=l.scrollHeight; return d; }
+function abrirChat(agenteId,nombre,rol,pico){
+  CHAT_AGENTE=agenteId||"director"; CHAT_NOMBRE=nombre||"AXEL"; CHAT_ROL=rol||"Director de la Mesa";
+  document.getElementById("axNom").textContent=CHAT_NOMBRE;
+  document.getElementById("axRol").textContent=CHAT_ROL;
+  document.getElementById("axAv").textContent=(pico||CHAT_NOMBRE.charAt(0));
+  document.getElementById("axelLog").innerHTML="";
+  var saludo = CHAT_AGENTE==="director"
+    ? "Soy **AXEL**, el Director de la Mesa. Dame una orden y reparto la mision a los agentes."
+    : "Convoca al "+CHAT_NOMBRE+". Escribeme y respondere con su voz y sus poderes.";
+  axelAdd("b",saludo);
+  document.getElementById("axelChat").classList.add("open");
+  setTimeout(function(){document.getElementById("axelIn").focus();},100);
+  // primer mensaje real para que el agente se presente si no es el director
+  if(CHAT_AGENTE!=="director"){ enviarAlCerebro("Presentate brevemente y dime en que me puedes ayudar."); }
+}
+function enviarAlCerebro(t){
+  var pensando=axelAdd("b","_"+CHAT_NOMBRE+" esta pensando..._");
+  fetch(CEREBRO,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:"forjador",sesion:"universo-"+CHAT_AGENTE,agente:CHAT_AGENTE,mensaje:t})})
+   .then(function(r){return r.json();}).then(function(d){ pensando.remove(); axelAdd("b",(d&&(d.respuesta||d.output))||"(sin respuesta)"); })
+   .catch(function(){ pensando.remove(); axelAdd("b","No pude conectar con el cerebro. Revisa que el Portal Central este publicado."); });
+}
 function axelSend(){
   var inp=document.getElementById("axelIn"); var t=(inp.value||"").trim(); if(!t) return; inp.value="";
-  axelAdd("u",t); var pensando=document.createElement("div"); pensando.className="msg b"; pensando.textContent="AXEL esta pensando..."; document.getElementById("axelLog").appendChild(pensando);
-  fetch(CEREBRO,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:"forjador",sesion:"universo",agente:"director",mensaje:t})})
-   .then(function(r){return r.json();}).then(function(d){ pensando.remove(); axelAdd("b",(d&&(d.respuesta||d.output))||"(sin respuesta)"); })
-   .catch(function(){ pensando.remove(); axelAdd("b","No pude conectar con el cerebro de AXEL. Revisa que el Portal Central este publicado."); });
+  axelAdd("u",t); enviarAlCerebro(t);
 }
+// saludo inicial del director al cargar el log
+abrirChatInit();
+function abrirChatInit(){ var l=document.getElementById("axelLog"); if(l&&!l.children.length){ axelAdd("b","Soy **AXEL**, el Director de la Mesa. Dame una orden y reparto la mision a los agentes."); } }
 
 /* ---- Fondo de estrellas ---- */
 (function stars(){

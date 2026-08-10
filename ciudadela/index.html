@@ -213,6 +213,17 @@
   #robot .rb-cape{transform-origin:60px 60px;animation:rbCape 4s ease-in-out infinite}
   @keyframes rbCape{0%,100%{transform:skewX(0)}50%{transform:skewX(2deg)}}
   @media(max-width:560px){#robot{width:32px;height:52px;bottom:12px;left:10px}}
+  /* Bienvenida: el bot se planta en el CENTRO al inicio */
+  #robot.centro{left:50%!important;top:42%!important;bottom:auto!important;right:auto!important;width:120px!important;height:190px!important;transform:translate(-50%,-50%)!important;transition:left 1.4s ease,top 1.4s ease,width 1.4s ease,height 1.4s ease,transform 1.4s ease;z-index:9600}
+  #robot.centro:hover{transform:translate(-50%,-50%) scale(1.03)!important}
+  @media(max-width:560px){#robot.centro{width:96px!important;height:152px!important}}
+  #robotSaludo{position:fixed;left:50%;top:calc(42% + 120px);transform:translateX(-50%);z-index:9601;background:var(--panel);border:1px solid rgba(232,200,106,.4);border-radius:14px;padding:14px 20px;max-width:min(420px,88vw);text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6);display:none;animation:vwPop .5s cubic-bezier(.34,1.4,.5,1)}
+  #robotSaludo.show{display:block}
+  #robotSaludo .t{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.05rem;color:var(--texto);line-height:1.5}
+  #robotSaludo .t b{color:var(--oro)}
+  #robotSaludo .cta{margin-top:12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  #robotSaludo .cta button{background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;border:none;border-radius:8px;padding:8px 16px;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.5px;cursor:pointer}
+  #robotSaludo .cta .ghost{background:transparent;border:1px solid var(--border);color:var(--tenue)}
 
   section{padding:78px 7vw;position:relative}
   #planes,#contacto,#newsletter{padding-top:56px;padding-bottom:56px}
@@ -470,12 +481,12 @@
 
   /* ===== AGENTE DE VOZ (widget) ===== */
   #vozFab{bottom:160px;right:22px;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;font-size:24px}
-  #vozWidget{position:fixed;bottom:132px;left:18px;width:min(340px,90vw);height:min(500px,72vh);background:var(--panel);border:1px solid rgba(232,200,106,.32);border-radius:15px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:9400;display:none;flex-direction:column;overflow:hidden;transform-origin:14px 100%;animation:vwPop .28s cubic-bezier(.34,1.4,.5,1)}
+  #vozWidget{position:fixed;bottom:132px;left:18px;width:min(420px,94vw);height:min(640px,82vh);background:var(--panel);border:1px solid rgba(232,200,106,.32);border-radius:15px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:9400;display:none;flex-direction:column;overflow:hidden;transform-origin:14px 100%;animation:vwPop .28s cubic-bezier(.34,1.4,.5,1)}
   #vozWidget.open{display:flex}
   @keyframes vwPop{0%{opacity:0;transform:translateY(18px) scale(.85)}100%{opacity:1;transform:none}}
   /* pico que apunta a la cabeza del bot */
   #vozWidget::after{content:'';position:absolute;bottom:-9px;left:26px;border:9px solid transparent;border-top-color:var(--panel);filter:drop-shadow(0 2px 1px rgba(0,0,0,.3))}
-  @media(max-width:560px){#vozWidget{bottom:104px;left:8px;width:min(320px,94vw);height:min(440px,66vh)}}
+  @media(max-width:560px){#vozWidget{bottom:104px;left:8px;width:min(360px,96vw);height:min(560px,78vh)}}
   .vw-head{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(232,200,106,.08),transparent)}
   .vw-orb{width:34px;height:34px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 0 0 rgba(232,200,106,.5),0 2px 8px rgba(0,0,0,.4)}
   .vw-orb.talk{animation:orbPulse 1s infinite}
@@ -491,8 +502,8 @@
   .vw-body{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
   .vw-hint{color:var(--tenue);font-size:.74rem;line-height:1.5;font-style:italic;text-align:center;padding:10px}
   .vw-msg{display:flex;gap:8px;max-width:90%}
-  .vw-msg .b{padding:10px 13px;border-radius:13px;font-size:.82rem;line-height:1.55;font-family:'Cormorant Garamond',Georgia,serif;letter-spacing:.2px}
-  .vw-msg.bot .b{font-size:.85rem}
+  .vw-msg .b{padding:11px 15px;border-radius:13px;font-size:.95rem;line-height:1.6;font-family:'Cormorant Garamond',Georgia,serif;letter-spacing:.2px}
+  .vw-msg.bot .b{font-size:.98rem}
   .vw-msg .b p{margin:0 0 7px}
   .vw-msg .b p:last-child{margin-bottom:0}
   .vw-msg .b strong{color:var(--oro);font-weight:600}
@@ -501,9 +512,9 @@
   .vw-msg .b li{margin:2px 0}
   .vw-msg .b a{color:var(--oro);text-decoration:underline;word-break:break-word}
   .vw-acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-  .vw-act{display:inline-flex;align-items:center;gap:5px;background:rgba(232,200,106,.1);border:1px solid rgba(232,200,106,.35);color:var(--oro);border-radius:8px;padding:5px 11px;font-size:.72rem;font-family:'Cinzel',serif;letter-spacing:.4px;cursor:pointer;transition:all .2s;text-decoration:none}
+  .vw-act{display:inline-flex;align-items:center;gap:4px;background:rgba(232,200,106,.1);border:1px solid rgba(232,200,106,.35);color:var(--oro);border-radius:7px;padding:3px 8px;font-size:.6rem;font-family:'Cinzel',serif;letter-spacing:.3px;cursor:pointer;transition:all .2s;text-decoration:none}
   .vw-act:hover{background:rgba(232,200,106,.2);border-color:var(--oro);transform:translateY(-1px)}
-  .vw-act .ai{font-size:.85rem}
+  .vw-act .ai{font-size:.7rem}
   .vw-msg.user{align-self:flex-end;flex-direction:row-reverse}
   .vw-msg.user .b{background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;border-bottom-right-radius:4px}
   .vw-msg.bot .b{background:var(--panel2);color:var(--texto);border:1px solid var(--border);border-bottom-left-radius:4px}
@@ -943,6 +954,13 @@
 
 <!-- ===================== AGENTE DE VOZ (widget) ===================== -->
 <!-- ===================== PERSONAJE ROBOT (guia de IA) ===================== -->
+<div id="robotSaludo">
+  <div class="t">Hola, soy <b>AXEL</b> &#10024; Bienvenido a <b>Orionix</b>. Si tienes cualquier pregunta o duda, estoy aqui para resolverla. &iquest;Empezamos?</div>
+  <div class="cta">
+    <button onclick="axelBienvenidaChat()">Si, ayudame</button>
+    <button class="ghost" onclick="axelRetirar()">Explorar solo</button>
+  </div>
+</div>
 <div id="robot" class="walk" onclick="abrirVoz()" title="Habla con AXEL, tu guia de IA">
   <div class="bocadillo" id="rbBocadillo">Hola, soy AXEL. Tocame y te resuelvo cualquier duda.</div>
   <svg class="rb-svg" viewBox="0 0 120 190" xmlns="http://www.w3.org/2000/svg">
@@ -1784,10 +1802,35 @@
   }
   function cerrarVoz(){document.getElementById("vozWidget").classList.remove("open");vozStopSpeak();vwStopListen(true);vwHands=false;refreshHandsBtn();}
   /* Bienvenida automatica: el agente aparece y explica la pagina (una sola vez por sesion) */
+  /* El bot se retira del centro al rincon y arranca su recorrido normal */
+  window.axelRetirar=function(){
+    var rb=document.getElementById("robot"); var sal=document.getElementById("robotSaludo");
+    if(sal)sal.classList.remove("show");
+    if(rb){rb.classList.remove("centro","talk");rb.classList.add("walk");}
+    if(window.axelStartMove) window.axelStartMove();
+  };
+  /* Al aceptar la ayuda: retira del centro y abre el chat de AXEL */
+  window.axelBienvenidaChat=function(){
+    axelRetirar();
+    setTimeout(function(){ if(window.introWelcomeChat) window.introWelcomeChat(); }, 700);
+  };
+  /* Bienvenida CENTRAL: el bot se planta en el centro y saluda educadamente */
   window.introWelcome=function(){
     try{
       if(sessionStorage.getItem("orionix_welcomed")==="1")return;
       sessionStorage.setItem("orionix_welcomed","1");
+      var rb=document.getElementById("robot"); var sal=document.getElementById("robotSaludo");
+      if(rb){rb.classList.remove("nave","walk");rb.classList.add("centro","talk");}
+      setTimeout(function(){ if(sal)sal.classList.add("show"); }, 900);
+      /* saludo por voz suave (si el navegador lo permite) */
+      if(window.speechSynthesis){ vozWarmup&&vozWarmup(); setTimeout(function(){ try{ vozHablar("Hola, soy AXEL. Bienvenido a Orionix. Si tienes cualquier pregunta o duda, estoy aqui para resolverla."); }catch(e){} },1100); }
+      /* si el usuario no interactua, el bot se retira solo a los 9 segundos */
+      setTimeout(function(){ var s=document.getElementById("robotSaludo"); if(s&&s.classList.contains("show")) axelRetirar(); }, 9000);
+    }catch(e){}
+  };
+  /* Contenido del chat de bienvenida (cuando el usuario acepta ayuda) */
+  window.introWelcomeChat=function(){
+    try{
       var w=document.getElementById("vozWidget"); if(!w)return;
       var rb=document.getElementById("robot"); if(rb){rb.classList.remove("nave");rb.classList.add("walk","talk");}
       w.classList.add("open"); vwStarted=true;
@@ -1846,7 +1889,9 @@
   function vwEnsureRecog(){
     if(!VW_SR)return null;
     if(vwRecog)return vwRecog;
-    var r=new VW_SR();r.lang="es-ES";r.continuous=true;r.interimResults=true;r.maxAlternatives=1;
+    /* MODO UNA-FRASE: continuous=false es MUCHO mas fiable en Chrome.
+       Chrome detecta el fin del habla solo y dispara onend con el resultado final. */
+    var r=new VW_SR();r.lang="es-ES";r.continuous=false;r.interimResults=true;r.maxAlternatives=1;
     r.onresult=function(ev){
       var interim="";
       for(var i=ev.resultIndex;i<ev.results.length;i++){
@@ -1855,16 +1900,11 @@
       }
       vwLastInterim=interim;
       vwShowInterim((vwFinalBuf+interim).trim());
-      var hayFinal=false; for(var k=ev.resultIndex;k<ev.results.length;k++){ if(ev.results[k].isFinal){hayFinal=true;break;} }
-      /* MODO ANALISIS RAPIDO: al detectar habla arranca tope de seguridad */
-      if((vwFinalBuf+interim).trim()){vwSetState("Escuchando...");if(!vwMaxTimer){vwMaxTimer=setTimeout(function(){vwMaxTimer=null;vwFlush();},9000);}}
-      if(vwSilenceTimer)clearTimeout(vwSilenceTimer);
-      /* si Chrome ya dio un resultado FINAL, responde casi al instante; si es interino, espera un respiro corto de silencio */
-      vwSilenceTimer=setTimeout(function(){vwFlush();}, hayFinal?250:650);
+      vwSetState("Escuchando...");
     };
     r.onstart=function(){ vwListening=true; };
     r.onaudiostart=function(){ vwListening=true; };
-    r.onspeechend=function(){/* Chrome detecto fin de habla: responde de inmediato si ya hay texto */ if((vwFinalBuf+vwLastInterim).trim()){if(vwSilenceTimer)clearTimeout(vwSilenceTimer);vwFlush();}};
+    r.onspeechend=function(){ /* Chrome detecto el fin del habla: para el reconocimiento para que dispare onend con el final */ try{r.stop();}catch(e){} };
     r.onerror=function(ev){
       var e=ev&&ev.error;
       if(e==="not-allowed"||e==="service-not-allowed"){
@@ -1872,15 +1912,14 @@
         document.getElementById("vwMicLbl").textContent="Toca el candado de la barra de direcciones y permite el Microfono";
         alert("Debes PERMITIR el microfono. Toca el candado (o el icono de camara/microfono) en la barra de direcciones de Chrome, elige Microfono = Permitir, y vuelve a pulsar Manos libres.");return;
       }
-      /* no-speech / aborted / network / audio-capture: transitorio, seguimos escuchando */
-      vwListening=false;if(vwHands&&vwWantListen&&!vwSpeaking&&!vwThinking){setTimeout(vwStartListen,350);}
+      /* no-speech: no hablaste nada; aborted/network/audio-capture: transitorio -> reintenta escuchar */
+      vwListening=false;
     };
     r.onend=function(){
       vwListening=false;
-      /* si Chrome cerro la sesion pero quedo texto sin responder, lo aprovechamos YA */
-      if((vwFinalBuf+vwLastInterim).trim()&&!vwSpeaking&&!vwThinking){vwFlush();return;}
-      /* reinicia si seguimos en manos libres y no estamos hablando/pensando (conversacion fluida) */
-      if(vwWantListen&&vwHands&&!vwSpeaking&&!vwThinking){setTimeout(vwStartListen,150);}
+      /* al cerrar la frase: si hay texto, lo analizamos YA; si no, reiniciamos la escucha */
+      if((vwFinalBuf+vwLastInterim).trim()&&!vwSpeaking&&!vwThinking){ vwFlush(); return; }
+      if(vwWantListen&&vwHands&&!vwSpeaking&&!vwThinking){ setTimeout(vwStartListen,250); }
     };
     vwRecog=r;return r;
   }
@@ -1889,10 +1928,9 @@
   function vwArmWatch(){
     if(vwWatch)clearInterval(vwWatch);
     vwWatch=setInterval(function(){
-      /* si hay texto sin analizar, procesalo ya */
-      if(vwHands&&(vwFinalBuf+vwLastInterim).trim()&&!vwSpeaking&&!vwThinking){ vwFlush(); return; }
+      /* si por alguna razon dejo de escuchar y seguimos en manos libres, reactiva */
       if(vwHands&&vwWantListen&&!vwListening&&!vwSpeaking&&!vwThinking){ vwStartListen(); }
-    },900);
+    },1500);
   }
   function vwStartListen(){
     if(!VW_SR)return;
@@ -2119,47 +2157,57 @@
 <script>
 /* ============ MOVIMIENTO DEL ROBOT (independiente y a prueba de fallos) ============ */
 (function(){
+  var started=false;
   function init(){
     var r=document.getElementById("robot");
     if(!r){ return setTimeout(init,300); }
     var M=16, curP=Math.random(), tgtP=curP, run=false,lastY=window.pageYOffset||0,driftPhase=Math.random(),navTimer=null;
+    function enCentro(){ return r.classList.contains("centro"); }
     function widgetAbierto(){var w=document.getElementById("vozWidget");return w&&w.classList.contains("open");}
-    function nave(on){ if(on){ if(widgetAbierto())return; r.classList.remove("walk"); r.classList.add("nave"); } else { r.classList.remove("nave"); r.classList.add("walk"); } }
-    /* Solo el PERIMETRO del viewport: bordes y rincones, nunca el centro */
+    function nave(on){ if(enCentro())return; if(on){ if(widgetAbierto())return; r.classList.remove("walk"); r.classList.add("nave"); } else { r.classList.remove("nave"); r.classList.add("walk"); } }
+    /* Solo el PERIMETRO del viewport: bordes y rincones, nunca el centro.
+       EFECTO PORTAL: la vertical DERECHA baja; al pasar el borde inferior, reaparece por el borde IZQUIERDO subiendo. */
     function perim(p){
-      var w=window.innerWidth,h=window.innerHeight,rw=r.offsetWidth||74,rh=r.offsetHeight||118;
+      var w=window.innerWidth,h=window.innerHeight,rw=r.offsetWidth||40,rh=r.offsetHeight||64;
       var minX=M,maxX=Math.max(M,w-rw-M),minY=74,maxY=Math.max(74,h-rh-M);
       p=((p%1)+1)%1; var t;
-      if(p<0.30){ t=p/0.30; return {x:minX+(maxX-minX)*t,y:maxY}; }
-      if(p<0.55){ t=(p-0.30)/0.25; return {x:maxX,y:maxY+(minY-maxY)*t}; }
-      if(p<0.80){ t=(p-0.55)/0.25; return {x:maxX+(minX-maxX)*t,y:minY}; }
-      t=(p-0.80)/0.20; return {x:minX,y:minY+(maxY-minY)*t};
+      /* 0 -> 0.5 : baja por la DERECHA */
+      if(p<0.5){ t=p/0.5; return {x:maxX, y:minY+(maxY-minY)*t}; }
+      /* 0.5 -> 1 : (portal) sube por la IZQUIERDA */
+      t=(p-0.5)/0.5; return {x:minX, y:maxY+(minY-maxY)*t};
     }
     function calc(){
       var de=document.documentElement, bd=document.body;
       var sh=Math.max(de.scrollHeight,bd.scrollHeight),max=(sh-window.innerHeight)||1;
       var sy=window.pageYOffset||de.scrollTop||bd.scrollTop||0;
       var p=Math.min(1,Math.max(0,sy/max));
-      tgtP=driftPhase+p*0.85; /* destino como posicion sobre el perimetro */
+      tgtP=driftPhase+p; /* al bajar el scroll, baja por la derecha y cruza el portal al otro extremo */
     }
     function loop(){
-      /* interpolamos SOBRE el perimetro (parametro p), asi nunca cruza el centro */
-      var d=tgtP-curP; curP+=d*0.009;
+      if(enCentro()){ run=false; return; } /* no mover mientras esta en el saludo central */
+      /* interpolacion MUY lenta sobre el perimetro (nunca cruza el centro) */
+      var d=tgtP-curP; curP+=d*0.0035;
       var pos=perim(curP);
       r.style.left=pos.x.toFixed(1)+"px"; r.style.top=pos.y.toFixed(1)+"px"; r.style.right="auto"; r.style.bottom="auto";
-      if(Math.abs(tgtP-curP)>0.0015){ requestAnimationFrame(loop); } else { curP=tgtP; run=false; r.classList.add("estrella"); }
+      if(Math.abs(tgtP-curP)>0.0012){ requestAnimationFrame(loop); } else { curP=tgtP; run=false; r.classList.add("estrella"); }
     }
-    function kick(){ if(!run){ r.classList.remove("estrella"); run=true; requestAnimationFrame(loop); } }
-    function viaje(){ nave(true); if(navTimer)clearTimeout(navTimer); navTimer=setTimeout(function(){nave(false);},7000); }
-    function onScroll(){ calc(); kick(); var sy=window.pageYOffset||0; if(Math.abs(sy-lastY)>3){ lastY=sy; viaje(); } }
-    calc(); curP=tgtP;
-    var _p0=perim(curP); r.style.left=_p0.x+"px"; r.style.top=_p0.y+"px"; r.style.right="auto"; r.style.bottom="auto";
-    window.addEventListener("scroll",onScroll,{passive:true});
-    window.addEventListener("resize",function(){calc();kick();});
-    document.addEventListener("scroll",onScroll,{passive:true});
-    setInterval(function(){ var sy=window.pageYOffset||0; if(sy!==lastY){ onScroll(); } },250);
-    /* deriva tranquila por los bordes: llama la nave y viaja al siguiente rincon */
-    setInterval(function(){ if(widgetAbierto())return; driftPhase=(driftPhase+0.03)%1; calc(); kick(); viaje(); },40000);
+    function kick(){ if(enCentro())return; if(!run){ r.classList.remove("estrella"); run=true; requestAnimationFrame(loop); } }
+    function viaje(){ nave(true); if(navTimer)clearTimeout(navTimer); navTimer=setTimeout(function(){nave(false);},9000); }
+    function onScroll(){ if(enCentro())return; calc(); kick(); var sy=window.pageYOffset||0; if(Math.abs(sy-lastY)>3){ lastY=sy; viaje(); } }
+    /* arranca el recorrido normal (se llama tras la bienvenida central) */
+    window.axelStartMove=function(){
+      if(started)return; started=true;
+      calc(); curP=tgtP;
+      var _p0=perim(curP); r.style.left=_p0.x+"px"; r.style.top=_p0.y+"px"; r.style.right="auto"; r.style.bottom="auto";
+      window.addEventListener("scroll",onScroll,{passive:true});
+      window.addEventListener("resize",function(){calc();kick();});
+      document.addEventListener("scroll",onScroll,{passive:true});
+      setInterval(function(){ var sy=window.pageYOffset||0; if(sy!==lastY){ onScroll(); } },300);
+      /* deriva tranquila y lenta por los bordes */
+      setInterval(function(){ if(widgetAbierto()||enCentro())return; driftPhase=(driftPhase+0.02)%1; calc(); kick(); viaje(); },55000);
+    };
+    /* Si NO hay bienvenida central pendiente (ya saludo esta sesion), arranca de una */
+    if(sessionStorage.getItem("orionix_welcomed")==="1"){ window.axelStartMove(); }
   }
   if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
 })();

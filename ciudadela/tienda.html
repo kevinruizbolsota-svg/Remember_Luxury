@@ -377,9 +377,19 @@ function cardHTML(p){
     + '<div class="stars">'+stars(p.rating||5)+'<small>('+(p.reviews||"nuevo")+')</small></div>'
     + '<div class="desc">'+esc(p.descripcion||"")+'</div>'
     + '<div class="precio">'+money(p.precio,p.moneda)+' <small>'+(p.moneda||"USD")+'</small>'+antes+'</div>'
-    + '<button class="btn wide sm" onclick="agregar('+idx+')">Añadir</button>'
-    + (p.pago ? '<a class="btn ghost wide sm" style="margin-top:8px" href="'+esc(p.pago)+'" target="_blank" rel="noopener">Consultar</a>' : '')
+    + (p.enlace ? '<a class="btn wide sm" href="'+esc(p.enlace)+'" target="_blank" rel="noopener sponsored">'+tiendaLabel(p.tienda)+'</a>' : '<button class="btn wide sm" onclick="agregar('+idx+')">Añadir</button>')
+    + (p.enlace ? '' : (p.pago ? '<a class="btn ghost wide sm" style="margin-top:8px" href="'+esc(p.pago)+'" target="_blank" rel="noopener">Consultar</a>' : ''))
     + '</div></div>';
+}
+/* etiqueta del boton segun la tienda de afiliado */
+function tiendaLabel(t){
+  t = (t||'').toLowerCase();
+  if(t.indexOf('amazon')>-1) return 'Ver en Amazon';
+  if(t.indexOf('aliexpress')>-1) return 'Ver en AliExpress';
+  if(t.indexOf('ebay')>-1) return 'Ver en eBay';
+  if(t.indexOf('hotmart')>-1) return 'Comprar ahora';
+  if(t.indexOf('awin')>-1||t.indexOf('cj')>-1) return 'Ver oferta';
+  return 'Ver producto';
 }
 function placeholderCards(){
   /* si el webhook no devuelve productos, muestra el catalogo como tarjetas invitando a consultar */

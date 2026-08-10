@@ -678,10 +678,26 @@ function actualizar(){
 }
 function abrirCarrito(){ document.getElementById("carrito").classList.add("open"); document.getElementById("overlay").classList.add("on"); }
 function cerrarCarrito(){ document.getElementById("carrito").classList.remove("open"); document.getElementById("overlay").classList.remove("on"); }
-function pagar(){
+var PAYPAL_API = "https://kevinruiz.app.n8n.cloud/webhook/paypal-crear-orden";
+async function pagar(){
   if(!CARRITO.length){ alert("Tu carrito esta vacio."); return; }
-  var link = CARRITO[0].pago || "https://wa.me/573014410541?text=Hola,%20quiero%20pagar%20mi%20pedido";
-  window.open(link, "_blank");
+  var btn = document.getElementById("pagarBtn");
+  var total = CARRITO.reduce(function(s,p){return s+Number(p.precio||0);},0);
+  var moneda = CARRITO[0].moneda || "USD";
+  var concepto = CARRITO.length===1 ? CARRITO[0].nombre : ("Pedido Orionix ("+CARRITO.length+" articulos)");
+  if(!total){ // productos sin precio (afiliado o consulta) -> WhatsApp
+    window.open("https://wa.me/573014410541?text="+encodeURIComponent("Hola Orionix, quiero comprar: "+concepto),"_blank"); return;
+  }
+  var txt = btn.textContent; btn.textContent = "Conectando con PayPal..."; btn.disabled = true;
+  try{
+    var r = await fetch(PAYPAL_API, {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ monto: total.toFixed(2), moneda: moneda, concepto: concepto })});
+    var d = await r.json();
+    if(d && d.approve){ window.location.href = d.approve; }
+    else { throw new Error("sin enlace"); }
+  }catch(e){
+    alert("No pudimos abrir PayPal en este momento. Te llevamos a WhatsApp para completar tu compra.");
+    window.open("https://wa.me/573014410541?text="+encodeURIComponent("Hola Orionix, quiero pagar mi pedido: "+concepto+" ("+total.toFixed(2)+" "+moneda+")"),"_blank");
+  }finally{ btn.textContent = txt; btn.disabled = false; }
 }
 
 cargar();

@@ -421,6 +421,13 @@ function crearRecordatorio(texto){
    .then(function(r){return r.json();}).then(function(d){ pensando.remove(); axelAdd("b",(d&&d.respuesta)||"Recordatorio guardado."); })
    .catch(function(){ pensando.remove(); axelAdd("b","No pude guardar el recordatorio ahora mismo."); });
 }
+var BOLSA="https://kevinruiz.app.n8n.cloud/webhook/bolsa-cripto";
+function consultarBolsa(q){
+  var pensando=axelAdd("b","_El Cazador esta consultando el mercado..._");
+  fetch(BOLSA,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({query:q||"bitcoin ethereum solana"})})
+   .then(function(r){return r.json();}).then(function(d){ pensando.remove(); axelAdd("b",(d&&d.respuesta)||"No pude consultar el mercado ahora mismo."); })
+   .catch(function(){ pensando.remove(); axelAdd("b","No pude conectar con el mercado ahora mismo."); });
+}
 function axelSend(){
   var inp=document.getElementById("axelIn"); var t=(inp.value||"").trim(); if(!t) return; inp.value="";
   axelAdd("u",t);
@@ -435,11 +442,15 @@ function axelSend(){
     if(!rec){ axelAdd("b","Que quieres que te recuerde y a que hora. Ejemplo: /recordar hacer ejercicio a las 6:00 cada dia"); return; }
     crearRecordatorio(rec); return;
   }
+  if(low.indexOf("/bolsa")===0 || low.indexOf("/cripto")===0){
+    var q=t.replace(/^\/(bolsa|cripto)/i,"").trim();
+    consultarBolsa(q); return;
+  }
   enviarAlCerebro(t);
 }
 // saludo inicial del director al cargar el log
 abrirChatInit();
-function abrirChatInit(){ var l=document.getElementById("axelLog"); if(l&&!l.children.length){ axelAdd("b","Soy **AXEL**, el Director de la Mesa. Dame una orden y reparto la mision a los agentes. _Comandos: `/imagen` crear imagen, `/pagina` forjar una web, `/recordar` programar un correo (ej: /recordar hacer ejercicio a las 6:00 cada dia)._"); }
+function abrirChatInit(){ var l=document.getElementById("axelLog"); if(l&&!l.children.length){ axelAdd("b","Soy **AXEL**, el Director de la Mesa. Dame una orden y reparto la mision a los agentes. _Comandos: `/imagen` crear imagen, `/pagina` forjar una web, `/recordar` programar un correo, `/bolsa` precios cripto en vivo (ej: /bolsa bitcoin ethereum)._"); }
   try{ var m=localStorage.getItem("orionix_motor"); var s=document.getElementById("axelModelo"); if(m&&s){ s.value=m; } }catch(e){} }
 
 /* ---- Fondo de estrellas ---- */

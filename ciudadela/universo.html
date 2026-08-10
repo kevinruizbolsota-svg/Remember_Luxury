@@ -428,6 +428,19 @@ function consultarBolsa(q){
    .then(function(r){return r.json();}).then(function(d){ pensando.remove(); axelAdd("b",(d&&d.respuesta)||"No pude consultar el mercado ahora mismo."); })
    .catch(function(){ pensando.remove(); axelAdd("b","No pude conectar con el mercado ahora mismo."); });
 }
+var NOTAS="https://kevinruiz.app.n8n.cloud/webhook/notas";
+function guardarNota(txt, tipo){
+  var pensando=axelAdd("b","_El Escriba esta guardando..._");
+  fetch(NOTAS,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({accion:"guardar",texto:txt,tipo:tipo})})
+   .then(function(r){return r.json();}).then(function(d){ pensando.remove(); axelAdd("b",(d&&d.respuesta)||"Guardado."); })
+   .catch(function(){ pensando.remove(); axelAdd("b","No pude guardar ahora mismo."); });
+}
+function listarNotas(){
+  var pensando=axelAdd("b","_El Escriba esta leyendo tus notas..._");
+  fetch(NOTAS,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({accion:"listar"})})
+   .then(function(r){return r.json();}).then(function(d){ pensando.remove(); axelAdd("b",(d&&d.respuesta)||"No hay notas."); })
+   .catch(function(){ pensando.remove(); axelAdd("b","No pude leer tus notas ahora mismo."); });
+}
 function axelSend(){
   var inp=document.getElementById("axelIn"); var t=(inp.value||"").trim(); if(!t) return; inp.value="";
   axelAdd("u",t);
@@ -446,11 +459,20 @@ function axelSend(){
     var q=t.replace(/^\/(bolsa|cripto)/i,"").trim();
     consultarBolsa(q); return;
   }
+  if(low.indexOf("/notas")===0 || low.indexOf("/tareas")===0){
+    listarNotas(); return;
+  }
+  if(low.indexOf("/nota")===0 || low.indexOf("/tarea")===0){
+    var esTarea=low.indexOf("/tarea")===0;
+    var txt=t.replace(/^\/(nota|tarea)/i,"").trim();
+    if(!txt){ axelAdd("b","Escribe la "+(esTarea?"tarea":"nota")+". Ejemplo: /"+(esTarea?"tarea terminar la web":"nota comprar velas")); return; }
+    guardarNota(txt, esTarea?"tarea":"nota"); return;
+  }
   enviarAlCerebro(t);
 }
 // saludo inicial del director al cargar el log
 abrirChatInit();
-function abrirChatInit(){ var l=document.getElementById("axelLog"); if(l&&!l.children.length){ axelAdd("b","Soy **AXEL**, el Director de la Mesa. Dame una orden y reparto la mision a los agentes. _Comandos: `/imagen` crear imagen, `/pagina` forjar una web, `/recordar` programar un correo, `/bolsa` precios cripto en vivo (ej: /bolsa bitcoin ethereum)._"); }
+function abrirChatInit(){ var l=document.getElementById("axelLog"); if(l&&!l.children.length){ axelAdd("b","Soy **AXEL**, el Director de la Mesa. Dame una orden y reparto la mision a los agentes. _Comandos: `/imagen` crear imagen, `/pagina` forjar una web, `/recordar` programar un correo, `/bolsa` precios cripto, `/nota` y `/tarea` guardar, `/notas` ver todo._"); }
   try{ var m=localStorage.getItem("orionix_motor"); var s=document.getElementById("axelModelo"); if(m&&s){ s.value=m; } }catch(e){} }
 
 /* ---- Fondo de estrellas ---- */

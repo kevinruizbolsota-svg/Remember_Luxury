@@ -190,7 +190,7 @@
       <p>Una casa donde la inteligencia se vuelve arte. Colecciones forjadas con esencia, carácter y precisión.</p>
       <div class="cta">
         <a class="btn" onclick="scrollTo2('catalogo')">Descubrir la colección</a>
-        <a class="btn ghost" onclick="scrollTo2('videos')">Ver el desfile</a>
+        <a class="btn ghost" href="reels.html">El Desfile · Reels</a>
       </div>
     </div>
   </div>
@@ -354,7 +354,7 @@ function pintarRibbon(){
   var cats = catsDisponibles();
   rib.innerHTML = '<a class="menu" onclick="scrollTo2(\'catalogo\')">Colecciones</a>'
     + cats.map(function(c){ return '<a onclick="filtrarCat(\''+esc(c).replace(/'/g,"")+'\')">'+esc(c)+'</a>'; }).join("")
-    + '<a onclick="scrollTo2(\'videos\')">Desfile</a>'
+    + '<a href="reels.html">El Desfile</a>'
     + '<a onclick="scrollTo2(\'destacados\')">Destacados</a>';
 }
 function pintarSearchCats(){

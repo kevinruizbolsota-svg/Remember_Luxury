@@ -1855,14 +1855,16 @@
       }
       vwLastInterim=interim;
       vwShowInterim((vwFinalBuf+interim).trim());
-      /* MODO ANALISIS: al detectar habla, arranca tope de seguridad y espera ~2.6s de silencio antes de responder */
-      if((vwFinalBuf+interim).trim()){vwSetState("Escuchando... (analizando)");if(!vwMaxTimer){vwMaxTimer=setTimeout(function(){vwMaxTimer=null;vwFlush();},13000);}}
+      var hayFinal=false; for(var k=ev.resultIndex;k<ev.results.length;k++){ if(ev.results[k].isFinal){hayFinal=true;break;} }
+      /* MODO ANALISIS RAPIDO: al detectar habla arranca tope de seguridad */
+      if((vwFinalBuf+interim).trim()){vwSetState("Escuchando...");if(!vwMaxTimer){vwMaxTimer=setTimeout(function(){vwMaxTimer=null;vwFlush();},9000);}}
       if(vwSilenceTimer)clearTimeout(vwSilenceTimer);
-      vwSilenceTimer=setTimeout(function(){vwFlush();},1700);
+      /* si Chrome ya dio un resultado FINAL, responde casi al instante; si es interino, espera un respiro corto de silencio */
+      vwSilenceTimer=setTimeout(function(){vwFlush();}, hayFinal?250:650);
     };
     r.onstart=function(){ vwListening=true; };
     r.onaudiostart=function(){ vwListening=true; };
-    r.onspeechend=function(){/* Chrome detecto fin de habla: responde pronto si ya hay texto */ if((vwFinalBuf+vwLastInterim).trim()){if(vwSilenceTimer)clearTimeout(vwSilenceTimer);vwSilenceTimer=setTimeout(function(){vwFlush();},900);}};
+    r.onspeechend=function(){/* Chrome detecto fin de habla: responde de inmediato si ya hay texto */ if((vwFinalBuf+vwLastInterim).trim()){if(vwSilenceTimer)clearTimeout(vwSilenceTimer);vwFlush();}};
     r.onerror=function(ev){
       var e=ev&&ev.error;
       if(e==="not-allowed"||e==="service-not-allowed"){
@@ -1875,10 +1877,10 @@
     };
     r.onend=function(){
       vwListening=false;
-      /* si Chrome cerro la sesion pero quedo texto sin responder, lo aprovechamos */
+      /* si Chrome cerro la sesion pero quedo texto sin responder, lo aprovechamos YA */
       if((vwFinalBuf+vwLastInterim).trim()&&!vwSpeaking&&!vwThinking){vwFlush();return;}
       /* reinicia si seguimos en manos libres y no estamos hablando/pensando (conversacion fluida) */
-      if(vwWantListen&&vwHands&&!vwSpeaking&&!vwThinking){setTimeout(vwStartListen,180);}
+      if(vwWantListen&&vwHands&&!vwSpeaking&&!vwThinking){setTimeout(vwStartListen,150);}
     };
     vwRecog=r;return r;
   }
@@ -1887,15 +1889,19 @@
   function vwArmWatch(){
     if(vwWatch)clearInterval(vwWatch);
     vwWatch=setInterval(function(){
+      /* si hay texto sin analizar, procesalo ya */
+      if(vwHands&&(vwFinalBuf+vwLastInterim).trim()&&!vwSpeaking&&!vwThinking){ vwFlush(); return; }
       if(vwHands&&vwWantListen&&!vwListening&&!vwSpeaking&&!vwThinking){ vwStartListen(); }
-    },1200);
+    },900);
   }
   function vwStartListen(){
     if(!VW_SR)return;
     if(!vwHands)return;
     if(vwListening||vwSpeaking||vwThinking)return;
+    /* si hay texto pendiente sin responder, procesalo ANTES de reiniciar (no lo borres) */
+    if((vwFinalBuf+vwLastInterim).trim()){vwFlush();return;}
     var r=vwEnsureRecog();if(!r)return;
-    vwFinalBuf="";vwWantListen=true;
+    vwWantListen=true;
     try{r.start();vwListening=true;var o=document.getElementById("vwOrb");if(o)o.classList.add("talk");vwSetState("Escuchando... hablame");document.getElementById("vwMicLbl").textContent="Te escucho... habla con naturalidad";}
     catch(e){/* InvalidStateError: ya estaba iniciado -> lo tratamos como escuchando */ vwListening=true;}
   }

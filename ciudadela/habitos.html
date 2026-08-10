@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hábitos Diarios del Forjador</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #05060f;
+            color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #0a0d1c;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .titulo {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #d4af37;
+        }
+        .lista-habitos {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .lista-habitos li {
+            margin-bottom: 10px;
+        }
+        .casilla {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .casilla:checked {
+            background-color: #d4af37;
+            border-color: #d4af37;
+        }
+        .barra-progreso {
+            width: 100%;
+            height: 10px;
+            background-color: #333;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .progreso {
+            height: 10px;
+            background-color: #d4af37;
+            border-radius: 10px;
+        }
+        .racha {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .boton-volver {
+            background-color: #d4af37;
+            color: #000;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .boton-volver:hover {
+            background-color: #c7a537;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="titulo">Hábitos Diarios del Forjador</h1>
+        <ul class="lista-habitos">
+            <li>
+                <input type="checkbox" id="habito1" class="casilla">
+                <label for="habito1">Ejercicio físico</label>
+            </li>
+            <li>
+                <input type="checkbox" id="habito2" class="casilla">
+                <label for="habito2">Meditación</label>
+            </li>
+            <li>
+                <input type="checkbox" id="habito3" class="casilla">
+                <label for="habito3">Lectura</label>
+            </li>
+            <li>
+                <input type="checkbox" id="habito4" class="casilla">
+                <label for="habito4">Aprendizaje de un nuevo skill</label>
+            </li>
+            <li>
+                <input type="checkbox" id="habito5" class="casilla">
+                <label for="habito5">Escribir en un diario</label>
+            </li>
+        </ul>
+        <div class="barra-progreso">
+            <div class="progreso" id="progreso"></div>
+        </div>
+        <p class="racha" id="racha">Racha: 0 días</p>
+        <button class="boton-volver" onclick="volverAlInicio()">Volver al inicio</button>
+    </div>
+    <script>
+        let habitos = [
+            { id: "habito1", nombre: "Ejercicio físico", completado: false },
+            { id: "habito2", nombre: "Meditación", completado: false },
+            { id: "habito3", nombre: "Lectura", completado: false },
+            { id: "habito4", nombre: "Aprendizaje de un nuevo skill", completado: false },
+            { id: "habito5", nombre: "Escribir en un diario", completado: false }
+        ];
+        let racha = 0;
+        let progreso = 0;
+        let fechaActual = new Date();
+        let fechaUltimoRegistro = localStorage.getItem("fechaUltimoRegistro");
+        let habitosCompletados = localStorage.getItem("habitosCompletados");
+        if (fechaUltimoRegistro && habitosCompletados) {
+            if (fechaUltimoRegistro !== fechaActual.toISOString().split("T")[0]) {
+                racha = 0;
+                habitos.forEach(habito => {
+                    habito.completado = false;
+                });
+            } else {
+                racha = parseInt(localStorage.getItem("racha"));
+                habitosCompletados = JSON.parse(habitosCompletados);
+                habitos.forEach(habito => {
+                    habito.completado = habitosCompletados[habito.id];
+                });
+            }
+        }
+        habitos.forEach(habito => {
+            let casilla = document.getElementById(habito.id);
+            casilla.addEventListener("change", () => {
+                habito.completado = casilla.checked;
+                calcularProgreso();
+                calcularRacha();
+                guardarDatos();
+            });
+            if (habito.completado) {
+                casilla.checked = true;
+            }
+        });
+        function calcularProgreso() {
+            progreso = 0;
+            habitos.forEach(habito => {
+                if (habito.completado) {
+                    progreso++;
+                }
+            });
+            document.getElementById("progreso").style.width = (progreso / habitos.length) * 100 + "%";
+        }
+        function calcularRacha() {
+            if (progreso === habitos.length) {
+                racha++;
+            } else {
+                racha = 0;
+            }
+            document.getElementById("racha").textContent = `Racha: ${racha} días`;
+            localStorage.setItem("racha", racha);
+        }
+        function guardarDatos() {
+            localStorage.setItem("fechaUltimoRegistro", fechaActual.toISOString().split("T")[0]);
+            let habitosCompletados = {};
+            habitos.forEach(habito => {
+                habitosCompletados[habito.id] = habito.completado;
+            });
+            localStorage.setItem("habitosCompletados", JSON.stringify(habitosCompletados));
+        }
+        function volverAlInicio() {
+            window.location.href = "index.html";
+        }
+        calcularProgreso();
+        calcularRacha();
+    </script>
+</body>
+</html>

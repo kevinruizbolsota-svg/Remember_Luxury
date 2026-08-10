@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nebula Habits · Forja tu constelación</title>
+<meta name="description" content="Nebula Habits — convierte tus hábitos en estrellas y forja tu propia constelación de disciplina.">
+<style>
+:root{
+  --morado:#7b2ff7; --morado2:#b06cff; --azul:#3ad6ff; --oro:#f5c451;
+  --bg:#07060f; --bg2:#0d0a1f; --panel:rgba(255,255,255,.05);
+  --linea:rgba(255,255,255,.10); --txt:#eae6ff; --gris:#9a92c0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',system-ui,sans-serif;color:var(--txt);
+  background:radial-gradient(1200px 800px at 70% -10%,#241247 0,transparent 60%),
+             radial-gradient(1000px 700px at 10% 110%,#12213f 0,transparent 55%),
+             var(--bg);
+  min-height:100vh;overflow-x:hidden;position:relative;
+}
+#cielo{position:fixed;inset:0;z-index:0;pointer-events:none}
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* HEADER */
+header{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.logo{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.5px}
+.logo .astro{width:40px;height:40px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,var(--morado2),var(--morado) 60%,#2a0f5e);
+  box-shadow:0 0 20px rgba(123,47,247,.6);display:grid;place-items:center;font-size:20px}
+.logo b{font-size:1.15rem;background:linear-gradient(90deg,var(--azul),var(--morado2),var(--oro));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.logo small{display:block;font-size:.6rem;letter-spacing:3px;color:var(--gris);font-weight:400}
+
+/* HERO */
+.hero{text-align:center;padding:40px 0 30px}
+.hero h1{font-size:clamp(1.8rem,6vw,3.4rem);font-weight:800;line-height:1.05;letter-spacing:.5px}
+.hero h1 span{background:linear-gradient(90deg,var(--azul),var(--morado2),var(--oro));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--gris);max-width:560px;margin:14px auto 0;font-size:1rem}
+.nivel{margin-top:22px;display:inline-flex;align-items:center;gap:14px;
+  padding:10px 20px;border:1px solid var(--linea);border-radius:40px;background:var(--panel)}
+.nivel .lvl{font-size:1.4rem;font-weight:800;color:var(--oro)}
+.nivel .barra{width:180px;height:8px;border-radius:8px;background:rgba(255,255,255,.08);overflow:hidden}
+.nivel .barra i{display:block;height:100%;width:0;border-radius:8px;
+  background:linear-gradient(90deg,var(--azul),var(--morado2));transition:width .8s ease}
+.nivel .xp{font-size:.75rem;color:var(--gris)}
+
+/* ADD */
+.add{display:flex;gap:10px;margin:26px 0 8px;flex-wrap:wrap}
+.add input{flex:1;min-width:200px;padding:14px 16px;border-radius:12px;
+  border:1px solid var(--linea);background:rgba(255,255,255,.04);color:var(--txt);font-size:1rem;outline:none}
+.add input:focus{border-color:var(--morado2)}
+.add button{padding:14px 22px;border:none;border-radius:12px;cursor:pointer;font-weight:700;
+  background:linear-gradient(90deg,var(--morado),var(--morado2));color:#fff;font-size:1rem;
+  box-shadow:0 8px 24px rgba(123,47,247,.35);transition:.2s}
+.add button:hover{transform:translateY(-2px)}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.stat{background:var(--panel);border:1px solid var(--linea);border-radius:16px;padding:18px;text-align:center}
+.stat b{display:block;font-size:1.8rem;color:var(--oro)}
+.stat span{font-size:.72rem;color:var(--gris);letter-spacing:1px}
+
+/* HABITS */
+h2.sec{font-size:1.1rem;margin:28px 0 12px;letter-spacing:1px;color:var(--morado2)}
+.habits{display:flex;flex-direction:column;gap:12px}
+.habit{display:flex;align-items:center;gap:14px;background:var(--panel);
+  border:1px solid var(--linea);border-radius:16px;padding:16px 18px;transition:.2s}
+.habit.done{border-color:rgba(58,214,255,.4);background:rgba(58,214,255,.06)}
+.check{width:34px;height:34px;border-radius:50%;border:2px solid var(--morado2);
+  cursor:pointer;display:grid;place-items:center;flex-shrink:0;transition:.2s;font-size:18px}
+.habit.done .check{background:linear-gradient(135deg,var(--azul),var(--morado2));border-color:transparent}
+.habit .info{flex:1}
+.habit .info b{display:block;font-size:1.05rem}
+.habit .info small{color:var(--gris);font-size:.78rem}
+.habit .racha{font-size:.8rem;color:var(--oro);font-weight:700;white-space:nowrap}
+.habit .del{background:none;border:none;color:var(--gris);cursor:pointer;font-size:1.2rem;opacity:.5;transition:.2s}
+.habit .del:hover{opacity:1;color:#ff6b6b}
+.vacio{text-align:center;color:var(--gris);padding:30px;border:1px dashed var(--linea);border-radius:16px}
+
+/* CONSTELACIONES */
+.constel{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-bottom:40px}
+.logro{background:var(--panel);border:1px solid var(--linea);border-radius:16px;padding:18px;text-align:center;opacity:.35;transition:.3s}
+.logro.on{opacity:1;border-color:var(--oro);box-shadow:0 0 26px rgba(245,196,81,.25)}
+.logro .ico{font-size:2rem}
+.logro b{display:block;margin-top:8px;font-size:.9rem}
+.logro small{color:var(--gris);font-size:.7rem}
+
+footer{text-align:center;padding:30px 0 50px;color:var(--gris);font-size:.75rem}
+footer a{color:var(--morado2);text-decoration:none}
+
+/* toast */
+#toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(120px);
+  background:linear-gradient(90deg,var(--morado),var(--morado2));color:#fff;padding:14px 24px;
+  border-radius:40px;font-weight:600;z-index:50;box-shadow:0 10px 30px rgba(123,47,247,.5);
+  transition:transform .4s cubic-bezier(.2,1.4,.4,1);max-width:90vw;text-align:center}
+#toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<canvas id="cielo"></canvas>
+<div class="wrap">
+  <header>
+    <div class="logo">
+      <div class="astro">🔨</div>
+      <div><b>NEBULA HABITS</b><small>FORJA TU CONSTELACIÓN</small></div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Convierte tus hábitos en <span>estrellas</span></h1>
+    <p>Cada día que cumples, enciendes una estrella. Suma rachas, sube de nivel y forja tu propia constelación de disciplina.</p>
+    <div class="nivel">
+      <span class="lvl">Nv <b id="nivel">1</b></span>
+      <div class="barra"><i id="barraXp"></i></div>
+      <span class="xp"><b id="xpActual">0</b>/<span id="xpMeta">100</span> XP</span>
+    </div>
+  </section>
+
+  <div class="add">
+    <input id="nuevo" type="text" placeholder="Nuevo hábito… (ej: Beber agua, Entrenar, Meditar)" maxlength="60">
+    <button onclick="agregar()">+ Forjar hábito</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b id="stTotal">0</b><span>HÁBITOS</span></div>
+    <div class="stat"><b id="stHoy">0</b><span>HOY</span></div>
+    <div class="stat"><b id="stMejor">0</b><span>MEJOR RACHA</span></div>
+  </div>
+
+  <h2 class="sec">✦ Tus hábitos</h2>
+  <div class="habits" id="lista"></div>
+
+  <h2 class="sec">✦ Constelaciones desbloqueadas</h2>
+  <div class="constel" id="logros"></div>
+
+  <footer>
+    Nebula Habits · forjado para <b>Orionix</b> · tus datos se guardan en tu propio navegador.<br>
+    <a href="index.html">← Volver a Orionix</a>
+  </footer>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ===== estado ===== */
+const HOY = () => new Date().toISOString().slice(0,10);
+const AYER = () => { const d=new Date(); d.setDate(d.getDate()-1); return d.toISOString().slice(0,10); };
+let S = JSON.parse(localStorage.getItem('nebula_habits')||'null') || { habitos:[], xp:0 };
+function guardar(){ localStorage.setItem('nebula_habits', JSON.stringify(S)); }
+
+/* ===== lógica ===== */
+function agregar(){
+  const inp=document.getElementById('nuevo');
+  const nom=inp.value.trim();
+  if(!nom){ inp.focus(); return; }
+  S.habitos.push({ id:Date.now(), nombre:nom, racha:0, mejor:0, ultimo:null });
+  inp.value=''; guardar(); render(); toast('⭐ Hábito forjado: '+nom);
+}
+document.addEventListener('keydown',e=>{ if(e.key==='Enter'&&document.activeElement.id==='nuevo') agregar(); });
+
+function toggle(id){
+  const h=S.habitos.find(x=>x.id===id); if(!h) return;
+  if(h.ultimo===HOY()){                     // desmarcar
+    h.ultimo = h.antes || null;
+    h.racha = Math.max(0,h.racha-1);
+    S.xp = Math.max(0,S.xp-10);
+  } else {                                   // marcar
+    h.antes = h.ultimo;
+    h.racha = (h.ultimo===AYER()) ? h.racha+1 : 1;
+    h.mejor = Math.max(h.mejor,h.racha);
+    h.ultimo = HOY();
+    S.xp += 10 + Math.min(h.racha,10);       // bonus por racha
+    festejo();
+  }
+  guardar(); render();
+}
+
+function borrar(id){
+  S.habitos = S.habitos.filter(x=>x.id!==id);
+  guardar(); render();
+}
+
+/* ===== niveles ===== */
+function nivelDe(xp){ let n=1,meta=100,acc=0; while(xp>=acc+meta){ acc+=meta; n++; meta=Math.round(meta*1.4);} return {n,acc,meta}; }
+
+/* ===== logros ===== */
+const LOGROS=[
+  {ico:'🌱',n:'Primera Chispa',d:'Crea tu 1er hábito',ok:s=>s.habitos.length>=1},
+  {ico:'🔥',n:'Racha de 3',d:'3 días seguidos',ok:s=>s.habitos.some(h=>h.mejor>=3)},
+  {ico:'⚔️',n:'Guerrero',d:'7 días seguidos',ok:s=>s.habitos.some(h=>h.mejor>=7)},
+  {ico:'🐉',n:'Domador',d:'14 días seguidos',ok:s=>s.habitos.some(h=>h.mejor>=14)},
+  {ico:'🏛️',n:'Disciplinado',d:'5 hábitos activos',ok:s=>s.habitos.length>=5},
+  {ico:'🌌',n:'Constelación',d:'Alcanza nivel 5',ok:s=>nivelDe(s.xp).n>=5},
+  {ico:'👑',n:'Forjador',d:'Alcanza nivel 10',ok:s=>nivelDe(s.xp).n>=10},
+  {ico:'💎',n:'Diamante',d:'30 días seguidos',ok:s=>s.habitos.some(h=>h.mejor>=30)},
+];
+
+/* ===== render ===== */
+function render(){
+  const lista=document.getElementById('lista');
+  lista.innerHTML = S.habitos.length ? '' : '<div class="vacio">Aún no hay hábitos. Forja el primero arriba ⭐</div>';
+  S.habitos.forEach(h=>{
+    const done = h.ultimo===HOY();
+    const el=document.createElement('div');
+    el.className='habit'+(done?' done':'');
+    el.innerHTML=`
+      <div class="check" onclick="toggle(${h.id})">${done?'✓':''}</div>
+      <div class="info"><b>${escapeHtml(h.nombre)}</b><small>${done?'Completado hoy':'Pendiente hoy'}</small></div>
+      <div class="racha">🔥 ${h.racha}</div>
+      <button class="del" onclick="borrar(${h.id})" title="Eliminar">✕</button>`;
+    lista.appendChild(el);
+  });
+
+  const total=S.habitos.length;
+  const hoy=S.habitos.filter(h=>h.ultimo===HOY()).length;
+  const mejor=S.habitos.reduce((m,h)=>Math.max(m,h.mejor),0);
+  document.getElementById('stTotal').textContent=total;
+  document.getElementById('stHoy').textContent=hoy;
+  document.getElementById('stMejor').textContent=mejor;
+
+  const nv=nivelDe(S.xp);
+  document.getElementById('nivel').textContent=nv.n;
+  document.getElementById('xpActual').textContent=S.xp-nv.acc;
+  document.getElementById('xpMeta').textContent=nv.meta;
+  document.getElementById('barraXp').style.width=Math.min(100,((S.xp-nv.acc)/nv.meta)*100)+'%';
+
+  const cont=document.getElementById('logros');
+  cont.innerHTML='';
+  LOGROS.forEach(l=>{
+    const on=l.ok(S);
+    const el=document.createElement('div');
+    el.className='logro'+(on?' on':'');
+    el.innerHTML=`<div class="ico">${l.ico}</div><b>${l.n}</b><small>${l.d}</small>`;
+    cont.appendChild(el);
+  });
+}
+
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+/* ===== toast + festejo ===== */
+let tT;
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(tT); tT=setTimeout(()=>t.classList.remove('show'),2600); }
+function festejo(){ for(let i=0;i<24;i++) chispa(); }
+function chispa(){
+  const c=document.createElement('div');
+  c.style.cssText='position:fixed;z-index:60;width:6px;height:6px;border-radius:50%;pointer-events:none;left:50%;top:40%';
+  c.style.background=['#3ad6ff','#b06cff','#f5c451','#fff'][Math.floor(Math.random()*4)];
+  document.body.appendChild(c);
+  const ang=Math.random()*Math.PI*2, vel=60+Math.random()*160;
+  let x=0,y=0,op=1;
+  const t=setInterval(()=>{ x+=Math.cos(ang)*vel*.02; y+=Math.sin(ang)*vel*.02+ .6; op-=.03;
+    c.style.transform=`translate(${x}px,${y}px)`; c.style.opacity=op;
+    if(op<=0){ clearInterval(t); c.remove(); } },16);
+}
+
+/* ===== cielo estrellado ===== */
+const cv=document.getElementById('cielo'), cx=cv.getContext('2d');
+let W,H,stars=[];
+function resize(){ W=cv.width=innerWidth; H=cv.height=innerHeight;
+  stars=Array.from({length:130},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.2,a:Math.random(),v:Math.random()*.02+.005})); }
+resize(); addEventListener('resize',resize);
+(function loop(){ cx.clearRect(0,0,W,H);
+  stars.forEach(s=>{ s.a+=s.v; const al=.4+Math.abs(Math.sin(s.a))*.6;
+    cx.beginPath(); cx.arc(s.x,s.y,s.r,0,7); cx.fillStyle=`rgba(200,190,255,${al})`; cx.fill(); });
+  requestAnimationFrame(loop); })();
+
+render();
+</script>
+</body>
+</html>

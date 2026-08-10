@@ -129,6 +129,7 @@
   <div class="marca">ORIONIX · UNIVERSO</div>
   <div>
     <a href="index.html">&larr; Volver</a>
+    <a onclick="abrirConsejo()" style="cursor:pointer">🌌 El Consejo</a>
     <a onclick="abrirChat('director','AXEL','Director de la Mesa','A')" style="cursor:pointer">Hablar con AXEL</a>
   </div>
 </div>
@@ -346,6 +347,7 @@ function copiarCodigo(id){ var el=document.getElementById(id); if(!el)return; va
 var CHAT_AGENTE="director", CHAT_NOMBRE="AXEL", CHAT_ROL="Director de la Mesa";
 function axelAdd(role,txt){ var l=document.getElementById("axelLog"); var d=document.createElement("div"); d.className="msg "+(role==="u"?"u":"b"); if(role==="u"){d.textContent=txt;} else {d.innerHTML=renderMD(txt);} l.appendChild(d); l.scrollTop=l.scrollHeight; return d; }
 function abrirChat(agenteId,nombre,rol,pico){
+  MODO_CONSEJO=false;
   CHAT_AGENTE=agenteId||"director"; CHAT_NOMBRE=nombre||"AXEL"; CHAT_ROL=rol||"Director de la Mesa";
   document.getElementById("axNom").textContent=CHAT_NOMBRE;
   document.getElementById("axRol").textContent=CHAT_ROL;
@@ -468,7 +470,59 @@ function axelSend(){
     if(!txt){ axelAdd("b","Escribe la "+(esTarea?"tarea":"nota")+". Ejemplo: /"+(esTarea?"tarea terminar la web":"nota comprar velas")); return; }
     guardarNota(txt, esTarea?"tarea":"nota"); return;
   }
+  if(MODO_CONSEJO){ enviarAlConsejo(t); return; }
   enviarAlCerebro(t);
+}
+
+/* ---- EL CONSEJO: escribes una vez y toda la Mesa responde ---- */
+var MODO_CONSEJO=false;
+var CONSEJO=[
+  {id:"director", nom:"AXEL", rol:"Director de la Mesa", pico:"\ud83d\udc51"},
+  {id:"cazador", nom:"CAZADOR", rol:"Productos & Economia", pico:"\ud83d\udd0d"},
+  {id:"sabio", nom:"SABIO", rol:"Conocimiento & Contexto", pico:"\ud83d\udcda"},
+  {id:"escriba", nom:"ESCRIBA", rol:"Datos & CRM", pico:"\u270d\ufe0f"},
+  {id:"creador", nom:"CREADOR", rol:"Imagenes & Video", pico:"\ud83c\udfa8"},
+  {id:"heraldo", nom:"HERALDO", rol:"Comunicacion", pico:"\ud83d\udce7"},
+  {id:"vocero", nom:"VOCERO", rol:"Redes Sociales", pico:"\ud83c\udf10"},
+  {id:"explorador", nom:"EXPLORADOR", rol:"Investigacion Profunda", pico:"\ud83d\udd75\ufe0f"},
+  {id:"guardian", nom:"GUARDIAN", rol:"Seguridad & Memoria", pico:"\ud83d\udee1\ufe0f"}
+];
+function abrirConsejo(){
+  MODO_CONSEJO=true;
+  document.getElementById("axNom").textContent="EL CONSEJO";
+  document.getElementById("axRol").textContent="Toda la Mesa de Forjadores";
+  document.getElementById("axAv").textContent="\ud83c\udf0c";
+  document.getElementById("axelLog").innerHTML="";
+  axelAdd("b","**EL CONSEJO esta reunido.** Escribe tu pregunta y los "+CONSEJO.length+" agentes de la Mesa responderan, cada uno con su voz y su especialidad. _(Van uno por uno; ten paciencia.)_");
+  document.getElementById("axelChat").classList.add("open");
+  setTimeout(function(){document.getElementById("axelIn").focus();},100);
+}
+function pedirAgente(t, motor, agenteId){
+  return fetch(CEREBRO,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:"forjador",sesion:"consejo-"+agenteId,agente:(agenteId||"director").toUpperCase(),mensaje:t,ia:motor,motor:motor,proveedor:motor})})
+    .then(function(r){ return r.json().catch(function(){return null;}); })
+    .then(function(d){ var r=d&&(d.respuesta||d.output); return (r&&(""+r).trim())?(""+r):null; })
+    .catch(function(){ return null; });
+}
+function enviarAlConsejo(t){
+  var preferido=motorElegido();
+  try{ localStorage.setItem("orionix_motor", preferido); }catch(e){}
+  var i=0;
+  function siguiente(){
+    if(i>=CONSEJO.length){ axelAdd("b","_El Consejo ha hablado._ \ud83c\udf1f"); return; }
+    var ag=CONSEJO[i++];
+    var pensando=axelAdd("b","_"+ag.pico+" **"+ag.nom+"** esta pensando..._");
+    var lista=cadenaMotores(preferido); var j=0;
+    function intentar(){
+      if(j>=lista.length){ pensando.innerHTML=renderMD(""+ag.pico+" **"+ag.nom+"**\n\n_(sin cuota ahora mismo, prueba otro motor arriba)_"); siguiente(); return; }
+      var motor=lista[j++];
+      pedirAgente(t, motor, ag.id).then(function(resp){
+        if(resp){ pensando.innerHTML=renderMD(""+ag.pico+" **"+ag.nom+"** \u00b7 _"+ag.rol+"_\n\n"+resp); siguiente(); }
+        else { intentar(); }
+      });
+    }
+    intentar();
+  }
+  siguiente();
 }
 // saludo inicial del director al cargar el log
 abrirChatInit();

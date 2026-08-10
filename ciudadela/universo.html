@@ -407,6 +407,20 @@ function forjarPagina(desc){
    })
    .catch(function(){ pensando.remove(); axelAdd("b","No pude conectar con el Arquitecto (Forjador de Paginas)."); });
 }
+var RECORDAR="https://kevinruiz.app.n8n.cloud/webhook/recordatorio-crear";
+function crearRecordatorio(texto){
+  // Extrae hora tipo "6:00", "18h30", "07.15" del texto
+  var mh=texto.match(/(\d{1,2})[:h\.](\d{2})/);
+  var hora=mh?(("0"+mh[1]).slice(-2)+":"+mh[2]):"";
+  var esDiario=/cada dia|cada d\u00eda|diario|todos los dias|todos los d\u00edas/i.test(texto);
+  var tipo=esDiario?"diario":"puntual";
+  var mensaje=texto.replace(/(\d{1,2})[:h\.](\d{2})/,"").replace(/a las|cada dia|cada d\u00eda|todos los dias|todos los d\u00edas|diario|puntual/gi,"").replace(/\s+/g," ").trim();
+  if(!hora){ axelAdd("b","Dime la hora. Ejemplo: `/recordar hacer ejercicio a las 6:00 cada dia`"); return; }
+  var pensando=axelAdd("b","_El Heraldo esta guardando tu recordatorio..._");
+  fetch(RECORDAR,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({mensaje:mensaje||"Recordatorio",hora:hora,tipo:tipo,destino:""})})
+   .then(function(r){return r.json();}).then(function(d){ pensando.remove(); axelAdd("b",(d&&d.respuesta)||"Recordatorio guardado."); })
+   .catch(function(){ pensando.remove(); axelAdd("b","No pude guardar el recordatorio ahora mismo."); });
+}
 function axelSend(){
   var inp=document.getElementById("axelIn"); var t=(inp.value||"").trim(); if(!t) return; inp.value="";
   axelAdd("u",t);
@@ -416,11 +430,16 @@ function axelSend(){
     if(!desc){ axelAdd("b","Escribe que pagina quieres. Ejemplo: /pagina una landing de ventas para un curso de meditacion"); return; }
     forjarPagina(desc); return;
   }
+  if(low.indexOf("/recordar")===0 || low.indexOf("/recuerda")===0){
+    var rec=t.replace(/^\/record?[a-z]*/i,"").trim();
+    if(!rec){ axelAdd("b","Que quieres que te recuerde y a que hora. Ejemplo: /recordar hacer ejercicio a las 6:00 cada dia"); return; }
+    crearRecordatorio(rec); return;
+  }
   enviarAlCerebro(t);
 }
 // saludo inicial del director al cargar el log
 abrirChatInit();
-function abrirChatInit(){ var l=document.getElementById("axelLog"); if(l&&!l.children.length){ axelAdd("b","Soy **AXEL**, el Director de la Mesa. Dame una orden y reparto la mision a los agentes. _Comandos: `/imagen` para crear una imagen, `/pagina` para forjar y publicar una web (ej: /pagina una landing de ventas)._"); }
+function abrirChatInit(){ var l=document.getElementById("axelLog"); if(l&&!l.children.length){ axelAdd("b","Soy **AXEL**, el Director de la Mesa. Dame una orden y reparto la mision a los agentes. _Comandos: `/imagen` crear imagen, `/pagina` forjar una web, `/recordar` programar un correo (ej: /recordar hacer ejercicio a las 6:00 cada dia)._"); }
   try{ var m=localStorage.getItem("orionix_motor"); var s=document.getElementById("axelModelo"); if(m&&s){ s.value=m; } }catch(e){} }
 
 /* ---- Fondo de estrellas ---- */

@@ -361,13 +361,39 @@ function abrirChat(agenteId,nombre,rol,pico){
   if(CHAT_AGENTE!=="director"){ enviarAlCerebro("Presentate brevemente y dime en que me puedes ayudar."); }
 }
 function motorElegido(){ var s=document.getElementById("axelModelo"); return s?s.value:"groq"; }
+// Cadena de respaldo: si un motor esta agotado (cuota diaria), prueba el siguiente automaticamente.
+function cadenaMotores(preferido){
+  var todos=["groq","gemini","openrouter","mistral","claude"];
+  var lista=[preferido];
+  for(var i=0;i<todos.length;i++){ if(todos[i]!==preferido) lista.push(todos[i]); }
+  return lista;
+}
+function pedirAMotor(t, motor){
+  return fetch(CEREBRO,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:"forjador",sesion:"universo-"+CHAT_AGENTE,agente:CHAT_AGENTE,mensaje:t,ia:motor,motor:motor,proveedor:motor})})
+    .then(function(r){ return r.json().catch(function(){return null;}); })
+    .then(function(d){ var r=d&&(d.respuesta||d.output); return (r&&(""+r).trim())?(""+r):null; })
+    .catch(function(){ return null; });
+}
 function enviarAlCerebro(t){
   var pensando=axelAdd("b","_"+CHAT_NOMBRE+" esta pensando..._");
-  var motor=motorElegido();
-  try{ localStorage.setItem("orionix_motor", motor); }catch(e){}
-  fetch(CEREBRO,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:"forjador",sesion:"universo-"+CHAT_AGENTE,agente:CHAT_AGENTE,mensaje:t,motor:motor,proveedor:motor})})
-   .then(function(r){return r.json();}).then(function(d){ pensando.remove(); axelAdd("b",(d&&(d.respuesta||d.output))||"(sin respuesta)"); })
-   .catch(function(){ pensando.remove(); axelAdd("b","No pude conectar con el cerebro. Revisa que el Portal Central este publicado."); });
+  var preferido=motorElegido();
+  try{ localStorage.setItem("orionix_motor", preferido); }catch(e){}
+  var lista=cadenaMotores(preferido);
+  var idx=0;
+  function intentar(){
+    if(idx>=lista.length){
+      pensando.remove();
+      axelAdd("b","Ahora mismo mis motores gratuitos estan descansando (se agoto la cuota diaria). Vuelve a intentarlo en unos minutos o elige otro motor arriba. Mientras tanto sigo aqui contigo. 🌙");
+      return;
+    }
+    var motor=lista[idx++];
+    if(idx>1){ pensando.innerHTML=renderMD("_probando otro motor ("+motor+")..._"); }
+    pedirAMotor(t, motor).then(function(resp){
+      if(resp){ pensando.remove(); axelAdd("b",resp); }
+      else { intentar(); }
+    });
+  }
+  intentar();
 }
 function axelSend(){
   var inp=document.getElementById("axelIn"); var t=(inp.value||"").trim(); if(!t) return; inp.value="";

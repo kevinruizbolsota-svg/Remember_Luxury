@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hábitos Diarios del Forjador</title>
+    <title>Hábitos Diarios de Kevin Ruiz</title>
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -24,9 +24,26 @@
             text-align: center;
             font-size: 24px;
             font-weight: bold;
-            margin-bottom: 20px;
+            margin-bottom: 4px;
             color: #d4af37;
         }
+        .subtitulo {
+            text-align: center;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #9aa0b5;
+            margin: 0 0 20px;
+        }
+        .firma {
+            text-align: center;
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(212,175,55,.25);
+            font-size: 13px;
+            color: #7d8296;
+        }
+        .firma b { color: #d4af37; font-weight: 600; }
         .lista-habitos {
             list-style: none;
             padding: 0;
@@ -86,6 +103,7 @@
 <body>
     <div class="container">
         <h1 class="titulo">Hábitos Diarios del Forjador</h1>
+        <p class="subtitulo">de Kevin Ruiz</p>
         <ul class="lista-habitos">
             <li>
                 <input type="checkbox" id="habito1" class="casilla">
@@ -113,6 +131,7 @@
         </div>
         <p class="racha" id="racha">Racha: 0 días</p>
         <button class="boton-volver" onclick="volverAlInicio()">Volver al inicio</button>
+        <p class="firma">Creado por <b>Kevin Ruiz</b> · ORIONIX</p>
     </div>
     <script>
         let habitos = [

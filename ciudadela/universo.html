@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIONIX · Universo de la Mesa de Forjadores</title>
+<meta name="description" content="El hogar viviente de los agentes de inteligencia artificial de Orionix. Un universo donde cada planeta es un agente con vida propia que aprende cada dia.">
+<style>
+  :root{--oro:#e8c86a;--oro2:#c9a94e;--tinta:#eaf0ff;--tenue:#8a93b0;--panel:rgba(12,16,32,.72);--linea:rgba(232,200,106,.22)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{font-family:"Times New Roman",Georgia,serif;background:#02030a;color:var(--tinta);overflow-x:hidden}
+  canvas#cosmos{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+  .veil{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,rgba(6,10,26,0) 30%,rgba(2,3,10,.55) 100%)}
+  /* Topbar */
+  .top{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:14px 22px;background:linear-gradient(180deg,rgba(2,3,10,.85),rgba(2,3,10,0))}
+  .marca{font-size:.82rem;letter-spacing:6px;color:var(--oro);font-weight:400}
+  .top a{color:var(--tenue);text-decoration:none;font-size:.72rem;letter-spacing:2px;margin-left:16px;transition:.25s}
+  .top a:hover{color:var(--oro)}
+  /* Escenario */
+  .scene{position:relative;z-index:10;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:90px 16px 60px}
+  .titulo{text-align:center;margin-bottom:8px}
+  .titulo h1{font-size:clamp(1.4rem,5vw,2.4rem);letter-spacing:10px;font-weight:400;color:#fff;text-shadow:0 0 24px rgba(232,200,106,.35)}
+  .titulo p{color:var(--tenue);font-size:.8rem;letter-spacing:3px;margin-top:8px}
+  /* Sistema orbital */
+  .sistema{position:relative;width:min(92vw,720px);height:min(92vw,720px);margin:10px auto;display:flex;align-items:center;justify-content:center}
+  .orbita{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:1px solid rgba(232,200,106,.10);border-radius:50%}
+  .o1{width:34%;height:34%}.o2{width:56%;height:56%}.o3{width:78%;height:78%}.o4{width:100%;height:100%}
+  @keyframes girar{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+  .anillo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%}
+  .r1{width:34%;height:34%;animation:girar 46s linear infinite}
+  .r2{width:56%;height:56%;animation:girar 74s linear infinite reverse}
+  .r3{width:78%;height:78%;animation:girar 104s linear infinite}
+  .r4{width:100%;height:100%;animation:girar 140s linear infinite reverse}
+  /* Sol AXEL */
+  .sol{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;
+    background:radial-gradient(circle at 38% 34%,#fff7df,#f4d98a 34%,#d9ac47 66%,#8a6a1f);
+    box-shadow:0 0 60px rgba(244,217,138,.55),0 0 130px rgba(232,200,106,.35),inset -8px -10px 26px rgba(120,86,16,.5);
+    animation:latir 5s ease-in-out infinite;z-index:6}
+  @keyframes latir{0%,100%{box-shadow:0 0 60px rgba(244,217,138,.55),0 0 130px rgba(232,200,106,.30)}50%{box-shadow:0 0 78px rgba(255,240,190,.75),0 0 170px rgba(232,200,106,.45)}}
+  .sol b{font-size:1.05rem;letter-spacing:3px;color:#3a2a06;font-weight:700}
+  .sol span{font-size:.52rem;letter-spacing:2px;color:#5a4310;margin-top:2px}
+  /* Planeta */
+  .planeta{position:absolute;width:64px;height:64px;border-radius:50%;cursor:pointer;transition:transform .25s;
+    display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;
+    box-shadow:0 0 22px rgba(120,160,255,.35),inset -6px -8px 16px rgba(0,0,0,.45);animation:contraGirar linear infinite}
+  .r1 .planeta{animation-duration:46s}.r2 .planeta{animation-duration:74s}.r3 .planeta{animation-duration:104s}.r4 .planeta{animation-duration:140s}
+  .r2 .planeta,.r4 .planeta{animation-direction:reverse}
+  @keyframes contraGirar{from{transform:rotate(0)}to{transform:rotate(-360deg)}}
+  .r2 .planeta,.r4 .planeta{animation-name:contraGirarR}
+  @keyframes contraGirarR{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  .planeta:hover{transform:scale(1.16)}
+  .planeta .halo{position:absolute;inset:-9px;border-radius:50%;border:1px solid rgba(232,200,106,.35);opacity:.0;transition:.3s}
+  .planeta.activo .halo{opacity:1;animation:pulso 2.6s ease-in-out infinite}
+  @keyframes pulso{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.14);opacity:1}}
+  .planeta .lbl{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:.56rem;letter-spacing:1.5px;color:var(--tenue);white-space:nowrap}
+  .estado{position:absolute;top:-3px;right:-3px;width:13px;height:13px;border-radius:50%;border:2px solid #02030a}
+  .on{background:#3fd07a;box-shadow:0 0 10px #3fd07a}
+  .learn{background:#e8c86a;box-shadow:0 0 10px #e8c86a}
+  .off{background:#5a6480}
+  /* posiciones sobre cada anillo */
+  .r1 .p0{top:-32px;left:50%;margin-left:-32px}
+  .r2 .p0{top:-32px;left:50%;margin-left:-32px}.r2 .p1{top:50%;left:-32px;margin-top:-32px}
+  .r3 .p0{top:-32px;left:50%;margin-left:-32px}.r3 .p1{top:50%;right:-32px;margin-top:-32px}.r3 .p2{bottom:-32px;left:50%;margin-left:-32px}
+  .r4 .p0{top:6%;left:6%}.r4 .p1{top:6%;right:6%}.r4 .p2{bottom:6%;left:6%}.r4 .p3{bottom:6%;right:6%}
+  /* Panel lateral */
+  .panel{position:fixed;top:0;right:-460px;width:min(92vw,420px);height:100%;z-index:40;background:var(--panel);backdrop-filter:blur(14px);border-left:1px solid var(--linea);
+    padding:26px 22px;overflow-y:auto;transition:right .4s cubic-bezier(.2,.7,.2,1);box-shadow:-20px 0 60px rgba(0,0,0,.5)}
+  .panel.open{right:0}
+  .panel .cerrar{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--tenue);font-size:1.5rem;cursor:pointer}
+  .panel .pico{font-size:2.4rem}
+  .panel h2{color:var(--oro);font-size:1.5rem;letter-spacing:2px;margin:6px 0 2px}
+  .panel .rol{color:var(--tenue);font-size:.78rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+  .panel .desc{font-size:.98rem;line-height:1.6;color:var(--tinta);margin-bottom:16px}
+  .campo{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.86rem}
+  .campo span:first-child{color:var(--tenue)}
+  .barra{height:7px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;margin:6px 0 16px}
+  .barra i{display:block;height:100%;background:linear-gradient(90deg,var(--oro2),var(--oro));border-radius:6px}
+  .chip{display:inline-block;font-size:.7rem;letter-spacing:1px;padding:5px 10px;border:1px solid var(--linea);border-radius:20px;color:var(--oro);margin:0 6px 6px 0}
+  .pbtn{display:block;width:100%;text-align:center;padding:12px;margin-top:16px;border:1px solid var(--oro);border-radius:4px;color:var(--oro);background:transparent;letter-spacing:2px;font-size:.78rem;cursor:pointer;text-decoration:none;transition:.25s}
+  .pbtn:hover{background:var(--oro);color:#1a1204}
+  .pbtn.solido{background:var(--oro);color:#1a1204}
+  .nota{font-size:.72rem;color:var(--tenue);margin-top:12px;line-height:1.5}
+  /* Chat AXEL */
+  .chatwrap{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:30;width:min(92vw,560px);background:var(--panel);backdrop-filter:blur(12px);border:1px solid var(--linea);border-radius:12px;padding:12px;display:none}
+  .chatwrap.open{display:block}
+  .chatlog{max-height:200px;overflow-y:auto;margin-bottom:10px;font-size:.9rem;line-height:1.5}
+  .msg{margin:6px 0;padding:8px 12px;border-radius:8px}
+  .msg.u{background:rgba(232,200,106,.12);text-align:right}
+  .msg.b{background:rgba(255,255,255,.05)}
+  .chatin{display:flex;gap:8px}
+  .chatin input{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--linea);border-radius:6px;padding:10px;color:#fff;font-family:inherit;font-size:.9rem}
+  .chatin button{background:var(--oro);border:none;border-radius:6px;padding:0 16px;color:#1a1204;cursor:pointer;font-weight:700}
+  .pie{position:fixed;bottom:6px;left:0;right:0;text-align:center;z-index:12;color:var(--tenue);font-size:.62rem;letter-spacing:2px;pointer-events:none}
+</style>
+</head>
+<body>
+<canvas id="cosmos"></canvas>
+<div class="veil"></div>
+
+<div class="top">
+  <div class="marca">ORIONIX · UNIVERSO</div>
+  <div>
+    <a href="index.html">&larr; Volver</a>
+    <a onclick="document.getElementById('axelChat').classList.toggle('open')" style="cursor:pointer">Hablar con AXEL</a>
+  </div>
+</div>
+
+<div class="scene">
+  <div class="titulo">
+    <h1>LA MESA DE FORJADORES</h1>
+    <p>Un universo vivo · cada planeta es un agente que aprende cada dia</p>
+  </div>
+
+  <div class="sistema" id="sistema">
+    <div class="orbita o1"></div><div class="orbita o2"></div>
+    <div class="orbita o3"></div><div class="orbita o4"></div>
+
+    <!-- Sol: AXEL Director -->
+    <div class="sol" onclick="document.getElementById('axelChat').classList.add('open')">
+      <b>AXEL</b><span>DIRECTOR</span>
+    </div>
+
+    <!-- Anillos con planetas (se llenan por JS) -->
+    <div class="anillo r1" id="r1"></div>
+    <div class="anillo r2" id="r2"></div>
+    <div class="anillo r3" id="r3"></div>
+    <div class="anillo r4" id="r4"></div>
+  </div>
+</div>
+
+<!-- Panel de agente -->
+<aside class="panel" id="panel">
+  <button class="cerrar" onclick="cerrarPanel()">&times;</button>
+  <div class="pico" id="pPico">🔍</div>
+  <h2 id="pNom">Agente</h2>
+  <div class="rol" id="pRol">Rol</div>
+  <div class="desc" id="pDesc"></div>
+  <div class="campo"><span>Estado</span><span id="pEstado"></span></div>
+  <div class="campo"><span>Motor de IA</span><span id="pMotor"></span></div>
+  <div class="campo"><span>Nivel de aprendizaje</span><span id="pNivelTxt"></span></div>
+  <div class="barra"><i id="pNivel"></i></div>
+  <div id="pHerr"></div>
+  <a class="pbtn" id="pAccion" href="#">Interactuar</a>
+  <div class="nota" id="pNota"></div>
+</aside>
+
+<!-- Chat con AXEL (cerebro real portal-central) -->
+<div class="chatwrap" id="axelChat">
+  <div class="chatlog" id="axelLog"><div class="msg b">Soy AXEL, el Director de la Mesa. Dame una orden y reparto la mision a los agentes.</div></div>
+  <div class="chatin">
+    <input id="axelIn" placeholder="Da tu orden, Forjador..." onkeydown="if(event.key==='Enter')axelSend()">
+    <button onclick="axelSend()">&#10148;</button>
+  </div>
+</div>
+
+<div class="pie">ORIONIX · LA FUENTE DE LOS AGENTES · Acceso exclusivo</div>
+
+<script>
+/* ============ DEFINICION DEL UNIVERSO (arquitectura base) ============
+   Aqui vive cada agente. Para "dar vida" a uno nuevo, se agrega su objeto.
+   estado: "on" (activo) | "learn" (aprendiendo) | "off" (por despertar)      */
+var AGENTES = [
+  {id:"cazador", nom:"CAZADOR", rol:"Productos & Economia", pico:"🔍", color:"#4a86ff",
+   anillo:1, pos:0, estado:"on", motor:"Gemini + Busqueda Web",
+   nivel:62, herr:["Busqueda web","Ofertas","Cupones","Trading"],
+   desc:"Rastrea Amazon, AliExpress y todo el mundo buscando las mejores promociones, eventos y cupones. Domina economia, trading, banca e historia del dinero.",
+   accion:"Ponerlo a cazar", nota:"Activo en el Centro de Comando (n8n). Busqueda web real conectada."},
+
+  {id:"sabio", nom:"SABIO", rol:"Conocimiento & Contexto", pico:"📚", color:"#8f6fff",
+   anillo:2, pos:0, estado:"on", motor:"Gemini + Wikipedia",
+   nivel:48, herr:["Historia","Filosofia","Definiciones","Contexto"],
+   desc:"Guardian del conocimiento. Aporta historia, filosofia y contexto profundo a cualquier mision de la Mesa.",
+   accion:"Consultar al Sabio", nota:"Activo en el Centro de Comando (n8n)."},
+
+  {id:"escriba", nom:"ESCRIBA", rol:"Datos & CRM", pico:"✍️", color:"#3fd07a",
+   anillo:2, pos:1, estado:"learn", motor:"Gemini + Google Sheets/Drive",
+   nivel:20, herr:["Google Sheets","Drive","Docs","CRM"],
+   desc:"Estructura listas y guarda los datos de clientes (nombre, correo, telefono) en Google Sheets y Drive, en un cofre seguro. Nunca contrasenas de terceros.",
+   accion:"Despertar (proxima fase)", nota:"Requiere conectar tu cuenta de Google. Fase 2."},
+
+  {id:"creador", nom:"CREADOR", rol:"Imagenes & Video", pico:"🎨", color:"#ff7ac6",
+   anillo:3, pos:0, estado:"learn", motor:"Gemini Image + Veo 3.1",
+   nivel:15, herr:["Imagenes IA","Video IA","Edicion","Arte"],
+   desc:"Da forma visual al imperio: genera imagenes y videos de alto impacto para la marca, la tienda y las redes.",
+   accion:"Despertar (proxima fase)", nota:"Se activa con la API de imagen/video. Fase 3."},
+
+  {id:"heraldo", nom:"HERALDO", rol:"Comunicacion", pico:"📧", color:"#ffb454",
+   anillo:3, pos:1, estado:"off", motor:"Gmail + Telegram",
+   nivel:8, herr:["Gmail","Telegram","Alertas"],
+   desc:"Mensajero del imperio. Envia correos y avisos a clientes y al Forjador cuando algo importante ocurre.",
+   accion:"Despertar (proxima fase)", nota:"Requiere Gmail/Telegram. Fase 2."},
+
+  {id:"vocero", nom:"VOCERO", rol:"Redes Sociales", pico:"🌐", color:"#54c8ff",
+   anillo:3, pos:2, estado:"off", motor:"APIs oficiales de redes",
+   nivel:5, herr:["Publicaciones","Programacion","Analitica"],
+   desc:"La voz publica de Orionix. Publica y programa contenido en redes usando las APIs oficiales.",
+   accion:"Despertar (proxima fase)", nota:"Solo por APIs oficiales. Fase 4."},
+
+  {id:"explorador", nom:"EXPLORADOR", rol:"Investigacion Profunda", pico:"🕵️", color:"#a0f0d0",
+   anillo:4, pos:0, estado:"off", motor:"Perplexity / Firecrawl",
+   nivel:4, herr:["Informes","Analisis web","Sintesis"],
+   desc:"Se sumerge en la web para traer informes largos y analisis profundos que ningun otro agente alcanza.",
+   accion:"Despertar (proxima fase)", nota:"Cerebro adicional. Fase 4."},
+
+  {id:"guardian", nom:"GUARDIAN", rol:"Seguridad & Memoria", pico:"🛡️", color:"#c0c8e0",
+   anillo:4, pos:1, estado:"off", motor:"Supabase (cifrado)",
+   nivel:2, herr:["Cifrado","Memoria evolutiva","Accesos"],
+   desc:"Protege el cofre de datos y guarda la memoria evolutiva de todos los agentes: recuerdan y se fortalecen cada dia.",
+   accion:"Despertar (proxima fase)", nota:"Base de datos segura. Fase 5."},
+];
+
+var CEREBRO = "https://kevinruiz.app.n8n.cloud/webhook/portal-central";
+
+/* ---- Render de planetas en sus anillos ---- */
+(function render(){
+  var rings = {1:document.getElementById("r1"),2:document.getElementById("r2"),3:document.getElementById("r3"),4:document.getElementById("r4")};
+  AGENTES.forEach(function(a){
+    var el = document.createElement("div");
+    el.className = "planeta p"+a.pos+(a.estado==="on"?" activo":"");
+    el.style.background = "radial-gradient(circle at 36% 32%,#ffffff44,"+a.color+" 40%,#0b1030 92%)";
+    el.innerHTML = '<span class="estado '+a.estado+'"></span><span>'+a.pico+'</span><span class="halo"></span><span class="lbl">'+a.nom+'</span>';
+    el.onclick = function(ev){ ev.stopPropagation(); abrirPanel(a.id); };
+    rings[a.anillo].appendChild(el);
+  });
+})();
+
+/* ---- Panel de detalle ---- */
+function abrirPanel(id){
+  var a = AGENTES.find(function(x){return x.id===id;}); if(!a) return;
+  document.getElementById("pPico").textContent = a.pico;
+  document.getElementById("pNom").textContent = a.nom;
+  document.getElementById("pRol").textContent = a.rol;
+  document.getElementById("pDesc").textContent = a.desc;
+  var etxt = a.estado==="on"?"🟢 Activo":(a.estado==="learn"?"🟡 Aprendiendo":"⚪ Por despertar");
+  document.getElementById("pEstado").textContent = etxt;
+  document.getElementById("pMotor").textContent = a.motor;
+  document.getElementById("pNivelTxt").textContent = a.nivel+"%";
+  document.getElementById("pNivel").style.width = a.nivel+"%";
+  document.getElementById("pHerr").innerHTML = a.herr.map(function(h){return '<span class="chip">'+h+'</span>';}).join("");
+  var btn = document.getElementById("pAccion");
+  btn.textContent = a.accion;
+  btn.className = "pbtn"+(a.estado==="on"?" solido":"");
+  btn.onclick = function(e){ e.preventDefault(); cerrarPanel(); if(a.estado==="on"){ document.getElementById("axelChat").classList.add("open"); document.getElementById("axelIn").value="Convoca al "+a.nom+": "; document.getElementById("axelIn").focus(); } else { alert(a.nom+" aun no ha despertado. Se activa en su fase correspondiente."); } };
+  document.getElementById("pNota").textContent = a.nota;
+  document.getElementById("panel").classList.add("open");
+}
+function cerrarPanel(){ document.getElementById("panel").classList.remove("open"); }
+
+/* ---- Chat con AXEL (cerebro real) ---- */
+function axelAdd(role,txt){ var l=document.getElementById("axelLog"); var d=document.createElement("div"); d.className="msg "+(role==="u"?"u":"b"); d.textContent=txt; l.appendChild(d); l.scrollTop=l.scrollHeight; }
+function axelSend(){
+  var inp=document.getElementById("axelIn"); var t=(inp.value||"").trim(); if(!t) return; inp.value="";
+  axelAdd("u",t); var pensando=document.createElement("div"); pensando.className="msg b"; pensando.textContent="AXEL esta pensando..."; document.getElementById("axelLog").appendChild(pensando);
+  fetch(CEREBRO,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:"forjador",sesion:"universo",agente:"director",mensaje:t})})
+   .then(function(r){return r.json();}).then(function(d){ pensando.remove(); axelAdd("b",(d&&(d.respuesta||d.output))||"(sin respuesta)"); })
+   .catch(function(){ pensando.remove(); axelAdd("b","No pude conectar con el cerebro de AXEL. Revisa que el Portal Central este publicado."); });
+}
+
+/* ---- Fondo de estrellas ---- */
+(function stars(){
+  var cv=document.getElementById("cosmos"), ctx=cv.getContext("2d"), W,H,DPR=Math.min(window.devicePixelRatio||1,2), ps=[];
+  function size(){ W=cv.clientWidth;H=cv.clientHeight;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0); make(); }
+  function make(){ ps=[]; var n=Math.min(340,Math.floor(W*H/4200)); for(var i=0;i<n;i++){ps.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+.2,a:Math.random(),s:Math.random()*.02+.004,d:Math.random()<.5?1:-1});} }
+  function loop(){ ctx.clearRect(0,0,W,H);
+    var g=ctx.createRadialGradient(W*.5,H*.42,0,W*.5,H*.42,Math.max(W,H)*.7); g.addColorStop(0,"rgba(30,26,60,.5)"); g.addColorStop(.5,"rgba(10,10,30,.35)"); g.addColorStop(1,"rgba(2,3,10,0)"); ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    for(var i=0;i<ps.length;i++){var p=ps[i]; p.a+=p.s*p.d; if(p.a>1){p.a=1;p.d=-1;} if(p.a<.1){p.a=.1;p.d=1;} ctx.globalAlpha=p.a; ctx.fillStyle="#dfe7ff"; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.283); ctx.fill();} ctx.globalAlpha=1; requestAnimationFrame(loop); }
+  size(); window.addEventListener("resize",size); loop();
+})();
+document.addEventListener("keydown",function(e){ if(e.key==="Escape"){cerrarPanel();} });
+</script>
+</body>
+</html>

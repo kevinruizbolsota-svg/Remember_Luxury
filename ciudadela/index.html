@@ -46,7 +46,7 @@
   "logo":"https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/og.svg",
   "description":"Orionix crea agentes de inteligencia artificial que atienden, califican y venden 24/7, automatizacion de negocios, contenido con IA y paginas web a medida.",
   "email":"kevin.ruiz.calle@gmail.com",
-  "sameAs":["https://www.instagram.com/kybalio.oficial"],
+  "sameAs":["https://www.instagram.com/axel.oficial"],
   "contactPoint":{"@type":"ContactPoint","telephone":"+57 301 4410541","contactType":"sales","availableLanguage":["Spanish"]},
   "makesOffer":[
     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Agentes de IA vendedores 24/7"}},
@@ -261,7 +261,7 @@
   #comunidad .galtop .cerrar:hover{color:var(--oro)}
   #comunidadFrame{flex:1;width:100%;border:0}
 
-  /* ===== PORTAL KYBALIO ===== */
+  /* ===== PORTAL AXEL ===== */
   #portal{position:fixed;inset:0;z-index:500;background:var(--bg);display:none}
   #portal.open{display:flex}
   #sidebar{width:270px;background:var(--panel);border-right:1px solid var(--border);display:flex;flex-direction:column;transition:margin .25s}
@@ -655,10 +655,9 @@
   <a onclick="mobGo('hero')">Inicio</a>
   <a onclick="mobGo('ciudadela')">Nosotros</a>
   <a onclick="mobGo('servicios')">Servicios</a>
-  <a class="oro" onclick="closeMob();abrirTienda()">Mundos</a>
-  <a href="mi-cuenta.html">Mi Cuenta</a>
+  <a onclick="mobGo('destacados')">Tienda</a>
   <a onclick="mobGo('contacto')">Contacto</a>
-  <a class="oro" onclick="closeMob();abrirPortal()">Mi Portal</a>
+  <a class="oro" onclick="closeMob();abrirPortal()">AXEL</a>
   <a class="oro" onclick="closeMob();abrirComunidad()">Mi Templo</a>
   <a class="oro" onclick="closeMob();abrirTienda()">Mi Tienda</a>
 </div>
@@ -672,11 +671,9 @@
     <a onclick="scrollTo2('servicios')">Servicios</a>
     <a onclick="scrollTo2('agentes')">Agentes IA</a>
     <a onclick="scrollTo2('planes')">Planes</a>
-    <a onclick="abrirTienda()">Mundos</a>
-    <a href="mi-cuenta.html">Mi Cuenta</a>
     <a onclick="scrollTo2('contacto')">Contacto</a>
     <span class="sep"></span>
-    <a class="acc" onclick="abrirPortal()">Mi Portal</a>
+    <a class="acc" onclick="abrirPortal()">AXEL</a>
     <a class="acc" onclick="abrirComunidad()">Mi Templo</a>
     <a class="acc" onclick="abrirTienda()">Mi Tienda</a>
   </div>
@@ -689,7 +686,7 @@
   <h1 class="oro">ORIONIX</h1>
   <p class="sub">Agentes de IA que venden por ti, las 24 horas.</p>
   <div class="cta">
-    <a class="btn" onclick="abrirPortal()">Mi Portal</a>
+    <a class="btn" onclick="abrirPortal()">AXEL</a>
     <a class="btn" onclick="abrirComunidad()">Mi Templo</a>
     <a class="btn" onclick="abrirTienda()">Mi Tienda</a>
   </div>
@@ -772,7 +769,7 @@
 <section id="destacados">
   <div class="sec-head reveal">
     <div class="eyebrow">Lo mas deseado</div>
-    <h2 class="oro">Destacados de la Tienda</h2>
+    <h2 class="oro">Tienda Destacada</h2>
     <div class="hairline"></div>
   </div>
   <div class="prodgrid">
@@ -804,7 +801,7 @@
   <div class="tgrid">
     <div class="testi reveal"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"La automatizacion me devolvio horas de vida. Ahora mi negocio vende solo."</p><div class="who"><div class="ava">M</div><div><div class="nm">Mariana G.</div><div class="rl">Emprendedora</div></div></div></div>
     <div class="testi reveal"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"El contenido con IA elevo mi marca a otro nivel. Puro lujo y resultados."</p><div class="who"><div class="ava">C</div><div><div class="nm">Carlos R.</div><div class="rl">Creador de contenido</div></div></div></div>
-    <div class="testi reveal"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"KYBALIO responde mejor que muchos humanos. Orionix es el futuro."</p><div class="who"><div class="ava">V</div><div><div class="nm">Valentina S.</div><div class="rl">Coach de negocios</div></div></div></div>
+    <div class="testi reveal"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"AXEL responde mejor que muchos humanos. Orionix es el futuro."</p><div class="who"><div class="ava">V</div><div><div class="nm">Valentina S.</div><div class="rl">Coach de negocios</div></div></div></div>
   </div>
 </section>
 
@@ -864,7 +861,7 @@
     <h2 class="oro">Contacto</h2>
     <div class="hairline"></div>
   </div>
-  <p class="reveal">Listo para llevar tu proyecto al siguiente nivel? Dejanos tus datos y te contactamos, o conversa con KYBALIO.</p>
+  <p class="reveal">Listo para llevar tu proyecto al siguiente nivel? Dejanos tus datos y te contactamos, o conversa con AXEL.</p>
   <form id="leadForm" class="lead-form reveal" onsubmit="enviarLead(event)">
     <input type="hidden" id="lf_interes" value="Contacto general">
     <div class="lf-row">
@@ -880,7 +877,7 @@
     <div class="lf-status" id="lf_status"></div>
   </form>
   <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:20px">
-    <a class="btn ghost reveal" onclick="abrirPortal()">Hablar con KYBALIO</a>
+    <a class="btn ghost reveal" onclick="abrirPortal()">Hablar con AXEL</a>
     <a class="btn ghost reveal" onclick="abrirVoz()">Probar Agente de Voz</a>
   </div>
 </section>
@@ -904,7 +901,7 @@
       <h4>Orionix</h4>
       <p>Inteligencia artificial y automatizacion para negocios que quieren vender mas y trabajar menos. Agentes IA, contenido y webs a medida.</p>
       <div class="foot-social">
-        <a href="https://www.instagram.com/kybalio.oficial" target="_blank" rel="noopener" title="Instagram">&#128247;</a>
+        <a href="https://www.instagram.com/axel.oficial" target="_blank" rel="noopener" title="Instagram">&#128247;</a>
         <a href="https://wa.me/573014410541" target="_blank" rel="noopener" title="WhatsApp">&#128172;</a>
         <a href="mailto:kevin.ruiz.calle@gmail.com" title="Email">&#9993;</a>
       </div>
@@ -913,7 +910,7 @@
       <h4>Explora</h4>
       <a onclick="scrollTo2('servicios')">Servicios</a>
       <a onclick="scrollTo2('agentes')">Agentes IA</a>
-      <a onclick="abrirPortal()">Mi Portal</a>
+      <a onclick="abrirPortal()">AXEL</a>
       <a onclick="abrirComunidad()">Mi Templo</a>
       <a onclick="abrirTienda()">Mi Tienda</a>
     </div>
@@ -921,7 +918,7 @@
       <h4>Contacto</h4>
       <a href="mailto:kevin.ruiz.calle@gmail.com">kevin.ruiz.calle@gmail.com</a>
       <a href="https://wa.me/573014410541" target="_blank" rel="noopener">WhatsApp: +57 301 4410541</a>
-      <a href="https://www.instagram.com/kybalio.oficial" target="_blank" rel="noopener">@kybalio.oficial</a>
+      <a href="https://www.instagram.com/axel.oficial" target="_blank" rel="noopener">@axel.oficial</a>
     </div>
   </div>
   <div class="foot-bottom">Orionix &copy; 2026 &mdash; Inteligencia Artificial &amp; Automatizacion</div>
@@ -946,8 +943,8 @@
 
 <!-- ===================== AGENTE DE VOZ (widget) ===================== -->
 <!-- ===================== PERSONAJE ROBOT (guia de IA) ===================== -->
-<div id="robot" class="walk" onclick="abrirVoz()" title="Habla con KYBALIO, tu guia de IA">
-  <div class="bocadillo" id="rbBocadillo">Hola, soy KYBALIO. Tocame y te resuelvo cualquier duda.</div>
+<div id="robot" class="walk" onclick="abrirVoz()" title="Habla con AXEL, tu guia de IA">
+  <div class="bocadillo" id="rbBocadillo">Hola, soy AXEL. Tocame y te resuelvo cualquier duda.</div>
   <svg class="rb-svg" viewBox="0 0 120 190" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="rbMetal" x1="0" y1="0" x2="0" y2="1">
@@ -1135,13 +1132,13 @@
       </svg>
     </div>
     <div class="vw-id">
-      <div class="vw-nm oro">KYBALIO &middot; Agente de Voz</div>
+      <div class="vw-nm oro">AXEL &middot; Agente de Voz</div>
       <div class="vw-st" id="vwState">Activa Manos libres y hablame</div>
     </div>
     <button class="vw-x" onclick="cerrarVoz()">&times;</button>
   </div>
   <div class="vw-body" id="vwBody">
-    <div class="vw-hint">Soy KYBALIO, el oraculo de Orionix. Activa <b>Manos libres</b> y hablame con naturalidad: te escucho, te respondo en voz alta, te explico cada detalle y te llevo a cualquier parte de la web.</div>
+    <div class="vw-hint">Soy AXEL, el oraculo de Orionix. Activa <b>Manos libres</b> y hablame con naturalidad: te escucho, te respondo en voz alta, te explico cada detalle y te llevo a cualquier parte de la web.</div>
   </div>
   <div class="vw-foot">
     <div class="vw-live">
@@ -1169,7 +1166,7 @@
   </div>
 </div>
 
-<!-- ===================== PORTAL KYBALIO ===================== -->
+<!-- ===================== PORTAL AXEL ===================== -->
 <div id="galeria">
   <div class="galtop">
     <span class="title">&#9733; MI TEMPLO &middot; FOTOS Y VIDEOS</span>
@@ -1204,7 +1201,7 @@
     </div>
   </div>
   <div id="sidebar">
-    <div class="brand">LA CIUDADELA<small>KYBALIO</small></div>
+    <div class="brand">LA CIUDADELA<small>AXEL</small></div>
     <button class="newchat" onclick="newChat()">+ Nueva conversacion</button>
     <button class="newchat sec" onclick="toggleMusic()">&#9835; Musica</button>
     <div class="hist" id="hist"><h4>Historial</h4></div>
@@ -1214,10 +1211,10 @@
   <div id="pmain">
     <div class="topbar">
       <button class="hamb" onclick="toggleSide()">&#9776;</button>
-      <span class="title">KYBALIO</span>
+      <span class="title">AXEL</span>
       <select id="agente">
         <option value="GENERAL">General</option>
-        <option value="FILOSOFIA">KYBALIO / Filosofia</option>
+        <option value="FILOSOFIA">AXEL / Filosofia</option>
         <option value="VENDEDOR">Vendedor de elite</option>
         <option value="PROGRAMADOR">Programador senior</option>
         <option value="INGRESOS">Estratega de ingresos</option>
@@ -1231,7 +1228,7 @@
       <button id="speakBtn" class="iconbtn" onclick="toggleSpeak()" title="Leer las respuestas en voz alta" style="width:40px;font-size:16px;">&#128263;</button>
       <span class="cerrar" onclick="cerrarPortal()">&larr; Volver a la web</span>
     </div>
-    <div id="messages"><div class="welcome"><h1>Hola</h1><p>Soy KYBALIO, el cerebro de Orionix. Elige un proyecto arriba y escribe tu mensaje.</p></div></div>
+    <div id="messages"><div class="welcome"><h1>Hola</h1><p>Soy AXEL, el cerebro de Orionix. Elige un proyecto arriba y escribe tu mensaje.</p></div></div>
     <div class="inputbar">
       <div class="quickbar" id="quickbar">
         <span class="chip" onclick="quick('Explicame a fondo, paso a paso: ')">&#129504; Explicar a fondo</span>
@@ -1278,7 +1275,7 @@
   function cerrarPortal(){document.getElementById('portal').classList.remove('open');document.body.style.overflow='';_syncOverlay();}
   function borrarHistorial(){ if(confirm('Seguro que quieres borrar el historial guardado en este navegador?')){ try{ localStorage.clear(); sessionStorage.clear(); }catch(e){} location.reload(); } }
 
-  /* ---- CHAT KYBALIO ---- */
+  /* ---- CHAT AXEL ---- */
   var WEBHOOK="https://kevinruiz.app.n8n.cloud/webhook/portal-central";
   var user="",chats={},current=null;
   function k(){return "ciudadela_"+user}
@@ -1292,9 +1289,9 @@
   function openChat(id){current=id;renderHist();renderMsgs();}
   function renderHist(){var h=document.getElementById("hist");h.innerHTML="<h4>Historial</h4>";var ids=Object.keys(chats).reverse();for(var i=0;i<ids.length;i++){(function(id){var d=document.createElement("div");d.className="chatitem"+(id===current?" active":"");d.textContent=chats[id].title;d.onclick=function(){openChat(id);};h.appendChild(d);})(ids[i]);}}
   function renderMsgs(){var m=document.getElementById("messages");m.innerHTML="";var c=chats[current];if(!c||!c.msgs.length){m.innerHTML="<div class=\"welcome\"><h1>Hola, "+escapeHtml(user)+"</h1><p>Elige un proyecto arriba y escribe tu mensaje.</p></div>";return;}for(var i=0;i<c.msgs.length;i++){addBubble(c.msgs[i].role,c.msgs[i].text,false);}m.scrollTop=m.scrollHeight;}
-  function addBubble(role,text,scroll){var m=document.getElementById("messages");if(m.querySelector(".welcome"))m.innerHTML="";var d=document.createElement("div");d.className="msg";var isU=role==="user";d.innerHTML="<div class=\"avatar "+(isU?"u":"b")+"\">"+(isU?escapeHtml(user.charAt(0).toUpperCase()):"K")+"</div><div class=\"bubble\"><div class=\"who\">"+(isU?escapeHtml(user):"KYBALIO")+"</div>"+escapeHtml(text)+"</div>";m.appendChild(d);if(scroll)m.scrollTop=m.scrollHeight;return d;}
+  function addBubble(role,text,scroll){var m=document.getElementById("messages");if(m.querySelector(".welcome"))m.innerHTML="";var d=document.createElement("div");d.className="msg";var isU=role==="user";d.innerHTML="<div class=\"avatar "+(isU?"u":"b")+"\">"+(isU?escapeHtml(user.charAt(0).toUpperCase()):"K")+"</div><div class=\"bubble\"><div class=\"who\">"+(isU?escapeHtml(user):"AXEL")+"</div>"+escapeHtml(text)+"</div>";m.appendChild(d);if(scroll)m.scrollTop=m.scrollHeight;return d;}
   function escapeHtml(t){var e=document.createElement("div");e.textContent=t;return e.innerHTML;}
-  function sendMsg(){var inp=document.getElementById("input");var text=inp.value.trim();if(!text||!current)return;var c=chats[current];c.msgs.push({role:"user",text:text});if(c.title==="Nueva conversacion")c.title=text.slice(0,34);inp.value="";inp.style.height="auto";addBubble("user",text,true);save();renderHist();var typing=addBubble("bot","",true);typing.querySelector(".bubble").innerHTML="<div class=\"who\">KYBALIO</div><span class=\"dots\"><span>.</span><span>.</span><span>.</span></span>";document.getElementById("send").disabled=true;fetch(WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:user,sesion:current,agente:document.getElementById("agente").value,mensaje:text})}).then(function(r){return r.json();}).then(function(data){var resp=(data&&(data.respuesta||data.output))||"(sin respuesta)";typing.remove();c.msgs.push({role:"bot",text:resp});addBubble("bot",resp,true);save();if(window.__speak)speak(resp);}).catch(function(){typing.remove();var err="No pude conectar con el cerebro. Revisa que el Portal Central este publicado.";c.msgs.push({role:"bot",text:err});addBubble("bot",err,true);save();}).finally(function(){document.getElementById("send").disabled=false;});}
+  function sendMsg(){var inp=document.getElementById("input");var text=inp.value.trim();if(!text||!current)return;var c=chats[current];c.msgs.push({role:"user",text:text});if(c.title==="Nueva conversacion")c.title=text.slice(0,34);inp.value="";inp.style.height="auto";addBubble("user",text,true);save();renderHist();var typing=addBubble("bot","",true);typing.querySelector(".bubble").innerHTML="<div class=\"who\">AXEL</div><span class=\"dots\"><span>.</span><span>.</span><span>.</span></span>";document.getElementById("send").disabled=true;fetch(WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:user,sesion:current,agente:document.getElementById("agente").value,mensaje:text})}).then(function(r){return r.json();}).then(function(data){var resp=(data&&(data.respuesta||data.output))||"(sin respuesta)";typing.remove();c.msgs.push({role:"bot",text:resp});addBubble("bot",resp,true);save();if(window.__speak)speak(resp);}).catch(function(){typing.remove();var err="No pude conectar con el cerebro. Revisa que el Portal Central este publicado.";c.msgs.push({role:"bot",text:err});addBubble("bot",err,true);save();}).finally(function(){document.getElementById("send").disabled=false;});}
   function toggleSide(){document.getElementById("sidebar").classList.toggle("hidden");}
   function quick(prefijo){var i=document.getElementById("input");i.value=prefijo;i.focus();i.style.height="auto";i.style.height=Math.min(i.scrollHeight,160)+"px";i.setSelectionRange(i.value.length,i.value.length);}
   var inp=document.getElementById("input");inp.addEventListener("input",function(){this.style.height="auto";this.style.height=Math.min(this.scrollHeight,160)+"px";});inp.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMsg();}});
@@ -1716,7 +1713,7 @@
   (function(){
     var r=document.getElementById("robot");if(!r)return;
     var frases=[
-      "Hola, soy KYBALIO. Tocame y te resuelvo cualquier duda.",
+      "Hola, soy AXEL. Tocame y te resuelvo cualquier duda.",
       "Quieres ver los planes? Solo preguntame.",
       "Puedo llevarte a la tienda, al templo o al portal.",
       "Estamos descendiendo hacia la Fuente. Sigueme.",
@@ -1777,11 +1774,11 @@
     vozWarmup();
     if(!vwStarted){vwStarted=true;
       if(!VW_SR){document.getElementById("vwMicLbl").innerHTML="Para voz usa Google Chrome en tu PC o celular.";}
-      vwAdd("bot","Hola, soy **KYBALIO**, el oraculo de Orionix. Conozco cada rincon de la web: puedo *explicarte* cualquier seccion, resolver dudas y *llevarte* justo a donde quieras. Activa **Manos libres** y hablame, o dime por ejemplo \u201cmuestrame los planes\u201d.",[{label:"Ver Planes",icon:"&#128176;",fn:function(){cerrarVoz();scrollTo2("planes");}},{label:"Agentes IA",icon:"&#129302;",fn:function(){cerrarVoz();scrollTo2("agentes");}},{label:"Tienda",icon:"&#128717;",fn:function(){abrirTienda();}}]);
+      vwAdd("bot","Hola, soy **AXEL**, el oraculo de Orionix. Conozco cada rincon de la web: puedo *explicarte* cualquier seccion, resolver dudas y *llevarte* justo a donde quieras. Activa **Manos libres** y hablame, o dime por ejemplo \u201cmuestrame los planes\u201d.",[{label:"Ver Planes",icon:"&#128176;",fn:function(){cerrarVoz();scrollTo2("planes");}},{label:"Agentes IA",icon:"&#129302;",fn:function(){cerrarVoz();scrollTo2("agentes");}},{label:"Tienda",icon:"&#128717;",fn:function(){abrirTienda();}}]);
     }
     /* saluda por voz y activa manos libres (voz <-> voz) automaticamente */
     if(VW_SR && !vwHands){ vwHands=true; refreshHandsBtn();
-      vozHablar("Hola, soy KYBALIO. Te escucho, dime en que puedo ayudarte.");
+      vozHablar("Hola, soy AXEL. Te escucho, dime en que puedo ayudarte.");
       setTimeout(function(){ if(!vwSpeaking) vwStartListen(); },1400);
     }
   }
@@ -1794,14 +1791,14 @@
       var w=document.getElementById("vozWidget"); if(!w)return;
       var rb=document.getElementById("robot"); if(rb){rb.classList.remove("nave");rb.classList.add("walk","talk");}
       w.classList.add("open"); vwStarted=true;
-      var intro="Bienvenido a **ORIONIX** \\u2728 Soy **KYBALIO**, tu oraculo de inteligencia artificial. Deja que te guie por todo lo que puedes hacer aqui:\\n\\n- **Mi Portal**: tu espacio personal con el chat KYBALIO, tu musica y tu universo.\\n- **Mi Templo**: la comunidad Orionix, donde compartes y creces.\\n- **Mi Tienda**: agentes de IA y automatizaciones reales, listos para vender por ti.\\n- **Agentes IA** y **Planes**: descubre como un agente puede atender, responder y cerrar ventas 24/7.\\n\\nDime lo que buscas o toca un boton, y te llevo justo ahi.";
+      var intro="Bienvenido a **ORIONIX** \\u2728 Soy **AXEL**, tu oraculo de inteligencia artificial. Deja que te guie por todo lo que puedes hacer aqui:\\n\\n- **AXEL (Mi Portal)**: tu espacio personal con el chat de AXEL, tu musica y tu universo.\\n- **Mi Templo**: la comunidad Orionix, donde compartes y creces.\\n- **Mi Tienda**: agentes de IA y automatizaciones reales, listos para vender por ti.\\n- **Agentes IA** y **Planes**: descubre como un agente puede atender, responder y cerrar ventas 24/7.\\n\\nDime lo que buscas o toca un boton, y te llevo justo ahi.";
       vwAdd("bot",intro,[
         {label:"Ver Planes",icon:"&#128176;",fn:function(){cerrarVoz();scrollTo2("planes");}},
         {label:"Agentes IA",icon:"&#129302;",fn:function(){cerrarVoz();scrollTo2("agentes");}},
         {label:"Mi Tienda",icon:"&#128717;",fn:function(){abrirTienda();}},
         {label:"Explorar",icon:"&#128260;",fn:function(){cerrarVoz();scrollTo2("servicios");}}
       ]);
-      if(window.speechSynthesis){ vozWarmup&&vozWarmup(); setTimeout(function(){ try{ vozHablar("Bienvenido a Orionix. Soy KYBALIO, tu oraculo de inteligencia artificial. Puedo explicarte cada seccion: Mi Portal, Mi Templo, Mi Tienda, los Agentes de IA y los Planes. Dime que buscas y te llevo justo ahi."); }catch(e){} },600); }
+      if(window.speechSynthesis){ vozWarmup&&vozWarmup(); setTimeout(function(){ try{ vozHablar("Bienvenido a Orionix. Soy AXEL, tu oraculo de inteligencia artificial. Puedo explicarte cada seccion: AXEL (tu portal), Mi Templo, Mi Tienda, los Agentes de IA y los Planes. Dime que buscas y te llevo justo ahi."); }catch(e){} },600); }
     }catch(e){}
   };
   function vwEsc(t){var e=document.createElement("div");e.textContent=t;return e.innerHTML;}
@@ -1841,7 +1838,7 @@
     b.appendChild(d);
     if(role!=="user")vwActions(d,acciones);
     b.scrollTop=b.scrollHeight;return d;}
-  function vwTyping(){var b=document.getElementById("vwBody");var d=document.createElement("div");d.className="vw-msg bot";d.innerHTML='<div class="vw-av">K</div><div class="b vw-dots"><span>.</span><span>.</span><span>.</span></div>';b.appendChild(d);b.scrollTop=b.scrollHeight;return d;}
+  function vwTyping(){var b=document.getElementById("vwBody");var d=document.createElement("div");d.className="vw-msg bot";d.innerHTML='<div class="vw-av">A</div><div class="b vw-dots"><span>.</span><span>.</span><span>.</span></div>';b.appendChild(d);b.scrollTop=b.scrollHeight;return d;}
   function vwShowInterim(t){var b=document.getElementById("vwBody");if(!vwInterimEl){vwInterimEl=document.createElement("div");vwInterimEl.className="vw-interim";b.appendChild(vwInterimEl);}vwInterimEl.textContent=t?("\u201c"+t+"\u201d"):"";b.scrollTop=b.scrollHeight;}
   function vwClearInterim(){if(vwInterimEl){vwInterimEl.remove();vwInterimEl=null;}}
 
@@ -1915,11 +1912,11 @@
     vwClearInterim();
     /* detenemos el reconocimiento mientras responde para no auto-escucharse */
     vwStopListen(false);
-    vwAdd("user",t);vwSetState("KYBALIO esta analizando...");
+    vwAdd("user",t);vwSetState("AXEL esta analizando...");
     /* 1) intenta ejecutar un comando de navegacion */
     if(vozComando(t))return;
-    /* 2) si no, va al cerebro KYBALIO */
-    vwThinking=true;vwSetState("KYBALIO esta pensando...");vozEnviar(t);
+    /* 2) si no, va al cerebro AXEL */
+    vwThinking=true;vwSetState("AXEL esta pensando...");vozEnviar(t);
   }
 
   /* Un solo boton: al activar Manos libres arranca la conversacion (voz + escucha) */
@@ -1930,9 +1927,22 @@
       /* desbloquea la voz del navegador dentro del mismo clic del usuario */
       vozWarmup();
       vwWantListen=true; vwArmWatch();
-      vozHablar("Hola, te escucho. Dime en que puedo ayudarte o pideme abrir cualquier parte de la web.");
-      /* SpeechRecognition pide el permiso del microfono por si mismo al hacer start() */
-      setTimeout(function(){ if(!vwSpeaking) vwStartListen(); },1000);
+      /* pide el permiso del microfono explicitamente DENTRO del gesto del clic (Chrome lo exige) */
+      if(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia){
+        navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
+          /* cerramos el stream de prueba: SpeechRecognition abre el suyo */
+          try{stream.getTracks().forEach(function(t){t.stop();});}catch(e){}
+          vozHablar("Hola, soy AXEL. Te escucho: dime en que puedo ayudarte o pideme abrir cualquier parte de la web.");
+          setTimeout(function(){ if(!vwSpeaking) vwStartListen(); },800);
+        }).catch(function(err){
+          vwHands=false;refreshHandsBtn();vwSetState("Permite el microfono en el navegador");
+          document.getElementById("vwMicLbl").textContent="Toca el candado de la barra de direcciones y permite el Microfono";
+          alert("Para hablar con AXEL debes PERMITIR el microfono. Toca el candado (o el icono de camara/microfono) en la barra de direcciones de Chrome, elige Microfono = Permitir, y vuelve a pulsar Manos libres.");
+        });
+      } else {
+        alert("Tu navegador no permite grabar audio. Usa Google Chrome en PC o Android.");
+        vwHands=false;refreshHandsBtn();
+      }
     } else {
       vozStopSpeak();vwStopListen(true);if(vwWatch){clearInterval(vwWatch);vwWatch=null;}vwSetState("Manos libres desactivado");
       document.getElementById("vwMicLbl").textContent="Pulsa \u00abManos libres\u00bb y hablame";
@@ -1953,7 +1963,7 @@
         try{
           var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1.02;u.pitch=1;u.volume=1;
           var pref=mejorVozEs(); if(pref){u.voice=pref;u.lang=pref.lang||"es-ES";}
-          vwSpeaking=true;var o=document.getElementById("vwOrb");if(o)o.classList.add("talk");vwSetState("KYBALIO esta hablando...");
+          vwSpeaking=true;var o=document.getElementById("vwOrb");if(o)o.classList.add("talk");vwSetState("AXEL esta hablando...");
           u.onend=function(){vwSpeaking=false;var o2=document.getElementById("vwOrb");if(o2)o2.classList.remove("talk");
             if(vwHands){setTimeout(vwStartListen,180);}else{vwSetState("Pulsa \u00abManos libres\u00bb para seguir");}
           };
@@ -1978,13 +1988,13 @@
     inp.value="";
     vwAdd("user",t);
     if(vozComando(t))return;
-    vwThinking=true;vwSetState("KYBALIO esta pensando...");vozEnviar(t);
+    vwThinking=true;vwSetState("AXEL esta pensando...");vozEnviar(t);
   }
   /* ---- MAPA DE LA WEB: el oraculo conoce cada rincon ---- */
   var SITE_MAP=[
     {k:["tienda","comprar","producto","catalogo","precio de producto"],label:"Ir a la Tienda",icon:"&#128717;",fn:function(){abrirTienda();},desc:"la tienda Orionix con todos los productos y servicios"},
     {k:["templo","comunidad","perfil","red social","miembros"],label:"Abrir Mi Templo",icon:"&#9733;",fn:function(){abrirComunidad();},desc:"Mi Templo, la comunidad y tu espacio personal"},
-    {k:["portal","chat completo","kybalio completo","conversar"],label:"Abrir el Portal KYBALIO",icon:"&#128172;",fn:function(){abrirPortal();},desc:"el Portal completo de KYBALIO para conversar a fondo"},
+    {k:["portal","chat completo","axel completo","conversar"],label:"Abrir el Portal AXEL",icon:"&#128172;",fn:function(){abrirPortal();},desc:"el Portal completo de AXEL para conversar a fondo"},
     {k:["plan","planes","precio","precios","tarifa","cuanto cuesta","inversion","suscripcion"],label:"Ver Planes",icon:"&#128176;",fn:function(){cerrarVoz();scrollTo2("planes");},desc:"los planes: Esencia, Imperio y Ciudadela a medida"},
     {k:["agente","agentes","ia","inteligencia","vendedor","voz","whatsapp","seguimiento"],label:"Ver Agentes IA",icon:"&#129302;",fn:function(){cerrarVoz();scrollTo2("agentes");},desc:"los Agentes de IA: Vendedor, WhatsApp, Voz y Seguimiento"},
     {k:["servicio","servicios","que hacen","que ofrecen"],label:"Ver Servicios",icon:"&#10024;",fn:function(){cerrarVoz();scrollTo2("servicios");},desc:"los servicios: contenido con IA, automatizacion, vendedores 24/7 y webs a medida"},
@@ -2030,7 +2040,7 @@
     if(h("templo","comunidad")) return "**Mi Templo** es tu espacio y la comunidad de Orionix. Te llevo alli.";
     if(h("servicio","que hacen","que ofrecen")) return "Creamos **contenido con IA**, **automatizacion** de procesos, **vendedores 24/7** y **webs a medida**. Mira la seccion de servicios.";
     if(h("contacto","asesor","hablar","datos")) return "Dejanos tus datos en **Contacto** y te escribimos, o hablamos directo por WhatsApp. Que prefieres?";
-    if(h("hola","buenas","saludos")) return "Hola, soy **KYBALIO**, el oraculo de Orionix. Puedo explicarte cada seccion, llevarte donde quieras y resolver cualquier duda. Que te muestro primero?";
+    if(h("hola","buenas","saludos")) return "Hola, soy **AXEL**, el oraculo de Orionix. Puedo explicarte cada seccion, llevarte donde quieras y resolver cualquier duda. Que te muestro primero?";
     return "Soy el oraculo de Orionix y conozco cada rincon de la web. Puedo llevarte a la **Tienda**, **Mi Templo**, el **Portal**, los **Planes**, los **Agentes IA**, **Servicios** o **Contacto**. Dime que necesitas.";
   }
 
@@ -2044,7 +2054,7 @@
 
     if(has("tienda","comprar","productos","catalogo")){resp="Abriendo la tienda para ti.";accion=function(){abrirTienda();};actuar=true;}
     else if(has("templo","comunidad","perfil","red social")){resp="Te llevo a Mi Templo.";accion=function(){abrirComunidad();};actuar=true;}
-    else if(has("portal","chatear","escribir","kybalio completo","chat completo")){resp="Abriendo el Portal de KYBALIO.";accion=function(){abrirPortal();};actuar=true;}
+    else if(has("portal","chatear","escribir","axel completo","chat completo")){resp="Abriendo el Portal de AXEL.";accion=function(){abrirPortal();};actuar=true;}
     else if(has("planes","precio","precios","cuanto cuesta","cuanto vale","tarifas","inversion")){resp="Aqui tienes los planes.";accion=function(){cerrarVoz();scrollTo2("planes");};actuar=true;}
     else if(has("agentes","agente de venta","agente ia","inteligencia artificial")){resp="Te muestro nuestros Agentes de Inteligencia Artificial.";accion=function(){cerrarVoz();scrollTo2("agentes");};actuar=true;}
     else if(has("servicio","que hacen","que ofrecen")){resp="Estos son nuestros servicios.";accion=function(){cerrarVoz();scrollTo2("servicios");};actuar=true;}
@@ -2071,7 +2081,7 @@
 
   /* ---- PALETA DE COMANDOS (Ctrl/Cmd + K) ---- */
   var CMDS=[
-    {i:"&#128172;",t:"Entrar al Portal KYBALIO",fn:function(){abrirPortal();}},
+    {i:"&#128172;",t:"Entrar al Portal AXEL",fn:function(){abrirPortal();}},
     {i:"&#127908;",t:"Hablar con el Agente de Voz",fn:function(){abrirVoz();}},
     {i:"&#9733;",t:"Abrir Mi Templo",fn:function(){abrirComunidad();}},
     {i:"&#128081;",t:"Abrir la Tienda",fn:function(){abrirTienda();}},

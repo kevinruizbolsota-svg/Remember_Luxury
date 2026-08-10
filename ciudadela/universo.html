@@ -185,9 +185,9 @@
   <div class="chatia">
     <label for="axelModelo">Motor</label>
     <select id="axelModelo" title="Elige el motor de IA">
-      <option value="groq">Groq · Llama 3.3 (rápido)</option>
+      <option value="groq">Groq · Llama 3.3 (rápido, cuota diaria)</option>
       <option value="mistral">Mistral</option>
-      <option value="openrouter">OpenRouter</option>
+      <option value="openrouter" selected>OpenRouter (recomendado)</option>
       <option value="claude">Claude (Anthropic)</option>
       <option value="gemini">Gemini (Google)</option>
       <option value="perplexity" disabled>Perplexity — próximamente</option>
@@ -360,7 +360,7 @@ function abrirChat(agenteId,nombre,rol,pico){
   // primer mensaje real para que el agente se presente si no es el director
   if(CHAT_AGENTE!=="director"){ enviarAlCerebro("Presentate brevemente y dime en que me puedes ayudar."); }
 }
-function motorElegido(){ var s=document.getElementById("axelModelo"); return s?s.value:"groq"; }
+function motorElegido(){ var s=document.getElementById("axelModelo"); return s?s.value:"openrouter"; }
 // Cadena de respaldo: si un motor esta agotado (cuota diaria), prueba el siguiente automaticamente.
 function cadenaMotores(preferido){
   var todos=["groq","gemini","openrouter","mistral","claude"];
@@ -473,7 +473,7 @@ function axelSend(){
 // saludo inicial del director al cargar el log
 abrirChatInit();
 function abrirChatInit(){ var l=document.getElementById("axelLog"); if(l&&!l.children.length){ axelAdd("b","Soy **AXEL**, el Director de la Mesa. Dame una orden y reparto la mision a los agentes. _Comandos: `/imagen` crear imagen, `/pagina` forjar una web, `/recordar` programar un correo, `/bolsa` precios cripto, `/nota` y `/tarea` guardar, `/notas` ver todo._"); }
-  try{ var m=localStorage.getItem("orionix_motor"); var s=document.getElementById("axelModelo"); if(m&&s){ s.value=m; } }catch(e){} }
+  try{ var m=localStorage.getItem("orionix_motor"); if(!m||m==="groq"){ m="openrouter"; localStorage.setItem("orionix_motor",m); } var s=document.getElementById("axelModelo"); if(m&&s){ s.value=m; } }catch(e){} }
 
 /* ---- Fondo de estrellas ---- */
 (function stars(){

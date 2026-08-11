@@ -252,7 +252,60 @@
     background: var(--core); color: #000; padding: 15px; font-family: 'Orbitron', sans-serif; font-size: 1rem; letter-spacing: 3px; font-weight: 700; text-transform: uppercase;
     cursor: pointer; border: none; box-shadow: 0 0 20px var(--core-glow); transition: 0.3s; text-decoration: none;
   }
-  .cart-checkout-btn:hover { background: #fff; box-shadow: 0 0 40px #fff; }
+  /* ===== PERFIL DE USUARIO HUD ===== */
+  .hud-nav { display: flex; align-items: center; gap: 20px; }
+  
+  /* Avatar del perfil */
+  .profile-wrap { position: relative; cursor: pointer; }
+  .profile-avatar {
+    width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--core);
+    object-fit: cover; display: flex; align-items: center; justify-content: center;
+    background: rgba(0,255,255,0.15); font-family: 'Orbitron',sans-serif;
+    font-size: 1.1rem; font-weight: 700; color: var(--core); overflow: hidden;
+  }
+  .profile-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+  
+  /* AURA ESPECIAL DE ADMIN */
+  .profile-wrap.admin-aura .profile-avatar {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(244,208,63,0.3), 0 0 20px rgba(244,208,63,0.5);
+  }
+  .profile-wrap.admin-aura::before {
+    content: ''; position: absolute; inset: -6px; border-radius: 50%;
+    border: 2px solid transparent;
+    background: conic-gradient(from 0deg, #f4d03f, #0ff, #ff00ff, #f4d03f) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out; mask-composite: exclude;
+    animation: adminRing 2s linear infinite;
+  }
+  @keyframes adminRing { to { transform: rotate(360deg); } }
+
+  /* Dropdown menú del perfil */
+  .profile-dropdown {
+    position: absolute; top: 58px; right: 0; min-width: 240px;
+    background: rgba(5,5,15,0.95); border: 1px solid var(--border);
+    backdrop-filter: blur(20px); box-shadow: 0 0 30px rgba(0,255,255,0.2);
+    display: none; flex-direction: column; z-index: 200;
+    animation: slideDown .3s ease;
+  }
+  @keyframes slideDown { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)} }
+  .profile-dropdown.open { display: flex; }
+  .pd-header { padding: 18px 20px; border-bottom: 1px solid var(--border); }
+  .pd-name { font-family:'Orbitron',sans-serif; font-size: .85rem; color: #fff; letter-spacing: 1px; }
+  .pd-email { font-size: .75rem; color: rgba(255,255,255,.5); margin-top: 4px; }
+  .pd-item {
+    padding: 14px 20px; font-family: 'Orbitron',sans-serif; font-size: .7rem;
+    letter-spacing: 2px; color: var(--text); cursor: pointer; transition: .3s;
+    border-bottom: 1px solid rgba(0,255,255,.05); text-decoration: none; display: block;
+  }
+  .pd-item:hover { background: rgba(0,255,255,.08); color: var(--core); padding-left: 28px; }
+  .pd-item.admin-btn {
+    color: var(--gold); border-top: 1px solid rgba(244,208,63,.2);
+    background: rgba(244,208,63,.05);
+  }
+  .pd-item.admin-btn:hover { background: rgba(244,208,63,.15); }
+  .pd-item.logout { color: #ff0055; }
+  .pd-item.logout:hover { background: rgba(255,0,85,.1); color: #ff0055; }
 
 </style>
 </head>
@@ -270,9 +323,24 @@
 <!-- HUD -->
 <div class="hud hud-top hud-interactive">
   <a href="index.html" class="hud-logo">ORIO<span>NIX</span></a>
-  <div class="hud-cart" onclick="abrirCarrito()">
-    <span class="hud-cart-text">Bahía de Carga</span>
-    <span class="hud-cart-badge" id="hudBadge">0</span>
+  <div class="hud-nav">
+    <div class="hud-cart" onclick="abrirCarrito()">
+      <span class="hud-cart-text">Bahía</span>
+      <span class="hud-cart-badge" id="hudBadge">0</span>
+    </div>
+    <!-- Perfil de usuario (se llena por Firebase) -->
+    <div class="profile-wrap" id="profileWrap" onclick="toggleDropdown()" style="display:none">
+      <div class="profile-avatar" id="profileAvatar">?</div>
+      <div class="profile-dropdown" id="profileDropdown">
+        <div class="pd-header">
+          <div class="pd-name" id="pdName">COMANDANTE</div>
+          <div class="pd-email" id="pdEmail"></div>
+        </div>
+        <a href="auth.html" class="pd-item" id="pdLogout" onclick="cerrarSesion(event)">⏏ DESCONECTAR</a>
+      </div>
+    </div>
+    <!-- Botón login si no hay sesión -->
+    <a href="auth.html" class="pd-item" id="btnLogin" style="font-family:'Orbitron',sans-serif;font-size:.7rem;letter-spacing:2px;color:var(--core);border:1px solid var(--core);padding:8px 16px;text-decoration:none;">ACCEDER</a>
   </div>
 </div>
 <div class="hud hud-status" id="hudStatus">SISTEMAS ONLINE // MOTOR WARP LISTO</div>
@@ -516,6 +584,84 @@ cargarProductos();
 animarMotor3D();
 drawStars();
 
+</script>
+<!-- Firebase CDN -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+/* ===== FIREBASE AUTH EN LA TIENDA ===== */
+const ADMIN_EMAIL = "kevinruizbolsota@gmail.com"; // TU EMAIL REAL
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDZoywcYKSBrAk_iwSMN4rnw7goLSltj7A",
+  authDomain: "las-cronicas-de-krc.firebaseapp.com",
+  projectId: "las-cronicas-de-krc",
+  storageBucket: "las-cronicas-de-krc.firebasestorage.app",
+  messagingSenderId: "636206734640",
+  appId: "1:636206734640:web:40c52672294155c6d77cf5"
+};
+
+if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+const auth2 = firebase.auth();
+const db2   = firebase.firestore();
+
+auth2.onAuthStateChanged(async function(user) {
+  const profileWrap = document.getElementById('profileWrap');
+  const btnLogin    = document.getElementById('btnLogin');
+  
+  if(user) {
+    // Usuario logueado — mostrar perfil
+    btnLogin.style.display = 'none';
+    profileWrap.style.display = 'block';
+    
+    // Foto o inicial
+    const avatar = document.getElementById('profileAvatar');
+    if(user.photoURL) {
+      avatar.innerHTML = `<img src="${user.photoURL}" alt="">`;
+    } else {
+      avatar.textContent = (user.displayName||user.email||'?')[0].toUpperCase();
+    }
+    
+    document.getElementById('pdName').textContent  = user.displayName || 'Comandante';
+    document.getElementById('pdEmail').textContent = user.email || '';
+    
+    // Verificar si es admin
+    const esAdmin = user.email === ADMIN_EMAIL;
+    if(esAdmin) {
+      profileWrap.classList.add('admin-aura');
+      // Insertar botón de admin en el dropdown si no existe
+      if(!document.getElementById('btnAdminPanel')) {
+        const btnAdmin = document.createElement('a');
+        btnAdmin.id = 'btnAdminPanel'; btnAdmin.href = 'admin.html';
+        btnAdmin.className = 'pd-item admin-btn';
+        btnAdmin.innerHTML = '⚙ PANEL DE ADMINISTRACIÓN';
+        document.getElementById('pdLogout').insertAdjacentElement('beforebegin', btnAdmin);
+      }
+      document.getElementById('hudStatus').textContent = '⚡ SISTEMA ONLINE // MODO ARQUITECTO ACTIVO';
+    }
+    
+  } else {
+    // Sin sesión — mostrar botón de acceder
+    btnLogin.style.display = 'block';
+    profileWrap.style.display = 'none';
+  }
+});
+
+function toggleDropdown() {
+  document.getElementById('profileDropdown').classList.toggle('open');
+}
+// Cerrar dropdown al hacer click afuera
+document.addEventListener('click', function(e) {
+  if(!document.getElementById('profileWrap').contains(e.target)) {
+    const dd = document.getElementById('profileDropdown');
+    if(dd) dd.classList.remove('open');
+  }
+});
+function cerrarSesion(e) {
+  e.preventDefault();
+  auth2.signOut().then(() => { window.location.href = 'auth.html'; });
+}
 </script>
 </body>
 </html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orionix | Centro de Comando Arquitecto</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --core: #0ff;
+    --core-glow: rgba(0,255,255,0.4);
+    --alert: #ff0055;
+    --bg-dark: #05050a;
+    --border: rgba(0, 255, 255, 0.2);
+    --text: #e0f7fa;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background-color: var(--bg-dark);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    background-image: 
+      linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  
+  /* SCANLINE EFFECT */
+  body::after {
+    content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    z-index: 9999; pointer-events: none; opacity: 0.4;
+  }
+
+  header {
+    width: 100%;
+    padding: 30px 40px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+  }
+  .logo { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 900; color: #fff; letter-spacing: 5px; text-shadow: 0 0 15px var(--core); }
+  .logo span { color: var(--core); }
+  .status { font-family: 'Orbitron', sans-serif; font-size: 0.8rem; letter-spacing: 2px; color: var(--core); }
+
+  /* MODO BLOQUEO (LOGIN) */
+  #lockScreen {
+    position: fixed; inset: 0; background: var(--bg-dark); z-index: 1000;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: opacity 0.5s;
+  }
+  .lock-box {
+    text-align: center; border: 1px solid var(--core); padding: 50px;
+    background: rgba(0,255,255,0.05); box-shadow: 0 0 30px var(--core-glow);
+    border-radius: 8px;
+  }
+  .lock-box h2 { font-family: 'Orbitron', sans-serif; font-size: 2rem; margin-bottom: 20px; letter-spacing: 3px; }
+  .lock-box input {
+    background: rgba(0,0,0,0.5); border: 1px solid var(--core); color: var(--core);
+    padding: 15px; font-size: 1.2rem; font-family: 'Orbitron', sans-serif; text-align: center;
+    outline: none; width: 100%; margin-bottom: 20px; letter-spacing: 5px;
+  }
+  .lock-box input:focus { box-shadow: 0 0 15px var(--core-glow); }
+  .lock-box button {
+    background: var(--core); color: #000; border: none; padding: 15px 30px;
+    font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer;
+    width: 100%; transition: 0.3s;
+  }
+  .lock-box button:hover { background: #fff; box-shadow: 0 0 20px #fff; }
+
+  /* DASHBOARD (OCULTO AL INICIO) */
+  #dashboard {
+    display: none; width: min(1000px, 95%); margin: 40px auto; z-index: 10;
+  }
+  
+  .tabs { display: flex; gap: 20px; margin-bottom: 30px; }
+  .tab {
+    padding: 15px 30px; font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700;
+    background: transparent; color: var(--text); border: 1px solid var(--border);
+    cursor: pointer; transition: 0.3s; letter-spacing: 2px; flex: 1; text-align: center;
+  }
+  .tab.active { background: var(--core); color: #000; border-color: var(--core); box-shadow: 0 0 20px var(--core-glow); }
+  .tab:hover:not(.active) { background: rgba(0,255,255,0.1); border-color: var(--core); }
+
+  .panel {
+    background: rgba(0,0,0,0.6); border: 1px solid var(--border); padding: 40px;
+    backdrop-filter: blur(10px); box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    display: none;
+  }
+  .panel.active { display: block; animation: slideUp 0.5s ease; }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  .form-group { margin-bottom: 25px; }
+  .form-group label { display: block; font-family: 'Orbitron', sans-serif; font-size: 0.8rem; letter-spacing: 2px; color: var(--core); margin-bottom: 8px; }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%; background: rgba(0,255,255,0.02); border: 1px solid var(--border);
+    color: #fff; padding: 15px; font-family: 'Rajdhani', sans-serif; font-size: 1.1rem;
+    outline: none; transition: 0.3s;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color: var(--core); box-shadow: 0 0 10px var(--core-glow); background: rgba(0,255,255,0.05);
+  }
+  
+  .btn-submit {
+    background: var(--core); color: #000; border: none; padding: 15px 40px;
+    font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 700; cursor: pointer;
+    transition: 0.3s; letter-spacing: 3px; text-transform: uppercase; width: 100%;
+  }
+  .btn-submit:hover { background: #fff; box-shadow: 0 0 30px #fff; }
+  
+  #sysMessage {
+    margin-top: 20px; padding: 15px; text-align: center; font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem; letter-spacing: 2px; display: none; border: 1px solid;
+  }
+  .msg-success { color: var(--core); border-color: var(--core); background: rgba(0,255,255,0.1); }
+  .msg-error { color: var(--alert); border-color: var(--alert); background: rgba(255,0,85,0.1); }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">ORIO<span>NIX</span> | ARQUITECTO</div>
+  <div class="status">SISTEMA CERRADO</div>
+</header>
+
+<!-- Pantalla de Bloqueo -->
+<div id="lockScreen">
+  <div class="lock-box">
+    <h2>AUTENTICACIÓN REQUERIDA</h2>
+    <input type="password" id="passInput" placeholder="CÓDIGO DE ACCESO" onkeypress="if(event.key==='Enter') unlock()">
+    <button onclick="unlock()">INICIAR ENLACE</button>
+  </div>
+</div>
+
+<!-- Panel de Control -->
+<div id="dashboard">
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('single')">INYECCIÓN UNITARIA</button>
+    <button class="tab" onclick="switchTab('mass')">INYECCIÓN MASIVA (JSON)</button>
+  </div>
+
+  <!-- Formulario Unidad -->
+  <div id="panel-single" class="panel active">
+    <div class="form-group">
+      <label>NOMBRE DEL PRODUCTO</label>
+      <input type="text" id="f_nombre" placeholder="Ej. Motor de Iones T-500">
+    </div>
+    <div style="display:flex; gap:20px;">
+      <div class="form-group" style="flex:1;">
+        <label>PRECIO</label>
+        <input type="number" id="f_precio" placeholder="Ej. 15000">
+      </div>
+      <div class="form-group" style="flex:1;">
+        <label>MONEDA</label>
+        <select id="f_moneda">
+          <option value="USD">USD</option>
+          <option value="COP">COP</option>
+          <option value="EUR">EUR</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>CATEGORÍA (MUNDO)</label>
+      <input type="text" id="f_categoria" placeholder="Ej. Vehículos">
+    </div>
+    <div class="form-group">
+      <label>URL DE LA IMAGEN</label>
+      <input type="text" id="f_imagen" placeholder="https://...">
+    </div>
+    <div class="form-group">
+      <label>DESCRIPCIÓN</label>
+      <textarea id="f_descripcion" rows="3" placeholder="Especificaciones técnicas..."></textarea>
+    </div>
+    <button class="btn-submit" onclick="enviarUnidad()">ENVIAR A N8N (GOOGLE SHEETS)</button>
+  </div>
+
+  <!-- Formulario Masivo -->
+  <div id="panel-mass" class="panel">
+    <div class="form-group">
+      <label>CARGA MASIVA JSON</label>
+      <textarea id="f_json" rows="15" placeholder='[
+  {
+    "nombre": "Producto 1",
+    "precio": 100,
+    "moneda": "USD",
+    "categoria": "Categoría A",
+    "imagen": "https://...",
+    "descripcion": "Descripción del producto"
+  },
+  {...}
+]' style="font-family: monospace;"></textarea>
+    </div>
+    <button class="btn-submit" onclick="enviarMasivo()">PROCESAR CARGA MASIVA</button>
+  </div>
+
+  <!-- Mensajes del Sistema -->
+  <div id="sysMessage"></div>
+</div>
+
+<script>
+  // CONTRASEÑA DE SEGURIDAD (Cámbiala aquí si lo deseas)
+  const CLAVE_SECRETA = "orionix2026";
+  
+  // WEBHOOK DE N8N (Para enviar datos y guardarlos en Google Sheets)
+  // DEBES CONFIGURAR ESTE WEBHOOK EN N8N CON EL NODO DE "GOOGLE SHEETS (APPEND)"
+  const WEBHOOK_N8N = "https://kevinruiz.app.n8n.cloud/webhook/agregar-producto";
+
+  function unlock() {
+    const pass = document.getElementById("passInput").value;
+    if(pass === CLAVE_SECRETA) {
+      document.getElementById("lockScreen").style.opacity = "0";
+      setTimeout(() => {
+        document.getElementById("lockScreen").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+        document.querySelector(".status").innerText = "SISTEMA ONLINE - MODO ARQUITECTO";
+        document.querySelector(".status").style.color = "#fff";
+      }, 500);
+    } else {
+      document.getElementById("passInput").style.borderColor = "var(--alert)";
+      document.getElementById("passInput").style.color = "var(--alert)";
+      setTimeout(() => {
+        document.getElementById("passInput").style.borderColor = "var(--core)";
+        document.getElementById("passInput").style.color = "var(--core)";
+        document.getElementById("passInput").value = "";
+      }, 1000);
+    }
+  }
+
+  function switchTab(tab) {
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+    
+    if(tab === 'single') {
+      document.querySelectorAll(".tab")[0].classList.add("active");
+      document.getElementById("panel-single").classList.add("active");
+    } else {
+      document.querySelectorAll(".tab")[1].classList.add("active");
+      document.getElementById("panel-mass").classList.add("active");
+    }
+    document.getElementById("sysMessage").style.display = "none";
+  }
+
+  function mostrarMensaje(texto, exito) {
+    const box = document.getElementById("sysMessage");
+    box.style.display = "block";
+    box.innerText = texto;
+    box.className = exito ? "msg-success" : "msg-error";
+  }
+
+  async function enviarPayload(data) {
+    try {
+      const btn = document.querySelector(".panel.active .btn-submit");
+      const originalText = btn.innerText;
+      btn.innerText = "TRANSMITIENDO...";
+      btn.style.opacity = "0.5";
+      
+      // Enviamos el POST al webhook de n8n
+      const response = await fetch(WEBHOOK_N8N, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      
+      btn.innerText = originalText;
+      btn.style.opacity = "1";
+
+      if(response.ok) {
+        mostrarMensaje("TRANSMISIÓN EXITOSA. BASE DE DATOS ACTUALIZADA.", true);
+        return true;
+      } else {
+        mostrarMensaje("ERROR DE TRANSMISIÓN: EL SERVIDOR N8N RECHAZÓ LA CARGA.", false);
+        return false;
+      }
+    } catch(err) {
+      document.querySelector(".panel.active .btn-submit").innerText = "REINTENTAR";
+      document.querySelector(".panel.active .btn-submit").style.opacity = "1";
+      mostrarMensaje("FALLO CRÍTICO: NO SE PUDO CONECTAR CON N8N. REVISA LA URL DEL WEBHOOK.", false);
+      console.error(err);
+      return false;
+    }
+  }
+
+  async function enviarUnidad() {
+    const producto = {
+      nombre: document.getElementById("f_nombre").value.trim(),
+      precio: parseFloat(document.getElementById("f_precio").value) || 0,
+      moneda: document.getElementById("f_moneda").value,
+      categoria: document.getElementById("f_categoria").value.trim(),
+      imagen: document.getElementById("f_imagen").value.trim(),
+      descripcion: document.getElementById("f_descripcion").value.trim()
+    };
+    
+    if(!producto.nombre || !producto.precio || !producto.categoria) {
+      mostrarMensaje("ERROR: DATOS INCOMPLETOS. RELLENA NOMBRE, PRECIO Y CATEGORÍA.", false);
+      return;
+    }
+
+    const exito = await enviarPayload(producto);
+    if(exito) {
+      // Limpiar formulario excepto categoría para subir más rápido
+      document.getElementById("f_nombre").value = "";
+      document.getElementById("f_precio").value = "";
+      document.getElementById("f_imagen").value = "";
+      document.getElementById("f_descripcion").value = "";
+    }
+  }
+
+  async function enviarMasivo() {
+    const jsonText = document.getElementById("f_json").value.trim();
+    let data;
+    try {
+      data = JSON.parse(jsonText);
+    } catch(e) {
+      mostrarMensaje("ERROR: FORMATO JSON INVÁLIDO. REVISA LA SINTAXIS.", false);
+      return;
+    }
+    
+    if(!Array.isArray(data)) {
+      mostrarMensaje("ERROR: EL JSON DEBE SER UN ARREGLO (ARRAY) DE OBJETOS [...].", false);
+      return;
+    }
+
+    // Aquí enviamos el array completo al webhook
+    // N8N deberá recibir el array y hacer un "Split in Batches" o simplemente pasarlo a Google Sheets
+    const payload = { "productos_masivos": data };
+    const exito = await enviarPayload(payload);
+    if(exito) {
+      document.getElementById("f_json").value = "";
+    }
+  }
+</script>
+</body>
+</html>

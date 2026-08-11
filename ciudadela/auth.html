@@ -6,291 +6,403 @@
 <title>Orionix | Acceso al Sistema</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --core: #0ff;
-    --core-glow: rgba(0,255,255,0.4);
-    --gold: #f4d03f;
-    --alert: #ff0055;
-    --bg: #05050a;
-    --border: rgba(0,255,255,0.2);
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    background: var(--bg); color: #e0f7fa; font-family: 'Rajdhani', sans-serif;
-    min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
-  }
-  canvas#bg { position:fixed; inset:0; z-index:0; }
+:root { --core:#0ff; --gold:#f4d03f; --alert:#ff0055; --bg:#03020a; }
+*{ margin:0; padding:0; box-sizing:border-box; }
 
-  /* Scanlines */
-  body::after {
-    content:''; position:fixed; inset:0; z-index:1; pointer-events:none;
-    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px);
-  }
+body {
+  background:var(--bg); color:#e0f7fa; font-family:'Rajdhani',sans-serif;
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
 
-  .container {
-    position:relative; z-index:10; width:min(460px,90vw);
-    animation: appear 1s ease;
-  }
-  @keyframes appear { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+/* CANVAS FONDO */
+canvas#stars { position:fixed; inset:0; z-index:0; }
 
-  .logo-big {
-    text-align:center; font-family:'Orbitron',sans-serif; font-size:2.5rem; font-weight:900;
-    letter-spacing:10px; color:#fff; text-shadow:0 0 30px var(--core); margin-bottom:6px;
-  }
-  .logo-big span { color:var(--core); }
-  .subtitle {
-    text-align:center; font-size:.85rem; letter-spacing:4px; color:rgba(0,255,255,.6);
-    text-transform:uppercase; margin-bottom:40px; font-family:'Orbitron',sans-serif;
-  }
+/* PLANETA DECORATIVO */
+.planet {
+  position:fixed; width:500px; height:500px; border-radius:50%;
+  background: radial-gradient(circle at 35% 35%,
+    rgba(0,255,255,0.08) 0%,
+    rgba(0,100,180,0.05) 40%,
+    transparent 70%);
+  border:1px solid rgba(0,255,255,0.06);
+  bottom:-200px; right:-150px; z-index:1;
+  box-shadow: inset -30px -30px 60px rgba(0,255,255,0.04),
+              0 0 80px rgba(0,255,255,0.04);
+  animation: planetRotate 40s linear infinite;
+}
+.planet::before {
+  content:''; position:absolute; inset:-2px; border-radius:50%;
+  border:1px solid rgba(0,255,255,0.08);
+  box-shadow:0 0 40px rgba(0,255,255,0.08);
+}
+/* Anillos del planeta */
+.planet::after {
+  content:''; position:absolute;
+  width:130%; height:30%; left:-15%; top:35%;
+  border-radius:50%; border:1px solid rgba(0,255,255,0.1);
+  transform:rotateX(70deg);
+}
+@keyframes planetRotate { to { transform:rotate(360deg); } }
 
-  .card {
-    background:rgba(5,5,15,0.75); border:1px solid var(--border);
-    backdrop-filter:blur(20px); padding:40px; position:relative;
-    box-shadow:0 0 40px rgba(0,255,255,0.08);
-  }
-  .card::before, .card::after {
-    content:''; position:absolute; width:24px; height:24px; border:2px solid var(--core);
-  }
-  .card::before { top:-1px; left:-1px; border-right:none; border-bottom:none; }
-  .card::after { bottom:-1px; right:-1px; border-left:none; border-top:none; }
+/* SCANLINES */
+body::after {
+  content:''; position:fixed; inset:0; z-index:2; pointer-events:none;
+  background:repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.12) 2px, rgba(0,0,0,0.12) 4px);
+}
 
-  /* Tabs */
-  .tabs { display:flex; margin-bottom:30px; border-bottom:1px solid var(--border); }
-  .tab {
-    flex:1; padding:12px; text-align:center; cursor:pointer; font-family:'Orbitron',sans-serif;
-    font-size:.75rem; letter-spacing:2px; color:rgba(255,255,255,.5); transition:.3s;
-    border-bottom:2px solid transparent;
-  }
-  .tab.active { color:var(--core); border-bottom-color:var(--core); text-shadow:0 0 10px var(--core); }
+/* CONTENEDOR PRINCIPAL */
+.main { position:relative; z-index:10; width:min(480px,92vw); }
 
-  .panel { display:none; }
-  .panel.active { display:block; animation:fadeIn .4s ease; }
-  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+/* Logo */
+.logo-wrap { text-align:center; margin-bottom:10px; }
+.logo-wrap .brand {
+  font-family:'Orbitron',sans-serif; font-size:clamp(2rem,6vw,3rem);
+  font-weight:900; color:#fff; letter-spacing:12px;
+  text-shadow:0 0 40px var(--core), 0 0 80px rgba(0,255,255,0.4);
+  display:inline-block;
+  animation:glowPulse 3s ease-in-out infinite;
+}
+.logo-wrap .brand em { color:var(--core); font-style:normal; }
+@keyframes glowPulse {
+  0%,100%{ text-shadow:0 0 30px var(--core), 0 0 60px rgba(0,255,255,0.3); }
+  50%{ text-shadow:0 0 50px var(--core), 0 0 100px rgba(0,255,255,0.6), 0 0 140px rgba(0,255,255,0.2); }
+}
+.subtitle {
+  text-align:center; font-family:'Orbitron',sans-serif;
+  font-size:.7rem; letter-spacing:5px; color:rgba(0,255,255,.5);
+  text-transform:uppercase; margin-bottom:40px;
+}
 
-  .form-group { margin-bottom:20px; }
-  .form-group label {
-    display:block; font-family:'Orbitron',sans-serif; font-size:.7rem; letter-spacing:2px;
-    color:var(--core); margin-bottom:8px;
-  }
-  .form-group input {
-    width:100%; background:rgba(0,255,255,.03); border:1px solid var(--border);
-    color:#fff; padding:14px 16px; font-family:'Rajdhani',sans-serif; font-size:1.1rem;
-    outline:none; transition:.3s;
-  }
-  .form-group input:focus {
-    border-color:var(--core); box-shadow:0 0 12px var(--core-glow);
-    background:rgba(0,255,255,.06);
-  }
+/* CARD */
+.card {
+  position:relative; background:rgba(3,2,10,0.82);
+  border:1px solid rgba(0,255,255,0.18);
+  backdrop-filter:blur(30px); -webkit-backdrop-filter:blur(30px);
+  padding:44px 40px; overflow:hidden;
+}
+/* Esquinas HUD */
+.card::before, .card::after {
+  content:''; position:absolute; width:28px; height:28px;
+  border:2px solid var(--core); transition:.4s;
+}
+.card::before { top:-1px; left:-1px; border-right:none; border-bottom:none; }
+.card::after  { bottom:-1px; right:-1px; border-left:none; border-top:none; }
+.card:hover::before, .card:hover::after { width:48px; height:48px; }
+/* Línea brillante en la parte superior */
+.card .glow-line {
+  position:absolute; top:0; left:10%; width:80%; height:1px;
+  background:linear-gradient(90deg, transparent, var(--core), transparent);
+  box-shadow:0 0 15px var(--core);
+}
 
-  .btn-main {
-    width:100%; padding:15px; background:var(--core); color:#000; border:none;
-    font-family:'Orbitron',sans-serif; font-size:.9rem; font-weight:700; letter-spacing:3px;
-    cursor:pointer; transition:.3s; text-transform:uppercase; margin-bottom:16px;
-  }
-  .btn-main:hover { background:#fff; box-shadow:0 0 30px rgba(255,255,255,.5); }
-  .btn-main:disabled { opacity:.5; cursor:not-allowed; }
+/* TABS */
+.tabs { display:flex; margin-bottom:36px; border-bottom:1px solid rgba(0,255,255,0.12); }
+.tab {
+  flex:1; padding:14px 10px; text-align:center; cursor:pointer;
+  font-family:'Orbitron',sans-serif; font-size:.72rem; letter-spacing:2.5px;
+  color:rgba(255,255,255,.35); transition:.3s;
+  border-bottom:2px solid transparent; position:relative;
+}
+.tab.active {
+  color:var(--core); border-bottom-color:var(--core);
+  text-shadow:0 0 12px var(--core);
+}
+.tab:hover:not(.active) { color:rgba(255,255,255,.7); }
 
-  .divider {
-    display:flex; align-items:center; gap:12px; margin:16px 0;
-    color:rgba(255,255,255,.3); font-size:.8rem; letter-spacing:2px;
-  }
-  .divider::before, .divider::after { content:''; flex:1; height:1px; background:var(--border); }
+/* PANELS */
+.panel { display:none; }
+.panel.active { display:block; animation:fadeSlide .4s ease; }
+@keyframes fadeSlide { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
 
-  .btn-google {
-    width:100%; padding:14px; background:transparent; color:#fff;
-    border:1px solid var(--border); font-family:'Rajdhani',sans-serif; font-size:1.1rem;
-    font-weight:600; cursor:pointer; transition:.3s; display:flex; align-items:center;
-    justify-content:center; gap:12px;
-  }
-  .btn-google:hover { border-color:var(--core); background:rgba(0,255,255,.05); box-shadow:0 0 15px var(--core-glow); }
+/* INPUTS */
+.fg { margin-bottom:22px; }
+.fg label {
+  display:flex; align-items:center; gap:8px;
+  font-family:'Orbitron',sans-serif; font-size:.65rem; letter-spacing:2.5px;
+  color:var(--core); margin-bottom:9px; text-transform:uppercase;
+}
+.fg label::before { content:'▸'; font-size:.8rem; }
+.fg input {
+  width:100%; background:rgba(0,255,255,.03);
+  border:1px solid rgba(0,255,255,.16); color:#fff;
+  padding:14px 18px; font-family:'Rajdhani',sans-serif; font-size:1.1rem;
+  outline:none; transition:.3s; letter-spacing:.5px;
+}
+.fg input::placeholder { color:rgba(255,255,255,.22); }
+.fg input:focus {
+  border-color:var(--core);
+  background:rgba(0,255,255,.06);
+  box-shadow:0 0 0 1px rgba(0,255,255,.3), 0 4px 20px rgba(0,255,255,.1);
+}
 
-  .google-icon { width:22px; height:22px; flex-shrink:0; }
+/* BOTÓN PRINCIPAL */
+.btn-main {
+  width:100%; padding:16px; background:var(--core); color:#000; border:none;
+  font-family:'Orbitron',sans-serif; font-size:.88rem; font-weight:900;
+  letter-spacing:4px; cursor:pointer; transition:.35s; text-transform:uppercase;
+  position:relative; overflow:hidden; margin-bottom:18px;
+}
+.btn-main::before {
+  content:''; position:absolute; top:0; left:-100%;
+  width:100%; height:100%;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent);
+  transition:.5s;
+}
+.btn-main:hover::before { left:100%; }
+.btn-main:hover { background:#fff; box-shadow:0 0 40px rgba(255,255,255,.4), 0 0 80px rgba(0,255,255,.2); }
+.btn-main:disabled { opacity:.45; cursor:not-allowed; }
 
-  .msg {
-    margin-top:16px; padding:12px; text-align:center; font-family:'Orbitron',sans-serif;
-    font-size:.75rem; letter-spacing:1px; display:none; border:1px solid;
-  }
-  .msg.ok { color:var(--core); border-color:var(--core); background:rgba(0,255,255,.08); }
-  .msg.err { color:var(--alert); border-color:var(--alert); background:rgba(255,0,85,.08); }
+/* DIVIDER */
+.divider {
+  display:flex; align-items:center; gap:14px; margin:18px 0;
+  color:rgba(255,255,255,.25); font-size:.72rem; letter-spacing:3px;
+}
+.divider::before, .divider::after {
+  content:''; flex:1; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(0,255,255,.2), transparent);
+}
+
+/* BOTÓN GOOGLE */
+.btn-google {
+  width:100%; padding:14px 20px; background:transparent; color:#fff;
+  border:1px solid rgba(0,255,255,.18); font-family:'Rajdhani',sans-serif;
+  font-size:1.05rem; font-weight:600; cursor:pointer; transition:.3s;
+  display:flex; align-items:center; justify-content:center; gap:14px;
+}
+.btn-google:hover {
+  border-color:var(--core); background:rgba(0,255,255,.06);
+  box-shadow:0 0 20px rgba(0,255,255,.15);
+}
+.g-icon { width:22px; height:22px; flex-shrink:0; }
+
+/* LOADING SPINNER */
+.spinner {
+  display:inline-block; width:18px; height:18px; margin-right:10px;
+  border:2px solid rgba(0,0,0,.3); border-top-color:#000;
+  border-radius:50%; animation:spin .7s linear infinite; vertical-align:middle;
+}
+@keyframes spin { to{transform:rotate(360deg)} }
+
+/* MENSAJE */
+#msg {
+  margin-top:18px; padding:13px 18px; font-family:'Orbitron',sans-serif;
+  font-size:.72rem; letter-spacing:1.5px; display:none;
+  border-left:3px solid; animation:fadeSlide .3s ease;
+}
+#msg.ok  { color:var(--core);  border-color:var(--core);  background:rgba(0,255,255,.07); }
+#msg.err { color:var(--alert); border-color:var(--alert); background:rgba(255,0,85,.07); }
+
+/* FOOTER */
+.footer {
+  text-align:center; margin-top:24px;
+  font-family:'Orbitron',sans-serif; font-size:.6rem; letter-spacing:2px;
+  color:rgba(255,255,255,.2);
+}
 </style>
 </head>
 <body>
-<canvas id="bg"></canvas>
+<canvas id="stars"></canvas>
+<div class="planet"></div>
 
-<div class="container">
-  <div class="logo-big">ORIO<span>NIX</span></div>
+<div class="main">
+  <div class="logo-wrap">
+    <div class="brand">ORIO<em>NIX</em></div>
+  </div>
   <div class="subtitle">Sistema de Identificación Galáctico</div>
+
   <div class="card">
+    <div class="glow-line"></div>
+
     <div class="tabs">
-      <div class="tab active" onclick="switchTab('login')">ACCEDER</div>
-      <div class="tab" onclick="switchTab('register')">REGISTRARSE</div>
+      <div class="tab active" id="tab-login" onclick="switchTab('login')">ACCEDER</div>
+      <div class="tab" id="tab-reg"   onclick="switchTab('register')">REGISTRARSE</div>
     </div>
 
     <!-- LOGIN -->
     <div id="panel-login" class="panel active">
-      <div class="form-group">
-        <label>CORREO ELECTRÓNICO</label>
-        <input type="email" id="loginEmail" placeholder="comandante@galaxia.com">
+      <div class="fg">
+        <label>Correo</label>
+        <input type="email" id="lEmail" placeholder="comandante@galaxia.com" onkeypress="if(event.key==='Enter')doLogin()">
       </div>
-      <div class="form-group">
-        <label>CONTRASEÑA</label>
-        <input type="password" id="loginPass" placeholder="••••••••" onkeypress="if(event.key==='Enter')loginEmail()">
+      <div class="fg">
+        <label>Contraseña</label>
+        <input type="password" id="lPass" placeholder="••••••••••" onkeypress="if(event.key==='Enter')doLogin()">
       </div>
-      <button class="btn-main" onclick="loginEmail()">INICIAR ENLACE</button>
+      <button class="btn-main" id="btnLogin" onclick="doLogin()">INICIAR ENLACE</button>
       <div class="divider">O CONTINÚA CON</div>
-      <button class="btn-google" onclick="loginGoogle()">
-        <svg class="google-icon" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
+      <button class="btn-google" onclick="doGoogle()">
+        <svg class="g-icon" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
         Continuar con Google
       </button>
     </div>
 
     <!-- REGISTRO -->
     <div id="panel-register" class="panel">
-      <div class="form-group">
-        <label>NOMBRE DE COMANDANTE</label>
-        <input type="text" id="regName" placeholder="Tu nombre o alias">
+      <div class="fg">
+        <label>Nombre de Comandante</label>
+        <input type="text" id="rName" placeholder="Tu nombre o alias galáctico">
       </div>
-      <div class="form-group">
-        <label>CORREO ELECTRÓNICO</label>
-        <input type="email" id="regEmail" placeholder="comandante@galaxia.com">
+      <div class="fg">
+        <label>Correo</label>
+        <input type="email" id="rEmail" placeholder="comandante@galaxia.com">
       </div>
-      <div class="form-group">
-        <label>CONTRASEÑA (mín. 6 caracteres)</label>
-        <input type="password" id="regPass" placeholder="••••••••">
+      <div class="fg">
+        <label>Contraseña</label>
+        <input type="password" id="rPass" placeholder="Mín. 6 caracteres" onkeypress="if(event.key==='Enter')doRegister()">
       </div>
-      <button class="btn-main" onclick="registerEmail()">CREAR PERFIL DE COMANDANTE</button>
-      <div class="divider">O CONTINÚA CON</div>
-      <button class="btn-google" onclick="loginGoogle()">
-        <svg class="google-icon" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
+      <button class="btn-main" id="btnReg" onclick="doRegister()">CREAR PERFIL DE COMANDANTE</button>
+      <div class="divider">O REGÍSTRATE CON</div>
+      <button class="btn-google" onclick="doGoogle()">
+        <svg class="g-icon" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
         Registrarse con Google
       </button>
     </div>
 
-    <div id="msg" class="msg"></div>
+    <div id="msg"></div>
   </div>
+  <div class="footer">ORIONIX MAISON © 2026 — TODOS LOS DERECHOS DEL UNIVERSO RESERVADOS</div>
 </div>
 
-<!-- Firebase CDN (no-module, compatible con cualquier browser sin npm) -->
+<!-- Firebase (CDN sin npm) -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
 <script>
-/* ===== FIREBASE CONFIG ===== */
-const firebaseConfig = {
-  apiKey: "AIzaSyDZoywcYKSBrAk_iwSMN4rnw7goLSltj7A",
-  authDomain: "las-cronicas-de-krc.firebaseapp.com",
-  projectId: "las-cronicas-de-krc",
-  storageBucket: "las-cronicas-de-krc.firebasestorage.app",
-  messagingSenderId: "636206734640",
-  appId: "1:636206734640:web:40c52672294155c6d77cf5",
-  measurementId: "G-LGGE5H802H"
-};
-firebase.initializeApp(firebaseConfig);
+/* ─── Firebase Config ─── */
+firebase.initializeApp({
+  apiKey:"AIzaSyDZoywcYKSBrAk_iwSMN4rnw7goLSltj7A",
+  authDomain:"las-cronicas-de-krc.firebaseapp.com",
+  projectId:"las-cronicas-de-krc",
+  storageBucket:"las-cronicas-de-krc.firebasestorage.app",
+  messagingSenderId:"636206734640",
+  appId:"1:636206734640:web:40c52672294155c6d77cf5"
+});
 const auth = firebase.auth();
 const db   = firebase.firestore();
+const ADMIN_EMAIL = "kevinruizbolsota@gmail.com";
 
-/* ===== EMAIL DEL ADMIN (pon aquí tu correo de Google) ===== */
-const ADMIN_EMAIL = "kevinruizbolsota@gmail.com"; // <-- Actualiza con tu email real
+/* ─── Si ya está logueado → tienda ─── */
+auth.onAuthStateChanged(u => { if(u) go(); });
 
-/* ===== TAB SWITCH ===== */
-function switchTab(t) {
-  document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active', i===(t==='login'?0:1)));
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById('panel-'+t).classList.add('active');
+function go(){ window.location.href = 'tienda.html'; }
+
+/* ─── UI helpers ─── */
+function switchTab(t){
+  ['login','register'].forEach(x=>{
+    document.getElementById('tab-'+(x==='login'?'login':'reg')).classList.toggle('active',x===t);
+    document.getElementById('panel-'+x).classList.toggle('active',x===t);
+  });
   hideMsg();
 }
-function showMsg(txt, ok) {
+function msg(txt,ok){
   const el=document.getElementById('msg');
-  el.textContent=txt; el.className='msg '+(ok?'ok':'err'); el.style.display='block';
+  el.innerHTML=txt; el.className=ok?'ok':'err'; el.style.display='block';
 }
 function hideMsg(){ document.getElementById('msg').style.display='none'; }
+function setLoading(btnId,loading,label){
+  const b=document.getElementById(btnId);
+  b.disabled=loading;
+  b.innerHTML=loading?`<span class="spinner"></span>PROCESANDO...`:label;
+}
 
-/* ===== GUARDAR PERFIL EN FIRESTORE ===== */
-async function guardarPerfil(user, nombre) {
-  const ref = db.collection('usuarios').doc(user.uid);
-  const snap = await ref.get();
-  if(!snap.exists) {
+/* ─── Guardar perfil Firestore ─── */
+async function saveProfile(user, nombre){
+  const ref=db.collection('usuarios').doc(user.uid);
+  if(!(await ref.get()).exists){
     await ref.set({
-      nombre: nombre || user.displayName || 'Comandante',
-      email: user.email,
-      foto: user.photoURL || '',
-      rol: user.email === ADMIN_EMAIL ? 'admin' : 'usuario',
+      nombre: nombre||user.displayName||'Comandante',
+      email: user.email, foto: user.photoURL||'',
+      rol: user.email===ADMIN_EMAIL?'admin':'usuario',
       creado: firebase.firestore.FieldValue.serverTimestamp()
     });
   }
 }
 
-/* ===== REDIRIGIR TRAS LOGIN ===== */
-function redirigir() {
-  window.location.href = 'tienda.html';
-}
-
-/* ===== LOGIN CON EMAIL ===== */
-async function loginEmail() {
-  const email = document.getElementById('loginEmail').value.trim();
-  const pass  = document.getElementById('loginPass').value;
-  if(!email||!pass){ showMsg('Completa todos los campos.', false); return; }
-  try {
-    showMsg('Verificando credenciales...', true);
-    await auth.signInWithEmailAndPassword(email, pass);
-    redirigir();
-  } catch(e) {
-    const msgs = { 'auth/user-not-found':'No existe una cuenta con ese correo.', 'auth/wrong-password':'Contraseña incorrecta.', 'auth/invalid-email':'Correo inválido.' };
-    showMsg(msgs[e.code]||e.message, false);
+/* ─── Login Email ─── */
+async function doLogin(){
+  const email=document.getElementById('lEmail').value.trim();
+  const pass =document.getElementById('lPass').value;
+  if(!email||!pass){msg('⚠ Completa todos los campos.',false);return;}
+  setLoading('btnLogin',true);
+  try{
+    await auth.signInWithEmailAndPassword(email,pass);
+    msg('✓ Acceso concedido. Redirigiendo...',true);
+    setTimeout(go,800);
+  }catch(e){
+    const m={'auth/user-not-found':'No existe esa cuenta.','auth/wrong-password':'Contraseña incorrecta.','auth/invalid-credential':'Credenciales inválidas.'};
+    msg('⚠ '+(m[e.code]||e.message),false);
+    setLoading('btnLogin',false,'INICIAR ENLACE');
   }
 }
 
-/* ===== REGISTRO CON EMAIL ===== */
-async function registerEmail() {
-  const nombre= document.getElementById('regName').value.trim();
-  const email = document.getElementById('regEmail').value.trim();
-  const pass  = document.getElementById('regPass').value;
-  if(!nombre||!email||!pass){ showMsg('Completa todos los campos.', false); return; }
-  if(pass.length<6){ showMsg('La contraseña debe tener al menos 6 caracteres.', false); return; }
-  try {
-    showMsg('Creando perfil...', true);
-    const cred = await auth.createUserWithEmailAndPassword(email, pass);
-    await cred.user.updateProfile({ displayName: nombre });
-    await guardarPerfil(cred.user, nombre);
-    redirigir();
-  } catch(e) {
-    const msgs = { 'auth/email-already-in-use':'Ese correo ya tiene una cuenta.', 'auth/invalid-email':'Correo inválido.' };
-    showMsg(msgs[e.code]||e.message, false);
+/* ─── Registro Email ─── */
+async function doRegister(){
+  const nombre=document.getElementById('rName').value.trim();
+  const email =document.getElementById('rEmail').value.trim();
+  const pass  =document.getElementById('rPass').value;
+  if(!nombre||!email||!pass){msg('⚠ Completa todos los campos.',false);return;}
+  if(pass.length<6){msg('⚠ La contraseña debe tener al menos 6 caracteres.',false);return;}
+  setLoading('btnReg',true);
+  try{
+    const c=await auth.createUserWithEmailAndPassword(email,pass);
+    await c.user.updateProfile({displayName:nombre});
+    await saveProfile(c.user,nombre);
+    msg('✓ Perfil creado. Ingresando al universo...',true);
+    setTimeout(go,900);
+  }catch(e){
+    const m={'auth/email-already-in-use':'Ese correo ya tiene una cuenta.','auth/invalid-email':'Correo inválido.'};
+    msg('⚠ '+(m[e.code]||e.message),false);
+    setLoading('btnReg',false,'CREAR PERFIL DE COMANDANTE');
   }
 }
 
-/* ===== LOGIN CON GOOGLE ===== */
-async function loginGoogle() {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  try {
-    showMsg('Abriendo portal de Google...', true);
-    const result = await auth.signInWithPopup(provider);
-    await guardarPerfil(result.user);
-    redirigir();
-  } catch(e) {
-    if(e.code!=='auth/popup-closed-by-user') showMsg(e.message, false);
+/* ─── Login Google ─── */
+async function doGoogle(){
+  try{
+    msg('Abriendo portal de Google...',true);
+    const r=await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    await saveProfile(r.user);
+    msg('✓ Google verificado. Ingresando...',true);
+    setTimeout(go,800);
+  }catch(e){
+    if(e.code!=='auth/popup-closed-by-user') msg('⚠ '+e.message,false);
     else hideMsg();
   }
 }
 
-/* ===== SI YA ESTÁ LOGUEADO, REDIRIGIR ===== */
-auth.onAuthStateChanged(user => { if(user) redirigir(); });
-
-/* ===== CANVAS STARFIELD ===== */
-const canvas=document.getElementById('bg'), ctx=canvas.getContext('2d');
-let W,H,stars=[];
-function init(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; stars=Array.from({length:600},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5,v:Math.random()*.4+.1})); }
+/* ─── Canvas Warp Stars ─── */
+const cv=document.getElementById('stars'), ct=cv.getContext('2d');
+let W,H,S=[];
+function init(){
+  W=cv.width=innerWidth; H=cv.height=innerHeight;
+  S=Array.from({length:700},()=>({
+    x:Math.random()*W-W/2, y:Math.random()*H-H/2,
+    z:Math.random()*1800+200, r:Math.random()*1.4+.3
+  }));
+}
 window.addEventListener('resize',init); init();
-(function frame(){
-  ctx.fillStyle='rgba(5,5,10,.95)'; ctx.fillRect(0,0,W,H);
-  stars.forEach(s=>{
-    ctx.fillStyle=`rgba(255,255,255,${s.r/1.5})`; ctx.beginPath();
-    ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill();
-    s.y+=s.v; if(s.y>H){s.y=0;s.x=Math.random()*W;}
+(function loop(){
+  ct.fillStyle='rgba(3,2,10,.92)'; ct.fillRect(0,0,W,H);
+  const cx=W/2, cy=H/2;
+  S.forEach(s=>{
+    s.z-=1.5; if(s.z<=0){s.z=1800;s.x=Math.random()*W-W/2;s.y=Math.random()*H-H/2;}
+    const px=s.x/s.z*1000+cx, py=s.y/s.z*1000+cy;
+    const sc=(1800-s.z)/1800, sz=s.r*sc*3;
+    if(px<0||px>W||py<0||py>H) return;
+    ct.beginPath();
+    ct.fillStyle=s.z<400?`rgba(0,255,255,${sc})`:`rgba(255,255,255,${sc*.9})`;
+    ct.arc(px,py,sz,0,Math.PI*2); ct.fill();
+    // Estela
+    if(s.z<600){
+      ct.beginPath();
+      ct.strokeStyle=`rgba(0,255,255,${sc*.3})`;
+      ct.lineWidth=sz*.5;
+      const px2=s.x/(s.z+8)*1000+cx, py2=s.y/(s.z+8)*1000+cy;
+      ct.moveTo(px,py); ct.lineTo(px2,py2); ct.stroke();
+    }
   });
-  requestAnimationFrame(frame);
+  requestAnimationFrame(loop);
 })();
 </script>
 </body>

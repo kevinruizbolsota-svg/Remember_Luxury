@@ -3,1580 +3,519 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-<title>Tienda Orionix | Agentes de IA, Automatizacion y Productos Digitales</title>
-<meta name="description" content="Tienda oficial de Orionix: agentes de inteligencia artificial, automatizacion, contenido, webs a medida y productos digitales para hacer crecer tu negocio.">
-<meta name="robots" content="index, follow">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<title>Orionix Maison | 3D Experience</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* ============================================================
-     ESTÉTICA MÍSTICA (Orionix Dark Theme)
-     Fondo cósmico, tipografías serif de lujo, acentos dorados
-     ============================================================ */
-  :root{
-    /* Textos claros sobre fondo oscuro */
-    --tinta: #e9ddc4;
-    --tinta2: #e9ddc4;
-    --gris: #b8a982;
-    --linea: #2a2530;
-    
-    /* Fondos oscuros */
-    --papel: #0b0b0d;
-    --papel2: #141117;
-    --blanco: #1c1922;
-    
-    /* Acentos dorados */
-    --acento: #e8c86a;
-    --oro: #e8c86a;
-    --oro-brillo: #fff6d6;
-
-    /* Portada La Ciudadela */
-    --fondo:#14140f; --fondo-2:#1d1c16;
-    --tinta-portada:#ece7db; --tinta-suave:#b5ae9c; --linea-portada:#6f6552;
-    --c-flow:#7d8a6f; --c-glamur:#9a8258; --c-dinastia:#6c6f78;
-    --nucleo:#c9b783;
+  :root {
+    --core: #0ff;          /* Cyan neón */
+    --core-glow: rgba(0,255,255,0.4);
+    --gold: #f4d03f;       /* Dorado imperial */
+    --gold-glow: rgba(244,208,63,0.4);
+    --bg-dark: rgba(5,5,10,0.8);
+    --border: rgba(0, 255, 255, 0.2);
+    --text: #e0f7fa;
   }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth;font-size:16px}
-  body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--papel);color:var(--tinta);min-height:100vh;line-height:1.55;-webkit-font-smoothing:antialiased}
-  h1,h2,h3,.serif{font-family:'Cinzel',serif;font-weight:500;letter-spacing:1px}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background-color: #000;
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    /* La altura se ajustará dinámicamente por JS según los productos */
+    min-height: 10000px; 
+    overflow-x: hidden;
+  }
+  
+  /* Canvas para el fondo de estrellas */
+  #starfield {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+  }
 
-  /* ===== ANIMACIONES INTERACTIVAS ===== */
-  .reveal { opacity: 0; transform: translateY(40px); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
+  /* ===== MOTOR 3D CSS ===== */
+  #viewport {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    perspective: 1000px;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none; /* Dejamos que los clicks pasen al canvas si no hay card, pero las cards tendrán pointer-events: auto */
+  }
+  #camera {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    transform-style: preserve-3d;
+    will-change: transform;
+    /* Transición muy sutil para suavizar el scroll */
+    transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
 
-  /* ===== ESTILOS EMBLEMA LA CIUDADELA ===== */
-  .portada{ min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:clamp(16px,4vw,48px); gap:clamp(20px,4vh,40px); text-align:center; background:radial-gradient(1200px 800px at 50% 50%, var(--fondo-2), var(--fondo) 70%); color:var(--tinta-portada); }
-  .titulo-ciudadela{ letter-spacing:.35em; font-size:clamp(20px,4vw,34px); font-weight:600; text-transform:uppercase; font-family:'Playfair Display','Cinzel',serif; }
-  .subtitulo-ciudadela{ letter-spacing:.18em; font-size:clamp(12px,2.2vw,15px); color:var(--tinta-suave); text-transform:uppercase; max-width:40ch; line-height:1.7; }
-  .emblema{ position:relative; width:min(92vw,720px); aspect-ratio:1/1; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; place-items:center; gap:clamp(10px,2.4vw,22px); }
-  .tri{ position:relative; width:100%; height:100%; min-height:120px; border:none; background:transparent; cursor:pointer; color:var(--tinta-portada); display:flex; align-items:center; justify-content:center; padding:0; transition:transform .45s ease; }
-  .tri .cara{ position:absolute; inset:0; background:linear-gradient(160deg, color-mix(in srgb, var(--sec) 78%, #fff 6%), color-mix(in srgb, var(--sec) 92%, #000 30%)); border:1px solid color-mix(in srgb, var(--sec) 60%, var(--linea-portada)); opacity:.92; transition:opacity .45s ease, box-shadow .45s ease; }
-  .tri-arriba .cara{ clip-path:polygon(50% 100%, 0 0, 100% 0); }
-  .tri-izq .cara{ clip-path:polygon(100% 50%, 0 0, 0 100%); }
-  .tri-der .cara{ clip-path:polygon(0 50%, 100% 0, 100% 100%); }
-  .tri-arriba{ grid-column:1/3; grid-row:1; align-self:end; height:70%; }
-  .tri-izq{ grid-column:1; grid-row:2; justify-self:end; width:78%; }
-  .tri-der{ grid-column:2; grid-row:2; justify-self:start; width:78%; }
-  .tri .texto{ position:relative; z-index:2; padding:8px 12px; pointer-events:none; }
-  .tri .nombre{ display:block; font-size:clamp(13px,2.1vw,20px); font-weight:600; letter-spacing:.14em; text-transform:uppercase; text-shadow:0 1px 6px rgba(0,0,0,.6); font-family:'Jost',sans-serif; }
-  .tri .lema{ display:block; margin-top:6px; font-size:clamp(10px,1.5vw,12px); color:var(--tinta-suave); letter-spacing:.08em; }
-  .tri-arriba .texto{ transform:translateY(-14%); }
-  .tri-izq .texto{ transform:translateX(-16%); }
-  .tri-der .texto{ transform:translateX(16%); }
-  .nucleo{ position:absolute; left:50%; top:50%; width:clamp(70px,16vw,130px); aspect-ratio:1; transform:translate(-50%,-50%); border-radius:50%; z-index:3; pointer-events:none; background:radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--nucleo) 90%, #fff 10%) 0%, var(--nucleo) 30%, color-mix(in srgb, var(--nucleo) 40%, transparent) 60%, transparent 72%); box-shadow:0 0 40px color-mix(in srgb, var(--nucleo) 45%, transparent); animation:respira 6s ease-in-out infinite; }
-  .nucleo svg{ position:absolute; inset:0; width:100%; height:100%; opacity:.85; }
-  @keyframes respira{ 0%,100%{ transform:translate(-50%,-50%) scale(1); opacity:.9; } 50%{ transform:translate(-50%,-50%) scale(1.06); opacity:1; } }
-  .rayos{ position:absolute; inset:0; z-index:1; pointer-events:none; overflow:visible; }
-  .rayos path{ fill:none; stroke:var(--nucleo); stroke-width:1.4; opacity:.28; stroke-linecap:round; filter:drop-shadow(0 0 3px color-mix(in srgb, var(--nucleo) 60%, transparent)); stroke-dasharray:6 10; animation:flujo 5s linear infinite; }
-  .rayos path:nth-child(2){ animation-delay:1.6s; }
-  .rayos path:nth-child(3){ animation-delay:3.2s; }
-  @keyframes flujo{ to{ stroke-dashoffset:-160; } }
-  .tri:hover, .tri:focus-visible{ transform:scale(1.03); outline:none; }
-  .tri:hover .cara, .tri:focus-visible .cara{ opacity:1; box-shadow:0 0 26px color-mix(in srgb, var(--sec) 50%, transparent); }
-  .tri:focus-visible .cara{ border-color:var(--nucleo); }
-  .pie-ciudadela{ font-size:clamp(10px,1.6vw,12px); color:var(--tinta-suave); letter-spacing:.14em; text-transform:uppercase; }
-  @media (prefers-reduced-motion: reduce){ .nucleo, .rayos path{ animation:none !important; } .tri{ transition:none; } }
-  @media (max-width:520px){ .tri-izq, .tri-der{ width:92%; } .tri-arriba{ height:64%; } }
-  .oro{background:linear-gradient(92deg,#8a6a24,var(--oro) 25%,var(--oro-brillo) 50%,var(--oro) 75%,#8a6a24);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 6s linear infinite}
-  @keyframes brilloOro{to{background-position:200% center}}
-  a{color:inherit;text-decoration:none}
-  img{max-width:100%;display:block}
-  ::-webkit-scrollbar{height:8px;width:8px}::-webkit-scrollbar-thumb{background:var(--linea);border-radius:6px}
+  /* ===== PRODUCT CARDS (HOLOGRAMAS) ===== */
+  .holo-card {
+    position: absolute;
+    /* Centramos el punto de origen en la pantalla */
+    top: 50%; left: 50%;
+    width: 320px;
+    height: 480px;
+    margin-left: -160px;
+    margin-top: -240px;
+    background: var(--bg-dark);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 16px;
+    transform-style: preserve-3d;
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 30px rgba(0,255,255,0.1), inset 0 0 20px rgba(0,255,255,0.05);
+    transition: border-color 0.4s, box-shadow 0.4s;
+    cursor: pointer;
+  }
+  .holo-card:hover {
+    border-color: var(--core);
+    box-shadow: 0 0 50px var(--core-glow), inset 0 0 30px var(--core-glow);
+  }
+  /* Decoraciones del borde del holograma */
+  .holo-card::before, .holo-card::after {
+    content: ''; position: absolute; width: 20px; height: 20px; border: 2px solid var(--core); transition: 0.3s;
+  }
+  .holo-card::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+  .holo-card::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+  .holo-card:hover::before, .holo-card:hover::after { width: 40px; height: 40px; }
 
-  /* ===== TOPBAR minimalista de moda ===== */
-  .top{position:sticky;top:0;z-index:100;background:rgba(11,11,13,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea)}
-  .top1{display:flex;align-items:center;gap:26px;padding:18px 5vw}
-  .brand{display:flex;flex-direction:column;align-items:flex-start;gap:0;font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:7px;color:var(--tinta);font-size:1.5rem;line-height:1;white-space:nowrap;flex-shrink:0;text-transform:uppercase}
-  .brand small{font-size:.5rem;letter-spacing:5px;color:var(--gris);font-weight:400;font-family:'Jost',sans-serif;margin-top:4px;text-transform:uppercase}
-  .search{flex:1;display:flex;max-width:520px;overflow:hidden;border:none;border-bottom:1px solid var(--tinta);background:transparent}
-  .search select{display:none}
-  .search input{flex:1;border:none;background:transparent;padding:8px 4px;font-size:.82rem;font-family:'Jost',sans-serif;letter-spacing:1px;outline:none;color:var(--tinta)}
-  .search input::placeholder{color:var(--gris);text-transform:uppercase;font-size:.72rem;letter-spacing:2px}
-  .search button{border:none;background:transparent;color:var(--tinta);padding:0 6px;font-size:16px;cursor:pointer}
-  .top-actions{display:flex;align-items:center;gap:26px;flex-shrink:0}
-  .top-actions .ta{color:var(--tinta);cursor:pointer;font-size:.66rem;line-height:1.2;white-space:nowrap;text-transform:uppercase;letter-spacing:2px}
-  .top-actions .ta small{display:none}
-  .top-actions .ta b{font-weight:500;font-size:.66rem}
-  .cartbtn{position:relative;cursor:pointer;color:var(--tinta);font-size:.66rem;display:flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:2px}
-  .cartbtn .badge{background:var(--tinta);color:#fff;font-size:.58rem;font-weight:600;border-radius:50%;min-width:17px;height:17px;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif}
-  .cartbtn span.lbl{font-size:.66rem;letter-spacing:2px}
-  /* cinta de categorias -> menu editorial centrado */
-  .ribbon{display:flex;gap:0;align-items:center;justify-content:center;padding:12px 5vw;background:transparent;overflow-x:auto;flex-wrap:wrap}
-  .ribbon a{color:var(--tinta2);font-size:.68rem;padding:6px 16px;white-space:nowrap;cursor:pointer;transition:color .2s;letter-spacing:2.5px;text-transform:uppercase;position:relative}
-  .ribbon a:hover{color:var(--tinta)}
-  .ribbon a:hover::after{content:'';position:absolute;left:16px;right:16px;bottom:0;height:1px;background:var(--tinta)}
-  .ribbon a.menu{font-weight:600;color:var(--tinta)}
-  @media(max-width:820px){.top1{gap:16px;padding:14px 5vw}.brand{font-size:1.15rem;letter-spacing:5px}.search{display:none}.ribbon{justify-content:flex-start}}
+  .hc-img {
+    flex: 1;
+    width: 100%;
+    border-radius: 16px 16px 0 0;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+  }
+  .hc-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: sepia(0.3) hue-rotate(180deg) brightness(0.8) contrast(1.2);
+    transition: filter 0.5s, transform 0.5s;
+  }
+  .holo-card:hover .hc-img img {
+    filter: sepia(0) hue-rotate(0deg) brightness(1) contrast(1.1);
+    transform: scale(1.05);
+  }
+  /* Escaneo laser sobre la imagen */
+  .hc-img::after {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+    background: var(--core);
+    box-shadow: 0 0 10px var(--core);
+    animation: scan 4s linear infinite;
+    opacity: 0.5;
+  }
+  @keyframes scan { 0% { top: 0; opacity:0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { top: 100%; opacity:0; } }
 
-  /* ===== HERO FULL-BLEED editorial ===== */
-  .hero{position:relative;margin:0 auto;max-width:100%}
-  .banner{position:relative;height:min(88vh,780px);overflow:hidden;background:#dcd8cf}
-  .banner .bgimg{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.28)),url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;transition:transform 8s ease}
-  .banner:hover .bgimg{transform:scale(1.05)}
-  .banner .inner{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;text-align:center;padding:0 7vw 8vh;z-index:2}
-  .banner .eyebrow{letter-spacing:6px;font-size:.66rem;color:#fff;text-transform:uppercase;margin-bottom:18px;font-weight:400}
-  .banner h1{font-size:clamp(2.4rem,6vw,5rem);font-weight:400;letter-spacing:2px;line-height:1.02;margin-bottom:22px;color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.35)}
-  .banner p{color:#f3f1ec;font-size:clamp(.85rem,1.4vw,1rem);margin-bottom:30px;max-width:520px;letter-spacing:1px}
-  .banner .cta{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
-  .crown-bg{display:none}
+  .hc-info {
+    padding: 20px;
+    text-align: center;
+  }
+  .hc-cat {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65rem;
+    color: var(--core);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .hc-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #fff;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+  }
+  .hc-price {
+    font-size: 1.2rem;
+    color: var(--gold);
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 500;
+  }
+  .hc-btn {
+    margin-top: 15px;
+    background: transparent;
+    color: var(--core);
+    border: 1px solid var(--core);
+    padding: 10px 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .hc-btn:hover {
+    background: var(--core);
+    color: #000;
+    box-shadow: 0 0 20px var(--core-glow);
+  }
 
-  /* ===== BOTONES editoriales ===== */
-  .btn{position:relative;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;padding:12px 30px;font-size:.66rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--oro);border:1px solid var(--oro);border-radius:2px;background:transparent;overflow:hidden;transition:color .4s,border-color .4s;z-index:0;font-family:'Cinzel',serif}
-  .btn::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#f4e2a0,var(--oro) 45%,#c8a24a);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.4,0,.2,1)}
-  .btn:hover{color:#1a1409;border-color:var(--oro)}
-  .btn:hover::before{transform:scaleX(1)}
-  .btn.ghost{color:var(--gris);border-color:var(--linea)}
-  .btn.ghost::before{background:rgba(232,200,106,.12)}
-  .btn.ghost:hover{color:var(--oro-brillo);border-color:var(--oro)}
-  .btn.wide{width:100%}
-  .btn.sm{padding:11px 18px;font-size:.6rem;letter-spacing:2px}
+  /* ===== HUD (HEAD-UP DISPLAY) INTERFACE ===== */
+  .hud {
+    position: fixed;
+    z-index: 100;
+    pointer-events: none;
+    font-family: 'Orbitron', sans-serif;
+  }
+  .hud-interactive { pointer-events: auto; }
+  
+  .hud-top {
+    top: 0; left: 0; width: 100%;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 30px 40px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.8), transparent);
+  }
+  .hud-logo {
+    font-size: 1.8rem; font-weight: 900; color: #fff; letter-spacing: 10px;
+    text-shadow: 0 0 20px var(--core);
+    cursor: pointer; text-decoration: none;
+  }
+  .hud-logo span { color: var(--core); }
+  
+  .hud-cart {
+    display: flex; align-items: center; gap: 15px;
+    cursor: pointer;
+  }
+  .hud-cart-text { font-size: 0.8rem; letter-spacing: 3px; color: var(--core); text-transform: uppercase; }
+  .hud-cart-badge {
+    width: 30px; height: 30px; border: 1px solid var(--core);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; color: #fff; box-shadow: 0 0 10px var(--core-glow);
+    background: rgba(0,255,255,0.1);
+  }
 
-  section{max-width:1600px;margin:0 auto}
-  .rowhead{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:70px 5vw 30px}
-  .rowhead h2{font-size:clamp(1.6rem,3.4vw,2.6rem);letter-spacing:1px;color:var(--tinta);font-weight:400;text-transform:capitalize}
-  .rowhead h2 span{font-style:italic;color:var(--tinta)}
-  .rowhead a{color:var(--tinta2);font-size:.64rem;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;border-bottom:1px solid var(--tinta);padding-bottom:3px;margin-top:6px}
-  .rowhead a:hover{color:var(--tinta)}
+  .hud-status {
+    position: fixed; bottom: 30px; left: 40px;
+    font-size: 0.7rem; letter-spacing: 2px; color: rgba(255,255,255,0.5);
+  }
+  .hud-progress {
+    position: fixed; bottom: 30px; right: 40px;
+    font-size: 0.7rem; letter-spacing: 2px; color: var(--core);
+  }
+  
+  /* Instrucción inicial */
+  .scroll-hint {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    text-align: center; z-index: 50; color: #fff; pointer-events: none;
+    transition: opacity 1s;
+  }
+  .scroll-hint h2 { font-family: 'Orbitron', sans-serif; font-size: 3rem; letter-spacing: 8px; margin-bottom: 20px; text-shadow: 0 0 30px var(--core); }
+  .scroll-hint p { font-size: 1.2rem; letter-spacing: 4px; color: var(--core); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{ opacity: 1; } 50%{ opacity: 0.3; } }
 
-  /* ===== CATEGORIAS: mosaico editorial grande ===== */
-  .cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;padding:0 5vw}
-  .cat-tile{position:relative;aspect-ratio:3/4;background:var(--papel2);cursor:pointer;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;text-align:center;padding:34px 22px;border:1px solid var(--linea);border-radius:12px;transition:all 0.5s ease;}
-  .cat-tile::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.0) 0%,rgba(0,0,0,.2) 45%,rgba(0,0,0,.8) 100%);z-index:1;transition:opacity .5s}
-  .cat-tile:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,.4), 0 0 20px rgba(232,200,106,.15);border-color:var(--oro);}
-  .cat-tile:hover::before{opacity:0.8;}
-  .cat-tile .ic{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);font-size:4rem;opacity:.15;z-index:1;transition:all .6s cubic-bezier(.4,0,.2,1)}
-  .cat-tile:hover .ic{transform:translate(-50%,-60%) scale(1.2);opacity:.4;filter:drop-shadow(0 0 15px var(--oro));color:var(--oro);}
-  .cat-tile h3{position:relative;z-index:2;font-size:1.6rem;color:var(--oro-brillo);letter-spacing:2px;margin-bottom:6px;font-weight:600;font-family:'Cinzel',serif;transform:translateY(10px);transition:transform .5s}
-  .cat-tile:hover h3{transform:translateY(0);}
-  .cat-tile p{position:relative;z-index:2;color:rgba(255,255,255,.75);font-size:.85rem;line-height:1.5;margin-bottom:14px;letter-spacing:.5px;max-width:240px;opacity:0;transform:translateY(10px);transition:all .5s}
-  .cat-tile:hover p{opacity:1;transform:translateY(0);}
-  .cat-tile .link{position:relative;z-index:2;color:var(--oro);font-size:.65rem;letter-spacing:3px;text-transform:uppercase;border-bottom:1px solid var(--oro);padding-bottom:3px;opacity:0;transition:opacity .5s .1s}
-  .cat-tile:hover .link{opacity:1;}
+  /* ===== OVERLAYS (CARRITO Y FICHA) ===== */
+  .overlay-glass {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px);
+    z-index: 9000; display: none; flex-direction: column; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.5s;
+  }
+  .overlay-glass.active { display: flex; opacity: 1; }
+  
+  .panel-holografico {
+    width: min(900px, 90vw); max-height: 85vh; background: rgba(5,5,10,0.7);
+    border: 1px solid var(--core); box-shadow: 0 0 50px var(--core-glow);
+    border-radius: 8px; overflow-y: auto; padding: 40px; position: relative;
+  }
+  .panel-holografico::-webkit-scrollbar { width: 5px; }
+  .panel-holografico::-webkit-scrollbar-thumb { background: var(--core); }
+  
+  .panel-close {
+    position: absolute; top: 20px; right: 20px; font-size: 2rem; color: var(--core); cursor: pointer;
+    line-height: 1; font-family: 'Orbitron', sans-serif;
+  }
+  .panel-close:hover { color: #fff; text-shadow: 0 0 10px var(--core); }
 
-  /* ===== LOS MUNDOS ===== */
-  .mundos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px;padding:0 0 10px}
-  .mundo-tile{position:relative;aspect-ratio:4/5;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;justify-content:flex-end;padding:40px 30px;color:#fff}
-  .mundo-tile .mbg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 6s ease;z-index:0}
-  .mundo-tile:hover .mbg{transform:scale(1.06)}
-  .mundo-tile::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12) 0%,rgba(0,0,0,.25) 45%,rgba(0,0,0,.72) 100%);z-index:1;transition:background .4s}
-  .mundo-tile:hover::before{background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,.82))}
-  .mundo-tile .mc{position:relative;z-index:2}
-  .mundo-tile .mnum{font-size:.6rem;letter-spacing:3px;opacity:.75;margin-bottom:9px}
-  .mundo-tile h3{font-size:1.8rem;font-weight:500;letter-spacing:1px;margin-bottom:8px;line-height:1.05;color:#fff}
-  .mundo-tile p{font-size:.8rem;line-height:1.55;opacity:.9;margin-bottom:14px;max-width:280px}
-  .mundo-tile .mlink{font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;border-bottom:1px solid #fff;padding-bottom:3px;display:inline-block}
-  .m1 .mbg{background-image:url('https://images.unsplash.com/photo-1556909212-d5b604d0c90d?q=80&w=1200&auto=format&fit=crop')}
-  .m2 .mbg{background-image:url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1200&auto=format&fit=crop')}
-  .m3 .mbg{background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop')}
-  /* ===== ATELIER ===== */
-  #atelier{background:#111;color:#efece5;padding:90px 6vw;text-align:center;max-width:none;margin:0}
-  #atelier .mnum{font-size:.6rem;letter-spacing:3px;color:var(--oro);text-transform:uppercase;margin-bottom:14px}
-  #atelier h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:400;color:#fff;margin-bottom:16px}
-  #atelier p{color:#c9c4b8;max-width:600px;margin:0 auto 28px;font-size:.95rem;letter-spacing:.4px}
-  #atelier .btn{color:#fff;border-color:var(--oro)}
-  #atelier .btn:hover{background:var(--oro);color:#111}
+  /* Carrito UI */
+  .cart-title { font-family: 'Orbitron', sans-serif; font-size: 2rem; color: #fff; margin-bottom: 30px; letter-spacing: 4px; text-shadow: 0 0 15px var(--core); }
+  .cart-item { display: flex; align-items: center; gap: 20px; padding: 15px 0; border-bottom: 1px solid rgba(0,255,255,0.2); }
+  .cart-item img { width: 60px; height: 80px; object-fit: cover; border: 1px solid var(--core); }
+  .cart-item-info { flex: 1; }
+  .cart-item-title { font-size: 1.2rem; font-weight: 600; color: #fff; }
+  .cart-item-price { color: var(--gold); font-family: 'Orbitron', sans-serif; margin-top: 5px; }
+  .cart-item-remove { color: #ff0055; cursor: pointer; font-family: 'Orbitron', sans-serif; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 10px; display: inline-block;}
+  .cart-total { display: flex; justify-content: space-between; margin-top: 30px; font-size: 1.5rem; font-weight: 700; color: #fff; font-family: 'Orbitron', sans-serif; }
+  .cart-checkout-btn {
+    display: block; width: 100%; text-align: center; margin-top: 30px;
+    background: var(--core); color: #000; padding: 15px; font-family: 'Orbitron', sans-serif; font-size: 1rem; letter-spacing: 3px; font-weight: 700; text-transform: uppercase;
+    cursor: pointer; border: none; box-shadow: 0 0 20px var(--core-glow); transition: 0.3s; text-decoration: none;
+  }
+  .cart-checkout-btn:hover { background: #fff; box-shadow: 0 0 40px #fff; }
 
-  /* ===== FICHA DE PRODUCTO (overlay) ===== */
-  #ficha{position:fixed;inset:0;background:var(--papel);z-index:9600;overflow-y:auto;transform:translateY(100%);transition:transform .45s cubic-bezier(.4,0,.2,1);opacity:0}
-  #ficha.open{transform:none;opacity:1}
-  .ficha-top{position:sticky;top:0;background:rgba(11,11,13,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea);display:flex;align-items:center;gap:16px;padding:16px 5vw;z-index:5}
-  .ficha-top .volver{cursor:pointer;font-size:.66rem;letter-spacing:2px;text-transform:uppercase;color:var(--tinta);display:flex;align-items:center;gap:8px}
-  .ficha-top .marca{margin-left:auto;font-family:'Cormorant Garamond',serif;letter-spacing:5px;text-transform:uppercase;font-size:1rem;font-weight:600}
-  .ficha-wrap{max-width:1300px;margin:0 auto;padding:40px 5vw 80px;display:grid;grid-template-columns:1.1fr 1fr;gap:56px}
-  @media(max-width:900px){.ficha-wrap{grid-template-columns:1fr;gap:30px;padding:24px 6vw 60px}}
-  .fgal .main{aspect-ratio:3/4;background:var(--papel2) center/cover no-repeat;display:flex;align-items:center;justify-content:center;font-size:5rem}
-  .fgal .thumbs{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-  .fgal .thumbs .t{width:70px;height:88px;background:var(--papel2) center/cover;cursor:pointer;border:1px solid var(--linea);opacity:.7;transition:.2s}
-  .fgal .thumbs .t:hover,.fgal .thumbs .t.act{opacity:1;border-color:var(--tinta)}
-  .finfo .fcat{font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--gris);margin-bottom:12px}
-  .finfo h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:500;line-height:1.1;margin-bottom:14px}
-  .finfo .fstars{color:var(--oro);font-size:.85rem;letter-spacing:2px;margin-bottom:18px}
-  .finfo .fstars small{color:var(--gris);margin-left:8px}
-  .finfo .fprecio{font-size:1.5rem;letter-spacing:1px;margin-bottom:6px}
-  .finfo .fprecio .antes{font-size:1rem;color:var(--gris);text-decoration:line-through;margin-left:10px}
-  .finfo .fdesc{color:var(--tinta2);font-size:.95rem;line-height:1.7;margin:22px 0;letter-spacing:.3px}
-  .finfo .fsens{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--tinta);line-height:1.5;margin:22px 0;padding-left:16px;border-left:2px solid var(--oro)}
-  .finfo .facc{display:flex;flex-direction:column;gap:12px;margin-top:26px}
-  .fchip{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--tinta2);border:1px solid var(--linea);padding:9px 16px;background:transparent;transition:.25s;width:fit-content}
-  .fchip:hover{border-color:var(--tinta);color:var(--tinta)}
-  .fchip.on{border-color:var(--oro);color:var(--oro)}
-  .fvid{max-width:1300px;margin:0 auto;padding:0 5vw 40px}
-  .fvid .frame{aspect-ratio:16/9;background:#000}
-  .fvid iframe{width:100%;height:100%;border:0}
-  .frel{max-width:1300px;margin:0 auto;padding:20px 5vw 60px}
-  .frel .rail{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:30px 20px}
-
-  /* ===== PRODUCTOS: grid tipo pasarela / catalogo de moda ===== */
-  .rail-wrap{position:relative;padding:0 5vw}
-  .rail{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:40px 24px;overflow:visible;padding:10px 0 20px}
-  .card{background:var(--papel2);border:1px solid var(--linea);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:all .5s cubic-bezier(0.16, 1, 0.3, 1);cursor:pointer;position:relative}
-  .card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%, rgba(232,200,106,0.1), transparent 70%);opacity:0;transition:opacity 0.5s;pointer-events:none;z-index:3}
-  .card:hover{transform:translateY(-8px);box-shadow:0 15px 35px rgba(0,0,0,0.5), 0 0 15px rgba(232,200,106,0.15);border-color:rgba(232,200,106,0.5);}
-  .card:hover::before{opacity:1;}
-  .card .img{aspect-ratio:3/4;background:var(--bg) center/cover no-repeat;position:relative;display:flex;align-items:center;justify-content:center;font-size:3.4rem;overflow:hidden;border-bottom:1px solid var(--linea)}
-  .card .img::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .4s}
-  .card .img img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s ease;}
-  .card:hover .img img{transform:scale(1.08);}
-  .card:hover .img::after{background:rgba(0,0,0,.15)}
-  .card .tag{position:absolute;top:14px;left:14px;background:rgba(11,11,13,0.7);backdrop-filter:blur(4px);color:var(--oro);font-size:.56rem;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border:1px solid var(--oro);border-radius:4px;font-family:'Jost',sans-serif;z-index:2}
-  .card .badge-off{position:absolute;top:14px;right:14px;background:var(--oro);color:#111;font-size:.56rem;font-weight:600;letter-spacing:1.5px;padding:4px 9px;border-radius:4px;font-family:'Jost',sans-serif;text-transform:uppercase;z-index:2;box-shadow:0 4px 10px rgba(232,200,106,0.3)}
-  .card .body{padding:20px 20px 24px;display:flex;flex-direction:column;flex:1;text-align:center;position:relative;z-index:2;background:linear-gradient(180deg, rgba(20,17,23,0) 0%, rgba(20,17,23,1) 30%)}
-  .card h3{font-size:1.25rem;letter-spacing:1px;color:var(--oro-brillo);margin-bottom:8px;line-height:1.2;font-weight:500;font-family:'Cinzel',serif}
-  .card .stars{color:var(--oro);font-size:.72rem;margin-bottom:8px;letter-spacing:2px}
-  .card .stars small{color:var(--gris);margin-left:6px;letter-spacing:.5px}
-  .card .desc{font-size:.82rem;color:var(--tinta2);flex:1;margin-bottom:16px;line-height:1.6;letter-spacing:.3px;opacity:0.8}
-  .card .precio{font-family:'Jost',sans-serif;font-size:1.1rem;color:var(--tinta);margin-bottom:18px;letter-spacing:1px;font-weight:400}
-  .card .precio small{font-size:.65rem;color:var(--gris);letter-spacing:1px}
-  .card .precio .antes{font-size:.85rem;color:var(--gris);text-decoration:line-through;margin-left:8px}
-  .card .quick-add{position:absolute;bottom:0;left:0;width:100%;background:var(--oro);color:#111;padding:12px;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:2px;font-weight:600;text-transform:uppercase;transform:translateY(100%);transition:transform 0.4s ease;opacity:0}
-  .card:hover .quick-add{transform:translateY(0);opacity:1}
-  .railbtn{display:none}
-  .estado{text-align:center;color:var(--gris);padding:40px;font-size:1rem;font-style:italic;grid-column:1/-1;font-family:'Cormorant Garamond',serif}
-
-  /* ===== VIDEOS ===== */
-  .vids{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:2px;padding:0}
-  .vid{background:#000;border:none;border-radius:0;overflow:hidden}
-  .vid .frame{position:relative;aspect-ratio:16/9;background:#000}
-  .vid iframe{width:100%;height:100%;border:0;display:block}
-  .vid .vcap{padding:18px 20px;background:var(--blanco)}
-  .vid .vcap h3{font-size:1.2rem;color:var(--tinta);letter-spacing:.5px;margin-bottom:4px;font-weight:500}
-  .vid .vcap p{color:var(--tinta2);font-size:.8rem;letter-spacing:.3px}
-
-  /* ===== BANDA CTA editorial ===== */
-  .strip{margin:0;background:var(--blanco);border:none;border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);border-radius:0;padding:80px 30px;text-align:center}
-  .strip h2{font-size:clamp(1.8rem,3.6vw,3rem);letter-spacing:1px;margin-bottom:14px;font-weight:400}
-  .strip p{color:var(--tinta2);font-size:.95rem;max-width:560px;margin:0 auto 26px;letter-spacing:.5px}
-  .strip .cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-
-  /* ===== CARRITO ===== */
-  #carrito{position:fixed;top:0;right:0;width:min(420px,94vw);height:100%;background:var(--blanco);border-left:1px solid var(--linea);z-index:9500;transform:translateX(105%);transition:transform .4s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(0,0,0,.12)}
-  #carrito.open{transform:none}
-  #carrito .chead{padding:24px 24px;border-bottom:1px solid var(--linea);display:flex;justify-content:space-between;align-items:center}
-  #carrito .chead h2{font-size:1.4rem;color:var(--tinta);letter-spacing:1px;font-weight:500}
-  #carrito .cerrar{cursor:pointer;color:var(--gris);font-size:1.6rem}
-  #carrito .items{flex:1;overflow-y:auto;padding:16px}
-  .citem{display:flex;gap:14px;padding:14px 6px;border:none;border-bottom:1px solid var(--linea);border-radius:0;margin-bottom:0;align-items:center}
-  .citem .thumb{width:60px;height:76px;border-radius:0;background:var(--papel2) center/cover;display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
-  .citem .info{flex:1;font-size:.9rem}
-  .citem .info b{color:var(--tinta);display:block;font-family:'Cormorant Garamond',serif;font-size:1.1rem;margin-bottom:2px;font-weight:500}
-  .citem .info .pr{color:var(--tinta2);letter-spacing:.5px}
-  .citem .quitar{cursor:pointer;color:var(--gris);font-size:1.1rem}
-  .citem .quitar:hover{color:var(--tinta)}
-  #carrito .foot{padding:22px 24px;border-top:1px solid var(--linea)}
-  #carrito .total{display:flex;justify-content:space-between;font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--tinta);margin-bottom:16px;font-weight:500}
-  .vacio{text-align:center;color:var(--gris);padding:50px 20px;font-style:italic;line-height:1.7;font-family:'Cormorant Garamond',serif;font-size:1.05rem}
-  #overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9400;display:none}
-  #overlay.on{display:block}
-  /* ===== CHECKOUT ===== */
-  #checkout{position:fixed;inset:0;z-index:9700;background:rgba(0,0,0,.85);display:none;overflow-y:auto;padding:0}
-  #checkout.open{display:block}
-  .ck-wrap{max-width:1060px;margin:0 auto;min-height:100%;display:grid;grid-template-columns:1.35fr .95fr;gap:0;background:var(--papel)}
-  @media(max-width:820px){.ck-wrap{grid-template-columns:1fr}}
-  .ck-main{padding:34px 40px 60px;background:var(--blanco)}
-  .ck-side{padding:34px 34px 60px;background:var(--papel2);border-left:1px solid var(--linea)}
-  @media(max-width:820px){.ck-side{border-left:none;border-top:1px solid var(--linea)}}
-  .ck-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
-  .ck-logo{font-family:'Cormorant Garamond',serif;letter-spacing:6px;font-size:1.25rem;text-transform:uppercase;color:var(--tinta)}
-  .ck-x{cursor:pointer;font-size:1.7rem;color:var(--gris);line-height:1}
-  .ck-steps{display:flex;gap:0;margin-bottom:30px}
-  .ck-steps .st{flex:1;text-align:center;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--gris);padding-bottom:10px;border-bottom:2px solid var(--linea);position:relative}
-  .ck-steps .st.on{color:var(--tinta);border-bottom-color:var(--tinta);font-weight:600}
-  .ck-steps .st .n{display:inline-flex;width:20px;height:20px;border-radius:50%;border:1px solid currentColor;align-items:center;justify-content:center;font-size:.6rem;margin-right:6px;vertical-align:middle}
-  .ck-pane{display:none;animation:ckin .35s ease}
-  .ck-pane.on{display:block}
-  @keyframes ckin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-  .ck-h{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--tinta);margin:0 0 4px;font-weight:500}
-  .ck-sub{color:var(--gris);font-size:.82rem;margin-bottom:20px}
-  .ck-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
-  .ck-grid .full{grid-column:1/-1}
-  .ck-field{display:flex;flex-direction:column;gap:5px}
-  .ck-field label{font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--gris)}
-  .ck-field input,.ck-field select,.ck-field textarea{border:1px solid var(--linea);background:var(--blanco);padding:11px 13px;font-family:'Jost',sans-serif;font-size:.9rem;color:var(--tinta);border-radius:0;outline:none;transition:border-color .2s}
-  .ck-field input:focus,.ck-field select:focus,.ck-field textarea:focus{border-color:var(--tinta)}
-  .ck-field.err input,.ck-field.err select{border-color:#b3261e;background:#fdf3f2}
-  .ck-pay{display:flex;flex-direction:column;gap:12px;margin-top:6px}
-  .ck-opt{border:1px solid var(--linea);padding:16px 18px;cursor:pointer;display:flex;align-items:center;gap:14px;transition:border-color .2s,background .2s}
-  .ck-opt.sel{border-color:var(--tinta);background:var(--papel)}
-  .ck-opt .rad{width:18px;height:18px;border-radius:50%;border:1px solid var(--gris);flex-shrink:0;position:relative}
-  .ck-opt.sel .rad{border-color:var(--tinta)}
-  .ck-opt.sel .rad:after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--tinta)}
-  .ck-opt .lb{flex:1}
-  .ck-opt .lb b{display:block;font-size:.9rem;color:var(--tinta);font-weight:600}
-  .ck-opt .lb span{font-size:.74rem;color:var(--gris)}
-  .ck-nav{display:flex;gap:12px;margin-top:26px}
-  .ck-nav .btn{flex:1}
-  .ck-sec{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--gris);text-align:center;margin-top:20px;display:flex;align-items:center;justify-content:center;gap:7px}
-  .ck-side h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--tinta);font-weight:500;margin:0 0 16px}
-  .ck-line{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--linea)}
-  .ck-line .th{width:52px;height:64px;background:var(--papel) center/cover no-repeat;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--gris)}
-  .ck-line .d{flex:1;min-width:0}
-  .ck-line .d b{display:block;font-size:.82rem;color:var(--tinta);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .ck-line .d span{font-size:.74rem;color:var(--gris)}
-  .ck-line .pr{font-size:.82rem;color:var(--tinta);white-space:nowrap}
-  .ck-tot{margin-top:18px;font-size:.84rem;color:var(--tinta2)}
-  .ck-tot .row{display:flex;justify-content:space-between;padding:6px 0}
-  .ck-tot .grand{border-top:1px solid var(--tinta);margin-top:8px;padding-top:12px;font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--tinta)}
-  .ck-promo{display:flex;gap:8px;margin-top:16px}
-  .ck-promo input{flex:1;border:1px solid var(--linea);padding:10px 12px;font-family:'Jost';font-size:.82rem;outline:none}
-  .ck-promo button{border:1px solid var(--tinta);background:transparent;padding:0 16px;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
-  .ck-badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
-  .ck-badges span{font-size:.58rem;letter-spacing:1px;text-transform:uppercase;color:var(--gris);border:1px solid var(--linea);padding:5px 9px}
-
-  footer{text-align:center;padding:60px 6vw 50px;margin-top:0;border-top:1px solid var(--linea);background:var(--papel2);color:var(--tinta2);font-size:.66rem;letter-spacing:3px;text-transform:uppercase}
-  footer a{color:var(--tinta);border-bottom:1px solid var(--tinta);padding-bottom:2px}
 </style>
 </head>
 <body>
 
-<!-- ===== TOPBAR ===== -->
-<div class="top">
-  <div class="top1">
-    <a href="index.html" class="brand">ORIONIX<small>Maison</small></a>
-    <div class="search">
-      <select id="searchCat"><option value="Todos">Todo</option></select>
-      <input id="searchInput" placeholder="Buscar" onkeydown="if(event.key==='Enter')buscar()">
-      <button onclick="buscar()">&#128269;</button>
-    </div>
-    <div class="top-actions">
-      <select id="currSelect" onchange="cambiarMoneda(this.value)" style="border:none;background:transparent;font-family:'Jost',sans-serif;font-size:.66rem;letter-spacing:2px;text-transform:uppercase;color:var(--tinta);cursor:pointer;outline:none;margin-right:10px">
-        <option value="EUR">EUR (€)</option>
-        <option value="USD">USD ($)</option>
-        <option value="COP">COP ($)</option>
-      </select>
-      <a href="index.html" class="ta hideM"><b>Orionix</b></a>
-      <span class="cartbtn" onclick="abrirCarrito()"><span class="lbl">Cesta</span><span class="badge" id="badge">0</span></span>
-    </div>
+<!-- Fondo Warp Speed -->
+<canvas id="starfield"></canvas>
+
+<!-- Mensaje Inicial -->
+<div class="scroll-hint" id="scrollHint">
+  <h2>ORIONIX</h2>
+  <p>INICIA LA NAVEGACIÓN (HAZ SCROLL)</p>
+</div>
+
+<!-- HUD -->
+<div class="hud hud-top hud-interactive">
+  <a href="index.html" class="hud-logo">ORIO<span>NIX</span></a>
+  <div class="hud-cart" onclick="abrirCarrito()">
+    <span class="hud-cart-text">Bahía de Carga</span>
+    <span class="hud-cart-badge" id="hudBadge">0</span>
   </div>
-  <div class="ribbon" id="ribbon">
-    <a class="menu" onclick="scrollTo2('catalogo')">Colecciones</a>
+</div>
+<div class="hud hud-status" id="hudStatus">SISTEMAS ONLINE // MOTOR WARP LISTO</div>
+<div class="hud hud-progress" id="hudProgress">COORDENADA Z: 0000</div>
+
+<!-- Mundo 3D -->
+<div id="viewport">
+  <div id="camera">
+    <!-- Los productos se inyectarán aquí vía JS -->
   </div>
 </div>
 
-<!-- ===== PORTADA LA CIUDADELA ===== -->
-<main class="portada">
-  <h1 class="titulo-ciudadela">La Ciudadela</h1>
-  <p class="subtitulo-ciudadela">Tres caminos, un mismo origen. Elige tu nivel y deja que la energía te guíe al centro.</p>
-  <div class="emblema" role="group" aria-label="Elige un catálogo de la tienda">
-    <svg class="rayos" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M50 18 L47 34 L53 40 L49 50" />
-      <path d="M24 74 L38 60 L44 56 L50 50" />
-      <path d="M76 74 L62 60 L56 56 L50 50" />
-    </svg>
-    <button class="tri tri-arriba" style="--sec:var(--c-flow)" onclick="filtrarMundo('cotidiano')" aria-label="Flow Urbano. De la calle, con estilo.">
-      <span class="cara" aria-hidden="true"></span>
-      <span class="texto"><span class="nombre">Flow Urbano</span><span class="lema">De la calle &middot; con estilo</span></span>
-    </button>
-    <button class="tri tri-izq" style="--sec:var(--c-glamur)" onclick="filtrarMundo('aspiracional')" aria-label="Glamur Style. Elegancia que sube de nivel.">
-      <span class="cara" aria-hidden="true"></span>
-      <span class="texto"><span class="nombre">Glamur Style</span><span class="lema">Sube de nivel</span></span>
-    </button>
-    <button class="tri tri-der" style="--sec:var(--c-dinastia)" onclick="scrollTo2('atelier')" aria-label="La Gran Dinastía. Lo exclusivo, por consulta privada.">
-      <span class="cara" aria-hidden="true"></span>
-      <span class="texto"><span class="nombre">La Gran Dinastía</span><span class="lema">Consulta privada</span></span>
-    </button>
-    <div class="nucleo" aria-hidden="true">
-      <svg viewBox="0 0 100 100"><path d="M54 20 L40 52 L52 52 L46 80 L64 44 L52 44 Z" fill="#14140f" opacity="0.55"/></svg>
-    </div>
-  </div>
-  <p class="pie-ciudadela">Elige un camino para entrar</p>
-</main>
-
-<!-- ===== LOS MUNDOS ===== -->
-<section id="mundos">
-  <div class="rowhead"><h2>Los <span>Mundos</span></h2><p style="color:var(--gris);font-size:.82rem;letter-spacing:.3px;max-width:560px;margin:0 auto">Del objeto cotidiano a lo extraordinario. Tres universos dentro de una sola casa.</p></div>
-  <div class="mundos-grid">
-    <div class="mundo-tile m1" onclick="filtrarMundo('cotidiano')">
-      <div class="mbg"></div>
-      <div class="mc"><div class="mnum">MUNDO I</div><h3>Lo Cotidiano</h3><p>Tecnologia, hogar, moda y belleza, elevados.</p><span class="mlink">Explorar</span></div>
-    </div>
-    <div class="mundo-tile m2" onclick="filtrarMundo('aspiracional')">
-      <div class="mbg"></div>
-      <div class="mc"><div class="mnum">MUNDO II</div><h3>Lo Aspiracional</h3><p>Joyeria, gadgets premium y agentes de IA.</p><span class="mlink">Explorar</span></div>
-    </div>
-    <div class="mundo-tile m3" onclick="scrollTo2('atelier')">
-      <div class="mbg"></div>
-      <div class="mc"><div class="mnum">MUNDO III</div><h3>El Atelier a medida</h3><p>Autos, propiedades y experiencias unicas.</p><span class="mlink">Descubrir</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== CATEGORIAS ===== -->
-<section id="catalogo">
-  <div class="rowhead"><h2>Las <span>Colecciones</span></h2></div>
-  <div class="cats" id="catTiles"></div>
-</section>
-
-<!-- ===== DESTACADOS ===== -->
-<section id="destacados">
-  <div class="rowhead"><h2>Piezas <span>Destacadas</span></h2><a onclick="verTodo()">Ver toda la colección</a></div>
-  <div class="rail-wrap">
-    <div class="rail" id="railDestacados"><div class="estado" id="estado">Preparando la colección&hellip;</div></div>
-  </div>
-</section>
-
-<!-- ===== SECCIONES POR CATALOGO (dinamicas) ===== -->
-<div id="secciones"></div>
-
-<!-- ===== ATELIER (Mundo III) ===== -->
-<section id="atelier">
-  <div class="mnum">Mundo III</div>
-  <h2 class="serif">El Atelier a medida</h2>
-  <p>Autos de lujo, propiedades y experiencias irrepetibles. No se compran con un clic: se conciben contigo, en privado. Cuentanos tu vision y la Maison la hara realidad.</p>
-  <a class="btn" href="https://wa.me/573014410541?text=Hola%20Orionix%2C%20quiero%20una%20consulta%20privada%20del%20Atelier" target="_blank" rel="noopener">Consulta privada por WhatsApp</a>
-</section>
-
-<!-- ===== VIDEOS ===== -->
-<section id="videos">
-  <div class="rowhead"><h2>El <span>Desfile</span></h2></div>
-  <div class="vids" id="vids"></div>
-</section>
-
-<!-- ===== BANDA CTA ===== -->
-<div class="strip">
-  <h2 class="oro">Asesoramiento Personal</h2>
-  <p>AXEL, nuestro asesor de IA, te acompaña para encontrar la pieza perfecta. Disponible ahora, abajo a la izquierda.</p>
-  <div class="cta">
-    <a class="btn" onclick="abrirVoz()">Hablar con AXEL</a>
-    <a class="btn ghost" href="https://wa.me/573014410541?text=Hola%20Orionix,%20quiero%20info%20de%20la%20tienda" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+<!-- Modal Carrito (Panel Holográfico) -->
+<div class="overlay-glass" id="cartOverlay">
+  <div class="panel-holografico hud-interactive">
+    <span class="panel-close" onclick="cerrarCarrito()">&times;</span>
+    <h2 class="cart-title">BAHÍA DE CARGA</h2>
+    <div id="cartItems"></div>
+    <div class="cart-total"><span>TOTAL</span><span id="cartTotalUSD" style="color:var(--gold)">$0</span></div>
+    <button class="cart-checkout-btn" onclick="iniciarSecuenciaDePago()">PROCESAR TRANSMISIÓN (PAGAR)</button>
+    <a href="https://wa.me/573014410541?text=Hola,%20solicito%20coordenadas%20de%20pago" target="_blank" class="cart-checkout-btn" style="background:transparent; color:var(--core); border:1px solid var(--core); margin-top:15px;">COMUNICAR CON COMANDANCIA (WHATSAPP)</a>
   </div>
 </div>
-
-<!-- ===== FICHA DE PRODUCTO ===== -->
-<div id="ficha">
-  <div class="ficha-top">
-    <span class="volver" onclick="cerrarFicha()">&#8592; Volver a la coleccion</span>
-    <span class="marca">Orionix</span>
-  </div>
-  <div class="ficha-wrap">
-    <div class="fgal">
-      <div class="main" id="fMain"></div>
-      <div class="thumbs" id="fThumbs"></div>
-    </div>
-    <div class="finfo">
-      <div class="fcat" id="fCat"></div>
-      <h1 id="fNombre"></h1>
-      <div class="fstars" id="fStars"></div>
-      <div class="fprecio" id="fPrecio"></div>
-      <div class="fsens" id="fSens"></div>
-      <div class="fdesc" id="fDesc"></div>
-      <div class="facc" id="fAcc"></div>
-    </div>
-  </div>
-  <div class="fvid" id="fVidWrap" style="display:none">
-    <div class="rowhead"><h2>El <span>Desfile</span> de esta pieza</h2></div>
-    <div class="frame"><iframe id="fVid" src="" title="Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-  </div>
-  <div class="frel">
-    <div class="rowhead"><h2>Tambien te <span>encantara</span></h2></div>
-    <div class="rail" id="fRel"></div>
-  </div>
-</div>
-
-<!-- ===== CARRITO ===== -->
-<div id="overlay" onclick="cerrarCarrito()"></div>
-<aside id="carrito">
-  <div class="chead"><h2>Carrito</h2><span class="cerrar" onclick="cerrarCarrito()">&times;</span></div>
-  <div class="items" id="citems"><div class="vacio">Tu carrito está vacío.<br>Añade piezas y aparecerán aquí.</div></div>
-  <div class="foot">
-    <div class="total"><span>Total</span><span id="total">$0</span></div>
-    <button class="btn wide" id="pagarBtn" onclick="pagar()">Pagar con PayPal</button>
-    <a class="btn ghost wide" style="margin-top:10px" href="https://wa.me/573014410541?text=Hola,%20quiero%20comprar%20en%20la%20tienda" target="_blank" rel="noopener">Comprar por WhatsApp</a>
-  </div>
-</aside>
-
-<!-- ===== CHECKOUT ===== -->
-<div id="checkout">
-  <div class="ck-wrap">
-    <div class="ck-main">
-      <div class="ck-top">
-        <span class="ck-logo">ORIONIX</span>
-        <span class="ck-x" onclick="cerrarCheckout()">&times;</span>
-      </div>
-      <div class="ck-steps">
-        <div class="st on" id="ckst0"><span class="n">1</span>Contacto</div>
-        <div class="st" id="ckst1"><span class="n">2</span>Envío</div>
-        <div class="st" id="ckst2"><span class="n">3</span>Pago</div>
-      </div>
-
-      <!-- Paso 1: contacto -->
-      <div class="ck-pane on" id="ckp0">
-        <h2 class="ck-h">Tus datos de contacto</h2>
-        <p class="ck-sub">Los usamos para enviarte la confirmación y el seguimiento del pedido.</p>
-        <div class="ck-grid">
-          <div class="ck-field full"><label>Nombre completo</label><input id="ck_nombre" placeholder="Ej. María González"></div>
-          <div class="ck-field"><label>Correo electrónico</label><input id="ck_email" type="email" placeholder="tucorreo@correo.com"></div>
-          <div class="ck-field"><label>Teléfono / WhatsApp</label><input id="ck_tel" placeholder="+57 300 000 0000"></div>
-        </div>
-        <div class="ck-nav">
-          <button class="btn ghost wide" onclick="cerrarCheckout()">Cancelar</button>
-          <button class="btn wide" onclick="ckNext(1)">Continuar</button>
-        </div>
-      </div>
-
-      <!-- Paso 2: envío -->
-      <div class="ck-pane" id="ckp1">
-        <h2 class="ck-h">Dirección de envío</h2>
-        <p class="ck-sub">Indica dónde quieres recibir tu pedido.</p>
-        <div class="ck-grid">
-          <div class="ck-field full"><label>Dirección</label><input id="ck_dir" placeholder="Calle, número, apto"></div>
-          <div class="ck-field"><label>Ciudad</label><input id="ck_ciudad" placeholder="Ciudad"></div>
-          <div class="ck-field"><label>Departamento / Estado</label><input id="ck_estado" placeholder="Estado"></div>
-          <div class="ck-field"><label>Código postal</label><input id="ck_cp" placeholder="000000"></div>
-          <div class="ck-field"><label>País</label>
-            <select id="ck_pais">
-              <option value="Colombia">Colombia</option>
-              <option value="España">España</option>
-              <option value="México">México</option>
-              <option value="Argentina">Argentina</option>
-              <option value="Chile">Chile</option>
-              <option value="Perú">Perú</option>
-              <option value="Estados Unidos">Estados Unidos</option>
-              <option value="Otro">Otro</option>
-            </select>
-          </div>
-          <div class="ck-field full"><label>Notas para la entrega (opcional)</label><textarea id="ck_notas" rows="2" placeholder="Referencias, horario preferido..."></textarea></div>
-        </div>
-        <div class="ck-nav">
-          <button class="btn ghost wide" onclick="ckNext(0)">Volver</button>
-          <button class="btn wide" onclick="ckNext(2)">Continuar</button>
-        </div>
-      </div>
-
-      <!-- Paso 3: pago -->
-      <div class="ck-pane" id="ckp2">
-        <h2 class="ck-h">Método de pago</h2>
-        <p class="ck-sub">Elige cómo quieres pagar. El pago con tarjeta se procesa de forma segura vía PayPal.</p>
-        <div class="ck-pay">
-          <div class="ck-opt sel" id="ckpay_paypal" onclick="ckPay('paypal')">
-            <span class="rad"></span>
-            <span class="lb"><b>Tarjeta o PayPal</b><span>Visa, Mastercard, Amex o tu cuenta PayPal — pago seguro</span></span>
-          </div>
-          <div class="ck-opt" id="ckpay_wa" onclick="ckPay('wa')">
-            <span class="rad"></span>
-            <span class="lb"><b>Coordinar por WhatsApp</b><span>Un asesor confirma el pago y el envío contigo</span></span>
-          </div>
-        </div>
-        <div class="ck-sec">&#128274; Pago cifrado &middot; No guardamos datos de tu tarjeta</div>
-        <div class="ck-nav">
-          <button class="btn ghost wide" onclick="ckNext(1)">Volver</button>
-          <button class="btn wide" id="ckPagarBtn" onclick="ckFinalizar()">Pagar ahora</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="ck-side">
-      <h3>Resumen del pedido</h3>
-      <div id="ck_items"></div>
-      <div class="ck-promo">
-        <input id="ck_promo" placeholder="Código de descuento">
-        <button onclick="ckPromo()">Aplicar</button>
-      </div>
-      <div class="ck-tot" id="ck_tot"></div>
-      <div class="ck-badges">
-        <span>&#128274; Compra segura</span><span>&#128666; Envío rastreable</span><span>&#8634; Devoluciones</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<footer>
-  Orionix Maison &copy; 2026 &middot; Inteligencia Artificial &amp; Automatización &middot; <a href="index.html">Volver a la web</a>
-</footer>
 
 <script>
-const API = "https://kevinruiz.app.n8n.cloud/webhook/tienda-productos";
-let PRODUCTOS = [], CARRITO = [], CAT_ACTUAL = "Todos", BUSQUEDA = "";
-
-/* Iconos por categoria (fallback) */
-const CAT_ICON = {"Agentes IA":"\uD83E\uDDE0","Automatizacion":"\u2699\uFE0F","Contenido":"\uD83C\uDFA8","Web":"\uD83C\uDF10","Ropa":"\uD83D\uDC55","Digital":"\uD83D\uDCBE","Cursos":"\uD83D\uDCDA"};
-/* Colecciones curadas estilo Maison (siempre visibles aunque el webhook este vacio) */
-const CATALOGO = [
-  {cat:"Ready to Wear", ic:"\uD83E\uDDE5", desc:"Sastreria y prendas de poder con la esencia Orionix.", img:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1000&auto=format&fit=crop"},
-  {cat:"Alta Costura", ic:"\uD83D\uDC57", desc:"Piezas de autor, hechas a medida y sin igual.", img:"https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=1000&auto=format&fit=crop"},
-  {cat:"Accesorios", ic:"\uD83D\uDC5C", desc:"Bolsos, cinturones y detalles que definen el caracter.", img:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1000&auto=format&fit=crop"},
-  {cat:"Joyeria", ic:"\uD83D\uDC8D", desc:"Oro, plata y piedras: el brillo de una firma.", img:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1000&auto=format&fit=crop"},
-  {cat:"Fragancias", ic:"\uD83E\uDDF4", desc:"Perfumes que capturan una memoria y una era.", img:"https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=1000&auto=format&fit=crop"},
-  {cat:"Agentes IA", ic:"\uD83E\uDDE0", desc:"Vendedores, WhatsApp y voz que trabajan 24/7.", img:"https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop"}
-];
-/* Piezas de demostracion estilo pasarela (placeholder: reemplazables por tus productos reales) */
+/* =====================================================================
+   DATA Y LOGICA DE TIENDA (Preservado del sistema anterior)
+   ===================================================================== */
 const COLECCION_DEMO = [
-  {categoria:"Ready to Wear", nombre:"Abrigo Nero Sicilia", precio:2450, moneda:"EUR", rating:5, reviews:"F/W 2026", descripcion:"Lana carda con corte sartorial. Hombros que definen caracter.", imagen:"https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Ready to Wear", nombre:"Traje Espiga Doble", precio:1980, moneda:"EUR", rating:5, reviews:"Tailoring", descripcion:"Chaqueta cruzada en tejido de espiga blanco y negro.", imagen:"https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Ready to Wear", nombre:"Punto Alpaca Boucle", precio:790, moneda:"EUR", rating:5, reviews:"Knitwear", descripcion:"Tejido aireado de lana y alpaca, corte relajado.", imagen:"https://images.unsplash.com/photo-1576871337622-98d48d1cf531?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Alta Costura", nombre:"Vestido Chiaroscuro", precio:5400, moneda:"EUR", rating:5, reviews:"Couture", descripcion:"Seda mate esculpida con sensibilidad renacentista.", imagen:"https://images.unsplash.com/photo-1566174053879-31528523f8ae?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Alta Costura", nombre:"Smoking Red Carpet", precio:3900, moneda:"EUR", rating:5, reviews:"Red Carpet", descripcion:"Esmoquin de charol con broches preciosos en la solapa.", imagen:"https://images.unsplash.com/photo-1507680434567-5739c80be1ac?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Accesorios", nombre:"Bolso Maison Orionix", precio:1650, moneda:"EUR", rating:5, reviews:"Icono", descripcion:"Piel granulada con herraje dorado. Pieza de firma.", imagen:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Accesorios", nombre:"Cinturon Herraje Oro", precio:520, moneda:"EUR", rating:5, reviews:"Detalle", descripcion:"Cuero negro con hebilla escultura en acabado oro.", imagen:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Joyeria", nombre:"Collar Constelacion", precio:2100, moneda:"EUR", rating:5, reviews:"Fine Jewelry", descripcion:"Oro con piedras que dibujan un cielo estrellado.", imagen:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Joyeria", nombre:"Anillo Sello Orionix", precio:880, moneda:"EUR", rating:5, reviews:"Signature", descripcion:"Sello grabado a mano con el emblema de la casa.", imagen:"https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Fragancias", nombre:"Eau de Orionix", precio:180, moneda:"EUR", rating:5, reviews:"Signature", descripcion:"Notas de ambar, cuero y flor de azahar. Una memoria.", imagen:"https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Fragancias", nombre:"Nero Sicilia Parfum", precio:220, moneda:"EUR", rating:5, reviews:"Intense", descripcion:"Fragancia intensa y magnetica de caracter mediterraneo.", imagen:"https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Agentes IA", nombre:"Oráculo de Ventas V2", precio:1500, moneda:"EUR", rating:5, reviews:"IA", descripcion:"Agente entrenado para vender 24/7 con persuasión y empatía.", imagen:"https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Agentes IA", nombre:"Conserje WhatsApp", precio:850, moneda:"EUR", rating:5, reviews:"Automatización", descripcion:"IA conversacional que atiende clientes, agenda citas y cierra tratos.", imagen:"https://images.unsplash.com/photo-1614064641913-a53ce9ae14bb?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Alta Costura", nombre:"Capa de Terciopelo Cósmico", precio:2900, moneda:"EUR", rating:5, reviews:"Exclusivo", descripcion:"Terciopelo negro con hilos de oro entretejidos.", imagen:"https://images.unsplash.com/photo-1582298687711-b4ec8b94101e?q=80&w=1000&auto=format&fit=crop"}
-];
-/* Videos (reemplazables luego por los tuyos) */
-const VIDEOS = [
-  {id:"aircAruvnKk", t:"Que es un Agente IA", d:"Como una IA atiende y vende por ti."},
-  {id:"5sLYAQS9sWQ", t:"Automatiza tu negocio", d:"Procesos que trabajan solos 24/7."},
-  {id:"jNQXAC9IVRw", t:"Contenido con IA", d:"Crea piezas de alto impacto en minutos."}
+  {categoria:"Agente IA", nombre:"Oráculo V2", precio:1500, moneda:"USD", descripcion:"IA conversacional cuántica. Entiende el contexto emocional del usuario.", imagen:"https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop"},
+  {categoria:"Alta Costura", nombre:"Traje Anti-Gravedad", precio:2900, moneda:"USD", descripcion:"Tejido de nanocarbono que reduce el peso percibido en un 80%.", imagen:"https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=1000&auto=format&fit=crop"},
+  {categoria:"Vehículo", nombre:"Speeder Orionix X1", precio:145000, moneda:"USD", descripcion:"Levitación magnética, motor de iones y acabados en titanio oscuro.", imagen:"https://images.unsplash.com/photo-1614064641913-a53ce9ae14bb?q=80&w=1000&auto=format&fit=crop"},
+  {categoria:"Joyería", nombre:"Cristal de Materia Oscura", precio:5400, moneda:"USD", descripcion:"Piedra tallada por láser en el cinturón de asteroides.", imagen:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1000&auto=format&fit=crop"},
+  {categoria:"Automatización", nombre:"Nexus Core", precio:850, moneda:"USD", descripcion:"Conecta todos los sistemas de tu nave corporativa en un solo panel.", imagen:"https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=1000&auto=format&fit=crop"},
+  {categoria:"Fragancia", nombre:"Nebula Essense", precio:320, moneda:"USD", descripcion:"El olor del espacio profundo atrapado en cristal de cuarzo.", imagen:"https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=1000&auto=format&fit=crop"},
+  {categoria:"Accesorio", nombre:"Visor Táctico HUD", precio:1200, moneda:"USD", descripcion:"Realidad aumentada integrada directamente en la retina.", imagen:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1000&auto=format&fit=crop"}
 ];
 
-let MONEDA_SELECCIONADA = "EUR";
-const TASAS = { EUR: 1, USD: 1.09, COP: 4350 };
-function cambiarMoneda(m){
-  MONEDA_SELECCIONADA = m;
-  pintarDestacados();
-  pintarSecciones();
-}
-function money(p, m){
-  m = MONEDA_SELECCIONADA || m || "EUR";
-  let val = Number(p||0);
-  if(m === "USD") val = val * TASAS.USD;
-  if(m === "COP") val = val * TASAS.COP;
-  let simbolo = m === "EUR" ? "€" : "$";
-  return simbolo + " " + Math.round(val).toLocaleString() + " " + m;
-}
-function scrollTo2(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:"smooth"});}
-function railMove(id,dir){var r=document.getElementById(id);if(r)r.scrollBy({left:dir*Math.min(560,r.clientWidth*0.9),behavior:"smooth"});}
-function esc(t){var e=document.createElement("div");e.textContent=t==null?"":t;return e.innerHTML;}
-function stars(n){n=n||5;var s="";for(var i=0;i<5;i++)s+=(i<n?"\u2605":"\u2606");return s;}
+let PRODUCTOS = [];
+let CARRITO = [];
+const Z_SPACING = 1500; // Distancia en el eje Z entre cada producto
 
-/* ===== CATALOGO REAL DE AGENTES (siempre visible; el webhook puede ampliarlo) ===== */
-const AGENTES_REALES = [
-  {categoria:"Agentes IA", nombre:"Agente Vendedor 24/7", precio:197, moneda:"EUR", rating:5, reviews:"popular",
-   descripcion:"Atiende, califica y responde a tus clientes de dia y de noche por chat/web. Construido en n8n + webhooks conectados al cerebro AXEL. Ideal para no perder ninguna venta.",
-   pago:"https://wa.me/573014410541?text=Hola%20Orionix,%20quiero%20el%20Agente%20Vendedor%2024/7"},
-  {categoria:"Agentes IA", nombre:"Agente de WhatsApp", precio:247, moneda:"EUR", rating:5, reviews:"top ventas",
-   descripcion:"Responde automaticamente en WhatsApp: preguntas frecuentes, precios, agenda y seguimiento. Deriva a un humano cuando hace falta. Perfecto para negocios que venden por WhatsApp.",
-   pago:"https://wa.me/573014410541?text=Hola%20Orionix,%20quiero%20el%20Agente%20de%20WhatsApp"},
-  {categoria:"Agentes IA", nombre:"Agente de Seguimiento", precio:167, moneda:"EUR", rating:5, reviews:"nuevo",
-   descripcion:"Recontacta a los interesados que no compraron: mensajes automaticos, recordatorios y ofertas. Recupera ventas que se estaban perdiendo. Se integra con tu CRM/base de datos.",
-   pago:"https://wa.me/573014410541?text=Hola%20Orionix,%20quiero%20el%20Agente%20de%20Seguimiento"},
-  {categoria:"Automatizacion", nombre:"Automatizacion de Cobros", precio:297, moneda:"EUR", rating:5, reviews:"recomendado",
-   descripcion:"Cobros con PayPal/enlace de pago, confirmacion automatica y registro de cada venta. Menos trabajo manual, cero pagos olvidados.",
-   pago:"https://wa.me/573014410541?text=Hola%20Orionix,%20quiero%20la%20Automatizacion%20de%20Cobros"},
-  {categoria:"Automatizacion", nombre:"Captura de Leads + Alertas", precio:147, moneda:"EUR", rating:5, reviews:"activo",
-   descripcion:"Formulario en tu web que guarda cada contacto y te avisa al instante por correo. El mismo sistema que ya corre en Orionix. Nunca mas un lead perdido.",
-   pago:"https://wa.me/573014410541?text=Hola%20Orionix,%20quiero%20Captura%20de%20Leads"},
-  {categoria:"Contenido con IA", nombre:"Contenido con IA (mensual)", precio:127, moneda:"EUR", rating:5, reviews:"mensual",
-   descripcion:"Textos, imagenes y guiones para redes generados con IA y tu esencia de marca. Publicaciones listas cada semana para no quedarte sin contenido.",
-   pago:"https://wa.me/573014410541?text=Hola%20Orionix,%20quiero%20Contenido%20con%20IA"},
-  {categoria:"Webs a medida", nombre:"Web Profesional Orionix", precio:490, moneda:"EUR", rating:5, reviews:"a medida",
-   descripcion:"Sitio elegante, veloz y optimizado (SEO) creado por Orionix, con agente de IA integrado. Como esta misma web. Entrega llave en mano.",
-   pago:"https://wa.me/573014410541?text=Hola%20Orionix,%20quiero%20una%20Web%20Profesional"}
-];
-
-async function cargar(){
-  try{
-    const r = await fetch(API, {cache:"no-store"});
-    const d = await r.json();
-    PRODUCTOS = (d.productos||[]);
-  }catch(e){ PRODUCTOS = []; }
-  /* si el webhook no trae productos, mostramos la coleccion de demostracion + agentes reales */
-  if(!PRODUCTOS.length){ PRODUCTOS = COLECCION_DEMO.concat(AGENTES_REALES); }
-  window.PRODUCTOS = PRODUCTOS;
-  pintarCategorias(); pintarRibbon(); pintarSearchCats();
-  pintarDestacados(); pintarSecciones(); pintarVideos();
-  initReveal();
-}
-
-/* ---- Animaciones en Scroll ---- */
-function initReveal() {
-  var els = document.querySelectorAll('.card, .cat-tile, .rowhead, .mundo-tile, .vid, .strip');
-  els.forEach(el => el.classList.add('reveal'));
+async function cargarProductos(){
+  try {
+    const res = await fetch("https://kevinruiz.app.n8n.cloud/webhook/tienda-productos");
+    const data = await res.json();
+    if(data && data.length > 0) PRODUCTOS = data;
+    else PRODUCTOS = COLECCION_DEMO;
+  } catch(e) {
+    PRODUCTOS = COLECCION_DEMO;
+  }
   
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  // Duplicar el demo si hay muy pocos para tener un buen viaje
+  if(PRODUCTOS.length < 15) {
+      PRODUCTOS = PRODUCTOS.concat(COLECCION_DEMO).concat(COLECCION_DEMO);
+  }
   
-  els.forEach(el => observer.observe(el));
+  construirUniverso();
 }
 
-/* ---- categorias (tiles) ---- */
-function catsDisponibles(){
-  var set = Array.from(new Set(PRODUCTOS.map(p=>p.categoria).filter(Boolean)));
-  if(set.length) return set;
-  return CATALOGO.map(c=>c.cat);
-}
-function pintarCategorias(){
-  var cont = document.getElementById("catTiles");
-  var base = CATALOGO;
-  /* si hay categorias reales del webhook, priorizalas */
-  var reales = Array.from(new Set(PRODUCTOS.map(p=>p.categoria).filter(Boolean)));
-  if(reales.length){
-    base = reales.map(function(c){ var f=CATALOGO.find(x=>x.cat===c); return {cat:c, ic:(f?f.ic:(CAT_ICON[c]||"\uD83D\uDECD\uFE0F")), desc:(f?f.desc:("Explora "+c+" en Orionix."))}; });
-  }
-  cont.innerHTML = base.map(function(c){
-    var bg = c.img ? (' style="background:#efece5 url(\''+esc(c.img)+'\') center/cover no-repeat"') : '';
-    return '<div class="cat-tile"'+bg+' onclick="filtrarCat(\''+esc(c.cat).replace(/'/g,"")+'\')">'
-      + (c.img?'':'<span class="ic">'+c.ic+'</span>')
-      + '<h3>'+esc(c.cat)+'</h3>'
-      + '<p>'+esc(c.desc)+'</p>'
-      + '<span class="link">Descubrir</span>'
-      + '</div>';
-  }).join("");
-}
-function pintarRibbon(){
-  var rib = document.getElementById("ribbon");
-  var cats = catsDisponibles();
-  rib.innerHTML = '<a class="menu" onclick="scrollTo2(\'mundos\')">Los Mundos</a>'
-    + '<a onclick="scrollTo2(\'catalogo\')">Colecciones</a>'
-    + cats.map(function(c){ return '<a onclick="filtrarCat(\''+esc(c).replace(/'/g,"")+'\')">'+esc(c)+'</a>'; }).join("")
-    + '<a onclick="scrollTo2(\'atelier\')">Atelier</a>'
-    + '<a href="reels.html">El Desfile</a>'
-    + '<a onclick="scrollTo2(\'destacados\')">Destacados</a>';
-}
-function pintarSearchCats(){
-  var sel = document.getElementById("searchCat");
-  var cats = catsDisponibles();
-  sel.innerHTML = '<option value="Todos">Todo</option>' + cats.map(function(c){return '<option value="'+esc(c)+'">'+esc(c)+'</option>';}).join("");
+function agregarAlCarrito(idx){
+  CARRITO.push(PRODUCTOS[idx]);
+  document.getElementById("hudBadge").innerText = CARRITO.length;
+  // Efecto visual HUD
+  const hud = document.getElementById("hudBadge");
+  hud.style.background = "var(--core)";
+  hud.style.color = "#000";
+  setTimeout(() => { hud.style.background="rgba(0,255,255,0.1)"; hud.style.color="#fff"; }, 300);
 }
 
-/* ---- tarjeta de producto ---- */
-function cardHTML(p){
-  var idx = PRODUCTOS.indexOf(p);
-  var img = p.imagen ? ('style="background-image:url(\''+esc(p.imagen)+'\')"') : '';
-  var emoji = p.imagen ? '' : (CAT_ICON[p.categoria]||"\uD83D\uDECD\uFE0F");
-  var off = p.antes ? ('<span class="badge-off">OFERTA</span>') : '';
-  var antes = p.antes ? ('<span class="antes">'+money(p.antes,p.moneda)+'</span>') : '';
-  var action = p.enlace ? '<a class="quick-add" href="'+esc(p.enlace)+'" target="_blank" style="text-align:center;text-decoration:none">'+tiendaLabel(p.tienda)+'</a>' : '<div class="quick-add" onclick="agregar('+idx+')" style="text-align:center">Añadir al carrito</div>';
-  return '<div class="card reveal">'
-    + '<div class="img" '+img+' onclick="abrirFicha('+idx+')">'+emoji+'<span class="tag">'+esc(p.categoria||"Producto")+'</span>'+off+'</div>'
-    + '<div class="body">'
-    + '<h3 onclick="abrirFicha('+idx+')" style="cursor:pointer">'+esc(p.nombre)+'</h3>'
-    + '<div class="stars">'+stars(p.rating||5)+'<small>('+(p.reviews||"nuevo")+')</small></div>'
-    + '<div class="desc">'+esc(p.descripcion||"")+'</div>'
-    + '<div class="precio">'+money(p.precio,p.moneda)+' <small>'+(p.moneda||"USD")+'</small>'+antes+'</div>'
-    + action
-    + '</div></div>';
-}
-/* etiqueta del boton segun la tienda de afiliado */
-function tiendaLabel(t){
-  t = (t||'').toLowerCase();
-  if(t.indexOf('amazon')>-1) return 'Ver en Amazon';
-  if(t.indexOf('aliexpress')>-1) return 'Ver en AliExpress';
-  if(t.indexOf('ebay')>-1) return 'Ver en eBay';
-  if(t.indexOf('hotmart')>-1) return 'Comprar ahora';
-  if(t.indexOf('awin')>-1||t.indexOf('cj')>-1) return 'Ver oferta';
-  return 'Ver producto';
-}
-function placeholderCards(){
-  /* si el webhook no devuelve productos, muestra el catalogo como tarjetas invitando a consultar */
-  return CATALOGO.map(function(c){
-    return '<div class="card">'
-      + '<div class="img">'+c.ic+'<span class="tag">'+esc(c.cat)+'</span></div>'
-      + '<div class="body">'
-      + '<h3>'+esc(c.cat)+'</h3>'
-      + '<div class="stars">'+stars(5)+'<small>(a medida)</small></div>'
-      + '<div class="desc">'+esc(c.desc)+'</div>'
-      + '<div class="precio">Cotizacion <small>segun tu negocio</small></div>'
-      + '<a class="btn wide sm" href="https://wa.me/573014410541?text=Hola,%20quiero%20info%20de%20'+encodeURIComponent(c.cat)+'" target="_blank" rel="noopener">Pedir informacion</a>'
-      + '</div></div>';
-  }).join("");
-}
-
-function pintarDestacados(){
-  var cont = document.getElementById("railDestacados");
-  if(!PRODUCTOS.length){ cont.innerHTML = placeholderCards(); return; }
-  var lista = PRODUCTOS.slice(0,12);
-  cont.innerHTML = lista.map(cardHTML).join("");
-}
-
-function pintarSecciones(){
-  var cont = document.getElementById("secciones");
-  if(!PRODUCTOS.length){ cont.innerHTML = ""; return; }
-  var cats = Array.from(new Set(PRODUCTOS.map(p=>p.categoria).filter(Boolean)));
-  cont.innerHTML = cats.map(function(c,ci){
-    var items = PRODUCTOS.filter(p=>p.categoria===c);
-    if(!items.length) return "";
-    var rid = "rail_"+ci;
-    return '<section>'
-      + '<div class="rowhead"><h2><span>'+esc(c)+'</span></h2><a onclick="filtrarCat(\''+esc(c).replace(/\'/g,"")+'\')">Ver todo &rarr;</a></div>'
-      + '<div class="rail-wrap">'
-      + '<button class="railbtn prev" onclick="railMove(\''+rid+'\',-1)">&#8249;</button>'
-      + '<div class="rail" id="'+rid+'">'+items.map(cardHTML).join("")+'</div>'
-      + '<button class="railbtn next" onclick="railMove(\''+rid+'\',1)">&#8250;</button>'
-      + '</div></section>';
-  }).join("");
-}
-
-function pintarVideos(){
-  var cont = document.getElementById("vids");
-  cont.innerHTML = VIDEOS.map(function(v){
-    return '<div class="vid"><div class="frame"><iframe src="https://www.youtube.com/embed/'+esc(v.id)+'" title="'+esc(v.t)+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>'
-      + '<div class="vcap"><h3>'+esc(v.t)+'</h3><p>'+esc(v.d)+'</p></div></div>';
-  }).join("");
-}
-
-/* ---- filtros / busqueda ---- */
-function filtrarCat(c){
-  CAT_ACTUAL=c;
-  var lista = PRODUCTOS.filter(function(p){return p.categoria===c;});
-  var cont = document.getElementById("railDestacados");
-  document.querySelector("#destacados .rowhead h2").innerHTML = 'Categoria: <span>'+esc(c)+'</span>';
-  if(!lista.length){ cont.innerHTML = placeholderCards(); }
-  else { cont.innerHTML = lista.map(cardHTML).join(""); }
-  scrollTo2("destacados");
-}
-var MUNDO_COTIDIANO=["lo cotidiano","cotidiano","tecnologia","hogar","moda","ropa","belleza","electronics","electronica","computers","homeandkitchen","fashion","beauty","toys","books","productos"];
-var MUNDO_ASPIRACIONAL=["lo aspiracional","aspiracional","joyeria","joyas","premium","gadgets","motor","agentes ia","agente","sportsandoutdoors"];
-function enMundo(cat,lista){cat=(cat||"").toLowerCase();return lista.some(function(k){return cat.indexOf(k)>=0;});}
-function filtrarMundo(m){
-  var lista;
-  if(m==="cotidiano"){ lista = PRODUCTOS.filter(function(p){return enMundo(p.categoria,MUNDO_COTIDIANO)||!enMundo(p.categoria,MUNDO_ASPIRACIONAL);}); }
-  else { lista = PRODUCTOS.filter(function(p){return enMundo(p.categoria,MUNDO_ASPIRACIONAL);}); }
-  var titulo = (m==="cotidiano") ? "Mundo I &middot; Lo <span>Cotidiano</span>" : "Mundo II &middot; Lo <span>Aspiracional</span>";
-  var cont = document.getElementById("railDestacados");
-  document.querySelector("#destacados .rowhead h2").innerHTML = titulo;
-  cont.innerHTML = lista.length ? lista.map(cardHTML).join("") : placeholderCards();
-  scrollTo2("destacados");
-}
-function verTodo(){
-  CAT_ACTUAL="Todos";
-  document.querySelector("#destacados .rowhead h2").innerHTML = 'Lo mas <span>deseado</span>';
-  pintarDestacados(); scrollTo2("destacados");
-}
-function buscar(){
-  var q = document.getElementById("searchInput").value.trim().toLowerCase();
-  var cat = document.getElementById("searchCat").value;
-  var lista = PRODUCTOS.filter(function(p){
-    var okCat = (cat==="Todos" || p.categoria===cat);
-    var okQ = !q || (String(p.nombre||"").toLowerCase().indexOf(q)>=0 || String(p.descripcion||"").toLowerCase().indexOf(q)>=0 || String(p.categoria||"").toLowerCase().indexOf(q)>=0);
-    return okCat && okQ;
-  });
-  var cont = document.getElementById("railDestacados");
-  document.querySelector("#destacados .rowhead h2").innerHTML = 'Resultados'+(q?' para "<span>'+esc(q)+'</span>"':'');
-  cont.innerHTML = lista.length ? lista.map(cardHTML).join("") : '<div class="estado">No encontramos productos. Escribenos por WhatsApp y te ayudamos.</div>';
-  scrollTo2("destacados");
-}
-function pedirAsesor(){ window.location.href = "index.html"; }
-
-/* ---- carrito ---- */
-function agregar(i){ if(PRODUCTOS[i]){CARRITO.push(PRODUCTOS[i]); actualizar(); abrirCarrito();} }
-
-/* ===== FAVORITOS (compartidos con Mi Cuenta) ===== */
-var KEY_FAV="orionix_favoritos";
-function getFavs(){try{return JSON.parse(localStorage.getItem(KEY_FAV)||"[]");}catch(e){return [];}}
-function setFavs(f){localStorage.setItem(KEY_FAV,JSON.stringify(f));}
-function esFav(p){var f=getFavs();return f.some(function(x){return (x.nombre||"")===(p.nombre||"");});}
-function toggleFav(i){
-  var p=PRODUCTOS[i];if(!p)return;
-  var f=getFavs();
-  var pos=f.findIndex(function(x){return (x.nombre||"")===(p.nombre||"");});
-  if(pos>=0){f.splice(pos,1);}else{f.push({nombre:p.nombre,precio:p.precio,moneda:p.moneda,categoria:p.categoria,imagen:p.imagen,imagen_url:p.imagen,enlace:p.enlace});}
-  setFavs(f);
-  var btn=document.getElementById("fFavBtn");
-  if(btn){btn.classList.toggle("on",esFav(p));btn.innerHTML=(esFav(p)?"&#10022; Guardado":"&#9734; Guardar");}
-}
-
-/* ===== FICHA DE PRODUCTO ===== */
-var FICHA_ACTUAL=null;
-function ytId(url){
-  if(!url)return "";
-  var m=String(url).match(/(?:youtu\.be\/|v=|embed\/)([A-Za-z0-9_-]{6,})/);
-  return m?m[1]:(String(url).length<15?url:"");
-}
-function abrirFicha(i){
-  var p=PRODUCTOS[i];if(!p)return;
-  FICHA_ACTUAL=i;
-  document.getElementById("fCat").textContent=p.categoria||"Orionix";
-  document.getElementById("fNombre").textContent=p.nombre||"Producto";
-  document.getElementById("fStars").innerHTML=stars(p.rating||5)+'<small>('+(p.reviews||"nuevo")+')</small>';
-  var antes=p.antes?('<span class="antes">'+money(p.antes,p.moneda)+'</span>'):'';
-  document.getElementById("fPrecio").innerHTML=money(p.precio,p.moneda)+' '+(p.moneda||"USD")+antes;
-  document.getElementById("fSens").textContent=p.esencia||("Una pieza pensada para quienes distinguen lo esencial. "+(p.categoria||"Orionix")+" con la firma de la Maison.");
-  document.getElementById("fDesc").textContent=p.descripcion||"";
-  var main=document.getElementById("fMain");
-  if(p.imagen){main.style.backgroundImage="url('"+p.imagen+"')";main.textContent="";}else{main.style.backgroundImage="";main.textContent=(CAT_ICON[p.categoria]||"\uD83D\uDECD\uFE0F");}
-  // thumbs (misma imagen + variantes de la categoria)
-  var thumbs=[p.imagen].filter(Boolean);
-  PRODUCTOS.forEach(function(q){if(q.categoria===p.categoria&&q.imagen&&thumbs.indexOf(q.imagen)<0&&thumbs.length<4)thumbs.push(q.imagen);});
-  document.getElementById("fThumbs").innerHTML=thumbs.map(function(t,ti){return '<div class="t'+(ti===0?' act':'')+'" style="background-image:url(\''+esc(t)+'\')" onclick="fSetMain(\''+esc(t)+'\',this)"></div>';}).join("");
-  // acciones
-  var acc='';
-  if(p.enlace){acc+='<a class="btn wide" href="'+esc(p.enlace)+'" target="_blank" rel="noopener sponsored">'+tiendaLabel(p.tienda)+'</a>';}
-  else{acc+='<button class="btn wide" onclick="agregar('+i+')">Anadir al carrito</button>';if(p.pago){acc+='<a class="btn ghost wide" href="'+esc(p.pago)+'" target="_blank" rel="noopener">Comprar ahora</a>';}}
-  acc+='<button class="fchip'+(esFav(p)?' on':'')+'" id="fFavBtn" onclick="toggleFav('+i+')">'+(esFav(p)?"&#10022; Guardado":"&#9734; Guardar")+'</button>';
-  acc+='<a class="fchip" href="https://wa.me/573014410541?text='+encodeURIComponent("Hola Orionix, me interesa: "+(p.nombre||""))+'" target="_blank" rel="noopener">Consultar por WhatsApp</a>';
-  document.getElementById("fAcc").innerHTML=acc;
-  // video
-  var vid=ytId(p.video);
-  var vw=document.getElementById("fVidWrap");
-  if(vid){vw.style.display="block";document.getElementById("fVid").src="https://www.youtube.com/embed/"+vid;}
-  else{vw.style.display="none";document.getElementById("fVid").src="";}
-  // relacionados
-  var rel=PRODUCTOS.filter(function(q,qi){return qi!==i&&q.categoria===p.categoria;}).slice(0,4);
-  if(rel.length<4){PRODUCTOS.forEach(function(q,qi){if(qi!==i&&rel.indexOf(q)<0&&rel.length<4)rel.push(q);});}
-  document.getElementById("fRel").innerHTML=rel.map(cardHTML).join("");
-  document.getElementById("ficha").classList.add("open");
-  document.body.style.overflow="hidden";
-  window.scrollTo(0,0);
-}
-function fSetMain(url,el){
-  var main=document.getElementById("fMain");main.style.backgroundImage="url('"+url+"')";main.textContent="";
-  document.querySelectorAll("#fThumbs .t").forEach(function(t){t.classList.remove("act");});if(el)el.classList.add("act");
-}
-function cerrarFicha(){document.getElementById("ficha").classList.remove("open");document.getElementById("fVid").src="";document.body.style.overflow="";}
-function quitar(i){ CARRITO.splice(i,1); actualizar(); }
-function actualizar(){
-  document.getElementById("badge").textContent = CARRITO.length;
-  var cont = document.getElementById("citems");
-  if(!CARRITO.length){ cont.innerHTML = '<div class="vacio">Tu carrito esta vacio.<br>Agrega productos y aparecen aqui.</div>'; }
-  else{
-    cont.innerHTML = CARRITO.map(function(p,i){
-      var th = p.imagen ? ('style="background-image:url(\''+esc(p.imagen)+'\')"') : '';
-      var em = p.imagen ? '' : (CAT_ICON[p.categoria]||"\uD83D\uDECD\uFE0F");
-      return '<div class="citem"><div class="thumb" '+th+'>'+em+'</div><div class="info"><b>'+esc(p.nombre)+'</b><span class="pr">'+money(p.precio,p.moneda)+'</span></div><span class="quitar" onclick="quitar('+i+')">&times;</span></div>';
-    }).join("");
-  }
-  var total = CARRITO.reduce(function(s,p){return s+Number(p.precio||0);},0);
-  document.getElementById("total").textContent = "$"+total.toLocaleString();
-}
-function abrirCarrito(){ document.getElementById("carrito").classList.add("open"); document.getElementById("overlay").classList.add("on"); }
-function cerrarCarrito(){ document.getElementById("carrito").classList.remove("open"); document.getElementById("overlay").classList.remove("on"); }
-var PAYPAL_API = "https://kevinruiz.app.n8n.cloud/webhook/paypal-crear-orden";
-var CK_STEP = 0, CK_PAY = "paypal", CK_DESC = 0;
-
-/* pagar() ahora abre el checkout profesional de varios pasos */
-function pagar(){
-  if(!CARRITO.length){ alert("Tu carrito esta vacio."); return; }
-  abrirCheckout();
-}
-function ckMoneda(){ return (CARRITO[0] && CARRITO[0].moneda) || "USD"; }
-function ckSubtotal(){ return CARRITO.reduce(function(s,p){return s+Number(p.precio||0);},0); }
-function ckEnvio(sub){ return sub>0 && sub<80 ? 4.99 : 0; }
-function abrirCheckout(){
-  CK_STEP=0; CK_DESC=0;
-  ckGoto(0);
-  ckRenderResumen();
-  document.getElementById("checkout").classList.add("open");
-  document.body.style.overflow="hidden";
-  cerrarCarrito();
-}
-function cerrarCheckout(){ document.getElementById("checkout").classList.remove("open"); document.body.style.overflow=""; }
-function ckGoto(n){
-  CK_STEP=n;
-  for(var i=0;i<3;i++){
-    document.getElementById("ckp"+i).classList.toggle("on", i===n);
-    document.getElementById("ckst"+i).classList.toggle("on", i<=n);
-  }
-  var box=document.getElementById("checkout"); if(box) box.scrollTop=0;
-}
-function ckMark(id,bad){ var f=document.getElementById(id); if(f&&f.parentElement) f.parentElement.classList.toggle("err",!!bad); }
-function ckNext(n){
-  if(n>CK_STEP){ // validar antes de avanzar
-    if(CK_STEP===0){
-      var nom=val("ck_nombre"), em=val("ck_email"), tel=val("ck_tel");
-      var okEm=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em);
-      ckMark("ck_nombre",!nom); ckMark("ck_email",!okEm); ckMark("ck_tel",!tel);
-      if(!nom||!okEm||!tel){ return; }
-    }
-    if(CK_STEP===1){
-      var d1=val("ck_dir"), c1=val("ck_ciudad"), cp=val("ck_cp");
-      ckMark("ck_dir",!d1); ckMark("ck_ciudad",!c1); ckMark("ck_cp",!cp);
-      if(!d1||!c1||!cp){ return; }
-    }
-  }
-  ckGoto(n);
-}
-function val(id){ var e=document.getElementById(id); return e?e.value.trim():""; }
-function ckPay(m){
-  CK_PAY=m;
-  document.getElementById("ckpay_paypal").classList.toggle("sel",m==="paypal");
-  document.getElementById("ckpay_wa").classList.toggle("sel",m==="wa");
-  document.getElementById("ckPagarBtn").textContent = m==="wa" ? "Continuar por WhatsApp" : "Pagar ahora";
-}
-function ckPromo(){
-  var code=val("ck_promo").toUpperCase();
-  var sub=ckSubtotal();
-  if(code==="ORIONIX10"){ CK_DESC=+(sub*0.10).toFixed(2); alert("Cupon aplicado: 10% de descuento."); }
-  else if(code==="BIENVENIDA"){ CK_DESC=+(sub*0.05).toFixed(2); alert("Cupon aplicado: 5% de descuento."); }
-  else if(code){ CK_DESC=0; alert("Ese codigo no es valido."); }
-  ckRenderResumen();
-}
-function ckRenderResumen(){
-  var cont=document.getElementById("ck_items");
-  cont.innerHTML = CARRITO.map(function(p){
-    var th = p.imagen ? ('style="background-image:url(\''+esc(p.imagen)+'\')"') : '';
-    var em = p.imagen ? '' : (CAT_ICON[p.categoria]||"\uD83D\uDECD\uFE0F");
-    return '<div class="ck-line"><div class="th" '+th+'>'+em+'</div><div class="d"><b>'+esc(p.nombre)+'</b><span>'+esc(p.categoria||"")+'</span></div><span class="pr">'+money(p.precio,p.moneda)+'</span></div>';
-  }).join("");
-  var sub=ckSubtotal(), envio=ckEnvio(sub), tot=Math.max(0,sub-CK_DESC)+envio, m=ckMoneda();
-  var rows='<div class="row"><span>Subtotal</span><span>'+money(sub,m)+'</span></div>';
-  if(CK_DESC>0) rows+='<div class="row"><span>Descuento</span><span>-'+money(CK_DESC,m)+'</span></div>';
-  rows+='<div class="row"><span>Envío</span><span>'+(envio?money(envio,m):"Gratis")+'</span></div>';
-  rows+='<div class="row grand"><span>Total</span><span>'+money(tot,m)+'</span></div>';
-  document.getElementById("ck_tot").innerHTML=rows;
-}
-async function ckFinalizar(){
-  var sub=ckSubtotal(), envio=ckEnvio(sub), total=Math.max(0,sub-CK_DESC)+envio, moneda=ckMoneda();
-  var concepto = CARRITO.length===1 ? CARRITO[0].nombre : ("Pedido Orionix ("+CARRITO.length+" articulos)");
-  var cliente = {
-    nombre: val("ck_nombre"), email: val("ck_email"), tel: val("ck_tel"),
-    dir: val("ck_dir"), ciudad: val("ck_ciudad"), estado: val("ck_estado"),
-    cp: val("ck_cp"), pais: val("ck_pais"), notas: val("ck_notas")
-  };
-  var resumen = concepto+" | "+cliente.nombre+" | "+cliente.dir+", "+cliente.ciudad+", "+cliente.pais+" | Tel "+cliente.tel;
-  if(CK_PAY==="wa" || !total){
-    window.open("https://wa.me/573014410541?text="+encodeURIComponent("Hola Orionix, quiero completar mi pedido:\n"+resumen+"\nTotal: "+money(total,moneda)),"_blank");
-    return;
-  }
-  var btn=document.getElementById("ckPagarBtn"); var txt=btn.textContent;
-  btn.textContent="Conectando con PayPal..."; btn.disabled=true;
-  try{
-    var r = await fetch(PAYPAL_API, {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ monto: total.toFixed(2), moneda: moneda, concepto: concepto, cliente: cliente })});
-    var d = await r.json();
-    if(d && d.approve){ window.location.href = d.approve; }
-    else { throw new Error("sin enlace"); }
-  }catch(e){
-    alert("No pudimos abrir PayPal ahora. Te llevamos a WhatsApp para completar tu compra.");
-    window.open("https://wa.me/573014410541?text="+encodeURIComponent("Hola Orionix, quiero pagar mi pedido:\n"+resumen+"\nTotal: "+money(total,moneda)),"_blank");
-  }finally{ btn.textContent=txt; btn.disabled=false; }
-}
-
-cargar();
-</script>
-<!-- ===== CONFIG DEL ORACULO PARA LA TIENDA ===== -->
-<script>
-window.ORA_CFG={
-  agente:"VENDEDOR",
-  webhook:"https://kevinruiz.app.n8n.cloud/webhook/portal-central",
-  hint:"Soy **AXEL**, el oraculo de la Tienda Orionix. Te explico cualquier producto, te comparo agentes IA, te muestro lo destacado, los videos, o te abro el carrito. Activa **Manos libres** y hablame, o escribe.",
-  quick:[
-    {label:"Ver catalogo",icon:"&#128722;",run:function(){scrollTo2('catalogo');}},
-    {label:"Lo destacado",icon:"&#11088;",run:function(){scrollTo2('destacados');}},
-    {label:"Abrir carrito",icon:"&#128230;",run:function(){abrirCarrito();}}
-  ],
-  map:[
-    {k:["catalogo","productos","todo","que venden","que hay"],label:"el catalogo",icon:"&#128722;",resp:"Te muestro todo el catalogo.",run:function(){scrollTo2('catalogo');}},
-    {k:["destacado","lo mas","mas vendido","recomendado","estrella"],label:"lo destacado",icon:"&#11088;",resp:"Mira lo mas deseado de la tienda.",run:function(){scrollTo2('destacados');}},
-    {k:["video","demo","ver funcionando"],label:"los videos",icon:"&#127909;",resp:"Aqui tienes los videos.",run:function(){scrollTo2('videos');}},
-    {k:["carrito","cofre","comprar","pagar","checkout","llevar"],label:"el carrito",icon:"&#128230;",resp:"Abro tu carrito.",run:function(){abrirCarrito();}},
-    {k:["agente","ia","vendedor","whatsapp","voz","seguimiento"],label:"los agentes IA",icon:"&#129302;",resp:"Te muestro nuestros agentes de IA en el catalogo.",run:function(){scrollTo2('catalogo');}},
-    {k:["inicio","orionix","home","volver","pagina principal"],label:"la pagina principal",icon:"&#127968;",resp:"Volviendo a Orionix.",run:function(){window.location.href='index.html';}},
-    {k:["whatsapp","asesor","humano","hablar con alguien"],label:"WhatsApp",icon:"&#128241;",href:"https://wa.me/573014410541?text=Hola%20Orionix,%20estoy%20en%20la%20tienda%20y%20quiero%20info"}
-  ],
-  local:function(texto){var n=(texto||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-    function h(){for(var i=0;i<arguments.length;i++){if(n.indexOf(arguments[i])>=0)return true;}return false;}
-    /* lee los productos REALES cargados en la tienda para no inventar */
-    var P=(window.PRODUCTOS&&window.PRODUCTOS.length)?window.PRODUCTOS:[];
-    function listaReal(){ if(!P.length) return ""; var t="\n"; for(var i=0;i<Math.min(P.length,6);i++){var p=P[i];t+="- **"+(p.nombre||p.titulo||"Producto")+"**"+(p.precio?(" \u2014 "+p.precio+(p.moneda?(" "+p.moneda):"")):"")+"\n";} return t; }
-    if(h("promo","oferta","descuento","rebaja","cupon")){
-      return P.length ? ("Estas son las promociones y precios **reales** que hay ahora mismo en la tienda:"+listaReal()+"No invento ofertas: si no aparece aqui, no existe. Te abro el catalogo para verlas en detalle?") 
-                      : "No tengo promociones activas confirmadas en este momento. Prefiero decirte la verdad antes que inventar una oferta. Si quieres, te dejo con un asesor por WhatsApp para ver posibilidades reales.";
-    }
-    if(h("agente","ia","vendedor","whatsapp","voz","seguimiento")) return "Nuestros **Agentes de IA** reales son: *Vendedor* (atiende y cierra 24/7), *WhatsApp*, *Voz* y *Seguimiento*. Estan construidos con **n8n** (workflows, nodos, webhooks) conectados al cerebro AXEL. Te muestro el catalogo con lo que hay disponible?";
-    if(h("precio","cuanto","cuesta","vale","pagar")){ return P.length ? ("Estos son los precios **reales** en la tienda:"+listaReal()+"Te abro el catalogo o el carrito?") : "Cada producto muestra su precio real en su ficha. Te abro el **catalogo** para verlos."; }
-    if(h("envio","entrega","digital","descarga")) return "La mayoria de productos son **digitales**: los recibes y los activamos contigo, sin envio fisico. Te muestro lo destacado?";
-    if(h("hola","buenas")) return "Hola, soy **AXEL**, el oraculo de la Tienda Orionix. Solo te hablo de productos, agentes y precios **reales**. Que quieres ver: catalogo, destacados, videos o carrito?";
-    return "Soy el oraculo de la Tienda Orionix y solo hablo con la verdad: te muestro los **productos y precios reales**, los **agentes de IA** disponibles y te llevo al **catalogo**, **destacados**, **videos** o **carrito**. Dime que buscas.";}
-};
-</script>
-
-<!-- ===================== AVATAR AXEL (identico al inicio) ===================== -->
-<style>
-  #robot{position:fixed;bottom:18px;left:18px;z-index:9135;width:40px;height:64px;cursor:pointer;filter:drop-shadow(0 8px 12px rgba(0,0,0,.55));transition:transform .5s cubic-bezier(.4,0,.2,1)}
-  #robot::before{content:'';position:absolute;left:50%;top:50%;width:150%;height:150%;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;z-index:-1;background:radial-gradient(circle,rgba(180,210,255,.55) 0%,rgba(232,200,106,.28) 38%,transparent 70%);opacity:0;transition:opacity 1.2s ease}
-  #robot.estrella::before{opacity:1;animation:estrellaFija 3.4s ease-in-out infinite}
-  @keyframes estrellaFija{0%,100%{transform:translate(-50%,-50%) scale(.85);opacity:.55}50%{transform:translate(-50%,-50%) scale(1.15);opacity:1}}
-  #robot:hover{transform:translateY(-5px) scale(1.05)}
-  #robot .rb-svg{width:100%;height:100%;display:block;overflow:visible}
-  #robot .bocadillo{display:none!important}
-  #robot .rb-nave{opacity:0;transform:translateY(14px) scale(.6);transform-origin:60px 175px;transition:opacity .5s,transform .5s}
-  #robot.nave .rb-nave{opacity:1;transform:none}
-  #robot.nave .rb-svg{animation:navevuelo 3.6s ease-in-out infinite}
-  @keyframes navevuelo{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
-  #robot.nave .rb-body{animation:none!important;transform:translateY(6px) scale(.86);transition:transform .5s}
-  #robot.nave .rb-legL,#robot.nave .rb-legR{animation:none!important;transform:rotate(0)}
-  #robot .rb-thrust{opacity:0;transform-origin:60px 176px}
-  #robot.nave .rb-thrust{opacity:1;animation:navThrust .35s ease-in-out infinite}
-  @keyframes navThrust{0%,100%{transform:scaleY(.8) scaleX(.95);opacity:.7}50%{transform:scaleY(1.3) scaleX(1.05);opacity:1}}
-  #robot.walk .rb-legL{animation:pasoL .55s ease-in-out infinite}
-  #robot.walk .rb-legR{animation:pasoR .55s ease-in-out infinite}
-  @keyframes pasoL{0%,100%{transform:rotate(11deg)}50%{transform:rotate(-11deg)}}
-  @keyframes pasoR{0%,100%{transform:rotate(-11deg)}50%{transform:rotate(11deg)}}
-  #robot .rb-legL{transform-origin:50% 0%}
-  #robot .rb-legR{transform-origin:50% 0%}
-  #robot .rb-arm{transform-origin:50% 8%;animation:brazo 2.6s ease-in-out infinite}
-  @keyframes brazo{0%,100%{transform:rotate(5deg)}50%{transform:rotate(-5deg)}}
-  #robot .rb-eye{animation:parpadeo 4.5s infinite}
-  @keyframes parpadeo{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
-  #robot .rb-eye{transform-origin:center;transform-box:fill-box}
-  #robot .rb-glow{animation:glowRobot 2.5s ease-in-out infinite}
-  @keyframes glowRobot{0%,100%{opacity:.5}50%{opacity:1}}
-  #robot .rb-hair{animation:rbHair 5s ease-in-out infinite}
-  @keyframes rbHair{0%,100%{transform:translateX(0)}50%{transform:translateX(.6px)}}
-  #robot .rb-body{animation:rbFloat 3.6s ease-in-out infinite}
-  @keyframes rbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-  #robot .rb-cape{transform-origin:60px 60px;animation:rbCape 4s ease-in-out infinite}
-  @keyframes rbCape{0%,100%{transform:skewX(0)}50%{transform:skewX(2deg)}}
-  @media(max-width:560px){#robot{width:32px;height:52px;bottom:12px;left:10px}}
-
-  #vozWidget{position:fixed;bottom:132px;left:18px;width:min(340px,90vw);height:min(500px,72vh);background:#141117;border:1px solid rgba(232,200,106,.32);border-radius:15px;box-shadow:0 24px 70px rgba(0,0,0,.6);z-index:9400;display:none;flex-direction:column;overflow:hidden;transform-origin:14px 100%;animation:vwPop .28s cubic-bezier(.34,1.4,.5,1);font-family:'Cormorant Garamond',Georgia,serif}
-  #vozWidget.open{display:flex}
-  @keyframes vwPop{0%{opacity:0;transform:translateY(18px) scale(.85)}100%{opacity:1;transform:none}}
-  #vozWidget::after{content:'';position:absolute;bottom:-9px;left:26px;border:9px solid transparent;border-top-color:#141117;filter:drop-shadow(0 2px 1px rgba(0,0,0,.3))}
-  @media(max-width:560px){#vozWidget{bottom:104px;left:8px;width:min(320px,94vw);height:min(440px,66vh)}}
-  #vozWidget .vw-head{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid #2a2530;background:linear-gradient(180deg,rgba(232,200,106,.08),transparent)}
-  #vozWidget .vw-orb{width:34px;height:34px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 0 0 rgba(232,200,106,.5),0 2px 8px rgba(0,0,0,.4)}
-  #vozWidget .vw-orb.talk{animation:orbPulse 1s infinite}
-  #vozWidget .vw-orb .av-eye{animation:avParpadeo 4s infinite}
-  #vozWidget .vw-orb.talk .av-eye{animation:avParpadeo 4s infinite,avHabla .5s ease-in-out infinite}
-  @keyframes avParpadeo{0%,92%,100%{opacity:1}96%{opacity:.15}}
-  @keyframes avHabla{0%,100%{filter:drop-shadow(0 0 1px #8fe9ff)}50%{filter:drop-shadow(0 0 4px #8fe9ff)}}
-  @keyframes orbPulse{0%,100%{box-shadow:0 0 0 0 rgba(232,200,106,.5)}50%{box-shadow:0 0 0 12px rgba(232,200,106,0)}}
-  #vozWidget .vw-nm{font-size:.74rem;font-family:'Cinzel',serif;letter-spacing:.8px;color:#e8c86a}
-  #vozWidget .vw-st{font-size:.62rem;color:#b8a982}
-  #vozWidget .vw-x{margin-left:auto;background:none;border:none;color:#b8a982;font-size:22px;cursor:pointer}
-  #vozWidget .vw-x:hover{color:#e8c86a}
-  #vozWidget .vw-body{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
-  #vozWidget .vw-hint{color:#b8a982;font-size:.74rem;line-height:1.5;font-style:italic;text-align:center;padding:10px}
-  #vozWidget .vw-msg{display:flex;gap:8px;max-width:90%}
-  #vozWidget .vw-msg .b{padding:10px 13px;border-radius:13px;font-size:.82rem;line-height:1.55;letter-spacing:.2px}
-  #vozWidget .vw-msg.bot .b{font-size:.85rem}
-  #vozWidget .vw-msg .b p{margin:0 0 7px}
-  #vozWidget .vw-msg .b p:last-child{margin-bottom:0}
-  #vozWidget .vw-msg .b strong{color:#e8c86a;font-weight:600}
-  #vozWidget .vw-msg .b em{color:#c8a24a;font-style:italic}
-  #vozWidget .vw-msg .b ul{margin:4px 0 6px;padding-left:16px}
-  #vozWidget .vw-msg .b li{margin:2px 0}
-  #vozWidget .vw-msg .b a{color:#e8c86a;text-decoration:underline;word-break:break-word}
-  #vozWidget .vw-acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-  #vozWidget .vw-act{display:inline-flex;align-items:center;gap:5px;background:rgba(232,200,106,.1);border:1px solid rgba(232,200,106,.35);color:#e8c86a;border-radius:8px;padding:5px 11px;font-size:.72rem;font-family:'Cinzel',serif;letter-spacing:.4px;cursor:pointer;transition:all .2s;text-decoration:none}
-  #vozWidget .vw-act:hover{background:rgba(232,200,106,.2);border-color:#e8c86a;transform:translateY(-1px)}
-  #vozWidget .vw-act .ai{font-size:.85rem}
-  #vozWidget .vw-msg.user{align-self:flex-end;flex-direction:row-reverse}
-  #vozWidget .vw-msg.user .b{background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;border-bottom-right-radius:4px}
-  #vozWidget .vw-msg.bot .b{background:#1c1922;color:#e9ddc4;border:1px solid #2a2530;border-bottom-left-radius:4px}
-  #vozWidget .vw-av{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-family:'Cinzel',serif}
-  #vozWidget .vw-msg.user .vw-av{background:#1c1922;color:#e8c86a}
-  #vozWidget .vw-msg.bot .vw-av{background:radial-gradient(circle at 40% 35%,#f4e2a0,#c8a24a);color:#1a1409}
-  #vozWidget .vw-interim{align-self:flex-end;max-width:88%;font-size:.8rem;font-style:italic;color:#b8a982;padding:2px 12px;text-align:right}
-  #vozWidget .vw-foot{border-top:1px solid #2a2530;padding:12px 14px;display:flex;flex-direction:column;align-items:center;gap:8px;position:relative}
-  #vozWidget .vw-live{width:100%;display:flex;align-items:center;justify-content:center;gap:10px}
-  #vozWidget .vw-toggle{display:flex;align-items:center;gap:9px;cursor:pointer;background:#1c1922;border:1px solid #2a2530;border-radius:22px;padding:8px 16px;transition:all .2s;user-select:none}
-  #vozWidget .vw-toggle:hover{border-color:#c8a24a}
-  #vozWidget .vw-toggle.on{border-color:#e8c86a;background:rgba(232,200,106,.1)}
-  #vozWidget .vw-toggle .sw{width:38px;height:20px;border-radius:12px;background:#2a2530;position:relative;transition:background .2s;flex-shrink:0}
-  #vozWidget .vw-toggle .sw::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#b8a982;transition:transform .2s,background .2s}
-  #vozWidget .vw-toggle.on .sw{background:linear-gradient(180deg,#f4e2a0,#c8a24a)}
-  #vozWidget .vw-toggle.on .sw::after{transform:translateX(18px);background:#1a1409}
-  #vozWidget .vw-toggle .lbl{font-size:.72rem;color:#e9ddc4;font-family:'Cinzel',serif;letter-spacing:.5px;white-space:nowrap}
-  #vozWidget .vw-mic-lbl{font-size:.68rem;color:#b8a982;letter-spacing:.5px;text-align:center}
-  #vozWidget .vw-chat{width:100%;display:flex;gap:8px;margin-top:4px}
-  #vozWidget .vw-chat input{flex:1;background:#1c1922;border:1px solid #2a2530;border-radius:20px;color:#e9ddc4;padding:9px 14px;font-family:inherit;font-size:.9rem;outline:none}
-  #vozWidget .vw-chat input:focus{border-color:#c8a24a}
-  #vozWidget .vw-chat button{width:38px;border:none;border-radius:50%;background:linear-gradient(180deg,#f4e2a0,#c8a24a);color:#1a1409;font-size:15px;cursor:pointer;flex-shrink:0}
-  #vozWidget .vw-dots span{animation:vwblink 1.2s infinite;color:#b8a982}
-  #vozWidget .vw-dots span:nth-child(2){animation-delay:.2s}#vozWidget .vw-dots span:nth-child(3){animation-delay:.4s}
-  @keyframes vwblink{0%,80%{opacity:.2}40%{opacity:1}}
-</style>
-
-<div id="robot" class="walk" onclick="abrirVoz()" title="Habla con AXEL, tu guia de IA">
-  <div class="bocadillo" id="rbBocadillo">Hola, soy AXEL. Tocame y te resuelvo cualquier duda.</div>
-  <svg class="rb-svg" viewBox="0 0 120 190" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="rbMetal" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#fff3cf"/><stop offset=".5" stop-color="#e8c86a"/><stop offset="1" stop-color="#a9812f"/>
-      </linearGradient>
-      <linearGradient id="rbMetal2" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#f4e2a0"/><stop offset="1" stop-color="#8a6a24"/>
-      </linearGradient>
-      <radialGradient id="rbAura" cx="50%" cy="50%" r="50%">
-        <stop offset="0" stop-color="rgba(232,200,106,.4)"/><stop offset="1" stop-color="rgba(232,200,106,0)"/>
-      </radialGradient>
-      <radialGradient id="rbPiel" cx="42%" cy="32%" r="72%">
-        <stop offset="0" stop-color="#ffe0bd"/><stop offset=".6" stop-color="#eec19a"/><stop offset="1" stop-color="#d19a6d"/>
-      </radialGradient>
-      <linearGradient id="rbTunica" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#2b3040"/><stop offset=".5" stop-color="#191d29"/><stop offset="1" stop-color="#0b0d14"/>
-      </linearGradient>
-      <linearGradient id="rbTunicaL" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#333a4d"/><stop offset=".5" stop-color="#1a1e2a"/><stop offset="1" stop-color="#0d0f16"/>
-      </linearGradient>
-      <linearGradient id="rbCapa" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#4a3712"/><stop offset="1" stop-color="#171003"/>
-      </linearGradient>
-      <linearGradient id="rbPelo" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#4a3620"/><stop offset=".55" stop-color="#2c1f12"/><stop offset="1" stop-color="#160f08"/>
-      </linearGradient>
-      <linearGradient id="rbPant" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#20242f"/><stop offset="1" stop-color="#0a0c11"/>
-      </linearGradient>
-      <filter id="rbEyeGlow" x="-120%" y="-120%" width="340%" height="340%">
-        <feGaussianBlur stdDeviation="1.1" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-      </filter>
-      <filter id="rbSoft" x="-30%" y="-30%" width="160%" height="160%">
-        <feGaussianBlur stdDeviation=".5"/>
-      </filter>
-      <linearGradient id="navHull" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#fbf3ff"/><stop offset=".4" stop-color="#c9b6e6"/><stop offset="1" stop-color="#6b5a8c"/>
-      </linearGradient>
-      <linearGradient id="navHull2" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#b6a3d6"/><stop offset="1" stop-color="#3a2f56"/>
-      </linearGradient>
-      <radialGradient id="navDome" cx="50%" cy="40%" r="70%">
-        <stop offset="0" stop-color="#f3e9ff"/><stop offset=".6" stop-color="#9a7fd0"/><stop offset="1" stop-color="#2a1f45"/>
-      </radialGradient>
-      <linearGradient id="navEnergy" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#f4e2a0" stop-opacity="0"/><stop offset=".5" stop-color="#f4e2a0"/><stop offset="1" stop-color="#f4e2a0" stop-opacity="0"/>
-      </linearGradient>
-      <linearGradient id="navFlame" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#e6d4ff"/><stop offset=".5" stop-color="#a678ff"/><stop offset="1" stop-color="#a678ff" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
-    <g class="rb-nave">
-      <g class="rb-thrust">
-        <path d="M40 176 Q60 200 80 176 Q60 190 40 176 Z" fill="url(#navFlame)" opacity=".9"/>
-        <path d="M48 176 Q60 192 72 176 Q60 184 48 176 Z" fill="#bfeaff" opacity=".8"/>
-      </g>
-      <ellipse cx="60" cy="186" rx="30" ry="4" fill="rgba(120,200,255,.18)"/>
-      <path d="M22 172 Q60 200 98 172 Q92 162 60 162 Q28 162 22 172 Z" fill="url(#navHull2)"/>
-      <path d="M18 168 Q60 150 102 168 Q104 172 100 175 Q60 190 20 175 Q16 172 18 168 Z" fill="url(#navHull)" stroke="#f4e2a0" stroke-width=".9"/>
-      <path d="M24 170 Q60 182 96 170" fill="none" stroke="url(#navEnergy)" stroke-width="1.6" class="rb-glow"/>
-      <path d="M18 168 L4 178 L20 174 Z" fill="url(#navHull2)" stroke="#d9c6f2" stroke-width=".5"/>
-      <path d="M102 168 L116 178 L100 174 Z" fill="url(#navHull2)" stroke="#d9c6f2" stroke-width=".5"/>
-      <path d="M42 162 Q60 144 78 162 Q60 170 42 162 Z" fill="url(#navDome)" stroke="#efe3ff" stroke-width="1"/>
-      <ellipse cx="54" cy="156" rx="5" ry="3" fill="#ffffff" opacity=".5"/>
-      <circle cx="30" cy="171" r="2.4" fill="#c8a24a" class="rb-glow"/>
-      <circle cx="60" cy="176" r="2.6" fill="#fff6d6" class="rb-glow"/>
-      <circle cx="90" cy="171" r="2.4" fill="#a678ff" class="rb-glow"/>
-      <rect x="50" y="167" width="20" height="2" rx="1" fill="rgba(40,20,60,.3)"/>
-    </g>
-    <circle cx="60" cy="80" r="60" fill="url(#rbAura)" class="rb-glow"/>
-    <g class="rb-body">
-    <g class="rb-legL"><path d="M50 138 L48 172 Q48 176 53 176 L57 176 Q59 176 59 172 L59 138 Z" fill="url(#rbPant)"/><path d="M46 172 L61 172 L62 180 Q62 183 58 183 L48 183 Q45 183 45 180 Z" fill="#241a0d"/><rect x="45" y="178" width="17" height="3" rx="1.5" fill="url(#rbMetal2)"/></g>
-    <g class="rb-legR"><path d="M61 138 L61 172 Q61 176 63 176 L67 176 Q72 176 72 172 L70 138 Z" fill="url(#rbPant)"/><path d="M59 172 L74 172 L75 180 Q75 183 72 183 L62 183 Q58 183 58 180 Z" fill="#241a0d"/><rect x="58" y="178" width="17" height="3" rx="1.5" fill="url(#rbMetal2)"/></g>
-    <g class="rb-cape">
-    <path d="M40 66 Q20 108 26 148 L40 140 Q37 104 46 74 Z" fill="url(#rbCapa)"/>
-    <path d="M80 66 Q100 108 94 148 L80 140 Q83 104 74 74 Z" fill="url(#rbCapa)"/>
-    <path d="M46 74 Q42 108 44 140" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>
-    <path d="M74 74 Q78 108 76 140" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>
-    </g>
-    <g class="rb-arm"><path d="M31 70 Q26 72 27 82 L30 112 Q30 118 36 118 L40 118 Q44 116 43 108 L41 74 Q40 68 34 68 Z" fill="url(#rbTunicaL)"/><ellipse cx="38" cy="120" rx="5" ry="6" fill="url(#rbPiel)"/></g>
-    <path d="M89 70 Q94 72 93 82 L90 112 Q90 118 84 118 L80 118 Q76 116 77 108 L79 74 Q80 68 86 68 Z" fill="url(#rbTunicaL)"/><ellipse cx="82" cy="120" rx="5" ry="6" fill="url(#rbPiel)"/>
-    <path d="M42 66 Q37 64 38 76 L40 128 Q40 138 51 138 L69 138 Q80 138 80 128 L82 76 Q83 64 78 66 Z" fill="url(#rbTunica)" stroke="url(#rbMetal)" stroke-width="1.4"/>
-    <path d="M54 80 L52 128" stroke="rgba(0,0,0,.28)" stroke-width="1.4" fill="none"/>
-    <path d="M66 80 L68 128" stroke="rgba(0,0,0,.28)" stroke-width="1.4" fill="none"/>
-    <path d="M60 78 L60 126" stroke="rgba(255,255,255,.05)" stroke-width="1.4" fill="none"/>
-    <path d="M51 64 L60 82 L69 64 Z" fill="url(#rbPiel)"/>
-    <rect x="43" y="118" width="34" height="7" rx="2" fill="url(#rbMetal2)"/>
-    <rect x="55" y="116" width="10" height="11" rx="2.5" fill="url(#rbMetal)" stroke="#7a5c1c" stroke-width=".6"/>
-    <circle cx="60" cy="121.5" r="2.4" fill="#3a2c0e"/>
-    <circle cx="60" cy="98" r="4.6" fill="url(#rbMetal)" class="rb-glow"/>
-    <path d="M60 95 L61.4 98 L60 101 L58.6 98 Z" fill="#3a2c0e"/>
-    <path d="M40 66 Q42 58 51 60 L49 70 Q44 68 40 70 Z" fill="url(#rbMetal2)"/>
-    <path d="M80 66 Q78 58 69 60 L71 70 Q76 68 80 70 Z" fill="url(#rbMetal2)"/>
-    <rect x="55" y="54" width="10" height="11" rx="3" fill="url(#rbPiel)"/>
-    <ellipse cx="60" cy="55" rx="6" ry="2.2" fill="rgba(0,0,0,.18)"/>
-    <g class="rb-hair">
-    <path d="M39 34 Q35 6 60 4 Q85 6 81 34 L81 48 Q84 26 60 24 Q36 26 39 48 Z" fill="url(#rbPelo)"/>
-    <path d="M42 32 Q42 12 60 11 Q78 12 78 32 Q78 44 72 50 Q66 55 60 55 Q54 55 48 50 Q42 44 42 32 Z" fill="url(#rbPiel)"/>
-    <path d="M48 48 Q60 56 72 48 Q68 53 60 54 Q52 53 48 48 Z" fill="rgba(180,120,80,.25)" filter="url(#rbSoft)"/>
-    <path d="M42 34 Q37 33 38 39 Q40 43 43 41 Z" fill="url(#rbPiel)"/>
-    <path d="M78 34 Q83 33 82 39 Q80 43 77 41 Z" fill="url(#rbPiel)"/>
-    <path d="M41 30 Q40 8 60 7 Q80 8 79 30 Q76 20 66 17 Q64 24 58 25 Q49 25 44 22 Q42 26 41 30 Z" fill="url(#rbPelo)"/>
-    <path d="M60 7 Q70 9 74 18" fill="none" stroke="rgba(0,0,0,.3)" stroke-width="1"/>
-    </g>
-    <path d="M48 27 Q52 25 56 27" fill="none" stroke="#3a2a17" stroke-width="1.8" stroke-linecap="round"/>
-    <path d="M64 27 Q68 25 72 27" fill="none" stroke="#3a2a17" stroke-width="1.8" stroke-linecap="round"/>
-    <g class="rb-eye">
-    <ellipse cx="53" cy="33" rx="3.6" ry="2.6" fill="#fff"/>
-    <ellipse cx="67" cy="33" rx="3.6" ry="2.6" fill="#fff"/>
-    <g filter="url(#rbEyeGlow)">
-      <circle cx="53.3" cy="33.2" r="1.9" fill="#3d6ea0"/>
-      <circle cx="66.7" cy="33.2" r="1.9" fill="#3d6ea0"/>
-    </g>
-    <circle cx="53.3" cy="33.2" r=".9" fill="#0c1a2b"/>
-    <circle cx="66.7" cy="33.2" r=".9" fill="#0c1a2b"/>
-    <circle cx="54" cy="32.4" r=".6" fill="#fff"/>
-    <circle cx="67.4" cy="32.4" r=".6" fill="#fff"/>
-    </g>
-    <path d="M49.4 31.4 Q53 29.4 56.6 31.4" fill="none" stroke="rgba(90,60,40,.5)" stroke-width=".9"/>
-    <path d="M63.4 31.4 Q67 29.4 70.6 31.4" fill="none" stroke="rgba(90,60,40,.5)" stroke-width=".9"/>
-    <path d="M60 34 Q58.4 40 59 42 Q60 43.4 61 42 Q61.6 40 60 34" fill="none" stroke="rgba(150,95,60,.55)" stroke-width="1.2" stroke-linecap="round"/>
-    <ellipse cx="60" cy="42.4" rx="2.4" ry="1.1" fill="rgba(150,95,60,.28)"/>
-    <path d="M54 47 Q60 51 66 47" fill="none" stroke="#b06a45" stroke-width="1.7" stroke-linecap="round"/>
-    <path d="M56 46.6 Q60 48.4 64 46.6" fill="none" stroke="rgba(255,235,220,.55)" stroke-width="1" stroke-linecap="round"/>
-    <path d="M43 21 Q60 13 77 21" fill="none" stroke="url(#rbMetal)" stroke-width="2.2" stroke-linecap="round"/>
-    <circle cx="60" cy="15" r="2.3" fill="#fff6d6" class="rb-glow"/>
-    </g>
-  </svg>
-</div>
-
-<div id="vozWidget">
-  <div class="vw-head">
-    <div class="vw-orb" id="vwOrb">
-      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-        <defs>
-          <radialGradient id="avFace" cx="42%" cy="36%" r="72%">
-            <stop offset="0" stop-color="#fff8e1"/><stop offset="1" stop-color="#c8a24a"/>
-          </radialGradient>
-          <linearGradient id="avVisor" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#0f3550"/><stop offset="1" stop-color="#06131f"/>
-          </linearGradient>
-        </defs>
-        <circle cx="24" cy="24" r="23" fill="url(#avFace)"/>
-        <path d="M13 20 Q13 9 24 9 Q35 9 35 20 L35 30 Q35 39 24 39 Q13 39 13 30 Z" fill="#141019"/>
-        <path d="M16 20 Q16 15 24 15 Q32 15 32 20 L32 27 Q32 31 24 31 Q16 31 16 27 Z" fill="url(#avVisor)"/>
-        <circle class="av-eye" cx="20.5" cy="23" r="2.2" fill="#8fe9ff"/>
-        <circle class="av-eye" cx="27.5" cy="23" r="2.2" fill="#8fe9ff"/>
-        <line x1="24" y1="9" x2="24" y2="4" stroke="#fff8e1" stroke-width="1.6"/>
-        <circle cx="24" cy="3.4" r="1.8" fill="#fff8e1"/>
-      </svg>
-    </div>
-    <div class="vw-id">
-      <div class="vw-nm">AXEL &middot; Agente de Voz</div>
-      <div class="vw-st" id="vwState">Activa Manos libres y hablame</div>
-    </div>
-    <button class="vw-x" onclick="cerrarVoz()">&times;</button>
-  </div>
-  <div class="vw-body" id="vwBody">
-    <div class="vw-hint" id="vwHint">Soy AXEL, el oraculo de Orionix. Activa <b>Manos libres</b> y hablame con naturalidad: te escucho, te respondo en voz alta, te explico cada detalle y te llevo a cualquier parte de la web.</div>
-  </div>
-  <div class="vw-foot">
-    <div class="vw-live">
-      <div class="vw-toggle" id="vwHandsToggle" onclick="vozToggleHands()" title="Pulsa para empezar a hablar">
-        <span class="sw"></span><span class="lbl" id="vwHandsLbl">Manos libres</span>
+function abrirCarrito(){
+  const cont = document.getElementById("cartItems");
+  if(CARRITO.length === 0){
+    cont.innerHTML = "<p style='color:var(--core); text-align:center; padding: 40px;'>LA BAHÍA ESTÁ VACÍA</p>";
+  } else {
+    cont.innerHTML = CARRITO.map((p, i) => `
+      <div class="cart-item">
+        <img src="${p.imagen}">
+        <div class="cart-item-info">
+          <div class="cart-item-title">${p.nombre}</div>
+          <div class="cart-item-price">$${(p.precio||0).toLocaleString()} ${p.moneda}</div>
+          <span class="cart-item-remove" onclick="quitarDelCarrito(${i})">[X] EXPULSAR AL ESPACIO</span>
+        </div>
       </div>
-    </div>
-    <div class="vw-mic-lbl" id="vwMicLbl">Pulsa &laquo;Manos libres&raquo; y hablame, o escribe abajo</div>
-    <div class="vw-chat">
-      <input id="vwText" placeholder="Escribe tu mensaje..." onkeydown="if(event.key==='Enter')vozEnviarTexto()">
-      <button onclick="vozEnviarTexto()" title="Enviar">&#10148;</button>
-    </div>
-  </div>
-</div>
-
-<script>
-(function(){
-  var CFG=window.ORA_CFG||{};
-  var WEBHOOK=CFG.webhook||"https://kevinruiz.app.n8n.cloud/webhook/portal-central";
-  var AGENTE=CFG.agente||"VENDEDOR";
-  var MAP=CFG.map||[];
-  var QUICK=CFG.quick||[];
-  var HINT=CFG.hint||"";
-  var LOCAL=CFG.local||function(){return "Soy el oraculo de Orionix. Puedo explicarte cada seccion y llevarte a donde quieras.";};
-  var FRASES=CFG.frases||[
-    "Hola, soy AXEL. Tocame y te resuelvo cualquier duda.",
-    "Preguntame lo que quieras, te escucho.",
-    "Puedo llevarte a cualquier parte de la web.",
-    "Necesitas ayuda? Solo hablame.",
-    "Estoy aqui para guiarte, paso a paso."
-  ];
-  if(HINT){var hn=document.getElementById("vwHint");if(hn)hn.innerHTML=HINT.replace(/\*\*/g,"");}
-
-  var vwSession="voz"+Date.now(), vwStarted=false;
-  var VW_SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  var vwRecog=null,vwListening=false,vwHands=false,vwSpeaking=false,vwThinking=false,vwFinalBuf="",vwLastInterim="",vwSilenceTimer=null,vwMaxTimer=null,vwInterimEl=null,vwWantListen=false;
-
-  /* ---- voces ---- */
-  window.__voces=window.__voces||[];
-  function cargarVoces(){if(window.speechSynthesis){var v=window.speechSynthesis.getVoices();if(v&&v.length)window.__voces=v;}}
-  if(window.speechSynthesis){cargarVoces();window.speechSynthesis.onvoiceschanged=cargarVoces;setTimeout(cargarVoces,300);setTimeout(cargarVoces,1200);setTimeout(cargarVoces,3000);
-    setInterval(function(){try{if(window.speechSynthesis.speaking&&window.speechSynthesis.paused)window.speechSynthesis.resume();}catch(e){}},4000);}
-  function mejorVozEs(){var vs=window.__voces.length?window.__voces:(window.speechSynthesis?window.speechSynthesis.getVoices():[]);if(!vs||!vs.length)return null;
-    return vs.find(function(v){return /es(-|_)?(es|419|mx|us|co)/i.test(v.lang)&&/(google|microsoft)/i.test(v.name);})||vs.find(function(v){return /^es/i.test(v.lang)&&/google/i.test(v.name);})||vs.find(function(v){return /^es/i.test(v.lang);})||vs[0];}
-  window.__audioListo=window.__audioListo||false;
-  function vozWarmup(){try{if(window.speechSynthesis){window.speechSynthesis.cancel();window.speechSynthesis.resume();}cargarVoces();
-    if(!window.__audioListo&&window.speechSynthesis){var u=new SpeechSynthesisUtterance(" ");u.volume=0;window.speechSynthesis.speak(u);window.__audioListo=true;}}catch(e){}}
-  ["click","touchstart","keydown"].forEach(function(ev){document.addEventListener(ev,function _wu(){vozWarmup();},{once:true,passive:true});});
-
-  /* ---- helpers UI ---- */
-  function vwEsc(t){var e=document.createElement("div");e.textContent=t;return e.innerHTML;}
-  function vwSetState(t){var s=document.getElementById("vwState");if(s)s.textContent=t;}
-  function vwFormat(text){var esc=vwEsc(text);
-    esc=esc.replace(/(https?:\/\/[^\s<]+)/g,function(u){return '<a href="'+u+'" target="_blank" rel="noopener">'+u+'</a>';});
-    esc=esc.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/(^|[^*])\*([^*\n]+)\*/g,'$1<em>$2</em>');
-    var lines=esc.split(/\n/);var out="";var inList=false;
-    for(var i=0;i<lines.length;i++){var ln=lines[i].trim();
-      if(/^([-*\u2022])\s+/.test(ln)){if(!inList){out+="<ul>";inList=true;}out+="<li>"+ln.replace(/^([-*\u2022])\s+/,"")+"</li>";}
-      else{if(inList){out+="</ul>";inList=false;}if(ln)out+="<p>"+ln+"</p>";}}
-    if(inList)out+="</ul>";return out||("<p>"+esc+"</p>");}
-  function vwActions(el,acciones){if(!acciones||!acciones.length)return;
-    var bWrap=el.querySelector(".b");var w=document.createElement("div");w.className="vw-acts";
-    acciones.forEach(function(a){var el2;
-      if(a.href){el2=document.createElement("a");el2.href=a.href;el2.target="_blank";el2.rel="noopener";}
-      else{el2=document.createElement("span");el2.onclick=(a.run||a.fn);}
-      el2.className="vw-act";el2.innerHTML='<span class="ai">'+(a.icon||"&#10148;")+'</span>'+a.label;w.appendChild(el2);});
-    bWrap.appendChild(w);}
-  function vwAdd(role,text,acciones){var b=document.getElementById("vwBody");var h=b.querySelector(".vw-hint");if(h)h.remove();
-    var d=document.createElement("div");d.className="vw-msg "+(role==="user"?"user":"bot");
-    d.innerHTML='<div class="vw-av">'+(role==="user"?"&#128100;":"K")+'</div><div class="b">'+(role==="user"?("<p>"+vwEsc(text)+"</p>"):vwFormat(text))+'</div>';
-    b.appendChild(d);if(role!=="user")vwActions(d,acciones);b.scrollTop=b.scrollHeight;return d;}
-  function vwTyping(){var b=document.getElementById("vwBody");var d=document.createElement("div");d.className="vw-msg bot";d.innerHTML='<div class="vw-av">A</div><div class="b vw-dots"><span>.</span><span>.</span><span>.</span></div>';b.appendChild(d);b.scrollTop=b.scrollHeight;return d;}
-  function vwShowInterim(t){var b=document.getElementById("vwBody");if(!vwInterimEl){vwInterimEl=document.createElement("div");vwInterimEl.className="vw-interim";b.appendChild(vwInterimEl);}vwInterimEl.textContent=t?("\u201c"+t+"\u201d"):"";b.scrollTop=b.scrollHeight;}
-  function vwClearInterim(){if(vwInterimEl){vwInterimEl.remove();vwInterimEl=null;}}
-
-  function vwSugerir(texto){var n=(texto||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");var acts=[],usados={};
-    for(var i=0;i<MAP.length;i++){var s=MAP[i];for(var j=0;j<s.k.length;j++){if(n.indexOf(s.k[j])>=0){if(!usados[s.label]){acts.push(s);usados[s.label]=1;}break;}}}
-    return acts.slice(0,3);}
-
-  /* ---- abrir / cerrar ---- */
-  window.abrirVoz=function(){var w=document.getElementById("vozWidget");w.classList.add("open");var rb=document.getElementById("robot");if(rb){rb.classList.remove("talk","nave");rb.classList.add("walk");}
-    vozWarmup();
-    if(!vwStarted){vwStarted=true;
-      if(!VW_SR){document.getElementById("vwMicLbl").innerHTML="Para voz usa Google Chrome en tu PC o celular.";}
-      vwAdd("bot",HINT||"Hola, soy **AXEL**, el oraculo de Orionix. Activa **Manos libres** y hablame, o escribe: te explico todo y te llevo a cualquier parte.",QUICK);
-    }
-    if(VW_SR&&!vwHands){vwHands=true;refreshHandsBtn();
-      vozHablar("Hola, soy AXEL. Te escucho, dime en que puedo ayudarte.");
-      setTimeout(function(){if(!vwSpeaking)vwStartListen();},1400);}
-  };
-  window.cerrarVoz=function(){document.getElementById("vozWidget").classList.remove("open");vozStopSpeak();vwStopListen(true);vwHands=false;refreshHandsBtn();};
-
-  /* ---- reconocimiento ---- */
-  function vwEnsureRecog(){if(!VW_SR)return null;if(vwRecog)return vwRecog;
-    var r=new VW_SR();r.lang="es-ES";r.continuous=true;r.interimResults=true;r.maxAlternatives=1;
-    r.onresult=function(ev){var interim="";for(var i=ev.resultIndex;i<ev.results.length;i++){var tr=ev.results[i][0].transcript;if(ev.results[i].isFinal){vwFinalBuf+=tr+" ";}else{interim+=tr;}}
-      vwLastInterim=interim; /* guardamos el provisional por si Chrome nunca lo marca como final */
-      vwShowInterim((vwFinalBuf+interim).trim());
-      /* MODO ANALISIS: al detectar habla, arranca tope de seguridad; y espera ~2.6s de silencio antes de responder */
-      if((vwFinalBuf+interim).trim()){vwSetState("Escuchando... (analizando)");if(!vwMaxTimer){vwMaxTimer=setTimeout(function(){vwMaxTimer=null;vwFlush();},13000);}}
-      if(vwSilenceTimer)clearTimeout(vwSilenceTimer);vwSilenceTimer=setTimeout(function(){vwFlush();},1700);};
-    r.onstart=function(){vwListening=true;};r.onaudiostart=function(){vwListening=true;};
-    r.onspeechend=function(){/* Chrome detecto fin de habla: responde pronto si ya hay texto */ if((vwFinalBuf+vwLastInterim).trim()){if(vwSilenceTimer)clearTimeout(vwSilenceTimer);vwSilenceTimer=setTimeout(function(){vwFlush();},900);}};
-    r.onerror=function(ev){var e=ev&&ev.error;
-      if(e==="not-allowed"||e==="service-not-allowed"){vwHands=false;refreshHandsBtn();vwSetState("Permite el microfono en el navegador");
-        document.getElementById("vwMicLbl").textContent="Toca el candado de la barra de direcciones y permite el Microfono";
-        alert("Debes PERMITIR el microfono. Toca el candado (o el icono de camara/microfono) en la barra de direcciones de Chrome, elige Microfono = Permitir, y vuelve a pulsar Manos libres.");return;}
-      /* no-speech / aborted / network / audio-capture: no cortamos, seguimos escuchando */
-      vwListening=false;if(vwHands&&vwWantListen&&!vwSpeaking&&!vwThinking){setTimeout(vwStartListen,350);}};
-    r.onend=function(){vwListening=false;
-      /* si Chrome cerro la sesion pero quedo texto sin responder, lo aprovechamos */
-      if((vwFinalBuf+vwLastInterim).trim()&&!vwSpeaking&&!vwThinking){vwFlush();return;}
-      if(vwWantListen&&vwHands&&!vwSpeaking&&!vwThinking){setTimeout(vwStartListen,180);}};
-    vwRecog=r;return r;}
-  var vwWatch=null;
-  function vwArmWatch(){if(vwWatch)clearInterval(vwWatch);vwWatch=setInterval(function(){if(vwHands&&vwWantListen&&!vwListening&&!vwSpeaking&&!vwThinking){vwStartListen();}},1200);}
-  function vwStartListen(){if(!VW_SR||!vwHands||vwListening||vwSpeaking||vwThinking)return;var r=vwEnsureRecog();if(!r)return;vwFinalBuf="";vwWantListen=true;
-    try{r.start();vwListening=true;var o=document.getElementById("vwOrb");if(o)o.classList.add("talk");vwSetState("Escuchando... hablame");document.getElementById("vwMicLbl").textContent="Te escucho... habla con naturalidad";}
-    catch(e){vwListening=true;}}
-  function vwStopListen(hard){vwWantListen=false;if(vwSilenceTimer){clearTimeout(vwSilenceTimer);vwSilenceTimer=null;}if(vwMaxTimer){clearTimeout(vwMaxTimer);vwMaxTimer=null;}if(vwRecog){try{vwRecog.stop();}catch(e){}}vwListening=false;var o=document.getElementById("vwOrb");if(o&&!vwSpeaking)o.classList.remove("talk");if(hard){vwClearInterim();vwLastInterim="";}}
-  function vwFlush(){if(vwMaxTimer){clearTimeout(vwMaxTimer);vwMaxTimer=null;}if(vwSilenceTimer){clearTimeout(vwSilenceTimer);vwSilenceTimer=null;}
-    /* usa lo final; si Chrome no marco nada como final, usa el provisional acumulado */
-    var t=(vwFinalBuf.trim()||vwLastInterim.trim());vwFinalBuf="";vwLastInterim="";
-    if(!t){ if(vwHands&&!vwSpeaking){setTimeout(vwStartListen,200);} return; }
-    vwClearInterim();vwStopListen(false);vwAdd("user",t);vwSetState("AXEL esta analizando...");if(vozComando(t))return;vwThinking=true;vwSetState("AXEL esta pensando...");vozEnviar(t);}
-
-  window.vozToggleHands=function(){if(!VW_SR){alert("Tu navegador no permite reconocimiento de voz. Usa Google Chrome en PC o Android.");return;}
-    vwHands=!vwHands;refreshHandsBtn();
-    if(vwHands){vozWarmup();vwWantListen=true;vwArmWatch();
-      vozHablar("Hola, te escucho. Dime en que puedo ayudarte o pideme abrir cualquier parte de la web.");
-      setTimeout(function(){if(!vwSpeaking)vwStartListen();},1000);}
-    else{vozStopSpeak();vwStopListen(true);if(vwWatch){clearInterval(vwWatch);vwWatch=null;}vwSetState("Manos libres desactivado");document.getElementById("vwMicLbl").textContent="Pulsa \u00abManos libres\u00bb y hablame";}};
-  function refreshHandsBtn(){var b=document.getElementById("vwHandsToggle");var l=document.getElementById("vwHandsLbl");if(b)b.classList.toggle("on",vwHands);if(l)l.textContent=vwHands?"Escuchando":"Manos libres";}
-
-  function vozStopSpeak(){if(window.speechSynthesis)window.speechSynthesis.cancel();vwSpeaking=false;var o=document.getElementById("vwOrb");if(o)o.classList.remove("talk");}
-  function vozHablar(txt,_intentos){
-    if(!window.speechSynthesis){if(vwHands)vwStartListen();return;}
-    vwStopListen(false);
-    if((!window.__voces||!window.__voces.length)&&(_intentos||0)<4){cargarVoces();setTimeout(function(){vozHablar(txt,(_intentos||0)+1);},300);return;}
-    try{window.speechSynthesis.cancel();
-      setTimeout(function(){try{
-        var u=new SpeechSynthesisUtterance(txt.slice(0,4500));u.lang="es-ES";u.rate=1.02;u.pitch=1;u.volume=1;
-        var pref=mejorVozEs();if(pref){u.voice=pref;u.lang=pref.lang||"es-ES";}
-        vwSpeaking=true;var o=document.getElementById("vwOrb");if(o)o.classList.add("talk");vwSetState("AXEL esta hablando...");
-        u.onend=function(){vwSpeaking=false;var o2=document.getElementById("vwOrb");if(o2)o2.classList.remove("talk");if(vwHands){setTimeout(vwStartListen,180);}else{vwSetState("Pulsa \u00abManos libres\u00bb para seguir");}};
-        u.onerror=function(){vwSpeaking=false;var o3=document.getElementById("vwOrb");if(o3)o3.classList.remove("talk");if(vwHands)setTimeout(vwStartListen,180);};
-        window.speechSynthesis.speak(u);
-        setTimeout(function(){try{if(window.speechSynthesis.paused)window.speechSynthesis.resume();}catch(e){}},220);
-        setTimeout(function(){if(vwSpeaking&&!window.speechSynthesis.speaking&&!window.speechSynthesis.pending&&(_intentos||0)<2){vwSpeaking=false;vozHablar(txt,(_intentos||0)+1);}},700);
-      }catch(e2){vwSpeaking=false;if(vwHands)vwStartListen();}},140);
-    }catch(e){vwSpeaking=false;if(vwHands)vwStartListen();}}
-
-  window.vozEnviarTexto=function(){var inp=document.getElementById("vwText");var t=(inp.value||"").trim();if(!t)return;inp.value="";vwAdd("user",t);if(vozComando(t))return;vwThinking=true;vwSetState("AXEL esta pensando...");vozEnviar(t);};
-
-  function vozEnviar(texto){var typing=vwTyping();
-    fetch(WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usuario:"Visitante",sesion:vwSession,agente:AGENTE,mensaje:texto})})
-      .then(function(r){return r.json();}).then(function(data){vwThinking=false;var resp=(data&&(data.respuesta||data.output))||"";if(!resp){resp=LOCAL(texto);}typing.remove();var acts=vwSugerir(texto+" "+resp);vwAdd("bot",resp,acts);vozHablar(resp);})
-      .catch(function(){typing.remove();vwThinking=false;var resp=LOCAL(texto);vwAdd("bot",resp,vwSugerir(texto+" "+resp));vozHablar(resp);});}
-
-  function vozComando(texto){var n=(texto||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-    function h(){for(var i=0;i<arguments.length;i++){if(n.indexOf(arguments[i])>=0)return true;}return false;}
-    var abrir=h("abre","abrir","muestra","muestrame","ensename","llevame","lleva","ve a","vamos a","ir a","entra","entrar","quiero ver","ver la","ver el");
-    for(var i=0;i<MAP.length;i++){var s=MAP[i];if(!s.run&&!s.fn)continue;var run=s.run||s.fn;
-      for(var j=0;j<s.k.length;j++){if(n.indexOf(s.k[j])>=0){
-        var resp=s.resp||("Te llevo a "+s.label+".");
-        vwAdd("bot",resp);
-        if(window.speechSynthesis){try{window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(resp);u.lang="es-ES";u.rate=1.03;var pref=mejorVozEs();if(pref)u.voice=pref;u.onend=function(){setTimeout(run,150);};window.speechSynthesis.speak(u);}catch(e){setTimeout(run,300);}}
-        else{setTimeout(run,400);}
-        return true;}}}
-    return false;}
-
-  refreshHandsBtn();
-
-  /* ---- PERSONAJE: frases + saludo ---- */
-  (function(){var r=document.getElementById("robot");if(!r)return;var idx=0,boc=document.getElementById("rbBocadillo");
-    setTimeout(function(){r.classList.add("talk");setTimeout(function(){r.classList.remove("talk");},4200);},1600);
-    setInterval(function(){idx=(idx+1)%FRASES.length;if(boc)boc.textContent=FRASES[idx];r.classList.add("talk");setTimeout(function(){r.classList.remove("talk");},4200);},14000);
-    r.addEventListener("mouseenter",function(){r.classList.add("talk");});
-  })();
-})();
-
-/* ============ MOVIMIENTO POR LOS BORDES + NAVE (nunca el centro) ============ */
-(function(){
-  function init(){
-    var r=document.getElementById("robot");
-    if(!r){return setTimeout(init,300);}
-    var M=16, curP=Math.random(),tgtP=curP,run=false,lastY=window.pageYOffset||0,driftPhase=Math.random(),navTimer=null;
-    function widgetAbierto(){var w=document.getElementById("vozWidget");return w&&w.classList.contains("open");}
-    function nave(on){if(on){if(widgetAbierto())return;r.classList.remove("walk");r.classList.add("nave");}else{r.classList.remove("nave");r.classList.add("walk");}}
-    /* Punto sobre el PERIMETRO del viewport (solo bordes y rincones). p:0..1 recorre inferior->derecha->superior->izquierda */
-    function perim(p){
-      var w=window.innerWidth,h=window.innerHeight,rw=r.offsetWidth||74,rh=r.offsetHeight||118;
-      var minX=M,maxX=Math.max(M,w-rw-M),minY=74,maxY=Math.max(74,h-rh-M);
-      p=((p%1)+1)%1; var t;
-      if(p<0.30){ t=p/0.30; return {x:minX+(maxX-minX)*t,y:maxY}; }        /* borde inferior  -> derecha */
-      if(p<0.55){ t=(p-0.30)/0.25; return {x:maxX,y:maxY+(minY-maxY)*t}; } /* borde derecho   -> arriba  */
-      if(p<0.80){ t=(p-0.55)/0.25; return {x:maxX+(minX-maxX)*t,y:minY}; } /* borde superior  -> izq     */
-      t=(p-0.80)/0.20; return {x:minX,y:minY+(maxY-minY)*t};               /* borde izquierdo -> abajo    */
-    }
-    function calc(){
-      var de=document.documentElement,bd=document.body;
-      var sh=Math.max(de.scrollHeight,bd.scrollHeight),max=(sh-window.innerHeight)||1;
-      var sy=window.pageYOffset||de.scrollTop||bd.scrollTop||0;
-      var p=Math.min(1,Math.max(0,sy/max));
-      tgtP=driftPhase+p*0.85; /* destino como posicion sobre el perimetro */
-    }
-    function loop(){
-      /* interpolamos SOBRE el perimetro (parametro p), asi nunca cruza el centro */
-      curP+=(tgtP-curP)*0.02;
-      var pos=perim(curP);
-      r.style.left=pos.x.toFixed(1)+"px"; r.style.top=pos.y.toFixed(1)+"px"; r.style.right="auto"; r.style.bottom="auto";
-      if(Math.abs(tgtP-curP)>0.0015){requestAnimationFrame(loop);}else{curP=tgtP;run=false;r.classList.add("estrella");}
-    }
-    function kick(){if(!run){r.classList.remove("estrella");run=true;requestAnimationFrame(loop);}}
-    function viaje(){ nave(true); if(navTimer)clearTimeout(navTimer); navTimer=setTimeout(function(){nave(false);},7000); }
-    function onScroll(){calc();kick();var sy=window.pageYOffset||0;if(Math.abs(sy-lastY)>3){lastY=sy;viaje();}}
-    calc();curP=tgtP;
-    var _p0=perim(curP);r.style.left=_p0.x+"px";r.style.top=_p0.y+"px";r.style.right="auto";r.style.bottom="auto";
-    window.addEventListener("scroll",onScroll,{passive:true});
-    window.addEventListener("resize",function(){calc();kick();});
-    document.addEventListener("scroll",onScroll,{passive:true});
-    setInterval(function(){var sy=window.pageYOffset||0;if(sy!==lastY){onScroll();}},250);
-    /* deriva tranquila por los bordes aunque no haya scroll: llama la nave y viaja al siguiente rincon */
-    setInterval(function(){ if(widgetAbierto())return; driftPhase=(driftPhase+0.04)%1; calc(); kick(); viaje(); },26000);
+    `).join("");
   }
-  if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init);}else{init();}
-})();
+  const total = CARRITO.reduce((acc, p) => acc + (Number(p.precio)||0), 0);
+  document.getElementById("cartTotalUSD").innerText = "$" + total.toLocaleString();
+  document.getElementById("cartOverlay").classList.add("active");
+}
+
+function cerrarCarrito(){
+  document.getElementById("cartOverlay").classList.remove("active");
+}
+
+window.quitarDelCarrito = function(i){
+  CARRITO.splice(i, 1);
+  document.getElementById("hudBadge").innerText = CARRITO.length;
+  abrirCarrito();
+}
+
+function iniciarSecuenciaDePago(){
+  if(CARRITO.length===0) return alert("Secuencia abortada: Bahía vacía.");
+  alert("Secuencia de transmisión de créditos iniciada (Conectar a Checkout n8n aquí)");
+}
+
+/* =====================================================================
+   MOTOR 3D PARALLAX Y RENDERIZADO ESPACIAL
+   ===================================================================== */
+const camera = document.getElementById('camera');
+const body = document.body;
+let totalZ = 0;
+
+function construirUniverso(){
+  totalZ = PRODUCTOS.length * Z_SPACING;
+  // Ajustamos la altura del body para que el scroll nos permita recorrer todo el Z
+  body.style.minHeight = (totalZ + window.innerHeight + 1000) + "px";
+  
+  let html = "";
+  PRODUCTOS.forEach((p, i) => {
+    // Distribuir en el eje Z profundo
+    const zPos = -(i * Z_SPACING) - 1000; 
+    
+    // Distribuir en X e Y para que no estén todos en el centro tapándose
+    // Alternar izquierda, derecha, arriba, abajo
+    const xPos = (i % 2 === 0 ? 1 : -1) * (Math.random() * 400 + 200); 
+    const yPos = (i % 3 === 0 ? 1 : -1) * (Math.random() * 300 + 100);
+    
+    // Algunos rotan ligeramente para dar sensación de gravedad cero
+    const rotY = (Math.random() - 0.5) * 40;
+    const rotX = (Math.random() - 0.5) * 20;
+    
+    html += `
+      <div class="holo-card" style="transform: translate3d(${xPos}px, ${yPos}px, ${zPos}px) rotateY(${rotY}deg) rotateX(${rotX}deg);">
+        <div class="hc-img"><img src="${p.imagen}"></div>
+        <div class="hc-info">
+          <div class="hc-cat">${p.categoria}</div>
+          <div class="hc-title">${p.nombre}</div>
+          <div class="hc-price">$${(p.precio||0).toLocaleString()} ${p.moneda}</div>
+          <button class="hc-btn" onclick="agregarAlCarrito(${i})">INTERCEPTAR (AÑADIR)</button>
+        </div>
+      </div>
+    `;
+  });
+  
+  camera.innerHTML = html;
+}
+
+// Variables para suavizar el scroll (Lerp)
+let currentScrollY = 0;
+let targetScrollY = 0;
+
+window.addEventListener('scroll', () => {
+  targetScrollY = window.scrollY;
+  // Ocultar hint
+  if(targetScrollY > 100) document.getElementById('scrollHint').style.opacity = 0;
+});
+
+function animarMotor3D() {
+  // Interpolación lineal (Lerp) para un viaje ultra suave
+  currentScrollY += (targetScrollY - currentScrollY) * 0.1;
+  
+  // Mapeamos 1px de scroll a 1.5px de profundidad Z
+  const zCamera = currentScrollY * 1.5;
+  camera.style.transform = `translateZ(${zCamera}px)`;
+  
+  document.getElementById("hudProgress").innerText = `COORDENADA Z: ${Math.round(zCamera)}`;
+  
+  requestAnimationFrame(animarMotor3D);
+}
+
+/* =====================================================================
+   STARFIELD (WARP SPEED CANVAS)
+   ===================================================================== */
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+let width, height;
+let stars = [];
+
+function initStars() {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+  stars = [];
+  for(let i = 0; i < 800; i++) {
+    stars.push({
+      x: Math.random() * width - width / 2,
+      y: Math.random() * height - height / 2,
+      z: Math.random() * 2000,
+      size: Math.random() * 1.5 + 0.5
+    });
+  }
+}
+window.addEventListener('resize', initStars);
+initStars();
+
+function drawStars() {
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.4)'; // Estela de movimiento
+  ctx.fillRect(0, 0, width, height);
+  
+  const cx = width / 2;
+  const cy = height / 2;
+  
+  // Velocidad base + velocidad según scroll (target vs current detecta inercia)
+  const scrollVelocity = Math.abs(targetScrollY - currentScrollY);
+  const speed = 2 + (scrollVelocity * 0.1); 
+
+  ctx.fillStyle = '#fff';
+  for(let i = 0; i < stars.length; i++) {
+    let s = stars[i];
+    s.z -= speed;
+    
+    if(s.z <= 0) {
+      s.z = 2000;
+      s.x = Math.random() * width - width / 2;
+      s.y = Math.random() * height - height / 2;
+    }
+    
+    // Proyección 3D simple a 2D
+    const px = (s.x / s.z) * 1000 + cx;
+    const py = (s.y / s.z) * 1000 + cy;
+    
+    const scale = (2000 - s.z) / 2000;
+    const size = s.size * scale * 3;
+    
+    if(px >= 0 && px <= width && py >= 0 && py <= height) {
+      // Color dependiente de Z (los más lejanos oscuros, cercanos cyan)
+      if(s.z < 500) ctx.fillStyle = 'rgba(0, 255, 255, 1)';
+      else ctx.fillStyle = `rgba(255, 255, 255, ${scale})`;
+      
+      ctx.beginPath();
+      ctx.arc(px, py, size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+  
+  requestAnimationFrame(drawStars);
+}
+
+// Inicializar todo
+cargarProductos();
+animarMotor3D();
+drawStars();
+
 </script>
-<!-- ===================== FIN AVATAR AXEL ===================== -->
-
-
 </body>
 </html>

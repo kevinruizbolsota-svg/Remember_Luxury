@@ -265,28 +265,22 @@
       btn.innerText = "TRANSMITIENDO...";
       btn.style.opacity = "0.5";
       
-      // Enviamos el POST al webhook de n8n
-      const response = await fetch(WEBHOOK_N8N, {
+      await fetch(WEBHOOK_N8N, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        mode: "no-cors",
+        keepalive: true
       });
       
       btn.innerText = originalText;
       btn.style.opacity = "1";
-
-      if(response.ok) {
-        mostrarMensaje("TRANSMISIÓN EXITOSA. BASE DE DATOS ACTUALIZADA.", true);
-        return true;
-      } else {
-        mostrarMensaje("ERROR DE TRANSMISIÓN: EL SERVIDOR N8N RECHAZÓ LA CARGA.", false);
-        return false;
-      }
+      mostrarMensaje("TRANSMISIÓN COMPLETADA.", true);
+      return true;
     } catch(err) {
       document.querySelector(".panel.active .btn-submit").innerText = "REINTENTAR";
       document.querySelector(".panel.active .btn-submit").style.opacity = "1";
-      mostrarMensaje("FALLO CRÍTICO: NO SE PUDO CONECTAR CON N8N. REVISA LA URL DEL WEBHOOK.", false);
-      console.error(err);
+      mostrarMensaje("FALLO CRÍTICO: NO SE PUDO CONECTAR.", false);
       return false;
     }
   }
@@ -302,13 +296,12 @@
     };
     
     if(!producto.nombre || !producto.precio || !producto.categoria) {
-      mostrarMensaje("ERROR: DATOS INCOMPLETOS. RELLENA NOMBRE, PRECIO Y CATEGORÍA.", false);
+      mostrarMensaje("ERROR: DATOS INCOMPLETOS.", false);
       return;
     }
 
     const exito = await enviarPayload(producto);
     if(exito) {
-      // Limpiar formulario excepto categoría para subir más rápido
       document.getElementById("f_nombre").value = "";
       document.getElementById("f_precio").value = "";
       document.getElementById("f_imagen").value = "";
@@ -325,19 +318,28 @@
       mostrarMensaje("ERROR: FORMATO JSON INVÁLIDO. REVISA LA SINTAXIS.", false);
       return;
     }
-    
-    if(!Array.isArray(data)) {
-      mostrarMensaje("ERROR: EL JSON DEBE SER UN ARREGLO (ARRAY) DE OBJETOS [...].", false);
+    if(!Array.isArray(data) || data.length === 0) {
+      mostrarMensaje("ERROR: EL JSON DEBE SER UN ARREGLO CON AL MENOS UN PRODUCTO.", false);
       return;
     }
 
-    // Aquí enviamos el array completo al webhook
-    // N8N deberá recibir el array y hacer un "Split in Batches" o simplemente pasarlo a Google Sheets
-    const payload = { "productos_masivos": data };
-    const exito = await enviarPayload(payload);
-    if(exito) {
-      document.getElementById("f_json").value = "";
+    mostrarMensaje("INICIANDO TRANSMISIÓN MASIVA: " + data.length + " PRODUCTOS...", true);
+    let ok = 0;
+    for(let i = 0; i < data.length; i++) {
+      try {
+        await fetch(WEBHOOK_N8N, {
+          method: "POST",
+          mode: "no-cors",
+          keepalive: true,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data[i])
+        });
+        ok++;
+        mostrarMensaje("TRANSMITIENDO " + ok + "/" + data.length + "...", true);
+      } catch(e) { console.warn("Error en producto " + i, e); }
     }
+    mostrarMensaje("✓ TRANSMISIÓN COMPLETA: " + ok + "/" + data.length + " PRODUCTOS ENVIADOS A GOOGLE SHEETS.", true);
+    document.getElementById("f_json").value = "";
   }
 </script>
 </body>

@@ -12,7 +12,7 @@
 <style>
   :root{--tinta:#111;--oro:#c8a24a;--oro2:#f4e2a0;}
   *{margin:0;padding:0;box-sizing:border-box}
-  html,body{height:100%;overflow:hidden;background:#000;font-family:'Jost',-apple-system,'Segoe UI',sans-serif;color:#fff}
+  html,body{padding-top:52px;height:100%;overflow:hidden;background:#000;font-family:'Jost',-apple-system,'Segoe UI',sans-serif;color:#fff}
   a{color:inherit;text-decoration:none}
   .serif{font-family:'Cormorant Garamond',Georgia,serif}
 
@@ -78,6 +78,33 @@
 </style>
 </head>
 <body>
+<!-- ORIONIX NAV UNIVERSAL -->
+<style>
+#onav{position:fixed;top:0;left:0;width:100%;z-index:9999;display:flex;justify-content:space-between;align-items:center;padding:10px 5vw;background:rgba(11,11,13,.95);border-bottom:1px solid rgba(232,200,106,.2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font-family:'Cinzel',serif;}
+#onav .on-m{font-size:.68rem;font-weight:600;letter-spacing:4px;text-decoration:none;background:linear-gradient(92deg,#8a6a24,#e8c86a 40%,#fff6d6 60%,#e8c86a 80%,#8a6a24);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:onBrillo 6s linear infinite;flex-shrink:0;}
+@keyframes onBrillo{to{background-position:200% center}}
+#onav .on-l{display:flex;align-items:center;gap:0;flex-wrap:nowrap;}
+#onav .on-l a{color:#b8a982;text-decoration:none;margin-left:14px;font-size:.46rem;letter-spacing:1.4px;text-transform:uppercase;transition:color .2s;white-space:nowrap;font-family:'Cinzel',serif;}
+#onav .on-l a:hover{color:#e8c86a;}
+#onav .on-sp{width:1px;height:12px;background:rgba(232,200,106,.22);margin-left:14px;}
+#onav .on-l a.on-a{color:#e8c86a!important;font-weight:600;border:1px solid rgba(232,200,106,.32);border-radius:5px;padding:4px 10px;margin-left:7px;transition:background .2s,box-shadow .2s;}
+#onav .on-l a.on-a:hover{background:rgba(232,200,106,.12);box-shadow:0 0 10px rgba(232,200,106,.2);}
+@media(max-width:780px){#onav .on-l a:not(.on-a){display:none;}}
+</style>
+<div id="onav">
+  <a class="on-m" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/">ORIONIX</a>
+  <div class="on-l">
+    <a href="hub.html">Hub</a>
+    <a href="ciudadela.html">Ciudadela</a>
+    <a href="hogar.html">Hogar</a>
+    <a href="forjadora.html">Forjadora</a>
+    <div class="on-sp"></div>
+    <a href="axel.html" class="on-a">AXEL</a>
+    <a href="tienda.html" class="on-a">Tienda</a>
+  </div>
+</div>
+
+
 
 <div class="cargando" id="cargando">
   <div class="spin"></div>

@@ -186,12 +186,10 @@
   <div class="chatia">
     <label for="axelModelo">Motor</label>
     <select id="axelModelo" title="Elige el motor de IA">
-      <option value="groq">Groq · Llama 3.3 (rápido, cuota diaria)</option>
-      <option value="mistral">Mistral</option>
-      <option value="openrouter" selected>OpenRouter (recomendado)</option>
-      <option value="claude">Claude (Anthropic)</option>
-      <option value="gemini">Gemini (Google)</option>
-      <option value="perplexity" disabled>Perplexity — próximamente</option>
+      <option value="gemini" selected>Gemini (Google) — recomendado para el Consejo</option>
+      <option value="openrouter">OpenRouter (GPT-4o-mini)</option>
+      <option value="mistral">Mistral Large</option>
+      <option value="groq">Groq · Llama 3.3 (rápido)</option>
     </select>
   </div>
   <div class="chatin">
@@ -364,8 +362,9 @@ function abrirChat(agenteId,nombre,rol,pico){
 }
 function motorElegido(){ var s=document.getElementById("axelModelo"); return s?s.value:"openrouter"; }
 // Cadena de respaldo: si un motor esta agotado (cuota diaria), prueba el siguiente automaticamente.
+// "claude" eliminado (credenciales no disponibles en este servidor).
 function cadenaMotores(preferido){
-  var todos=["groq","gemini","openrouter","mistral","claude"];
+  var todos=["gemini","openrouter","mistral","groq"];
   var lista=[preferido];
   for(var i=0;i<todos.length;i++){ if(todos[i]!==preferido) lista.push(todos[i]); }
   return lista;
@@ -503,20 +502,28 @@ function pedirAgente(t, motor, agenteId){
     .then(function(d){ var r=d&&(d.respuesta||d.output); return (r&&(""+r).trim())?(""+r):null; })
     .catch(function(){ return null; });
 }
+// Motores disponibles para rotar entre agentes del Consejo
+var MOTORES_CONSEJO=["gemini","openrouter","mistral","groq"];
 function enviarAlConsejo(t){
   var preferido=motorElegido();
   try{ localStorage.setItem("orionix_motor", preferido); }catch(e){}
   var i=0;
+  function motorParaAgente(idx){
+    var base=[preferido].concat(MOTORES_CONSEJO.filter(function(m){return m!==preferido;}));
+    return base[idx % base.length];
+  }
   function siguiente(){
     if(i>=CONSEJO.length){ axelAdd("b","_El Consejo ha hablado._ \ud83c\udf1f"); return; }
-    var ag=CONSEJO[i++];
+    var ag=CONSEJO[i];
+    var motorBase=motorParaAgente(i);
+    i++;
     var pensando=axelAdd("b","_"+ag.pico+" **"+ag.nom+"** esta pensando..._");
-    var lista=cadenaMotores(preferido); var j=0;
+    var lista=cadenaMotores(motorBase); var j=0;
     function intentar(){
-      if(j>=lista.length){ pensando.innerHTML=renderMD(""+ag.pico+" **"+ag.nom+"**\n\n_(sin cuota ahora mismo, prueba otro motor arriba)_"); siguiente(); return; }
+      if(j>=lista.length){ pensando.innerHTML=renderMD(""+ag.pico+" **"+ag.nom+"**\n\n_(todos los motores ocupados, intenta en un momento)_"); setTimeout(siguiente, 800); return; }
       var motor=lista[j++];
       pedirAgente(t, motor, ag.id).then(function(resp){
-        if(resp){ pensando.innerHTML=renderMD(""+ag.pico+" **"+ag.nom+"** \u00b7 _"+ag.rol+"_\n\n"+resp); siguiente(); }
+        if(resp){ pensando.innerHTML=renderMD(""+ag.pico+" **"+ag.nom+"** \u00b7 _"+ag.rol+"_\n\n"+resp); setTimeout(siguiente, 400); }
         else { intentar(); }
       });
     }
@@ -524,6 +531,7 @@ function enviarAlConsejo(t){
   }
   siguiente();
 }
+
 // saludo inicial del director al cargar el log
 abrirChatInit();
 function abrirChatInit(){ var l=document.getElementById("axelLog"); if(l&&!l.children.length){ axelAdd("b","Soy **AXEL**, el Director de la Mesa. Dame una orden y reparto la mision a los agentes. _Comandos: `/imagen` crear imagen, `/pagina` forjar una web, `/recordar` programar un correo, `/bolsa` precios cripto, `/nota` y `/tarea` guardar, `/notas` ver todo._"); }

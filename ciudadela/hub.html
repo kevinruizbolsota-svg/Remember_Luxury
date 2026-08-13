@@ -2097,7 +2097,7 @@ function applyPanelStyle(id){
       <div class="acard">
         <h2 class="atitle">Configuración del Sitio</h2>
         <label class="alabel">Google Client ID</label>
-        <input class="ainput" id="site-google-client" type="text" placeholder="XXXXXXXXXXXX.apps.googleusercontent.com">
+        <input class="ainput" id="site-google-client" type="text" value="636206734640-fvo9u7m8pjj5an7d5kp5es55kf58jg4u.apps.googleusercontent.com">
         <p style="font-size:.7rem;color:rgba(184,169,130,.4);margin-top:-6px;">Crea uno en <a href="https://console.cloud.google.com/apis/credentials" target="_blank" style="color:#e8c86a;">Google Cloud Console</a> → Credenciales → OAuth 2.0 → Aplicación web</p>
         <label class="alabel">Webhook de publicación (n8n)</label>
         <input class="ainput" id="site-webhook-input" type="text" value="https://lkevinruizl.app.n8n.cloud/webhook/orionix-editor">
@@ -2152,7 +2152,7 @@ function applyPanelStyle(id){
    AUTH ENGINE — ORIONIX
    ═══════════════════════════════════ */
 var AUTH_WH='https://lkevinruizl.app.n8n.cloud/webhook/orionix-auth';
-var GOOGLE_CID=localStorage.getItem('orionix_google_client')||'';
+var GOOGLE_CID=localStorage.getItem('orionix_google_client')||'636206734640-fvo9u7m8pjj5an7d5kp5es55kf58jg4u.apps.googleusercontent.com';
 var currentUser=null, sessToken=null;
 
 (function initAuth(){

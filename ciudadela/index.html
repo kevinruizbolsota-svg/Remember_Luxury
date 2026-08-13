@@ -2569,5 +2569,108 @@
 })();
 </script>
 <!-- FIN PARCHE moneda -->
+<script>
+// AXEL VOZ — usa n8n como proxy seguro para Deepgram
+(function(){
+  var WEBHOOK = 'https://lkevinruizl.app.n8n.cloud/webhook/axel-voz';
+  var mediaRec = null, chunks = [];
+
+  function getMicBtn() {
+    return document.getElementById('axelMicBtn') || document.querySelector('[id*="mic"]');
+  }
+
+  function setStatus(txt, color) {
+    var el = document.getElementById('axelMicStatus');
+    if (el) { el.textContent = txt; el.style.color = color || '#e8c86a'; }
+  }
+
+  function blobToBase64(blob) {
+    return new Promise(function(res, rej) {
+      var r = new FileReader();
+      r.onloadend = function() { res(r.result.split(',')[1]); };
+      r.onerror = rej;
+      r.readAsDataURL(blob);
+    });
+  }
+
+  async function enviarAudio(blob, mimeType) {
+    try {
+      setStatus('Procesando...', '#c8a24a');
+      var b64 = await blobToBase64(blob);
+      var resp = await fetch(WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ audio: b64, mimeType: mimeType })
+      });
+      var data = await resp.json();
+      if (data.ok && data.texto) {
+        setStatus('', '');
+        // Mete el texto en el input de AXEL y lo envía
+        var inp = document.getElementById('axelInput') || document.querySelector('.axel-input, [placeholder*="mensaje"]');
+        if (inp) {
+          inp.value = data.texto;
+          inp.dispatchEvent(new Event('input', { bubbles: true }));
+          // Simula Enter para enviar
+          inp.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+        }
+      } else {
+        setStatus(data.mensaje || 'No se entendió. Intenta de nuevo.', '#e07070');
+      }
+    } catch(e) {
+      setStatus('Error de conexión. Intenta de nuevo.', '#e07070');
+    }
+  }
+
+  function iniciar() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      setStatus('Micrófono no disponible en este navegador.', '#e07070');
+      return;
+    }
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function(stream) {
+      var mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
+        ? 'audio/webm;codecs=opus' : 'audio/webm';
+      chunks = [];
+      mediaRec = new MediaRecorder(stream, { mimeType: mimeType });
+      mediaRec.ondataavailable = function(e) { if (e.data.size > 0) chunks.push(e.data); };
+      mediaRec.onstop = function() {
+        var blob = new Blob(chunks, { type: mimeType });
+        stream.getTracks().forEach(function(t){ t.stop(); });
+        enviarAudio(blob, mimeType);
+      };
+      mediaRec.start();
+      setStatus('Escuchando... toca de nuevo para detener', '#7ddc9a');
+      var btn = getMicBtn();
+      if (btn) btn.classList.add('grabando');
+    }).catch(function(err) {
+      setStatus('Permiso de micrófono denegado.', '#e07070');
+    });
+  }
+
+  function detener() {
+    if (mediaRec && mediaRec.state === 'recording') {
+      mediaRec.stop();
+      var btn = getMicBtn();
+      if (btn) btn.classList.remove('grabando');
+    }
+  }
+
+  // Exponemos globalmente para que cualquier botón lo llame
+  window.axelVozToggle = function() {
+    if (mediaRec && mediaRec.state === 'recording') { detener(); }
+    else { iniciar(); }
+  };
+
+  // Conecta automáticamente a cualquier botón con id axelMicBtn
+  document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('axelMicBtn');
+    if (btn) btn.onclick = window.axelVozToggle;
+  });
+})();
+</script>
+<style>
+#axelMicBtn { transition: box-shadow .3s, transform .3s; }
+#axelMicBtn.grabando { box-shadow: 0 0 0 4px rgba(125,220,154,.5); transform: scale(1.12); animation: micPulse 1s ease-in-out infinite; }
+@keyframes micPulse { 0%,100%{ box-shadow:0 0 0 4px rgba(125,220,154,.4); } 50%{ box-shadow:0 0 0 8px rgba(125,220,154,.15); } }
+</style>
 </body>
 </html>

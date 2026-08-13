@@ -2077,6 +2077,7 @@
     vwThinking=true;vwSetState("AXEL esta pensando...");vozEnviar(t);
   }
   /* ---- MICROFONO del chat de AXEL: graba -> transcribe (webhook) -> escribe en el input, igual que el portal ---- */
+  var VOZ_WEBHOOK='https://lkevinruizl.app.n8n.cloud/webhook/axel-voz';
   var __vwMr=null,__vwChunks=[],__vwGrab=false,__vwStream=null;
   function vwMic(){
     var btn=document.getElementById("vwMicBtn");
@@ -2096,7 +2097,8 @@
         var blob=new Blob(__vwChunks,{type:(__vwChunks[0]&&__vwChunks[0].type)||"audio/webm"});
         var fr=new FileReader();
         fr.onloadend=function(){
-          fetch(VOZ_WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({audio:fr.result})})
+          var rawB64=fr.result.split(",")[1];var mType=(__vwChunks[0]&&__vwChunks[0].type)||"audio/webm";
+          fetch(VOZ_WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({audio:rawB64,mimeType:mType})})
           .then(function(r){return r.json();})
           .then(function(d){
             var t=(d&&d.texto?d.texto:"").trim();

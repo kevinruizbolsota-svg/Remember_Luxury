@@ -486,11 +486,15 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,sans-serif;b
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
               Voz
             </button>
-            <button class="tool-btn" title="Adjuntar archivo">
+            <button class="tool-btn" title="Adjuntar archivo" onclick="document.getElementById('fileInput').click()">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
               Archivo
             </button>
-            <button class="tool-btn" title="Búsqueda web">
+            <button class="tool-btn" onclick="generateVideo()" title="Generar video">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              Video
+            </button>
+            <button class="tool-btn" onclick="webSearch()" title="Búsqueda en internet">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
               Web
             </button>
@@ -686,7 +690,7 @@ function callAxel(userMsg) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      chatInput: userMsg,
+      chatInput: (currentMode==='imagenes'?'GENERA UNA IMAGEN de: '+userMsg:userMsg),
       sessionId: currentChatId,
       model: currentModel,
       system: systemContext,
@@ -695,7 +699,8 @@ function callAxel(userMsg) {
   })
   .then(function(r){ return r.json(); })
   .then(function(data){
-    var reply = data.output || data.text || data.message || data.response || JSON.stringify(data);
+    var reply = data.respuesta || data.output || data.text || data.message || data.response || (typeof data==='string'?data:JSON.stringify(data));
+    if(data.imagen_url||data.imageUrl||data.image){var iu=data.imagen_url||data.imageUrl||data.image;reply=(reply&&reply!==JSON.stringify(data)?reply+'\n\n':'')+'![imagen generada]('+iu+')';}    
     var el = document.getElementById(thinkId);
     if(el) el.remove();
     appendMsg('axel', reply, true);
@@ -811,6 +816,34 @@ function renderStars(){
   window.addEventListener('resize',rsz);
   var S=[];for(var i=0;i<180;i++)S.push({x:Math.random(),y:Math.random(),r:.15+Math.random()*.6,a:.2+Math.random()*.6,sp:.00008+Math.random()*.0004});
   (function draw(){ctx.clearRect(0,0,c.width,c.height);S.forEach(function(s){s.a+=Math.sin(Date.now()*s.sp)*.002;ctx.beginPath();ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);ctx.fillStyle='rgba(255,248,220,'+Math.max(.05,Math.min(.85,s.a))+')';ctx.fill()});requestAnimationFrame(draw)})();
+}
+</script>
+<input type="file" id="fileInput" accept="image/*,.pdf,.txt,.doc,.docx,.csv" style="display:none" onchange="handleFileAttach(event)">
+<script>
+function handleFileAttach(e){
+  var file=e.target.files[0];if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(ev){
+    var msgs=document.getElementById('messages');
+    msgs.style.display='flex';document.getElementById('welcome').style.display='none';
+    if(file.type.startsWith('image/')){
+      var w=document.createElement('div');w.className='msg-wrapper user';
+      w.innerHTML='<div class="msg-body"><div class="msg-name user-name">Tú</div><div class="msg-bubble user-bubble"><img src="'+ev.target.result+'" style="max-width:220px;border-radius:10px;" alt="adjunto"></div></div><div class="msg-avatar user-av">🧑</div>';
+      msgs.appendChild(w);msgs.scrollTop=msgs.scrollHeight;
+      sendMsg('🖼 Analiza esta imagen que adjunté y dime qué ves con detalle.');
+    } else {
+      sendMsg('📎 He adjuntado: '+file.name+' ('+Math.round(file.size/1024)+' KB). Ayúdame con su contenido.');
+    }
+  };
+  reader.readAsDataURL(file);e.target.value='';
+}
+function webSearch(){
+  var q=prompt('🔍 ¿Qué quieres buscar en internet?');
+  if(q&&q.trim())sendMsg('🔍 Investiga en internet sobre: '+q.trim()+'. Dame un resumen actualizado y fuentes.');
+}
+function generateVideo(){
+  var p=prompt('🎬 Describe el video o storyboard que quieres crear:');
+  if(p&&p.trim())sendMsg('🎬 Crea un storyboard detallado para un video sobre: '+p.trim()+'. Incluye escenas, narración y efectos visuales.');
 }
 </script>
 </body>

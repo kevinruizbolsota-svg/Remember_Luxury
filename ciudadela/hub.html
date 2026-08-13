@@ -3,584 +3,380 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIONIX · Panel de Control — Centro de Mando</title>
-<meta name="description" content="Panel de Control ORIONIX — todos los portales del universo desde un solo lugar.">
-<meta name="robots" content="index, follow">
+<title>ORIONIX · Portal Central</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230b0b0d'/%3E%3Ctext x='50' y='72' font-size='60' text-anchor='middle' fill='%23e8c86a'%3E%F0%9F%91%91%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--oro:#e8c86a;--oro-med:#c8a24a;--oro-osc:#8a6a24;--bg:#0b0b0d;--panel:#141117;--border:#2a2530;--texto:#e9ddc4;--tenue:#b8a982}
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--bg);color:var(--texto);min-height:100vh;overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
-h1,h2,h3,.marca,.btn,.cinzel{font-family:'Cinzel',serif}
-.oro{background:linear-gradient(92deg,#8a6a24,#e8c86a 25%,#fff6d6 50%,#e8c86a 75%,#8a6a24);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 6s linear infinite}
+:root{
+  --oro:#e8c86a;--oro-med:#c8a24a;--oro-osc:#8a6a24;
+  --bg:#06050d;--texto:#e9ddc4;--tenue:#b8a982;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden}
+@media(max-width:860px){html,body{overflow:auto}}
+body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--bg);color:var(--texto);-webkit-font-smoothing:antialiased}
+
+/* ── COSMOS ── */
+#cosmos{position:fixed;inset:0;z-index:0;
+  background:radial-gradient(ellipse at 50% 30%,#080818,#03030a 60%,#010104 100%);overflow:hidden}
+.neb{position:absolute;inset:-20%;
+  background:
+    radial-gradient(closest-side,rgba(90,60,180,.45),transparent) no-repeat 22% 20% / 55% 55%,
+    radial-gradient(closest-side,rgba(40,90,200,.35),transparent) no-repeat 78% 45% / 50% 50%,
+    radial-gradient(closest-side,rgba(180,100,50,.28),transparent) no-repeat 50% 82% / 65% 65%;
+  filter:blur(42px);opacity:.65;animation:nebFloat 55s ease-in-out infinite alternate}
+@keyframes nebFloat{to{transform:translate(-3%,-4%) scale(1.15)}}
+#starfield{position:fixed;inset:0;z-index:1;pointer-events:none}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 5vw;
+  background:rgba(6,5,13,.75);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(232,200,106,.1);
+}
+.nav-brand{
+  font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;letter-spacing:5px;
+  background:linear-gradient(92deg,#8a6a24,#e8c86a 35%,#fff6d6 50%,#e8c86a 70%,#8a6a24);
+  background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:brilloOro 6s linear infinite;text-decoration:none;
+}
 @keyframes brilloOro{to{background-position:200% center}}
-#cosmos{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 50% 20%,#0a0a16,#03030a 60%,#010104 100%);overflow:hidden}
-#cosmos .neb{position:absolute;inset:-20%;background:radial-gradient(closest-side,var(--neb1),transparent) no-repeat,radial-gradient(closest-side,var(--neb2),transparent) no-repeat,radial-gradient(closest-side,var(--neb3),transparent) no-repeat;background-position:20% 15%,80% 40%,50% 85%;background-size:60% 60%,55% 55%,70% 70%;filter:blur(38px);opacity:.55;animation:nebFloat 50s ease-in-out infinite alternate}
-@keyframes nebFloat{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(-3%,-4%,0) scale(1.12)}}
-#cosmosStars{position:fixed;inset:0;z-index:-1;pointer-events:none}
-body[data-cielo="1"]{--neb1:rgba(90,60,180,.5);--neb2:rgba(40,90,200,.4);--neb3:rgba(200,120,60,.35)}
-body[data-cielo="2"]{--neb1:rgba(200,60,120,.45);--neb2:rgba(120,40,160,.4);--neb3:rgba(60,120,200,.35)}
-body[data-cielo="3"]{--neb1:rgba(40,140,150,.45);--neb2:rgba(30,80,180,.4);--neb3:rgba(150,200,120,.28)}
-body[data-cielo="4"]{--neb1:rgba(180,120,40,.45);--neb2:rgba(150,40,60,.4);--neb3:rgba(90,40,160,.35)}
-body[data-cielo="5"]{--neb1:rgba(60,60,120,.5);--neb2:rgba(120,120,200,.35);--neb3:rgba(200,180,120,.3)}
-body[data-cielo="6"]{--neb1:rgba(20,120,90,.45);--neb2:rgba(160,60,180,.4);--neb3:rgba(230,180,90,.32)}
+.nav-links{display:flex;gap:20px;align-items:center}
+.nav-links a{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:1.8px;text-transform:uppercase;color:var(--tenue);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--oro)}
+.nav-links a.acc{color:var(--oro);border:1px solid rgba(232,200,106,.32);border-radius:4px;padding:5px 11px}
+@media(max-width:700px){.nav-links{display:none}}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;width:100%;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:14px 6vw;transition:padding .3s,background .3s}
-nav.scrolled{padding:8px 6vw;background:rgba(11,11,13,.96);border-bottom:1px solid rgba(232,200,106,.15);backdrop-filter:blur(16px)}
-nav .marca{font-size:.72rem;font-weight:700;letter-spacing:5px;text-decoration:none;color:var(--texto)}
-nav .links{display:flex;align-items:center;gap:0;flex-wrap:nowrap}
-nav .links a{color:var(--tenue);text-decoration:none;margin-left:18px;font-size:.48rem;letter-spacing:1.6px;text-transform:uppercase;font-family:'Cinzel',serif;transition:color .25s;position:relative;cursor:pointer;white-space:nowrap}
-nav .links a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--oro);transition:width .3s}
-nav .links a:hover{color:var(--oro)}nav .links a:hover::after{width:100%}
-nav .links a.acc{color:var(--oro)!important;font-weight:700;border:1px solid rgba(232,200,106,.38);border-radius:4px;padding:6px 14px;margin-left:10px;transition:background .25s,box-shadow .25s}
-nav .links a.acc:hover{background:rgba(232,200,106,.12);box-shadow:0 0 16px rgba(232,200,106,.25)}
-nav .links a.acc::after{display:none}
-@media(max-width:860px){nav .links{display:none}}
+/* ── BEAMS CANVAS ── */
+#beamCanvas{position:fixed;inset:0;z-index:5;pointer-events:none}
 
-/* HERO */
-#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 7vw;position:relative}
-#hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(232,200,106,.05) 1px,transparent 1px);background-size:28px 28px;opacity:.5;pointer-events:none}
-#hero::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(2,2,7,.3),rgba(2,2,7,.6));pointer-events:none}
-.hero-badge{font-family:'Cinzel',serif;letter-spacing:6px;font-size:.48rem;color:var(--oro-med);text-transform:uppercase;margin-bottom:18px;opacity:.75}
-.hero-title{font-family:'Cinzel',serif;font-size:clamp(2rem,7vw,5.5rem);font-weight:900;letter-spacing:clamp(8px,2.5vw,28px);background:linear-gradient(120deg,#8a6d2a 0%,#f6e6ad 28%,#fff8e1 48%,#f6e6ad 68%,#b8912f 100%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;filter:drop-shadow(0 4px 40px rgba(232,200,106,.45));animation:brilloTitulo 6s linear infinite;margin-bottom:6px}
-@keyframes brilloTitulo{to{background-position:220% center}}
-.hero-subtitle{font-family:'Cinzel',serif;font-size:clamp(.7rem,1.8vw,1rem);letter-spacing:clamp(4px,1.5vw,14px);color:var(--tenue);margin-bottom:22px;opacity:.7}
-.hero-desc{font-size:clamp(.85rem,1.6vw,1.05rem);font-style:italic;color:var(--tenue);max-width:500px;margin:0 auto 36px;line-height:1.7;opacity:.85}
-.hairline{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--oro),transparent);margin:0 auto 30px}
-.cta-bar{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-.btn-main{display:inline-flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;text-decoration:none;padding:14px 36px;font-family:'Cinzel',serif;font-size:.62rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#1a1409;background:linear-gradient(135deg,#f4e2a0,#e8c86a 45%,#c8a24a);border:none;border-radius:3px;transition:box-shadow .3s,transform .25s}
-.btn-main:hover{box-shadow:0 8px 30px rgba(232,200,106,.5);transform:translateY(-2px)}
-.btn-outline{display:inline-flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;text-decoration:none;padding:13px 34px;font-family:'Cinzel',serif;font-size:.62rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--oro);background:transparent;border:1px solid rgba(232,200,106,.42);border-radius:3px;transition:background .3s,box-shadow .3s,transform .25s}
-.btn-outline:hover{background:rgba(232,200,106,.1);box-shadow:0 6px 24px rgba(232,200,106,.28);transform:translateY(-2px)}
-.scroll-ind{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);color:var(--oro-med);font-size:1.4rem;animation:flota 2s ease-in-out infinite;z-index:3}
-@keyframes flota{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
+/* ── MAIN GRID ── */
+#hub{
+  position:fixed;inset:0;z-index:10;
+  display:grid;
+  grid-template-columns: 1fr 1.7fr 1fr;
+  grid-template-rows: 1fr 1.55fr 1fr;
+  grid-template-areas:
+    ".    top    ."
+    "left center right"
+    ".    bottom .";
+  padding: 66px 28px 20px;
+  gap: 14px;
+}
 
-/* PANEL */
-#panel{padding:80px 6vw 100px;position:relative}
-#panel::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(2,2,7,.45),rgba(2,2,7,.88));pointer-events:none}
+/* ── PORTAL BASE ── */
+.portal{
+  position:relative;overflow:hidden;
+  border:1px solid rgba(232,200,106,.15);
+  border-radius:14px;
+  background:rgba(10,8,18,.8);
+  backdrop-filter:blur(18px);
+  cursor:pointer;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;align-items:center;
+  padding:20px 18px 26px;
+  text-decoration:none;color:inherit;
+  transition:transform .3s cubic-bezier(.4,0,.2,1),box-shadow .3s,border-color .3s;
+  user-select:none;
+}
+/* Placeholder zone for images — user drops images here */
+.portal-img-zone{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:4.5rem;
+  opacity:.18;
+  pointer-events:none;
+}
+/* Bottom gradient so text is always readable */
+.portal::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:65%;
+  background:linear-gradient(transparent,rgba(6,5,13,.85) 60%,rgba(6,5,13,.97));
+  pointer-events:none;z-index:1;
+}
+.portal-text{position:relative;z-index:2;text-align:center}
+.portal-name{
+  font-family:'Cinzel',serif;
+  font-size:clamp(.85rem,2vw,1.45rem);
+  font-weight:900;letter-spacing:4px;
+  line-height:1.15;
+  background:linear-gradient(130deg,#8a6d2a 0%,#f6e6ad 38%,#fff8e0 52%,#f6e6ad 68%,#8a6d2a 100%);
+  background-size:240%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:brilloOro 7s linear infinite;
+  filter:drop-shadow(0 2px 14px rgba(232,200,106,.55));
+}
+.portal-sub{
+  font-family:'Cinzel',serif;font-size:clamp(.33rem,.8vw,.5rem);
+  letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(232,200,106,.45);margin-top:7px;
+}
 
-/* SECTION HEADER */
-.sec-wrap{max-width:1160px;margin:0 auto}
-.sec-header{margin-bottom:30px}
-.sec-sup{font-family:'Cinzel',serif;letter-spacing:6px;font-size:.44rem;color:var(--oro-med);text-transform:uppercase;opacity:.7;margin-bottom:5px}
-.sec-title{font-family:'Cinzel',serif;font-size:clamp(.85rem,2vw,1.25rem);letter-spacing:6px}
+/* Grid zones */
+.portal.top   {grid-area:top}
+.portal.left  {grid-area:left}
+.portal.right {grid-area:right}
+.portal.bottom{grid-area:bottom}
 
-/* DIVIDER */
-.divider{max-width:1160px;margin:60px auto 36px;display:flex;align-items:center;gap:20px;opacity:.38}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--oro),transparent)}
-.divider span{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:5px;color:var(--oro-med);text-transform:uppercase;white-space:nowrap}
+/* ── HOVER PER ZONE ── */
+.portal.top:hover{
+  transform:scale(1.035) translateY(-3px);
+  box-shadow:0 0 50px rgba(232,200,106,.22),0 0 0 1px rgba(232,200,106,.44);
+  border-color:rgba(232,200,106,.5);
+}
+.portal.left:hover{
+  transform:scale(1.035) translateX(-3px);
+  box-shadow:0 0 50px rgba(100,170,255,.2),0 0 0 1px rgba(100,170,255,.38);
+  border-color:rgba(100,170,255,.45);
+}
+.portal.right:hover{
+  transform:scale(1.035) translateX(3px);
+  box-shadow:0 0 50px rgba(80,220,170,.18),0 0 0 1px rgba(80,220,170,.35);
+  border-color:rgba(80,220,170,.42);
+}
+.portal.bottom:hover{
+  transform:scale(1.035) translateY(3px);
+  box-shadow:0 0 50px rgba(190,100,255,.2),0 0 0 1px rgba(190,100,255,.38);
+  border-color:rgba(190,100,255,.45);
+}
 
-/* GRIDS */
-.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1160px;margin:0 auto}
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1160px;margin:0 auto}
-@media(max-width:1100px){.grid-4{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:860px){.grid-4,.grid-3{grid-template-columns:1fr 1fr}}
-@media(max-width:520px){.grid-4,.grid-3{grid-template-columns:1fr}}
+/* Color accent per zone */
+.portal.left .portal-name{
+  background:linear-gradient(130deg,#3a6aaa,#80b4ff 40%,#d0e8ff,#80b4ff,#3a6aaa);
+  background-size:240%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 14px rgba(100,170,255,.55));
+}
+.portal.right .portal-name{
+  background:linear-gradient(130deg,#1a6a4a,#50e0a0 40%,#c0fff0,#50e0a0,#1a6a4a);
+  background-size:240%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 14px rgba(80,220,160,.55));
+}
+.portal.bottom .portal-name{
+  background:linear-gradient(130deg,#6a1a9a,#c060ff 40%,#ecc0ff,#c060ff,#6a1a9a);
+  background-size:240%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 14px rgba(190,100,255,.55));
+}
 
-/* CARD */
-.card{border:1px solid rgba(232,200,106,.16);border-radius:6px;background:rgba(20,17,23,.8);backdrop-filter:blur(20px);overflow:hidden;display:flex;flex-direction:column;transition:transform .35s,box-shadow .35s,border-color .35s;text-decoration:none;color:inherit;position:relative;cursor:pointer}
-.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,200,106,.03),transparent 60%);pointer-events:none}
-.card:hover{transform:translateY(-6px);box-shadow:0 16px 50px rgba(232,200,106,.14),0 0 0 1px rgba(232,200,106,.3);border-color:rgba(232,200,106,.35)}
-.card.featured{border-color:rgba(232,200,106,.24)}
-.card.featured::before{background:linear-gradient(135deg,rgba(232,200,106,.06),transparent 60%)}
-.card.featured:hover{box-shadow:0 20px 60px rgba(232,200,106,.22),0 0 0 1px rgba(232,200,106,.42)}
-.card.soon{opacity:.28;pointer-events:none}
-.card-head{padding:22px 20px 14px;border-bottom:1px solid rgba(232,200,106,.08)}
-.card-icon{font-size:1.9rem;margin-bottom:10px;display:block}
-.card-label{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:5px;text-transform:uppercase;color:var(--oro-med);margin-bottom:4px;opacity:.7}
-.card-title{font-family:'Cinzel',serif;font-size:.92rem;letter-spacing:3px;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.3}
-.card.soon .card-title{background:none;color:rgba(255,255,255,.2);-webkit-text-fill-color:rgba(255,255,255,.2)}
-.card-desc{font-size:.76rem;font-style:italic;color:var(--tenue);margin-top:6px;line-height:1.5;opacity:.8}
-.card-body{padding:14px 20px 20px;display:flex;flex-direction:column;gap:7px;flex:1}
-.card-btn{display:flex;align-items:center;justify-content:space-between;text-decoration:none;padding:10px 14px;border:1px solid rgba(232,200,106,.17);border-radius:3px;background:rgba(232,200,106,.04);color:var(--texto);font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:2px;text-transform:uppercase;transition:background .25s,border-color .25s,color .25s,transform .2s;cursor:pointer}
-.card-btn:hover{background:rgba(232,200,106,.11);border-color:rgba(232,200,106,.42);color:var(--oro);transform:translateX(3px)}
-.card-btn .arr{font-size:.7rem;color:var(--oro-med);transition:transform .2s;flex-shrink:0;margin-left:8px}
-.card-btn:hover .arr{transform:translateX(4px)}
-.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-family:'Cinzel',serif;font-size:.36rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:4px;width:fit-content}
-.badge.live{color:#4ade80;border:1px solid rgba(74,222,128,.3);background:rgba(74,222,128,.06)}
-.badge.live::before{content:'';width:5px;height:5px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px #4ade80;animation:pulseLive 2s infinite;flex-shrink:0}
-@keyframes pulseLive{0%,100%{opacity:1}50%{opacity:.4}}
-.badge.coming{color:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04)}
+/* ── CENTER OVAL (La Ciudadela) ── */
+.portal.center{
+  grid-area:center;
+  border-radius:50%;            /* oval = because cell is wider than tall */
+  border:2px solid rgba(232,200,106,.28);
+  background:radial-gradient(ellipse at 50% 38%,rgba(22,14,40,.97),rgba(8,6,16,.99) 80%);
+  justify-content:center;align-items:center;padding:16px;
+}
+.portal.center::before{display:none}
 
-/* AXEL ORB */
-#axelTrail{position:fixed;inset:0;pointer-events:none;z-index:9998}
-#axelOrb{position:fixed;width:64px;height:64px;cursor:grab;z-index:9999;user-select:none;-webkit-user-select:none;touch-action:none}
-#axelOrb:active{cursor:grabbing}
-.orb-ring{position:absolute;inset:-6px;border-radius:50%;border:2px solid transparent;background:conic-gradient(from 0deg,#e8c86a,#fff6d6,#c8a24a,#fff6d6,#e8c86a) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;animation:orbSpin 3s linear infinite}
-@keyframes orbSpin{to{transform:rotate(360deg)}}
-.orb-core{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff8e8,#f4d878 18%,#e8c86a 32%,#c8a24a 55%,#8a6a24 78%,#3a2a08);box-shadow:0 0 20px rgba(232,200,106,.7),0 0 40px rgba(232,200,106,.35),0 0 60px rgba(232,200,106,.15),inset 0 0 16px rgba(255,246,214,.4);display:flex;align-items:center;justify-content:center;animation:orbPulse 2.5s ease-in-out infinite}
-@keyframes orbPulse{0%,100%{box-shadow:0 0 20px rgba(232,200,106,.7),0 0 40px rgba(232,200,106,.35),0 0 60px rgba(232,200,106,.15),inset 0 0 16px rgba(255,246,214,.4)}50%{box-shadow:0 0 30px rgba(232,200,106,1),0 0 60px rgba(232,200,106,.6),0 0 90px rgba(232,200,106,.25),inset 0 0 22px rgba(255,246,214,.6)}}
-.orb-sheen{position:absolute;inset:8px;border-radius:50%;background:radial-gradient(circle at 38% 28%,rgba(255,255,255,.55),transparent 58%)}
-.orb-label{font-family:'Cinzel',serif;font-size:.85rem;font-weight:700;color:#1a0f00;position:relative;z-index:1;pointer-events:none}
-#axelPanel{position:fixed;bottom:108px;right:30px;width:320px;max-height:480px;background:rgba(11,11,13,.97);border:1px solid rgba(232,200,106,.28);border-radius:10px;display:flex;flex-direction:column;z-index:9997;transform:translateY(16px) scale(.96);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(24px);box-shadow:0 24px 70px rgba(0,0,0,.85),0 0 30px rgba(232,200,106,.08)}
-#axelPanel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all}
-.ap-hdr{padding:14px 16px;border-bottom:1px solid rgba(232,200,106,.13);display:flex;align-items:center;gap:10px}
-.ap-av{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff8e8,#e8c86a 36%,#8a6a24 78%);flex-shrink:0;box-shadow:0 0 10px rgba(232,200,106,.5);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:.65rem;font-weight:700;color:#1a0f00}
-.ap-nm{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:2px;color:var(--oro)}
-.ap-st{font-size:.58rem;color:rgba(232,200,106,.45);letter-spacing:1px;margin-top:1px}
-.ap-x{margin-left:auto;background:none;border:none;color:rgba(232,200,106,.4);font-size:1.1rem;cursor:pointer;line-height:1;padding:3px;transition:color .2s}
-.ap-x:hover{color:var(--oro)}
-.ap-msgs{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:9px;min-height:160px}
-.ap-msgs::-webkit-scrollbar{width:3px}.ap-msgs::-webkit-scrollbar-thumb{background:rgba(232,200,106,.25)}
-.ap-msg{padding:9px 12px;border-radius:4px;font-size:.76rem;line-height:1.55;max-width:88%}
-.ap-msg.bot{background:rgba(232,200,106,.07);border:1px solid rgba(232,200,106,.14);color:var(--texto);align-self:flex-start}
-.ap-msg.usr{background:rgba(232,200,106,.13);border:1px solid rgba(232,200,106,.28);color:var(--texto);align-self:flex-end;text-align:right}
-.ap-ft{padding:11px 16px;border-top:1px solid rgba(232,200,106,.13);display:flex;gap:7px}
-.ap-ft input{flex:1;background:rgba(232,200,106,.05);border:1px solid rgba(232,200,106,.18);border-radius:3px;padding:8px 11px;color:var(--texto);font-family:'Cormorant Garamond',serif;font-size:.78rem;outline:none;transition:border-color .2s}
-.ap-ft input:focus{border-color:rgba(232,200,106,.45)}
-.ap-ft button{background:var(--oro-med);border:none;color:#1a0f00;width:34px;border-radius:3px;cursor:pointer;font-size:.9rem;transition:background .2s;font-weight:700}
-.ap-ft button:hover{background:var(--oro)}
+/* Spinning ring */
+.portal.center::after{
+  content:'';position:absolute;inset:-2px;border-radius:50%;
+  background:conic-gradient(from 0deg,
+    transparent 0%,transparent 35%,
+    rgba(232,200,106,.55) 45%,rgba(255,246,214,.8) 50%,rgba(232,200,106,.55) 55%,
+    transparent 65%,transparent 100%);
+  animation:spinRing 10s linear infinite;z-index:0;
+}
+@keyframes spinRing{to{transform:rotate(360deg)}}
 
-/* FOOTER */
-footer.pro{padding:28px 6vw;border-top:1px solid rgba(232,200,106,.1);display:flex;align-items:center;justify-content:space-between;background:rgba(11,11,13,.92);position:relative;flex-wrap:wrap;gap:14px}
-footer.pro::before{content:'';position:absolute;inset:0;z-index:-1;background:rgba(2,2,7,.8);pointer-events:none}
-.ft-copy{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:3px;color:rgba(232,200,106,.35);text-transform:uppercase}
-.ft-links{display:flex;gap:16px;flex-wrap:wrap}
-.ft-links a{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:2px;text-transform:uppercase;color:rgba(232,200,106,.35);text-decoration:none;transition:color .2s}
-.ft-links a:hover{color:var(--oro)}
+.portal.center:hover{
+  transform:scale(1.03);
+  box-shadow:0 0 100px rgba(232,200,106,.35),0 0 0 2px rgba(232,200,106,.55);
+  border-color:rgba(232,200,106,.6);
+}
+
+/* Inner glow pulse */
+.center-glow{
+  position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(ellipse at 50% 38%,rgba(232,200,106,.13),transparent 70%);
+  animation:glowPulse 4s ease-in-out infinite;z-index:0;
+}
+@keyframes glowPulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+
+.center-inner{position:relative;z-index:2;text-align:center;padding:8px}
+.center-icon{
+  font-size:clamp(2rem,4vw,3.2rem);
+  margin-bottom:10px;
+  filter:drop-shadow(0 0 20px rgba(232,200,106,.8));
+  animation:glowPulse 4s ease-in-out infinite;
+  display:block;
+}
+.center-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.1rem,3vw,2.2rem);
+  font-weight:900;letter-spacing:6px;
+  background:linear-gradient(130deg,#8a6d2a 0%,#f6e6ad 30%,#fff8e0 50%,#f6e6ad 70%,#8a6d2a 100%);
+  background-size:220%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:brilloOro 5s linear infinite;
+  filter:drop-shadow(0 0 24px rgba(232,200,106,.7));
+  line-height:1.1;
+}
+.center-sub{
+  font-family:'Cinzel',serif;
+  font-size:clamp(.34rem,.85vw,.54rem);
+  letter-spacing:3px;text-transform:uppercase;
+  color:rgba(232,200,106,.5);
+  margin-top:10px;line-height:1.7;
+}
+.center-dot{
+  display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:#e8c86a;box-shadow:0 0 8px #e8c86a;
+  animation:glowPulse 2s ease-in-out infinite;
+  margin:8px auto 0;
+}
+
+/* ── MOBILE ── */
+@media(max-width:860px){
+  html,body{overflow-y:auto}
+  #hub{
+    position:relative;inset:unset;
+    display:flex;flex-direction:column;gap:12px;
+    padding:72px 14px 20px;min-height:100vh;height:auto;
+  }
+  .portal{min-height:130px}
+  .portal.center{border-radius:20px;min-height:200px}
+  #beamCanvas{display:none}
+  .portal.left:hover{transform:scale(1.02)}
+  .portal.right:hover{transform:scale(1.02)}
+}
 </style>
 </head>
 <body>
 
+<!-- Cosmos -->
 <div id="cosmos"><div class="neb"></div></div>
-<canvas id="cosmosStars"></canvas>
-<canvas id="axelTrail"></canvas>
+<canvas id="starfield"></canvas>
+<canvas id="beamCanvas"></canvas>
 
-<nav id="nav">
-  <a class="marca oro" href="index.html">ORIONIX</a>
-  <div class="links">
-    <a href="axel.html">AXEL</a>
+<!-- Nav -->
+<nav>
+  <a href="index.html" class="nav-brand">ORIONIX</a>
+  <div class="nav-links">
+    <a href="index.html">Inicio</a>
     <a href="ciudadela.html">Ciudadela</a>
-    <a href="hogar.html">Hogar</a>
-    <a href="forjadora.html">Forjadora</a>
-    <a href="afiliados.html">Afiliados</a>
     <a href="universo.html">Universo</a>
-    <a href="tienda.html" class="acc">&#x1F6CD; Tienda</a>
-    <a href="axel.html" class="acc">&#x2728; AXEL</a>
+    <a href="comunidad.html">Comunidad</a>
+    <a href="tienda.html" class="acc">Tienda</a>
+    <a href="axel.html" class="acc">✦ AXEL</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-badge">&#x2605; ORIONIX &middot; Remember Luxury &middot; KRC &#x2605;</div>
-  <h1 class="hero-title">PANEL DE CONTROL</h1>
-  <div class="hero-subtitle">CENTRO DE MANDO &middot; TODOS LOS PORTALES</div>
-  <div class="hairline"></div>
-  <p class="hero-desc">Accede a cada rincón del universo Orionix desde un solo lugar. Organizado. Poderoso. Tuyo.</p>
-  <div class="cta-bar">
-    <a href="axel.html" class="btn-main">&#x2728; Hablar con AXEL</a>
-    <a href="tienda.html" class="btn-outline">Ver Planes &amp; Precios</a>
-  </div>
-  <div class="scroll-ind">&#8964;</div>
-</section>
+<!-- Grid -->
+<div id="hub">
 
-<!-- MAIN PANEL -->
-<section id="panel">
-
-  <!-- ====== SECCIÓN 1: PORTALES PRINCIPALES ====== -->
-  <div class="sec-wrap">
-    <div class="sec-header">
-      <div class="sec-sup">// Nivel 1 &mdash; Portales Esenciales</div>
-      <h2 class="sec-title"><span class="oro">Portales Principales</span></h2>
+  <!-- TOP -->
+  <a class="portal top" href="hogar.html" id="p-top">
+    <div class="portal-img-zone">🏠</div>
+    <div class="portal-text">
+      <div class="portal-name">EL HOGAR</div>
+      <div class="portal-sub">Portal Personal · Hábitos · Nebula IA</div>
     </div>
+  </a>
 
-    <div class="grid-4">
-
-      <!-- AXEL -->
-      <div class="card featured" onclick="window.location='axel.html'">
-        <div class="card-head">
-          <span class="card-icon">&#x1F916;</span>
-          <div class="card-label">// Kether &middot; Agente IA Principal</div>
-          <div class="card-title">AXEL</div>
-          <div class="card-desc">Tu agente de inteligencia artificial. Busca, crea, responde y vende las 24 horas.</div>
-        </div>
-        <div class="card-body">
-          <span class="badge live">En L&iacute;nea</span>
-          <a class="card-btn" href="axel.html"><span>Abrir AXEL</span><span class="arr">&#8594;</span></a>
-          <a class="card-btn" href="axel.html#chat"><span>Chat Directo</span><span class="arr">&#8594;</span></a>
-        </div>
-      </div>
-
-      <!-- LA CIUDADELA -->
-      <div class="card featured" onclick="window.location='ciudadela.html'">
-        <div class="card-head">
-          <span class="card-icon">&#x1F9CA;</span>
-          <div class="card-label">// Centro de Operaciones IA</div>
-          <div class="card-title">La Ciudadela</div>
-          <div class="card-desc">El n&uacute;cleo de operaciones. Donde viven los 22 agentes del sistema Cabbalah.</div>
-        </div>
-        <div class="card-body">
-          <span class="badge live">Activa</span>
-          <a class="card-btn" href="ciudadela.html"><span>Entrar a la Ciudadela</span><span class="arr">&#8594;</span></a>
-          <a class="card-btn" href="universo.html"><span>22 Agentes &mdash; Universo</span><span class="arr">&#8594;</span></a>
-        </div>
-      </div>
-
-      <!-- LA TIENDA -->
-      <div class="card featured" onclick="window.location='tienda.html'">
-        <div class="card-head">
-          <span class="card-icon">&#x1F6CD;&#xFE0F;</span>
-          <div class="card-label">// Comercio &middot; Suscripciones</div>
-          <div class="card-title">La Tienda</div>
-          <div class="card-desc">Planes Esencia (197&euro;/mes), Imperio (497&euro;/mes) y Ciudadela. Agentes 24/7.</div>
-        </div>
-        <div class="card-body">
-          <span class="badge live">Abierta</span>
-          <a class="card-btn" href="tienda.html"><span>Ver Planes y Precios</span><span class="arr">&#8594;</span></a>
-          <a class="card-btn" href="https://wa.me/573014410541?text=Quiero%20suscribirme%20a%20Orionix" target="_blank"><span>Suscribirme Ahora</span><span class="arr">&#8594;</span></a>
-        </div>
-      </div>
-
-      <!-- LA FORJADORA -->
-      <div class="card featured" onclick="window.location='forjadora.html'">
-        <div class="card-head">
-          <span class="card-icon">&#x1F48E;</span>
-          <div class="card-label">// Programa &Eacute;lite</div>
-          <div class="card-title">La Forjadora</div>
-          <div class="card-desc">Transformaci&oacute;n &eacute;lite. De empresario a l&iacute;der del universo digital con IA.</div>
-        </div>
-        <div class="card-body">
-          <span class="badge live">Disponible</span>
-          <a class="card-btn" href="forjadora.html"><span>Descubrir la Forjadora</span><span class="arr">&#8594;</span></a>
-          <a class="card-btn" href="https://wa.me/573014410541?text=Quiero%20unirme%20a%20La%20Forjadora" target="_blank"><span>Solicitar mi Lugar</span><span class="arr">&#8594;</span></a>
-        </div>
-      </div>
-
+  <!-- LEFT -->
+  <a class="portal left" href="forjadora.html" id="p-left">
+    <div class="portal-img-zone">💎</div>
+    <div class="portal-text">
+      <div class="portal-name">LA FORJADORA<br><span style="font-size:.75em;letter-spacing:3px">DE DIAMANTES</span></div>
+      <div class="portal-sub">Programa Élite · Transformación</div>
     </div>
-  </div>
+  </a>
 
-  <!-- DIVIDER -->
-  <div class="divider"><span>&#9670; Tu Espacio Personal &#9670;</span></div>
-
-  <!-- ====== SECCIÓN 2: ZONA PERSONAL ====== -->
-  <div class="sec-wrap">
-    <div class="sec-header">
-      <div class="sec-sup">// Nivel 2 &mdash; Tu Zona</div>
-      <h2 class="sec-title"><span class="oro">El Hogar &amp; Tu Cuenta</span></h2>
+  <!-- CENTER — LA CIUDADELA (oval) -->
+  <a class="portal center" href="ciudadela.html" id="p-center">
+    <div class="center-glow"></div>
+    <div class="center-inner">
+      <span class="center-icon">🌌</span>
+      <div class="center-title">LA CIUDADELA</div>
+      <div class="center-sub">
+        AXEL · 22 Agentes · Universo IA<br>
+        Tienda · Suscripciones
+      </div>
+      <div class="center-dot"></div>
     </div>
+  </a>
 
-    <div class="grid-3">
-
-      <!-- EL HOGAR -->
-      <div class="card" onclick="window.location='hogar.html'">
-        <div class="card-head">
-          <span class="card-icon">&#x1F3E0;</span>
-          <div class="card-label">// Tu Portal Personal</div>
-          <div class="card-title">El Hogar</div>
-          <div class="card-desc">Tu espacio dentro del universo Orionix. Herramientas, h&aacute;bitos y crecimiento.</div>
-        </div>
-        <div class="card-body">
-          <a class="card-btn" href="hogar.html"><span>Ir al Hogar</span><span class="arr">&#8594;</span></a>
-          <a class="card-btn" href="habitos.html"><span>Mis H&aacute;bitos</span><span class="arr">&#8594;</span></a>
-          <a class="card-btn" href="nebula-habits.html"><span>Nebula &mdash; IA de H&aacute;bitos</span><span class="arr">&#8594;</span></a>
-        </div>
-      </div>
-
-      <!-- MI CUENTA -->
-      <div class="card" onclick="window.location='mi-cuenta.html'">
-        <div class="card-head">
-          <span class="card-icon">&#x1F464;</span>
-          <div class="card-label">// Perfil &middot; Acceso</div>
-          <div class="card-title">Mi Cuenta</div>
-          <div class="card-desc">Gestiona tu perfil, suscripci&oacute;n y configuraci&oacute;n de tus agentes IA.</div>
-        </div>
-        <div class="card-body">
-          <a class="card-btn" href="mi-cuenta.html"><span>Ver mi Perfil</span><span class="arr">&#8594;</span></a>
-          <a class="card-btn" href="auth.html"><span>Iniciar Sesi&oacute;n</span><span class="arr">&#8594;</span></a>
-          <a class="card-btn" href="gracias.html"><span>P&aacute;gina de Bienvenida</span><span class="arr">&#8594;</span></a>
-        </div>
-      </div>
-
-      <!-- UNIVERSO DE AGENTES -->
-      <div class="card" onclick="window.location='universo.html'">
-        <div class="card-head">
-          <span class="card-icon">&#x1F5FA;&#xFE0F;</span>
-          <div class="card-label">// 22 Agentes &middot; Cabbalah</div>
-          <div class="card-title">Universo</div>
-          <div class="card-desc">El mapa completo de los 22 agentes. 11 Sefirot de Luz + 11 Qliphoth de Sombra.</div>
-        </div>
-        <div class="card-body">
-          <a class="card-btn" href="universo.html"><span>Explorar el Universo</span><span class="arr">&#8594;</span></a>
-          <a class="card-btn" href="axel.html"><span>AXEL &mdash; Kether</span><span class="arr">&#8594;</span></a>
-        </div>
-      </div>
-
+  <!-- RIGHT -->
+  <a class="portal right" href="comunidad.html" id="p-right">
+    <div class="portal-img-zone">📜</div>
+    <div class="portal-text">
+      <div class="portal-name">LAS CRÓNICAS<br><span style="font-size:.75em;letter-spacing:3px">DEL CREADOR</span></div>
+      <div class="portal-sub">Historia · Legado · KRC</div>
     </div>
-  </div>
+  </a>
 
-  <!-- DIVIDER -->
-  <div class="divider"><span>&#9670; Comunidad &amp; Crecimiento &#9670;</span></div>
-
-  <!-- ====== SECCIÓN 3: COMUNIDAD & NEGOCIO ====== -->
-  <div class="sec-wrap">
-    <div class="sec-header">
-      <div class="sec-sup">// Nivel 3 &mdash; Red &amp; Expansi&oacute;n</div>
-      <h2 class="sec-title"><span class="oro">Comunidad &amp; Ingresos</span></h2>
+  <!-- BOTTOM -->
+  <a class="portal bottom" href="afiliados.html" id="p-bottom">
+    <div class="portal-img-zone">🤝</div>
+    <div class="portal-text">
+      <div class="portal-name">AFILIADOS</div>
+      <div class="portal-sub">Red de Embajadores · Ingresos Pasivos</div>
     </div>
+  </a>
 
-    <div class="grid-4">
-
-      <!-- AFILIADOS -->
-      <div class="card" onclick="window.location='afiliados.html'">
-        <div class="card-head">
-          <span class="card-icon">&#x1F91D;</span>
-          <div class="card-label">// Ingresos Pasivos</div>
-          <div class="card-title">Afiliados</div>
-          <div class="card-desc">Gana 20% por cada referido. Red de embajadores y comisiones recurrentes.</div>
-        </div>
-        <div class="card-body">
-          <a class="card-btn" href="afiliados.html"><span>Ser Afiliado</span><span class="arr">&#8594;</span></a>
-          <a class="card-btn" href="https://wa.me/573014410541?text=Quiero%20ser%20afiliado%20de%20Orionix" target="_blank"><span>Unirme a la Red</span><span class="arr">&#8594;</span></a>
-        </div>
-      </div>
-
-      <!-- COMUNIDAD -->
-      <div class="card" onclick="window.location='comunidad.html'">
-        <div class="card-head">
-          <span class="card-icon">&#x1F30C;</span>
-          <div class="card-label">// Red Orionix</div>
-          <div class="card-title">Comunidad</div>
-          <div class="card-desc">La red de emprendedores del universo Orionix. Conéctate, colabora y crece.</div>
-        </div>
-        <div class="card-body">
-          <a class="card-btn" href="comunidad.html"><span>Ver Comunidad</span><span class="arr">&#8594;</span></a>
-        </div>
-      </div>
-
-      <!-- REELS -->
-      <div class="card" onclick="window.location='reels.html'">
-        <div class="card-head">
-          <span class="card-icon">&#x1F3AC;</span>
-          <div class="card-label">// Contenido &middot; Media</div>
-          <div class="card-title">Reels</div>
-          <div class="card-desc">El contenido visual del universo. Videos, historias y momentos del ecosistema.</div>
-        </div>
-        <div class="card-body">
-          <a class="card-btn" href="reels.html"><span>Ver Contenido</span><span class="arr">&#8594;</span></a>
-        </div>
-      </div>
-
-      <!-- WHATSAPP DIRECTO -->
-      <div class="card" onclick="window.open('https://wa.me/573014410541?text=Hola%20Orionix%2C%20quiero%20informaci%C3%B3n','_blank')">
-        <div class="card-head">
-          <span class="card-icon">&#x1F4AC;</span>
-          <div class="card-label">// Contacto Directo</div>
-          <div class="card-title">WhatsApp</div>
-          <div class="card-desc">Habla con el equipo Orionix ahora mismo. Soporte y ventas en tiempo real.</div>
-        </div>
-        <div class="card-body">
-          <a class="card-btn" href="https://wa.me/573014410541?text=Hola%20Orionix%2C%20quiero%20informaci%C3%B3n" target="_blank"><span>Abrir WhatsApp</span><span class="arr">&#8594;</span></a>
-          <a class="card-btn" href="https://wa.me/573014410541?text=Quiero%20saber%20m%C3%A1s%20sobre%20los%20agentes%20IA" target="_blank"><span>Consultar Planes</span><span class="arr">&#8594;</span></a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- DIVIDER -->
-  <div class="divider"><span>&#9670; Acceso R&aacute;pido &#9670;</span></div>
-
-  <!-- ====== SECCIÓN 4: ACCESO RÁPIDO ====== -->
-  <div class="sec-wrap">
-    <div class="sec-header">
-      <div class="sec-sup">// Nivel 4 &mdash; Accesos Directos</div>
-      <h2 class="sec-title"><span class="oro">Todas las P&aacute;ginas</span></h2>
-    </div>
-
-    <div class="grid-4">
-
-      <!-- INICIO (INDEX) -->
-      <div class="card" onclick="window.location='index.html'">
-        <div class="card-head">
-          <span class="card-icon">&#x1F30D;</span>
-          <div class="card-label">// P&aacute;gina Principal</div>
-          <div class="card-title">Inicio ORIONIX</div>
-          <div class="card-desc">La landing page principal con hero, testimonios y toda la informaci&oacute;n del universo.</div>
-        </div>
-        <div class="card-body">
-          <a class="card-btn" href="index.html"><span>Ir al Inicio</span><span class="arr">&#8594;</span></a>
-          <a class="card-btn" href="index.html#planes"><span>Ver Planes</span><span class="arr">&#8594;</span></a>
-        </div>
-      </div>
-
-      <!-- HABITOS -->
-      <div class="card" onclick="window.location='habitos.html'">
-        <div class="card-head">
-          <span class="card-icon">&#x1F4C5;</span>
-          <div class="card-label">// Productividad</div>
-          <div class="card-title">H&aacute;bitos</div>
-          <div class="card-desc">Registra y construye tus h&aacute;bitos diarios. Disciplina con inteligencia artificial.</div>
-        </div>
-        <div class="card-body">
-          <a class="card-btn" href="habitos.html"><span>Ver H&aacute;bitos</span><span class="arr">&#8594;</span></a>
-          <a class="card-btn" href="nebula-habits.html"><span>Nebula IA</span><span class="arr">&#8594;</span></a>
-        </div>
-      </div>
-
-      <!-- NEBULA -->
-      <div class="card" onclick="window.location='nebula-habits.html'">
-        <div class="card-head">
-          <span class="card-icon">&#x1F52D;</span>
-          <div class="card-label">// IA &middot; H&aacute;bitos</div>
-          <div class="card-title">Nebula</div>
-          <div class="card-desc">Sistema de h&aacute;bitos con asistencia de IA. Construye tu mejor versi&oacute;n.</div>
-        </div>
-        <div class="card-body">
-          <a class="card-btn" href="nebula-habits.html"><span>Abrir Nebula</span><span class="arr">&#8594;</span></a>
-        </div>
-      </div>
-
-      <!-- ADMIN -->
-      <div class="card" onclick="window.location='admin.html'">
-        <div class="card-head">
-          <span class="card-icon">&#x2699;&#xFE0F;</span>
-          <div class="card-label">// Administraci&oacute;n</div>
-          <div class="card-title">Admin</div>
-          <div class="card-desc">Panel de administraci&oacute;n interno. Gesti&oacute;n y configuraci&oacute;n del universo.</div>
-        </div>
-        <div class="card-body">
-          <a class="card-btn" href="admin.html"><span>Panel Admin</span><span class="arr">&#8594;</span></a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- DIVIDER -->
-  <div class="divider"><span>&#9670; Pr&oacute;ximamente &#9670;</span></div>
-
-  <!-- ====== SECCIÓN 5: COMING SOON ====== -->
-  <div class="sec-wrap">
-    <div class="grid-4">
-      <div class="card soon">
-        <div class="card-head">
-          <span class="card-icon">&#x1F3DB;&#xFE0F;</span>
-          <div class="card-label">Pr&oacute;ximamente</div>
-          <div class="card-title">Los Mundos</div>
-        </div>
-      </div>
-      <div class="card soon">
-        <div class="card-head">
-          <span class="card-icon">&#x1F4DA;</span>
-          <div class="card-label">Pr&oacute;ximamente</div>
-          <div class="card-title">Academia Orionix</div>
-        </div>
-      </div>
-      <div class="card soon">
-        <div class="card-head">
-          <span class="card-icon">&#x1F3C6;</span>
-          <div class="card-label">Pr&oacute;ximamente</div>
-          <div class="card-title">Portal VIP</div>
-        </div>
-      </div>
-      <div class="card soon">
-        <div class="card-head">
-          <span class="card-icon">&#x1F4F1;</span>
-          <div class="card-label">Pr&oacute;ximamente</div>
-          <div class="card-title">App M&oacute;vil</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</section>
-
-<footer class="pro">
-  <div class="ft-copy">&copy; 2024 Orionix &middot; Remember Luxury &middot; KRC</div>
-  <div class="ft-links">
-    <a href="index.html">Inicio</a>
-    <a href="axel.html">AXEL</a>
-    <a href="ciudadela.html">Ciudadela</a>
-    <a href="tienda.html">Tienda</a>
-    <a href="forjadora.html">Forjadora</a>
-    <a href="afiliados.html">Afiliados</a>
-    <a href="hogar.html">Hogar</a>
-    <a href="comunidad.html">Comunidad</a>
-    <a href="universo.html">Universo</a>
-  </div>
-</footer>
-
-<!-- AXEL ORB -->
-<div id="axelOrb" title="Hablar con AXEL">
-  <div class="orb-ring"></div>
-  <div class="orb-core">
-    <div class="orb-sheen"></div>
-    <span class="orb-label">A</span>
-  </div>
-</div>
-<div id="axelPanel">
-  <div class="ap-hdr">
-    <div class="ap-av">A</div>
-    <div>
-      <div class="ap-nm">AXEL</div>
-      <div class="ap-st">Agente Orionix &middot; En L&iacute;nea</div>
-    </div>
-    <button class="ap-x" onclick="document.getElementById('axelPanel').classList.remove('open')">&#10005;</button>
-  </div>
-  <div class="ap-msgs" id="axelMsgs">
-    <div class="ap-msg bot">Hola, soy AXEL &mdash; el agente de Orionix. &iquest;En qu&eacute; puedo asistirte hoy?</div>
-  </div>
-  <div class="ap-ft">
-    <input id="axelInput" type="text" placeholder="Escribe tu mensaje..." onkeydown="if(event.key==='Enter')axelSend()">
-    <button onclick="axelSend()">&#8594;</button>
-  </div>
 </div>
 
 <script>
-const WEBHOOK_URL='https://lkevinruizl.app.n8n.cloud/webhook/axel-brain';
-document.body.setAttribute('data-cielo',Math.ceil(Math.random()*6));
+/* ── STARS ── */
 (function(){
-  var c=document.getElementById('cosmosStars'),ctx=c.getContext('2d');
-  function resize(){c.width=innerWidth;c.height=innerHeight}resize();
-  window.addEventListener('resize',resize);
-  var stars=[];for(var i=0;i<220;i++)stars.push({x:Math.random(),y:Math.random(),r:.3+Math.random()*.9,a:.3+Math.random()*.7,sp:.0002+Math.random()*.0008});
-  function draw(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(function(s){s.a+=Math.sin(Date.now()*s.sp)*.003;ctx.beginPath();ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);ctx.fillStyle='rgba(255,248,220,'+Math.max(.1,Math.min(.9,s.a))+')';ctx.fill()});requestAnimationFrame(draw)}draw();
+  var c=document.getElementById('starfield'),ctx=c.getContext('2d');
+  function rsz(){c.width=innerWidth;c.height=innerHeight}rsz();
+  window.addEventListener('resize',rsz);
+  var S=[];for(var i=0;i<240;i++)S.push({x:Math.random(),y:Math.random(),r:.2+Math.random()*.85,a:.25+Math.random()*.7,sp:.0001+Math.random()*.0007});
+  (function draw(){ctx.clearRect(0,0,c.width,c.height);S.forEach(function(s){s.a+=Math.sin(Date.now()*s.sp)*.003;ctx.beginPath();ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);ctx.fillStyle='rgba(255,248,220,'+Math.max(.08,Math.min(.92,s.a))+')';ctx.fill()});requestAnimationFrame(draw)})();
 })();
-var nav=document.getElementById('nav');
-window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>60)},{passive:true});
+
+/* ── BEAMS ── */
 (function(){
-  var tc=document.getElementById('axelTrail'),ctx=tc.getContext('2d');
-  function resize(){tc.width=innerWidth;tc.height=innerHeight}resize();window.addEventListener('resize',resize);
-  var pts=[],drag=false,orbEl=document.getElementById('axelOrb');
-  var ox=innerWidth-80,oy=innerHeight-80;orbEl.style.left=ox+'px';orbEl.style.top=oy+'px';
-  function draw(){
-    ctx.clearRect(0,0,tc.width,tc.height);var now=Date.now();
-    pts=pts.filter(function(p){return now-p.t<900});
-    for(var i=1;i<pts.length;i++){var p=pts[i-1],q=pts[i];var age=now-q.t,alpha=Math.max(0,1-age/900);var w=(pts.length-i)/pts.length*20*alpha;if(w<=0)continue;var g=ctx.createLinearGradient(p.x,p.y,q.x,q.y);g.addColorStop(0,'rgba(232,200,106,0)');g.addColorStop(.4,'rgba(255,246,214,'+(alpha*.5)+')');g.addColorStop(1,'rgba(232,200,106,'+alpha+')');ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=g;ctx.lineWidth=w;ctx.lineCap='round';ctx.stroke();}
-    for(var i=0;i<pts.length;i+=3){var p=pts[i];var age=now-p.t,alpha=Math.max(0,1-age/700)*.3;if(alpha<=0)continue;var g2=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,14);g2.addColorStop(0,'rgba(255,246,214,'+alpha+')');g2.addColorStop(1,'rgba(232,200,106,0)');ctx.beginPath();ctx.arc(p.x,p.y,14,0,Math.PI*2);ctx.fillStyle=g2;ctx.fill();}
-    requestAnimationFrame(draw);
-  }draw();
-  var startX,startY,moved=false;
-  function startDrag(e){drag=true;moved=false;var src=e.touches?e.touches[0]:e;startX=src.clientX;startY=src.clientY;e.preventDefault();}
-  function moveDrag(e){if(!drag)return;var src=e.touches?e.touches[0]:e;var x=src.clientX,y=src.clientY;if(Math.abs(x-startX)>4||Math.abs(y-startY)>4)moved=true;ox=x-32;oy=y-32;orbEl.style.left=ox+'px';orbEl.style.top=oy+'px';pts.push({x:x,y:y,t:Date.now()});e.preventDefault();}
-  function endDrag(){if(!moved){document.getElementById('axelPanel').classList.toggle('open');}drag=false;}
-  orbEl.addEventListener('mousedown',startDrag);window.addEventListener('mousemove',function(e){if(drag)moveDrag(e);});window.addEventListener('mouseup',endDrag);
-  orbEl.addEventListener('touchstart',startDrag,{passive:false});window.addEventListener('touchmove',function(e){if(drag)moveDrag(e);},{passive:false});window.addEventListener('touchend',endDrag);
-})();
-var axelHistory=[];
-async function axelSend(){
-  var input=document.getElementById('axelInput');
-  var msg=input.value.trim();if(!msg)return;
-  var msgs=document.getElementById('axelMsgs');
-  var ud=document.createElement('div');ud.className='ap-msg usr';ud.textContent=msg;msgs.appendChild(ud);
-  input.value='';msgs.scrollTop=msgs.scrollHeight;
-  axelHistory.push({role:'user',content:msg});
-  var ld=document.createElement('div');ld.className='ap-msg bot';ld.textContent='...';msgs.appendChild(ld);msgs.scrollTop=msgs.scrollHeight;
-  try{
-    var res=await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,history:axelHistory,sessionId:'hub-'+Date.now()})});
-    var data=await res.json();
-    var reply=data.response||data.output||data.text||data.message||'Procesando...';
-    ld.textContent=reply;
-    axelHistory.push({role:'assistant',content:reply});
-  }catch(e){
-    ld.textContent='Conexi\u00f3n temporal no disponible. Escr\u00edbenos por WhatsApp.';
+  var bc=document.getElementById('beamCanvas'),bx=bc.getContext('2d');
+  function rsz(){bc.width=innerWidth;bc.height=innerHeight}rsz();
+  window.addEventListener('resize',rsz);
+
+  function getCenterOf(el){
+    var r=el.getBoundingClientRect();
+    return{x:r.left+r.width/2,y:r.top+r.height/2};
   }
-  msgs.scrollTop=msgs.scrollHeight;
-}
+
+  var beamColors={
+    top:'rgba(232,200,106,',
+    left:'rgba(100,170,255,',
+    right:'rgba(80,220,160,',
+    bottom:'rgba(190,100,255,'
+  };
+
+  function drawBeam(from,to,color,alpha){
+    var g=bx.createLinearGradient(from.x,from.y,to.x,to.y);
+    g.addColorStop(0,color+'0)');
+    g.addColorStop(.4,color+alpha+')');
+    g.addColorStop(.6,color+alpha+')');
+    g.addColorStop(1,color+'0)');
+    bx.beginPath();bx.moveTo(from.x,from.y);bx.lineTo(to.x,to.y);
+    bx.strokeStyle=g;bx.lineWidth=2.5;
+    bx.shadowColor=color+'.6)';bx.shadowBlur=12;
+    bx.stroke();bx.shadowBlur=0;
+  }
+
+  var pulsT=0;
+  function frame(){
+    bx.clearRect(0,0,bc.width,bc.height);
+    var ct=document.getElementById('p-center');
+    if(!ct){requestAnimationFrame(frame);return}
+    var cx=getCenterOf(ct);
+    pulsT+=0.025;
+    var alpha=(0.38+Math.sin(pulsT)*0.2).toFixed(3);
+
+    ['top','left','right','bottom'].forEach(function(z){
+      var el=document.getElementById('p-'+z);
+      if(!el)return;
+      drawBeam(getCenterOf(el),cx,beamColors[z],alpha);
+    });
+    requestAnimationFrame(frame);
+  }
+  // Wait for layout to be ready
+  setTimeout(frame,200);
+})();
 </script>
+
 </body>
 </html>

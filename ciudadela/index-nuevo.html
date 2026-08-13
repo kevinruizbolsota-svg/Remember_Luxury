@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ciudadela | Bio-Future Concept</title>
+    <!-- Fuentes Modernas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Paleta Bio-Futurista */
+            --bg-deep: #0f1c15;       /* Verde bosque muy oscuro */
+            --bg-surface: #1a2f25;    /* Verde superficie */
+            --text-main: #e0e7e4;     /* Blanco grisáceo */
+            --text-muted: #94a39b;    /* Gris verdoso */
+            --accent-glow: #4ade80;   /* Verde neón suave */
+            --accent-cyan: #2dd4bf;   /* Cian relajante */
+            --glass-bg: rgba(26, 47, 37, 0.6);
+            --glass-border: rgba(74, 222, 128, 0.2);
+            --blur: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .brand {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* Fondo Animado con Imagen de Naturaleza */
+        .ambient-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: 
+                linear-gradient(to bottom, rgba(15, 28, 21, 0.85), rgba(15, 28, 21, 0.95)),
+                url('https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=2574&auto=format&fit=crop') no-repeat center center/cover;
+            filter: blur(2px);
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navbar Glassmorphism */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1000px;
+            padding: 16px 32px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--blur));
+            -webkit-backdrop-filter: blur(var(--blur));
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #fff, var(--accent-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-glow);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-glow);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(to right, #ffffff, #a7f3d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, var(--accent-glow), var(--accent-cyan));
+            color: var(--bg-deep);
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 20px rgba(74, 222, 128, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(74, 222, 128, 0.6);
+        }
+
+        /* Cards Section (Mundos) */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--text-main);
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--blur));
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px;
+            transition: transform 0.4s ease, border-color 0.4s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-glow);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            filter: brightness(0.9);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Testimonios */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .testi-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .testi-quote {
+            font-style: italic;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .testi-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-glow), var(--accent-cyan));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-deep);
+            font-weight: bold;
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            nav { width: 95%; padding: 12px 20px; }
+            .nav-links { display: none; } /* En móvil se ocultaría o usaría menú hamburguesa */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fondo Ambiental -->
+    <div class="ambient-bg"></div>
+
+    <!-- Navegación -->
+    <nav>
+        <div class="brand">Ciudadela</div>
+        <div class="nav-links">
+            <a href="#mundos">Mundos</a>
+            <a href="#habitos">Hábitos</a>
+            <a href="#tienda">Tienda</a>
+            <a href="#axel">Axel IA</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>El Futuro es Orgánico</h1>
+            <p>Descubre un ecosistema digital donde la tecnología se funde con la naturaleza. Automatización inteligente, diseño consciente y tranquilidad absoluta.</p>
+            <a href="#mundos" class="btn-primary">Explorar Ecosistema</a>
+        </div>
+    </section>
+
+    <!-- Sección Mundos -->
+    <section id="mundos" class="section">
+        <div class="container">
+            <h2 class="section-title">Nuestros Mundos</h2>
+            <div class="grid-cards">
+                <!-- Card 1 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=2674&auto=format&fit=crop" alt="Bosque" class="card-img">
+                    <h3>Bosque Digital</h3>
+                    <p>Herramientas de productividad que crecen contigo. Organiza tu vida sin estrés, como quien cuida un jardín.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1534531173927-aeb928d54385?q=80&w=2574&auto=format&fit=crop" alt="Tigre" class="card-img">
+                    <h3>Instinto Salvaje</h3>
+                    <p>Cursos de alto rendimiento para emprendedores. Despierta tu potencial latente con estrategias probadas.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1463130456316-4356e371d6cb?q=80&w=2670&auto=format&fit=crop" alt="Tecnología" class="card-img">
+                    <h3>Tech Zen</h3>
+                    <p>Automatizaciones con IA diseñadas para liberar tiempo, no para complicarlo. El lujo del silencio digital.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Testimonios -->
+    <section id="testimonios" class="section">
+        <div class="container">
+            <h2 class="section-title">Voces del Círculo</h2>
+            <div class="testimonials-grid">
+                <div class="testi-card">
+                    <p class="testi-quote">"La automatización me devolvió horas de vida. Ahora mi negocio vende solo, en armonía con mi ritmo."</p>
+                    <div class="testi-author">
+                        <div class="avatar">M</div>
+                        <div>
+                            <strong>Mariana G.</strong><br>
+                            <small style="color:var(--text-muted)">Emprendedora</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card">
+                    <p class="testi-quote">"El diseño de Ciudadela es tan relajante que trabajar aquí se siente como meditar. Resultados increíbles."</p>
+                    <div class="testi-author">
+                        <div class="avatar">C</div>
+                        <div>
+                            <strong>Carlos R.</strong><br>
+                            <small style="color:var(--text-muted)">Creador</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card">
+                    <p class="testi-quote">"AXEL entiende el contexto humano mejor que nadie. Es el futuro de la atención al cliente consciente."</p>
+                    <div class="testi-author">
+                        <div class="avatar">V</div>
+                        <div>
+                            <strong>Valentina S.</strong><br>
+                            <small style="color:var(--text-muted)">Coach</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Simple -->
+    <footer style="text-align:center; padding: 40px; color: var(--text-muted); font-size: 0.8rem;">
+        <p>&copy; 2024 Ciudadela. Diseñado para el futuro sostenible.</p>
+    </footer>
+
+</body>
+</html>

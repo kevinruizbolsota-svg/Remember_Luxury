@@ -1292,7 +1292,7 @@
   function borrarHistorial(){ if(confirm('Seguro que quieres borrar el historial guardado en este navegador?')){ try{ localStorage.clear(); sessionStorage.clear(); }catch(e){} location.reload(); } }
 
   /* ---- CHAT AXEL ---- */
-  var WEBHOOK="https://kevinruiz.app.n8n.cloud/webhook/portal-central";
+  var WEBHOOK="https://lkevinruizl.app.n8n.cloud/webhook/portal-central";
   var user="",chats={},current=null;
   function k(){return "ciudadela_"+user}
   function load(){var raw=localStorage.getItem(k());chats=raw?JSON.parse(raw):{};}
@@ -1315,7 +1315,7 @@
 
   /* ---- VOZ: HABLAR (micro -> texto) ---- */
   /* ==== VOZ ROBUSTA: graba audio real y lo transcribe en el servidor (funciona en cualquier PC) ==== */
-  var VOZ_WEBHOOK="https://kevinruiz.app.n8n.cloud/webhook/portal-voz";
+  var VOZ_WEBHOOK="https://lkevinruizl.app.n8n.cloud/webhook/kybalio-voz";
   var __mr=null,__chunks=[],__grabando=false,__stream=null;
   function startMic(){
     var btn=document.getElementById("micBtn");
@@ -1773,7 +1773,7 @@
   })();
 
   /* ---- CAPTURA DE LEADS (formulario + modal + newsletter) ---- */
-  var LEAD_WEBHOOK="https://kevinruiz.app.n8n.cloud/webhook/lead-ciudadela";
+  var LEAD_WEBHOOK="https://lkevinruizl.app.n8n.cloud/webhook/lead-ciudadela";
   function postLead(payload){return fetch(LEAD_WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});}
   function enviarLead(ev){ev.preventDefault();var btn=document.getElementById("lf_btn");var st=document.getElementById("lf_status");
     var p={nombre:document.getElementById("lf_nombre").value,negocio:document.getElementById("lf_negocio").value,contacto:document.getElementById("lf_contacto").value,email:document.getElementById("lf_email").value,interes:document.getElementById("lf_interes").value,presupuesto:"",mensaje:document.getElementById("lf_mensaje").value,origen:"Formulario Contacto"};

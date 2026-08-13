@@ -385,7 +385,7 @@ const Z_SPACING = 1500; // Distancia en el eje Z entre cada producto
 
 async function cargarProductos(){
   try {
-    const res = await fetch("https://kevinruiz.app.n8n.cloud/webhook/tienda-productos");
+    const res = await fetch("https://lkevinruizl.app.n8n.cloud/webhook/tienda-productos");
     const data = await res.json();
     if(data && data.length > 0) PRODUCTOS = data;
     else PRODUCTOS = COLECCION_DEMO;

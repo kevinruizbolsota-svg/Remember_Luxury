@@ -232,6 +232,58 @@ footer.pro::before{content:'';position:absolute;inset:0;z-index:-1;background:rg
   </div>
 </section>
 
+
+<!-- ══ SECCIÓN HÁBITOS ══ -->
+<style>
+.hab-sec{padding:60px 7vw 50px;position:relative}
+.hab-sec::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(2,2,7,.5),rgba(2,2,7,.85));pointer-events:none}
+.hab-sec-head{text-align:center;margin-bottom:36px}
+.hab-eyebrow{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:6px;color:var(--oro-med);text-transform:uppercase;opacity:.7;margin-bottom:8px}
+.hab-title{font-family:'Cinzel',serif;font-size:clamp(.9rem,2.2vw,1.4rem);letter-spacing:5px;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:10px}
+.hab-desc{font-size:.88rem;font-style:italic;color:var(--tenue);max-width:500px;margin:0 auto;opacity:.8;line-height:1.6}
+.hab-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:900px;margin:0 auto}
+@media(max-width:600px){.hab-grid{grid-template-columns:1fr}}
+.hab-card{border:1px solid rgba(232,200,106,.18);border-radius:8px;background:rgba(20,17,23,.82);backdrop-filter:blur(16px);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s,border-color .3s;text-decoration:none;color:inherit;cursor:pointer}
+.hab-card:hover{transform:translateY(-5px);box-shadow:0 14px 44px rgba(232,200,106,.16);border-color:rgba(232,200,106,.38)}
+.hab-card-top{height:110px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:linear-gradient(135deg,rgba(20,14,36,.95),rgba(8,6,16,.98));border-bottom:1px solid rgba(232,200,106,.08)}
+.hab-card-body{padding:18px 20px 22px}
+.hab-card-name{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:3px;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:7px}
+.hab-card-desc{font-size:.76rem;font-style:italic;color:var(--tenue);line-height:1.5;opacity:.8;margin-bottom:12px}
+.hab-card-cta{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:2px;text-transform:uppercase;color:var(--oro-med);display:flex;align-items:center;gap:6px;transition:gap .2s}
+.hab-card:hover .hab-card-cta{gap:10px}
+</style>
+
+<section class="hab-sec">
+  <div class="hab-sec-head">
+    <div class="hab-eyebrow">// Disciplina &middot; Constancia &middot; Poder</div>
+    <h2 class="hab-title">Sistema de H&aacute;bitos</h2>
+    <p class="hab-desc">La Forjadora no solo transforma tu negocio. Forja al hombre detr&aacute;s del negocio. Tus h&aacute;bitos son tu capital m&aacute;s valioso.</p>
+  </div>
+
+  <div class="hab-grid">
+
+    <a class="hab-card" href="habitos.html">
+      <div class="hab-card-top">&#x1F4C5;</div>
+      <div class="hab-card-body">
+        <div class="hab-card-name">H&aacute;bitos Diarios</div>
+        <div class="hab-card-desc">Tracker de h&aacute;bitos con checkboxes, barras de progreso y registro diario. El sistema base de disciplina del forjador.</div>
+        <div class="hab-card-cta">Abrir Tracker &#8594;</div>
+      </div>
+    </a>
+
+    <a class="hab-card" href="nebula-habits.html">
+      <div class="hab-card-top">&#x1F52D;</div>
+      <div class="hab-card-body">
+        <div class="hab-card-name">Nebula Habits</div>
+        <div class="hab-card-desc">Sistema gamificado con estrellas y constelaciones. Convierte cada h&aacute;bito cumplido en una estrella de tu propia constelaci&oacute;n.</div>
+        <div class="hab-card-cta">Entrar a Nebula &#8594;</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+<!-- ══ FIN HÁBITOS ══ -->
+
 <footer class="pro">
   <div class="ft-copy">&copy; 2024 Orionix &middot; Remember Luxury &middot; KRC</div>
   <div class="ft-links">

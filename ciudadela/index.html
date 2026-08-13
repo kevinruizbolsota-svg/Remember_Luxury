@@ -805,10 +805,9 @@
 
 
 <!-- ============================================================ -->
-<!-- PANEL DE CONTROL MAESTRO — Acceso a todos los portales      -->
+<!-- PANEL DE CONTROL MAESTRO                                     -->
 <!-- ============================================================ -->
 <style>
-/* ===== PANEL DE CONTROL ===== */
 #panel-control{padding:80px 6vw 90px;position:relative}
 .pc-sup{font-family:'Cinzel',serif;letter-spacing:6px;font-size:.44rem;color:var(--oro-med);text-transform:uppercase;opacity:.7;margin-bottom:5px}
 .pc-title{font-family:'Cinzel',serif;font-size:clamp(.85rem,2vw,1.25rem);letter-spacing:6px;margin-bottom:36px}
@@ -816,192 +815,199 @@
 .pc-divider{max-width:1160px;margin:54px auto 32px;display:flex;align-items:center;gap:18px;opacity:.35}
 .pc-divider::before,.pc-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--oro),transparent)}
 .pc-divider span{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:5px;color:var(--oro-med);text-transform:uppercase;white-space:nowrap}
-.pc-grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1160px;margin:0 auto}
-.pc-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1160px;margin:0 auto}
-@media(max-width:1100px){.pc-grid4{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:860px){.pc-grid4,.pc-grid3{grid-template-columns:1fr 1fr}}
-@media(max-width:520px){.pc-grid4,.pc-grid3{grid-template-columns:1fr}}
-.pc-card{border:1px solid rgba(232,200,106,.16);border-radius:6px;background:rgba(20,17,23,.8);backdrop-filter:blur(20px);overflow:hidden;display:flex;flex-direction:column;transition:transform .35s,box-shadow .35s,border-color .35s;text-decoration:none;color:inherit;position:relative;cursor:pointer}
-.pc-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,200,106,.03),transparent 60%);pointer-events:none}
-.pc-card:hover{transform:translateY(-6px);box-shadow:0 16px 50px rgba(232,200,106,.14),0 0 0 1px rgba(232,200,106,.3);border-color:rgba(232,200,106,.35)}
-.pc-card.featured{border-color:rgba(232,200,106,.24)}
-.pc-card.featured::before{background:linear-gradient(135deg,rgba(232,200,106,.06),transparent 60%)}
-.pc-card.featured:hover{box-shadow:0 20px 60px rgba(232,200,106,.22),0 0 0 1px rgba(232,200,106,.42)}
-.pc-card-head{padding:22px 20px 14px;border-bottom:1px solid rgba(232,200,106,.08)}
-.pc-card-icon{font-size:1.9rem;margin-bottom:10px;display:block}
-.pc-card-label{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:5px;text-transform:uppercase;color:var(--oro-med);margin-bottom:4px;opacity:.7}
-.pc-card-title{font-family:'Cinzel',serif;font-size:.92rem;letter-spacing:3px;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.3}
-.pc-card-desc{font-size:.76rem;font-style:italic;color:var(--tenue);margin-top:6px;line-height:1.5;opacity:.8}
-.pc-card-body{padding:14px 20px 20px;display:flex;flex-direction:column;gap:7px;flex:1}
-.pc-btn{display:flex;align-items:center;justify-content:space-between;text-decoration:none;padding:10px 14px;border:1px solid rgba(232,200,106,.17);border-radius:3px;background:rgba(232,200,106,.04);color:var(--texto);font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:2px;text-transform:uppercase;transition:background .25s,border-color .25s,color .25s,transform .2s;cursor:pointer}
-.pc-btn:hover{background:rgba(232,200,106,.11);border-color:rgba(232,200,106,.42);color:var(--oro);transform:translateX(3px)}
-.pc-btn .arr{font-size:.7rem;color:var(--oro-med);transition:transform .2s;flex-shrink:0;margin-left:8px}
+.pc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1160px;margin:0 auto}
+@media(max-width:1100px){.pc-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.pc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.pc-grid{grid-template-columns:1fr}}
+.pc-card{border:1px solid rgba(232,200,106,.16);border-radius:6px;background:rgba(20,17,23,.8);backdrop-filter:blur(20px);overflow:hidden;display:flex;flex-direction:column;transition:transform .35s,box-shadow .35s,border-color .35s;cursor:pointer}
+.pc-card:hover{transform:translateY(-5px);box-shadow:0 14px 44px rgba(232,200,106,.14);border-color:rgba(232,200,106,.35)}
+.pc-card.top{border-color:rgba(232,200,106,.28)}
+.pc-card-head{padding:20px 18px 12px;border-bottom:1px solid rgba(232,200,106,.08)}
+.pc-card-icon{font-size:1.75rem;margin-bottom:8px;display:block}
+.pc-card-label{font-family:'Cinzel',serif;font-size:.36rem;letter-spacing:5px;text-transform:uppercase;color:var(--oro-med);margin-bottom:3px;opacity:.65}
+.pc-card-title{font-family:'Cinzel',serif;font-size:.88rem;letter-spacing:3px;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pc-card-desc{font-size:.74rem;font-style:italic;color:var(--tenue);margin-top:5px;line-height:1.45;opacity:.78}
+.pc-card-body{padding:12px 18px 18px;flex:1;display:flex;align-items:flex-end}
+.pc-btn{display:flex;align-items:center;justify-content:space-between;width:100%;text-decoration:none;padding:10px 14px;border:1px solid rgba(232,200,106,.18);border-radius:3px;background:rgba(232,200,106,.04);color:var(--texto);font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:2px;text-transform:uppercase;transition:background .2s,border-color .2s,color .2s,transform .2s}
+.pc-btn:hover{background:rgba(232,200,106,.12);border-color:rgba(232,200,106,.44);color:var(--oro);transform:translateX(3px)}
+.pc-btn .arr{color:var(--oro-med);transition:transform .2s;flex-shrink:0}
 .pc-btn:hover .arr{transform:translateX(4px)}
-.pc-badge-live{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-family:'Cinzel',serif;font-size:.36rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:4px;width:fit-content;color:#4ade80;border:1px solid rgba(74,222,128,.3);background:rgba(74,222,128,.06)}
-.pc-badge-live::before{content:'';width:5px;height:5px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px #4ade80;animation:pulseLive 2s infinite;flex-shrink:0}
-@keyframes pulseLive{0%,100%{opacity:1}50%{opacity:.4}}
+.pc-live{display:inline-block;width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px #4ade80;animation:pulseLive 2s infinite;margin-right:6px;flex-shrink:0;vertical-align:middle}
+@keyframes pulseLive{0%,100%{opacity:1}50%{opacity:.35}}
 </style>
 
 <section id="panel-control">
 <div class="pc-wrap">
   <div class="pc-sup">// Centro de Mando</div>
-  <h2 class="pc-title"><span class="oro">Panel de Control ORIONIX</span></h2>
+  <h2 class="pc-title"><span class="oro">Acceso Directo a Todo</span></h2>
 
-  <!-- NIVEL 1: LOS 4 PORTALES CLAVE -->
-  <div class="pc-grid4">
+  <div class="pc-grid">
 
-    <div class="pc-card featured reveal" onclick="window.location='axel.html'">
+    <div class="pc-card top reveal" onclick="window.location='axel.html'">
       <div class="pc-card-head">
         <span class="pc-card-icon">&#x1F916;</span>
-        <div class="pc-card-label">// Kether &middot; IA Principal</div>
-        <div class="pc-card-title">AXEL</div>
-        <div class="pc-card-desc">Tu agente de IA. Busca, crea, responde y vende las 24 horas.</div>
+        <div class="pc-card-label">IA Principal</div>
+        <div class="pc-card-title"><span class="pc-live"></span>AXEL</div>
+        <div class="pc-card-desc">Tu agente IA. Busca, crea y vende 24h.</div>
       </div>
       <div class="pc-card-body">
-        <span class="pc-badge-live">En L&iacute;nea</span>
         <a class="pc-btn" href="axel.html"><span>Abrir AXEL</span><span class="arr">&#8594;</span></a>
       </div>
     </div>
 
-    <div class="pc-card featured reveal" onclick="window.location='tienda.html'">
+    <div class="pc-card top reveal" onclick="window.location='tienda.html'">
       <div class="pc-card-head">
         <span class="pc-card-icon">&#x1F6CD;&#xFE0F;</span>
-        <div class="pc-card-label">// Suscripciones</div>
+        <div class="pc-card-label">Planes</div>
         <div class="pc-card-title">La Tienda</div>
-        <div class="pc-card-desc">Esencia 197&euro; &middot; Imperio 497&euro; &middot; Ciudadela a medida.</div>
+        <div class="pc-card-desc">Esencia 197&euro; &middot; Imperio 497&euro; &middot; Ciudadela.</div>
       </div>
       <div class="pc-card-body">
-        <span class="pc-badge-live">Abierta</span>
         <a class="pc-btn" href="tienda.html"><span>Ver Planes</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="https://wa.me/573014410541?text=Quiero%20suscribirme" target="_blank"><span>Suscribirme Ya</span><span class="arr">&#8594;</span></a>
       </div>
     </div>
 
-    <div class="pc-card featured reveal" onclick="window.location='forjadora.html'">
+    <div class="pc-card top reveal" onclick="window.location='forjadora.html'">
       <div class="pc-card-head">
         <span class="pc-card-icon">&#x1F48E;</span>
-        <div class="pc-card-label">// Programa &Eacute;lite</div>
+        <div class="pc-card-label">Programa &Eacute;lite</div>
         <div class="pc-card-title">La Forjadora</div>
-        <div class="pc-card-desc">Transformaci&oacute;n &eacute;lite. De empresario a l&iacute;der digital con IA.</div>
+        <div class="pc-card-desc">Transformaci&oacute;n &eacute;lite con IA. L&iacute;deres digitales.</div>
       </div>
       <div class="pc-card-body">
-        <span class="pc-badge-live">Disponible</span>
-        <a class="pc-btn" href="forjadora.html"><span>Descubrir</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="https://wa.me/573014410541?text=Quiero%20unirme%20a%20La%20Forjadora" target="_blank"><span>Solicitar mi Lugar</span><span class="arr">&#8594;</span></a>
+        <a class="pc-btn" href="forjadora.html"><span>Ver Forjadora</span><span class="arr">&#8594;</span></a>
       </div>
     </div>
 
-    <div class="pc-card featured reveal" onclick="window.location='afiliados.html'">
+    <div class="pc-card top reveal" onclick="window.location='afiliados.html'">
       <div class="pc-card-head">
         <span class="pc-card-icon">&#x1F91D;</span>
-        <div class="pc-card-label">// Ingresos Pasivos</div>
+        <div class="pc-card-label">Ingresos Pasivos</div>
         <div class="pc-card-title">Afiliados</div>
-        <div class="pc-card-desc">Gana 20% por cada referido. Red de embajadores recurrente.</div>
+        <div class="pc-card-desc">20% por referido. Red de embajadores.</div>
       </div>
       <div class="pc-card-body">
-        <a class="pc-btn" href="afiliados.html"><span>Ser Afiliado</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="https://wa.me/573014410541?text=Quiero%20ser%20afiliado" target="_blank"><span>Unirme a la Red</span><span class="arr">&#8594;</span></a>
+        <a class="pc-btn" href="afiliados.html"><span>Ver Afiliados</span><span class="arr">&#8594;</span></a>
       </div>
     </div>
-
-  </div>
-
-  <div class="pc-divider"><span>&#9670; Portales del Universo &#9670;</span></div>
-
-  <!-- NIVEL 2: PORTALES PRINCIPALES (distintos destinos) -->
-  <div class="pc-grid3">
 
     <div class="pc-card reveal" onclick="window.location='ciudadela.html'">
       <div class="pc-card-head">
         <span class="pc-card-icon">&#x1F9CA;</span>
-        <div class="pc-card-label">// Centro de Operaciones IA</div>
+        <div class="pc-card-label">Operaciones IA</div>
         <div class="pc-card-title">La Ciudadela</div>
-        <div class="pc-card-desc">El n&uacute;cleo de los 22 agentes del sistema Cabbalah. Luz y Sombra.</div>
+        <div class="pc-card-desc">22 agentes del sistema Cabbalah.</div>
       </div>
       <div class="pc-card-body">
         <a class="pc-btn" href="ciudadela.html"><span>Entrar</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="universo.html"><span>Mapa de 22 Agentes</span><span class="arr">&#8594;</span></a>
+      </div>
+    </div>
+
+    <div class="pc-card reveal" onclick="window.location='universo.html'">
+      <div class="pc-card-head">
+        <span class="pc-card-icon">&#x1F5FA;&#xFE0F;</span>
+        <div class="pc-card-label">22 Agentes</div>
+        <div class="pc-card-title">Universo</div>
+        <div class="pc-card-desc">Mapa Cabbalah. 11 Luz + 11 Sombra.</div>
+      </div>
+      <div class="pc-card-body">
+        <a class="pc-btn" href="universo.html"><span>Ver Mapa</span><span class="arr">&#8594;</span></a>
       </div>
     </div>
 
     <div class="pc-card reveal" onclick="window.location='hogar.html'">
       <div class="pc-card-head">
         <span class="pc-card-icon">&#x1F3E0;</span>
-        <div class="pc-card-label">// Tu Espacio Personal</div>
+        <div class="pc-card-label">Espacio Personal</div>
         <div class="pc-card-title">El Hogar</div>
-        <div class="pc-card-desc">H&aacute;bitos, herramientas y crecimiento personal. Nebula IA incluida.</div>
+        <div class="pc-card-desc">H&aacute;bitos, herramientas y Nebula IA.</div>
       </div>
       <div class="pc-card-body">
-        <a class="pc-btn" href="hogar.html"><span>Ir al Hogar</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="mi-cuenta.html"><span>Mi Cuenta</span><span class="arr">&#8594;</span></a>
+        <a class="pc-btn" href="hogar.html"><span>Mi Hogar</span><span class="arr">&#8594;</span></a>
+      </div>
+    </div>
+
+    <div class="pc-card reveal" onclick="window.location='mi-cuenta.html'">
+      <div class="pc-card-head">
+        <span class="pc-card-icon">&#x1F464;</span>
+        <div class="pc-card-label">Perfil</div>
+        <div class="pc-card-title">Mi Cuenta</div>
+        <div class="pc-card-desc">Gestiona tu suscripci&oacute;n y perfil.</div>
+      </div>
+      <div class="pc-card-body">
+        <a class="pc-btn" href="mi-cuenta.html"><span>Ver Perfil</span><span class="arr">&#8594;</span></a>
       </div>
     </div>
 
     <div class="pc-card reveal" onclick="window.location='comunidad.html'">
       <div class="pc-card-head">
         <span class="pc-card-icon">&#x1F30C;</span>
-        <div class="pc-card-label">// Red Orionix</div>
+        <div class="pc-card-label">Red</div>
         <div class="pc-card-title">Comunidad</div>
-        <div class="pc-card-desc">La red de emprendedores del universo. Conecta, colabora y crece.</div>
+        <div class="pc-card-desc">Conecta con emprendedores del universo.</div>
       </div>
       <div class="pc-card-body">
-        <a class="pc-btn" href="comunidad.html"><span>Ver Comunidad</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="reels.html"><span>Contenido &amp; Reels</span><span class="arr">&#8594;</span></a>
+        <a class="pc-btn" href="comunidad.html"><span>Entrar</span><span class="arr">&#8594;</span></a>
       </div>
     </div>
 
-  </div>
-
-  <div class="pc-divider"><span>&#9670; Acceso R&aacute;pido &#9670;</span></div>
-
-  <!-- NIVEL 3: ACCESOS DIRECTOS ÚNICOS (sin repetir destinos) -->
-  <div class="pc-grid4">
+    <div class="pc-card reveal" onclick="window.location='reels.html'">
+      <div class="pc-card-head">
+        <span class="pc-card-icon">&#x1F3AC;</span>
+        <div class="pc-card-label">Contenido</div>
+        <div class="pc-card-title">Reels</div>
+        <div class="pc-card-desc">Videos e historias del ecosistema.</div>
+      </div>
+      <div class="pc-card-body">
+        <a class="pc-btn" href="reels.html"><span>Ver Reels</span><span class="arr">&#8594;</span></a>
+      </div>
+    </div>
 
     <div class="pc-card reveal" onclick="window.location='mundos.html'">
       <div class="pc-card-head">
         <span class="pc-card-icon">&#x1F30F;</span>
-        <div class="pc-card-label">// Reinos</div>
+        <div class="pc-card-label">Reinos</div>
         <div class="pc-card-title">Los Mundos</div>
-        <div class="pc-card-desc">Los reinos del universo Orionix. Cada mundo con su historia y sus agentes.</div>
+        <div class="pc-card-desc">Los reinos del universo Orionix.</div>
       </div>
       <div class="pc-card-body">
         <a class="pc-btn" href="mundos.html"><span>Explorar</span><span class="arr">&#8594;</span></a>
       </div>
     </div>
 
-    <div class="pc-card reveal" onclick="window.location='https://kevinruizbolsota-svg.github.io/Remember_Luxury/'">
-      <div class="pc-card-head">
-        <span class="pc-card-icon">&#x1F3DB;&#xFE0F;</span>
-        <div class="pc-card-label">// B&oacute;veda Personal</div>
-        <div class="pc-card-title">Kybalio</div>
-        <div class="pc-card-desc">833 videos, 1251 im&aacute;genes, 373 documentos y m&uacute;sica. Tu archivo personal.</div>
-      </div>
-      <div class="pc-card-body">
-        <a class="pc-btn" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/" target="_blank"><span>Abrir B&oacute;veda</span><span class="arr">&#8594;</span></a>
-      </div>
-    </div>
-
     <div class="pc-card reveal" onclick="window.location='admin.html'">
       <div class="pc-card-head">
         <span class="pc-card-icon">&#x2699;&#xFE0F;</span>
-        <div class="pc-card-label">// Administraci&oacute;n</div>
+        <div class="pc-card-label">Administraci&oacute;n</div>
         <div class="pc-card-title">Admin</div>
-        <div class="pc-card-desc">Panel de administraci&oacute;n interno del universo Orionix.</div>
+        <div class="pc-card-desc">Panel interno de gesti&oacute;n.</div>
       </div>
       <div class="pc-card-body">
-        <a class="pc-btn" href="admin.html"><span>Panel Admin</span><span class="arr">&#8594;</span></a>
+        <a class="pc-btn" href="admin.html"><span>Abrir</span><span class="arr">&#8594;</span></a>
+      </div>
+    </div>
+
+    <div class="pc-card reveal" onclick="window.location='https://kevinruizbolsota-svg.github.io/Remember_Luxury/'">
+      <div class="pc-card-head">
+        <span class="pc-card-icon">&#x1F3DB;&#xFE0F;</span>
+        <div class="pc-card-label">B&oacute;veda</div>
+        <div class="pc-card-title">Kybalio</div>
+        <div class="pc-card-desc">833 videos · 1251 im&aacute;genes · 373 docs.</div>
+      </div>
+      <div class="pc-card-body">
+        <a class="pc-btn" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/" target="_blank"><span>Abrir</span><span class="arr">&#8594;</span></a>
       </div>
     </div>
 
     <div class="pc-card reveal" onclick="window.open('https://wa.me/573014410541?text=Hola%20Orionix','_blank')">
       <div class="pc-card-head">
         <span class="pc-card-icon">&#x1F4AC;</span>
-        <div class="pc-card-label">// Contacto Directo</div>
+        <div class="pc-card-label">Contacto</div>
         <div class="pc-card-title">WhatsApp</div>
-        <div class="pc-card-desc">Habla con el equipo ahora mismo. Soporte y ventas en tiempo real.</div>
+        <div class="pc-card-desc">Equipo Orionix en tiempo real.</div>
       </div>
       <div class="pc-card-body">
-        <a class="pc-btn" href="https://wa.me/573014410541?text=Hola%20Orionix" target="_blank"><span>Escribir Ahora</span><span class="arr">&#8594;</span></a>
+        <a class="pc-btn" href="https://wa.me/573014410541?text=Hola%20Orionix" target="_blank"><span>Escribir</span><span class="arr">&#8594;</span></a>
       </div>
     </div>
 

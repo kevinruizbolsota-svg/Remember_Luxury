@@ -827,12 +827,10 @@
 .pc-card.featured{border-color:rgba(232,200,106,.24)}
 .pc-card.featured::before{background:linear-gradient(135deg,rgba(232,200,106,.06),transparent 60%)}
 .pc-card.featured:hover{box-shadow:0 20px 60px rgba(232,200,106,.22),0 0 0 1px rgba(232,200,106,.42)}
-.pc-card.soon{opacity:.25;pointer-events:none}
 .pc-card-head{padding:22px 20px 14px;border-bottom:1px solid rgba(232,200,106,.08)}
 .pc-card-icon{font-size:1.9rem;margin-bottom:10px;display:block}
 .pc-card-label{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:5px;text-transform:uppercase;color:var(--oro-med);margin-bottom:4px;opacity:.7}
 .pc-card-title{font-family:'Cinzel',serif;font-size:.92rem;letter-spacing:3px;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.3}
-.pc-card.soon .pc-card-title{background:none;color:rgba(255,255,255,.2);-webkit-text-fill-color:rgba(255,255,255,.2)}
 .pc-card-desc{font-size:.76rem;font-style:italic;color:var(--tenue);margin-top:6px;line-height:1.5;opacity:.8}
 .pc-card-body{padding:14px 20px 20px;display:flex;flex-direction:column;gap:7px;flex:1}
 .pc-btn{display:flex;align-items:center;justify-content:space-between;text-decoration:none;padding:10px 14px;border:1px solid rgba(232,200,106,.17);border-radius:3px;background:rgba(232,200,106,.04);color:var(--texto);font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:2px;text-transform:uppercase;transition:background .25s,border-color .25s,color .25s,transform .2s;cursor:pointer}
@@ -846,51 +844,36 @@
 
 <section id="panel-control">
 <div class="pc-wrap">
-  <div class="pc-sup">// Centro de Mando &mdash; Acceso Directo</div>
+  <div class="pc-sup">// Centro de Mando</div>
   <h2 class="pc-title"><span class="oro">Panel de Control ORIONIX</span></h2>
 
-  <!-- NIVEL 1: PORTALES PRINCIPALES -->
+  <!-- NIVEL 1: LOS 4 PORTALES CLAVE -->
   <div class="pc-grid4">
 
     <div class="pc-card featured reveal" onclick="window.location='axel.html'">
       <div class="pc-card-head">
         <span class="pc-card-icon">&#x1F916;</span>
-        <div class="pc-card-label">// Kether &middot; Agente IA Principal</div>
+        <div class="pc-card-label">// Kether &middot; IA Principal</div>
         <div class="pc-card-title">AXEL</div>
-        <div class="pc-card-desc">Tu agente de IA. Busca, crea, responde y vende las 24 horas sin parar.</div>
+        <div class="pc-card-desc">Tu agente de IA. Busca, crea, responde y vende las 24 horas.</div>
       </div>
       <div class="pc-card-body">
         <span class="pc-badge-live">En L&iacute;nea</span>
         <a class="pc-btn" href="axel.html"><span>Abrir AXEL</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="axel.html#chat"><span>Chat Directo</span><span class="arr">&#8594;</span></a>
-      </div>
-    </div>
-
-    <div class="pc-card featured reveal" onclick="window.location='ciudadela.html'">
-      <div class="pc-card-head">
-        <span class="pc-card-icon">&#x1F9CA;</span>
-        <div class="pc-card-label">// Centro de Operaciones IA</div>
-        <div class="pc-card-title">La Ciudadela</div>
-        <div class="pc-card-desc">El n&uacute;cleo de 22 agentes del sistema Cabbalah. Luz y Sombra en equilibrio.</div>
-      </div>
-      <div class="pc-card-body">
-        <span class="pc-badge-live">Activa</span>
-        <a class="pc-btn" href="ciudadela.html"><span>Entrar a la Ciudadela</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="universo.html"><span>22 Agentes &mdash; Universo</span><span class="arr">&#8594;</span></a>
       </div>
     </div>
 
     <div class="pc-card featured reveal" onclick="window.location='tienda.html'">
       <div class="pc-card-head">
         <span class="pc-card-icon">&#x1F6CD;&#xFE0F;</span>
-        <div class="pc-card-label">// Suscripciones &middot; Planes</div>
+        <div class="pc-card-label">// Suscripciones</div>
         <div class="pc-card-title">La Tienda</div>
-        <div class="pc-card-desc">Esencia 197&euro;/mes · Imperio 497&euro;/mes · Ciudadela a medida. Agentes 24/7.</div>
+        <div class="pc-card-desc">Esencia 197&euro; &middot; Imperio 497&euro; &middot; Ciudadela a medida.</div>
       </div>
       <div class="pc-card-body">
         <span class="pc-badge-live">Abierta</span>
-        <a class="pc-btn" href="tienda.html"><span>Ver Planes y Precios</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="https://wa.me/573014410541?text=Quiero%20suscribirme%20a%20Orionix" target="_blank"><span>Suscribirme Ahora</span><span class="arr">&#8594;</span></a>
+        <a class="pc-btn" href="tienda.html"><span>Ver Planes</span><span class="arr">&#8594;</span></a>
+        <a class="pc-btn" href="https://wa.me/573014410541?text=Quiero%20suscribirme" target="_blank"><span>Suscribirme Ya</span><span class="arr">&#8594;</span></a>
       </div>
     </div>
 
@@ -899,80 +882,58 @@
         <span class="pc-card-icon">&#x1F48E;</span>
         <div class="pc-card-label">// Programa &Eacute;lite</div>
         <div class="pc-card-title">La Forjadora</div>
-        <div class="pc-card-desc">Transformaci&oacute;n &eacute;lite. De empresario a l&iacute;der del universo digital con IA.</div>
+        <div class="pc-card-desc">Transformaci&oacute;n &eacute;lite. De empresario a l&iacute;der digital con IA.</div>
       </div>
       <div class="pc-card-body">
         <span class="pc-badge-live">Disponible</span>
-        <a class="pc-btn" href="forjadora.html"><span>Descubrir la Forjadora</span><span class="arr">&#8594;</span></a>
+        <a class="pc-btn" href="forjadora.html"><span>Descubrir</span><span class="arr">&#8594;</span></a>
         <a class="pc-btn" href="https://wa.me/573014410541?text=Quiero%20unirme%20a%20La%20Forjadora" target="_blank"><span>Solicitar mi Lugar</span><span class="arr">&#8594;</span></a>
       </div>
     </div>
 
-  </div><!-- /grid4 -->
-
-  <div class="pc-divider"><span>&#9670; Tu Espacio Personal &#9670;</span></div>
-
-  <!-- NIVEL 2: ZONA PERSONAL -->
-  <div class="pc-grid3">
-
-    <div class="pc-card reveal" onclick="window.location='hogar.html'">
-      <div class="pc-card-head">
-        <span class="pc-card-icon">&#x1F3E0;</span>
-        <div class="pc-card-label">// Tu Portal Personal</div>
-        <div class="pc-card-title">El Hogar</div>
-        <div class="pc-card-desc">Tu espacio dentro del universo. H&aacute;bitos, herramientas y crecimiento personal.</div>
-      </div>
-      <div class="pc-card-body">
-        <a class="pc-btn" href="hogar.html"><span>Ir al Hogar</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="habitos.html"><span>Mis H&aacute;bitos</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="nebula-habits.html"><span>Nebula &mdash; IA de H&aacute;bitos</span><span class="arr">&#8594;</span></a>
-      </div>
-    </div>
-
-    <div class="pc-card reveal" onclick="window.location='mi-cuenta.html'">
-      <div class="pc-card-head">
-        <span class="pc-card-icon">&#x1F464;</span>
-        <div class="pc-card-label">// Perfil &middot; Acceso</div>
-        <div class="pc-card-title">Mi Cuenta</div>
-        <div class="pc-card-desc">Gestiona tu perfil, suscripci&oacute;n y configuraci&oacute;n de tus agentes IA.</div>
-      </div>
-      <div class="pc-card-body">
-        <a class="pc-btn" href="mi-cuenta.html"><span>Ver mi Perfil</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="auth.html"><span>Iniciar Sesi&oacute;n</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="gracias.html"><span>P&aacute;gina de Bienvenida</span><span class="arr">&#8594;</span></a>
-      </div>
-    </div>
-
-    <div class="pc-card reveal" onclick="window.location='universo.html'">
-      <div class="pc-card-head">
-        <span class="pc-card-icon">&#x1F5FA;&#xFE0F;</span>
-        <div class="pc-card-label">// 22 Agentes &middot; Cabbalah</div>
-        <div class="pc-card-title">Universo</div>
-        <div class="pc-card-desc">El mapa completo. 11 Sefirot de Luz + 11 Qliphoth de Sombra en perfecta armon&iacute;a.</div>
-      </div>
-      <div class="pc-card-body">
-        <a class="pc-btn" href="universo.html"><span>Explorar el Universo</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="axel.html"><span>AXEL &mdash; Kether</span><span class="arr">&#8594;</span></a>
-      </div>
-    </div>
-
-  </div><!-- /grid3 -->
-
-  <div class="pc-divider"><span>&#9670; Comunidad &amp; Ingresos &#9670;</span></div>
-
-  <!-- NIVEL 3: RED & NEGOCIO -->
-  <div class="pc-grid4">
-
-    <div class="pc-card reveal" onclick="window.location='afiliados.html'">
+    <div class="pc-card featured reveal" onclick="window.location='afiliados.html'">
       <div class="pc-card-head">
         <span class="pc-card-icon">&#x1F91D;</span>
         <div class="pc-card-label">// Ingresos Pasivos</div>
         <div class="pc-card-title">Afiliados</div>
-        <div class="pc-card-desc">20% por cada referido. Red de embajadores y comisiones recurrentes mes a mes.</div>
+        <div class="pc-card-desc">Gana 20% por cada referido. Red de embajadores recurrente.</div>
       </div>
       <div class="pc-card-body">
         <a class="pc-btn" href="afiliados.html"><span>Ser Afiliado</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="https://wa.me/573014410541?text=Quiero%20ser%20afiliado%20de%20Orionix" target="_blank"><span>Unirme a la Red</span><span class="arr">&#8594;</span></a>
+        <a class="pc-btn" href="https://wa.me/573014410541?text=Quiero%20ser%20afiliado" target="_blank"><span>Unirme a la Red</span><span class="arr">&#8594;</span></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pc-divider"><span>&#9670; Portales del Universo &#9670;</span></div>
+
+  <!-- NIVEL 2: PORTALES PRINCIPALES (distintos destinos) -->
+  <div class="pc-grid3">
+
+    <div class="pc-card reveal" onclick="window.location='ciudadela.html'">
+      <div class="pc-card-head">
+        <span class="pc-card-icon">&#x1F9CA;</span>
+        <div class="pc-card-label">// Centro de Operaciones IA</div>
+        <div class="pc-card-title">La Ciudadela</div>
+        <div class="pc-card-desc">El n&uacute;cleo de los 22 agentes del sistema Cabbalah. Luz y Sombra.</div>
+      </div>
+      <div class="pc-card-body">
+        <a class="pc-btn" href="ciudadela.html"><span>Entrar</span><span class="arr">&#8594;</span></a>
+        <a class="pc-btn" href="universo.html"><span>Mapa de 22 Agentes</span><span class="arr">&#8594;</span></a>
+      </div>
+    </div>
+
+    <div class="pc-card reveal" onclick="window.location='hogar.html'">
+      <div class="pc-card-head">
+        <span class="pc-card-icon">&#x1F3E0;</span>
+        <div class="pc-card-label">// Tu Espacio Personal</div>
+        <div class="pc-card-title">El Hogar</div>
+        <div class="pc-card-desc">H&aacute;bitos, herramientas y crecimiento personal. Nebula IA incluida.</div>
+      </div>
+      <div class="pc-card-body">
+        <a class="pc-btn" href="hogar.html"><span>Ir al Hogar</span><span class="arr">&#8594;</span></a>
+        <a class="pc-btn" href="mi-cuenta.html"><span>Mi Cuenta</span><span class="arr">&#8594;</span></a>
       </div>
     </div>
 
@@ -981,26 +942,58 @@
         <span class="pc-card-icon">&#x1F30C;</span>
         <div class="pc-card-label">// Red Orionix</div>
         <div class="pc-card-title">Comunidad</div>
-        <div class="pc-card-desc">La red de emprendedores del universo. Conéctate, colabora y crece con otros.</div>
+        <div class="pc-card-desc">La red de emprendedores del universo. Conecta, colabora y crece.</div>
       </div>
       <div class="pc-card-body">
         <a class="pc-btn" href="comunidad.html"><span>Ver Comunidad</span><span class="arr">&#8594;</span></a>
+        <a class="pc-btn" href="reels.html"><span>Contenido &amp; Reels</span><span class="arr">&#8594;</span></a>
       </div>
     </div>
 
-    <div class="pc-card reveal" onclick="window.location='reels.html'">
+  </div>
+
+  <div class="pc-divider"><span>&#9670; Acceso R&aacute;pido &#9670;</span></div>
+
+  <!-- NIVEL 3: ACCESOS DIRECTOS ÚNICOS (sin repetir destinos) -->
+  <div class="pc-grid4">
+
+    <div class="pc-card reveal" onclick="window.location='mundos.html'">
       <div class="pc-card-head">
-        <span class="pc-card-icon">&#x1F3AC;</span>
-        <div class="pc-card-label">// Contenido &middot; Media</div>
-        <div class="pc-card-title">Reels</div>
-        <div class="pc-card-desc">El contenido visual del universo. Videos, historias y momentos del ecosistema.</div>
+        <span class="pc-card-icon">&#x1F30F;</span>
+        <div class="pc-card-label">// Reinos</div>
+        <div class="pc-card-title">Los Mundos</div>
+        <div class="pc-card-desc">Los reinos del universo Orionix. Cada mundo con su historia y sus agentes.</div>
       </div>
       <div class="pc-card-body">
-        <a class="pc-btn" href="reels.html"><span>Ver Contenido</span><span class="arr">&#8594;</span></a>
+        <a class="pc-btn" href="mundos.html"><span>Explorar</span><span class="arr">&#8594;</span></a>
       </div>
     </div>
 
-    <div class="pc-card reveal" onclick="window.open('https://wa.me/573014410541?text=Hola%20Orionix%2C%20quiero%20informaci%C3%B3n','_blank')">
+    <div class="pc-card reveal" onclick="window.location='https://kevinruizbolsota-svg.github.io/Remember_Luxury/'">
+      <div class="pc-card-head">
+        <span class="pc-card-icon">&#x1F3DB;&#xFE0F;</span>
+        <div class="pc-card-label">// B&oacute;veda Personal</div>
+        <div class="pc-card-title">Kybalio</div>
+        <div class="pc-card-desc">833 videos, 1251 im&aacute;genes, 373 documentos y m&uacute;sica. Tu archivo personal.</div>
+      </div>
+      <div class="pc-card-body">
+        <a class="pc-btn" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/" target="_blank"><span>Abrir B&oacute;veda</span><span class="arr">&#8594;</span></a>
+      </div>
+    </div>
+
+    <div class="pc-card reveal" onclick="window.location='admin.html'">
+      <div class="pc-card-head">
+        <span class="pc-card-icon">&#x2699;&#xFE0F;</span>
+        <div class="pc-card-label">// Administraci&oacute;n</div>
+        <div class="pc-card-title">Admin</div>
+        <div class="pc-card-desc">Panel de administraci&oacute;n interno del universo Orionix.</div>
+      </div>
+      <div class="pc-card-body">
+        <a class="pc-btn" href="admin.html"><span>Panel Admin</span><span class="arr">&#8594;</span></a>
+      </div>
+    </div>
+
+    <div class="pc-card reveal" onclick="window.open('https://wa.me/573014410541?text=Hola%20Orionix','_blank')">
       <div class="pc-card-head">
         <span class="pc-card-icon">&#x1F4AC;</span>
         <div class="pc-card-label">// Contacto Directo</div>
@@ -1008,112 +1001,13 @@
         <div class="pc-card-desc">Habla con el equipo ahora mismo. Soporte y ventas en tiempo real.</div>
       </div>
       <div class="pc-card-body">
-        <a class="pc-btn" href="https://wa.me/573014410541?text=Hola%20Orionix%2C%20quiero%20informaci%C3%B3n" target="_blank"><span>Abrir WhatsApp</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="https://wa.me/573014410541?text=Quiero%20saber%20m%C3%A1s%20sobre%20los%20agentes%20IA" target="_blank"><span>Consultar Planes</span><span class="arr">&#8594;</span></a>
+        <a class="pc-btn" href="https://wa.me/573014410541?text=Hola%20Orionix" target="_blank"><span>Escribir Ahora</span><span class="arr">&#8594;</span></a>
       </div>
     </div>
 
-  </div><!-- /grid4 -->
+  </div>
 
-  <div class="pc-divider"><span>&#9670; Acceso R&aacute;pido &#9670;</span></div>
-
-  <!-- NIVEL 4: TODAS LAS PÁGINAS -->
-  <div class="pc-grid4">
-
-    <div class="pc-card reveal" onclick="window.location='habitos.html'">
-      <div class="pc-card-head">
-        <span class="pc-card-icon">&#x1F4C5;</span>
-        <div class="pc-card-label">// Productividad</div>
-        <div class="pc-card-title">H&aacute;bitos</div>
-        <div class="pc-card-desc">Construye tus h&aacute;bitos diarios con disciplina e inteligencia artificial.</div>
-      </div>
-      <div class="pc-card-body">
-        <a class="pc-btn" href="habitos.html"><span>Ver H&aacute;bitos</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="nebula-habits.html"><span>Nebula IA</span><span class="arr">&#8594;</span></a>
-      </div>
-    </div>
-
-    <div class="pc-card reveal" onclick="window.location='nebula-habits.html'">
-      <div class="pc-card-head">
-        <span class="pc-card-icon">&#x1F52D;</span>
-        <div class="pc-card-label">// IA &middot; H&aacute;bitos</div>
-        <div class="pc-card-title">Nebula</div>
-        <div class="pc-card-desc">Sistema de h&aacute;bitos con asistencia de IA. Construye tu mejor versi&oacute;n.</div>
-      </div>
-      <div class="pc-card-body">
-        <a class="pc-btn" href="nebula-habits.html"><span>Abrir Nebula</span><span class="arr">&#8594;</span></a>
-      </div>
-    </div>
-
-    <div class="pc-card reveal" onclick="window.location='hub.html'">
-      <div class="pc-card-head">
-        <span class="pc-card-icon">&#x1F9ED;</span>
-        <div class="pc-card-label">// Panel Completo</div>
-        <div class="pc-card-title">Hub Central</div>
-        <div class="pc-card-desc">El panel de control completo con acceso expandido a todo el universo.</div>
-      </div>
-      <div class="pc-card-body">
-        <a class="pc-btn" href="hub.html"><span>Ver Hub Completo</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="admin.html"><span>Panel Admin</span><span class="arr">&#8594;</span></a>
-      </div>
-    </div>
-
-    <div class="pc-card soon">
-      <div class="pc-card-head">
-        <span class="pc-card-icon">&#x1F3DB;&#xFE0F;</span>
-        <div class="pc-card-label">Pr&oacute;ximamente</div>
-        <div class="pc-card-title">Academia Orionix</div>
-      </div>
-    </div>
-
-  </div><!-- /grid4 -->
-
-  <div class="pc-divider"><span>&#9670; B&oacute;veda de Medios &amp; Mundos &#9670;</span></div>
-
-  <div class="pc-grid3">
-
-    <div class="pc-card reveal" onclick="window.location='https://kevinruizbolsota-svg.github.io/Remember_Luxury/'">
-      <div class="pc-card-head">
-        <span class="pc-card-icon">&#x1F3DB;&#xFE0F;</span>
-        <div class="pc-card-label">// Portal Kybalio &middot; B&oacute;veda</div>
-        <div class="pc-card-title">B&oacute;veda de Kybalio</div>
-        <div class="pc-card-desc">833 videos, 1251 im&aacute;genes, 206 audios, 373 documentos. Tu archivo personal con IA de voz.</div>
-      </div>
-      <div class="pc-card-body">
-        <a class="pc-btn" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/" target="_blank"><span>Abrir la B&oacute;veda</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/" target="_blank"><span>Videos &amp; M&uacute;sica</span><span class="arr">&#8594;</span></a>
-      </div>
-    </div>
-
-    <div class="pc-card reveal" onclick="window.location='mundos.html'">
-      <div class="pc-card-head">
-        <span class="pc-card-icon">&#x1F30F;</span>
-        <div class="pc-card-label">// Expansi&oacute;n &middot; Reinos</div>
-        <div class="pc-card-title">Los Mundos</div>
-        <div class="pc-card-desc">Los reinos del universo Orionix. Cada mundo tiene su historia, sus reglas y sus agentes.</div>
-      </div>
-      <div class="pc-card-body">
-        <a class="pc-btn" href="mundos.html"><span>Explorar los Mundos</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="tienda.html#mundos"><span>Planes de Acceso</span><span class="arr">&#8594;</span></a>
-      </div>
-    </div>
-
-    <div class="pc-card reveal" onclick="window.location='gracias.html'">
-      <div class="pc-card-head">
-        <span class="pc-card-icon">&#x1F381;</span>
-        <div class="pc-card-label">// Bienvenida &middot; Onboarding</div>
-        <div class="pc-card-title">P&aacute;g. Gracias</div>
-        <div class="pc-card-desc">La p&aacute;gina de bienvenida para nuevos miembros del universo Orionix.</div>
-      </div>
-      <div class="pc-card-body">
-        <a class="pc-btn" href="gracias.html"><span>Ver Bienvenida</span><span class="arr">&#8594;</span></a>
-        <a class="pc-btn" href="auth.html"><span>Acceso &amp; Registro</span><span class="arr">&#8594;</span></a>
-      </div>
-    </div>
-
-  </div><!-- /grid3 -->
-
-</div><!-- /pc-wrap -->
+</div>
 </section>
 <!-- ============================================================ -->
 <!-- FIN PANEL DE CONTROL                                         -->

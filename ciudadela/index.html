@@ -1313,45 +1313,42 @@
   var inp=document.getElementById("input");inp.addEventListener("input",function(){this.style.height="auto";this.style.height=Math.min(this.scrollHeight,160)+"px";});inp.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMsg();}});
   document.getElementById("nameInput").addEventListener("keydown",function(e){if(e.key==="Enter")doLogin();});
 
-  /* ---- VOZ: HABLAR (micro -> texto) ---- */
-  /* ==== VOZ ROBUSTA: graba audio real y lo transcribe en el servidor (funciona en cualquier PC) ==== */
-  var VOZ_WEBHOOK="https://lkevinruizl.app.n8n.cloud/webhook/kybalio-voz";
-  var __mr=null,__chunks=[],__grabando=false,__stream=null;
+  /* ---- VOZ: HABLAR (micro -> texto via SpeechRecognition del navegador) ---- */
+  var MIC_SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  var __micRecog=null,__micActivo=false;
   function startMic(){
     var btn=document.getElementById("micBtn");
     var inp=document.getElementById("input");
     var live=document.getElementById("vozlive");
-    /* Si ya esta grabando -> detener y transcribir */
-    if(__grabando){ __grabando=false; btn.classList.remove("rec"); if(live)live.textContent="Transcribiendo..."; try{__mr.stop();}catch(e){} return; }
-    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){alert("Tu navegador no permite grabar audio. Usa Google Chrome.");return;}
-    navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
-      __stream=stream;__chunks=[];
-      try{__mr=new MediaRecorder(stream);}catch(e){__mr=new MediaRecorder(stream,{mimeType:"audio/webm"});}
-      __mr.ondataavailable=function(e){if(e.data&&e.data.size>0)__chunks.push(e.data);};
-      __mr.onstop=function(){
-        try{__stream.getTracks().forEach(function(t){t.stop();});}catch(e){}
-        var blob=new Blob(__chunks,{type:(__chunks[0]&&__chunks[0].type)||"audio/webm"});
-        var fr=new FileReader();
-        fr.onloadend=function(){
-          var b64=fr.result;
-          fetch(VOZ_WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({audio:b64})})
-          .then(function(r){return r.json();})
-          .then(function(d){
-            var t=(d&&d.texto?d.texto:"").trim();
-            if(live)live.style.display="none";
-            if(t){ inp.value=(inp.value?inp.value+" ":"")+t; inp.style.height="auto"; inp.style.height=Math.min(inp.scrollHeight,160)+"px"; inp.focus(); try{inp.setSelectionRange(inp.value.length,inp.value.length);}catch(e){} }
-            else{ alert("No se entendio el audio. Habla mas cerca del microfono e intenta de nuevo."); }
-          })
-          .catch(function(){ if(live)live.style.display="none"; alert("No pude transcribir el audio. Revisa tu conexion."); });
-        };
-        fr.readAsDataURL(blob);
-      };
-      __grabando=true;btn.classList.add("rec");
-      if(live){live.style.display="block";live.textContent="Grabando... toca el microfono otra vez cuando termines";}
-      __mr.start();
-    }).catch(function(){
-      alert("Debes PERMITIR el microfono. Toca el candado (o el icono de camara) en la barra de direcciones de Chrome, activa el Microfono y recarga la pagina.");
-    });
+    if(!MIC_SR){alert("Tu navegador no soporta reconocimiento de voz. Usa Google Chrome en PC o Android.");return;}
+    /* Si ya escucha -> detener */
+    if(__micActivo&&__micRecog){try{__micRecog.stop();}catch(e){}return;}
+    var r=new MIC_SR();
+    r.lang="es-ES";r.continuous=false;r.interimResults=true;r.maxAlternatives=1;
+    __micRecog=r;__micActivo=true;
+    btn.classList.add("rec");
+    if(live){live.style.display="block";live.textContent="🎙️ Escuchando... habla ahora";}
+    var finalBuf="";
+    r.onresult=function(ev){
+      var interim="";
+      for(var i=ev.resultIndex;i<ev.results.length;i++){
+        if(ev.results[i].isFinal)finalBuf+=ev.results[i][0].transcript+" ";
+        else interim+=ev.results[i][0].transcript;
+      }
+      if(live)live.textContent="🎙️ "+(finalBuf+interim).trim();
+    };
+    r.onerror=function(ev){
+      __micActivo=false;btn.classList.remove("rec");if(live)live.style.display="none";
+      var e=ev&&ev.error;
+      if(e==="not-allowed"||e==="service-not-allowed"){alert("Debes PERMITIR el microfono. Toca el candado en la barra de direcciones de Chrome, activa el Microfono y recarga la pagina.");}
+    };
+    r.onend=function(){
+      __micActivo=false;btn.classList.remove("rec");if(live)live.style.display="none";
+      var t=finalBuf.trim();
+      if(t){inp.value=(inp.value?inp.value+" ":"")+t;inp.style.height="auto";inp.style.height=Math.min(inp.scrollHeight,160)+"px";inp.focus();try{inp.setSelectionRange(inp.value.length,inp.value.length);}catch(e){}}
+      else{alert("No se entendio el audio. Habla mas cerca del microfono e intenta de nuevo.");}
+    };
+    r.start();
   }
   /* ---- VOZ: ESCUCHAR (texto -> voz) ---- */
   window.__speak=(localStorage.getItem("ciudadela_speak")==="1");

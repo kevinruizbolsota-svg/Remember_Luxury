@@ -91,7 +91,7 @@ nav{
 .portal-img-zone{
   position:absolute;inset:0;
   display:flex;align-items:center;justify-content:center;
-  opacity:.45;
+  opacity:.78;
   pointer-events:none;
   overflow:hidden;
 }
@@ -103,12 +103,14 @@ nav{
   object-fit:cover;opacity:.38;border-radius:inherit;z-index:1;
 }
 
-/* Bottom gradient → texto siempre legible */
+/* Gradiente SOLO en la parte baja para el texto — imagen visible */
 .portal::before{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:68%;
-  background:linear-gradient(transparent,rgba(6,5,13,.88) 60%,rgba(6,5,13,.98));
+  content:'';position:absolute;bottom:0;left:0;right:0;height:40%;
+  background:linear-gradient(transparent,rgba(6,5,13,.72) 50%,rgba(6,5,13,.92));
   pointer-events:none;z-index:2;
+  transition:opacity .3s;
 }
+.portal:hover::before{ opacity:.25; }
 .portal-text{position:relative;z-index:3;text-align:center}
 .portal-name{
   font-family:'Cinzel',serif;
@@ -370,15 +372,7 @@ nav{
   justify-content:center;align-items:center;padding:16px;
 }
 .portal.center::before{display:none}
-.portal.center::after{
-  content:'';position:absolute;inset:-2px;border-radius:50%;
-  background:conic-gradient(from 0deg,
-    transparent 0%,transparent 35%,
-    rgba(232,200,106,.55) 45%,rgba(255,246,214,.8) 50%,rgba(232,200,106,.55) 55%,
-    transparent 65%,transparent 100%);
-  animation:spinRing 10s linear infinite;z-index:0;
-}
-@keyframes spinRing{to{transform:rotate(360deg)}}
+.portal.center::after{display:none}
 /* Glow en reposo del centro */
 .portal.center{
   animation:restGlowCenterPulse 2.8s ease-in-out infinite;

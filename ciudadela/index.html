@@ -1326,7 +1326,7 @@
   function borrarHistorial(){ if(confirm('Seguro que quieres borrar el historial guardado en este navegador?')){ try{ localStorage.clear(); sessionStorage.clear(); }catch(e){} location.reload(); } }
 
   /* ---- CHAT AXEL ---- */
-  var WEBHOOK="https://lkevinruizl.app.n8n.cloud/webhook/portal-central";
+  var WEBHOOK="https://lkevinruizl.app.n8n.cloud/webhook/axel-brain";
   var user="",chats={},current=null;
   function k(){return "ciudadela_"+user}
   function load(){var raw=localStorage.getItem(k());chats=raw?JSON.parse(raw):{};}

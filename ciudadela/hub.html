@@ -11,58 +11,24 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
-:root{
-  --oro:#e8c86a; --oro-med:#c8a24a; --oro-osc:#8a6a24;
-  --bg:#0b0b0d; --bg2:#141118; --panel:#141117; --panel2:#1c1922; --border:#2a2530;
-  --texto:#e9ddc4; --tenue:#b8a982;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--bg);color:var(--texto);min-height:100vh;overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+:root{--oro:#e8c86a;--oro-med:#c8a24a;--oro-osc:#8a6a24;--bg:#0b0b0d;--panel:#141117;--border:#2a2530;--texto:#e9ddc4;--tenue:#b8a982}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Cormorant Garamond',Georgia,serif;background:transparent;color:var(--texto);min-height:100vh;overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
 h1,h2,h3,.marca,.btn,.cinzel{font-family:'Cinzel',serif}
-
-/* ── ORO ANIMADO ── */
 .oro{background:linear-gradient(92deg,#8a6a24,#e8c86a 25%,#fff6d6 50%,#e8c86a 75%,#8a6a24);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 6s linear infinite}
 @keyframes brilloOro{to{background-position:200% center}}
 .hairline{width:70px;height:1px;background:linear-gradient(90deg,transparent,var(--oro),transparent);margin:22px auto}
 
-/* ── BTN ── */
+/* BTN */
 .btn{position:relative;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;padding:12px 30px;font-size:.66rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--oro);border:1px solid var(--oro-med);border-radius:2px;background:transparent;overflow:hidden;transition:color .4s,border-color .4s;z-index:0}
 .btn::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#f4e2a0,#e8c86a 45%,#c8a24a);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.4,0,.2,1)}
-.btn:hover{color:#1a1409;border-color:var(--oro)}
-.btn:hover::before{transform:scaleX(1)}
-.btn.ghost{color:var(--tenue);border-color:var(--border)}
-.btn.ghost::before{background:rgba(232,200,106,.12)}
-.btn.ghost:hover{color:#fff6d6;border-color:var(--oro-med)}
+.btn:hover{color:#1a1409;border-color:var(--oro)}.btn:hover::before{transform:scaleX(1)}
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;width:100%;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px 7vw;transition:padding .3s,background .3s}
-nav.scrolled{padding:8px 7vw;background:rgba(11,11,13,.9);border-bottom:1px solid rgba(232,200,106,.2);backdrop-filter:blur(10px)}
-nav .marca{font-size:.72rem;font-weight:600;letter-spacing:4px;flex-shrink:0;text-decoration:none;color:var(--texto)}
-nav .links{display:flex;align-items:center;flex-wrap:nowrap;gap:0}
-nav .links a{color:var(--tenue);text-decoration:none;margin-left:18px;font-size:.56rem;letter-spacing:1.4px;text-transform:uppercase;font-family:'Cinzel',serif;transition:color .25s;position:relative;cursor:pointer;white-space:nowrap}
-nav .links a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--oro);transition:width .3s}
-nav .links a:hover{color:var(--oro)}
-nav .links a:hover::after{width:100%}
-nav .links .sep{width:1px;height:14px;background:rgba(232,200,106,.25);margin-left:20px}
-nav .links a.acc{color:var(--oro)!important;font-weight:600;border:1px solid rgba(232,200,106,.35);border-radius:6px;padding:6px 12px;margin-left:10px;transition:background .25s,box-shadow .25s,transform .2s}
-nav .links a.acc:hover{background:rgba(232,200,106,.14);box-shadow:0 0 12px rgba(232,200,106,.25);transform:translateY(-1px)}
-nav .links a.acc::after{display:none}
-@media(max-width:900px){nav .links{display:none}}
-
-/* ── COSMOS ── */
-body{background:transparent!important}
+/* COSMOS */
 #cosmos{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 50% 20%,#0a0a16,#03030a 60%,#010104 100%);overflow:hidden}
-#cosmos .neb{position:absolute;inset:-20%;background:
-    radial-gradient(closest-side,var(--neb1),transparent) no-repeat,
-    radial-gradient(closest-side,var(--neb2),transparent) no-repeat,
-    radial-gradient(closest-side,var(--neb3),transparent) no-repeat;
-  background-position:20% 15%,80% 40%,50% 85%;
-  background-size:60% 60%,55% 55%,70% 70%;
-  filter:blur(38px);opacity:.55;animation:nebFloat 50s ease-in-out infinite alternate}
+#cosmos .neb{position:absolute;inset:-20%;background:radial-gradient(closest-side,var(--neb1),transparent) no-repeat,radial-gradient(closest-side,var(--neb2),transparent) no-repeat,radial-gradient(closest-side,var(--neb3),transparent) no-repeat;background-position:20% 15%,80% 40%,50% 85%;background-size:60% 60%,55% 55%,70% 70%;filter:blur(38px);opacity:.55;animation:nebFloat 50s ease-in-out infinite alternate}
 @keyframes nebFloat{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(-3%,-4%,0) scale(1.12)}}
 #cosmosStars{position:fixed;inset:0;z-index:-1;pointer-events:none}
-
 body[data-cielo="1"]{--neb1:rgba(90,60,180,.5);--neb2:rgba(40,90,200,.4);--neb3:rgba(200,120,60,.35)}
 body[data-cielo="2"]{--neb1:rgba(200,60,120,.45);--neb2:rgba(120,40,160,.4);--neb3:rgba(60,120,200,.35)}
 body[data-cielo="3"]{--neb1:rgba(40,140,150,.45);--neb2:rgba(30,80,180,.4);--neb3:rgba(150,200,120,.28)}
@@ -70,72 +36,75 @@ body[data-cielo="4"]{--neb1:rgba(180,120,40,.45);--neb2:rgba(150,40,60,.4);--neb
 body[data-cielo="5"]{--neb1:rgba(60,60,120,.5);--neb2:rgba(120,120,200,.35);--neb3:rgba(200,180,120,.3)}
 body[data-cielo="6"]{--neb1:rgba(20,120,90,.45);--neb2:rgba(160,60,180,.4);--neb3:rgba(230,180,90,.32)}
 
-/* ── HERO / TITLE ── */
+/* NAV */
+nav{position:fixed;top:0;left:0;width:100%;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px 7vw;transition:padding .3s,background .3s}
+nav.scrolled{padding:8px 7vw;background:rgba(11,11,13,.9);border-bottom:1px solid rgba(232,200,106,.2);backdrop-filter:blur(10px)}
+nav .marca{font-size:.72rem;font-weight:600;letter-spacing:4px;flex-shrink:0;text-decoration:none;color:var(--texto)}
+nav .links{display:flex;align-items:center;flex-wrap:nowrap;gap:0}
+nav .links a{color:var(--tenue);text-decoration:none;margin-left:16px;font-size:.52rem;letter-spacing:1.4px;text-transform:uppercase;font-family:'Cinzel',serif;transition:color .25s;position:relative;cursor:pointer;white-space:nowrap}
+nav .links a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--oro);transition:width .3s}
+nav .links a:hover{color:var(--oro)}nav .links a:hover::after{width:100%}
+nav .links .sep{width:1px;height:14px;background:rgba(232,200,106,.25);margin-left:18px}
+nav .links a.acc{color:var(--oro)!important;font-weight:600;border:1px solid rgba(232,200,106,.35);border-radius:6px;padding:5px 11px;margin-left:8px;transition:background .25s,box-shadow .25s,transform .2s}
+nav .links a.acc:hover{background:rgba(232,200,106,.14);box-shadow:0 0 12px rgba(232,200,106,.25);transform:translateY(-1px)}
+nav .links a.acc::after{display:none}
+@media(max-width:900px){nav .links{display:none}}
+
+/* HERO */
 #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 7vw;position:relative}
 #hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(232,200,106,.06) 1px,transparent 1px);background-size:26px 26px;opacity:.5;pointer-events:none}
+#hero::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(2,2,7,.4),rgba(2,2,7,.7));pointer-events:none}
 #hero .eyebrow{font-family:'Cinzel',serif;letter-spacing:4px;font-size:.5rem;color:var(--oro-med);text-transform:uppercase;margin-bottom:12px}
-#hero h1{font-size:clamp(1.15rem,3.4vw,2.3rem);font-weight:400;letter-spacing:clamp(6px,2.4vw,20px);line-height:1;text-indent:clamp(6px,2.4vw,20px);
-  background:linear-gradient(120deg,#8a6d2a 0%,#f6e6ad 25%,#fff8e1 45%,#f6e6ad 60%,#b8912f 100%);
-  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
-  filter:drop-shadow(0 4px 40px rgba(232,200,106,.35));animation:brilloTitulo 6s linear infinite,latido 4.5s ease-in-out infinite}
+#hero h1{font-size:clamp(1.15rem,3.4vw,2.3rem);font-weight:400;letter-spacing:clamp(6px,2.4vw,20px);line-height:1;text-indent:clamp(6px,2.4vw,20px);background:linear-gradient(120deg,#8a6d2a 0%,#f6e6ad 25%,#fff8e1 45%,#f6e6ad 60%,#b8912f 100%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;filter:drop-shadow(0 4px 40px rgba(232,200,106,.35));animation:brilloTitulo 6s linear infinite,latido 4.5s ease-in-out infinite}
 @keyframes brilloTitulo{to{background-position:220% center}}
 @keyframes latido{0%,100%{filter:drop-shadow(0 4px 40px rgba(232,200,106,.30))}50%{filter:drop-shadow(0 6px 60px rgba(232,200,106,.55))}}
 #hero .sub{font-size:clamp(.8rem,1.6vw,1rem);font-style:italic;color:var(--tenue);margin:12px 0 10px}
 .scroll-ind{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);color:var(--oro-med);font-size:1.4rem;animation:flota 2s ease-in-out infinite;z-index:3}
 @keyframes flota{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
 
-/* ── HUB SECTION ── */
+/* HUB */
 #hub{padding:100px 7vw 80px;position:relative}
 #hub::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(2,2,7,.55),rgba(2,2,7,.82));pointer-events:none}
-#hub .hub-label{text-align:center;font-family:'Cinzel',serif;letter-spacing:6px;font-size:.6rem;color:var(--oro-med);text-transform:uppercase;opacity:.7;margin-bottom:8px}
-#hub .hub-title{text-align:center;font-family:'Cinzel',serif;font-size:clamp(1rem,2vw,1.5rem);letter-spacing:8px;margin-bottom:60px}
+.hub-sup{text-align:center;font-family:'Cinzel',serif;letter-spacing:6px;font-size:.55rem;color:var(--oro-med);text-transform:uppercase;opacity:.7;margin-bottom:8px}
+.hub-title{text-align:center;font-family:'Cinzel',serif;font-size:clamp(.9rem,2vw,1.4rem);letter-spacing:8px;margin-bottom:56px}
 
-/* ── GRID ── */
+/* GRID */
 .hub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:0 auto}
 @media(max-width:860px){.hub-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:540px){.hub-grid{grid-template-columns:1fr}}
 
-/* ── CARD ── */
-.hub-card{position:relative;border:1px solid rgba(232,200,106,.18);border-radius:4px;background:rgba(20,17,23,.75);backdrop-filter:blur(18px);overflow:hidden;display:flex;flex-direction:column;transition:transform .35s,box-shadow .35s,border-color .35s}
+/* CARD */
+.hub-card{border:1px solid rgba(232,200,106,.18);border-radius:4px;background:rgba(20,17,23,.75);backdrop-filter:blur(18px);overflow:hidden;display:flex;flex-direction:column;transition:transform .35s,box-shadow .35s,border-color .35s}
 .hub-card:hover{transform:translateY(-6px);box-shadow:0 14px 50px rgba(232,200,106,.14);border-color:rgba(232,200,106,.38)}
-.hub-card.soon{opacity:.45;pointer-events:none}
-.hub-card.soon:hover{transform:none;box-shadow:none}
+.hub-card.soon{opacity:.38;pointer-events:none}
+.card-header{padding:28px 24px 18px;border-bottom:1px solid rgba(232,200,106,.1)}
+.card-icon{font-size:1.8rem;margin-bottom:10px}
+.card-label{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:5px;text-transform:uppercase;color:var(--oro-med);margin-bottom:6px;opacity:.7}
+.card-title{font-family:'Cinzel',serif;font-size:1rem;letter-spacing:3px;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hub-card.soon .card-title{background:none;color:rgba(255,255,255,.25);-webkit-text-fill-color:rgba(255,255,255,.25)}
+.card-desc{font-size:.85rem;font-style:italic;color:var(--tenue);margin-top:8px;line-height:1.5;opacity:.8}
+.card-body{padding:18px 24px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
 
-/* Card header */
-.card-header{padding:32px 28px 20px;border-bottom:1px solid rgba(232,200,106,.1)}
-.card-icon{font-size:2rem;margin-bottom:10px}
-.card-label{font-family:'Cinzel',serif;font-size:.45rem;letter-spacing:5px;text-transform:uppercase;color:var(--oro-med);margin-bottom:6px}
-.card-title{font-family:'Cinzel',serif;font-size:1.05rem;letter-spacing:3px;
-  background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);
-  -webkit-background-clip:text;background-clip:text;color:transparent}
-.hub-card.soon .card-title{background:none;color:rgba(255,255,255,.3);-webkit-text-fill-color:rgba(255,255,255,.3)}
-.card-desc{font-size:.88rem;font-style:italic;color:var(--tenue);margin-top:8px;line-height:1.5}
-
-/* Card body — botones */
-.card-body{padding:20px 28px 28px;display:flex;flex-direction:column;gap:10px;flex:1}
-.card-btn{display:flex;align-items:center;justify-content:space-between;text-decoration:none;padding:12px 16px;border:1px solid rgba(232,200,106,.2);border-radius:2px;background:rgba(232,200,106,.04);color:var(--texto);font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;transition:background .25s,border-color .25s,color .25s,transform .2s}
+/* CARD BUTTON */
+.card-btn{display:flex;align-items:center;justify-content:space-between;text-decoration:none;padding:12px 16px;border:1px solid rgba(232,200,106,.2);border-radius:2px;background:rgba(232,200,106,.04);color:var(--texto);font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:2px;text-transform:uppercase;transition:background .25s,border-color .25s,color .25s,transform .2s}
 .card-btn:hover{background:rgba(232,200,106,.12);border-color:rgba(232,200,106,.4);color:var(--oro);transform:translateX(4px)}
-.card-btn .arrow{font-size:.7rem;color:var(--oro-med);transition:transform .2s}
-.card-btn:hover .arrow{transform:translateX(4px)}
+.card-btn .arr{font-size:.75rem;color:var(--oro-med);transition:transform .2s}
+.card-btn:hover .arr{transform:translateX(4px)}
 
-/* Soon badge */
-.soon-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid rgba(255,255,255,.1);border-radius:20px;background:rgba(255,255,255,.04);font-family:'Cinzel',serif;font-size:.45rem;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:16px}
+/* SOON BADGE */
+.soon-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid rgba(255,255,255,.1);border-radius:20px;background:rgba(255,255,255,.04);font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.3)}
 
-/* Hairline divisor */
-.hub-hairline{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(232,200,106,.25),transparent);margin:12px 0}
-
-/* ── FOOTER ── */
+/* FOOTER */
 footer.pro{padding:28px 7vw;border-top:1px solid rgba(232,200,106,.1);display:flex;align-items:center;justify-content:space-between;background:rgba(11,11,13,.85);position:relative}
 footer.pro::before{content:'';position:absolute;inset:0;z-index:-1;background:rgba(2,2,7,.75);pointer-events:none}
-.ft-copy{font-family:'Cinzel',serif;font-size:.45rem;letter-spacing:3px;color:rgba(232,200,106,.35);text-transform:uppercase}
-.ft-links{display:flex;gap:24px}
-.ft-links a{font-family:'Cinzel',serif;font-size:.45rem;letter-spacing:2px;text-transform:uppercase;color:rgba(232,200,106,.35);text-decoration:none;transition:color .2s}
+.ft-copy{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:3px;color:rgba(232,200,106,.35);text-transform:uppercase}
+.ft-links{display:flex;gap:20px}
+.ft-links a{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:2px;text-transform:uppercase;color:rgba(232,200,106,.35);text-decoration:none;transition:color .2s}
 .ft-links a:hover{color:var(--oro)}
 </style>
 </head>
 <body>
 
-<!-- COSMOS -->
 <div id="cosmos"><div class="neb"></div></div>
 <canvas id="cosmosStars"></canvas>
 
@@ -144,13 +113,13 @@ footer.pro::before{content:'';position:absolute;inset:0;z-index:-1;background:rg
   <a class="marca oro" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/">ORIONIX</a>
   <div class="links">
     <a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/">Inicio</a>
-    <a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/#nosotros">Nosotros</a>
     <a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/#servicios">Servicios</a>
     <a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/#agentes">Agentes IA</a>
     <a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/#planes">Planes</a>
+    <a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/#contacto">Contacto</a>
     <div class="sep"></div>
     <a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/#agentes" class="acc">AXEL</a>
-    <a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/" class="acc">Mi Templo</a>
+    <a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/#contacto" class="acc">Mi Templo</a>
     <a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/tienda.html" class="acc">Mi Tienda</a>
   </div>
 </nav>
@@ -164,14 +133,14 @@ footer.pro::before{content:'';position:absolute;inset:0;z-index:-1;background:rg
   <div class="scroll-ind">&#8964;</div>
 </section>
 
-<!-- HUB PRINCIPAL -->
+<!-- HUB -->
 <section id="hub">
-  <div class="hub-label">Circulo de mundos</div>
+  <div class="hub-sup">Circulo de Mundos</div>
   <h2 class="hub-title"><span class="oro">La Ciudadela</span></h2>
 
   <div class="hub-grid">
 
-    <!-- LA CIUDADELA — Universo de IA -->
+    <!-- 1. LA CIUDADELA -->
     <div class="hub-card">
       <div class="card-header">
         <div class="card-icon">&#x1F916;</div>
@@ -180,16 +149,17 @@ footer.pro::before{content:'';position:absolute;inset:0;z-index:-1;background:rg
         <div class="card-desc">El centro de operaciones de Orionix. Agentes, universo digital y el poder de la IA.</div>
       </div>
       <div class="card-body">
-        <a class="card-btn" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/#agentes" target="_blank" rel="noopener">
+        <a class="card-btn" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/#agentes">
           <span>Universo de Agentes IA</span>
-          <span class="arrow">&#8594;</span>
+          <span class="arr">&#8594;</span>
         </a>
-        <div class="hub-hairline"></div>
-        <div class="soon-badge">&#x1F512; M&aacute;s portales pr&oacute;ximamente</div>
+        <div style="margin-top:8px">
+          <div class="soon-badge">&#x1F512; M&aacute;s portales pr&oacute;ximamente</div>
+        </div>
       </div>
     </div>
 
-    <!-- HOGAR — La Tienda + El Templo -->
+    <!-- 2. HOGAR -->
     <div class="hub-card">
       <div class="card-header">
         <div class="card-icon">&#x1F3E0;</div>
@@ -198,23 +168,23 @@ footer.pro::before{content:'';position:absolute;inset:0;z-index:-1;background:rg
         <div class="card-desc">Tu espacio personal dentro del universo. Todo lo que necesitas para crecer.</div>
       </div>
       <div class="card-body">
-        <a class="card-btn" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/tienda.html" target="_blank" rel="noopener">
+        <a class="card-btn" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/tienda.html">
           <span>La Tienda</span>
-          <span class="arrow">&#8594;</span>
+          <span class="arr">&#8594;</span>
         </a>
-        <a class="card-btn" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/#contacto" target="_blank" rel="noopener">
+        <a class="card-btn" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/#contacto">
           <span>El Templo</span>
-          <span class="arrow">&#8594;</span>
+          <span class="arr">&#8594;</span>
         </a>
       </div>
     </div>
 
-    <!-- PROXIMO -->
+    <!-- 3. PROX -->
     <div class="hub-card soon">
       <div class="card-header">
         <div class="card-icon">&#x1F4DC;</div>
         <div class="card-label">// Tercer Circulo</div>
-        <div class="card-title">Las Cr&oacute;nicas del Creador</div>
+        <div class="card-title">Las Cr&oacute;nicas</div>
         <div class="card-desc">Historia, legado y vision del Creador KRC. En desarrollo.</div>
       </div>
       <div class="card-body">
@@ -224,27 +194,19 @@ footer.pro::before{content:'';position:absolute;inset:0;z-index:-1;background:rg
 
   </div>
 
-  <!-- Segunda fila: próximamente -->
-  <div class="hub-grid" style="margin-top:24px;opacity:.35;pointer-events:none;">
-    <div class="hub-card soon" style="min-height:120px">
-      <div class="card-header">
-        <div class="card-label">// La Forjadora de Diamantes</div>
-        <div class="card-title" style="font-size:.8rem">Pr&oacute;ximamente</div>
-      </div>
+  <!-- Fila mini -->
+  <div class="hub-grid" style="margin-top:20px;opacity:.3;pointer-events:none">
+    <div class="hub-card soon" style="min-height:100px">
+      <div class="card-header"><div class="card-label">La Forjadora de Diamantes</div><div class="card-title" style="font-size:.75rem">Pr&oacute;ximamente</div></div>
     </div>
-    <div class="hub-card soon" style="min-height:120px">
-      <div class="card-header">
-        <div class="card-label">// Academia Orionix</div>
-        <div class="card-title" style="font-size:.8rem">Pr&oacute;ximamente</div>
-      </div>
+    <div class="hub-card soon" style="min-height:100px">
+      <div class="card-header"><div class="card-label">Academia Orionix</div><div class="card-title" style="font-size:.75rem">Pr&oacute;ximamente</div></div>
     </div>
-    <div class="hub-card soon" style="min-height:120px">
-      <div class="card-header">
-        <div class="card-label">// Portal Elite</div>
-        <div class="card-title" style="font-size:.8rem">Pr&oacute;ximamente</div>
-      </div>
+    <div class="hub-card soon" style="min-height:100px">
+      <div class="card-header"><div class="card-label">Portal Elite</div><div class="card-title" style="font-size:.75rem">Pr&oacute;ximamente</div></div>
     </div>
   </div>
+
 </section>
 
 <!-- FOOTER -->
@@ -258,36 +220,16 @@ footer.pro::before{content:'';position:absolute;inset:0;z-index:-1;background:rg
 </footer>
 
 <script>
-// Cosmos
-document.body.setAttribute('data-cielo', Math.ceil(Math.random()*6));
+document.body.setAttribute('data-cielo',Math.ceil(Math.random()*6));
 (function(){
-  const c=document.getElementById('cosmosStars');
-  const ctx=c.getContext('2d');
-  function resize(){c.width=innerWidth;c.height=innerHeight}
-  resize();window.addEventListener('resize',resize);
-  const stars=Array.from({length:220},()=>({
-    x:Math.random(),y:Math.random(),
-    r:.3+Math.random()*.9,
-    a:.3+Math.random()*.7,
-    sp:.0002+Math.random()*.0008
-  }));
-  function draw(){
-    ctx.clearRect(0,0,c.width,c.height);
-    stars.forEach(s=>{
-      s.a+=Math.sin(Date.now()*s.sp)*0.003;
-      ctx.beginPath();
-      ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(255,248,220,${Math.max(.1,Math.min(.9,s.a))})`;
-      ctx.fill();
-    });
-    requestAnimationFrame(draw);
-  }
-  draw();
+  var c=document.getElementById('cosmosStars'),ctx=c.getContext('2d');
+  function resize(){c.width=innerWidth;c.height=innerHeight}resize();
+  window.addEventListener('resize',resize);
+  var stars=[];for(var i=0;i<220;i++)stars.push({x:Math.random(),y:Math.random(),r:.3+Math.random()*.9,a:.3+Math.random()*.7,sp:.0002+Math.random()*.0008});
+  function draw(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(function(s){s.a+=Math.sin(Date.now()*s.sp)*.003;ctx.beginPath();ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);ctx.fillStyle='rgba(255,248,220,'+Math.max(.1,Math.min(.9,s.a))+')';ctx.fill()});requestAnimationFrame(draw)}draw();
 })();
-
-// Nav scroll
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
+var nav=document.getElementById('nav');
+window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>60)},{passive:true});
 </script>
 </body>
 </html>

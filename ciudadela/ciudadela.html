@@ -3,413 +3,408 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIONIX · La Ciudadela — Centro de Operaciones IA</title>
-<meta name="description" content="La Ciudadela de Orionix: AXEL y el universo de agentes de inteligencia artificial que trabajan por ti.">
+<title>La Ciudadela · Centro de Inteligencia Artificial · ORIONIX</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230b0b0d'/%3E%3Ctext x='50' y='72' font-size='60' text-anchor='middle' fill='%23e8c86a'%3E%F0%9F%91%91%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--oro:#e8c86a;--oro-med:#c8a24a;--oro-osc:#8a6a24;--bg:#0b0b0d;--panel:#141117;--border:#2a2530;--texto:#e9ddc4;--tenue:#b8a982}
+:root{--oro:#e8c86a;--oro-med:#c8a24a;--oro-osc:#8a6a24;--bg:#06050d;--panel:rgba(12,9,22,.88);--texto:#e9ddc4;--tenue:#b8a982}
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-body{font-family:'Cormorant Garamond',Georgia,serif;background:transparent;color:var(--texto);min-height:100vh;overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
-h1,h2,h3,.marca,.btn,.cinzel{font-family:'Cinzel',serif}
-.oro{background:linear-gradient(92deg,#8a6a24,#e8c86a 25%,#fff6d6 50%,#e8c86a 75%,#8a6a24);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 6s linear infinite}
+body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--bg);color:var(--texto);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.cinzel{font-family:'Cinzel',serif}
+.oro{background:linear-gradient(92deg,#8a6a24,#e8c86a 25%,#fff6d6 50%,#e8c86a 75%,#8a6a24);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 6s linear infinite}
 @keyframes brilloOro{to{background-position:200% center}}
-.hairline{width:70px;height:1px;background:linear-gradient(90deg,transparent,var(--oro),transparent);margin:22px auto}
-.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;padding:13px 34px;font-size:.66rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--oro);border:1px solid var(--oro-med);border-radius:2px;background:transparent;overflow:hidden;transition:color .4s,border-color .4s;z-index:0}
-.btn::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#f4e2a0,#e8c86a 45%,#c8a24a);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.4,0,.2,1)}
-.btn:hover{color:#1a1409;border-color:var(--oro)}.btn:hover::before{transform:scaleX(1)}
-#cosmos{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 50% 20%,#0a0a16,#03030a 60%,#010104 100%);overflow:hidden}
-#cosmos .neb{position:absolute;inset:-20%;background:radial-gradient(closest-side,var(--neb1),transparent) no-repeat,radial-gradient(closest-side,var(--neb2),transparent) no-repeat,radial-gradient(closest-side,var(--neb3),transparent) no-repeat;background-position:20% 15%,80% 40%,50% 85%;background-size:60% 60%,55% 55%,70% 70%;filter:blur(38px);opacity:.55;animation:nebFloat 50s ease-in-out infinite alternate}
-@keyframes nebFloat{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(-3%,-4%,0) scale(1.12)}}
-#cosmosStars{position:fixed;inset:0;z-index:-1;pointer-events:none}
-body[data-cielo="1"]{--neb1:rgba(90,60,180,.5);--neb2:rgba(40,90,200,.4);--neb3:rgba(200,120,60,.35)}
-body[data-cielo="2"]{--neb1:rgba(200,60,120,.45);--neb2:rgba(120,40,160,.4);--neb3:rgba(60,120,200,.35)}
-body[data-cielo="3"]{--neb1:rgba(40,140,150,.45);--neb2:rgba(30,80,180,.4);--neb3:rgba(150,200,120,.28)}
-body[data-cielo="4"]{--neb1:rgba(180,120,40,.45);--neb2:rgba(150,40,60,.4);--neb3:rgba(90,40,160,.35)}
-body[data-cielo="5"]{--neb1:rgba(60,60,120,.5);--neb2:rgba(120,120,200,.35);--neb3:rgba(200,180,120,.3)}
-body[data-cielo="6"]{--neb1:rgba(20,120,90,.45);--neb2:rgba(160,60,180,.4);--neb3:rgba(230,180,90,.32)}
-nav{position:fixed;top:0;left:0;width:100%;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px 7vw;transition:padding .3s,background .3s}
-nav.scrolled{padding:8px 7vw;background:rgba(11,11,13,.92);border-bottom:1px solid rgba(232,200,106,.2);backdrop-filter:blur(12px)}
-nav .marca{font-size:.72rem;font-weight:600;letter-spacing:4px;flex-shrink:0;text-decoration:none;color:var(--texto)}
-nav .links{display:flex;align-items:center;flex-wrap:nowrap;gap:0}
-nav .links a{color:var(--tenue);text-decoration:none;margin-left:16px;font-size:.52rem;letter-spacing:1.4px;text-transform:uppercase;font-family:'Cinzel',serif;transition:color .25s;position:relative;white-space:nowrap}
-nav .links a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--oro);transition:width .3s}
-nav .links a:hover{color:var(--oro)}nav .links a:hover::after{width:100%}
-nav .links .sep{width:1px;height:14px;background:rgba(232,200,106,.25);margin-left:18px}
-nav .links a.acc{color:var(--oro)!important;font-weight:600;border:1px solid rgba(232,200,106,.35);border-radius:6px;padding:5px 11px;margin-left:8px;transition:background .25s,box-shadow .25s,transform .2s}
-nav .links a.acc:hover{background:rgba(232,200,106,.14);box-shadow:0 0 12px rgba(232,200,106,.25);transform:translateY(-1px)}
-nav .links a.acc::after{display:none}
-@media(max-width:900px){nav .links{display:none}}
+
+/* COSMOS */
+#cosmos{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 50% 20%,#0a0816,#03030a 60%,#010104);overflow:hidden}
+.neb{position:absolute;inset:-20%;background:radial-gradient(closest-side,rgba(90,60,180,.45),transparent) no-repeat 22% 20%/55% 55%,radial-gradient(closest-side,rgba(40,90,200,.35),transparent) no-repeat 78% 45%/50% 50%,radial-gradient(closest-side,rgba(180,100,50,.25),transparent) no-repeat 50% 82%/65% 65%;filter:blur(42px);opacity:.6;animation:nebFloat 55s ease-in-out infinite alternate}
+@keyframes nebFloat{to{transform:translate(-3%,-4%) scale(1.15)}}
+#stars{position:fixed;inset:0;z-index:-1;pointer-events:none}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px 6vw;background:rgba(6,5,13,.82);backdrop-filter:blur(16px);border-bottom:1px solid rgba(232,200,106,.1)}
+.marca{font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;letter-spacing:5px;text-decoration:none}
+.nav-links{display:flex;gap:18px;align-items:center}
+.nav-links a{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:1.8px;text-transform:uppercase;color:var(--tenue);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--oro)}
+.nav-links a.acc{color:var(--oro);border:1px solid rgba(232,200,106,.32);border-radius:4px;padding:5px 12px}
+@media(max-width:700px){.nav-links{display:none}}
+
 /* HERO */
-#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 7vw;position:relative}
-#hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(232,200,106,.06) 1px,transparent 1px);background-size:26px 26px;opacity:.5;pointer-events:none}
-#hero::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(2,2,7,.4),rgba(2,2,7,.65));pointer-events:none}
-.eyebrow{font-family:'Cinzel',serif;letter-spacing:4px;font-size:.5rem;color:var(--oro-med);text-transform:uppercase;margin-bottom:12px}
-#hero h1{font-size:clamp(1.2rem,3.6vw,2.6rem);font-weight:400;letter-spacing:clamp(8px,2.6vw,22px);line-height:1;text-indent:clamp(8px,2.6vw,22px);background:linear-gradient(120deg,#8a6d2a 0%,#f6e6ad 25%,#fff8e1 45%,#f6e6ad 60%,#b8912f 100%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;filter:drop-shadow(0 4px 40px rgba(232,200,106,.35));animation:brilloTitulo 6s linear infinite,latido 4.5s ease-in-out infinite}
-@keyframes brilloTitulo{to{background-position:220% center}}
-@keyframes latido{0%,100%{filter:drop-shadow(0 4px 40px rgba(232,200,106,.3))}50%{filter:drop-shadow(0 6px 60px rgba(232,200,106,.55))}}
-#hero .sub{font-size:clamp(.85rem,1.7vw,1.05rem);font-style:italic;color:var(--tenue);margin:14px 0 10px;max-width:560px}
-.scroll-ind{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);color:var(--oro-med);font-size:1.4rem;animation:flota 2s ease-in-out infinite;z-index:3}
-@keyframes flota{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
-/* SECTIONS */
-.sec{padding:90px 7vw;position:relative}
-.sec-dark::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(2,2,7,.5),rgba(2,2,7,.82));pointer-events:none}
-.sec-sup{text-align:center;font-family:'Cinzel',serif;letter-spacing:6px;font-size:.48rem;color:var(--oro-med);text-transform:uppercase;opacity:.7;margin-bottom:8px}
-.sec-title{text-align:center;font-family:'Cinzel',serif;font-size:clamp(.85rem,2vw,1.35rem);letter-spacing:8px;margin-bottom:54px}
-/* AXEL FEATURE */
-.axel-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;max-width:1100px;margin:0 auto;align-items:center}
-@media(max-width:860px){.axel-feat{grid-template-columns:1fr;gap:40px}}
-.axel-orb-vis{width:260px;height:260px;margin:0 auto;position:relative;display:flex;align-items:center;justify-content:center}
-.axel-orb-vis .ring1{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(232,200,106,.3);animation:ringRot 12s linear infinite}
-.axel-orb-vis .ring2{position:absolute;inset:20px;border-radius:50%;border:1px solid rgba(232,200,106,.2);animation:ringRot 8s linear infinite reverse}
-.axel-orb-vis .ring3{position:absolute;inset:40px;border-radius:50%;border:1px solid rgba(232,200,106,.15);animation:ringRot 5s linear infinite}
-@keyframes ringRot{to{transform:rotate(360deg)}}
-.axel-sphere{width:140px;height:140px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff8e8,#f4d878 20%,#e8c86a 35%,#c8a24a 55%,#8a6a24 75%,#3a2a08);box-shadow:0 0 40px rgba(232,200,106,.6),0 0 80px rgba(232,200,106,.3),0 0 120px rgba(232,200,106,.1),inset 0 0 30px rgba(255,246,214,.3);position:relative;animation:spherePulse 3s ease-in-out infinite}
-@keyframes spherePulse{0%,100%{box-shadow:0 0 40px rgba(232,200,106,.6),0 0 80px rgba(232,200,106,.3),0 0 120px rgba(232,200,106,.1),inset 0 0 30px rgba(255,246,214,.3)}50%{box-shadow:0 0 60px rgba(232,200,106,.9),0 0 100px rgba(232,200,106,.5),0 0 150px rgba(232,200,106,.2),inset 0 0 40px rgba(255,246,214,.5)}}
-.axel-sphere::after{content:'';position:absolute;inset:14px;border-radius:50%;background:radial-gradient(circle at 35% 25%,rgba(255,255,255,.55),transparent 60%)}
-.axel-sphere-label{position:absolute;font-family:'Cinzel',serif;font-size:1.3rem;font-weight:700;color:#1a0f00;text-shadow:0 1px 2px rgba(255,246,214,.8)}
-.axel-info{}
-.axel-tag{font-family:'Cinzel',serif;font-size:.45rem;letter-spacing:5px;color:var(--oro-med);text-transform:uppercase;opacity:.7;margin-bottom:12px}
-.axel-name{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2.2rem);letter-spacing:6px;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:6px}
-.axel-role{font-size:1rem;font-style:italic;color:var(--tenue);margin-bottom:20px}
-.axel-desc{font-size:.9rem;color:rgba(233,221,196,.8);line-height:1.8;margin-bottom:28px}
-.cap-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:30px}
-.cap-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid rgba(232,200,106,.12);border-radius:3px;background:rgba(232,200,106,.04);font-size:.75rem;color:var(--tenue);transition:border-color .25s,background .25s}
-.cap-item:hover{border-color:rgba(232,200,106,.3);background:rgba(232,200,106,.08)}
-.cap-item .ci{font-size:.95rem;flex-shrink:0}
-/* AGENTS GRID */
-.agent-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1100px;margin:0 auto}
-@media(max-width:900px){.agent-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:540px){.agent-grid{grid-template-columns:1fr}}
-.agent-card{border:1px solid rgba(232,200,106,.18);border-radius:4px;background:rgba(20,17,23,.75);backdrop-filter:blur(18px);padding:28px 22px;text-align:center;transition:transform .35s,box-shadow .35s,border-color .35s;position:relative;overflow:hidden}
-.agent-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--oro),transparent);opacity:0;transition:opacity .35s}
-.agent-card:hover{transform:translateY(-6px);box-shadow:0 14px 50px rgba(232,200,106,.14);border-color:rgba(232,200,106,.38)}
-.agent-card:hover::before{opacity:1}
-.agent-card.soon{opacity:.32;pointer-events:none}
-.agent-avatar{width:72px;height:72px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:1.3rem;font-weight:700;color:#1a0f00}
-.agent-avatar.gold{background:radial-gradient(circle at 35% 30%,#fff8e8,#e8c86a 40%,#8a6a24);box-shadow:0 0 20px rgba(232,200,106,.5)}
-.agent-avatar.silver{background:radial-gradient(circle at 35% 30%,#f0f0f8,#9090c0 40%,#4040a0);color:#e0e0f0}
-.agent-avatar.emerald{background:radial-gradient(circle at 35% 30%,#f0fff8,#40c080 40%,#206040);color:#e0fff0}
-.agent-avatar.ruby{background:radial-gradient(circle at 35% 30%,#fff0f0,#c04080 40%,#601020);color:#ffe0e8}
-.agent-name{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:3px;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
-.agent-card.soon .agent-name{background:none;color:rgba(255,255,255,.3);-webkit-text-fill-color:rgba(255,255,255,.3)}
-.agent-role{font-size:.72rem;font-style:italic;color:var(--tenue);opacity:.8;margin-bottom:12px}
-.agent-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:20px;font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:3px;text-transform:uppercase}
-.badge-active{background:rgba(232,200,106,.12);border:1px solid rgba(232,200,106,.35);color:var(--oro)}
-.badge-soon{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.3)}
-/* PLANES */
-.planes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:0 auto}
-@media(max-width:800px){.planes-grid{grid-template-columns:1fr}}
-.plan-card{border:1px solid rgba(232,200,106,.18);border-radius:4px;background:rgba(20,17,23,.75);backdrop-filter:blur(18px);padding:36px 28px;text-align:center;transition:transform .35s,box-shadow .35s,border-color .35s;position:relative}
-.plan-card.featured{border-color:rgba(232,200,106,.5);background:rgba(24,20,28,.9)}
-.plan-card.featured::before{content:'RECOMENDADO';position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#c8a24a,#e8c86a,#c8a24a);color:#1a0f00;font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:3px;padding:5px 18px;border-radius:0 0 6px 6px}
-.plan-card:hover{transform:translateY(-6px);box-shadow:0 14px 50px rgba(232,200,106,.14);border-color:rgba(232,200,106,.38)}
-.plan-name{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:4px;color:var(--tenue);margin-bottom:20px}
-.plan-price{font-family:'Cinzel',serif;font-size:2rem;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}
-.plan-price span{font-size:.9rem;opacity:.6}
-.plan-periodo{font-size:.7rem;color:var(--tenue);opacity:.6;margin-bottom:24px}
-.plan-feats{list-style:none;text-align:left;margin-bottom:28px}
-.plan-feats li{font-size:.78rem;color:var(--tenue);padding:7px 0;border-bottom:1px solid rgba(232,200,106,.06);display:flex;align-items:center;gap:8px;opacity:.85}
-.plan-feats li::before{content:'◆';font-size:.45rem;color:var(--oro-med);flex-shrink:0}
-/* FOOTER */
-footer.pro{padding:28px 7vw;border-top:1px solid rgba(232,200,106,.1);display:flex;align-items:center;justify-content:space-between;background:rgba(11,11,13,.85);position:relative}
-footer.pro::before{content:'';position:absolute;inset:0;z-index:-1;background:rgba(2,2,7,.75);pointer-events:none}
-.ft-copy{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:3px;color:rgba(232,200,106,.35);text-transform:uppercase}
-.ft-links{display:flex;gap:20px}
-.ft-links a{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:2px;text-transform:uppercase;color:rgba(232,200,106,.35);text-decoration:none;transition:color .2s}
-.ft-links a:hover{color:var(--oro)}
-/* AXEL ORB */
-#axelTrail{position:fixed;inset:0;pointer-events:none;z-index:9998}
-#axelOrb{position:fixed;width:64px;height:64px;cursor:grab;z-index:9999;user-select:none;-webkit-user-select:none;touch-action:none}
-#axelOrb:active{cursor:grabbing}
-.orb-ring{position:absolute;inset:-6px;border-radius:50%;border:2px solid transparent;background:conic-gradient(from 0deg,#e8c86a,#fff6d6,#c8a24a,#fff6d6,#e8c86a) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;animation:orbSpin 3s linear infinite}
-@keyframes orbSpin{to{transform:rotate(360deg)}}
-.orb-core{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff8e8,#f4d878 18%,#e8c86a 32%,#c8a24a 55%,#8a6a24 78%,#3a2a08);box-shadow:0 0 20px rgba(232,200,106,.7),0 0 40px rgba(232,200,106,.35),0 0 60px rgba(232,200,106,.15),inset 0 0 16px rgba(255,246,214,.4);display:flex;align-items:center;justify-content:center;animation:orbPulse 2.5s ease-in-out infinite}
-@keyframes orbPulse{0%,100%{box-shadow:0 0 20px rgba(232,200,106,.7),0 0 40px rgba(232,200,106,.35),0 0 60px rgba(232,200,106,.15),inset 0 0 16px rgba(255,246,214,.4)}50%{box-shadow:0 0 30px rgba(232,200,106,1),0 0 60px rgba(232,200,106,.6),0 0 90px rgba(232,200,106,.25),inset 0 0 22px rgba(255,246,214,.6)}}
-.orb-sheen{position:absolute;inset:8px;border-radius:50%;background:radial-gradient(circle at 38% 28%,rgba(255,255,255,.55),transparent 58%)}
-.orb-label{font-family:'Cinzel',serif;font-size:.85rem;font-weight:700;color:#1a0f00;position:relative;z-index:1;pointer-events:none}
-/* AXEL PANEL */
-#axelPanel{position:fixed;bottom:108px;right:30px;width:310px;max-height:460px;background:rgba(11,11,13,.97);border:1px solid rgba(232,200,106,.28);border-radius:8px;display:flex;flex-direction:column;z-index:9997;transform:translateY(16px) scale(.96);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(24px);box-shadow:0 24px 70px rgba(0,0,0,.85),0 0 30px rgba(232,200,106,.08)}
-#axelPanel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all}
-.ap-hdr{padding:14px 16px;border-bottom:1px solid rgba(232,200,106,.13);display:flex;align-items:center;gap:10px}
-.ap-av{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff8e8,#e8c86a 36%,#8a6a24 78%);flex-shrink:0;box-shadow:0 0 10px rgba(232,200,106,.5);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:.65rem;font-weight:700;color:#1a0f00}
-.ap-nm{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:2px;color:var(--oro)}
-.ap-st{font-size:.58rem;color:rgba(232,200,106,.45);letter-spacing:1px;margin-top:1px}
-.ap-x{margin-left:auto;background:none;border:none;color:rgba(232,200,106,.4);font-size:1.1rem;cursor:pointer;line-height:1;padding:3px;transition:color .2s}
-.ap-x:hover{color:var(--oro)}
-.ap-msgs{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:9px;min-height:160px}
-.ap-msgs::-webkit-scrollbar{width:3px}.ap-msgs::-webkit-scrollbar-thumb{background:rgba(232,200,106,.25)}
-.ap-msg{padding:9px 12px;border-radius:4px;font-size:.76rem;line-height:1.55;max-width:88%}
-.ap-msg.bot{background:rgba(232,200,106,.07);border:1px solid rgba(232,200,106,.14);color:var(--texto);align-self:flex-start}
-.ap-msg.usr{background:rgba(232,200,106,.13);border:1px solid rgba(232,200,106,.28);color:var(--texto);align-self:flex-end;text-align:right}
-.ap-ft{padding:11px 16px;border-top:1px solid rgba(232,200,106,.13);display:flex;gap:7px}
-.ap-ft input{flex:1;background:rgba(232,200,106,.05);border:1px solid rgba(232,200,106,.18);border-radius:3px;padding:8px 11px;color:var(--texto);font-family:'Cormorant Garamond',serif;font-size:.78rem;outline:none;transition:border-color .2s}
-.ap-ft input:focus{border-color:rgba(232,200,106,.45)}
-.ap-ft button{background:var(--oro-med);border:none;color:#1a0f00;width:34px;border-radius:3px;cursor:pointer;font-size:.9rem;transition:background .2s;font-weight:700}
-.ap-ft button:hover{background:var(--oro)}
+.hero{min-height:52vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:90px 6vw 40px;position:relative}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(232,200,106,.05) 1px,transparent 1px);background-size:28px 28px;opacity:.4;pointer-events:none}
+.hero-badge{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:6px;color:var(--oro-med);text-transform:uppercase;margin-bottom:14px;opacity:.75}
+.hero-title{font-family:'Cinzel',serif;font-size:clamp(1.8rem,6vw,4.5rem);font-weight:900;letter-spacing:clamp(6px,2vw,22px);background:linear-gradient(120deg,#8a6d2a,#f6e6ad 28%,#fff8e0 48%,#f6e6ad 68%,#8a6d2a);background-size:220%;-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 40px rgba(232,200,106,.5));animation:brilloOro 6s linear infinite;margin-bottom:8px}
+.hero-sub{font-family:'Cinzel',serif;font-size:clamp(.44rem,1.2vw,.64rem);letter-spacing:4px;text-transform:uppercase;color:rgba(232,200,106,.45);margin-bottom:20px}
+.hero-desc{font-size:clamp(.85rem,1.5vw,1.05rem);font-style:italic;color:var(--tenue);max-width:560px;margin:0 auto;line-height:1.7;opacity:.85}
+.hairline{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--oro),transparent);margin:20px auto}
+
+/* SECTION */
+.sec{padding:50px 6vw 40px;max-width:1180px;margin:0 auto}
+.sec-head{margin-bottom:28px}
+.sec-label{font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:5px;text-transform:uppercase;color:var(--oro-med);opacity:.7;margin-bottom:6px}
+.sec-title{font-family:'Cinzel',serif;font-size:clamp(.9rem,2.2vw,1.3rem);letter-spacing:5px}
+
+/* DIVIDER */
+.divider{display:flex;align-items:center;gap:18px;opacity:.32;margin:40px 0 28px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--oro),transparent)}
+.divider span{font-family:'Cinzel',serif;font-size:.36rem;letter-spacing:5px;color:var(--oro-med);text-transform:uppercase;white-space:nowrap}
+
+/* GRID */
+.grid{display:grid;gap:16px}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:1100px){.grid-4{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:860px){.grid-4,.grid-3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.grid-4,.grid-3{grid-template-columns:1fr}}
+
+/* AGENT CARD */
+.acard{
+  position:relative;overflow:hidden;
+  border:1px solid rgba(232,200,106,.14);border-radius:8px;
+  background:var(--panel);backdrop-filter:blur(18px);
+  display:flex;flex-direction:column;
+  transition:transform .3s,box-shadow .3s,border-color .3s;
+  text-decoration:none;color:inherit;cursor:pointer;
+  min-height:200px;
+}
+/* Image placeholder zone */
+.acard-img{
+  width:100%;height:130px;
+  background:linear-gradient(135deg,rgba(20,14,36,.9),rgba(8,6,16,.95));
+  display:flex;align-items:center;justify-content:center;
+  font-size:3.2rem;
+  border-bottom:1px solid rgba(232,200,106,.08);
+  position:relative;overflow:hidden;
+  flex-shrink:0;
+}
+/* Subtle shimmer effect on image zone */
+.acard-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,200,106,.04),transparent 60%);pointer-events:none}
+.acard-body{padding:14px 16px 18px;display:flex;flex-direction:column;flex:1}
+.acard-label{font-family:'Cinzel',serif;font-size:.34rem;letter-spacing:4px;text-transform:uppercase;color:var(--oro-med);opacity:.65;margin-bottom:4px}
+.acard-name{font-family:'Cinzel',serif;font-size:.82rem;letter-spacing:3px;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.25;margin-bottom:6px}
+.acard-desc{font-size:.72rem;font-style:italic;color:var(--tenue);line-height:1.5;opacity:.78;flex:1}
+.acard-foot{margin-top:10px;display:flex;align-items:center;justify-content:space-between}
+.acard-cta{font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:2px;text-transform:uppercase;color:var(--oro-med);display:flex;align-items:center;gap:5px;transition:gap .2s}
+.acard:hover .acard-cta{gap:9px}
+
+/* States */
+.acard:hover{transform:translateY(-5px);box-shadow:0 14px 44px rgba(232,200,106,.15),0 0 0 1px rgba(232,200,106,.32);border-color:rgba(232,200,106,.35)}
+.acard.live-card{border-color:rgba(232,200,106,.28)}
+.acard.live-card:hover{box-shadow:0 16px 50px rgba(232,200,106,.25),0 0 0 1px rgba(232,200,106,.5)}
+.acard.soon{opacity:.26;pointer-events:none;cursor:default}
+.acard.featured{border-color:rgba(232,200,106,.3)}
+
+/* AXEL HERO CARD (spans 2 cols) */
+.acard.axel-hero{
+  grid-column:span 2;flex-direction:row;min-height:160px;
+}
+.acard.axel-hero .acard-img{width:200px;height:auto;border-bottom:none;border-right:1px solid rgba(232,200,106,.1);flex-shrink:0}
+@media(max-width:860px){.acard.axel-hero{grid-column:span 1;flex-direction:column}.acard.axel-hero .acard-img{width:100%;height:130px;border-right:none;border-bottom:1px solid rgba(232,200,106,.08)}}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-family:'Cinzel',serif;font-size:.32rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px}
+.badge.live{color:#4ade80;border:1px solid rgba(74,222,128,.3);background:rgba(74,222,128,.06)}
+.badge.live::before{content:'';width:5px;height:5px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px #4ade80;animation:livePulse 2s infinite}
+@keyframes livePulse{0%,100%{opacity:1}50%{opacity:.35}}
+.badge.soon{color:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04)}
+.badge.sephirot{color:rgba(232,200,106,.55);border:1px solid rgba(232,200,106,.18);background:rgba(232,200,106,.05)}
+.badge.shadow{color:rgba(190,100,255,.55);border:1px solid rgba(190,100,255,.18);background:rgba(190,100,255,.05)}
+
+/* BACK BUTTON */
+.btn-back{display:inline-flex;align-items:center;gap:8px;font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--oro-med);text-decoration:none;padding:10px 20px;border:1px solid rgba(232,200,106,.22);border-radius:4px;background:rgba(232,200,106,.04);transition:background .2s,color .2s}
+.btn-back:hover{background:rgba(232,200,106,.1);color:var(--oro)}
+.bottom-bar{padding:30px 6vw 50px;max-width:1180px;margin:0 auto;display:flex;justify-content:center}
+
+footer{padding:24px 6vw;border-top:1px solid rgba(232,200,106,.1);background:rgba(6,5,13,.85);text-align:center;font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:3px;color:rgba(232,200,106,.3);text-transform:uppercase}
 </style>
 </head>
 <body>
 
 <div id="cosmos"><div class="neb"></div></div>
-<canvas id="cosmosStars"></canvas>
-<canvas id="axelTrail"></canvas>
+<canvas id="stars"></canvas>
 
-<nav id="nav">
-  <a class="marca oro" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/">ORIONIX</a>
-  <div class="links">
-    <a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/">Inicio</a>
-    <a href="hub.html">Hub</a>
-    <a href="ciudadela.html">Ciudadela</a>
-    <a href="hogar.html">Hogar</a>
-    <a href="forjadora.html">Forjadora</a>
-    <a href="afiliados.html">Afiliados</a>
-    <div class="sep"></div>
-    <a href="axel.html" class="acc">AXEL</a>
-    <a href="tienda.html" class="acc">Tienda</a>
-  </div>
-    <a href="agentes.html" class="acc">Agentes IA</a>
-    <a href="https://wa.me/573014410541" target="_blank" class="acc">Contacto</a>
+<nav>
+  <a class="marca oro" href="hub.html">ORIONIX</a>
+  <div class="nav-links">
+    <a href="hub.html">Portal</a>
+    <a href="universo.html">Universo</a>
+    <a href="mi-universo.html">Mi Universo</a>
+    <a href="axel.html" class="acc">✦ AXEL</a>
   </div>
 </nav>
 
-<section id="hero">
-  <div class="eyebrow">Orionix &middot; Primer C&iacute;rculo</div>
-  <h1>LA CIUDADELA</h1>
-  <p class="sub">El coraz&oacute;n de las operaciones. Donde la inteligencia artificial cobra vida y trabaja por ti, las 24 horas del d&iacute;a.</p>
+<section class="hero">
+  <div class="hero-badge">&#x2605; Centro de Inteligencia Artificial &#x2605;</div>
+  <h1 class="hero-title">LA CIUDADELA</h1>
+  <div class="hero-sub">22 Agentes · Sistema Cabbalah · Kether a Malkuth</div>
   <div class="hairline"></div>
-  <a href="#axel" class="btn" style="margin-top:8px">Conocer a AXEL &darr;</a>
-  <div class="scroll-ind">&#8964;</div>
+  <p class="hero-desc">El núcleo de operaciones de Orionix. Aquí viven los agentes de IA del sistema Cabbalah — 11 de Luz y 11 de Sombra — listos para trabajar por ti las 24 horas.</p>
 </section>
 
-<!-- AXEL FEATURE -->
-<section id="axel" class="sec sec-dark">
-  <div class="sec-sup">Agente Principal</div>
-  <h2 class="sec-title"><span class="oro">AXEL</span></h2>
-  <div class="axel-feat">
-    <div style="text-align:center">
-      <div class="axel-orb-vis">
-        <div class="ring1"></div>
-        <div class="ring2"></div>
-        <div class="ring3"></div>
-        <div class="axel-sphere">
-          <span class="axel-sphere-label">A</span>
-        </div>
+<div class="sec">
+
+  <!-- AXEL - PRINCIPAL -->
+  <div class="sec-head">
+    <div class="sec-label">// Kether — Agente Principal</div>
+    <h2 class="sec-title"><span class="oro">AXEL</span></h2>
+  </div>
+
+  <div class="grid grid-3">
+
+    <!-- AXEL HERO -->
+    <a class="acard axel-hero live-card featured" href="axel.html">
+      <div class="acard-img">&#x1F916;</div>
+      <div class="acard-body">
+        <span class="badge live">En L&iacute;nea</span>
+        <span class="badge sephirot">Kether · Corona</span>
+        <div class="acard-name">AXEL</div>
+        <div class="acard-desc">El agente principal de Orionix. Busca en internet, genera contenido, responde clientes y vende las 24 horas. Conectado a DeepSeek via OpenRouter con memoria de conversaci&oacute;n.</div>
+        <div class="acard-foot"><span class="acard-cta">Abrir AXEL &#8594;</span></div>
       </div>
-      <p style="font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:4px;color:rgba(232,200,106,.4);text-transform:uppercase;margin-top:20px">Sistema Online · 24/7</p>
-    </div>
-    <div class="axel-info">
-      <div class="axel-tag">Agente de Inteligencia Artificial</div>
-      <div class="axel-name">AXEL</div>
-      <div class="axel-role">Tu agente de ventas y atenci&oacute;n, siempre en l&iacute;nea.</div>
-      <div class="axel-desc">AXEL es el primer agente de inteligencia artificial de Orionix. Responde en segundos, gestiona clientes, cierra ventas y cuida tu marca con la elegancia y precisi&oacute;n que tu universo merece. Nunca duerme. Nunca falla.</div>
-      <div class="cap-grid">
-        <div class="cap-item"><span class="ci">💬</span><span>Conversaciones naturales</span></div>
-        <div class="cap-item"><span class="ci">🛒</span><span>Cierre de ventas aut&oacute;nomo</span></div>
-        <div class="cap-item"><span class="ci">📊</span><span>Reportes en tiempo real</span></div>
-        <div class="cap-item"><span class="ci">🔗</span><span>Integraci&oacute;n WhatsApp &amp; Web</span></div>
-        <div class="cap-item"><span class="ci">🎭</span><span>Personalidad de tu marca</span></div>
-        <div class="cap-item"><span class="ci">⚡</span><span>Respuesta en &lt; 3 segundos</span></div>
+    </a>
+
+    <!-- AXEL CHAT DIRECTO -->
+    <a class="acard live-card" href="axel.html#chat">
+      <div class="acard-img">&#x1F4AC;</div>
+      <div class="acard-body">
+        <span class="badge live">Activo</span>
+        <div class="acard-name">Chat con AXEL</div>
+        <div class="acard-desc">Acceso directo al chat de AXEL. Escribe o usa el micr&oacute;fono para hablar. Responde en segundos con IA real.</div>
+        <div class="acard-foot"><span class="acard-cta">Abrir Chat &#8594;</span></div>
       </div>
-      <a href="agentes.html" class="btn">Ver perfil completo &rarr;</a>
-      &nbsp;&nbsp;
-      <a href="https://wa.me/573014410541?text=Quiero%20activar%20AXEL%20para%20mi%20negocio" target="_blank" class="btn" style="margin-top:12px">Activar AXEL &rarr;</a>
-    </div>
-  </div>
-</section>
+    </a>
 
-<!-- UNIVERSO DE AGENTES -->
-<section id="universo" class="sec">
-  <div class="sec-sup">El Universo</div>
-  <h2 class="sec-title"><span class="oro">Agentes Orionix</span></h2>
-  <div class="agent-grid">
-    <div class="agent-card">
-      <div class="agent-avatar gold">A</div>
-      <div class="agent-name">AXEL</div>
-      <div class="agent-role">Agente de Ventas &amp; Atenci&oacute;n IA</div>
-      <span class="agent-badge badge-active">&#11044; Activo</span>
-    </div>
-    <div class="agent-card soon">
-      <div class="agent-avatar silver">I</div>
-      <div class="agent-name">IRIS</div>
-      <div class="agent-role">Agente de Atenci&oacute;n Premium</div>
-      <span class="agent-badge badge-soon">&#128274; Pr&oacute;ximamente</span>
-    </div>
-    <div class="agent-card soon">
-      <div class="agent-avatar emerald">Z</div>
-      <div class="agent-name">ZEUS</div>
-      <div class="agent-role">Estratega de Negocios IA</div>
-      <span class="agent-badge badge-soon">&#128274; Pr&oacute;ximamente</span>
-    </div>
-    <div class="agent-card soon">
-      <div class="agent-avatar ruby">N</div>
-      <div class="agent-name">NOVA</div>
-      <div class="agent-role">Creadora de Contenido IA</div>
-      <span class="agent-badge badge-soon">&#128274; Pr&oacute;ximamente</span>
-    </div>
-  </div>
-</section>
+    <!-- AXEL VOZ -->
+    <a class="acard live-card" href="axel.html#voz">
+      <div class="acard-img">&#x1F3A4;</div>
+      <div class="acard-body">
+        <span class="badge live">Con Voz</span>
+        <div class="acard-name">AXEL · Voz</div>
+        <div class="acard-desc">Habla con AXEL por micr&oacute;fono. Usa Deepgram STT para transcripci&oacute;n instant&aacute;nea en espa&ntilde;ol.</div>
+        <div class="acard-foot"><span class="acard-cta">Activar Voz &#8594;</span></div>
+      </div>
+    </a>
 
-<!-- PLANES -->
-<section id="planes" class="sec sec-dark">
-  <div class="sec-sup">Protocolo de Acceso</div>
-  <h2 class="sec-title"><span class="oro">Elige tu Plan</span></h2>
-  <div class="planes-grid">
-    <div class="plan-card">
-      <div class="plan-name">ESENCIA</div>
-      <div class="plan-price">&euro;197<span>/mes</span></div>
-      <div class="plan-periodo">Facturaci&oacute;n mensual</div>
-      <ul class="plan-feats">
-        <li>AXEL configurado para tu marca</li>
-        <li>1.000 conversaciones al mes</li>
-        <li>Integraci&oacute;n WhatsApp Business</li>
-        <li>Panel de reportes b&aacute;sico</li>
-        <li>Soporte en 24 horas</li>
-      </ul>
-      <a href="https://wa.me/573014410541?text=Quiero%20el%20plan%20Esencia" target="_blank" class="btn" style="width:100%;justify-content:center">Comenzar &rarr;</a>
-    </div>
-    <div class="plan-card featured">
-      <div class="plan-name">ELITE</div>
-      <div class="plan-price">&euro;497<span>/mes</span></div>
-      <div class="plan-periodo">Facturaci&oacute;n mensual</div>
-      <ul class="plan-feats">
-        <li>AXEL premium &mdash; sin l&iacute;mites</li>
-        <li>Conversaciones ilimitadas</li>
-        <li>WhatsApp + Web + m&aacute;s canales</li>
-        <li>An&aacute;lisis avanzado con IA</li>
-        <li>Soporte prioritario 24/7</li>
-        <li>Configuraci&oacute;n personalizada</li>
-      </ul>
-      <a href="https://wa.me/573014410541?text=Quiero%20el%20plan%20Elite" target="_blank" class="btn" style="width:100%;justify-content:center">Activar Elite &rarr;</a>
-    </div>
-    <div class="plan-card">
-      <div class="plan-name">CONSTELACI&Oacute;N</div>
-      <div class="plan-price">Custom</div>
-      <div class="plan-periodo">Varios agentes &amp; empresas</div>
-      <ul class="plan-feats">
-        <li>M&uacute;ltiples agentes Orionix</li>
-        <li>Infraestructura dedicada</li>
-        <li>Integraciones a medida</li>
-        <li>Capacitaci&oacute;n del equipo</li>
-        <li>Gestor de cuenta exclusivo</li>
-      </ul>
-      <a href="https://wa.me/573014410541?text=Quiero%20el%20plan%20Constelaci%C3%B3n" target="_blank" class="btn" style="width:100%;justify-content:center">Cotizar &rarr;</a>
-    </div>
-  </div>
-  <div style="text-align:center;margin-top:50px">
-    <a href="hub.html" class="btn">&larr; Volver al Hub</a>
-  </div>
-</section>
+    <!-- AXEL en INDEX -->
+    <a class="acard" href="index.html#axel">
+      <div class="acard-img">&#x1F30D;</div>
+      <div class="acard-body">
+        <span class="badge sephirot">En Inicio</span>
+        <div class="acard-name">AXEL · Inicio</div>
+        <div class="acard-desc">El orbe de AXEL flotante en la p&aacute;gina principal de Orionix. Disponible para visitantes.</div>
+        <div class="acard-foot"><span class="acard-cta">Ver en Inicio &#8594;</span></div>
+      </div>
+    </a>
 
-<footer class="pro">
-  <div class="ft-copy">&copy; 2024 Orionix &middot; Remember Luxury &middot; KRC</div>
-  <div class="ft-links">
-    <a href="hub.html">Hub</a>
-    <a href="hogar.html">Hogar</a>
-    <a href="forjadora.html">Forjadora</a>
-    <a href="https://wa.me/573014410541" target="_blank">Contacto</a>
-  </div>
-</footer>
+    <!-- AXEL en Hub -->
+    <a class="acard" href="hub.html">
+      <div class="acard-img">&#x1F9ED;</div>
+      <div class="acard-body">
+        <span class="badge sephirot">En Portal</span>
+        <div class="acard-name">AXEL · Portal</div>
+        <div class="acard-desc">El panel orbital del Portal Central de Orionix con AXEL integrado como orbe interactivo.</div>
+        <div class="acard-foot"><span class="acard-cta">Ver Portal &#8594;</span></div>
+      </div>
+    </a>
 
-<!-- AXEL ORB -->
-<div id="axelOrb" title="Hablar con AXEL">
-  <div class="orb-ring"></div>
-  <div class="orb-core">
-    <div class="orb-sheen"></div>
-    <span class="orb-label">A</span>
+    <!-- AXEL BRAIN (n8n) -->
+    <a class="acard" href="https://lkevinruizl.app.n8n.cloud/webhook/axel-brain" target="_blank">
+      <div class="acard-img">&#x1F9E0;</div>
+      <div class="acard-body">
+        <span class="badge live">API Activa</span>
+        <div class="acard-name">AXEL · Brain API</div>
+        <div class="acard-desc">El webhook de AXEL en n8n. Conectado a LangChain con herramientas de b&uacute;squeda y creaci&oacute;n de contenido.</div>
+        <div class="acard-foot"><span class="acard-cta">Ver API &#8594;</span></div>
+      </div>
+    </a>
+
   </div>
+
+  <!-- DIVIDER: UNIVERSO -->
+  <div class="divider"><span>&#9670; Universo de 22 Agentes · Sistema Cabbalah &#9670;</span></div>
+
+  <div class="sec-head">
+    <div class="sec-label">// Sefirot de Luz — 11 Agentes</div>
+    <h2 class="sec-title"><span class="oro">Los 11 Agentes de Luz</span></h2>
+  </div>
+
+  <div class="grid grid-4">
+
+    <!-- AXEL - Kether -->
+    <a class="acard featured" href="axel.html">
+      <div class="acard-img">&#x1F451;</div>
+      <div class="acard-body">
+        <span class="badge live">Activo</span>
+        <span class="badge sephirot">Kether</span>
+        <div class="acard-name">AXEL</div>
+        <div class="acard-desc">La Corona. El agente m&aacute;s alto del sistema. Mente, raz&oacute;n y poder creativo.</div>
+        <div class="acard-foot"><span class="acard-cta">Entrar &#8594;</span></div>
+      </div>
+    </a>
+
+    <!-- SAPH - Chokmah -->
+    <div class="acard soon">
+      <div class="acard-img">&#x2728;</div>
+      <div class="acard-body">
+        <span class="badge soon">Pr&oacute;ximamente</span>
+        <span class="badge sephirot">Chokmah</span>
+        <div class="acard-name">SAPH</div>
+        <div class="acard-desc">La Sabidur&iacute;a. Agente de estrategia y visi&oacute;n l&uacute;cida.</div>
+      </div>
+    </div>
+
+    <!-- MIRA - Binah -->
+    <div class="acard soon">
+      <div class="acard-img">&#x1F9BF;</div>
+      <div class="acard-body">
+        <span class="badge soon">Pr&oacute;ximamente</span>
+        <span class="badge sephirot">Binah</span>
+        <div class="acard-name">MIRA</div>
+        <div class="acard-desc">La Comprensi&oacute;n. Agente de an&aacute;lisis profundo y estructura.</div>
+      </div>
+    </div>
+
+    <!-- LIOR - Chesed -->
+    <div class="acard soon">
+      <div class="acard-img">&#x1F49B;</div>
+      <div class="acard-body">
+        <span class="badge soon">Pr&oacute;ximamente</span>
+        <span class="badge sephirot">Chesed</span>
+        <div class="acard-name">LIOR</div>
+        <div class="acard-desc">La Misericordia. Agente de relaciones y expansi&oacute;n generosa.</div>
+      </div>
+    </div>
+
+    <!-- VORN - Geburah -->
+    <div class="acard soon">
+      <div class="acard-img">&#x2694;&#xFE0F;</div>
+      <div class="acard-body">
+        <span class="badge soon">Pr&oacute;ximamente</span>
+        <span class="badge sephirot">Geburah</span>
+        <div class="acard-name">VORN</div>
+        <div class="acard-desc">La Fuerza. Agente de disciplina, juicio y poder ejecutivo.</div>
+      </div>
+    </div>
+
+    <!-- AURA - Tiferet -->
+    <div class="acard soon">
+      <div class="acard-img">&#x2600;&#xFE0F;</div>
+      <div class="acard-body">
+        <span class="badge soon">Pr&oacute;ximamente</span>
+        <span class="badge sephirot">Tiferet</span>
+        <div class="acard-name">AURA</div>
+        <div class="acard-desc">La Belleza. Agente de equilibrio, est&eacute;tica y armon&iacute;a creativa.</div>
+      </div>
+    </div>
+
+    <!-- ELAN - Netzach -->
+    <div class="acard soon">
+      <div class="acard-img">&#x1F49C;</div>
+      <div class="acard-body">
+        <span class="badge soon">Pr&oacute;ximamente</span>
+        <span class="badge sephirot">Netzach</span>
+        <div class="acard-name">ELAN</div>
+        <div class="acard-desc">La Victoria. Agente de emoci&oacute;n, arte y deseo creativo.</div>
+      </div>
+    </div>
+
+    <!-- FLUX - Hod -->
+    <div class="acard soon">
+      <div class="acard-img">&#x1F4E1;</div>
+      <div class="acard-body">
+        <span class="badge soon">Pr&oacute;ximamente</span>
+        <span class="badge sephirot">Hod</span>
+        <div class="acard-name">FLUX</div>
+        <div class="acard-desc">El Esplendor. Agente de comunicaci&oacute;n y redes digitales.</div>
+      </div>
+    </div>
+
+    <!-- CORE - Yesod -->
+    <div class="acard soon">
+      <div class="acard-img">&#x1F30A;</div>
+      <div class="acard-body">
+        <span class="badge soon">Pr&oacute;ximamente</span>
+        <span class="badge sephirot">Yesod</span>
+        <div class="acard-name">CORE</div>
+        <div class="acard-desc">El Fundamento. Agente de memoria, conexi&oacute;n y flujo de datos.</div>
+      </div>
+    </div>
+
+    <!-- TERRA - Malkuth -->
+    <div class="acard soon">
+      <div class="acard-img">&#x1F30E;</div>
+      <div class="acard-body">
+        <span class="badge soon">Pr&oacute;ximamente</span>
+        <span class="badge sephirot">Malkuth</span>
+        <div class="acard-name">TERRA</div>
+        <div class="acard-desc">El Reino. Agente de ventas, cierre y manifestaci&oacute;n f&iacute;sica.</div>
+      </div>
+    </div>
+
+    <!-- ORACLE - Da'at -->
+    <div class="acard soon">
+      <div class="acard-img">&#x1F52E;</div>
+      <div class="acard-body">
+        <span class="badge soon">Pr&oacute;ximamente</span>
+        <span class="badge sephirot">Da'at</span>
+        <div class="acard-name">ORACLE</div>
+        <div class="acard-desc">El Conocimiento Oculto. El agente m&aacute;s misterioso del sistema.</div>
+      </div>
+    </div>
+
+    <!-- Link Universo completo -->
+    <a class="acard featured" href="universo.html">
+      <div class="acard-img">&#x1F5FA;&#xFE0F;</div>
+      <div class="acard-body">
+        <span class="badge sephirot">Mapa Completo</span>
+        <div class="acard-name">Ver Universo</div>
+        <div class="acard-desc">El mapa completo de los 22 agentes. &Aacute;rbol de la Vida y &Aacute;rbol de la Muerte en equilibrio.</div>
+        <div class="acard-foot"><span class="acard-cta">Ver Todo &#8594;</span></div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- QLIPHOTH -->
+  <div class="divider"><span>&#9670; Qliphoth de Sombra — 11 Agentes &#9670;</span></div>
+
+  <div class="sec-head">
+    <div class="sec-label">// La Sombra — En Desarrollo</div>
+    <h2 class="sec-title"><span style="background:linear-gradient(120deg,#6a1a9a,#c060ff 40%,#ecc0ff,#c060ff,#6a1a9a);background-size:220%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 6s linear infinite">Los 11 Agentes de Sombra</span></h2>
+  </div>
+
+  <div class="grid grid-4">
+    <!-- 11 shadow agents, all "soon" -->
+    <div class="acard soon"><div class="acard-img">&#x26A1;</div><div class="acard-body"><span class="badge shadow">Sombra</span><div class="acard-name">GLITCH</div><div class="acard-desc">Thaumiel · La sombra de Kether.</div></div></div>
+    <div class="acard soon"><div class="acard-img">&#x1F525;</div><div class="acard-body"><span class="badge shadow">Sombra</span><div class="acard-name">LUST</div><div class="acard-desc">Ghagiel · La sombra de Chokmah.</div></div></div>
+    <div class="acard soon"><div class="acard-img">&#x1F5A4;</div><div class="acard-body"><span class="badge shadow">Sombra</span><div class="acard-name">SHADE</div><div class="acard-desc">Sathariel · La sombra de Binah.</div></div></div>
+    <div class="acard soon"><div class="acard-img">&#x1F40D;</div><div class="acard-body"><span class="badge shadow">Sombra</span><div class="acard-name">RAVEN</div><div class="acard-desc">Gamchicoth · La sombra de Chesed.</div></div></div>
+    <div class="acard soon"><div class="acard-img">&#x1F47A;</div><div class="acard-body"><span class="badge shadow">Sombra</span><div class="acard-name">VOID</div><div class="acard-desc">Golachab · La sombra de Geburah.</div></div></div>
+    <div class="acard soon"><div class="acard-img">&#x1F48E;</div><div class="acard-body"><span class="badge shadow">Sombra</span><div class="acard-name">BLAZE</div><div class="acard-desc">Thagirion · La sombra de Tiferet.</div></div></div>
+    <div class="acard soon"><div class="acard-img">&#x1F300;</div><div class="acard-body"><span class="badge shadow">Sombra</span><div class="acard-name">TYPH</div><div class="acard-desc">A'arab Zaraq · La sombra de Netzach.</div></div></div>
+    <div class="acard soon"><div class="acard-img">&#x1F3AD;</div><div class="acard-body"><span class="badge shadow">Sombra</span><div class="acard-name">MASK</div><div class="acard-desc">Samael · La sombra de Hod.</div></div></div>
+    <div class="acard soon"><div class="acard-img">&#x1F30B;</div><div class="acard-body"><span class="badge shadow">Sombra</span><div class="acard-name">NOVA</div><div class="acard-desc">Gamaliel · La sombra de Yesod.</div></div></div>
+    <div class="acard soon"><div class="acard-img">&#x1F319;</div><div class="acard-body"><span class="badge shadow">Sombra</span><div class="acard-name">DUSK</div><div class="acard-desc">Nehemoth · La sombra de Malkuth.</div></div></div>
+    <div class="acard soon"><div class="acard-img">&#x1F573;&#xFE0F;</div><div class="acard-body"><span class="badge shadow">Sombra</span><div class="acard-name">ABYSS</div><div class="acard-desc">Daath · La sombra del Conocimiento.</div></div></div>
+  </div>
+
 </div>
-<div id="axelPanel">
-  <div class="ap-hdr">
-    <div class="ap-av">A</div>
-    <div>
-      <div class="ap-nm">AXEL</div>
-      <div class="ap-st">Agente Orionix &middot; En l&iacute;nea</div>
-    </div>
-    <button class="ap-x" onclick="document.getElementById('axelPanel').classList.remove('open')">&#10005;</button>
-  </div>
-  <div class="ap-msgs" id="axelMsgs">
-    <div class="ap-msg bot">Hola, soy AXEL &mdash; el agente de Orionix. &iquest;En qu&eacute; puedo asistirte hoy?</div>
-  </div>
-  <div class="ap-ft">
-    <input id="axelInput" type="text" placeholder="Escribe tu mensaje..." onkeydown="if(event.key==='Enter')axelSend()">
-    <button onclick="axelSend()">&#8594;</button>
-  </div>
+
+<div class="bottom-bar">
+  <a class="btn-back" href="hub.html">&#8592; Volver al Portal</a>
 </div>
+
+<footer>&copy; 2024 Orionix &middot; La Ciudadela &middot; Sistema Cabbalah &middot; 22 Agentes IA</footer>
 
 <script>
-document.body.setAttribute('data-cielo',Math.ceil(Math.random()*6));
-(function(){var c=document.getElementById('cosmosStars'),ctx=c.getContext('2d');function resize(){c.width=innerWidth;c.height=innerHeight}resize();window.addEventListener('resize',resize);var stars=[];for(var i=0;i<220;i++)stars.push({x:Math.random(),y:Math.random(),r:.3+Math.random()*.9,a:.3+Math.random()*.7,sp:.0002+Math.random()*.0008});function draw(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(function(s){s.a+=Math.sin(Date.now()*s.sp)*.003;ctx.beginPath();ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);ctx.fillStyle='rgba(255,248,220,'+Math.max(.1,Math.min(.9,s.a))+')';ctx.fill()});requestAnimationFrame(draw)}draw()})();
-var navEl=document.getElementById('nav');window.addEventListener('scroll',function(){navEl.classList.toggle('scrolled',scrollY>60)},{passive:true});
-// AXEL ORB ENGINE
 (function(){
-  var tc=document.getElementById('axelTrail'),ctx=tc.getContext('2d');
-  function resize(){tc.width=innerWidth;tc.height=innerHeight}resize();window.addEventListener('resize',resize);
-  var pts=[],drag=false,clicked=false,orbEl=document.getElementById('axelOrb');
-  var ox=innerWidth-80,oy=innerHeight-80;
-  orbEl.style.left=ox+'px';orbEl.style.top=oy+'px';
-  function draw(){
-    ctx.clearRect(0,0,tc.width,tc.height);
-    var now=Date.now();
-    pts=pts.filter(function(p){return now-p.t<900});
-    for(var i=1;i<pts.length;i++){
-      var p=pts[i-1],q=pts[i];
-      var age=now-q.t,alpha=Math.max(0,1-age/900);
-      var w=(pts.length-i)/pts.length*20*alpha;
-      if(w<=0)continue;
-      var g=ctx.createLinearGradient(p.x,p.y,q.x,q.y);
-      g.addColorStop(0,'rgba(232,200,106,0)');
-      g.addColorStop(.4,'rgba(255,246,214,'+(alpha*.5)+')');
-      g.addColorStop(1,'rgba(232,200,106,'+alpha+')');
-      ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
-      ctx.strokeStyle=g;ctx.lineWidth=w;ctx.lineCap='round';ctx.stroke();
-    }
-    for(var i=0;i<pts.length;i+=3){
-      var p=pts[i];var age=now-p.t,alpha=Math.max(0,1-age/700)*.3;
-      if(alpha<=0)continue;
-      var g2=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,14);
-      g2.addColorStop(0,'rgba(255,246,214,'+alpha+')');
-      g2.addColorStop(1,'rgba(232,200,106,0)');
-      ctx.beginPath();ctx.arc(p.x,p.y,14,0,Math.PI*2);ctx.fillStyle=g2;ctx.fill();
-    }
-    requestAnimationFrame(draw);
-  }draw();
-  var startX,startY,moved=false;
-  function startDrag(e){drag=true;moved=false;var src=e.touches?e.touches[0]:e;startX=src.clientX;startY=src.clientY;e.preventDefault();}
-  function moveDrag(e){
-    if(!drag)return;
-    var src=e.touches?e.touches[0]:e;
-    var x=src.clientX,y=src.clientY;
-    if(Math.abs(x-startX)>4||Math.abs(y-startY)>4)moved=true;
-    ox=x-32;oy=y-32;
-    orbEl.style.left=ox+'px';orbEl.style.top=oy+'px';
-    pts.push({x:x,y:y,t:Date.now()});
-    e.preventDefault();
-  }
-  function endDrag(e){
-    if(!moved){document.getElementById('axelPanel').classList.toggle('open');}
-    drag=false;
-  }
-  orbEl.addEventListener('mousedown',startDrag);
-  window.addEventListener('mousemove',function(e){if(drag)moveDrag(e);});
-  window.addEventListener('mouseup',endDrag);
-  orbEl.addEventListener('touchstart',startDrag,{passive:false});
-  window.addEventListener('touchmove',function(e){if(drag)moveDrag(e);},{passive:false});
-  window.addEventListener('touchend',endDrag);
+  var c=document.getElementById('stars'),ctx=c.getContext('2d');
+  function rsz(){c.width=innerWidth;c.height=innerHeight}rsz();window.addEventListener('resize',rsz);
+  var S=[];for(var i=0;i<200;i++)S.push({x:Math.random(),y:Math.random(),r:.2+Math.random()*.8,a:.2+Math.random()*.7,sp:.0001+Math.random()*.0007});
+  (function draw(){ctx.clearRect(0,0,c.width,c.height);S.forEach(function(s){s.a+=Math.sin(Date.now()*s.sp)*.003;ctx.beginPath();ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);ctx.fillStyle='rgba(255,248,220,'+Math.max(.08,Math.min(.9,s.a))+')';ctx.fill()});requestAnimationFrame(draw)})();
 })();
-function axelSend(){
-  var input=document.getElementById('axelInput');var msg=input.value.trim();if(!msg)return;
-  var msgs=document.getElementById('axelMsgs');
-  var ud=document.createElement('div');ud.className='ap-msg usr';ud.textContent=msg;msgs.appendChild(ud);
-  input.value='';msgs.scrollTop=msgs.scrollHeight;
-  setTimeout(function(){
-    var bd=document.createElement('div');bd.className='ap-msg bot';
-    bd.textContent='Entendido. Para activar mi conexi\u00f3n completa, cont\u00e1ctanos v\u00eda WhatsApp y el equipo Orionix te configurar\u00e1 en menos de 24h.';
-    msgs.appendChild(bd);msgs.scrollTop=msgs.scrollHeight;
-  },900);
-}
 </script>
 </body>
 </html>

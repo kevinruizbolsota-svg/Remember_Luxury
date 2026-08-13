@@ -3,719 +3,852 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIONIX · La Ciudadela — Portal de Inicio</title>
-<meta name="description" content="ORIONIX — La Ciudadela. El universo vivo de inteligencia artificial: La Forjadora, El Hogar, Las Crónicas y los Agentes del futuro.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230b0b0d'/%3E%3Ctext x='50' y='72' font-size='60' text-anchor='middle' fill='%23e8c86a'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+<title>ORIONIX · La Ciudadela 2030</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000010'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%2300f5ff'%3E✦%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════
-   VARIABLES & RESET
-═══════════════════════════════════════════ */
+/* ═══════ VARIABLES 2030 ═══════ */
 :root{
-  --oro:#e8c86a; --oro-med:#c8a24a; --oro-osc:#8a6a24; --oro-claro:#fff6d6;
-  --azul:#4ab8e8; --azul-deep:#1a6090;
-  --teal:#2ae8c8; --teal-deep:#0a7060;
-  --portal:#e8906a; --portal-deep:#8a3010;
-  --bg:#020209; --panel:rgba(8,6,20,.7); --border:rgba(232,200,106,.18);
-  --texto:#e9ddc4; --tenue:#b8a982;
+  --c:#00f5ff;      /* cyan */
+  --m:#ff00cc;      /* magenta */
+  --p:#7b2fff;      /* purple */
+  --g:#00ff88;      /* green */
+  --o:#e8c86a;      /* gold */
+  --bg:#000510;
+  --bg2:#020818;
+  --panel:rgba(0,20,40,.65);
+  --border-c:rgba(0,245,255,.22);
+  --border-m:rgba(255,0,204,.22);
+  --text:#c8f0ff;
+  --dim:#5a8090;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;overflow:hidden}
-body{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  background:var(--bg);color:var(--texto);
-  cursor:none;user-select:none;
-}
+html,body{width:100%;height:100%;overflow:hidden;cursor:none}
+body{font-family:'Rajdhani',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
 
-/* ═══════════════════════════════════════════
-   CURSOR COSMICO
-═══════════════════════════════════════════ */
-#cursor{
-  position:fixed;width:20px;height:20px;
-  border:1.5px solid var(--oro-med);border-radius:50%;
-  pointer-events:none;z-index:9999;
-  transform:translate(-50%,-50%);
-  transition:width .18s,height .18s,border-color .18s,box-shadow .18s;
-  box-shadow:0 0 8px rgba(232,200,106,.4);
-  mix-blend-mode:screen;
+/* ═══════ CURSOR HUD ═══════ */
+#hud-cursor{
+  position:fixed;width:28px;height:28px;z-index:9999;
+  pointer-events:none;transform:translate(-50%,-50%);
+  transition:width .12s,height .12s;
 }
-#cursor::after{
-  content:'';position:absolute;inset:5px;
-  background:var(--oro);border-radius:50%;opacity:.7;
-  box-shadow:0 0 10px var(--oro);
+#hud-cursor::before{
+  content:'';position:absolute;inset:0;
+  border:1px solid var(--c);
+  clip-path:polygon(0 30%,30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%);
+  animation:cursorSpin 8s linear infinite;
+  box-shadow:0 0 8px var(--c),inset 0 0 4px rgba(0,245,255,.2);
 }
-#cursor.hover{width:36px;height:36px;border-color:var(--oro);box-shadow:0 0 20px rgba(232,200,106,.7)}
+#hud-cursor::after{
+  content:'';position:absolute;inset:10px;
+  border-radius:50%;background:var(--c);
+  box-shadow:0 0 12px var(--c);
+  animation:cursorPulse 1.5s ease-in-out infinite;
+}
+#hud-cursor.hover::before{border-color:var(--m);box-shadow:0 0 16px var(--m)}
+#hud-cursor.hover::after{background:var(--m);box-shadow:0 0 16px var(--m)}
+@keyframes cursorSpin{to{transform:rotate(360deg)}}
+@keyframes cursorPulse{0%,100%{opacity:.6;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
 
-/* ═══════════════════════════════════════════
-   FONDO: COSMOS + ESTRELLLAS
-═══════════════════════════════════════════ */
-#cosmosCanvas{position:fixed;inset:0;z-index:0}
+/* ═══════ FONDO: HEX GRID + COSMOS ═══════ */
+#bg-canvas{position:fixed;inset:0;z-index:0}
+.bg-grid{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,245,255,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,245,255,.04) 1px,transparent 1px);
+  background-size:60px 60px;
+  animation:gridShift 20s linear infinite;
+}
+@keyframes gridShift{0%{background-position:0 0}100%{background-position:60px 60px}}
+.bg-scanline{
+  position:fixed;inset:0;z-index:2;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,5,16,.35) 3px,rgba(0,5,16,.35) 4px);
+}
+.bg-vignette{
+  position:fixed;inset:0;z-index:3;pointer-events:none;
+  background:radial-gradient(ellipse at center,transparent 30%,rgba(0,5,16,.85) 100%);
+}
+/* Nebulas */
 .nebula{
-  position:fixed;inset:-20%;z-index:1;pointer-events:none;
+  position:fixed;inset:-15%;z-index:1;pointer-events:none;
   background:
-    radial-gradient(ellipse 65% 55% at 20% 25%,rgba(100,40,200,.35),transparent),
-    radial-gradient(ellipse 55% 45% at 82% 18%,rgba(30,70,200,.28),transparent),
-    radial-gradient(ellipse 70% 50% at 55% 85%,rgba(180,50,50,.18),transparent),
-    radial-gradient(ellipse 45% 40% at 8% 72%,rgba(30,140,140,.2),transparent),
-    radial-gradient(ellipse 60% 55% at 90% 75%,rgba(80,20,150,.22),transparent);
-  animation:nebulaShift 40s ease-in-out infinite alternate;
-  filter:blur(2px);
+    radial-gradient(ellipse 50% 40% at 15% 20%,rgba(123,47,255,.18),transparent),
+    radial-gradient(ellipse 45% 35% at 85% 15%,rgba(0,245,255,.12),transparent),
+    radial-gradient(ellipse 55% 45% at 50% 90%,rgba(255,0,204,.1),transparent),
+    radial-gradient(ellipse 40% 35% at 5% 75%,rgba(0,255,136,.08),transparent);
+  animation:nebShift 35s ease-in-out infinite alternate;
+  filter:blur(1px);
 }
-@keyframes nebulaShift{0%{opacity:.55;transform:scale(1) rotate(0deg)}100%{opacity:.9;transform:scale(1.1) rotate(-3deg)}}
+@keyframes nebShift{0%{opacity:.5;transform:scale(1)}100%{opacity:.9;transform:scale(1.08)}}
 
-/* ═══════════════════════════════════════════
-   INTRO ANIMATION
-═══════════════════════════════════════════ */
-#intro{
-  position:fixed;inset:0;z-index:500;
-  background:radial-gradient(ellipse at 50% 50%,#0a071e,#020209 60%);
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;
-  animation:introOut 1.2s 2.5s forwards cubic-bezier(.4,0,.2,1);
+/* ═══════ INTRO BOOT ═══════ */
+#boot{
+  position:fixed;inset:0;z-index:800;
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;
+  animation:bootOut .6s 3s forwards;
 }
-@keyframes introOut{to{opacity:0;pointer-events:none;visibility:hidden}}
-.intro-logo{
-  font-family:'Cinzel Decorative',serif;font-size:clamp(2.5rem,6vw,5rem);
-  font-weight:900;letter-spacing:12px;
-  background:linear-gradient(120deg,#8a6a24,#f6e6ad 30%,#fff8e1 50%,#f6e6ad 70%,#8a6a24);
-  background-size:220% auto;
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 40px rgba(232,200,106,.9));
-  animation:brilloTit 4s linear infinite;
-  text-align:center;
+@keyframes bootOut{to{opacity:0;pointer-events:none;visibility:hidden}}
+.boot-logo{
+  font-family:'Orbitron',sans-serif;font-size:clamp(2rem,6vw,4.5rem);
+  font-weight:900;letter-spacing:16px;text-indent:16px;
+  color:var(--c);text-shadow:0 0 30px var(--c),0 0 60px rgba(0,245,255,.4);
+  animation:glitch 4s infinite;
 }
-.intro-sub{
-  font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:8px;
-  color:var(--oro-med);margin-top:14px;text-transform:uppercase;
-  animation:fadeIn 1s .5s both;
+@keyframes glitch{
+  0%,90%,100%{clip-path:none;transform:none}
+  91%{clip-path:polygon(0 15%,100% 15%,100% 30%,0 30%);transform:translateX(-3px);color:var(--m)}
+  92%{clip-path:polygon(0 60%,100% 60%,100% 75%,0 75%);transform:translateX(3px);color:var(--c)}
+  93%{clip-path:none;transform:none;color:var(--c)}
 }
-.intro-line{width:0;height:1px;background:linear-gradient(90deg,transparent,var(--oro),transparent);margin-top:22px;animation:lineGrow 1.2s 1s forwards}
-@keyframes lineGrow{to{width:280px}}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-@keyframes brilloTit{to{background-position:220% center}}
+.boot-bar{width:min(320px,80vw);height:2px;background:rgba(0,245,255,.1);border-radius:1px;overflow:hidden}
+.boot-bar-fill{height:100%;background:linear-gradient(90deg,var(--p),var(--c),var(--g));border-radius:1px;animation:bootFill 2.8s ease-out forwards}
+@keyframes bootFill{from{width:0}to{width:100%}}
+.boot-text{
+  font-family:'Share Tech Mono',monospace;font-size:.7rem;
+  color:var(--dim);letter-spacing:3px;
+  animation:bootText 3s steps(1) forwards;
+}
+@keyframes bootText{
+  0%{content:'INICIANDO NUCLEO...'}
+  30%{color:var(--g)}
+  60%{color:var(--c)}
+  100%{color:var(--g)}
+}
 
-/* ═══════════════════════════════════════════
-   NAV
-═══════════════════════════════════════════ */
+/* ═══════ NAV HUD ═══════ */
 nav{
   position:fixed;top:0;left:0;width:100%;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:11px 5vw;
-  background:rgba(2,2,9,.78);
-  border-bottom:1px solid rgba(232,200,106,.14);
-  backdrop-filter:blur(18px);
-  transition:padding .3s;
+  padding:10px 4vw;
+  background:rgba(0,5,16,.82);
+  border-bottom:1px solid var(--border-c);
+  backdrop-filter:blur(20px);
 }
-.nav-marca{
-  font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:4px;
-  color:var(--oro);text-decoration:none;font-weight:700;cursor:none;
-  text-shadow:0 0 20px rgba(232,200,106,.5);
-  display:flex;align-items:center;gap:8px;
+.nav-id{
+  font-family:'Orbitron',sans-serif;font-size:.58rem;letter-spacing:3px;
+  color:var(--c);text-shadow:0 0 10px var(--c);
+  display:flex;align-items:center;gap:10px;
 }
-.nav-marca .dot{width:6px;height:6px;border-radius:50%;background:var(--oro);box-shadow:0 0 10px var(--oro);animation:dotPulse 2s ease-in-out infinite}
-@keyframes dotPulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.4)}}
-.nav-links{display:flex;align-items:center}
+.nav-id .status{width:6px;height:6px;border-radius:50%;background:var(--g);box-shadow:0 0 8px var(--g);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:.4}50%{opacity:1}}
+.nav-links{display:flex;align-items:center;gap:4px}
 .nav-links a{
-  color:var(--tenue);text-decoration:none;
-  font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:1.8px;
-  text-transform:uppercase;margin-left:20px;
-  transition:color .25s;cursor:none;position:relative;
+  font-family:'Rajdhani',sans-serif;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--dim);text-decoration:none;padding:5px 12px;
+  border:1px solid transparent;border-radius:2px;cursor:none;
+  transition:all .2s;position:relative;
 }
-.nav-links a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--oro);transition:width .3s}
-.nav-links a:hover{color:var(--oro)}
-.nav-links a:hover::after,.nav-links a.act::after{width:100%}
-.nav-links a.act{color:var(--oro)}
-.nav-links .sep{width:1px;height:13px;background:rgba(232,200,106,.2);margin-left:20px}
+.nav-links a:hover,.nav-links a.act{
+  color:var(--c);border-color:var(--border-c);
+  background:rgba(0,245,255,.06);text-shadow:0 0 8px var(--c);
+}
 .nav-cta{
-  font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:2px;
-  color:var(--oro);border:1px solid rgba(232,200,106,.38);
-  border-radius:3px;padding:7px 16px;text-decoration:none;cursor:none;
-  transition:background .25s,box-shadow .25s;margin-left:14px;
-  text-transform:uppercase;
+  font-family:'Orbitron',sans-serif;font-size:.5rem;letter-spacing:2px;
+  color:var(--bg);background:linear-gradient(90deg,var(--c),var(--g));
+  border:none;padding:8px 18px;cursor:none;text-decoration:none;
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);
+  transition:box-shadow .2s;
 }
-.nav-cta:hover{background:rgba(232,200,106,.1);box-shadow:0 0 22px rgba(232,200,106,.3)}
-@media(max-width:900px){.nav-links{display:none}}
+.nav-cta:hover{box-shadow:0 0 20px rgba(0,245,255,.5)}
+.nav-coords{
+  font-family:'Share Tech Mono',monospace;font-size:.52rem;
+  color:var(--dim);letter-spacing:1px;
+}
+@media(max-width:900px){.nav-links,.nav-coords{display:none}}
 
-/* ═══════════════════════════════════════════
-   HUB PRINCIPAL
-═══════════════════════════════════════════ */
+/* ═══════ HUB GRID ═══════ */
 .hub-wrap{
-  position:relative;z-index:2;
+  position:relative;z-index:4;
   width:100%;height:100vh;
   display:flex;align-items:center;justify-content:center;
-  padding-top:50px;
-  padding-bottom:36px;
+  padding-top:48px;padding-bottom:30px;
 }
 .hub{
   position:relative;
-  width:min(1280px,98vw);
-  height:calc(100vh - 90px);
+  width:min(1320px,99vw);
+  height:calc(100vh - 84px);
   display:grid;
-  grid-template-columns:1fr 340px 1fr;
-  grid-template-rows:120px 1fr 100px;
+  grid-template-columns:1fr 320px 1fr;
+  grid-template-rows:110px 1fr 90px;
+  gap:0;
 }
 
-/* ═══════════════════════════════════════════
-   RAYOS DE ENERGÍA (SVG absoluto)
-═══════════════════════════════════════════ */
-.energy-svg{
+/* ═══════ ENERGY BEAMS SVG ═══════ */
+.beam-svg{
   position:absolute;inset:0;width:100%;height:100%;
   z-index:1;pointer-events:none;overflow:visible;
 }
 
-/* ═══════════════════════════════════════════
-   SECCIONES BASE
-═══════════════════════════════════════════ */
+/* ═══════ SECCIÓN BASE ═══════ */
 .s{
   position:relative;z-index:2;
   display:flex;align-items:center;justify-content:center;
   flex-direction:column;cursor:none;text-decoration:none;color:inherit;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1);
 }
 
-/* ═══════════════════════════════════════════
-   TOP: ORIONIX
-═══════════════════════════════════════════ */
-.s-top{grid-column:2;grid-row:1;position:relative}
-
-.orionix-rays{
-  position:absolute;inset:-80px;pointer-events:none;
-  background:conic-gradient(
-    from 0deg,
-    transparent 0deg,rgba(232,200,106,.1) 4deg,transparent 8deg,
-    transparent 22deg,rgba(232,200,106,.07) 26deg,transparent 30deg,
-    transparent 42deg,rgba(255,240,150,.1) 46deg,transparent 50deg,
-    transparent 65deg,rgba(232,200,106,.08) 69deg,transparent 73deg,
-    transparent 88deg,rgba(232,200,106,.1) 92deg,transparent 96deg,
-    transparent 115deg,rgba(232,200,106,.07) 119deg,transparent 123deg,
-    transparent 155deg,rgba(255,240,150,.09) 159deg,transparent 163deg,
-    transparent 178deg,rgba(232,200,106,.1) 182deg,transparent 186deg,
-    transparent 200deg,rgba(232,200,106,.07) 204deg,transparent 208deg,
-    transparent 245deg,rgba(255,240,150,.08) 249deg,transparent 253deg,
-    transparent 268deg,rgba(232,200,106,.1) 272deg,transparent 276deg,
-    transparent 310deg,rgba(232,200,106,.07) 314deg,transparent 318deg,
-    transparent 345deg,rgba(255,240,150,.09) 349deg,transparent 353deg
-  );
-  animation:raysRot 25s linear infinite;
-  filter:blur(1.5px);
-}
-@keyframes raysRot{to{transform:rotate(360deg)}}
-
-.orionix-halo{
-  position:absolute;inset:-30px;border-radius:50%;pointer-events:none;
-  background:radial-gradient(ellipse,rgba(232,200,106,.28) 0%,rgba(255,240,150,.08) 40%,transparent 70%);
-  animation:haloBreath 4s ease-in-out infinite;
-  filter:blur(12px);
-}
-@keyframes haloBreath{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.25)}}
-
-.orionix-title{
-  font-family:'Cinzel Decorative','Cinzel',serif;
-  font-size:clamp(1.8rem,3.8vw,3.2rem);
-  font-weight:900;letter-spacing:10px;
-  background:linear-gradient(120deg,#8a6a24 0%,#f6e6ad 25%,#fff8e1 45%,#f6e6ad 65%,#c8a24a 80%,#8a6a24 100%);
-  background-size:220% auto;
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 35px rgba(232,200,106,.9)) drop-shadow(0 0 70px rgba(232,200,106,.4));
-  animation:brilloTit 5s linear infinite,titBreath 4s ease-in-out infinite;
-  text-align:center;position:relative;z-index:2;
-  text-indent:10px;
-}
-@keyframes titBreath{
-  0%,100%{filter:drop-shadow(0 0 35px rgba(232,200,106,.9)) drop-shadow(0 0 70px rgba(232,200,106,.4))}
-  50%{filter:drop-shadow(0 0 55px rgba(255,245,160,1)) drop-shadow(0 0 110px rgba(232,200,106,.7))}
-}
-.orionix-sub{
-  font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:6px;
-  color:var(--oro-med);text-transform:uppercase;margin-top:8px;
-  opacity:.85;position:relative;z-index:2;
-  text-shadow:0 0 16px rgba(232,200,106,.4);
-}
-
-/* ═══════════════════════════════════════════
-   LEFT: La Forjadora de Diamantes
-═══════════════════════════════════════════ */
-.s-left{grid-column:1;grid-row:2;padding:10px 20px 10px 10px}
-
-.s-left .img-frame{
-  width:100%;max-width:310px;
-  aspect-ratio:4/3;position:relative;border-radius:16px;overflow:hidden;
-  box-shadow:0 0 40px rgba(74,184,232,.3),0 0 80px rgba(74,184,232,.12),inset 0 0 30px rgba(74,184,232,.08);
-  border:1px solid rgba(74,184,232,.28);
-  transition:box-shadow .5s,border-color .5s;
-}
-.s-left:hover .img-frame{
-  box-shadow:0 0 70px rgba(74,184,232,.55),0 0 140px rgba(74,184,232,.22),inset 0 0 50px rgba(74,184,232,.15);
-  border-color:rgba(74,184,232,.6);
-}
-.s-left .img-frame::before{
-  content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
-  background:linear-gradient(135deg,rgba(74,184,232,.12) 0%,transparent 50%,rgba(100,60,200,.08) 100%);
-}
-.s-left .img-frame img{
-  width:100%;height:100%;object-fit:cover;display:block;
-  transition:transform .7s cubic-bezier(.2,.8,.2,1),filter .5s;
-  filter:saturate(1.15) brightness(.92) contrast(1.05);
-}
-.s-left:hover .img-frame img{transform:scale(1.08);filter:saturate(1.4) brightness(1.05) contrast(1.1)}
-/* shimmer placeholder while loading */
-.s-left .img-frame::after{
-  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(120deg,rgba(74,184,232,.05) 0%,rgba(100,60,200,.08) 50%,rgba(74,184,232,.05) 100%);
-  background-size:200% 100%;
-  animation:shimmer 2.5s ease-in-out infinite;
-}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-
-.s-left .s-label{
-  font-family:'Cinzel',serif;
-  font-size:clamp(.82rem,1.6vw,1.18rem);
-  font-weight:700;margin-top:14px;text-align:center;
-  background:linear-gradient(120deg,#4ab8e8,#a8dcf4,#ffffff,#a8dcf4,#4ab8e8);
-  background-size:200% auto;
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 2px 14px rgba(74,184,232,.55));
-  animation:brilloTit 5s linear infinite;letter-spacing:.5px;
-}
-.s-left .s-sub{
-  font-size:.7rem;color:var(--tenue);margin-top:5px;
-  text-align:center;letter-spacing:.8px;font-style:italic;
-}
-
-/* ═══════════════════════════════════════════
-   CENTER: Portal Hogar
-═══════════════════════════════════════════ */
-.s-center{grid-column:2;grid-row:2;position:relative}
-
-.portal-label-top{
-  font-family:'Cinzel',serif;
-  font-size:clamp(.65rem,1.4vw,.95rem);
-  letter-spacing:4px;text-transform:uppercase;color:var(--oro);
-  margin-bottom:10px;
-  text-shadow:0 0 20px rgba(232,200,106,.9),0 0 40px rgba(232,200,106,.4);
-  animation:labelPulse 3s ease-in-out infinite;
-}
-.portal-label-bot{
-  font-family:'Cinzel',serif;
-  font-size:clamp(.65rem,1.4vw,.95rem);
-  letter-spacing:4px;text-transform:uppercase;color:var(--oro);
-  margin-top:10px;
-  text-shadow:0 0 20px rgba(232,200,106,.9),0 0 40px rgba(232,200,106,.4);
-  animation:labelPulse 3s 1s ease-in-out infinite;
-}
-@keyframes labelPulse{0%,100%{opacity:.75;text-shadow:0 0 20px rgba(232,200,106,.7)}50%{opacity:1;text-shadow:0 0 30px rgba(255,245,160,1),0 0 60px rgba(232,200,106,.5)}}
-
-.portal-wrap{
+/* ═══════ CORNER BRACKETS (decoración HUD) ═══════ */
+.hud-frame{
   position:relative;
-  width:min(280px,80%);aspect-ratio:1;
-  display:flex;align-items:center;justify-content:center;
 }
-/* outer glow ring - always rotating */
-.portal-ring-outer{
-  position:absolute;inset:-6px;border-radius:50%;
+.hud-frame::before,.hud-frame::after,
+.hud-frame .hf-bl,.hud-frame .hf-br{
+  content:'';position:absolute;width:16px;height:16px;
+}
+.hud-frame::before{top:0;left:0;border-top:2px solid var(--c);border-left:2px solid var(--c)}
+.hud-frame::after{top:0;right:0;border-top:2px solid var(--c);border-right:2px solid var(--c)}
+.hud-frame .hf-bl{bottom:0;left:0;border-bottom:2px solid var(--c);border-left:2px solid var(--c)}
+.hud-frame .hf-br{bottom:0;right:0;border-bottom:2px solid var(--c);border-right:2px solid var(--c)}
+
+/* colores de frame por sección */
+.hud-frame.magenta::before,.hud-frame.magenta::after,.hud-frame.magenta .hf-bl,.hud-frame.magenta .hf-br{border-color:var(--m)}
+.hud-frame.purple::before,.hud-frame.purple::after,.hud-frame.purple .hf-bl,.hud-frame.purple .hf-br{border-color:var(--p)}
+.hud-frame.green::before,.hud-frame.green::after,.hud-frame.green .hf-bl,.hud-frame.green .hf-br{border-color:var(--g)}
+.hud-frame.gold::before,.hud-frame.gold::after,.hud-frame.gold .hf-bl,.hud-frame.gold .hf-br{border-color:var(--o)}
+
+/* ═══════ TOP: ORIONIX ═══════ */
+.s-top{grid-column:2;grid-row:1;padding:8px}
+
+.orionix-ring{
+  position:absolute;inset:-30px;border-radius:50%;pointer-events:none;
   background:conic-gradient(
-    var(--oro-osc) 0deg,var(--oro) 60deg,var(--oro-claro) 120deg,
-    var(--portal) 180deg,var(--oro) 240deg,var(--oro-claro) 300deg,var(--oro-osc) 360deg
+    var(--p) 0deg,var(--c) 60deg,var(--g) 120deg,
+    var(--c) 180deg,var(--m) 240deg,var(--p) 300deg,var(--p) 360deg
   );
-  animation:ringRot 10s linear infinite;
-  filter:blur(.5px) drop-shadow(0 0 8px rgba(232,200,106,.6));
-  border-radius:50%;
+  animation:ringRot 12s linear infinite;
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1px));
+  mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1px));
+  filter:blur(.5px) drop-shadow(0 0 6px var(--c));
+  opacity:.7;
 }
 @keyframes ringRot{to{transform:rotate(360deg)}}
-/* inner mask */
-.portal-ring-mask{
-  position:absolute;inset:4px;border-radius:50%;
-  background:var(--bg);
-  box-shadow:inset 0 0 30px rgba(232,120,60,.2);
+.orionix-ring2{
+  position:absolute;inset:-14px;border-radius:50%;pointer-events:none;
+  border:1px solid rgba(0,245,255,.15);
+  animation:ringRot2 20s linear infinite reverse;
 }
-/* pulse rings */
-.portal-pulse{
-  position:absolute;inset:-20px;border-radius:50%;
-  border:1px solid rgba(232,200,106,.18);
-  animation:portalPulse 3s ease-out infinite;
-}
-.portal-pulse:nth-child(2){inset:-40px;animation-delay:.8s;border-color:rgba(232,200,106,.1)}
-.portal-pulse:nth-child(3){inset:-60px;animation-delay:1.6s;border-color:rgba(232,200,106,.06)}
-@keyframes portalPulse{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.3)}}
+@keyframes ringRot2{to{transform:rotate(360deg)}}
 
-.portal-inner{
+.orionix-title{
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(1.6rem,3.5vw,3rem);
+  font-weight:900;letter-spacing:12px;text-indent:12px;
+  color:transparent;
+  background:linear-gradient(120deg,var(--p),var(--c) 30%,#fff 50%,var(--c) 70%,var(--g));
+  background-size:220% auto;
+  -webkit-background-clip:text;background-clip:text;
+  filter:drop-shadow(0 0 20px var(--c)) drop-shadow(0 0 40px rgba(0,245,255,.3));
+  animation:titleShift 5s linear infinite,titleGlitch 8s steps(1) infinite;
+  text-align:center;position:relative;z-index:2;
+}
+@keyframes titleShift{to{background-position:220% center}}
+@keyframes titleGlitch{
+  0%,88%,100%{filter:drop-shadow(0 0 20px var(--c)) drop-shadow(0 0 40px rgba(0,245,255,.3))}
+  89%{filter:drop-shadow(2px 0 0 var(--m)) drop-shadow(-2px 0 0 var(--c)) drop-shadow(0 0 20px var(--m));transform:translateX(2px)}
+  90%{filter:drop-shadow(-2px 0 0 var(--m)) drop-shadow(2px 0 0 var(--c));transform:translateX(-2px)}
+  91%{filter:drop-shadow(0 0 20px var(--c));transform:none}
+}
+.orionix-sub{
+  font-family:'Share Tech Mono',monospace;font-size:.55rem;letter-spacing:5px;
+  color:var(--c);text-transform:uppercase;margin-top:6px;
+  text-shadow:0 0 10px var(--c);opacity:.8;position:relative;z-index:2;
+}
+
+/* ═══════ PANELES LATERALES ═══════ */
+.s-left{grid-column:1;grid-row:2;padding:12px 16px 12px 10px;align-items:flex-start}
+.s-right{grid-column:3;grid-row:2;padding:12px 10px 12px 16px;align-items:flex-end}
+
+.panel-card{
+  width:100%;max-width:320px;
+  background:var(--panel);
+  backdrop-filter:blur(16px);
+  border:1px solid var(--border-c);
+  position:relative;overflow:hidden;
+  transition:border-color .4s,box-shadow .4s;
+}
+.s-right .panel-card{border-color:var(--border-m)}
+.panel-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--c),transparent);
+  animation:scanH 3s ease-in-out infinite;
+}
+.s-right .panel-card::before{background:linear-gradient(90deg,transparent,var(--m),transparent)}
+@keyframes scanH{0%,100%{opacity:0;transform:scaleX(.4)}50%{opacity:1;transform:scaleX(1)}}
+
+.panel-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,245,255,.04),transparent 50%,rgba(0,245,255,.02));
+  pointer-events:none;
+}
+.s-right .panel-card::after{background:linear-gradient(225deg,rgba(255,0,204,.04),transparent 50%,rgba(255,0,204,.02))}
+
+.s-left:hover .panel-card{
+  border-color:rgba(0,245,255,.55);
+  box-shadow:0 0 30px rgba(0,245,255,.15),inset 0 0 20px rgba(0,245,255,.04);
+}
+.s-right:hover .panel-card{
+  border-color:rgba(255,0,204,.55);
+  box-shadow:0 0 30px rgba(255,0,204,.15),inset 0 0 20px rgba(255,0,204,.04);
+}
+
+.img-wrap{
+  position:relative;overflow:hidden;
+  aspect-ratio:16/9;
+}
+.img-wrap img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:saturate(1.2) brightness(.88) contrast(1.1) hue-rotate(-5deg);
+  transition:transform .6s cubic-bezier(.2,.8,.2,1),filter .4s;
+}
+.s-left:hover .img-wrap img{transform:scale(1.07);filter:saturate(1.5) brightness(1) contrast(1.15)}
+.s-right:hover .img-wrap img{transform:scale(1.07);filter:saturate(1.5) brightness(1) contrast(1.15) hue-rotate(10deg)}
+
+/* scan line sobre imagen */
+.img-wrap .scan{
+  position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--c),transparent);
+  animation:imgScan 4s ease-in-out infinite;opacity:.5;
+  pointer-events:none;
+}
+.s-right .img-wrap .scan{background:linear-gradient(90deg,transparent,var(--m),transparent)}
+@keyframes imgScan{0%{top:0;opacity:0}10%{opacity:.5}90%{opacity:.5}100%{top:100%;opacity:0}}
+
+/* holographic overlay */
+.img-wrap .holo{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(135deg,rgba(0,245,255,.08) 0%,transparent 40%,rgba(123,47,255,.06) 100%);
+  mix-blend-mode:screen;
+}
+.s-right .img-wrap .holo{background:linear-gradient(225deg,rgba(255,0,204,.08) 0%,transparent 40%,rgba(0,245,255,.06) 100%)}
+
+/* Data bar debajo imagen */
+.data-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:6px 12px;
+  background:rgba(0,245,255,.04);
+  border-top:1px solid var(--border-c);
+  font-family:'Share Tech Mono',monospace;font-size:.52rem;letter-spacing:1px;
+}
+.s-right .data-bar{border-top-color:var(--border-m);background:rgba(255,0,204,.04)}
+.data-bar .db-label{color:var(--c);text-shadow:0 0 6px var(--c)}
+.s-right .data-bar .db-label{color:var(--m);text-shadow:0 0 6px var(--m)}
+.data-bar .db-val{color:var(--dim)}
+
+.panel-info{padding:12px 14px 14px}
+.panel-title{
+  font-family:'Orbitron',sans-serif;font-size:clamp(.62rem,1.3vw,.9rem);
+  font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--c);text-shadow:0 0 12px rgba(0,245,255,.5);
+  display:flex;align-items:center;gap:8px;
+}
+.s-right .panel-title{color:var(--m);text-shadow:0 0 12px rgba(255,0,204,.5)}
+.panel-title::before{content:'▶';font-size:.5rem}
+.panel-sub{
+  font-family:'Rajdhani',sans-serif;font-size:.75rem;
+  color:var(--dim);letter-spacing:1.5px;margin-top:3px;
+}
+
+/* status dots */
+.status-row{display:flex;gap:5px;margin-top:8px}
+.dot-s{width:5px;height:5px;border-radius:50%;background:var(--c);box-shadow:0 0 6px var(--c);animation:dotPop .4s infinite alternate}
+.dot-s:nth-child(2){animation-delay:.15s}
+.dot-s:nth-child(3){animation-delay:.3s;background:var(--g);box-shadow:0 0 6px var(--g)}
+.s-right .dot-s{background:var(--m);box-shadow:0 0 6px var(--m)}
+.s-right .dot-s:nth-child(3){background:var(--p);box-shadow:0 0 6px var(--p)}
+@keyframes dotPop{from{opacity:.3}to{opacity:1}}
+
+.s-left{transition:transform .4s}
+.s-left:hover{transform:translateX(6px)}
+.s-right:hover{transform:translateX(-6px)}
+
+/* ═══════ CENTER: PORTAL HOGAR ═══════ */
+.s-center{grid-column:2;grid-row:2;position:relative}
+
+.portal-outer{
+  position:relative;
+  width:min(260px,78%);aspect-ratio:1;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* hex border spinner */
+.hex-ring{
+  position:absolute;inset:-8px;
+  border:2px solid transparent;
+  border-radius:50%;
+  background:conic-gradient(var(--o),var(--m),var(--c),var(--g),var(--o)) border-box;
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2px));
+  mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2px));
+  animation:hexSpin 8s linear infinite;
+  filter:drop-shadow(0 0 8px var(--c));
+}
+@keyframes hexSpin{to{transform:rotate(360deg)}}
+.hex-ring2{
+  position:absolute;inset:-20px;border-radius:50%;
+  border:1px solid rgba(0,245,255,.14);
+  animation:hexSpin 16s linear infinite reverse;
+}
+.hex-ring3{
+  position:absolute;inset:-34px;border-radius:50%;
+  border:1px dashed rgba(123,47,255,.2);
+  animation:hexSpin 22s linear infinite;
+}
+
+/* pulse waves */
+.pulse-wave{
+  position:absolute;inset:-50px;border-radius:50%;
+  border:1px solid rgba(0,245,255,.15);
+  animation:pulseWave 3s ease-out infinite;
+}
+.pulse-wave:nth-child(2){animation-delay:1s;border-color:rgba(255,0,204,.1)}
+.pulse-wave:nth-child(3){animation-delay:2s;border-color:rgba(0,255,136,.08)}
+@keyframes pulseWave{
+  0%{opacity:1;transform:scale(1)}
+  100%{opacity:0;transform:scale(1.6)}
+}
+
+.portal-glass{
   position:relative;z-index:2;
-  width:calc(100% - 16px);aspect-ratio:1;border-radius:50%;
+  width:calc(100% - 20px);aspect-ratio:1;border-radius:50%;
   overflow:hidden;
-  background:radial-gradient(circle at 40% 35%,#1a0820,#0d0420 50%,#050112);
+  background:radial-gradient(circle at 40% 35%,#0a0520,#030110);
+  box-shadow:inset 0 0 30px rgba(0,245,255,.1);
+  border:1px solid rgba(0,245,255,.2);
   transition:box-shadow .5s;
 }
-.s-center:hover .portal-inner{
-  box-shadow:0 0 60px rgba(232,150,60,.4),inset 0 0 40px rgba(232,150,60,.15);
+.s-center:hover .portal-glass{
+  box-shadow:inset 0 0 50px rgba(0,245,255,.2),0 0 40px rgba(0,245,255,.15);
 }
-.portal-inner img{
-  width:100%;height:100%;object-fit:cover;display:block;
-  transition:transform .6s,filter .5s;opacity:.88;
+.portal-glass img{
+  width:100%;height:100%;object-fit:cover;
+  filter:saturate(1.3) brightness(.85) contrast(1.1);
+  transition:transform .6s,filter .4s;
 }
-.s-center:hover .portal-inner img{transform:scale(1.06);opacity:1}
+.s-center:hover .portal-glass img{transform:scale(1.08);filter:saturate(1.6) brightness(1) contrast(1.15)}
 
-/* ═══════════════════════════════════════════
-   RIGHT: Las Crónicas del Creador
-═══════════════════════════════════════════ */
-.s-right{grid-column:3;grid-row:2;padding:10px 10px 10px 20px}
+/* holographic overlay en portal */
+.portal-holo{
+  position:absolute;inset:0;border-radius:50%;pointer-events:none;
+  background:conic-gradient(
+    rgba(0,245,255,.06) 0deg,rgba(123,47,255,.04) 90deg,
+    rgba(255,0,204,.05) 180deg,rgba(0,255,136,.03) 270deg,rgba(0,245,255,.06) 360deg
+  );
+  animation:holoRot 10s linear infinite;
+  mix-blend-mode:screen;
+}
+@keyframes holoRot{to{transform:rotate(360deg)}}
 
-.s-right .img-frame{
-  width:100%;max-width:310px;
-  aspect-ratio:4/3;position:relative;border-radius:16px;overflow:hidden;
-  box-shadow:0 0 40px rgba(42,232,200,.25),0 0 80px rgba(42,232,200,.1),inset 0 0 30px rgba(42,232,200,.07);
-  border:1px solid rgba(42,232,200,.22);
-  transition:box-shadow .5s,border-color .5s;
+/* Labels portal */
+.portal-lbl{
+  font-family:'Orbitron',sans-serif;font-size:clamp(.55rem,1.1vw,.78rem);
+  letter-spacing:5px;text-transform:uppercase;text-indent:5px;
+  color:var(--o);text-shadow:0 0 14px var(--o),0 0 30px rgba(232,200,106,.3);
+  animation:lblPulse 3s ease-in-out infinite;
 }
-.s-right:hover .img-frame{
-  box-shadow:0 0 70px rgba(42,232,200,.5),0 0 140px rgba(42,232,200,.2),inset 0 0 50px rgba(42,232,200,.14);
-  border-color:rgba(42,232,200,.55);
-}
-.s-right .img-frame::before{
-  content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
-  background:linear-gradient(225deg,rgba(42,232,200,.12) 0%,transparent 50%,rgba(80,20,150,.08) 100%);
-}
-.s-right .img-frame img{
-  width:100%;height:100%;object-fit:cover;display:block;
-  transition:transform .7s cubic-bezier(.2,.8,.2,1),filter .5s;
-  filter:saturate(1.15) brightness(.92) contrast(1.05);
-}
-.s-right:hover .img-frame img{transform:scale(1.08);filter:saturate(1.4) brightness(1.05) contrast(1.1)}
-.s-right .img-frame::after{
-  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(120deg,rgba(42,232,200,.04) 0%,rgba(80,20,150,.06) 50%,rgba(42,232,200,.04) 100%);
-  background-size:200% 100%;animation:shimmer 3s ease-in-out infinite;
-}
-.s-right .s-label{
-  font-family:'Cinzel',serif;
-  font-size:clamp(.82rem,1.6vw,1.18rem);
-  font-weight:700;margin-top:14px;text-align:center;
-  background:linear-gradient(120deg,#2ae8c8,#a0f4e8,#ffffff,#a0f4e8,#2ae8c8);
-  background-size:200% auto;
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 2px 14px rgba(42,232,200,.55));
-  animation:brilloTit 6s linear infinite;letter-spacing:.5px;
-}
-.s-right .s-sub{
-  font-size:.7rem;color:var(--tenue);margin-top:5px;
-  text-align:center;letter-spacing:.8px;font-style:italic;
-}
+@keyframes lblPulse{0%,100%{opacity:.7}50%{opacity:1;text-shadow:0 0 20px var(--o),0 0 40px rgba(232,200,106,.5)}}
+.portal-lbl-top{margin-bottom:8px}
+.portal-lbl-bot{margin-top:8px}
 
-/* ═══════════════════════════════════════════
-   BOTTOM: La Ciudadela
-═══════════════════════════════════════════ */
-.s-bottom{grid-column:2;grid-row:3;flex-direction:column;padding-bottom:8px}
-
-.ciudadela-sep{
-  width:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--oro-med),transparent);
-  margin-bottom:12px;
-  animation:sepGrow 2s 3s forwards;
+/* bar de datos debajo del portal */
+.portal-data{
+  display:flex;gap:14px;margin-top:8px;
+  font-family:'Share Tech Mono',monospace;font-size:.48rem;color:var(--dim);letter-spacing:1px;
 }
-@keyframes sepGrow{to{width:120px}}
+.portal-data span{color:var(--c)}
+.s-center:hover{transform:scale(1.03)}
+
+/* ═══════ BOTTOM: La Ciudadela ═══════ */
+.s-bottom{grid-column:2;grid-row:3;padding-bottom:6px}
+
+.ciudadela-hud{
+  text-align:center;position:relative;
+  padding:8px 20px;
+  border-top:1px solid rgba(0,245,255,.15);
+  width:100%;
+}
+.ciudadela-hud::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--c) 30%,var(--g) 50%,var(--c) 70%,transparent);
+  opacity:.6;
+}
+.ciudadela-label{
+  font-family:'Share Tech Mono',monospace;font-size:.48rem;
+  color:var(--dim);letter-spacing:4px;text-transform:uppercase;
+  margin-bottom:5px;
+}
 .ciudadela-title{
-  font-family:'Cinzel',serif;
-  font-size:clamp(1rem,2.2vw,1.7rem);
-  font-weight:900;letter-spacing:8px;text-align:center;text-indent:8px;
-  background:linear-gradient(120deg,#8a6a24,#e8c86a 30%,#fff6d6 50%,#e8c86a 70%,#8a6a24);
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(.85rem,1.9vw,1.5rem);
+  font-weight:900;letter-spacing:8px;text-indent:8px;
+  color:transparent;
+  background:linear-gradient(90deg,var(--p),var(--c) 30%,var(--g) 50%,var(--c) 70%,var(--m));
   background-size:220% auto;
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 2px 20px rgba(232,200,106,.55));
-  animation:brilloTit 7s linear infinite;
+  -webkit-background-clip:text;background-clip:text;
+  filter:drop-shadow(0 0 14px rgba(0,245,255,.5));
+  animation:titleShift 6s linear infinite;
 }
 .ciudadela-sub{
-  font-size:.6rem;letter-spacing:4px;color:var(--tenue);
-  text-transform:uppercase;margin-top:7px;text-align:center;
-  font-style:italic;opacity:.8;
+  font-family:'Rajdhani',sans-serif;font-size:.65rem;
+  color:var(--dim);letter-spacing:3px;margin-top:4px;
+  text-transform:uppercase;
 }
+.ciudadela-metrics{
+  display:flex;justify-content:center;gap:20px;margin-top:7px;
+  font-family:'Share Tech Mono',monospace;font-size:.45rem;
+  color:var(--dim);letter-spacing:1px;
+}
+.ciudadela-metrics .met-val{color:var(--g);text-shadow:0 0 6px var(--g)}
+.s-bottom:hover{transform:translateY(-4px)}
 
-/* ═══════════════════════════════════════════
-   HOVER SCALE EN SECCIONES
-═══════════════════════════════════════════ */
-.s-left,.s-right{transition:transform .45s cubic-bezier(.2,.8,.2,1)}
-.s-left:hover{transform:translateX(6px) scale(1.03)}
-.s-right:hover{transform:translateX(-6px) scale(1.03)}
-.s-top{transition:transform .4s cubic-bezier(.2,.8,.2,1)}
-.s-top:hover{transform:translateY(4px) scale(1.02)}
-.s-bottom{transition:transform .4s cubic-bezier(.2,.8,.2,1)}
-.s-bottom:hover{transform:translateY(-4px) scale(1.02)}
-.s-center{transition:transform .4s cubic-bezier(.2,.8,.2,1)}
-.s-center:hover{transform:scale(1.04)}
+/* ═══════ CORNER LABELS HUD (coords) ═══════ */
+.hud-corner{
+  position:fixed;z-index:5;
+  font-family:'Share Tech Mono',monospace;font-size:.44rem;
+  color:rgba(0,245,255,.28);letter-spacing:1px;line-height:1.8;
+  pointer-events:none;
+}
+.hud-corner.tl{top:54px;left:12px}
+.hud-corner.tr{top:54px;right:12px;text-align:right}
+.hud-corner.bl{bottom:8px;left:12px}
+.hud-corner.br{bottom:8px;right:12px;text-align:right}
 
-/* ═══════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════ */
+/* ═══════ FOOTER ═══════ */
 footer{
   position:fixed;bottom:0;left:0;width:100%;z-index:50;
   display:flex;align-items:center;justify-content:space-between;
-  padding:7px 5vw;
-  background:rgba(2,2,9,.82);
-  border-top:1px solid rgba(232,200,106,.1);
+  padding:5px 4vw;
+  background:rgba(0,5,16,.88);
+  border-top:1px solid var(--border-c);
   backdrop-filter:blur(14px);
-  font-size:.55rem;color:var(--tenue);letter-spacing:.8px;
+  font-family:'Share Tech Mono',monospace;font-size:.46rem;
+  color:var(--dim);letter-spacing:1px;
 }
-.soc{display:flex;gap:14px}
-.soc a{color:var(--tenue);text-decoration:none;font-size:.9rem;cursor:none;transition:color .2s,text-shadow .2s}
-.soc a:hover{color:var(--oro);text-shadow:0 0 12px rgba(232,200,106,.6)}
+.soc{display:flex;gap:16px}
+.soc a{color:var(--dim);text-decoration:none;cursor:none;transition:color .2s,text-shadow .2s;font-size:.8rem}
+.soc a:hover{color:var(--c);text-shadow:0 0 10px var(--c)}
 
-/* ═══════════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════════ */
-@media(max-width:960px){
-  .hub{grid-template-columns:1fr 280px 1fr;grid-template-rows:100px 1fr 85px}
-  .portal-wrap{width:min(230px,75%)}
+/* ═══════ RESPONSIVE ═══════ */
+@media(max-width:980px){
+  .hub{grid-template-columns:1fr 260px 1fr;grid-template-rows:95px 1fr 80px}
+  .portal-outer{width:min(210px,72%)}
 }
 @media(max-width:700px){
-  .hub{grid-template-columns:90px 1fr 90px;grid-template-rows:80px 1fr 72px}
-  .s-left .img-frame,.s-right .img-frame{max-width:none}
-  .s-left .s-sub,.s-right .s-sub{display:none}
-  .s-left,.s-right{padding:6px}
-  .portal-wrap{width:min(200px,70%)}
+  .hub{grid-template-columns:88px 1fr 88px;grid-template-rows:76px 1fr 70px}
+  .panel-info .panel-sub,.panel-info .status-row,.data-bar{display:none}
+  .s-left,.s-right{padding:4px}
 }
 @media(max-width:480px){
-  .hub{grid-template-columns:70px 1fr 70px}
-  .s-left .s-label,.s-right .s-label{font-size:.68rem}
-  .orionix-title{font-size:1.6rem;letter-spacing:5px}
-  .ciudadela-title{font-size:.9rem;letter-spacing:4px}
+  .hub{grid-template-columns:62px 1fr 62px}
+  .panel-title{font-size:.52rem}
+  .orionix-title{font-size:1.5rem;letter-spacing:6px}
 }
 </style>
 </head>
 <body>
 
-<!-- ══ INTRO ANIMADO ══ -->
-<div id="intro">
-  <div class="intro-logo">ORIONIX</div>
-  <div class="intro-sub">La Ciudadela · Entrando al Universo</div>
-  <div class="intro-line"></div>
+<!-- ══ BOOT SCREEN ══ -->
+<div id="boot">
+  <div class="boot-logo">ORIONIX</div>
+  <div class="boot-bar"><div class="boot-bar-fill"></div></div>
+  <div class="boot-text" id="bootTxt">INICIALIZANDO NUCLEO DE INTELIGENCIA...</div>
 </div>
 
-<!-- ══ CURSOR CÓSMICO ══ -->
-<div id="cursor"></div>
+<!-- ══ CURSOR ══ -->
+<div id="hud-cursor"></div>
 
 <!-- ══ FONDO ══ -->
-<canvas id="cosmosCanvas"></canvas>
+<canvas id="bg-canvas"></canvas>
 <div class="nebula"></div>
+<div class="bg-grid"></div>
+<div class="bg-scanline"></div>
+<div class="bg-vignette"></div>
 
-<!-- ══ NAVEGACIÓN ══ -->
+<!-- ══ HUD CORNERS ══ -->
+<div class="hud-corner tl">
+  SYS:ONLINE<br>
+  NET:SECURE<br>
+  AI:ACTIVE
+</div>
+<div class="hud-corner tr" id="hudTR">
+  LAT:04.7112°N<br>
+  LON:074.0721°W<br>
+  <span id="hudTime"></span>
+</div>
+<div class="hud-corner bl">
+  VER:2030.8.13<br>
+  BUILD:OMEGA
+</div>
+<div class="hud-corner br">
+  AGENTS:9<br>
+  STATUS:READY<br>
+  UPTIME:100%
+</div>
+
+<!-- ══ NAV ══ -->
 <nav>
-  <a href="." class="nav-marca"><span class="dot"></span>LA CIUDADELA</a>
+  <div class="nav-id"><span class="status"></span>ORIONIX · CIUDADELA</div>
   <div class="nav-links">
-    <a href="hub.html" class="act">Inicio</a>
-    <a href="universo.html">Mundos</a>
-    <a href="#">Crónicas</a>
-    <div class="sep"></div>
-    <a href="comunidad.html">Comunidad</a>
-    <a href="#">Perfil</a>
+    <a href="hub.html" class="act">HUB</a>
+    <a href="universo.html">MUNDOS</a>
+    <a href="#">CRÓNICAS</a>
+    <a href="comunidad.html">COMUNIDAD</a>
+    <a href="#">PERFIL</a>
   </div>
-  <a href="index.html" class="nav-cta">✦ Hablar con AXEL</a>
+  <a href="index.html" class="nav-cta">⬡ AXEL</a>
+  <div class="nav-coords" id="navCoords">◈ SECTOR ALPHA-7</div>
 </nav>
 
 <!-- ══ HUB PRINCIPAL ══ -->
 <div class="hub-wrap">
   <div class="hub">
 
-    <!-- SVG RAYOS DE ENERGÍA -->
-    <svg class="energy-svg" viewBox="0 0 1280 680" preserveAspectRatio="none" id="beamSVG">
+    <!-- ═══ SVG BEAMS ═══ -->
+    <svg class="beam-svg" viewBox="0 0 1320 680" preserveAspectRatio="none">
       <defs>
-        <!-- Filtros de glow -->
-        <filter id="gBlue" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="4" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        <filter id="gTeal" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="4" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        <filter id="gGold" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="5" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        <filter id="gSoft" x="-100%" y="-100%" width="300%" height="300%">
-          <feGaussianBlur stdDeviation="8"/>
-        </filter>
-        <!-- Gradientes de rayos -->
-        <linearGradient id="gradLeft" x1="0%" y1="50%" x2="100%" y2="50%">
-          <stop offset="0%" stop-color="#4ab8e8" stop-opacity="0"/>
-          <stop offset="50%" stop-color="#4ab8e8" stop-opacity=".8"/>
-          <stop offset="100%" stop-color="#e8c86a" stop-opacity=".95"/>
+        <!-- Glow filters -->
+        <filter id="fC"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="fM"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="fS"><feGaussianBlur stdDeviation="6"/></filter>
+        <filter id="fG"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+
+        <!-- Gradients -->
+        <linearGradient id="gL" x1="0%" y1="50%" x2="100%" y2="50%">
+          <stop offset="0%" stop-color="#00f5ff" stop-opacity="0"/>
+          <stop offset="60%" stop-color="#00f5ff" stop-opacity=".9"/>
+          <stop offset="100%" stop-color="#e8c86a" stop-opacity="1"/>
         </linearGradient>
-        <linearGradient id="gradRight" x1="100%" y1="50%" x2="0%" y2="50%">
-          <stop offset="0%" stop-color="#2ae8c8" stop-opacity="0"/>
-          <stop offset="50%" stop-color="#2ae8c8" stop-opacity=".8"/>
-          <stop offset="100%" stop-color="#e8c86a" stop-opacity=".95"/>
+        <linearGradient id="gR" x1="100%" y1="50%" x2="0%" y2="50%">
+          <stop offset="0%" stop-color="#ff00cc" stop-opacity="0"/>
+          <stop offset="60%" stop-color="#ff00cc" stop-opacity=".9"/>
+          <stop offset="100%" stop-color="#e8c86a" stop-opacity="1"/>
         </linearGradient>
-        <linearGradient id="gradTop" x1="50%" y1="0%" x2="50%" y2="100%">
-          <stop offset="0%" stop-color="#fff6d6" stop-opacity="0"/>
-          <stop offset="40%" stop-color="#e8c86a" stop-opacity=".5"/>
-          <stop offset="100%" stop-color="#e8c86a" stop-opacity=".95"/>
+        <linearGradient id="gT" x1="50%" y1="0%" x2="50%" y2="100%">
+          <stop offset="0%" stop-color="#7b2fff" stop-opacity="0"/>
+          <stop offset="70%" stop-color="#00f5ff" stop-opacity=".8"/>
+          <stop offset="100%" stop-color="#e8c86a" stop-opacity="1"/>
         </linearGradient>
-        <linearGradient id="gradDiagLT" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#4ab8e8" stop-opacity="0"/>
-          <stop offset="100%" stop-color="#e8c86a" stop-opacity=".45"/>
+        <linearGradient id="gDL" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#00f5ff" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#00f5ff" stop-opacity=".35"/>
         </linearGradient>
-        <linearGradient id="gradDiagRT" x1="100%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#2ae8c8" stop-opacity="0"/>
-          <stop offset="100%" stop-color="#e8c86a" stop-opacity=".45"/>
+        <linearGradient id="gDR" x1="100%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#ff00cc" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#ff00cc" stop-opacity=".35"/>
         </linearGradient>
-        <!-- Gradiente de glow central -->
-        <radialGradient id="centerAura" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="rgba(232,200,106,.25)"/>
-          <stop offset="60%" stop-color="rgba(232,150,60,.08)"/>
+        <radialGradient id="gCore" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#e8c86a" stop-opacity=".4"/>
+          <stop offset="50%" stop-color="#00f5ff" stop-opacity=".15"/>
           <stop offset="100%" stop-color="transparent"/>
         </radialGradient>
-        <!-- Paths para partículas animadas -->
-        <path id="pLeft" d="M 300 350 L 640 350" fill="none"/>
-        <path id="pRight" d="M 980 350 L 640 350" fill="none"/>
-        <path id="pTop" d="M 640 120 L 640 340" fill="none"/>
-        <path id="pDiagLT" d="M 220 160 L 590 335" fill="none"/>
-        <path id="pDiagRT" d="M 1060 160 L 690 335" fill="none"/>
+
+        <!-- Particle paths -->
+        <path id="pL" d="M 310 355 L 660 355"/>
+        <path id="pR" d="M 1010 355 L 660 355"/>
+        <path id="pT" d="M 660 115 L 660 340"/>
+        <path id="pDL" d="M 240 165 L 610 340"/>
+        <path id="pDR" d="M 1080 165 L 710 340"/>
       </defs>
 
-      <!-- AURA CENTRAL SUAVE -->
-      <ellipse cx="640" cy="345" rx="160" ry="155" fill="url(#centerAura)" filter="url(#gSoft)">
-        <animate attributeName="rx" values="150;185;150" dur="5s" repeatCount="indefinite"/>
-        <animate attributeName="ry" values="145;175;145" dur="5s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values=".5;1;.5" dur="5s" repeatCount="indefinite"/>
+      <!-- Central aura -->
+      <ellipse cx="660" cy="350" rx="100" ry="95" fill="url(#gCore)" filter="url(#fS)">
+        <animate attributeName="rx" values="90;120;90" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="ry" values="88;115;88" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".4;1;.4" dur="4s" repeatCount="indefinite"/>
       </ellipse>
 
-      <!-- RAYO IZQUIERDO (Forge → Centro) principal -->
-      <line x1="300" y1="350" x2="640" y2="350" stroke="url(#gradLeft)" stroke-width="2.8" filter="url(#gBlue)">
-        <animate attributeName="stroke-opacity" values=".5;1;.5" dur="3s" repeatCount="indefinite"/>
-        <animate attributeName="stroke-width" values="2;3.5;2" dur="3s" repeatCount="indefinite"/>
+      <!-- RAYO IZQUIERDO — principal -->
+      <line x1="310" y1="355" x2="660" y2="355" stroke="url(#gL)" stroke-width="1.5" filter="url(#fC)">
+        <animate attributeName="stroke-opacity" values=".4;1;.4" dur="2.5s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-width" values="1;2.5;1" dur="2.5s" repeatCount="indefinite"/>
       </line>
-      <!-- eco difuso -->
-      <line x1="300" y1="350" x2="640" y2="350" stroke="url(#gradLeft)" stroke-width="12" opacity=".15" filter="url(#gSoft)"/>
+      <!-- glow difuso -->
+      <line x1="310" y1="355" x2="660" y2="355" stroke="#00f5ff" stroke-width="16" opacity=".06" filter="url(#fS)"/>
+      <!-- segmentos tech -->
+      <line x1="380" y1="355" x2="420" y2="355" stroke="#00f5ff" stroke-width="1" opacity=".3" stroke-dasharray="4 8"/>
+      <line x1="450" y1="355" x2="560" y2="355" stroke="#00f5ff" stroke-width=".5" opacity=".2" stroke-dasharray="2 6"/>
 
-      <!-- RAYO DERECHO (Crónicas → Centro) principal -->
-      <line x1="980" y1="350" x2="640" y2="350" stroke="url(#gradRight)" stroke-width="2.8" filter="url(#gTeal)">
-        <animate attributeName="stroke-opacity" values=".5;1;.5" dur="3.6s" repeatCount="indefinite"/>
-        <animate attributeName="stroke-width" values="2;3.5;2" dur="3.6s" repeatCount="indefinite"/>
+      <!-- RAYO DERECHO — principal -->
+      <line x1="1010" y1="355" x2="660" y2="355" stroke="url(#gR)" stroke-width="1.5" filter="url(#fM)">
+        <animate attributeName="stroke-opacity" values=".4;1;.4" dur="3.1s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-width" values="1;2.5;1" dur="3.1s" repeatCount="indefinite"/>
       </line>
-      <line x1="980" y1="350" x2="640" y2="350" stroke="url(#gradRight)" stroke-width="12" opacity=".15" filter="url(#gSoft)"/>
+      <line x1="1010" y1="355" x2="660" y2="355" stroke="#ff00cc" stroke-width="16" opacity=".06" filter="url(#fS)"/>
+      <line x1="940" y1="355" x2="900" y2="355" stroke="#ff00cc" stroke-width="1" opacity=".3" stroke-dasharray="4 8"/>
 
-      <!-- RAYO SUPERIOR (ORIONIX → Centro) -->
-      <line x1="640" y1="120" x2="640" y2="340" stroke="url(#gradTop)" stroke-width="2.5" filter="url(#gGold)">
-        <animate attributeName="stroke-opacity" values=".4;.9;.4" dur="4.2s" repeatCount="indefinite"/>
-        <animate attributeName="stroke-width" values="1.5;3;1.5" dur="4.2s" repeatCount="indefinite"/>
+      <!-- RAYO SUPERIOR -->
+      <line x1="660" y1="115" x2="660" y2="340" stroke="url(#gT)" stroke-width="1.5" filter="url(#fC)">
+        <animate attributeName="stroke-opacity" values=".3;.9;.3" dur="3.8s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-width" values="1;2;1" dur="3.8s" repeatCount="indefinite"/>
       </line>
-      <line x1="640" y1="100" x2="640" y2="340" stroke="url(#gradTop)" stroke-width="14" opacity=".12" filter="url(#gSoft)"/>
+      <line x1="660" y1="100" x2="660" y2="340" stroke="#7b2fff" stroke-width="14" opacity=".07" filter="url(#fS)"/>
 
-      <!-- DIAGONAL IZQUIERDA-SUPERIOR (como imagen 2 - estilo X) -->
-      <line x1="220" y1="160" x2="590" y2="335" stroke="url(#gradDiagLT)" stroke-width="1.8" filter="url(#gBlue)">
-        <animate attributeName="stroke-opacity" values=".2;.6;.2" dur="5.5s" repeatCount="indefinite"/>
+      <!-- DIAGONALES (estilo X como imagen 2) -->
+      <line x1="240" y1="165" x2="610" y2="340" stroke="url(#gDL)" stroke-width="1.2" filter="url(#fC)">
+        <animate attributeName="stroke-opacity" values=".1;.55;.1" dur="5s" repeatCount="indefinite"/>
       </line>
-      <line x1="220" y1="160" x2="590" y2="335" stroke="#4ab8e8" stroke-width="8" opacity=".08" filter="url(#gSoft)"/>
+      <line x1="240" y1="165" x2="610" y2="340" stroke="#00f5ff" stroke-width="8" opacity=".05" filter="url(#fS)"/>
 
-      <!-- DIAGONAL DERECHA-SUPERIOR -->
-      <line x1="1060" y1="160" x2="690" y2="335" stroke="url(#gradDiagRT)" stroke-width="1.8" filter="url(#gTeal)">
-        <animate attributeName="stroke-opacity" values=".2;.6;.2" dur="5s" repeatCount="indefinite"/>
+      <line x1="1080" y1="165" x2="710" y2="340" stroke="url(#gDR)" stroke-width="1.2" filter="url(#fM)">
+        <animate attributeName="stroke-opacity" values=".1;.55;.1" dur="4.5s" repeatCount="indefinite"/>
       </line>
-      <line x1="1060" y1="160" x2="690" y2="335" stroke="#2ae8c8" stroke-width="8" opacity=".08" filter="url(#gSoft)"/>
+      <line x1="1080" y1="165" x2="710" y2="340" stroke="#ff00cc" stroke-width="8" opacity=".05" filter="url(#fS)"/>
 
-      <!-- PARTÍCULA IZQUIERDA →  -->
-      <circle r="3.5" fill="#e8c86a" filter="url(#gGold)">
-        <animateMotion dur="2.8s" repeatCount="indefinite"><mpath href="#pLeft"/></animateMotion>
-        <animate attributeName="opacity" values="0;1;0" dur="2.8s" repeatCount="indefinite"/>
+      <!-- Nodos en extremos de rayos -->
+      <circle cx="310" cy="355" r="3" fill="#00f5ff" filter="url(#fC)">
+        <animate attributeName="opacity" values=".3;1;.3" dur="2s" repeatCount="indefinite"/>
       </circle>
-      <circle r="2" fill="#4ab8e8" filter="url(#gBlue)">
-        <animateMotion dur="2.8s" begin="1.4s" repeatCount="indefinite"><mpath href="#pLeft"/></animateMotion>
-        <animate attributeName="opacity" values="0;.8;0" dur="2.8s" begin="1.4s" repeatCount="indefinite"/>
+      <circle cx="1010" cy="355" r="3" fill="#ff00cc" filter="url(#fM)">
+        <animate attributeName="opacity" values=".3;1;.3" dur="2.4s" repeatCount="indefinite"/>
       </circle>
-
-      <!-- PARTÍCULA DERECHA → -->
-      <circle r="3.5" fill="#e8c86a" filter="url(#gGold)">
-        <animateMotion dur="3.2s" repeatCount="indefinite"><mpath href="#pRight"/></animateMotion>
-        <animate attributeName="opacity" values="0;1;0" dur="3.2s" repeatCount="indefinite"/>
-      </circle>
-      <circle r="2" fill="#2ae8c8" filter="url(#gTeal)">
-        <animateMotion dur="3.2s" begin="1.6s" repeatCount="indefinite"><mpath href="#pRight"/></animateMotion>
-        <animate attributeName="opacity" values="0;.8;0" dur="3.2s" begin="1.6s" repeatCount="indefinite"/>
+      <circle cx="660" cy="115" r="3" fill="#7b2fff">
+        <animate attributeName="opacity" values=".3;1;.3" dur="3s" repeatCount="indefinite"/>
       </circle>
 
-      <!-- PARTÍCULA SUPERIOR ↓ -->
-      <circle r="3" fill="#fff6d6" filter="url(#gGold)">
-        <animateMotion dur="3.6s" repeatCount="indefinite"><mpath href="#pTop"/></animateMotion>
-        <animate attributeName="opacity" values="0;1;0" dur="3.6s" repeatCount="indefinite"/>
+      <!-- PARTÍCULAS VIAJANDO -->
+      <!-- Izq → Centro -->
+      <circle r="4" fill="#00f5ff" filter="url(#fC)">
+        <animateMotion dur="2.2s" repeatCount="indefinite"><mpath href="#pL"/></animateMotion>
+        <animate attributeName="opacity" values="0;1;0" dur="2.2s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="2.5" fill="#ffffff">
+        <animateMotion dur="2.2s" begin="1.1s" repeatCount="indefinite"><mpath href="#pL"/></animateMotion>
+        <animate attributeName="opacity" values="0;.8;0" dur="2.2s" begin="1.1s" repeatCount="indefinite"/>
       </circle>
 
-      <!-- PARTÍCULA DIAG LT -->
-      <circle r="2.5" fill="#4ab8e8" filter="url(#gBlue)">
-        <animateMotion dur="4s" repeatCount="indefinite"><mpath href="#pDiagLT"/></animateMotion>
-        <animate attributeName="opacity" values="0;.7;0" dur="4s" repeatCount="indefinite"/>
+      <!-- Der → Centro -->
+      <circle r="4" fill="#ff00cc" filter="url(#fM)">
+        <animateMotion dur="2.6s" repeatCount="indefinite"><mpath href="#pR"/></animateMotion>
+        <animate attributeName="opacity" values="0;1;0" dur="2.6s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="2.5" fill="#ffffff">
+        <animateMotion dur="2.6s" begin="1.3s" repeatCount="indefinite"><mpath href="#pR"/></animateMotion>
+        <animate attributeName="opacity" values="0;.8;0" dur="2.6s" begin="1.3s" repeatCount="indefinite"/>
       </circle>
 
-      <!-- PARTÍCULA DIAG RT -->
-      <circle r="2.5" fill="#2ae8c8" filter="url(#gTeal)">
-        <animateMotion dur="4.5s" repeatCount="indefinite"><mpath href="#pDiagRT"/></animateMotion>
-        <animate attributeName="opacity" values="0;.7;0" dur="4.5s" repeatCount="indefinite"/>
+      <!-- Top → Centro -->
+      <circle r="3.5" fill="#7b2fff">
+        <animateMotion dur="3s" repeatCount="indefinite"><mpath href="#pT"/></animateMotion>
+        <animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="2" fill="#00f5ff">
+        <animateMotion dur="3s" begin="1.5s" repeatCount="indefinite"><mpath href="#pT"/></animateMotion>
+        <animate attributeName="opacity" values="0;.7;0" dur="3s" begin="1.5s" repeatCount="indefinite"/>
       </circle>
 
-      <!-- PUNTO DE CONVERGENCIA CENTRAL -->
-      <circle cx="640" cy="345" r="6" fill="var(--oro)" filter="url(#gGold)">
-        <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values=".6;1;.6" dur="2s" repeatCount="indefinite"/>
+      <!-- Diag LT -->
+      <circle r="3" fill="#00f5ff" filter="url(#fC)">
+        <animateMotion dur="4s" repeatCount="indefinite"><mpath href="#pDL"/></animateMotion>
+        <animate attributeName="opacity" values="0;.8;0" dur="4s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- Diag RT -->
+      <circle r="3" fill="#ff00cc" filter="url(#fM)">
+        <animateMotion dur="4.5s" repeatCount="indefinite"><mpath href="#pDR"/></animateMotion>
+        <animate attributeName="opacity" values="0;.8;0" dur="4.5s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- CORE CENTRAL — donde converge todo -->
+      <circle cx="660" cy="350" r="7" fill="#e8c86a" filter="url(#fG)">
+        <animate attributeName="r" values="5;10;5" dur="1.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".7;1;.7" dur="1.8s" repeatCount="indefinite"/>
+      </circle>
+      <!-- inner bright -->
+      <circle cx="660" cy="350" r="3" fill="#ffffff">
+        <animate attributeName="r" values="2;5;2" dur="1.8s" repeatCount="indefinite"/>
       </circle>
     </svg>
 
-    <!-- ══ SECCIÓN TOP: ORIONIX ══ -->
+    <!-- ═══ TOP: ORIONIX ═══ -->
     <a class="s s-top" href="index.html">
-      <div class="orionix-halo"></div>
-      <div class="orionix-rays"></div>
+      <div class="orionix-ring"></div>
+      <div class="orionix-ring2"></div>
       <div class="orionix-title">ORIONIX</div>
-      <div class="orionix-sub">La Ciudadela · Universo de Inteligencia Artificial</div>
+      <div class="orionix-sub">nexus://ciudadela.ai · 2030</div>
     </a>
 
-    <!-- ══ SECCIÓN LEFT: La Forjadora de Diamantes ══ -->
+    <!-- ═══ LEFT: La Forjadora ═══ -->
     <a class="s s-left" href="universo.html">
-      <div class="img-frame">
-        <img
-          src="https://image.pollinations.ai/prompt/crystal%20diamond%20forge%20anvil%20hammer%20glowing%20blue%20purple%20crystals%20fire%20epic%20fantasy%20realistic%20dramatic%20lighting%20cinematic%20high%20quality%20dark%20background?width=480&height=360&nologo=true&seed=42"
-          alt="La Forjadora de Diamantes"
-          loading="lazy"
-        >
-      </div>
-      <div class="s-label">La Forjadora de Diamantes</div>
-      <div class="s-sub">Forja el futuro con inteligencia</div>
-    </a>
-
-    <!-- ══ SECCIÓN CENTER: Portal Hogar ══ -->
-    <a class="s s-center" href="comunidad.html">
-      <div class="portal-label-top">✦ &nbsp;Hogar&nbsp; ✦</div>
-      <div class="portal-wrap">
-        <div class="portal-pulse"></div>
-        <div class="portal-pulse"></div>
-        <div class="portal-pulse"></div>
-        <div class="portal-ring-outer"></div>
-        <div class="portal-ring-mask"></div>
-        <div class="portal-inner">
-          <img
-            src="https://image.pollinations.ai/prompt/mystical%20cosmic%20home%20portal%20warm%20golden%20orange%20light%20glowing%20sphere%20galaxy%20swirl%20cozy%20house%20family%20silhouette%20nebula%20clouds%20epic%20fantasy%20realistic%20cinematic?width=400&height=400&nologo=true&seed=99"
-            alt="Portal Hogar"
-            loading="lazy"
-          >
+      <div class="panel-card hud-frame">
+        <span class="hf-bl"></span><span class="hf-br"></span>
+        <div class="img-wrap">
+          <img src="https://image.pollinations.ai/prompt/futuristic%20crystal%20forge%20neon%20blue%20holographic%20anvil%20hammer%20diamond%20technology%202030%20sci-fi%20cyberpunk%20dramatic%20cinematic%20dark%20background%20ultra%20realistic?width=480&height=270&nologo=true&seed=77" alt="La Forjadora de Diamantes" loading="lazy">
+          <div class="scan"></div>
+          <div class="holo"></div>
+        </div>
+        <div class="data-bar">
+          <span class="db-label">SYS_FORGE</span>
+          <span class="db-val">NODE:A1 · ACTIVE</span>
+        </div>
+        <div class="panel-info">
+          <div class="panel-title">La Forjadora de Diamantes</div>
+          <div class="panel-sub">Creación · Automatización · IA</div>
+          <div class="status-row">
+            <div class="dot-s"></div><div class="dot-s"></div><div class="dot-s"></div>
+          </div>
         </div>
       </div>
-      <div class="portal-label-bot">✦ &nbsp;Hogar&nbsp; ✦</div>
     </a>
 
-    <!-- ══ SECCIÓN RIGHT: Las Crónicas del Creador ══ -->
-    <a class="s s-right" href="#">
-      <div class="img-frame">
-        <img
-          src="https://image.pollinations.ai/prompt/ancient%20illuminated%20scroll%20magic%20book%20compass%20quill%20feather%20teal%20cyan%20mystical%20light%20cosmic%20knowledge%20epic%20fantasy%20realistic%20dramatic%20cinematic%20dark%20background%20high%20quality?width=480&height=360&nologo=true&seed=77"
-          alt="Las Crónicas del Creador"
-          loading="lazy"
-        >
+    <!-- ═══ CENTER: Portal Hogar ═══ -->
+    <a class="s s-center" href="comunidad.html">
+      <div class="portal-lbl portal-lbl-top">⬡ &nbsp;HOGAR&nbsp; ⬡</div>
+      <div class="portal-outer">
+        <div class="pulse-wave"></div>
+        <div class="pulse-wave"></div>
+        <div class="pulse-wave"></div>
+        <div class="hex-ring"></div>
+        <div class="hex-ring2"></div>
+        <div class="hex-ring3"></div>
+        <div class="portal-glass">
+          <img src="https://image.pollinations.ai/prompt/holographic%20home%20portal%20neon%20golden%20light%20futuristic%20family%20silhouette%20cyber%202030%20galaxy%20swirl%20glass%20sphere%20cosmic%20ultra%20realistic%20cinematic?width=400&height=400&nologo=true&seed=42" alt="Portal Hogar" loading="lazy">
+          <div class="portal-holo"></div>
+        </div>
       </div>
-      <div class="s-label">Las Crónicas del Creador</div>
-      <div class="s-sub">Historia y KRC — El legado vivo</div>
+      <div class="portal-lbl portal-lbl-bot">⬡ &nbsp;HOGAR&nbsp; ⬡</div>
+      <div class="portal-data">
+        <div>CONN: <span>LIVE</span></div>
+        <div>PING: <span>4ms</span></div>
+        <div>MEMBERS: <span>∞</span></div>
+      </div>
     </a>
 
-    <!-- ══ SECCIÓN BOTTOM: La Ciudadela ══ -->
+    <!-- ═══ RIGHT: Las Crónicas ═══ -->
+    <a class="s s-right" href="#">
+      <div class="panel-card hud-frame magenta">
+        <span class="hf-bl"></span><span class="hf-br"></span>
+        <div class="img-wrap">
+          <img src="https://image.pollinations.ai/prompt/futuristic%20neon%20magenta%20holographic%20ancient%20scroll%20book%20compass%20quill%20cyber%202030%20teal%20purple%20glowing%20ultra%20realistic%20cinematic%20dark%20dramatic?width=480&height=270&nologo=true&seed=55" alt="Las Crónicas del Creador" loading="lazy">
+          <div class="scan"></div>
+          <div class="holo"></div>
+        </div>
+        <div class="data-bar">
+          <span class="db-label">SYS_CHRON</span>
+          <span class="db-val">NODE:B3 · ACTIVE</span>
+        </div>
+        <div class="panel-info">
+          <div class="panel-title">Las Crónicas del Creador</div>
+          <div class="panel-sub">Historia · KRC · Legado vivo</div>
+          <div class="status-row">
+            <div class="dot-s"></div><div class="dot-s"></div><div class="dot-s"></div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- ═══ BOTTOM: La Ciudadela ═══ -->
     <a class="s s-bottom" href="index.html">
-      <div class="ciudadela-sep"></div>
-      <div class="ciudadela-title">LA &nbsp; CIUDADELA</div>
-      <div class="ciudadela-sub">El corazón del universo Orionix</div>
+      <div class="ciudadela-hud">
+        <div class="ciudadela-label">◈ ACCESO PRINCIPAL ◈</div>
+        <div class="ciudadela-title">LA &nbsp; CIUDADELA</div>
+        <div class="ciudadela-sub">El corazón del universo Orionix</div>
+        <div class="ciudadela-metrics">
+          <div>AGENTES: <span class="met-val">9</span></div>
+          <div>MUNDOS: <span class="met-val">∞</span></div>
+          <div>IA: <span class="met-val">ONLINE</span></div>
+        </div>
+      </div>
     </a>
 
   </div><!-- /hub -->
@@ -723,113 +856,132 @@ footer{
 
 <!-- ══ FOOTER ══ -->
 <footer>
-  <span>© 2026 ORIONIX · La Ciudadela &nbsp;·&nbsp; Todos los derechos reservados</span>
+  <span>© 2026-2030 ORIONIX · CIUDADELA · TODOS LOS DERECHOS RESERVADOS</span>
   <div class="soc">
-    <a href="#" title="Facebook">&#9632;</a>
-    <a href="#" title="X / Twitter">&#10006;</a>
-    <a href="#" title="Instagram">&#11052;</a>
-    <a href="#" title="YouTube">&#9654;</a>
+    <a href="#" title="Facebook">⬜</a>
+    <a href="#" title="X">✕</a>
+    <a href="#" title="Instagram">⬡</a>
+    <a href="#" title="YouTube">▶</a>
   </div>
 </footer>
 
 <script>
-/* ══════════════════════════════════════
-   CURSOR COSMICO
-══════════════════════════════════════ */
-var cur=document.getElementById('cursor');
+/* ══ CURSOR ══ */
+var cur=document.getElementById('hud-cursor');
+var mx=window.innerWidth/2,my=window.innerHeight/2;
 document.addEventListener('mousemove',function(e){
-  cur.style.left=e.clientX+'px'; cur.style.top=e.clientY+'px';
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';cur.style.top=my+'px';
 });
-document.addEventListener('mousedown',function(){ cur.style.width='28px'; cur.style.height='28px'; });
-document.addEventListener('mouseup',function(){ cur.style.width='20px'; cur.style.height='20px'; });
+document.addEventListener('mousedown',function(){cur.style.width='36px';cur.style.height='36px';});
+document.addEventListener('mouseup',function(){cur.style.width='28px';cur.style.height='28px';});
 document.querySelectorAll('a,.s').forEach(function(el){
-  el.addEventListener('mouseenter',function(){ cur.classList.add('hover'); });
-  el.addEventListener('mouseleave',function(){ cur.classList.remove('hover'); });
+  el.addEventListener('mouseenter',function(){cur.classList.add('hover');});
+  el.addEventListener('mouseleave',function(){cur.classList.remove('hover');});
 });
 
-/* ══════════════════════════════════════
-   ESTRELLLAS CANVAS
-══════════════════════════════════════ */
+/* ══ BOOT TEXT ══ */
+var bootMsgs=['INICIALIZANDO NUCLEO DE INTELIGENCIA...','CONECTANDO AGENTES IA: 9/9','CARGANDO UNIVERSO ORIONIX...','AUTENTICACION NEXUS... OK','BIENVENIDO A LA CIUDADELA 2030'];
+var bi=0;
+var bootTxt=document.getElementById('bootTxt');
+var bootInterval=setInterval(function(){
+  bi++;
+  if(bi<bootMsgs.length){bootTxt.textContent=bootMsgs[bi];}
+  else{clearInterval(bootInterval);}
+},600);
+
+/* ══ RELOJ HUD ══ */
+function updateTime(){
+  var d=new Date();
+  var h=String(d.getHours()).padStart(2,'0');
+  var m=String(d.getMinutes()).padStart(2,'0');
+  var s=String(d.getSeconds()).padStart(2,'0');
+  var el=document.getElementById('hudTime');
+  if(el)el.textContent='UTC+02:'+h+':'+m+':'+s;
+}
+setInterval(updateTime,1000);updateTime();
+
+/* ══ CANVAS COSMOS ══ */
 (function(){
-  var cv=document.getElementById('cosmosCanvas');
+  var cv=document.getElementById('bg-canvas');
   var ctx=cv.getContext('2d');
   var W,H,DPR=Math.min(window.devicePixelRatio||1,2),stars=[];
 
   function resize(){
-    W=window.innerWidth; H=window.innerHeight;
-    cv.width=W*DPR; cv.height=H*DPR;
-    cv.style.width=W+'px'; cv.style.height=H+'px';
+    W=window.innerWidth;H=window.innerHeight;
+    cv.width=W*DPR;cv.height=H*DPR;
+    cv.style.width=W+'px';cv.style.height=H+'px';
     ctx.setTransform(DPR,0,0,DPR,0,0);
-    buildStars();
+    build();
   }
-
-  function buildStars(){
+  function build(){
     stars=[];
-    var n=Math.min(500,Math.floor(W*H/3200));
+    var n=Math.min(600,Math.floor(W*H/3000));
     for(var i=0;i<n;i++){
-      var cold=Math.random()<.25;
+      // colores fríos, cian, azul, blanco
+      var hue=[180,200,220,240,280,60][Math.floor(Math.random()*6)];
       stars.push({
-        x:Math.random()*W, y:Math.random()*H,
-        r:Math.random()*1.6+.15,
-        a:Math.random(), s:Math.random()*.018+.004, d:Math.random()<.5?1:-1,
-        hue:cold?(200+Math.random()*60):60,
-        sat:cold?70:30
+        x:Math.random()*W,y:Math.random()*H,
+        r:Math.random()*1.4+.1,
+        a:Math.random(),s:Math.random()*.02+.004,d:Math.random()<.5?1:-1,
+        hue:hue
       });
     }
   }
 
+  var t=0;
   function loop(){
+    t+=.004;
     ctx.clearRect(0,0,W,H);
-    // Background gradient
-    var bg=ctx.createRadialGradient(W*.5,H*.35,0,W*.5,H*.6,Math.max(W,H)*.9);
-    bg.addColorStop(0,'rgba(16,10,40,.9)');
-    bg.addColorStop(.45,'rgba(6,4,20,.92)');
-    bg.addColorStop(1,'rgba(2,2,9,.97)');
-    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+    // Fondo profundo
+    var bg=ctx.createRadialGradient(W*.5,H*.4,0,W*.5,H*.7,Math.max(W,H));
+    bg.addColorStop(0,'rgba(0,10,35,.95)');
+    bg.addColorStop(.5,'rgba(0,5,20,.97)');
+    bg.addColorStop(1,'rgba(0,5,16,1)');
+    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
 
+    // Nebula ciano sutil
+    var cn=ctx.createRadialGradient(W*.2,H*.25,0,W*.2,H*.25,W*.4);
+    cn.addColorStop(0,'rgba(0,245,255,.04)');cn.addColorStop(1,'transparent');
+    ctx.fillStyle=cn;ctx.fillRect(0,0,W,H);
+    var cm=ctx.createRadialGradient(W*.82,H*.18,0,W*.82,H*.18,W*.35);
+    cm.addColorStop(0,'rgba(123,47,255,.05)');cm.addColorStop(1,'transparent');
+    ctx.fillStyle=cm;ctx.fillRect(0,0,W,H);
+
+    // Estrellas
     for(var i=0;i<stars.length;i++){
       var s=stars[i];
       s.a+=s.s*s.d;
-      if(s.a>1){s.a=1;s.d=-1;} if(s.a<.05){s.a=.05;s.d=1;}
+      if(s.a>1){s.a=1;s.d=-1;}if(s.a<.05){s.a=.05;s.d=1;}
       ctx.globalAlpha=s.a;
-      if(s.r>1.1){
-        var grd=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*2);
-        grd.addColorStop(0,'hsl('+s.hue+','+s.sat+'%,95%)');
-        grd.addColorStop(1,'transparent');
-        ctx.fillStyle=grd;
-        ctx.beginPath(); ctx.arc(s.x,s.y,s.r*2,0,Math.PI*2); ctx.fill();
+      if(s.r>1){
+        var g=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*2.5);
+        g.addColorStop(0,'hsl('+s.hue+',80%,90%)');g.addColorStop(1,'transparent');
+        ctx.fillStyle=g;ctx.beginPath();ctx.arc(s.x,s.y,s.r*2.5,0,Math.PI*2);ctx.fill();
       }
-      ctx.fillStyle='hsl('+s.hue+','+s.sat+'%,92%)';
-      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle='hsl('+s.hue+',60%,92%)';
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();
     }
     ctx.globalAlpha=1;
+
+    // Horizon glow ciano sutil en el centro
+    var hg=ctx.createRadialGradient(W*.5,H*.5,0,W*.5,H*.5,Math.max(W,H)*.45);
+    hg.addColorStop(0,'rgba(0,245,255,.025)');hg.addColorStop(1,'transparent');
+    ctx.fillStyle=hg;ctx.fillRect(0,0,W,H);
+
     requestAnimationFrame(loop);
   }
-  resize(); window.addEventListener('resize',resize); loop();
+  resize();window.addEventListener('resize',resize);loop();
 })();
 
-/* ══════════════════════════════════════
-   RESPONSIVE: reposicionar rayos SVG
-══════════════════════════════════════ */
-function reposBeams(){
-  var h=document.querySelector('.hub');
-  if(!h)return;
-  var r=h.getBoundingClientRect();
-  var svg=document.getElementById('beamSVG');
-  if(!svg)return;
-  var W=r.width, H=r.height;
-  var cols=[0,W/3,W/3*2,W];
-  var rows=[0,H*130/680,H*(130+1)/680,H];
-  var cx=W/2, cy=H*350/680;
-  var lx=W/3*1-10, rx=W/3*2+10;
-  var ty=H*120/680;
-
-  function updateLine(id,x1,y1,x2,y2){
-    var el=svg.querySelector('#'+id)||svg.querySelector('[data-id="'+id+'"]');
-  }
-}
-window.addEventListener('resize', reposBeams);
-setTimeout(reposBeams,100);
+/* ══ NAV COORDS ANIMADO ══ */
+var coordMsgs=['◈ SECTOR ALPHA-7','◈ NODO CENTRAL','◈ CIUDADELA NEXUS','◈ GRID:660-350'];
+var ci=0;
+setInterval(function(){
+  ci=(ci+1)%coordMsgs.length;
+  var el=document.getElementById('navCoords');
+  if(el)el.textContent=coordMsgs[ci];
+},3000);
 </script>
 </body>
 </html>

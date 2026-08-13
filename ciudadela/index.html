@@ -707,14 +707,12 @@
 
   <!-- Texto de introduccion en capas -->
   <div class="hero-intro-wrap">
-    <div class="hero-linea-top reveal-up" aria-label="Donde nace el futuro">
-      <span>D</span><span>O</span><span>N</span><span>D</span><span>E</span>
+    <div class="hero-linea-top reveal-up" aria-label="La Ciudadela Gaia">
+      <span>L</span><span>A</span>
       <span>&nbsp;</span>
-      <span>N</span><span>A</span><span>C</span><span>E</span>
+      <span>C</span><span>I</span><span>U</span><span>D</span><span>A</span><span>D</span><span>E</span><span>L</span><span>A</span>
       <span>&nbsp;</span>
-      <span>E</span><span>L</span>
-      <span>&nbsp;</span>
-      <span>F</span><span>U</span><span>T</span><span>U</span><span>R</span><span>O</span>
+      <span>G</span><span>A</span><span>I</span><span>A</span>
     </div>
 
     <h1 class="hero-titulo">
@@ -1678,7 +1676,7 @@
       return;
     }
     try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){}
-    navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
+    navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,sampleRate:16000}}).then(function(stream){
       __micStream=stream;__micChunks=[];
       var mType=MediaRecorder.isTypeSupported("audio/webm;codecs=opus")?"audio/webm;codecs=opus":"audio/webm";
       try{__micMr=new MediaRecorder(stream,{mimeType:mType});}catch(e){__micMr=new MediaRecorder(stream);}
@@ -2415,16 +2413,16 @@
     if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){alert("Tu navegador no permite grabar audio. Usa Google Chrome.");return;}
     /* si AXEL esta hablando, callalo para que no se grabe a si mismo */
     try{if(window.speechSynthesis)window.speechSynthesis.cancel();vwSpeaking=false;}catch(e){}
-    navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
+    navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,sampleRate:16000}}).then(function(stream){
       __vwStream=stream;__vwChunks=[];
-      try{__vwMr=new MediaRecorder(stream);}catch(e){__vwMr=new MediaRecorder(stream,{mimeType:"audio/webm"});}
+      var __vwMtype=MediaRecorder.isTypeSupported("audio/webm;codecs=opus")?"audio/webm;codecs=opus":"audio/webm";try{__vwMr=new MediaRecorder(stream,{mimeType:__vwMtype});}catch(e){__vwMr=new MediaRecorder(stream,{mimeType:"audio/webm"});}
       __vwMr.ondataavailable=function(e){if(e.data&&e.data.size>0)__vwChunks.push(e.data);};
       __vwMr.onstop=function(){
         try{__vwStream.getTracks().forEach(function(t){t.stop();});}catch(e){}
         var blob=new Blob(__vwChunks,{type:(__vwChunks[0]&&__vwChunks[0].type)||"audio/webm"});
         var fr=new FileReader();
         fr.onloadend=function(){
-          var rawB64=fr.result.split(",")[1];var mType=(__vwChunks[0]&&__vwChunks[0].type)||"audio/webm";
+          var rawB64=fr.result.split(",")[1];var mType=(__vwChunks[0]&&__vwChunks[0].type)||"audio/webm;codecs=opus";
           fetch(VOZ_WEBHOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({audio:rawB64,mimeType:mType})})
           .then(function(r){return r.json();})
           .then(function(d){

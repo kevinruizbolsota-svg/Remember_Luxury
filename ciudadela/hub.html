@@ -627,5 +627,798 @@ nav{
 })();
 </script>
 
-</body>
-</html>
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║           MODO EDITOR — ORIONIX COMMAND PANEL               ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+
+<!-- Botón flotante activador (visible siempre) -->
+<button id="editorToggle" onclick="editorOpen()" title="Modo Editor (Ctrl+E)">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+  </svg>
+  <span>Editor</span>
+</button>
+
+<!-- Overlay oscuro -->
+<div id="editorOverlay" onclick="editorClose()"></div>
+
+<!-- Panel lateral del editor -->
+<aside id="editorPanel">
+
+  <!-- CABECERA -->
+  <div class="ep-header">
+    <div class="ep-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#e8c86a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+      </svg>
+      <span>COMMAND PANEL</span>
+    </div>
+    <button class="ep-close" onclick="editorClose()">✕</button>
+  </div>
+
+  <!-- TABS -->
+  <div class="ep-tabs">
+    <button class="ep-tab active" onclick="switchTab('paneles')">Paneles</button>
+    <button class="ep-tab" onclick="switchTab('nav')">Nav</button>
+    <button class="ep-tab" onclick="switchTab('estilos')">Estilos</button>
+    <button class="ep-tab" onclick="switchTab('config')">Config</button>
+  </div>
+
+  <!-- SCROLLABLE CONTENT -->
+  <div class="ep-body">
+
+    <!-- ── TAB: PANELES ── -->
+    <div id="tab-paneles" class="ep-section">
+      <p class="ep-hint">Haz clic en cualquier campo para editar. Arrastra una imagen sobre el panel para cambiarla.</p>
+
+      <!-- Panel Centro -->
+      <div class="ep-card ep-card-gold">
+        <div class="ep-card-label">🏛 LA CIUDADELA (centro)</div>
+        <label class="ep-label">Título</label>
+        <input class="ep-input" id="e-center-title" type="text" value="LA CIUDADELA" oninput="liveUpdate('center-title',this.value)" placeholder="Título central">
+        <label class="ep-label">Subtítulo</label>
+        <textarea class="ep-textarea" id="e-center-sub" oninput="liveUpdate('center-sub',this.value)" rows="2">AXEL · 22 Agentes · Universo IA
+Tienda · Suscripciones</textarea>
+        <label class="ep-label">Enlace destino</label>
+        <input class="ep-input" id="e-center-link" type="text" value="ciudadela.html" oninput="liveUpdateLink('p-center',this.value)" placeholder="URL o archivo.html">
+        <label class="ep-label">Foto de fondo</label>
+        <div class="ep-dropzone" ondragover="event.preventDefault()" ondrop="handleDrop(event,'p-center')" onclick="triggerFileInput('p-center')">
+          <span>Arrastra tu foto aquí<br><small>o haz clic para seleccionar</small></span>
+          <input type="file" accept="image/*" style="display:none" onchange="handleFile(event,'p-center')">
+        </div>
+        <button class="ep-btn-sm ep-btn-danger" onclick="clearPhoto('p-center')">Quitar foto</button>
+      </div>
+
+      <!-- Panel Top -->
+      <div class="ep-card">
+        <div class="ep-card-label">🌌 MI UNIVERSO (arriba)</div>
+        <label class="ep-label">Título</label>
+        <input class="ep-input" id="e-top-name" type="text" value="MI UNIVERSO" oninput="liveUpdateByQuery('#p-top .portal-name',this.value)" placeholder="Nombre del panel">
+        <label class="ep-label">Descripción</label>
+        <input class="ep-input" id="e-top-sub" type="text" value="Tienda · Comunidad · Cuenta · Afiliados · Todo" oninput="liveUpdateByQuery('#p-top .portal-sub',this.value)" placeholder="Subtítulo">
+        <label class="ep-label">Enlace</label>
+        <input class="ep-input" id="e-top-link" type="text" value="mi-universo.html" oninput="liveUpdateLink('p-top',this.value)" placeholder="URL o archivo.html">
+        <label class="ep-label">Foto de fondo</label>
+        <div class="ep-dropzone" ondragover="event.preventDefault()" ondrop="handleDrop(event,'p-top')" onclick="triggerFileInput('p-top')">
+          <span>Arrastra tu foto aquí<br><small>o haz clic para seleccionar</small></span>
+          <input type="file" accept="image/*" style="display:none" onchange="handleFile(event,'p-top')">
+        </div>
+        <button class="ep-btn-sm ep-btn-danger" onclick="clearPhoto('p-top')">Quitar foto</button>
+      </div>
+
+      <!-- Panel Left -->
+      <div class="ep-card">
+        <div class="ep-card-label">💎 LA FORJADORA (izquierda)</div>
+        <label class="ep-label">Título</label>
+        <input class="ep-input" id="e-left-name" type="text" value="LA FORJADORA DE DIAMANTES" oninput="liveUpdateByQuery('#p-left .portal-name',this.value)" placeholder="Nombre del panel">
+        <label class="ep-label">Descripción</label>
+        <input class="ep-input" id="e-left-sub" type="text" value="Programa Élite · Hábitos · Transformación" oninput="liveUpdateByQuery('#p-left .portal-sub',this.value)" placeholder="Subtítulo">
+        <label class="ep-label">Enlace</label>
+        <input class="ep-input" id="e-left-link" type="text" value="forjadora.html" oninput="liveUpdateLink('p-left',this.value)" placeholder="URL o archivo.html">
+        <label class="ep-label">Foto de fondo</label>
+        <div class="ep-dropzone" ondragover="event.preventDefault()" ondrop="handleDrop(event,'p-left')" onclick="triggerFileInput('p-left')">
+          <span>Arrastra tu foto aquí<br><small>o haz clic para seleccionar</small></span>
+          <input type="file" accept="image/*" style="display:none" onchange="handleFile(event,'p-left')">
+        </div>
+        <button class="ep-btn-sm ep-btn-danger" onclick="clearPhoto('p-left')">Quitar foto</button>
+      </div>
+
+      <!-- Panel Right -->
+      <div class="ep-card">
+        <div class="ep-card-label">📜 LAS CRÓNICAS (derecha)</div>
+        <label class="ep-label">Título</label>
+        <input class="ep-input" id="e-right-name" type="text" value="LAS CRÓNICAS DEL CREADOR" oninput="liveUpdateByQuery('#p-right .portal-name',this.value)" placeholder="Nombre del panel">
+        <label class="ep-label">Descripción</label>
+        <input class="ep-input" id="e-right-sub" type="text" value="Historia · Legado · KRC · En Desarrollo" oninput="liveUpdateByQuery('#p-right .portal-sub',this.value)" placeholder="Subtítulo">
+        <label class="ep-label">Enlace</label>
+        <input class="ep-input" id="e-right-link" type="text" value="comunidad.html" oninput="liveUpdateLink('p-right',this.value)" placeholder="URL o archivo.html">
+        <label class="ep-label">Foto de fondo</label>
+        <div class="ep-dropzone" ondragover="event.preventDefault()" ondrop="handleDrop(event,'p-right')" onclick="triggerFileInput('p-right')">
+          <span>Arrastra tu foto aquí<br><small>o haz clic para seleccionar</small></span>
+          <input type="file" accept="image/*" style="display:none" onchange="handleFile(event,'p-right')">
+        </div>
+        <button class="ep-btn-sm ep-btn-danger" onclick="clearPhoto('p-right')">Quitar foto</button>
+      </div>
+
+      <!-- Panel Bottom -->
+      <div class="ep-card">
+        <div class="ep-card-label">🤝 AFILIADOS (abajo)</div>
+        <label class="ep-label">Título</label>
+        <input class="ep-input" id="e-bottom-name" type="text" value="AFILIADOS" oninput="liveUpdateByQuery('#p-bottom .portal-name',this.value)" placeholder="Nombre del panel">
+        <label class="ep-label">Descripción</label>
+        <input class="ep-input" id="e-bottom-sub" type="text" value="Red de Embajadores · Ingresos Pasivos" oninput="liveUpdateByQuery('#p-bottom .portal-sub',this.value)" placeholder="Subtítulo">
+        <label class="ep-label">Enlace</label>
+        <input class="ep-input" id="e-bottom-link" type="text" value="afiliados.html" oninput="liveUpdateLink('p-bottom',this.value)" placeholder="URL o archivo.html">
+        <label class="ep-label">Foto de fondo</label>
+        <div class="ep-dropzone" ondragover="event.preventDefault()" ondrop="handleDrop(event,'p-bottom')" onclick="triggerFileInput('p-bottom')">
+          <span>Arrastra tu foto aquí<br><small>o haz clic para seleccionar</small></span>
+          <input type="file" accept="image/*" style="display:none" onchange="handleFile(event,'p-bottom')">
+        </div>
+        <button class="ep-btn-sm ep-btn-danger" onclick="clearPhoto('p-bottom')">Quitar foto</button>
+      </div>
+    </div><!-- /tab-paneles -->
+
+    <!-- ── TAB: NAV ── -->
+    <div id="tab-nav" class="ep-section" style="display:none">
+      <div class="ep-card">
+        <div class="ep-card-label">🔗 Barra de Navegación</div>
+        <label class="ep-label">Logo / Marca</label>
+        <input class="ep-input" id="e-nav-brand" type="text" value="ORIONIX" oninput="liveUpdateByQuery('.nav-brand',this.value)" placeholder="Texto del logo">
+        <label class="ep-label">Enlace del logo</label>
+        <input class="ep-input" id="e-nav-brand-link" type="text" value="index.html" placeholder="URL del logo" onchange="document.querySelector('.nav-brand').href=this.value">
+        <div class="ep-sep"></div>
+        <label class="ep-label">Links de navegación</label>
+        <p class="ep-hint">Edita texto y URL de cada link del menú</p>
+        <div id="ep-navlinks"></div>
+        <button class="ep-btn-sm" onclick="addNavLink()">+ Añadir link</button>
+      </div>
+    </div>
+
+    <!-- ── TAB: ESTILOS ── -->
+    <div id="tab-estilos" class="ep-section" style="display:none">
+      <div class="ep-card">
+        <div class="ep-card-label">🎨 Colores Globales</div>
+        <label class="ep-label">Color dorado principal</label>
+        <div class="ep-color-row">
+          <input type="color" class="ep-color" id="c-oro" value="#e8c86a" oninput="setCSSVar('--oro',this.value)">
+          <input class="ep-input ep-input-sm" type="text" value="#e8c86a" oninput="document.getElementById('c-oro').value=this.value;setCSSVar('--oro',this.value)">
+        </div>
+        <label class="ep-label">Color de fondo</label>
+        <div class="ep-color-row">
+          <input type="color" class="ep-color" id="c-bg" value="#06050d" oninput="setCSSVar('--bg',this.value)">
+          <input class="ep-input ep-input-sm" type="text" value="#06050d" oninput="document.getElementById('c-bg').value=this.value;setCSSVar('--bg',this.value)">
+        </div>
+        <label class="ep-label">Color de texto</label>
+        <div class="ep-color-row">
+          <input type="color" class="ep-color" id="c-texto" value="#e9ddc4" oninput="setCSSVar('--texto',this.value)">
+          <input class="ep-input ep-input-sm" type="text" value="#e9ddc4" oninput="document.getElementById('c-texto').value=this.value;setCSSVar('--texto',this.value)">
+        </div>
+        <label class="ep-label">Color tenue (subtítulos)</label>
+        <div class="ep-color-row">
+          <input type="color" class="ep-color" id="c-tenue" value="#b8a982" oninput="setCSSVar('--tenue',this.value)">
+          <input class="ep-input ep-input-sm" type="text" value="#b8a982" oninput="document.getElementById('c-tenue').value=this.value;setCSSVar('--tenue',this.value)">
+        </div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-card-label">⚡ Efectos Visuales</div>
+        <label class="ep-label">Opacidad del arte SVG</label>
+        <div class="ep-slider-row">
+          <input type="range" class="ep-slider" min="0" max="100" value="45" oninput="setSVGOpacity(this.value/100);this.nextElementSibling.textContent=this.value+'%'">
+          <span class="ep-slider-val">45%</span>
+        </div>
+        <label class="ep-label">Intensidad del fondo nebulosa</label>
+        <div class="ep-slider-row">
+          <input type="range" class="ep-slider" min="0" max="100" value="65" oninput="setNebOpacity(this.value/100);this.nextElementSibling.textContent=this.value+'%'">
+          <span class="ep-slider-val">65%</span>
+        </div>
+        <label class="ep-label">Arte SVG visible</label>
+        <div class="ep-toggle-row">
+          <span>Mostrar animaciones SVG</span>
+          <label class="ep-toggle"><input type="checkbox" checked onchange="toggleSVGArt(this.checked)"><span class="ep-toggle-slider"></span></label>
+        </div>
+        <label class="ep-label">Beams de luz (rayos entre paneles)</label>
+        <div class="ep-toggle-row">
+          <span>Mostrar beams</span>
+          <label class="ep-toggle"><input type="checkbox" checked onchange="document.getElementById('beamCanvas').style.display=this.checked?'':'none'"><span class="ep-toggle-slider"></span></label>
+        </div>
+        <label class="ep-label">Estrellas de fondo</label>
+        <div class="ep-toggle-row">
+          <span>Mostrar estrellas</span>
+          <label class="ep-toggle"><input type="checkbox" checked onchange="document.getElementById('starfield').style.display=this.checked?'':'none'"><span class="ep-toggle-slider"></span></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TAB: CONFIG ── -->
+    <div id="tab-config" class="ep-section" style="display:none">
+      <div class="ep-card">
+        <div class="ep-card-label">⚙️ Configuración del Editor</div>
+        <label class="ep-label">Password para publicar</label>
+        <input class="ep-input" id="ep-password" type="password" placeholder="Contraseña (configúrala abajo)">
+        <label class="ep-label">Webhook de publicación (n8n)</label>
+        <input class="ep-input" id="ep-webhook" type="text" value="https://lkevinruizl.app.n8n.cloud/webhook/orionix-editor" placeholder="URL del webhook n8n">
+        <p class="ep-hint">El webhook recibe el HTML y lo sube a GitHub automáticamente.</p>
+        <button class="ep-btn-sm" onclick="saveConfig()">Guardar configuración</button>
+      </div>
+      <div class="ep-card">
+        <div class="ep-card-label">💾 Datos guardados</div>
+        <p class="ep-hint">Los cambios se guardan en tu navegador automáticamente. Usa "Publicar" para subirlos a GitHub.</p>
+        <button class="ep-btn-sm ep-btn-danger" onclick="clearAllDrafts()">Borrar borrador local</button>
+      </div>
+    </div>
+
+  </div><!-- /ep-body -->
+
+  <!-- PIE DEL EDITOR -->
+  <div class="ep-footer">
+    <div class="ep-status" id="ep-status">
+      <span class="ep-status-dot"></span>
+      <span id="ep-status-text">Sin cambios</span>
+    </div>
+    <div class="ep-footer-btns">
+      <button class="ep-btn ep-btn-secondary" onclick="saveDraft()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        Borrador
+      </button>
+      <button class="ep-btn ep-btn-primary" onclick="publishToGitHub()" id="ep-publish-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
+        Publicar
+      </button>
+    </div>
+  </div>
+
+</aside><!-- /editorPanel -->
+
+<!-- NOTIFICACIÓN TOAST -->
+<div id="ep-toast"></div>
+
+<style>
+/* ────────────────────────────────────────────
+   EDITOR TOGGLE BUTTON
+   ──────────────────────────────────────────── */
+#editorToggle{
+  position:fixed;bottom:28px;right:28px;z-index:900;
+  display:flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,rgba(20,14,40,.95),rgba(10,8,20,.98));
+  border:1px solid rgba(232,200,106,.4);border-radius:50px;
+  color:#e8c86a;font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:2.5px;
+  padding:11px 20px 11px 15px;cursor:pointer;
+  box-shadow:0 4px 32px rgba(232,200,106,.25),0 0 0 1px rgba(232,200,106,.15);
+  transition:all .25s cubic-bezier(.4,0,.2,1);
+}
+#editorToggle:hover{
+  box-shadow:0 4px 48px rgba(232,200,106,.45),0 0 0 1px rgba(232,200,106,.4);
+  transform:translateY(-2px);border-color:rgba(232,200,106,.7);
+}
+#editorToggle svg{width:16px;height:16px;stroke:#e8c86a}
+
+/* ────────────────────────────────────────────
+   OVERLAY
+   ──────────────────────────────────────────── */
+#editorOverlay{
+  display:none;position:fixed;inset:0;z-index:910;
+  background:rgba(0,0,0,.55);backdrop-filter:blur(4px);
+  animation:fadeIn .25s ease;
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ────────────────────────────────────────────
+   PANEL LATERAL
+   ──────────────────────────────────────────── */
+#editorPanel{
+  position:fixed;top:0;right:-440px;bottom:0;z-index:920;
+  width:420px;max-width:95vw;
+  display:flex;flex-direction:column;
+  background:linear-gradient(180deg,#0d0b1e 0%,#080616 100%);
+  border-left:1px solid rgba(232,200,106,.18);
+  box-shadow:-8px 0 60px rgba(0,0,0,.8);
+  transition:right .35s cubic-bezier(.4,0,.2,1);
+  overflow:hidden;
+}
+#editorPanel.open{right:0}
+
+/* HEADER */
+.ep-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 20px;
+  background:linear-gradient(135deg,rgba(22,14,45,.9),rgba(12,8,25,.95));
+  border-bottom:1px solid rgba(232,200,106,.15);
+  flex-shrink:0;
+}
+.ep-logo{display:flex;align-items:center;gap:10px;font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:3px;color:#e8c86a;}
+.ep-close{background:none;border:1px solid rgba(232,200,106,.25);border-radius:6px;color:rgba(232,200,106,.6);width:30px;height:30px;cursor:pointer;font-size:.85rem;transition:all .2s}
+.ep-close:hover{background:rgba(232,200,106,.12);border-color:rgba(232,200,106,.5);color:#e8c86a}
+
+/* TABS */
+.ep-tabs{
+  display:flex;border-bottom:1px solid rgba(232,200,106,.1);
+  flex-shrink:0;
+}
+.ep-tab{
+  flex:1;padding:11px 4px;background:none;border:none;
+  font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:1.8px;text-transform:uppercase;
+  color:rgba(184,169,130,.55);cursor:pointer;
+  border-bottom:2px solid transparent;transition:all .2s;
+}
+.ep-tab.active{color:#e8c86a;border-bottom-color:#e8c86a;background:rgba(232,200,106,.05)}
+.ep-tab:hover:not(.active){color:rgba(232,200,106,.75)}
+
+/* BODY */
+.ep-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;}
+.ep-body::-webkit-scrollbar{width:4px}
+.ep-body::-webkit-scrollbar-track{background:rgba(255,255,255,.03)}
+.ep-body::-webkit-scrollbar-thumb{background:rgba(232,200,106,.25);border-radius:2px}
+.ep-section{display:flex;flex-direction:column;gap:12px}
+
+/* CARDS */
+.ep-card{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(232,200,106,.1);
+  border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;
+}
+.ep-card-gold{border-color:rgba(232,200,106,.28);background:rgba(232,200,106,.04)}
+.ep-card-label{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:#e8c86a;padding-bottom:6px;border-bottom:1px solid rgba(232,200,106,.12)}
+.ep-sep{height:1px;background:rgba(232,200,106,.1);margin:2px 0}
+
+/* LABELS */
+.ep-label{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(184,169,130,.7);margin-bottom:-4px}
+.ep-hint{font-size:.72rem;color:rgba(184,169,130,.5);line-height:1.5;margin:0}
+
+/* INPUTS */
+.ep-input{
+  background:rgba(255,255,255,.05);border:1px solid rgba(232,200,106,.18);
+  border-radius:7px;padding:9px 12px;color:#e9ddc4;font-size:.8rem;
+  font-family:Georgia,serif;outline:none;transition:border-color .2s;width:100%;
+}
+.ep-input:focus{border-color:rgba(232,200,106,.55);background:rgba(232,200,106,.06)}
+.ep-input-sm{flex:1}
+.ep-textarea{
+  background:rgba(255,255,255,.05);border:1px solid rgba(232,200,106,.18);
+  border-radius:7px;padding:9px 12px;color:#e9ddc4;font-size:.8rem;
+  font-family:Georgia,serif;outline:none;resize:vertical;width:100%;
+  transition:border-color .2s;
+}
+.ep-textarea:focus{border-color:rgba(232,200,106,.55);background:rgba(232,200,106,.06)}
+
+/* DROPZONE */
+.ep-dropzone{
+  border:2px dashed rgba(232,200,106,.25);border-radius:8px;
+  padding:18px;text-align:center;cursor:pointer;
+  color:rgba(184,169,130,.6);font-size:.78rem;line-height:1.6;
+  transition:all .2s;position:relative;
+}
+.ep-dropzone:hover{border-color:rgba(232,200,106,.55);background:rgba(232,200,106,.05);color:#e8c86a}
+.ep-dropzone.drag-over{border-color:#e8c86a;background:rgba(232,200,106,.1)}
+.ep-dropzone small{font-size:.7rem;opacity:.7}
+
+/* COLORS */
+.ep-color-row{display:flex;gap:8px;align-items:center}
+.ep-color{width:38px;height:38px;border:none;border-radius:8px;padding:2px;background:rgba(255,255,255,.05);border:1px solid rgba(232,200,106,.2);cursor:pointer}
+
+/* SLIDER */
+.ep-slider-row{display:flex;gap:10px;align-items:center}
+.ep-slider{flex:1;-webkit-appearance:none;height:4px;border-radius:2px;background:rgba(232,200,106,.2);outline:none}
+.ep-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:#e8c86a;cursor:pointer;box-shadow:0 0 8px rgba(232,200,106,.6)}
+.ep-slider-val{font-size:.72rem;color:#e8c86a;min-width:38px;text-align:right}
+
+/* TOGGLE */
+.ep-toggle-row{display:flex;align-items:center;justify-content:space-between;font-size:.78rem;color:rgba(184,169,130,.7)}
+.ep-toggle{position:relative;display:inline-block;width:40px;height:22px;flex-shrink:0}
+.ep-toggle input{opacity:0;width:0;height:0}
+.ep-toggle-slider{
+  position:absolute;inset:0;background:rgba(255,255,255,.1);border-radius:22px;
+  transition:.3s;cursor:pointer;
+}
+.ep-toggle-slider:before{
+  content:'';position:absolute;height:16px;width:16px;left:3px;bottom:3px;
+  background:#888;border-radius:50%;transition:.3s;
+}
+.ep-toggle input:checked+.ep-toggle-slider{background:rgba(232,200,106,.3)}
+.ep-toggle input:checked+.ep-toggle-slider:before{transform:translateX(18px);background:#e8c86a}
+
+/* NAV LINK ROWS */
+.ep-navlink-row{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+.ep-navlink-row .ep-input{flex:1}
+.ep-navlink-row button{background:rgba(255,60,60,.12);border:1px solid rgba(255,60,60,.2);border-radius:5px;color:rgba(255,120,120,.8);width:28px;height:32px;cursor:pointer;font-size:.85rem;flex-shrink:0;transition:all .2s}
+.ep-navlink-row button:hover{background:rgba(255,60,60,.22);color:#ff8888}
+
+/* BUTTONS */
+.ep-btn-sm{
+  background:rgba(232,200,106,.08);border:1px solid rgba(232,200,106,.22);
+  border-radius:7px;padding:7px 14px;color:#e8c86a;font-family:'Cinzel',serif;
+  font-size:.44rem;letter-spacing:1.5px;cursor:pointer;align-self:flex-start;
+  transition:all .2s;
+}
+.ep-btn-sm:hover{background:rgba(232,200,106,.18);border-color:rgba(232,200,106,.5)}
+.ep-btn-danger{background:rgba(255,60,60,.08)!important;border-color:rgba(255,60,60,.2)!important;color:rgba(255,140,140,.8)!important}
+.ep-btn-danger:hover{background:rgba(255,60,60,.2)!important;border-color:rgba(255,60,60,.4)!important}
+
+/* FOOTER */
+.ep-footer{
+  padding:14px 16px;
+  border-top:1px solid rgba(232,200,106,.12);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;background:rgba(0,0,0,.3);
+}
+.ep-status{display:flex;align-items:center;gap:7px;font-size:.72rem;color:rgba(184,169,130,.65)}
+.ep-status-dot{width:7px;height:7px;border-radius:50%;background:rgba(184,169,130,.4);flex-shrink:0;transition:background .3s}
+.ep-status-dot.changed{background:#e8c86a;box-shadow:0 0 6px rgba(232,200,106,.7);animation:dotPulse 1.5s ease-in-out infinite}
+.ep-status-dot.publishing{background:#60a0ff;box-shadow:0 0 6px rgba(96,160,255,.7);animation:dotPulse 0.6s ease-in-out infinite}
+.ep-status-dot.success{background:#50e0a0;box-shadow:0 0 6px rgba(80,224,160,.7)}
+.ep-status-dot.error{background:#ff6060;box-shadow:0 0 6px rgba(255,96,96,.7)}
+@keyframes dotPulse{0%,100%{opacity:1}50%{opacity:.4}}
+.ep-footer-btns{display:flex;gap:8px}
+.ep-btn{
+  display:flex;align-items:center;gap:6px;
+  padding:9px 16px;border-radius:8px;font-family:'Cinzel',serif;
+  font-size:.44rem;letter-spacing:1.5px;cursor:pointer;border:none;transition:all .2s;
+}
+.ep-btn-secondary{background:rgba(255,255,255,.06);border:1px solid rgba(232,200,106,.2);color:#b8a982}
+.ep-btn-secondary:hover{background:rgba(255,255,255,.1);color:#e8c86a}
+.ep-btn-primary{
+  background:linear-gradient(135deg,#8a6a24,#c8a24a);color:#0b0b0d;font-weight:700;
+  box-shadow:0 4px 20px rgba(232,200,106,.3);
+}
+.ep-btn-primary:hover{background:linear-gradient(135deg,#c8a24a,#e8c86a);transform:translateY(-1px);box-shadow:0 6px 28px rgba(232,200,106,.45)}
+.ep-btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* TOAST */
+#ep-toast{
+  position:fixed;bottom:90px;right:28px;z-index:950;
+  background:linear-gradient(135deg,rgba(22,14,45,.97),rgba(12,8,25,.98));
+  border:1px solid rgba(232,200,106,.3);border-radius:10px;
+  padding:12px 20px;font-size:.78rem;color:#e9ddc4;
+  pointer-events:none;opacity:0;transition:opacity .3s,transform .3s;
+  transform:translateY(10px);min-width:200px;
+  box-shadow:0 8px 32px rgba(0,0,0,.6);
+}
+#ep-toast.show{opacity:1;transform:translateY(0)}
+
+/* MOBILE */
+@media(max-width:500px){
+  #editorPanel{width:100vw}
+  #editorToggle{bottom:16px;right:16px;padding:10px 14px 10px 12px}
+}
+</style>
+
+<script>
+/* ════════════════════════════════════════════
+   EDITOR ENGINE — ORIONIX COMMAND PANEL
+   ════════════════════════════════════════════ */
+
+var editorDirty = false;
+var editorState = {};
+
+/* Cargar borrador guardado al iniciar */
+(function loadDraft(){
+  try {
+    var saved = localStorage.getItem('orionix_hub_draft');
+    if(saved){ editorState = JSON.parse(saved); applyState(); }
+  } catch(e){}
+  buildNavLinks();
+})();
+
+function editorOpen(){
+  document.getElementById('editorPanel').classList.add('open');
+  document.getElementById('editorOverlay').style.display='block';
+  syncInputsFromDOM();
+}
+function editorClose(){
+  document.getElementById('editorPanel').classList.remove('open');
+  document.getElementById('editorOverlay').style.display='none';
+}
+
+/* Ctrl+E shortcut */
+document.addEventListener('keydown',function(e){
+  if((e.ctrlKey||e.metaKey) && e.key==='e'){
+    e.preventDefault();
+    var p=document.getElementById('editorPanel');
+    if(p.classList.contains('open')) editorClose(); else editorOpen();
+  }
+});
+
+/* ── Tabs ── */
+function switchTab(name){
+  ['paneles','nav','estilos','config'].forEach(function(t){
+    document.getElementById('tab-'+t).style.display=(t===name)?'flex':'none';
+    document.getElementById('tab-'+t).style.flexDirection='column';
+  });
+  document.querySelectorAll('.ep-tab').forEach(function(btn,i){
+    var tabs=['paneles','nav','estilos','config'];
+    btn.classList.toggle('active',tabs[i]===name);
+  });
+}
+/* Hide non-active sections on load */
+['nav','estilos','config'].forEach(function(t){
+  document.getElementById('tab-'+t).style.display='none';
+});
+
+/* ── Live updates ── */
+function liveUpdate(id,val){
+  var el=document.querySelector('.'+id)||document.getElementById(id);
+  if(el){ el.textContent=val; }
+  markChanged(id,val);
+}
+function liveUpdateByQuery(sel,val){
+  var el=document.querySelector(sel);
+  if(el) el.textContent=val;
+  markChanged(sel,val);
+}
+function liveUpdateLink(panelId,val){
+  var el=document.getElementById(panelId);
+  if(el) el.href=val;
+  markChanged('link_'+panelId,val);
+}
+function setCSSVar(name,val){
+  document.documentElement.style.setProperty(name,val);
+  markChanged('css_'+name,val);
+}
+function setSVGOpacity(val){
+  document.querySelectorAll('.portal-img-zone').forEach(function(z){ z.style.opacity=val; });
+  markChanged('svg_opacity',val);
+}
+function setNebOpacity(val){
+  var neb=document.querySelector('.neb');
+  if(neb) neb.style.opacity=val;
+  markChanged('neb_opacity',val);
+}
+function toggleSVGArt(show){
+  document.querySelectorAll('.portal-img-zone svg,.center-bg-art svg').forEach(function(s){
+    s.style.display=show?'':'none';
+  });
+  markChanged('svg_art_visible',show);
+}
+
+/* ── Estado / Dirty ── */
+function markChanged(key,val){
+  editorState[key]=val;
+  editorDirty=true;
+  var dot=document.querySelector('.ep-status-dot');
+  var txt=document.getElementById('ep-status-text');
+  if(dot) dot.className='ep-status-dot changed';
+  if(txt) txt.textContent='Cambios sin guardar';
+}
+
+/* ── Fotos ── */
+function triggerFileInput(panelId){
+  var dz=document.querySelector('#'+panelId+' .ep-dropzone');
+  if(dz) dz.querySelector('input[type=file]').click();
+}
+function handleDrop(event,panelId){
+  event.preventDefault();
+  var file=event.dataTransfer.files[0];
+  if(file&&file.type.startsWith('image/')) applyPhoto(file,panelId);
+}
+function handleFile(event,panelId){
+  var file=event.target.files[0];
+  if(file) applyPhoto(file,panelId);
+}
+function applyPhoto(file,panelId){
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var panel=document.getElementById(panelId);
+    if(!panel) return;
+    // Eliminar foto anterior si existe
+    var existing=panel.querySelector('.ep-user-photo');
+    if(existing) existing.remove();
+    // Crear imagen nueva
+    var img=document.createElement('img');
+    img.src=e.target.result;
+    img.className='portal-photo ep-user-photo';
+    if(panelId==='p-center') img.style.borderRadius='50%';
+    panel.querySelector('.portal-img-zone, .center-bg-art').prepend(img);
+    // Guardar en estado (puede ser grande, solo guardar referencia)
+    markChanged('photo_'+panelId,e.target.result);
+    editorState['photo_'+panelId]=e.target.result;
+    toast('Foto aplicada a '+panelId.replace('p-',''),'success');
+  };
+  reader.readAsDataURL(file);
+}
+function clearPhoto(panelId){
+  var panel=document.getElementById(panelId);
+  if(!panel) return;
+  var existing=panel.querySelector('.ep-user-photo');
+  if(existing){ existing.remove(); markChanged('photo_'+panelId,null); toast('Foto eliminada'); }
+  else toast('No hay foto que quitar');
+}
+
+/* ── Nav Links ── */
+function buildNavLinks(){
+  var links=Array.from(document.querySelectorAll('.nav-links a'));
+  var container=document.getElementById('ep-navlinks');
+  if(!container) return;
+  container.innerHTML='';
+  links.forEach(function(a,i){
+    var row=document.createElement('div');
+    row.className='ep-navlink-row';
+    row.innerHTML='<input class="ep-input" value="'+a.textContent.trim()+'" placeholder="Texto" onchange="updateNavLink('+i+',this.value,null)">'
+      +'<input class="ep-input" value="'+a.getAttribute('href')+'" placeholder="URL" style="max-width:120px" onchange="updateNavLink('+i+',null,this.value)">'
+      +'<button onclick="removeNavLink('+i+')">✕</button>';
+    container.appendChild(row);
+  });
+}
+function updateNavLink(idx,text,href){
+  var links=Array.from(document.querySelectorAll('.nav-links a'));
+  if(links[idx]){
+    if(text!==null) links[idx].textContent=text;
+    if(href!==null) links[idx].href=href;
+    markChanged('navlinks',true);
+  }
+}
+function addNavLink(){
+  var nav=document.querySelector('.nav-links');
+  if(!nav) return;
+  var a=document.createElement('a');
+  a.href='#';a.textContent='Nuevo';
+  nav.appendChild(a);
+  buildNavLinks();
+  markChanged('navlinks',true);
+}
+function removeNavLink(idx){
+  var links=Array.from(document.querySelectorAll('.nav-links a'));
+  if(links[idx]){ links[idx].remove(); buildNavLinks(); markChanged('navlinks',true); }
+}
+
+/* ── Sync inputs from DOM ── */
+function syncInputsFromDOM(){
+  try{
+    var ct=document.querySelector('.center-title');
+    if(ct) document.getElementById('e-center-title').value=ct.textContent;
+    var cs=document.querySelector('.center-sub');
+    if(cs) document.getElementById('e-center-sub').value=cs.textContent.trim();
+    buildNavLinks();
+  } catch(e){}
+}
+
+/* ── Apply saved state ── */
+function applyState(){
+  Object.keys(editorState).forEach(function(key){
+    var val=editorState[key];
+    if(!val&&val!==false) return;
+    try{
+      if(key.startsWith('css_')) document.documentElement.style.setProperty(key.replace('css_',''),val);
+      else if(key.startsWith('photo_')&&val){
+        var pid=key.replace('photo_','');
+        var panel=document.getElementById(pid);
+        if(panel){
+          var existing=panel.querySelector('.ep-user-photo');
+          if(existing) existing.remove();
+          var img=document.createElement('img');
+          img.src=val;img.className='portal-photo ep-user-photo';
+          if(pid==='p-center') img.style.borderRadius='50%';
+          var zone=panel.querySelector('.portal-img-zone,.center-bg-art');
+          if(zone) zone.prepend(img);
+        }
+      }
+      else if(key.startsWith('link_')){
+        var pid=key.replace('link_','');
+        var el=document.getElementById(pid);
+        if(el) el.href=val;
+      }
+      else if(key==='svg_opacity') setSVGOpacity(val);
+      else if(key==='neb_opacity'){
+        var neb=document.querySelector('.neb');
+        if(neb) neb.style.opacity=val;
+      }
+      else if(key==='svg_art_visible') toggleSVGArt(val);
+      else if(key==='center-title') liveUpdate('center-title',val);
+      else if(key==='center-sub') liveUpdate('center-sub',val);
+      else {
+        var el=document.querySelector(key);
+        if(el) el.textContent=val;
+      }
+    } catch(e){}
+  });
+}
+
+/* ── Save draft (localStorage) ── */
+function saveDraft(){
+  try{
+    // No guardar fotos grandes en localStorage si ya las hay en el DOM
+    var stateToSave=Object.assign({},editorState);
+    localStorage.setItem('orionix_hub_draft',JSON.stringify(stateToSave));
+    toast('Borrador guardado','success');
+    var dot=document.querySelector('.ep-status-dot');
+    var txt=document.getElementById('ep-status-text');
+    if(dot) dot.className='ep-status-dot success';
+    if(txt) txt.textContent='Borrador guardado';
+  } catch(e){
+    toast('Error: borrador muy grande (fotos en alta res). Reduce el tamaño de imágenes.','error');
+  }
+}
+function clearAllDrafts(){
+  if(confirm('¿Borrar todos los cambios guardados localmente?')){
+    localStorage.removeItem('orionix_hub_draft');
+    editorState={};editorDirty=false;
+    toast('Borrador eliminado');
+    var dot=document.querySelector('.ep-status-dot');
+    var txt=document.getElementById('ep-status-text');
+    if(dot) dot.className='ep-status-dot';
+    if(txt) txt.textContent='Sin cambios';
+  }
+}
+
+/* ── Save config ── */
+function saveConfig(){
+  var wh=document.getElementById('ep-webhook').value;
+  var pw=document.getElementById('ep-password').value;
+  if(wh) localStorage.setItem('orionix_webhook',wh);
+  if(pw) localStorage.setItem('orionix_pw',btoa(pw));
+  toast('Configuración guardada','success');
+}
+(function loadConfig(){
+  var wh=localStorage.getItem('orionix_webhook');
+  var pw=localStorage.getItem('orionix_pw');
+  if(wh){ var el=document.getElementById('ep-webhook');if(el)el.value=wh; }
+  if(pw){ var el=document.getElementById('ep-password');if(el)el.value='••••••••'; }
+})();
+
+/* ── Publish to GitHub via n8n webhook ── */
+function publishToGitHub(){
+  var webhook=document.getElementById('ep-webhook').value||localStorage.getItem('orionix_webhook');
+  var pwRaw=localStorage.getItem('orionix_pw');
+  if(!webhook){ toast('Configura el webhook en la pestaña Config','error'); return; }
+
+  var btn=document.getElementById('ep-publish-btn');
+  var dot=document.querySelector('.ep-status-dot');
+  var txt=document.getElementById('ep-status-text');
+  btn.disabled=true;
+  if(dot) dot.className='ep-status-dot publishing';
+  if(txt) txt.textContent='Publicando…';
+
+  // Serializar el HTML actual completo
+  var fullHtml='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+
+  var payload={
+    html: fullHtml,
+    path: 'ciudadela/hub.html',
+    commitMessage: 'editor: actualización desde Modo Editor ORIONIX — '+new Date().toISOString(),
+    password: pwRaw ? atob(pwRaw) : ''
+  };
+
+  fetch(webhook,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(payload)
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    btn.disabled=false;
+    if(data.status==='OK'||data.success){
+      if(dot) dot.className='ep-status-dot success';
+      if(txt) txt.textContent='Publicado · commit '+( data.sha||'OK');
+      editorDirty=false;
+      toast('Publicado en GitHub · '+new Date().toLocaleTimeString(),'success');
+    } else {
+      if(dot) dot.className='ep-status-dot error';
+      if(txt) txt.textContent='Error al publicar';
+      toast('Error: '+(data.error||data.message||'Revisa el webhook'),'error');
+    }
+  })
+  .catch(function(err){
+    btn.disabled=false;
+    if(dot) dot.className='ep-status-dot error';
+    if(txt) txt.textContent='Error de conexión';
+    toast('No se pudo conectar al webhook','error');
+  });
+}
+
+/* ── Toast ── */
+function toast(msg,type){
+  var t=document.getElementById('ep-toast');
+  var icons={success:'✓ ',error:'✗ '};
+  t.textContent=(icons[type]||'')+msg;
+  t.style.borderColor=type==='success'?'rgba(80,224,160,.4)':type==='error'?'rgba(255,96,96,.4)':'rgba(232,200,106,.3)';
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer=setTimeout(function(){ t.classList.remove('show'); },3200);
+}
+
+/* ── Autoguardado cada 30s si hay cambios ── */
+setInterval(function(){
+  if(editorDirty) saveDraft();
+},30000);
+</script>
+

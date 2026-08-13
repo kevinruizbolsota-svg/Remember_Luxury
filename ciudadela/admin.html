@@ -134,12 +134,12 @@
   <div class="status">SISTEMA CERRADO</div>
 </header>
 
-<!-- Pantalla de Bloqueo -->
+<!-- Pantalla de Bloqueo / Verificando Identidad -->
 <div id="lockScreen">
   <div class="lock-box">
     <h2>AUTENTICACIÓN REQUERIDA</h2>
-    <input type="password" id="passInput" placeholder="CÓDIGO DE ACCESO" onkeypress="if(event.key==='Enter') unlock()">
-    <button onclick="unlock()">INICIAR ENLACE</button>
+    <div id="authStatus" style="font-family:'Orbitron',sans-serif; color:var(--core); margin:20px 0; letter-spacing:2px;">ESCANEANDO CREDENCIALES DE COMANDANCIA...</div>
+    <a href="tienda.html" id="btnReturn" style="display:none; background:transparent; color:var(--core); border:1px solid var(--core); padding:10px 20px; text-decoration:none; font-family:'Orbitron',sans-serif; font-size:0.9rem; margin-top:20px; display:inline-block;">VOLVER A LA BASE</a>
   </div>
 </div>
 
@@ -208,34 +208,56 @@
   <div id="sysMessage"></div>
 </div>
 
+<!-- Firebase CDN (no-module) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
 <script>
-  // CONTRASEÑA DE SEGURIDAD (Cámbiala aquí si lo deseas)
-  const CLAVE_SECRETA = "orionix2026";
+  // CONFIGURACIÓN DE SEGURIDAD
+  const ADMIN_EMAIL = "kevin.ruiz.bolsota@gmail.com";
   
   // WEBHOOK DE N8N (Para enviar datos y guardarlos en Google Sheets)
-  // DEBES CONFIGURAR ESTE WEBHOOK EN N8N CON EL NODO DE "GOOGLE SHEETS (APPEND)"
-  const WEBHOOK_N8N = "https://lkevinruizl.app.n8n.cloud/webhook/agregar-producto";
+  const WEBHOOK_N8N = "https://kevinruiz.app.n8n.cloud/webhook/agregar-producto";
 
-  function unlock() {
-    const pass = document.getElementById("passInput").value;
-    if(pass === CLAVE_SECRETA) {
-      document.getElementById("lockScreen").style.opacity = "0";
+  // INICIALIZAR FIREBASE
+  const firebaseConfig = {
+    apiKey: "AIzaSyDZoywcYKSBrAk_iwSMN4rnw7goLSltj7A",
+    authDomain: "las-cronicas-de-krc.firebaseapp.com",
+    projectId: "las-cronicas-de-krc",
+    storageBucket: "las-cronicas-de-krc.firebasestorage.app",
+    messagingSenderId: "636206734640",
+    appId: "1:636206734640:web:40c52672294155c6d77cf5"
+  };
+  if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  // VERIFICAR AUTENTICACIÓN AL ENTRAR
+  auth.onAuthStateChanged(user => {
+    const statusDiv = document.getElementById("authStatus");
+    const lockScreen = document.getElementById("lockScreen");
+    const dashboard = document.getElementById("dashboard");
+    const btnReturn = document.getElementById("btnReturn");
+
+    if (user && user.email === ADMIN_EMAIL) {
+      statusDiv.innerText = "ACCESO AUTORIZADO. BIENVENIDO, CREADOR.";
+      statusDiv.style.color = "var(--core)";
+      btnReturn.style.display = "none";
       setTimeout(() => {
-        document.getElementById("lockScreen").style.display = "none";
-        document.getElementById("dashboard").style.display = "block";
-        document.querySelector(".status").innerText = "SISTEMA ONLINE - MODO ARQUITECTO";
-        document.querySelector(".status").style.color = "#fff";
-      }, 500);
-    } else {
-      document.getElementById("passInput").style.borderColor = "var(--alert)";
-      document.getElementById("passInput").style.color = "var(--alert)";
-      setTimeout(() => {
-        document.getElementById("passInput").style.borderColor = "var(--core)";
-        document.getElementById("passInput").style.color = "var(--core)";
-        document.getElementById("passInput").value = "";
+        lockScreen.style.opacity = "0";
+        setTimeout(() => {
+          lockScreen.style.display = "none";
+          dashboard.style.display = "block";
+          document.querySelector(".status").innerText = "SISTEMA ONLINE - MODO ARQUITECTO";
+          document.querySelector(".status").style.color = "#fff";
+        }, 500);
       }, 1000);
+    } else {
+      statusDiv.innerText = "ACCESO DENEGADO. NO ERES EL ADMINISTRADOR.";
+      statusDiv.style.color = "var(--alert)";
+      btnReturn.style.display = "inline-block";
+      dashboard.style.display = "none";
     }
-  }
+  });
 
   function switchTab(tab) {
     document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));

@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>ORIONIX · Portal Central</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230b0b0d'/%3E%3Ctext x='50' y='72' font-size='60' text-anchor='middle' fill='%23e8c86a'%3E%F0%9F%91%91%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,7 +54,7 @@ nav{
 .nav-links a.acc{color:var(--oro);border:1px solid rgba(232,200,106,.32);border-radius:4px;padding:5px 11px}
 @media(max-width:700px){.nav-links{display:none}}
 
-/* ── BEAMS CANVAS ── */
+/* ── BEAMS ── */
 #beamCanvas{position:fixed;inset:0;z-index:5;pointer-events:none}
 
 /* ── MAIN GRID ── */
@@ -61,9 +64,9 @@ nav{
   grid-template-columns: 1fr 1.7fr 1fr;
   grid-template-rows: 1fr 1.55fr 1fr;
   grid-template-areas:
-    ".    top    ."
-    "left center right"
-    ".    bottom .";
+    ".     top    ."
+    "left  center right"
+    ".     bottom .";
   padding: 66px 28px 20px;
   gap: 14px;
 }
@@ -83,26 +86,34 @@ nav{
   transition:transform .3s cubic-bezier(.4,0,.2,1),box-shadow .3s,border-color .3s;
   user-select:none;
 }
-/* Placeholder zone for images — user drops images here */
+
+/* ── IMAGE ZONE — SVG art vive aquí; tu foto va como <img class="portal-photo"> ── */
 .portal-img-zone{
   position:absolute;inset:0;
   display:flex;align-items:center;justify-content:center;
-  font-size:4.5rem;
-  opacity:.18;
+  opacity:.45;
   pointer-events:none;
+  overflow:hidden;
 }
-/* Bottom gradient so text is always readable */
+.portal-img-zone svg{width:100%;height:100%}
+
+/* Foto personal — descomenta el <img> en el HTML para usar tu foto */
+.portal-photo{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;opacity:.38;border-radius:inherit;z-index:1;
+}
+
+/* Bottom gradient → texto siempre legible */
 .portal::before{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:65%;
-  background:linear-gradient(transparent,rgba(6,5,13,.85) 60%,rgba(6,5,13,.97));
-  pointer-events:none;z-index:1;
+  content:'';position:absolute;bottom:0;left:0;right:0;height:68%;
+  background:linear-gradient(transparent,rgba(6,5,13,.88) 60%,rgba(6,5,13,.98));
+  pointer-events:none;z-index:2;
 }
-.portal-text{position:relative;z-index:2;text-align:center}
+.portal-text{position:relative;z-index:3;text-align:center}
 .portal-name{
   font-family:'Cinzel',serif;
   font-size:clamp(.85rem,2vw,1.45rem);
-  font-weight:900;letter-spacing:4px;
-  line-height:1.15;
+  font-weight:900;letter-spacing:4px;line-height:1.15;
   background:linear-gradient(130deg,#8a6d2a 0%,#f6e6ad 38%,#fff8e0 52%,#f6e6ad 68%,#8a6d2a 100%);
   background-size:240%;-webkit-background-clip:text;background-clip:text;color:transparent;
   animation:brilloOro 7s linear infinite;
@@ -120,7 +131,7 @@ nav{
 .portal.right {grid-area:right}
 .portal.bottom{grid-area:bottom}
 
-/* ── HOVER PER ZONE ── */
+/* ── HOVER ── */
 .portal.top:hover{
   transform:scale(1.035) translateY(-3px);
   box-shadow:0 0 50px rgba(232,200,106,.22),0 0 0 1px rgba(232,200,106,.44);
@@ -159,17 +170,15 @@ nav{
   filter:drop-shadow(0 2px 14px rgba(190,100,255,.55));
 }
 
-/* ── CENTER OVAL (La Ciudadela) ── */
+/* ── CENTER OVAL ── */
 .portal.center{
   grid-area:center;
-  border-radius:50%;            /* oval = because cell is wider than tall */
+  border-radius:50%;
   border:2px solid rgba(232,200,106,.28);
   background:radial-gradient(ellipse at 50% 38%,rgba(22,14,40,.97),rgba(8,6,16,.99) 80%);
   justify-content:center;align-items:center;padding:16px;
 }
 .portal.center::before{display:none}
-
-/* Spinning ring */
 .portal.center::after{
   content:'';position:absolute;inset:-2px;border-radius:50%;
   background:conic-gradient(from 0deg,
@@ -179,14 +188,12 @@ nav{
   animation:spinRing 10s linear infinite;z-index:0;
 }
 @keyframes spinRing{to{transform:rotate(360deg)}}
-
 .portal.center:hover{
   transform:scale(1.03);
   box-shadow:0 0 100px rgba(232,200,106,.35),0 0 0 2px rgba(232,200,106,.55);
   border-color:rgba(232,200,106,.6);
 }
 
-/* Inner glow pulse */
 .center-glow{
   position:absolute;inset:0;border-radius:50%;
   background:radial-gradient(ellipse at 50% 38%,rgba(232,200,106,.13),transparent 70%);
@@ -194,13 +201,17 @@ nav{
 }
 @keyframes glowPulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
 
+.center-bg-art{
+  position:absolute;inset:0;border-radius:50%;
+  opacity:.32;pointer-events:none;overflow:hidden;z-index:0;
+}
+.center-bg-art svg{width:100%;height:100%}
+
 .center-inner{position:relative;z-index:2;text-align:center;padding:8px}
 .center-icon{
-  font-size:clamp(2rem,4vw,3.2rem);
-  margin-bottom:10px;
+  font-size:clamp(2rem,4vw,3.2rem);margin-bottom:10px;
   filter:drop-shadow(0 0 20px rgba(232,200,106,.8));
-  animation:glowPulse 4s ease-in-out infinite;
-  display:block;
+  animation:glowPulse 4s ease-in-out infinite;display:block;
 }
 .center-title{
   font-family:'Cinzel',serif;
@@ -209,21 +220,18 @@ nav{
   background:linear-gradient(130deg,#8a6d2a 0%,#f6e6ad 30%,#fff8e0 50%,#f6e6ad 70%,#8a6d2a 100%);
   background-size:220%;-webkit-background-clip:text;background-clip:text;color:transparent;
   animation:brilloOro 5s linear infinite;
-  filter:drop-shadow(0 0 24px rgba(232,200,106,.7));
-  line-height:1.1;
+  filter:drop-shadow(0 0 24px rgba(232,200,106,.7));line-height:1.1;
 }
 .center-sub{
   font-family:'Cinzel',serif;
   font-size:clamp(.34rem,.85vw,.54rem);
   letter-spacing:3px;text-transform:uppercase;
-  color:rgba(232,200,106,.5);
-  margin-top:10px;line-height:1.7;
+  color:rgba(232,200,106,.5);margin-top:10px;line-height:1.7;
 }
 .center-dot{
   display:inline-block;width:6px;height:6px;border-radius:50%;
   background:#e8c86a;box-shadow:0 0 8px #e8c86a;
-  animation:glowPulse 2s ease-in-out infinite;
-  margin:8px auto 0;
+  animation:glowPulse 2s ease-in-out infinite;margin:8px auto 0;
 }
 
 /* ── MOBILE ── */
@@ -258,36 +266,191 @@ nav{
     <a href="universo.html">Universo</a>
     <a href="comunidad.html">Comunidad</a>
     <a href="tienda.html" class="acc">Tienda</a>
-    <a href="axel.html" class="acc">✦ AXEL</a>
+    <a href="axel.html" class="acc">♦ AXEL</a>
   </div>
 </nav>
 
 <!-- Grid -->
 <div id="hub">
 
-  <!-- TOP -->
+  <!-- ═══════════════════════════════════
+       TOP — MI UNIVERSO
+       Para poner tu foto: descomenta el <img> y ajusta la ruta
+       ═══════════════════════════════════ -->
   <a class="portal top" href="mi-universo.html" id="p-top">
-    <div class="portal-img-zone">🌌</div>
+    <div class="portal-img-zone">
+      <!-- TU FOTO: <img src="img/mi-universo.jpg" class="portal-photo" alt="Mi Universo"> -->
+      <!-- ARTE SVG: galaxia en espiral -->
+      <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="galC" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#fff8e0" stop-opacity="1"/>
+            <stop offset="40%" stop-color="#e8c86a" stop-opacity=".7"/>
+            <stop offset="100%" stop-color="#e8c86a" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="g1"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <!-- Núcleo galáctico -->
+        <ellipse cx="200" cy="100" rx="16" ry="16" fill="url(#galC)" filter="url(#g1)"/>
+        <!-- Anillos orbitales -->
+        <ellipse cx="200" cy="100" rx="72" ry="22" fill="none" stroke="rgba(232,200,106,.38)" stroke-width="1.5">
+          <animateTransform attributeName="transform" type="rotate" from="0 200 100" to="360 200 100" dur="26s" repeatCount="indefinite"/>
+        </ellipse>
+        <ellipse cx="200" cy="100" rx="115" ry="36" fill="none" stroke="rgba(232,200,106,.22)" stroke-width="1">
+          <animateTransform attributeName="transform" type="rotate" from="20 200 100" to="380 200 100" dur="44s" repeatCount="indefinite"/>
+        </ellipse>
+        <ellipse cx="200" cy="100" rx="160" ry="50" fill="none" stroke="rgba(200,162,74,.12)" stroke-width=".8">
+          <animateTransform attributeName="transform" type="rotate" from="40 200 100" to="400 200 100" dur="68s" repeatCount="indefinite"/>
+        </ellipse>
+        <!-- Brazos espirales -->
+        <path d="M200,100 Q248,62 300,52 Q348,42 368,68" fill="none" stroke="rgba(232,200,106,.28)" stroke-width="10" stroke-linecap="round" filter="url(#g1)"/>
+        <path d="M200,100 Q152,138 100,148 Q52,158 32,132" fill="none" stroke="rgba(232,200,106,.28)" stroke-width="10" stroke-linecap="round" filter="url(#g1)"/>
+        <!-- Estrellas animadas -->
+        <g fill="#fff8e0">
+          <circle cx="58" cy="28" r="1.3" opacity=".9"><animate attributeName="opacity" values=".9;.2;.9" dur="2.3s" repeatCount="indefinite"/></circle>
+          <circle cx="342" cy="44" r="1.6" opacity=".7"><animate attributeName="opacity" values=".7;.15;.7" dur="3.1s" repeatCount="indefinite"/></circle>
+          <circle cx="128" cy="172" r="1.1" opacity=".85"><animate attributeName="opacity" values=".85;.3;.85" dur="1.9s" repeatCount="indefinite"/></circle>
+          <circle cx="282" cy="158" r="1.4" opacity=".6"><animate attributeName="opacity" values=".6;.1;.6" dur="2.7s" repeatCount="indefinite"/></circle>
+          <circle cx="374" cy="82" r="1.2" opacity=".8"><animate attributeName="opacity" values=".8;.25;.8" dur="4s" repeatCount="indefinite"/></circle>
+          <circle cx="38" cy="138" r="1.5" opacity=".75"><animate attributeName="opacity" values=".75;.2;.75" dur="3.5s" repeatCount="indefinite"/></circle>
+          <circle cx="312" cy="18" r="1" opacity=".9"><animate attributeName="opacity" values=".9;.4;.9" dur="2s" repeatCount="indefinite"/></circle>
+          <circle cx="88" cy="92" r=".9" opacity=".7"><animate attributeName="opacity" values=".7;.2;.7" dur="5s" repeatCount="indefinite"/></circle>
+        </g>
+      </svg>
+    </div>
     <div class="portal-text">
       <div class="portal-name">MI UNIVERSO</div>
       <div class="portal-sub">Tienda · Comunidad · Cuenta · Afiliados · Todo</div>
     </div>
   </a>
 
-  <!-- LEFT -->
+  <!-- ═══════════════════════════════════
+       LEFT — LA FORJADORA
+       Para poner tu foto: descomenta el <img> y ajusta la ruta
+       ═══════════════════════════════════ -->
   <a class="portal left" href="forjadora.html" id="p-left">
-    <div class="portal-img-zone">💎</div>
+    <div class="portal-img-zone">
+      <!-- TU FOTO: <img src="img/forjadora.jpg" class="portal-photo" alt="La Forjadora"> -->
+      <!-- ARTE SVG: diamante con destellos de luz azul -->
+      <svg viewBox="0 0 200 360" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="diamG" cx="50%" cy="38%" r="60%">
+            <stop offset="0%" stop-color="#d0e8ff" stop-opacity=".95"/>
+            <stop offset="55%" stop-color="#80b4ff" stop-opacity=".55"/>
+            <stop offset="100%" stop-color="#3a6aaa" stop-opacity=".15"/>
+          </radialGradient>
+          <filter id="g2"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <!-- Cuerpo del diamante -->
+        <polygon points="100,55 158,138 100,305 42,138" fill="url(#diamG)" opacity=".75"/>
+        <!-- Corona superior -->
+        <polygon points="100,55 58,105 100,138 142,105" fill="rgba(208,232,255,.35)"/>
+        <!-- Líneas de facetas -->
+        <line x1="100" y1="55" x2="100" y2="305" stroke="rgba(208,232,255,.45)" stroke-width=".9"/>
+        <line x1="42" y1="138" x2="158" y2="138" stroke="rgba(208,232,255,.45)" stroke-width=".9"/>
+        <line x1="58" y1="105" x2="142" y2="105" stroke="rgba(208,232,255,.3)" stroke-width=".7"/>
+        <line x1="100" y1="55" x2="42" y2="138" stroke="rgba(208,232,255,.3)" stroke-width=".7"/>
+        <line x1="100" y1="55" x2="158" y2="138" stroke="rgba(208,232,255,.3)" stroke-width=".7"/>
+        <line x1="100" y1="138" x2="42" y2="138" stroke="rgba(208,232,255,.2)" stroke-width=".6"/>
+        <line x1="100" y1="138" x2="158" y2="138" stroke="rgba(208,232,255,.2)" stroke-width=".6"/>
+        <!-- Rayos de luz -->
+        <g filter="url(#g2)">
+          <line x1="100" y1="165" x2="16" y2="82" stroke="rgba(128,180,255,.7)" stroke-width="1.8">
+            <animate attributeName="opacity" values="0.7;0.1;0.7" dur="2.4s" repeatCount="indefinite"/>
+          </line>
+          <line x1="100" y1="165" x2="184" y2="82" stroke="rgba(128,180,255,.65)" stroke-width="1.8">
+            <animate attributeName="opacity" values="0.3;0.9;0.3" dur="2.9s" repeatCount="indefinite"/>
+          </line>
+          <line x1="100" y1="165" x2="8" y2="200" stroke="rgba(128,180,255,.4)" stroke-width="1.2">
+            <animate attributeName="opacity" values="0.4;0.1;0.4" dur="4s" repeatCount="indefinite"/>
+          </line>
+          <line x1="100" y1="165" x2="192" y2="200" stroke="rgba(128,180,255,.4)" stroke-width="1.2">
+            <animate attributeName="opacity" values="0.2;0.65;0.2" dur="3.5s" repeatCount="indefinite"/>
+          </line>
+          <line x1="100" y1="165" x2="100" y2="30" stroke="rgba(208,232,255,.5)" stroke-width="1">
+            <animate attributeName="opacity" values="0.5;0.1;0.5" dur="3s" repeatCount="indefinite"/>
+          </line>
+        </g>
+        <!-- Destello central -->
+        <circle cx="100" cy="105" r="3.5" fill="#d0e8ff" filter="url(#g2)">
+          <animate attributeName="opacity" values="1;.2;1" dur="1.7s" repeatCount="indefinite"/>
+          <animate attributeName="r" values="3.5;5.5;3.5" dur="1.7s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="78" cy="148" r="1.8" fill="#80b4ff"><animate attributeName="opacity" values=".8;.1;.8" dur="2.5s" repeatCount="indefinite"/></circle>
+        <circle cx="122" cy="148" r="1.8" fill="#80b4ff"><animate attributeName="opacity" values=".4;1;.4" dur="2s" repeatCount="indefinite"/></circle>
+        <circle cx="100" cy="240" r="1.5" fill="#80b4ff" opacity=".5"><animate attributeName="opacity" values=".5;.1;.5" dur="3s" repeatCount="indefinite"/></circle>
+      </svg>
+    </div>
     <div class="portal-text">
       <div class="portal-name">LA FORJADORA<br><span style="font-size:.75em;letter-spacing:3px">DE DIAMANTES</span></div>
-      <div class="portal-sub">Élite · H&aacute;bitos · Disciplina · Transformaci&oacute;n</div>
+      <div class="portal-sub">Programa Élite · Hábitos · Transformación</div>
     </div>
   </a>
 
-  <!-- CENTER — LA CIUDADELA (oval) -->
+  <!-- ═══════════════════════════════════
+       CENTER — LA CIUDADELA (oval)
+       Para poner tu foto: descomenta el <img> y ajusta la ruta
+       ═══════════════════════════════════ -->
   <a class="portal center" href="ciudadela.html" id="p-center">
     <div class="center-glow"></div>
+    <!-- TU FOTO: <img src="img/ciudadela-bg.jpg" class="portal-photo" style="opacity:.15;border-radius:50%;" alt=""> -->
+    <!-- ARTE SVG: red neuronal / IA -->
+    <div class="center-bg-art">
+      <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="nodeG" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#fff8e0" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#e8c86a" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="g3"><feGaussianBlur stdDeviation="3"/></filter>
+        </defs>
+        <!-- Conexiones neuronales -->
+        <g stroke="rgba(232,200,106,.28)" stroke-width="1.2" fill="none">
+          <line x1="200" y1="110" x2="96" y2="48"><animate attributeName="stroke-opacity" values=".28;.75;.28" dur="2.4s" repeatCount="indefinite"/></line>
+          <line x1="200" y1="110" x2="304" y2="48"><animate attributeName="stroke-opacity" values=".28;.72;.28" dur="3.1s" repeatCount="indefinite"/></line>
+          <line x1="200" y1="110" x2="55" y2="118"><animate attributeName="stroke-opacity" values=".28;.62;.28" dur="2s" repeatCount="indefinite"/></line>
+          <line x1="200" y1="110" x2="345" y2="118"><animate attributeName="stroke-opacity" values=".28;.65;.28" dur="3.6s" repeatCount="indefinite"/></line>
+          <line x1="200" y1="110" x2="128" y2="182"><animate attributeName="stroke-opacity" values=".28;.55;.28" dur="4.1s" repeatCount="indefinite"/></line>
+          <line x1="200" y1="110" x2="272" y2="182"><animate attributeName="stroke-opacity" values=".28;.58;.28" dur="2.9s" repeatCount="indefinite"/></line>
+          <!-- Conexiones secundarias -->
+          <line x1="96" y1="48" x2="304" y2="48" stroke-opacity=".12"/>
+          <line x1="55" y1="118" x2="128" y2="182" stroke-opacity=".1"/>
+          <line x1="345" y1="118" x2="272" y2="182" stroke-opacity=".1"/>
+          <line x1="96" y1="48" x2="55" y2="118" stroke-opacity=".1"/>
+          <line x1="304" y1="48" x2="345" y2="118" stroke-opacity=".1"/>
+        </g>
+        <!-- Pulsos viajando por las líneas -->
+        <circle r="3.5" fill="#fff8e0" opacity=".9">
+          <animateMotion dur="2.4s" repeatCount="indefinite" path="M200,110 L96,48"/>
+          <animate attributeName="opacity" values=".9;0" dur="2.4s" repeatCount="indefinite"/>
+        </circle>
+        <circle r="3.5" fill="#fff8e0" opacity=".9">
+          <animateMotion dur="3.1s" repeatCount="indefinite" path="M200,110 L304,48"/>
+          <animate attributeName="opacity" values=".9;0" dur="3.1s" repeatCount="indefinite"/>
+        </circle>
+        <circle r="3" fill="#e8c86a" opacity=".8">
+          <animateMotion dur="2s" repeatCount="indefinite" path="M200,110 L55,118"/>
+          <animate attributeName="opacity" values=".8;0" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Nodos exteriores -->
+        <g fill="#e8c86a">
+          <circle cx="96" cy="48" r="5.5" opacity=".8"><animate attributeName="opacity" values=".8;.3;.8" dur="2.4s" repeatCount="indefinite"/><animate attributeName="r" values="5.5;7.5;5.5" dur="2.4s" repeatCount="indefinite"/></circle>
+          <circle cx="304" cy="48" r="5.5" opacity=".6"><animate attributeName="opacity" values=".6;1;.6" dur="3.1s" repeatCount="indefinite"/></circle>
+          <circle cx="55" cy="118" r="4.5" opacity=".7"><animate attributeName="opacity" values=".7;.2;.7" dur="2s" repeatCount="indefinite"/></circle>
+          <circle cx="345" cy="118" r="4.5" opacity=".55"><animate attributeName="opacity" values=".55;.9;.55" dur="3.6s" repeatCount="indefinite"/></circle>
+          <circle cx="128" cy="182" r="4" opacity=".65"><animate attributeName="opacity" values=".65;.2;.65" dur="4.1s" repeatCount="indefinite"/></circle>
+          <circle cx="272" cy="182" r="4" opacity=".7"><animate attributeName="opacity" values=".7;.3;.7" dur="2.9s" repeatCount="indefinite"/></circle>
+        </g>
+        <!-- Nodo central -->
+        <circle cx="200" cy="110" r="18" fill="url(#nodeG)" filter="url(#g3)" opacity=".8"/>
+        <circle cx="200" cy="110" r="9" fill="#fff8e0" opacity=".95">
+          <animate attributeName="r" values="9;13;9" dur="3s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values=".95;.5;.95" dur="3s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    </div>
     <div class="center-inner">
-      <span class="center-icon">🌌</span>
+      <span class="center-icon">🏛</span>
       <div class="center-title">LA CIUDADELA</div>
       <div class="center-sub">
         AXEL · 22 Agentes · Universo IA<br>
@@ -297,18 +460,125 @@ nav{
     </div>
   </a>
 
-  <!-- RIGHT -->
+  <!-- ═══════════════════════════════════
+       RIGHT — LAS CRÓNICAS DEL CREADOR
+       Para poner tu foto: descomenta el <img> y ajusta la ruta
+       ═══════════════════════════════════ -->
   <a class="portal right" href="comunidad.html" id="p-right">
-    <div class="portal-img-zone">📜</div>
+    <div class="portal-img-zone">
+      <!-- TU FOTO: <img src="img/cronicas.jpg" class="portal-photo" alt="Las Crónicas"> -->
+      <!-- ARTE SVG: constelación / legado -->
+      <svg viewBox="0 0 200 360" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="g4"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <!-- Líneas de constelación -->
+        <g stroke="rgba(80,224,160,.38)" stroke-width="1.2" fill="none">
+          <line x1="100" y1="75" x2="55" y2="138"><animate attributeName="stroke-opacity" values=".38;.85;.38" dur="3s" repeatCount="indefinite"/></line>
+          <line x1="100" y1="75" x2="148" y2="128"><animate attributeName="stroke-opacity" values=".38;.75;.38" dur="2.6s" repeatCount="indefinite"/></line>
+          <line x1="55" y1="138" x2="75" y2="215"><animate attributeName="stroke-opacity" values=".38;.65;.38" dur="4.2s" repeatCount="indefinite"/></line>
+          <line x1="148" y1="128" x2="128" y2="215"><animate attributeName="stroke-opacity" values=".38;.72;.38" dur="3.6s" repeatCount="indefinite"/></line>
+          <line x1="75" y1="215" x2="128" y2="215" stroke-opacity=".22"/>
+          <line x1="100" y1="75" x2="100" y2="35" stroke-opacity=".18"/>
+          <line x1="100" y1="75" x2="28" y2="48" stroke-opacity=".14"/>
+          <line x1="100" y1="75" x2="172" y2="55" stroke-opacity=".14"/>
+          <!-- Trayecto de estrella fugaz -->
+          <line x1="30" y1="270" x2="90" y2="300" stroke="rgba(80,224,160,.55)" stroke-width="1">
+            <animate attributeName="stroke-opacity" values="0;.55;0" dur="4s" repeatCount="indefinite"/>
+            <animate attributeName="x1" values="30;10;30" dur="4s" repeatCount="indefinite"/>
+            <animate attributeName="y1" values="270;250;270" dur="4s" repeatCount="indefinite"/>
+          </line>
+        </g>
+        <!-- Estrellas de la constelación -->
+        <g fill="#50e0a0" filter="url(#g4)">
+          <circle cx="100" cy="75" r="7" opacity=".9"><animate attributeName="r" values="7;10;7" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values=".9;.5;.9" dur="3s" repeatCount="indefinite"/></circle>
+          <circle cx="55" cy="138" r="4.5" opacity=".75"><animate attributeName="opacity" values=".75;.2;.75" dur="2.5s" repeatCount="indefinite"/></circle>
+          <circle cx="148" cy="128" r="5" opacity=".65"><animate attributeName="opacity" values=".65;1;.65" dur="3.5s" repeatCount="indefinite"/></circle>
+          <circle cx="75" cy="215" r="4" opacity=".8"><animate attributeName="opacity" values=".8;.3;.8" dur="2s" repeatCount="indefinite"/></circle>
+          <circle cx="128" cy="215" r="4" opacity=".55"><animate attributeName="opacity" values=".55;.9;.55" dur="4s" repeatCount="indefinite"/></circle>
+          <circle cx="100" cy="35" r="3" opacity=".7"><animate attributeName="opacity" values=".7;.2;.7" dur="1.8s" repeatCount="indefinite"/></circle>
+          <circle cx="28" cy="48" r="2.5" opacity=".6"><animate attributeName="opacity" values=".6;.15;.6" dur="2.8s" repeatCount="indefinite"/></circle>
+          <circle cx="172" cy="55" r="2.5" opacity=".65"><animate attributeName="opacity" values=".65;.2;.65" dur="3.3s" repeatCount="indefinite"/></circle>
+        </g>
+        <!-- Estrellas de fondo -->
+        <g fill="rgba(80,224,160,.35)">
+          <circle cx="28" cy="170" r="1.2"><animate attributeName="opacity" values="1;.2;1" dur="3.2s" repeatCount="indefinite"/></circle>
+          <circle cx="172" cy="175" r="1"><animate attributeName="opacity" values=".8;.1;.8" dur="4.6s" repeatCount="indefinite"/></circle>
+          <circle cx="18" cy="300" r="1.3"><animate attributeName="opacity" values=".9;.3;.9" dur="2.3s" repeatCount="indefinite"/></circle>
+          <circle cx="182" cy="285" r="1.1"><animate attributeName="opacity" values=".6;.9;.6" dur="3.9s" repeatCount="indefinite"/></circle>
+          <circle cx="60" cy="318" r="1.4"><animate attributeName="opacity" values=".7;.2;.7" dur="2.7s" repeatCount="indefinite"/></circle>
+          <circle cx="145" cy="325" r="1"><animate attributeName="opacity" values=".5;.85;.5" dur="4.1s" repeatCount="indefinite"/></circle>
+        </g>
+      </svg>
+    </div>
     <div class="portal-text">
-      <div class="portal-name">LAS CR&Oacute;NICAS<br><span style="font-size:.75em;letter-spacing:3px">DEL CREADOR</span></div>
-      <div class="portal-sub">Historia &middot; Legado &middot; KRC &middot; En Desarrollo</div>
+      <div class="portal-name">LAS CRÓNICAS<br><span style="font-size:.75em;letter-spacing:3px">DEL CREADOR</span></div>
+      <div class="portal-sub">Historia · Legado · KRC · En Desarrollo</div>
     </div>
   </a>
 
-  <!-- BOTTOM -->
+  <!-- ═══════════════════════════════════
+       BOTTOM — AFILIADOS
+       Para poner tu foto: descomenta el <img> y ajusta la ruta
+       ═══════════════════════════════════ -->
   <a class="portal bottom" href="afiliados.html" id="p-bottom">
-    <div class="portal-img-zone">🤝</div>
+    <div class="portal-img-zone">
+      <!-- TU FOTO: <img src="img/afiliados.jpg" class="portal-photo" alt="Afiliados"> -->
+      <!-- ARTE SVG: red de embajadores -->
+      <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="g5"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <!-- Conexiones de red -->
+        <g stroke="rgba(192,96,255,.38)" stroke-width="1.3" fill="none">
+          <line x1="200" y1="100" x2="78" y2="48"><animate attributeName="stroke-opacity" values=".38;.85;.38" dur="2s" repeatCount="indefinite"/></line>
+          <line x1="200" y1="100" x2="322" y2="48"><animate attributeName="stroke-opacity" values=".38;.8;.38" dur="2.8s" repeatCount="indefinite"/></line>
+          <line x1="200" y1="100" x2="55" y2="148"><animate attributeName="stroke-opacity" values=".38;.65;.38" dur="3.5s" repeatCount="indefinite"/></line>
+          <line x1="200" y1="100" x2="345" y2="148"><animate attributeName="stroke-opacity" values=".38;.68;.38" dur="2.6s" repeatCount="indefinite"/></line>
+          <line x1="200" y1="100" x2="138" y2="178"><animate attributeName="stroke-opacity" values=".38;.58;.38" dur="4.1s" repeatCount="indefinite"/></line>
+          <line x1="200" y1="100" x2="262" y2="178"><animate attributeName="stroke-opacity" values=".38;.58;.38" dur="3.1s" repeatCount="indefinite"/></line>
+          <!-- Nivel 2 -->
+          <line x1="78" y1="48" x2="55" y2="148" stroke-opacity=".16"/>
+          <line x1="322" y1="48" x2="345" y2="148" stroke-opacity=".16"/>
+          <line x1="78" y1="48" x2="138" y2="178" stroke-opacity=".12"/>
+          <line x1="322" y1="48" x2="262" y2="178" stroke-opacity=".12"/>
+          <line x1="55" y1="148" x2="138" y2="178" stroke-opacity=".1"/>
+          <line x1="345" y1="148" x2="262" y2="178" stroke-opacity=".1"/>
+        </g>
+        <!-- Pulsos viajando -->
+        <circle r="3.5" fill="#ecc0ff" filter="url(#g5)">
+          <animateMotion dur="2s" repeatCount="indefinite" path="M200,100 L78,48"/>
+          <animate attributeName="opacity" values=".9;0" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <circle r="3.5" fill="#ecc0ff" filter="url(#g5)">
+          <animateMotion dur="2.8s" repeatCount="indefinite" path="M200,100 L322,48"/>
+          <animate attributeName="opacity" values=".9;0" dur="2.8s" repeatCount="indefinite"/>
+        </circle>
+        <circle r="3" fill="#c060ff" filter="url(#g5)">
+          <animateMotion dur="3.5s" repeatCount="indefinite" path="M200,100 L55,148"/>
+          <animate attributeName="opacity" values=".8;0" dur="3.5s" repeatCount="indefinite"/>
+        </circle>
+        <circle r="3" fill="#c060ff" filter="url(#g5)">
+          <animateMotion dur="4.1s" repeatCount="indefinite" path="M200,100 L138,178"/>
+          <animate attributeName="opacity" values=".8;0" dur="4.1s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Nodos exteriores -->
+        <g fill="#c060ff" filter="url(#g5)">
+          <circle cx="78" cy="48" r="5.5" opacity=".8"><animate attributeName="opacity" values=".8;.3;.8" dur="2s" repeatCount="indefinite"/></circle>
+          <circle cx="322" cy="48" r="5.5" opacity=".65"><animate attributeName="opacity" values=".65;1;.65" dur="2.8s" repeatCount="indefinite"/></circle>
+          <circle cx="55" cy="148" r="4.5" opacity=".7"><animate attributeName="opacity" values=".7;.2;.7" dur="3.5s" repeatCount="indefinite"/></circle>
+          <circle cx="345" cy="148" r="4.5" opacity=".55"><animate attributeName="opacity" values=".55;.9;.55" dur="2.6s" repeatCount="indefinite"/></circle>
+          <circle cx="138" cy="178" r="4" opacity=".7"><animate attributeName="opacity" values=".7;.3;.7" dur="4.1s" repeatCount="indefinite"/></circle>
+          <circle cx="262" cy="178" r="4" opacity=".65"><animate attributeName="opacity" values=".65;1;.65" dur="3.1s" repeatCount="indefinite"/></circle>
+        </g>
+        <!-- Nodo central hub -->
+        <circle cx="200" cy="100" r="16" fill="rgba(192,96,255,.18)" filter="url(#g5)"/>
+        <circle cx="200" cy="100" r="9" fill="#c060ff" opacity=".92">
+          <animate attributeName="r" values="9;13;9" dur="3s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values=".92;.5;.92" dur="3s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    </div>
     <div class="portal-text">
       <div class="portal-name">AFILIADOS</div>
       <div class="portal-sub">Red de Embajadores · Ingresos Pasivos</div>
@@ -332,48 +602,27 @@ nav{
   var bc=document.getElementById('beamCanvas'),bx=bc.getContext('2d');
   function rsz(){bc.width=innerWidth;bc.height=innerHeight}rsz();
   window.addEventListener('resize',rsz);
-
-  function getCenterOf(el){
-    var r=el.getBoundingClientRect();
-    return{x:r.left+r.width/2,y:r.top+r.height/2};
-  }
-
-  var beamColors={
-    top:'rgba(232,200,106,',
-    left:'rgba(100,170,255,',
-    right:'rgba(80,220,160,',
-    bottom:'rgba(190,100,255,'
-  };
-
+  function getCenterOf(el){var r=el.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height/2};}
+  var beamColors={top:'rgba(232,200,106,',left:'rgba(100,170,255,',right:'rgba(80,220,160,',bottom:'rgba(190,100,255,'};
   function drawBeam(from,to,color,alpha){
     var g=bx.createLinearGradient(from.x,from.y,to.x,to.y);
-    g.addColorStop(0,color+'0)');
-    g.addColorStop(.4,color+alpha+')');
-    g.addColorStop(.6,color+alpha+')');
-    g.addColorStop(1,color+'0)');
+    g.addColorStop(0,color+'0)');g.addColorStop(.4,color+alpha+')');g.addColorStop(.6,color+alpha+')');g.addColorStop(1,color+'0)');
     bx.beginPath();bx.moveTo(from.x,from.y);bx.lineTo(to.x,to.y);
     bx.strokeStyle=g;bx.lineWidth=2.5;
-    bx.shadowColor=color+'.6)';bx.shadowBlur=12;
-    bx.stroke();bx.shadowBlur=0;
+    bx.shadowColor=color+'.6)';bx.shadowBlur=12;bx.stroke();bx.shadowBlur=0;
   }
-
   var pulsT=0;
   function frame(){
     bx.clearRect(0,0,bc.width,bc.height);
-    var ct=document.getElementById('p-center');
-    if(!ct){requestAnimationFrame(frame);return}
-    var cx=getCenterOf(ct);
-    pulsT+=0.025;
+    var ct=document.getElementById('p-center');if(!ct){requestAnimationFrame(frame);return;}
+    var cx=getCenterOf(ct);pulsT+=0.025;
     var alpha=(0.38+Math.sin(pulsT)*0.2).toFixed(3);
-
     ['top','left','right','bottom'].forEach(function(z){
-      var el=document.getElementById('p-'+z);
-      if(!el)return;
+      var el=document.getElementById('p-'+z);if(!el)return;
       drawBeam(getCenterOf(el),cx,beamColors[z],alpha);
     });
     requestAnimationFrame(frame);
   }
-  // Wait for layout to be ready
   setTimeout(frame,200);
 })();
 </script>

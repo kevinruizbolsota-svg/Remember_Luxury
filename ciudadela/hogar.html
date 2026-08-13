@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ORIONIX · El Hogar — Tu Espacio Personal</title>
-<meta name="description" content="El Hogar de Orionix: tu espacio personal dentro del universo. La Tienda, herramientas y todo lo que necesitas para crecer.">
+<meta name="description" content="Tu espacio personal dentro del universo Orionix. La Tienda, La Forjadora, AXEL y todo lo que necesitas para crecer.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230b0b0d'/%3E%3Ctext x='50' y='72' font-size='60' text-anchor='middle' fill='%23e8c86a'%3E%F0%9F%91%91%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@ h1,h2,h3,.marca,.btn,.cinzel{font-family:'Cinzel',serif}
 .oro{background:linear-gradient(92deg,#8a6a24,#e8c86a 25%,#fff6d6 50%,#e8c86a 75%,#8a6a24);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 6s linear infinite}
 @keyframes brilloOro{to{background-position:200% center}}
 .hairline{width:70px;height:1px;background:linear-gradient(90deg,transparent,var(--oro),transparent);margin:22px auto}
-.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;padding:13px 34px;font-size:.66rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--oro);border:1px solid var(--oro-med);border-radius:2px;background:transparent;overflow:hidden;transition:color .4s,border-color .4s;z-index:0}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;padding:12px 30px;font-size:.66rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--oro);border:1px solid var(--oro-med);border-radius:2px;background:transparent;overflow:hidden;transition:color .4s,border-color .4s;z-index:0}
 .btn::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#f4e2a0,#e8c86a 45%,#c8a24a);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.4,0,.2,1)}
 .btn:hover{color:#1a1409;border-color:var(--oro)}.btn:hover::before{transform:scaleX(1)}
 #cosmos{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 50% 20%,#0a0a16,#03030a 60%,#010104 100%);overflow:hidden}
@@ -31,55 +31,79 @@ body[data-cielo="4"]{--neb1:rgba(180,120,40,.45);--neb2:rgba(150,40,60,.4);--neb
 body[data-cielo="5"]{--neb1:rgba(60,60,120,.5);--neb2:rgba(120,120,200,.35);--neb3:rgba(200,180,120,.3)}
 body[data-cielo="6"]{--neb1:rgba(20,120,90,.45);--neb2:rgba(160,60,180,.4);--neb3:rgba(230,180,90,.32)}
 nav{position:fixed;top:0;left:0;width:100%;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px 7vw;transition:padding .3s,background .3s}
-nav.scrolled{padding:8px 7vw;background:rgba(11,11,13,.92);border-bottom:1px solid rgba(232,200,106,.2);backdrop-filter:blur(12px)}
+nav.scrolled{padding:8px 7vw;background:rgba(11,11,13,.9);border-bottom:1px solid rgba(232,200,106,.2);backdrop-filter:blur(10px)}
 nav .marca{font-size:.72rem;font-weight:600;letter-spacing:4px;flex-shrink:0;text-decoration:none;color:var(--texto)}
 nav .links{display:flex;align-items:center;flex-wrap:nowrap;gap:0}
-nav .links a{color:var(--tenue);text-decoration:none;margin-left:16px;font-size:.52rem;letter-spacing:1.4px;text-transform:uppercase;font-family:'Cinzel',serif;transition:color .25s;position:relative;white-space:nowrap}
-nav .links a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--oro);transition:width .3s}
+nav .links a{color:var(--tenue);text-decoration:none;margin-left:16px;font-size:.52rem;letter-spacing:1.4px;text-transform:uppercase;font-family:'Cinzel',serif;transition:color .25s;position:relative;cursor:pointer;white-space:nowrap}
+nav .links a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--oro);transition:width .3s}
 nav .links a:hover{color:var(--oro)}nav .links a:hover::after{width:100%}
 nav .links .sep{width:1px;height:14px;background:rgba(232,200,106,.25);margin-left:18px}
 nav .links a.acc{color:var(--oro)!important;font-weight:600;border:1px solid rgba(232,200,106,.35);border-radius:6px;padding:5px 11px;margin-left:8px;transition:background .25s,box-shadow .25s,transform .2s}
 nav .links a.acc:hover{background:rgba(232,200,106,.14);box-shadow:0 0 12px rgba(232,200,106,.25);transform:translateY(-1px)}
 nav .links a.acc::after{display:none}
 @media(max-width:900px){nav .links{display:none}}
-#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 7vw;position:relative}
+#hero{min-height:65vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 7vw 60px;position:relative}
 #hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(232,200,106,.06) 1px,transparent 1px);background-size:26px 26px;opacity:.5;pointer-events:none}
-#hero::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(2,2,7,.4),rgba(2,2,7,.65));pointer-events:none}
-.eyebrow{font-family:'Cinzel',serif;letter-spacing:4px;font-size:.5rem;color:var(--oro-med);text-transform:uppercase;margin-bottom:12px}
-#hero h1{font-size:clamp(1.2rem,3.6vw,2.6rem);font-weight:400;letter-spacing:clamp(8px,2.6vw,22px);line-height:1;text-indent:clamp(8px,2.6vw,22px);background:linear-gradient(120deg,#8a6d2a 0%,#f6e6ad 25%,#fff8e1 45%,#f6e6ad 60%,#b8912f 100%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;filter:drop-shadow(0 4px 40px rgba(232,200,106,.35));animation:brilloTitulo 6s linear infinite,latido 4.5s ease-in-out infinite}
+#hero .badge{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:6px;color:var(--oro-med);text-transform:uppercase;border:1px solid rgba(232,200,106,.2);padding:6px 18px;border-radius:20px;margin-bottom:20px;background:rgba(232,200,106,.05)}
+#hero h1{font-size:clamp(1.1rem,3vw,2rem);font-weight:400;letter-spacing:clamp(4px,1.8vw,14px);background:linear-gradient(120deg,#8a6d2a 0%,#f6e6ad 25%,#fff8e1 45%,#f6e6ad 60%,#b8912f 100%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;filter:drop-shadow(0 4px 30px rgba(232,200,106,.3));animation:brilloTitulo 6s linear infinite}
 @keyframes brilloTitulo{to{background-position:220% center}}
-@keyframes latido{0%,100%{filter:drop-shadow(0 4px 40px rgba(232,200,106,.3))}50%{filter:drop-shadow(0 6px 60px rgba(232,200,106,.55))}}
-#hero .sub{font-size:clamp(.85rem,1.7vw,1.05rem);font-style:italic;color:var(--tenue);margin:14px 0 10px;max-width:560px}
-.scroll-ind{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);color:var(--oro-med);font-size:1.4rem;animation:flota 2s ease-in-out infinite;z-index:3}
-@keyframes flota{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
-.sec{padding:90px 7vw;position:relative}
-.sec-dark::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(2,2,7,.5),rgba(2,2,7,.82));pointer-events:none}
-.sec-sup{text-align:center;font-family:'Cinzel',serif;letter-spacing:6px;font-size:.48rem;color:var(--oro-med);text-transform:uppercase;opacity:.7;margin-bottom:8px}
-.sec-title{text-align:center;font-family:'Cinzel',serif;font-size:clamp(.85rem,2vw,1.35rem);letter-spacing:8px;margin-bottom:54px}
-/* PORTALES */
-.portal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1100px;margin:0 auto}
-@media(max-width:860px){.portal-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:540px){.portal-grid{grid-template-columns:1fr}}
-.portal-card{border:1px solid rgba(232,200,106,.18);border-radius:6px;background:rgba(20,17,23,.8);backdrop-filter:blur(18px);overflow:hidden;display:flex;flex-direction:column;transition:transform .35s,box-shadow .35s,border-color .35s;text-decoration:none;color:var(--texto)}
-.portal-card:hover{transform:translateY(-8px);box-shadow:0 18px 60px rgba(232,200,106,.16);border-color:rgba(232,200,106,.45)}
-.portal-card.soon{opacity:.3;pointer-events:none}
-.pc-visual{height:160px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.pc-visual::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(transparent,rgba(20,17,23,.9))}
-.pc-icon{font-size:3.5rem;position:relative;z-index:1}
-.pc-body{padding:24px;flex:1}
-.pc-label{font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:5px;color:var(--oro-med);text-transform:uppercase;opacity:.7;margin-bottom:8px}
-.pc-title{font-family:'Cinzel',serif;font-size:1.05rem;letter-spacing:3px;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px}
-.pc-desc{font-size:.82rem;font-style:italic;color:var(--tenue);opacity:.8;line-height:1.6;margin-bottom:18px}
-.pc-cta{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:3px;text-transform:uppercase;color:var(--oro-med);display:flex;align-items:center;gap:6px;transition:color .2s,gap .2s}
-.portal-card:hover .pc-cta{color:var(--oro);gap:12px}
-/* RECURSOS */
-.rec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:900px;margin:0 auto}
-@media(max-width:600px){.rec-grid{grid-template-columns:1fr}}
-.rec-item{display:flex;align-items:flex-start;gap:16px;padding:22px;border:1px solid rgba(232,200,106,.12);border-radius:4px;background:rgba(20,17,23,.6);transition:border-color .25s,background .25s}
-.rec-item:hover{border-color:rgba(232,200,106,.3);background:rgba(20,17,23,.85)}
-.rec-ico{font-size:1.6rem;flex-shrink:0;margin-top:2px}
-.rec-title{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:2px;color:var(--tenue);margin-bottom:5px}
-.rec-desc{font-size:.78rem;color:rgba(184,169,130,.7);line-height:1.55}
+#hero .sub{font-size:clamp(.85rem,1.6vw,1rem);font-style:italic;color:var(--tenue);margin:14px 0 24px;max-width:520px;line-height:1.6}
+/* PORTAL GRID */
+section.portales{padding:60px 7vw 80px;position:relative}
+section.portales::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(2,2,7,.5),rgba(2,2,7,.78));pointer-events:none}
+.portales-title{text-align:center;font-family:'Cinzel',serif;font-size:clamp(.8rem,1.8vw,1.2rem);letter-spacing:7px;margin-bottom:48px}
+/* FORJADORA HERO CARD */
+.forjadora-card{max-width:1000px;margin:0 auto 48px;border:1px solid rgba(232,200,106,.36);border-radius:4px;background:rgba(20,17,23,.88);backdrop-filter:blur(24px);overflow:hidden;display:grid;grid-template-columns:1fr 1fr;transition:box-shadow .35s}
+.forjadora-card:hover{box-shadow:0 20px 70px rgba(232,200,106,.12)}
+@media(max-width:680px){.forjadora-card{grid-template-columns:1fr}}
+.fc-left{padding:44px 40px;display:flex;flex-direction:column;justify-content:center}
+.fc-badge{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:5px;color:var(--oro-med);text-transform:uppercase;margin-bottom:12px;opacity:.8}
+.fc-title{font-family:'Cinzel',serif;font-size:clamp(1rem,2.4vw,1.55rem);letter-spacing:4px;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:16px;line-height:1.2}
+.fc-desc{font-size:.9rem;font-style:italic;color:var(--tenue);line-height:1.6;margin-bottom:24px}
+.fc-features{list-style:none;margin-bottom:28px}
+.fc-features li{font-size:.82rem;color:var(--texto);padding:4px 0;display:flex;align-items:center;gap:8px}
+.fc-features li::before{content:'◆';color:var(--oro-med);font-size:.55rem;flex-shrink:0}
+.fc-right{background:linear-gradient(135deg,rgba(232,200,106,.08) 0%,rgba(138,106,36,.12) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:44px 32px;text-align:center;border-left:1px solid rgba(232,200,106,.14)}
+.fc-price{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:4px;color:var(--oro-med);text-transform:uppercase;margin-bottom:8px}
+.fc-price-val{font-family:'Cinzel',serif;font-size:2rem;background:linear-gradient(120deg,#8a6d2a,#f6e6ad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700;margin-bottom:4px}
+.fc-price-note{font-size:.78rem;color:var(--tenue);margin-bottom:28px;font-style:italic}
+.fc-phases{width:100%;text-align:left;margin-bottom:28px}
+.fc-phase{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(232,200,106,.08)}
+.fc-phase:last-child{border-bottom:none}
+.fc-phase-n{font-family:'Cinzel',serif;font-size:.55rem;color:var(--oro-med);font-weight:700;width:20px;flex-shrink:0}
+.fc-phase-txt{font-size:.8rem;color:var(--texto)}
+/* PORTAL CARDS */
+.portal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:0 auto}
+@media(max-width:760px){.portal-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.portal-grid{grid-template-columns:1fr}}
+.portal-card{border:1px solid rgba(232,200,106,.18);border-radius:4px;background:rgba(20,17,23,.75);backdrop-filter:blur(18px);padding:28px 22px;display:flex;flex-direction:column;gap:12px;transition:transform .3s,box-shadow .3s,border-color .3s}
+.portal-card:hover{transform:translateY(-5px);box-shadow:0 12px 44px rgba(232,200,106,.12);border-color:rgba(232,200,106,.34)}
+.pc-icon{font-size:1.6rem;margin-bottom:4px}
+.pc-label{font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:4px;text-transform:uppercase;color:var(--oro-med);opacity:.7}
+.pc-title{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:2px;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pc-desc{font-size:.82rem;font-style:italic;color:var(--tenue);line-height:1.5;flex:1}
+.pc-btn{display:flex;align-items:center;justify-content:space-between;text-decoration:none;padding:10px 14px;border:1px solid rgba(232,200,106,.2);border-radius:2px;background:rgba(232,200,106,.04);color:var(--texto);font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:2px;text-transform:uppercase;transition:background .22s,border-color .22s,color .22s,transform .18s;margin-top:4px}
+.pc-btn:hover{background:rgba(232,200,106,.12);border-color:rgba(232,200,106,.4);color:var(--oro);transform:translateX(4px)}
+.pc-btn .arr{color:var(--oro-med);transition:transform .2s}.pc-btn:hover .arr{transform:translateX(4px)}
+.pc-soon{opacity:.32;pointer-events:none}
+.soon-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid rgba(255,255,255,.1);border-radius:20px;background:rgba(255,255,255,.04);font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.3)}
+/* FOOTER */
+footer.pro{padding:28px 7vw;border-top:1px solid rgba(232,200,106,.1);display:flex;align-items:center;justify-content:space-between;background:rgba(11,11,13,.85);position:relative}
+footer.pro::before{content:'';position:absolute;inset:0;z-index:-1;background:rgba(2,2,7,.75);pointer-events:none}
+.ft-copy{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:3px;color:rgba(232,200,106,.35);text-transform:uppercase}
+.ft-links{display:flex;gap:20px}
+.ft-links a{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:2px;text-transform:uppercase;color:rgba(232,200,106,.35);text-decoration:none;transition:color .2s}
+.ft-links a:hover{color:var(--oro)}
+/* NAV ORB BUTTON */
+#navOrbBtn{position:fixed;bottom:30px;left:30px;width:52px;height:52px;z-index:9994;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(11,11,13,.9);border:1px solid rgba(232,200,106,.42);box-shadow:0 0 18px rgba(232,200,106,.14);transition:all .3s;font-size:1.15rem;color:#e8c86a;user-select:none;-webkit-user-select:none;backdrop-filter:blur(14px);}
+#navOrbBtn:hover{border-color:rgba(232,200,106,.72);box-shadow:0 0 28px rgba(232,200,106,.28);transform:scale(1.09);}
+#navOrbBtn.open{background:rgba(232,200,106,.13);border-color:rgba(232,200,106,.78);transform:rotate(45deg);}
+#navOrbMenu{position:fixed;bottom:94px;left:18px;z-index:9993;display:flex;flex-direction:column;gap:8px;pointer-events:none;opacity:0;transform:translateY(10px) scale(.96);transition:all .28s cubic-bezier(.4,0,.2,1);}
+#navOrbMenu.open{opacity:1;transform:translateY(0) scale(1);pointer-events:all;}
+.norb-item{display:flex;align-items:center;gap:10px;text-decoration:none;padding:7px 15px;background:rgba(11,11,13,.94);border:1px solid rgba(232,200,106,.18);border-radius:3px;backdrop-filter:blur(18px);transition:all .2s;}
+.norb-item:hover{background:rgba(232,200,106,.09);border-color:rgba(232,200,106,.44);transform:translateX(5px);}
+.norb-icon{color:#e8c86a;font-size:.8rem;width:18px;text-align:center;flex-shrink:0;}
+.norb-label{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:3px;text-transform:uppercase;color:#e9ddc4;white-space:nowrap;}
 /* AXEL ORB */
 #axelTrail{position:fixed;inset:0;pointer-events:none;z-index:9998}
 #axelOrb{position:fixed;width:64px;height:64px;cursor:grab;z-index:9999;user-select:none;-webkit-user-select:none;touch-action:none}
@@ -108,12 +132,6 @@ nav .links a.acc::after{display:none}
 .ap-ft input:focus{border-color:rgba(232,200,106,.45)}
 .ap-ft button{background:var(--oro-med);border:none;color:#1a0f00;width:34px;border-radius:3px;cursor:pointer;font-size:.9rem;transition:background .2s;font-weight:700}
 .ap-ft button:hover{background:var(--oro)}
-footer.pro{padding:28px 7vw;border-top:1px solid rgba(232,200,106,.1);display:flex;align-items:center;justify-content:space-between;background:rgba(11,11,13,.85);position:relative}
-footer.pro::before{content:'';position:absolute;inset:0;z-index:-1;background:rgba(2,2,7,.75);pointer-events:none}
-.ft-copy{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:3px;color:rgba(232,200,106,.35);text-transform:uppercase}
-.ft-links{display:flex;gap:20px}
-.ft-links a{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:2px;text-transform:uppercase;color:rgba(232,200,106,.35);text-decoration:none;transition:color .2s}
-.ft-links a:hover{color:var(--oro)}
 </style>
 </head>
 <body>
@@ -124,138 +142,150 @@ footer.pro::before{content:'';position:absolute;inset:0;z-index:-1;background:rg
 <nav id="nav">
   <a class="marca oro" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/">ORIONIX</a>
   <div class="links">
-    <a href="hub.html">Hub</a>
+    <a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/">Inicio</a>
     <a href="ciudadela.html">La Ciudadela</a>
     <a href="forjadora.html">La Forjadora</a>
+    <a href="afiliados.html">Afiliados</a>
     <div class="sep"></div>
-    <a href="tienda.html" class="acc">La Tienda</a>
-    <a href="https://wa.me/573014410541" target="_blank" class="acc">Contacto</a>
+    <a href="tienda.html" class="acc">Tienda</a>
+    <a href="axel.html" class="acc">AXEL</a>
   </div>
 </nav>
 
+<!-- HERO -->
 <section id="hero">
-  <div class="eyebrow">Orionix &middot; Segundo C&iacute;rculo</div>
+  <div class="badge">Orionix &middot; Segundo C&iacute;rculo</div>
   <h1>EL HOGAR</h1>
-  <p class="sub">Tu espacio personal dentro del universo Orionix. Aqu&iacute; vive todo lo que necesitas para crecer, comprar y conectar.</p>
+  <p class="sub">Tu espacio personal dentro del universo. Accede a la Forjadora, la Tienda, tus agentes y todo lo que necesitas para construir tu imperio digital.</p>
   <div class="hairline"></div>
-  <a href="#portales" class="btn" style="margin-top:8px">Explorar &darr;</a>
-  <div class="scroll-ind">&#8964;</div>
 </section>
 
 <!-- PORTALES -->
-<section id="portales" class="sec sec-dark">
-  <div class="sec-sup">Espacios del Hogar</div>
-  <h2 class="sec-title"><span class="oro">Tus Portales</span></h2>
-  <div class="portal-grid">
-    <!-- La Tienda -->
-    <a class="portal-card" href="tienda.html">
-      <div class="pc-visual" style="background:linear-gradient(135deg,#0a0820,#1a1040)">
-        <div class="pc-icon">🛒</div>
-      </div>
-      <div class="pc-body">
-        <div class="pc-label">Portal &middot; Comercio</div>
-        <div class="pc-title">La Tienda</div>
-        <div class="pc-desc">Explora la colecci&oacute;n Orionix en experiencia 3D holografica. Productos exclusivos de la marca, agentes IA y servicios premium.</div>
-        <div class="pc-cta">Entrar a la Tienda <span>&rarr;</span></div>
-      </div>
-    </a>
-    <!-- El Templo (integrado aquí) -->
-    <div class="portal-card" onclick="document.getElementById('axelPanel').classList.add('open')" style="cursor:pointer">
-      <div class="pc-visual" style="background:linear-gradient(135deg,#120820,#200a30)">
-        <div class="pc-icon">🏛️</div>
-      </div>
-      <div class="pc-body">
-        <div class="pc-label">Portal &middot; Conexi&oacute;n</div>
-        <div class="pc-title">El Templo</div>
-        <div class="pc-desc">Tu espacio de conexi&oacute;n directa con el universo Orionix. Conversa con AXEL, encuentra tu camino y accede al conocimiento.</div>
-        <div class="pc-cta">Abrir AXEL <span>&rarr;</span></div>
-      </div>
-    </div>
-    <!-- Mi Perfil - próximamente -->
-    <div class="portal-card soon">
-      <div class="pc-visual" style="background:linear-gradient(135deg,#0d0d18,#1a1a30)">
-        <div class="pc-icon">👤</div>
-      </div>
-      <div class="pc-body">
-        <div class="pc-label">Portal &middot; Identidad</div>
-        <div class="pc-title">Mi Perfil</div>
-        <div class="pc-desc">Tu identidad dentro del universo. Historial, logros y tu rango en la constelaci&oacute;n Orionix.</div>
-        <div class="pc-cta">Pr&oacute;ximamente <span>&mdash;</span></div>
-      </div>
-    </div>
-  </div>
-</section>
+<section class="portales">
+  <h2 class="portales-title"><span class="oro">La Forjadora de Diamantes</span></h2>
 
-<!-- RECURSOS -->
-<section class="sec">
-  <div class="sec-sup">Herramientas</div>
-  <h2 class="sec-title"><span class="oro">Recursos del Hogar</span></h2>
-  <div class="rec-grid">
-    <div class="rec-item">
-      <div class="rec-ico">📊</div>
-      <div>
-        <div class="rec-title">Panel de Resultados</div>
-        <div class="rec-desc">Ve en tiempo real el rendimiento de tus agentes IA, conversaciones y ventas cerradas. Pr&oacute;ximamente.</div>
+  <!-- FORJADORA HERO CARD -->
+  <div class="forjadora-card">
+    <div class="fc-left">
+      <div class="fc-badge">&#9830; Programa &Eacute;lite &middot; Cuarto C&iacute;rculo</div>
+      <div class="fc-title">De Empresario<br>a L&iacute;der del<br>Universo Digital</div>
+      <div class="fc-desc">No todos llegan. Los que llegan, se transforman para siempre. La Forjadora somete tu negocio a la presión exacta que lo convierte en algo indestructible.</div>
+      <ul class="fc-features">
+        <li>Tu propio AXEL configurado con el ADN de tu marca</li>
+        <li>Sistema de ventas automático — cierra mientras duermes</li>
+        <li>Presencia digital profesional completa</li>
+        <li>Acceso a la Comunidad de &Eacute;lite Orionix</li>
+        <li>Acompañamiento directo con Kevin Ruiz Calle</li>
+      </ul>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="forjadora.html" class="btn">Descubrir el Programa</a>
+        <a href="https://wa.me/573014410541?text=Quiero%20unirme%20a%20La%20Forjadora%20de%20Diamantes" target="_blank" class="btn" style="border-color:rgba(232,200,106,.4)">Solicitar mi Lugar</a>
       </div>
     </div>
-    <div class="rec-item">
-      <div class="rec-ico">🎓</div>
-      <div>
-        <div class="rec-title">Academia Orionix</div>
-        <div class="rec-desc">Aprende a multiplicar tu negocio con inteligencia artificial. Cursos, guias y masterclasses exclusivas. Pr&oacute;ximamente.</div>
+    <div class="fc-right">
+      <div class="fc-price">Inversi&oacute;n</div>
+      <div class="fc-price-val">Custom</div>
+      <div class="fc-price-note">Proceso de selecci&oacute;n previo</div>
+      <div class="fc-phases">
+        <div class="fc-phase"><span class="fc-phase-n">01</span><span class="fc-phase-txt">La Ignici&oacute;n — Diagn&oacute;stico total</span></div>
+        <div class="fc-phase"><span class="fc-phase-n">02</span><span class="fc-phase-txt">La Forja — Implementaci&oacute;n de IA</span></div>
+        <div class="fc-phase"><span class="fc-phase-n">03</span><span class="fc-phase-txt">El Pulido — Marca y posicionamiento</span></div>
+        <div class="fc-phase"><span class="fc-phase-n">04</span><span class="fc-phase-txt">La Coronaci&oacute;n — Tu imperio activo</span></div>
       </div>
-    </div>
-    <div class="rec-item">
-      <div class="rec-ico">💬</div>
-      <div>
-        <div class="rec-title">Comunidad Elite</div>
-        <div class="rec-desc">Conecta con otros empresarios del universo Orionix. Redes, alianzas y oportunidades. Pr&oacute;ximamente.</div>
-      </div>
-    </div>
-    <div class="rec-item">
-      <div class="rec-ico">⚙️</div>
-      <div>
-        <div class="rec-title">Configuraci&oacute;n IA</div>
-        <div class="rec-desc">Personaliza tu agente AXEL: tono de voz, conocimiento de tu marca, respuestas y flujos. Pr&oacute;ximamente.</div>
-      </div>
+      <a href="forjadora.html" class="btn" style="width:100%;justify-content:center">Ver la Forjadora &#8594;</a>
     </div>
   </div>
-  <div style="text-align:center;margin-top:56px">
-    <a href="hub.html" class="btn">&larr; Volver al Hub</a>
-    &nbsp;&nbsp;
-    <a href="ciudadela.html" class="btn">La Ciudadela &rarr;</a>
+
+  <!-- PORTAL GRID -->
+  <h2 class="portales-title" style="margin-top:60px"><span class="oro">Tus Portales</span></h2>
+  <div class="portal-grid">
+    <!-- TIENDA -->
+    <div class="portal-card">
+      <div class="pc-icon">&#x1F4E6;</div>
+      <div class="pc-label">Portal &middot; Comercio</div>
+      <div class="pc-title">La Tienda</div>
+      <div class="pc-desc">Explora la colección Orionix. Agentes IA, servicios premium y productos exclusivos de la marca en experiencia 3D.</div>
+      <a class="pc-btn" href="tienda.html"><span>Entrar a la Tienda</span><span class="arr">&#8594;</span></a>
+    </div>
+    <!-- CIUDADELA -->
+    <div class="portal-card">
+      <div class="pc-icon">&#x1F9EC;</div>
+      <div class="pc-label">Portal &middot; Primer C&iacute;rculo</div>
+      <div class="pc-title">La Ciudadela</div>
+      <div class="pc-desc">El centro de operaciones IA. AXEL activo 24/7, planes de suscripción y el universo de agentes Orionix.</div>
+      <a class="pc-btn" href="ciudadela.html"><span>Centro de Operaciones</span><span class="arr">&#8594;</span></a>
+    </div>
+    <!-- AXEL -->
+    <div class="portal-card">
+      <div class="pc-icon">&#9733;</div>
+      <div class="pc-label">Agente &middot; Kether</div>
+      <div class="pc-title">AXEL</div>
+      <div class="pc-desc">El primer agente de Orionix. Ventas, atención, búsquedas en tiempo real y creación de contenido. Siempre en línea.</div>
+      <a class="pc-btn" href="axel.html"><span>Perfil de AXEL</span><span class="arr">&#8594;</span></a>
+    </div>
+    <!-- AFILIADOS -->
+    <div class="portal-card">
+      <div class="pc-icon">&#8853;</div>
+      <div class="pc-label">Portal &middot; Red</div>
+      <div class="pc-title">Afiliados</div>
+      <div class="pc-desc">Presenta Orionix y gana comisiones recurrentes reales. Construye tu red y tu flujo de ingresos pasivos.</div>
+      <a class="pc-btn" href="afiliados.html"><span>Ver Comisiones</span><span class="arr">&#8594;</span></a>
+    </div>
+    <!-- HUB -->
+    <div class="portal-card">
+      <div class="pc-icon">&#9680;</div>
+      <div class="pc-label">Portal &middot; Navegaci&oacute;n</div>
+      <div class="pc-title">El Hub</div>
+      <div class="pc-desc">La plaza central de La Ciudadela. Vista completa de todos los mundos del universo Orionix.</div>
+      <a class="pc-btn" href="hub.html"><span>Ir al Hub</span><span class="arr">&#8594;</span></a>
+    </div>
+    <!-- PRÓXIMAMENTE -->
+    <div class="portal-card pc-soon">
+      <div class="pc-icon">&#9670;</div>
+      <div class="pc-label">Portal &middot; Academia</div>
+      <div class="pc-title">Las Cr&oacute;nicas</div>
+      <div class="pc-desc">Formación de élite. Conocimiento del Creador KRC — historia, métodos y el legado Orionix.</div>
+      <span class="soon-badge">Pr&oacute;ximamente</span>
+    </div>
   </div>
 </section>
 
 <footer class="pro">
   <div class="ft-copy">&copy; 2024 Orionix &middot; Remember Luxury &middot; KRC</div>
   <div class="ft-links">
-    <a href="hub.html">Hub</a>
+    <a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/">Inicio</a>
     <a href="ciudadela.html">Ciudadela</a>
+    <a href="forjadora.html">Forjadora</a>
+    <a href="afiliados.html">Afiliados</a>
     <a href="tienda.html">Tienda</a>
-    <a href="https://wa.me/573014410541" target="_blank">Contacto</a>
   </div>
 </footer>
+
+<!-- NAV ORB BUTTON -->
+<div id="navOrbBtn" title="Navegar en Orionix">&#8857;</div>
+<div id="navOrbMenu">
+  <a class="norb-item" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/"><span class="norb-icon">&#8962;</span><span class="norb-label">Inicio</span></a>
+  <a class="norb-item" href="ciudadela.html"><span class="norb-icon">&#10022;</span><span class="norb-label">Ciudadela</span></a>
+  <a class="norb-item" href="hub.html"><span class="norb-icon">&#9680;</span><span class="norb-label">El Hub</span></a>
+  <a class="norb-item" href="tienda.html"><span class="norb-icon">&#9670;</span><span class="norb-label">La Tienda</span></a>
+  <a class="norb-item" href="forjadora.html"><span class="norb-icon">&#128142;</span><span class="norb-label">Forjadora</span></a>
+  <a class="norb-item" href="afiliados.html"><span class="norb-icon">&#8853;</span><span class="norb-label">Afiliados</span></a>
+  <a class="norb-item" href="axel.html"><span class="norb-icon">A</span><span class="norb-label">AXEL</span></a>
+</div>
 
 <!-- AXEL ORB -->
 <div id="axelOrb" title="Hablar con AXEL">
   <div class="orb-ring"></div>
-  <div class="orb-core">
-    <div class="orb-sheen"></div>
-    <span class="orb-label">A</span>
-  </div>
+  <div class="orb-core"><div class="orb-sheen"></div><span class="orb-label">A</span></div>
 </div>
 <div id="axelPanel">
   <div class="ap-hdr">
     <div class="ap-av">A</div>
-    <div>
-      <div class="ap-nm">AXEL</div>
-      <div class="ap-st">Agente Orionix &middot; En l&iacute;nea</div>
-    </div>
+    <div><div class="ap-nm">AXEL</div><div class="ap-st">Agente Orionix &middot; En l&iacute;nea</div></div>
     <button class="ap-x" onclick="document.getElementById('axelPanel').classList.remove('open')">&#10005;</button>
   </div>
   <div class="ap-msgs" id="axelMsgs">
-    <div class="ap-msg bot">Bienvenido al Hogar, soy AXEL. &iquest;En qu&eacute; puedo ayudarte hoy?</div>
+    <div class="ap-msg bot">Hola. Soy AXEL &mdash; ¿quieres saber más sobre La Forjadora o cualquier servicio Orionix?</div>
   </div>
   <div class="ap-ft">
     <input id="axelInput" type="text" placeholder="Escribe tu mensaje..." onkeydown="if(event.key==='Enter')axelSend()">
@@ -265,21 +295,29 @@ footer.pro::before{content:'';position:absolute;inset:0;z-index:-1;background:rg
 
 <script>
 document.body.setAttribute('data-cielo',Math.ceil(Math.random()*6));
-(function(){var c=document.getElementById('cosmosStars'),ctx=c.getContext('2d');function resize(){c.width=innerWidth;c.height=innerHeight}resize();window.addEventListener('resize',resize);var stars=[];for(var i=0;i<220;i++)stars.push({x:Math.random(),y:Math.random(),r:.3+Math.random()*.9,a:.3+Math.random()*.7,sp:.0002+Math.random()*.0008});function draw(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(function(s){s.a+=Math.sin(Date.now()*s.sp)*.003;ctx.beginPath();ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);ctx.fillStyle='rgba(255,248,220,'+Math.max(.1,Math.min(.9,s.a))+')';ctx.fill()});requestAnimationFrame(draw)}draw()})();
-var navEl=document.getElementById('nav');window.addEventListener('scroll',function(){navEl.classList.toggle('scrolled',scrollY>60)},{passive:true});
+(function(){
+  var c=document.getElementById('cosmosStars'),ctx=c.getContext('2d');
+  function resize(){c.width=innerWidth;c.height=innerHeight}resize();
+  window.addEventListener('resize',resize);
+  var stars=[];for(var i=0;i<220;i++)stars.push({x:Math.random(),y:Math.random(),r:.3+Math.random()*.9,a:.3+Math.random()*.7,sp:.0002+Math.random()*.0008});
+  function draw(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(function(s){s.a+=Math.sin(Date.now()*s.sp)*.003;ctx.beginPath();ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);ctx.fillStyle='rgba(255,248,220,'+Math.max(.1,Math.min(.9,s.a))+')';ctx.fill()});requestAnimationFrame(draw)}draw();
+})();
+var nav=document.getElementById('nav');
+window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>60)},{passive:true});
+// NAV ORB
+(function(){
+  var btn=document.getElementById('navOrbBtn'),menu=document.getElementById('navOrbMenu'),open=false;
+  btn.addEventListener('click',function(e){e.stopPropagation();open=!open;btn.classList.toggle('open',open);menu.classList.toggle('open',open);});
+  document.addEventListener('click',function(){if(open){open=false;btn.classList.remove('open');menu.classList.remove('open');}});
+  menu.addEventListener('click',function(e){e.stopPropagation();});
+})();
+// AXEL ORB ENGINE
 (function(){
   var tc=document.getElementById('axelTrail'),ctx=tc.getContext('2d');
   function resize(){tc.width=innerWidth;tc.height=innerHeight}resize();window.addEventListener('resize',resize);
   var pts=[],drag=false,orbEl=document.getElementById('axelOrb');
-  var ox=innerWidth-80,oy=innerHeight-80;
-  orbEl.style.left=ox+'px';orbEl.style.top=oy+'px';
-  function draw(){
-    ctx.clearRect(0,0,tc.width,tc.height);
-    var now=Date.now();pts=pts.filter(function(p){return now-p.t<900});
-    for(var i=1;i<pts.length;i++){var p=pts[i-1],q=pts[i];var age=now-q.t,alpha=Math.max(0,1-age/900);var w=(pts.length-i)/pts.length*20*alpha;if(w<=0)continue;var g=ctx.createLinearGradient(p.x,p.y,q.x,q.y);g.addColorStop(0,'rgba(232,200,106,0)');g.addColorStop(.4,'rgba(255,246,214,'+(alpha*.5)+')');g.addColorStop(1,'rgba(232,200,106,'+alpha+')');ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=g;ctx.lineWidth=w;ctx.lineCap='round';ctx.stroke();}
-    for(var i=0;i<pts.length;i+=3){var p=pts[i];var age=now-p.t,alpha=Math.max(0,1-age/700)*.3;if(alpha<=0)continue;var g2=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,14);g2.addColorStop(0,'rgba(255,246,214,'+alpha+')');g2.addColorStop(1,'rgba(232,200,106,0)');ctx.beginPath();ctx.arc(p.x,p.y,14,0,Math.PI*2);ctx.fillStyle=g2;ctx.fill();}
-    requestAnimationFrame(draw);
-  }draw();
+  var ox=innerWidth-80,oy=innerHeight-80;orbEl.style.left=ox+'px';orbEl.style.top=oy+'px';
+  function draw(){ctx.clearRect(0,0,tc.width,tc.height);var now=Date.now();pts=pts.filter(function(p){return now-p.t<900});for(var i=1;i<pts.length;i++){var p=pts[i-1],q=pts[i];var age=now-q.t,alpha=Math.max(0,1-age/900);var w=(pts.length-i)/pts.length*20*alpha;if(w<=0)continue;var g=ctx.createLinearGradient(p.x,p.y,q.x,q.y);g.addColorStop(0,'rgba(232,200,106,0)');g.addColorStop(.4,'rgba(255,246,214,'+(alpha*.5)+')');g.addColorStop(1,'rgba(232,200,106,'+alpha+')');ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=g;ctx.lineWidth=w;ctx.lineCap='round';ctx.stroke();}for(var i=0;i<pts.length;i+=3){var p=pts[i];var age=now-p.t,alpha=Math.max(0,1-age/700)*.3;if(alpha<=0)continue;var g2=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,14);g2.addColorStop(0,'rgba(255,246,214,'+alpha+')');g2.addColorStop(1,'rgba(232,200,106,0)');ctx.beginPath();ctx.arc(p.x,p.y,14,0,Math.PI*2);ctx.fillStyle=g2;ctx.fill();}requestAnimationFrame(draw);}draw();
   var startX,startY,moved=false;
   function startDrag(e){drag=true;moved=false;var src=e.touches?e.touches[0]:e;startX=src.clientX;startY=src.clientY;e.preventDefault();}
   function moveDrag(e){if(!drag)return;var src=e.touches?e.touches[0]:e;var x=src.clientX,y=src.clientY;if(Math.abs(x-startX)>4||Math.abs(y-startY)>4)moved=true;ox=x-32;oy=y-32;orbEl.style.left=ox+'px';orbEl.style.top=oy+'px';pts.push({x:x,y:y,t:Date.now()});e.preventDefault();}
@@ -287,7 +325,10 @@ var navEl=document.getElementById('nav');window.addEventListener('scroll',functi
   orbEl.addEventListener('mousedown',startDrag);window.addEventListener('mousemove',function(e){if(drag)moveDrag(e);});window.addEventListener('mouseup',endDrag);
   orbEl.addEventListener('touchstart',startDrag,{passive:false});window.addEventListener('touchmove',function(e){if(drag)moveDrag(e);},{passive:false});window.addEventListener('touchend',endDrag);
 })();
-function axelSend(){var input=document.getElementById('axelInput');var msg=input.value.trim();if(!msg)return;var msgs=document.getElementById('axelMsgs');var ud=document.createElement('div');ud.className='ap-msg usr';ud.textContent=msg;msgs.appendChild(ud);input.value='';msgs.scrollTop=msgs.scrollHeight;setTimeout(function(){var bd=document.createElement('div');bd.className='ap-msg bot';bd.textContent='Gracias por contactarme. Para asistencia completa, nuestro equipo Orionix est\u00e1 disponible por WhatsApp.';msgs.appendChild(bd);msgs.scrollTop=msgs.scrollHeight;},900);}
+var VOZ_WEBHOOK='https://lkevinruizl.app.n8n.cloud/webhook/axel-voz';
+var AXEL_WEBHOOK='https://lkevinruizl.app.n8n.cloud/webhook/axel-brain';
+var axelHistory=[];
+function axelSend(){var input=document.getElementById('axelInput');var msg=input.value.trim();if(!msg)return;var msgs=document.getElementById('axelMsgs');var ud=document.createElement('div');ud.className='ap-msg usr';ud.textContent=msg;msgs.appendChild(ud);input.value='';msgs.scrollTop=msgs.scrollHeight;axelHistory.push({role:'user',content:msg});var bd=document.createElement('div');bd.className='ap-msg bot';bd.textContent='...';msgs.appendChild(bd);msgs.scrollTop=msgs.scrollHeight;fetch(AXEL_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,history:axelHistory})}).then(function(r){return r.json();}).then(function(d){var reply=d.output||d.text||d.message||d.response||'Recibido.';bd.textContent=reply;axelHistory.push({role:'assistant',content:reply});msgs.scrollTop=msgs.scrollHeight;}).catch(function(){bd.textContent='Error de conexión. Inténtalo de nuevo.';msgs.scrollTop=msgs.scrollHeight;});}
 </script>
 </body>
 </html>

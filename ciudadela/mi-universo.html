@@ -3,81 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mi Universo · Portal Personal · ORIONIX</title>
+<title>Mi Universo · ORIONIX</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230b0b0d'/%3E%3Ctext x='50' y='72' font-size='60' text-anchor='middle' fill='%23e8c86a'%3E%F0%9F%91%91%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--oro:#e8c86a;--oro-med:#c8a24a;--oro-osc:#8a6a24;--bg:#06050d;--panel:rgba(12,9,22,.88);--texto:#e9ddc4;--tenue:#b8a982}
+:root{--oro:#e8c86a;--oro-med:#c8a24a;--bg:#06050d;--texto:#e9ddc4;--tenue:#b8a982;--panel:rgba(12,9,22,.9)}
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--bg);color:var(--texto);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-.oro{background:linear-gradient(92deg,#8a6a24,#e8c86a 25%,#fff6d6 50%,#e8c86a 75%,#8a6a24);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 6s linear infinite}
+body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--bg);color:var(--texto);min-height:100vh;-webkit-font-smoothing:antialiased}
+#cosmos{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 20%,#0a0816,#03030a 60%,#010104);overflow:hidden;pointer-events:none}
+.neb{position:absolute;inset:-20%;background:radial-gradient(closest-side,rgba(90,60,180,.38),transparent) no-repeat 25% 25%/60% 60%,radial-gradient(closest-side,rgba(40,90,200,.28),transparent) no-repeat 75% 60%/50% 50%;filter:blur(44px);opacity:.5;animation:nebFloat 55s ease-in-out infinite alternate}
+@keyframes nebFloat{to{transform:translate(-3%,-4%) scale(1.12)}}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px 5vw;background:rgba(6,5,13,.85);backdrop-filter:blur(18px);border-bottom:1px solid rgba(232,200,106,.1)}
+.nav-brand{font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;letter-spacing:5px;background:linear-gradient(92deg,#8a6a24,#e8c86a 35%,#fff6d6 50%,#e8c86a 70%,#8a6a24);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 6s linear infinite;text-decoration:none}
 @keyframes brilloOro{to{background-position:200% center}}
-#cosmos{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 50% 20%,#0a0816,#03030a 60%,#010104);overflow:hidden}
-.neb{position:absolute;inset:-20%;background:radial-gradient(closest-side,rgba(60,120,200,.38),transparent) no-repeat 25% 20%/55% 55%,radial-gradient(closest-side,rgba(80,40,160,.3),transparent) no-repeat 75% 50%/50% 50%,radial-gradient(closest-side,rgba(200,140,40,.22),transparent) no-repeat 50% 85%/65% 65%;filter:blur(42px);opacity:.55;animation:nebFloat 55s ease-in-out infinite alternate}
-@keyframes nebFloat{to{transform:translate(-3%,-4%) scale(1.15)}}
-#stars{position:fixed;inset:0;z-index:-1;pointer-events:none}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px 6vw;background:rgba(6,5,13,.82);backdrop-filter:blur(16px);border-bottom:1px solid rgba(232,200,106,.1)}
-.marca{font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;letter-spacing:5px;text-decoration:none}
 .nav-links{display:flex;gap:18px;align-items:center}
 .nav-links a{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:1.8px;text-transform:uppercase;color:var(--tenue);text-decoration:none;transition:color .2s}
 .nav-links a:hover{color:var(--oro)}
-.nav-links a.acc{color:var(--oro);border:1px solid rgba(232,200,106,.32);border-radius:4px;padding:5px 12px}
+.nav-links a.acc{color:var(--oro);border:1px solid rgba(232,200,106,.32);border-radius:4px;padding:5px 11px}
 @media(max-width:700px){.nav-links{display:none}}
-.hero{min-height:48vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:90px 6vw 40px;position:relative}
-.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(232,200,106,.05) 1px,transparent 1px);background-size:28px 28px;opacity:.4;pointer-events:none}
-.hero-badge{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:6px;color:var(--oro-med);text-transform:uppercase;margin-bottom:14px;opacity:.75}
-.hero-title{font-family:'Cinzel',serif;font-size:clamp(1.8rem,6vw,4.5rem);font-weight:900;letter-spacing:clamp(6px,2vw,22px);background:linear-gradient(120deg,#8a6d2a,#f6e6ad 28%,#fff8e0 48%,#f6e6ad 68%,#8a6d2a);background-size:220%;-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 40px rgba(232,200,106,.5));animation:brilloOro 6s linear infinite;margin-bottom:8px}
-.hero-sub{font-family:'Cinzel',serif;font-size:clamp(.44rem,1.2vw,.64rem);letter-spacing:4px;text-transform:uppercase;color:rgba(232,200,106,.45);margin-bottom:20px}
-.hero-desc{font-size:clamp(.85rem,1.5vw,1.05rem);font-style:italic;color:var(--tenue);max-width:560px;margin:0 auto;line-height:1.7;opacity:.85}
-.hairline{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--oro),transparent);margin:20px auto}
-.sec{padding:50px 6vw 40px;max-width:1180px;margin:0 auto}
-.sec-head{margin-bottom:28px}
-.sec-label{font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:5px;text-transform:uppercase;color:var(--oro-med);opacity:.7;margin-bottom:6px}
-.sec-title{font-family:'Cinzel',serif;font-size:clamp(.9rem,2.2vw,1.3rem);letter-spacing:5px}
-.divider{display:flex;align-items:center;gap:18px;opacity:.32;margin:40px 0 28px}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--oro),transparent)}
-.divider span{font-family:'Cinzel',serif;font-size:.36rem;letter-spacing:5px;color:var(--oro-med);text-transform:uppercase;white-space:nowrap}
-.grid{display:grid;gap:16px}
-.grid-2{grid-template-columns:repeat(2,1fr)}
-.grid-3{grid-template-columns:repeat(3,1fr)}
-.grid-4{grid-template-columns:repeat(4,1fr)}
-@media(max-width:1100px){.grid-4{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:860px){.grid-4,.grid-3{grid-template-columns:repeat(2,1fr)}.grid-2{grid-template-columns:1fr}}
-@media(max-width:480px){.grid-4,.grid-3,.grid-2{grid-template-columns:1fr}}
 
-/* PORTAL CARD */
-.pcard{position:relative;overflow:hidden;border:1px solid rgba(232,200,106,.14);border-radius:8px;background:var(--panel);backdrop-filter:blur(18px);display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s,border-color .3s;text-decoration:none;color:inherit;cursor:pointer;min-height:180px}
-.pcard-img{width:100%;height:120px;background:linear-gradient(135deg,rgba(20,14,36,.9),rgba(8,6,16,.95));display:flex;align-items:center;justify-content:center;font-size:2.8rem;border-bottom:1px solid rgba(232,200,106,.08);flex-shrink:0;position:relative}
-.pcard-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,200,106,.04),transparent 60%)}
-.pcard-body{padding:14px 16px 18px;display:flex;flex-direction:column;flex:1}
-.pcard-label{font-family:'Cinzel',serif;font-size:.34rem;letter-spacing:4px;text-transform:uppercase;color:var(--oro-med);opacity:.65;margin-bottom:4px}
-.pcard-name{font-family:'Cinzel',serif;font-size:.82rem;letter-spacing:3px;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.25;margin-bottom:6px}
-.pcard-desc{font-size:.72rem;font-style:italic;color:var(--tenue);line-height:1.5;opacity:.78;flex:1}
-.pcard-cta{margin-top:10px;font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:2px;text-transform:uppercase;color:var(--oro-med);display:flex;align-items:center;gap:5px;transition:gap .2s}
-.pcard:hover .pcard-cta{gap:9px}
-.pcard:hover{transform:translateY(-5px);box-shadow:0 14px 44px rgba(232,200,106,.15),0 0 0 1px rgba(232,200,106,.32);border-color:rgba(232,200,106,.35)}
-.pcard.hero-card{grid-column:span 2;flex-direction:row;min-height:150px}
-.pcard.hero-card .pcard-img{width:180px;height:auto;border-bottom:none;border-right:1px solid rgba(232,200,106,.08);flex-shrink:0}
-@media(max-width:860px){.pcard.hero-card{grid-column:span 1;flex-direction:column}.pcard.hero-card .pcard-img{width:100%;height:120px;border-right:none;border-bottom:1px solid rgba(232,200,106,.08)}}
-.badge-live{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-family:'Cinzel',serif;font-size:.32rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;color:#4ade80;border:1px solid rgba(74,222,128,.3);background:rgba(74,222,128,.06)}
-.badge-live::before{content:'';width:5px;height:5px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px #4ade80;animation:livePulse 2s infinite}
-@keyframes livePulse{0%,100%{opacity:1}50%{opacity:.35}}
-.badge-tag{display:inline-block;padding:3px 9px;border-radius:20px;font-family:'Cinzel',serif;font-size:.32rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;color:rgba(232,200,106,.55);border:1px solid rgba(232,200,106,.18);background:rgba(232,200,106,.05)}
-.btn-back{display:inline-flex;align-items:center;gap:8px;font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--oro-med);text-decoration:none;padding:10px 20px;border:1px solid rgba(232,200,106,.22);border-radius:4px;background:rgba(232,200,106,.04);transition:background .2s,color .2s}
-.btn-back:hover{background:rgba(232,200,106,.1);color:var(--oro)}
-.bottom-bar{padding:30px 6vw 50px;max-width:1180px;margin:0 auto;display:flex;justify-content:center}
-footer{padding:24px 6vw;border-top:1px solid rgba(232,200,106,.1);background:rgba(6,5,13,.85);text-align:center;font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:3px;color:rgba(232,200,106,.3);text-transform:uppercase}
+/* HERO */
+.hero{position:relative;z-index:10;padding:104px 6vw 44px;text-align:center}
+.hero-label{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:5px;color:rgba(232,200,106,.42);margin-bottom:10px;text-transform:uppercase}
+.hero-title{font-family:'Cinzel',serif;font-size:clamp(1.8rem,5vw,3.2rem);font-weight:900;letter-spacing:5px;background:linear-gradient(130deg,#8a6d2a,#f6e6ad 38%,#fff8e0 52%,#f6e6ad 68%,#8a6d2a);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 7s linear infinite;margin-bottom:12px}
+.hero-sub{font-size:clamp(.9rem,2vw,1.1rem);color:var(--tenue);max-width:560px;margin:0 auto 10px;line-height:1.65;font-style:italic}
+
+/* ACCESO DIRECTO GRID */
+.ac-section{position:relative;z-index:10;padding:20px 5vw 80px}
+.ac-label-top{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:4px;color:rgba(232,200,106,.4);text-transform:uppercase;margin-bottom:18px;text-align:center}
+.ac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+
+/* CARDS */
+.ac-card{display:flex;flex-direction:column;gap:10px;padding:18px 18px 16px;border-radius:14px;border:1px solid rgba(232,200,106,.1);background:var(--panel);backdrop-filter:blur(18px);text-decoration:none;color:inherit;transition:transform .25s cubic-bezier(.2,0,.1,1),box-shadow .25s,border-color .25s;cursor:pointer}
+.ac-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.35),0 0 0 1px rgba(232,200,106,.22);border-color:rgba(232,200,106,.28)}
+.ac-top{display:flex;align-items:center;gap:12px}
+.ac-icon{width:44px;height:44px;border-radius:10px;border:1px solid;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;transition:transform .2s}
+.ac-card:hover .ac-icon{transform:scale(1.1)}
+.ac-meta{min-width:0}
+.ac-label{font-family:'Cinzel',serif;font-size:.3rem;letter-spacing:3px;text-transform:uppercase;color:rgba(232,200,106,.4);margin-bottom:3px}
+.ac-name{font-family:'Cinzel',serif;font-size:.62rem;font-weight:700;letter-spacing:2.5px;background:linear-gradient(120deg,#c8a24a,#f6e6ad 50%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac-desc{font-size:.8rem;color:var(--tenue);line-height:1.52;flex:1;font-style:italic}
+.ac-cta{font-family:'Cinzel',serif;font-size:.36rem;letter-spacing:2px;text-transform:uppercase;color:var(--oro-med);display:flex;align-items:center;gap:5px;transition:gap .2s}
+.ac-card:hover .ac-cta{gap:10px}
+.ac-arr{transition:transform .2s}
+.ac-card:hover .ac-arr{transform:translateX(3px)}
+
+/* BACK */
+.back-row{position:relative;z-index:10;text-align:center;padding-bottom:40px}
+.btn-back{display:inline-flex;align-items:center;gap:7px;font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:2px;text-decoration:none;border:1px solid rgba(232,200,106,.18);border-radius:8px;padding:10px 20px;color:var(--tenue);transition:all .2s}
+.btn-back:hover{color:var(--oro);border-color:rgba(232,200,106,.42)}
 </style>
 </head>
 <body>
-
 <div id="cosmos"><div class="neb"></div></div>
-<canvas id="stars"></canvas>
 
 <nav>
-  <a class="marca oro" href="hub.html">ORIONIX</a>
+  <a href="hub.html" class="nav-brand">ORIONIX</a>
   <div class="nav-links">
     <a href="hub.html">Portal</a>
     <a href="ciudadela.html">Ciudadela</a>
@@ -86,200 +69,173 @@ footer{padding:24px 6vw;border-top:1px solid rgba(232,200,106,.1);background:rgb
   </div>
 </nav>
 
-<section class="hero">
-  <div class="hero-badge">&#x2605; Tu Espacio Personal &#x2605;</div>
+<div class="hero">
+  <div class="hero-label">Tu ecosistema completo</div>
   <h1 class="hero-title">MI UNIVERSO</h1>
-  <div class="hero-sub">Tu Imperio · Tu Templo · Todo bajo un mismo techo</div>
-  <div class="hairline"></div>
-  <p class="hero-desc">El portal personal de Orionix. Aquí vive todo lo que no es IA — tu tienda, tu cuenta, tu comunidad, tus afiliados y todo el ecosistema de tu negocio digital.</p>
+  <p class="hero-sub">Acceso directo a todo lo que necesitas dentro del universo ORIONIX. Un clic, una puerta.</p>
+</div>
+
+<section class="ac-section">
+  <div class="ac-label-top">Acceso Directo a Todo</div>
+  <div class="ac-grid">
+<a class="ac-card" href="ciudadela.html" >
+  <div class="ac-top">
+    <div class="ac-icon" style="background:rgba(232,200,106,.1);border-color:rgba(232,200,106,.28)">🤖</div>
+    <div class="ac-meta">
+      <div class="ac-label">IA Principal</div>
+      <div class="ac-name">AXEL</div>
+    </div>
+  </div>
+  <p class="ac-desc">Tu agente IA. Busca, crea y vende 24h.</p>
+  <div class="ac-cta">Abrir AXEL <span class="ac-arr">→</span></div>
+</a>
+<a class="ac-card" href="tienda.html" >
+  <div class="ac-top">
+    <div class="ac-icon" style="background:rgba(100,170,255,.08);border-color:rgba(100,170,255,.22)">🛍️</div>
+    <div class="ac-meta">
+      <div class="ac-label">Planes</div>
+      <div class="ac-name">La Tienda</div>
+    </div>
+  </div>
+  <p class="ac-desc">Esencia 197€ · Imperio 497€ · Ciudadela.</p>
+  <div class="ac-cta">Ver Planes <span class="ac-arr">→</span></div>
+</a>
+<a class="ac-card" href="forjadora.html" >
+  <div class="ac-top">
+    <div class="ac-icon" style="background:rgba(80,220,170,.08);border-color:rgba(80,220,170,.22)">💎</div>
+    <div class="ac-meta">
+      <div class="ac-label">Programa Élite</div>
+      <div class="ac-name">La Forjadora</div>
+    </div>
+  </div>
+  <p class="ac-desc">Transformación élite con IA. Líderes digitales.</p>
+  <div class="ac-cta">Ver Forjadora <span class="ac-arr">→</span></div>
+</a>
+<a class="ac-card" href="afiliados.html" >
+  <div class="ac-top">
+    <div class="ac-icon" style="background:rgba(190,100,255,.08);border-color:rgba(190,100,255,.22)">🤝</div>
+    <div class="ac-meta">
+      <div class="ac-label">Ingresos Pasivos</div>
+      <div class="ac-name">Afiliados</div>
+    </div>
+  </div>
+  <p class="ac-desc">20% por referido. Red de embajadores.</p>
+  <div class="ac-cta">Ver Afiliados <span class="ac-arr">→</span></div>
+</a>
+<a class="ac-card" href="ciudadela.html" >
+  <div class="ac-top">
+    <div class="ac-icon" style="background:rgba(232,200,106,.06);border-color:rgba(232,200,106,.18)">🧊</div>
+    <div class="ac-meta">
+      <div class="ac-label">Operaciones IA</div>
+      <div class="ac-name">La Ciudadela</div>
+    </div>
+  </div>
+  <p class="ac-desc">22 agentes del sistema Cabbalah.</p>
+  <div class="ac-cta">Entrar <span class="ac-arr">→</span></div>
+</a>
+<a class="ac-card" href="universo.html" >
+  <div class="ac-top">
+    <div class="ac-icon" style="background:rgba(150,200,255,.07);border-color:rgba(150,200,255,.2)">🗺️</div>
+    <div class="ac-meta">
+      <div class="ac-label">22 Agentes</div>
+      <div class="ac-name">Universo</div>
+    </div>
+  </div>
+  <p class="ac-desc">Mapa Cabbalah. 11 Luz + 11 Sombra.</p>
+  <div class="ac-cta">Ver Mapa <span class="ac-arr">→</span></div>
+</a>
+<a class="ac-card" href="hogar.html" >
+  <div class="ac-top">
+    <div class="ac-icon" style="background:rgba(200,150,255,.07);border-color:rgba(200,150,255,.2)">🏠</div>
+    <div class="ac-meta">
+      <div class="ac-label">Espacio Personal</div>
+      <div class="ac-name">El Hogar</div>
+    </div>
+  </div>
+  <p class="ac-desc">Hábitos, herramientas y Nebula IA.</p>
+  <div class="ac-cta">Mi Hogar <span class="ac-arr">→</span></div>
+</a>
+<a class="ac-card" href="mi-cuenta.html" >
+  <div class="ac-top">
+    <div class="ac-icon" style="background:rgba(255,200,100,.07);border-color:rgba(255,200,100,.2)">👤</div>
+    <div class="ac-meta">
+      <div class="ac-label">Perfil</div>
+      <div class="ac-name">Mi Cuenta</div>
+    </div>
+  </div>
+  <p class="ac-desc">Gestiona tu suscripción y perfil.</p>
+  <div class="ac-cta">Ver Perfil <span class="ac-arr">→</span></div>
+</a>
+<a class="ac-card" href="comunidad.html" >
+  <div class="ac-top">
+    <div class="ac-icon" style="background:rgba(80,140,255,.07);border-color:rgba(80,140,255,.2)">🌌</div>
+    <div class="ac-meta">
+      <div class="ac-label">Red</div>
+      <div class="ac-name">Comunidad</div>
+    </div>
+  </div>
+  <p class="ac-desc">Conecta con emprendedores del universo.</p>
+  <div class="ac-cta">Entrar <span class="ac-arr">→</span></div>
+</a>
+<a class="ac-card" href="reels.html" >
+  <div class="ac-top">
+    <div class="ac-icon" style="background:rgba(255,80,120,.07);border-color:rgba(255,80,120,.2)">🎬</div>
+    <div class="ac-meta">
+      <div class="ac-label">Contenido</div>
+      <div class="ac-name">Reels</div>
+    </div>
+  </div>
+  <p class="ac-desc">Videos e historias del ecosistema.</p>
+  <div class="ac-cta">Ver Reels <span class="ac-arr">→</span></div>
+</a>
+<a class="ac-card" href="mundos.html" >
+  <div class="ac-top">
+    <div class="ac-icon" style="background:rgba(80,200,180,.07);border-color:rgba(80,200,180,.2)">🌏</div>
+    <div class="ac-meta">
+      <div class="ac-label">Reinos</div>
+      <div class="ac-name">Los Mundos</div>
+    </div>
+  </div>
+  <p class="ac-desc">Los reinos del universo Orionix.</p>
+  <div class="ac-cta">Explorar <span class="ac-arr">→</span></div>
+</a>
+<a class="ac-card" href="admin.html" >
+  <div class="ac-top">
+    <div class="ac-icon" style="background:rgba(184,169,130,.07);border-color:rgba(184,169,130,.2)">⚙️</div>
+    <div class="ac-meta">
+      <div class="ac-label">Administración</div>
+      <div class="ac-name">Admin</div>
+    </div>
+  </div>
+  <p class="ac-desc">Panel interno de gestión.</p>
+  <div class="ac-cta">Abrir <span class="ac-arr">→</span></div>
+</a>
+<a class="ac-card" href="https://kybalio.com" target="_blank" rel="noopener">
+  <div class="ac-top">
+    <div class="ac-icon" style="background:rgba(232,200,106,.05);border-color:rgba(232,200,106,.14)">🏛️</div>
+    <div class="ac-meta">
+      <div class="ac-label">Bóveda</div>
+      <div class="ac-name">Kybalio</div>
+    </div>
+  </div>
+  <p class="ac-desc">833 videos · 1251 imágenes · 373 docs.</p>
+  <div class="ac-cta">Abrir <span class="ac-arr">→</span></div>
+</a>
+<a class="ac-card" href="https://wa.me/573014410541?text=Hola%20Orionix" target="_blank" rel="noopener">
+  <div class="ac-top">
+    <div class="ac-icon" style="background:rgba(37,211,102,.07);border-color:rgba(37,211,102,.2)">💬</div>
+    <div class="ac-meta">
+      <div class="ac-label">Contacto</div>
+      <div class="ac-name">WhatsApp</div>
+    </div>
+  </div>
+  <p class="ac-desc">Equipo Orionix en tiempo real.</p>
+  <div class="ac-cta">Escribir <span class="ac-arr">→</span></div>
+</a></div>
 </section>
 
-<div class="sec">
-
-  <!-- TIENDA & NEGOCIO -->
-  <div class="sec-head">
-    <div class="sec-label">// Comercio · Suscripciones</div>
-    <h2 class="sec-title"><span class="oro">Tienda &amp; Negocio</span></h2>
-  </div>
-
-  <div class="grid grid-3">
-
-    <a class="pcard hero-card" href="tienda.html">
-      <div class="pcard-img">&#x1F6CD;&#xFE0F;</div>
-      <div class="pcard-body">
-        <span class="badge-live">Abierta</span>
-        <div class="pcard-label">// Planes &amp; Precios</div>
-        <div class="pcard-name">La Tienda</div>
-        <div class="pcard-desc">Esencia 197&euro;/mes &middot; Imperio 497&euro;/mes &middot; Ciudadela a medida. Agentes IA trabajando 24/7 por ti.</div>
-        <div class="pcard-cta">Ver Planes &#8594;</div>
-      </div>
-    </a>
-
-    <a class="pcard" href="afiliados.html">
-      <div class="pcard-img">&#x1F91D;</div>
-      <div class="pcard-body">
-        <span class="badge-live">Activo</span>
-        <div class="pcard-label">// Ingresos Pasivos</div>
-        <div class="pcard-name">Afiliados</div>
-        <div class="pcard-desc">20% por cada referido. Red de embajadores con comisiones recurrentes.</div>
-        <div class="pcard-cta">Entrar &#8594;</div>
-      </div>
-    </a>
-
-  </div>
-
-  <div class="divider"><span>&#9670; Tu Cuenta &#9670;</span></div>
-
-  <!-- CUENTA & ACCESO -->
-  <div class="sec-head">
-    <div class="sec-label">// Perfil · Configuraci&oacute;n</div>
-    <h2 class="sec-title"><span class="oro">Mi Cuenta</span></h2>
-  </div>
-
-  <div class="grid grid-4">
-
-    <a class="pcard" href="mi-cuenta.html">
-      <div class="pcard-img">&#x1F464;</div>
-      <div class="pcard-body">
-        <div class="pcard-label">// Perfil</div>
-        <div class="pcard-name">Mi Cuenta</div>
-        <div class="pcard-desc">Gestiona tu suscripci&oacute;n, perfil y configuraci&oacute;n de agentes IA.</div>
-        <div class="pcard-cta">Ver Perfil &#8594;</div>
-      </div>
-    </a>
-
-    <a class="pcard" href="auth.html">
-      <div class="pcard-img">&#x1F511;</div>
-      <div class="pcard-body">
-        <div class="pcard-label">// Acceso</div>
-        <div class="pcard-name">Inicio de Sesi&oacute;n</div>
-        <div class="pcard-desc">Accede a tu cuenta de Orionix. Login y registro de nuevos miembros.</div>
-        <div class="pcard-cta">Entrar &#8594;</div>
-      </div>
-    </a>
-
-    <a class="pcard" href="gracias.html">
-      <div class="pcard-img">&#x1F381;</div>
-      <div class="pcard-body">
-        <div class="pcard-label">// Bienvenida</div>
-        <div class="pcard-name">P&aacute;gina Gracias</div>
-        <div class="pcard-desc">La p&aacute;gina de bienvenida para nuevos miembros que se unen al universo.</div>
-        <div class="pcard-cta">Ver &#8594;</div>
-      </div>
-    </a>
-
-    <a class="pcard" href="admin.html">
-      <div class="pcard-img">&#x2699;&#xFE0F;</div>
-      <div class="pcard-body">
-        <div class="pcard-label">// Administraci&oacute;n</div>
-        <div class="pcard-name">Admin</div>
-        <div class="pcard-desc">Panel interno de gesti&oacute;n y configuraci&oacute;n del universo Orionix.</div>
-        <div class="pcard-cta">Abrir &#8594;</div>
-      </div>
-    </a>
-
-  </div>
-
-  <div class="divider"><span>&#9670; Comunidad &amp; Contenido &#9670;</span></div>
-
-  <!-- COMUNIDAD -->
-  <div class="sec-head">
-    <div class="sec-label">// Red · Expansi&oacute;n</div>
-    <h2 class="sec-title"><span class="oro">Comunidad &amp; Contenido</span></h2>
-  </div>
-
-  <div class="grid grid-3">
-
-    <a class="pcard" href="comunidad.html">
-      <div class="pcard-img">&#x1F30C;</div>
-      <div class="pcard-body">
-        <div class="pcard-label">// Red Orionix</div>
-        <div class="pcard-name">Comunidad</div>
-        <div class="pcard-desc">La red de emprendedores del universo. Conecta, colabora y crece con otros miembros.</div>
-        <div class="pcard-cta">Ver Comunidad &#8594;</div>
-      </div>
-    </a>
-
-    <a class="pcard" href="reels.html">
-      <div class="pcard-img">&#x1F3AC;</div>
-      <div class="pcard-body">
-        <div class="pcard-label">// Contenido</div>
-        <div class="pcard-name">Reels</div>
-        <div class="pcard-desc">Videos, historias y momentos del ecosistema Orionix. Contenido generado con IA.</div>
-        <div class="pcard-cta">Ver Reels &#8594;</div>
-      </div>
-    </a>
-
-    <a class="pcard" href="https://wa.me/573014410541?text=Hola%20Orionix" target="_blank">
-      <div class="pcard-img">&#x1F4AC;</div>
-      <div class="pcard-body">
-        <span class="badge-live">En L&iacute;nea</span>
-        <div class="pcard-label">// Soporte Directo</div>
-        <div class="pcard-name">WhatsApp</div>
-        <div class="pcard-desc">Habla con el equipo Orionix en tiempo real. Soporte, ventas y consultas.</div>
-        <div class="pcard-cta">Escribir &#8594;</div>
-      </div>
-    </a>
-
-  </div>
-
-  <div class="divider"><span>&#9670; B&oacute;veda Personal &#9670;</span></div>
-
-  <!-- BÓVEDA Y MUNDOS -->
-  <div class="sec-head">
-    <div class="sec-label">// Archivo · Explorar</div>
-    <h2 class="sec-title"><span class="oro">Archivo &amp; Mundos</span></h2>
-  </div>
-
-  <div class="grid grid-3">
-
-    <a class="pcard" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/" target="_blank">
-      <div class="pcard-img">&#x1F3DB;&#xFE0F;</div>
-      <div class="pcard-body">
-        <div class="pcard-label">// B&oacute;veda de Kybalio</div>
-        <div class="pcard-name">Mi Archivo</div>
-        <div class="pcard-desc">833 videos · 1251 im&aacute;genes · 206 audios · 373 documentos. Tu archivo personal.</div>
-        <div class="pcard-cta">Abrir &#8594;</div>
-      </div>
-    </a>
-
-    <a class="pcard" href="mundos.html">
-      <div class="pcard-img">&#x1F30F;</div>
-      <div class="pcard-body">
-        <div class="pcard-label">// Reinos</div>
-        <div class="pcard-name">Los Mundos</div>
-        <div class="pcard-desc">Los reinos del universo Orionix. Cada mundo con su historia y sus agentes propios.</div>
-        <div class="pcard-cta">Explorar &#8594;</div>
-      </div>
-    </a>
-
-    <a class="pcard" href="universo.html">
-      <div class="pcard-img">&#x1F5FA;&#xFE0F;</div>
-      <div class="pcard-body">
-        <div class="pcard-label">// Mapa</div>
-        <div class="pcard-name">Universo de Agentes</div>
-        <div class="pcard-desc">El mapa completo de todos los agentes IA. &Aacute;rbol de la Vida Cabbalah.</div>
-        <div class="pcard-cta">Ver Mapa &#8594;</div>
-      </div>
-    </a>
-
-  </div>
-
+<div class="back-row">
+  <a href="hub.html" class="btn-back">← Volver al Portal Central</a>
 </div>
-
-<div class="bottom-bar">
-  <a class="btn-back" href="hub.html">&#8592; Volver al Portal</a>
-</div>
-
-<footer>&copy; 2024 Orionix &middot; Mi Universo &middot; Tu Imperio Digital</footer>
-
-<script>
-(function(){
-  var c=document.getElementById('stars'),ctx=c.getContext('2d');
-  function rsz(){c.width=innerWidth;c.height=innerHeight}rsz();window.addEventListener('resize',rsz);
-  var S=[];for(var i=0;i<200;i++)S.push({x:Math.random(),y:Math.random(),r:.2+Math.random()*.8,a:.2+Math.random()*.7,sp:.0001+Math.random()*.0007});
-  (function draw(){ctx.clearRect(0,0,c.width,c.height);S.forEach(function(s){s.a+=Math.sin(Date.now()*s.sp)*.003;ctx.beginPath();ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);ctx.fillStyle='rgba(255,248,220,'+Math.max(.08,Math.min(.9,s.a))+')';ctx.fill()});requestAnimationFrame(draw)})();
-})();
-</script>
 </body>
 </html>

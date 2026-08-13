@@ -1,137 +1,81 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hábitos Diarios de Kevin Ruiz</title>
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #05060f;
-            color: #fff;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #0a0d1c;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-        .titulo {
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 4px;
-            color: #d4af37;
-        }
-        .subtitulo {
-            text-align: center;
-            font-size: 14px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #9aa0b5;
-            margin: 0 0 20px;
-        }
-        .firma {
-            text-align: center;
-            margin-top: 24px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(212,175,55,.25);
-            font-size: 13px;
-            color: #7d8296;
-        }
-        .firma b { color: #d4af37; font-weight: 600; }
-        .lista-habitos {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .lista-habitos li {
-            margin-bottom: 10px;
-        }
-        .casilla {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-            border: 1px solid #fff;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        .casilla:checked {
-            background-color: #d4af37;
-            border-color: #d4af37;
-        }
-        .barra-progreso {
-            width: 100%;
-            height: 10px;
-            background-color: #333;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-        .progreso {
-            height: 10px;
-            background-color: #d4af37;
-            border-radius: 10px;
-        }
-        .racha {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        .boton-volver {
-            background-color: #d4af37;
-            color: #000;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .boton-volver:hover {
-            background-color: #c7a537;
-        }
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hábitos Diarios · ORIONIX</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230b0b0d'/%3E%3Ctext x='50' y='72' font-size='60' text-anchor='middle' fill='%23e8c86a'%3E%F0%9F%91%91%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--oro:#e8c86a;--oro-med:#c8a24a;--bg:#06050d;--texto:#e9ddc4;--tenue:#b8a982}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--bg);color:var(--texto);min-height:100vh;-webkit-font-smoothing:antialiased}
+#cosmos{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 20%,#0a0816,#03030a 60%,#010104);overflow:hidden;pointer-events:none}
+.neb{position:absolute;inset:-20%;background:radial-gradient(closest-side,rgba(90,60,180,.38),transparent) no-repeat 25% 25%/60% 60%,radial-gradient(closest-side,rgba(40,90,200,.28),transparent) no-repeat 75% 60%/50% 50%;filter:blur(44px);opacity:.5;animation:nebFloat 55s ease-in-out infinite alternate}
+@keyframes nebFloat{to{transform:translate(-3%,-4%) scale(1.12)}}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px 5vw;background:rgba(6,5,13,.82);backdrop-filter:blur(16px);border-bottom:1px solid rgba(232,200,106,.1)}
+.nav-brand{font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;letter-spacing:5px;background:linear-gradient(92deg,#8a6a24,#e8c86a 35%,#fff6d6 50%,#e8c86a 70%,#8a6a24);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 6s linear infinite;text-decoration:none}
+@keyframes brilloOro{to{background-position:200% center}}
+.nav-links{display:flex;gap:18px;align-items:center}
+.nav-links a{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:1.8px;text-transform:uppercase;color:var(--tenue);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.acc{color:var(--oro)}
+.nav-links a.acc{border:1px solid rgba(232,200,106,.32);border-radius:4px;padding:5px 11px}
+@media(max-width:700px){.nav-links{display:none}}
+.main{position:relative;z-index:10;padding:96px 20px 60px;max-width:720px;margin:0 auto}
+.page-label{font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:4px;color:rgba(232,200,106,.45);margin-bottom:8px;text-transform:uppercase}
+.page-title{font-family:'Cinzel',serif;font-size:clamp(1.5rem,4vw,2.4rem);font-weight:900;letter-spacing:4px;background:linear-gradient(130deg,#8a6d2a,#f6e6ad 40%,#fff8e0 52%,#f6e6ad 68%,#8a6d2a);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 7s linear infinite;margin-bottom:8px}
+.page-sub{font-size:clamp(.85rem,2vw,1rem);color:var(--tenue);margin-bottom:28px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
+.stat{background:rgba(232,200,106,.05);border:1px solid rgba(232,200,106,.1);border-radius:10px;padding:14px;text-align:center}
+.stat-n{font-family:'Cinzel',serif;font-size:1.6rem;font-weight:900;color:var(--oro);display:block;line-height:1}
+.stat-l{font-size:.55rem;color:var(--tenue);text-transform:uppercase;letter-spacing:2px;margin-top:5px;display:block}
+.prog-wrap{background:rgba(232,200,106,.07);border-radius:20px;height:8px;overflow:hidden;margin-bottom:6px;border:1px solid rgba(232,200,106,.1)}
+.prog{height:100%;background:linear-gradient(90deg,#8a6a24,#e8c86a);border-radius:20px;transition:width .5s ease;width:0%}
+.prog-lbl{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:2px;color:rgba(232,200,106,.5);text-align:right;margin-bottom:20px}
+.card{background:rgba(12,9,22,.88);border:1px solid rgba(232,200,106,.12);border-radius:14px;padding:20px;backdrop-filter:blur(16px)}
+.lista-habitos{list-style:none;padding:0;margin:0}
+.habito{display:flex;align-items:center;gap:14px;padding:11px 14px;border-radius:10px;margin-bottom:6px;transition:background .2s;cursor:pointer;user-select:none}
+.habito:hover{background:rgba(232,200,106,.05)}
+.habito.done{opacity:.48}
+.habito.done span{text-decoration:line-through;color:rgba(184,169,130,.4)}
+.cas{width:26px;height:26px;border-radius:50%;border:2px solid rgba(232,200,106,.28);background:transparent;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .22s;font-size:.88rem;line-height:1}
+.habito.done .cas{background:linear-gradient(135deg,#8a6a24,#e8c86a);border-color:#e8c86a;color:#06050d}
+.habito span{font-size:clamp(.85rem,2vw,.98rem);color:var(--texto);flex:1;line-height:1.4;transition:all .2s}
+.btn-reset{width:100%;margin-top:16px;padding:10px;background:rgba(232,200,106,.05);border:1px solid rgba(232,200,106,.15);border-radius:8px;color:var(--tenue);font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:2px;cursor:pointer;transition:all .2s}
+.btn-reset:hover{background:rgba(232,200,106,.1);color:var(--oro)}
+.links-row{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.link-btn{display:inline-flex;align-items:center;gap:7px;font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:2px;text-decoration:none;border:1px solid rgba(232,200,106,.18);border-radius:8px;padding:9px 16px;transition:all .2s;color:var(--tenue)}
+.link-btn:hover{color:var(--oro);border-color:rgba(232,200,106,.4)}
+.link-btn.gold{color:var(--oro);border-color:rgba(232,200,106,.3);background:rgba(232,200,106,.05)}
+</style>
 </head>
 <body>
-<!-- ORIONIX NAV UNIVERSAL -->
-<style>
-#onav{position:fixed;top:0;left:0;width:100%;z-index:9999;display:flex;justify-content:space-between;align-items:center;padding:10px 5vw;background:rgba(11,11,13,.95);border-bottom:1px solid rgba(232,200,106,.2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font-family:'Cinzel',serif;}
-#onav .on-m{font-size:.68rem;font-weight:600;letter-spacing:4px;text-decoration:none;background:linear-gradient(92deg,#8a6a24,#e8c86a 40%,#fff6d6 60%,#e8c86a 80%,#8a6a24);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:onBrillo 6s linear infinite;flex-shrink:0;}
-@keyframes onBrillo{to{background-position:200% center}}
-#onav .on-l{display:flex;align-items:center;gap:0;flex-wrap:nowrap;}
-#onav .on-l a{color:#b8a982;text-decoration:none;margin-left:14px;font-size:.46rem;letter-spacing:1.4px;text-transform:uppercase;transition:color .2s;white-space:nowrap;font-family:'Cinzel',serif;}
-#onav .on-l a:hover{color:#e8c86a;}
-#onav .on-sp{width:1px;height:12px;background:rgba(232,200,106,.22);margin-left:14px;}
-#onav .on-l a.on-a{color:#e8c86a!important;font-weight:600;border:1px solid rgba(232,200,106,.32);border-radius:5px;padding:4px 10px;margin-left:7px;transition:background .2s,box-shadow .2s;}
-#onav .on-l a.on-a:hover{background:rgba(232,200,106,.12);box-shadow:0 0 10px rgba(232,200,106,.2);}
-@media(max-width:780px){#onav .on-l a:not(.on-a){display:none;}}
-</style>
-<div id="onav">
-  <a class="on-m" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/">ORIONIX</a>
-  <div class="on-l">
-    <a href="hub.html">Hub</a>
+<div id="cosmos"><div class="neb"></div></div>
+<nav>
+  <a href="hub.html" class="nav-brand">ORIONIX</a>
+  <div class="nav-links">
+    <a href="hub.html">Portal</a>
     <a href="ciudadela.html">Ciudadela</a>
-    <a href="hogar.html">Hogar</a>
     <a href="forjadora.html">Forjadora</a>
-    <div class="on-sp"></div>
-    <a href="axel.html" class="on-a">AXEL</a>
-    <a href="tienda.html" class="on-a">Tienda</a>
+    <a href="nebula-habits.html">Nebula AI</a>
+    <a href="axel.html" class="acc">✦ AXEL</a>
   </div>
-</div>
-
-
-    <div class="container">
-        <h1 class="titulo">Hábitos Diarios del Forjador</h1>
-        <p class="subtitulo">de Kevin Ruiz</p>
-        <ul class="lista-habitos">
+</nav>
+<div class="main">
+  <div class="page-label">Sistema de Disciplina · La Forjadora</div>
+  <div class="page-title">HÁBITOS DIARIOS</div>
+  <p class="page-sub">Tu protocolo de alto rendimiento · Marca cada hábito al completarlo</p>
+  <div class="stats">
+    <div class="stat"><span class="stat-n" id="s-done">0</span><span class="stat-l">Completados</span></div>
+    <div class="stat"><span class="stat-n" id="s-tot">0</span><span class="stat-l">Total hábitos</span></div>
+    <div class="stat"><span class="stat-n" id="s-pct">0%</span><span class="stat-l">Progreso</span></div>
+  </div>
+  <div class="prog-wrap"><div class="prog" id="prog"></div></div>
+  <div class="prog-lbl" id="prog-lbl">0 / 0 completados</div>
+  <div class="card">
+    <ul class="lista-habitos" id="lista">
             <li>
                 <input type="checkbox" id="habito1" class="casilla">
                 <label for="habito1">Ejercicio físico</label>
@@ -153,83 +97,43 @@
                 <label for="habito5">Escribir en un diario</label>
             </li>
         </ul>
-        <div class="barra-progreso">
-            <div class="progreso" id="progreso"></div>
-        </div>
-        <p class="racha" id="racha">Racha: 0 días</p>
-        <button class="boton-volver" onclick="volverAlInicio()">Volver al inicio</button>
-        <p class="firma">Creado por <b>Kevin Ruiz</b> · ORIONIX</p>
-    </div>
-    <script>
-        let habitos = [
-            { id: "habito1", nombre: "Ejercicio físico", completado: false },
-            { id: "habito2", nombre: "Meditación", completado: false },
-            { id: "habito3", nombre: "Lectura", completado: false },
-            { id: "habito4", nombre: "Aprendizaje de un nuevo skill", completado: false },
-            { id: "habito5", nombre: "Escribir en un diario", completado: false }
-        ];
-        let racha = 0;
-        let progreso = 0;
-        let fechaActual = new Date();
-        let fechaUltimoRegistro = localStorage.getItem("fechaUltimoRegistro");
-        let habitosCompletados = localStorage.getItem("habitosCompletados");
-        if (fechaUltimoRegistro && habitosCompletados) {
-            if (fechaUltimoRegistro !== fechaActual.toISOString().split("T")[0]) {
-                racha = 0;
-                habitos.forEach(habito => {
-                    habito.completado = false;
-                });
-            } else {
-                racha = parseInt(localStorage.getItem("racha"));
-                habitosCompletados = JSON.parse(habitosCompletados);
-                habitos.forEach(habito => {
-                    habito.completado = habitosCompletados[habito.id];
-                });
-            }
-        }
-        habitos.forEach(habito => {
-            let casilla = document.getElementById(habito.id);
-            casilla.addEventListener("change", () => {
-                habito.completado = casilla.checked;
-                calcularProgreso();
-                calcularRacha();
-                guardarDatos();
-            });
-            if (habito.completado) {
-                casilla.checked = true;
-            }
-        });
-        function calcularProgreso() {
-            progreso = 0;
-            habitos.forEach(habito => {
-                if (habito.completado) {
-                    progreso++;
-                }
-            });
-            document.getElementById("progreso").style.width = (progreso / habitos.length) * 100 + "%";
-        }
-        function calcularRacha() {
-            if (progreso === habitos.length) {
-                racha++;
-            } else {
-                racha = 0;
-            }
-            document.getElementById("racha").textContent = `Racha: ${racha} días`;
-            localStorage.setItem("racha", racha);
-        }
-        function guardarDatos() {
-            localStorage.setItem("fechaUltimoRegistro", fechaActual.toISOString().split("T")[0]);
-            let habitosCompletados = {};
-            habitos.forEach(habito => {
-                habitosCompletados[habito.id] = habito.completado;
-            });
-            localStorage.setItem("habitosCompletados", JSON.stringify(habitosCompletados));
-        }
-        function volverAlInicio() {
-            window.location.href = "index.html";
-        }
-        calcularProgreso();
-        calcularRacha();
-    </script>
+    <button class="btn-reset" onclick="resetAll()">↺ Reiniciar para mañana</button>
+  </div>
+  <div class="links-row">
+    <a href="forjadora.html" class="link-btn">← Forjadora</a>
+    <a href="nebula-habits.html" class="link-btn gold">✦ Nebula AI Habits</a>
+    <a href="hub.html" class="link-btn">Portal Central</a>
+  </div>
+</div>
+<script>
+var KEY='orx_hab_'+new Date().toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit',year:'numeric'});
+var sv=JSON.parse(localStorage.getItem(KEY)||'{}');
+function init(){
+  document.querySelectorAll('.habito').forEach(function(li,i){
+    var id=li.dataset.id||String(i+1);
+    li.dataset.id=id;
+    var btn=li.querySelector('.cas');
+    if(sv[id]){li.classList.add('done');if(btn)btn.textContent='✓';}
+    li.addEventListener('click',function(){tick(li,id,btn);});
+  });upd();
+}
+function tick(li,id,btn){
+  var d=li.classList.toggle('done');
+  if(btn)btn.textContent=d?'✓':'';
+  sv[id]=d;localStorage.setItem(KEY,JSON.stringify(sv));upd();
+}
+function upd(){
+  var all=document.querySelectorAll('.habito').length;
+  var done=document.querySelectorAll('.habito.done').length;
+  var pct=all?Math.round(done/all*100):0;
+  document.getElementById('s-done').textContent=done;
+  document.getElementById('s-tot').textContent=all;
+  document.getElementById('s-pct').textContent=pct+'%';
+  document.getElementById('prog').style.width=pct+'%';
+  document.getElementById('prog-lbl').textContent=done+' / '+all+' completados';
+}
+function resetAll(){if(!confirm('¿Reiniciar todos los hábitos?'))return;localStorage.removeItem(KEY);sv={};document.querySelectorAll('.habito').forEach(function(li){li.classList.remove('done');var b=li.querySelector('.cas');if(b)b.textContent='';});upd();}
+init();
+</script>
 </body>
 </html>

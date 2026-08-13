@@ -256,7 +256,7 @@ var AGENTES = [
    accion:"Despertar (proxima fase)", nota:"Base de datos segura. Fase 5."},
 ];
 
-var CEREBRO = "https://kevinruiz.app.n8n.cloud/webhook/portal-central";
+var CEREBRO = "https://lkevinruizl.app.n8n.cloud/webhook/portal-central";
 
 /* ---- Render de planetas en sus anillos ---- */
 (function render(){
@@ -397,7 +397,7 @@ function enviarAlCerebro(t){
   }
   intentar();
 }
-var FORJADOR="https://kevinruiz.app.n8n.cloud/webhook/forjar-pagina";
+var FORJADOR="https://lkevinruizl.app.n8n.cloud/webhook/forjar-pagina";
 function forjarPagina(desc){
   var pensando=axelAdd("b","_El Arquitecto esta forjando tu pagina... (esto tarda unos segundos)_");
   fetch(FORJADOR,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({instruccion:desc,nombre_archivo:""})})
@@ -409,7 +409,7 @@ function forjarPagina(desc){
    })
    .catch(function(){ pensando.remove(); axelAdd("b","No pude conectar con el Arquitecto (Forjador de Paginas)."); });
 }
-var RECORDAR="https://kevinruiz.app.n8n.cloud/webhook/recordatorio-crear";
+var RECORDAR="https://lkevinruizl.app.n8n.cloud/webhook/recordatorio-crear";
 function crearRecordatorio(texto){
   // Extrae hora tipo "6:00", "18h30", "07.15" del texto
   var mh=texto.match(/(\d{1,2})[:h\.](\d{2})/);
@@ -423,14 +423,14 @@ function crearRecordatorio(texto){
    .then(function(r){return r.json();}).then(function(d){ pensando.remove(); axelAdd("b",(d&&d.respuesta)||"Recordatorio guardado."); })
    .catch(function(){ pensando.remove(); axelAdd("b","No pude guardar el recordatorio ahora mismo."); });
 }
-var BOLSA="https://kevinruiz.app.n8n.cloud/webhook/bolsa-cripto";
+var BOLSA="https://lkevinruizl.app.n8n.cloud/webhook/bolsa-cripto";
 function consultarBolsa(q){
   var pensando=axelAdd("b","_El Cazador esta consultando el mercado..._");
   fetch(BOLSA,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({query:q||"bitcoin ethereum solana"})})
    .then(function(r){return r.json();}).then(function(d){ pensando.remove(); axelAdd("b",(d&&d.respuesta)||"No pude consultar el mercado ahora mismo."); })
    .catch(function(){ pensando.remove(); axelAdd("b","No pude conectar con el mercado ahora mismo."); });
 }
-var NOTAS="https://kevinruiz.app.n8n.cloud/webhook/notas";
+var NOTAS="https://lkevinruizl.app.n8n.cloud/webhook/notas";
 function guardarNota(txt, tipo){
   var pensando=axelAdd("b","_El Escriba esta guardando..._");
   fetch(NOTAS,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({accion:"guardar",texto:txt,tipo:tipo})})

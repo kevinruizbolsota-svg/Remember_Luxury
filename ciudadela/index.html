@@ -1347,44 +1347,55 @@
   var inp=document.getElementById("input");inp.addEventListener("input",function(){this.style.height="auto";this.style.height=Math.min(this.scrollHeight,160)+"px";});inp.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMsg();}});
   document.getElementById("nameInput").addEventListener("keydown",function(e){if(e.key==="Enter")doLogin();});
 
-  /* ---- VOZ: HABLAR (micro -> texto via SpeechRecognition del navegador) ---- */
-  var MIC_SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  var __micRecog=null,__micActivo=false;
+  /* ---- VOZ: HABLAR (micro -> Deepgram via n8n) ---- */
+  var __micMr=null,__micChunks=[],__micGrab=false,__micStream=null;
   function startMic(){
     var btn=document.getElementById("micBtn");
     var inp=document.getElementById("input");
     var live=document.getElementById("vozlive");
-    if(!MIC_SR){alert("Tu navegador no soporta reconocimiento de voz. Usa Google Chrome en PC o Android.");return;}
-    /* Si ya escucha -> detener */
-    if(__micActivo&&__micRecog){try{__micRecog.stop();}catch(e){}return;}
-    var r=new MIC_SR();
-    r.lang="es-ES";r.continuous=false;r.interimResults=true;r.maxAlternatives=1;
-    __micRecog=r;__micActivo=true;
-    btn.classList.add("rec");
-    if(live){live.style.display="block";live.textContent="🎙️ Escuchando... habla ahora";}
-    var finalBuf="";
-    r.onresult=function(ev){
-      var interim="";
-      for(var i=ev.resultIndex;i<ev.results.length;i++){
-        if(ev.results[i].isFinal)finalBuf+=ev.results[i][0].transcript+" ";
-        else interim+=ev.results[i][0].transcript;
-      }
-      if(live)live.textContent="🎙️ "+(finalBuf+interim).trim();
-    };
-    r.onerror=function(ev){
-      __micActivo=false;btn.classList.remove("rec");if(live)live.style.display="none";
-      var e=ev&&ev.error;
-      if(e==="not-allowed"||e==="service-not-allowed"){alert("Debes PERMITIR el microfono. Toca el candado en la barra de direcciones de Chrome, activa el Microfono y recarga la pagina.");}
-    };
-    r.onend=function(){
-      __micActivo=false;btn.classList.remove("rec");if(live)live.style.display="none";
-      var t=finalBuf.trim();
-      if(t){inp.value=(inp.value?inp.value+" ":"")+t;inp.style.height="auto";inp.style.height=Math.min(inp.scrollHeight,160)+"px";inp.focus();try{inp.setSelectionRange(inp.value.length,inp.value.length);}catch(e){}}
-      else{alert("No se entendio el audio. Habla mas cerca del microfono e intenta de nuevo.");}
-    };
-    r.start();
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){alert("Tu navegador no permite grabar audio. Usa Google Chrome.");return;}
+    if(__micGrab){
+      __micGrab=false;
+      if(btn){btn.classList.remove("rec");}
+      if(live){live.textContent="Transcribiendo...";live.style.display="block";}
+      try{__micMr.stop();}catch(e){}
+      return;
+    }
+    try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){}
+    navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
+      __micStream=stream;__micChunks=[];
+      var mType=MediaRecorder.isTypeSupported("audio/webm;codecs=opus")?"audio/webm;codecs=opus":"audio/webm";
+      try{__micMr=new MediaRecorder(stream,{mimeType:mType});}catch(e){__micMr=new MediaRecorder(stream);}
+      __micMr.ondataavailable=function(e){if(e.data&&e.data.size>0)__micChunks.push(e.data);};
+      __micMr.onstop=function(){
+        try{__micStream.getTracks().forEach(function(t){t.stop();});}catch(e){}
+        var blob=new Blob(__micChunks,{type:(__micChunks[0]&&__micChunks[0].type)||"audio/webm"});
+        var fr=new FileReader();
+        fr.onloadend=function(){
+          var rawB64=fr.result.split(",")[1];
+          var mT=(__micChunks[0]&&__micChunks[0].type)||"audio/webm";
+          fetch("https://lkevinruizl.app.n8n.cloud/webhook/axel-voz",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({audio:rawB64,mimeType:mT})})
+          .then(function(r){return r.json();})
+          .then(function(d){
+            if(live)live.style.display="none";
+            var t=(d&&d.texto?d.texto:"").trim();
+            if(t){inp.value=(inp.value?inp.value+" ":"")+t;inp.style.height="auto";inp.style.height=Math.min(inp.scrollHeight,160)+"px";inp.focus();try{inp.setSelectionRange(inp.value.length,inp.value.length);}catch(e){}}
+            else{alert("No se entendio el audio. Habla mas cerca del microfono e intenta de nuevo.");}
+          })
+          .catch(function(){if(live)live.style.display="none";alert("No pude transcribir el audio. Revisa tu conexion.");});
+        };
+        fr.readAsDataURL(blob);
+      };
+      __micGrab=true;
+      if(btn){btn.classList.add("rec");}
+      if(live){live.style.display="block";live.textContent="🎙️ Grabando... pulsa de nuevo para terminar";}
+      __micMr.start();
+    }).catch(function(){
+      alert("Debes PERMITIR el microfono. Toca el candado en la barra de direcciones de Chrome, activa el Microfono y recarga la pagina.");
+    });
   }
-  /* ---- VOZ: ESCUCHAR (texto -> voz) ---- */
+  
+    /* ---- VOZ: ESCUCHAR (texto -> voz) ---- */
   window.__speak=(localStorage.getItem("ciudadela_speak")==="1");
   function refreshSpeakBtn(){var b=document.getElementById("speakBtn");if(!b)return;if(window.__speak){b.classList.add("on");b.innerHTML="&#128266;";b.title="Voz activada: leo las respuestas";}else{b.classList.remove("on");b.innerHTML="&#128263;";b.title="Voz desactivada: toca para que lea en voz alta";}}
   function toggleSpeak(){window.__speak=!window.__speak;localStorage.setItem("ciudadela_speak",window.__speak?"1":"0");refreshSpeakBtn();if(!window.__speak&&window.speechSynthesis){window.speechSynthesis.cancel();}else{speak("Voz activada.");}}

@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIONIX · La Ciudadela — Portal de Inicio</title>
+<meta name="description" content="ORIONIX — La Ciudadela. El universo vivo de inteligencia artificial: La Forjadora, El Hogar, Las Crónicas y los Agentes del futuro.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230b0b0d'/%3E%3Ctext x='50' y='72' font-size='60' text-anchor='middle' fill='%23e8c86a'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   VARIABLES & RESET
+═══════════════════════════════════════════ */
+:root{
+  --oro:#e8c86a; --oro-med:#c8a24a; --oro-osc:#8a6a24; --oro-claro:#fff6d6;
+  --azul:#4ab8e8; --azul-deep:#1a6090;
+  --teal:#2ae8c8; --teal-deep:#0a7060;
+  --portal:#e8906a; --portal-deep:#8a3010;
+  --bg:#020209; --panel:rgba(8,6,20,.7); --border:rgba(232,200,106,.18);
+  --texto:#e9ddc4; --tenue:#b8a982;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden}
+body{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  background:var(--bg);color:var(--texto);
+  cursor:none;user-select:none;
+}
+
+/* ═══════════════════════════════════════════
+   CURSOR COSMICO
+═══════════════════════════════════════════ */
+#cursor{
+  position:fixed;width:20px;height:20px;
+  border:1.5px solid var(--oro-med);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:width .18s,height .18s,border-color .18s,box-shadow .18s;
+  box-shadow:0 0 8px rgba(232,200,106,.4);
+  mix-blend-mode:screen;
+}
+#cursor::after{
+  content:'';position:absolute;inset:5px;
+  background:var(--oro);border-radius:50%;opacity:.7;
+  box-shadow:0 0 10px var(--oro);
+}
+#cursor.hover{width:36px;height:36px;border-color:var(--oro);box-shadow:0 0 20px rgba(232,200,106,.7)}
+
+/* ═══════════════════════════════════════════
+   FONDO: COSMOS + ESTRELLLAS
+═══════════════════════════════════════════ */
+#cosmosCanvas{position:fixed;inset:0;z-index:0}
+.nebula{
+  position:fixed;inset:-20%;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(ellipse 65% 55% at 20% 25%,rgba(100,40,200,.35),transparent),
+    radial-gradient(ellipse 55% 45% at 82% 18%,rgba(30,70,200,.28),transparent),
+    radial-gradient(ellipse 70% 50% at 55% 85%,rgba(180,50,50,.18),transparent),
+    radial-gradient(ellipse 45% 40% at 8% 72%,rgba(30,140,140,.2),transparent),
+    radial-gradient(ellipse 60% 55% at 90% 75%,rgba(80,20,150,.22),transparent);
+  animation:nebulaShift 40s ease-in-out infinite alternate;
+  filter:blur(2px);
+}
+@keyframes nebulaShift{0%{opacity:.55;transform:scale(1) rotate(0deg)}100%{opacity:.9;transform:scale(1.1) rotate(-3deg)}}
+
+/* ═══════════════════════════════════════════
+   INTRO ANIMATION
+═══════════════════════════════════════════ */
+#intro{
+  position:fixed;inset:0;z-index:500;
+  background:radial-gradient(ellipse at 50% 50%,#0a071e,#020209 60%);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;
+  animation:introOut 1.2s 2.5s forwards cubic-bezier(.4,0,.2,1);
+}
+@keyframes introOut{to{opacity:0;pointer-events:none;visibility:hidden}}
+.intro-logo{
+  font-family:'Cinzel Decorative',serif;font-size:clamp(2.5rem,6vw,5rem);
+  font-weight:900;letter-spacing:12px;
+  background:linear-gradient(120deg,#8a6a24,#f6e6ad 30%,#fff8e1 50%,#f6e6ad 70%,#8a6a24);
+  background-size:220% auto;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 40px rgba(232,200,106,.9));
+  animation:brilloTit 4s linear infinite;
+  text-align:center;
+}
+.intro-sub{
+  font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:8px;
+  color:var(--oro-med);margin-top:14px;text-transform:uppercase;
+  animation:fadeIn 1s .5s both;
+}
+.intro-line{width:0;height:1px;background:linear-gradient(90deg,transparent,var(--oro),transparent);margin-top:22px;animation:lineGrow 1.2s 1s forwards}
+@keyframes lineGrow{to{width:280px}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes brilloTit{to{background-position:220% center}}
+
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;width:100%;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:11px 5vw;
+  background:rgba(2,2,9,.78);
+  border-bottom:1px solid rgba(232,200,106,.14);
+  backdrop-filter:blur(18px);
+  transition:padding .3s;
+}
+.nav-marca{
+  font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:4px;
+  color:var(--oro);text-decoration:none;font-weight:700;cursor:none;
+  text-shadow:0 0 20px rgba(232,200,106,.5);
+  display:flex;align-items:center;gap:8px;
+}
+.nav-marca .dot{width:6px;height:6px;border-radius:50%;background:var(--oro);box-shadow:0 0 10px var(--oro);animation:dotPulse 2s ease-in-out infinite}
+@keyframes dotPulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.4)}}
+.nav-links{display:flex;align-items:center}
+.nav-links a{
+  color:var(--tenue);text-decoration:none;
+  font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:1.8px;
+  text-transform:uppercase;margin-left:20px;
+  transition:color .25s;cursor:none;position:relative;
+}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--oro);transition:width .3s}
+.nav-links a:hover{color:var(--oro)}
+.nav-links a:hover::after,.nav-links a.act::after{width:100%}
+.nav-links a.act{color:var(--oro)}
+.nav-links .sep{width:1px;height:13px;background:rgba(232,200,106,.2);margin-left:20px}
+.nav-cta{
+  font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:2px;
+  color:var(--oro);border:1px solid rgba(232,200,106,.38);
+  border-radius:3px;padding:7px 16px;text-decoration:none;cursor:none;
+  transition:background .25s,box-shadow .25s;margin-left:14px;
+  text-transform:uppercase;
+}
+.nav-cta:hover{background:rgba(232,200,106,.1);box-shadow:0 0 22px rgba(232,200,106,.3)}
+@media(max-width:900px){.nav-links{display:none}}
+
+/* ═══════════════════════════════════════════
+   HUB PRINCIPAL
+═══════════════════════════════════════════ */
+.hub-wrap{
+  position:relative;z-index:2;
+  width:100%;height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding-top:50px;
+  padding-bottom:36px;
+}
+.hub{
+  position:relative;
+  width:min(1280px,98vw);
+  height:calc(100vh - 90px);
+  display:grid;
+  grid-template-columns:1fr 340px 1fr;
+  grid-template-rows:120px 1fr 100px;
+}
+
+/* ═══════════════════════════════════════════
+   RAYOS DE ENERGÍA (SVG absoluto)
+═══════════════════════════════════════════ */
+.energy-svg{
+  position:absolute;inset:0;width:100%;height:100%;
+  z-index:1;pointer-events:none;overflow:visible;
+}
+
+/* ═══════════════════════════════════════════
+   SECCIONES BASE
+═══════════════════════════════════════════ */
+.s{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;cursor:none;text-decoration:none;color:inherit;
+}
+
+/* ═══════════════════════════════════════════
+   TOP: ORIONIX
+═══════════════════════════════════════════ */
+.s-top{grid-column:2;grid-row:1;position:relative}
+
+.orionix-rays{
+  position:absolute;inset:-80px;pointer-events:none;
+  background:conic-gradient(
+    from 0deg,
+    transparent 0deg,rgba(232,200,106,.1) 4deg,transparent 8deg,
+    transparent 22deg,rgba(232,200,106,.07) 26deg,transparent 30deg,
+    transparent 42deg,rgba(255,240,150,.1) 46deg,transparent 50deg,
+    transparent 65deg,rgba(232,200,106,.08) 69deg,transparent 73deg,
+    transparent 88deg,rgba(232,200,106,.1) 92deg,transparent 96deg,
+    transparent 115deg,rgba(232,200,106,.07) 119deg,transparent 123deg,
+    transparent 155deg,rgba(255,240,150,.09) 159deg,transparent 163deg,
+    transparent 178deg,rgba(232,200,106,.1) 182deg,transparent 186deg,
+    transparent 200deg,rgba(232,200,106,.07) 204deg,transparent 208deg,
+    transparent 245deg,rgba(255,240,150,.08) 249deg,transparent 253deg,
+    transparent 268deg,rgba(232,200,106,.1) 272deg,transparent 276deg,
+    transparent 310deg,rgba(232,200,106,.07) 314deg,transparent 318deg,
+    transparent 345deg,rgba(255,240,150,.09) 349deg,transparent 353deg
+  );
+  animation:raysRot 25s linear infinite;
+  filter:blur(1.5px);
+}
+@keyframes raysRot{to{transform:rotate(360deg)}}
+
+.orionix-halo{
+  position:absolute;inset:-30px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(ellipse,rgba(232,200,106,.28) 0%,rgba(255,240,150,.08) 40%,transparent 70%);
+  animation:haloBreath 4s ease-in-out infinite;
+  filter:blur(12px);
+}
+@keyframes haloBreath{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.25)}}
+
+.orionix-title{
+  font-family:'Cinzel Decorative','Cinzel',serif;
+  font-size:clamp(1.8rem,3.8vw,3.2rem);
+  font-weight:900;letter-spacing:10px;
+  background:linear-gradient(120deg,#8a6a24 0%,#f6e6ad 25%,#fff8e1 45%,#f6e6ad 65%,#c8a24a 80%,#8a6a24 100%);
+  background-size:220% auto;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 35px rgba(232,200,106,.9)) drop-shadow(0 0 70px rgba(232,200,106,.4));
+  animation:brilloTit 5s linear infinite,titBreath 4s ease-in-out infinite;
+  text-align:center;position:relative;z-index:2;
+  text-indent:10px;
+}
+@keyframes titBreath{
+  0%,100%{filter:drop-shadow(0 0 35px rgba(232,200,106,.9)) drop-shadow(0 0 70px rgba(232,200,106,.4))}
+  50%{filter:drop-shadow(0 0 55px rgba(255,245,160,1)) drop-shadow(0 0 110px rgba(232,200,106,.7))}
+}
+.orionix-sub{
+  font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:6px;
+  color:var(--oro-med);text-transform:uppercase;margin-top:8px;
+  opacity:.85;position:relative;z-index:2;
+  text-shadow:0 0 16px rgba(232,200,106,.4);
+}
+
+/* ═══════════════════════════════════════════
+   LEFT: La Forjadora de Diamantes
+═══════════════════════════════════════════ */
+.s-left{grid-column:1;grid-row:2;padding:10px 20px 10px 10px}
+
+.s-left .img-frame{
+  width:100%;max-width:310px;
+  aspect-ratio:4/3;position:relative;border-radius:16px;overflow:hidden;
+  box-shadow:0 0 40px rgba(74,184,232,.3),0 0 80px rgba(74,184,232,.12),inset 0 0 30px rgba(74,184,232,.08);
+  border:1px solid rgba(74,184,232,.28);
+  transition:box-shadow .5s,border-color .5s;
+}
+.s-left:hover .img-frame{
+  box-shadow:0 0 70px rgba(74,184,232,.55),0 0 140px rgba(74,184,232,.22),inset 0 0 50px rgba(74,184,232,.15);
+  border-color:rgba(74,184,232,.6);
+}
+.s-left .img-frame::before{
+  content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(135deg,rgba(74,184,232,.12) 0%,transparent 50%,rgba(100,60,200,.08) 100%);
+}
+.s-left .img-frame img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .7s cubic-bezier(.2,.8,.2,1),filter .5s;
+  filter:saturate(1.15) brightness(.92) contrast(1.05);
+}
+.s-left:hover .img-frame img{transform:scale(1.08);filter:saturate(1.4) brightness(1.05) contrast(1.1)}
+/* shimmer placeholder while loading */
+.s-left .img-frame::after{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(120deg,rgba(74,184,232,.05) 0%,rgba(100,60,200,.08) 50%,rgba(74,184,232,.05) 100%);
+  background-size:200% 100%;
+  animation:shimmer 2.5s ease-in-out infinite;
+}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+.s-left .s-label{
+  font-family:'Cinzel',serif;
+  font-size:clamp(.82rem,1.6vw,1.18rem);
+  font-weight:700;margin-top:14px;text-align:center;
+  background:linear-gradient(120deg,#4ab8e8,#a8dcf4,#ffffff,#a8dcf4,#4ab8e8);
+  background-size:200% auto;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 14px rgba(74,184,232,.55));
+  animation:brilloTit 5s linear infinite;letter-spacing:.5px;
+}
+.s-left .s-sub{
+  font-size:.7rem;color:var(--tenue);margin-top:5px;
+  text-align:center;letter-spacing:.8px;font-style:italic;
+}
+
+/* ═══════════════════════════════════════════
+   CENTER: Portal Hogar
+═══════════════════════════════════════════ */
+.s-center{grid-column:2;grid-row:2;position:relative}
+
+.portal-label-top{
+  font-family:'Cinzel',serif;
+  font-size:clamp(.65rem,1.4vw,.95rem);
+  letter-spacing:4px;text-transform:uppercase;color:var(--oro);
+  margin-bottom:10px;
+  text-shadow:0 0 20px rgba(232,200,106,.9),0 0 40px rgba(232,200,106,.4);
+  animation:labelPulse 3s ease-in-out infinite;
+}
+.portal-label-bot{
+  font-family:'Cinzel',serif;
+  font-size:clamp(.65rem,1.4vw,.95rem);
+  letter-spacing:4px;text-transform:uppercase;color:var(--oro);
+  margin-top:10px;
+  text-shadow:0 0 20px rgba(232,200,106,.9),0 0 40px rgba(232,200,106,.4);
+  animation:labelPulse 3s 1s ease-in-out infinite;
+}
+@keyframes labelPulse{0%,100%{opacity:.75;text-shadow:0 0 20px rgba(232,200,106,.7)}50%{opacity:1;text-shadow:0 0 30px rgba(255,245,160,1),0 0 60px rgba(232,200,106,.5)}}
+
+.portal-wrap{
+  position:relative;
+  width:min(280px,80%);aspect-ratio:1;
+  display:flex;align-items:center;justify-content:center;
+}
+/* outer glow ring - always rotating */
+.portal-ring-outer{
+  position:absolute;inset:-6px;border-radius:50%;
+  background:conic-gradient(
+    var(--oro-osc) 0deg,var(--oro) 60deg,var(--oro-claro) 120deg,
+    var(--portal) 180deg,var(--oro) 240deg,var(--oro-claro) 300deg,var(--oro-osc) 360deg
+  );
+  animation:ringRot 10s linear infinite;
+  filter:blur(.5px) drop-shadow(0 0 8px rgba(232,200,106,.6));
+  border-radius:50%;
+}
+@keyframes ringRot{to{transform:rotate(360deg)}}
+/* inner mask */
+.portal-ring-mask{
+  position:absolute;inset:4px;border-radius:50%;
+  background:var(--bg);
+  box-shadow:inset 0 0 30px rgba(232,120,60,.2);
+}
+/* pulse rings */
+.portal-pulse{
+  position:absolute;inset:-20px;border-radius:50%;
+  border:1px solid rgba(232,200,106,.18);
+  animation:portalPulse 3s ease-out infinite;
+}
+.portal-pulse:nth-child(2){inset:-40px;animation-delay:.8s;border-color:rgba(232,200,106,.1)}
+.portal-pulse:nth-child(3){inset:-60px;animation-delay:1.6s;border-color:rgba(232,200,106,.06)}
+@keyframes portalPulse{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.3)}}
+
+.portal-inner{
+  position:relative;z-index:2;
+  width:calc(100% - 16px);aspect-ratio:1;border-radius:50%;
+  overflow:hidden;
+  background:radial-gradient(circle at 40% 35%,#1a0820,#0d0420 50%,#050112);
+  transition:box-shadow .5s;
+}
+.s-center:hover .portal-inner{
+  box-shadow:0 0 60px rgba(232,150,60,.4),inset 0 0 40px rgba(232,150,60,.15);
+}
+.portal-inner img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .6s,filter .5s;opacity:.88;
+}
+.s-center:hover .portal-inner img{transform:scale(1.06);opacity:1}
+
+/* ═══════════════════════════════════════════
+   RIGHT: Las Crónicas del Creador
+═══════════════════════════════════════════ */
+.s-right{grid-column:3;grid-row:2;padding:10px 10px 10px 20px}
+
+.s-right .img-frame{
+  width:100%;max-width:310px;
+  aspect-ratio:4/3;position:relative;border-radius:16px;overflow:hidden;
+  box-shadow:0 0 40px rgba(42,232,200,.25),0 0 80px rgba(42,232,200,.1),inset 0 0 30px rgba(42,232,200,.07);
+  border:1px solid rgba(42,232,200,.22);
+  transition:box-shadow .5s,border-color .5s;
+}
+.s-right:hover .img-frame{
+  box-shadow:0 0 70px rgba(42,232,200,.5),0 0 140px rgba(42,232,200,.2),inset 0 0 50px rgba(42,232,200,.14);
+  border-color:rgba(42,232,200,.55);
+}
+.s-right .img-frame::before{
+  content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(225deg,rgba(42,232,200,.12) 0%,transparent 50%,rgba(80,20,150,.08) 100%);
+}
+.s-right .img-frame img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .7s cubic-bezier(.2,.8,.2,1),filter .5s;
+  filter:saturate(1.15) brightness(.92) contrast(1.05);
+}
+.s-right:hover .img-frame img{transform:scale(1.08);filter:saturate(1.4) brightness(1.05) contrast(1.1)}
+.s-right .img-frame::after{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(120deg,rgba(42,232,200,.04) 0%,rgba(80,20,150,.06) 50%,rgba(42,232,200,.04) 100%);
+  background-size:200% 100%;animation:shimmer 3s ease-in-out infinite;
+}
+.s-right .s-label{
+  font-family:'Cinzel',serif;
+  font-size:clamp(.82rem,1.6vw,1.18rem);
+  font-weight:700;margin-top:14px;text-align:center;
+  background:linear-gradient(120deg,#2ae8c8,#a0f4e8,#ffffff,#a0f4e8,#2ae8c8);
+  background-size:200% auto;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 14px rgba(42,232,200,.55));
+  animation:brilloTit 6s linear infinite;letter-spacing:.5px;
+}
+.s-right .s-sub{
+  font-size:.7rem;color:var(--tenue);margin-top:5px;
+  text-align:center;letter-spacing:.8px;font-style:italic;
+}
+
+/* ═══════════════════════════════════════════
+   BOTTOM: La Ciudadela
+═══════════════════════════════════════════ */
+.s-bottom{grid-column:2;grid-row:3;flex-direction:column;padding-bottom:8px}
+
+.ciudadela-sep{
+  width:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--oro-med),transparent);
+  margin-bottom:12px;
+  animation:sepGrow 2s 3s forwards;
+}
+@keyframes sepGrow{to{width:120px}}
+.ciudadela-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1rem,2.2vw,1.7rem);
+  font-weight:900;letter-spacing:8px;text-align:center;text-indent:8px;
+  background:linear-gradient(120deg,#8a6a24,#e8c86a 30%,#fff6d6 50%,#e8c86a 70%,#8a6a24);
+  background-size:220% auto;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 20px rgba(232,200,106,.55));
+  animation:brilloTit 7s linear infinite;
+}
+.ciudadela-sub{
+  font-size:.6rem;letter-spacing:4px;color:var(--tenue);
+  text-transform:uppercase;margin-top:7px;text-align:center;
+  font-style:italic;opacity:.8;
+}
+
+/* ═══════════════════════════════════════════
+   HOVER SCALE EN SECCIONES
+═══════════════════════════════════════════ */
+.s-left,.s-right{transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.s-left:hover{transform:translateX(6px) scale(1.03)}
+.s-right:hover{transform:translateX(-6px) scale(1.03)}
+.s-top{transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.s-top:hover{transform:translateY(4px) scale(1.02)}
+.s-bottom{transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.s-bottom:hover{transform:translateY(-4px) scale(1.02)}
+.s-center{transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.s-center:hover{transform:scale(1.04)}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer{
+  position:fixed;bottom:0;left:0;width:100%;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:7px 5vw;
+  background:rgba(2,2,9,.82);
+  border-top:1px solid rgba(232,200,106,.1);
+  backdrop-filter:blur(14px);
+  font-size:.55rem;color:var(--tenue);letter-spacing:.8px;
+}
+.soc{display:flex;gap:14px}
+.soc a{color:var(--tenue);text-decoration:none;font-size:.9rem;cursor:none;transition:color .2s,text-shadow .2s}
+.soc a:hover{color:var(--oro);text-shadow:0 0 12px rgba(232,200,106,.6)}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media(max-width:960px){
+  .hub{grid-template-columns:1fr 280px 1fr;grid-template-rows:100px 1fr 85px}
+  .portal-wrap{width:min(230px,75%)}
+}
+@media(max-width:700px){
+  .hub{grid-template-columns:90px 1fr 90px;grid-template-rows:80px 1fr 72px}
+  .s-left .img-frame,.s-right .img-frame{max-width:none}
+  .s-left .s-sub,.s-right .s-sub{display:none}
+  .s-left,.s-right{padding:6px}
+  .portal-wrap{width:min(200px,70%)}
+}
+@media(max-width:480px){
+  .hub{grid-template-columns:70px 1fr 70px}
+  .s-left .s-label,.s-right .s-label{font-size:.68rem}
+  .orionix-title{font-size:1.6rem;letter-spacing:5px}
+  .ciudadela-title{font-size:.9rem;letter-spacing:4px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ INTRO ANIMADO ══ -->
+<div id="intro">
+  <div class="intro-logo">ORIONIX</div>
+  <div class="intro-sub">La Ciudadela · Entrando al Universo</div>
+  <div class="intro-line"></div>
+</div>
+
+<!-- ══ CURSOR CÓSMICO ══ -->
+<div id="cursor"></div>
+
+<!-- ══ FONDO ══ -->
+<canvas id="cosmosCanvas"></canvas>
+<div class="nebula"></div>
+
+<!-- ══ NAVEGACIÓN ══ -->
+<nav>
+  <a href="." class="nav-marca"><span class="dot"></span>LA CIUDADELA</a>
+  <div class="nav-links">
+    <a href="hub.html" class="act">Inicio</a>
+    <a href="universo.html">Mundos</a>
+    <a href="#">Crónicas</a>
+    <div class="sep"></div>
+    <a href="comunidad.html">Comunidad</a>
+    <a href="#">Perfil</a>
+  </div>
+  <a href="index.html" class="nav-cta">✦ Hablar con AXEL</a>
+</nav>
+
+<!-- ══ HUB PRINCIPAL ══ -->
+<div class="hub-wrap">
+  <div class="hub">
+
+    <!-- SVG RAYOS DE ENERGÍA -->
+    <svg class="energy-svg" viewBox="0 0 1280 680" preserveAspectRatio="none" id="beamSVG">
+      <defs>
+        <!-- Filtros de glow -->
+        <filter id="gBlue" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="gTeal" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="gGold" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="gSoft" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur stdDeviation="8"/>
+        </filter>
+        <!-- Gradientes de rayos -->
+        <linearGradient id="gradLeft" x1="0%" y1="50%" x2="100%" y2="50%">
+          <stop offset="0%" stop-color="#4ab8e8" stop-opacity="0"/>
+          <stop offset="50%" stop-color="#4ab8e8" stop-opacity=".8"/>
+          <stop offset="100%" stop-color="#e8c86a" stop-opacity=".95"/>
+        </linearGradient>
+        <linearGradient id="gradRight" x1="100%" y1="50%" x2="0%" y2="50%">
+          <stop offset="0%" stop-color="#2ae8c8" stop-opacity="0"/>
+          <stop offset="50%" stop-color="#2ae8c8" stop-opacity=".8"/>
+          <stop offset="100%" stop-color="#e8c86a" stop-opacity=".95"/>
+        </linearGradient>
+        <linearGradient id="gradTop" x1="50%" y1="0%" x2="50%" y2="100%">
+          <stop offset="0%" stop-color="#fff6d6" stop-opacity="0"/>
+          <stop offset="40%" stop-color="#e8c86a" stop-opacity=".5"/>
+          <stop offset="100%" stop-color="#e8c86a" stop-opacity=".95"/>
+        </linearGradient>
+        <linearGradient id="gradDiagLT" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#4ab8e8" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#e8c86a" stop-opacity=".45"/>
+        </linearGradient>
+        <linearGradient id="gradDiagRT" x1="100%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#2ae8c8" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#e8c86a" stop-opacity=".45"/>
+        </linearGradient>
+        <!-- Gradiente de glow central -->
+        <radialGradient id="centerAura" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(232,200,106,.25)"/>
+          <stop offset="60%" stop-color="rgba(232,150,60,.08)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+        <!-- Paths para partículas animadas -->
+        <path id="pLeft" d="M 300 350 L 640 350" fill="none"/>
+        <path id="pRight" d="M 980 350 L 640 350" fill="none"/>
+        <path id="pTop" d="M 640 120 L 640 340" fill="none"/>
+        <path id="pDiagLT" d="M 220 160 L 590 335" fill="none"/>
+        <path id="pDiagRT" d="M 1060 160 L 690 335" fill="none"/>
+      </defs>
+
+      <!-- AURA CENTRAL SUAVE -->
+      <ellipse cx="640" cy="345" rx="160" ry="155" fill="url(#centerAura)" filter="url(#gSoft)">
+        <animate attributeName="rx" values="150;185;150" dur="5s" repeatCount="indefinite"/>
+        <animate attributeName="ry" values="145;175;145" dur="5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".5;1;.5" dur="5s" repeatCount="indefinite"/>
+      </ellipse>
+
+      <!-- RAYO IZQUIERDO (Forge → Centro) principal -->
+      <line x1="300" y1="350" x2="640" y2="350" stroke="url(#gradLeft)" stroke-width="2.8" filter="url(#gBlue)">
+        <animate attributeName="stroke-opacity" values=".5;1;.5" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-width" values="2;3.5;2" dur="3s" repeatCount="indefinite"/>
+      </line>
+      <!-- eco difuso -->
+      <line x1="300" y1="350" x2="640" y2="350" stroke="url(#gradLeft)" stroke-width="12" opacity=".15" filter="url(#gSoft)"/>
+
+      <!-- RAYO DERECHO (Crónicas → Centro) principal -->
+      <line x1="980" y1="350" x2="640" y2="350" stroke="url(#gradRight)" stroke-width="2.8" filter="url(#gTeal)">
+        <animate attributeName="stroke-opacity" values=".5;1;.5" dur="3.6s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-width" values="2;3.5;2" dur="3.6s" repeatCount="indefinite"/>
+      </line>
+      <line x1="980" y1="350" x2="640" y2="350" stroke="url(#gradRight)" stroke-width="12" opacity=".15" filter="url(#gSoft)"/>
+
+      <!-- RAYO SUPERIOR (ORIONIX → Centro) -->
+      <line x1="640" y1="120" x2="640" y2="340" stroke="url(#gradTop)" stroke-width="2.5" filter="url(#gGold)">
+        <animate attributeName="stroke-opacity" values=".4;.9;.4" dur="4.2s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-width" values="1.5;3;1.5" dur="4.2s" repeatCount="indefinite"/>
+      </line>
+      <line x1="640" y1="100" x2="640" y2="340" stroke="url(#gradTop)" stroke-width="14" opacity=".12" filter="url(#gSoft)"/>
+
+      <!-- DIAGONAL IZQUIERDA-SUPERIOR (como imagen 2 - estilo X) -->
+      <line x1="220" y1="160" x2="590" y2="335" stroke="url(#gradDiagLT)" stroke-width="1.8" filter="url(#gBlue)">
+        <animate attributeName="stroke-opacity" values=".2;.6;.2" dur="5.5s" repeatCount="indefinite"/>
+      </line>
+      <line x1="220" y1="160" x2="590" y2="335" stroke="#4ab8e8" stroke-width="8" opacity=".08" filter="url(#gSoft)"/>
+
+      <!-- DIAGONAL DERECHA-SUPERIOR -->
+      <line x1="1060" y1="160" x2="690" y2="335" stroke="url(#gradDiagRT)" stroke-width="1.8" filter="url(#gTeal)">
+        <animate attributeName="stroke-opacity" values=".2;.6;.2" dur="5s" repeatCount="indefinite"/>
+      </line>
+      <line x1="1060" y1="160" x2="690" y2="335" stroke="#2ae8c8" stroke-width="8" opacity=".08" filter="url(#gSoft)"/>
+
+      <!-- PARTÍCULA IZQUIERDA →  -->
+      <circle r="3.5" fill="#e8c86a" filter="url(#gGold)">
+        <animateMotion dur="2.8s" repeatCount="indefinite"><mpath href="#pLeft"/></animateMotion>
+        <animate attributeName="opacity" values="0;1;0" dur="2.8s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="2" fill="#4ab8e8" filter="url(#gBlue)">
+        <animateMotion dur="2.8s" begin="1.4s" repeatCount="indefinite"><mpath href="#pLeft"/></animateMotion>
+        <animate attributeName="opacity" values="0;.8;0" dur="2.8s" begin="1.4s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- PARTÍCULA DERECHA → -->
+      <circle r="3.5" fill="#e8c86a" filter="url(#gGold)">
+        <animateMotion dur="3.2s" repeatCount="indefinite"><mpath href="#pRight"/></animateMotion>
+        <animate attributeName="opacity" values="0;1;0" dur="3.2s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="2" fill="#2ae8c8" filter="url(#gTeal)">
+        <animateMotion dur="3.2s" begin="1.6s" repeatCount="indefinite"><mpath href="#pRight"/></animateMotion>
+        <animate attributeName="opacity" values="0;.8;0" dur="3.2s" begin="1.6s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- PARTÍCULA SUPERIOR ↓ -->
+      <circle r="3" fill="#fff6d6" filter="url(#gGold)">
+        <animateMotion dur="3.6s" repeatCount="indefinite"><mpath href="#pTop"/></animateMotion>
+        <animate attributeName="opacity" values="0;1;0" dur="3.6s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- PARTÍCULA DIAG LT -->
+      <circle r="2.5" fill="#4ab8e8" filter="url(#gBlue)">
+        <animateMotion dur="4s" repeatCount="indefinite"><mpath href="#pDiagLT"/></animateMotion>
+        <animate attributeName="opacity" values="0;.7;0" dur="4s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- PARTÍCULA DIAG RT -->
+      <circle r="2.5" fill="#2ae8c8" filter="url(#gTeal)">
+        <animateMotion dur="4.5s" repeatCount="indefinite"><mpath href="#pDiagRT"/></animateMotion>
+        <animate attributeName="opacity" values="0;.7;0" dur="4.5s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- PUNTO DE CONVERGENCIA CENTRAL -->
+      <circle cx="640" cy="345" r="6" fill="var(--oro)" filter="url(#gGold)">
+        <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".6;1;.6" dur="2s" repeatCount="indefinite"/>
+      </circle>
+    </svg>
+
+    <!-- ══ SECCIÓN TOP: ORIONIX ══ -->
+    <a class="s s-top" href="index.html">
+      <div class="orionix-halo"></div>
+      <div class="orionix-rays"></div>
+      <div class="orionix-title">ORIONIX</div>
+      <div class="orionix-sub">La Ciudadela · Universo de Inteligencia Artificial</div>
+    </a>
+
+    <!-- ══ SECCIÓN LEFT: La Forjadora de Diamantes ══ -->
+    <a class="s s-left" href="universo.html">
+      <div class="img-frame">
+        <img
+          src="https://image.pollinations.ai/prompt/crystal%20diamond%20forge%20anvil%20hammer%20glowing%20blue%20purple%20crystals%20fire%20epic%20fantasy%20realistic%20dramatic%20lighting%20cinematic%20high%20quality%20dark%20background?width=480&height=360&nologo=true&seed=42"
+          alt="La Forjadora de Diamantes"
+          loading="lazy"
+        >
+      </div>
+      <div class="s-label">La Forjadora de Diamantes</div>
+      <div class="s-sub">Forja el futuro con inteligencia</div>
+    </a>
+
+    <!-- ══ SECCIÓN CENTER: Portal Hogar ══ -->
+    <a class="s s-center" href="comunidad.html">
+      <div class="portal-label-top">✦ &nbsp;Hogar&nbsp; ✦</div>
+      <div class="portal-wrap">
+        <div class="portal-pulse"></div>
+        <div class="portal-pulse"></div>
+        <div class="portal-pulse"></div>
+        <div class="portal-ring-outer"></div>
+        <div class="portal-ring-mask"></div>
+        <div class="portal-inner">
+          <img
+            src="https://image.pollinations.ai/prompt/mystical%20cosmic%20home%20portal%20warm%20golden%20orange%20light%20glowing%20sphere%20galaxy%20swirl%20cozy%20house%20family%20silhouette%20nebula%20clouds%20epic%20fantasy%20realistic%20cinematic?width=400&height=400&nologo=true&seed=99"
+            alt="Portal Hogar"
+            loading="lazy"
+          >
+        </div>
+      </div>
+      <div class="portal-label-bot">✦ &nbsp;Hogar&nbsp; ✦</div>
+    </a>
+
+    <!-- ══ SECCIÓN RIGHT: Las Crónicas del Creador ══ -->
+    <a class="s s-right" href="#">
+      <div class="img-frame">
+        <img
+          src="https://image.pollinations.ai/prompt/ancient%20illuminated%20scroll%20magic%20book%20compass%20quill%20feather%20teal%20cyan%20mystical%20light%20cosmic%20knowledge%20epic%20fantasy%20realistic%20dramatic%20cinematic%20dark%20background%20high%20quality?width=480&height=360&nologo=true&seed=77"
+          alt="Las Crónicas del Creador"
+          loading="lazy"
+        >
+      </div>
+      <div class="s-label">Las Crónicas del Creador</div>
+      <div class="s-sub">Historia y KRC — El legado vivo</div>
+    </a>
+
+    <!-- ══ SECCIÓN BOTTOM: La Ciudadela ══ -->
+    <a class="s s-bottom" href="index.html">
+      <div class="ciudadela-sep"></div>
+      <div class="ciudadela-title">LA &nbsp; CIUDADELA</div>
+      <div class="ciudadela-sub">El corazón del universo Orionix</div>
+    </a>
+
+  </div><!-- /hub -->
+</div><!-- /hub-wrap -->
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <span>© 2026 ORIONIX · La Ciudadela &nbsp;·&nbsp; Todos los derechos reservados</span>
+  <div class="soc">
+    <a href="#" title="Facebook">&#9632;</a>
+    <a href="#" title="X / Twitter">&#10006;</a>
+    <a href="#" title="Instagram">&#11052;</a>
+    <a href="#" title="YouTube">&#9654;</a>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════
+   CURSOR COSMICO
+══════════════════════════════════════ */
+var cur=document.getElementById('cursor');
+document.addEventListener('mousemove',function(e){
+  cur.style.left=e.clientX+'px'; cur.style.top=e.clientY+'px';
+});
+document.addEventListener('mousedown',function(){ cur.style.width='28px'; cur.style.height='28px'; });
+document.addEventListener('mouseup',function(){ cur.style.width='20px'; cur.style.height='20px'; });
+document.querySelectorAll('a,.s').forEach(function(el){
+  el.addEventListener('mouseenter',function(){ cur.classList.add('hover'); });
+  el.addEventListener('mouseleave',function(){ cur.classList.remove('hover'); });
+});
+
+/* ══════════════════════════════════════
+   ESTRELLLAS CANVAS
+══════════════════════════════════════ */
+(function(){
+  var cv=document.getElementById('cosmosCanvas');
+  var ctx=cv.getContext('2d');
+  var W,H,DPR=Math.min(window.devicePixelRatio||1,2),stars=[];
+
+  function resize(){
+    W=window.innerWidth; H=window.innerHeight;
+    cv.width=W*DPR; cv.height=H*DPR;
+    cv.style.width=W+'px'; cv.style.height=H+'px';
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    buildStars();
+  }
+
+  function buildStars(){
+    stars=[];
+    var n=Math.min(500,Math.floor(W*H/3200));
+    for(var i=0;i<n;i++){
+      var cold=Math.random()<.25;
+      stars.push({
+        x:Math.random()*W, y:Math.random()*H,
+        r:Math.random()*1.6+.15,
+        a:Math.random(), s:Math.random()*.018+.004, d:Math.random()<.5?1:-1,
+        hue:cold?(200+Math.random()*60):60,
+        sat:cold?70:30
+      });
+    }
+  }
+
+  function loop(){
+    ctx.clearRect(0,0,W,H);
+    // Background gradient
+    var bg=ctx.createRadialGradient(W*.5,H*.35,0,W*.5,H*.6,Math.max(W,H)*.9);
+    bg.addColorStop(0,'rgba(16,10,40,.9)');
+    bg.addColorStop(.45,'rgba(6,4,20,.92)');
+    bg.addColorStop(1,'rgba(2,2,9,.97)');
+    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+
+    for(var i=0;i<stars.length;i++){
+      var s=stars[i];
+      s.a+=s.s*s.d;
+      if(s.a>1){s.a=1;s.d=-1;} if(s.a<.05){s.a=.05;s.d=1;}
+      ctx.globalAlpha=s.a;
+      if(s.r>1.1){
+        var grd=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*2);
+        grd.addColorStop(0,'hsl('+s.hue+','+s.sat+'%,95%)');
+        grd.addColorStop(1,'transparent');
+        ctx.fillStyle=grd;
+        ctx.beginPath(); ctx.arc(s.x,s.y,s.r*2,0,Math.PI*2); ctx.fill();
+      }
+      ctx.fillStyle='hsl('+s.hue+','+s.sat+'%,92%)';
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill();
+    }
+    ctx.globalAlpha=1;
+    requestAnimationFrame(loop);
+  }
+  resize(); window.addEventListener('resize',resize); loop();
+})();
+
+/* ══════════════════════════════════════
+   RESPONSIVE: reposicionar rayos SVG
+══════════════════════════════════════ */
+function reposBeams(){
+  var h=document.querySelector('.hub');
+  if(!h)return;
+  var r=h.getBoundingClientRect();
+  var svg=document.getElementById('beamSVG');
+  if(!svg)return;
+  var W=r.width, H=r.height;
+  var cols=[0,W/3,W/3*2,W];
+  var rows=[0,H*130/680,H*(130+1)/680,H];
+  var cx=W/2, cy=H*350/680;
+  var lx=W/3*1-10, rx=W/3*2+10;
+  var ty=H*120/680;
+
+  function updateLine(id,x1,y1,x2,y2){
+    var el=svg.querySelector('#'+id)||svg.querySelector('[data-id="'+id+'"]');
+  }
+}
+window.addEventListener('resize', reposBeams);
+setTimeout(reposBeams,100);
+</script>
+</body>
+</html>

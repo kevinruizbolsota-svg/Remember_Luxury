@@ -1,0 +1,25 @@
+{
+  "misiones": [
+    {
+      "id": "mision_001",
+      "title": "Pagina de Bienvenida ORIONIX",
+      "prompt": "Crea una pagina de bienvenida para ORIONIX con un hero section elegante, tres cards mostrando los agentes principales (AXEL, Qwen, Antigravity), un CTA para entrar a la Ciudadela, y un footer minimalista. Usa la estetica LUXURY con fondo #0b0b0d, dorado #e8c86a, fuentes Cinzel y Cormorant Garamond.",
+      "target_path": "ciudadela/forja_output/bienvenida_orionix.html",
+      "status": "pending",
+      "created_at": "2026-08-14T07:25:00Z"
+    },
+    {
+      "id": "mision_002",
+      "title": "Calculadora Imperial",
+      "prompt": "Crea una calculadora con estetica luxury que convierta euros a dolares y a pesos colombianos, con animaciones suaves y diseno minimalista. Fondo negro cosmos #0b0b0d, acentos dorados #e8c86a, fuentes Cinzel y Cormorant Garamond.",
+      "target_path": "ciudadela/forja_output/calculadora.html",
+      "status": "pending",
+      "created_at": "2026-08-14T07:25:00Z"
+    }
+  ],
+  "metadata": {
+    "version": "2.0",
+    "ultimo_ciclo": null,
+    "total_completadas": 0
+  }
+}

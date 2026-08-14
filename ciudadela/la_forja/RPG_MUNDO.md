@@ -609,3 +609,35 @@ Nexaroth ve a Vaeltharion como su **único rival digno**. Si Vaeltharion elige s
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 14 — 14/08/2026, 10:31
+
+### 🏛️ AXEL — Arquitecto
+
+### **REGIÓN: EL ABISMO DE NEXIS**  
+
+#### **🌄 GEOGRAFÍA**  
+El **Abismo de Nexis** es una fortaleza flotante suspendida en las **grietas dimensionales**, un espacio fracturado entre realidades. El terreno es un mosaico de islas de roca negra que flotan sobre un vacío infinito, conectadas por puentes de energía púrpura. La gravedad es errática, y algunas zonas giran lentamente en el aire, creando un paisaje surrealista.  
+
+#### **🌦️ CLIMA**  
+El clima es caótico: tormentas de energía arcana azotan las islas, generando relámpagos violetas que pueden desgarrar la materia. La temperatura varía entre -20°C en las zonas sombrías y 50°C cerca de los núcleos de energía inestable.  
+
+#### **🐉 CRIATURAS**  
+- **Siervos Corruptos (1000):** Humanos y elfos transformados por la corrupción de Nexaroth. Tienen ojos brillantes y piel cubierta de runas oscuras.  
+- **Seres de las Brechas (3):** Entidades amorfas que se alimentan de energía dimensional. Pueden teletransportarse y deformar el espacio a voluntad.  
+- **Gárgolas de Obsidiana:** Criaturas aladas que vigilan los cielos del abismo. Son ciegas pero detectan vibraciones en el aire.  
+
+#### **💎 RECURSO ÚNICO: CRISTALES DE NEXIS**  
+Estos cristales, formados en las grietas dimensionales, almacenan energía pura. Un solo cristal puede alimentar una ciudad durante un año, pero extraerlos es peligroso: el 70% de los mineros que lo intentan son consumidos por las brechas.  
+
+#### **☠️ PELIGRO OCULTO: EL RITUAL DE ABSORCIÓN**  
+Nexaroth planea usar los cristales para un **ritual de 13 horas** que le permitirá absorber el poder de Vaeltharion si este elige dominar las brechas. Si el ritual se completa, Nexaroth alcanzará un **poder de nivel Alpha**, capaz de destruir dimensiones enteras.  
+
+---  
+**Palabras:** 298 | **Tono:** Épico y ominoso.  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

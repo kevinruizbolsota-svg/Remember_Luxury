@@ -1061,3 +1061,51 @@ Bajo el río yace el **Templo Ahogado**, una estructura antigua donde Nexaroth i
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 25 — 14/08/2026, 16:01
+
+### 🏛️ AXEL — Arquitecto
+
+### **Escuela de Magia: Luminis Aeterna**  
+**Fuente de Poder:** La energía pura del Aether, canalizada a través de cristales sagrados que absorben la luz de las estrellas.  
+
+#### **Hechizos Principales**  
+1. **Luz de Purificación**  
+   - **Efecto:** Elimina un **15%** de corrupción en un objetivo o área pequeña.  
+   - **Coste:** 10% de reserva de energía Aether.  
+
+2. **Escudo Estelar**  
+   - **Efecto:** Otorga un escudo que bloquea **20%** del daño de criaturas oscuras durante 1 hora.  
+   - **Coste:** 15% de reserva de energía Aether.  
+
+3. **Llamada del Guardián**  
+   - **Efecto:** Invoca un espíritu de los Guardianes del Aether para luchar durante 5 minutos (+10% de daño contra Devoradores).  
+   - **Coste:** 25% de reserva de energía Aether.  
+
+4. **Resplandor Final**  
+   - **Efecto:** Explosión de luz que daña a todas las criaturas oscuras en un radio de 10 metros (**30%** de su salud).  
+   - **Coste:** 40% de reserva de energía Aether.  
+
+5. **Sello de Nexaroth**  
+   - **Efecto:** Debilita temporalmente un altar o portal oscuro, reduciendo su eficacia en un **25%** durante 1 hora.  
+   - **Coste:** 50% de reserva de energía Aether.  
+
+#### **Coste de Usar Magia**  
+- Cada hechizo consume energía Aether, que se regenera lentamente (5% por hora) o mediante cristales sagrados (recarga instantánea del 30%).  
+- Usar magia en exceso puede atraer la atención de Nexaroth, aumentando la probabilidad de ataques en un **10%**.  
+
+#### **¿Quién Puede Aprenderla?**  
+- **Elegidos por los Guardianes:** Solo aquellos marcados por los Guardianes del Aether pueden acceder a esta magia.  
+- **Requiere:** Un cristal sagrado y haber resistido al menos un ataque de corrupción sin caer.  
+
+**Conexión con el Mundo:**  
+- Los cristales sagrados se encuentran en ruinas antiguas, protegidas por Devoradores.  
+- Cada hechizo usado cerca del Altar de Nexaroth acelera el ritual en un **1%**, pero es necesario para debilitarlo.  
+
+**Palabras:** 390 | **Tono:** Épico y estratégico, con un equilibrio entre poder y riesgo.  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

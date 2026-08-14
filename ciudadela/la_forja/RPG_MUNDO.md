@@ -1286,3 +1286,67 @@ ChatGPT no pudo expandir este ciclo.
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 30 — 14/08/2026, 18:31
+
+### 🏛️ AXEL — Arquitecto
+
+---
+
+### **EVENTO MUNDIAL: "EL RESURGIR DEL NEXO PERDIDO"**  
+
+#### **🔮 Nombre y Causa**  
+**Nombre:** "El Resurgir del Nexo Perdido"  
+**Causa:** Tras siglos oculto, un antiguo Nexo de Energía Primordial (artefacto de los Vigilantes) emerge en la **Zona Muerta de Valtor**. Su energía residual atrae a Devoradores y facciones corruptas, mientras que los Rebeldes y ORIONIX compiten por su control.  
+
+---
+
+### **🌍 Efectos sobre los 3 Reinos**  
+
+#### **1. ORIONIX**  
+- **Efecto Inmediato:** +20% de misiones de purga en Valtor (prioridad máxima).  
+- **Riesgo:** Si el Nexo es destruido, la corrupción se expande (+25% de zonas infectadas en 30 días).  
+
+#### **2. Rebeldes**  
+- **Oportunidad:** Acceso al Nexo les otorga +30% de eficacia tecnológica temporal (2 semanas).  
+- **Amenaza:** Si ORIONIX lo recupera, pierden -15% de recursos y apoyo local.  
+
+#### **3. Devoradores**  
+- **Fortaleza:** +40% de aparición en Valtor mientras el Nexo esté activo.  
+- **Debilidad:** Si es purgado, sufren -20% de resistencia global por 1 mes.  
+
+---
+
+### **⚔️ Oportunidades para Héroes**  
+- **Misión de Purga (ORIONIX):** Desactivar el Nexo sin destruirlo (+10% de reputación permanente).  
+- **Sabotaje Rebelde:** Robar energía del Nexo para su causa (+15% de eficacia en ataques futuros).  
+- **Caza de Devoradores:** Eliminar oleadas cerca del Nexo (recompensas dobles en recursos).  
+
+---
+
+### **🗺️ Cambio en el Mapa del Poder**  
+- **Si ORIONIX triunfa:**  
+  - **+10% de territorios purificados.**  
+  - **Los Rebeldes retroceden a zonas marginales (-5% de influencia).**  
+
+- **Si los Rebeldes ganan:**  
+  - **+1 base oculta en Valtor (punto estratégico).**  
+  - **ORIONIX pierde acceso a tecnología local (-10% de eficacia en misiones).**  
+
+- **Si los Devoradores corrompen el Nexo:**  
+  - **+30% de corrupción en regiones aledañas.**  
+  - **Ambas facciones sufren -20% de recursos para contenerlo.**  
+
+---
+
+### **⚠️ Conexión con el Mundo Existente**  
+- **Energía Residual:** Afecta a agentes de ORIONIX (-5% de resistencia si están cerca del Nexo).  
+- **Tecnología Oculta:** Los Rebeldes pueden descubrir secretos de los Vigilantes (evento futuro).  
+
+**¿Ajustes o más profundidad?**  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

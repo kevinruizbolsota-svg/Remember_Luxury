@@ -346,3 +346,59 @@ ChatGPT no pudo expandir este ciclo.
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 9 — 14/08/2026, 08:01
+
+### 🏛️ AXEL — Arquitecto
+
+### **MISIÓN RPG CICLO 9: "EL SUSURRO DE UMBRION"**  
+
+#### **📜 Nombre y Cliente**  
+- **Nombre:** *El Susurro de Umbrion*  
+- **Cliente:** *Los Vigilantes del Umbral* (facción secreta que monitorea la energía oscura).  
+
+#### **🎯 Objetivos**  
+- **Aparente:** Los jugadores deben infiltrarse en un templo abandonado para recuperar un *Artefacto de Purificación* que supuestamente frenará la corrupción.  
+- **Real:** El artefacto es una trampa de los Sectarios de Umbrion para liberar un *Núcleo de Corrupción*.  
+
+---  
+
+### **🎭 3 Actos con Giros Narrativos**  
+
+#### **🔮 Acto 1: La Ofrenda**  
+- Los Vigilantes envían a los jugadores al *Templo de las Sombras*, donde el artefacto está custodiado por *Espectros de Umbrion* (enemigos nivel 15-18).  
+- **Giro:** Al recuperar el artefacto, este emite un *susurro* que reduce la *Corrupción* de los jugadores en -1... pero también les otorga *Marca del Engaño* (sin su conocimiento).  
+
+#### **⚡ Acto 2: La Traición**  
+- Al regresar, los Vigilantes revelan que el artefacto es falso y los jugadores han sido *manipulados*.  
+- **Giro:** Los Sectarios atacan el escondite de los Vigilantes, forzando una batalla donde los jugadores deben elegir:  
+  - **Defender a los Vigilantes** (dificultad +1, recompensa: *Amuleto de Vigilancia*).  
+  - **Unirse a los Sectarios** (ganan *Poder Oscuro* pero +2 Corrupción).  
+
+#### **💥 Acto 3: El Despertar**  
+- Si los jugadores eligen a los Vigilantes, descubren que el *Artefacto de Purificación* real está en manos de un *Espectro Primordial* (jefe nivel 20).  
+- **Giro Final:** Derrotarlo revela que los Vigilantes también están *corrompidos*, y el artefacto es una *prueba de lealtad* para filtrar a los débiles.  
+
+---  
+
+### **🏆 Recompensa vs. Consecuencia**  
+- **Éxito:**  
+  - *Artefacto de Purificación* (-3 Corrupción acumulada).  
+  - *Ascenso en los Vigilantes* (acceso a misiones exclusivas).  
+- **Fracaso:**  
+  - *Marca del Engaño* se activa (+1 Corrupción por misión hasta purificarse).  
+  - Los Sectarios los cazan como *traidores* (-2 en pruebas de sigilo).  
+
+---  
+
+**📊 Estadísticas Clave:**  
+- **Dificultad Media:** 17/20 (depende de elecciones).  
+- **Palabras:** 390 | **Conexión con Ciclo 8:** Confirmada (corrupción acumulada).  
+
+**⚠️ Nota:** Esta misión profundiza en la *dualidad moral* del mundo, donde ni los "héroes" son confiables. ¿Hasta dónde llegarán los jugadores por poder?  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

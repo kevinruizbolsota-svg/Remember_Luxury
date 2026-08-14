@@ -1109,3 +1109,45 @@ ChatGPT no pudo expandir este ciclo.
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 26 — 14/08/2026, 16:31
+
+### 🏛️ AXEL — Arquitecto
+
+### **Criatura del Mundo ORIONIX RPG: El Devorador de Cristales**  
+
+#### **Nombre y Descripción Física**  
+- **Nombre:** Devorador de Cristales (*Cristavorex*)  
+- **Descripción:** Una criatura biomecánica de 3 metros de altura, con un exoesqueleto de cristales negros fusionados con metal arcano. Sus ojos brillan con un tono violeta intenso, y sus garras están impregnadas de energía corruptora. Su boca se abre en un espiral de púas cristalinas, capaz de absorber magia pura.  
+
+#### **Hábitat**  
+- **Ubicación:** Ruinas del Altar de Nexaroth y zonas cercanas a cristales sagrados.  
+- **Comportamiento:** Patrulla en solitario, atrayendo magos descuidados para drenar su energía y alimentar el ritual de Nexaroth.  
+
+#### **Estadísticas de Combate**  
+| **Atributo** | **Valor** |  
+|-------------|----------|  
+| **HP**      | 450      |  
+| **ATQ**     | 85 (Físico + Corrupción) |  
+| **DEF**     | 70 (Resistencia a Magia) |  
+| **VEL**     | 40       |  
+
+#### **Botín Especial**  
+- **Cristal Corrupto (10% de drop):** Usable para reforzar armas con +15 ATQ, pero reduce la resistencia a corrupción en un 5%.  
+- **Núcleo de Devorador (5% de drop):** Permite fabricar pociones que regeneran el 30% de HP durante 10 segundos, con un 20% de probabilidad de sufrir corrupción.  
+
+#### **Leyenda Asociada**  
+Se dice que los Devoradores son fragmentos del primer hechizo fallido de Nexaroth, convertidos en criaturas para sabotear a los magos. Cada Devorador destruido retrasa el ritual en un **0.5%**, pero su muerte libera una onda de corrupción que afecta a todos en un radio de 50 metros (-10% resistencia por 1 minuto).  
+
+**Palabras:** 280 | **Tono:** Oscuro y estratégico, con énfasis en riesgo-recompensa.  
+**Conexión con el Mundo:**  
+- Los Devoradores son clave para el balance del ritual de Nexaroth.  
+- Su presencia aumenta un **15%** al usar magia cerca de cristales sagrados.  
+
+¿Necesitas ajustar algo o prefieres expandir otra área del mundo?  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

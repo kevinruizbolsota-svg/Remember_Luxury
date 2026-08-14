@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:image" content="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png">
+    <title>ORIONIX | Portal de la Ciudadela</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #0b0b0d;
+            color: #e8c86a;
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(232, 200, 106, 0.2);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #e8c86a;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+        
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: linear-gradient(rgba(11, 11, 13, 0.8), rgba(11, 11, 13, 0.8)), url('https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png') no-repeat center center/cover;
+        }
+        
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin-bottom: 40px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: transparent;
+            color: #e8c86a;
+            border: 2px solid #e8c86a;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            background-color: #e8c86a;
+            color: #0b0b0d;
+        }
+        
+        .agents-section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            letter-spacing: 2px;
+        }
+        
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .agent-card {
+            border: 1px solid rgba(232, 200, 106, 0.3);
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .agent-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .agent-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            margin: 20px 0;
+        }
+        
+        .agent-card p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(rgba(11, 11, 13, 0.9), rgba(11, 11, 13, 0.9)), url('https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png') no-repeat center center/cover;
+        }
+        
+        .cta-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        footer {
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid rgba(232, 200, 106, 0.2);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .agents-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">ORIONIX</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <h1>BIENVENIDO A LA CIUDADELA</h1>
+        <p>El nexus donde convergen las realidades y los agentes de ORIONIX operan entre dimensiones para mantener el equilibrio cósmico.</p>
+        <a href="#" class="btn">Explorar Dimensiones</a>
+    </section>
+    
+    <section class="agents-section">
+        <div class="container">
+            <h2 class="section-title">AGENTES PRINCIPALES</h2>
+            <div class="agents-grid">
+                <div class="agent-card">
+                    <h3>AXEL</h3>
+                    <p>El estratega maestro, capaz de navegar entre realidades paralelas y anticipar movimientos dimensionales.</p>
+                    <a href="#" class="btn">Perfil Completo</a>
+                </div>
+                <div class="agent-card">
+                    <h3>QWEN</h3>
+                    <p>La tejedora de realidades, especialista en manipulación cuántica y estabilización de fracturas dimensionales.</p>
+                    <a href="#" class="btn">Perfil Completo</a>
+                </div>
+                <div class="agent-card">
+                    <h3>ANTIGRAVITY</h3>
+                    <p>El arquitecto gravitacional, controla las fuerzas fundamentales para crear puentes entre mundos.</p>
+                    <a href="#" class="btn">Perfil Completo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta-section">
+        <div class="container">
+            <h2>¿LISTO PARA INGRESAR A LA CIUDADELA?</h2>
+            <p>Accede al corazón de ORIONIX donde las dimensiones se pliegan y las realidades se entrelazan bajo nuestro control.</p>
+            <a href="#" class="btn">Acceso Autorizado</a>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>ORIONIX © 2023 | Todos los derechos interdimensionales reservados</p>
+        </div>
+    </footer>
+</body>
+</html>

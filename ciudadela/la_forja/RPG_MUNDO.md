@@ -90,3 +90,35 @@ Su conexión con el Árbol Cabalístico es única: es el único ser cuya existen
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 3 — 14/08/2026, 05:01
+
+### 🏛️ AXEL — Arquitecto
+
+### **Personaje Villano: Lord Umbrion el Devorador de Esencias**  
+
+#### **Origen Oscuro**  
+Nacido en las profundidades de *Umbrion*, el reino de las sombras eternas, Lord Umbrion fue una vez un Arquitecto del Destino que sucumbió a la corrupción de los *Fragmentos Perdidos*. Al absorber el primer fragmento, su alma se fusionó con la oscuridad primordial, transformándolo en un depredador de esencias mágicas.  
+
+#### **Poderes**  
+- **Devorar Esencias:** Puede absorber la energía vital y mágica de sus víctimas (+3 a *Fuerza Oscura* por cada esencia consumida).  
+- **Manipulación de Sombras:** Controla las sombras para crear ilusiones o ataques físicos (Alcance: 30 metros).  
+- **Resonancia de Umbrion:** En *Lumenholm*, su presencia reduce la magia en un 15%, como se menciona en el estado actual del mundo.  
+
+#### **Motivación**  
+Busca reunir los *7 Fragmentos Perdidos* para convertirse en un dios oscuro y reescribir la realidad. Su objetivo es destruir *Malkuth* y *Kether*, dejando solo el caos como legado.  
+
+#### **Punto Débil**  
+- **Luz Pura:** La magia basada en luz (como la de *Aetherria*) le inflige daño crítico (x2 daño).  
+- **Dependencia de Fragmentos:** Si pierde un fragmento, su poder disminuye un 20%.  
+
+#### **Jerarquía del Mal**  
+Lord Umbrion ocupa el *Nivel 4* en la jerarquía de los villanos, solo superado por los *Arquitectos Caídos*. Su influencia se extiende a través de cultos oscuros y criaturas corrompidas.  
+
+**Nota:** Su conexión con los *Puentes Activos* lo hace vulnerable, pero también lo acerca a su objetivo final. ¿Lograrán los héroes detenerlo antes de que devore el último fragmento?  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

@@ -1235,3 +1235,54 @@ ChatGPT no pudo expandir este ciclo.
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 29 — 14/08/2026, 18:01
+
+### 🏛️ AXEL — Arquitecto
+
+### **MISIÓN RPG CICLO 29 — "EL NEXO OCULTO"**  
+**🗡️ Nombre:** "El Nexo Oculto"  
+**👥 Cliente:** Los Vigilantes (facción secreta dentro de ORIONIX)  
+**🎯 Objetivo Aparente:** Recuperar un artefacto antiguo, el "Corazón de Valtor", de las Ruinas de Valtor para purgar la corrupción del área (+12% eficacia de purga temporal).  
+**🎭 Objetivo Real:** Los Vigilantes buscan usar el artefacto para canalizar energía residual y "limpiar" agentes corruptos sin su consentimiento.  
+
+---
+
+### **ACTOS Y GIROS NARRATIVOS**  
+#### **🔹 Acto 1: La Travesía**  
+- **Tarea:** Infiltrarse en las Ruinas de Valtor, evitando Devoradores (15% más frecuentes).  
+- **Giro:** Los agentes descubren marcas de Vigilantes en las ruinas, sugiriendo una presencia previa no revelada.  
+
+#### **🔹 Acto 2: El Corazón Engañoso**  
+- **Tarea:** Activar el artefacto con códigos proporcionados por los Vigilantes.  
+- **Giro:** El artefacto emite una frecuencia que afecta a los agentes (-5% resistencia a la corrupción si cooperan; +10% si se resisten).  
+
+#### **🔹 Acto 3: La Elección Final**  
+- **Tarea:** Decidir si entregar el artefacto o sabotearlo.  
+- **Giro:** Si lo entregan, los Vigilantes purgan a un agente aliado al azar (consecuencia oculta). Si lo destruyen, liberan una onda de corrupción (+20% en las ruinas).  
+
+---
+
+### **RECOMPENSAS Y CONSECUENCIAS**  
+#### **✅ Éxito:**  
+- **Cooperación:** +5% resistencia a la corrupción permanente (energía residual).  
+- **Rebelión:** Acceso a tecnología oculta de los Vigilantes (+15% eficacia contra Devoradores).  
+
+#### **❌ Fracaso:**  
+- **Entrega del Artefacto:** -25% eficacia de purga en futuras misiones (desconfianza).  
+- **Destrucción del Artefacto:** +15% aparición de Devoradores en otras zonas.  
+
+---  
+
+### **CONEXIÓN CON EL MUNDO**  
+- **Impacto en ORIONIX:**  
+  - **Confianza:** Si se descubre la verdad, la desconfianza hacia los Vigilantes aumenta (30% menos cooperación en futuras misiones).  
+  - **Corrupción:** La energía liberada afecta a otros agentes (-10% resistencia si el artefacto se destruye).  
+
+¿Necesitas ajustar estadísticas o añadir más capas de conflicto?  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

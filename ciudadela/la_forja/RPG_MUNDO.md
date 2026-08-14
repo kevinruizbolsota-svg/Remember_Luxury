@@ -809,3 +809,55 @@ Su objetivo declarado es "proteger el equilibrio dimensional", pero en secreto b
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 19 — 14/08/2026, 13:01
+
+### 🏛️ AXEL — Arquitecto
+
+### **MISIÓN RPG CICLO 19 — "LA TORRE DE LOS SUSURROS"**  
+
+#### **🔹 Nombre:** "La Torre de los Susurros"  
+#### **🔹 Cliente:** ORIONIX (Mesa Directiva)  
+#### **🔹 Objetivo Aparente:** Investigar la desaparición de los 3 agentes en la Torre de los Vigilantes y recuperar el artefacto *Ojo de Nexaroth*.  
+#### **🔹 Objetivo Real:** Descubrir si los Vigilantes están corrompidos por los Devoradores y evitar que usen el artefacto para abrir un portal dimensional.  
+
+---
+
+### **🎭 ACTO 1: LA INFILTRACIÓN**  
+**Giro Narrativo:** Los agentes ingresan a la Torre, donde descubren que los Vigilantes no son los captores, sino víctimas de una entidad que habita en sus sueños (un Devorador disfrazado).  
+- **Dato Clave:** 68% de los Vigilantes muestran patrones de sueño alterados.  
+- **Consecuencia:** Si fallan en infiltrarse sin ser detectados, la Torre se sellará y perderán acceso al artefacto.  
+
+---
+
+### **🎭 ACTO 2: LOS SUEÑOS CORROMPIDOS**  
+**Giro Narrativo:** Los agentes deben entrar en un sueño colectivo usando tecnología ORIONIX para liberar a los Vigilantes.  
+- **Estadística:** Solo el 12% de los agentes entrenados han sobrevivido a pruebas similares.  
+- **Consecuencia:** Si no logran romper el vínculo, el Devorador se apoderará de sus mentes.  
+
+---
+
+### **🎭 ACTO 3: EL OJO DE NEXAROTH**  
+**Giro Narrativo:** El artefacto no es un objeto físico, sino un Vigilante inocente poseído. Destruirlo significa matar al hospedador.  
+- **Dilema Moral:** ¿Sacrifican a uno para salvar a muchos?  
+- **Consecuencia:** Si fallan, el portal se abre y los Devoradores invaden el mundo.  
+
+---
+
+### **🏆 RECOMPENSA**  
+- **Aliados:** Los Vigilantes se unen a ORIONIX, aumentando un 40% la eficacia contra brechas dimensionales.  
+- **Artefacto:** El *Ojo de Nexaroth* purificado otorga visión multidimensional.  
+
+### **💀 CONSECUENCIA DE FALLAR**  
+- **Pérdida:** Los 3 agentes desaparecidos mueren, y ORIONIX pierde credibilidad.  
+- **Amenaza:** Los Devoradores ganan un punto de entrada al mundo.  
+
+---  
+**Palabras:** 390 | **Tono:** Misterioso, estratégico y moralmente ambiguo.  
+**Conexión:** Vincula directamente con la corrupción de los Vigilantes y la amenaza de los Devoradores.
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

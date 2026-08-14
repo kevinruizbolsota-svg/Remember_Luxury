@@ -1,29 +1,55 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIONIX NEXUS · Chat Multi-Agente</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#0b0b0d;--bg2:#111114;--bg3:#18181c;--card:#1c1c22;
-  --gold:#e8c86a;--gold-dim:rgba(232,200,106,.3);--gold-glow:rgba(232,200,106,.12);
-  --text:#f0ece4;--muted:#8a8578;--border:rgba(232,200,106,.15);
-  --green:#4ade80;--red:#f87171;--blue:#60a5fa;--purple:#a78bfa;--cyan:#22d3ee;
-  --axel:#e8c86a;--qwen:#60a5fa;--claude:#d97757;--chatgpt:#4ade80;
-  --copilot:#a78bfa;--antigravity:#22d3ee;--n8n:#f87171;
+File name: Nexus.html.md
+Language: 
+var last=mem.slice(-10).reverse().map(function(m,i){return (i+1)+'. ['+m.type+'] '+esc(m.content.slice(0,80));}).join('\n');
+    conv.messages.push({role:'agent',agent:'qwen',ts:Date.now(),text:'**Memoria Largo Plazo** ('+mem.length+' registros)\n\n'+(last||'Vacía')});
+  }
+  saveState(); renderChat();
 }
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',serif;height:100vh;overflow:hidden;display:flex}
-h1,h2,h3,h4,.btn,.agent-name,.sidebar-title,.cmd{font-family:'Cinzel',serif}
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-::-webkit-scrollbar-thumb:hover{background:var(--gold-dim)}
-.sidebar{width:280px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;transition:margin-left .3s}
-.sidebar.collapsed{margin-left:-280px}
-</style>
-</head>
-<body><p>LOADING...</p></body>
+
+function startLoop(mission,conv){
+  state.loopActive=true; state.loopCount=0; state.loopMission=mission;
+  var badge=document.getElementById('modeBadge'); badge.textContent='/LOOP ACTIVO'; badge.classList.add('loop');
+  conv.messages.push({type:'loop-banner',text:'LOOP INICIADO · '+mission,ts:Date.now()});
+  addLongMem('loop','Loop iniciado: '+mission);
+  saveState(); renderChat(); runLoopCycle(conv);
+}
+function stopLoop(){ state.loopActive=false; if(state.loopTimer)clearTimeout(state.loopTimer); var b=document.getElementById('modeBadge'); b.textContent='Normal'; b.classList.remove('loop'); }
+function runLoopCycle(conv){
+  if(!state.loopActive) return;
+  var max=parseInt(document.getElementById('cfgLoopMax').value)||10;
+  if(state.loopCount>=max){
+    conv.messages.push({type:'loop-banner',text:'META CUMPLIDA · '+state.loopCount+' ciclos',ts:Date.now()});
+    stopLoop(); saveState(); renderChat();
+    reportN8n({evento:'loop_completado',detalle:state.loopMission,ciclos:state.loopCount});
+    return;
+  }
+  state.loopCount++;
+  conv.messages.push({type:'loop-banner',text:'CICLO '+state.loopCount+'/'+max+' · '+state.loopMission,ts:Date.now()});
+  saveState(); renderChat();
+  AGENTS.filter(function(a){return a.enabled;}).slice(0,3).forEach(function(a){ agentRespond(a,'[LOOP ciclo '+state.loopCount+'] '+state.loopMission,conv,false); });
+  reportN8n({evento:'loop_ciclo',detalle:'Ciclo '+state.loopCount+' de: '+state.loopMission});
+  var interval=(parseInt(document.getElementById('cfgLoopInterval').value)||30)*1000;
+  state.loopTimer=setTimeout(function(){runLoopCycle(conv);},interval);
+}
+function reportN8n(p){ if(!document.getElementById('cfgLoopReport').checked)return; fetch('https://lkevinruizl.app.n8n.cloud/webhook/orionix-bridge',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)}).catch(function(){}); }
+
+function openSettings(){ document.getElementById('settingsModal').classList.add('open'); }
+function closeSettings(){ document.getElementById('settingsModal').classList.remove('open'); }
+function showMemory(){ var mem=getLongMem(); var list=mem.slice(-15).reverse().map(function(m,i){return (i+1)+'. **['+m.type+']** '+esc(m.content.slice(0,100));}).join('\n')||'Memoria vacía'; var c=currentConv(); if(!c)newChat(); var cc=currentConv(); cc.messages.push({role:'agent',agent:'qwen',ts:Date.now(),text:'**MEMORIA LARGO PLAZO** ('+mem.length+')\n\n'+list}); saveState(); renderChat(); closeSettings(); }
+function clearLongMemory(){ if(confirm('¿Borrar memoria a largo plazo?')) saveLongMem([]); }
+function clearAllHistory(){ if(confirm('¿Borrar TODO el historial?')){ state.conversations=[]; state.currentId=null; stopLoop(); saveState(); renderHistory(); renderChat(); closeSettings(); } }
+function exportData(){ var d={exportado:new Date().toISOString(),conversaciones:state.conversations,memoria:getLongMem()}; var b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'}); var a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='orionix-nexus-backup.json'; a.click(); }
+function importData(e){ var f=e.target.files[0]; if(!f)return; var r=new FileReader(); r.onload=function(ev){ try{ var d=JSON.parse(ev.target.result); if(d.conversaciones){state.conversations=d.conversaciones;saveState();} if(d.memoria)saveLongMem(d.memoria); renderHistory(); renderChat(); alert('Importado.'); }catch(err){alert('Archivo inválido.');} }; r.readAsText(f); }
+function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('collapsed'); }
+
+/* ── INIT + listeners robustos ── */
+loadState(); renderAgents(); renderHistory(); renderChat();
+var _btn=document.getElementById('sendBtn');
+var _inp=document.getElementById('msgInput');
+_btn.addEventListener('click',function(e){ e.preventDefault(); sendMessage(); });
+_inp.addEventListener('keydown',function(e){ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); sendMessage(); } });
+_inp.addEventListener('input',function(){ autoResize(_inp); });
+console.log('[NEXUS v2] Listo. sendMessage =',typeof sendMessage);
+</script>
+</body>
 </html>

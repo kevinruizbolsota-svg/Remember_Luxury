@@ -257,6 +257,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
    CONFIGURACIÓN
 ══════════════════════════════════════════════════════ */
 const WH = 'https://lkevinruizl.app.n8n.cloud/webhook/';
+const GATEWAY = 'https://lkevinruizl.app.n8n.cloud/webhook/kabalion-chat';
 
 /* ══════════════════════════════════════════════════════
    DATOS DE LOS 22 SEFIROT
@@ -584,13 +585,14 @@ async function sendChat(sid){
   toast('📡 Enviando a '+s.agente.split('·')[0].trim()+'…');
 
   try{
-    const res=await fetch(WH+s.wh,{
+    const agenteId=s.wh?s.wh.replace('axel-brain','axel').replace('orionix-claude','claude').replace('orionix-chatgpt','chatgpt').replace('orionix-copilot','copilot').replace('orionix-qwen-code','qwen'):'axel';
+    const res=await fetch(GATEWAY,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({mensaje:text,source:'kabalion-2d',agente:s.agente,sefirot:s.nombre}),
+      body:JSON.stringify({mensaje:text,agente:agenteId,sesion:'kbl-'+sid,sefirot:s.nombre}),
     });
     const data=await res.json().catch(()=>({respuesta:await res.text()}));
-    const reply=data.resultado||data.respuesta||data.output||data.message||data.content||JSON.stringify(data).slice(0,200);
+    const reply=data.respuesta||data.resultado||data.output||data.message||data.content||JSON.stringify(data).slice(0,200);
     chatLogs[sid].push({role:'agent',text:reply});
     toast('✓ Respuesta de '+s.agente.split('·')[0].trim());
   }catch(e){
@@ -621,9 +623,9 @@ async function sendBbar(){
   status.textContent='Enviando…';
   document.getElementById('bbarSend').disabled=true;
   try{
-    const res=await fetch(WH+target,{
+    const res=await fetch(GATEWAY,{
       method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({mision:msg,mensaje:msg,origen:'kevin',source:'kabalion-2d'}),
+      body:JSON.stringify({mision:msg,mensaje:msg,agente:target,origen:'kevin',source:'kabalion-2d'}),
     });
     const d=await res.json().catch(()=>({}));
     status.textContent='✓ '+new Date().toLocaleTimeString('es');
@@ -643,9 +645,10 @@ async function broadcast(){
   status.textContent='Broadcast…';
   const webhooks=['axel-brain','orionix-claude','orionix-chatgpt','orionix-copilot'];
   toast('📡 Broadcast a '+webhooks.length+' agentes…');
-  const results=await Promise.allSettled(webhooks.map(wh=>
-    fetch(WH+wh,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({mision:msg,mensaje:msg,origen:'kevin',source:'broadcast-kabalion'})})
+  const agentes=['axel','claude','chatgpt','copilot'];
+  const results=await Promise.allSettled(agentes.map(ag=>
+    fetch(GATEWAY,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({mision:msg,mensaje:msg,agente:ag,origen:'kevin',source:'broadcast-kabalion'})})
   ));
   const ok=results.filter(r=>r.status==='fulfilled').length;
   status.textContent=ok+'/'+webhooks.length+' ✓ '+new Date().toLocaleTimeString('es');

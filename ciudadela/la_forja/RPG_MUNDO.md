@@ -906,3 +906,49 @@ Misterio, sacrificio, corrupción, alianzas frágiles.
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 21 — 14/08/2026, 14:01
+
+### 🏛️ AXEL — Arquitecto
+
+### **🌌 MUNDO ORIONIX RPG — "LAS SOMBRAS DE NEXAROTH"**  
+
+#### **✨ COSMOLOGÍA**  
+El universo de **ORIONIX RPG** es un tejido de realidades superpuestas, dividido en tres reinos primordiales, regidos por fuerzas cósmicas en eterno conflicto. El eje central es el **Nexus**, un plano interdimensional donde los agentes de ORIONIX operan para mantener el equilibrio. Pero ahora, el **Templo de las Sombras**, una estructura antigua en el Nexus, se ha convertido en el epicentro de una invasión de los **Devoradores**, criaturas de pura corrupción.  
+
+---
+
+### **🏰 REINOS PRINCIPALES**  
+
+1. **NEXAROTH (El Reino de las Sombras)**  
+   - **Color:** Púrpura oscuro con destellos dorados.  
+   - **Esencia:** Corrupción y poder arcano prohibido.  
+   - **Descripción:** Un mundo de ruinas flotantes y niebla eterna, donde los Devoradores han convertido a los antiguos sabios en sus siervos. El *Ojo de Nexaroth*, un artefacto místico, es la clave para sellar o abrir portales dimensionales.  
+
+2. **AETHERIA (El Reino de los Vigilantes)**  
+   - **Color:** Plata y azul cobalto.  
+   - **Esencia:** Orden y vigilancia cósmica.  
+   - **Descripción:** Una fortaleza flotante en el Nexus, hogar de los Vigilantes, seres de energía pura que protegen las leyes del universo. Su tecnología arcana es la única capaz de purificar la corrupción de Nexaroth.  
+
+3. **VERDANTIS (El Reino Neutral)**  
+   - **Color:** Verde esmeralda y oro.  
+   - **Esencia:** Vida y ambigüedad moral.  
+   - **Descripción:** Un mundo de bosques infinitos y criaturas ancestrales. Sus habitantes, los **Mercenarios del Umbral**, son clave para inclinar la balanza en la guerra entre Aetheria y Nexaroth.  
+
+---
+
+### **⚡ ESTADO ACTUAL DEL MUNDO**  
+- **Brechas dimensionales:** **15% del Nexus está infectado** por la corrupción de Nexaroth.  
+- **Aliados:** Los Vigilantes (Aetheria) están **70% dispuestos a unirse a ORIONIX**, pero exigen la purificación del ritual.  
+- **Amenaza:** Si los Devoradores consolidan su base en el Templo de las Sombras, **el 10% de los territorios neutrales caerán en 30 días**.  
+
+#### **🔮 PALABRAS CLAVE**  
+Sacrificio, lealtad frágil, tecnología arcana, corrupción irreversible.  
+
+**Palabras:** 390 | **Tono:** Épico y oscuro, con un enfoque en decisiones estratégicas y consecuencias permanentes.  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

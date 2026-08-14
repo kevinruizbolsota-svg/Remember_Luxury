@@ -571,3 +571,41 @@ Vaeltharion está vinculado al **Árbol de Kether (Corona)**, simbolizando su de
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 13 — 14/08/2026, 10:01
+
+### 🏛️ AXEL — Arquitecto
+
+### **🔥 VILLANO: LORD NEXAROTH, EL TEJEDOR DE SOMBRAS**  
+
+#### **🌑 ORIGEN OSCURO**  
+Nexaroth nació en las **Grietas de Duskharrow**, un lugar donde la luz del Eclipse nunca llega. Fue el primer humano infectado por el **Virus de la Eternidad**, una plaga creada por los vampiros de la Hoz para convertir a los mortales en esclavos inmortales. Sin embargo, Nexaroth mutó más allá de su control, absorbiendo la esencia de las brechas dimensionales y convirtiéndose en un **ente híbrido de sombra y carne**.  
+
+#### **⚡ PODERES**  
+1. **Tejedor de Realidades:** Puede manipular las brechas cercanas al Árbol de Kether, creando ilusiones que se vuelven realidad (45% de efectividad en humanos, 80% en seres mágicos).  
+2. **Infección de la Eternidad:** Su contacto corrompe a los seres vivos, drenando su voluntad (3 minutos para convertir a un humano en un siervo).  
+3. **Invisibilidad en las Sombras:** Se mueve como una niebla oscura, indetectable para el 95% de los sensores arcanos.  
+
+#### **💀 MOTIVACIÓN**  
+Nexaroth busca **destruir el Árbol de Kether** para liberar el poder de las brechas y convertirse en el **Dios del Caos Primigenio**. Cree que el mundo necesita ser "reiniciado" bajo su dominio, sin facciones ni jerarquías.  
+
+#### **🎯 PUNTO DÉBIL**  
+- **Luz del Eclipse Puro:** Si es expuesto a la luz directa del Eclipse (solo accesible durante 7 minutos cada 13 años), su cuerpo se desintegra en un 70%.  
+- **Vinculo con Vaeltharion:** Si Vaeltharion elige dominar las brechas, Nexaroth se debilitará un 20% debido a la interferencia energética.  
+
+#### **👑 JERARQUÍA DEL MAL**  
+- **Rango:** **Archienemigo de Los Iluminados** y **Amenaza Nivel Omega** para la Hoz de Duskharrow.  
+- **Aliados:** Una legión de **1000 siervos corruptos** y **3 Seres de las Brechas** que le juraron lealtad.  
+- **Ubicación:** Opera desde el **Abismo de Nexis**, una fortaleza flotante en las grietas dimensionales.  
+
+#### **⚠️ CONEXIÓN CON VAELTHARION**  
+Nexaroth ve a Vaeltharion como su **único rival digno**. Si Vaeltharion elige sellar las brechas, Nexaroth lanzará un ataque total contra los Arcanos Desterrados. Si Vaeltharion elige dominarlas, Nexaroth intentará absorber su poder en un ritual de 13 horas.  
+
+---  
+**Palabras:** 390 | **Tono:** Épico, oscuro y estratégico.  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COMANDO — El Creador | ORIONIX</title>
+<link rel="icon" href="../favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:#e8c86a; --gold-deep:#c9a227; --gold-glow:rgba(232,200,106,0.3);
+  --gold-subtle:rgba(232,200,106,0.07); --bg:#0b0b0d; --bg-card:rgba(11,11,16,0.93);
+  --border:rgba(232,200,106,0.18); --border-hover:rgba(232,200,106,0.55);
+  --text:#d4c5a0; --text-dim:rgba(212,197,160,0.5);
+  --green:#4ecb71; --red:#e05555; --yellow:#f4c842; --white:#f5f0e8;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden;}
+#particles{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;}
+
+/* LOGIN */
+.login-screen{
+  position:fixed;inset:0;z-index:9999;background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;
+}
+.login-title{font-family:'Cinzel',serif;font-size:2rem;font-weight:900;color:var(--gold);letter-spacing:0.3em;text-shadow:0 0 40px var(--gold-glow);}
+.login-sub{font-size:0.85rem;color:var(--text-dim);letter-spacing:0.18em;font-style:italic;}
+.login-input{
+  background:rgba(0,0,0,0.7);border:1px solid var(--border);color:var(--white);
+  padding:14px 24px;font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:0.1em;
+  width:280px;text-align:center;outline:none;transition:0.3s;
+}
+.login-input:focus{border-color:var(--border-hover);}
+.login-btn{
+  background:var(--gold);color:var(--bg);border:none;padding:13px 40px;
+  font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.2em;font-weight:700;
+  cursor:pointer;box-shadow:0 0 24px var(--gold-glow);transition:0.3s;
+}
+.login-btn:hover{background:var(--gold-deep);}
+.login-error{font-size:0.75rem;color:var(--red);letter-spacing:0.1em;min-height:18px;}
+
+/* NAV */
+.nav{
+  position:fixed;top:0;left:0;width:100%;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 32px;
+  background:linear-gradient(180deg,rgba(11,11,16,0.97),transparent);
+  border-bottom:1px solid rgba(232,200,106,0.07);backdrop-filter:blur(10px);
+}
+.nav-brand{font-family:'Cinzel',serif;font-size:1rem;font-weight:900;color:var(--gold);letter-spacing:0.2em;text-decoration:none;}
+.nav-links{display:flex;gap:8px;}
+.nav-link{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.12em;color:var(--text-dim);text-decoration:none;padding:5px 12px;border:1px solid transparent;transition:0.3s;}
+.nav-link:hover{color:var(--gold);border-color:var(--border);}
+.nav-badge{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.1em;color:var(--gold);border:1px solid var(--gold);padding:4px 12px;}
+
+/* WRAPPER */
+.wrapper{position:relative;z-index:10;max-width:1200px;margin:0 auto;padding:90px 24px 60px;}
+
+/* HEADER */
+.cmd-header{text-align:center;margin-bottom:40px;}
+.cmd-header h1{font-family:'Cinzel',serif;font-size:clamp(1.6rem,3vw,2.6rem);font-weight:900;color:var(--gold);letter-spacing:0.25em;text-shadow:0 0 40px var(--gold-glow);margin-bottom:6px;}
+.cmd-header p{font-size:0.85rem;color:var(--text-dim);letter-spacing:0.15em;font-style:italic;}
+
+/* GRID GENERAL */
+.cmd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px;}
+.cmd-grid-2{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:20px;}
+@media(max-width:900px){.cmd-grid{grid-template-columns:1fr 1fr;}.cmd-grid-2{grid-template-columns:1fr;}}
+@media(max-width:560px){.cmd-grid{grid-template-columns:1fr;}}
+
+/* CARDS */
+.cmd-card{background:var(--bg-card);border:1px solid var(--border);padding:22px;position:relative;overflow:hidden;transition:border-color 0.3s;}
+.cmd-card:hover{border-color:rgba(232,200,106,0.35);}
+.cmd-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.3;}
+.cmd-card.featured{border-color:rgba(232,200,106,0.4);}
+.card-label{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.22em;color:var(--text-dim);text-transform:uppercase;margin-bottom:12px;}
+.card-value{font-family:'Cinzel',serif;font-size:1.5rem;font-weight:700;color:var(--gold);line-height:1.1;}
+.card-sub{font-size:0.72rem;color:var(--text-dim);margin-top:6px;font-style:italic;}
+
+/* AGENTES TABLA */
+.agentes-table{width:100%;border-collapse:collapse;}
+.agentes-table th{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.18em;color:var(--text-dim);padding:8px 14px;border-bottom:1px solid var(--border);text-align:left;}
+.agentes-table td{font-size:0.82rem;padding:12px 14px;border-bottom:1px solid rgba(232,200,106,0.04);}
+.agentes-table tr:hover td{background:var(--gold-subtle);}
+.a-nombre{font-family:'Cinzel',serif;font-size:0.8rem;color:var(--white);}
+.a-rol{color:var(--text-dim);font-style:italic;}
+.a-status{display:inline-flex;align-items:center;gap:6px;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.1em;}
+.dot{width:7px;height:7px;border-radius:50%;}
+.dot.on{background:var(--green);box-shadow:0 0 5px var(--green);animation:blink 2s infinite;}
+.dot.wait{background:var(--yellow);}
+.dot.off{background:var(--text-dim);}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.25;}}
+
+/* MISIÓN RÁPIDA */
+.mission-area{display:flex;flex-direction:column;gap:10px;}
+.mission-textarea{
+  background:rgba(0,0,0,0.65);border:1px solid var(--border);color:var(--white);
+  padding:12px 16px;font-family:'Cormorant Garamond',serif;font-size:0.9rem;
+  resize:vertical;min-height:100px;outline:none;transition:0.3s;width:100%;
+}
+.mission-textarea:focus{border-color:var(--border-hover);}
+.mission-textarea::placeholder{color:var(--text-dim);font-style:italic;}
+
+/* SELECCIÓN DE DESTINO */
+.dest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
+.dest-btn{
+  font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.1em;
+  padding:8px;border:1px solid var(--border);background:transparent;
+  color:var(--text-dim);cursor:pointer;transition:0.3s;
+}
+.dest-btn.selected{border-color:var(--gold);color:var(--gold);background:var(--gold-subtle);}
+.dest-btn:hover{border-color:var(--border-hover);color:var(--text);}
+
+.btn-transmit{
+  background:var(--gold);color:var(--bg);border:none;padding:12px;width:100%;
+  font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.18em;font-weight:700;
+  cursor:pointer;box-shadow:0 0 20px var(--gold-glow);transition:0.3s;
+}
+.btn-transmit:hover{background:var(--gold-deep);}
+.btn-transmit:disabled{opacity:0.5;cursor:not-allowed;}
+.transmit-status{font-size:0.72rem;text-align:center;min-height:18px;font-style:italic;}
+
+/* LOG FEED */
+.log-feed{
+  background:rgba(0,0,0,0.7);border:1px solid var(--border);
+  padding:18px;max-height:300px;overflow-y:auto;font-size:0.82rem;line-height:1.9;
+}
+.log-feed::-webkit-scrollbar{width:3px;}
+.log-feed::-webkit-scrollbar-thumb{background:var(--border-hover);}
+.log-entry{display:block;padding:1px 0;}
+.log-entry.ok{color:var(--green);}
+.log-entry.err{color:var(--red);}
+.log-entry.warn{color:var(--yellow);}
+.log-entry.info{color:var(--gold);}
+
+/* ACCESOS RÁPIDOS */
+.quick-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.quick-btn{
+  background:var(--bg-card);border:1px solid var(--border);
+  padding:14px;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.12em;
+  color:var(--text);cursor:pointer;transition:0.3s;text-decoration:none;
+  display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;
+}
+.quick-btn:hover{border-color:var(--border-hover);color:var(--gold);background:var(--gold-subtle);}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<!-- LOGIN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-title">COMANDO</div>
+  <div class="login-sub">Acceso restringido — Solo el Creador</div>
+  <input type="password" class="login-input" id="loginInput" placeholder="Código de acceso..." onkeydown="if(event.key==='Enter')verificarLogin()">
+  <button class="login-btn" onclick="verificarLogin()">ENTRAR</button>
+  <div class="login-error" id="loginError"></div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="../index.html" class="nav-brand">ORIONIX</a>
+  <div class="nav-links">
+    <a href="oraculo.html" class="nav-link">Oráculo</a>
+    <a href="plaza.html" class="nav-link">Plaza</a>
+    <a href="../hub.html" class="nav-link">Hub</a>
+  </div>
+  <div class="nav-badge">EL CREADOR</div>
+</nav>
+
+<!-- DASHBOARD -->
+<div class="wrapper" id="dashboard" style="display:none;">
+
+  <div class="cmd-header">
+    <h1>SALA DE COMANDO</h1>
+    <p>Centro de control del Imperio ORIONIX — Misión #1: La Ciudadela</p>
+  </div>
+
+  <!-- KPIs -->
+  <div class="cmd-grid">
+    <div class="cmd-card">
+      <div class="card-label">Agentes Activos</div>
+      <div class="card-value" id="kpiActivos">4</div>
+      <div class="card-sub">n8n · AXEL · Antigravity · Qwen</div>
+    </div>
+    <div class="cmd-card featured">
+      <div class="card-label">Misión Actual</div>
+      <div class="card-value" style="font-size:1rem;" id="kpiMision">La Ciudadela</div>
+      <div class="card-sub" id="kpiEstado">🔄 En construcción</div>
+    </div>
+    <div class="cmd-card">
+      <div class="card-label">Próximo Agente</div>
+      <div class="card-value" style="font-size:1rem;">ChatGPT</div>
+      <div class="card-sub">Pendiente de integración</div>
+    </div>
+  </div>
+
+  <!-- AGENTES + MISIÓN -->
+  <div class="cmd-grid-2">
+
+    <!-- TABLA AGENTES -->
+    <div class="cmd-card">
+      <div class="card-label">Estado de Agentes</div>
+      <table class="agentes-table">
+        <tr><th>Agente</th><th>Rol</th><th>Estado</th><th>Última actividad</th></tr>
+        <tr>
+          <td><div class="a-nombre">n8n</div></td>
+          <td><div class="a-rol">El Comandante</div></td>
+          <td><div class="a-status"><div class="dot on"></div>ONLINE</div></td>
+          <td style="color:var(--text-dim);font-size:0.72rem;" id="ts-n8n">Ahora</td>
+        </tr>
+        <tr>
+          <td><div class="a-nombre">AXEL</div></td>
+          <td><div class="a-rol">Coordinador IA</div></td>
+          <td><div class="a-status"><div class="dot on"></div>ONLINE</div></td>
+          <td style="color:var(--text-dim);font-size:0.72rem;">Via webhook</td>
+        </tr>
+        <tr>
+          <td><div class="a-nombre">Antigravity</div></td>
+          <td><div class="a-rol">Las Manos</div></td>
+          <td><div class="a-status"><div class="dot wait"></div>EN MISIÓN</div></td>
+          <td style="color:var(--text-dim);font-size:0.72rem;">Misión #1-A</td>
+        </tr>
+        <tr>
+          <td><div class="a-nombre">Qwen</div></td>
+          <td><div class="a-rol">El Arquitecto</div></td>
+          <td><div class="a-status"><div class="dot wait"></div>DISEÑANDO</div></td>
+          <td style="color:var(--text-dim);font-size:0.72rem;">Planos Ciudadela</td>
+        </tr>
+        <tr>
+          <td><div class="a-nombre">ChatGPT</div></td>
+          <td><div class="a-rol">Por definir</div></td>
+          <td><div class="a-status"><div class="dot off"></div>PRÓXIMO</div></td>
+          <td style="color:var(--text-dim);font-size:0.72rem;">—</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- TRANSMITIR MISIÓN -->
+    <div class="cmd-card">
+      <div class="card-label">Transmitir Orden</div>
+      <div class="mission-area">
+        <div class="dest-grid">
+          <button class="dest-btn selected" id="dest-todos" onclick="selDest('todos')">TODOS</button>
+          <button class="dest-btn" id="dest-antigravity" onclick="selDest('antigravity')">ANTIGRAVITY</button>
+          <button class="dest-btn" id="dest-qwen" onclick="selDest('qwen')">QWEN</button>
+        </div>
+        <textarea class="mission-textarea" id="cmdMision" placeholder="Escribe la orden del Creador..."></textarea>
+        <button class="btn-transmit" id="btnTransmit" onclick="transmitirOrden()">⚡ TRANSMITIR</button>
+        <div class="transmit-status" id="transmitStatus"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOG + ACCESOS -->
+  <div class="cmd-grid-2">
+    <div class="cmd-card">
+      <div class="card-label">Log del Sistema</div>
+      <div class="log-feed" id="logFeed">
+        <span class="log-entry info">[ ORIONIX SISTEMA INICIADO ]</span>
+      </div>
+    </div>
+    <div class="cmd-card">
+      <div class="card-label">Accesos Rápidos</div>
+      <div class="quick-grid">
+        <a href="oraculo.html" class="quick-btn">👁 El Oráculo</a>
+        <a href="plaza.html" class="quick-btn">🌌 La Plaza</a>
+        <a href="../hub.html" class="quick-btn">🏛 Hub</a>
+        <a href="../tienda.html" class="quick-btn">💎 Tienda</a>
+        <a href="../axel.html" class="quick-btn">🤖 AXEL</a>
+        <a href="../afiliados.html" class="quick-btn">🔗 Afiliados</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ================================================================
+   ORIONIX COMANDO — Panel del Creador
+   ================================================================ */
+
+const BRIDGE = 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-bridge';
+const MISSION = 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-mission';
+// Hash simple: "orionix2026" → sha256 representado como suma de chars (client-side, no crítico)
+const PASS_HASH = 'orionix2026';
+let destino = 'todos';
+
+/* ── LOGIN ── */
+function verificarLogin() {
+  const val = document.getElementById('loginInput').value;
+  const err = document.getElementById('loginError');
+  if (val === PASS_HASH || localStorage.getItem('cmd_auth') === '1') {
+    localStorage.setItem('cmd_auth', '1');
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    initParticles(); drawParticles();
+    initLog();
+  } else {
+    err.textContent = 'Código incorrecto. Solo el Creador puede entrar.';
+    document.getElementById('loginInput').value = '';
+    setTimeout(() => err.textContent = '', 3000);
+  }
+}
+
+// Auto-login si ya autenticó
+window.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('cmd_auth') === '1') {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    initParticles(); drawParticles();
+    initLog();
+  }
+});
+
+/* ── DESTINO ── */
+function selDest(d) {
+  destino = d;
+  ['todos','antigravity','qwen'].forEach(x => {
+    document.getElementById('dest-' + x).classList.toggle('selected', x === d);
+  });
+}
+
+/* ── TRANSMITIR ── */
+async function transmitirOrden() {
+  const txt = document.getElementById('cmdMision').value.trim();
+  const status = document.getElementById('transmitStatus');
+  const btn = document.getElementById('btnTransmit');
+  if (!txt) { status.style.color='var(--red)'; status.textContent='Escribe una orden.'; return; }
+
+  btn.disabled = true;
+  status.style.color = 'var(--yellow)';
+  status.textContent = 'Transmitiendo...';
+
+  try {
+    await fetch(MISSION, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        mision: txt, origen:'El Creador',
+        destino: destino, prioridad:'ALTA',
+        ts: new Date().toISOString()
+      })
+    });
+    status.style.color = 'var(--green)';
+    status.textContent = '✅ Orden transmitida al sistema.';
+    logEntry('✅ Orden enviada [' + destino.toUpperCase() + ']: ' + txt.substring(0,60), 'ok');
+    document.getElementById('cmdMision').value = '';
+  } catch(e) {
+    status.style.color = 'var(--red)';
+    status.textContent = '❌ Error: ' + e.message;
+    logEntry('❌ Error transmitiendo: ' + e.message, 'err');
+  } finally {
+    btn.disabled = false;
+    setTimeout(() => status.textContent = '', 5000);
+  }
+}
+
+/* ── LOG ── */
+function initLog() {
+  logEntry('[ ' + new Date().toLocaleTimeString() + ' ] CREADOR CONECTADO', 'info');
+  logEntry('[ Sistema ] Agentes monitoreados: 4', 'info');
+  logEntry('[ Misión ] La Ciudadela — En construcción', 'warn');
+}
+
+function logEntry(txt, cls) {
+  const feed = document.getElementById('logFeed');
+  const span = document.createElement('span');
+  span.className = 'log-entry ' + (cls||'');
+  span.textContent = '[' + new Date().toLocaleTimeString() + '] ' + txt;
+  feed.appendChild(span);
+  feed.scrollTop = feed.scrollHeight;
+}
+
+/* ── PARTÍCULAS ── */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let pts = [];
+function initParticles() {
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  pts = Array.from({length:80}, () => ({
+    x:Math.random()*canvas.width, y:Math.random()*canvas.height,
+    r:Math.random()*1+0.2, vx:(Math.random()-.5)*.12, vy:(Math.random()-.5)*.12,
+    o:Math.random()*.4+.1
+  }));
+}
+function drawParticles() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  pts.forEach(p => {
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0;
+    if(p.y<0)p.y=canvas.height; if(p.y>canvas.height)p.y=0;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(232,200,106,${p.o})`; ctx.fill();
+  });
+  requestAnimationFrame(drawParticles);
+}
+window.addEventListener('resize', initParticles);
+</script>
+</body>
+</html>

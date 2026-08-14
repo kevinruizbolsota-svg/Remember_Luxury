@@ -1350,3 +1350,81 @@ ChatGPT no pudo expandir este ciclo.
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 31 — 14/08/2026, 19:01
+
+### 🏛️ AXEL — Arquitecto
+
+# **MUNDO ORIONIX RPG: EL EQUILIBRIO FRACTURADO**  
+
+## **Nombre y Cosmología**  
+**Nombre del Mundo:** **Aeternum Nexus**  
+**Cosmología:** Un universo fracturado por tres fuerzas primordiales: **Orden (ORIONIX)**, **Caos (Rebeldes)**, y **Corrupción (Devoradores)**. El Nexo, un punto de energía pura, es el corazón del mundo, pero su equilibrio se resquebraja.  
+
+---
+
+## **TRES REINOS PRINCIPALES**  
+
+### **1. Valtor — Reino de los Vigilantes (ORIONIX)**  
+- **Color:** Azul cobalto y plateado.  
+- **Esencia:** Orden y tecnología arcana.  
+- **Estado Actual:**  
+  - **+10% de territorios purificados.**  
+  - **Amenaza:** Si pierden el Nexo, su tecnología sufre **-10% de eficacia**.  
+
+### **2. Umbrak — Refugio de los Rebeldes**  
+- **Color:** Carmesí y negro.  
+- **Esencia:** Libertad y adaptación.  
+- **Estado Actual:**  
+  - **Retroceso a zonas marginales (-5% de influencia).**  
+  - **Oportunidad:** Si ganan, establecen **+1 base oculta en Valtor**.  
+
+### **3. Vorath — Dominio de los Devoradores**  
+- **Color:** Verde esmeralda y púrpura oscuro.  
+- **Esencia:** Corrupción y asimilación.  
+- **Estado Actual:**  
+  - **Si corrompen el Nexo:** **+30% de corrupción en regiones cercanas.**  
+  - **Consecuencia:** Todas las facciones pierden **-20% de recursos** para contenerlo.  
+
+---
+
+## **CONEXIONES CRÍTICAS**  
+- **Energía Residual del Nexo:** Afecta a los agentes de ORIONIX (**-5% de resistencia** si operan cerca del Nexo).  
+- **Tecnología Oculta:** Los Rebeldes pueden desbloquear secretos de los Vigilantes, alterando el equilibrio futuro.  
+
+---
+
+### **⚠️ ESTADO DEL MUNDO: FRAGILIDAD EPIC**  
+El equilibrio pende de un hilo. Cada acción tiene consecuencias numéricas, y las facciones luchan por sobrevivir en un mundo donde la purificación, la rebelión y la corrupción chocan.  
+
+**¿Necesitas ajustes o más profundidad en algún aspecto?**
+
+### 🤖 ChatGPT — Expansor
+
+# **MUNDO ORIONIX RPG: EL EQUILIBRIO FRACTURADO**
+
+## **Detalles Únicos**
+
+1. **El Eco de los Ancestros:** En Valtor, los Vigilantes pueden escuchar ecos de sabiduría ancestral a través de la tecnología arcana. Esta conexión les otorga un **+5% en habilidades de estrategia** durante las batallas, permitiéndoles anticipar movimientos enemigos.
+
+2. **Las Sombras de Umbrak:** En el refugio de los Rebeldes, las sombras no solo ocultan, sino que también otorgan habilidades únicas. Los guerreros que operan en la penumbra pueden **desbloquear un ataque sorpresa** que inflige **+15% de daño** en su primer golpe.
+
+3. **El Vínculo de Vorath:** Los Devoradores poseen la habilidad de asimilar no solo recursos, sino también habilidades de sus enemigos. Al corromper un territorio, pueden **robar una habilidad especial** de la facción afectada, integrándola a su arsenal.
+
+## **Estadísticas de Juego**
+
+| Facción         | Territorios Purificados | Influencia | Eficacia Tecnológica | Recursos   |
+|-----------------|------------------------|------------|----------------------|------------|
+| **Valtor**      | +10%                   | 50%        | 100%                 | 80%        |
+| **Umbrak**      | -5%                    | 30%        | 90%                  | 70%        |
+| **Vorath**      | N/A                    | 20%        | 80%                  | 60%        |
+
+## **Secreto Oculto**
+
+**El Nexo es un Ser Vivo:** Solo el Game Master conoce que el Nexo es, en realidad, un ser consciente que siente el dolor de su fractura. Si las facciones logran unirse temporalmente para sanarlo, recibirán un poder inimaginable que podría cambiar el rumbo de la guerra.
+
+## **Conexión Existente**
+
+El **Eco de los Ancestros** en Valtor se relaciona con la **Tecnología Oculta** de los Rebeldes. Al descubrir secretos de los Vigilantes, los Rebeldes pueden aprender a manipular estos ecos, creando un nuevo tipo de tecnología que fusiona el orden con la libertad, alterando el equilibrio del juego.

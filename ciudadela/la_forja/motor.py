@@ -1,317 +1,224 @@
 #!/usr/bin/env python3
 """
-motor.py v2 — Loop Autónomo ORIONIX con Resiliencia Real
-Dependencias: requests, schedule, PyGithub, pyyaml
-Ejecutar: python motor.py
-Env vars:
-  GITHUB_TOKEN         — Personal Access Token con permisos contents:write (requerido)
-  ORIONIX_CICLO_HORAS  — Horas entre ciclos autónomos (default: 6)
+ORIONIX Motor v3 — Bucle autónomo Ollama → GitHub
+Modelos disponibles: qwen2.5-coder:14b-16k (principal), qwen2.5:14b, llama3.1:8b
 """
 
 import requests
-import schedule
-import time
-import os
 import json
-import yaml
-import logging
-from datetime import datetime, timezone
-from github import Github, GithubException
+import base64
+import time
+import re
+import os
+from datetime import datetime
 
-# ──────────────────────────────────────────────────────────────────────────────
-# CONFIGURACIÓN
-# ──────────────────────────────────────────────────────────────────────────────
-WEBHOOK_MISSION = "https://lkevinruizl.app.n8n.cloud/webhook/orionix-mission"
-WEBHOOK_BRIDGE  = "https://lkevinruizl.app.n8n.cloud/webhook/orionix-bridge"
-WEBHOOK_CHATGPT = "https://lkevinruizl.app.n8n.cloud/webhook/orionix-chatgpt"
+# ─── CONFIGURACIÓN ───────────────────────────────────────────────
+GITHUB_TOKEN   = os.environ.get("GITHUB_TOKEN", "TU_TOKEN_AQUI")
+GITHUB_REPO    = "kevinruizbolsota-svg/Remember_Luxury"
+GITHUB_BRANCH  = "main"
+GITHUB_PATH    = "ciudadela"
 
-REPO_NAME   = "kevinruizbolsota-svg/Remember_Luxury"
-BRANCH      = "main"
-FORJA_PATH  = "ciudadela/la_forja"
+OLLAMA_URL     = "http://localhost:11434/api/chat"
+MODELO_DEFAULT = "qwen2.5-coder:14b-16k"
 
-MAX_RETRIES = 5
-BASE_DELAY  = 2  # segundos base para backoff exponencial
-CICLO_HORAS = int(os.getenv("ORIONIX_CICLO_HORAS", "6"))
+N8N_QUEUE_URL  = "https://lkevinruizl.app.n8n.cloud/webhook/orionix-queue"
 
-# ──────────────────────────────────────────────────────────────────────────────
-# LOGGING
-# ──────────────────────────────────────────────────────────────────────────────
-os.makedirs("la_forja", exist_ok=True)
+INTERVALO_POLL = 60   # segundos entre polls cuando no hay misión
+MAX_TOKENS     = 8000
+TIMEOUT_OLLAMA = 300  # 5 minutos máximo por generación
 
-logging.basicConfig(
-    filename="la_forja/motor.log",
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s"
-)
-logger = logging.getLogger("motor_orionix")
+# ─── GITHUB API ──────────────────────────────────────────────────
 
-# También mostrar en consola
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.INFO)
-console_handler.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] %(message)s"))
-logger.addHandler(console_handler)
-
-# ──────────────────────────────────────────────────────────────────────────────
-# GITHUB CLIENT
-# ──────────────────────────────────────────────────────────────────────────────
-github_token = os.getenv("GITHUB_TOKEN")
-if not github_token:
-    logger.critical("❌ Variable GITHUB_TOKEN no configurada. Abortando.")
-    raise SystemExit(1)
-
-gh   = Github(github_token)
-repo = gh.get_repo(REPO_NAME)
-
-
-# ──────────────────────────────────────────────────────────────────────────────
-# FUNCIÓN 1: BACKOFF EXPONENCIAL CON JITTER
-# ──────────────────────────────────────────────────────────────────────────────
-def llamar_webhook(url: str, payload: dict, evento: str = "webhook") -> dict | None:
-    """Llama un webhook con reintentos y backoff exponencial."""
-    for intento in range(MAX_RETRIES):
-        try:
-            resp = requests.post(url, json=payload, timeout=30)
-            if resp.status_code == 200:
-                logger.info(f"✅ {evento} OK (intento {intento + 1})")
-                try:
-                    return resp.json()
-                except Exception:
-                    return {"status": "ok", "raw": resp.text[:200]}
-            else:
-                logger.warning(f"⚠️ {evento} status {resp.status_code}: {resp.text[:200]}")
-
-        except requests.Timeout:
-            logger.error(f"❌ {evento} timeout en intento {intento + 1}")
-        except requests.ConnectionError as e:
-            logger.error(f"❌ {evento} conexión fallida: {str(e)[:100]}")
-        except requests.RequestException as e:
-            logger.error(f"❌ {evento} error: {str(e)[:100]}")
-
-        if intento < MAX_RETRIES - 1:
-            delay = BASE_DELAY * (2 ** intento) + (intento * 0.5)
-            logger.info(f"⏳ Retry en {delay:.1f}s (intento {intento + 2}/{MAX_RETRIES})")
-            time.sleep(delay)
-
-    logger.critical(f"🚨 {evento} FALLÓ tras {MAX_RETRIES} intentos")
-    reportar_bridge("ERROR_CRITICO", f"{evento} falló tras {MAX_RETRIES} intentos")
+def github_get_sha(ruta_archivo: str) -> str | None:
+    """Obtiene el SHA actual de un archivo en GitHub (necesario para actualizar)."""
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{ruta_archivo}"
+    headers = {"Authorization": f"token {GITHUB_TOKEN}", "Accept": "application/vnd.github.v3+json"}
+    r = requests.get(url, headers=headers, timeout=15)
+    if r.status_code == 200:
+        return r.json().get("sha")
     return None
 
-
-# ──────────────────────────────────────────────────────────────────────────────
-# FUNCIÓN 2: LEER ARCHIVO DE GITHUB
-# ──────────────────────────────────────────────────────────────────────────────
-def leer_archivo_github(path: str) -> tuple[str | None, str | None]:
-    """Lee un archivo de GitHub. Devuelve (contenido_str, sha) o (None, None)."""
-    try:
-        archivo = repo.get_contents(path, ref=BRANCH)
-        contenido = archivo.decoded_content.decode("utf-8")
-        return contenido, archivo.sha
-    except GithubException as e:
-        if e.status == 404:
-            logger.info(f"📄 Archivo no encontrado (404): {path}")
-        else:
-            logger.error(f"❌ Error GitHub leyendo {path}: {e.status} {e.data}")
-        return None, None
-    except Exception as e:
-        logger.error(f"❌ Error leyendo {path}: {e}")
-        return None, None
-
-
-# ──────────────────────────────────────────────────────────────────────────────
-# FUNCIÓN 3: ESCRIBIR ARCHIVO EN GITHUB
-# ──────────────────────────────────────────────────────────────────────────────
-def escribir_archivo_github(path: str, contenido: str, sha: str | None, mensaje_commit: str) -> bool:
-    """Actualiza o crea un archivo en GitHub."""
-    try:
-        if sha:
-            repo.update_file(path, mensaje_commit, contenido, sha, branch=BRANCH)
-        else:
-            repo.create_file(path, mensaje_commit, contenido, branch=BRANCH)
-        logger.info(f"✅ Escrito: {path}")
-        return True
-    except GithubException as e:
-        logger.error(f"❌ Error GitHub escribiendo {path}: {e.status} {e.data}")
-        return False
-    except Exception as e:
-        logger.error(f"❌ Error escribiendo {path}: {e}")
-        return False
-
-
-# ──────────────────────────────────────────────────────────────────────────────
-# FUNCIÓN 4: ACTUALIZAR MESA REDONDA
-# ──────────────────────────────────────────────────────────────────────────────
-def actualizar_mesa(seccion: str, nueva_entrada: str) -> bool:
-    """Append una entrada a la sección especificada de MESA_REDONDA.md."""
-    path = f"{FORJA_PATH}/MESA_REDONDA.md"
-    contenido, sha = leer_archivo_github(path)
-
-    if contenido is None:
-        logger.error("❌ No se pudo leer MESA_REDONDA.md")
-        return False
-
-    # Intentar parsear YAML frontmatter
-    try:
-        partes = contenido.split("---", 2)
-        if len(partes) >= 3:
-            frontmatter = yaml.safe_load(partes[1]) or {}
-            body = partes[2]
-        else:
-            frontmatter = {}
-            body = contenido
-    except yaml.YAMLError:
-        frontmatter = {}
-        body = contenido
-
-    # Actualizar frontmatter
-    ahora_iso = datetime.now(timezone.utc).isoformat()
-    frontmatter["ultimo_ciclo"] = ahora_iso
-    frontmatter["agente_activo"] = "motor"
-
-    # Append entrada a sección correspondiente
-    marca = f"## {seccion}"
-    if marca in body:
-        body = body.replace(marca, marca + "\n" + nueva_entrada)
-    else:
-        body = body + f"\n\n## {seccion}\n{nueva_entrada}"
-
-    # Reconstruir y guardar
-    try:
-        nuevo_contenido = f"---\n{yaml.dump(frontmatter, allow_unicode=True)}---\n{body}"
-    except Exception:
-        nuevo_contenido = contenido + f"\n\n[{ahora_iso}] {nueva_entrada}"
-
-    return escribir_archivo_github(
-        path,
-        nuevo_contenido,
-        sha,
-        f"[motor] Actualización {seccion} — {datetime.now().strftime('%Y-%m-%d %H:%M')}"
-    )
-
-
-# ──────────────────────────────────────────────────────────────────────────────
-# FUNCIÓN 5: REPORTAR AL BRIDGE
-# ──────────────────────────────────────────────────────────────────────────────
-def reportar_bridge(evento: str, detalle: str) -> None:
-    """Envía un evento al ORIONIX Bridge (Telegram + log)."""
-    payload = {
-        "evento": evento,
-        "detalle": detalle,
-        "agente": "motor",
-        "timestamp": datetime.now(timezone.utc).isoformat()
+def github_commit(ruta_archivo: str, contenido: str, mensaje: str) -> dict:
+    """Sube o actualiza un archivo en GitHub."""
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{ruta_archivo}"
+    headers = {
+        "Authorization": f"token {GITHUB_TOKEN}",
+        "Accept": "application/vnd.github.v3+json",
+        "Content-Type": "application/json",
     }
-    # No esperar respuesta, solo intentar 1 vez
-    try:
-        requests.post(WEBHOOK_BRIDGE, json=payload, timeout=15)
-    except Exception as e:
-        logger.warning(f"⚠️ Bridge no respondió: {e}")
+    b64 = base64.b64encode(contenido.encode("utf-8")).decode("ascii")
+    sha = github_get_sha(ruta_archivo)
+    body = {"message": mensaje, "content": b64, "branch": GITHUB_BRANCH}
+    if sha:
+        body["sha"] = sha
+    r = requests.put(url, headers=headers, data=json.dumps(body), timeout=30)
+    return r.json()
 
+# ─── OLLAMA ──────────────────────────────────────────────────────
 
-# ──────────────────────────────────────────────────────────────────────────────
-# FUNCIÓN 6: CONSULTAR CHATGPT VIA PUENTE
-# ──────────────────────────────────────────────────────────────────────────────
-def consultar_chatgpt(instruccion: str, tipo: str = "revision", contexto: str = "") -> str | None:
-    """Hace una consulta al Puente ChatGPT y devuelve la respuesta."""
+def generar_html(descripcion: str, pagina: str, modelo: str) -> str:
+    """Llama a Ollama y extrae el HTML generado."""
+    prompt = f"""Eres un desarrollador web experto en diseño de lujo. 
+Genera una página HTML completa y profesional para ORIONIX.
+
+PÁGINA: {pagina}
+INSTRUCCIÓN: {descripcion}
+
+REQUISITOS OBLIGATORIOS:
+- HTML completo con DOCTYPE, head y body
+- Fuentes: Cinzel y Cormorant Garamond de Google Fonts
+- Colores: fondo #0b0b0d (cosmos negro), dorado #e8c86a, texto blanco
+- Favicon: <link rel="icon" href="favicon.svg">
+- Meta og:image: https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png
+- Logo ORIONIX en nav con link a index.html
+- Diseño responsive y elegante
+- CSS inline en <style> (no archivos externos)
+- JavaScript vanilla si es necesario
+
+Responde SOLO con el código HTML completo entre ```html y ```, sin explicaciones."""
+
     payload = {
-        "solicitante": "motor",
-        "tipo_consulta": tipo,
-        "contexto": contexto,
-        "instruccion": instruccion,
-        "prioridad": "normal"
+        "model": modelo,
+        "messages": [{"role": "user", "content": prompt}],
+        "stream": False,
+        "options": {"num_predict": MAX_TOKENS, "temperature": 0.7}
     }
-    resultado = llamar_webhook(WEBHOOK_CHATGPT, payload, "chatgpt")
-    if resultado and resultado.get("status") == "ok":
-        return resultado.get("respuesta")
+
+    r = requests.post(OLLAMA_URL, json=payload, timeout=TIMEOUT_OLLAMA)
+    r.raise_for_status()
+    respuesta = r.json()["message"]["content"]
+
+    # Extraer bloque HTML
+    match = re.search(r"```html\s*([\s\S]+?)```", respuesta, re.IGNORECASE)
+    if match:
+        return match.group(1).strip()
+
+    # Si no tiene marcadores, intentar extraer directamente
+    if "<!DOCTYPE" in respuesta.upper() or "<html" in respuesta.lower():
+        start = respuesta.lower().find("<!doctype")
+        if start == -1:
+            start = respuesta.lower().find("<html")
+        return respuesta[start:].strip()
+
+    # Devolver tal cual como último recurso
+    return respuesta.strip()
+
+# ─── N8N QUEUE ──────────────────────────────────────────────────
+
+def obtener_mision() -> dict | None:
+    """Pide la siguiente misión pendiente a n8n."""
+    try:
+        r = requests.post(N8N_QUEUE_URL, json={"accion": "obtener_pendiente"}, timeout=15)
+        data = r.json()
+        if data.get("ok") and data.get("mision"):
+            return data["mision"]
+    except Exception as e:
+        print(f"[ERROR] No pude contactar n8n: {e}")
     return None
 
+def reportar_resultado(mision_id: int, titulo: str, exito: bool, resultado_url: str = "", error: str = ""):
+    """Reporta el resultado de una misión a n8n."""
+    try:
+        requests.post(N8N_QUEUE_URL, json={
+            "accion": "completar_mision",
+            "id": mision_id,
+            "titulo": titulo,
+            "exito": exito,
+            "resultado_url": resultado_url,
+            "error": error,
+        }, timeout=15)
+    except Exception as e:
+        print(f"[WARN] No pude reportar resultado: {e}")
 
-# ──────────────────────────────────────────────────────────────────────────────
-# FUNCIÓN 7: CICLO AUTÓNOMO PRINCIPAL
-# ──────────────────────────────────────────────────────────────────────────────
-def ciclo_autonomo() -> None:
-    """Ejecuta un ciclo completo: lee estado, llama misión, procesa respuesta."""
-    ts_inicio = datetime.now()
-    logger.info("═" * 60)
-    logger.info(f"🔄 CICLO AUTÓNOMO — {ts_inicio.strftime('%Y-%m-%d %H:%M:%S')}")
-    logger.info("═" * 60)
+def agregar_mision(titulo: str, descripcion: str, pagina: str, modelo: str = MODELO_DEFAULT):
+    """Agrega una misión nueva a la cola desde este script."""
+    r = requests.post(N8N_QUEUE_URL, json={
+        "accion": "nueva_mision",
+        "titulo": titulo,
+        "descripcion": descripcion,
+        "pagina": pagina,
+        "modelo": modelo,
+    }, timeout=15)
+    return r.json()
 
-    reportar_bridge("ciclo_inicio", f"Ciclo autónomo #{ts_inicio.strftime('%H:%M')} — cada {CICLO_HORAS}h")
+# ─── BUCLE PRINCIPAL ─────────────────────────────────────────────
 
-    # 1. Leer estado actual de agentes
-    logger.info("📖 Leyendo estado de agentes...")
-    estado_str, _ = leer_archivo_github(f"{FORJA_PATH}/agentes_estado.json")
-    if estado_str:
-        try:
-            estado_dict = json.loads(estado_str)
-            logger.info(f"✅ Estado cargado: {list(estado_dict.keys())[:5]}")
-        except json.JSONDecodeError:
-            estado_dict = {"sistema": "error_parse"}
-            logger.warning("⚠️ agentes_estado.json no es JSON válido")
-    else:
-        estado_dict = {"sistema": "desconocido", "motor": "activo"}
-        logger.warning("⚠️ No se pudo cargar estado — usando base")
+def ejecutar_mision(mision: dict):
+    mision_id = mision["id"]
+    titulo    = mision.get("titulo", "Sin título")
+    descripcion = mision.get("descripcion", "Crea una página HTML para ORIONIX")
+    pagina    = mision.get("pagina", "nueva_pagina.html")
+    modelo    = mision.get("modelo") or MODELO_DEFAULT
+    ruta      = f"{GITHUB_PATH}/{pagina}"
 
-    # 2. Llamar webhook de misión
-    logger.info("📡 Llamando ORIONIX Mission Relay...")
-    payload_mission = {
-        "tipo": "ciclo_autonomo",
-        "estado_actual": estado_dict,
-        "ciclo_horas": CICLO_HORAS,
-        "timestamp": datetime.now(timezone.utc).isoformat(),
-        "motor_version": "v2"
-    }
-    resultado = llamar_webhook(WEBHOOK_MISSION, payload_mission, "mission")
+    print(f"\n{'='*60}")
+    print(f"[MISIÓN #{mision_id}] {titulo}")
+    print(f"  Página:  {pagina}")
+    print(f"  Modelo:  {modelo}")
+    print(f"  Inicio:  {datetime.now().strftime('%H:%M:%S')}")
+    print(f"{'='*60}")
 
-    # 3. Procesar respuesta
-    ts_fin = datetime.now()
-    ts_str = ts_fin.strftime("%Y-%m-%d %H:%M")
-    duracion = (ts_fin - ts_inicio).seconds
+    try:
+        print("[1/3] Generando HTML con Ollama...")
+        html = generar_html(descripcion, pagina, modelo)
+        print(f"  → {len(html)} caracteres generados")
 
-    if resultado:
-        logger.info(f"✅ Misión completada en {duracion}s")
-        entrada_historial = f"| {ts_str} | motor | ✅ ciclo | Completado en {duracion}s |"
-        actualizar_mesa("HISTORIAL", entrada_historial)
-        reportar_bridge("ciclo_completado", f"Ciclo autónomo exitoso — {duracion}s")
-    else:
-        logger.error(f"❌ Ciclo falló tras {duracion}s")
-        entrada_alerta = f"- ⚠️ [{ts_str}] Ciclo autónomo falló — revisar la_forja/motor.log"
-        actualizar_mesa("ALERTAS", entrada_alerta)
+        print("[2/3] Subiendo a GitHub...")
+        commit_msg = f"feat(motor): {titulo} — Auto-deploy ORIONIX Motor v3"
+        resultado = github_commit(ruta, html, commit_msg)
 
-    logger.info(f"🔄 Ciclo terminado ({duracion}s)")
+        if "content" in resultado or "commit" in resultado:
+            url = f"https://kevinruizbolsota-svg.github.io/Remember_Luxury/{ruta}"
+            print(f"[3/3] ✅ Éxito → {url}")
+            reportar_resultado(mision_id, titulo, True, url)
+        else:
+            error_msg = resultado.get("message", "Error desconocido de GitHub")
+            print(f"[3/3] ❌ Error GitHub: {error_msg}")
+            reportar_resultado(mision_id, titulo, False, error=error_msg)
 
+    except requests.exceptions.Timeout:
+        err = f"Timeout después de {TIMEOUT_OLLAMA}s — timeout por modelo muy lento"
+        print(f"[ERROR] {err}")
+        reportar_resultado(mision_id, titulo, False, error=err)
+    except Exception as e:
+        print(f"[ERROR] {e}")
+        reportar_resultado(mision_id, titulo, False, error=str(e))
 
-# ──────────────────────────────────────────────────────────────────────────────
-# MAIN
-# ──────────────────────────────────────────────────────────────────────────────
+def loop_principal():
+    print("\n" + "█"*60)
+    print("  ORIONIX MOTOR v3 — ACTIVO")
+    print(f"  Ollama: {OLLAMA_URL}")
+    print(f"  Queue:  {N8N_QUEUE_URL}")
+    print(f"  Poll:   cada {INTERVALO_POLL}s")
+    print("█"*60 + "\n")
+
+    while True:
+        mision = obtener_mision()
+        if mision:
+            ejecutar_mision(mision)
+            # Poll inmediato para ver si hay más misiones
+            time.sleep(3)
+        else:
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] Sin misiones pendientes. Esperando {INTERVALO_POLL}s...")
+            time.sleep(INTERVALO_POLL)
+
+# ─── CLI ─────────────────────────────────────────────────────────
+
 if __name__ == "__main__":
-    logger.info("╔══════════════════════════════════════════════════════════╗")
-    logger.info("║         🚀 MOTOR ORIONIX v2 — Loop Autónomo             ║")
-    logger.info("╚══════════════════════════════════════════════════════════╝")
-    logger.info(f"Repositorio : {REPO_NAME}")
-    logger.info(f"Rama        : {BRANCH}")
-    logger.info(f"Ciclo cada  : {CICLO_HORAS} horas")
-    logger.info(f"Mission URL : {WEBHOOK_MISSION}")
-    logger.info(f"Bridge URL  : {WEBHOOK_BRIDGE}")
-    logger.info(f"ChatGPT URL : {WEBHOOK_CHATGPT}")
-    logger.info("")
+    import sys
 
-    # Notificar inicio al bridge
-    reportar_bridge("motor_iniciado", f"Motor v2 iniciado — ciclos cada {CICLO_HORAS}h")
-
-    # Programar ciclos periódicos
-    schedule.every(CICLO_HORAS).hours.do(ciclo_autonomo)
-    logger.info(f"⏱️  Próximo ciclo automático en {CICLO_HORAS}h")
-
-    # Ejecutar primer ciclo inmediatamente al inicio
-    logger.info("🔄 Ejecutando primer ciclo de inmediato...")
-    ciclo_autonomo()
-
-    # Loop principal — ejecuta ciclos programados
-    logger.info(f"\n⏱️  En espera del próximo ciclo (cada {CICLO_HORAS}h)...")
-    logger.info("   Presiona Ctrl+C para detener el motor.\n")
-    try:
-        while True:
-            schedule.run_pending()
-            time.sleep(60)
-    except KeyboardInterrupt:
-        logger.info("\n🛑 Motor detenido por el Creador.")
-        reportar_bridge("motor_detenido", "KeyboardInterrupt — detenido manualmente")
+    if len(sys.argv) > 1 and sys.argv[1] == "agregar":
+        # Uso: python motor_v3.py agregar "Título" "Descripción" "pagina.html"
+        if len(sys.argv) < 5:
+            print("Uso: python motor_v3.py agregar <titulo> <descripcion> <pagina.html>")
+            sys.exit(1)
+        resultado = agregar_mision(sys.argv[2], sys.argv[3], sys.argv[4])
+        print(f"Misión agregada: {json.dumps(resultado, indent=2)}")
+    else:
+        # Modo bucle
+        if not GITHUB_TOKEN or GITHUB_TOKEN == "TU_TOKEN_AQUI":
+            print("[ERROR] Falta GITHUB_TOKEN. Ejecútalo así:")
+            print('  $env:GITHUB_TOKEN = "ghp_tu_token_aqui"')
+            print("  python motor_v3.py")
+            sys.exit(1)
+        loop_principal()

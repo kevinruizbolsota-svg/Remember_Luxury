@@ -952,3 +952,39 @@ Sacrificio, lealtad frágil, tecnología arcana, corrupción irreversible.
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 22 — 14/08/2026, 14:31
+
+### 🏛️ AXEL — Arquitecto
+
+### **🔥 HÉROE CREADO: VORIAN EL ATADO**  
+
+#### **📜 DATOS BÁSICOS**  
+- **Nombre:** Vorian el Atado  
+- **Raza:** Nephilim (Híbrido de humano y ángel caído)  
+- **Clase:** Paladín de la Espada Fracturada  
+- **Estadísticas:**  
+  - **FUE** 18 | **DES** 14 | **INT** 12 | **SAB** 16 | **CAR** 10  
+- **Habilidad Única:** **"Grito del Abismo"** — Invoca una onda de energía corrupta que reduce la resistencia mágica de los enemigos en un 30% durante 15 segundos (1 uso por combate).  
+
+---
+
+#### **🌌 HISTORIA DE ORIGEN**  
+Vorian nació en las ruinas de Aetheria, marcado por el pacto que su ancestro hizo con un ángel caído. Su linaje lo convierte en un arma de doble filo: mientras su sangre lo acerca a la corrupción de Nexaroth, su alma clama por la redención. Criado entre los Vigilantes, aprendió a canalizar su herencia oscura en golpes devastadores, pero cada uso de su poder lo acerca a la locura.  
+
+Su conexión con el árbol Cabalístico es el **Sendero de Kether (Corona)**, simbolizando su lucha eterna entre la luz y la sombra. Las raíces del árbol se enredan en su brazo derecho, un recordatorio físico de que su destino está atado a la purificación o la caída definitiva.  
+
+---
+
+#### **⚔️ CONEXIÓN CON EL MUNDO**  
+- **Aliados:** Los Vigilantes lo ven como un símbolo de esperanza, pero desconfían de su herencia. Su presencia aumenta un **15% la disposición de Aetheria a unirse a ORIONIX**.  
+- **Amenaza:** Si Vorian cae en la corrupción, **el porcentaje de territorios infectados por Nexaroth aumentará un 5% inmediatamente**.  
+- **Misión Clave:** Purificar el Templo de las Sombras antes de que los Devoradores consoliden su base, o el mundo perderá territorios críticos.  
+
+**Palabras:** 390 | **Tono:** Épico y desgarrador, con un enfoque en sacrificio y consecuencias irreversibles.  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

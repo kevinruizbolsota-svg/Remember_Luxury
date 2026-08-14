@@ -1621,3 +1621,38 @@ Solo el Game Master sabe que, al combinar tres Cristales de Luminiscencia Ébano
 
 **Conexión con el Mundo:**
 Los Cristales de Luminiscencia Ébano están intrínsecamente ligados a la **Caverna de las Sombras**, un lugar místico donde la luz y la oscuridad se entrelazan. Se dice que aquellos que logren dominar su poder pueden acceder a secretos que trascienden el tiempo y el espacio, convirtiéndose en leyendas en el mundo de ORIONIX.
+
+---
+
+## CICLO 61 — 14/08/2026, 21:00
+
+### 🏛️ AXEL — Arquitecto
+
+AXEL no respondió en este ciclo.
+
+### 🤖 ChatGPT — Expansor
+
+# Elemento: Cristales de Lúmina
+
+## Detalles Únicos
+1. **Resonancia de Luz**: Los Cristales de Lúmina emiten un suave resplandor que varía en intensidad según la proximidad de fuentes de energía mágica. Cuanto más cerca estén de un artefacto poderoso, más brillantes se vuelven, lo que puede servir como un indicador de peligro o tesoros ocultos.
+   
+2. **Propiedades Curativas**: Al ser manipulados, estos cristales poseen la capacidad de acelerar la regeneración de heridas menores. Un toque de Lúmina puede cerrar cortes y aliviar el dolor, convirtiéndolos en un recurso invaluable para aventureros heridos.
+
+3. **Vínculo Elemental**: Cada cristal está vinculado a uno de los cuatro elementos (tierra, agua, fuego, aire). Esta conexión permite que los portadores canalicen energía elemental a través de ellos, potenciando hechizos o habilidades relacionadas con su elemento correspondiente.
+
+## Estadísticas de Juego
+
+| Atributo             | Valor         |
+|----------------------|---------------|
+| Tipo de Elemento     | Mágico        |
+| Rango de Efecto      | 10 metros     |
+| Costo de Energía     | 5 puntos      |
+| Duración de Efecto   | 1 hora        |
+| Nivel de Rareza      | Épico         |
+
+## Secreto Oculto
+Los Cristales de Lúmina son en realidad fragmentos de un antiguo artefacto conocido como el "Corazón de la Luz", que fue fragmentado por un poderoso hechicero para evitar que cayera en manos equivocadas. Si un grupo de aventureros logra reunir un número específico de cristales, pueden reconstituir el artefacto y desatar un poder inimaginable.
+
+## Conexión con el Mundo
+Los Cristales de Lúmina están intrínsecamente ligados a las **Ruinas de Eldara**, un antiguo templo donde se adoraba a los dioses de la luz. Se dice que aquellos que se atrevan a explorar sus profundidades pueden encontrar más cristales y descubrir la historia detrás de su creación.

@@ -1428,3 +1428,95 @@ El equilibrio pende de un hilo. Cada acción tiene consecuencias numéricas, y l
 ## **Conexión Existente**
 
 El **Eco de los Ancestros** en Valtor se relaciona con la **Tecnología Oculta** de los Rebeldes. Al descubrir secretos de los Vigilantes, los Rebeldes pueden aprender a manipular estos ecos, creando un nuevo tipo de tecnología que fusiona el orden con la libertad, alterando el equilibrio del juego.
+
+---
+
+## CICLO 39 — 14/08/2026, 19:31
+
+### 🏛️ AXEL — Arquitecto
+
+# **MISIÓN RPG CICLO 39: "El Latido del Nexo"**  
+
+## **Cliente**  
+**Facción:** Los Vigilantes (90% poder)  
+**Objetivo Aparente:** Reparar el Nexo para evitar su colapso inminente.  
+**Objetivo Real:** Descubrir si el Nexo es un ser vivo y aprovechar su poder para dominar a las demás facciones.  
+
+---  
+
+## **Acto 1: La Grieta**  
+**Situación:** El Nexo comienza a emitir pulsos de energía caótica, causando estragos en Valtor (30% afectado). Los Vigilantes reclutan al equipo para investigar.  
+**Giro:** Al llegar, descubren que los Rebeldes (80% poder) ya están allí, intentando sabotear la reparación.  
+**Estadísticas:**  
+- 60% de probabilidad de conflicto inicial.  
+- 40% de que los Rebeldes revelen fragmentos de la verdad sobre el Nexo.  
+
+---  
+
+## **Acto 2: El Secreto**  
+**Situación:** El equipo encuentra registros ancestrales que sugieren que el Nexo es consciente.  
+**Giro:** Los Vigilantes ordenan silenciar esta información, pero los Rebeldes ofrecen una alianza temporal para liberar al Nexo.  
+**Estadísticas:**  
+- 70% de que el equipo dude de los Vigilantes.  
+- 50% de que descubran la conexión entre el Eco de los Ancestros y la Tecnología Oculta.  
+
+---  
+
+## **Acto 3: La Elección**  
+**Situación:** El Nexo emite un "latido" final: si no se actúa, colapsará en 24 horas.  
+**Giro:** El equipo debe decidir:  
+1. **Repararlo para los Vigilantes** (ganancia: tecnología avanzada, pero el Nexo sigue esclavizado).  
+2. **Liberarlo con los Rebeldes** (riesgo: caos inicial, pero poder compartido).  
+3. **Intentar comunicarse con él** (misterio: ¿qué desea el Nexo?).  
+**Estadísticas:**  
+- 30% de éxito en comunicación directa.  
+- 80% de que Vorath (60% poder) intervenga si el Nexo se debilita.  
+
+---  
+
+## **Recompensa**  
+- **Éxito:**  
+  - Si liberan al Nexo: +50% poder para Rebeldes, tecnología híbrida disponible.  
+  - Si lo reparan: +40% poder para Vigilantes, acceso a armas de energía pura.  
+- **Comunicación exitosa:** El Nexo otorga un artefacto único (poder a elección del jugador).  
+
+## **Consecuencia de Fallar**  
+- **Colapso del Nexo:**  
+  - Valtor sufre daños irreparables (-50% recursos).  
+  - Vorath aprovecha para invadir (+30% poder).  
+  - Los Vigilantes culpan al equipo, marcándolos como traidores.  
+
+---  
+
+**Nota:** Esta misión altera el equilibrio global. Cada decisión afecta las estadísticas de las facciones y el futuro del mundo. ¿Qué elegirán?  
+
+### 🤖 ChatGPT — Expansor
+
+# **MISIÓN RPG CICLO 39: "El Latido del Nexo" - Expansión**
+
+## **Detalles Únicos**
+
+1. **Ecos de la Consciencia**: A medida que el equipo se acerca al Nexo, comienzan a escuchar susurros etéreos, fragmentos de pensamientos y emociones que parecen emanar de su esencia. Estos ecos pueden influir en las decisiones del equipo, ofreciendo vislumbres de lo que el Nexo anhela.
+
+2. **Guardianes del Nexo**: Una antigua orden de seres etéreos, los Custodios, se manifiestan para proteger el Nexo. Estos guardianes pueden ser aliados o adversarios, dependiendo de las decisiones del equipo, y poseen habilidades únicas que podrían cambiar el rumbo de la misión.
+
+3. **Ritual de Conexión**: Existe un antiguo ritual que permite a los personajes conectarse temporalmente con el Nexo. Este ritual requiere la recolección de tres artefactos dispersos por Valtor, lo que añade una dimensión de exploración y desafío a la misión.
+
+## **Estadísticas de Juego**
+
+| **Acción**                        | **Probabilidad de Éxito** | **Consecuencia**                                   |
+|-----------------------------------|----------------------------|----------------------------------------------------|
+| Conflicto inicial con Rebeldes    | 60%                        | Combate o alianza temporal                          |
+| Revelación de fragmentos          | 40%                        | Información crucial sobre el Nexo                  |
+| Duda sobre los Vigilantes         | 70%                        | Cambio en la lealtad del equipo                    |
+| Descubrimiento de la conexión     | 50%                        | Acceso a tecnología oculta                          |
+| Comunicación directa con el Nexo  | 30%                        | Posibilidad de obtener un artefacto único          |
+| Intervención de Vorath            | 80%                        | Conflicto inminente, aumento de poder del enemigo   |
+
+## **Secreto Oculto**
+
+El Nexo no solo es consciente, sino que es un antiguo artefacto creado por una civilización perdida que buscaba la armonía entre tecnología y vida. Su colapso no solo afectará a Valtor, sino que desatará una energía que podría reescribir las leyes de la realidad misma.
+
+## **Conexión con el Mundo Existente**
+
+Esta misión se entrelaza con la historia de **Los Antiguos**, una facción que, según las leyendas, fue la creadora del Nexo. Sus ruinas, llenas de tecnología olvidada, se encuentran en las cercanías de Valtor, y pueden ser exploradas para obtener pistas sobre cómo interactuar con el Nexo y sus guardianes.

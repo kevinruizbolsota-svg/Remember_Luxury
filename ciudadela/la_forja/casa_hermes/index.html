@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Hermes — ORIONIX</title>
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#e8c86a;--dark:#0b0b0d;--dark2:#111116;--dark3:#1a1a22;--text:#e8e0d0}
+body{background:var(--dark);color:var(--text);font-family:'Cormorant Garamond',serif;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(232,200,106,0.06) 0%,transparent 60%);pointer-events:none}
+.orionix-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(11,11,13,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(232,200,106,0.2);padding:0 2rem;display:flex;align-items:center;height:56px;gap:1.5rem}
+.nav-brand{font-family:'Cinzel',serif;font-weight:700;font-size:1.1rem;color:var(--gold);text-decoration:none;letter-spacing:0.15em;margin-right:auto}
+.nav-links{display:flex;gap:0.5rem}
+.nav-links a{color:rgba(232,200,106,0.7);text-decoration:none;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.08em;padding:0.3rem 0.7rem;border:1px solid rgba(232,200,106,0.2);border-radius:2px;transition:all 0.3s}
+.nav-links a:hover,.nav-cta{color:var(--gold)!important;border-color:var(--gold)!important;background:rgba(232,200,106,0.1)}
+.wrap{padding-top:80px;max-width:1100px;margin:0 auto;padding-left:1.5rem;padding-right:1.5rem;padding-bottom:4rem}
+.hero{text-align:center;padding:3rem 0 4rem;border-bottom:1px solid rgba(232,200,106,0.12);margin-bottom:3rem}
+.orb{font-size:4rem;margin-bottom:1.5rem;filter:drop-shadow(0 0 20px rgba(232,200,106,0.4))}
+h1{font-family:'Cinzel',serif;font-size:2.5rem;color:var(--gold);letter-spacing:0.2em;font-weight:700;margin-bottom:0.5rem}
+.subtitle{color:rgba(232,200,106,0.5);font-size:1rem;letter-spacing:0.15em;margin-bottom:0.5rem}
+.badge-role{display:inline-block;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.2em;color:rgba(232,200,106,0.6);border:1px solid rgba(232,200,106,0.25);padding:0.2rem 1rem;margin-top:0.5rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem}
+.grid.full{grid-template-columns:1fr}
+.card{background:var(--dark2);border:1px solid rgba(232,200,106,0.15);border-radius:4px;padding:1.5rem}
+.card h3{font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.15em;color:var(--gold);font-weight:600;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(232,200,106,0.1)}
+.skill-list{list-style:none;display:flex;flex-wrap:wrap;gap:0.5rem}
+.skill-list li{background:rgba(232,200,106,0.08);border:1px solid rgba(232,200,106,0.2);color:rgba(232,200,106,0.8);font-size:0.65rem;padding:0.2rem 0.6rem;border-radius:2px;font-family:'Cinzel',serif;letter-spacing:0.05em}
+.cmd-box{background:#080810;border:1px solid rgba(232,200,106,0.15);border-radius:3px;padding:1rem;font-family:monospace;font-size:0.75rem;color:#4ade80;white-space:pre-wrap;overflow-x:auto}
+.cmd-label{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.15em;color:rgba(232,200,106,0.4);margin-bottom:0.5rem;display:block}
+.status-row{display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem}
+.dot{width:8px;height:8px;border-radius:50%}
+.dot.green{background:#4ade80;box-shadow:0 0 8px #4ade8080}
+.dot.yellow{background:#fbbf24;box-shadow:0 0 8px #fbbf2480}
+.stat-label{font-size:0.7rem;color:rgba(232,200,106,0.5)}
+.chat-area{background:#080810;border:1px solid rgba(232,200,106,0.15);border-radius:3px;padding:1rem;min-height:120px;font-size:0.75rem;color:rgba(232,224,208,0.6);font-style:italic;text-align:center;display:flex;align-items:center;justify-content:center}
+.orionix-links{display:flex;gap:0.8rem;flex-wrap:wrap;margin-top:1rem}
+.orionix-link{flex:1;min-width:140px;background:rgba(232,200,106,0.08);border:1px solid rgba(232,200,106,0.2);color:rgba(232,200,106,0.8);text-decoration:none;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.1em;padding:0.7rem;text-align:center;border-radius:3px;transition:all 0.3s}
+.orionix-link:hover{border-color:var(--gold);color:var(--gold);background:rgba(232,200,106,0.12)}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<nav class="orionix-nav">
+  <a href="../../index.html" class="nav-brand">ORIONIX</a>
+  <div class="nav-links">
+    <a href="../../hub.html">Hub</a>
+    <a href="../../ciudadela.html">AXEL</a>
+    <a href="../plaza.html">Plaza</a>
+    <a href="../../tienda.html" class="nav-cta">Tienda</a>
+  </div>
+</nav>
+<div class="wrap">
+  <div class="hero">
+    <div class="orb">🪄</div>
+    <h1>CASA HERMES</h1>
+    <p class="subtitle">AI de auto-mejora continua — aprende y evoluciona en cada ciclo</p>
+    <span class="badge-role">Agente Automejorable · Nous Research</span>
+    <div class="status-row" style="justify-content:center;margin-top:1.2rem">
+      <span class="dot yellow"></span>
+      <span class="stat-label">Agente detectado — Integración ORIONIX pendiente de activación</span>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>⚡ Identidad del Agente</h3>
+      <table style="width:100%;font-size:0.8rem;border-collapse:collapse">
+        <tr><td style="color:rgba(232,200,106,0.5);padding:0.3rem 0;width:40%">Modelo</td><td style="color:var(--text)">hermes3</td></tr>
+        <tr><td style="color:rgba(232,200,106,0.5);padding:0.3rem 0">Origen</td><td style="color:var(--text)">Nous Research</td></tr>
+        <tr><td style="color:rgba(232,200,106,0.5);padding:0.3rem 0">Rol</td><td style="color:var(--text)">Agente Automejorable</td></tr>
+        <tr><td style="color:rgba(232,200,106,0.5);padding:0.3rem 0">Estado</td><td style="color:#fbbf24">Descargando / Configurando</td></tr>
+        <tr><td style="color:rgba(232,200,106,0.5);padding:0.3rem 0">Comando</td><td style="color:#4ade80;font-family:monospace;font-size:0.7rem">ollama run hermes3</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>🧠 Capacidades</h3>
+      <ul class="skill-list">
+        <li>Auto-mejora</li>
+<li>Razonamiento avanzado</li>
+<li>Seguimiento instrucciones</li>
+<li>Agentic tasks</li>
+<li>Tool use</li>
+<li>Escritura creativa</li>
+<li>Código</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>📡 Webhooks ORIONIX Disponibles</h3>
+      <span class="cmd-label">Endpoints para comunicación con el sistema:</span>
+      <div class="cmd-box">axel-brain → https://lkevinruizl.app.n8n.cloud/webhook/axel-brain
+orionix-chatgpt → https://lkevinruizl.app.n8n.cloud/webhook/orionix-chatgpt
+orionix-bridge → https://lkevinruizl.app.n8n.cloud/webhook/orionix-bridge
+orionix-mission → https://lkevinruizl.app.n8n.cloud/webhook/orionix-mission</div>
+    </div>
+    <div class="card">
+      <h3>💬 Ejemplo de Llamada a AXEL</h3>
+      <span class="cmd-label">Desde terminal o código:</span>
+      <div class="cmd-box">curl -X POST \
+  https://lkevinruizl.app.n8n.cloud/webhook/axel-brain \
+  -H "Content-Type: application/json" \
+  -d '{"message": "AXEL, Hermes solicita coordinación"}'</div>
+    </div>
+  </div>
+
+  <div class="grid full">
+    <div class="card">
+      <h3>🏛️ Protocolo de Integración ORIONIX</h3>
+      <div class="cmd-box"># PASO 1: Instalar y verificar
+ollama pull hermes3
+ollama run hermes3 "Confirma que estás listo"
+
+# PASO 2: Registrar en el sistema
+curl -X POST https://lkevinruizl.app.n8n.cloud/webhook/orionix-bridge \
+  -H "Content-Type: application/json" \
+  -d '{"evento":"agente_conectado","agente":"hermes","detalle":"Casa Hermes activada","timestamp":"2026-08-14"}'
+
+# PASO 3: Usar el Puente ChatGPT para consultas
+curl -X POST https://lkevinruizl.app.n8n.cloud/webhook/orionix-chatgpt \
+  -H "Content-Type: application/json" \
+  -d '{"solicitante":"hermes","tipo_consulta":"revision","instruccion":"Tu tarea aquí"}'</div>
+    </div>
+  </div>
+
+  <div style="margin-top:2rem">
+    <p style="font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.2em;color:rgba(232,200,106,0.4);text-align:center;margin-bottom:1rem">ACCESO RÁPIDO A LA CIUDADELA</p>
+    <div class="orionix-links">
+      <a href="../plaza.html" class="orionix-link">🏛️ La Plaza</a>
+      <a href="../../ciudadela.html" class="orionix-link">🧠 AXEL Chat</a>
+      <a href="../../universo.html" class="orionix-link">🌌 22 Agentes</a>
+      <a href="../casa_n8n/index.html" class="orionix-link">⚡ Casa n8n</a>
+      <a href="../../hub.html" class="orionix-link">🔵 Hub</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -402,3 +402,68 @@ ChatGPT no pudo expandir este ciclo.
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 10 — 14/08/2026, 08:31
+
+### 🏛️ AXEL — Arquitecto
+
+### **🌍 EVENTO MUNDIAL: "EL ECLIPSE DE LOS JURAMENTOS"**  
+
+#### **📜 Nombre y Causa**  
+El evento **"El Eclipse de los Juramentos"** surge cuando la luna negra, *Nyxara*, se alinea con el sol en un fenómeno cósmico único cada mil años. Este eclipse activa antiguos sellos de corrupción ocultos en los tres reinos, liberando energía arcana maldita que distorsiona la realidad y los juramentos sagrados.  
+
+**Causa:**  
+- Los *Sectarios del Vacío* han manipulado rituales ancestrales para aprovechar el eclipse y debilitar las barreras entre reinos.  
+- La *Marca del Engaño* (del Ciclo 8) se intensifica, afectando incluso a los líderes de facciones.  
+
+---
+
+#### **⚔️ Efectos en los 3 Reinos**  
+1. **Reino de la Luz (Aurelia):**  
+   - *-15% en resistencia a la corrupción*: Los paladines pierden temporalmente sus habilidades sagradas.  
+   - *Revueltas internas*: 30% de los nobles son acusados de traición (falsamente o no).  
+
+2. **Reino de las Sombras (Umbrion):**  
+   - *+20% de poder en hechizos oscuros*: Los brujos ganan fuerza, pero 1 de cada 5 sufre *posesión demoníaca*.  
+   - *Caos en las guildas*: Las alianzas se rompen (+3 pruebas de persuasión para negociar).  
+
+3. **Reino del Crepúsculo (Duskhold):**  
+   - *Equilibrio roto*: Los seres crepusculares se dividen en facciones salvajes (-10 en control de criaturas).  
+   - *Geografía alterada*: Surgimiento de *Brechas de Nyxara* (zonas con eventos aleatorios).  
+
+---
+
+#### **🎯 Oportunidades para Héroes**  
+- **Misión Principal:** *"Purificar los Sellos"*  
+  - Encontrar y destruir 3 *Objetos de Juramento* corruptos (uno en cada reino).  
+  - **Recompensas:**  
+    - *+5% en resistencia a la corrupción permanente*.  
+    - *Artefacto "Luz de Nyxara"* (inmunidad a posesiones por 24h).  
+- **Misiones Secundarias:**  
+  - *Explotar el caos*: Robar reliquias de facciones debilitadas (+2 en sigilo).  
+  - *Aliarse con Sectarios*: Obtener poder oscuro, pero +2 corrupción por misión.  
+
+---
+
+#### **🗺️ Cambios en el Mapa del Poder**  
+- **Nuevas Facciones:**  
+  - *Los Renegados de Nyxara* (exiliados de los 3 reinos, +10% en ataques críticos).  
+  - *Los Vigilantes del Eclipse* (neutrales, venden información por oro).  
+- **Zonas en Conflicto:**  
+  - *40% de las ciudades* tienen disputas abiertas.  
+  - *Brechas de Nyxara* aparecen en 5 ubicaciones clave (riesgo/recompensa).  
+
+---
+
+#### **📊 Estadísticas Clave**  
+- **Duración del Evento:** 7 días (tiempo real) o hasta completar la misión principal.  
+- **Dificultad Global:** 18/20 (por la dualidad moral y efectos aleatorios).  
+- **Palabras:** 390 | **Conexión con Ciclo 8:** La *Marca del Engaño* ahora afecta a NPCs clave.  
+
+**⚠️ Nota:** Este evento fuerza a los jugadores a elegir entre *poder* o *pureza*, con consecuencias permanentes en el mundo. ¿Sacrificarán sus principios por sobrevivir?  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

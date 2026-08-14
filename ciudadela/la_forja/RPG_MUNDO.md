@@ -243,3 +243,60 @@ Esta criatura puede aparecer cuando los jugadores interactúan con el Espejo Ant
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 7 — 14/08/2026, 07:01
+
+### 🏛️ AXEL — Arquitecto
+
+**💎 Artefacto Legendario: El Corazón de Umbrion**  
+
+---
+
+### **🔮 Nombre**  
+**Corazón de Umbrion** — Un fragmento del Espejo Antiguo, cristalizado en una gema negra pulsante.  
+
+---
+
+### **🎨 Aspecto**  
+Una gema de ébano tallada en forma de corazón, con vetas rojas que laten como sangre. Al sostenerla, refleja destellos de rostros distorsionados — ecos de las almas atrapadas en su interior.  
+
+---
+
+### **⚡ Poder Primario**  
+**"Eco de la Sombra"** (Activo):  
+- **+3 a Voluntad** durante 1 hora (acumulativo con otros efectos).  
+- **Costo:** 1 punto de Corrupción por uso.  
+- **Efecto secundario:** El portador escucha susurros del Espectro del Espejo Roto en sueños.  
+
+---
+
+### **🌀 Poder Secundario Oculto**  
+**"Pacto del Abismo"** (Pasivo, se desbloquea con 5 puntos de Corrupción):  
+- **Invoca al Espectro del Espejo Roto** como aliado temporal (1 vez/día).  
+- **Riesgo:** Cada invocación aumenta un 10% la probabilidad de que el Espectro se vuelva contra el portador.  
+
+---
+
+### **📜 Historia de su Creación**  
+El *Corazón de Umbrion* fue forjado por Lord Umbrion, un hechicero que buscó dominar las sombras del Espejo Antiguo. Al romperlo, su alma quedó atrapada en este fragmento, junto a las de sus víctimas. Los cultistas lo veneran como reliquia sagrada, creyendo que su poder puede "elevar" a los elegidos... o consumirlos.  
+
+---
+
+### **🗺️ Paradero Actual**  
+Oculto en las **Catacumbas del Susurro** (Nivel 3 del Calabozo del Espejo Antiguo), custodiado por:  
+- **3 Sectarios de Umbrion** (Nivel 4, resistencia a magia oscura).  
+- **1 Espectro del Espejo Roto** (aparece si el *Corazón* es tocado).  
+
+---
+
+### **🎭 Conexión con la Trama**  
+- **Si los jugadores destruyen el *Corazón*:** Libera una onda de energía oscura (+5 Corrupción para todos en 10m), pero otorga **+1 permanente a Voluntad**.  
+- **Si lo conservan:** Los susurros del Espectro los guiarán hacia el **Espejo Antiguo**, revelando su ubicación... y su trampa final.  
+
+**⚠️ Advertencia:** Cada uso del *Corazón* acerca al grupo al desenlace de la maldición de Umbrion. ¿Lo usarán para el poder... o lo sellarán para siempre?  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

@@ -1025,3 +1025,39 @@ Nexaroth ocupa el **nivel más alto** en la jerarquía de los Devoradores, super
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 24 — 14/08/2026, 15:31
+
+### 🏛️ AXEL — Arquitecto
+
+### **🌄 Región: Las Tierras de Vorian**  
+
+#### **🗺️ Geografía**  
+Las Tierras de Vorian son un vasto territorio dominado por llanuras áridas y cañones profundos, donde el viento susurra secretos ancestrales. Al norte, se alza la **Montaña de los Suspiros**, un coloso de piedra negra que emana energía corrupta. Al sur, el **Río Aether**, único curso de agua pura que resiste la corrupción, serpentea entre valles estériles.  
+
+#### **🌦️ Clima**  
+El clima es implacable: días abrasadores bajo un sol rojizo y noches gélidas donde la niebla sombría se arrastra desde la montaña. Las tormentas eléctricas son frecuentes, y se dice que los relámpagos llevan fragmentos de la voluntad de Nexaroth.  
+
+#### **🐾 Criaturas**  
+- **Devoradores de Sombras:** Bestias aladas con piel de obsidiana que se alimentan de la energía vital. Su fuerza aumenta un **15%** bajo la luna negra.  
+- **Guardianes del Aether:** Espíritus ancestrales que protegen el río. Si son derrotados, la corrupción avanza un **5%** en la región.  
+- **Gárgolas Vivientes:** Estatuas animadas por la magia oscura de Nexaroth, con un **20%** de resistencia al daño físico.  
+
+#### **💎 Recurso Único: Cristales de Vorian**  
+Estas gemas, encontradas solo en las profundidades de la Montaña de los Suspiros, pueden purificar pequeñas áreas de corrupción. Cada cristal usado reduce la influencia de Nexaroth en un **3%**, pero extraerlos atrae a los Devoradores.  
+
+#### **☠️ Peligro Oculto**  
+Bajo el río yace el **Templo Ahogado**, una estructura antigua donde Nexaroth intenta completar su ritual. Si los jugadores no lo detienen en **7 días**, la corrupción se extenderá irreversiblemente, debilitando a todas las criaturas puras en un **30%**.  
+
+#### **⚡ Conexión con el Mundo**  
+- **Aliados:** Los Guardianes del Aether pueden otorgar bendiciones temporales (+10% de resistencia a la corrupción).  
+- **Amenaza:** Cada Devorador derrotado reduce la agresividad de las criaturas oscuras en un **2%**, pero Nexaroth enviará oleadas cada vez más fuertes.  
+- **Misión Clave:** Destruir el **Altar de Nexaroth** en el Templo Ahogado antes de que el ritual termine, o el mundo caerá en la oscuridad eterna.  
+
+**Palabras:** 390 | **Tono:** Épico y desesperado, con un enfoque en la lucha contra el tiempo y la corrupción.  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

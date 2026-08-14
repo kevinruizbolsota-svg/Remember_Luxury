@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa de Antigravity — Las Manos | ORIONIX</title>
+<link rel="icon" href="../../favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#e8c86a;--gold-deep:#c9a227;--gold-glow:rgba(232,200,106,0.28);--gold-subtle:rgba(232,200,106,0.07);--bg:#0b0b0d;--bg-card:rgba(11,11,16,0.9);--border:rgba(232,200,106,0.18);--border-hover:rgba(232,200,106,0.55);--text:#d4c5a0;--text-dim:rgba(212,197,160,0.5);--green:#4ecb71;--yellow:#f4c842;--white:#f5f0e8;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden;}
+#stars{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;}
+.nav{position:fixed;top:0;left:0;width:100%;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:linear-gradient(180deg,rgba(11,11,16,0.97),transparent);border-bottom:1px solid rgba(232,200,106,0.07);backdrop-filter:blur(10px);}
+.nav-brand{font-family:'Cinzel',serif;font-size:1rem;font-weight:700;color:var(--gold);letter-spacing:0.2em;text-decoration:none;}
+.nav-links{display:flex;gap:6px;}
+.nav-link{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.1em;color:var(--text-dim);text-decoration:none;padding:5px 12px;border:1px solid transparent;transition:0.3s;}
+.nav-link:hover{color:var(--gold);border-color:var(--border);}
+.wrapper{position:relative;z-index:10;max-width:960px;margin:0 auto;padding:90px 24px 60px;}
+.hero{text-align:center;margin-bottom:46px;padding:38px 0;}
+.orbe{width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(78,203,113,0.3) 0%,rgba(11,11,16,0.9) 70%);margin:0 auto 22px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;box-shadow:0 0 50px rgba(78,203,113,0.15);animation:pulse 4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 30px rgba(78,203,113,0.15);}50%{box-shadow:0 0 65px rgba(78,203,113,0.3);}}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:900;color:var(--white);letter-spacing:0.28em;margin-bottom:6px;}
+.hero-sub{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.24em;color:var(--text-dim);margin-bottom:14px;}
+.hero-desc{font-size:1rem;color:var(--text);max-width:500px;margin:0 auto;line-height:1.75;font-style:italic;}
+.badge{display:inline-block;margin-top:16px;font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.16em;padding:5px 16px;border:1px solid rgba(78,203,113,0.4);color:rgba(78,203,113,0.8);background:rgba(78,203,113,0.04);}
+.section-label{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.22em;color:var(--gold);margin-bottom:14px;}
+/* LOG */
+.log-box{background:rgba(0,0,0,0.75);border:1px solid var(--border);padding:24px;max-height:280px;overflow-y:auto;font-size:0.85rem;line-height:1.9;margin-bottom:32px;font-family:'Cormorant Garamond',serif;}
+.log-box::-webkit-scrollbar{width:3px;}
+.log-box::-webkit-scrollbar-thumb{background:var(--border-hover);}
+.log-line{display:block;}
+.log-line.ok{color:var(--green);}
+.log-line.warn{color:var(--yellow);}
+.log-line.dim{color:var(--text-dim);}
+/* MISIONES */
+.misiones-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:32px;}
+.mision-card{background:var(--bg-card);border:1px solid var(--border);padding:20px;}
+.mision-id{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.18em;color:var(--text-dim);margin-bottom:6px;}
+.mision-titulo{font-family:'Cinzel',serif;font-size:0.82rem;color:var(--white);margin-bottom:6px;letter-spacing:0.06em;}
+.mision-estado{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.12em;}
+.mision-estado.done{color:var(--green);}
+.mision-estado.progress{color:var(--yellow);}
+.mision-estado.pending{color:var(--text-dim);}
+/* REPORTE */
+.report-area{background:rgba(0,0,0,0.65);border:1px solid var(--border);color:var(--white);padding:14px;font-family:'Cormorant Garamond',serif;font-size:0.9rem;resize:vertical;min-height:90px;outline:none;transition:0.3s;width:100%;margin-bottom:10px;}
+.report-area:focus{border-color:var(--border-hover);}
+.report-area::placeholder{color:var(--text-dim);font-style:italic;}
+.report-btn{background:transparent;color:var(--green);border:1px solid rgba(78,203,113,0.4);padding:11px 22px;font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.14em;cursor:pointer;transition:0.3s;}
+.report-btn:hover{background:rgba(78,203,113,0.08);}
+.report-status{font-size:0.72rem;margin-top:8px;min-height:18px;font-style:italic;color:var(--green);}
+/* INSTALACION */
+.install-box{background:rgba(0,0,0,0.7);border:1px solid rgba(78,203,113,0.2);padding:22px;margin-bottom:32px;}
+.install-title{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.18em;color:rgba(78,203,113,0.8);margin-bottom:14px;}
+.code-block{background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.06);padding:14px;font-family:monospace;font-size:0.82rem;color:rgba(78,203,113,0.9);line-height:1.8;margin-bottom:12px;overflow-x:auto;}
+.install-note{font-size:0.8rem;color:var(--text-dim);font-style:italic;line-height:1.65;}
+@media(max-width:600px){.wrapper{padding:80px 16px 40px;}}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<nav class="nav">
+  <a href="../../index.html" class="nav-brand">ORIONIX</a>
+  <div class="nav-links">
+    <a href="../la_forja/plaza.html" class="nav-link">← Plaza</a>
+    <a href="../la_forja/oraculo.html" class="nav-link">Oráculo</a>
+    <a href="../la_forja/comando.html" class="nav-link">Comando</a>
+  </div>
+</nav>
+
+<div class="wrapper">
+  <div class="hero">
+    <div class="orbe">🔨</div>
+    <h1>ANTIGRAVITY</h1>
+    <div class="hero-sub">LAS MANOS — AGENTE EJECUTOR</div>
+    <p class="hero-desc">Convierte los planos de Qwen en código real. Hace commits directos al repositorio, despliega en GitHub Pages y reporta cada acción al Comandante.</p>
+    <div class="badge">SDK: google.antigravity — Gemini Enterprise</div>
+  </div>
+
+  <!-- ESTADO ACTUAL -->
+  <div class="section-label">ESTADO ACTUAL</div>
+  <div class="log-box">
+    <span class="log-line warn">⚡ [2026-08-14 02:30] Misión #1-A iniciada — Archivos base la_forja/ desplegados</span>
+    <span class="log-line ok">✅ [2026-08-14 02:30] motor.py → commit exitoso</span>
+    <span class="log-line ok">✅ [2026-08-14 02:30] oraculo.html → commit exitoso</span>
+    <span class="log-line ok">✅ [2026-08-14 02:30] MESA_REDONDA.md → commit exitoso</span>
+    <span class="log-line ok">✅ [2026-08-14 02:28] Bridge notificado — ejecución #358</span>
+    <span class="log-line warn">⚡ [2026-08-14 02:49] Instancia agotó tokens de contexto — reiniciando</span>
+    <span class="log-line dim">🔄 [Estado] En espera de nueva instancia o CLI activado</span>
+    <span class="log-line dim">📋 [Pendiente] Misión #1-B: plaza.html + casas + agentes_estado.json</span>
+  </div>
+
+  <!-- MISIONES -->
+  <div class="section-label">HISTORIAL DE MISIONES</div>
+  <div class="misiones-grid">
+    <div class="mision-card">
+      <div class="mision-id">MISIÓN #1-A</div>
+      <div class="mision-titulo">Archivos Base la_forja/</div>
+      <div class="mision-estado done">✅ COMPLETADA</div>
+    </div>
+    <div class="mision-card">
+      <div class="mision-id">MISIÓN #1-B</div>
+      <div class="mision-titulo">Ciudadela — Plaza + Casas</div>
+      <div class="mision-estado progress">🔄 EN PROGRESO (n8n ejecuta)</div>
+    </div>
+    <div class="mision-card">
+      <div class="mision-id">MISIÓN #2</div>
+      <div class="mision-titulo">motor.py con backoff exponencial</div>
+      <div class="mision-estado pending">⏳ PENDIENTE</div>
+    </div>
+  </div>
+
+  <!-- INSTALACIÓN CLI -->
+  <div class="install-box">
+    <div class="install-title">ACTIVAR ANTIGRAVITY CLI EN WINDOWS</div>
+    <div class="code-block"># 1. Abrir PowerShell como administrador
+# 2. Agregar al PATH (ejecutar UNA SOLA VEZ):
+[System.Environment]::SetEnvironmentVariable("PATH", $env:PATH + ";$env:LOCALAPPDATA\agy\bin", "User")
+
+# 3. CERRAR PowerShell y abrir una NUEVA ventana
+
+# 4. Instalar SDK Python:
+python -m pip install google-antigravity
+
+# 5. Configurar API key:
+$env:GEMINI_API_KEY = "tu_api_key_aqui"
+
+# 6. Probar:
+agy --version</div>
+    <div class="install-note">Nota: si 'python' no funciona, usa 'py' o instala Python desde python.org. El CLI ya está en tu máquina en C:\Users\carol\AppData\Local\agy\bin\agy.exe — solo falta el PATH y Python.</div>
+  </div>
+
+  <!-- DEJAR REPORTE -->
+  <div class="section-label">DEJAR REPORTE DE EJECUCIÓN</div>
+  <textarea class="report-area" id="reportInput" placeholder="Antigravity: reporta aquí el resultado de tu misión (commits, errores, estado)..."></textarea>
+  <button class="report-btn" onclick="enviarReporte()">📡 REPORTAR AL BRIDGE</button>
+  <div class="report-status" id="reportStatus"></div>
+</div>
+
+<script>
+const BRIDGE='https://lkevinruizl.app.n8n.cloud/webhook/orionix-bridge';
+const c=document.getElementById('stars'),cx=c.getContext('2d');let st=[];
+function initS(){c.width=window.innerWidth;c.height=window.innerHeight;st=Array.from({length:130},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.1+0.2,o:Math.random()*0.45+0.1,s:Math.random()*0.002,g:Math.random()<0.06,gr:Math.random()<0.08}));}
+function drawS(){cx.clearRect(0,0,c.width,c.height);st.forEach(s=>{s.o+=s.s*(Math.random()>.5?1:-1);s.o=Math.max(0.05,Math.min(0.7,s.o));cx.beginPath();cx.arc(s.x,s.y,s.r,0,Math.PI*2);cx.fillStyle=s.g?`rgba(232,200,106,${s.o})`:s.gr?`rgba(78,203,113,${s.o})`:`rgba(245,240,232,${s.o*0.5})`;cx.fill();});requestAnimationFrame(drawS);}
+window.addEventListener('resize',initS);
+async function enviarReporte(){
+  const txt=document.getElementById('reportInput').value.trim();
+  const st=document.getElementById('reportStatus');
+  if(!txt){st.textContent='Escribe el reporte primero.';st.style.color='var(--yellow)';return;}
+  st.textContent='Enviando al bridge...';
+  try{
+    await fetch(BRIDGE,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({evento:'reporte_ejecucion',detalle:txt,agente:'antigravity',ts:new Date().toISOString()})});
+    st.style.color='var(--green)';st.textContent='✅ Reporte enviado. Kevin recibe Telegram.';
+    document.getElementById('reportInput').value='';
+  }catch(e){st.style.color='var(--yellow)';st.textContent='❌ Error enviando.';}
+  setTimeout(()=>st.textContent='',6000);
+}
+initS();drawS();
+</script>
+</body>
+</html>

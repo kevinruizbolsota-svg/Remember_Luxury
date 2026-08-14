@@ -772,3 +772,40 @@ Se rumorea que el Ojo está oculto en las *Ruinas de Valtor*, una ciudad abandon
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 18 — 14/08/2026, 12:31
+
+### 🏛️ AXEL — Arquitecto
+
+### **FACCIÓN: LOS VIGILANTES DEL UMBRAL**  
+
+#### **🔹 Nombre y Emblema**  
+**Nombre:** *Los Vigilantes del Umbral*  
+**Emblema:** Un ojo cerrado rodeado por una espiral de runas arcanas, simbolizando la vigilancia sobre las puertas dimensionales y el conocimiento prohibido.  
+
+#### **🔹 Sede**  
+**Ubicación:** *La Torre del Silencio*, una estructura flotante sobre las Ruinas de Valtor, accesible solo mediante portales controlados por la facción.  
+**Características:** La torre está construida con fragmentos de realidades alternas, lo que la hace inmune a la corrupción dimensional.  
+
+#### **🔹 Jerarquía Interna**  
+1. **Patriarca/Matriarca del Umbral** (1 líder): Controla los portales y decide qué conocimiento se comparte.  
+2. **Guardianes del Ojo** (5 miembros): Protegen el artefacto y monitorean las fluctuaciones dimensionales.  
+3. **Aprendices del Nexis** (12 miembros): Investigadores que estudian los fragmentos de Nexaroth sin sucumbir a su influencia.  
+
+#### **🔹 Misión Oculta**  
+Su objetivo declarado es "proteger el equilibrio dimensional", pero en secreto buscan *reconstruir el Ojo de Nexaroth* para usarlo como arma contra los Devoradores de Nexis. Sin embargo, algunos miembros han comenzado a mostrar signos de corrupción, susurrando en lenguas olvidadas.  
+
+#### **🔹 Relación con los 22 Agentes ORIONIX**  
+- **Alianza Tensa:** Colaboran con los agentes para contener brechas dimensionales, pero desconfían de las intenciones de ORIONIX.  
+- **Conflicto:** 3 agentes han desaparecido investigando la Torre, y se sospecha que los Vigilantes los retienen para evitar que descubran su verdadero plan.  
+
+**Palabras:** 290 | **Tono:** Misterioso y estratégico.  
+
+---  
+**Nota:** Esta facción añade capas al conflicto, introduciendo un grupo que podría salvar el mundo... o acelerar su caída. Conecta directamente con el artefacto *Ojo de Nexaroth* y la amenaza de los Devoradores.
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

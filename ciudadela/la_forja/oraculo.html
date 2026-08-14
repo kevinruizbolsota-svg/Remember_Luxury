@@ -56,6 +56,37 @@
     position: absolute; top: 15px; right: 20px; font-family: 'Cinzel', serif; font-size: 0.8rem;
     color: #4CAF50; letter-spacing: 2px;
   }
+  .status-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #4CAF50; margin-right: 5px; box-shadow: 0 0 10px #4CAF50; }
+  .status.error { color: #f44336; }
+  .status.error .status-dot { background: #f44336; box-shadow: 0 0 10px #f44336; }
+
+  /* Métricas */
+  .metrics-panel {
+    display: flex; justify-content: space-between; margin-bottom: 30px;
+    background: rgba(232,200,106,0.05); border: 1px solid rgba(232,200,106,0.2);
+    padding: 20px; border-radius: 8px;
+  }
+  .metric-box { text-align: center; flex: 1; }
+  .metric-box:not(:last-child) { border-right: 1px solid rgba(232,200,106,0.1); }
+  .metric-title { font-family: 'Cinzel', serif; font-size: 0.9rem; color: rgba(233, 221, 196, 0.6); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+  .metric-value { font-size: 1.5rem; color: var(--gold); font-weight: 600; }
+
+  /* Enviar Misión */
+  .mission-sender {
+    margin-top: 30px; display: flex; gap: 15px;
+  }
+  .mission-input {
+    flex: 1; background: rgba(0,0,0,0.6); border: 1px solid rgba(232,200,106,0.3);
+    color: var(--text); padding: 15px; font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; border-radius: 4px; outline: none;
+  }
+  .mission-input:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(232,200,106,0.2); }
+  
+  /* Syntax Highlighting */
+  .hl-green { color: #4CAF50; }
+  .hl-red { color: #f44336; }
+  .hl-yellow { color: #ffeb3b; }
+  .hl-gold { color: var(--gold); font-weight: bold; }
 </style>
 </head>
 <body>
@@ -65,10 +96,30 @@
 <div class="container">
   <h1>EL ORÁCULO</h1>
   
+  <div class="metrics-panel">
+    <div class="metric-box">
+      <div class="metric-title">Último Ciclo</div>
+      <div class="metric-value" id="m-ciclo">--:--:--</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-title">Agente Activo</div>
+      <div class="metric-value" id="m-agente">Desconocido</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-title">Ciclos Completados</div>
+      <div class="metric-value" id="m-count">0</div>
+    </div>
+  </div>
+
   <div class="terminal">
-    <div class="status" id="status-indicator">● SYNC ACTIVO</div>
+    <div class="status" id="status-indicator"><span class="status-dot"></span>SYNC ACTIVO</div>
     <div id="mesa-content" class="content">Iniciando enlace con La Mesa Redonda...</div>
     <div class="cursor"></div>
+  </div>
+  
+  <div class="mission-sender">
+    <input type="text" id="missionInput" class="mission-input" placeholder="Dicta una nueva misión suprema al sistema...">
+    <button class="btn-force" style="margin: 0; width: auto;" onclick="enviarMision()">Enviar al Creador</button>
   </div>
   
   <button class="btn-force" onclick="forzarCiclo()">Forzar Ciclo</button>
@@ -77,19 +128,51 @@
 <script>
   const rawUrl = 'https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/la_forja/MESA_REDONDA.md';
   const contentDiv = document.getElementById('mesa-content');
-  const webhookUrl = 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-mission';
+  const webhookMission = 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-mission';
+  const webhookBridge = 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-bridge';
+
+  function applySyntax(text) {
+    const lines = text.split('\n');
+    return lines.map(line => {
+      if (line.includes('✅')) return `<span class="hl-green">${line}</span>`;
+      if (line.includes('❌')) return `<span class="hl-red">${line}</span>`;
+      if (line.includes('⚡')) return `<span class="hl-yellow">${line}</span>`;
+      if (line.includes('🧠')) return `<span class="hl-gold">${line}</span>`;
+      return line;
+    }).join('\n');
+  }
 
   // Fetch a la Mesa Redonda
   async function fetchMesa() {
+    const statusInd = document.getElementById('status-indicator');
     try {
-      // Cache buster para evitar el cache de GitHub Raw
       const res = await fetch(rawUrl + '?t=' + new Date().getTime());
       if(res.ok) {
         const text = await res.text();
-        contentDiv.innerHTML = text; // Se podría usar una librería de markdown a HTML para mejor renderizado
+        
+        // Parsear métricas
+        const mSync = text.match(/\*\*Última Sincronización:\*\* (.*)/);
+        if(mSync) document.getElementById('m-ciclo').innerText = mSync[1].trim();
+        
+        const mResp = text.match(/\*\*Responsable:\*\* (.*)/);
+        if(mResp) document.getElementById('m-agente').innerText = mResp[1].trim();
+        
+        const count = (text.match(/✅/g) || []).length;
+        document.getElementById('m-count').innerText = count;
+
+        contentDiv.innerHTML = applySyntax(text);
+        
+        // Indicador verde
+        statusInd.className = 'status';
+        statusInd.innerHTML = '<span class="status-dot"></span>SYNC ACTIVO';
+      } else {
+        throw new Error("HTTP error");
       }
     } catch(e) {
       console.error("Error leyendo MESA_REDONDA", e);
+      // Indicador rojo
+      statusInd.className = 'status error';
+      statusInd.innerHTML = '<span class="status-dot"></span>ERROR DE SYNC';
     }
   }
 
@@ -97,10 +180,33 @@
   setInterval(fetchMesa, 30000);
   fetchMesa();
 
+  // Enviar Misión al Creador
+  async function enviarMision() {
+    const input = document.getElementById('missionInput');
+    const texto = input.value.trim();
+    if(!texto) return;
+    
+    try {
+      await fetch(webhookBridge, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          evento: 'mensaje_agente',
+          detalle: texto,
+          agente: 'oraculo'
+        })
+      });
+      alert("Mensaje transmitido al Creador.");
+      input.value = '';
+    } catch(e) {
+      alert("Error enviando el mensaje.");
+    }
+  }
+
   // Forzar Ciclo
   async function forzarCiclo() {
     try {
-      await fetch(webhookUrl, {
+      await fetch(webhookMission, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -300,3 +300,49 @@ Oculto en las **Catacumbas del Susurro** (Nivel 3 del Calabozo del Espejo Antigu
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 8 — 14/08/2026, 07:31
+
+### 🏛️ AXEL — Arquitecto
+
+### 🏛️ **FACCIÓN: LOS VIGILANTES DEL UMBRAL**  
+
+#### **📜 Nombre y Emblema**  
+- **Nombre:** *Los Vigilantes del Umbral* (también conocidos como "Los Selladores").  
+- **Emblema:** Un ojo cerrado dentro de un círculo de runas antiguas, símbolo de vigilancia y contención.  
+
+#### **🏰 Sede**  
+- **Ubicación:** *El Atrio de los Suspiros*, una fortaleza oculta en el Nivel 2 del Calabozo del Espejo Antiguo, justo sobre las Catacumbas del Susurro.  
+- **Características:**  
+  - Paredes impregnadas de salvia sagrada (reduce Corrupción en -2 para aliados).  
+  - Un *Espejo de Vigilancia* que refleja movimientos en las Catacumbas (ventaja en percepción).  
+
+#### **👥 Jerarquía Interna**  
+1. **Guardianes del Silencio** (Nivel 5): Líderes místicos, expertos en sellar energías oscuras.  
+   - **Habilidad única:** *Sello de Contención* (1/día, neutraliza un efecto de Corrupción).  
+2. **Custodios de Runas** (Nivel 4): Artesanos de barreras mágicas.  
+   - **Habilidad única:** *Runas de Protección* (+3 Defensa vs. magia oscura).  
+3. **Exploradores del Umbral** (Nivel 3): Espías y recolectores de artefactos malditos.  
+   - **Habilidad única:** *Paso Fantasmal* (ignora trampas de sombra 1/escena).  
+
+#### **🎭 Misión Oculta**  
+- **Objetivo real:** Evitar que el *Corazón* sea destruido o usado, pues su energía alimenta la maldición de Umbrion.  
+- **Relación con ORIONIX:** 5 agentes (de los 22) son infiltrados en la facción, monitoreando su progreso para controlar el flujo de energía oscura.  
+
+#### **⚔️ Conexión con la Trama Actual**  
+- **Si los jugadores se unen a los Vigilantes:**  
+  - Reciben *Amuletos de Vigilancia* (-1 Corrupción acumulada).  
+  - Acceso a misiones para *sellar* el Corazón (requiere superar a los Sectarios de Umbrion).  
+- **Si los traicionan:**  
+  - Los Vigilantes los marcan como *Apóstatas* (+2 dificultad en todas las pruebas dentro del calabozo).  
+
+**⚠️ Advertencia:** La facción tiene sus propios secretos... ¿Confiarán los jugadores en ellos, o descubrirán que también son manipulados por fuerzas mayores?  
+
+---  
+**Palabras:** 390 | **Conexión confirmada con Ciclo 8.**
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

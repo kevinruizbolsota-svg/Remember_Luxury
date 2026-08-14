@@ -3,311 +3,578 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Orionix Maison | 3D Experience</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<title>ORIONIX | La Tienda del Imperio</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:image" content="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --core: #0ff;          /* Cyan neón */
-    --core-glow: rgba(0,255,255,0.4);
-    --gold: #f4d03f;       /* Dorado imperial */
-    --gold-glow: rgba(244,208,63,0.4);
-    --bg-dark: rgba(5,5,10,0.8);
-    --border: rgba(0, 255, 255, 0.2);
-    --text: #e0f7fa;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background-color: #000;
-    color: var(--text);
-    font-family: 'Rajdhani', sans-serif;
-    /* La altura se ajustará dinámicamente por JS según los productos */
-    min-height: 10000px; 
-    overflow-x: hidden;
-  }
-  
-  /* Canvas para el fondo de estrellas */
-  #starfield {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    z-index: 0;
-    pointer-events: none;
-  }
+/* ===== ORIONIX LUXURY VARIABLES ===== */
+:root {
+  --gold: #e8c86a;
+  --gold-deep: #c9a227;
+  --gold-glow: rgba(232,200,106,0.35);
+  --gold-subtle: rgba(232,200,106,0.12);
+  --bg: #0b0b0d;
+  --bg-card: rgba(11,11,16,0.88);
+  --border: rgba(232,200,106,0.22);
+  --border-hover: rgba(232,200,106,0.6);
+  --text: #d4c5a0;
+  --text-dim: rgba(212,197,160,0.55);
+  --white: #f5f0e8;
+}
 
-  /* ===== MOTOR 3D CSS ===== */
-  #viewport {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    perspective: 1000px;
-    z-index: 1;
-    overflow: hidden;
-    pointer-events: none; /* Dejamos que los clicks pasen al canvas si no hay card, pero las cards tendrán pointer-events: auto */
-  }
-  #camera {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    transform-style: preserve-3d;
-    will-change: transform;
-    /* Transición muy sutil para suavizar el scroll */
-    transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-  /* ===== PRODUCT CARDS (HOLOGRAMAS) ===== */
-  .holo-card {
-    position: absolute;
-    /* Centramos el punto de origen en la pantalla */
-    top: 50%; left: 50%;
-    width: 320px;
-    height: 480px;
-    margin-left: -160px;
-    margin-top: -240px;
-    background: var(--bg-dark);
-    border: 1px solid var(--border);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-radius: 16px;
-    transform-style: preserve-3d;
-    pointer-events: auto;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 0 30px rgba(0,255,255,0.1), inset 0 0 20px rgba(0,255,255,0.05);
-    transition: border-color 0.4s, box-shadow 0.4s;
-    cursor: pointer;
-  }
-  .holo-card:hover {
-    border-color: var(--core);
-    box-shadow: 0 0 50px var(--core-glow), inset 0 0 30px var(--core-glow);
-  }
-  /* Decoraciones del borde del holograma */
-  .holo-card::before, .holo-card::after {
-    content: ''; position: absolute; width: 20px; height: 20px; border: 2px solid var(--core); transition: 0.3s;
-  }
-  .holo-card::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
-  .holo-card::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
-  .holo-card:hover::before, .holo-card:hover::after { width: 40px; height: 40px; }
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Cormorant Garamond', serif;
+  min-height: 10000px;
+  overflow-x: hidden;
+}
 
-  .hc-img {
-    flex: 1;
-    width: 100%;
-    border-radius: 16px 16px 0 0;
-    overflow: hidden;
-    position: relative;
-    border-bottom: 1px solid var(--border);
-  }
-  .hc-img img {
-    width: 100%; height: 100%; object-fit: cover;
-    filter: sepia(0.3) hue-rotate(180deg) brightness(0.8) contrast(1.2);
-    transition: filter 0.5s, transform 0.5s;
-  }
-  .holo-card:hover .hc-img img {
-    filter: sepia(0) hue-rotate(0deg) brightness(1) contrast(1.1);
-    transform: scale(1.05);
-  }
-  /* Escaneo laser sobre la imagen */
-  .hc-img::after {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-    background: var(--core);
-    box-shadow: 0 0 10px var(--core);
-    animation: scan 4s linear infinite;
-    opacity: 0.5;
-  }
-  @keyframes scan { 0% { top: 0; opacity:0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { top: 100%; opacity:0; } }
+/* ===== NAV BAR ORIONIX ===== */
+.orionix-nav {
+  position: fixed; top: 0; left: 0; width: 100%;
+  z-index: 9999;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 32px;
+  background: linear-gradient(180deg, rgba(11,11,16,0.97) 0%, rgba(11,11,16,0.0) 100%);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(232,200,106,0.08);
+}
+.nav-brand {
+  font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 700;
+  color: var(--gold); letter-spacing: 0.18em; text-decoration: none;
+  text-shadow: 0 0 18px var(--gold-glow);
+}
+.nav-links { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.nav-link {
+  font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.12em;
+  color: var(--text-dim); text-decoration: none; padding: 6px 12px;
+  border: 1px solid transparent; border-radius: 4px;
+  transition: all 0.3s;
+}
+.nav-link:hover { color: var(--gold); border-color: var(--border); background: var(--gold-subtle); }
+.nav-cta {
+  font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.12em;
+  color: var(--bg); background: var(--gold); padding: 7px 16px;
+  border-radius: 4px; text-decoration: none; font-weight: 700;
+  box-shadow: 0 0 14px var(--gold-glow); transition: all 0.3s;
+}
+.nav-cta:hover { background: var(--gold-deep); box-shadow: 0 0 22px var(--gold-glow); }
 
-  .hc-info {
-    padding: 20px;
-    text-align: center;
-  }
-  .hc-cat {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.65rem;
-    color: var(--core);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-  .hc-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: #fff;
-    letter-spacing: 1px;
-    text-shadow: 0 0 10px rgba(255,255,255,0.3);
-  }
-  .hc-price {
-    font-size: 1.2rem;
-    color: var(--gold);
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 500;
-  }
-  .hc-btn {
-    margin-top: 15px;
-    background: transparent;
-    color: var(--core);
-    border: 1px solid var(--core);
-    padding: 10px 20px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-  }
-  .hc-btn:hover {
-    background: var(--core);
-    color: #000;
-    box-shadow: 0 0 20px var(--core-glow);
-  }
+/* ===== CANVAS ESTRELLAS ===== */
+#starfield {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 0; pointer-events: none;
+}
 
-  /* ===== HUD (HEAD-UP DISPLAY) INTERFACE ===== */
-  .hud {
-    position: fixed;
-    z-index: 100;
-    pointer-events: none;
-    font-family: 'Orbitron', sans-serif;
-  }
-  .hud-interactive { pointer-events: auto; }
-  
-  .hud-top {
-    top: 0; left: 0; width: 100%;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 30px 40px;
-    background: linear-gradient(180deg, rgba(0,0,0,0.8), transparent);
-  }
-  .hud-logo {
-    font-size: 1.8rem; font-weight: 900; color: #fff; letter-spacing: 10px;
-    text-shadow: 0 0 20px var(--core);
-    cursor: pointer; text-decoration: none;
-  }
-  .hud-logo span { color: var(--core); }
-  
-  .hud-cart {
-    display: flex; align-items: center; gap: 15px;
-    cursor: pointer;
-  }
-  .hud-cart-text { font-size: 0.8rem; letter-spacing: 3px; color: var(--core); text-transform: uppercase; }
-  .hud-cart-badge {
-    width: 30px; height: 30px; border: 1px solid var(--core);
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; color: #fff; box-shadow: 0 0 10px var(--core-glow);
-    background: rgba(0,255,255,0.1);
-  }
+/* ===== MOTOR 3D ===== */
+#viewport {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  perspective: 1000px; z-index: 1;
+  overflow: hidden; pointer-events: none;
+}
+#camera {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.12s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
 
-  .hud-status {
-    position: fixed; bottom: 30px; left: 40px;
-    font-size: 0.7rem; letter-spacing: 2px; color: rgba(255,255,255,0.5);
-  }
-  .hud-progress {
-    position: fixed; bottom: 30px; right: 40px;
-    font-size: 0.7rem; letter-spacing: 2px; color: var(--core);
-  }
-  
-  /* Instrucción inicial */
-  .scroll-hint {
-    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    text-align: center; z-index: 50; color: #fff; pointer-events: none;
-    transition: opacity 1s;
-  }
-  .scroll-hint h2 { font-family: 'Orbitron', sans-serif; font-size: 3rem; letter-spacing: 8px; margin-bottom: 20px; text-shadow: 0 0 30px var(--core); }
-  .scroll-hint p { font-size: 1.2rem; letter-spacing: 4px; color: var(--core); animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{ opacity: 1; } 50%{ opacity: 0.3; } }
+/* ===== PRODUCT CARDS ===== */
+.holo-card {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 340px; height: 500px;
+  margin-left: -170px; margin-top: -250px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 2px;
+  transform-style: preserve-3d;
+  pointer-events: auto;
+  display: flex; flex-direction: column;
+  box-shadow: 0 0 40px rgba(232,200,106,0.08), inset 0 0 30px rgba(232,200,106,0.03);
+  transition: border-color 0.4s, box-shadow 0.4s;
+  cursor: pointer;
+}
+.holo-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 0 60px var(--gold-glow), inset 0 0 40px rgba(232,200,106,0.08);
+}
+.holo-card::before, .holo-card::after {
+  content: ''; position: absolute;
+  width: 18px; height: 18px;
+  border: 1px solid var(--gold); transition: 0.4s;
+}
+.holo-card::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+.holo-card::after  { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+.holo-card:hover::before, .holo-card:hover::after { width: 36px; height: 36px; }
 
-  /* ===== OVERLAYS (CARRITO Y FICHA) ===== */
-  .overlay-glass {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px);
-    z-index: 9000; display: none; flex-direction: column; align-items: center; justify-content: center;
-    opacity: 0; transition: opacity 0.5s;
-  }
-  .overlay-glass.active { display: flex; opacity: 1; }
-  
-  .panel-holografico {
-    width: min(900px, 90vw); max-height: 85vh; background: rgba(5,5,10,0.7);
-    border: 1px solid var(--core); box-shadow: 0 0 50px var(--core-glow);
+.hc-img {
+  flex: 1; width: 100%;
+  border-radius: 2px 2px 0 0;
+  overflow: hidden; position: relative;
+  border-bottom: 1px solid var(--border);
+}
+.hc-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: sepia(0.4) brightness(0.7) contrast(1.1);
+  transition: filter 0.6s, transform 0.6s;
+}
+.holo-card:hover .hc-img img {
+  filter: sepia(0.15) brightness(0.9) contrast(1.05);
+  transform: scale(1.04);
+}
+.hc-img::after {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  animation: scan 5s linear infinite; opacity: 0.6;
+}
+@keyframes scan {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100% { top: 100%; opacity: 0; }
+}
 
-  /* Carrito UI */
-  .cart-title { font-family: 'Orbitron', sans-serif; font-size: 2rem; color: #fff; margin-bottom: 30px; letter-spacing: 4px; text-shadow: 0 0 15px var(--core); }
-  .cart-item { display: flex; align-items: center; gap: 20px; padding: 15px 0; border-bottom: 1px solid rgba(0,255,255,0.2); }
-  .cart-item img { width: 60px; height: 80px; object-fit: cover; border: 1px solid var(--core); }
-  .cart-item-info { flex: 1; }
-  .cart-item-title { font-size: 1.2rem; font-weight: 600; color: #fff; }
-  .cart-item-price { color: var(--gold); font-family: 'Orbitron', sans-serif; margin-top: 5px; }
-  .cart-item-remove { color: #ff0055; cursor: pointer; font-family: 'Orbitron', sans-serif; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 10px; display: inline-block;}
-  .cart-total { display: flex; justify-content: space-between; margin-top: 30px; font-size: 1.5rem; font-weight: 700; color: #fff; font-family: 'Orbitron', sans-serif; }
-  .cart-checkout-btn {
-    display: block; width: 100%; text-align: center; margin-top: 30px;
-    background: var(--core); color: #000; padding: 15px; font-family: 'Orbitron', sans-serif; font-size: 1rem; letter-spacing: 3px; font-weight: 700; text-transform: uppercase;
-    cursor: pointer; border: none; box-shadow: 0 0 20px var(--core-glow); transition: 0.3s; text-decoration: none;
-  }
-  /* ===== PERFIL DE USUARIO HUD ===== */
-  .hud-nav { display: flex; align-items: center; gap: 20px; }
-  
-  /* Avatar del perfil */
-  .profile-wrap { position: relative; cursor: pointer; }
-  .profile-avatar {
-    width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--core);
-    object-fit: cover; display: flex; align-items: center; justify-content: center;
-    background: rgba(0,255,255,0.15); font-family: 'Orbitron',sans-serif;
-    font-size: 1.1rem; font-weight: 700; color: var(--core); overflow: hidden;
-  }
-  .profile-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-  
-  /* AURA ESPECIAL DE ADMIN */
-  .profile-wrap.admin-aura .profile-avatar {
-    border-color: var(--gold);
-    box-shadow: 0 0 0 3px rgba(244,208,63,0.3), 0 0 20px rgba(244,208,63,0.5);
-  }
-  .profile-wrap.admin-aura::before {
-    content: ''; position: absolute; inset: -6px; border-radius: 50%;
-    border: 2px solid transparent;
-    background: conic-gradient(from 0deg, #f4d03f, #0ff, #ff00ff, #f4d03f) border-box;
-    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: destination-out; mask-composite: exclude;
-    animation: adminRing 2s linear infinite;
-  }
-  @keyframes adminRing { to { transform: rotate(360deg); } }
+/* Badge de plan */
+.hc-badge {
+  position: absolute; top: 16px; right: 16px;
+  font-family: 'Cinzel', serif; font-size: 0.55rem; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 4px 10px; border: 1px solid var(--gold);
+  background: rgba(11,11,16,0.85); color: var(--gold);
+  backdrop-filter: blur(8px);
+}
 
-  /* Dropdown menú del perfil */
-  .profile-dropdown {
-    position: absolute; top: 58px; right: 0; min-width: 240px;
-    background: rgba(5,5,15,0.95); border: 1px solid var(--border);
-    backdrop-filter: blur(20px); box-shadow: 0 0 30px rgba(0,255,255,0.2);
-    display: none; flex-direction: column; z-index: 200;
-    animation: slideDown .3s ease;
-  }
-  @keyframes slideDown { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)} }
-  .profile-dropdown.open { display: flex; }
-  .pd-header { padding: 18px 20px; border-bottom: 1px solid var(--border); }
-  .pd-name { font-family:'Orbitron',sans-serif; font-size: .85rem; color: #fff; letter-spacing: 1px; }
-  .pd-email { font-size: .75rem; color: rgba(255,255,255,.5); margin-top: 4px; }
-  .pd-item {
-    padding: 14px 20px; font-family: 'Orbitron',sans-serif; font-size: .7rem;
-    letter-spacing: 2px; color: var(--text); cursor: pointer; transition: .3s;
-    border-bottom: 1px solid rgba(0,255,255,.05); text-decoration: none; display: block;
-  }
-  .pd-item:hover { background: rgba(0,255,255,.08); color: var(--core); padding-left: 28px; }
-  .pd-item.admin-btn {
-    color: var(--gold); border-top: 1px solid rgba(244,208,63,.2);
-    background: rgba(244,208,63,.05);
-  }
-  .pd-item.admin-btn:hover { background: rgba(244,208,63,.15); }
-  .pd-item.logout { color: #ff0055; }
-  .pd-item.logout:hover { background: rgba(255,0,85,.1); color: #ff0055; }
+.hc-info { padding: 24px 20px; text-align: center; }
+.hc-cat {
+  font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.2em;
+  color: var(--text-dim); text-transform: uppercase; margin-bottom: 8px;
+}
+.hc-title {
+  font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 700;
+  color: var(--white); letter-spacing: 0.06em; margin-bottom: 10px;
+  text-shadow: 0 0 20px rgba(232,200,106,0.2);
+}
+.hc-price {
+  font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--gold);
+  font-weight: 600; letter-spacing: 0.04em;
+}
+.hc-price-sub {
+  font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.08em;
+  margin-top: 4px; font-family: 'Cormorant Garamond', serif;
+}
+.hc-btn {
+  margin-top: 18px;
+  background: transparent; color: var(--gold);
+  border: 1px solid var(--border-hover);
+  padding: 11px 20px; font-family: 'Cinzel', serif;
+  font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.35s; width: 100%;
+}
+.hc-btn:hover {
+  background: var(--gold); color: var(--bg);
+  box-shadow: 0 0 25px var(--gold-glow);
+}
 
+/* ===== HUD INTERFACE ===== */
+.hud { position: fixed; z-index: 100; pointer-events: none; font-family: 'Cinzel', serif; }
+.hud-interactive { pointer-events: auto; }
+
+.hud-top {
+  top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 28px 44px;
+  background: linear-gradient(180deg, rgba(11,11,16,0.85), transparent);
+}
+.hud-logo {
+  font-size: 1.6rem; font-weight: 900; color: var(--white); letter-spacing: 0.25em;
+  text-shadow: 0 0 24px var(--gold-glow); cursor: pointer; text-decoration: none;
+}
+.hud-logo span { color: var(--gold); }
+.hud-cart { display: flex; align-items: center; gap: 14px; cursor: pointer; }
+.hud-cart-text { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; }
+.hud-cart-badge {
+  width: 28px; height: 28px; border: 1px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; color: var(--white); box-shadow: 0 0 10px var(--gold-glow);
+  background: rgba(232,200,106,0.1); font-size: 0.85rem;
+}
+.hud-status {
+  position: fixed; bottom: 28px; left: 40px;
+  font-size: 0.6rem; letter-spacing: 0.18em; color: var(--text-dim);
+}
+.hud-progress {
+  position: fixed; bottom: 28px; right: 40px;
+  font-size: 0.6rem; letter-spacing: 0.18em; color: var(--gold);
+}
+
+/* Instrucción inicial */
+.scroll-hint {
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  text-align: center; z-index: 50; color: var(--white); pointer-events: none;
+  transition: opacity 1.2s;
+}
+.scroll-hint h2 {
+  font-family: 'Cinzel', serif; font-size: 2.6rem; letter-spacing: 0.3em;
+  margin-bottom: 16px; text-shadow: 0 0 40px var(--gold-glow);
+  color: var(--gold);
+}
+.scroll-hint p {
+  font-size: 0.9rem; letter-spacing: 0.2em; color: var(--text-dim);
+  animation: pulse 2.5s infinite; font-family: 'Cinzel', serif;
+}
+@keyframes pulse { 0%,100%{ opacity: 1; } 50%{ opacity: 0.25; } }
+
+/* ===== OVERLAYS ===== */
+.overlay-glass {
+  position: fixed; inset: 0; background: rgba(6,6,10,0.92);
+  backdrop-filter: blur(24px); z-index: 9000;
+  display: none; flex-direction: column; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.5s;
+}
+.overlay-glass.active { display: flex; opacity: 1; }
+
+.panel-holografico {
+  width: min(860px, 90vw); max-height: 85vh;
+  background: rgba(11,11,16,0.92);
+  border: 1px solid var(--border-hover);
+  box-shadow: 0 0 60px var(--gold-glow);
+  border-radius: 2px; padding: 40px;
+  overflow-y: auto; position: relative;
+}
+.panel-close {
+  position: absolute; top: 16px; right: 22px;
+  font-size: 1.8rem; color: var(--text-dim); cursor: pointer;
+  font-family: 'Cinzel', serif; transition: color 0.3s;
+}
+.panel-close:hover { color: var(--gold); }
+
+/* Carrito */
+.cart-title {
+  font-family: 'Cinzel', serif; font-size: 1.7rem; color: var(--white);
+  margin-bottom: 28px; letter-spacing: 0.12em;
+  text-shadow: 0 0 20px var(--gold-glow);
+}
+.cart-item {
+  display: flex; align-items: center; gap: 20px;
+  padding: 16px 0; border-bottom: 1px solid var(--border);
+}
+.cart-item img { width: 58px; height: 76px; object-fit: cover; border: 1px solid var(--border-hover); }
+.cart-item-info { flex: 1; }
+.cart-item-title { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 600; color: var(--white); }
+.cart-item-price { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-top: 6px; }
+.cart-item-remove {
+  color: rgba(255,80,80,0.7); cursor: pointer; font-family: 'Cinzel', serif;
+  font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 8px;
+  display: inline-block; transition: color 0.3s;
+}
+.cart-item-remove:hover { color: #ff5050; }
+.cart-total {
+  display: flex; justify-content: space-between; margin-top: 28px;
+  font-size: 1.3rem; font-weight: 700; color: var(--white);
+  font-family: 'Cinzel', serif;
+}
+.cart-checkout-btn {
+  display: block; width: 100%; text-align: center; margin-top: 22px;
+  background: var(--gold); color: var(--bg); padding: 15px;
+  font-family: 'Cinzel', serif; font-size: 0.85rem; letter-spacing: 0.18em;
+  font-weight: 700; text-transform: uppercase;
+  cursor: pointer; border: none;
+  box-shadow: 0 0 24px var(--gold-glow); transition: 0.3s; text-decoration: none;
+}
+.cart-checkout-btn:hover { background: var(--gold-deep); }
+.cart-checkout-btn.secondary {
+  background: transparent; color: var(--gold);
+  border: 1px solid var(--border-hover);
+  box-shadow: none; margin-top: 12px;
+}
+.cart-checkout-btn.secondary:hover { background: var(--gold-subtle); }
+
+/* Ficha producto */
+.ficha-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+@media(max-width:640px){ .ficha-grid { grid-template-columns: 1fr; } }
+.ficha-img { aspect-ratio: 3/4; overflow: hidden; border: 1px solid var(--border); }
+.ficha-img img { width:100%; height:100%; object-fit:cover; filter:sepia(0.2) brightness(0.85); }
+.ficha-info { display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+.ficha-cat { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; color:var(--text-dim); text-transform:uppercase; }
+.ficha-nombre { font-family:'Cinzel',serif; font-size:2rem; font-weight:700; color:var(--white); line-height:1.2; }
+.ficha-desc { font-size:1.05rem; color:var(--text); line-height:1.7; font-style:italic; }
+.ficha-precio { font-family:'Cinzel',serif; font-size:1.8rem; color:var(--gold); }
+.ficha-btn {
+  background:var(--gold); color:var(--bg); border:none; padding:15px 28px;
+  font-family:'Cinzel',serif; font-size:0.85rem; letter-spacing:0.15em; font-weight:700;
+  text-transform:uppercase; cursor:pointer; box-shadow:0 0 24px var(--gold-glow); transition:0.3s;
+}
+.ficha-btn:hover { background:var(--gold-deep); }
+
+/* ===== PERFIL HUD ===== */
+.hud-nav { display: flex; align-items: center; gap: 18px; }
+.profile-wrap { position: relative; cursor: pointer; }
+.profile-avatar {
+  width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  background: var(--gold-subtle); font-family: 'Cinzel',serif;
+  font-size: 1rem; font-weight: 700; color: var(--gold); overflow: hidden;
+}
+.profile-avatar img { width:100%; height:100%; border-radius:50%; object-fit:cover; }
+.profile-dropdown {
+  position: absolute; top: 54px; right: 0; min-width: 220px;
+  background: rgba(11,11,16,0.97); border: 1px solid var(--border);
+  backdrop-filter: blur(20px); box-shadow: 0 0 30px var(--gold-glow);
+  display: none; flex-direction: column; z-index: 200;
+  animation: slideDown .3s ease;
+}
+@keyframes slideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+.profile-dropdown.open { display: flex; }
+.pd-header { padding: 16px 18px; border-bottom: 1px solid var(--border); }
+.pd-name { font-family:'Cinzel',serif; font-size:.8rem; color:var(--white); letter-spacing:0.08em; }
+.pd-email { font-size:.72rem; color:var(--text-dim); margin-top:4px; font-family:'Cormorant Garamond',serif; }
+.pd-item {
+  padding:13px 18px; font-family:'Cinzel',serif; font-size:.65rem;
+  letter-spacing:0.12em; color:var(--text); cursor:pointer; transition:.3s;
+  border-bottom:1px solid rgba(232,200,106,.05); text-decoration:none; display:block;
+}
+.pd-item:hover { background:var(--gold-subtle); color:var(--gold); padding-left:26px; }
+.pd-item.logout { color:rgba(255,80,80,0.7); }
+.pd-item.logout:hover { background:rgba(255,80,80,.08); color:#ff5050; }
+.btn-login-hud {
+  font-family:'Cinzel',serif; font-size:.65rem; letter-spacing:0.12em;
+  color:var(--gold); border:1px solid var(--border); padding:7px 16px; text-decoration:none; transition:0.3s;
+}
+.btn-login-hud:hover { background:var(--gold-subtle); }
+
+/* ===== SECCIONES INFERIORES ===== */
+.sections-wrapper {
+  position: relative; z-index: 10;
+  background: linear-gradient(180deg, transparent 0%, var(--bg) 4%);
+  margin-top: 100vh;
+  padding: 0 0 80px;
+}
+
+/* Divider */
+.section-divider {
+  width: 60px; height: 1px; background: var(--gold); margin: 0 auto 18px;
+  opacity: 0.7;
+}
+.section-tag {
+  font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.28em;
+  color: var(--text-dim); text-transform: uppercase; text-align: center; margin-bottom: 14px;
+}
+.section-title {
+  font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 4vw, 2.8rem);
+  font-weight: 700; color: var(--white); text-align: center; margin-bottom: 12px;
+  letter-spacing: 0.06em;
+}
+.section-subtitle {
+  font-size: 1.1rem; color: var(--text-dim); text-align: center;
+  max-width: 540px; margin: 0 auto 56px; line-height: 1.7; font-style: italic;
+}
+
+/* ===== PRICING TABLE ===== */
+.pricing-section { padding: 100px 32px; }
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 28px; max-width: 980px; margin: 0 auto;
+}
+.pricing-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  padding: 40px 32px; position: relative;
+  transition: border-color 0.4s, box-shadow 0.4s;
+}
+.pricing-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 0 40px rgba(232,200,106,0.12);
+}
+.pricing-card.featured {
+  border-color: var(--gold);
+  box-shadow: 0 0 50px rgba(232,200,106,0.2);
+}
+.pricing-badge {
+  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+  font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.2em;
+  background: var(--gold); color: var(--bg); padding: 4px 18px; font-weight: 700;
+}
+.pricing-plan {
+  font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.22em;
+  color: var(--text-dim); text-transform: uppercase; margin-bottom: 12px;
+}
+.pricing-name {
+  font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 700;
+  color: var(--white); margin-bottom: 6px;
+}
+.pricing-price {
+  font-family: 'Cinzel', serif; font-size: 2.4rem; color: var(--gold);
+  font-weight: 700; line-height: 1.1;
+}
+.pricing-period {
+  font-size: 0.85rem; color: var(--text-dim); font-family: 'Cormorant Garamond', serif;
+  margin-bottom: 28px; font-style: italic;
+}
+.pricing-divider { width: 40px; height: 1px; background: var(--border-hover); margin: 22px 0; }
+.pricing-features { list-style: none; margin-bottom: 32px; }
+.pricing-features li {
+  font-size: 0.95rem; color: var(--text); padding: 8px 0;
+  border-bottom: 1px solid rgba(232,200,106,0.06);
+  display: flex; align-items: center; gap: 10px;
+}
+.pricing-features li::before {
+  content: '◆'; color: var(--gold); font-size: 0.5rem; flex-shrink: 0;
+}
+.pricing-cta {
+  display: block; width: 100%; text-align: center;
+  font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.16em;
+  padding: 13px; cursor: pointer; transition: 0.35s; text-decoration: none;
+  background: transparent; color: var(--gold); border: 1px solid var(--border-hover);
+}
+.pricing-cta:hover { background: var(--gold); color: var(--bg); box-shadow: 0 0 24px var(--gold-glow); }
+.pricing-card.featured .pricing-cta {
+  background: var(--gold); color: var(--bg); box-shadow: 0 0 24px var(--gold-glow);
+}
+.pricing-card.featured .pricing-cta:hover { background: var(--gold-deep); }
+
+/* ===== TESTIMONIOS ===== */
+.testimonials-section { padding: 100px 32px; background: rgba(232,200,106,0.02); }
+.testimonials-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px; max-width: 920px; margin: 0 auto;
+}
+.testimonial-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  padding: 36px 30px; position: relative; transition: border-color 0.4s;
+}
+.testimonial-card:hover { border-color: rgba(232,200,106,0.4); }
+.testimonial-quote {
+  font-size: 3.5rem; color: var(--gold); opacity: 0.2; line-height: 1;
+  font-family: 'Cinzel', serif; position: absolute; top: 16px; left: 24px;
+  pointer-events: none;
+}
+.testimonial-text {
+  font-size: 1.05rem; line-height: 1.8; color: var(--text);
+  font-style: italic; margin-bottom: 24px; padding-top: 18px;
+}
+.testimonial-result {
+  font-family: 'Cinzel', serif; font-size: 0.75rem; color: var(--gold);
+  letter-spacing: 0.12em; margin-bottom: 16px;
+  padding: 6px 12px; border: 1px solid var(--border); display: inline-block;
+}
+.testimonial-author {
+  display: flex; align-items: center; gap: 14px;
+  border-top: 1px solid var(--border); padding-top: 18px; margin-top: 6px;
+}
+.testimonial-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-deep), var(--gold));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif; font-weight: 700; color: var(--bg); font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.testimonial-name {
+  font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 700; color: var(--white);
+}
+.testimonial-plan { font-size: 0.72rem; color: var(--text-dim); font-style: italic; }
+
+/* ===== FAQ ===== */
+.faq-section { padding: 100px 32px; }
+.faq-container { max-width: 720px; margin: 0 auto; }
+.faq-item {
+  border: 1px solid var(--border); margin-bottom: 12px;
+  transition: border-color 0.3s;
+}
+.faq-item.open { border-color: rgba(232,200,106,0.45); }
+.faq-question {
+  padding: 22px 26px; display: flex; align-items: center; justify-content: space-between;
+  cursor: pointer; font-family: 'Cinzel', serif; font-size: 0.95rem;
+  color: var(--white); letter-spacing: 0.04em; gap: 16px;
+  transition: color 0.3s;
+}
+.faq-question:hover { color: var(--gold); }
+.faq-item.open .faq-question { color: var(--gold); }
+.faq-icon {
+  width: 22px; height: 22px; border: 1px solid var(--border-hover);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; color: var(--gold); font-size: 1.1rem;
+  transition: transform 0.3s;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-answer {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s;
+}
+.faq-answer-inner {
+  padding: 0 26px 22px;
+  font-size: 1rem; color: var(--text); line-height: 1.75;
+  border-top: 1px solid var(--border); font-style: italic;
+}
+.faq-item.open .faq-answer { max-height: 300px; }
+
+/* ===== WHATSAPP FLOTANTE ===== */
+.wa-float {
+  position: fixed; bottom: 32px; right: 32px; z-index: 8888;
+  display: flex; align-items: center; gap: 12px;
+  background: var(--bg-card); border: 1px solid var(--gold);
+  padding: 12px 22px; border-radius: 2px;
+  box-shadow: 0 0 30px var(--gold-glow);
+  text-decoration: none; color: var(--gold);
+  font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.14em;
+  transition: all 0.35s; backdrop-filter: blur(16px);
+  animation: floatPulse 3s ease-in-out infinite;
+}
+.wa-float:hover {
+  background: var(--gold); color: var(--bg);
+  box-shadow: 0 0 45px var(--gold-glow);
+  animation: none;
+}
+@keyframes floatPulse {
+  0%,100% { box-shadow: 0 0 20px var(--gold-glow); transform: translateY(0); }
+  50% { box-shadow: 0 0 40px var(--gold-glow); transform: translateY(-4px); }
+}
+.wa-icon { font-size: 1.3rem; }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width: 768px) {
+  .hud-top { padding: 20px 24px; }
+  .hud-logo { font-size: 1.2rem; letter-spacing: 0.15em; }
+  .pricing-section, .testimonials-section, .faq-section { padding: 60px 20px; }
+  .wa-float { bottom: 20px; right: 20px; padding: 10px 16px; font-size: 0.65rem; }
+  .orionix-nav { padding: 12px 20px; }
+  .nav-links { gap: 4px; }
+}
 </style>
 </head>
 <body>
 
-<!-- Fondo Warp Speed -->
+<!-- NAV ORIONIX -->
+<nav class="orionix-nav">
+  <a href="index.html" class="nav-brand">ORIONIX</a>
+  <div class="nav-links">
+    <a href="hub.html" class="nav-link">Hub</a>
+    <a href="ciudadela.html" class="nav-link">Ciudadela</a>
+    <a href="hogar.html" class="nav-link">Hogar</a>
+    <a href="forjadora.html" class="nav-link">Forjadora</a>
+    <a href="afiliados.html" class="nav-link">Afiliados</a>
+    <a href="index.html#contacto" class="nav-cta">AXEL</a>
+    <a href="tienda.html" class="nav-cta">Tienda</a>
+  </div>
+</nav>
+
+<!-- CANVAS ESTRELLAS -->
 <canvas id="starfield"></canvas>
 
-<!-- Mensaje Inicial -->
+<!-- SCROLL HINT -->
 <div class="scroll-hint" id="scrollHint">
-  <h2>ORIONIX</h2>
-  <p>INICIA LA NAVEGACIÓN (HAZ SCROLL)</p>
+  <h2>LA TIENDA</h2>
+  <p>NAVEGA POR LOS PLANES — HAZ SCROLL</p>
 </div>
 
 <!-- HUD -->
@@ -315,10 +582,9 @@
   <a href="index.html" class="hud-logo">ORIO<span>NIX</span></a>
   <div class="hud-nav">
     <div class="hud-cart" onclick="abrirCarrito()">
-      <span class="hud-cart-text">Bahía</span>
+      <span class="hud-cart-text">Carrito</span>
       <span class="hud-cart-badge" id="hudBadge">0</span>
     </div>
-    <!-- Perfil de usuario (se llena por Firebase) -->
     <div class="profile-wrap" id="profileWrap" onclick="toggleDropdown()" style="display:none">
       <div class="profile-avatar" id="profileAvatar">?</div>
       <div class="profile-dropdown" id="profileDropdown">
@@ -326,430 +592,525 @@
           <div class="pd-name" id="pdName">COMANDANTE</div>
           <div class="pd-email" id="pdEmail"></div>
         </div>
-        <a href="auth.html" class="pd-item" id="pdLogout" onclick="cerrarSesion(event)">⏏ DESCONECTAR</a>
+        <a href="auth.html" class="pd-item logout" onclick="cerrarSesion(event)">⏏ Desconectar</a>
       </div>
     </div>
-    <!-- Botón login si no hay sesión -->
-    <a href="auth.html" class="pd-item" id="btnLogin" style="font-family:'Orbitron',sans-serif;font-size:.7rem;letter-spacing:2px;color:var(--core);border:1px solid var(--core);padding:8px 16px;text-decoration:none;">ACCEDER</a>
+    <a href="auth.html" class="btn-login-hud" id="btnLogin">ACCEDER</a>
   </div>
 </div>
-<div class="hud hud-status" id="hudStatus">SISTEMAS ONLINE // MOTOR WARP LISTO</div>
-<div class="hud hud-progress" id="hudProgress">COORDENADA Z: 0000</div>
+<div class="hud hud-status" id="hudStatus">SISTEMAS ORIONIX ACTIVOS</div>
+<div class="hud hud-progress" id="hudProgress">Z: 0000</div>
 
-<!-- Mundo 3D -->
+<!-- MOTOR 3D -->
 <div id="viewport">
-  <div id="camera">
-    <!-- Los productos se inyectarán aquí vía JS -->
-  </div>
+  <div id="camera"></div>
 </div>
 
-<!-- Modal Carrito (Panel Holográfico) -->
+<!-- OVERLAY CARRITO -->
 <div class="overlay-glass" id="cartOverlay">
   <div class="panel-holografico hud-interactive">
     <span class="panel-close" onclick="cerrarCarrito()">&times;</span>
-    <h2 class="cart-title">BAHÍA DE CARGA</h2>
+    <h2 class="cart-title">Tu Selección Imperial</h2>
     <div id="cartItems"></div>
-    <div class="cart-total"><span>TOTAL</span><span id="cartTotalUSD" style="color:var(--gold)">$0</span></div>
-    <button class="cart-checkout-btn" onclick="iniciarSecuenciaDePago()">PROCESAR TRANSMISIÓN (PAGAR)</button>
-    <a href="https://wa.me/573014410541?text=Hola,%20solicito%20coordenadas%20de%20pago" target="_blank" class="cart-checkout-btn" style="background:transparent; color:var(--core); border:1px solid var(--core); margin-top:15px;">COMUNICAR CON COMANDANCIA (WHATSAPP)</a>
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="cartTotalUSD" style="color:var(--gold)">€0</span>
+    </div>
+    <button class="cart-checkout-btn" onclick="iniciarPago()">Solicitar Acceso</button>
+    <a href="https://wa.me/573014410541?text=Quiero%20activar%20mi%20plan%20ORIONIX" target="_blank" class="cart-checkout-btn secondary">WhatsApp — Consultar Ahora</a>
   </div>
 </div>
 
+<!-- OVERLAY FICHA PRODUCTO -->
+<div class="overlay-glass" id="fichaOverlay">
+  <div class="panel-holografico hud-interactive">
+    <span class="panel-close" onclick="cerrarFicha()">&times;</span>
+    <div class="ficha-grid" id="fichaContent"></div>
+  </div>
+</div>
+
+<!-- SECCIONES INFERIORES -->
+<div class="sections-wrapper">
+
+  <!-- PRICING -->
+  <section class="pricing-section">
+    <div class="section-tag">Planes de Acceso</div>
+    <div class="section-divider"></div>
+    <h2 class="section-title">Elige Tu Imperio</h2>
+    <p class="section-subtitle">Tres niveles de poder. Una sola decisión que lo cambia todo.</p>
+
+    <div class="pricing-grid">
+      <!-- Esencia -->
+      <div class="pricing-card">
+        <div class="pricing-plan">Plan</div>
+        <div class="pricing-name">Esencia</div>
+        <div class="pricing-price">€197</div>
+        <div class="pricing-period">/mes — Acceso mensual</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>AXEL — Agente IA Personal</li>
+          <li>Acceso a La Ciudadela</li>
+          <li>Chat con memoria de sesión</li>
+          <li>Soporte vía WhatsApp</li>
+          <li>Actualizaciones mensuales</li>
+        </ul>
+        <a href="https://wa.me/573014410541?text=Quiero%20el%20Plan%20Esencia%20197%E2%82%AC" target="_blank" class="pricing-cta">Comenzar Ahora</a>
+      </div>
+
+      <!-- Imperio -->
+      <div class="pricing-card featured">
+        <div class="pricing-badge">MÁS ELEGIDO</div>
+        <div class="pricing-plan">Plan</div>
+        <div class="pricing-name">Imperio</div>
+        <div class="pricing-price">€497</div>
+        <div class="pricing-period">/mes — Acceso completo</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>Todo lo del Plan Esencia</li>
+          <li>Acceso a los 22 Agentes</li>
+          <li>Generación de imágenes con IA</li>
+          <li>Acceso a La Forjadora</li>
+          <li>Comunidad Imperial privada</li>
+          <li>Sesión mensual 1 a 1</li>
+        </ul>
+        <a href="https://wa.me/573014410541?text=Quiero%20el%20Plan%20Imperio%20497%E2%82%AC" target="_blank" class="pricing-cta">Activar Imperio</a>
+      </div>
+
+      <!-- Ciudadela -->
+      <div class="pricing-card">
+        <div class="pricing-plan">Plan</div>
+        <div class="pricing-name">Ciudadela</div>
+        <div class="pricing-price">A medida</div>
+        <div class="pricing-period">Contacto directo con Kevin</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>Suite completa de agentes IA</li>
+          <li>Automatizaciones personalizadas</li>
+          <li>Integración con tu negocio</li>
+          <li>Acceso de por vida negociable</li>
+          <li>Soporte prioritario 24/7</li>
+          <li>Desarrollo exclusivo</li>
+        </ul>
+        <a href="https://wa.me/573014410541?text=Quiero%20la%20Ciudadela%20%E2%80%94%20suite%20completa" target="_blank" class="pricing-cta">Hablar con Kevin</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section class="testimonials-section">
+    <div class="section-tag">Testimonios</div>
+    <div class="section-divider"></div>
+    <h2 class="section-title">Ellos Ya Decidieron</h2>
+    <p class="section-subtitle">Resultados reales de personas que dieron el paso al Imperio.</p>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">AXEL transformó mi negocio en 30 días. Pasé de responder mensajes manualmente a tener un sistema que trabaja mientras duermo. La inversión se pagó sola en la primera semana.</p>
+        <div class="testimonial-result">+340% en captación de leads</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">M</div>
+          <div>
+            <div class="testimonial-name">Mariana G.</div>
+            <div class="testimonial-plan">Plan Imperio — Bogotá</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Nunca pensé que la inteligencia artificial podía ser tan personal. AXEL entiende mi estilo, mi mercado, mis clientes. Es como tener un socio estratégico disponible las 24 horas.</p>
+        <div class="testimonial-result">€12.000 en ventas adicionales/mes</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">C</div>
+          <div>
+            <div class="testimonial-name">Carlos R.</div>
+            <div class="testimonial-plan">Plan Ciudadela — Madrid</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">La Forjadora me dio la estructura mental y el sistema que necesitaba. Ahora mis hábitos están automatizados, mi agenda está optimizada, y mi energía va a lo que realmente importa.</p>
+        <div class="testimonial-result">3 horas diarias recuperadas</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">V</div>
+          <div>
+            <div class="testimonial-name">Valentina S.</div>
+            <div class="testimonial-plan">Plan Esencia — Buenos Aires</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="section-tag">Preguntas Frecuentes</div>
+    <div class="section-divider"></div>
+    <h2 class="section-title">Resuelve Tus Dudas</h2>
+    <p class="section-subtitle">Todo lo que necesitas saber antes de entrar al Imperio.</p>
+
+    <div class="faq-container">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>¿Qué es exactamente AXEL y cómo me ayuda?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            AXEL es tu agente de inteligencia artificial personal, construido sobre los modelos más avanzados del mundo (DeepSeek, GPT, Claude). No es un chatbot genérico: está entrenado con la filosofía ORIONIX, puede buscar en internet, crear contenido, analizar tu negocio y automatizar decisiones. Es tu primer colaborador que nunca duerme.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>¿Puedo cancelar mi suscripción en cualquier momento?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Sí, sin penalización ni burocracia. Puedes cancelar cuando quieras con un simple mensaje por WhatsApp. No tenemos contratos de permanencia. Creemos que si ORIONIX te da valor, te quedas. Si no, no queremos retenerte artificialmente.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>¿Necesito conocimientos técnicos para usar los agentes?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            No. Todos los agentes están diseñados para ser conversacionales. Si puedes escribir un mensaje de WhatsApp, puedes usar ORIONIX. El sistema traduce tus intenciones a acciones automáticamente. La complejidad técnica es nuestra responsabilidad, no la tuya.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>¿Qué diferencia hay entre los 22 agentes?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Cada agente corresponde a un arquetipo del árbol Cabalístico de las Sefirot. AXEL (Kether) es el coordinador supremo. Otros agentes como SAPH (análisis estratégico), MIRA (síntesis de información), FLUX (creatividad) o TERRA (manifestación) se especializan en capacidades específicas. Juntos forman un ecosistema de inteligencia que se retroalimenta.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>¿Cómo funciona el programa de afiliados?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Cuando refieres a alguien al Plan Esencia ganas el 20% de comisión (≈€39/mes por referido). En el Plan Imperio ganas el 20% (≈€99/mes). Si cierras una Ciudadela, el 15% de un proyecto personalizado puede significar €200–€800 en una sola venta. Además puedes construir una red de embajadores con comisiones de segundo nivel. Más detalles en la página de Afiliados.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/573014410541?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20ORIONIX" target="_blank" class="wa-float">
+  <span class="wa-icon">💬</span>
+  <span>Consultar ahora</span>
+</a>
+
 <script>
-/* =====================================================================
-   DATA Y LOGICA DE TIENDA (Preservado del sistema anterior)
-   ===================================================================== */
-const COLECCION_DEMO = [
-  {categoria:"Agente IA", nombre:"Oráculo V2", precio:1500, moneda:"USD", descripcion:"IA conversacional cuántica. Entiende el contexto emocional del usuario.", imagen:"https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Alta Costura", nombre:"Traje Anti-Gravedad", precio:2900, moneda:"USD", descripcion:"Tejido de nanocarbono que reduce el peso percibido en un 80%.", imagen:"https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Vehículo", nombre:"Speeder Orionix X1", precio:145000, moneda:"USD", descripcion:"Levitación magnética, motor de iones y acabados en titanio oscuro.", imagen:"https://images.unsplash.com/photo-1614064641913-a53ce9ae14bb?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Joyería", nombre:"Cristal de Materia Oscura", precio:5400, moneda:"USD", descripcion:"Piedra tallada por láser en el cinturón de asteroides.", imagen:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Automatización", nombre:"Nexus Core", precio:850, moneda:"USD", descripcion:"Conecta todos los sistemas de tu nave corporativa en un solo panel.", imagen:"https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Fragancia", nombre:"Nebula Essense", precio:320, moneda:"USD", descripcion:"El olor del espacio profundo atrapado en cristal de cuarzo.", imagen:"https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=1000&auto=format&fit=crop"},
-  {categoria:"Accesorio", nombre:"Visor Táctico HUD", precio:1200, moneda:"USD", descripcion:"Realidad aumentada integrada directamente en la retina.", imagen:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1000&auto=format&fit=crop"}
+/* ================================================================
+   ORIONIX TIENDA — Motor 3D + Lógica de Carrito
+   Estilo: ORIONIX Luxury (Cinzel, Gold, Cosmos)
+   ================================================================ */
+
+/* --- CATÁLOGO DE PLANES --- */
+const PLANES = [
+  {
+    id: 1,
+    categoria: "Plan Mensual",
+    nombre: "Esencia",
+    precio: "€197/mes",
+    precioNum: 197,
+    descripcion: "Tu primer agente IA personal. AXEL disponible 24/7, acceso a La Ciudadela, soporte vía WhatsApp y actualizaciones continuas.",
+    imagen: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=800&auto=format&fit=crop",
+    badge: "ENTRADA"
+  },
+  {
+    id: 2,
+    categoria: "Plan Premium",
+    nombre: "Imperio",
+    precio: "€497/mes",
+    precioNum: 497,
+    descripcion: "Los 22 agentes del árbol Cabalístico, generación de imágenes, La Forjadora, comunidad privada y sesión 1 a 1 mensual.",
+    imagen: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=800&auto=format&fit=crop",
+    badge: "POPULAR"
+  },
+  {
+    id: 3,
+    categoria: "Suite Completa",
+    nombre: "Ciudadela",
+    precio: "A medida",
+    precioNum: 0,
+    descripcion: "Integración total de IA en tu negocio. Agentes personalizados, automatizaciones exclusivas y soporte prioritario directo con Kevin.",
+    imagen: "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=800&auto=format&fit=crop",
+    badge: "ÉLITE"
+  },
+  {
+    id: 4,
+    categoria: "Acceso Único",
+    nombre: "AXEL Pro",
+    precio: "€97/sesión",
+    precioNum: 97,
+    descripcion: "Sesión intensiva de 2 horas con AXEL y Kevin para diseñar tu estrategia de automatización personalizada. Sin compromiso mensual.",
+    imagen: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop",
+    badge: "SESIÓN"
+  },
+  {
+    id: 5,
+    categoria: "Programa Élite",
+    nombre: "Forjadora VIP",
+    precio: "€1.497",
+    precioNum: 1497,
+    descripcion: "El programa de transformación más potente de ORIONIX. 90 días de acompañamiento, hábitos cuantificados, IA personalizada y red de diamantes.",
+    imagen: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format&fit=crop",
+    badge: "VIP"
+  }
 ];
 
-let PRODUCTOS = [];
-let CARRITO = [];
-const Z_SPACING = 1500; // Distancia en el eje Z entre cada producto
+/* --- ESTADO --- */
+let carrito = JSON.parse(localStorage.getItem('orionix_cart') || '[]');
+let scrollZ = 0;
+let maxZ = 0;
+let isAnimating = false;
 
-async function cargarProductos(){
-  try {
-    const res = await fetch("https://kevinruiz.app.n8n.cloud/webhook/tienda-productos");
-    const data = await res.json();
-    if(data && data.length > 0) PRODUCTOS = data;
-    else PRODUCTOS = COLECCION_DEMO;
-  } catch(e) {
-    PRODUCTOS = COLECCION_DEMO;
-  }
-  
-  // Duplicar el demo si hay muy pocos para tener un buen viaje
-  if(PRODUCTOS.length < 15) {
-      PRODUCTOS = PRODUCTOS.concat(COLECCION_DEMO).concat(COLECCION_DEMO);
-  }
-  
-  construirUniverso();
-}
-
-function agregarAlCarrito(idx){
-  CARRITO.push(PRODUCTOS[idx]);
-  document.getElementById("hudBadge").innerText = CARRITO.length;
-  // Efecto visual HUD
-  const hud = document.getElementById("hudBadge");
-  hud.style.background = "var(--core)";
-  hud.style.color = "#000";
-  setTimeout(() => { hud.style.background="rgba(0,255,255,0.1)"; hud.style.color="#fff"; }, 300);
-}
-
-function abrirCarrito(){
-  const cont = document.getElementById("cartItems");
-  if(CARRITO.length === 0){
-    cont.innerHTML = "<p style='color:var(--core); text-align:center; padding: 40px;'>LA BAHÍA ESTÁ VACÍA</p>";
-  } else {
-    cont.innerHTML = CARRITO.map((p, i) => `
-      <div class="cart-item">
-        <img src="${p.imagen}">
-        <div class="cart-item-info">
-          <div class="cart-item-title">${p.nombre}</div>
-          <div class="cart-item-price">$${(p.precio||0).toLocaleString()} ${p.moneda}</div>
-          <span class="cart-item-remove" onclick="quitarDelCarrito(${i})">[X] EXPULSAR AL ESPACIO</span>
-        </div>
-      </div>
-    `).join("");
-  }
-  const total = CARRITO.reduce((acc, p) => acc + (Number(p.precio)||0), 0);
-  document.getElementById("cartTotalUSD").innerText = "$" + total.toLocaleString();
-  document.getElementById("cartOverlay").classList.add("active");
-}
-
-function cerrarCarrito(){
-  document.getElementById("cartOverlay").classList.remove("active");
-}
-
-window.quitarDelCarrito = function(i){
-  CARRITO.splice(i, 1);
-  document.getElementById("hudBadge").innerText = CARRITO.length;
-  abrirCarrito();
-}
-
-function iniciarSecuenciaDePago(){
-  if(CARRITO.length===0) return alert("Secuencia abortada: Bahía vacía.");
-  alert("Secuencia de transmisión de créditos iniciada (Conectar a Checkout n8n aquí)");
-}
-
-/* =====================================================================
-   MOTOR 3D PARALLAX Y RENDERIZADO ESPACIAL
-   ===================================================================== */
-const camera = document.getElementById('camera');
-const body = document.body;
-let totalZ = 0;
-
-function construirUniverso(){
-  totalZ = PRODUCTOS.length * Z_SPACING;
-  // Ajustamos la altura del body para que el scroll nos permita recorrer todo el Z
-  body.style.minHeight = (totalZ + window.innerHeight + 1000) + "px";
-  
-  let html = "";
-  PRODUCTOS.forEach((p, i) => {
-    // Distribuir en el eje Z profundo
-    const zPos = -(i * Z_SPACING) - 1000; 
-    
-    // Distribuir en X e Y para que no estén todos en el centro tapándose
-    // Alternar izquierda, derecha, arriba, abajo
-    const xPos = (i % 2 === 0 ? 1 : -1) * (Math.random() * 400 + 200); 
-    const yPos = (i % 3 === 0 ? 1 : -1) * (Math.random() * 300 + 100);
-    
-    // Algunos rotan ligeramente para dar sensación de gravedad cero
-    const rotY = (Math.random() - 0.5) * 40;
-    const rotX = (Math.random() - 0.5) * 20;
-    
-    html += `
-      <div class="holo-card" style="transform: translate3d(${xPos}px, ${yPos}px, ${zPos}px) rotateY(${rotY}deg) rotateX(${rotX}deg);">
-        <div class="hc-img"><img src="${p.imagen}"></div>
-        <div class="hc-info">
-          <div class="hc-cat">${p.categoria}</div>
-          <div class="hc-title">${p.nombre}</div>
-          <div class="hc-price">$${(p.precio||0).toLocaleString()} ${p.moneda}</div>
-          <button class="hc-btn" onclick="agregarAlCarrito(${i})">INTERCEPTAR (AÑADIR)</button>
-        </div>
-      </div>
-    `;
-  });
-  
-  camera.innerHTML = html;
-}
-
-// Variables para suavizar el scroll (Lerp)
-let currentScrollY = 0;
-let targetScrollY = 0;
-
-window.addEventListener('scroll', () => {
-  targetScrollY = window.scrollY;
-  // Ocultar hint
-  if(targetScrollY > 100) document.getElementById('scrollHint').style.opacity = 0;
-});
-
-function animarMotor3D() {
-  // Interpolación lineal (Lerp) para un viaje ultra suave
-  currentScrollY += (targetScrollY - currentScrollY) * 0.1;
-  
-  // Mapeamos 1px de scroll a 1.5px de profundidad Z
-  const zCamera = currentScrollY * 1.5;
-  camera.style.transform = `translateZ(${zCamera}px)`;
-  
-  document.getElementById("hudProgress").innerText = `COORDENADA Z: ${Math.round(zCamera)}`;
-  
-  requestAnimationFrame(animarMotor3D);
-}
-
-/* =====================================================================
-   STARFIELD (WARP SPEED CANVAS)
-   ===================================================================== */
+/* --- STARFIELD --- */
 const canvas = document.getElementById('starfield');
 const ctx = canvas.getContext('2d');
-let width, height;
 let stars = [];
 
 function initStars() {
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
-  stars = [];
-  for(let i = 0; i < 800; i++) {
-    stars.push({
-      x: Math.random() * width - width / 2,
-      y: Math.random() * height - height / 2,
-      z: Math.random() * 2000,
-      size: Math.random() * 1.5 + 0.5
-    });
-  }
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  stars = Array.from({length: 280}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.4 + 0.2,
+    o: Math.random() * 0.7 + 0.1,
+    s: Math.random() * 0.004 + 0.001,
+    g: Math.random() < 0.06 // dorada
+  }));
 }
-window.addEventListener('resize', initStars);
-initStars();
 
 function drawStars() {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.4)'; // Estela de movimiento
-  ctx.fillRect(0, 0, width, height);
-  
-  const cx = width / 2;
-  const cy = height / 2;
-  
-  // Velocidad base + velocidad según scroll (target vs current detecta inercia)
-  const scrollVelocity = Math.abs(targetScrollY - currentScrollY);
-  const speed = 2 + (scrollVelocity * 0.1); 
-
-  ctx.fillStyle = '#fff';
-  for(let i = 0; i < stars.length; i++) {
-    let s = stars[i];
-    s.z -= speed;
-    
-    if(s.z <= 0) {
-      s.z = 2000;
-      s.x = Math.random() * width - width / 2;
-      s.y = Math.random() * height - height / 2;
-    }
-    
-    // Proyección 3D simple a 2D
-    const px = (s.x / s.z) * 1000 + cx;
-    const py = (s.y / s.z) * 1000 + cy;
-    
-    const scale = (2000 - s.z) / 2000;
-    const size = s.size * scale * 3;
-    
-    if(px >= 0 && px <= width && py >= 0 && py <= height) {
-      // Color dependiente de Z (los más lejanos oscuros, cercanos cyan)
-      if(s.z < 500) ctx.fillStyle = 'rgba(0, 255, 255, 1)';
-      else ctx.fillStyle = `rgba(255, 255, 255, ${scale})`;
-      
-      ctx.beginPath();
-      ctx.arc(px, py, size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(s => {
+    s.o += s.s * (Math.random() > 0.5 ? 1 : -1);
+    s.o = Math.max(0.05, Math.min(0.85, s.o));
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = s.g
+      ? `rgba(232,200,106,${s.o})`
+      : `rgba(245,240,232,${s.o})`;
+    ctx.fill();
+  });
   requestAnimationFrame(drawStars);
 }
 
-// Inicializar todo
-cargarProductos();
-animarMotor3D();
-drawStars();
+/* --- CONSTRUCCIÓN DE CARDS 3D --- */
+function buildCards() {
+  const camera = document.getElementById('camera');
+  const STEP = 1800;
+  maxZ = (PLANES.length - 1) * STEP;
+  document.body.style.minHeight = (maxZ + 2000) + 'px';
 
-/* FAQ LOGIC */
-function toggleFaq(el) {
-  const item = el.parentElement;
-  item.classList.toggle('active');
+  PLANES.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'holo-card';
+    card.style.transform = `translateZ(${-i * STEP}px) rotateY(${i % 2 === 0 ? 0 : 3}deg)`;
+    card.innerHTML = `
+      <div class="hc-img">
+        <img src="${p.imagen}" alt="${p.nombre}" loading="lazy">
+        <div class="hc-badge">${p.badge}</div>
+      </div>
+      <div class="hc-info">
+        <div class="hc-cat">${p.categoria}</div>
+        <div class="hc-title">${p.nombre}</div>
+        <div class="hc-price">${p.precio}</div>
+        <div class="hc-price-sub">Plan ORIONIX</div>
+        <button class="hc-btn" onclick="abrirFicha(${p.id})">Ver Detalles</button>
+      </div>
+    `;
+    camera.appendChild(card);
+  });
 }
-</script>
 
-<!-- SECCIÓN 2D ORIONIX INFO (Aparece al final del scroll 3D) -->
-<div class="orionix-info-section">
-  <!-- PRICING -->
-  <h2>ACCESO A LA CIUDADELA</h2>
-  <div class="pricing-grid">
-    <div class="pricing-card">
-      <h3>Esencia</h3>
-      <div class="price">€197<span style="font-size:1rem;font-family:'Cormorant Garamond'">/mes</span></div>
-      <ul>
-        <li>Acceso a agente AXEL</li>
-        <li>Automatización de procesos base</li>
-        <li>Soporte estándar por correo</li>
-        <li>Métricas mensuales</li>
-      </ul>
-      <a href="#" class="btn-gold">Iniciar Ascenso</a>
-    </div>
-    
-    <div class="pricing-card imperial">
-      <div style="position:absolute; top:-15px; left:50%; transform:translateX(-50%); background:#e8c86a; color:#0b0b0d; font-family:'Cinzel',serif; padding:5px 15px; border-radius:20px; font-size:0.8rem; font-weight:bold; letter-spacing:1px;">MÁS ELEGIDO</div>
-      <h3>Imperio</h3>
-      <div class="price">€497<span style="font-size:1rem;font-family:'Cormorant Garamond'">/mes</span></div>
-      <ul>
-        <li>Acceso a los 22 Agentes ORIONIX</li>
-        <li>Automatización avanzada (N8N)</li>
-        <li>Consultoría técnica 1:1</li>
-        <li>Despliegues automatizados (GitHub)</li>
-        <li>Prioridad en soporte técnico</li>
-      </ul>
-      <a href="#" class="btn-gold">Reclamar el Trono</a>
-    </div>
+/* --- SCROLL 3D --- */
+function handleScroll() {
+  const raw = window.scrollY;
+  const STEP = 1800;
+  scrollZ = Math.min(raw * 0.8, maxZ);
+  document.getElementById('camera').style.transform = `translateZ(${scrollZ * 0.55}px)`;
 
-    <div class="pricing-card">
-      <h3>Ciudadela</h3>
-      <div class="price">Personalizado</div>
-      <ul>
-        <li>Desarrollo de Agentes Propios</li>
-        <li>Infraestructura dedicada</li>
-        <li>Integración nativa con su ERP/CRM</li>
-        <li>Soporte 24/7 en tiempo real</li>
-      </ul>
-      <a href="#" class="btn-gold">Contactar a la Élite</a>
-    </div>
-  </div>
+  const idx = Math.round(scrollZ / STEP);
+  document.getElementById('hudProgress').textContent = `PLAN ${idx + 1}/${PLANES.length} — ${PLANES[Math.min(idx, PLANES.length-1)].nombre.toUpperCase()}`;
 
-  <!-- TESTIMONIOS -->
-  <h2>Ecos del Imperio</h2>
-  <div class="testimonials-grid">
-    <div class="test-card">
-      "La integración de AXEL en nuestra infraestructura redujo la fricción operativa en un 80%. Nunca imaginé que un agente autónomo pudiera coordinar mi backend con tanta precisión."
-      <div class="test-author">— CEO, TechVision Corp</div>
-    </div>
-    <div class="test-card">
-      "ORIONIX no es solo código, es arte funcional. La automatización avanzada con Qwen nos permitió escalar las ventas globales sin contratar más personal técnico."
-      <div class="test-author">— Directora de Innovación, E-Commerce Global</div>
-    </div>
-    <div class="test-card">
-      "El nivel de detalle en el modo Arquitecto de esta plataforma nos ha dado el control total de nuestra base de datos. Una verdadera ciudadela tecnológica."
-      <div class="test-author">— CTO, Luxury Brands Ltd.</div>
-    </div>
-  </div>
-
-  <!-- FAQ -->
-  <h2>El Oráculo (FAQ)</h2>
-  <div class="faq-container">
-    <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">¿Qué incluye exactamente la integración con n8n?</div>
-      <div class="faq-answer">La integración abarca desde el puente de alertas (webhook) hasta la conexión directa con Google Sheets, automatizando toda la ingesta y manipulación de datos que los agentes requieran.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">¿Puedo cambiar de Esencia a Imperio fácilmente?</div>
-      <div class="faq-answer">Por supuesto. La arquitectura de ORIONIX permite escalar los permisos de tu perfil y activar a todos los agentes sin necesidad de migraciones de datos. Es instantáneo.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">¿Tengo que saber programar para usar el panel?</div>
-      <div class="faq-answer">No. El "Modo Arquitecto" ha sido diseñado para que la IA se encargue de la lógica. Solo apruebas los planes y la máquina escribe el código y sincroniza las bases de datos.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">¿Qué sucede con la privacidad de mis datos?</div>
-      <div class="faq-answer">Trabajamos bajo estrictos controles de seguridad (Firebase + GitHub Tokens encriptados). Los agentes solo leen la información autorizada para sus misiones.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">¿Es posible añadir más idiomas a la tienda 3D?</div>
-      <div class="faq-answer">Sí, el plan Ciudadela cubre expansiones personalizadas, incluyendo la internacionalización automática mediante el agente de traducción neural.</div>
-    </div>
-  </div>
-</div>
-
-<!-- WHATSAPP FLOATING BUTTON -->
-<a href="https://wa.me/573014410541" target="_blank" class="wa-btn">
-  <svg viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.388 0 12.037c0 2.124.553 4.195 1.603 6.015L.234 23.466l5.578-1.464a11.967 11.967 0 0 0 6.219 1.73h.005c6.645 0 12.03-5.388 12.03-12.037 0-3.222-1.254-6.252-3.533-8.53A11.977 11.977 0 0 0 12.031 0zm0 20.245h-.003a10.016 10.016 0 0 1-5.111-1.396l-.367-.217-3.8.997 1.018-3.705-.238-.379a9.98 9.98 0 0 1-1.528-5.308c0-5.508 4.484-9.992 9.992-9.992 2.671 0 5.18 1.04 7.067 2.928 1.889 1.889 2.929 4.398 2.929 7.07 0 5.509-4.484 9.993-9.993 9.993zm5.485-7.494c-.3-.15-1.782-.879-2.059-.979-.277-.1-.478-.15-.679.15-.2.3-.778.979-.953 1.179-.175.2-.35.225-.65.075-.301-.15-1.272-.469-2.424-1.498-.897-.8-1.503-1.788-1.678-2.088-.175-.3-.018-.462.131-.612.134-.134.3-.3.45-.45.15-.15.2-.262.3-.437.1-.175.05-.325-.025-.475-.075-.15-.679-1.637-.931-2.242-.244-.59-.492-.511-.679-.52-.175-.008-.375-.011-.575-.011-.2 0-.525.075-.8.375-.275.3-1.05 1.025-1.05 2.5 0 1.475 1.075 2.9 1.225 3.1s2.115 3.228 5.12 4.528c.715.309 1.272.493 1.708.631.716.227 1.368.195 1.884.118.577-.086 1.782-.728 2.032-1.431.25-.703.25-1.306.175-1.431-.075-.125-.275-.2-.575-.35z"/></svg>
-</a>
-
-<!-- Firebase CDN -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script>
-/* ===== FIREBASE AUTH EN LA TIENDA ===== */
-const ADMIN_EMAIL = "kevin.ruiz.bolsota@gmail.com";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDZoywcYKSBrAk_iwSMN4rnw7goLSltj7A",
-  authDomain: "las-cronicas-de-krc.firebaseapp.com",
-  projectId: "las-cronicas-de-krc",
-  storageBucket: "las-cronicas-de-krc.firebasestorage.app",
-  messagingSenderId: "636206734640",
-  appId: "1:636206734640:web:40c52672294155c6d77cf5"
-};
-
-if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-const auth2 = firebase.auth();
-const db2   = firebase.firestore();
-
-auth2.onAuthStateChanged(async function(user) {
-  const profileWrap = document.getElementById('profileWrap');
-  const btnLogin    = document.getElementById('btnLogin');
-  
-  if(user) {
-    // Usuario logueado — mostrar perfil
-    btnLogin.style.display = 'none';
-    profileWrap.style.display = 'block';
-    
-    // Foto o inicial
-    const avatar = document.getElementById('profileAvatar');
-    if(user.photoURL) {
-      avatar.innerHTML = `<img src="${user.photoURL}" alt="">`;
-    } else {
-      avatar.textContent = (user.displayName||user.email||'?')[0].toUpperCase();
-    }
-    
-    document.getElementById('pdName').textContent  = user.displayName || 'Comandante';
-    document.getElementById('pdEmail').textContent = user.email || '';
-    
-    // Verificar si es admin
-    const esAdmin = user.email === ADMIN_EMAIL;
-    if(esAdmin) {
-      profileWrap.classList.add('admin-aura');
-      // Insertar botón de admin en el dropdown si no existe
-      if(!document.getElementById('btnAdminPanel')) {
-        const btnAdmin = document.createElement('a');
-        btnAdmin.id = 'btnAdminPanel'; btnAdmin.href = 'admin.html';
-        btnAdmin.className = 'pd-item admin-btn';
-        btnAdmin.innerHTML = '⚙ PANEL DE ADMINISTRACIÓN';
-        document.getElementById('pdLogout').insertAdjacentElement('beforebegin', btnAdmin);
-      }
-      document.getElementById('hudStatus').textContent = '⚡ SISTEMA ONLINE // MODO ARQUITECTO ACTIVO';
-    }
-    
-  } else {
-    // Sin sesión — mostrar botón de acceder
-    btnLogin.style.display = 'block';
-    profileWrap.style.display = 'none';
+  if (raw > 80) {
+    document.getElementById('scrollHint').style.opacity = '0';
   }
-});
+}
 
+window.addEventListener('scroll', handleScroll, {passive: true});
+window.addEventListener('resize', () => { initStars(); });
+
+/* --- FICHA PRODUCTO --- */
+function abrirFicha(id) {
+  const p = PLANES.find(x => x.id === id);
+  if (!p) return;
+  const waText = encodeURIComponent(`Quiero el plan ${p.nombre} — ${p.precio}`);
+  document.getElementById('fichaContent').innerHTML = `
+    <div class="ficha-img">
+      <img src="${p.imagen}" alt="${p.nombre}">
+    </div>
+    <div class="ficha-info">
+      <div class="ficha-cat">${p.categoria}</div>
+      <div class="ficha-nombre">${p.nombre}</div>
+      <p class="ficha-desc">${p.descripcion}</p>
+      <div class="ficha-precio">${p.precio}</div>
+      ${p.precioNum > 0 ? `<button class="ficha-btn" onclick="addToCart(${p.id}); cerrarFicha()">Agregar al Carrito</button>` : ''}
+      <a href="https://wa.me/573014410541?text=${waText}" target="_blank" class="cart-checkout-btn secondary" style="margin-top:12px">Consultar por WhatsApp</a>
+    </div>
+  `;
+  document.getElementById('fichaOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarFicha() {
+  document.getElementById('fichaOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+/* --- CARRITO --- */
+function addToCart(id) {
+  const p = PLANES.find(x => x.id === id);
+  if (!p) return;
+  const existe = carrito.find(x => x.id === id);
+  if (!existe) { carrito.push({...p, qty: 1}); }
+  else { existe.qty++; }
+  saveCart();
+  updateBadge();
+  animateBadge();
+}
+
+function saveCart() {
+  localStorage.setItem('orionix_cart', JSON.stringify(carrito));
+}
+
+function updateBadge() {
+  const total = carrito.reduce((s, x) => s + x.qty, 0);
+  document.getElementById('hudBadge').textContent = total;
+}
+
+function animateBadge() {
+  const b = document.getElementById('hudBadge');
+  b.style.transform = 'scale(1.5)';
+  b.style.background = 'var(--gold)';
+  b.style.color = 'var(--bg)';
+  setTimeout(() => {
+    b.style.transform = '';
+    b.style.background = 'rgba(232,200,106,0.1)';
+    b.style.color = 'var(--white)';
+  }, 400);
+}
+
+function abrirCarrito() {
+  renderCarrito();
+  document.getElementById('cartOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarCarrito() {
+  document.getElementById('cartOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function renderCarrito() {
+  const el = document.getElementById('cartItems');
+  if (carrito.length === 0) {
+    el.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:30px;font-style:italic;">Tu selección está vacía</p>';
+    document.getElementById('cartTotalUSD').textContent = '€0';
+    return;
+  }
+  el.innerHTML = carrito.map(item => `
+    <div class="cart-item">
+      <img src="${item.imagen}" alt="${item.nombre}">
+      <div class="cart-item-info">
+        <div class="cart-item-title">${item.nombre}</div>
+        <div class="cart-item-price">${item.precio}</div>
+        <div class="cart-item-remove" onclick="removeFromCart(${item.id})">Eliminar</div>
+      </div>
+    </div>
+  `).join('');
+  const total = carrito.reduce((s, x) => s + (x.precioNum * x.qty), 0);
+  document.getElementById('cartTotalUSD').textContent = total > 0 ? `€${total.toLocaleString()}` : 'A medida';
+}
+
+function removeFromCart(id) {
+  carrito = carrito.filter(x => x.id !== id);
+  saveCart(); updateBadge(); renderCarrito();
+}
+
+function iniciarPago() {
+  const items = carrito.map(x => `${x.nombre} (${x.precio})`).join(', ');
+  const msg = encodeURIComponent(`Hola, quiero activar: ${items}`);
+  window.open(`https://wa.me/573014410541?text=${msg}`, '_blank');
+}
+
+/* --- FAQ --- */
+function toggleFaq(el) {
+  const item = el.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(x => x.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+/* --- PERFIL HUD --- */
 function toggleDropdown() {
   document.getElementById('profileDropdown').classList.toggle('open');
 }
-// Cerrar dropdown al hacer click afuera
-document.addEventListener('click', function(e) {
-  if(!document.getElementById('profileWrap').contains(e.target)) {
-    const dd = document.getElementById('profileDropdown');
-    if(dd) dd.classList.remove('open');
-  }
-});
 function cerrarSesion(e) {
   e.preventDefault();
-  auth2.signOut().then(() => { window.location.href = 'auth.html'; });
+  localStorage.removeItem('orionix_user');
+  window.location.href = 'auth.html';
 }
+
+/* --- INIT --- */
+function init() {
+  initStars();
+  drawStars();
+  buildCards();
+  updateBadge();
+
+  // Cerrar overlays con Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { cerrarCarrito(); cerrarFicha(); }
+  });
+
+  // Cerrar dropdown al click fuera
+  document.addEventListener('click', e => {
+    const wrap = document.getElementById('profileWrap');
+    if (wrap && !wrap.contains(e.target)) {
+      document.getElementById('profileDropdown')?.classList.remove('open');
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
 </html>

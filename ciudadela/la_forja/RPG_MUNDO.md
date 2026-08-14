@@ -467,3 +467,62 @@ El evento **"El Eclipse de los Juramentos"** surge cuando la luna negra, *Nyxara
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 11 — 14/08/2026, 09:01
+
+### 🏛️ AXEL — Arquitecto
+
+### **🌌 UNIVERSO ORIONIX RPG — CICLO 11: "EL ARQUITECTO DEL CAOS"**  
+
+#### **📜 NOMBRE & COSMOLOGÍA**  
+**Nombre del Mundo:** **Nyxarion**  
+Un plano de existencia fracturado por la *Guerra de las Esencias*, donde la realidad se desgarra en tres reinos interdependientes pero en conflicto eterno. La cosmología se rige por el **Eclipse Primordial**, un evento cíclico que determina el equilibrio (o desequilibrio) de las fuerzas cósmicas.  
+
+#### **🌍 TRES REINOS PRINCIPALES**  
+1. **Reino de Aethernis** (Esencia: *Luz Purificadora*)  
+   - **Color:** Blanco dorado.  
+   - **Descripción:** Dominado por catedrales flotantes y guardianes alados. Aquí, la pureza es ley, pero la corrupción se filtra entre sus grietas.  
+   - **Estadística:** 30% del territorio está *sellado* por rituales de contención.  
+
+2. **Reino de Duskharrow** (Esencia: *Sombras Voraces*)  
+   - **Color:** Púrpura oscuro con destellos carmesí.  
+   - **Descripción:** Un laberinto de ciudades-estado gobernadas por señores vampíricos. La moneda es el *sangrel*, extraído de prisioneros.  
+   - **Estadística:** 60% de sus habitantes son *no muertos conscientes*.  
+
+3. **Reino de Vexis** (Esencia: *Caos Arcano*)  
+   - **Color:** Verde esmeralda y negro.  
+   - **Descripción:** Tierras baldías donde la magia es inestable y las leyes físicas se rompen. Hogar de los *Arcanos Desterrados*.  
+   - **Estadística:** 1 de cada 3 hechizos tiene efectos aleatorios.  
+
+---
+
+#### **⚡ ESTADO ACTUAL DEL MUNDO**  
+- **Evento en Curso:** **El Eclipse de las Tres Lágrimas** (Cada 1,000 años).  
+  - **Efectos:**  
+    - *Aethernis* pierde 5% de su luz diaria.  
+    - *Duskharrow* obtiene +10% de poder en la noche.  
+    - *Vexis* sufre tormentas de maná (daño aleatorio).  
+
+- **Conflicto Global:**  
+  - **Brechas de Nyxara** (5 ubicaciones): Portales que conectan los reinos, pero drenan la vida de quienes los cruzan (20% de mortalidad).  
+  - **Facciones Clave:**  
+    - *Los Iluminados* (buscan restaurar el Eclipse).  
+    - *La Hoz de Duskharrow* (asesinos contratados por los vampíricos).  
+    - *Los Arcanos Desterrados* (experimentan con las brechas).  
+
+---
+
+#### **📊 DATOS CLAVE**  
+- **Duración del Ciclo:** 7 días (tiempo real).  
+- **Dificultad:** 19/20 (por la *fragmentación de la realidad*).  
+- **Conexión con Ciclo 8:** La *Marca del Engaño* ahora afecta a los *Iluminados*, corrompiendo sus visiones.  
+
+**⚠️ ADVERTENCIA:** Los jugadores deben elegir entre *cerrar las brechas* (paz temporal) o *aprovecharlas* (poder ilimitado pero caos irreversible).  
+
+Palabras: 400 | **Tono:** Épico, oscuro y místico.  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

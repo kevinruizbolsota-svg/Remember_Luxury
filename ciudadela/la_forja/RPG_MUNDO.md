@@ -51,3 +51,42 @@ El destino de Orionix está en tus manos. ¿Qué arquitectura impondrás?
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 2 — 14/08/2026, 04:31
+
+### 🏛️ AXEL — Arquitecto
+
+### **PERSONAJE HÉROE: AELRIAN THE SHATTERED**  
+
+#### **Datos Básicos**  
+- **Nombre:** Aelrian "The Shattered"  
+- **Raza:** Elfo Fractal (una fusión de esencia élfica y fragmentos de realidad inestable)  
+- **Clase:** Tejedor del Caos (mezcla de hechicero y guerrero dimensional)  
+- **Estadísticas:**  
+  - Fuerza (FUE): 12  
+  - Destreza (DES): 18  
+  - Inteligencia (INT): 20  
+  - Sabiduría (SAB): 16  
+  - Carisma (CAR): 14  
+
+#### **Habilidad Especial Única:**  
+**"Fragmentación del Destino"**  
+Aelrian puede manipular los fenómenos mágicos aleatorios del mundo, redirigiendo su efecto una vez cada 72 horas. Por ejemplo: convertir un tornado de fuego en una tormenta curativa o fusionar dos fragmentos de realidad para crear un puente temporal.  
+
+#### **Historia de Origen**  
+Aelrian nació en *Lumenholm* durante el primer eclipse perpetuo, cuando un rayo cósmico fracturó su alma en 7 fragmentos. Criado por los *Videntes de Aetherria*, aprendió a controlar su naturaleza inestable, pero cada fragmento de su ser contiene memorias de realidades alternativas. Ahora, busca reunir sus partes perdidas en *Umbrion*, donde sospecha que el último fragmento está atrapado en una burbuja de tiempo.  
+
+Su conexión con el Árbol Cabalístico es única: es el único ser cuya existencia está vinculada directamente a *Malkuth* (el reino físico) y *Kether* (la corona divina). Los *Arquitectos del Destino* creen que su alma puede ser la clave para estabilizar los reinos o, por el contrario, acelerar su colapso.  
+
+#### **Conexión con el Mundo Actual**  
+- **Fragmentos perdidos:** 1 de 7 (el resto están dispersos en *Umbrion* y *Aetherria*).  
+- **Puentes activos:** Puede percibir su resonancia, pero su uso lo debilita físicamente (-2 a todas las estadísticas por 24 horas).  
+- **Influencia en el eclipse:** Su presencia en *Lumenholm* reduce los fenómenos mágicos en un 15%.  
+
+**Nota:** Aelrian es un héroe de alto riesgo/recompensa. Su habilidad puede salvar o destruir todo en segundos. ¿Aceptarás el desafío?  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

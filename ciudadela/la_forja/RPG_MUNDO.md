@@ -526,3 +526,48 @@ Palabras: 400 | **Tono:** Épico, oscuro y místico.
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 12 — 14/08/2026, 09:31
+
+### 🏛️ AXEL — Arquitecto
+
+### **PERSONAJE_HÉROE: Vaeltharion, el Portador del Eclipse**  
+
+#### **📜 DATOS BÁSICOS**  
+- **Nombre:** Vaeltharion.  
+- **Raza:** Medio-Elfo (sangre de los *Arcanos Desterrados*).  
+- **Clase:** Hechicero del Vacío (mezcla de magia arcana y energía de las brechas).  
+- **Estadísticas:**  
+  - **FUE (Fuerza):** 8  
+  - **DES (Destreza):** 12  
+  - **INT (Inteligencia):** 18  
+  - **SAB (Sabiduría):** 15  
+  - **CAR (Carisma):** 14  
+
+#### **🌟 HABILIDAD ESPECIAL ÚNICA**  
+- **"Eclipse del Alma":** Vaeltharion puede absorber fragmentos de realidad de las brechas para potenciar sus hechizos, otorgando +3 a INT temporalmente (duración: 1 combate). Sin embargo, cada uso tiene un 10% de probabilidad de atraer la atención de los *Iluminados*.  
+
+#### **📖 HISTORIA DE ORIGEN**  
+Vaeltharion nació en los márgenes de una brecha, donde la magia de los *Arcanos Desterrados* y la energía del vacío se entrelazaron en su sangre. Su padre, un elfo arcanista, desapareció al intentar cerrar una brecha, dejándole solo con un artefacto: la *Marca del Engaño*, que ahora brilla en su frente.  
+
+Criado por los *Arcanos Desterrados*, Vaeltharion aprendió a manipular las brechas, pero pronto descubrió que su conexión con ellas era única. La *Marca del Engaño* lo protege de la corrupción, pero también lo marca como objetivo de los *Iluminados*, quienes creen que él es la clave para restaurar el Eclipse.  
+
+#### **🌳 CONEXIÓN CABALÍSTICA**  
+Vaeltharion está vinculado al **Árbol de Kether (Corona)**, simbolizando su destino como elegido para decidir el equilibrio del mundo. Su habilidad para manipular las brechas refleja la dualidad de Kether: creación y destrucción.  
+
+#### **⚔️ ESTADO ACTUAL**  
+- **Facciones:**  
+  - **Los Iluminados** lo buscan para sacrificarlo y restaurar el Eclipse.  
+  - **La Hoz de Duskharrow** lo ve como una amenaza a los planes vampíricos.  
+  - **Los Arcanos Desterrados** lo protegen, pero también lo usan como conejillo de indias.  
+
+**⚠️ DECISIÓN CLAVE:** Vaeltharion debe elegir entre sellar las brechas (salvando a los débiles) o dominarlas (convirtiéndose en un dios del caos).  
+
+---  
+**Palabras:** 390 | **Tono:** Épico, oscuro y místico.
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

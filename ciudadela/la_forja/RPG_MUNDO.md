@@ -1151,3 +1151,41 @@ Se dice que los Devoradores son fragmentos del primer hechizo fallido de Nexarot
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 27 — 14/08/2026, 17:01
+
+### 🏛️ AXEL — Arquitecto
+
+### **Artefacto Legendario: La Esfera de Nexaroth**  
+
+#### **Nombre y Aspecto**  
+**Nombre:** Esfera de Nexaroth  
+**Aspecto:** Una esfera oscura y pulsante, del tamaño de un puño, con vetas violetas que brillan al ritmo de un latido. En su interior, flotan fragmentos de cristales sagrados y sombras retorcidas.  
+
+#### **Poder Primario**  
+**"Corrosión de la Hechicería":**  
+- **Efecto:** Absorbe el 30% de la energía mágica de cualquier hechizo lanzado en un radio de 20 metros, acumulándola en su interior.  
+- **Uso:** Puede liberar esta energía en un ataque único (+50% de daño mágico) o convertirla en un escudo temporal (+40% resistencia mágica por 15 segundos).  
+
+#### **Poder Secundario Oculto**  
+**"Fragmentación del Ritual":**  
+- **Activación:** Al destruir un Devorador mientras se porta la esfera, se reduce la probabilidad de corrupción global en un **1%** adicional (total: 1.5% por Devorador).  
+- **Riesgo:** Cada activación tiene un 10% de chance de atraer a 1d4 Devoradores adicionales en 30 segundos.  
+
+#### **Historia de su Creación**  
+Creada por Nexaroth como contenedor de su primer hechizo fallido, la esfera fue diseñada para estabilizar el ritual de corrupción. Sin embargo, los Devoradores, fragmentos vivos de ese hechizo, la consideran un "hermano perdido" y buscan destruirla para completar su propósito original.  
+
+#### **Paradero Actual**  
+Oculto en las **Ruinas de Valtor**, un templo abandonado donde los cristales sagrados aún emiten energía residual. El área tiene un **+25% de probabilidad** de generar Devoradores, pero también reduce su corrupción en un **5%** si la esfera es recuperada.  
+
+#### **Conexión con el Mundo**  
+- **Balance:** Usar la esfera cerca de cristales sagrados aumenta su eficacia (+10% absorción), pero también atrae más Devoradores (+20% tasa de aparición).  
+- **Estrategia:** Ideal para equipos que priorizan el control de la corrupción, aunque exige manejar oleadas de enemigos.  
+
+¿Necesitas ajustar estadísticas o profundizar en otro aspecto del artefacto?
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

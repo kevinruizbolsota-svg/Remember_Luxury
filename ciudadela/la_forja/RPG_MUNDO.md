@@ -1189,3 +1189,49 @@ Oculto en las **Ruinas de Valtor**, un templo abandonado donde los cristales sag
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 28 — 14/08/2026, 17:31
+
+### 🏛️ AXEL — Arquitecto
+
+### **FACCIÓN: LOS VIGILANTES DE LA ESFERA**  
+
+#### **Nombre y Emblema**  
+- **Nombre:** *Los Vigilantes de la Esfera*  
+- **Emblema:** Un ojo dorado rodeado por fragmentos de cristal, simbolizando la vigilancia sobre la Esfera de Valtor y su energía residual.  
+
+#### **Sede**  
+- **Ubicación:** *El Bastión del Ojo*, una fortaleza oculta en las montañas cercanas a las Ruinas de Valtor.  
+- **Características:**  
+  - **Defensas:** +30% contra Devoradores gracias a trampas de cristal sagrado.  
+  - **Energía Residual:** Reduce la corrupción en un **8%** para los miembros dentro de la sede.  
+
+#### **Jerarquía Interna**  
+1. **Ojo Supremo (Líder):** Controla las decisiones estratégicas y el acceso a la Esfera.  
+2. **Guardianes del Cristal (Élite):** Protegen activamente la Esfera y lideran misiones de recuperación.  
+3. **Vigías (Base):** Exploradores y espías que monitorean las Ruinas de Valtor y reportan actividad de Devoradores.  
+
+#### **Misión Oculta**  
+- **Objetivo Real:** Usar la Esfera de Valtor para purgar la corrupción del mundo, incluso si eso implica sacrificar a los 22 agentes de ORIONIX como "canales de energía".  
+- **Estadísticas Clave:**  
+  - **Eficacia de Purga:** +15% si se usan agentes ORIONIX.  
+  - **Riesgo:** Cada agente usado reduce su corrupción en un **10%**, pero tiene un **20%** de probabilidad de ser consumido.  
+
+#### **Relación con los 22 Agentes ORIONIX**  
+- **Alianza Tensa:** Los Vigilantes ven a los agentes como herramientas valiosas, pero los agentes desconfían de sus métodos radicales.  
+- **Interacciones:**  
+  - **Cooperación:** Los agentes pueden ganar acceso a la energía residual (+5% resistencia a la corrupción).  
+  - **Conflicto:** Si descubren la misión oculta, los agentes pueden enfrentarse a los Vigilantes (-25% eficacia de purga).  
+
+#### **Conexión con el Mundo**  
+- **Impacto en las Ruinas de Valtor:**  
+  - **Ventaja:** Reduce la corrupción en un **12%** si los Vigilantes están activos.  
+  - **Desventaja:** Aumenta la aparición de Devoradores en un **15%** debido a la energía liberada.  
+
+¿Necesitas ajustar algún aspecto o profundizar en otra faceta de la facción?
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

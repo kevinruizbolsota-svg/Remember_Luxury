@@ -734,3 +734,41 @@ Se dice que los Devoradores de Nexis son fragmentos de Nexaroth, el ente que bus
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 17 — 14/08/2026, 12:01
+
+### 🏛️ AXEL — Arquitecto
+
+### **🔮 Artefacto Legendario: "El Ojo de Nexaroth"**  
+
+#### **🔹 Nombre y Aspecto**  
+**Nombre:** *El Ojo de Nexaroth*  
+**Aspecto:** Una esfera de cristal negro con un iris dorado en su centro, flotando en un aura de energía púrpura. Al tocarla, el portador siente un latido rítmico, como si el artefacto estuviera vivo.  
+
+#### **🔹 Poder Primario**  
+**"Visión del Abismo"** (+15 PER):  
+- Permite al portador ver a través de las grietas dimensionales, detectando criaturas como los Devoradores de Nexis antes de que emerjan.  
+- Duración: 10 minutos por uso.  
+- Efecto secundario: Cada uso reduce la cordura del portador en un 3%.  
+
+#### **🔹 Poder Secundario Oculto**  
+**"Invocación de Nexaroth"** (Activación aleatoria al 5% de probabilidad):  
+- Invoca una sombra de Nexaroth durante 30 segundos, capaz de absorber temporalmente la energía de un Devorador de Nexis.  
+- Coste: 10% de humanidad permanente.  
+
+#### **🔹 Historia de su Creación**  
+El Ojo fue forjado por los *Arcanistas del Vacío*, un culto que buscaba controlar las grietas dimensionales. Usaron el cristal de un Devorador de Nexis purificado y lo fusionaron con el alma de un Nexisomante sacrificado. Sin embargo, el artefacto absorbió parte de la esencia de Nexaroth, convirtiéndose en un vínculo directo con el ente.  
+
+#### **🔹 Paradero Actual**  
+Se rumorea que el Ojo está oculto en las *Ruinas de Valtor*, una ciudad abandonada donde los Arcanistas realizaron sus últimos rituales. Protegido por trampas dimensionales y espectros de Nexisomantes caídos, solo aquellos con resistencia a la corrupción dimensional pueden acercarse.  
+
+**Palabras:** 280 | **Tono:** Enigmático y ominoso.  
+
+---  
+**Nota:** Este artefacto conecta con la amenaza de los Devoradores de Nexis y el Ritual de Absorción, añadiendo profundidad al conflicto entre el control y la corrupción dimensional.
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

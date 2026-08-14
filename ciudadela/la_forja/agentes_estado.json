@@ -1,0 +1,36 @@
+{
+  "sistema": "ORIONIX",
+  "actualizado": "2026-08-14T02:59:00Z",
+  "comandante": "n8n",
+  "mision_activa": "Misión #1 — La Ciudadela",
+  "agentes": {
+    "n8n": {
+      "rol": "El Comandante",
+      "estado": "ONLINE",
+      "ultima_actividad": "2026-08-14T02:59:00Z"
+    },
+    "axel": {
+      "rol": "Coordinador IA Kether",
+      "estado": "ONLINE",
+      "webhook": "https://lkevinruizl.app.n8n.cloud/webhook/axel-brain"
+    },
+    "antigravity": {
+      "rol": "Las Manos",
+      "estado": "TOKENS_AGOTADOS",
+      "mision_pendiente": "1-B"
+    },
+    "qwen": {
+      "rol": "El Arquitecto",
+      "estado": "PLANOS_ENTREGADOS",
+      "planos_aprobados": 5
+    },
+    "chatgpt": {
+      "rol": "Consultor Externo",
+      "estado": "PENDIENTE_INTEGRACION"
+    }
+  },
+  "webhooks": {
+    "mission": "https://lkevinruizl.app.n8n.cloud/webhook/orionix-mission",
+    "bridge": "https://lkevinruizl.app.n8n.cloud/webhook/orionix-bridge"
+  }
+}

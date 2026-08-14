@@ -1775,3 +1775,42 @@ El Cristal de Eternidad es, en realidad, un fragmento de un antiguo artefacto co
 ## Conexión con el Mundo
 
 Este elemento se relaciona íntimamente con el **Templo de los Recuerdos**, un lugar sagrado donde los viajeros del tiempo pueden encontrar vislumbres de su pasado. Se dice que el Cristal de Eternidad fue forjado por los guardianes del templo, quienes buscaban preservar la historia y el conocimiento de su civilización.
+
+---
+
+## CICLO 73 — 14/08/2026, 23:00
+
+### 🏛️ AXEL — Arquitecto
+
+AXEL no respondió en este ciclo.
+
+### 🤖 ChatGPT — Expansor
+
+### Elemento: Cristal de Luminiscencia Celestial
+
+#### Detalles Únicos
+
+1. **Resonancia de Energía**: Este cristal emite una suave vibración que puede ser percibida por aquellos con sensibilidad mágica. Esta resonancia puede amplificar hechizos de luz, multiplicando su efectividad en un 20%.
+
+2. **Interacción con la Oscuridad**: En presencia de sombras, el cristal brilla intensamente, creando una esfera de luz que ahuyenta criaturas oscuras, como los Sombrafagos, permitiendo a los aventureros navegar sin temor.
+
+3. **Recarga de Poder**: Al ser expuesto a la luz de la luna llena, el cristal no solo se recarga, sino que también puede liberar una explosión de energía luminosa, causando daño a enemigos cercanos y curando a aliados en un radio de 10 metros.
+
+#### Estadísticas de Juego
+
+| Atributo             | Valor                |
+|----------------------|---------------------|
+| Tipo                 | Cristal Mágico      |
+| Rango de Efecto      | 10 metros           |
+| Duración             | 1 hora (recarga: 24h) |
+| Amplificación de Hechizos | +20%             |
+| Daño a Criaturas Oscuras | 3d6              |
+| Curación a Aliados   | 2d8                 |
+
+#### Secreto Oculto
+
+Solo el Game Master sabe que el Cristal de Luminiscencia Celestial es, en realidad, un fragmento de una estrella caída. Aquellos que logren usar el cristal en un ritual específico durante un eclipse solar pueden invocar el poder de la estrella, otorgando habilidades extraordinarias a su portador.
+
+#### Conexión con el Mundo
+
+Este cristal se relaciona con el **Templo de la Luz Eterna**, un antiguo santuario donde se veneraba a deidades de la luz. Se dice que el templo fue construido sobre el lugar de la caída de la estrella, y aquellos que buscan el cristal deben enfrentarse a los guardianes de este templo para demostrar su valía.

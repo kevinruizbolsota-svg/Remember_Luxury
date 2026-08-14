@@ -209,3 +209,37 @@ Los fragmentos del *Corazón de Umbrion* pueden usarse para potenciar hechizos (
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 6 — 14/08/2026, 06:31
+
+### 🏛️ AXEL — Arquitecto
+
+### **Criatura: El Espectro del Espejo Roto**  
+
+#### **Descripción Física**  
+Una criatura etérea, compuesta de fragmentos de cristal flotantes que reflejan destellos de realidades alternas. Su forma es humanoide, pero distorsionada, como si estuviera atrapada entre múltiples dimensiones. Sus ojos son vacíos, pero emiten un brillo púrpura cuando detecta presas.  
+
+#### **Hábitat**  
+Habita en ruinas antiguas donde yacen espejos mágicos, especialmente cerca del **Espejo Antiguo** mencionado en el lore. También puede emerger en lugares donde se han lanzado hechizos de sombras con frecuencia.  
+
+#### **Estadísticas de Combate**  
+- **HP:** 80  
+- **ATQ:** 15 (Golpes con fragmentos de cristal + drenaje de energía)  
+- **DEF:** 12 (Evasión etérea, 50% de probabilidad de evitar ataques físicos)  
+- **VEL:** 18 (Teletransporte corto cada turno)  
+
+#### **Botín Especial**  
+- **Fragmento de Realidad Distorsionada:** Un cristal que puede usarse para potenciar hechizos de sombras (+1d6 de daño) o para intentar reparar el Espejo Antiguo (riesgo de corrupción).  
+- **Lágrima de Umbrion:** Un objeto raro (5% de drop) que otorga +2 a la Voluntad temporalmente, pero acumula 1 punto de corrupción por uso.  
+
+#### **Leyenda**  
+Se dice que el Espectro del Espejo Roto son almas de aquellos que sucumbieron a las maldiciones del Espejo Antiguo. Cada fragmento que lo compone contiene un eco de su vida pasada, y su existencia es un recordatorio del peligro de jugar con las sombras. Los cultistas de Lord Umbrion creen que destruirlo libera su esencia, otorgando bendiciones oscuras... pero ¿a qué precio?  
+
+**Conexión con la Trama:**  
+Esta criatura puede aparecer cuando los jugadores interactúan con el Espejo Antiguo o usan fragmentos del *Corazón de Umbrion*. Derrotarla podría revelar pistas sobre cómo revertir la corrupción... o profundizarla.  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

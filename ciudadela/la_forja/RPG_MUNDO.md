@@ -641,3 +641,59 @@ Nexaroth planea usar los cristales para un **ritual de 13 horas** que le permiti
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 15 — 14/08/2026, 11:01
+
+### 🏛️ AXEL — Arquitecto
+
+**📜 ESCUELA DE MAGIA: NEXISOMANCIA**  
+**Fuente de Poder:** Cristales de Nexis, energía pura extraída de las grietas dimensionales.  
+
+---
+
+### **⚡ HECHIZOS**  
+1. **Grito del Abismo**  
+   - **Efecto:** Libera una onda de sonido que paraliza a los enemigos (3 segundos) y rompe objetos frágiles en un radio de 10 metros.  
+   - **Coste:** 1 fragmento de Cristal de Nexis (equivalente a 1 hora de energía).  
+
+2. **Escudo de Resonancia**  
+   - **Efecto:** Crea un campo de vibraciones que absorbe el 70% del daño físico y mágico durante 15 segundos.  
+   - **Coste:** 2 fragmentos de Cristal de Nexis.  
+
+3. **Ceguera Dimensional**  
+   - **Efecto:** Genera una distorsión en el aire que confunde a los enemigos, reduciendo su precisión en un 50% durante 20 segundos.  
+   - **Coste:** 1.5 fragmentos de Cristal de Nexis.  
+
+4. **Llamada del Nexo**  
+   - **Efecto:** Invoca una criatura menor de las grietas (como un Devorador de Ecos) durante 1 minuto.  
+   - **Coste:** 3 fragmentos de Cristal de Nexis.  
+
+5. **Cataclismo Vibratorio**  
+   - **Efecto:** Libera una explosión de energía que causa 200 puntos de daño en un área de 20 metros.  
+   - **Coste:** 5 fragmentos de Cristal de Nexis.  
+
+---
+
+### **🧙 ¿QUIÉN PUEDE APRENDERLA?**  
+- **Nexisomantes:** Humanos o seres con afinidad dimensional (0.1% de la población).  
+- **Requisito:** Exposición prolongada a los Cristales de Nexis (mínimo 100 horas).  
+- **Riesgo:** 30% de probabilidad de sufrir corrupción dimensional (pérdida de humanidad).  
+
+---
+
+### **⚖️ COSTE DE USAR MAGIA**  
+- **Fragmentos de Cristal de Nexis:** Cada hechizo consume una cantidad específica.  
+- **Consecuencias:** Uso excesivo (más de 10 fragmentos/día) puede atraer criaturas de las grietas.  
+
+---
+
+**🔮 CONEXIÓN CON EL MUNDO**  
+La Nexisomancia es clave para el **Ritual de Absorción** de Nexaroth. Si los jugadores dominan esta magia, podrían sabotear el ritual o, peor, acelerarlo.  
+
+**Palabras:** 320 | **Tono:** Épico y peligroso.  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

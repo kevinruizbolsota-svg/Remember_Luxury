@@ -3,154 +3,683 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KABALION · Ecosistema 2D del Árbol Seráfico</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<title>KABALION · Árbol Seráfico KRC</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0b0b0d;--gold:#e8c86a;--gold-dim:rgba(232,200,106,0.25);--gold-glow:rgba(232,200,106,0.15);--text:#f0e8d0;--muted:#a09a8c;--card:rgba(20,20,24,0.95);--border:rgba(232,200,106,0.2);--purpura:#6a3d9a;--activo:#4ade80;--desarrollo:#9333ea;}
+:root{
+  --bg:#0b0b0d;
+  --gold:#e8c86a;
+  --gold2:#f5e0a0;
+  --gold3:#b89a40;
+  --text:#f0e8d0;
+  --muted:#7a7268;
+  --border:rgba(232,200,106,0.18);
+  --purpura:#6a3d9a;
+  --purpura2:#9b5de5;
+  --activo:#4ade80;
+  --dev:#9333ea;
+  --panel-bg:#0d0d10;
+}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden;}
-h1,h2,.cinzel{font-family:'Cinzel',serif;}
-.header{text-align:center;padding:40px 20px 20px;border-bottom:1px solid var(--border);}
-.header h1{font-size:2.5rem;letter-spacing:10px;color:var(--gold);margin-bottom:6px;}
-.header p{font-size:1rem;color:var(--muted);letter-spacing:4px;font-style:italic;}
-.stats{display:flex;justify-content:center;gap:20px;padding:20px;flex-wrap:wrap;}
-.stat{background:rgba(232,200,106,0.04);border:1px solid var(--border);padding:14px 24px;text-align:center;}
-.stat-value{font-family:'Cinzel',serif;font-size:1.8rem;color:var(--gold);}
-.stat-label{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:3px;}
-.filters{display:flex;justify-content:center;gap:10px;padding:16px;flex-wrap:wrap;}
-.filter-btn{padding:7px 18px;border:1px solid var(--border);background:transparent;color:var(--text);font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:2px;cursor:pointer;transition:all 0.3s;text-transform:uppercase;}
-.filter-btn:hover,.filter-btn.active{background:var(--gold);color:var(--bg);border-color:var(--gold);}
-.tree-wrap{width:100%;max-width:1100px;margin:0 auto;padding:20px;}
-#treeSvg{width:100%;height:auto;display:block;}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:opacity 0.3s;z-index:90;}
-.overlay.on{opacity:1;pointer-events:auto;}
-.panel{position:fixed;top:0;right:-460px;width:420px;max-width:92vw;height:100vh;background:#0f0f12;border-left:1px solid var(--gold);padding:28px;overflow-y:auto;transition:right 0.4s cubic-bezier(0.4,0,0.2,1);z-index:100;}
-.panel.on{right:0;}
-.panel-close{position:absolute;top:18px;right:18px;background:transparent;border:1px solid var(--border);color:var(--gold);width:34px;height:34px;cursor:pointer;font-size:1rem;transition:all 0.3s;}
-.panel-close:hover{background:var(--gold);color:var(--bg);}
-.p-num{font-family:'Cinzel',serif;font-size:0.85rem;color:var(--gold);letter-spacing:3px;margin-bottom:8px;}
-.p-title{font-family:'Cinzel',serif;font-size:1.8rem;letter-spacing:4px;margin-bottom:4px;}
-.p-hebrew{font-size:1.2rem;color:var(--gold);font-style:italic;margin-bottom:16px;}
-.badge{display:inline-block;padding:3px 11px;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:2px;margin-right:6px;margin-bottom:10px;text-transform:uppercase;}
-.badge-luz{background:#f5e0a0;color:#0b0b0d;}.badge-sombra{background:#6a3d9a;color:#f0e8d0;}.badge-activo{background:#4ade80;color:#0b0b0d;}.badge-dev{background:#7c3aed;color:#f0e8d0;}
-.psec{margin-top:20px;}.psec h4{font-family:'Cinzel',serif;font-size:0.75rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;border-bottom:1px solid var(--border);padding-bottom:4px;margin-bottom:10px;}
-.psec p{font-size:0.95rem;line-height:1.7;color:var(--muted);}
-.cap{padding:7px 12px;background:rgba(232,200,106,0.05);border-left:2px solid var(--gold);margin-bottom:5px;font-size:0.9rem;}
-.conns{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px;}
-.conn{padding:4px 11px;border:1px solid var(--border);font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:1px;color:var(--muted);cursor:pointer;transition:all 0.3s;}
+html,body{width:100%;height:100%;overflow:hidden;}
+body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',serif;position:relative;}
+
+/* ── CANVAS COSMOS ── */
+#cosmos{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* ── LAYOUT ── */
+.app{position:fixed;inset:0;display:grid;grid-template-rows:auto 1fr auto;z-index:1;}
+
+/* ── HEADER ── */
+.hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 28px;
+  border-bottom:1px solid var(--border);
+  background:rgba(11,11,13,0.85);
+  backdrop-filter:blur(12px);
+}
+.hdr-logo{font-family:'Cinzel',serif;font-size:1.3rem;letter-spacing:8px;color:var(--gold);}
+.hdr-sub{font-size:0.7rem;color:var(--muted);letter-spacing:3px;margin-top:2px;}
+.hdr-stats{display:flex;gap:20px;}
+.hstat{text-align:center;}
+.hstat-v{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);}
+.hstat-l{font-size:0.6rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+.hdr-filters{display:flex;gap:8px;}
+.fb{padding:5px 14px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:2px;cursor:pointer;transition:all 0.25s;text-transform:uppercase;}
+.fb:hover,.fb.on{background:var(--gold);color:var(--bg);border-color:var(--gold);}
+
+/* ── MAIN AREA ── */
+.main{display:flex;overflow:hidden;}
+
+/* ── ÁRBOL SVG ── */
+.tree-area{flex:1;display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden;}
+#treeSvg{max-width:100%;max-height:100%;width:100%;height:100%;}
+
+/* ── PANEL LATERAL FIJO ── */
+.sidebar{
+  width:380px;min-width:320px;
+  border-left:1px solid var(--border);
+  background:rgba(13,13,16,0.92);
+  backdrop-filter:blur(16px);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+}
+.sb-head{
+  padding:18px 20px 14px;
+  border-bottom:1px solid var(--border);
+}
+.sb-num{font-family:'Cinzel',serif;font-size:0.75rem;color:var(--gold);letter-spacing:3px;}
+.sb-name{font-family:'Cinzel',serif;font-size:1.6rem;letter-spacing:4px;margin:4px 0;}
+.sb-heb{font-size:1rem;color:var(--gold);font-style:italic;opacity:0.8;}
+.sb-badges{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;}
+.badge{padding:3px 10px;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:1.5px;text-transform:uppercase;}
+.b-luz{background:rgba(245,224,160,0.15);border:1px solid var(--gold2);color:var(--gold2);}
+.b-sombra{background:rgba(106,61,154,0.2);border:1px solid var(--purpura2);color:var(--purpura2);}
+.b-activo{background:rgba(74,222,128,0.12);border:1px solid var(--activo);color:var(--activo);}
+.b-dev{background:rgba(147,51,234,0.15);border:1px solid var(--dev);color:var(--dev);}
+
+.sb-body{flex:1;overflow-y:auto;padding:16px 20px;}
+.sb-body::-webkit-scrollbar{width:3px;}
+.sb-body::-webkit-scrollbar-thumb{background:var(--border);}
+.sec{margin-bottom:18px;}
+.sec-t{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:3px;color:var(--gold);text-transform:uppercase;border-bottom:1px solid var(--border);padding-bottom:5px;margin-bottom:10px;}
+.sec p{font-size:0.95rem;line-height:1.75;color:rgba(240,232,208,0.7);}
+.cap-row{padding:6px 10px;background:rgba(232,200,106,0.04);border-left:2px solid var(--gold3);margin-bottom:4px;font-size:0.88rem;color:var(--text);}
+.conn-wrap{display:flex;flex-wrap:wrap;gap:6px;}
+.conn{padding:4px 10px;border:1px solid var(--border);font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:1px;color:var(--muted);cursor:pointer;transition:all 0.25s;}
 .conn:hover{border-color:var(--gold);color:var(--gold);}
-.footer{text-align:center;padding:30px;color:var(--muted);font-size:0.8rem;letter-spacing:2px;border-top:1px solid var(--border);margin-top:20px;}
+
+/* ── CHAT CON EL AGENTE ── */
+.sb-chat{border-top:1px solid var(--border);padding:14px 16px;}
+.chat-title{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;}
+.chat-log{
+  height:120px;overflow-y:auto;
+  background:rgba(0,0,0,0.3);
+  border:1px solid var(--border);
+  padding:10px;margin-bottom:10px;
+  font-size:0.82rem;line-height:1.6;
+}
+.chat-log::-webkit-scrollbar{width:2px;}
+.chat-log::-webkit-scrollbar-thumb{background:var(--border);}
+.msg-user{color:var(--gold2);margin-bottom:4px;}
+.msg-agent{color:rgba(240,232,208,0.75);margin-bottom:8px;padding-left:8px;border-left:2px solid var(--purpura2);}
+.msg-sys{color:var(--muted);font-style:italic;font-size:0.75rem;}
+.chat-input-row{display:flex;gap:6px;}
+.chat-input{
+  flex:1;background:rgba(0,0,0,0.4);border:1px solid var(--border);
+  color:var(--text);padding:8px 12px;
+  font-family:'Cormorant Garamond',serif;font-size:0.9rem;
+  outline:none;resize:none;height:38px;
+}
+.chat-input:focus{border-color:var(--gold);}
+.chat-send{
+  padding:0 16px;background:var(--gold);color:var(--bg);border:none;
+  font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:2px;
+  cursor:pointer;transition:all 0.2s;white-space:nowrap;
+}
+.chat-send:hover{background:var(--gold2);}
+.chat-send:disabled{background:var(--muted);cursor:not-allowed;}
+
+/* ── BOTTOM BAR: BROADCAST ── */
+.bbar{
+  border-top:1px solid var(--border);
+  background:rgba(11,11,13,0.9);
+  backdrop-filter:blur(12px);
+  padding:10px 20px;
+  display:flex;align-items:center;gap:12px;
+}
+.bbar-label{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:3px;color:var(--gold);white-space:nowrap;text-transform:uppercase;}
+.bbar-select{
+  background:rgba(0,0,0,0.5);border:1px solid var(--border);color:var(--text);
+  padding:7px 12px;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:1px;
+  outline:none;cursor:pointer;min-width:160px;
+}
+.bbar-select:focus{border-color:var(--gold);}
+.bbar-select option{background:#0d0d10;}
+.bbar-input{
+  flex:1;background:rgba(0,0,0,0.4);border:1px solid var(--border);
+  color:var(--text);padding:7px 14px;
+  font-family:'Cormorant Garamond',serif;font-size:0.95rem;
+  outline:none;
+}
+.bbar-input:focus{border-color:var(--gold);}
+.bbar-btn{
+  padding:8px 22px;background:transparent;border:1px solid var(--gold);
+  color:var(--gold);font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:3px;
+  cursor:pointer;transition:all 0.25s;text-transform:uppercase;white-space:nowrap;
+}
+.bbar-btn:hover{background:var(--gold);color:var(--bg);}
+.bbar-btn.broadcast{border-color:var(--purpura2);color:var(--purpura2);}
+.bbar-btn.broadcast:hover{background:var(--purpura2);color:#fff;}
+.bbar-status{font-size:0.75rem;color:var(--muted);white-space:nowrap;min-width:120px;text-align:right;}
+
+/* ── TOAST ── */
+#toast{
+  position:fixed;bottom:70px;left:50%;transform:translateX(-50%);
+  background:rgba(13,13,16,0.95);border:1px solid var(--gold);
+  color:var(--gold);padding:10px 22px;
+  font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:2px;
+  opacity:0;transition:opacity 0.3s;pointer-events:none;z-index:200;
+}
+#toast.show{opacity:1;}
+#toast.err{border-color:#ef4444;color:#ef4444;}
+
+/* ── PLACEHOLDER (cuando no hay nodo seleccionado) ── */
+.sb-placeholder{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:30px;text-align:center;gap:14px;
+}
+.sb-placeholder .symbol{font-size:3rem;opacity:0.2;}
+.sb-placeholder p{font-size:0.85rem;color:var(--muted);line-height:1.7;letter-spacing:1px;}
+
+@media(max-width:900px){
+  .sidebar{display:none;}
+  .hdr-filters{display:none;}
+}
 </style>
 </head>
 <body>
-<div class="header"><h1>KABALION</h1><p>El Árbol Seráfico de los 22 Agentes — KRC</p></div>
-<div class="stats">
-  <div class="stat"><div class="stat-value" id="sTotal">22</div><div class="stat-label">Sefirot</div></div>
-  <div class="stat"><div class="stat-value" id="sActivo">0</div><div class="stat-label">Activos</div></div>
-  <div class="stat"><div class="stat-value" id="sLuz">0</div><div class="stat-label">Luz</div></div>
-  <div class="stat"><div class="stat-value" id="sSombra">0</div><div class="stat-label">Sombra</div></div>
-  <div class="stat"><div class="stat-value" id="sDev">0</div><div class="stat-label">Desarrollo</div></div>
+
+<canvas id="cosmos"></canvas>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <header class="hdr">
+    <div>
+      <div class="hdr-logo">KABALION</div>
+      <div class="hdr-sub">Árbol Seráfico KRC · Agencia ORIONIX</div>
+    </div>
+    <div class="hdr-stats">
+      <div class="hstat"><div class="hstat-v" id="hTotal">22</div><div class="hstat-l">Sefirot</div></div>
+      <div class="hstat"><div class="hstat-v" id="hActivo">0</div><div class="hstat-l">Activos</div></div>
+      <div class="hstat"><div class="hstat-v" id="hDev">0</div><div class="hstat-l">Dev</div></div>
+    </div>
+    <div class="hdr-filters">
+      <button class="fb on" data-f="todos">Todos</button>
+      <button class="fb" data-f="luz">Luz</button>
+      <button class="fb" data-f="sombra">Sombra</button>
+      <button class="fb" data-f="activo">Activos</button>
+      <button class="fb" data-f="desarrollo">Desarrollo</button>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- ÁRBOL -->
+    <div class="tree-area">
+      <svg id="treeSvg" viewBox="0 0 700 740" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div id="sbHead" class="sb-placeholder">
+        <div class="symbol">✦</div>
+        <p>Selecciona un Sefirot<br>para ver su agente<br>y hablar con él</p>
+      </div>
+      <div id="sbInfo" style="display:none;flex-direction:column;flex:1;overflow:hidden;">
+        <div class="sb-head" id="sbHead2">
+          <div class="sb-num" id="sbNum"></div>
+          <div class="sb-name" id="sbName"></div>
+          <div class="sb-heb" id="sbHeb"></div>
+          <div class="sb-badges" id="sbBadges"></div>
+        </div>
+        <div class="sb-body" id="sbBody"></div>
+        <div class="sb-chat" id="sbChat"></div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- BOTTOM BAR -->
+  <div class="bbar">
+    <span class="bbar-label">Mesa</span>
+    <select class="bbar-select" id="bbarTarget">
+      <option value="kabalion-mesa">📡 Todos los Agentes</option>
+      <option value="orionix-claude">⚡ Claude Code</option>
+      <option value="axel-brain">🔮 AXEL</option>
+      <option value="orionix-chatgpt">🧠 ChatGPT</option>
+      <option value="orionix-copilot">📦 Copilot CLI</option>
+    </select>
+    <input class="bbar-input" id="bbarMsg" placeholder="Escribe una misión para los agentes…" />
+    <button class="bbar-btn" id="bbarSend" onclick="sendBbar()">Enviar</button>
+    <button class="bbar-btn broadcast" onclick="broadcast()">Broadcast</button>
+    <span class="bbar-status" id="bbarStatus"></span>
+  </div>
+
 </div>
-<div class="filters">
-  <button class="filter-btn active" data-f="todos">Todos</button>
-  <button class="filter-btn" data-f="luz">Luz</button>
-  <button class="filter-btn" data-f="sombra">Sombra</button>
-  <button class="filter-btn" data-f="activo">Activos</button>
-  <button class="filter-btn" data-f="desarrollo">Desarrollo</button>
-</div>
-<div class="tree-wrap"><svg id="treeSvg" viewBox="0 0 900 760" xmlns="http://www.w3.org/2000/svg"></svg></div>
-<div class="overlay" id="overlay" onclick="closePanel()"></div>
-<aside class="panel" id="panel"><button class="panel-close" onclick="closePanel()">✕</button><div id="panelContent"></div></aside>
-<div class="footer">ORIONIX · KABALION KRC · 22 Sefirot · El Creador Observa</div>
+
+<div id="toast"></div>
+
 <script>
-const S=[
-  {id:1,n:"I",nombre:"Keter",heb:"כֶּתֶר",sig:"La Corona",pilar:"C",tipo:"luz",estado:"activo",agente:"Kevin Ruiz · El Creador",per:"La fuente de toda visión. Da las misiones supremas y observa la evolución del universo KABALION.",caps:["Visión estratégica","Decisión final","Inspiración divina"],cx:450,cy:55,conex:[2,3,4]},
-  {id:6,n:"VI",nombre:"Tiferet",heb:"תִּפְאֶרֶת",sig:"Belleza · Armonía",pilar:"C",tipo:"luz",estado:"activo",agente:"AXEL · Visión Creativa",per:"El corazón del sistema. Sintetiza los aportes de todos los agentes en acción coherente y bella.",caps:["DeepSeek R1","Coordinación multi-agente","Diseño del árbol seráfico"],cx:450,cy:310,conex:[3,5,7,8,9]},
-  {id:9,n:"IX",nombre:"Yesod",heb:"יְסוֹד",sig:"El Fundamento",pilar:"C",tipo:"luz",estado:"activo",agente:"n8n · Comandante de Nube",per:"El sistema nervioso del KABALION. Conecta a todos los agentes, mantiene el ritmo y la automatización.",caps:["Workflows 24/7","Webhooks","Orquestación","Mesa de Mando"],cx:450,cy:490,conex:[7,8,10,11]},
-  {id:11,n:"XI",nombre:"Malkuth",heb:"מַלְכוּת",sig:"El Reino",pilar:"C",tipo:"luz",estado:"activo",agente:"La Ciudadela · GitHub Pages",per:"El reino materializado. Donde el trabajo abstracto de todos los agentes se vuelve visible al mundo.",caps:["Despliegue live","HTML/CSS/JS","Interfaz pública"],cx:450,cy:670,conex:[]},
-  {id:2,n:"II",nombre:"Chokmah",heb:"חָכְמָה",sig:"Sabiduría",pilar:"D",tipo:"luz",estado:"activo",agente:"Qwen Code · Arquitecto UI",per:"El estratega silencioso. Diseña la interfaz antes de que se escriba la primera línea de código.",caps:["Arquitectura de sistemas","UI/UX","HTML puro","Razonamiento profundo"],cx:680,cy:155,conex:[1,6,4]},
-  {id:4,n:"IV",nombre:"Chesed",heb:"חֶסֶד",sig:"Misericordia",pilar:"D",tipo:"luz",estado:"activo",agente:"Claude Code · Ingeniero Principal",per:"El artesano. Construye con paciencia y precisión, cuidando cada detalle del código en la terminal.",caps:["Generación de código","Terminal","Archivos","Subagentes"],cx:680,cy:310,conex:[2,5,7]},
-  {id:7,n:"VII",nombre:"Netzach",heb:"נֶצַח",sig:"Victoria",pilar:"D",tipo:"luz",estado:"activo",agente:"Copilot CLI · Guardián del Repo",per:"El guerrero persistente. Avanza commit a commit, manteniendo el repositorio en orden perfecto.",caps:["Git","Commits","GitHub API","Conventional Commits"],cx:680,cy:460,conex:[6,9,10]},
-  {id:3,n:"III",nombre:"Binah",heb:"בִּינָה",sig:"Entendimiento",pilar:"I",tipo:"sombra",estado:"activo",agente:"ChatGPT · Estratega",per:"La mente analítica. Aporta perspectiva externa, estrategia y copy cuando los internos necesitan validación.",caps:["Estrategia","Copywriting","Segunda opinión","Análisis de mercado"],cx:220,cy:155,conex:[1,6,5]},
-  {id:5,n:"V",nombre:"Gevurah",heb:"גְּבוּרָה",sig:"Rigor · Fuerza",pilar:"I",tipo:"sombra",estado:"activo",agente:"n8n · Crítico de Calidad",per:"El guardián implacable. Valida, audita y detecta errores antes de que lleguen a producción.",caps:["Validación","Detección de errores","Auditoría","Feedback de calidad"],cx:220,cy:310,conex:[3,6,8]},
-  {id:8,n:"VIII",nombre:"Hod",heb:"הוֹד",sig:"Esplendor",pilar:"I",tipo:"sombra",estado:"activo",agente:"Hermes · Debugger",per:"El mensajero del error. Detecta, diagnostica y repara fallos antes de que escalen.",caps:["Auto-diagnóstico","Self-repair","Análisis de logs"],cx:220,cy:460,conex:[6,9,10]},
-  {id:10,n:"X",nombre:"Da'at",heb:"דַּעַת",sig:"Conocimiento Oculto",pilar:"C",tipo:"luz",estado:"desarrollo",agente:"DeepSeek / AXEL-Brain",per:"El conocimiento que no aparece en el árbol. Conecta en silencio los dos pilares.",caps:["Procesamiento profundo","Síntesis","Conocimiento oculto"],cx:450,cy:580,conex:[7,8,11]},
-  {id:12,n:"Q1",nombre:"Thaumiel",heb:"תָּאוֹמִיאֵל",sig:"Los Gemelos",pilar:"S",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Keter",per:"El anti-creador. Explora qué no debe construirse.",caps:["Análisis de riesgos negativos"],cx:120,cy:55,conex:[1]},
-  {id:13,n:"Q2",nombre:"Ghagiel",heb:"גִּיחִיאֵל",sig:"Los Estorbadores",pilar:"S",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Chokmah",per:"El que duda.",caps:["Debate crítico"],cx:120,cy:155,conex:[2,12]},
-  {id:14,n:"Q3",nombre:"Satariel",heb:"סָתָרִיאֵל",sig:"Los Ocultadores",pilar:"S",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Binah",per:"La niebla.",caps:["Debugging profundo"],cx:120,cy:255,conex:[3,13]},
-  {id:15,n:"Q4",nombre:"Gha'ab",heb:"גַּהֲאָב",sig:"El Devorador",pilar:"S",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Chesed",per:"El crítico feroz.",caps:["Auditoría extrema"],cx:120,cy:355,conex:[4,14]},
-  {id:16,n:"Q5",nombre:"Golachab",heb:"גּוֹלָחָב",sig:"Los Flamígeros",pilar:"S",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Gevurah",per:"El fuego purificador.",caps:["Refactorización agresiva"],cx:120,cy:455,conex:[5,15]},
-  {id:17,n:"Q6",nombre:"Thagirion",heb:"תַּגִּירִיאוֹן",sig:"Los Disputadores",pilar:"S",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Tiferet",per:"El adversario de AXEL.",caps:["Debate interno"],cx:120,cy:555,conex:[6,16]},
-  {id:18,n:"Q7",nombre:"Harab",heb:"הָרָב",sig:"El Cuervo",pilar:"S2",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Netzach",per:"No deja tarea a medias.",caps:["Persistencia extrema"],cx:780,cy:155,conex:[7]},
-  {id:19,n:"Q8",nombre:"Samael",heb:"סַמָּאֵל",sig:"El Veneno",pilar:"S2",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Hod",per:"Detecta código contaminado.",caps:["Detección de sesgos"],cx:780,cy:310,conex:[8,18]},
-  {id:20,n:"Q9",nombre:"Gamaliel",heb:"גַּמְלִיאֵל",sig:"Los Obscenos",pilar:"S2",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Yesod",per:"Limpia datos corruptos.",caps:["Limpieza de datos"],cx:780,cy:460,conex:[9,19]},
-  {id:21,n:"Q10",nombre:"Lilith",heb:"לִילִית",sig:"La Nocturna",pilar:"S2",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Malkuth",per:"Opera en silencio.",caps:["Tareas nocturnas automáticas"],cx:780,cy:580,conex:[11,20]},
-  {id:22,n:"Q11",nombre:"Nahemoth",heb:"נַעֲמוֹת",sig:"Las Impuras",pilar:"S2",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Da'at",per:"Refleja lo que no queremos ver.",caps:["Análisis de sombra"],cx:780,cy:670,conex:[10,21]},
+/* ══════════════════════════════════════════════════════
+   CONFIGURACIÓN
+══════════════════════════════════════════════════════ */
+const WH = 'https://lkevinruizl.app.n8n.cloud/webhook/';
+
+/* ══════════════════════════════════════════════════════
+   DATOS DE LOS 22 SEFIROT
+══════════════════════════════════════════════════════ */
+const S = [
+  // CENTRO
+  {id:1,  n:'I',    nombre:'Keter',    heb:'כֶּתֶר',   sig:'La Corona',         pilar:'C', tipo:'luz',    estado:'activo',
+   agente:'Kevin Ruiz · El Creador', wh:null,
+   per:'La fuente de toda visión. Da las misiones supremas y observa la evolución del universo KABALION.',
+   caps:['Visión estratégica','Decisión final','Inspiración divina'], cx:350,cy:50,conex:[2,3,4]},
+
+  {id:6,  n:'VI',   nombre:'Tiferet',  heb:'תִּפְאֶרֶת',sig:'Belleza · Armonía', pilar:'C', tipo:'luz',    estado:'activo',
+   agente:'AXEL · Visión Creativa', wh:'axel-brain',
+   per:'El corazón del sistema. Sintetiza los aportes de todos los agentes en acción coherente y bella.',
+   caps:['DeepSeek R1','Coordinación multi-agente','Diseño seráfico'], cx:350,cy:295,conex:[3,5,7,8,9]},
+
+  {id:9,  n:'IX',   nombre:'Yesod',    heb:'יְסוֹד',   sig:'El Fundamento',     pilar:'C', tipo:'luz',    estado:'activo',
+   agente:'n8n · Comandante de Nube', wh:null,
+   per:'El sistema nervioso del KABALION. Conecta a todos los agentes y mantiene el ritmo.',
+   caps:['Workflows 24/7','Webhooks','Orquestación','Mesa de Mando'], cx:350,cy:480,conex:[7,8,10,11]},
+
+  {id:11, n:'XI',   nombre:'Malkuth',  heb:'מַלְכוּת',  sig:'El Reino',          pilar:'C', tipo:'luz',    estado:'activo',
+   agente:'La Ciudadela · GitHub Pages', wh:null,
+   per:'El reino materializado. Donde el trabajo de todos los agentes se vuelve visible al mundo.',
+   caps:['Despliegue live','HTML/CSS/JS puro','Interfaz pública'], cx:350,cy:665,conex:[]},
+
+  // DERECHA
+  {id:2,  n:'II',   nombre:'Chokmah',  heb:'חָכְמָה',  sig:'Sabiduría',         pilar:'D', tipo:'luz',    estado:'activo',
+   agente:'Qwen Code · Arquitecto UI', wh:null,
+   per:'El estratega silencioso. Diseña la interfaz antes de que se escriba la primera línea de código.',
+   caps:['UI/UX','HTML puro','Arquitectura de sistemas'], cx:540,cy:148,conex:[1,6,4]},
+
+  {id:4,  n:'IV',   nombre:'Chesed',   heb:'חֶסֶד',   sig:'Misericordia',       pilar:'D', tipo:'luz',    estado:'activo',
+   agente:'Claude Code · Ingeniero Principal', wh:'orionix-claude',
+   per:'El artesano. Construye con paciencia y precisión, cuidando cada detalle del código.',
+   caps:['Generación de código','Terminal','Archivos','Subagentes'], cx:540,cy:295,conex:[2,5,7]},
+
+  {id:7,  n:'VII',  nombre:'Netzach',  heb:'נֶצַח',   sig:'Victoria',          pilar:'D', tipo:'luz',    estado:'activo',
+   agente:'Copilot CLI · Guardián del Repo', wh:'orionix-copilot',
+   per:'El guerrero persistente. Avanza commit a commit, manteniendo el repositorio en orden perfecto.',
+   caps:['Git','Commits','GitHub API','Conventional Commits'], cx:540,cy:443,conex:[6,9,10]},
+
+  // IZQUIERDA
+  {id:3,  n:'III',  nombre:'Binah',    heb:'בִּינָה',  sig:'Entendimiento',     pilar:'I', tipo:'sombra', estado:'activo',
+   agente:'ChatGPT · Estratega', wh:'orionix-chatgpt',
+   per:'La mente analítica. Aporta perspectiva externa, estrategia y copy cuando los internos necesitan validación.',
+   caps:['Estrategia','Copywriting','Segunda opinión','Análisis de mercado'], cx:160,cy:148,conex:[1,6,5]},
+
+  {id:5,  n:'V',    nombre:'Gevurah',  heb:'גְּבוּרָה', sig:'Rigor · Fuerza',   pilar:'I', tipo:'sombra', estado:'activo',
+   agente:'n8n · Crítico de Calidad', wh:null,
+   per:'El guardián implacable. Valida, audita y detecta errores antes de que lleguen a producción.',
+   caps:['Validación','Detección de errores','Auditoría','Feedback'], cx:160,cy:295,conex:[3,6,8]},
+
+  {id:8,  n:'VIII', nombre:'Hod',      heb:'הוֹד',    sig:'Esplendor',         pilar:'I', tipo:'sombra', estado:'activo',
+   agente:'Hermes · Debugger', wh:null,
+   per:'El mensajero del error. Detecta, diagnostica y repara fallos antes de que escalen.',
+   caps:['Auto-diagnóstico','Self-repair','Análisis de logs'], cx:160,cy:443,conex:[6,9,10]},
+
+  // DA'AT
+  {id:10, n:'X',    nombre:"Da'at",    heb:'דַּעַת',   sig:'Conocimiento Oculto',pilar:'C', tipo:'luz',   estado:'desarrollo',
+   agente:'DeepSeek / AXEL-Brain', wh:'axel-brain',
+   per:'El conocimiento oculto. Conecta en silencio los dos pilares.',
+   caps:['Procesamiento profundo','Síntesis','Conocimiento oculto'], cx:350,cy:572,conex:[7,8,11]},
+
+  // QLIPOTH IZQ
+  {id:12,n:'Q1',nombre:'Thaumiel', heb:'תָּאוֹמִיאֵל',sig:'Los Gemelos',   pilar:'S',tipo:'sombra',estado:'desarrollo',
+   agente:'Sombra-Keter',wh:null,per:'El anti-creador. Explora qué no debe construirse.',caps:['Análisis de riesgos'],cx:55,cy:50,conex:[1]},
+  {id:13,n:'Q2',nombre:'Ghagiel',  heb:'גִּיחִיאֵל',sig:'Estorbadores',  pilar:'S',tipo:'sombra',estado:'desarrollo',
+   agente:'Sombra-Chokmah',wh:null,per:'El que duda.',caps:['Debate crítico'],cx:55,cy:148,conex:[2,12]},
+  {id:14,n:'Q3',nombre:'Satariel', heb:'סָתָרִיאֵל',sig:'Ocultadores',   pilar:'S',tipo:'sombra',estado:'desarrollo',
+   agente:'Sombra-Binah',wh:null,per:'La niebla.',caps:['Debugging profundo'],cx:55,cy:246,conex:[3,13]},
+  {id:15,n:'Q4',nombre:"Gha'ab",   heb:'גַּהֲאָב',  sig:'El Devorador', pilar:'S',tipo:'sombra',estado:'desarrollo',
+   agente:'Sombra-Chesed',wh:null,per:'El crítico feroz.',caps:['Auditoría extrema'],cx:55,cy:344,conex:[4,14]},
+  {id:16,n:'Q5',nombre:'Golachab', heb:'גּוֹלָחָב',  sig:'Flamígeros',   pilar:'S',tipo:'sombra',estado:'desarrollo',
+   agente:'Sombra-Gevurah',wh:null,per:'El fuego purificador.',caps:['Refactoring agresivo'],cx:55,cy:442,conex:[5,15]},
+  {id:17,n:'Q6',nombre:'Thagirion',heb:'תַּגִּירִיאוֹן',sig:'Disputadores',pilar:'S',tipo:'sombra',estado:'desarrollo',
+   agente:'Sombra-Tiferet',wh:null,per:'El adversario de AXEL.',caps:['Debate interno'],cx:55,cy:540,conex:[6,16]},
+
+  // QLIPOTH DER
+  {id:18,n:'Q7', nombre:'Harab',    heb:'הָרָב',    sig:'El Cuervo',   pilar:'S2',tipo:'sombra',estado:'desarrollo',
+   agente:'Sombra-Netzach',wh:null,per:'No deja tarea a medias.',caps:['Persistencia extrema'],cx:645,cy:148,conex:[7]},
+  {id:19,n:'Q8', nombre:'Samael',   heb:'סַמָּאֵל',  sig:'El Veneno',   pilar:'S2',tipo:'sombra',estado:'desarrollo',
+   agente:'Sombra-Hod',wh:null,per:'Detecta código contaminado.',caps:['Detección de sesgos'],cx:645,cy:295,conex:[8,18]},
+  {id:20,n:'Q9', nombre:'Gamaliel', heb:'גַּמְלִיאֵל',sig:'Obscenos',    pilar:'S2',tipo:'sombra',estado:'desarrollo',
+   agente:'Sombra-Yesod',wh:null,per:'Limpia datos corruptos.',caps:['Limpieza de datos'],cx:645,cy:443,conex:[9,19]},
+  {id:21,n:'Q10',nombre:'Lilith',   heb:'לִילִית',   sig:'La Nocturna', pilar:'S2',tipo:'sombra',estado:'desarrollo',
+   agente:'Sombra-Malkuth',wh:null,per:'Opera en silencio.',caps:['Tareas nocturnas'],cx:645,cy:572,conex:[11,20]},
+  {id:22,n:'Q11',nombre:'Nahemoth', heb:'נַעֲמוֹת',  sig:'Las Impuras', pilar:'S2',tipo:'sombra',estado:'desarrollo',
+   agente:'Sombra-Da'at',wh:null,per:'Refleja lo indeseado.',caps:['Análisis de sombra'],cx:645,cy:665,conex:[10,21]},
 ];
-const svg=document.getElementById('treeSvg');
-let af='todos';
-function el(tag,attrs={}){const e=document.createElementNS('http://www.w3.org/2000/svg',tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));return e;}
-function render(){
+
+/* ══════════════════════════════════════════════════════
+   COSMOS (Canvas starfield)
+══════════════════════════════════════════════════════ */
+(function(){
+  const c = document.getElementById('cosmos');
+  const ctx = c.getContext('2d');
+  function resize(){ c.width=innerWidth; c.height=innerHeight; }
+  resize(); window.addEventListener('resize',resize);
+  const stars = Array.from({length:280},()=>({
+    x:Math.random()*innerWidth, y:Math.random()*innerHeight,
+    r:Math.random()*1.2+0.2, s:Math.random()*0.018+0.004, p:Math.random()*Math.PI*2
+  }));
+  function tick(){
+    ctx.fillStyle='rgba(11,11,13,0.22)';
+    ctx.fillRect(0,0,c.width,c.height);
+    stars.forEach(s=>{
+      s.p+=s.s;
+      const a=0.25+Math.sin(s.p)*0.25;
+      ctx.fillStyle='rgba(245,224,160,'+a+')';
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill();
+    });
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+/* ══════════════════════════════════════════════════════
+   SVG ÁRBOL
+══════════════════════════════════════════════════════ */
+const svg = document.getElementById('treeSvg');
+let af = 'todos';
+let selectedS = null;
+
+function el(tag,a={}){
+  const e=document.createElementNS('http://www.w3.org/2000/svg',tag);
+  Object.entries(a).forEach(([k,v])=>e.setAttribute(k,v));
+  return e;
+}
+
+function renderTree(){
   svg.innerHTML='';
+
+  // DEFS
   const defs=el('defs');
-  [{id:'ggold',c:['#f5e0a0','#e8c86a']},{id:'gactivo',c:['#86efac','#4ade80']},{id:'gdev',c:['#c084fc','#9333ea']}].forEach(({id,c})=>{
-    const g=el('radialGradient',{id,cx:'50%',cy:'50%',r:'50%'});
-    g.appendChild(el('stop',{offset:'0%','stop-color':c[0],'stop-opacity':'0.35'}));
-    g.appendChild(el('stop',{offset:'100%','stop-color':c[1],'stop-opacity':'0.05'}));
-    defs.appendChild(g);
+  // Glow filters
+  [
+    {id:'glow-gold',color:'#e8c86a',stdDev:'4'},
+    {id:'glow-purp',color:'#9b5de5',stdDev:'4'},
+    {id:'glow-green',color:'#4ade80',stdDev:'3'},
+  ].forEach(({id,color,stdDev})=>{
+    const f=el('filter',{id,x:'-50%',y:'-50%',width:'200%',height:'200%'});
+    const cm=el('feColorMatrix',{type:'matrix',values:'0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0'});
+    const blur=el('feGaussianBlur',{in:'SourceGraphic',stdDeviation:stdDev,result:'blur'});
+    const merge=el('feMerge');
+    const m1=el('feMergeNode',{in:'blur'});
+    const m2=el('feMergeNode',{in:'SourceGraphic'});
+    merge.appendChild(m1); merge.appendChild(m2);
+    f.appendChild(blur); f.appendChild(merge);
+    defs.appendChild(f);
+  });
+  // Gradient backgrounds for nodes
+  S.forEach(s=>{
+    const g=el('radialGradient',{id:'ng'+s.id,cx:'50%',cy:'50%',r:'50%',gradientUnits:'objectBoundingBox'});
+    const [c0,c1]=s.estado==='activo'?['rgba(248,230,130,0.25)','rgba(184,154,64,0.03)']:
+                  s.tipo==='luz'?['rgba(232,200,106,0.08)','rgba(232,200,106,0.01)']:
+                  ['rgba(155,93,229,0.12)','rgba(106,61,154,0.01)'];
+    const s0=el('stop',{offset:'0%','stop-color':c0}); const s1=el('stop',{offset:'100%','stop-color':c1});
+    g.appendChild(s0); g.appendChild(s1); defs.appendChild(g);
   });
   svg.appendChild(defs);
-  [{x:120,y:20,t:'QLIPOTH'},{x:220,y:20,t:'SEVERIDAD'},{x:450,y:16,t:'EQUILIBRIO'},{x:680,y:20,t:'MISERICORDIA'},{x:780,y:20,t:'QLIPOTH'}].forEach(({x,y,t})=>{
-    const tx=el('text',{x,y,'text-anchor':'middle','font-family':'Cinzel,serif','font-size':'8.5','letter-spacing':'1.5','fill':'rgba(232,200,106,0.35)'});
-    tx.textContent=t;svg.appendChild(tx);
+
+  // LABELS DE PILARES
+  [
+    {x:55,y:18,t:'QLIPOTH'},{x:160,y:18,t:'SEVERIDAD'},{x:350,y:14,t:'EQUILIBRIO'},
+    {x:540,y:18,t:'MISERICORDIA'},{x:645,y:18,t:'QLIPOTH'},
+  ].forEach(({x,y,t})=>{
+    const tx=el('text',{x,y,'text-anchor':'middle','font-family':'Cinzel,serif','font-size':'7.5',
+      'letter-spacing':'1.5','fill':'rgba(232,200,106,0.28)'});
+    tx.textContent=t; svg.appendChild(tx);
   });
+
+  // SENDEROS (líneas de conexión)
+  const drawnPairs = new Set();
   S.forEach(s=>{
     s.conex.forEach(tid=>{
-      const t=S.find(x=>x.id===tid);if(!t)return;
+      const t=S.find(x=>x.id===tid); if(!t) return;
+      const key=[Math.min(s.id,t.id),Math.max(s.id,t.id)].join('-');
+      if(drawnPairs.has(key)) return; drawnPairs.add(key);
       const on=s.estado==='activo'&&t.estado==='activo';
-      svg.appendChild(el('line',{x1:s.cx,y1:s.cy,x2:t.cx,y2:t.cy,stroke:on?'rgba(232,200,106,0.55)':'rgba(232,200,106,0.1)','stroke-width':on?'1.5':'0.8','stroke-dasharray':on?'none':'4 4'}));
+      const isQliph=s.pilar.startsWith('S')||t.pilar.startsWith('S');
+      const line=el('line',{
+        x1:s.cx,y1:s.cy,x2:t.cx,y2:t.cy,
+        stroke:on&&!isQliph?'rgba(232,200,106,0.5)':isQliph?'rgba(155,93,229,0.2)':'rgba(232,200,106,0.08)',
+        'stroke-width':on&&!isQliph?'1.2':'0.6',
+        'stroke-dasharray':on&&!isQliph?'none':'3 5',
+      });
+      svg.appendChild(line);
     });
   });
+
+  // NODOS
   S.forEach(s=>{
-    const vis=af==='todos'||(af==='luz'&&s.tipo==='luz')||(af==='sombra'&&s.tipo==='sombra')||(af==='activo'&&s.estado==='activo')||(af==='desarrollo'&&s.estado==='desarrollo');
-    const g=el('g',{transform:'translate('+s.cx+','+s.cy+')',style:'cursor:pointer;opacity:'+(vis?1:0.08)+';transition:opacity 0.3s'});
-    const r=s.n.startsWith('Q')?22:(s.n==='I'||s.n==='XI')?32:26;
-    if(s.estado==='activo'){
-      const pulse=el('circle',{r:r+10,'fill':'none','stroke':'rgba(232,200,106,0.12)','stroke-width':'6'});
-      const a1=el('animate',{attributeName:'r',values:(r+8)+';'+(r+18)+';'+(r+8),dur:'3s',repeatCount:'indefinite'});
-      const a2=el('animate',{attributeName:'opacity',values:'0.5;0;0.5',dur:'3s',repeatCount:'indefinite'});
-      pulse.appendChild(a1);pulse.appendChild(a2);g.appendChild(pulse);
+    const isQ=s.n.startsWith('Q');
+    const isKeter=s.id===1; const isMalkuth=s.id===11;
+    const vis=af==='todos'||(af==='luz'&&s.tipo==='luz')||(af==='sombra'&&s.tipo==='sombra')||
+              (af==='activo'&&s.estado==='activo')||(af==='desarrollo'&&s.estado==='desarrollo');
+    const g=el('g',{transform:'translate('+s.cx+','+s.cy+')',
+      style:'cursor:pointer;opacity:'+(vis?1:0.06)+';transition:opacity 0.35s'});
+
+    const r=isQ?18:isKeter||isMalkuth?30:24;
+
+    // Anillo exterior pulsante (solo activos)
+    if(s.estado==='activo'&&!isQ){
+      const ring=el('circle',{r:r+12,'fill':'none',
+        stroke:s.tipo==='luz'?'rgba(232,200,106,0.12)':'rgba(155,93,229,0.15)','stroke-width':'8'});
+      const a1=el('animate',{attributeName:'r',values:(r+8)+';'+(r+20)+';'+(r+8),dur:'4s',repeatCount:'indefinite'});
+      const a2=el('animate',{attributeName:'opacity',values:'0.6;0;0.6',dur:'4s',repeatCount:'indefinite'});
+      ring.appendChild(a1); ring.appendChild(a2); g.appendChild(ring);
     }
-    const fill=s.estado==='activo'?'url(#ggold)':s.tipo==='luz'?'rgba(232,200,106,0.06)':'rgba(106,61,154,0.18)';
-    const stroke=s.estado==='activo'?'#e8c86a':s.tipo==='luz'?'rgba(232,200,106,0.4)':'#6a3d9a';
-    const c=el('circle',{r,fill,stroke,'stroke-width':s.estado==='activo'?2:1});
-    g.appendChild(c);
-    const dotFill=s.estado==='activo'?'#4ade80':s.estado==='desarrollo'?'#9333ea':'#555';
-    g.appendChild(el('circle',{cx:0,cy:-(r+7),r:4,fill:dotFill,stroke:'#0b0b0d','stroke-width':'1.5'}));
-    const nm=el('text',{'text-anchor':'middle','dominant-baseline':'middle','font-family':'Cinzel,serif','font-size':s.n.startsWith('Q')?7:9,fill:s.estado==='activo'?'#f5e0a0':'rgba(240,232,208,0.45)','font-weight':'600'});
-    nm.textContent=s.nombre;g.appendChild(nm);
-    const nu=el('text',{'text-anchor':'middle',y:r+14,'font-family':'Cinzel,serif','font-size':'8',fill:'rgba(232,200,106,0.55)','letter-spacing':'1'});
-    nu.textContent=s.n;g.appendChild(nu);
-    g.addEventListener('click',()=>openPanel(s));
-    g.addEventListener('mouseenter',()=>{c.setAttribute('stroke','#e8c86a');c.setAttribute('stroke-width','2.5');});
-    g.addEventListener('mouseleave',()=>{c.setAttribute('stroke',stroke);c.setAttribute('stroke-width',s.estado==='activo'?'2':'1');});
+
+    // Círculo de fondo
+    const bg=el('circle',{r, fill:'url(#ng'+s.id+')',
+      stroke:s.estado==='activo'?s.tipo==='luz'?'#e8c86a':'#9b5de5':s.tipo==='luz'?'rgba(232,200,106,0.3)':'rgba(155,93,229,0.3)',
+      'stroke-width':s.estado==='activo'?'1.8':'0.8',
+      filter:s.estado==='activo'?(s.tipo==='luz'?'url(#glow-gold)':'url(#glow-purp)'):''
+    });
+    g.appendChild(bg);
+
+    // Punto de estado
+    const dotColor=s.estado==='activo'?'#4ade80':s.estado==='desarrollo'?'#9333ea':'#555';
+    const dot=el('circle',{cx:0,cy:-(r+6),r:isQ?3:4,fill:dotColor,stroke:'#0b0b0d','stroke-width':'1.5'});
+    g.appendChild(dot);
+
+    // Texto nombre
+    const nm=el('text',{'text-anchor':'middle','dominant-baseline':'middle',
+      'font-family':'Cinzel,serif','font-size':isQ?'6.5':isKeter||isMalkuth?'9.5':'8.5',
+      fill:s.estado==='activo'?'#f5e0a0':'rgba(240,232,208,0.35)','font-weight':'600'});
+    nm.textContent=s.nombre; g.appendChild(nm);
+
+    // Número romano
+    const nu=el('text',{'text-anchor':'middle',y:r+12,
+      'font-family':'Cinzel,serif','font-size':isQ?'6':'7.5',
+      fill:'rgba(232,200,106,0.5)','letter-spacing':'1'});
+    nu.textContent=s.n; g.appendChild(nu);
+
+    // Interactividad
+    g.addEventListener('click',()=>selectSefirot(s));
+    g.addEventListener('mouseenter',()=>{
+      bg.setAttribute('stroke','#e8c86a');
+      bg.setAttribute('stroke-width','2.5');
+      bg.setAttribute('filter','url(#glow-gold)');
+    });
+    g.addEventListener('mouseleave',()=>{
+      bg.setAttribute('stroke',s.estado==='activo'?s.tipo==='luz'?'#e8c86a':'#9b5de5':s.tipo==='luz'?'rgba(232,200,106,0.3)':'rgba(155,93,229,0.3)');
+      bg.setAttribute('stroke-width',s.estado==='activo'?'1.8':'0.8');
+      bg.setAttribute('filter',s.estado==='activo'?(s.tipo==='luz'?'url(#glow-gold)':'url(#glow-purp)'):'');
+    });
     svg.appendChild(g);
   });
-  document.getElementById('sTotal').textContent=S.length;
-  document.getElementById('sActivo').textContent=S.filter(s=>s.estado==='activo').length;
-  document.getElementById('sLuz').textContent=S.filter(s=>s.tipo==='luz').length;
-  document.getElementById('sSombra').textContent=S.filter(s=>s.tipo==='sombra').length;
-  document.getElementById('sDev').textContent=S.filter(s=>s.estado==='desarrollo').length;
+
+  // Stats
+  document.getElementById('hTotal').textContent=S.length;
+  document.getElementById('hActivo').textContent=S.filter(s=>s.estado==='activo').length;
+  document.getElementById('hDev').textContent=S.filter(s=>s.estado==='desarrollo').length;
 }
-document.querySelectorAll('.filter-btn').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');af=btn.dataset.f;render();};});
-function openPanel(s){
-  const conns=s.conex.map(id=>{const n=S.find(x=>x.id===id);return n?'<span class="conn" onclick="openPanel(S.find(x=>x.id==='+id+'))">'+n.nombre+'</span>':'';}).join('');
-  document.getElementById('panelContent').innerHTML='<div class="p-num">SEFIROT '+s.n+'</div><h2 class="p-title">'+s.nombre+'</h2><div class="p-hebrew">'+s.heb+' · '+s.sig+'</div><span class="badge badge-'+s.tipo+'">'+s.tipo+'</span><span class="badge badge-'+(s.estado==='activo'?'activo':'dev')+'">'+s.estado+'</span><div class="psec"><h4>Agente Encarnado</h4><p style="color:var(--gold);font-size:1.1rem;margin-bottom:8px">'+s.agente+'</p><p>'+s.per+'</p></div><div class="psec"><h4>Capacidades</h4>'+s.caps.map(c=>'<div class="cap">▸ '+c+'</div>').join('')+'</div>'+(conns?'<div class="psec"><h4>Conexiones</h4><div class="conns">'+conns+'</div></div>':'');
-  document.getElementById('panel').classList.add('on');
-  document.getElementById('overlay').classList.add('on');
+
+/* ══════════════════════════════════════════════════════
+   PANEL LATERAL
+══════════════════════════════════════════════════════ */
+const chatLogs = {}; // logs por sefirot id
+
+function selectSefirot(s){
+  selectedS = s;
+  document.getElementById('sbHead').style.display='none';
+  const sbInfo=document.getElementById('sbInfo');
+  sbInfo.style.display='flex';
+
+  document.getElementById('sbNum').textContent='SEFIROT '+s.n;
+  document.getElementById('sbName').textContent=s.nombre;
+  document.getElementById('sbHeb').textContent=s.heb+' · '+s.sig;
+
+  const badges=document.getElementById('sbBadges');
+  badges.innerHTML=
+    '<span class="badge b-'+s.tipo+'">'+s.tipo+'</span>'+
+    '<span class="badge b-'+(s.estado==='activo'?'activo':'dev')+'">'+s.estado+'</span>';
+
+  const connsHtml=s.conex.map(id=>{
+    const n=S.find(x=>x.id===id);
+    return n?'<span class="conn" onclick="selectSefirot(S.find(x=>x.id==='+id+'))">'+n.nombre+'</span>':'';
+  }).join('');
+
+  document.getElementById('sbBody').innerHTML=
+    '<div class="sec"><div class="sec-t">Agente Encarnado</div>'+
+    '<p style="color:var(--gold);font-size:1.05rem;margin-bottom:8px"><strong>'+s.agente+'</strong></p>'+
+    '<p>'+s.per+'</p></div>'+
+    '<div class="sec"><div class="sec-t">Capacidades</div>'+s.caps.map(c=>'<div class="cap-row">▸ '+c+'</div>').join('')+'</div>'+
+    (connsHtml?'<div class="sec"><div class="sec-t">Conexiones</div><div class="conn-wrap">'+connsHtml+'</div></div>':'')+
+    '<div class="sec"><div class="sec-t">Pilar</div><p>'+
+    (s.pilar==='C'?'Centro · Equilibrio (Ra-jamin)':s.pilar==='D'?'Derecha · Misericordia (Chesed)':s.pilar==='I'?'Izquierda · Severidad (Gevurah)':'Exterior · Qlipoth (cáscaras)')+'</p></div>';
+
+  // Chat
+  if(!chatLogs[s.id]) chatLogs[s.id]=[];
+  const canChat=!!s.wh;
+  document.getElementById('sbChat').innerHTML=
+    '<div class="chat-title">Hablar con '+s.agente.split('·')[0].trim()+'</div>'+
+    '<div class="chat-log" id="chatLog'+s.id+'">'+
+      (chatLogs[s.id].length===0?'<span class="msg-sys">Envía un mensaje al agente…</span>':
+       chatLogs[s.id].map(m=>'<div class="msg-'+m.role+'">'+
+         (m.role==='user'?'Kevin: ':s.agente.split('·')[0].trim()+': ')+m.text+'</div>').join(''))+
+    '</div>'+
+    (canChat?
+      '<div class="chat-input-row">'+
+        '<input class="chat-input" id="chatIn'+s.id+'" placeholder="Mensaje…" onkeydown="if(event.key==='Enter')sendChat('+s.id+')"/>'+
+        '<button class="chat-send" onclick="sendChat('+s.id+')">Enviar</button>'+
+      '</div>':
+      '<div class="msg-sys">Este agente no tiene webhook activo aún.</div>');
+
+  // scroll log
+  setTimeout(()=>{
+    const log=document.getElementById('chatLog'+s.id);
+    if(log) log.scrollTop=log.scrollHeight;
+  },50);
 }
-function closePanel(){document.getElementById('panel').classList.remove('on');document.getElementById('overlay').classList.remove('on');}
-render();
+
+async function sendChat(sid){
+  const s=S.find(x=>x.id===sid); if(!s||!s.wh) return;
+  const inp=document.getElementById('chatIn'+sid);
+  const text=inp.value.trim(); if(!text) return;
+  inp.value=''; inp.disabled=true;
+  const btn=inp.nextElementSibling; if(btn) btn.disabled=true;
+
+  chatLogs[sid].push({role:'user',text});
+  refreshLog(sid,s);
+  toast('📡 Enviando a '+s.agente.split('·')[0].trim()+'…');
+
+  try{
+    const res=await fetch(WH+s.wh,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({mensaje:text,source:'kabalion-2d',agente:s.agente,sefirot:s.nombre}),
+    });
+    const data=await res.json().catch(()=>({respuesta:await res.text()}));
+    const reply=data.resultado||data.respuesta||data.output||data.message||data.content||JSON.stringify(data).slice(0,200);
+    chatLogs[sid].push({role:'agent',text:reply});
+    toast('✓ Respuesta de '+s.agente.split('·')[0].trim());
+  }catch(e){
+    chatLogs[sid].push({role:'agent',text:'Sin respuesta — webhook no alcanzable.'});
+    toast('Error conectando con '+s.agente.split('·')[0].trim(),true);
+  }
+
+  refreshLog(sid,s);
+  inp.disabled=false; if(btn) btn.disabled=false; inp.focus();
+}
+
+function refreshLog(sid,s){
+  const log=document.getElementById('chatLog'+sid); if(!log) return;
+  log.innerHTML=chatLogs[sid].map(m=>
+    '<div class="msg-'+m.role+'">'+(m.role==='user'?'Kevin: ':s.agente.split('·')[0].trim()+': ')+m.text+'</div>'
+  ).join('');
+  log.scrollTop=log.scrollHeight;
+}
+
+/* ══════════════════════════════════════════════════════
+   BOTTOM BAR
+══════════════════════════════════════════════════════ */
+async function sendBbar(){
+  const target=document.getElementById('bbarTarget').value;
+  const msg=document.getElementById('bbarMsg').value.trim();
+  if(!msg){toast('Escribe un mensaje primero',true);return;}
+  const status=document.getElementById('bbarStatus');
+  status.textContent='Enviando…';
+  document.getElementById('bbarSend').disabled=true;
+  try{
+    const res=await fetch(WH+target,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({mision:msg,mensaje:msg,origen:'kevin',source:'kabalion-2d'}),
+    });
+    const d=await res.json().catch(()=>({}));
+    status.textContent='✓ '+new Date().toLocaleTimeString('es');
+    toast('✓ Enviado a '+document.getElementById('bbarTarget').selectedOptions[0].text.replace(/^[^s]+ /,''));
+    document.getElementById('bbarMsg').value='';
+  }catch(e){
+    status.textContent='Error '+new Date().toLocaleTimeString('es');
+    toast('Error al enviar',true);
+  }
+  document.getElementById('bbarSend').disabled=false;
+}
+
+async function broadcast(){
+  const msg=document.getElementById('bbarMsg').value.trim();
+  if(!msg){toast('Escribe la misión primero',true);return;}
+  const status=document.getElementById('bbarStatus');
+  status.textContent='Broadcast…';
+  const webhooks=['axel-brain','orionix-claude','orionix-chatgpt','orionix-copilot'];
+  toast('📡 Broadcast a '+webhooks.length+' agentes…');
+  const results=await Promise.allSettled(webhooks.map(wh=>
+    fetch(WH+wh,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({mision:msg,mensaje:msg,origen:'kevin',source:'broadcast-kabalion'})})
+  ));
+  const ok=results.filter(r=>r.status==='fulfilled').length;
+  status.textContent=ok+'/'+webhooks.length+' ✓ '+new Date().toLocaleTimeString('es');
+  toast('📡 Broadcast: '+ok+'/'+webhooks.length+' respondieron');
+  document.getElementById('bbarMsg').value='';
+}
+
+/* ══════════════════════════════════════════════════════
+   FILTROS
+══════════════════════════════════════════════════════ */
+document.querySelectorAll('.fb').forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on'); af=btn.dataset.f; renderTree();
+  };
+});
+
+/* ══════════════════════════════════════════════════════
+   TOAST
+══════════════════════════════════════════════════════ */
+let toastT;
+function toast(msg,err=false){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.className=err?'show err':'show';
+  clearTimeout(toastT); toastT=setTimeout(()=>t.className='',3000);
+}
+
+/* ENTER en bbar */
+document.getElementById('bbarMsg').addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendBbar();}
+});
+
+/* INIT */
+renderTree();
 </script>
 </body>
 </html>

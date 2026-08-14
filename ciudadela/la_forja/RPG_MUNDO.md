@@ -163,3 +163,49 @@ El Umbral de Sombras es uno de los *Puentes Activos* que alimentan su poder. Si 
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 5 — 14/08/2026, 06:01
+
+### 🏛️ AXEL — Arquitecto
+
+### **Escuela de Magia: Umbramancia**  
+
+**Fuente de Poder:** La Umbramancia extrae su energía del *Umbral de Sombras*, un plano liminal donde las emociones oscuras y los deseos reprimidos se materializan como energía pura. Los practicantes canalizan esta fuerza a través de objetos rituales (como espejos negros o gemas de obsidiana) o directamente desde su propia conexión con la oscuridad interior.  
+
+#### **Hechizos de Umbramancia**  
+1. **Manto de Sombras**  
+   - **Efecto:** El lanzador se envuelve en una capa de oscuridad, otorgando +5 a sigilo y resistencia a daño mágico por 1d4 turnos.  
+   - **Coste:** 2 puntos de Voluntad.  
+
+2. **Garra de Umbrion**  
+   - **Efecto:** Invoca una mano espectral que ataca a un objetivo (3d6 daño oscuro). Si el objetivo falla una tirada de Resistencia (DC 15), queda *paralizado* por 1 turno.  
+   - **Coste:** 3 puntos de Voluntad.  
+
+3. **Eco del Deseo**  
+   - **Efecto:** Refleja el mayor miedo o deseo de un objetivo en su mente (como el espejo antiguo). El afectado debe superar una tirada de Voluntad (DC 18) o quedar *confundido* o *hechizado*.  
+   - **Coste:** 4 puntos de Voluntad.  
+
+4. **Pacto de Obsidiana**  
+   - **Efecto:** Crea un vínculo temporal entre dos aliados, permitiendo compartir puntos de vida o magia (máximo 10 puntos transferidos). Duración: 1d6 turnos.  
+   - **Coste:** 5 puntos de Voluntad.  
+
+5. **Abismo Devorador**  
+   - **Efecto:** Abre un portal al Umbral de Sombras en un área de 3m². Todos dentro deben superar una tirada de Destreza (DC 20) o ser arrastrados al plano oscuro, sufriendo 4d8 daño.  
+   - **Coste:** 7 puntos de Voluntad + 1d4 de corrupción permanente.  
+
+#### **Coste de Usar Magia**  
+- La Umbramancia consume **puntos de Voluntad** (basados en el atributo *Voluntad* del personaje).  
+- Cada hechizo tiene un coste fijo, pero fallar una tirada crítica (1 en d20) inflige **1 punto de corrupción**, acumulativo. Al alcanzar 5, el personaje sufre una maldición aleatoria del espejo antiguo.  
+
+#### **¿Quién Puede Aprenderla?**  
+- **Requisitos:** Voluntad ≥ 14, haber mirado al espejo antiguo y superado la tirada (o sobrevivir a su maldición).  
+- **Restricciones:** Prohibida para clérigos de deidades de la luz. Cultistas de Lord Umbrion reciben +2 al lanzar hechizos de esta escuela.  
+
+**Conexión con la Trama:**  
+Los fragmentos del *Corazón de Umbrion* pueden usarse para potenciar hechizos (doblando su efecto), pero cada uso acerca al lanzador a convertirse en un siervo de las sombras. ¿Sacrificarán moralidad por poder?  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

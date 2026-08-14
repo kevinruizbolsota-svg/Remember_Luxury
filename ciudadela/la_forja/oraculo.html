@@ -3,253 +3,558 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EL ORÁCULO — Sistema ORIONIX</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+<title>EL ORÁCULO — ORIONIX Command</title>
+<link rel="icon" href="../favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0b0b0d;
-    --gold: #e8c86a;
-    --text: #e9ddc4;
-  }
-  body {
-    margin: 0; padding: 0; background-color: var(--bg); color: var(--text);
-    font-family: 'Cormorant Garamond', serif; overflow-x: hidden;
-  }
-  
-  /* Canvas de Partículas */
-  #particles { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
-  
-  .container {
-    position: relative; z-index: 10; max-width: 900px; margin: 0 auto; padding: 60px 20px;
-  }
-  
-  h1 {
-    font-family: 'Cinzel', serif; color: var(--gold); text-align: center; font-size: 3rem;
-    letter-spacing: 5px; text-shadow: 0 0 20px rgba(232,200,106,0.3); margin-bottom: 50px;
-  }
-  
-  .terminal {
-    background: rgba(0,0,0,0.6); border: 1px solid rgba(232,200,106,0.3); border-radius: 8px;
-    padding: 40px; box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 20px rgba(232,200,106,0.05);
-    min-height: 400px; position: relative;
-  }
-  
-  .content { font-size: 1.2rem; line-height: 1.6; white-space: pre-wrap; }
-  
-  .cursor {
-    display: inline-block; width: 10px; height: 20px; background-color: var(--gold);
-    animation: blink 1s step-end infinite; vertical-align: bottom; margin-left: 5px;
-  }
-  @keyframes blink { 50% { opacity: 0; } }
-  
-  .btn-force {
-    display: block; width: 250px; margin: 40px auto 0; padding: 15px; text-align: center;
-    background: transparent; color: var(--gold); border: 1px solid var(--gold);
-    font-family: 'Cinzel', serif; font-size: 1.1rem; cursor: pointer; transition: 0.3s;
-    text-transform: uppercase; letter-spacing: 2px;
-  }
-  .btn-force:hover {
-    background: var(--gold); color: var(--bg); box-shadow: 0 0 20px rgba(232,200,106,0.5);
-  }
-  
-  .status {
-    position: absolute; top: 15px; right: 20px; font-family: 'Cinzel', serif; font-size: 0.8rem;
-    color: #4CAF50; letter-spacing: 2px;
-  }
-  .status-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #4CAF50; margin-right: 5px; box-shadow: 0 0 10px #4CAF50; }
-  .status.error { color: #f44336; }
-  .status.error .status-dot { background: #f44336; box-shadow: 0 0 10px #f44336; }
+:root {
+  --gold: #e8c86a;
+  --gold-deep: #c9a227;
+  --gold-glow: rgba(232,200,106,0.3);
+  --gold-subtle: rgba(232,200,106,0.08);
+  --bg: #0b0b0d;
+  --bg-card: rgba(11,11,16,0.92);
+  --border: rgba(232,200,106,0.2);
+  --border-hover: rgba(232,200,106,0.55);
+  --text: #d4c5a0;
+  --text-dim: rgba(212,197,160,0.5);
+  --green: #4ecb71;
+  --red: #e05555;
+  --yellow: #f4c842;
+  --white: #f5f0e8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Cormorant Garamond',serif; min-height:100vh; overflow-x:hidden; }
 
-  /* Métricas */
-  .metrics-panel {
-    display: flex; justify-content: space-between; margin-bottom: 30px;
-    background: rgba(232,200,106,0.05); border: 1px solid rgba(232,200,106,0.2);
-    padding: 20px; border-radius: 8px;
-  }
-  .metric-box { text-align: center; flex: 1; }
-  .metric-box:not(:last-child) { border-right: 1px solid rgba(232,200,106,0.1); }
-  .metric-title { font-family: 'Cinzel', serif; font-size: 0.9rem; color: rgba(233, 221, 196, 0.6); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
-  .metric-value { font-size: 1.5rem; color: var(--gold); font-weight: 600; }
+/* PARTÍCULAS */
+#particles { position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:0; pointer-events:none; }
 
-  /* Enviar Misión */
-  .mission-sender {
-    margin-top: 30px; display: flex; gap: 15px;
-  }
-  .mission-input {
-    flex: 1; background: rgba(0,0,0,0.6); border: 1px solid rgba(232,200,106,0.3);
-    color: var(--text); padding: 15px; font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem; border-radius: 4px; outline: none;
-  }
-  .mission-input:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(232,200,106,0.2); }
-  
-  /* Syntax Highlighting */
-  .hl-green { color: #4CAF50; }
-  .hl-red { color: #f44336; }
-  .hl-yellow { color: #ffeb3b; }
-  .hl-gold { color: var(--gold); font-weight: bold; }
+/* NAV */
+.nav {
+  position:fixed; top:0; left:0; width:100%; z-index:999;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 32px;
+  background:linear-gradient(180deg,rgba(11,11,16,0.97),transparent);
+  border-bottom:1px solid rgba(232,200,106,0.07);
+  backdrop-filter:blur(10px);
+}
+.nav-brand { font-family:'Cinzel',serif; font-size:1.1rem; font-weight:700; color:var(--gold); letter-spacing:0.2em; text-decoration:none; }
+.nav-links { display:flex; gap:8px; align-items:center; }
+.nav-link { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.12em; color:var(--text-dim); text-decoration:none; padding:5px 12px; border:1px solid transparent; transition:0.3s; }
+.nav-link:hover { color:var(--gold); border-color:var(--border); }
+.nav-status { display:flex; align-items:center; gap:6px; font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.12em; }
+.status-dot { width:8px; height:8px; border-radius:50%; animation:blink 2s infinite; }
+.status-dot.online { background:var(--green); box-shadow:0 0 6px var(--green); }
+.status-dot.offline { background:var(--red); box-shadow:0 0 6px var(--red); animation:none; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+/* LAYOUT */
+.wrapper { position:relative; z-index:10; max-width:1100px; margin:0 auto; padding:100px 24px 60px; }
+
+/* TÍTULO */
+.titulo {
+  text-align:center; margin-bottom:48px;
+}
+.titulo h1 {
+  font-family:'Cinzel',serif; font-size:clamp(1.8rem,4vw,3rem); font-weight:900;
+  color:var(--gold); letter-spacing:0.25em;
+  text-shadow:0 0 40px var(--gold-glow), 0 0 80px rgba(232,200,106,0.1);
+  margin-bottom:8px;
+}
+.titulo p { font-size:0.9rem; color:var(--text-dim); letter-spacing:0.15em; font-style:italic; }
+
+/* MÉTRICAS */
+.metrics-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:16px; margin-bottom:32px;
+}
+.metric-card {
+  background:var(--bg-card); border:1px solid var(--border);
+  padding:20px; text-align:center; position:relative; overflow:hidden;
+  transition:border-color 0.3s;
+}
+.metric-card:hover { border-color:var(--border-hover); }
+.metric-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:0.4;
+}
+.metric-label { font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.2em; color:var(--text-dim); text-transform:uppercase; margin-bottom:10px; }
+.metric-value { font-family:'Cinzel',serif; font-size:1.6rem; font-weight:700; color:var(--gold); line-height:1; }
+.metric-sub { font-size:0.72rem; color:var(--text-dim); margin-top:6px; font-style:italic; }
+
+/* GRID PRINCIPAL */
+.main-grid { display:grid; grid-template-columns:1fr 340px; gap:20px; }
+@media(max-width:800px){ .main-grid{grid-template-columns:1fr;} }
+
+/* TERMINAL */
+.terminal-wrap { display:flex; flex-direction:column; gap:0; }
+.terminal-header {
+  background:rgba(232,200,106,0.06); border:1px solid var(--border);
+  border-bottom:none; padding:12px 20px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.terminal-title { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.2em; color:var(--gold); }
+.terminal-dots { display:flex; gap:6px; }
+.terminal-dots span { width:10px; height:10px; border-radius:50%; }
+.terminal-dots span:nth-child(1){ background:var(--red); }
+.terminal-dots span:nth-child(2){ background:var(--yellow); }
+.terminal-dots span:nth-child(3){ background:var(--green); }
+.terminal-body {
+  background:rgba(0,0,0,0.75); border:1px solid var(--border);
+  padding:28px; min-height:420px; max-height:60vh; overflow-y:auto;
+  font-size:0.92rem; line-height:1.8; position:relative;
+}
+.terminal-body::-webkit-scrollbar { width:4px; }
+.terminal-body::-webkit-scrollbar-track { background:transparent; }
+.terminal-body::-webkit-scrollbar-thumb { background:var(--border-hover); border-radius:2px; }
+.terminal-line { display:block; padding:1px 0; }
+.terminal-line.ok { color:var(--green); }
+.terminal-line.err { color:var(--red); }
+.terminal-line.warn { color:var(--yellow); }
+.terminal-line.gold { color:var(--gold); }
+.terminal-line.heading { color:var(--white); font-weight:600; font-family:'Cinzel',serif; font-size:0.85rem; letter-spacing:0.08em; margin-top:8px; }
+.terminal-line.dim { color:var(--text-dim); }
+.cursor-blink {
+  display:inline-block; width:8px; height:14px;
+  background:var(--gold); animation:blink 1s step-end infinite;
+  margin-left:4px; vertical-align:middle;
+}
+.terminal-footer {
+  background:rgba(0,0,0,0.5); border:1px solid var(--border); border-top:none;
+  padding:10px 20px; display:flex; align-items:center; justify-content:space-between;
+}
+.terminal-update { font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.15em; color:var(--text-dim); }
+.btn-refresh {
+  font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.15em;
+  color:var(--gold); background:transparent; border:1px solid var(--border);
+  padding:5px 14px; cursor:pointer; transition:0.3s;
+}
+.btn-refresh:hover { background:var(--gold-subtle); border-color:var(--border-hover); }
+
+/* PANEL LATERAL */
+.sidebar { display:flex; flex-direction:column; gap:16px; }
+
+/* AGENTES */
+.agentes-card {
+  background:var(--bg-card); border:1px solid var(--border); padding:20px;
+}
+.card-title { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.2em; color:var(--gold); margin-bottom:16px; }
+.agente-row {
+  display:flex; align-items:center; gap:12px; padding:10px 0;
+  border-bottom:1px solid rgba(232,200,106,0.06);
+}
+.agente-row:last-child { border-bottom:none; }
+.agente-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.agente-dot.activo { background:var(--green); box-shadow:0 0 6px var(--green); animation:blink 2s infinite; }
+.agente-dot.espera { background:var(--yellow); box-shadow:0 0 6px var(--yellow); }
+.agente-dot.offline { background:var(--text-dim); }
+.agente-info { flex:1; }
+.agente-nombre { font-family:'Cinzel',serif; font-size:0.75rem; color:var(--white); letter-spacing:0.06em; }
+.agente-rol { font-size:0.68rem; color:var(--text-dim); font-style:italic; }
+.agente-badge {
+  font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.1em;
+  padding:3px 8px; border:1px solid var(--border); color:var(--text-dim);
+}
+
+/* MISIÓN */
+.mision-card {
+  background:var(--bg-card); border:1px solid var(--border); padding:20px;
+}
+.mision-input {
+  width:100%; background:rgba(0,0,0,0.6); border:1px solid var(--border);
+  color:var(--white); padding:10px 14px; font-family:'Cormorant Garamond',serif;
+  font-size:0.9rem; resize:vertical; min-height:90px;
+  transition:border-color 0.3s; outline:none;
+}
+.mision-input:focus { border-color:var(--border-hover); }
+.mision-input::placeholder { color:var(--text-dim); font-style:italic; }
+.btn-mision {
+  width:100%; margin-top:10px; padding:12px;
+  font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.18em;
+  background:var(--gold); color:var(--bg); border:none; cursor:pointer;
+  font-weight:700; box-shadow:0 0 20px var(--gold-glow); transition:0.3s;
+}
+.btn-mision:hover { background:var(--gold-deep); }
+.btn-mision:disabled { opacity:0.5; cursor:not-allowed; }
+.mision-status { font-size:0.72rem; color:var(--green); margin-top:8px; text-align:center; min-height:18px; font-style:italic; }
+
+/* CICLO */
+.ciclo-card {
+  background:var(--bg-card); border:1px solid var(--border); padding:20px;
+}
+.btn-ciclo {
+  width:100%; padding:11px;
+  font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.16em;
+  background:transparent; color:var(--gold); border:1px solid var(--border-hover);
+  cursor:pointer; transition:0.3s;
+}
+.btn-ciclo:hover { background:var(--gold-subtle); }
+
+/* LOG MINI */
+.log-mini { margin-top:10px; font-size:0.72rem; color:var(--text-dim); line-height:1.7; max-height:80px; overflow-y:auto; }
+
+@media(max-width:600px){
+  .wrapper{padding:80px 16px 40px;}
+  .titulo h1{font-size:1.5rem;}
+}
 </style>
 </head>
 <body>
 
 <canvas id="particles"></canvas>
 
-<div class="container">
-  <h1>EL ORÁCULO</h1>
-  
-  <div class="metrics-panel">
-    <div class="metric-box">
-      <div class="metric-title">Último Ciclo</div>
-      <div class="metric-value" id="m-ciclo">--:--:--</div>
+<!-- NAV -->
+<nav class="nav">
+  <a href="../index.html" class="nav-brand">ORIONIX</a>
+  <div class="nav-links">
+    <a href="../hub.html" class="nav-link">Hub</a>
+    <a href="../ciudadela.html" class="nav-link">Ciudadela</a>
+    <a href="plaza.html" class="nav-link">Plaza</a>
+    <a href="comando.html" class="nav-link">Comando</a>
+  </div>
+  <div class="nav-status">
+    <div class="status-dot online" id="statusDot"></div>
+    <span id="statusText" style="color:var(--text-dim)">CONECTADO</span>
+  </div>
+</nav>
+
+<!-- CONTENIDO -->
+<div class="wrapper">
+
+  <!-- TÍTULO -->
+  <div class="titulo">
+    <h1>EL ORÁCULO</h1>
+    <p>Sistema de Inteligencia ORIONIX — Monitoreo en Tiempo Real</p>
+  </div>
+
+  <!-- MÉTRICAS -->
+  <div class="metrics-grid" id="metricsGrid">
+    <div class="metric-card">
+      <div class="metric-label">Último Ciclo</div>
+      <div class="metric-value" id="metUltimoCiclo">—</div>
+      <div class="metric-sub" id="metCicloTs">Cargando...</div>
     </div>
-    <div class="metric-box">
-      <div class="metric-title">Agente Activo</div>
-      <div class="metric-value" id="m-agente">Desconocido</div>
+    <div class="metric-card">
+      <div class="metric-label">Agente Activo</div>
+      <div class="metric-value" id="metAgenteActivo" style="font-size:1.1rem">—</div>
+      <div class="metric-sub">En este momento</div>
     </div>
-    <div class="metric-box">
-      <div class="metric-title">Ciclos Completados</div>
-      <div class="metric-value" id="m-count">0</div>
+    <div class="metric-card">
+      <div class="metric-label">Estado Sistema</div>
+      <div class="metric-value" id="metEstado" style="font-size:1rem">—</div>
+      <div class="metric-sub" id="metMision">—</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Actualización</div>
+      <div class="metric-value" id="metUpdate" style="font-size:1rem">—</div>
+      <div class="metric-sub">Ciclo: 30s</div>
     </div>
   </div>
 
-  <div class="terminal">
-    <div class="status" id="status-indicator"><span class="status-dot"></span>SYNC ACTIVO</div>
-    <div id="mesa-content" class="content">Iniciando enlace con La Mesa Redonda...</div>
-    <div class="cursor"></div>
+  <!-- GRID PRINCIPAL -->
+  <div class="main-grid">
+
+    <!-- TERMINAL -->
+    <div class="terminal-wrap">
+      <div class="terminal-header">
+        <span class="terminal-title">MESA_REDONDA.md — FEED EN VIVO</span>
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+      </div>
+      <div class="terminal-body" id="terminalBody">
+        <span class="terminal-line dim">Iniciando conexión con la Forja...</span>
+      </div>
+      <div class="terminal-footer">
+        <span class="terminal-update" id="lastUpdate">Última actualización: —</span>
+        <button class="btn-refresh" onclick="fetchMesa()">↻ Actualizar</button>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+      <!-- AGENTES -->
+      <div class="agentes-card">
+        <div class="card-title">AGENTES DEL SISTEMA</div>
+        <div class="agente-row">
+          <div class="agente-dot activo"></div>
+          <div class="agente-info">
+            <div class="agente-nombre">n8n</div>
+            <div class="agente-rol">El Comandante</div>
+          </div>
+          <div class="agente-badge">ONLINE</div>
+        </div>
+        <div class="agente-row">
+          <div class="agente-dot activo"></div>
+          <div class="agente-info">
+            <div class="agente-nombre">AXEL</div>
+            <div class="agente-rol">Kether — Coordinador</div>
+          </div>
+          <div class="agente-badge">ONLINE</div>
+        </div>
+        <div class="agente-row">
+          <div class="agente-dot espera"></div>
+          <div class="agente-info">
+            <div class="agente-nombre">Antigravity</div>
+            <div class="agente-rol">Las Manos — Ejecutor</div>
+          </div>
+          <div class="agente-badge">EN MISIÓN</div>
+        </div>
+        <div class="agente-row">
+          <div class="agente-dot espera"></div>
+          <div class="agente-info">
+            <div class="agente-nombre">Qwen</div>
+            <div class="agente-rol">El Arquitecto</div>
+          </div>
+          <div class="agente-badge">DISEÑANDO</div>
+        </div>
+        <div class="agente-row">
+          <div class="agente-dot offline"></div>
+          <div class="agente-info">
+            <div class="agente-nombre">ChatGPT</div>
+            <div class="agente-rol">Pendiente integración</div>
+          </div>
+          <div class="agente-badge">PRÓXIMO</div>
+        </div>
+      </div>
+
+      <!-- ENVIAR MISIÓN -->
+      <div class="mision-card">
+        <div class="card-title">ENVIAR MENSAJE AL SISTEMA</div>
+        <textarea class="mision-input" id="misionInput" placeholder="Escribe tu orden, Creador..."></textarea>
+        <button class="btn-mision" id="btnMision" onclick="enviarMision()">TRANSMITIR AL SISTEMA</button>
+        <div class="mision-status" id="misionStatus"></div>
+      </div>
+
+      <!-- FORZAR CICLO -->
+      <div class="ciclo-card">
+        <div class="card-title">CONTROL DE CICLOS</div>
+        <button class="btn-ciclo" onclick="forzarCiclo()">⚡ FORZAR CICLO AHORA</button>
+        <div class="log-mini" id="cicloLog">Esperando órdenes del Creador...</div>
+      </div>
+
+    </div>
   </div>
-  
-  <div class="mission-sender">
-    <input type="text" id="missionInput" class="mission-input" placeholder="Dicta una nueva misión suprema al sistema...">
-    <button class="btn-force" style="margin: 0; width: auto;" onclick="enviarMision()">Enviar al Creador</button>
-  </div>
-  
-  <button class="btn-force" onclick="forzarCiclo()">Forzar Ciclo</button>
+
 </div>
 
 <script>
-  const rawUrl = 'https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/la_forja/MESA_REDONDA.md';
-  const contentDiv = document.getElementById('mesa-content');
-  const webhookMission = 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-mission';
-  const webhookBridge = 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-bridge';
+/* ================================================================
+   ORÁCULO v2 — ORIONIX Intelligence Dashboard
+   ================================================================ */
 
-  function applySyntax(text) {
-    const lines = text.split('\n');
-    return lines.map(line => {
-      if (line.includes('✅')) return `<span class="hl-green">${line}</span>`;
-      if (line.includes('❌')) return `<span class="hl-red">${line}</span>`;
-      if (line.includes('⚡')) return `<span class="hl-yellow">${line}</span>`;
-      if (line.includes('🧠')) return `<span class="hl-gold">${line}</span>`;
-      return line;
-    }).join('\n');
-  }
+const MESA_URL = 'https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/la_forja/MESA_REDONDA.md';
+const BRIDGE_URL = 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-bridge';
+const MISSION_URL = 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-mission';
 
-  // Fetch a la Mesa Redonda
-  async function fetchMesa() {
-    const statusInd = document.getElementById('status-indicator');
-    try {
-      const res = await fetch(rawUrl + '?t=' + new Date().getTime());
-      if(res.ok) {
-        const text = await res.text();
-        
-        // Parsear métricas
-        const mSync = text.match(/\*\*Última Sincronización:\*\* (.*)/);
-        if(mSync) document.getElementById('m-ciclo').innerText = mSync[1].trim();
-        
-        const mResp = text.match(/\*\*Responsable:\*\* (.*)/);
-        if(mResp) document.getElementById('m-agente').innerText = mResp[1].trim();
-        
-        const count = (text.match(/✅/g) || []).length;
-        document.getElementById('m-count').innerText = count;
+let fetchInterval = null;
+let ciclosCompletados = 0;
+let lastContent = '';
 
-        contentDiv.innerHTML = applySyntax(text);
-        
-        // Indicador verde
-        statusInd.className = 'status';
-        statusInd.innerHTML = '<span class="status-dot"></span>SYNC ACTIVO';
-      } else {
-        throw new Error("HTTP error");
-      }
-    } catch(e) {
-      console.error("Error leyendo MESA_REDONDA", e);
-      // Indicador rojo
-      statusInd.className = 'status error';
-      statusInd.innerHTML = '<span class="status-dot"></span>ERROR DE SYNC';
+/* ── PARTÍCULAS ── */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function initParticles() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  particles = Array.from({length: 120}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.2 + 0.2,
+    vx: (Math.random() - 0.5) * 0.15,
+    vy: (Math.random() - 0.5) * 0.15,
+    o: Math.random() * 0.5 + 0.1
+  }));
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0) p.x = canvas.width;
+    if (p.x > canvas.width) p.x = 0;
+    if (p.y < 0) p.y = canvas.height;
+    if (p.y > canvas.height) p.y = 0;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(232,200,106,${p.o})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawParticles);
+}
+
+window.addEventListener('resize', initParticles);
+
+/* ── FETCH MESA_REDONDA ── */
+async function fetchMesa() {
+  const dot = document.getElementById('statusDot');
+  const statusTxt = document.getElementById('statusText');
+  try {
+    const res = await fetch(MESA_URL + '?t=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const txt = await res.text();
+
+    dot.className = 'status-dot online';
+    statusTxt.textContent = 'CONECTADO';
+
+    if (txt !== lastContent) {
+      lastContent = txt;
+      renderTerminal(txt);
+      parseMetrics(txt);
+      ciclosCompletados++;
     }
+
+    const now = new Date().toLocaleTimeString('es-ES');
+    document.getElementById('lastUpdate').textContent = 'Actualizado: ' + now;
+    document.getElementById('metUpdate').textContent = now;
+
+  } catch(e) {
+    dot.className = 'status-dot offline';
+    statusTxt.textContent = 'SIN CONEXIÓN';
+    addTerminalLine('❌ Error al conectar con la Forja: ' + e.message, 'err');
   }
+}
 
-  // Refrescar cada 30 segundos
-  setInterval(fetchMesa, 30000);
-  fetchMesa();
+/* ── RENDER TERMINAL CON HIGHLIGHTING ── */
+function renderTerminal(txt) {
+  const body = document.getElementById('terminalBody');
+  const lines = txt.split('\n');
+  body.innerHTML = '';
 
-  // Enviar Misión al Creador
-  async function enviarMision() {
-    const input = document.getElementById('missionInput');
-    const texto = input.value.trim();
-    if(!texto) return;
-    
-    try {
-      await fetch(webhookBridge, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          evento: 'mensaje_agente',
-          detalle: texto,
-          agente: 'oraculo'
-        })
-      });
-      alert("Mensaje transmitido al Creador.");
-      input.value = '';
-    } catch(e) {
-      alert("Error enviando el mensaje.");
+  lines.forEach(line => {
+    const span = document.createElement('span');
+    span.className = 'terminal-line';
+
+    if (line.startsWith('#')) {
+      span.classList.add('heading');
+      line = line.replace(/^#+\s*/, '');
+    } else if (line.includes('✅')) {
+      span.classList.add('ok');
+    } else if (line.includes('❌')) {
+      span.classList.add('err');
+    } else if (line.includes('⚡') || line.includes('🚨')) {
+      span.classList.add('warn');
+    } else if (line.includes('🧠') || line.includes('🌌') || line.includes('🏛️')) {
+      span.classList.add('gold');
+    } else if (line.trim() === '' || line.startsWith('---')) {
+      span.classList.add('dim');
     }
-  }
 
-  // Forzar Ciclo
-  async function forzarCiclo() {
-    try {
-      await fetch(webhookMission, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          tipo: 'forzar_ciclo', agente: 'oraculo_humano',
-          mensaje: 'El creador ha forzado un nuevo ciclo desde El Oráculo.'
-        })
-      });
-      alert("Señal enviada a ORIONIX. Ciclo forzado.");
-    } catch(e) {
-      alert("Error enviando la señal.");
-    }
-  }
+    span.textContent = line || ' ';
+    body.appendChild(span);
+  });
 
-  // Animación de partículas doradas
-  const cv = document.getElementById('particles');
-  const cx = cv.getContext('2d');
-  let W, H, particles = [];
-  
-  function initCanvas() {
-    W = cv.width = window.innerWidth;
-    H = cv.height = window.innerHeight;
-    particles = [];
-    for(let i=0; i<100; i++) {
-      particles.push({
-        x: Math.random()*W, y: Math.random()*H,
-        r: Math.random()*2, v: Math.random()*0.5 + 0.1
-      });
-    }
+  // Cursor parpadeante al final
+  const cursor = document.createElement('span');
+  cursor.className = 'cursor-blink';
+  body.appendChild(cursor);
+  body.scrollTop = body.scrollHeight;
+}
+
+function addTerminalLine(txt, cls) {
+  const body = document.getElementById('terminalBody');
+  const span = document.createElement('span');
+  span.className = 'terminal-line ' + (cls || '');
+  span.textContent = txt;
+  body.appendChild(span);
+  body.scrollTop = body.scrollHeight;
+}
+
+/* ── PARSEAR MÉTRICAS DEL MARKDOWN ── */
+function parseMetrics(txt) {
+  // Misión activa
+  const misionMatch = txt.match(/\*\*Misión:\*\*\s*(.+)/);
+  if (misionMatch) {
+    document.getElementById('metMision').textContent = misionMatch[1].trim().substring(0, 40) + '...';
   }
-  window.addEventListener('resize', initCanvas); initCanvas();
-  
-  function draw() {
-    cx.clearRect(0, 0, W, H);
-    cx.fillStyle = 'rgba(232, 200, 106, 0.5)';
-    particles.forEach(p => {
-      cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, Math.PI*2); cx.fill();
-      p.y -= p.v;
-      if(p.y < 0) { p.y = H; p.x = Math.random()*W; }
+  // Estado
+  const estadoMatch = txt.match(/\*\*Estado:\*\*\s*(.+)/);
+  if (estadoMatch) {
+    document.getElementById('metEstado').textContent = estadoMatch[1].trim().substring(0, 20);
+  }
+  // Responsable
+  const respMatch = txt.match(/\*\*Responsable:\*\*\s*(.+)/);
+  if (respMatch) {
+    document.getElementById('metAgenteActivo').textContent = respMatch[1].trim().substring(0, 20);
+  }
+  // Sincronización
+  const syncMatch = txt.match(/\*\*Última Sincronización:\*\*\s*(.+)/);
+  if (syncMatch) {
+    document.getElementById('metUltimoCiclo').textContent = '✓';
+    document.getElementById('metCicloTs').textContent = syncMatch[1].trim().substring(0, 30);
+  }
+}
+
+/* ── ENVIAR MISIÓN ── */
+async function enviarMision() {
+  const input = document.getElementById('misionInput');
+  const status = document.getElementById('misionStatus');
+  const btn = document.getElementById('btnMision');
+  const texto = input.value.trim();
+
+  if (!texto) { status.textContent = 'Escribe tu orden primero.'; status.style.color = 'var(--red)'; return; }
+
+  btn.disabled = true;
+  status.style.color = 'var(--yellow)';
+  status.textContent = 'Transmitiendo al sistema...';
+
+  try {
+    await fetch(BRIDGE_URL, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        evento: 'mensaje_creador',
+        detalle: texto,
+        agente: 'oraculo',
+        origen: 'El Creador',
+        ts: new Date().toISOString()
+      })
     });
-    requestAnimationFrame(draw);
+    status.style.color = 'var(--green)';
+    status.textContent = '✅ Mensaje transmitido al sistema.';
+    input.value = '';
+    addTerminalLine('[' + new Date().toLocaleTimeString() + '] 📡 Mensaje del Creador enviado al Bridge', 'ok');
+  } catch(e) {
+    status.style.color = 'var(--red)';
+    status.textContent = '❌ Error: ' + e.message;
+  } finally {
+    btn.disabled = false;
+    setTimeout(() => status.textContent = '', 4000);
   }
-  draw();
-</script>
+}
 
+/* ── FORZAR CICLO ── */
+async function forzarCiclo() {
+  const log = document.getElementById('cicloLog');
+  log.innerHTML = '<span style="color:var(--yellow)">⚡ Iniciando ciclo forzado...</span>';
+  try {
+    await fetch(MISSION_URL, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        mision: 'CICLO FORZADO — El Oráculo',
+        origen: 'oraculo_manual',
+        ts: new Date().toISOString()
+      })
+    });
+    log.innerHTML = '<span style="color:var(--green)">✅ Ciclo iniciado — n8n procesando</span>';
+    setTimeout(fetchMesa, 3000);
+  } catch(e) {
+    log.innerHTML = '<span style="color:var(--red)">❌ Error: ' + e.message + '</span>';
+  }
+}
+
+/* ── INIT ── */
+function init() {
+  initParticles();
+  drawParticles();
+  fetchMesa();
+  fetchInterval = setInterval(fetchMesa, 30000);
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
 </body>
 </html>

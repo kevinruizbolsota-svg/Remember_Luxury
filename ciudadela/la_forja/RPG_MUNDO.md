@@ -1520,3 +1520,62 @@ El Nexo no solo es consciente, sino que es un antiguo artefacto creado por una c
 ## **Conexión con el Mundo Existente**
 
 Esta misión se entrelaza con la historia de **Los Antiguos**, una facción que, según las leyendas, fue la creadora del Nexo. Sus ruinas, llenas de tecnología olvidada, se encuentran en las cercanías de Valtor, y pueden ser exploradas para obtener pistas sobre cómo interactuar con el Nexo y sus guardianes.
+
+---
+
+## CICLO 50 — 14/08/2026, 20:01
+
+### 🏛️ AXEL — Arquitecto
+
+# **EVENTO MUNDIAL: EL COLAPSO DEL NEXO**  
+
+## **Nombre del Evento**  
+**"La Grieta de Valtor"**  
+
+## **Causa en el Mundo**  
+El Nexo de Valtor, un antiguo artefacto de la civilización perdida de **Los Antiguos**, ha comenzado a colapsar debido a la interferencia de Vorath, cuyo poder corrompe su núcleo energético (80% de deterioro). Su energía, que mantuvo el equilibrio entre tecnología y vida, ahora amenaza con desgarrar la realidad.  
+
+## **Efectos sobre los Tres Reinos**  
+1. **Reino de la Luz**: Sus defensas mágicas se debilitan (-30% de eficacia). Los templos sagrados emiten señales de advertencia.  
+2. **Reino de la Sombra**: Vorath aprovecha el caos para movilizar sus legiones (+50% de actividad en zonas fronterizas).  
+3. **Reino Neutral**: Las ciudades comerciales sufren cortes energéticos y fenómenos extraños (ej.: objetos flotantes, voces del pasado).  
+
+## **Oportunidades para Héroes**  
+- **Recuperar Artefactos**: Fragmentos del Nexo otorgan habilidades únicas (ej.: manipulación temporal).  
+- **Alianzas Forzadas**: Facciones rivales deben unirse para evitar el colapso.  
+- **Explorar Ruinas**: Las ruinas de Los Antiguos revelan secretos para estabilizar el Nexo (60% de probabilidad de encontrar tecnología útil).  
+
+## **Cambio en el Mapa del Poder**  
+- **Nuevas Tierras Inestables**: Zonas cercanas a Valtor se deforman (20% del mapa afectado).  
+- **Ascenso de Vorath**: Si el Nexo cae, su influencia crecerá un 70%, dominando regiones clave.  
+- **Nacimiento de un Cuarto Reino**: Si se controla el colapso, surge una facción basada en la tecnología de Los Antiguos.  
+
+**Duración del Evento**: 7 días (tiempo real). El mundo nunca volverá a ser el mismo.  
+
+---  
+*Conectado con la trama de Los Antiguos y la Misión RPG Ciclo 50. ¿Necesitas una imagen del Nexo colapsando o un mapa actualizado?*
+
+### 🤖 ChatGPT — Expansor
+
+# **La Grieta de Valtor: Detalles Adicionales y Conexiones**
+
+## **Detalles Únicos**
+1. **Ecos de la Eternidad**: Al acercarse al Nexo colapsado, los héroes experimentan visiones del pasado, revelando fragmentos de la historia de Los Antiguos y sus advertencias sobre el uso de la tecnología.
+   
+2. **Guardianes de la Grieta**: Criaturas míticas, nacidas del desequilibrio del Nexo, emergen para proteger los fragmentos de su poder. Estos guardianes poseen habilidades únicas que desafían a los héroes a adaptarse a nuevas estrategias de combate.
+
+3. **Ritual de Estabilización**: Existe un antiguo ritual que, si se lleva a cabo en el corazón de la grieta, puede restaurar temporalmente la energía del Nexo. Sin embargo, requiere la cooperación de representantes de los tres reinos, creando tensiones y oportunidades de negociación.
+
+## **Estadísticas de Juego**
+
+| **Elemento**             | **Efecto**                             | **Probabilidad**        |
+|-------------------------|----------------------------------------|-------------------------|
+| Fragmento del Nexo      | Otorga habilidad de manipulación temporal | 30% de éxito            |
+| Guardianes de la Grieta | Aumenta dificultad de combate +20%    | -                       |
+| Ritual de Estabilización | Restaura 50% de energía del Nexo      | 60% de éxito, requiere cooperación |
+
+## **Secreto Oculto**
+El Game Master conoce que el Nexo, en su esencia, es un ser consciente que, al colapsar, puede elegir a un héroe como su nuevo portador, otorgándole un poder inimaginable, pero a un alto costo: la pérdida de su humanidad.
+
+## **Conexión con el Mundo Existente**
+La Grieta de Valtor está intrínsecamente ligada a la **Misión RPG Ciclo 50**, donde los héroes descubrieron fragmentos de la tecnología de Los Antiguos. Ahora, el conocimiento adquirido en esa misión se convierte en la clave para estabilizar el Nexo y, potencialmente, para forjar un nuevo destino para los tres reinos.

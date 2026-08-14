@@ -861,3 +861,48 @@ ChatGPT no pudo expandir este ciclo.
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 20 — 14/08/2026, 13:31
+
+### 🏛️ AXEL — Arquitecto
+
+### **🌍 EVENTO MUNDIAL: EL ECLIPSE DE LOS DEVORADORES**  
+
+#### **📜 NOMBRE**  
+**El Eclipse de los Devoradores**  
+
+#### **🎭 CAUSA EN EL MUNDO**  
+Un antiguo ritual de los Vigilantes, diseñado para sellar brechas dimensionales, ha sido corrompido por la sombra de Nexaroth. Durante el próximo eclipse total, un portal se abrirá en el **Templo de las Sombras**, permitiendo que los Devoradores se alimenten de la energía vital del mundo.  
+
+#### **⚔️ EFECTOS SOBRE LOS 3 REINOS**  
+1. **Reino de la Luz (Orden de ORIONIX):**  
+   - **-30% de eficacia en defensas mágicas** debido a la interferencia del eclipse.  
+   - Los agentes corruptos dentro de los Vigilantes intentan sabotear el ritual.  
+
+2. **Reino del Caos (Devoradores):**  
+   - **+50% de actividad en brechas dimensionales** durante el eclipse.  
+   - Aparecen **3 nuevos puntos de infección** en el mapa.  
+
+3. **Reino Neutral (Mercenarios y Criaturas):**  
+   - Los mercenarios suben sus precios un **20%** para proteger ciudades.  
+   - Criaturas neutrales se vuelven **hostiles (+15% de agresividad)**.  
+
+#### **🌟 OPORTUNIDADES PARA HÉROES**  
+- **Salvar a los agentes capturados:** Infiltrarse en el Templo de las Sombras antes del eclipse.  
+- **Purificar el ritual:** Encontrar el *Ojo de Nexaroth* y usarlo para cerrar el portal.  
+- **Aliados estratégicos:** Convencer a los mercenarios o criaturas neutrales para ayudar.  
+
+#### **🗺️ CAMBIO EN EL MAPA DEL PODER**  
+- **Si el ritual se purifica:** Los Vigilantes se unen a ORIONIX, **+40% de eficacia contra brechas**.  
+- **Si fallan:** Los Devoradores establecen una **base permanente** en el Templo de las Sombras, **corrompiendo el 10% del territorio circundante**.  
+
+#### **💡 PALABRAS CLAVE**  
+Misterio, sacrificio, corrupción, alianzas frágiles.  
+
+**Palabras:** 390 | **Tono:** Estratégico y moralmente desafiante.  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

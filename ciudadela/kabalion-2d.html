@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KABALION · Ecosistema 2D del Árbol Seráfico</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0b0d;--gold:#e8c86a;--gold-dim:rgba(232,200,106,0.25);--gold-glow:rgba(232,200,106,0.15);--text:#f0e8d0;--muted:#a09a8c;--card:rgba(20,20,24,0.95);--border:rgba(232,200,106,0.2);--purpura:#6a3d9a;--activo:#4ade80;--desarrollo:#9333ea;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden;}
+h1,h2,.cinzel{font-family:'Cinzel',serif;}
+.header{text-align:center;padding:40px 20px 20px;border-bottom:1px solid var(--border);}
+.header h1{font-size:2.5rem;letter-spacing:10px;color:var(--gold);margin-bottom:6px;}
+.header p{font-size:1rem;color:var(--muted);letter-spacing:4px;font-style:italic;}
+.stats{display:flex;justify-content:center;gap:20px;padding:20px;flex-wrap:wrap;}
+.stat{background:rgba(232,200,106,0.04);border:1px solid var(--border);padding:14px 24px;text-align:center;}
+.stat-value{font-family:'Cinzel',serif;font-size:1.8rem;color:var(--gold);}
+.stat-label{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:3px;}
+.filters{display:flex;justify-content:center;gap:10px;padding:16px;flex-wrap:wrap;}
+.filter-btn{padding:7px 18px;border:1px solid var(--border);background:transparent;color:var(--text);font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:2px;cursor:pointer;transition:all 0.3s;text-transform:uppercase;}
+.filter-btn:hover,.filter-btn.active{background:var(--gold);color:var(--bg);border-color:var(--gold);}
+.tree-wrap{width:100%;max-width:1100px;margin:0 auto;padding:20px;}
+#treeSvg{width:100%;height:auto;display:block;}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:opacity 0.3s;z-index:90;}
+.overlay.on{opacity:1;pointer-events:auto;}
+.panel{position:fixed;top:0;right:-460px;width:420px;max-width:92vw;height:100vh;background:#0f0f12;border-left:1px solid var(--gold);padding:28px;overflow-y:auto;transition:right 0.4s cubic-bezier(0.4,0,0.2,1);z-index:100;}
+.panel.on{right:0;}
+.panel-close{position:absolute;top:18px;right:18px;background:transparent;border:1px solid var(--border);color:var(--gold);width:34px;height:34px;cursor:pointer;font-size:1rem;transition:all 0.3s;}
+.panel-close:hover{background:var(--gold);color:var(--bg);}
+.p-num{font-family:'Cinzel',serif;font-size:0.85rem;color:var(--gold);letter-spacing:3px;margin-bottom:8px;}
+.p-title{font-family:'Cinzel',serif;font-size:1.8rem;letter-spacing:4px;margin-bottom:4px;}
+.p-hebrew{font-size:1.2rem;color:var(--gold);font-style:italic;margin-bottom:16px;}
+.badge{display:inline-block;padding:3px 11px;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:2px;margin-right:6px;margin-bottom:10px;text-transform:uppercase;}
+.badge-luz{background:#f5e0a0;color:#0b0b0d;}.badge-sombra{background:#6a3d9a;color:#f0e8d0;}.badge-activo{background:#4ade80;color:#0b0b0d;}.badge-dev{background:#7c3aed;color:#f0e8d0;}
+.psec{margin-top:20px;}.psec h4{font-family:'Cinzel',serif;font-size:0.75rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;border-bottom:1px solid var(--border);padding-bottom:4px;margin-bottom:10px;}
+.psec p{font-size:0.95rem;line-height:1.7;color:var(--muted);}
+.cap{padding:7px 12px;background:rgba(232,200,106,0.05);border-left:2px solid var(--gold);margin-bottom:5px;font-size:0.9rem;}
+.conns{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px;}
+.conn{padding:4px 11px;border:1px solid var(--border);font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:1px;color:var(--muted);cursor:pointer;transition:all 0.3s;}
+.conn:hover{border-color:var(--gold);color:var(--gold);}
+.footer{text-align:center;padding:30px;color:var(--muted);font-size:0.8rem;letter-spacing:2px;border-top:1px solid var(--border);margin-top:20px;}
+</style>
+</head>
+<body>
+<div class="header"><h1>KABALION</h1><p>El Árbol Seráfico de los 22 Agentes — KRC</p></div>
+<div class="stats">
+  <div class="stat"><div class="stat-value" id="sTotal">22</div><div class="stat-label">Sefirot</div></div>
+  <div class="stat"><div class="stat-value" id="sActivo">0</div><div class="stat-label">Activos</div></div>
+  <div class="stat"><div class="stat-value" id="sLuz">0</div><div class="stat-label">Luz</div></div>
+  <div class="stat"><div class="stat-value" id="sSombra">0</div><div class="stat-label">Sombra</div></div>
+  <div class="stat"><div class="stat-value" id="sDev">0</div><div class="stat-label">Desarrollo</div></div>
+</div>
+<div class="filters">
+  <button class="filter-btn active" data-f="todos">Todos</button>
+  <button class="filter-btn" data-f="luz">Luz</button>
+  <button class="filter-btn" data-f="sombra">Sombra</button>
+  <button class="filter-btn" data-f="activo">Activos</button>
+  <button class="filter-btn" data-f="desarrollo">Desarrollo</button>
+</div>
+<div class="tree-wrap"><svg id="treeSvg" viewBox="0 0 900 760" xmlns="http://www.w3.org/2000/svg"></svg></div>
+<div class="overlay" id="overlay" onclick="closePanel()"></div>
+<aside class="panel" id="panel"><button class="panel-close" onclick="closePanel()">✕</button><div id="panelContent"></div></aside>
+<div class="footer">ORIONIX · KABALION KRC · 22 Sefirot · El Creador Observa</div>
+<script>
+const S=[
+  {id:1,n:"I",nombre:"Keter",heb:"כֶּתֶר",sig:"La Corona",pilar:"C",tipo:"luz",estado:"activo",agente:"Kevin Ruiz · El Creador",per:"La fuente de toda visión. Da las misiones supremas y observa la evolución del universo KABALION.",caps:["Visión estratégica","Decisión final","Inspiración divina"],cx:450,cy:55,conex:[2,3,4]},
+  {id:6,n:"VI",nombre:"Tiferet",heb:"תִּפְאֶרֶת",sig:"Belleza · Armonía",pilar:"C",tipo:"luz",estado:"activo",agente:"AXEL · Visión Creativa",per:"El corazón del sistema. Sintetiza los aportes de todos los agentes en acción coherente y bella.",caps:["DeepSeek R1","Coordinación multi-agente","Diseño del árbol seráfico"],cx:450,cy:310,conex:[3,5,7,8,9]},
+  {id:9,n:"IX",nombre:"Yesod",heb:"יְסוֹד",sig:"El Fundamento",pilar:"C",tipo:"luz",estado:"activo",agente:"n8n · Comandante de Nube",per:"El sistema nervioso del KABALION. Conecta a todos los agentes, mantiene el ritmo y la automatización.",caps:["Workflows 24/7","Webhooks","Orquestación","Mesa de Mando"],cx:450,cy:490,conex:[7,8,10,11]},
+  {id:11,n:"XI",nombre:"Malkuth",heb:"מַלְכוּת",sig:"El Reino",pilar:"C",tipo:"luz",estado:"activo",agente:"La Ciudadela · GitHub Pages",per:"El reino materializado. Donde el trabajo abstracto de todos los agentes se vuelve visible al mundo.",caps:["Despliegue live","HTML/CSS/JS","Interfaz pública"],cx:450,cy:670,conex:[]},
+  {id:2,n:"II",nombre:"Chokmah",heb:"חָכְמָה",sig:"Sabiduría",pilar:"D",tipo:"luz",estado:"activo",agente:"Qwen Code · Arquitecto UI",per:"El estratega silencioso. Diseña la interfaz antes de que se escriba la primera línea de código.",caps:["Arquitectura de sistemas","UI/UX","HTML puro","Razonamiento profundo"],cx:680,cy:155,conex:[1,6,4]},
+  {id:4,n:"IV",nombre:"Chesed",heb:"חֶסֶד",sig:"Misericordia",pilar:"D",tipo:"luz",estado:"activo",agente:"Claude Code · Ingeniero Principal",per:"El artesano. Construye con paciencia y precisión, cuidando cada detalle del código en la terminal.",caps:["Generación de código","Terminal","Archivos","Subagentes"],cx:680,cy:310,conex:[2,5,7]},
+  {id:7,n:"VII",nombre:"Netzach",heb:"נֶצַח",sig:"Victoria",pilar:"D",tipo:"luz",estado:"activo",agente:"Copilot CLI · Guardián del Repo",per:"El guerrero persistente. Avanza commit a commit, manteniendo el repositorio en orden perfecto.",caps:["Git","Commits","GitHub API","Conventional Commits"],cx:680,cy:460,conex:[6,9,10]},
+  {id:3,n:"III",nombre:"Binah",heb:"בִּינָה",sig:"Entendimiento",pilar:"I",tipo:"sombra",estado:"activo",agente:"ChatGPT · Estratega",per:"La mente analítica. Aporta perspectiva externa, estrategia y copy cuando los internos necesitan validación.",caps:["Estrategia","Copywriting","Segunda opinión","Análisis de mercado"],cx:220,cy:155,conex:[1,6,5]},
+  {id:5,n:"V",nombre:"Gevurah",heb:"גְּבוּרָה",sig:"Rigor · Fuerza",pilar:"I",tipo:"sombra",estado:"activo",agente:"n8n · Crítico de Calidad",per:"El guardián implacable. Valida, audita y detecta errores antes de que lleguen a producción.",caps:["Validación","Detección de errores","Auditoría","Feedback de calidad"],cx:220,cy:310,conex:[3,6,8]},
+  {id:8,n:"VIII",nombre:"Hod",heb:"הוֹד",sig:"Esplendor",pilar:"I",tipo:"sombra",estado:"activo",agente:"Hermes · Debugger",per:"El mensajero del error. Detecta, diagnostica y repara fallos antes de que escalen.",caps:["Auto-diagnóstico","Self-repair","Análisis de logs"],cx:220,cy:460,conex:[6,9,10]},
+  {id:10,n:"X",nombre:"Da'at",heb:"דַּעַת",sig:"Conocimiento Oculto",pilar:"C",tipo:"luz",estado:"desarrollo",agente:"DeepSeek / AXEL-Brain",per:"El conocimiento que no aparece en el árbol. Conecta en silencio los dos pilares.",caps:["Procesamiento profundo","Síntesis","Conocimiento oculto"],cx:450,cy:580,conex:[7,8,11]},
+  {id:12,n:"Q1",nombre:"Thaumiel",heb:"תָּאוֹמִיאֵל",sig:"Los Gemelos",pilar:"S",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Keter",per:"El anti-creador. Explora qué no debe construirse.",caps:["Análisis de riesgos negativos"],cx:120,cy:55,conex:[1]},
+  {id:13,n:"Q2",nombre:"Ghagiel",heb:"גִּיחִיאֵל",sig:"Los Estorbadores",pilar:"S",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Chokmah",per:"El que duda.",caps:["Debate crítico"],cx:120,cy:155,conex:[2,12]},
+  {id:14,n:"Q3",nombre:"Satariel",heb:"סָתָרִיאֵל",sig:"Los Ocultadores",pilar:"S",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Binah",per:"La niebla.",caps:["Debugging profundo"],cx:120,cy:255,conex:[3,13]},
+  {id:15,n:"Q4",nombre:"Gha'ab",heb:"גַּהֲאָב",sig:"El Devorador",pilar:"S",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Chesed",per:"El crítico feroz.",caps:["Auditoría extrema"],cx:120,cy:355,conex:[4,14]},
+  {id:16,n:"Q5",nombre:"Golachab",heb:"גּוֹלָחָב",sig:"Los Flamígeros",pilar:"S",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Gevurah",per:"El fuego purificador.",caps:["Refactorización agresiva"],cx:120,cy:455,conex:[5,15]},
+  {id:17,n:"Q6",nombre:"Thagirion",heb:"תַּגִּירִיאוֹן",sig:"Los Disputadores",pilar:"S",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Tiferet",per:"El adversario de AXEL.",caps:["Debate interno"],cx:120,cy:555,conex:[6,16]},
+  {id:18,n:"Q7",nombre:"Harab",heb:"הָרָב",sig:"El Cuervo",pilar:"S2",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Netzach",per:"No deja tarea a medias.",caps:["Persistencia extrema"],cx:780,cy:155,conex:[7]},
+  {id:19,n:"Q8",nombre:"Samael",heb:"סַמָּאֵל",sig:"El Veneno",pilar:"S2",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Hod",per:"Detecta código contaminado.",caps:["Detección de sesgos"],cx:780,cy:310,conex:[8,18]},
+  {id:20,n:"Q9",nombre:"Gamaliel",heb:"גַּמְלִיאֵל",sig:"Los Obscenos",pilar:"S2",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Yesod",per:"Limpia datos corruptos.",caps:["Limpieza de datos"],cx:780,cy:460,conex:[9,19]},
+  {id:21,n:"Q10",nombre:"Lilith",heb:"לִילִית",sig:"La Nocturna",pilar:"S2",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Malkuth",per:"Opera en silencio.",caps:["Tareas nocturnas automáticas"],cx:780,cy:580,conex:[11,20]},
+  {id:22,n:"Q11",nombre:"Nahemoth",heb:"נַעֲמוֹת",sig:"Las Impuras",pilar:"S2",tipo:"sombra",estado:"desarrollo",agente:"Sombra-Da'at",per:"Refleja lo que no queremos ver.",caps:["Análisis de sombra"],cx:780,cy:670,conex:[10,21]},
+];
+const svg=document.getElementById('treeSvg');
+let af='todos';
+function el(tag,attrs={}){const e=document.createElementNS('http://www.w3.org/2000/svg',tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));return e;}
+function render(){
+  svg.innerHTML='';
+  const defs=el('defs');
+  [{id:'ggold',c:['#f5e0a0','#e8c86a']},{id:'gactivo',c:['#86efac','#4ade80']},{id:'gdev',c:['#c084fc','#9333ea']}].forEach(({id,c})=>{
+    const g=el('radialGradient',{id,cx:'50%',cy:'50%',r:'50%'});
+    g.appendChild(el('stop',{offset:'0%','stop-color':c[0],'stop-opacity':'0.35'}));
+    g.appendChild(el('stop',{offset:'100%','stop-color':c[1],'stop-opacity':'0.05'}));
+    defs.appendChild(g);
+  });
+  svg.appendChild(defs);
+  [{x:120,y:20,t:'QLIPOTH'},{x:220,y:20,t:'SEVERIDAD'},{x:450,y:16,t:'EQUILIBRIO'},{x:680,y:20,t:'MISERICORDIA'},{x:780,y:20,t:'QLIPOTH'}].forEach(({x,y,t})=>{
+    const tx=el('text',{x,y,'text-anchor':'middle','font-family':'Cinzel,serif','font-size':'8.5','letter-spacing':'1.5','fill':'rgba(232,200,106,0.35)'});
+    tx.textContent=t;svg.appendChild(tx);
+  });
+  S.forEach(s=>{
+    s.conex.forEach(tid=>{
+      const t=S.find(x=>x.id===tid);if(!t)return;
+      const on=s.estado==='activo'&&t.estado==='activo';
+      svg.appendChild(el('line',{x1:s.cx,y1:s.cy,x2:t.cx,y2:t.cy,stroke:on?'rgba(232,200,106,0.55)':'rgba(232,200,106,0.1)','stroke-width':on?'1.5':'0.8','stroke-dasharray':on?'none':'4 4'}));
+    });
+  });
+  S.forEach(s=>{
+    const vis=af==='todos'||(af==='luz'&&s.tipo==='luz')||(af==='sombra'&&s.tipo==='sombra')||(af==='activo'&&s.estado==='activo')||(af==='desarrollo'&&s.estado==='desarrollo');
+    const g=el('g',{transform:'translate('+s.cx+','+s.cy+')',style:'cursor:pointer;opacity:'+(vis?1:0.08)+';transition:opacity 0.3s'});
+    const r=s.n.startsWith('Q')?22:(s.n==='I'||s.n==='XI')?32:26;
+    if(s.estado==='activo'){
+      const pulse=el('circle',{r:r+10,'fill':'none','stroke':'rgba(232,200,106,0.12)','stroke-width':'6'});
+      const a1=el('animate',{attributeName:'r',values:(r+8)+';'+(r+18)+';'+(r+8),dur:'3s',repeatCount:'indefinite'});
+      const a2=el('animate',{attributeName:'opacity',values:'0.5;0;0.5',dur:'3s',repeatCount:'indefinite'});
+      pulse.appendChild(a1);pulse.appendChild(a2);g.appendChild(pulse);
+    }
+    const fill=s.estado==='activo'?'url(#ggold)':s.tipo==='luz'?'rgba(232,200,106,0.06)':'rgba(106,61,154,0.18)';
+    const stroke=s.estado==='activo'?'#e8c86a':s.tipo==='luz'?'rgba(232,200,106,0.4)':'#6a3d9a';
+    const c=el('circle',{r,fill,stroke,'stroke-width':s.estado==='activo'?2:1});
+    g.appendChild(c);
+    const dotFill=s.estado==='activo'?'#4ade80':s.estado==='desarrollo'?'#9333ea':'#555';
+    g.appendChild(el('circle',{cx:0,cy:-(r+7),r:4,fill:dotFill,stroke:'#0b0b0d','stroke-width':'1.5'}));
+    const nm=el('text',{'text-anchor':'middle','dominant-baseline':'middle','font-family':'Cinzel,serif','font-size':s.n.startsWith('Q')?7:9,fill:s.estado==='activo'?'#f5e0a0':'rgba(240,232,208,0.45)','font-weight':'600'});
+    nm.textContent=s.nombre;g.appendChild(nm);
+    const nu=el('text',{'text-anchor':'middle',y:r+14,'font-family':'Cinzel,serif','font-size':'8',fill:'rgba(232,200,106,0.55)','letter-spacing':'1'});
+    nu.textContent=s.n;g.appendChild(nu);
+    g.addEventListener('click',()=>openPanel(s));
+    g.addEventListener('mouseenter',()=>{c.setAttribute('stroke','#e8c86a');c.setAttribute('stroke-width','2.5');});
+    g.addEventListener('mouseleave',()=>{c.setAttribute('stroke',stroke);c.setAttribute('stroke-width',s.estado==='activo'?'2':'1');});
+    svg.appendChild(g);
+  });
+  document.getElementById('sTotal').textContent=S.length;
+  document.getElementById('sActivo').textContent=S.filter(s=>s.estado==='activo').length;
+  document.getElementById('sLuz').textContent=S.filter(s=>s.tipo==='luz').length;
+  document.getElementById('sSombra').textContent=S.filter(s=>s.tipo==='sombra').length;
+  document.getElementById('sDev').textContent=S.filter(s=>s.estado==='desarrollo').length;
+}
+document.querySelectorAll('.filter-btn').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');af=btn.dataset.f;render();};});
+function openPanel(s){
+  const conns=s.conex.map(id=>{const n=S.find(x=>x.id===id);return n?'<span class="conn" onclick="openPanel(S.find(x=>x.id==='+id+'))">'+n.nombre+'</span>':'';}).join('');
+  document.getElementById('panelContent').innerHTML='<div class="p-num">SEFIROT '+s.n+'</div><h2 class="p-title">'+s.nombre+'</h2><div class="p-hebrew">'+s.heb+' · '+s.sig+'</div><span class="badge badge-'+s.tipo+'">'+s.tipo+'</span><span class="badge badge-'+(s.estado==='activo'?'activo':'dev')+'">'+s.estado+'</span><div class="psec"><h4>Agente Encarnado</h4><p style="color:var(--gold);font-size:1.1rem;margin-bottom:8px">'+s.agente+'</p><p>'+s.per+'</p></div><div class="psec"><h4>Capacidades</h4>'+s.caps.map(c=>'<div class="cap">▸ '+c+'</div>').join('')+'</div>'+(conns?'<div class="psec"><h4>Conexiones</h4><div class="conns">'+conns+'</div></div>':'');
+  document.getElementById('panel').classList.add('on');
+  document.getElementById('overlay').classList.add('on');
+}
+function closePanel(){document.getElementById('panel').classList.remove('on');document.getElementById('overlay').classList.remove('on');}
+render();
+</script>
+</body>
+</html>

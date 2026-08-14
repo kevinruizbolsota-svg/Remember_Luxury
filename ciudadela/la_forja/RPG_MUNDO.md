@@ -988,3 +988,40 @@ Su conexión con el árbol Cabalístico es el **Sendero de Kether (Corona)**, si
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 23 — 14/08/2026, 15:01
+
+### 🏛️ AXEL — Arquitecto
+
+### **🌑 VILLANO: NEXAROTH, EL DEVORADOR DE ESENCIAS**  
+
+#### **📜 ORIGEN OSCURO**  
+Nexaroth surgió de las profundidades del Abismo Aeterno, una entidad primordial que se alimenta de la esencia vital de los mundos. Su existencia data de antes de la creación de Aetheria, y su sed de poder lo llevó a corromper a los primeros Vigilantes, convirtiéndolos en los Devoradores, sus siervos más leales.  
+
+#### **⚡ PODERES**  
+- **Manipulación de la Oscuridad:** Puede tejer sombras vivas que drenan la energía de sus víctimas, reduciendo su fuerza en un **30% por cada minuto de exposición**.  
+- **Corrupción de Almas:** Cualquier ser que caiga bajo su influencia tiene un **20% de probabilidad de convertirse en un Devorador en 24 horas**.  
+- **Regeneración:** Si no es destruido por completo, su esencia se regenera en **7 días**, aumentando su resistencia en un **10% cada vez**.  
+
+#### **💀 MOTIVACIÓN**  
+Nexaroth busca consumir el núcleo de Aetheria, un cristal sagrado que contiene la esencia pura del mundo. Si lo logra, **el 90% de los territorios caerán en oscuridad permanente**, y ORIONIX perderá su influencia.  
+
+#### **🎯 PUNTO DÉBIL**  
+- **Luz de Vorian:** La espada de Vorian, forjada con fragmentos del núcleo de Aetheria, es la única arma capaz de herirlo permanentemente. Cada golpe reduce su regeneración en un **15%**.  
+- **Templo de las Sombras:** Su conexión con este lugar lo hace vulnerable. Si el templo es purificado, su poder disminuirá un **40%**.  
+
+#### **🕳️ JERARQUÍA DEL MAL**  
+Nexaroth ocupa el **nivel más alto** en la jerarquía de los Devoradores, superando incluso a los antiguos Vigilantes corruptos. Su influencia se extiende como una plaga, y su caída debilitaría a todas sus criaturas en un **25%**.  
+
+#### **⚔️ CONEXIÓN CON EL MUNDO**  
+- **Aliados:** Los Devoradores lo veneran como un dios, y su presencia aumenta la agresividad de las criaturas oscuras en un **20%**.  
+- **Amenaza:** Si Vorian no logra purificar el templo, Nexaroth ganará acceso al núcleo de Aetheria, **aumentando la corrupción global en un 10% por día**.  
+- **Misión Clave:** Derrotar a Nexaroth antes de que complete su ritual en el Templo de las Sombras, o el mundo enfrentará una era de oscuridad irreversible.  
+
+**Palabras:** 390 | **Tono:** Siniestro y épico, con un enfoque en la inevitabilidad de la corrupción y la lucha desesperada por la luz.  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

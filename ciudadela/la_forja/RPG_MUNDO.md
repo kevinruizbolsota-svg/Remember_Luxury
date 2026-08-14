@@ -1656,3 +1656,46 @@ Los Cristales de Lúmina son en realidad fragmentos de un antiguo artefacto cono
 
 ## Conexión con el Mundo
 Los Cristales de Lúmina están intrínsecamente ligados a las **Ruinas de Eldara**, un antiguo templo donde se adoraba a los dioses de la luz. Se dice que aquellos que se atrevan a explorar sus profundidades pueden encontrar más cristales y descubrir la historia detrás de su creación.
+
+---
+
+## CICLO 66 — 14/08/2026, 21:30
+
+### 🏛️ AXEL — Arquitecto
+
+AXEL no respondió en este ciclo.
+
+### 🤖 ChatGPT — Expansor
+
+### Elemento: Cristal de Luminiscencia
+
+**Detalles Únicos:**
+
+1. **Resonancia Elemental:** Este cristal emite una suave vibración que se intensifica en presencia de energía mágica, permitiendo a su portador detectar fuentes ocultas de poder en un radio de 30 metros. 
+   
+2. **Fusión de Colores:** A medida que se expone a diferentes elementos, el cristal cambia de color, reflejando su afinidad. Por ejemplo, en contacto con agua, se torna azul; en presencia de fuego, rojo; y con aire, un verde vibrante.
+
+3. **Aura de Protección:** El Cristal de Luminiscencia crea un escudo de energía que otorga un +2 a la defensa del portador durante 10 minutos, una vez al día, al ser activado por una palabra clave secreta.
+
+---
+
+**Estadísticas de Juego:**
+
+| Atributo                | Valor          |
+|-------------------------|----------------|
+| Tipo                    | Cristal Mágico |
+| Rareza                  | Épico          |
+| Efecto Primario         | Detectar Energía|
+| Duración de Efecto      | 10 minutos      |
+| Bonificación de Defensa  | +2             |
+| Usos por Día            | 1              |
+
+---
+
+**Secreto Oculto:**
+El Cristal de Luminiscencia tiene el poder de absorber la esencia de criaturas mágicas que mueren en su proximidad. Al hacerlo, puede almacenar hasta tres "cargas" de energía mágica, que el portador puede liberar en un poderoso hechizo de su elección, duplicando su efecto.
+
+---
+
+**Conexión con el Mundo:**
+Este cristal se encuentra en las profundidades de la **Cueva de los Susurros**, un lugar sagrado donde se dice que los ancestros de los magos de la Luz depositaron su sabiduría. Aquellos que logran combinar el cristal con el **Cáliz de la Verdad** pueden acceder a visiones del pasado y del futuro, revelando secretos olvidados del mundo.

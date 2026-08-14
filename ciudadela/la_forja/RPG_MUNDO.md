@@ -697,3 +697,40 @@ La Nexisomancia es clave para el **Ritual de Absorción** de Nexaroth. Si los ju
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 16 — 14/08/2026, 11:31
+
+### 🏛️ AXEL — Arquitecto
+
+### 🌌 **Criatura del Mundo ORIONIX RPG: El Devorador de Nexis**  
+
+#### **🔹 Nombre**  
+**Devorador de Nexis** (Nexis Devourer)  
+
+#### **🔹 Descripción Física**  
+El Devorador de Nexis es una criatura amorfa, compuesta de una sustancia oscura y viscosa que parece absorber la luz a su alrededor. Su cuerpo está sembrado de fragmentos de Cristales de Nexis incrustados, que brillan con un resplandor enfermizo. No tiene una forma definida, pero puede alargar tentáculos afilados para atacar. Sus "ojos" son grietas dimensionales que parpadean en su superficie, mostrando breves visiones de otros planos.  
+
+#### **🔹 Hábitat**  
+- **Grietas Dimensionales:** Aparece cerca de zonas donde se ha abusado de la Nexisomancia.  
+- **Nidos de Cristal:** Se alimenta de los Fragmentos de Cristal de Nexis, por lo que suele merodear cerca de yacimientos o lugares donde se practica magia intensiva.  
+
+#### **🔹 Estadísticas de Combate**  
+- **HP (Vida):** 250  
+- **ATQ (Ataque):** 45 (tentáculos con propiedades corrosivas)  
+- **DEF (Defensa):** 30 (su cuerpo absorbe parte del daño mágico)  
+- **VEL (Velocidad):** 20 (lento, pero puede teletransportarse cortas distancias)  
+
+#### **🔹 Botín Especial**  
+- **Fragmento de Nexis Corrompido:** Un cristal oscurecido que puede usarse para fabricar armas con propiedades dimensionales (+10 ATQ, pero reduce la humanidad del portador en un 5% por uso).  
+- **Esencia de Devorador:** Un líquido negro que puede sellar grietas dimensionales temporalmente (útil para evitar apariciones de criaturas similares).  
+
+#### **🔹 Leyenda Asociada**  
+Se dice que los Devoradores de Nexis son fragmentos de Nexaroth, el ente que busca absorber el mundo. Cada vez que un Nexisomante abusa de su poder, estas criaturas emergen como "anticuerpos" del universo, limpiando el exceso de energía dimensional. Algunos creen que destruirlos acelera el Ritual de Absorción, mientras que otros piensan que son una advertencia para los imprudentes.  
+
+**Palabras:** 290 | **Tono:** Misterioso y amenazante.  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

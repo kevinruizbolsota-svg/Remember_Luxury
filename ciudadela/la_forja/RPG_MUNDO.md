@@ -122,3 +122,44 @@ Lord Umbrion ocupa el *Nivel 4* en la jerarquía de los villanos, solo superado 
 ### 🤖 ChatGPT — Expansor
 
 ChatGPT no pudo expandir este ciclo.
+
+---
+
+## CICLO 4 — 14/08/2026, 05:31
+
+### 🏛️ AXEL — Arquitecto
+
+### **Región: Umbral de Sombras**  
+
+#### **Geografía**  
+El Umbral de Sombras es una vasta llanura rodeada por montañas negras de roca volcánica, cuyos picos nunca ven la luz del sol. El terreno está surcado por grietas de las que emanan vapores púrpuras, producto de la corrupción de Lord Umbrion. Un río de agua estancada, conocido como el *Lamento Eterno*, divide la región en dos, y su corriente es tan densa que parece moverse en cámara lenta.  
+
+- **Tamaño:** ~500 km².  
+- **Elevación media:** 200 metros sobre el nivel del mar.  
+- **Característica única:** Las *Torres de Obsidiana*, estructuras antiguas que emiten un zumbido constante y distorsionan el tiempo cerca de ellas (+10% probabilidad de efectos temporales aleatorios).  
+
+#### **Clima**  
+El clima es frío y seco, con niebla perpetua que reduce la visibilidad a 10 metros. Las tormentas de relámpagos negros son frecuentes y drenan la energía mágica de quienes no están protegidos (-15% de resistencia mágica durante las tormentas).  
+
+- **Temperatura media:** 5°C.  
+- **Precipitación anual:** 50 mm (en forma de ceniza).  
+
+#### **Criaturas**  
+1. **Spectros de Umbrion:** Fantasmas corrompidos que drenan la vitalidad (25% de probabilidad de infligir *Sombra Parásita*).  
+2. **Gárgolas de Obsidiana:** Criaturas aladas que patrullan las torres (Resistencia física +30%).  
+3. **Drakes del Lamento:** Dragones menores que habitan el río, capaces de escupir un líquido corrosivo (Daño ácido: 20 puntos/segundo).  
+
+#### **Recurso Único: Fragmentos de Eclipso**  
+Cristales negros que crecen en las grietas del terreno. Al ser refinados, permiten a los magos oscuros canalizar el poder de Umbrion (+50% de eficiencia en hechizos oscuros). Sin embargo, su uso prolongado corrompe al usuario (1% de probabilidad diaria de adquirir *Marca de Umbrion*).  
+
+#### **Peligro Oculto: El Espejo Roto**  
+En el corazón de la región yace un espejo antiguo que refleja no imágenes, sino deseos oscuros. Quien se mira en él debe superar una tirada de Voluntad (DC 18) o sufrir una maldición aleatoria (ej.: *Invisibilidad perpetua*, pero incapacidad de interactuar con objetos físicos).  
+
+#### **Conexión con Lord Umbrion**  
+El Umbral de Sombras es uno de los *Puentes Activos* que alimentan su poder. Si los héroes destruyen las Torres de Obsidiana, su influencia en la región se reduce en un 40%, debilitando su conexión con el mundo material.  
+
+**Nota:** Esta región es clave para la trama, ya que alberga un fragmento del *Corazón de Umbrion*. ¿Podrán los jugadores recuperarlo antes de que caiga en manos de sus cultistas?  
+
+### 🤖 ChatGPT — Expansor
+
+ChatGPT no pudo expandir este ciclo.

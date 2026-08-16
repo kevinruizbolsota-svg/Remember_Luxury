@@ -4,240 +4,636 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mi Universo · ORIONIX</title>
-<link rel="icon" href="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png" type="image/png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-<style>
-:root{--oro:#e8c86a;--oro-med:#c8a24a;--bg:#06050d;--texto:#e9ddc4;--tenue:#b8a982;--panel:rgba(12,9,22,.9)}
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--bg);color:var(--texto);min-height:100vh;-webkit-font-smoothing:antialiased}
-#cosmos{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 20%,#0a0816,#03030a 60%,#010104);overflow:hidden;pointer-events:none}
-.neb{position:absolute;inset:-20%;background:radial-gradient(closest-side,rgba(90,60,180,.38),transparent) no-repeat 25% 25%/60% 60%,radial-gradient(closest-side,rgba(40,90,200,.28),transparent) no-repeat 75% 60%/50% 50%;filter:blur(44px);opacity:.5;animation:nebFloat 55s ease-in-out infinite alternate}
-@keyframes nebFloat{to{transform:translate(-3%,-4%) scale(1.12)}}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px 5vw;background:rgba(6,5,13,.85);backdrop-filter:blur(18px);border-bottom:1px solid rgba(232,200,106,.1)}
-.nav-brand{font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;letter-spacing:5px;background:linear-gradient(92deg,#8a6a24,#e8c86a 35%,#fff6d6 50%,#e8c86a 70%,#8a6a24);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 6s linear infinite;text-decoration:none}
-@keyframes brilloOro{to{background-position:200% center}}
-.nav-links{display:flex;gap:18px;align-items:center}
-.nav-links a{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:1.8px;text-transform:uppercase;color:var(--tenue);text-decoration:none;transition:color .2s}
-.nav-links a:hover{color:var(--oro)}
-.nav-links a.acc{color:var(--oro);border:1px solid rgba(232,200,106,.32);border-radius:4px;padding:5px 11px}
-@media(max-width:700px){.nav-links{display:none}}
-
-/* HERO */
-.hero{position:relative;z-index:10;padding:104px 6vw 44px;text-align:center}
-.hero-label{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:5px;color:rgba(232,200,106,.42);margin-bottom:10px;text-transform:uppercase}
-.hero-title{font-family:'Cinzel',serif;font-size:clamp(1.8rem,5vw,3.2rem);font-weight:900;letter-spacing:5px;background:linear-gradient(130deg,#8a6d2a,#f6e6ad 38%,#fff8e0 52%,#f6e6ad 68%,#8a6d2a);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 7s linear infinite;margin-bottom:12px}
-.hero-sub{font-size:clamp(.9rem,2vw,1.1rem);color:var(--tenue);max-width:560px;margin:0 auto 10px;line-height:1.65;font-style:italic}
-
-/* ACCESO DIRECTO GRID */
-.ac-section{position:relative;z-index:10;padding:20px 5vw 80px}
-.ac-label-top{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:4px;color:rgba(232,200,106,.4);text-transform:uppercase;margin-bottom:18px;text-align:center}
-.ac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
-
-/* CARDS */
-.ac-card{display:flex;flex-direction:column;gap:10px;padding:18px 18px 16px;border-radius:14px;border:1px solid rgba(232,200,106,.1);background:var(--panel);backdrop-filter:blur(18px);text-decoration:none;color:inherit;transition:transform .25s cubic-bezier(.2,0,.1,1),box-shadow .25s,border-color .25s;cursor:pointer}
-.ac-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.35),0 0 0 1px rgba(232,200,106,.22);border-color:rgba(232,200,106,.28)}
-.ac-top{display:flex;align-items:center;gap:12px}
-.ac-icon{width:44px;height:44px;border-radius:10px;border:1px solid;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;transition:transform .2s}
-.ac-card:hover .ac-icon{transform:scale(1.1)}
-.ac-meta{min-width:0}
-.ac-label{font-family:'Cinzel',serif;font-size:.3rem;letter-spacing:3px;text-transform:uppercase;color:rgba(232,200,106,.4);margin-bottom:3px}
-.ac-name{font-family:'Cinzel',serif;font-size:.62rem;font-weight:700;letter-spacing:2.5px;background:linear-gradient(120deg,#c8a24a,#f6e6ad 50%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ac-desc{font-size:.8rem;color:var(--tenue);line-height:1.52;flex:1;font-style:italic}
-.ac-cta{font-family:'Cinzel',serif;font-size:.36rem;letter-spacing:2px;text-transform:uppercase;color:var(--oro-med);display:flex;align-items:center;gap:5px;transition:gap .2s}
-.ac-card:hover .ac-cta{gap:10px}
-.ac-arr{transition:transform .2s}
-.ac-card:hover .ac-arr{transform:translateX(3px)}
-
-/* BACK */
-.back-row{position:relative;z-index:10;text-align:center;padding-bottom:40px}
-.btn-back{display:inline-flex;align-items:center;gap:7px;font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:2px;text-decoration:none;border:1px solid rgba(232,200,106,.18);border-radius:8px;padding:10px 20px;color:var(--tenue);transition:all .2s}
-.btn-back:hover{color:var(--oro);border-color:rgba(232,200,106,.42)}
-</style>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:image" content="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#e8c86a;--gold-l:#f5e0a0;--gold-d:#b89a40;
+  --glow:rgba(232,200,106,0.28);--bg:#0b0b0d;--bg2:rgba(15,15,22,0.92);
+  --border:rgba(232,200,106,0.14);--bora:rgba(232,200,106,0.46);
+  --text:#f0e8d0;--dim:rgba(240,232,208,0.42);--purple:#6a3d9a;
+  --sw:272px;--rw:288px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cormorant Garamond',serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* STARS */
+#cv{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* TOPBAR */
+.bar{
+  position:fixed;top:0;left:0;right:0;height:58px;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 18px;
+  background:rgba(11,11,13,0.97);border-bottom:1px solid var(--border);backdrop-filter:blur(14px);
+}
+.bar-brand{
+  font-family:'Cinzel',serif;font-size:1.05rem;font-weight:900;letter-spacing:0.22em;
+  color:var(--gold);text-shadow:0 0 18px var(--glow);text-decoration:none;white-space:nowrap;
+}
+.bar-brand span{color:var(--text)}
+.bar-search{
+  flex:1;max-width:380px;display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  border-radius:20px;padding:6px 14px;
+}
+.bar-search input{
+  background:transparent;border:none;outline:none;color:var(--text);
+  font-family:'Cormorant Garamond',serif;font-size:0.88rem;width:100%;
+}
+.bar-search input::placeholder{color:var(--dim)}
+.bar-acts{display:flex;align-items:center;gap:10px}
+.bar-btn{
+  width:36px;height:36px;border-radius:50%;border:1px solid var(--border);
+  background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .25s;font-size:.95rem;color:var(--dim);text-decoration:none;
+}
+.bar-btn:hover{border-color:var(--gold);color:var(--gold)}
+.bar-av{
+  width:36px;height:36px;border-radius:50%;border:2px solid var(--gold);
+  background:linear-gradient(135deg,var(--purple),var(--gold-d));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;font-size:.8rem;font-weight:700;color:var(--text);cursor:pointer;
+}
+
+/* LAYOUT */
+.layout{display:flex;padding-top:58px;min-height:100vh;position:relative;z-index:1}
+
+/* LEFT SIDEBAR */
+.sl{
+  width:var(--sw);flex-shrink:0;position:fixed;top:58px;left:0;bottom:0;
+  overflow-y:auto;overflow-x:hidden;padding:14px 10px;
+  border-right:1px solid var(--border);
+  background:rgba(11,11,13,0.75);backdrop-filter:blur(10px);
+}
+.sl::-webkit-scrollbar{width:3px}
+.sl::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+
+.pm{
+  display:flex;align-items:center;gap:11px;padding:11px;border-radius:10px;
+  border:1px solid var(--border);background:var(--bg2);margin-bottom:14px;
+  cursor:pointer;transition:border-color .25s;
+}
+.pm:hover{border-color:var(--bora)}
+.pm-av{
+  width:46px;height:46px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--purple),var(--gold-d));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;font-size:1rem;font-weight:700;color:var(--text);
+}
+.pm-name{font-family:'Cinzel',serif;font-size:.65rem;font-weight:700;letter-spacing:.1em;color:var(--text)}
+.pm-plan{font-size:.7rem;color:var(--gold);margin-top:2px}
+
+.sl-lbl{
+  font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.22em;
+  color:var(--dim);text-transform:uppercase;padding:12px 8px 5px;margin-top:2px;
+}
+.ni{
+  display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:7px;
+  text-decoration:none;color:var(--dim);font-family:'Cinzel',serif;
+  font-size:.56rem;letter-spacing:.1em;transition:all .22s;margin-bottom:2px;
+  border:1px solid transparent;cursor:pointer;
+}
+.ni:hover{background:rgba(255,255,255,0.04);color:var(--text)}
+.ni.on{background:rgba(232,200,106,0.08);color:var(--gold);border-color:var(--border)}
+.ni.dim{opacity:.3;pointer-events:none;cursor:default}
+.ni .ico{font-size:1rem;width:22px;text-align:center;flex-shrink:0}
+.ni .sb{
+  margin-left:auto;font-size:.42rem;letter-spacing:.14em;
+  color:var(--dim);border:1px solid var(--border);padding:2px 5px;border-radius:3px;
+}
+
+/* MAIN */
+.mc{
+  margin-left:var(--sw);margin-right:var(--rw);
+  flex:1;padding:22px 26px;min-width:0;
+}
+
+/* Section header */
+.sh{display:flex;align-items:center;gap:15px;margin-bottom:26px}
+.sh-ico{
+  width:50px;height:50px;border-radius:11px;flex-shrink:0;
+  background:rgba(232,200,106,0.09);border:1px solid var(--bora);
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+}
+.sh-lbl{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;margin-bottom:3px}
+.sh-tit{font-family:'Cinzel',serif;font-size:1.45rem;font-weight:900;color:var(--text);letter-spacing:.08em}
+
+.div{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:22px 0}
+
+/* PLANS */
+.ps-h{font-family:'Cinzel',serif;font-size:.72rem;font-weight:700;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:3px}
+.ps-s{font-size:.88rem;color:var(--dim);margin-bottom:18px;font-style:italic}
+
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
+
+.pc{
+  background:var(--bg2);border:1px solid var(--border);border-radius:11px;
+  padding:22px 18px;position:relative;transition:all .3s;cursor:pointer;overflow:hidden;
+}
+.pc::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .3s;
+}
+.pc:hover{border-color:var(--bora);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,.4)}
+.pc:hover::before{opacity:1}
+.pc.feat{border-color:rgba(232,200,106,.32)}
+.pc.feat::before{opacity:.5}
+
+.pc-badge{
+  font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:.16em;
+  color:var(--bg);background:var(--gold);padding:3px 10px;border-radius:20px;
+  display:inline-block;margin-bottom:12px;font-weight:700;
+}
+.pc-name{font-family:'Cinzel',serif;font-size:1rem;font-weight:700;color:var(--text);letter-spacing:.1em;margin-bottom:7px}
+.pc-price{font-family:'Cinzel',serif;font-size:1.9rem;font-weight:900;color:var(--gold);line-height:1}
+.pc-price .mo{font-size:.75rem;color:var(--dim);font-weight:400}
+.pc-desc{font-size:.84rem;color:var(--dim);margin:10px 0 14px;line-height:1.6;font-style:italic}
+.pc-ul{list-style:none;margin-bottom:18px}
+.pc-ul li{font-size:.8rem;color:var(--dim);padding:3px 0;display:flex;align-items:flex-start;gap:7px}
+.pc-ul li::before{content:'✦';color:var(--gold);font-size:.55rem;margin-top:3px;flex-shrink:0}
+.pc-btn{
+  display:block;width:100%;text-align:center;padding:11px;border-radius:6px;
+  font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.14em;font-weight:700;
+  text-transform:uppercase;transition:all .28s;cursor:pointer;
+  border:1px solid var(--bora);color:var(--gold);background:transparent;
+}
+.pc-btn:hover,.pc-btn.pri{background:var(--gold);color:var(--bg);box-shadow:0 0 18px var(--glow)}
+
+/* LEAD FORM */
+.lf{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:10px;padding:20px;margin-top:10px;display:none;
+}
+.lf h3{font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;color:var(--text);letter-spacing:.1em;margin-bottom:14px}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.fi{
+  width:100%;padding:10px 13px;background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);border-radius:6px;color:var(--text);
+  font-family:'Cormorant Garamond',serif;font-size:.9rem;outline:none;transition:border-color .25s;
+}
+.fi:focus{border-color:var(--gold)}
+.fi::placeholder{color:var(--dim)}
+.fs{
+  width:100%;padding:12px;background:var(--gold);color:var(--bg);border:none;
+  border-radius:6px;cursor:pointer;font-family:'Cinzel',serif;font-size:.62rem;
+  letter-spacing:.14em;font-weight:700;text-transform:uppercase;
+  box-shadow:0 0 14px var(--glow);transition:all .28s;
+}
+.fs:hover{background:var(--gold-d)}
+.fs:disabled{opacity:.5;cursor:default}
+
+/* CATALOG TABS */
+.ct{display:flex;gap:6px;border-bottom:1px solid var(--border);margin-bottom:18px}
+.ctab{
+  font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.14em;color:var(--dim);
+  padding:9px 18px;cursor:pointer;border-bottom:2px solid transparent;
+  margin-bottom:-1px;transition:all .22s;text-transform:uppercase;
+}
+.ctab.on{color:var(--gold);border-color:var(--gold)}
+.ctab:hover{color:var(--text)}
+
+.cp{display:none}
+.cp.on{display:block}
+
+.cdesc{
+  font-size:.86rem;color:var(--dim);margin-bottom:16px;font-style:italic;
+  padding:11px 14px;background:rgba(255,255,255,0.025);
+  border-left:2px solid var(--gold);border-radius:0 6px 6px 0;
+}
+.prodg{display:grid;grid-template-columns:repeat(auto-fill,minmax(186px,1fr));gap:12px}
+.prodc{
+  background:var(--bg2);border:1px solid var(--border);border-radius:9px;
+  overflow:hidden;transition:all .28s;cursor:pointer;
+}
+.prodc:hover{border-color:var(--bora);transform:translateY(-2px)}
+.pimg{
+  width:100%;aspect-ratio:3/4;background:rgba(255,255,255,0.03);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.5rem;color:var(--dim);border-bottom:1px solid var(--border);overflow:hidden;
+}
+.pimg img{width:100%;height:100%;object-fit:cover}
+.pi{padding:13px}
+.pname{font-family:'Cinzel',serif;font-size:.6rem;font-weight:700;color:var(--text);letter-spacing:.06em;margin-bottom:5px}
+.pprice{font-family:'Cinzel',serif;font-size:.88rem;color:var(--gold)}
+.pstore{font-size:.7rem;color:var(--dim);margin-top:3px}
+.pbtn{
+  display:block;width:100%;margin-top:9px;padding:7px;text-align:center;text-decoration:none;
+  font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.12em;
+  color:var(--gold);border:1px solid var(--border);border-radius:4px;transition:all .22s;
+}
+.pbtn:hover{background:var(--gold);color:var(--bg)}
+
+.empty{
+  grid-column:1/-1;text-align:center;padding:44px 20px;color:var(--dim);
+}
+.empty .ei{font-size:2.8rem;opacity:.3;margin-bottom:10px}
+.empty p{font-size:.86rem;font-style:italic;margin-bottom:8px}
+.empty small{font-size:.72rem;opacity:.6}
+
+/* SKELETONS */
+.sk{
+  background:linear-gradient(90deg,rgba(255,255,255,0.04),rgba(255,255,255,0.09),rgba(255,255,255,0.04));
+  background-size:200% 100%;animation:shim 1.5s infinite;border-radius:9px;
+}
+@keyframes shim{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* RIGHT SIDEBAR */
+.sr{
+  width:var(--rw);flex-shrink:0;position:fixed;top:58px;right:0;bottom:0;
+  overflow-y:auto;padding:14px 10px;
+  border-left:1px solid var(--border);
+  background:rgba(11,11,13,0.75);backdrop-filter:blur(10px);
+}
+.rc{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:15px;margin-bottom:12px}
+.rc h3{font-family:'Cinzel',serif;font-size:.55rem;font-weight:700;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:11px}
+.aq{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid rgba(232,200,106,.05);cursor:pointer;transition:all .2s}
+.aq:last-child{border-bottom:none;padding-bottom:0}
+.aq:hover .aname{color:var(--gold)}
+.adot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.aname{font-family:'Cinzel',serif;font-size:.56rem;color:var(--dim);transition:color .2s}
+.srow{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.srow:last-child{margin-bottom:0}
+.slbl{font-size:.76rem;color:var(--dim)}
+.sval{font-family:'Cinzel',serif;font-size:.75rem;color:var(--gold)}
+.tglink{
+  display:flex;align-items:center;gap:9px;
+  background:rgba(0,136,204,0.07);border:1px solid rgba(0,136,204,.22);
+  border-radius:8px;padding:11px;text-decoration:none;transition:all .28s;
+}
+.tglink:hover{background:rgba(0,136,204,.14)}
+.tglink .tgico{font-size:1.3rem}
+.tgt{font-family:'Cinzel',serif;font-size:.55rem;color:#29b6f6;letter-spacing:.1em}
+.tgs{font-size:.7rem;color:var(--dim);margin-top:2px}
+.axellink{
+  display:block;text-align:center;padding:10px;border:1px solid var(--bora);
+  border-radius:6px;text-decoration:none;font-family:'Cinzel',serif;
+  font-size:.56rem;letter-spacing:.12em;color:var(--gold);transition:all .25s;margin-top:8px;
+}
+.axellink:hover{background:var(--gold);color:var(--bg)}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:rgba(15,15,22,0.97);border:1px solid var(--bora);
+  color:var(--gold);font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.12em;
+  padding:11px 22px;border-radius:6px;box-shadow:0 0 18px var(--glow);
+  z-index:9999;transition:transform .38s;pointer-events:none;
+}
+.toast.on{transform:translateX(-50%) translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:1100px){.sr{display:none}.mc{margin-right:0}}
+@media(max-width:720px){.sl{display:none}.mc{margin-left:0;padding:16px}}
+@media(max-width:700px){.pg{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-<div id="cosmos"><div class="neb"></div></div>
+<canvas id="cv"></canvas>
 
-<nav>
-  <a href="hub.html" class="nav-brand"><img src="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png" alt="ORIONIX" style="height:26px;width:26px;border-radius:50%;object-fit:cover;margin-right:8px;vertical-align:middle;">ORIONIX</a>
-  <div class="nav-links">
-    <a href="hub.html">Portal</a>
-    <a href="ciudadela.html">Ciudadela</a>
-    <a href="tienda.html">Tienda</a>
-    <a href="axel.html" class="acc">✦ AXEL</a>
+<!-- TOPBAR -->
+<header class="bar">
+  <a href="hub.html" class="bar-brand">ORI<span>ONIX</span></a>
+  <div class="bar-search">
+    <span style="color:var(--dim);font-size:.88rem">🔍</span>
+    <input type="text" placeholder="Buscar en Mi Universo…">
   </div>
-</nav>
+  <div class="bar-acts">
+    <div class="bar-btn" title="Notificaciones">🔔</div>
+    <div class="bar-btn" title="Mensajes">💬</div>
+    <a href="ciudadela.html" class="bar-btn" title="AXEL" style="border-color:rgba(232,200,106,.36)">✦</a>
+    <div class="bar-av">K</div>
+  </div>
+</header>
 
-<div class="hero">
-  <div class="hero-label">Tu ecosistema completo</div>
-  <h1 class="hero-title">MI UNIVERSO</h1>
-  <p class="hero-sub">Acceso directo a todo lo que necesitas dentro del universo ORIONIX. Un clic, una puerta.</p>
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="sl">
+    <div class="pm" onclick="location.href='hub.html'">
+      <div class="pm-av">K</div>
+      <div>
+        <div class="pm-name">KEVIN RUIZ</div>
+        <div class="pm-plan">✦ El Creador · Ciudadela</div>
+      </div>
+    </div>
+
+    <div class="sl-lbl">Mi Espacio</div>
+    <div class="ni on"><span class="ico">🛍️</span> La Tienda</div>
+    <div class="ni dim"><span class="ico">🌌</span> Universo <span class="sb">Próximamente</span></div>
+    <div class="ni dim"><span class="ico">🤝</span> Afiliados <span class="sb">Próximamente</span></div>
+    <div class="ni dim"><span class="ico">🌍</span> Comunidad <span class="sb">Próximamente</span></div>
+    <div class="ni dim"><span class="ico">💎</span> La Forjadora <span class="sb">Próximamente</span></div>
+    <div class="ni dim"><span class="ico">🎬</span> Reels <span class="sb">Próximamente</span></div>
+    <div class="ni dim"><span class="ico">🌏</span> Los Mundos <span class="sb">Próximamente</span></div>
+
+    <div class="sl-lbl">Herramientas</div>
+    <a class="ni" href="ciudadela.html"><span class="ico">🤖</span> AXEL IA</a>
+    <a class="ni" href="nexus.html"><span class="ico">🧠</span> NEXUS Chat</a>
+    <a class="ni" href="kabalion-2d.html"><span class="ico">🔮</span> Kabalion 2D</a>
+    <div class="ni dim"><span class="ico">👤</span> Mi Cuenta <span class="sb">Próximamente</span></div>
+    <div class="ni dim"><span class="ico">📖</span> Crónicas <span class="sb">Próximamente</span></div>
+    <div class="ni dim"><span class="ico">🏠</span> El Hogar <span class="sb">Próximamente</span></div>
+
+    <div class="sl-lbl">Acceso Rápido</div>
+    <a class="ni" href="hub.html"><span class="ico">🏛️</span> Portal Central</a>
+    <a class="ni" href="universo.html"><span class="ico">🗺️</span> Mapa Agentes</a>
+    <a class="ni" href="https://kybalio.com" target="_blank"><span class="ico">🔒</span> Kybalio</a>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="mc">
+
+    <!-- TIENDA SECTION -->
+    <div class="sh">
+      <div class="sh-ico">🛍️</div>
+      <div>
+        <div class="sh-lbl">Centro Comercial ORIONIX</div>
+        <div class="sh-tit">LA TIENDA DEL IMPERIO</div>
+      </div>
+    </div>
+
+    <!-- PLANES DE SERVICIO -->
+    <div class="ps-h">✦ Planes de Servicio</div>
+    <p class="ps-s">Elige tu nivel de potencia dentro del universo ORIONIX</p>
+
+    <div class="pg">
+      <!-- ESENCIA -->
+      <div class="pc" onclick="openLead('Esencia')">
+        <div class="pc-badge">Entrada al Universo</div>
+        <div class="pc-name">ESENCIA</div>
+        <div class="pc-price">€197 <span class="mo">/mes</span></div>
+        <p class="pc-desc">La puerta de entrada al universo. Automatización básica y acceso a AXEL IA.</p>
+        <ul class="pc-ul">
+          <li>AXEL IA disponible 24/7</li>
+          <li>1 flujo de automatización</li>
+          <li>Soporte directo por Telegram</li>
+          <li>Acceso catálogo MODA</li>
+        </ul>
+        <button class="pc-btn" onclick="event.stopPropagation();openLead('Esencia')">Empezar Ahora →</button>
+      </div>
+
+      <!-- IMPERIO -->
+      <div class="pc feat" onclick="openLead('Imperio')">
+        <div class="pc-badge" style="background:linear-gradient(90deg,var(--gold-d),var(--gold))">⭐ Más Elegido</div>
+        <div class="pc-name">IMPERIO</div>
+        <div class="pc-price">€497 <span class="mo">/mes</span></div>
+        <p class="pc-desc">El verdadero poder. Todos los agentes, todos los flujos, rendimiento máximo.</p>
+        <ul class="pc-ul">
+          <li>22 Agentes IA del Kabalion</li>
+          <li>Flujos y automatizaciones ilimitadas</li>
+          <li>Mesa de Mando completa</li>
+          <li>Catálogos MODA + FASHION STYLE</li>
+          <li>CRM de leads automático</li>
+        </ul>
+        <button class="pc-btn pri" onclick="event.stopPropagation();openLead('Imperio')">Elegir Imperio →</button>
+      </div>
+
+      <!-- CIUDADELA -->
+      <div class="pc" onclick="openLead('Ciudadela')">
+        <div class="pc-badge" style="background:var(--purple)">👑 Élite Total</div>
+        <div class="pc-name">CIUDADELA</div>
+        <div class="pc-price" style="font-size:1.25rem;padding-top:6px;line-height:1.3">A medida<br><span style="font-size:.7rem;font-weight:400;color:var(--dim)">precio según proyecto</span></div>
+        <p class="pc-desc">Tu propia agencia de IA. Sefirot personalizados, estrategia KRC exclusiva.</p>
+        <ul class="pc-ul">
+          <li>Infraestructura ORIONIX completa</li>
+          <li>Agentes KRC / Kabalion propios</li>
+          <li>Acceso total MI DINASTÍA</li>
+          <li>Mentoría directa con Kevin</li>
+          <li>Desarrollo exclusivo a medida</li>
+        </ul>
+        <button class="pc-btn" onclick="event.stopPropagation();openLead('Ciudadela')">Hablar con Kevin →</button>
+      </div>
+    </div>
+
+    <!-- LEAD FORM -->
+    <div class="lf" id="lf">
+      <h3 id="lf-title">💎 Solicitar información del Plan</h3>
+      <div class="fr">
+        <input class="fi" id="l-nombre" type="text" placeholder="Tu nombre completo">
+        <input class="fi" id="l-telegram" type="text" placeholder="@tu_telegram">
+      </div>
+      <input id="l-plan" type="hidden">
+      <button class="fs" id="l-btn" onclick="submitLead()">Enviar Solicitud — Te contactamos en &lt;24h →</button>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- CATÁLOGOS -->
+    <div class="ps-h">✦ Catálogos de Productos</div>
+    <p class="ps-s">De una aguja a una mansión — encuentra lo que necesitas en tu nivel</p>
+
+    <div class="ct">
+      <div class="ctab on" onclick="tabCat('moda',this)">🧵 MODA</div>
+      <div class="ctab" onclick="tabCat('fashion',this)">✨ FASHION STYLE</div>
+      <div class="ctab" onclick="tabCat('dinastia',this)">👑 MI DINASTÍA</div>
+    </div>
+
+    <div id="cp-moda" class="cp on">
+      <div class="cdesc">De una aguja — productos económicos y accesibles para comenzar.</div>
+      <div class="prodg" id="g-moda">
+        <div class="sk" style="height:260px"></div>
+        <div class="sk" style="height:260px"></div>
+        <div class="sk" style="height:260px"></div>
+      </div>
+    </div>
+
+    <div id="cp-fashion" class="cp">
+      <div class="cdesc">El estilo que te eleva — moda con propósito, de €10 a €100.</div>
+      <div class="prodg" id="g-fashion">
+        <div class="sk" style="height:260px"></div>
+        <div class="sk" style="height:260px"></div>
+      </div>
+    </div>
+
+    <div id="cp-dinastia" class="cp">
+      <div class="cdesc">La cima — tu legado. Inversiones y productos de alto valor para tu dinastía.</div>
+      <div class="prodg" id="g-dinastia">
+        <div class="sk" style="height:260px"></div>
+        <div class="sk" style="height:260px"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- RIGHT SIDEBAR -->
+  <aside class="sr">
+    <div class="rc">
+      <h3>🤖 Agentes Activos</h3>
+      <div class="aq" onclick="location.href='ciudadela.html'">
+        <div class="adot" style="background:#e8c86a;box-shadow:0 0 5px #e8c86a66"></div>
+        <span class="aname">AXEL · Tiferet</span>
+      </div>
+      <div class="aq">
+        <div class="adot" style="background:#4a9eff;box-shadow:0 0 5px #4a9eff66"></div>
+        <span class="aname">Claude · Chesed</span>
+      </div>
+      <div class="aq">
+        <div class="adot" style="background:#4caf50;box-shadow:0 0 5px #4caf5066"></div>
+        <span class="aname">ChatGPT · Binah</span>
+      </div>
+      <div class="aq">
+        <div class="adot" style="background:#9c27b0;box-shadow:0 0 5px #9c27b066"></div>
+        <span class="aname">Copilot · Netzach</span>
+      </div>
+      <div class="aq">
+        <div class="adot" style="background:#00bcd4;box-shadow:0 0 5px #00bcd466"></div>
+        <span class="aname">Qwen · Hod</span>
+      </div>
+    </div>
+
+    <div class="rc">
+      <h3>📊 Tu Panel</h3>
+      <div class="srow"><span class="slbl">Plan activo</span><span class="sval">Ciudadela</span></div>
+      <div class="srow"><span class="slbl">Productos</span><span class="sval" id="s-prod">Cargando…</span></div>
+      <div class="srow"><span class="slbl">Agentes online</span><span class="sval">5 / 22</span></div>
+      <div class="srow"><span class="slbl">Leads este mes</span><span class="sval">—</span></div>
+    </div>
+
+    <div class="rc">
+      <h3>💬 Contacto Directo</h3>
+      <a href="https://t.me/KevinRuizBolsota" target="_blank" class="tglink">
+        <span class="tgico">✈️</span>
+        <div>
+          <div class="tgt">Telegram · Kevin</div>
+          <div class="tgs">Respuesta en &lt;24h</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="rc">
+      <h3>✦ Habla con AXEL</h3>
+      <p style="font-size:.78rem;color:var(--dim);font-style:italic;margin-bottom:0">¿Dudas sobre qué plan es para ti? AXEL te guía en segundos.</p>
+      <a href="ciudadela.html" class="axellink">Abrir AXEL IA →</a>
+    </div>
+
+    <div class="rc" style="opacity:.4;pointer-events:none">
+      <h3>🌌 Secciones Próximamente</h3>
+      <p style="font-size:.76rem;color:var(--dim);font-style:italic;line-height:1.5">
+        Universo · Afiliados · Comunidad · Forjadora · Reels · Los Mundos<br><br>
+        En construcción activa. Cada sección se activa cuando el Árbol florece.
+      </p>
+    </div>
+  </aside>
+
 </div>
 
-<section class="ac-section">
-  <div class="ac-label-top">Acceso Directo a Todo</div>
-  <div class="ac-grid">
-<a class="ac-card" href="ciudadela.html" >
-  <div class="ac-top">
-    <div class="ac-icon" style="background:rgba(232,200,106,.1);border-color:rgba(232,200,106,.28)">🤖</div>
-    <div class="ac-meta">
-      <div class="ac-label">IA Principal</div>
-      <div class="ac-name">AXEL</div>
-    </div>
-  </div>
-  <p class="ac-desc">Tu agente IA. Busca, crea y vende 24h.</p>
-  <div class="ac-cta">Abrir AXEL <span class="ac-arr">→</span></div>
-</a>
-<a class="ac-card" href="tienda.html" >
-  <div class="ac-top">
-    <div class="ac-icon" style="background:rgba(100,170,255,.08);border-color:rgba(100,170,255,.22)">🛍️</div>
-    <div class="ac-meta">
-      <div class="ac-label">Planes</div>
-      <div class="ac-name">La Tienda</div>
-    </div>
-  </div>
-  <p class="ac-desc">Esencia 197€ · Imperio 497€ · Ciudadela.</p>
-  <div class="ac-cta">Ver Planes <span class="ac-arr">→</span></div>
-</a>
-<a class="ac-card" href="forjadora.html" >
-  <div class="ac-top">
-    <div class="ac-icon" style="background:rgba(80,220,170,.08);border-color:rgba(80,220,170,.22)">💎</div>
-    <div class="ac-meta">
-      <div class="ac-label">Programa Élite</div>
-      <div class="ac-name">La Forjadora</div>
-    </div>
-  </div>
-  <p class="ac-desc">Transformación élite con IA. Líderes digitales.</p>
-  <div class="ac-cta">Ver Forjadora <span class="ac-arr">→</span></div>
-</a>
-<a class="ac-card" href="afiliados.html" >
-  <div class="ac-top">
-    <div class="ac-icon" style="background:rgba(190,100,255,.08);border-color:rgba(190,100,255,.22)">🤝</div>
-    <div class="ac-meta">
-      <div class="ac-label">Ingresos Pasivos</div>
-      <div class="ac-name">Afiliados</div>
-    </div>
-  </div>
-  <p class="ac-desc">20% por referido. Red de embajadores.</p>
-  <div class="ac-cta">Ver Afiliados <span class="ac-arr">→</span></div>
-</a>
-<a class="ac-card" href="ciudadela.html" >
-  <div class="ac-top">
-    <div class="ac-icon" style="background:rgba(232,200,106,.06);border-color:rgba(232,200,106,.18)">🧊</div>
-    <div class="ac-meta">
-      <div class="ac-label">Operaciones IA</div>
-      <div class="ac-name">La Ciudadela</div>
-    </div>
-  </div>
-  <p class="ac-desc">22 agentes del sistema Cabbalah.</p>
-  <div class="ac-cta">Entrar <span class="ac-arr">→</span></div>
-</a>
-<a class="ac-card" href="universo.html" >
-  <div class="ac-top">
-    <div class="ac-icon" style="background:rgba(150,200,255,.07);border-color:rgba(150,200,255,.2)">🗺️</div>
-    <div class="ac-meta">
-      <div class="ac-label">22 Agentes</div>
-      <div class="ac-name">Universo</div>
-    </div>
-  </div>
-  <p class="ac-desc">Mapa Cabbalah. 11 Luz + 11 Sombra.</p>
-  <div class="ac-cta">Ver Mapa <span class="ac-arr">→</span></div>
-</a>
-<a class="ac-card" href="hogar.html" >
-  <div class="ac-top">
-    <div class="ac-icon" style="background:rgba(200,150,255,.07);border-color:rgba(200,150,255,.2)">🏠</div>
-    <div class="ac-meta">
-      <div class="ac-label">Espacio Personal</div>
-      <div class="ac-name">El Hogar</div>
-    </div>
-  </div>
-  <p class="ac-desc">Hábitos, herramientas y Nebula IA.</p>
-  <div class="ac-cta">Mi Hogar <span class="ac-arr">→</span></div>
-</a>
-<a class="ac-card" href="mi-cuenta.html" >
-  <div class="ac-top">
-    <div class="ac-icon" style="background:rgba(255,200,100,.07);border-color:rgba(255,200,100,.2)">👤</div>
-    <div class="ac-meta">
-      <div class="ac-label">Perfil</div>
-      <div class="ac-name">Mi Cuenta</div>
-    </div>
-  </div>
-  <p class="ac-desc">Gestiona tu suscripción y perfil.</p>
-  <div class="ac-cta">Ver Perfil <span class="ac-arr">→</span></div>
-</a>
-<a class="ac-card" href="comunidad.html" >
-  <div class="ac-top">
-    <div class="ac-icon" style="background:rgba(80,140,255,.07);border-color:rgba(80,140,255,.2)">🌌</div>
-    <div class="ac-meta">
-      <div class="ac-label">Red</div>
-      <div class="ac-name">Comunidad</div>
-    </div>
-  </div>
-  <p class="ac-desc">Conecta con emprendedores del universo.</p>
-  <div class="ac-cta">Entrar <span class="ac-arr">→</span></div>
-</a>
-<a class="ac-card" href="reels.html" >
-  <div class="ac-top">
-    <div class="ac-icon" style="background:rgba(255,80,120,.07);border-color:rgba(255,80,120,.2)">🎬</div>
-    <div class="ac-meta">
-      <div class="ac-label">Contenido</div>
-      <div class="ac-name">Reels</div>
-    </div>
-  </div>
-  <p class="ac-desc">Videos e historias del ecosistema.</p>
-  <div class="ac-cta">Ver Reels <span class="ac-arr">→</span></div>
-</a>
-<a class="ac-card" href="mundos.html" >
-  <div class="ac-top">
-    <div class="ac-icon" style="background:rgba(80,200,180,.07);border-color:rgba(80,200,180,.2)">🌏</div>
-    <div class="ac-meta">
-      <div class="ac-label">Reinos</div>
-      <div class="ac-name">Los Mundos</div>
-    </div>
-  </div>
-  <p class="ac-desc">Los reinos del universo Orionix.</p>
-  <div class="ac-cta">Explorar <span class="ac-arr">→</span></div>
-</a>
-<a class="ac-card" href="admin.html" >
-  <div class="ac-top">
-    <div class="ac-icon" style="background:rgba(184,169,130,.07);border-color:rgba(184,169,130,.2)">⚙️</div>
-    <div class="ac-meta">
-      <div class="ac-label">Administración</div>
-      <div class="ac-name">Admin</div>
-    </div>
-  </div>
-  <p class="ac-desc">Panel interno de gestión.</p>
-  <div class="ac-cta">Abrir <span class="ac-arr">→</span></div>
-</a>
-<a class="ac-card" href="https://kybalio.com" target="_blank" rel="noopener">
-  <div class="ac-top">
-    <div class="ac-icon" style="background:rgba(232,200,106,.05);border-color:rgba(232,200,106,.14)">🏛️</div>
-    <div class="ac-meta">
-      <div class="ac-label">Bóveda</div>
-      <div class="ac-name">Kybalio</div>
-    </div>
-  </div>
-  <p class="ac-desc">833 videos · 1251 imágenes · 373 docs.</p>
-  <div class="ac-cta">Abrir <span class="ac-arr">→</span></div>
-</a>
-<a class="ac-card" href="https://wa.me/573014410541?text=Hola%20Orionix" target="_blank" rel="noopener">
-  <div class="ac-top">
-    <div class="ac-icon" style="background:rgba(37,211,102,.07);border-color:rgba(37,211,102,.2)">💬</div>
-    <div class="ac-meta">
-      <div class="ac-label">Contacto</div>
-      <div class="ac-name">WhatsApp</div>
-    </div>
-  </div>
-  <p class="ac-desc">Equipo Orionix en tiempo real.</p>
-  <div class="ac-cta">Escribir <span class="ac-arr">→</span></div>
-</a></div>
-</section>
+<div class="toast" id="toast"></div>
 
-<div class="back-row">
-  <a href="hub.html" class="btn-back">← Volver al Portal Central</a>
-</div>
+<script>
+const API='https://lkevinruizl.app.n8n.cloud/webhook/orionix-tienda';
+let plan='';
+
+// ── Catalog load ──
+async function loadCatalog(){
+  try{
+    const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({accion:'catalogo'})});
+    const d=await r.json();
+    if(d.ok&&d.catalogos){
+      renderGrid('g-moda', d.catalogos.MODA?.items||[]);
+      renderGrid('g-fashion', d.catalogos.FASHION_STYLE?.items||[]);
+      renderGrid('g-dinastia', d.catalogos.MI_DINASTIA?.items||[]);
+      document.getElementById('s-prod').textContent=(d.total||0)+' productos';
+    } else {
+      emptyAll('Error al cargar catálogo');
+    }
+  } catch(e){ emptyAll('Catálogo en construcción'); }
+}
+
+function renderGrid(id, items){
+  const g=document.getElementById(id);
+  if(!items.length){ g.innerHTML=emptyHTML('Productos llegando pronto'); return; }
+  g.innerHTML=items.map(p=>`
+    <div class="prodc">
+      <div class="pimg">${p.imagen_url?`<img src="${p.imagen_url}" onerror="this.parentNode.innerHTML='🛍️'">`:' 🛍️'}</div>
+      <div class="pi">
+        <div class="pname">${p.nombre||'Producto'}</div>
+        <div class="pprice">${p.precio?'€'+p.precio:'Consultar'}</div>
+        ${p.tienda_origen?`<div class="pstore">via ${p.tienda_origen}</div>`:''}
+        ${p.enlace_afiliado?`<a href="${p.enlace_afiliado}" target="_blank" class="pbtn">Ver Producto →</a>`:''}
+      </div>
+    </div>`).join('');
+}
+
+function emptyHTML(msg){
+  return`<div class="empty"><div class="ei">🌌</div><p>${msg}</p><small>Los productos se gestionan desde la Mesa de Mando</small></div>`;
+}
+function emptyAll(msg){
+  ['g-moda','g-fashion','g-dinastia'].forEach(id=>document.getElementById(id).innerHTML=emptyHTML(msg));
+  document.getElementById('s-prod').textContent='—';
+}
+
+// ── Catalog tabs ──
+function tabCat(cat,el){
+  document.querySelectorAll('.ctab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.cp').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('cp-'+cat).classList.add('on');
+}
+
+// ── Lead form ──
+function openLead(p){
+  plan=p;
+  document.getElementById('lf-title').textContent='💎 Plan '+p+' — Déjanos tus datos';
+  document.getElementById('l-plan').value=p;
+  const f=document.getElementById('lf');
+  f.style.display='block';
+  setTimeout(()=>f.scrollIntoView({behavior:'smooth',block:'center'}),80);
+}
+
+async function submitLead(){
+  const nombre=document.getElementById('l-nombre').value.trim();
+  const telegram=document.getElementById('l-telegram').value.trim();
+  if(!nombre||!telegram){toast('Completa tu nombre y Telegram');return;}
+  const btn=document.getElementById('l-btn');
+  btn.disabled=true;btn.textContent='Enviando…';
+  try{
+    const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({accion:'lead',nombre,telegram,interes:plan,origen:'mi-universo'})});
+    const d=await r.json();
+    if(d.ok){
+      toast('✦ Solicitud enviada — te contactamos pronto por Telegram');
+      document.getElementById('lf').style.display='none';
+      document.getElementById('l-nombre').value='';
+      document.getElementById('l-telegram').value='';
+    } else { toast('Error: '+(d.error||'inténtalo de nuevo')); }
+  }catch(e){toast('Error de conexión — inténtalo más tarde');}
+  btn.disabled=false;btn.textContent='Enviar Solicitud — Te contactamos en <24h →';
+}
+
+// ── Toast ──
+function toast(m){
+  const t=document.getElementById('toast');
+  t.textContent=m;t.classList.add('on');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),3500);
+}
+
+// ── Starfield ──
+(function(){
+  const c=document.getElementById('cv'),ctx=c.getContext('2d');
+  function resize(){c.width=innerWidth;c.height=innerHeight}
+  resize();addEventListener('resize',resize);
+  const s=Array.from({length:140},()=>({
+    x:Math.random(),y:Math.random(),
+    r:Math.random()*1.1+.2,a:Math.random(),da:(Math.random()-.5)*.007
+  }));
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    s.forEach(p=>{
+      p.a=Math.max(.04,Math.min(.9,p.a+p.da));
+      if(p.a<=.04||p.a>=.9)p.da*=-1;
+      ctx.beginPath();
+      ctx.arc(p.x*c.width,p.y*c.height,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(232,200,106,${p.a*.55})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+loadCatalog();
+</script>
 </body>
 </html>

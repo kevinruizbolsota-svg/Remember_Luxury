@@ -201,14 +201,11 @@ async function activarMic(){
   if (animId) cancelAnimationFrame(animId);
 
   devId = document.getElementById('devsel').value;
+  // Constraints mínimas — sin sampleRate forzado, sin filtros que silencian
   const constraints = {
-    audio: {
-      deviceId: devId ? { exact: devId } : undefined,
-      echoCancellation: false,
-      noiseSuppression: false,
-      autoGainControl: false,
-      sampleRate: 16000,
-    }
+    audio: devId
+      ? { deviceId: { ideal: devId } }
+      : true
   };
 
   try {

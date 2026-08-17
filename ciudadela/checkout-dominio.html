@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIONIX · Acceso Dominio — €1.000</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#e8c86a;--gl:#f5e0a0;--gd:#b89a40;--bg:#0b0b0d;--card:rgba(232,200,106,0.07);--text:#f0e8d0;--dim:rgba(240,232,208,0.5);--purple:#6a3d9a}
+body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;overflow-x:hidden}
+canvas#stars{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+canvas#sphere{position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:0;pointer-events:none;opacity:.25}
+
+.wrap{position:relative;z-index:1;width:100%;max-width:700px;padding:32px 20px 60px}
+.back{display:inline-flex;align-items:center;gap:8px;color:var(--dim);font-size:13px;text-decoration:none;letter-spacing:.1em;margin-bottom:36px;transition:.2s}
+.back:hover{color:var(--gold)}
+
+/* HERO ÉLITE */
+.elite-badge{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--gold);border-radius:4px;padding:10px 22px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:.35em;color:var(--gold);margin-bottom:24px;position:relative;overflow:hidden}
+.elite-badge::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(232,200,106,0.15),transparent);animation:shine 3s infinite}
+@keyframes shine{to{left:200%}}
+h1{font-family:'Cinzel',serif;font-size:clamp(30px,5vw,50px);font-weight:900;letter-spacing:.06em;line-height:1.05;margin-bottom:12px}
+h1 span{background:linear-gradient(135deg,var(--gd),var(--gold),var(--gl),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s infinite}
+@keyframes shimmer{0%,100%{filter:brightness(1)}50%{filter:brightness(1.3)}}
+.tagline{font-style:italic;font-size:18px;color:var(--dim);letter-spacing:.08em;margin-bottom:20px}
+.precio-hero{font-family:'Cinzel',serif;margin:16px 0 4px}
+.precio-hero .amount{font-size:72px;font-weight:900;background:linear-gradient(135deg,var(--gd),var(--gold),var(--gl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.precio-hero .sup{font-size:32px;vertical-align:super;color:var(--gold);-webkit-text-fill-color:var(--gold)}
+.precio-sub{color:var(--dim);font-size:14px;letter-spacing:.12em;margin-bottom:8px}
+.precio-note{font-size:13px;color:rgba(46,204,113,.9);letter-spacing:.06em;margin-bottom:30px}
+
+/* SEPARADOR */
+.sep{display:flex;align-items:center;gap:12px;margin:24px 0;opacity:.4}
+.sep::before,.sep::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.sep span{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;color:var(--gold)}
+
+/* BENEFICIOS PREMIUM */
+.benefits-premium{background:linear-gradient(135deg,rgba(232,200,106,0.05),rgba(106,61,154,0.05));border:1px solid rgba(232,200,106,0.25);border-radius:16px;padding:24px;margin-bottom:28px;position:relative}
+.benefits-premium::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--purple),var(--gold),var(--purple))}
+.benefits-premium h3{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.3em;color:var(--gold);margin-bottom:20px}
+.benefit-premium{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.benefit-premium:last-child{border-bottom:none}
+.benefit-premium .ico{font-size:24px;width:36px;text-align:center;flex-shrink:0}
+.benefit-premium .info strong{display:block;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.15em;color:var(--gold);margin-bottom:2px}
+.benefit-premium .info span{font-size:14px;color:var(--dim)}
+.benefit-premium .tag{margin-left:auto;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.15em;background:rgba(232,200,106,0.1);border:1px solid rgba(232,200,106,0.3);border-radius:20px;padding:3px 10px;color:var(--gold);white-space:nowrap}
+
+/* EXCLUSIVIDAD */
+.exclusivo-bar{background:linear-gradient(135deg,rgba(106,61,154,0.15),rgba(232,200,106,0.08));border:1px solid rgba(106,61,154,0.4);border-radius:12px;padding:16px 20px;margin-bottom:28px;display:flex;align-items:center;gap:14px}
+.exclusivo-bar .ico{font-size:30px}
+.exclusivo-bar .text strong{display:block;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.2em;color:var(--gold)}
+.exclusivo-bar .text span{font-size:13px;color:var(--dim)}
+
+/* METODOS */
+.section-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.3em;color:var(--dim);margin-bottom:14px}
+.methods-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
+.method-card{background:var(--card);border:1px solid rgba(232,200,106,0.12);border-radius:10px;padding:16px 12px;cursor:pointer;transition:.25s;text-align:center;position:relative}
+.method-card:hover{border-color:rgba(232,200,106,0.4);transform:translateY(-2px);box-shadow:0 6px 24px rgba(232,200,106,0.08)}
+.method-card.active{border-color:var(--gold);background:rgba(232,200,106,0.1);box-shadow:0 0 30px rgba(232,200,106,0.12)}
+.method-card.active::after{content:'✓';position:absolute;top:8px;right:10px;color:var(--gold);font-size:12px}
+.method-icon{font-size:26px;margin-bottom:6px}
+.method-name{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.18em;color:var(--text)}
+.method-tag{font-size:10px;color:var(--dim);margin-top:2px}
+
+/* CUOTAS */
+.cuotas-selector{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:24px}
+.cuota-opt{background:var(--card);border:1px solid rgba(232,200,106,0.12);border-radius:8px;padding:12px 6px;cursor:pointer;text-align:center;transition:.2s}
+.cuota-opt:hover,.cuota-opt.active{border-color:var(--gold);background:rgba(232,200,106,0.1)}
+.cuota-opt strong{display:block;font-family:'Cinzel',serif;font-size:13px;color:var(--gold)}
+.cuota-opt span{font-size:10px;color:var(--dim)}
+
+/* PANELES */
+.pay-panel{display:none;background:rgba(0,0,0,.3);border:1px solid rgba(232,200,106,0.2);border-radius:14px;padding:24px;margin-bottom:22px;animation:fadeIn .3s}
+.pay-panel.show{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.pay-panel label{display:block;font-size:12px;letter-spacing:.1em;color:var(--dim);margin-bottom:6px;margin-top:14px}
+.pay-panel label:first-of-type{margin-top:0}
+.pay-panel input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(232,200,106,0.2);border-radius:8px;padding:12px 14px;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:15px;outline:none;transition:.2s}
+.pay-panel input:focus{border-color:var(--gold)}
+.info-box{background:rgba(232,200,106,0.07);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:16px;font-size:14px;line-height:1.8}
+.info-box strong.title{color:var(--gold);display:block;margin-bottom:6px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.2em}
+.copy-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(232,200,106,0.1);border:1px solid rgba(232,200,106,0.3);border-radius:6px;padding:5px 12px;color:var(--gold);font-size:12px;cursor:pointer;margin-top:8px;font-family:'Cinzel',serif;letter-spacing:.1em;transition:.2s}
+.copy-btn:hover{background:rgba(232,200,106,0.2)}
+
+/* RESUMEN */
+.resumen{background:linear-gradient(135deg,rgba(232,200,106,0.06),rgba(106,61,154,0.04));border:1px solid rgba(232,200,106,0.2);border-radius:14px;padding:20px;margin-bottom:22px;position:relative;overflow:hidden}
+.resumen::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),var(--gold),var(--purple))}
+.resumen-row{display:flex;justify-content:space-between;padding:7px 0;font-size:15px;border-bottom:1px solid rgba(255,255,255,.04)}
+.resumen-row:last-child{border-bottom:none;font-family:'Cinzel',serif;color:var(--gold);font-size:18px;padding-top:14px;margin-top:6px}
+
+/* BOTON */
+.btn-pay{width:100%;padding:20px;background:linear-gradient(135deg,var(--purple),#8a5dbf,var(--gd),var(--gold));border:none;border-radius:12px;color:#fff;font-family:'Cinzel',serif;font-size:15px;font-weight:700;letter-spacing:.2em;cursor:pointer;transition:.25s;box-shadow:0 6px 30px rgba(106,61,154,0.3);position:relative;overflow:hidden}
+.btn-pay::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);animation:shimmer2 2.5s infinite}
+@keyframes shimmer2{to{left:200%}}
+.btn-pay:hover{transform:translateY(-2px);box-shadow:0 12px 50px rgba(106,61,154,0.4)}
+.btn-pay:disabled{opacity:.4;cursor:not-allowed;transform:none;animation:none}
+.security{display:flex;justify-content:center;gap:16px;margin-top:20px;flex-wrap:wrap}
+.security span{font-size:11px;color:var(--dim);display:flex;align-items:center;gap:5px;letter-spacing:.08em}
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);background:#1a1a1f;border:1px solid var(--gold);border-radius:8px;padding:12px 24px;font-family:'Cinzel',serif;font-size:13px;letter-spacing:.1em;color:var(--gold);transition:.3s;z-index:100;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<canvas id="sphere"></canvas>
+<div class="wrap">
+  <a href="tienda.html" class="back">← VOLVER A LA TIENDA</a>
+
+  <div class="elite-badge">✦ NIVEL DOMINIO · ACCESO ÉLITE · EDICIÓN LIMITADA ✦</div>
+  <h1>Acceso <span>Dominio</span></h1>
+  <p class="tagline">"El que domina su universo, lo hereda."</p>
+  <div class="precio-hero">
+    <span class="sup">€</span><span class="amount">1.000</span>
+  </div>
+  <div class="precio-sub">MEMBRESÍA ANUAL · TODOS LOS CURSOS · VIP COMPLETO</div>
+  <div class="precio-note">Solo 22 plazas disponibles — coincide con las 22 Sefirot del KRC</div>
+
+  <div class="exclusivo-bar">
+    <div class="ico">👑</div>
+    <div class="text">
+      <strong>ACCESO A LA MESA DE LOS CREADORES</strong>
+      <span>Sesiones privadas mensuales con Kevin Ruiz y el equipo ORIONIX</span>
+    </div>
+  </div>
+
+  <div class="benefits-premium">
+    <h3>DOMINIO COMPLETO — QUÉ OBTIENES</h3>
+    <div class="benefit-premium"><span class="ico">🌌</span><div class="info"><strong>MEMBRESÍA ANUAL</strong><span>12 meses de acceso total al ecosistema</span></div><span class="tag">VITALICIO*</span></div>
+    <div class="benefit-premium"><span class="ico">📚</span><div class="info"><strong>TODOS LOS CURSOS</strong><span>Catálogo completo actual y futuro incluido</span></div><span class="tag">ILIMITADO</span></div>
+    <div class="benefit-premium"><span class="ico">💎</span><div class="info"><strong>25% DESCUENTO PERMANENTE</strong><span>En toda la tienda ORIONIX para siempre</span></div></div>
+    <div class="benefit-premium"><span class="ico">🎁</span><div class="info"><strong>SET LUJO KABALION</strong><span>Reloj + Perfume + Pañuelo de seda edición numerada</span></div><span class="tag">FÍSICO</span></div>
+    <div class="benefit-premium"><span class="ico">🔮</span><div class="info"><strong>NFT KABALION #1-22</strong><span>Tu Sefirot personal en la cadena ORIONIX</span></div><span class="tag">DIGITAL</span></div>
+    <div class="benefit-premium"><span class="ico">👁️</span><div class="info"><strong>MESA DE LOS CREADORES</strong><span>Sesiones privadas mensuales con el equipo</span></div><span class="tag">VIP</span></div>
+    <div class="benefit-premium"><span class="ico">⚡</span><div class="info"><strong>SOPORTE 24H PRIORITARIO</strong><span>Línea directa con los agentes ORIONIX</span></div></div>
+    <div class="benefit-premium"><span class="ico">🏛️</span><div class="info"><strong>CO-CREACIÓN</strong><span>Vota en el roadmap y propón nuevos productos</span></div><span class="tag">EXCLUSIVO</span></div>
+  </div>
+
+  <div class="sep"><span>PLAN DE PAGO</span></div>
+
+  <p class="section-title">CUOTAS DISPONIBLES</p>
+  <div class="cuotas-selector">
+    <div class="cuota-opt active" onclick="setCuota(this,1000,'Pago único')"><strong>€1.000</strong><span>Único</span></div>
+    <div class="cuota-opt" onclick="setCuota(this,520,'2 × €520')"><strong>2×€520</strong><span>Bimensual</span></div>
+    <div class="cuota-opt" onclick="setCuota(this,360,'3 × €360')"><strong>3×€360</strong><span>Trimestral</span></div>
+    <div class="cuota-opt" onclick="setCuota(this,200,'6 × €200')"><strong>6×€200</strong><span>Semestral</span></div>
+  </div>
+
+  <p class="section-title">MÉTODO DE PAGO</p>
+  <div class="methods-grid">
+    <div class="method-card" onclick="selectMethod('tarjeta')">
+      <div class="method-icon">💳</div>
+      <div class="method-name">TARJETA</div>
+      <div class="method-tag">Visa / Mastercard</div>
+    </div>
+    <div class="method-card" onclick="selectMethod('telegram')">
+      <div class="method-icon">✈️</div>
+      <div class="method-name">TELEGRAM</div>
+      <div class="method-tag">Gestión VIP directa</div>
+    </div>
+    <div class="method-card" onclick="selectMethod('transferencia')">
+      <div class="method-icon">🏛️</div>
+      <div class="method-name">TRANSFERENCIA</div>
+      <div class="method-tag">Bancaria</div>
+    </div>
+    <div class="method-card" onclick="selectMethod('cripto')">
+      <div class="method-icon">₿</div>
+      <div class="method-name">CRIPTO</div>
+      <div class="method-tag">BTC · ETH · USDT</div>
+    </div>
+  </div>
+
+  <!-- PANELES -->
+  <div class="pay-panel" id="panel-tarjeta">
+    <label>Nombre en la tarjeta</label>
+    <input type="text" id="card-name" placeholder="KEVIN RUIZ">
+    <label>Número</label>
+    <input type="text" id="card-num" placeholder="•••• •••• •••• ••••" maxlength="19" oninput="fmtCard(this)">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div><label>Caducidad</label><input type="text" placeholder="MM/AA" maxlength="5" oninput="fmtDate(this)"></div>
+      <div><label>CVV</label><input type="password" placeholder="•••" maxlength="4"></div>
+    </div>
+  </div>
+  <div class="pay-panel" id="panel-telegram">
+    <div class="info-box">
+      <strong class="title">GESTIÓN VIP DIRECTA</strong>
+      Un miembro del equipo ORIONIX te contactará en Telegram en menos de 30 minutos para gestionar tu acceso Dominio de forma completamente personalizada.
+    </div>
+    <label>Tu usuario Telegram</label><input type="text" id="tg-user" placeholder="@tu_usuario">
+    <label>Tu email</label><input type="email" id="tg-email" placeholder="tu@email.com">
+    <label>Horario preferido de contacto</label><input type="text" placeholder="Ej: tardes, fines de semana...">
+  </div>
+  <div class="pay-panel" id="panel-transferencia">
+    <div class="info-box">
+      <strong class="title">TRANSFERENCIA BANCARIA</strong>
+      IBAN: <strong style="color:var(--gold)">ES00 0000 0000 00 0000000000</strong>
+      <button class="copy-btn" onclick="copiar('ES00000000000000000000')">📋 Copiar IBAN</button><br>
+      Titular: ORIONIX SL<br>
+      Concepto: <strong style="color:var(--gold)">DOMINIO + tu email</strong><br>
+      Confirmación en 1-2 días hábiles. Te enviamos tu kit de bienvenida al confirmar.
+    </div>
+    <label>Tu email</label><input type="email" id="tr-email" placeholder="tu@email.com">
+  </div>
+  <div class="pay-panel" id="panel-cripto">
+    <div class="info-box">
+      <strong class="title">PAGO EN CRIPTOMONEDAS</strong>
+      Aceptamos BTC, ETH y USDT (TRC20).<br><br>
+      <strong style="color:var(--gold)">Bitcoin (BTC):</strong><br>
+      <span style="word-break:break-all;font-size:12px">bc1q0000000000000000000000000000000000000000</span>
+      <button class="copy-btn" onclick="copiar('bc1q0000000000000000000000000000000000000000')">📋 Copiar BTC</button><br><br>
+      Tras el pago, envíanos el hash de la transacción por Telegram para activar el acceso.
+    </div>
+    <label>Tu Telegram para confirmación</label><input type="text" id="cr-tg" placeholder="@tu_usuario">
+    <label>Tu email</label><input type="email" id="cr-email" placeholder="tu@email.com">
+  </div>
+
+  <div class="resumen">
+    <div class="resumen-row"><span>Nivel</span><span>Acceso Dominio</span></div>
+    <div class="resumen-row"><span>Duración</span><span>12 meses + vitalicio*</span></div>
+    <div class="resumen-row"><span>Regalo incluido</span><span>Set Lujo Kabalion</span></div>
+    <div class="resumen-row"><span>Plan de pago</span><span id="res-cuota">Pago único</span></div>
+    <div class="resumen-row"><span>TOTAL AHORA</span><span id="res-total">€1.000</span></div>
+  </div>
+
+  <button class="btn-pay" id="btnPay" disabled onclick="pagar()">
+    ✦ ACCEDER AL DOMINIO · <span id="btn-price">€1.000</span> ✦
+  </button>
+  <div class="security">
+    <span>🔒 Transacción segura</span><span>👑 Gestión VIP</span><span>🛡️ Garantía 30 días</span><span>🎁 Set físico incluido</span>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// STARS
+const c=document.getElementById('stars'),ctx=c.getContext('2d');
+function resize(){c.width=innerWidth;c.height=innerHeight}resize();addEventListener('resize',resize);
+const stars=Array.from({length:280},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.6+.2,a:Math.random(),pulse:Math.random()}));
+function drawStars(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(s=>{s.pulse+=0.005;const a=s.a*(.7+.3*Math.sin(s.pulse));ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(240,232,208,${a})`;ctx.fill()});requestAnimationFrame(drawStars)}
+drawStars();
+
+// ARMILLARY SPHERE (decorative)
+const sc=document.getElementById('sphere'),sctx=sc.getContext('2d');
+sc.width=400;sc.height=400;let angle=0;
+function drawSphere(){sctx.clearRect(0,0,400,400);sctx.strokeStyle='rgba(232,200,106,0.3)';sctx.lineWidth=1;
+  [[1,0],[.7,.7],[0,1]].forEach(([cos,sin],i)=>{
+    sctx.beginPath();sctx.ellipse(200,200,160,160*sin||8,angle*cos,0,Math.PI*2);sctx.stroke()
+  });
+  sctx.beginPath();sctx.arc(200,200,160,0,Math.PI*2);sctx.stroke();
+  angle+=0.003;requestAnimationFrame(drawSphere)
+}
+drawSphere();
+
+let metodo=null,precio=1000,planLabel='Pago único';
+
+function setCuota(el,p,label){
+  document.querySelectorAll('.cuota-opt').forEach(e=>e.classList.remove('active'));
+  el.classList.add('active');precio=p;planLabel=label;
+  document.getElementById('res-cuota').textContent=label;
+  document.getElementById('res-total').textContent='€'+p;
+  document.getElementById('btn-price').textContent='€'+p;
+}
+function selectMethod(m){
+  metodo=m;
+  document.querySelectorAll('.method-card').forEach(el=>el.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.querySelectorAll('.pay-panel').forEach(el=>el.classList.remove('show'));
+  document.getElementById('panel-'+m).classList.add('show');
+  document.getElementById('btnPay').disabled=false;
+}
+function fmtCard(el){let v=el.value.replace(/\D/g,'').substring(0,16);el.value=v.replace(/(.{4})/g,'$1 ').trim()}
+function fmtDate(el){let v=el.value.replace(/\D/g,'');if(v.length>=2)v=v.substring(0,2)+'/'+v.substring(2,4);el.value=v}
+function copiar(txt){navigator.clipboard.writeText(txt).then(()=>toast('Copiado'))}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+
+function pagar(){
+  const btn=document.getElementById('btnPay');btn.disabled=true;
+  fetch('https://lkevinruizl.app.n8n.cloud/webhook/orionix-tienda',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({accion:'lead',nombre:'Acceso Dominio',telegram:document.getElementById('tg-user')?.value||'',email:document.getElementById('tg-email')?.value||document.getElementById('tr-email')?.value||'',interes:'DOMINIO',origen:'checkout-dominio'})}).catch(()=>{});
+  if(metodo==='telegram'){setTimeout(()=>{window.open('https://t.me/ORIONIX_oficial','_blank');ir()},600)}
+  else{setTimeout(()=>ir(),1200)}
+}
+function ir(){window.location.href=`gracias.html?nivel=DOMINIO&precio=${precio}&metodo=${metodo}&plan=${encodeURIComponent(planLabel)}`}
+</script>
+</body>
+</html>

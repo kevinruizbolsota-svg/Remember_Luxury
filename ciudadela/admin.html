@@ -51,86 +51,7 @@ body {
   pointer-events:none;
 }
 
-/* ═══════════════════════════════════════════
-   LOCK SCREEN
-═══════════════════════════════════════════ */
-#lockScreen {
-  position:fixed; inset:0; z-index:600;
-  display:flex; align-items:center; justify-content:center;
-  background:var(--bg);
-  transition:opacity .8s ease;
-}
-
-.lock-wrap {
-  text-align:center;
-  width:min(420px, 90%);
-}
-
-.lock-logo {
-  font-family:'Cinzel',serif;
-  font-size:clamp(1.4rem,4vw,2rem);
-  font-weight:900;
-  letter-spacing:10px;
-  background:linear-gradient(135deg,var(--gold-dark),var(--gold),var(--gold-light),var(--gold));
-  background-size:200% auto;
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-  animation:goldShimmer 5s linear infinite;
-  margin-bottom:6px;
-}
-
-.lock-sub {
-  font-family:'Cinzel',serif;
-  font-size:.52rem;
-  letter-spacing:5px;
-  color:var(--text-muted);
-  text-transform:uppercase;
-  margin-bottom:40px;
-}
-
-.lock-card {
-  background:var(--bg-card);
-  border:1px solid var(--border);
-  padding:36px;
-  backdrop-filter:blur(24px);
-  box-shadow:0 0 80px rgba(0,0,0,.9), inset 0 0 40px rgba(232,200,106,.03);
-}
-
-.lock-status {
-  font-family:'Cinzel',serif;
-  font-size:.62rem;
-  letter-spacing:3px;
-  color:var(--gold);
-  text-transform:uppercase;
-  min-height:18px;
-  margin-bottom:16px;
-}
-
-.lock-divider {
-  width:50px; height:1px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  margin:0 auto 16px;
-}
-
-.lock-message {
-  font-size:.88rem;
-  color:var(--text-muted);
-  line-height:1.7;
-}
-
-#btnReturn {
-  display:none;
-  margin-top:20px;
-  font-family:'Cinzel',serif;
-  font-size:.52rem;
-  letter-spacing:3px;
-  color:var(--gold);
-  text-decoration:none;
-  text-transform:uppercase;
-  border:1px solid var(--border);
-  padding:10px 22px;
-  transition:all .3s;
-}
-#btnReturn:hover { border-color:var(--gold); background:rgba(232,200,106,.05); }
+/* lock screen removed — page is open */
 
 /* ═══════════════════════════════════════════
    HEADER
@@ -172,7 +93,7 @@ header {
 .page { position:relative; z-index:10; min-height:100vh; }
 
 #dashboard {
-  display:none;
+  display:block;
   max-width:1080px;
   margin:0 auto;
   padding:52px 24px 100px;
@@ -507,21 +428,7 @@ header {
 <canvas id="aurora-canvas"></canvas>
 <canvas id="stars-canvas"></canvas>
 
-<!-- ═══════════════════════════════════════
-     LOCK SCREEN
-════════════════════════════════════════ -->
-<div id="lockScreen">
-  <div class="lock-wrap">
-    <div class="lock-logo">ORIONIX</div>
-    <div class="lock-sub">Arquitecto de Productos</div>
-    <div class="lock-card">
-      <div class="lock-status" id="lockStatus">Verificando identidad...</div>
-      <div class="lock-divider"></div>
-      <div class="lock-message" id="lockMessage">Escaneando credenciales del Creador</div>
-      <a href="tienda.html" id="btnReturn">← Volver a la tienda</a>
-    </div>
-  </div>
-</div>
+
 
 <!-- ═══════════════════════════════════════
      MAIN PAGE
@@ -715,10 +622,6 @@ header {
   </div><!-- /dashboard -->
 </div><!-- /page -->
 
-<!-- FIREBASE SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-
 <script>
 /* ═══════════════════════════════════════════════════════════════
    AURORA BOREALIS — PS3 XMB Style · Golden
@@ -859,53 +762,13 @@ header {
 /* ═══════════════════════════════════════════════════════════════
    CONFIG
 ══════════════════════════════════════════════════════════════ */
-const ADMIN_EMAIL = 'kevin.ruiz.bolsota@gmail.com';
-const WEBHOOK     = 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-tienda';
+const WEBHOOK = 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-tienda';
 
-const firebaseConfig = {
-  apiKey:            'AIzaSyDZoywcYKSBrAk_iwSMN4rnw7goLSltj7A',
-  authDomain:        'las-cronicas-de-krc.firebaseapp.com',
-  projectId:         'las-cronicas-de-krc',
-  storageBucket:     'las-cronicas-de-krc.firebasestorage.app',
-  messagingSenderId: '636206734640',
-  appId:             '1:636206734640:web:40c52672294155c6d77cf5',
-};
-
-if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-
-/* ═══════════════════════════════════════════════════════════════
-   AUTH
-══════════════════════════════════════════════════════════════ */
-auth.onAuthStateChanged(user => {
-  const lock   = document.getElementById('lockScreen');
-  const dash   = document.getElementById('dashboard');
-  const status = document.getElementById('lockStatus');
-  const msg    = document.getElementById('lockMessage');
-  const btn    = document.getElementById('btnReturn');
-  const dot    = document.getElementById('statusDot');
-  const lbl    = document.getElementById('statusLabel');
-
-  if (user && user.email === ADMIN_EMAIL) {
-    status.textContent = 'Acceso Autorizado';
-    status.style.color = 'var(--green)';
-    msg.textContent = 'Bienvenido de vuelta, Creador.';
-
-    setTimeout(() => {
-      lock.style.opacity = '0';
-      setTimeout(() => {
-        lock.style.display = 'none';
-        dash.style.display = 'block';
-        dot.classList.add('online');
-        lbl.textContent = 'Sistema Online · Modo Arquitecto';
-      }, 700);
-    }, 900);
-  } else {
-    status.textContent = 'Acceso Denegado';
-    status.style.color = 'var(--red)';
-    msg.textContent = 'Solo el Creador puede acceder a este sistema.';
-    btn.style.display = 'inline-block';
-  }
+// Show dashboard immediately — no auth required
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('dashboard').style.display = 'block';
+  document.getElementById('statusDot').classList.add('online');
+  document.getElementById('statusLabel').textContent = 'Sistema Online · Arquitecto';
 });
 
 /* ═══════════════════════════════════════════════════════════════

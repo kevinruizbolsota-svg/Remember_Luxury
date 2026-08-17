@@ -462,5 +462,6 @@ async function sendNebula(){
   function d(){ctx.clearRect(0,0,c.width,c.height);s.forEach(p=>{p.a=Math.max(.03,Math.min(.75,p.a+p.da));if(p.a<=.03||p.a>=.75)p.da*=-1;ctx.beginPath();ctx.arc(p.x*c.width,p.y*c.height,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(232,200,106,${p.a*.4})`;ctx.fill();});requestAnimationFrame(d);}d();
 })();
 </script>
+<script src="orionix-profile.js"></script>
 </body>
 </html>

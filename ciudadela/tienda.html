@@ -3,1114 +3,463 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIONIX | La Tienda del Imperio</title>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>ORIONIX · La Tienda del Imperio</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:image" content="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-/* ===== ORIONIX LUXURY VARIABLES ===== */
-:root {
-  --gold: #e8c86a;
-  --gold-deep: #c9a227;
-  --gold-glow: rgba(232,200,106,0.35);
-  --gold-subtle: rgba(232,200,106,0.12);
-  --bg: #0b0b0d;
-  --bg-card: rgba(11,11,16,0.88);
-  --border: rgba(232,200,106,0.22);
-  --border-hover: rgba(232,200,106,0.6);
-  --text: #d4c5a0;
-  --text-dim: rgba(212,197,160,0.55);
-  --white: #f5f0e8;
+:root{
+  --gold:#e8c86a;--gd:#b89a40;--gl:#f5e0a0;
+  --glow:rgba(232,200,106,0.22);--bg:#0b0b0d;--bg2:rgba(14,13,20,0.96);
+  --b:rgba(232,200,106,0.12);--ba:rgba(232,200,106,0.4);
+  --text:#f0e8d0;--dim:rgba(240,232,208,0.4);--purple:#6a3d9a;
 }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cormorant Garamond',serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+#cv{position:fixed;inset:0;z-index:0;pointer-events:none}
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;height:56px;z-index:900;
+  display:flex;align-items:center;gap:0;padding:0 20px;
+  background:rgba(11,11,13,.98);border-bottom:1px solid var(--b);backdrop-filter:blur(14px);
+}
+.brand{font-family:'Cinzel',serif;font-size:.95rem;font-weight:900;letter-spacing:.2em;color:var(--gold);text-decoration:none;text-shadow:0 0 14px var(--glow);margin-right:18px;white-space:nowrap}
+.nav-mid{display:flex;gap:2px;flex:1}
+.nl{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.1em;color:var(--dim);text-decoration:none;padding:7px 13px;border-radius:6px;transition:all .2s;text-transform:uppercase;white-space:nowrap}
+.nl:hover{color:var(--text);background:rgba(255,255,255,.04)}
+.nl.on{color:var(--gold);background:rgba(232,200,106,.07)}
+.nav-r{display:flex;align-items:center;gap:8px;margin-left:auto}
+.cart-ico{
+  position:relative;display:flex;align-items:center;gap:6px;
+  padding:7px 14px;border:1px solid var(--ba);border-radius:7px;
+  font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.1em;color:var(--gold);
+  text-decoration:none;transition:all .25s;
+}
+.cart-ico:hover{background:rgba(232,200,106,.08)}
+.cart-badge{
+  position:absolute;top:-7px;right:-7px;width:18px;height:18px;border-radius:50%;
+  background:var(--gold);color:var(--bg);font-size:.52rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;
+}
+.login-btn{
+  font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.1em;color:var(--dim);
+  text-decoration:none;padding:7px 13px;border-radius:6px;transition:all .2s;text-transform:uppercase;
+}
+.login-btn:hover{color:var(--gold)}
 
-body {
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: 'Cormorant Garamond', serif;
-  min-height: 10000px;
-  overflow-x: hidden;
+/* ── HERO ── */
+.hero{
+  position:relative;z-index:1;padding:100px 24px 60px;text-align:center;
+  background:radial-gradient(ellipse at 50% 0%,rgba(106,61,154,.12) 0%,transparent 65%);
 }
+.hero-tag{font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.26em;color:var(--dim);text-transform:uppercase;margin-bottom:12px}
+.hero-title{
+  font-family:'Cinzel',serif;font-size:clamp(1.8rem,5vw,3.4rem);font-weight:900;
+  letter-spacing:.1em;color:var(--text);margin-bottom:10px;
+  background:linear-gradient(130deg,#8a6d2a,#f6e6ad 38%,#fff8e0 52%,#f6e6ad 68%,#8a6d2a);
+  background-size:220%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:shine 7s linear infinite;
+}
+@keyframes shine{to{background-position:220% center}}
+.hero-sub{font-size:1.05rem;color:var(--dim);font-style:italic;max-width:520px;margin:0 auto 30px;line-height:1.65}
 
-/* ===== NAV BAR ORIONIX ===== */
-.orionix-nav {
-  position: fixed; top: 0; left: 0; width: 100%;
-  z-index: 9999;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 32px;
-  background: linear-gradient(180deg, rgba(11,11,16,0.97) 0%, rgba(11,11,16,0.0) 100%);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(232,200,106,0.08);
+/* HERO ACTIONS */
+.hero-acts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:50px}
+.hbtn{
+  display:flex;align-items:center;gap:8px;padding:14px 28px;
+  font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.14em;font-weight:700;
+  text-transform:uppercase;border-radius:8px;text-decoration:none;transition:all .28s;
 }
-.nav-brand {
-  font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 700;
-  color: var(--gold); letter-spacing: 0.18em; text-decoration: none;
-  text-shadow: 0 0 18px var(--gold-glow);
-}
-.nav-links { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-.nav-link {
-  font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.12em;
-  color: var(--text-dim); text-decoration: none; padding: 6px 12px;
-  border: 1px solid transparent; border-radius: 4px;
-  transition: all 0.3s;
-}
-.nav-link:hover { color: var(--gold); border-color: var(--border); background: var(--gold-subtle); }
-.nav-cta {
-  font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.12em;
-  color: var(--bg); background: var(--gold); padding: 7px 16px;
-  border-radius: 4px; text-decoration: none; font-weight: 700;
-  box-shadow: 0 0 14px var(--gold-glow); transition: all 0.3s;
-}
-.nav-cta:hover { background: var(--gold-deep); box-shadow: 0 0 22px var(--gold-glow); }
+.hbtn.pri{background:var(--gold);color:var(--bg);box-shadow:0 0 22px var(--glow)}
+.hbtn.pri:hover{background:var(--gd);transform:translateY(-2px)}
+.hbtn.sec{border:1px solid var(--ba);color:var(--gold)}
+.hbtn.sec:hover{background:rgba(232,200,106,.08);transform:translateY(-2px)}
 
-/* ===== CANVAS ESTRELLAS ===== */
-#starfield {
-  position: fixed; top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  z-index: 0; pointer-events: none;
+/* ── QUICK ACCESS ── */
+.quick{
+  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
+  margin-bottom:60px;position:relative;z-index:1;padding:0 24px;
 }
+.qa{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:16px 20px;background:var(--bg2);border:1px solid var(--b);
+  border-radius:10px;text-decoration:none;color:inherit;transition:all .25s;min-width:110px;
+}
+.qa:hover{border-color:var(--ba);transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.qa-ico{font-size:1.5rem}
+.qa-name{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.1em;color:var(--text);text-transform:uppercase}
+.qa-sub{font-size:.7rem;color:var(--dim);text-align:center}
 
-/* ===== MOTOR 3D ===== */
-#viewport {
-  position: fixed; top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  perspective: 1000px; z-index: 1;
-  overflow: hidden; pointer-events: none;
-}
-#camera {
-  position: absolute; top: 0; left: 0;
-  width: 100%; height: 100%;
-  transform-style: preserve-3d;
-  will-change: transform;
-  transition: transform 0.12s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
+/* ── DIVIDER ── */
+.div-line{height:1px;background:linear-gradient(90deg,transparent,var(--b),transparent);margin:0 24px 50px}
 
-/* ===== PRODUCT CARDS ===== */
-.holo-card {
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 340px; height: 500px;
-  margin-left: -170px; margin-top: -250px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 2px;
-  transform-style: preserve-3d;
-  pointer-events: auto;
-  display: flex; flex-direction: column;
-  box-shadow: 0 0 40px rgba(232,200,106,0.08), inset 0 0 30px rgba(232,200,106,0.03);
-  transition: border-color 0.4s, box-shadow 0.4s;
-  cursor: pointer;
-}
-.holo-card:hover {
-  border-color: var(--border-hover);
-  box-shadow: 0 0 60px var(--gold-glow), inset 0 0 40px rgba(232,200,106,0.08);
-}
-.holo-card::before, .holo-card::after {
-  content: ''; position: absolute;
-  width: 18px; height: 18px;
-  border: 1px solid var(--gold); transition: 0.4s;
-}
-.holo-card::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
-.holo-card::after  { bottom: -1px; right: -1px; border-left: none; border-top: none; }
-.holo-card:hover::before, .holo-card:hover::after { width: 36px; height: 36px; }
+/* ── PLANES ── */
+.section{position:relative;z-index:1;padding:0 24px 60px;max-width:1100px;margin:0 auto}
+.sec-tag{font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.24em;color:var(--dim);text-transform:uppercase;text-align:center;margin-bottom:8px}
+.sec-title{font-family:'Cinzel',serif;font-size:clamp(1.2rem,3vw,1.8rem);font-weight:900;color:var(--text);text-align:center;letter-spacing:.08em;margin-bottom:6px}
+.sec-sub{font-size:.9rem;color:var(--dim);text-align:center;font-style:italic;max-width:480px;margin:0 auto 32px}
 
-.hc-img {
-  flex: 1; width: 100%;
-  border-radius: 2px 2px 0 0;
-  overflow: hidden; position: relative;
-  border-bottom: 1px solid var(--border);
-}
-.hc-img img {
-  width: 100%; height: 100%; object-fit: cover;
-  filter: sepia(0.4) brightness(0.7) contrast(1.1);
-  transition: filter 0.6s, transform 0.6s;
-}
-.holo-card:hover .hc-img img {
-  filter: sepia(0.15) brightness(0.9) contrast(1.05);
-  transform: scale(1.04);
-}
-.hc-img::after {
-  content: ''; position: absolute; top: 0; left: 0;
-  width: 100%; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  animation: scan 5s linear infinite; opacity: 0.6;
-}
-@keyframes scan {
-  0% { top: 0; opacity: 0; }
-  10% { opacity: 0.7; }
-  90% { opacity: 0.7; }
-  100% { top: 100%; opacity: 0; }
-}
+.planes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
+@media(max-width:720px){.planes-grid{grid-template-columns:1fr}}
 
-/* Badge de plan */
-.hc-badge {
-  position: absolute; top: 16px; right: 16px;
-  font-family: 'Cinzel', serif; font-size: 0.55rem; font-weight: 700;
-  letter-spacing: 0.15em; text-transform: uppercase;
-  padding: 4px 10px; border: 1px solid var(--gold);
-  background: rgba(11,11,16,0.85); color: var(--gold);
-  backdrop-filter: blur(8px);
+.pcard{
+  background:var(--bg2);border:1px solid var(--b);border-radius:12px;
+  padding:24px 20px;transition:all .28s;cursor:pointer;position:relative;overflow:hidden;
 }
+.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .28s}
+.pcard:hover{border-color:var(--ba);transform:translateY(-3px);box-shadow:0 10px 32px rgba(0,0,0,.35)}
+.pcard:hover::before{opacity:1}
+.pcard.feat{border-color:rgba(232,200,106,.28)}
+.pcard.feat::before{opacity:.5}
 
-.hc-info { padding: 24px 20px; text-align: center; }
-.hc-cat {
-  font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.2em;
-  color: var(--text-dim); text-transform: uppercase; margin-bottom: 8px;
+.plan-badge{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:.16em;color:var(--bg);background:var(--gold);padding:3px 11px;border-radius:20px;display:inline-block;margin-bottom:13px;font-weight:700}
+.plan-name{font-family:'Cinzel',serif;font-size:1.05rem;font-weight:700;color:var(--text);letter-spacing:.1em;margin-bottom:8px}
+.plan-price{font-family:'Cinzel',serif;font-size:2rem;font-weight:900;color:var(--gold);line-height:1}
+.plan-price .mo{font-size:.72rem;color:var(--dim);font-weight:400}
+.plan-desc{font-size:.84rem;color:var(--dim);margin:10px 0 14px;line-height:1.6;font-style:italic}
+.plan-ul{list-style:none;margin-bottom:18px}
+.plan-ul li{font-size:.8rem;color:var(--dim);padding:3px 0;display:flex;align-items:flex-start;gap:7px}
+.plan-ul li::before{content:'✦';color:var(--gold);font-size:.52rem;margin-top:3px;flex-shrink:0}
+.plan-btn{
+  display:block;width:100%;text-align:center;padding:11px;border-radius:7px;
+  font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.14em;font-weight:700;
+  transition:all .28s;cursor:pointer;border:1px solid var(--ba);color:var(--gold);
+  background:transparent;text-decoration:none;
 }
-.hc-title {
-  font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 700;
-  color: var(--white); letter-spacing: 0.06em; margin-bottom: 10px;
-  text-shadow: 0 0 20px rgba(232,200,106,0.2);
-}
-.hc-price {
-  font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--gold);
-  font-weight: 600; letter-spacing: 0.04em;
-}
-.hc-price-sub {
-  font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.08em;
-  margin-top: 4px; font-family: 'Cormorant Garamond', serif;
-}
-.hc-btn {
-  margin-top: 18px;
-  background: transparent; color: var(--gold);
-  border: 1px solid var(--border-hover);
-  padding: 11px 20px; font-family: 'Cinzel', serif;
-  font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
-  cursor: pointer; transition: all 0.35s; width: 100%;
-}
-.hc-btn:hover {
-  background: var(--gold); color: var(--bg);
-  box-shadow: 0 0 25px var(--gold-glow);
-}
+.plan-btn:hover,.plan-btn.pri{background:var(--gold);color:var(--bg);box-shadow:0 0 16px var(--glow)}
 
-/* ===== HUD INTERFACE ===== */
-.hud { position: fixed; z-index: 100; pointer-events: none; font-family: 'Cinzel', serif; }
-.hud-interactive { pointer-events: auto; }
+/* ── CATALOGOS PREVIEW ── */
+.cat-tabs{display:flex;gap:6px;border-bottom:1px solid var(--b);margin-bottom:18px}
+.ctab{
+  font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:.12em;color:var(--dim);
+  padding:9px 18px;cursor:pointer;border-bottom:2px solid transparent;
+  margin-bottom:-1px;transition:all .2s;text-transform:uppercase;
+}
+.ctab.on{color:var(--gold);border-color:var(--gold)}
+.ctab:hover{color:var(--text)}
 
-.hud-top {
-  top: 0; left: 0; width: 100%;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 28px 44px;
-  background: linear-gradient(180deg, rgba(11,11,16,0.85), transparent);
-}
-.hud-logo {
-  font-size: 1.6rem; font-weight: 900; color: var(--white); letter-spacing: 0.25em;
-  text-shadow: 0 0 24px var(--gold-glow); cursor: pointer; text-decoration: none;
-}
-.hud-logo span { color: var(--gold); }
-.hud-cart { display: flex; align-items: center; gap: 14px; cursor: pointer; }
-.hud-cart-text { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; }
-.hud-cart-badge {
-  width: 28px; height: 28px; border: 1px solid var(--gold);
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 700; color: var(--white); box-shadow: 0 0 10px var(--gold-glow);
-  background: rgba(232,200,106,0.1); font-size: 0.85rem;
-}
-.hud-status {
-  position: fixed; bottom: 28px; left: 40px;
-  font-size: 0.6rem; letter-spacing: 0.18em; color: var(--text-dim);
-}
-.hud-progress {
-  position: fixed; bottom: 28px; right: 40px;
-  font-size: 0.6rem; letter-spacing: 0.18em; color: var(--gold);
-}
+.cat-panel{display:none}.cat-panel.on{display:block}
+.cat-desc{font-size:.86rem;color:var(--dim);font-style:italic;margin-bottom:16px;padding:10px 14px;background:rgba(255,255,255,.025);border-left:2px solid var(--gold);border-radius:0 6px 6px 0}
 
-/* Instrucción inicial */
-.scroll-hint {
-  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  text-align: center; z-index: 50; color: var(--white); pointer-events: none;
-  transition: opacity 1.2s;
-}
-.scroll-hint h2 {
-  font-family: 'Cinzel', serif; font-size: 2.6rem; letter-spacing: 0.3em;
-  margin-bottom: 16px; text-shadow: 0 0 40px var(--gold-glow);
-  color: var(--gold);
-}
-.scroll-hint p {
-  font-size: 0.9rem; letter-spacing: 0.2em; color: var(--text-dim);
-  animation: pulse 2.5s infinite; font-family: 'Cinzel', serif;
-}
-@keyframes pulse { 0%,100%{ opacity: 1; } 50%{ opacity: 0.25; } }
+.prodg{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.prodc{background:var(--bg2);border:1px solid var(--b);border-radius:9px;overflow:hidden;transition:all .25s;cursor:pointer}
+.prodc:hover{border-color:var(--ba);transform:translateY(-2px)}
+.pimg{width:100%;aspect-ratio:3/4;background:linear-gradient(135deg,rgba(106,61,154,.1),rgba(232,200,106,.07));display:flex;align-items:center;justify-content:center;font-size:2.4rem;max-height:200px;overflow:hidden}
+.pimg img{width:100%;height:100%;object-fit:cover}
+.pinf{padding:11px}
+.pname{font-family:'Cinzel',serif;font-size:.58rem;font-weight:700;color:var(--text);letter-spacing:.05em;margin-bottom:4px}
+.pprice{font-family:'Cinzel',serif;font-size:.86rem;color:var(--gold)}
+.padd{display:block;width:100%;margin-top:8px;padding:7px;text-align:center;font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.1em;color:var(--gold);border:1px solid var(--b);border-radius:5px;transition:all .22s;cursor:pointer;background:transparent}
+.padd:hover{background:var(--gold);color:var(--bg)}
 
-/* ===== OVERLAYS ===== */
-.overlay-glass {
-  position: fixed; inset: 0; background: rgba(6,6,10,0.92);
-  backdrop-filter: blur(24px); z-index: 9000;
-  display: none; flex-direction: column; align-items: center; justify-content: center;
-  opacity: 0; transition: opacity 0.5s;
+.ver-mas{
+  display:flex;align-items:center;justify-content:center;margin-top:18px;
 }
-.overlay-glass.active { display: flex; opacity: 1; }
+.ver-mas a{
+  font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.14em;color:var(--gold);
+  text-decoration:none;border:1px solid var(--ba);padding:11px 28px;border-radius:7px;
+  transition:all .28s;
+}
+.ver-mas a:hover{background:var(--gold);color:var(--bg)}
 
-.panel-holografico {
-  width: min(860px, 90vw); max-height: 85vh;
-  background: rgba(11,11,16,0.92);
-  border: 1px solid var(--border-hover);
-  box-shadow: 0 0 60px var(--gold-glow);
-  border-radius: 2px; padding: 40px;
-  overflow-y: auto; position: relative;
-}
-.panel-close {
-  position: absolute; top: 16px; right: 22px;
-  font-size: 1.8rem; color: var(--text-dim); cursor: pointer;
-  font-family: 'Cinzel', serif; transition: color 0.3s;
-}
-.panel-close:hover { color: var(--gold); }
+.sk{background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.08),rgba(255,255,255,.04));background-size:200% 100%;animation:shim 1.4s infinite;border-radius:9px}
+@keyframes shim{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-/* Carrito */
-.cart-title {
-  font-family: 'Cinzel', serif; font-size: 1.7rem; color: var(--white);
-  margin-bottom: 28px; letter-spacing: 0.12em;
-  text-shadow: 0 0 20px var(--gold-glow);
-}
-.cart-item {
-  display: flex; align-items: center; gap: 20px;
-  padding: 16px 0; border-bottom: 1px solid var(--border);
-}
-.cart-item img { width: 58px; height: 76px; object-fit: cover; border: 1px solid var(--border-hover); }
-.cart-item-info { flex: 1; }
-.cart-item-title { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 600; color: var(--white); }
-.cart-item-price { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-top: 6px; }
-.cart-item-remove {
-  color: rgba(255,80,80,0.7); cursor: pointer; font-family: 'Cinzel', serif;
-  font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 8px;
-  display: inline-block; transition: color 0.3s;
-}
-.cart-item-remove:hover { color: #ff5050; }
-.cart-total {
-  display: flex; justify-content: space-between; margin-top: 28px;
-  font-size: 1.3rem; font-weight: 700; color: var(--white);
-  font-family: 'Cinzel', serif;
-}
-.cart-checkout-btn {
-  display: block; width: 100%; text-align: center; margin-top: 22px;
-  background: var(--gold); color: var(--bg); padding: 15px;
-  font-family: 'Cinzel', serif; font-size: 0.85rem; letter-spacing: 0.18em;
-  font-weight: 700; text-transform: uppercase;
-  cursor: pointer; border: none;
-  box-shadow: 0 0 24px var(--gold-glow); transition: 0.3s; text-decoration: none;
-}
-.cart-checkout-btn:hover { background: var(--gold-deep); }
-.cart-checkout-btn.secondary {
-  background: transparent; color: var(--gold);
-  border: 1px solid var(--border-hover);
-  box-shadow: none; margin-top: 12px;
-}
-.cart-checkout-btn.secondary:hover { background: var(--gold-subtle); }
+/* ── LEAD FORM ── */
+.lead-form{background:var(--bg2);border:1px solid var(--b);border-radius:10px;padding:20px;margin-top:12px;display:none}
+.lead-form.on{display:block}
+.lf-h{font-family:'Cinzel',serif;font-size:.62rem;font-weight:700;color:var(--text);letter-spacing:.1em;margin-bottom:14px}
+.lf-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+@media(max-width:500px){.lf-grid{grid-template-columns:1fr}}
+.fi{width:100%;padding:10px 13px;background:rgba(255,255,255,.04);border:1px solid var(--b);border-radius:7px;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:.9rem;outline:none;transition:border .22s}
+.fi:focus{border-color:var(--gold)}
+.fi::placeholder{color:var(--dim)}
+.lf-btn{width:100%;padding:12px;background:var(--gold);color:var(--bg);border:none;border-radius:7px;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.14em;font-weight:700;cursor:pointer;transition:all .28s}
+.lf-btn:hover{background:var(--gd)}
+.lf-btn:disabled{opacity:.4}
 
-/* Ficha producto */
-.ficha-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
-@media(max-width:640px){ .ficha-grid { grid-template-columns: 1fr; } }
-.ficha-img { aspect-ratio: 3/4; overflow: hidden; border: 1px solid var(--border); }
-.ficha-img img { width:100%; height:100%; object-fit:cover; filter:sepia(0.2) brightness(0.85); }
-.ficha-info { display: flex; flex-direction: column; justify-content: center; gap: 18px; }
-.ficha-cat { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; color:var(--text-dim); text-transform:uppercase; }
-.ficha-nombre { font-family:'Cinzel',serif; font-size:2rem; font-weight:700; color:var(--white); line-height:1.2; }
-.ficha-desc { font-size:1.05rem; color:var(--text); line-height:1.7; font-style:italic; }
-.ficha-precio { font-family:'Cinzel',serif; font-size:1.8rem; color:var(--gold); }
-.ficha-btn {
-  background:var(--gold); color:var(--bg); border:none; padding:15px 28px;
-  font-family:'Cinzel',serif; font-size:0.85rem; letter-spacing:0.15em; font-weight:700;
-  text-transform:uppercase; cursor:pointer; box-shadow:0 0 24px var(--gold-glow); transition:0.3s;
-}
-.ficha-btn:hover { background:var(--gold-deep); }
+/* TOAST */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(14,13,20,.97);border:1px solid var(--ba);color:var(--gold);font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.1em;padding:10px 22px;border-radius:6px;z-index:9999;transition:transform .32s;pointer-events:none}
+.toast.on{transform:translateX(-50%) translateY(0)}
 
-/* ===== PERFIL HUD ===== */
-.hud-nav { display: flex; align-items: center; gap: 18px; }
-.profile-wrap { position: relative; cursor: pointer; }
-.profile-avatar {
-  width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--gold);
-  display: flex; align-items: center; justify-content: center;
-  background: var(--gold-subtle); font-family: 'Cinzel',serif;
-  font-size: 1rem; font-weight: 700; color: var(--gold); overflow: hidden;
-}
-.profile-avatar img { width:100%; height:100%; border-radius:50%; object-fit:cover; }
-.profile-dropdown {
-  position: absolute; top: 54px; right: 0; min-width: 220px;
-  background: rgba(11,11,16,0.97); border: 1px solid var(--border);
-  backdrop-filter: blur(20px); box-shadow: 0 0 30px var(--gold-glow);
-  display: none; flex-direction: column; z-index: 200;
-  animation: slideDown .3s ease;
-}
-@keyframes slideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
-.profile-dropdown.open { display: flex; }
-.pd-header { padding: 16px 18px; border-bottom: 1px solid var(--border); }
-.pd-name { font-family:'Cinzel',serif; font-size:.8rem; color:var(--white); letter-spacing:0.08em; }
-.pd-email { font-size:.72rem; color:var(--text-dim); margin-top:4px; font-family:'Cormorant Garamond',serif; }
-.pd-item {
-  padding:13px 18px; font-family:'Cinzel',serif; font-size:.65rem;
-  letter-spacing:0.12em; color:var(--text); cursor:pointer; transition:.3s;
-  border-bottom:1px solid rgba(232,200,106,.05); text-decoration:none; display:block;
-}
-.pd-item:hover { background:var(--gold-subtle); color:var(--gold); padding-left:26px; }
-.pd-item.logout { color:rgba(255,80,80,0.7); }
-.pd-item.logout:hover { background:rgba(255,80,80,.08); color:#ff5050; }
-.btn-login-hud {
-  font-family:'Cinzel',serif; font-size:.65rem; letter-spacing:0.12em;
-  color:var(--gold); border:1px solid var(--border); padding:7px 16px; text-decoration:none; transition:0.3s;
-}
-.btn-login-hud:hover { background:var(--gold-subtle); }
-
-/* ===== SECCIONES INFERIORES ===== */
-.sections-wrapper {
-  position: relative; z-index: 10;
-  background: linear-gradient(180deg, transparent 0%, var(--bg) 4%);
-  margin-top: 100vh;
-  padding: 0 0 80px;
-}
-
-/* Divider */
-.section-divider {
-  width: 60px; height: 1px; background: var(--gold); margin: 0 auto 18px;
-  opacity: 0.7;
-}
-.section-tag {
-  font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.28em;
-  color: var(--text-dim); text-transform: uppercase; text-align: center; margin-bottom: 14px;
-}
-.section-title {
-  font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 4vw, 2.8rem);
-  font-weight: 700; color: var(--white); text-align: center; margin-bottom: 12px;
-  letter-spacing: 0.06em;
-}
-.section-subtitle {
-  font-size: 1.1rem; color: var(--text-dim); text-align: center;
-  max-width: 540px; margin: 0 auto 56px; line-height: 1.7; font-style: italic;
-}
-
-/* ===== PRICING TABLE ===== */
-.pricing-section { padding: 100px 32px; }
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-  gap: 28px; max-width: 980px; margin: 0 auto;
-}
-.pricing-card {
-  background: var(--bg-card); border: 1px solid var(--border);
-  padding: 40px 32px; position: relative;
-  transition: border-color 0.4s, box-shadow 0.4s;
-}
-.pricing-card:hover {
-  border-color: var(--border-hover);
-  box-shadow: 0 0 40px rgba(232,200,106,0.12);
-}
-.pricing-card.featured {
-  border-color: var(--gold);
-  box-shadow: 0 0 50px rgba(232,200,106,0.2);
-}
-.pricing-badge {
-  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-  font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.2em;
-  background: var(--gold); color: var(--bg); padding: 4px 18px; font-weight: 700;
-}
-.pricing-plan {
-  font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.22em;
-  color: var(--text-dim); text-transform: uppercase; margin-bottom: 12px;
-}
-.pricing-name {
-  font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 700;
-  color: var(--white); margin-bottom: 6px;
-}
-.pricing-price {
-  font-family: 'Cinzel', serif; font-size: 2.4rem; color: var(--gold);
-  font-weight: 700; line-height: 1.1;
-}
-.pricing-period {
-  font-size: 0.85rem; color: var(--text-dim); font-family: 'Cormorant Garamond', serif;
-  margin-bottom: 28px; font-style: italic;
-}
-.pricing-divider { width: 40px; height: 1px; background: var(--border-hover); margin: 22px 0; }
-.pricing-features { list-style: none; margin-bottom: 32px; }
-.pricing-features li {
-  font-size: 0.95rem; color: var(--text); padding: 8px 0;
-  border-bottom: 1px solid rgba(232,200,106,0.06);
-  display: flex; align-items: center; gap: 10px;
-}
-.pricing-features li::before {
-  content: '◆'; color: var(--gold); font-size: 0.5rem; flex-shrink: 0;
-}
-.pricing-cta {
-  display: block; width: 100%; text-align: center;
-  font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.16em;
-  padding: 13px; cursor: pointer; transition: 0.35s; text-decoration: none;
-  background: transparent; color: var(--gold); border: 1px solid var(--border-hover);
-}
-.pricing-cta:hover { background: var(--gold); color: var(--bg); box-shadow: 0 0 24px var(--gold-glow); }
-.pricing-card.featured .pricing-cta {
-  background: var(--gold); color: var(--bg); box-shadow: 0 0 24px var(--gold-glow);
-}
-.pricing-card.featured .pricing-cta:hover { background: var(--gold-deep); }
-
-/* ===== TESTIMONIOS ===== */
-.testimonials-section { padding: 100px 32px; background: rgba(232,200,106,0.02); }
-.testimonials-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 28px; max-width: 920px; margin: 0 auto;
-}
-.testimonial-card {
-  background: var(--bg-card); border: 1px solid var(--border);
-  padding: 36px 30px; position: relative; transition: border-color 0.4s;
-}
-.testimonial-card:hover { border-color: rgba(232,200,106,0.4); }
-.testimonial-quote {
-  font-size: 3.5rem; color: var(--gold); opacity: 0.2; line-height: 1;
-  font-family: 'Cinzel', serif; position: absolute; top: 16px; left: 24px;
-  pointer-events: none;
-}
-.testimonial-text {
-  font-size: 1.05rem; line-height: 1.8; color: var(--text);
-  font-style: italic; margin-bottom: 24px; padding-top: 18px;
-}
-.testimonial-result {
-  font-family: 'Cinzel', serif; font-size: 0.75rem; color: var(--gold);
-  letter-spacing: 0.12em; margin-bottom: 16px;
-  padding: 6px 12px; border: 1px solid var(--border); display: inline-block;
-}
-.testimonial-author {
-  display: flex; align-items: center; gap: 14px;
-  border-top: 1px solid var(--border); padding-top: 18px; margin-top: 6px;
-}
-.testimonial-avatar {
-  width: 42px; height: 42px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--gold-deep), var(--gold));
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Cinzel', serif; font-weight: 700; color: var(--bg); font-size: 0.9rem;
-  flex-shrink: 0;
-}
-.testimonial-name {
-  font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 700; color: var(--white);
-}
-.testimonial-plan { font-size: 0.72rem; color: var(--text-dim); font-style: italic; }
-
-/* ===== FAQ ===== */
-.faq-section { padding: 100px 32px; }
-.faq-container { max-width: 720px; margin: 0 auto; }
-.faq-item {
-  border: 1px solid var(--border); margin-bottom: 12px;
-  transition: border-color 0.3s;
-}
-.faq-item.open { border-color: rgba(232,200,106,0.45); }
-.faq-question {
-  padding: 22px 26px; display: flex; align-items: center; justify-content: space-between;
-  cursor: pointer; font-family: 'Cinzel', serif; font-size: 0.95rem;
-  color: var(--white); letter-spacing: 0.04em; gap: 16px;
-  transition: color 0.3s;
-}
-.faq-question:hover { color: var(--gold); }
-.faq-item.open .faq-question { color: var(--gold); }
-.faq-icon {
-  width: 22px; height: 22px; border: 1px solid var(--border-hover);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; color: var(--gold); font-size: 1.1rem;
-  transition: transform 0.3s;
-}
-.faq-item.open .faq-icon { transform: rotate(45deg); }
-.faq-answer {
-  max-height: 0; overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.3s;
-}
-.faq-answer-inner {
-  padding: 0 26px 22px;
-  font-size: 1rem; color: var(--text); line-height: 1.75;
-  border-top: 1px solid var(--border); font-style: italic;
-}
-.faq-item.open .faq-answer { max-height: 300px; }
-
-/* ===== WHATSAPP FLOTANTE ===== */
-.wa-float {
-  position: fixed; bottom: 32px; right: 32px; z-index: 8888;
-  display: flex; align-items: center; gap: 12px;
-  background: var(--bg-card); border: 1px solid var(--gold);
-  padding: 12px 22px; border-radius: 2px;
-  box-shadow: 0 0 30px var(--gold-glow);
-  text-decoration: none; color: var(--gold);
-  font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.14em;
-  transition: all 0.35s; backdrop-filter: blur(16px);
-  animation: floatPulse 3s ease-in-out infinite;
-}
-.wa-float:hover {
-  background: var(--gold); color: var(--bg);
-  box-shadow: 0 0 45px var(--gold-glow);
-  animation: none;
-}
-@keyframes floatPulse {
-  0%,100% { box-shadow: 0 0 20px var(--gold-glow); transform: translateY(0); }
-  50% { box-shadow: 0 0 40px var(--gold-glow); transform: translateY(-4px); }
-}
-.wa-icon { font-size: 1.3rem; }
-
-/* ===== RESPONSIVE ===== */
-@media(max-width: 768px) {
-  .hud-top { padding: 20px 24px; }
-  .hud-logo { font-size: 1.2rem; letter-spacing: 0.15em; }
-  .pricing-section, .testimonials-section, .faq-section { padding: 60px 20px; }
-  .wa-float { bottom: 20px; right: 20px; padding: 10px 16px; font-size: 0.65rem; }
-  .orionix-nav { padding: 12px 20px; }
-  .nav-links { gap: 4px; }
-}
+@media(max-width:860px){.nav-mid{display:none}}
 </style>
 </head>
 <body>
+<canvas id="cv"></canvas>
 
-<!-- NAV ORIONIX -->
-<nav class="orionix-nav">
-  <a href="index.html" class="nav-brand">ORIONIX</a>
-  <div class="nav-links">
-    <a href="hub.html" class="nav-link">Hub</a>
-    <a href="ciudadela.html" class="nav-link">Ciudadela</a>
-    <a href="hogar.html" class="nav-link">Hogar</a>
-    <a href="forjadora.html" class="nav-link">Forjadora</a>
-    <a href="afiliados.html" class="nav-link">Afiliados</a>
-    <a href="index.html#contacto" class="nav-cta">AXEL</a>
-    <a href="tienda.html" class="nav-cta">Tienda</a>
+<!-- NAV -->
+<nav>
+  <a href="hub.html" class="brand">ORIONIX</a>
+  <div class="nav-mid">
+    <a class="nl on" href="tienda.html">🏠 Inicio</a>
+    <a class="nl" href="articulos.html">🛍️ Artículos</a>
+    <a class="nl" href="carrito.html">🛒 Carrito</a>
+    <a class="nl" href="mi-universo.html">🗺️ Mi Universo</a>
+    <a class="nl" href="agentes.html">🤖 Agentes</a>
+  </div>
+  <div class="nav-r">
+    <a href="login.html" class="login-btn">Iniciar Sesión</a>
+    <a href="carrito.html" class="cart-ico">
+      🛒 Carrito
+      <span class="cart-badge" id="cart-cnt">0</span>
+    </a>
   </div>
 </nav>
 
-<!-- CANVAS ESTRELLAS -->
-<canvas id="starfield"></canvas>
-
-<!-- SCROLL HINT -->
-<div class="scroll-hint" id="scrollHint">
-  <h2>LA TIENDA</h2>
-  <p>NAVEGA POR LOS PLANES — HAZ SCROLL</p>
-</div>
-
-<!-- HUD -->
-<div class="hud hud-top hud-interactive">
-  <a href="index.html" class="hud-logo">ORIO<span>NIX</span></a>
-  <div class="hud-nav">
-    <div class="hud-cart" onclick="abrirCarrito()">
-      <span class="hud-cart-text">Carrito</span>
-      <span class="hud-cart-badge" id="hudBadge">0</span>
-    </div>
-    <div class="profile-wrap" id="profileWrap" onclick="toggleDropdown()" style="display:none">
-      <div class="profile-avatar" id="profileAvatar">?</div>
-      <div class="profile-dropdown" id="profileDropdown">
-        <div class="pd-header">
-          <div class="pd-name" id="pdName">COMANDANTE</div>
-          <div class="pd-email" id="pdEmail"></div>
-        </div>
-        <a href="auth.html" class="pd-item logout" onclick="cerrarSesion(event)">⏏ Desconectar</a>
-      </div>
-    </div>
-    <a href="auth.html" class="btn-login-hud" id="btnLogin">ACCEDER</a>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Centro Comercial · ORIONIX · De una aguja a una mansión</div>
+  <h1 class="hero-title">LA TIENDA DEL IMPERIO</h1>
+  <p class="hero-sub">Planes de servicio exclusivos y catálogos de productos cuidadosamente seleccionados para tu ascenso.</p>
+  <div class="hero-acts">
+    <a href="articulos.html" class="hbtn pri">🛍️ Ver todos los Artículos →</a>
+    <a href="carrito.html" class="hbtn sec">🛒 Ver mi Carrito</a>
   </div>
-</div>
-<div class="hud hud-status" id="hudStatus">SISTEMAS ORIONIX ACTIVOS</div>
-<div class="hud hud-progress" id="hudProgress">Z: 0000</div>
 
-<!-- MOTOR 3D -->
-<div id="viewport">
-  <div id="camera"></div>
-</div>
-
-<!-- OVERLAY CARRITO -->
-<div class="overlay-glass" id="cartOverlay">
-  <div class="panel-holografico hud-interactive">
-    <span class="panel-close" onclick="cerrarCarrito()">&times;</span>
-    <h2 class="cart-title">Tu Selección Imperial</h2>
-    <div id="cartItems"></div>
-    <div class="cart-total">
-      <span>Total</span>
-      <span id="cartTotalUSD" style="color:var(--gold)">€0</span>
-    </div>
-    <button class="cart-checkout-btn" onclick="iniciarPago()">Solicitar Acceso</button>
-    <a href="https://wa.me/573014410541?text=Quiero%20activar%20mi%20plan%20ORIONIX" target="_blank" class="cart-checkout-btn secondary">WhatsApp — Consultar Ahora</a>
+  <!-- QUICK ACCESS -->
+  <div class="quick">
+    <a href="articulos.html" class="qa">
+      <span class="qa-ico">🧵</span>
+      <span class="qa-name">Moda</span>
+      <span class="qa-sub">Desde €1</span>
+    </a>
+    <a href="articulos.html?cat=FASHION+STYLE" class="qa">
+      <span class="qa-ico">✨</span>
+      <span class="qa-name">Fashion Style</span>
+      <span class="qa-sub">€10 – €100</span>
+    </a>
+    <a href="articulos.html?cat=MI+DINASTIA" class="qa">
+      <span class="qa-ico">👑</span>
+      <span class="qa-name">Mi Dinastía</span>
+      <span class="qa-sub">€100+</span>
+    </a>
+    <a href="login.html" class="qa">
+      <span class="qa-ico">👤</span>
+      <span class="qa-name">Mi Cuenta</span>
+      <span class="qa-sub">Acceder</span>
+    </a>
+    <a href="carrito.html" class="qa">
+      <span class="qa-ico">🛒</span>
+      <span class="qa-name">Carrito</span>
+      <span class="qa-sub" id="q-cart-sub">0 artículos</span>
+    </a>
+    <a href="metodo-pago.html" class="qa">
+      <span class="qa-ico">💳</span>
+      <span class="qa-name">Pagar</span>
+      <span class="qa-sub">PayPal · Telegram</span>
+    </a>
   </div>
 </div>
 
-<!-- OVERLAY FICHA PRODUCTO -->
-<div class="overlay-glass" id="fichaOverlay">
-  <div class="panel-holografico hud-interactive">
-    <span class="panel-close" onclick="cerrarFicha()">&times;</span>
-    <div class="ficha-grid" id="fichaContent"></div>
+<div class="div-line"></div>
+
+<!-- PLANES DE SERVICIO -->
+<div class="section">
+  <div class="sec-tag">Planes de Servicio</div>
+  <h2 class="sec-title">Elige tu Nivel de Potencia</h2>
+  <p class="sec-sub">Infraestructura IA completa según el nivel de tu misión</p>
+
+  <div class="planes-grid">
+    <!-- ESENCIA -->
+    <div class="pcard" onclick="openLead('Esencia')">
+      <div class="plan-badge">Entrada al Universo</div>
+      <div class="plan-name">ESENCIA</div>
+      <div class="plan-price">€197 <span class="mo">/mes</span></div>
+      <p class="plan-desc">La puerta de entrada. Automatización básica y acceso a AXEL IA.</p>
+      <ul class="plan-ul">
+        <li>AXEL IA disponible 24/7</li>
+        <li>1 flujo de automatización</li>
+        <li>Soporte directo por Telegram</li>
+        <li>Catálogo MODA completo</li>
+      </ul>
+      <button class="plan-btn" onclick="event.stopPropagation();openLead('Esencia')">Solicitar Esencia →</button>
+    </div>
+
+    <!-- IMPERIO -->
+    <div class="pcard feat" onclick="openLead('Imperio')">
+      <div class="plan-badge" style="background:linear-gradient(90deg,var(--gd),var(--gold))">⭐ Más Elegido</div>
+      <div class="plan-name">IMPERIO</div>
+      <div class="plan-price">€497 <span class="mo">/mes</span></div>
+      <p class="plan-desc">El verdadero poder. Todos los agentes, todos los flujos.</p>
+      <ul class="plan-ul">
+        <li>22 Agentes IA del Kabalion</li>
+        <li>Automatizaciones ilimitadas</li>
+        <li>Mesa de Mando completa</li>
+        <li>Catálogos MODA + FASHION STYLE</li>
+        <li>CRM de leads automático</li>
+      </ul>
+      <button class="plan-btn pri" onclick="event.stopPropagation();openLead('Imperio')">Elegir Imperio →</button>
+    </div>
+
+    <!-- CIUDADELA -->
+    <div class="pcard" onclick="openLead('Ciudadela')">
+      <div class="plan-badge" style="background:var(--purple)">👑 Élite Total</div>
+      <div class="plan-name">CIUDADELA</div>
+      <div class="plan-price" style="font-size:1.3rem;padding-top:8px;line-height:1.35">A medida<br><span style="font-size:.7rem;font-weight:400;color:var(--dim)">precio según proyecto</span></div>
+      <p class="plan-desc">Tu propia agencia de IA. Sefirot KRC personalizados, todo incluido.</p>
+      <ul class="plan-ul">
+        <li>Infraestructura ORIONIX completa</li>
+        <li>Agentes KRC propios</li>
+        <li>Catálogo MI DINASTÍA incluido</li>
+        <li>Mentoría directa con Kevin</li>
+        <li>Desarrollo exclusivo a medida</li>
+      </ul>
+      <button class="plan-btn" onclick="event.stopPropagation();openLead('Ciudadela')">Hablar con Kevin →</button>
+    </div>
+  </div>
+
+  <!-- LEAD FORM -->
+  <div class="lead-form" id="lead-form">
+    <div class="lf-h" id="lf-title">💎 Solicitar información</div>
+    <div class="lf-grid">
+      <input class="fi" id="lf-nombre" type="text" placeholder="Tu nombre completo *">
+      <input class="fi" id="lf-telegram" type="text" placeholder="@tu_telegram *">
+    </div>
+    <input type="hidden" id="lf-plan">
+    <button class="lf-btn" id="lf-btn" onclick="submitLead()">Enviar Solicitud — Te contactamos en menos de 24h →</button>
   </div>
 </div>
 
-<!-- SECCIONES INFERIORES -->
-<div class="sections-wrapper">
+<div class="div-line"></div>
 
-  <!-- PRICING -->
-  <section class="pricing-section">
-    <div class="section-tag">Planes de Acceso</div>
-    <div class="section-divider"></div>
-    <h2 class="section-title">Elige Tu Imperio</h2>
-    <p class="section-subtitle">Tres niveles de poder. Una sola decisión que lo cambia todo.</p>
+<!-- CATÁLOGOS -->
+<div class="section">
+  <div class="sec-tag">Catálogos de Productos</div>
+  <h2 class="sec-title">Artículos del Imperio</h2>
+  <p class="sec-sub">De una aguja a una mansión — encuentra lo que necesitas en tu nivel</p>
 
-    <div class="pricing-grid">
-      <!-- Esencia -->
-      <div class="pricing-card">
-        <div class="pricing-plan">Plan</div>
-        <div class="pricing-name">Esencia</div>
-        <div class="pricing-price">€197</div>
-        <div class="pricing-period">/mes — Acceso mensual</div>
-        <div class="pricing-divider"></div>
-        <ul class="pricing-features">
-          <li>AXEL — Agente IA Personal</li>
-          <li>Acceso a La Ciudadela</li>
-          <li>Chat con memoria de sesión</li>
-          <li>Soporte vía WhatsApp</li>
-          <li>Actualizaciones mensuales</li>
-        </ul>
-        <a href="https://wa.me/573014410541?text=Quiero%20el%20Plan%20Esencia%20197%E2%82%AC" target="_blank" class="pricing-cta">Comenzar Ahora</a>
-      </div>
+  <div class="cat-tabs">
+    <div class="ctab on" onclick="catTab('moda',this)">🧵 MODA</div>
+    <div class="ctab" onclick="catTab('fashion',this)">✨ FASHION STYLE</div>
+    <div class="ctab" onclick="catTab('dinastia',this)">👑 MI DINASTÍA</div>
+  </div>
 
-      <!-- Imperio -->
-      <div class="pricing-card featured">
-        <div class="pricing-badge">MÁS ELEGIDO</div>
-        <div class="pricing-plan">Plan</div>
-        <div class="pricing-name">Imperio</div>
-        <div class="pricing-price">€497</div>
-        <div class="pricing-period">/mes — Acceso completo</div>
-        <div class="pricing-divider"></div>
-        <ul class="pricing-features">
-          <li>Todo lo del Plan Esencia</li>
-          <li>Acceso a los 22 Agentes</li>
-          <li>Generación de imágenes con IA</li>
-          <li>Acceso a La Forjadora</li>
-          <li>Comunidad Imperial privada</li>
-          <li>Sesión mensual 1 a 1</li>
-        </ul>
-        <a href="https://wa.me/573014410541?text=Quiero%20el%20Plan%20Imperio%20497%E2%82%AC" target="_blank" class="pricing-cta">Activar Imperio</a>
-      </div>
+  <div class="cat-panel on" id="cp-moda">
+    <div class="cat-desc">De una aguja — productos económicos y accesibles para comenzar tu ascenso.</div>
+    <div class="prodg" id="g-moda"><div class="sk" style="height:240px"></div><div class="sk" style="height:240px"></div><div class="sk" style="height:240px"></div><div class="sk" style="height:240px"></div></div>
+  </div>
+  <div class="cat-panel" id="cp-fashion">
+    <div class="cat-desc">El estilo que te eleva — moda con propósito y calidad, de €10 a €100.</div>
+    <div class="prodg" id="g-fashion"><div class="sk" style="height:240px"></div><div class="sk" style="height:240px"></div></div>
+  </div>
+  <div class="cat-panel" id="cp-dinastia">
+    <div class="cat-desc">La cima — inversiones y productos de alto valor para tu legado y tu dinastía.</div>
+    <div class="prodg" id="g-dinastia"><div class="sk" style="height:240px"></div><div class="sk" style="height:240px"></div></div>
+  </div>
 
-      <!-- Ciudadela -->
-      <div class="pricing-card">
-        <div class="pricing-plan">Plan</div>
-        <div class="pricing-name">Ciudadela</div>
-        <div class="pricing-price">A medida</div>
-        <div class="pricing-period">Contacto directo con Kevin</div>
-        <div class="pricing-divider"></div>
-        <ul class="pricing-features">
-          <li>Suite completa de agentes IA</li>
-          <li>Automatizaciones personalizadas</li>
-          <li>Integración con tu negocio</li>
-          <li>Acceso de por vida negociable</li>
-          <li>Soporte prioritario 24/7</li>
-          <li>Desarrollo exclusivo</li>
-        </ul>
-        <a href="https://wa.me/573014410541?text=Quiero%20la%20Ciudadela%20%E2%80%94%20suite%20completa" target="_blank" class="pricing-cta">Hablar con Kevin</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIOS -->
-  <section class="testimonials-section">
-    <div class="section-tag">Testimonios</div>
-    <div class="section-divider"></div>
-    <h2 class="section-title">Ellos Ya Decidieron</h2>
-    <p class="section-subtitle">Resultados reales de personas que dieron el paso al Imperio.</p>
-
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <div class="testimonial-quote">"</div>
-        <p class="testimonial-text">AXEL transformó mi negocio en 30 días. Pasé de responder mensajes manualmente a tener un sistema que trabaja mientras duermo. La inversión se pagó sola en la primera semana.</p>
-        <div class="testimonial-result">+340% en captación de leads</div>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">M</div>
-          <div>
-            <div class="testimonial-name">Mariana G.</div>
-            <div class="testimonial-plan">Plan Imperio — Bogotá</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testimonial-quote">"</div>
-        <p class="testimonial-text">Nunca pensé que la inteligencia artificial podía ser tan personal. AXEL entiende mi estilo, mi mercado, mis clientes. Es como tener un socio estratégico disponible las 24 horas.</p>
-        <div class="testimonial-result">€12.000 en ventas adicionales/mes</div>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">C</div>
-          <div>
-            <div class="testimonial-name">Carlos R.</div>
-            <div class="testimonial-plan">Plan Ciudadela — Madrid</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testimonial-quote">"</div>
-        <p class="testimonial-text">La Forjadora me dio la estructura mental y el sistema que necesitaba. Ahora mis hábitos están automatizados, mi agenda está optimizada, y mi energía va a lo que realmente importa.</p>
-        <div class="testimonial-result">3 horas diarias recuperadas</div>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">V</div>
-          <div>
-            <div class="testimonial-name">Valentina S.</div>
-            <div class="testimonial-plan">Plan Esencia — Buenos Aires</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="faq-section">
-    <div class="section-tag">Preguntas Frecuentes</div>
-    <div class="section-divider"></div>
-    <h2 class="section-title">Resuelve Tus Dudas</h2>
-    <p class="section-subtitle">Todo lo que necesitas saber antes de entrar al Imperio.</p>
-
-    <div class="faq-container">
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span>¿Qué es exactamente AXEL y cómo me ayuda?</span>
-          <div class="faq-icon">+</div>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">
-            AXEL es tu agente de inteligencia artificial personal, construido sobre los modelos más avanzados del mundo (DeepSeek, GPT, Claude). No es un chatbot genérico: está entrenado con la filosofía ORIONIX, puede buscar en internet, crear contenido, analizar tu negocio y automatizar decisiones. Es tu primer colaborador que nunca duerme.
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span>¿Puedo cancelar mi suscripción en cualquier momento?</span>
-          <div class="faq-icon">+</div>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">
-            Sí, sin penalización ni burocracia. Puedes cancelar cuando quieras con un simple mensaje por WhatsApp. No tenemos contratos de permanencia. Creemos que si ORIONIX te da valor, te quedas. Si no, no queremos retenerte artificialmente.
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span>¿Necesito conocimientos técnicos para usar los agentes?</span>
-          <div class="faq-icon">+</div>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">
-            No. Todos los agentes están diseñados para ser conversacionales. Si puedes escribir un mensaje de WhatsApp, puedes usar ORIONIX. El sistema traduce tus intenciones a acciones automáticamente. La complejidad técnica es nuestra responsabilidad, no la tuya.
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span>¿Qué diferencia hay entre los 22 agentes?</span>
-          <div class="faq-icon">+</div>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">
-            Cada agente corresponde a un arquetipo del árbol Cabalístico de las Sefirot. AXEL (Kether) es el coordinador supremo. Otros agentes como SAPH (análisis estratégico), MIRA (síntesis de información), FLUX (creatividad) o TERRA (manifestación) se especializan en capacidades específicas. Juntos forman un ecosistema de inteligencia que se retroalimenta.
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span>¿Cómo funciona el programa de afiliados?</span>
-          <div class="faq-icon">+</div>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">
-            Cuando refieres a alguien al Plan Esencia ganas el 20% de comisión (≈€39/mes por referido). En el Plan Imperio ganas el 20% (≈€99/mes). Si cierras una Ciudadela, el 15% de un proyecto personalizado puede significar €200–€800 en una sola venta. Además puedes construir una red de embajadores con comisiones de segundo nivel. Más detalles en la página de Afiliados.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <div class="ver-mas">
+    <a href="articulos.html">Ver todos los artículos con filtros y búsqueda →</a>
+  </div>
 </div>
 
-<!-- WHATSAPP FLOTANTE -->
-<a href="https://wa.me/573014410541?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20ORIONIX" target="_blank" class="wa-float">
-  <span class="wa-icon">💬</span>
-  <span>Consultar ahora</span>
-</a>
+<div class="toast" id="toast"></div>
 
 <script>
-/* ================================================================
-   ORIONIX TIENDA — Motor 3D + Lógica de Carrito
-   Estilo: ORIONIX Luxury (Cinzel, Gold, Cosmos)
-   ================================================================ */
+const API='https://lkevinruizl.app.n8n.cloud/webhook/orionix-tienda';
 
-/* --- CATÁLOGO DE PLANES --- */
-const PLANES = [
-  {
-    id: 1,
-    categoria: "Plan Mensual",
-    nombre: "Esencia",
-    precio: "€197/mes",
-    precioNum: 197,
-    descripcion: "Tu primer agente IA personal. AXEL disponible 24/7, acceso a La Ciudadela, soporte vía WhatsApp y actualizaciones continuas.",
-    imagen: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=800&auto=format&fit=crop",
-    badge: "ENTRADA"
-  },
-  {
-    id: 2,
-    categoria: "Plan Premium",
-    nombre: "Imperio",
-    precio: "€497/mes",
-    precioNum: 497,
-    descripcion: "Los 22 agentes del árbol Cabalístico, generación de imágenes, La Forjadora, comunidad privada y sesión 1 a 1 mensual.",
-    imagen: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=800&auto=format&fit=crop",
-    badge: "POPULAR"
-  },
-  {
-    id: 3,
-    categoria: "Suite Completa",
-    nombre: "Ciudadela",
-    precio: "A medida",
-    precioNum: 0,
-    descripcion: "Integración total de IA en tu negocio. Agentes personalizados, automatizaciones exclusivas y soporte prioritario directo con Kevin.",
-    imagen: "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=800&auto=format&fit=crop",
-    badge: "ÉLITE"
-  },
-  {
-    id: 4,
-    categoria: "Acceso Único",
-    nombre: "AXEL Pro",
-    precio: "€97/sesión",
-    precioNum: 97,
-    descripcion: "Sesión intensiva de 2 horas con AXEL y Kevin para diseñar tu estrategia de automatización personalizada. Sin compromiso mensual.",
-    imagen: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop",
-    badge: "SESIÓN"
-  },
-  {
-    id: 5,
-    categoria: "Programa Élite",
-    nombre: "Forjadora VIP",
-    precio: "€1.497",
-    precioNum: 1497,
-    descripcion: "El programa de transformación más potente de ORIONIX. 90 días de acompañamiento, hábitos cuantificados, IA personalizada y red de diamantes.",
-    imagen: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format&fit=crop",
-    badge: "VIP"
-  }
-];
-
-/* --- ESTADO --- */
-let carrito = JSON.parse(localStorage.getItem('orionix_cart') || '[]');
-let scrollZ = 0;
-let maxZ = 0;
-let isAnimating = false;
-
-/* --- STARFIELD --- */
-const canvas = document.getElementById('starfield');
-const ctx = canvas.getContext('2d');
-let stars = [];
-
-function initStars() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  stars = Array.from({length: 280}, () => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 1.4 + 0.2,
-    o: Math.random() * 0.7 + 0.1,
-    s: Math.random() * 0.004 + 0.001,
-    g: Math.random() < 0.06 // dorada
-  }));
+/* ── CART COUNT ── */
+function updateCart(){
+  const cart=JSON.parse(localStorage.getItem('orionix_cart')||'[]');
+  const n=cart.reduce((a,i)=>a+(i.qty||1),0);
+  document.getElementById('cart-cnt').textContent=n;
+  document.getElementById('q-cart-sub').textContent=n+' artículo'+(n!==1?'s':'');
 }
 
-function drawStars() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  stars.forEach(s => {
-    s.o += s.s * (Math.random() > 0.5 ? 1 : -1);
-    s.o = Math.max(0.05, Math.min(0.85, s.o));
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    ctx.fillStyle = s.g
-      ? `rgba(232,200,106,${s.o})`
-      : `rgba(245,240,232,${s.o})`;
-    ctx.fill();
-  });
-  requestAnimationFrame(drawStars);
+/* ── CATALOG LOAD ── */
+async function loadCatalog(){
+  try{
+    const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({accion:'catalogo'})});
+    const d=await r.json();
+    if(d.ok&&d.catalogos){
+      renderCat('g-moda', d.catalogos.MODA?.items||[], 'MODA');
+      renderCat('g-fashion', d.catalogos.FASHION_STYLE?.items||[], 'FASHION STYLE');
+      renderCat('g-dinastia', d.catalogos.MI_DINASTIA?.items||[], 'MI DINASTIA');
+    } else emptyAll();
+  }catch(e){emptyAll();}
 }
 
-/* --- CONSTRUCCIÓN DE CARDS 3D --- */
-function buildCards() {
-  const camera = document.getElementById('camera');
-  const STEP = 1800;
-  maxZ = (PLANES.length - 1) * STEP;
-  document.body.style.minHeight = (maxZ + 2000) + 'px';
-
-  PLANES.forEach((p, i) => {
-    const card = document.createElement('div');
-    card.className = 'holo-card';
-    card.style.transform = `translateZ(${-i * STEP}px) rotateY(${i % 2 === 0 ? 0 : 3}deg)`;
-    card.innerHTML = `
-      <div class="hc-img">
-        <img src="${p.imagen}" alt="${p.nombre}" loading="lazy">
-        <div class="hc-badge">${p.badge}</div>
-      </div>
-      <div class="hc-info">
-        <div class="hc-cat">${p.categoria}</div>
-        <div class="hc-title">${p.nombre}</div>
-        <div class="hc-price">${p.precio}</div>
-        <div class="hc-price-sub">Plan ORIONIX</div>
-        <button class="hc-btn" onclick="abrirFicha(${p.id})">Ver Detalles</button>
-      </div>
-    `;
-    camera.appendChild(card);
-  });
-}
-
-/* --- SCROLL 3D --- */
-function handleScroll() {
-  const raw = window.scrollY;
-  const STEP = 1800;
-  scrollZ = Math.min(raw * 0.8, maxZ);
-  document.getElementById('camera').style.transform = `translateZ(${scrollZ * 0.55}px)`;
-
-  const idx = Math.round(scrollZ / STEP);
-  document.getElementById('hudProgress').textContent = `PLAN ${idx + 1}/${PLANES.length} — ${PLANES[Math.min(idx, PLANES.length-1)].nombre.toUpperCase()}`;
-
-  if (raw > 80) {
-    document.getElementById('scrollHint').style.opacity = '0';
-  }
-}
-
-window.addEventListener('scroll', handleScroll, {passive: true});
-window.addEventListener('resize', () => { initStars(); });
-
-/* --- FICHA PRODUCTO --- */
-function abrirFicha(id) {
-  const p = PLANES.find(x => x.id === id);
-  if (!p) return;
-  const waText = encodeURIComponent(`Quiero el plan ${p.nombre} — ${p.precio}`);
-  document.getElementById('fichaContent').innerHTML = `
-    <div class="ficha-img">
-      <img src="${p.imagen}" alt="${p.nombre}">
-    </div>
-    <div class="ficha-info">
-      <div class="ficha-cat">${p.categoria}</div>
-      <div class="ficha-nombre">${p.nombre}</div>
-      <p class="ficha-desc">${p.descripcion}</p>
-      <div class="ficha-precio">${p.precio}</div>
-      ${p.precioNum > 0 ? `<button class="ficha-btn" onclick="addToCart(${p.id}); cerrarFicha()">Agregar al Carrito</button>` : ''}
-      <a href="https://wa.me/573014410541?text=${waText}" target="_blank" class="cart-checkout-btn secondary" style="margin-top:12px">Consultar por WhatsApp</a>
-    </div>
-  `;
-  document.getElementById('fichaOverlay').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function cerrarFicha() {
-  document.getElementById('fichaOverlay').classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-/* --- CARRITO --- */
-function addToCart(id) {
-  const p = PLANES.find(x => x.id === id);
-  if (!p) return;
-  const existe = carrito.find(x => x.id === id);
-  if (!existe) { carrito.push({...p, qty: 1}); }
-  else { existe.qty++; }
-  saveCart();
-  updateBadge();
-  animateBadge();
-}
-
-function saveCart() {
-  localStorage.setItem('orionix_cart', JSON.stringify(carrito));
-}
-
-function updateBadge() {
-  const total = carrito.reduce((s, x) => s + x.qty, 0);
-  document.getElementById('hudBadge').textContent = total;
-}
-
-function animateBadge() {
-  const b = document.getElementById('hudBadge');
-  b.style.transform = 'scale(1.5)';
-  b.style.background = 'var(--gold)';
-  b.style.color = 'var(--bg)';
-  setTimeout(() => {
-    b.style.transform = '';
-    b.style.background = 'rgba(232,200,106,0.1)';
-    b.style.color = 'var(--white)';
-  }, 400);
-}
-
-function abrirCarrito() {
-  renderCarrito();
-  document.getElementById('cartOverlay').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function cerrarCarrito() {
-  document.getElementById('cartOverlay').classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-function renderCarrito() {
-  const el = document.getElementById('cartItems');
-  if (carrito.length === 0) {
-    el.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:30px;font-style:italic;">Tu selección está vacía</p>';
-    document.getElementById('cartTotalUSD').textContent = '€0';
+function renderCat(id, items, cat){
+  const g=document.getElementById(id);
+  if(!items.length){
+    g.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:36px;color:var(--dim);font-style:italic">Productos llegando pronto — <a href="articulos.html" style="color:var(--gold);text-decoration:none">ver catálogo completo</a></div>`;
     return;
   }
-  el.innerHTML = carrito.map(item => `
-    <div class="cart-item">
-      <img src="${item.imagen}" alt="${item.nombre}">
-      <div class="cart-item-info">
-        <div class="cart-item-title">${item.nombre}</div>
-        <div class="cart-item-price">${item.precio}</div>
-        <div class="cart-item-remove" onclick="removeFromCart(${item.id})">Eliminar</div>
+  g.innerHTML=items.slice(0,4).map(p=>`
+    <div class="prodc">
+      <div class="pimg">${p.imagen_url?`<img src="${p.imagen_url}" onerror="this.parentNode.innerHTML='🛍️'">`:' 🛍️'}</div>
+      <div class="pinf">
+        <div class="pname">${p.nombre||'Artículo'}</div>
+        <div class="pprice">${p.precio?'€'+p.precio:'Consultar'}</div>
+        <button class="padd" onclick='addCart(${JSON.stringify({...p,categoria:cat})})'>+ Añadir al Carrito</button>
       </div>
-    </div>
-  `).join('');
-  const total = carrito.reduce((s, x) => s + (x.precioNum * x.qty), 0);
-  document.getElementById('cartTotalUSD').textContent = total > 0 ? `€${total.toLocaleString()}` : 'A medida';
+    </div>`).join('');
 }
 
-function removeFromCart(id) {
-  carrito = carrito.filter(x => x.id !== id);
-  saveCart(); updateBadge(); renderCarrito();
-}
-
-function iniciarPago() {
-  const items = carrito.map(x => `${x.nombre} (${x.precio})`).join(', ');
-  const msg = encodeURIComponent(`Hola, quiero activar: ${items}`);
-  window.open(`https://wa.me/573014410541?text=${msg}`, '_blank');
-}
-
-/* --- FAQ --- */
-function toggleFaq(el) {
-  const item = el.closest('.faq-item');
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(x => x.classList.remove('open'));
-  if (!isOpen) item.classList.add('open');
-}
-
-/* --- PERFIL HUD --- */
-function toggleDropdown() {
-  document.getElementById('profileDropdown').classList.toggle('open');
-}
-function cerrarSesion(e) {
-  e.preventDefault();
-  localStorage.removeItem('orionix_user');
-  window.location.href = 'auth.html';
-}
-
-/* --- INIT --- */
-function init() {
-  initStars();
-  drawStars();
-  buildCards();
-  updateBadge();
-
-  // Cerrar overlays con Escape
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { cerrarCarrito(); cerrarFicha(); }
-  });
-
-  // Cerrar dropdown al click fuera
-  document.addEventListener('click', e => {
-    const wrap = document.getElementById('profileWrap');
-    if (wrap && !wrap.contains(e.target)) {
-      document.getElementById('profileDropdown')?.classList.remove('open');
-    }
+function emptyAll(){
+  ['g-moda','g-fashion','g-dinastia'].forEach(id=>{
+    document.getElementById(id).innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:36px;color:var(--dim);font-style:italic">Catálogo en construcción</div>`;
   });
 }
 
-document.addEventListener('DOMContentLoaded', init);
+function catTab(cat,el){
+  document.querySelectorAll('.ctab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.cat-panel').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('cp-'+cat).classList.add('on');
+}
+
+/* ── ADD CART ── */
+function addCart(p){
+  const cart=JSON.parse(localStorage.getItem('orionix_cart')||'[]');
+  const idx=cart.findIndex(i=>i.nombre===p.nombre);
+  if(idx>=0)cart[idx].qty=(cart[idx].qty||1)+1;
+  else cart.push({...p,qty:1});
+  localStorage.setItem('orionix_cart',JSON.stringify(cart));
+  updateCart();
+  toast('✦ '+p.nombre+' añadido al carrito');
+}
+
+/* ── LEAD ── */
+let activePlan='';
+function openLead(plan){
+  activePlan=plan;
+  document.getElementById('lf-title').textContent='💎 Plan '+plan+' — Déjanos tus datos';
+  document.getElementById('lf-plan').value=plan;
+  const f=document.getElementById('lead-form');
+  f.classList.add('on');
+  setTimeout(()=>f.scrollIntoView({behavior:'smooth',block:'center'}),80);
+}
+
+async function submitLead(){
+  const nombre=document.getElementById('lf-nombre').value.trim();
+  const telegram=document.getElementById('lf-telegram').value.trim();
+  if(!nombre||!telegram){toast('Completa tu nombre y Telegram');return;}
+  const btn=document.getElementById('lf-btn');
+  btn.disabled=true;btn.textContent='Enviando…';
+  try{
+    const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({accion:'lead',nombre,telegram,interes:activePlan,origen:'tienda-planes'})});
+    const d=await r.json();
+    if(d.ok){
+      toast('✦ Solicitud enviada — te contactamos pronto por Telegram');
+      document.getElementById('lead-form').classList.remove('on');
+      document.getElementById('lf-nombre').value='';
+      document.getElementById('lf-telegram').value='';
+    } else toast('Error: '+(d.error||'inténtalo de nuevo'));
+  }catch(e){toast('Error de conexión');}
+  btn.disabled=false;btn.textContent='Enviar Solicitud — Te contactamos en menos de 24h →';
+}
+
+/* ── TOAST ── */
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2800);}
+
+/* ── STARS ── */
+(function(){const c=document.getElementById('cv'),ctx=c.getContext('2d');function r(){c.width=innerWidth;c.height=innerHeight}r();addEventListener('resize',r);const s=Array.from({length:100},()=>({x:Math.random(),y:Math.random(),r:Math.random()*.9+.15,a:Math.random(),da:(Math.random()-.5)*.005}));function d(){ctx.clearRect(0,0,c.width,c.height);s.forEach(p=>{p.a=Math.max(.03,Math.min(.8,p.a+p.da));if(p.a<=.03||p.a>=.8)p.da*=-1;ctx.beginPath();ctx.arc(p.x*c.width,p.y*c.height,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(232,200,106,${p.a*.45})`;ctx.fill();});requestAnimationFrame(d);}d();})();
+
+loadCatalog();
+updateCart();
 </script>
 </body>
 </html>

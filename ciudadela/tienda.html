@@ -4,789 +4,463 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ORIONIX · La Tienda del Imperio</title>
-<link rel="icon" href="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png" type="image/png">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:image" content="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
   --gold:#e8c86a;--gd:#b89a40;--gl:#f5e0a0;
-  --glow:rgba(232,200,106,0.22);
-  --bg:#07070a;--bg2:rgba(12,12,18,0.95);--bg3:rgba(16,16,24,0.9);
-  --b:rgba(232,200,106,0.12);--ba:rgba(232,200,106,0.38);
-  --text:#f0e8d0;--dim:rgba(240,232,208,0.45);--muted:#8a7f68;
-  --green:#4ade80;--red:#f87171;--purple:#9b5de5;
+  --glow:rgba(232,200,106,0.22);--bg:#0b0b0d;--bg2:rgba(14,13,20,0.96);
+  --b:rgba(232,200,106,0.12);--ba:rgba(232,200,106,0.4);
+  --text:#f0e8d0;--dim:rgba(240,232,208,0.4);--purple:#6a3d9a;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
 body{font-family:'Cormorant Garamond',serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-thumb{background:var(--b);border-radius:3px}
 #cv{position:fixed;inset:0;z-index:0;pointer-events:none}
 
 /* ── NAV ── */
 nav{
   position:fixed;top:0;left:0;right:0;height:56px;z-index:900;
-  display:flex;align-items:center;padding:0 22px;gap:12px;
-  background:rgba(7,7,10,.97);border-bottom:1px solid var(--b);backdrop-filter:blur(16px);
+  display:flex;align-items:center;gap:0;padding:0 20px;
+  background:rgba(11,11,13,.98);border-bottom:1px solid var(--b);backdrop-filter:blur(14px);
 }
-.brand{font-family:'Cinzel',serif;font-size:.9rem;font-weight:900;letter-spacing:.18em;color:var(--gold);text-decoration:none;text-shadow:0 0 16px var(--glow);flex-shrink:0}
+.brand{font-family:'Cinzel',serif;font-size:.95rem;font-weight:900;letter-spacing:.2em;color:var(--gold);text-decoration:none;text-shadow:0 0 14px var(--glow);margin-right:18px;white-space:nowrap}
 .nav-mid{display:flex;gap:2px;flex:1}
-.nl{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.1em;color:var(--dim);text-decoration:none;padding:6px 12px;border-radius:6px;transition:all .2s;text-transform:uppercase;white-space:nowrap}
+.nl{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.1em;color:var(--dim);text-decoration:none;padding:7px 13px;border-radius:6px;transition:all .2s;text-transform:uppercase;white-space:nowrap}
 .nl:hover{color:var(--text);background:rgba(255,255,255,.04)}
 .nl.on{color:var(--gold);background:rgba(232,200,106,.07)}
 .nav-r{display:flex;align-items:center;gap:8px;margin-left:auto}
-.nav-user{display:flex;align-items:center;gap:8px;font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:2px;color:var(--dim)}
-.nav-user-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green)}
-.nav-btn{
-  font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:2px;text-transform:uppercase;
-  padding:7px 16px;border-radius:6px;cursor:pointer;transition:all .25s;text-decoration:none;border:none;
+.cart-ico{
+  position:relative;display:flex;align-items:center;gap:6px;
+  padding:7px 14px;border:1px solid var(--ba);border-radius:7px;
+  font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.1em;color:var(--gold);
+  text-decoration:none;transition:all .25s;
 }
-.nav-btn.outline{color:var(--dim);border:1px solid var(--b);background:transparent}
-.nav-btn.outline:hover{color:var(--gold);border-color:var(--ba)}
-.nav-btn.gold{background:linear-gradient(135deg,var(--gd),var(--gold));color:#07070a;font-weight:700}
-.nav-btn.gold:hover{box-shadow:0 0 20px var(--glow)}
-.cart-btn{
-  display:flex;align-items:center;gap:6px;padding:6px 14px;
-  border:1px solid var(--ba);border-radius:7px;
-  font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.1em;color:var(--gold);
-  text-decoration:none;transition:all .25s;cursor:pointer;background:transparent;
-  position:relative;
+.cart-ico:hover{background:rgba(232,200,106,.08)}
+.cart-badge{
+  position:absolute;top:-7px;right:-7px;width:18px;height:18px;border-radius:50%;
+  background:var(--gold);color:var(--bg);font-size:.52rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;
 }
-.cart-btn:hover{background:rgba(232,200,106,.08)}
-.cart-count{
-  position:absolute;top:-7px;right:-7px;
-  width:18px;height:18px;border-radius:50%;
-  background:var(--gold);color:#07070a;
-  font-size:.52rem;font-weight:700;font-family:'Cinzel',serif;
-  display:none;align-items:center;justify-content:center;
+.login-btn{
+  font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.1em;color:var(--dim);
+  text-decoration:none;padding:7px 13px;border-radius:6px;transition:all .2s;text-transform:uppercase;
 }
-.cart-count.show{display:flex}
+.login-btn:hover{color:var(--gold)}
 
 /* ── HERO ── */
 .hero{
-  position:relative;z-index:1;padding:100px 24px 64px;text-align:center;
-  background:radial-gradient(ellipse at 50% 0%,rgba(106,61,154,.1) 0%,transparent 65%);
+  position:relative;z-index:1;padding:100px 24px 60px;text-align:center;
+  background:radial-gradient(ellipse at 50% 0%,rgba(106,61,154,.12) 0%,transparent 65%);
 }
-.hero-eyebrow{font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.26em;color:var(--dim);text-transform:uppercase;margin-bottom:14px}
+.hero-tag{font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.26em;color:var(--dim);text-transform:uppercase;margin-bottom:12px}
 .hero-title{
-  font-family:'Cinzel',serif;
-  font-size:clamp(1.8rem,5vw,3rem);font-weight:900;letter-spacing:6px;
-  background:linear-gradient(135deg,var(--gd),var(--gold),var(--gl),var(--gold));
-  background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:shimmer 5s linear infinite;margin-bottom:16px;
+  font-family:'Cinzel',serif;font-size:clamp(1.8rem,5vw,3.4rem);font-weight:900;
+  letter-spacing:.1em;color:var(--text);margin-bottom:10px;
+  background:linear-gradient(130deg,#8a6d2a,#f6e6ad 38%,#fff8e0 52%,#f6e6ad 68%,#8a6d2a);
+  background-size:220%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:shine 7s linear infinite;
 }
-@keyframes shimmer{0%{background-position:0 center}100%{background-position:200% center}}
-.hero-sub{font-size:1.05rem;color:var(--dim);max-width:520px;margin:0 auto 32px;line-height:1.8}
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.hero-cta{
-  font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:3px;text-transform:uppercase;
-  padding:14px 30px;text-decoration:none;transition:all .3s;cursor:pointer;border:none;
-}
-.hero-cta.primary{background:linear-gradient(135deg,var(--gd),var(--gold),var(--gl));background-size:200% auto;color:#07070a;font-weight:700;box-shadow:0 0 24px rgba(232,200,106,.18)}
-.hero-cta.primary:hover{background-position:right center;box-shadow:0 0 36px rgba(232,200,106,.35)}
-.hero-cta.secondary{color:var(--gold);border:1px solid var(--ba);background:transparent}
-.hero-cta.secondary:hover{background:rgba(232,200,106,.06)}
+@keyframes shine{to{background-position:220% center}}
+.hero-sub{font-size:1.05rem;color:var(--dim);font-style:italic;max-width:520px;margin:0 auto 30px;line-height:1.65}
 
-.hairline{width:70px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:40px auto}
+/* HERO ACTIONS */
+.hero-acts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:50px}
+.hbtn{
+  display:flex;align-items:center;gap:8px;padding:14px 28px;
+  font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.14em;font-weight:700;
+  text-transform:uppercase;border-radius:8px;text-decoration:none;transition:all .28s;
+}
+.hbtn.pri{background:var(--gold);color:var(--bg);box-shadow:0 0 22px var(--glow)}
+.hbtn.pri:hover{background:var(--gd);transform:translateY(-2px)}
+.hbtn.sec{border:1px solid var(--ba);color:var(--gold)}
+.hbtn.sec:hover{background:rgba(232,200,106,.08);transform:translateY(-2px)}
 
-/* ── PLANS SECTION (Afiliados tipo Spotify) ── */
-.section{position:relative;z-index:1;padding:0 24px 72px;max-width:1100px;margin:0 auto}
-.section-title{font-family:'Cinzel',serif;font-size:clamp(.9rem,2.5vw,1.2rem);font-weight:700;letter-spacing:5px;text-transform:uppercase;text-align:center;color:var(--gold);margin-bottom:8px}
-.section-sub{text-align:center;font-size:.92rem;color:var(--dim);margin-bottom:36px;letter-spacing:1px}
+/* ── QUICK ACCESS ── */
+.quick{
+  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
+  margin-bottom:60px;position:relative;z-index:1;padding:0 24px;
+}
+.qa{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:16px 20px;background:var(--bg2);border:1px solid var(--b);
+  border-radius:10px;text-decoration:none;color:inherit;transition:all .25s;min-width:110px;
+}
+.qa:hover{border-color:var(--ba);transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.qa-ico{font-size:1.5rem}
+.qa-name{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.1em;color:var(--text);text-transform:uppercase}
+.qa-sub{font-size:.7rem;color:var(--dim);text-align:center}
 
-.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+/* ── DIVIDER ── */
+.div-line{height:1px;background:linear-gradient(90deg,transparent,var(--b),transparent);margin:0 24px 50px}
 
-.plan-card{
-  position:relative;
-  background:var(--bg3);border:1px solid var(--b);
-  padding:32px 28px;
-  backdrop-filter:blur(16px);
-  transition:all .3s;
-  display:flex;flex-direction:column;gap:0;
+/* ── PLANES ── */
+.section{position:relative;z-index:1;padding:0 24px 60px;max-width:1100px;margin:0 auto}
+.sec-tag{font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.24em;color:var(--dim);text-transform:uppercase;text-align:center;margin-bottom:8px}
+.sec-title{font-family:'Cinzel',serif;font-size:clamp(1.2rem,3vw,1.8rem);font-weight:900;color:var(--text);text-align:center;letter-spacing:.08em;margin-bottom:6px}
+.sec-sub{font-size:.9rem;color:var(--dim);text-align:center;font-style:italic;max-width:480px;margin:0 auto 32px}
+
+.planes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
+@media(max-width:720px){.planes-grid{grid-template-columns:1fr}}
+
+.pcard{
+  background:var(--bg2);border:1px solid var(--b);border-radius:12px;
+  padding:24px 20px;transition:all .28s;cursor:pointer;position:relative;overflow:hidden;
 }
-.plan-card:hover{border-color:var(--ba);box-shadow:0 0 40px rgba(232,200,106,.08)}
-.plan-card.featured{
-  border-color:rgba(232,200,106,.4);
-  background:rgba(18,16,28,.95);
-  box-shadow:0 0 60px rgba(232,200,106,.1),inset 0 0 40px rgba(232,200,106,.02);
-}
-.plan-badge{
-  font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:3px;text-transform:uppercase;
-  color:#07070a;background:var(--gold);padding:3px 12px;
-  display:inline-block;margin-bottom:16px;width:fit-content;
-}
-.plan-name{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;letter-spacing:4px;color:var(--gold);margin-bottom:6px}
-.plan-tagline{font-size:.88rem;color:var(--dim);margin-bottom:20px;font-style:italic}
-.plan-price{
-  font-family:'Cinzel',serif;font-size:2rem;font-weight:900;color:var(--text);
-  line-height:1;margin-bottom:4px;
-}
-.plan-price span{font-size:.9rem;color:var(--dim);font-weight:400}
-.plan-comision{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:24px}
-.plan-features{list-style:none;display:flex;flex-direction:column;gap:10px;flex:1}
-.plan-features li{display:flex;align-items:flex-start;gap:10px;font-size:.92rem;color:var(--dim);line-height:1.5}
-.plan-features li::before{content:'✦';color:var(--gold);font-size:.7rem;flex-shrink:0;margin-top:3px}
+.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .28s}
+.pcard:hover{border-color:var(--ba);transform:translateY(-3px);box-shadow:0 10px 32px rgba(0,0,0,.35)}
+.pcard:hover::before{opacity:1}
+.pcard.feat{border-color:rgba(232,200,106,.28)}
+.pcard.feat::before{opacity:.5}
+
+.plan-badge{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:.16em;color:var(--bg);background:var(--gold);padding:3px 11px;border-radius:20px;display:inline-block;margin-bottom:13px;font-weight:700}
+.plan-name{font-family:'Cinzel',serif;font-size:1.05rem;font-weight:700;color:var(--text);letter-spacing:.1em;margin-bottom:8px}
+.plan-price{font-family:'Cinzel',serif;font-size:2rem;font-weight:900;color:var(--gold);line-height:1}
+.plan-price .mo{font-size:.72rem;color:var(--dim);font-weight:400}
+.plan-desc{font-size:.84rem;color:var(--dim);margin:10px 0 14px;line-height:1.6;font-style:italic}
+.plan-ul{list-style:none;margin-bottom:18px}
+.plan-ul li{font-size:.8rem;color:var(--dim);padding:3px 0;display:flex;align-items:flex-start;gap:7px}
+.plan-ul li::before{content:'✦';color:var(--gold);font-size:.52rem;margin-top:3px;flex-shrink:0}
 .plan-btn{
-  font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:3px;text-transform:uppercase;
-  padding:13px;border:none;cursor:pointer;margin-top:24px;width:100%;transition:all .3s;text-decoration:none;display:block;text-align:center;
+  display:block;width:100%;text-align:center;padding:11px;border-radius:7px;
+  font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.14em;font-weight:700;
+  transition:all .28s;cursor:pointer;border:1px solid var(--ba);color:var(--gold);
+  background:transparent;text-decoration:none;
 }
-.plan-btn.gold{background:linear-gradient(135deg,var(--gd),var(--gold));color:#07070a;font-weight:700}
-.plan-btn.gold:hover{box-shadow:0 0 24px var(--glow)}
-.plan-btn.outline{background:transparent;border:1px solid var(--ba);color:var(--gold)}
-.plan-btn.outline:hover{background:rgba(232,200,106,.06)}
+.plan-btn:hover,.plan-btn.pri{background:var(--gold);color:var(--bg);box-shadow:0 0 16px var(--glow)}
 
-/* ── CATALOG ── */
-.catalog-filters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
-.filter-btn{
-  font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:2px;text-transform:uppercase;
-  padding:7px 18px;border-radius:20px;border:1px solid var(--b);background:transparent;
-  color:var(--dim);cursor:pointer;transition:all .25s;
+/* ── CATALOGOS PREVIEW ── */
+.cat-tabs{display:flex;gap:6px;border-bottom:1px solid var(--b);margin-bottom:18px}
+.ctab{
+  font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:.12em;color:var(--dim);
+  padding:9px 18px;cursor:pointer;border-bottom:2px solid transparent;
+  margin-bottom:-1px;transition:all .2s;text-transform:uppercase;
 }
-.filter-btn:hover{color:var(--gold);border-color:var(--ba)}
-.filter-btn.active{color:var(--gold);border-color:var(--gold);background:rgba(232,200,106,.07)}
+.ctab.on{color:var(--gold);border-color:var(--gold)}
+.ctab:hover{color:var(--text)}
 
-.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+.cat-panel{display:none}.cat-panel.on{display:block}
+.cat-desc{font-size:.86rem;color:var(--dim);font-style:italic;margin-bottom:16px;padding:10px 14px;background:rgba(255,255,255,.025);border-left:2px solid var(--gold);border-radius:0 6px 6px 0}
 
-.product-card{
-  background:var(--bg3);border:1px solid var(--b);
-  border-radius:2px;overflow:hidden;transition:all .28s;cursor:pointer;
-  display:flex;flex-direction:column;
-}
-.product-card:hover{border-color:var(--ba);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.5)}
-.product-img{
-  width:100%;aspect-ratio:4/3;background:rgba(255,255,255,.03);
-  display:flex;align-items:center;justify-content:center;
-  font-size:2.5rem;overflow:hidden;flex-shrink:0;
-  border-bottom:1px solid var(--b);
-}
-.product-img img{width:100%;height:100%;object-fit:cover}
-.product-body{padding:14px;flex:1;display:flex;flex-direction:column;gap:6px}
-.product-cat{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:2px;color:var(--dim);text-transform:uppercase}
-.product-name{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:1.5px;color:var(--text);line-height:1.4}
-.product-desc{font-size:.82rem;color:var(--dim);line-height:1.5;flex:1}
-.product-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
-.product-price{font-family:'Cinzel',serif;font-size:.9rem;font-weight:700;color:var(--gold)}
-.product-add{
-  font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:2px;text-transform:uppercase;
-  padding:6px 12px;background:rgba(232,200,106,.1);border:1px solid var(--ba);color:var(--gold);
-  cursor:pointer;transition:all .2s;
-}
-.product-add:hover{background:rgba(232,200,106,.2)}
+.prodg{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.prodc{background:var(--bg2);border:1px solid var(--b);border-radius:9px;overflow:hidden;transition:all .25s;cursor:pointer}
+.prodc:hover{border-color:var(--ba);transform:translateY(-2px)}
+.pimg{width:100%;aspect-ratio:3/4;background:linear-gradient(135deg,rgba(106,61,154,.1),rgba(232,200,106,.07));display:flex;align-items:center;justify-content:center;font-size:2.4rem;max-height:200px;overflow:hidden}
+.pimg img{width:100%;height:100%;object-fit:cover}
+.pinf{padding:11px}
+.pname{font-family:'Cinzel',serif;font-size:.58rem;font-weight:700;color:var(--text);letter-spacing:.05em;margin-bottom:4px}
+.pprice{font-family:'Cinzel',serif;font-size:.86rem;color:var(--gold)}
+.padd{display:block;width:100%;margin-top:8px;padding:7px;text-align:center;font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.1em;color:var(--gold);border:1px solid var(--b);border-radius:5px;transition:all .22s;cursor:pointer;background:transparent}
+.padd:hover{background:var(--gold);color:var(--bg)}
 
-.products-empty{
-  text-align:center;padding:60px 20px;color:var(--dim);
-  font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:3px;text-transform:uppercase;
-  grid-column:1/-1;
+.ver-mas{
+  display:flex;align-items:center;justify-content:center;margin-top:18px;
 }
+.ver-mas a{
+  font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.14em;color:var(--gold);
+  text-decoration:none;border:1px solid var(--ba);padding:11px 28px;border-radius:7px;
+  transition:all .28s;
+}
+.ver-mas a:hover{background:var(--gold);color:var(--bg)}
 
-/* ── CART DRAWER ── */
-.cart-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:990;opacity:0;pointer-events:none;transition:opacity .3s;
-}
-.cart-overlay.open{opacity:1;pointer-events:all}
-.cart-drawer{
-  position:fixed;top:0;right:0;bottom:0;width:min(380px,95vw);z-index:995;
-  background:rgba(10,10,15,.98);border-left:1px solid var(--b);backdrop-filter:blur(24px);
-  display:flex;flex-direction:column;
-  transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);
-}
-.cart-drawer.open{transform:none}
-.cart-head{padding:20px;border-bottom:1px solid var(--b);display:flex;justify-content:space-between;align-items:center}
-.cart-head h2{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:4px;color:var(--gold)}
-.cart-close{background:transparent;border:none;color:var(--dim);font-size:1.2rem;cursor:pointer;transition:color .2s}
-.cart-close:hover{color:var(--red)}
-.cart-items{flex:1;overflow-y:auto;padding:16px}
-.cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(232,200,106,.06)}
-.cart-item-img{width:50px;height:50px;background:rgba(255,255,255,.04);border:1px solid var(--b);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
-.cart-item-info{flex:1;min-width:0}
-.cart-item-name{font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:1px;color:var(--text);margin-bottom:4px}
-.cart-item-price{font-family:'Cinzel',serif;font-size:.68rem;color:var(--gold)}
-.cart-item-remove{background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:.9rem;flex-shrink:0;transition:color .2s;align-self:flex-start;margin-top:2px}
-.cart-item-remove:hover{color:var(--red)}
-.cart-empty{text-align:center;padding:40px 20px;color:var(--dim);font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:2px;text-transform:uppercase}
-.cart-footer{padding:20px;border-top:1px solid var(--b)}
-.cart-total{display:flex;justify-content:space-between;margin-bottom:16px;font-family:'Cinzel',serif}
-.cart-total span:first-child{font-size:.56rem;letter-spacing:2px;color:var(--dim);text-transform:uppercase}
-.cart-total span:last-child{font-size:.9rem;color:var(--gold)}
-.cart-checkout{
-  width:100%;padding:14px;background:linear-gradient(135deg,var(--gd),var(--gold));
-  border:none;color:#07070a;font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:3px;
-  text-transform:uppercase;cursor:pointer;font-weight:700;transition:all .3s;
-}
-.cart-checkout:hover{box-shadow:0 0 24px var(--glow)}
+.sk{background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.08),rgba(255,255,255,.04));background-size:200% 100%;animation:shim 1.4s infinite;border-radius:9px}
+@keyframes shim{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-/* ── LOGIN MODAL ── */
-.modal-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;
-  display:none;align-items:center;justify-content:center;
-  backdrop-filter:blur(8px);
-}
-.modal-overlay.open{display:flex;animation:fadeIn .25s ease}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.modal{
-  background:rgba(10,10,15,.98);border:1px solid var(--b);
-  padding:40px;width:min(440px,90vw);position:relative;
-  box-shadow:0 0 80px rgba(0,0,0,.9),inset 0 0 40px rgba(232,200,106,.02);
-}
-.modal-close{
-  position:absolute;top:16px;right:16px;background:transparent;border:none;
-  color:var(--dim);font-size:1.2rem;cursor:pointer;transition:color .2s;
-}
-.modal-close:hover{color:var(--red)}
-.modal-logo{font-family:'Cinzel',serif;font-size:1.2rem;font-weight:900;letter-spacing:6px;color:var(--gold);text-align:center;margin-bottom:4px}
-.modal-sub{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:3px;text-transform:uppercase;color:var(--dim);text-align:center;margin-bottom:28px}
-.modal-tabs{display:flex;border-bottom:1px solid var(--b);margin-bottom:24px}
-.modal-tab{
-  flex:1;padding:12px;text-align:center;cursor:pointer;
-  font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:2px;text-transform:uppercase;
-  color:var(--dim);border-bottom:2px solid transparent;position:relative;bottom:-1px;transition:all .25s;
-}
-.modal-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
-.mfg{margin-bottom:18px}
-.mfg label{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:2px;text-transform:uppercase;color:var(--gd);display:block;margin-bottom:7px}
-.mfg input,.mfg select{
-  width:100%;background:rgba(0,0,0,.4);border:1px solid var(--b);color:var(--text);
-  padding:12px 14px;font-family:'Cormorant Garamond',serif;font-size:1rem;outline:none;transition:all .3s;
-}
-.mfg input::placeholder{color:rgba(138,127,104,.3)}
-.mfg input:focus,.mfg select:focus{border-color:var(--ba);background:rgba(232,200,106,.02)}
-.mfg select option{background:#0f0f14;color:var(--text)}
-.modal-btn{
-  width:100%;padding:14px;background:linear-gradient(135deg,var(--gd),var(--gold));
-  border:none;color:#07070a;font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:3px;
-  text-transform:uppercase;cursor:pointer;font-weight:700;transition:all .3s;margin-bottom:12px;
-}
-.modal-btn:hover{box-shadow:0 0 24px var(--glow)}
-.modal-btn:disabled{opacity:.4;cursor:not-allowed}
-.modal-divider{display:flex;align-items:center;gap:12px;margin:14px 0;font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
-.modal-divider::before,.modal-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--b),transparent)}
-.modal-google{
-  width:100%;padding:12px 18px;background:transparent;border:1px solid var(--b);color:var(--text);
-  font-family:'Cormorant Garamond',serif;font-size:.95rem;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:12px;transition:all .3s;
-}
-.modal-google:hover{border-color:var(--ba);background:rgba(232,200,106,.04)}
-.g-icon{width:20px;height:20px;flex-shrink:0}
-.modal-msg{
-  margin-top:14px;padding:11px 14px;font-family:'Cinzel',serif;font-size:.46rem;
-  letter-spacing:2px;text-transform:uppercase;display:none;
-}
-.modal-msg.ok{background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.25);color:var(--green)}
-.modal-msg.err{background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.25);color:var(--red)}
-.spinner{display:inline-block;width:13px;height:13px;margin-right:8px;border:2px solid rgba(7,7,10,.3);border-top-color:#07070a;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle}
-@keyframes spin{to{transform:rotate(360deg)}}
+/* ── LEAD FORM ── */
+.lead-form{background:var(--bg2);border:1px solid var(--b);border-radius:10px;padding:20px;margin-top:12px;display:none}
+.lead-form.on{display:block}
+.lf-h{font-family:'Cinzel',serif;font-size:.62rem;font-weight:700;color:var(--text);letter-spacing:.1em;margin-bottom:14px}
+.lf-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+@media(max-width:500px){.lf-grid{grid-template-columns:1fr}}
+.fi{width:100%;padding:10px 13px;background:rgba(255,255,255,.04);border:1px solid var(--b);border-radius:7px;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:.9rem;outline:none;transition:border .22s}
+.fi:focus{border-color:var(--gold)}
+.fi::placeholder{color:var(--dim)}
+.lf-btn{width:100%;padding:12px;background:var(--gold);color:var(--bg);border:none;border-radius:7px;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.14em;font-weight:700;cursor:pointer;transition:all .28s}
+.lf-btn:hover{background:var(--gd)}
+.lf-btn:disabled{opacity:.4}
 
-/* ── AFFILIATE BANNER ── */
-.affiliate-banner{
-  position:relative;z-index:1;margin:0 24px 60px;max-width:1052px;margin-left:auto;margin-right:auto;
-  background:rgba(155,93,229,.06);border:1px solid rgba(155,93,229,.25);
-  padding:32px 36px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;
-}
-.aff-icon{font-size:2.5rem;flex-shrink:0}
-.aff-text{flex:1;min-width:200px}
-.aff-title{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:4px;color:var(--purple);margin-bottom:6px;text-transform:uppercase}
-.aff-desc{font-size:.9rem;color:var(--dim);line-height:1.7}
-.aff-btn{
-  font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:3px;text-transform:uppercase;
-  padding:12px 24px;background:rgba(155,93,229,.15);border:1px solid rgba(155,93,229,.4);
-  color:var(--purple);cursor:pointer;transition:all .3s;flex-shrink:0;
-}
-.aff-btn:hover{background:rgba(155,93,229,.25)}
+/* TOAST */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(14,13,20,.97);border:1px solid var(--ba);color:var(--gold);font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.1em;padding:10px 22px;border-radius:6px;z-index:9999;transition:transform .32s;pointer-events:none}
+.toast.on{transform:translateX(-50%) translateY(0)}
 
-/* ── ADMIN LINK ── */
-.admin-bar{
-  position:fixed;bottom:20px;right:20px;z-index:800;
-}
-.admin-link{
-  display:flex;align-items:center;gap:8px;
-  padding:10px 18px;background:rgba(10,10,15,.95);
-  border:1px solid var(--b);backdrop-filter:blur(12px);
-  font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:2px;text-transform:uppercase;
-  color:var(--dim);text-decoration:none;transition:all .3s;border-radius:30px;
-}
-.admin-link:hover{color:var(--gold);border-color:var(--ba)}
-
-/* ── RESPONSIVE ── */
-@media(max-width:700px){
-  .nav-mid{display:none}
-  .plans-grid{grid-template-columns:1fr}
-  .hero{padding:90px 18px 50px}
-  .section{padding:0 16px 50px}
-  .affiliate-banner{margin:0 16px 50px;padding:24px}
-  .modal{padding:28px 22px}
-}
+@media(max-width:860px){.nav-mid{display:none}}
 </style>
 </head>
 <body>
-
-<!-- STARFIELD -->
 <canvas id="cv"></canvas>
 
 <!-- NAV -->
 <nav>
   <a href="hub.html" class="brand">ORIONIX</a>
   <div class="nav-mid">
-    <a href="agentes.html" class="nl">🤖 Agentes</a>
-    <a href="tienda.html" class="nl on">🛍️ Tienda</a>
-    <a href="comunidad.html" class="nl">🌌 Comunidad</a>
-    <a href="hogar.html" class="nl">🏡 Hogar</a>
+    <a class="nl on" href="tienda.html">🏠 Inicio</a>
+    <a class="nl" href="articulos.html">🛍️ Artículos</a>
+    <a class="nl" href="carrito.html">🛒 Carrito</a>
+    <a class="nl" href="mi-universo.html">🗺️ Mi Universo</a>
+    <a class="nl" href="agentes.html">🤖 Agentes</a>
   </div>
   <div class="nav-r">
-    <button class="cart-btn" id="cartBtn" onclick="toggleCart()">
+    <a href="login.html" class="login-btn">Iniciar Sesión</a>
+    <a href="carrito.html" class="cart-ico">
       🛒 Carrito
-      <span class="cart-count" id="cartCount">0</span>
-    </button>
-    <div class="nav-user" id="navUser" style="display:none">
-      <div class="nav-user-dot"></div>
-      <span id="navUserName">Usuario</span>
-      <button class="nav-btn outline" onclick="doSignOut()" style="font-size:.42rem;padding:5px 10px">Salir</button>
-    </div>
-    <button class="nav-btn gold" id="navLoginBtn" onclick="openModal('login')">Acceder</button>
+      <span class="cart-badge" id="cart-cnt">0</span>
+    </a>
   </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-eyebrow">ORIONIX MAISON · La Tienda del Imperio</div>
-  <h1 class="hero-title">De una Aguja<br>a una Mansión</h1>
-  <p class="hero-sub">Productos de élite seleccionados para tu ascenso. Moda, estilo y poder — todo en un solo lugar.</p>
-  <div class="hero-btns">
-    <button class="hero-cta primary" onclick="document.getElementById('catalogSection').scrollIntoView({behavior:'smooth'})">Ver Catálogo</button>
-    <button class="hero-cta secondary" onclick="openModal('register')">Ser Afiliado</button>
+  <div class="hero-tag">Centro Comercial · ORIONIX · De una aguja a una mansión</div>
+  <h1 class="hero-title">LA TIENDA DEL IMPERIO</h1>
+  <p class="hero-sub">Planes de servicio exclusivos y catálogos de productos cuidadosamente seleccionados para tu ascenso.</p>
+  <div class="hero-acts">
+    <a href="articulos.html" class="hbtn pri">🛍️ Ver todos los Artículos →</a>
+    <a href="carrito.html" class="hbtn sec">🛒 Ver mi Carrito</a>
+  </div>
+
+  <!-- QUICK ACCESS -->
+  <div class="quick">
+    <a href="articulos.html" class="qa">
+      <span class="qa-ico">🧵</span>
+      <span class="qa-name">Moda</span>
+      <span class="qa-sub">Desde €1</span>
+    </a>
+    <a href="articulos.html?cat=FASHION+STYLE" class="qa">
+      <span class="qa-ico">✨</span>
+      <span class="qa-name">Fashion Style</span>
+      <span class="qa-sub">€10 – €100</span>
+    </a>
+    <a href="articulos.html?cat=MI+DINASTIA" class="qa">
+      <span class="qa-ico">👑</span>
+      <span class="qa-name">Mi Dinastía</span>
+      <span class="qa-sub">€100+</span>
+    </a>
+    <a href="login.html" class="qa">
+      <span class="qa-ico">👤</span>
+      <span class="qa-name">Mi Cuenta</span>
+      <span class="qa-sub">Acceder</span>
+    </a>
+    <a href="carrito.html" class="qa">
+      <span class="qa-ico">🛒</span>
+      <span class="qa-name">Carrito</span>
+      <span class="qa-sub" id="q-cart-sub">0 artículos</span>
+    </a>
+    <a href="metodo-pago.html" class="qa">
+      <span class="qa-ico">💳</span>
+      <span class="qa-name">Pagar</span>
+      <span class="qa-sub">PayPal · Telegram</span>
+    </a>
   </div>
 </div>
 
-<div class="hairline"></div>
+<div class="div-line"></div>
 
-<!-- PLANES DE AFILIADOS -->
-<div class="section" id="planesSection">
-  <div class="section-title">Planes de Afiliación</div>
-  <div class="section-sub">Tu tienda. Tus ventas. Tu porcentaje. Nosotros el catálogo.</div>
+<!-- PLANES DE SERVICIO -->
+<div class="section">
+  <div class="sec-tag">Planes de Servicio</div>
+  <h2 class="sec-title">Elige tu Nivel de Potencia</h2>
+  <p class="sec-sub">Infraestructura IA completa según el nivel de tu misión</p>
 
-  <div class="plans-grid">
+  <div class="planes-grid">
     <!-- ESENCIA -->
-    <div class="plan-card">
+    <div class="pcard" onclick="openLead('Esencia')">
+      <div class="plan-badge">Entrada al Universo</div>
       <div class="plan-name">ESENCIA</div>
-      <div class="plan-tagline">Para empezar a construir tu imperio</div>
-      <div class="plan-price">€197 <span>/ mes</span></div>
-      <div class="plan-comision">✦ 15% de comisión en ventas</div>
-      <ul class="plan-features">
-        <li>Tu tienda personalizada ORIONIX</li>
-        <li>Acceso al catálogo MODA completo</li>
-        <li>Panel de ventas y estadísticas</li>
-        <li>Soporte por Telegram</li>
-        <li>Código de afiliado exclusivo</li>
+      <div class="plan-price">€197 <span class="mo">/mes</span></div>
+      <p class="plan-desc">La puerta de entrada. Automatización básica y acceso a AXEL IA.</p>
+      <ul class="plan-ul">
+        <li>AXEL IA disponible 24/7</li>
+        <li>1 flujo de automatización</li>
+        <li>Soporte directo por Telegram</li>
+        <li>Catálogo MODA completo</li>
       </ul>
-      <button class="plan-btn outline" onclick="openModal('register')">Comenzar</button>
+      <button class="plan-btn" onclick="event.stopPropagation();openLead('Esencia')">Solicitar Esencia →</button>
     </div>
 
     <!-- IMPERIO -->
-    <div class="plan-card featured">
-      <div class="plan-badge">Más Popular</div>
+    <div class="pcard feat" onclick="openLead('Imperio')">
+      <div class="plan-badge" style="background:linear-gradient(90deg,var(--gd),var(--gold))">⭐ Más Elegido</div>
       <div class="plan-name">IMPERIO</div>
-      <div class="plan-tagline">Para quien construye en grande</div>
-      <div class="plan-price">€497 <span>/ mes</span></div>
-      <div class="plan-comision">✦ 25% de comisión en ventas</div>
-      <ul class="plan-features">
-        <li>Todo lo de ESENCIA incluido</li>
-        <li>Catálogo FASHION STYLE + MODA</li>
-        <li>Tu propio dominio personalizado</li>
-        <li>Soporte prioritario 24/7</li>
-        <li>Productos exclusivos antes que nadie</li>
-        <li>Formación en ventas y marketing</li>
+      <div class="plan-price">€497 <span class="mo">/mes</span></div>
+      <p class="plan-desc">El verdadero poder. Todos los agentes, todos los flujos.</p>
+      <ul class="plan-ul">
+        <li>22 Agentes IA del Kabalion</li>
+        <li>Automatizaciones ilimitadas</li>
+        <li>Mesa de Mando completa</li>
+        <li>Catálogos MODA + FASHION STYLE</li>
+        <li>CRM de leads automático</li>
       </ul>
-      <button class="plan-btn gold" onclick="openModal('register')">Quiero este Plan</button>
+      <button class="plan-btn pri" onclick="event.stopPropagation();openLead('Imperio')">Elegir Imperio →</button>
     </div>
 
     <!-- CIUDADELA -->
-    <div class="plan-card">
+    <div class="pcard" onclick="openLead('Ciudadela')">
+      <div class="plan-badge" style="background:var(--purple)">👑 Élite Total</div>
       <div class="plan-name">CIUDADELA</div>
-      <div class="plan-tagline">La cumbre — hecho a medida</div>
-      <div class="plan-price">A medida</div>
-      <div class="plan-comision">✦ 35% de comisión en ventas</div>
-      <ul class="plan-features">
-        <li>Todo IMPERIO incluido</li>
-        <li>Catálogo MI DINASTÍA completo</li>
-        <li>Integración directa con tu negocio</li>
-        <li>Gestión personalizada de catálogo</li>
-        <li>Acceso a productos de €100+</li>
-        <li>Sesión estratégica mensual con ORIONIX</li>
+      <div class="plan-price" style="font-size:1.3rem;padding-top:8px;line-height:1.35">A medida<br><span style="font-size:.7rem;font-weight:400;color:var(--dim)">precio según proyecto</span></div>
+      <p class="plan-desc">Tu propia agencia de IA. Sefirot KRC personalizados, todo incluido.</p>
+      <ul class="plan-ul">
+        <li>Infraestructura ORIONIX completa</li>
+        <li>Agentes KRC propios</li>
+        <li>Catálogo MI DINASTÍA incluido</li>
+        <li>Mentoría directa con Kevin</li>
+        <li>Desarrollo exclusivo a medida</li>
       </ul>
-      <button class="plan-btn outline" onclick="window.open('https://t.me/ORIONIX_Maison','_blank')">Contactar</button>
+      <button class="plan-btn" onclick="event.stopPropagation();openLead('Ciudadela')">Hablar con Kevin →</button>
     </div>
   </div>
-</div>
 
-<!-- BANNER AFILIADOS -->
-<div class="affiliate-banner">
-  <div class="aff-icon">⚡</div>
-  <div class="aff-text">
-    <div class="aff-title">¿Ya eres afiliado?</div>
-    <div class="aff-desc">Accede a tu panel, consulta tus ventas, genera tu código de afiliado y descarga tus productos.</div>
-  </div>
-  <button class="aff-btn" onclick="openModal('login')">Acceder a mi Panel</button>
-</div>
-
-<div class="hairline"></div>
-
-<!-- CATÁLOGO DE PRODUCTOS -->
-<div class="section" id="catalogSection">
-  <div class="section-title">Catálogo ORIONIX</div>
-  <div class="section-sub">Selección curada — de lo esencial a lo extraordinario</div>
-
-  <div class="catalog-filters">
-    <button class="filter-btn active" data-filter="all" onclick="filterProducts('all',this)">Todos</button>
-    <button class="filter-btn" data-filter="MODA" onclick="filterProducts('MODA',this)">MODA</button>
-    <button class="filter-btn" data-filter="FASHION STYLE" onclick="filterProducts('FASHION STYLE',this)">Fashion Style</button>
-    <button class="filter-btn" data-filter="MI DINASTIA" onclick="filterProducts('MI DINASTIA',this)">Mi Dinastía</button>
-  </div>
-
-  <div class="products-grid" id="productsGrid">
-    <div class="products-empty" id="productsLoading">⏳ &nbsp; Cargando catálogo...</div>
-  </div>
-</div>
-
-<!-- CART DRAWER -->
-<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-<div class="cart-drawer" id="cartDrawer">
-  <div class="cart-head">
-    <h2>Tu Carrito</h2>
-    <button class="cart-close" onclick="toggleCart()">✕</button>
-  </div>
-  <div class="cart-items" id="cartItems">
-    <div class="cart-empty">Tu carrito está vacío</div>
-  </div>
-  <div class="cart-footer">
-    <div class="cart-total">
-      <span>Total</span>
-      <span id="cartTotal">€0.00</span>
+  <!-- LEAD FORM -->
+  <div class="lead-form" id="lead-form">
+    <div class="lf-h" id="lf-title">💎 Solicitar información</div>
+    <div class="lf-grid">
+      <input class="fi" id="lf-nombre" type="text" placeholder="Tu nombre completo *">
+      <input class="fi" id="lf-telegram" type="text" placeholder="@tu_telegram *">
     </div>
-    <button class="cart-checkout" onclick="doCheckout()">Proceder al Pago</button>
+    <input type="hidden" id="lf-plan">
+    <button class="lf-btn" id="lf-btn" onclick="submitLead()">Enviar Solicitud — Te contactamos en menos de 24h →</button>
   </div>
 </div>
 
-<!-- LOGIN / REGISTRO MODAL -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-logo">ORIONIX</div>
-    <div class="modal-sub" id="modalSub">Accede o regístrate</div>
+<div class="div-line"></div>
 
-    <div class="modal-tabs">
-      <div class="modal-tab active" id="mtab-login" onclick="switchModalTab('login')">Acceder</div>
-      <div class="modal-tab" id="mtab-register" onclick="switchModalTab('register')">Ser Afiliado</div>
-    </div>
+<!-- CATÁLOGOS -->
+<div class="section">
+  <div class="sec-tag">Catálogos de Productos</div>
+  <h2 class="sec-title">Artículos del Imperio</h2>
+  <p class="sec-sub">De una aguja a una mansión — encuentra lo que necesitas en tu nivel</p>
 
-    <!-- LOGIN -->
-    <div id="mpanel-login">
-      <div class="mfg">
-        <label>Correo electrónico</label>
-        <input type="email" id="mEmail" placeholder="tu@correo.com" onkeypress="if(event.key==='Enter')doLogin()">
-      </div>
-      <div class="mfg">
-        <label>Contraseña</label>
-        <input type="password" id="mPass" placeholder="••••••••" onkeypress="if(event.key==='Enter')doLogin()">
-      </div>
-      <button class="modal-btn" id="mBtnLogin" onclick="doLogin()">Iniciar Sesión</button>
-      <div class="modal-divider">O continúa con</div>
-      <button class="modal-google" onclick="doGoogle()">
-        <svg class="g-icon" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-        Continuar con Google
-      </button>
-    </div>
+  <div class="cat-tabs">
+    <div class="ctab on" onclick="catTab('moda',this)">🧵 MODA</div>
+    <div class="ctab" onclick="catTab('fashion',this)">✨ FASHION STYLE</div>
+    <div class="ctab" onclick="catTab('dinastia',this)">👑 MI DINASTÍA</div>
+  </div>
 
-    <!-- REGISTRO AFILIADO -->
-    <div id="mpanel-register" style="display:none">
-      <div class="mfg">
-        <label>Nombre completo</label>
-        <input type="text" id="rName" placeholder="Tu nombre">
-      </div>
-      <div class="mfg">
-        <label>Telegram (para soporte)</label>
-        <input type="text" id="rTelegram" placeholder="@tu_usuario">
-      </div>
-      <div class="mfg">
-        <label>Correo electrónico</label>
-        <input type="email" id="rEmail" placeholder="tu@correo.com">
-      </div>
-      <div class="mfg">
-        <label>Contraseña</label>
-        <input type="password" id="rPass" placeholder="Mín. 6 caracteres">
-      </div>
-      <div class="mfg">
-        <label>Plan de interés</label>
-        <select id="rPlan">
-          <option value="ESENCIA">ESENCIA — €197/mes (15% comisión)</option>
-          <option value="IMPERIO" selected>IMPERIO — €497/mes (25% comisión)</option>
-          <option value="CIUDADELA">CIUDADELA — A medida (35% comisión)</option>
-        </select>
-      </div>
-      <button class="modal-btn" id="mBtnReg" onclick="doRegister()">Solicitar Afiliación</button>
-      <div class="modal-divider">O regístrate con</div>
-      <button class="modal-google" onclick="doGoogle()">
-        <svg class="g-icon" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-        Registrarse con Google
-      </button>
-    </div>
+  <div class="cat-panel on" id="cp-moda">
+    <div class="cat-desc">De una aguja — productos económicos y accesibles para comenzar tu ascenso.</div>
+    <div class="prodg" id="g-moda"><div class="sk" style="height:240px"></div><div class="sk" style="height:240px"></div><div class="sk" style="height:240px"></div><div class="sk" style="height:240px"></div></div>
+  </div>
+  <div class="cat-panel" id="cp-fashion">
+    <div class="cat-desc">El estilo que te eleva — moda con propósito y calidad, de €10 a €100.</div>
+    <div class="prodg" id="g-fashion"><div class="sk" style="height:240px"></div><div class="sk" style="height:240px"></div></div>
+  </div>
+  <div class="cat-panel" id="cp-dinastia">
+    <div class="cat-desc">La cima — inversiones y productos de alto valor para tu legado y tu dinastía.</div>
+    <div class="prodg" id="g-dinastia"><div class="sk" style="height:240px"></div><div class="sk" style="height:240px"></div></div>
+  </div>
 
-    <div class="modal-msg" id="modalMsg"></div>
+  <div class="ver-mas">
+    <a href="articulos.html">Ver todos los artículos con filtros y búsqueda →</a>
   </div>
 </div>
 
-<!-- ADMIN BUTTON (oculto para usuarios normales, visible para admin) -->
-<div class="admin-bar" id="adminBar" style="display:none">
-  <a href="admin.html" class="admin-link">⚙ Centro de Comando</a>
-</div>
+<div class="toast" id="toast"></div>
 
-<!-- STARFIELD -->
 <script>
-(function(){
-  const c=document.getElementById('cv'),ctx=c.getContext('2d');let stars=[];
-  function resize(){c.width=window.innerWidth;c.height=window.innerHeight;stars=[];const n=Math.floor(c.width*c.height/5500);for(let i=0;i<n;i++)stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*.9+.15,a:Math.random()*.5+.08,s:Math.random()*.0005+.0002,p:Math.random()*Math.PI*2});}
-  function draw(ts){ctx.clearRect(0,0,c.width,c.height);stars.forEach(s=>{const a=s.a*(.65+.35*Math.sin(ts*s.s+s.p));ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(240,232,208,${a.toFixed(3)})`;ctx.fill();});requestAnimationFrame(draw);}
-  window.addEventListener('resize',resize);resize();requestAnimationFrame(draw);
-})();
-</script>
+const API='https://lkevinruizl.app.n8n.cloud/webhook/orionix-tienda';
 
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script>
-const ADMIN_EMAIL = 'kevin.ruiz.bolsota@gmail.com';
-const TIENDA_WEBHOOK = 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-tienda';
-
-firebase.initializeApp({
-  apiKey:'AIzaSyDZoywcYKSBrAk_iwSMN4rnw7goLSltj7A',
-  authDomain:'las-cronicas-de-krc.firebaseapp.com',
-  projectId:'las-cronicas-de-krc',
-  storageBucket:'las-cronicas-de-krc.firebasestorage.app',
-  messagingSenderId:'636206734640',
-  appId:'1:636206734640:web:40c52672294155c6d77cf5'
-});
-const auth = firebase.auth();
-
-/* ── AUTH STATE ── */
-auth.onAuthStateChanged(user => {
-  const navUser  = document.getElementById('navUser');
-  const loginBtn = document.getElementById('navLoginBtn');
-  const adminBar = document.getElementById('adminBar');
-
-  if (user) {
-    navUser.style.display = 'flex';
-    loginBtn.style.display = 'none';
-    document.getElementById('navUserName').textContent = user.displayName || user.email.split('@')[0];
-    if (user.email === ADMIN_EMAIL) adminBar.style.display = 'block';
-  } else {
-    navUser.style.display = 'none';
-    loginBtn.style.display = 'block';
-    adminBar.style.display = 'none';
-  }
-});
-
-/* ── AUTH HELPERS ── */
-function fbErr(code) {
-  const m = {
-    'auth/user-not-found':'No existe cuenta con ese correo.',
-    'auth/wrong-password':'Contraseña incorrecta.',
-    'auth/invalid-credential':'Correo o contraseña incorrectos.',
-    'auth/email-already-in-use':'Ya existe una cuenta con ese correo.',
-    'auth/weak-password':'La contraseña debe tener al menos 6 caracteres.',
-    'auth/popup-blocked':'Permite popups para este sitio.',
-    'auth/popup-closed-by-user':'Cerraste la ventana. Inténtalo de nuevo.',
-    'auth/unauthorized-domain':'Dominio no autorizado. Añade github.io en Firebase Console.',
-  };
-  return m[code] || 'Error: ' + code;
+/* ── CART COUNT ── */
+function updateCart(){
+  const cart=JSON.parse(localStorage.getItem('orionix_cart')||'[]');
+  const n=cart.reduce((a,i)=>a+(i.qty||1),0);
+  document.getElementById('cart-cnt').textContent=n;
+  document.getElementById('q-cart-sub').textContent=n+' artículo'+(n!==1?'s':'');
 }
 
-function setModalMsg(txt, type) {
-  const el = document.getElementById('modalMsg');
-  if (!txt) { el.style.display='none'; return; }
-  el.textContent = txt; el.className = 'modal-msg ' + type; el.style.display = 'block';
+/* ── CATALOG LOAD ── */
+async function loadCatalog(){
+  try{
+    const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({accion:'catalogo'})});
+    const d=await r.json();
+    if(d.ok&&d.catalogos){
+      renderCat('g-moda', d.catalogos.MODA?.items||[], 'MODA');
+      renderCat('g-fashion', d.catalogos.FASHION_STYLE?.items||[], 'FASHION STYLE');
+      renderCat('g-dinastia', d.catalogos.MI_DINASTIA?.items||[], 'MI DINASTIA');
+    } else emptyAll();
+  }catch(e){emptyAll();}
 }
 
-function setLoading(id, loading, label) {
-  const b = document.getElementById(id);
-  b.disabled = loading;
-  b.innerHTML = loading ? `<span class="spinner"></span>Procesando...` : label;
-}
-
-async function doLogin() {
-  const email = document.getElementById('mEmail').value.trim();
-  const pass  = document.getElementById('mPass').value;
-  if (!email || !pass) { setModalMsg('Completa todos los campos.','err'); return; }
-  setLoading('mBtnLogin', true, 'Iniciar Sesión');
-  try {
-    await auth.signInWithEmailAndPassword(email, pass);
-    setModalMsg('✦ Acceso concedido', 'ok');
-    setTimeout(closeModal, 900);
-  } catch(e) { setModalMsg(fbErr(e.code), 'err'); }
-  setLoading('mBtnLogin', false, 'Iniciar Sesión');
-}
-
-async function doRegister() {
-  const name     = document.getElementById('rName').value.trim();
-  const telegram = document.getElementById('rTelegram').value.trim();
-  const email    = document.getElementById('rEmail').value.trim();
-  const pass     = document.getElementById('rPass').value;
-  const plan     = document.getElementById('rPlan').value;
-  if (!name || !email || !pass) { setModalMsg('Completa los campos obligatorios.','err'); return; }
-
-  setLoading('mBtnReg', true, 'Solicitar Afiliación');
-  try {
-    const cred = await auth.createUserWithEmailAndPassword(email, pass);
-    await cred.user.updateProfile({ displayName: name });
-
-    // Register as affiliate in n8n
-    await fetch(TIENDA_WEBHOOK, {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ accion:'afiliado', nombre:name, telegram, email, catalogo:plan, origen:'tienda-web' })
-    });
-
-    setModalMsg('✦ ¡Bienvenido a ORIONIX! Revisa tu Telegram pronto.', 'ok');
-    setTimeout(closeModal, 1200);
-  } catch(e) { setModalMsg(fbErr(e.code), 'err'); }
-  setLoading('mBtnReg', false, 'Solicitar Afiliación');
-}
-
-async function doGoogle() {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  provider.setCustomParameters({ prompt: 'select_account' });
-  try {
-    await auth.signInWithPopup(provider);
-    setModalMsg('✦ Acceso con Google concedido', 'ok');
-    setTimeout(closeModal, 900);
-  } catch(e) { setModalMsg(fbErr(e.code), 'err'); }
-}
-
-function doSignOut() { auth.signOut(); }
-
-/* ── MODAL ── */
-function openModal(tab) {
-  document.getElementById('modalOverlay').classList.add('open');
-  switchModalTab(tab || 'login');
-}
-function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('open');
-  setModalMsg('','');
-}
-function switchModalTab(tab) {
-  ['login','register'].forEach(t => {
-    document.getElementById('mtab-' + t).classList.toggle('active', t === tab);
-    document.getElementById('mpanel-' + t).style.display = t === tab ? 'block' : 'none';
-  });
-  document.getElementById('modalSub').textContent = tab === 'login' ? 'Accede a tu cuenta' : 'Únete como afiliado';
-  setModalMsg('','');
-}
-document.getElementById('modalOverlay').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
-
-/* ── CART ── */
-let cart = JSON.parse(localStorage.getItem('orx_cart') || '[]');
-
-function updateCartUI() {
-  const count = document.getElementById('cartCount');
-  const total = cart.reduce((s,i) => s + i.precio, 0);
-  count.textContent = cart.length;
-  count.classList.toggle('show', cart.length > 0);
-  document.getElementById('cartTotal').textContent = '€' + total.toFixed(2);
-
-  const itemsEl = document.getElementById('cartItems');
-  if (!cart.length) { itemsEl.innerHTML = '<div class="cart-empty">Tu carrito está vacío</div>'; return; }
-  itemsEl.innerHTML = cart.map((item, i) => `
-    <div class="cart-item">
-      <div class="cart-item-img">${item.imagen_url ? `<img src="${item.imagen_url}" style="width:50px;height:50px;object-fit:cover">` : '🛍️'}</div>
-      <div class="cart-item-info">
-        <div class="cart-item-name">${item.nombre}</div>
-        <div class="cart-item-price">€${item.precio}</div>
-      </div>
-      <button class="cart-item-remove" onclick="removeFromCart(${i})">✕</button>
-    </div>`).join('');
-  localStorage.setItem('orx_cart', JSON.stringify(cart));
-}
-
-function addToCart(product) {
-  cart.push(product);
-  updateCartUI();
-  // Brief flash
-  const btn = document.querySelector(`[data-product-id="${product.id}"]`);
-  if (btn) { btn.textContent = '✦ Añadido'; setTimeout(() => btn.textContent = 'Añadir', 1200); }
-}
-
-function removeFromCart(idx) { cart.splice(idx,1); updateCartUI(); }
-
-function toggleCart() {
-  document.getElementById('cartDrawer').classList.toggle('open');
-  document.getElementById('cartOverlay').classList.toggle('open');
-}
-
-function doCheckout() {
-  if (!auth.currentUser) { toggleCart(); openModal('login'); return; }
-  window.location.href = 'carrito.html';
-}
-
-/* ── PRODUCTS ── */
-let allProducts = [];
-let activeFilter = 'all';
-
-async function loadProducts() {
-  try {
-    const res  = await fetch(TIENDA_WEBHOOK, {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ accion:'catalogo' })
-    });
-    const data = await res.json();
-    if (data.ok && data.catalogos) {
-      allProducts = [
-        ...(data.catalogos.MODA?.items || []),
-        ...(data.catalogos.FASHION_STYLE?.items || []),
-        ...(data.catalogos.MI_DINASTIA?.items || []),
-      ].map((p,i) => ({ ...p, id: i }));
-    }
-  } catch(e) {
-    console.warn('Error cargando catálogo:', e);
-  }
-  renderProducts();
-}
-
-function filterProducts(filter, btn) {
-  activeFilter = filter;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  renderProducts();
-}
-
-function renderProducts() {
-  const grid = document.getElementById('productsGrid');
-  const visible = activeFilter === 'all'
-    ? allProducts
-    : allProducts.filter(p => p.categoria === activeFilter);
-
-  if (!visible.length) {
-    grid.innerHTML = '<div class="products-empty">No hay productos en esta categoría todavía</div>';
+function renderCat(id, items, cat){
+  const g=document.getElementById(id);
+  if(!items.length){
+    g.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:36px;color:var(--dim);font-style:italic">Productos llegando pronto — <a href="articulos.html" style="color:var(--gold);text-decoration:none">ver catálogo completo</a></div>`;
     return;
   }
-
-  grid.innerHTML = visible.map(p => `
-    <div class="product-card">
-      <div class="product-img">
-        ${p.imagen_url ? `<img src="${p.imagen_url}" alt="${p.nombre}" loading="lazy" onerror="this.parentNode.innerHTML='🛍️'">` : '🛍️'}
-      </div>
-      <div class="product-body">
-        <div class="product-cat">${p.categoria || ''}</div>
-        <div class="product-name">${p.nombre || 'Producto'}</div>
-        <div class="product-desc">${p.descripcion || ''}</div>
-        <div class="product-footer">
-          <div class="product-price">${p.moneda || 'EUR'} ${parseFloat(p.precio||0).toFixed(2)}</div>
-          ${p.paypal_link
-            ? `<button class="product-add" onclick="window.open('${p.paypal_link}','_blank')">Comprar</button>`
-            : `<button class="product-add" data-product-id="${p.id}" onclick="addToCart(${JSON.stringify(p).replace(/"/g,'&quot;')})">Añadir</button>`
-          }
-        </div>
+  g.innerHTML=items.slice(0,4).map(p=>`
+    <div class="prodc">
+      <div class="pimg">${p.imagen_url?`<img src="${p.imagen_url}" onerror="this.parentNode.innerHTML='🛍️'">`:' 🛍️'}</div>
+      <div class="pinf">
+        <div class="pname">${p.nombre||'Artículo'}</div>
+        <div class="pprice">${p.precio?'€'+p.precio:'Consultar'}</div>
+        <button class="padd" onclick='addCart(${JSON.stringify({...p,categoria:cat})})'>+ Añadir al Carrito</button>
       </div>
     </div>`).join('');
 }
 
-/* ── INIT ── */
-updateCartUI();
-loadProducts();
+function emptyAll(){
+  ['g-moda','g-fashion','g-dinastia'].forEach(id=>{
+    document.getElementById(id).innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:36px;color:var(--dim);font-style:italic">Catálogo en construcción</div>`;
+  });
+}
+
+function catTab(cat,el){
+  document.querySelectorAll('.ctab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.cat-panel').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('cp-'+cat).classList.add('on');
+}
+
+/* ── ADD CART ── */
+function addCart(p){
+  const cart=JSON.parse(localStorage.getItem('orionix_cart')||'[]');
+  const idx=cart.findIndex(i=>i.nombre===p.nombre);
+  if(idx>=0)cart[idx].qty=(cart[idx].qty||1)+1;
+  else cart.push({...p,qty:1});
+  localStorage.setItem('orionix_cart',JSON.stringify(cart));
+  updateCart();
+  toast('✦ '+p.nombre+' añadido al carrito');
+}
+
+/* ── LEAD ── */
+let activePlan='';
+function openLead(plan){
+  activePlan=plan;
+  document.getElementById('lf-title').textContent='💎 Plan '+plan+' — Déjanos tus datos';
+  document.getElementById('lf-plan').value=plan;
+  const f=document.getElementById('lead-form');
+  f.classList.add('on');
+  setTimeout(()=>f.scrollIntoView({behavior:'smooth',block:'center'}),80);
+}
+
+async function submitLead(){
+  const nombre=document.getElementById('lf-nombre').value.trim();
+  const telegram=document.getElementById('lf-telegram').value.trim();
+  if(!nombre||!telegram){toast('Completa tu nombre y Telegram');return;}
+  const btn=document.getElementById('lf-btn');
+  btn.disabled=true;btn.textContent='Enviando…';
+  try{
+    const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({accion:'lead',nombre,telegram,interes:activePlan,origen:'tienda-planes'})});
+    const d=await r.json();
+    if(d.ok){
+      toast('✦ Solicitud enviada — te contactamos pronto por Telegram');
+      document.getElementById('lead-form').classList.remove('on');
+      document.getElementById('lf-nombre').value='';
+      document.getElementById('lf-telegram').value='';
+    } else toast('Error: '+(d.error||'inténtalo de nuevo'));
+  }catch(e){toast('Error de conexión');}
+  btn.disabled=false;btn.textContent='Enviar Solicitud — Te contactamos en menos de 24h →';
+}
+
+/* ── TOAST ── */
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2800);}
+
+/* ── STARS ── */
+(function(){const c=document.getElementById('cv'),ctx=c.getContext('2d');function r(){c.width=innerWidth;c.height=innerHeight}r();addEventListener('resize',r);const s=Array.from({length:100},()=>({x:Math.random(),y:Math.random(),r:Math.random()*.9+.15,a:Math.random(),da:(Math.random()-.5)*.005}));function d(){ctx.clearRect(0,0,c.width,c.height);s.forEach(p=>{p.a=Math.max(.03,Math.min(.8,p.a+p.da));if(p.a<=.03||p.a>=.8)p.da*=-1;ctx.beginPath();ctx.arc(p.x*c.width,p.y*c.height,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(232,200,106,${p.a*.45})`;ctx.fill();});requestAnimationFrame(d);}d();})();
+
+loadCatalog();
+updateCart();
 </script>
+<script src="orionix-profile.js"></script>
 </body>
 </html>

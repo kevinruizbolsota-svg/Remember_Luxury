@@ -1,1 +1,154 @@
-<!-- deploy via n8n -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIONIX · Acceso Raíz — $100</title>
+<link rel="icon" href="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#e8c86a;--gd:#b89a40;--bg:#0b0b0d;--bg2:rgba(14,13,20,.97);--b:rgba(232,200,106,.12);--ba:rgba(232,200,106,.35);--text:#f0e8d0;--dim:rgba(240,232,208,.45);--glow:rgba(232,200,106,.18)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cormorant Garamond',serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+#cv{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* NAV */
+nav{position:relative;z-index:10;height:52px;display:flex;align-items:center;padding:0 20px;gap:14px;background:rgba(11,11,13,.98);border-bottom:1px solid var(--b)}
+.brand{font-family:'Cinzel',serif;font-size:.85rem;font-weight:900;letter-spacing:.22em;color:var(--gold);text-decoration:none}
+.nav-back{font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.1em;color:var(--dim);text-decoration:none;transition:color .2s;text-transform:uppercase}
+.nav-back:hover{color:var(--gold)}
+.nav-nivel{margin-left:auto;font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+
+/* HERO */
+.hero{position:relative;z-index:1;padding:80px 24px 60px;text-align:center;max-width:680px;margin:0 auto}
+.nivel-tag{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.3em;color:var(--dim);text-transform:uppercase;margin-bottom:12px}
+.nivel-ico{font-size:2.2rem;margin-bottom:12px;display:block;opacity:.7}
+.hero-title{font-family:'Cinzel',serif;font-size:clamp(1.6rem,5vw,2.8rem);font-weight:900;color:var(--text);letter-spacing:.08em;margin-bottom:10px}
+.hero-price{font-family:'Cinzel',serif;font-size:clamp(2.2rem,7vw,4rem);font-weight:900;color:var(--gold);letter-spacing:.04em;line-height:1;margin-bottom:6px}
+.hero-price span{font-size:.7rem;font-weight:400;color:var(--dim);letter-spacing:.1em}
+.hero-sub{font-size:1rem;color:var(--dim);font-style:italic;line-height:1.65;max-width:440px;margin:0 auto 40px}
+
+/* BENEFICIOS */
+.benefits{position:relative;z-index:1;max-width:640px;margin:0 auto 50px;padding:0 20px}
+.b-card{background:var(--bg2);border:1px solid var(--b);border-radius:12px;padding:28px 28px}
+.b-title{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;margin-bottom:18px}
+.b-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.b-item{display:flex;align-items:flex-start;gap:12px;font-size:.9rem;color:var(--text);line-height:1.55}
+.b-ico{color:var(--gold);font-size:.78rem;margin-top:3px;flex-shrink:0}
+
+/* GARANTIA */
+.garantia{text-align:center;font-size:.78rem;color:var(--dim);margin-bottom:40px;position:relative;z-index:1}
+
+/* CTA */
+.cta-wrap{position:relative;z-index:1;max-width:480px;margin:0 auto 60px;padding:0 20px;display:flex;flex-direction:column;gap:12px}
+.cta-main{display:block;width:100%;padding:18px 24px;background:var(--gold);color:var(--bg);border:none;border-radius:10px;font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.18em;font-weight:700;text-transform:uppercase;cursor:pointer;transition:all .28s;text-align:center;text-decoration:none}
+.cta-main:hover{background:var(--gd);transform:translateY(-2px)}
+.cta-alt{display:flex;gap:8px}
+.cta-btn{flex:1;padding:13px 12px;background:transparent;border:1px solid var(--b);border-radius:8px;font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.1em;color:var(--dim);cursor:pointer;transition:all .22s;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.cta-btn:hover{border-color:var(--ba);color:var(--text)}
+
+/* FAQ */
+.faq{position:relative;z-index:1;max-width:640px;margin:0 auto 60px;padding:0 20px}
+.faq-title{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;text-align:center;margin-bottom:20px}
+.faq-item{border-top:1px solid var(--b);padding:14px 0}
+.faq-q{font-family:'Cinzel',serif;font-size:.62rem;color:var(--text);letter-spacing:.06em;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.faq-a{font-size:.84rem;color:var(--dim);line-height:1.65;margin-top:10px;display:none;font-style:italic}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .faq-arr{transform:rotate(180deg)}
+.faq-arr{transition:transform .22s;color:var(--dim);font-size:.7rem}
+
+/* FOOTER */
+footer{position:relative;z-index:1;text-align:center;padding:24px;font-size:.72rem;color:var(--dim);border-top:1px solid var(--b);margin-top:auto}
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+
+<nav>
+  <a href="tienda.html" class="brand">ORIONIX</a>
+  <a href="tienda.html" class="nav-back">← Volver</a>
+  <span class="nav-nivel">🜁 Nivel Raíz</span>
+</nav>
+
+<div class="hero">
+  <div class="nivel-tag">Nivel de Acceso · Entrada al Ecosistema</div>
+  <span class="nivel-ico">🜁</span>
+  <h1 class="hero-title">Acceso Raíz</h1>
+  <div class="hero-price">$100 <span>/ pago único</span></div>
+  <p class="hero-sub">La puerta de entrada al ecosistema ORIONIX. Da el primer paso hacia una forma diferente de construir ingresos.</p>
+</div>
+
+<div class="benefits">
+  <div class="b-card">
+    <div class="b-title">Qué incluye</div>
+    <ul class="b-list">
+      <li class="b-item"><span class="b-ico">✦</span> 1 producto digital a elegir de nuestro catálogo</li>
+      <li class="b-item"><span class="b-ico">✦</span> 1 mes de membresía básica ORIONIX</li>
+      <li class="b-item"><span class="b-ico">✦</span> 5% de descuento permanente en todas tus compras futuras</li>
+      <li class="b-item"><span class="b-ico">✦</span> Acceso al canal privado de Telegram ORIONIX</li>
+      <li class="b-item"><span class="b-ico">✦</span> Soporte por Telegram con respuesta en 24h</li>
+    </ul>
+  </div>
+</div>
+
+<div class="garantia">🛡️ Garantía de satisfacción de 7 días · Sin preguntas</div>
+
+<div class="cta-wrap">
+  <a href="#" class="cta-main" id="btnPrincipal" onclick="iniciarCompra('raiz')">Acceder ahora — $100</a>
+  <div class="cta-alt">
+    <a href="#" class="cta-btn" onclick="pagarTelegram()">✈ Pagar por Telegram</a>
+    <a href="#" class="cta-btn" onclick="pagarWhatsApp()">💬 Pagar por WhatsApp</a>
+  </div>
+</div>
+
+<div class="faq">
+  <div class="faq-title">Preguntas frecuentes</div>
+  <div class="faq-item">
+    <div class="faq-q">¿Qué producto digital puedo elegir? <span class="faq-arr">▾</span></div>
+    <div class="faq-a">Tienes acceso al catálogo MODA y FASHION STYLE. El mismo día que accedes recibirás el enlace de selección.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">¿Qué pasa después de 1 mes? <span class="faq-arr">▾</span></div>
+    <div class="faq-a">Tu membresía básica se puede renovar o puedes subir de nivel a Base o Dominio. El 5% de descuento es tuyo para siempre.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">¿Cómo funciona la garantía? <span class="faq-arr">▾</span></div>
+    <div class="faq-a">Si en los primeros 7 días sientes que no era lo que esperabas, te devolvemos el dinero sin preguntas. Escríbenos por Telegram.</div>
+  </div>
+</div>
+
+<footer>ORIONIX · Agencia de Inteligencia Artificial · <a href="tienda.html" style="color:var(--gold);text-decoration:none">Volver a la tienda</a></footer>
+
+<script>
+// Estrellas
+(function(){
+  var cv=document.getElementById('cv'),ctx=cv.getContext('2d'),stars=[];
+  function resize(){cv.width=innerWidth;cv.height=innerHeight;stars=[];for(var i=0;i<80;i++)stars.push({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*.8+.2,o:Math.random()*.4+.05});}
+  function draw(){ctx.clearRect(0,0,cv.width,cv.height);for(var s of stars){ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='rgba(232,200,106,'+s.o+')';ctx.fill();s.o+=(Math.random()-.5)*.015;if(s.o<.05)s.o=.05;if(s.o>.5)s.o=.5;}requestAnimationFrame(draw);}
+  resize();window.addEventListener('resize',resize);draw();
+})();
+
+// FAQ
+document.querySelectorAll('.faq-item').forEach(function(item){
+  item.querySelector('.faq-q').addEventListener('click',function(){item.classList.toggle('open');});
+});
+
+// Compra
+function iniciarCompra(nivel){
+  var pedido={nivel:'Acceso Raíz',precio:100,moneda:'USD',metodo:'pendiente',timestamp:new Date().toISOString()};
+  localStorage.setItem('orionix_pedido',JSON.stringify(pedido));
+  window.location.href='metodo-pago.html?nivel=raiz&precio=100';
+}
+
+function pagarTelegram(){
+  var msg='Hola, quiero el Acceso Raíz ORIONIX por $100. ¿Cómo procedo?';
+  window.open('https://t.me/orionix_support?text='+encodeURIComponent(msg),'_blank');
+}
+
+function pagarWhatsApp(){
+  var msg='Hola, quiero el Acceso Raíz ORIONIX por $100';
+  window.open('https://wa.me/34600000000?text='+encodeURIComponent(msg),'_blank');
+}
+</script>
+</body>
+</html>

@@ -54,6 +54,9 @@ nav{
 .nav-links a{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:1.8px;text-transform:uppercase;color:var(--tenue);text-decoration:none;transition:color .2s}
 .nav-links a:hover{color:var(--oro)}
 .nav-links a.acc{color:var(--oro);border:1px solid rgba(232,200,106,.32);border-radius:4px;padding:5px 11px}
+.nav-links a.tienda-btn{background:linear-gradient(135deg,var(--oro-osc),var(--oro));color:#06050d!important;border:none;padding:7px 16px;font-weight:700;box-shadow:0 0 14px rgba(232,200,106,.25);animation:btnGlow 2.5s ease-in-out infinite;letter-spacing:2px}
+@keyframes btnGlow{0%,100%{box-shadow:0 0 14px rgba(232,200,106,.25)}50%{box-shadow:0 0 24px rgba(232,200,106,.45)}}
+.nav-links a.tienda-btn:hover{box-shadow:0 0 30px rgba(232,200,106,.5);transform:translateY(-1px)}
 @media(max-width:700px){.nav-links{display:none}}
 
 /* ── BEAMS ── */
@@ -485,7 +488,7 @@ nav{
   <a href="index.html" class="nav-brand"><img src="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png" alt="ORIONIX" style="height:26px;width:26px;border-radius:50%;object-fit:cover;margin-right:8px;vertical-align:middle;">ORIONIX</a>
   <div class="nav-links">
     <a href="agentes.html">🤖 Agentes</a>
-    <a href="tienda.html">🛍️ Tienda</a>
+    <a href="tienda.html" class="acc tienda-btn">🛍️ Tienda</a>
     <a href="comunidad.html">🌌 Comunidad</a>
     <a href="hogar.html">🏡 Hogar</a>
     <a href="mi-universo.html">🗺️ Mi Universo</a>

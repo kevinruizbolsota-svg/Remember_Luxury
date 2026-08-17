@@ -201,11 +201,14 @@ async function activarMic(){
   if (animId) cancelAnimationFrame(animId);
 
   devId = document.getElementById('devsel').value;
-  // Constraints mínimas — sin sampleRate forzado, sin filtros que silencian
+  // Mismo constraints que index.html — el que funciona
   const constraints = {
-    audio: devId
-      ? { deviceId: { ideal: devId } }
-      : true
+    audio: {
+      echoCancellation: true,
+      noiseSuppression: true,
+      sampleRate: 16000,
+      ...(devId ? { deviceId: { exact: devId } } : {})
+    }
   };
 
   try {
@@ -277,43 +280,47 @@ function parar(){
   document.getElementById('btnRec').disabled = false;
 }
 
-// ── Send to n8n ──
+// ── Send to n8n — método exacto de index.html ──
 async function enviar(){
   if (!lastBlob) return;
-  setStatus('rec', '⚡ Enviando a Deepgram vía n8n...');
+  setStatus('rec', '⚡ Transcribiendo...');
   document.getElementById('btnSend').disabled = true;
 
-  try {
-    const ab = await lastBlob.arrayBuffer();
-    const b64 = btoa(String.fromCharCode(...new Uint8Array(ab)));
-    const mime = lastBlob.type || 'audio/webm';
+  // Usar FileReader + readAsDataURL igual que index.html
+  const fr = new FileReader();
+  fr.onloadend = function(){
+    const rawB64 = fr.result.split(',')[1];
+    const mType = lastBlob.type || 'audio/webm;codecs=opus';
 
-    const resp = await fetch(WEBHOOK, {
+    fetch(WEBHOOK, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ audio: b64, mimeType: mime })
+      body: JSON.stringify({ audio: rawB64, mimeType: mType })
+    })
+    .then(r => r.json())
+    .then(data => {
+      const texto = (data && data.texto ? data.texto : '').trim();
+      const res = document.getElementById('res');
+      const trans = document.getElementById('trans');
+      const conf = document.getElementById('conf');
+      res.classList.add('on');
+      if (texto) {
+        trans.textContent = '"' + texto + '"';
+        conf.textContent = '✓ Transcripción exitosa';
+        setStatus('ok', '✦ AXEL escuchó: "' + texto.substring(0,60) + '"');
+      } else {
+        trans.textContent = data.mensaje || 'No se entendió el audio. Habla más cerca del micrófono.';
+        conf.textContent = '';
+        setStatus('err', 'No se entendió — habla más cerca del micrófono e intenta de nuevo');
+      }
+      document.getElementById('btnSend').disabled = false;
+    })
+    .catch(e => {
+      setStatus('err', 'Error de red: ' + e.message);
+      document.getElementById('btnSend').disabled = false;
     });
-
-    const data = await resp.json();
-    const res = document.getElementById('res');
-    const trans = document.getElementById('trans');
-    const conf = document.getElementById('conf');
-    res.classList.add('on');
-
-    if (data.ok && data.texto) {
-      trans.textContent = '"' + data.texto + '"';
-      conf.textContent = '✓ Transcripción exitosa';
-      setStatus('ok', '✦ AXEL escuchó: "' + data.texto.substring(0,60) + '"');
-    } else {
-      trans.textContent = data.mensaje || 'Sin transcripción — mira el medidor, si marcó señal el problema es de formato';
-      conf.textContent = data.ok === false ? '⚠ confidence: 0 — el audio llegó en silencio o el formato no es compatible' : '';
-      setStatus('err', 'No se entendió el audio — revisa el medidor arriba');
-    }
-  } catch(e) {
-    setStatus('err', 'Error de red: ' + e.message);
-  }
-
-  document.getElementById('btnSend').disabled = false;
+  };
+  fr.readAsDataURL(lastBlob);
 }
 
 function setStatus(type, msg){

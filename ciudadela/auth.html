@@ -3,179 +3,772 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIONIX · Iniciar Sesión</title>
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<title>ORIONIX · Acceso</title>
+<link rel="icon" href="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#0b0b0d;color:#f0e8d0;font-family:'Cormorant Garamond',serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-canvas#cosmos{position:fixed;inset:0;z-index:0;pointer-events:none}
-.auth-wrap{position:relative;z-index:1;width:100%;max-width:440px}
-.logo-small{width:80px;height:80px;margin:0 auto 20px;display:block}
-.logo-small svg{width:100%;height:100%}
-h1{font-family:'Cinzel',serif;font-size:1.8rem;letter-spacing:6px;color:#e8c86a;text-align:center;margin-bottom:8px}
-.sub{text-align:center;color:#f0e8d0;font-style:italic;letter-spacing:2px;margin-bottom:30px;opacity:0.7}
-.card{background:rgba(20,20,26,0.95);border:1px solid rgba(232,200,106,0.2);border-radius:14px;padding:30px;backdrop-filter:blur(10px)}
-.tabs{display:flex;gap:0;margin-bottom:25px;border-bottom:1px solid rgba(232,200,106,0.2)}
-.tab{flex:1;padding:12px;text-align:center;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:2px;color:#b89a40;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.3s}
-.tab.active{color:#e8c86a;border-bottom-color:#e8c86a}
-.tab:hover{color:#f5e0a0}
-.form{display:none}
-.form.active{display:block;animation:fadeIn 0.3s}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.field{margin-bottom:18px}
-.field label{display:block;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:2px;color:#b89a40;margin-bottom:6px}
-.field input{width:100%;padding:12px 14px;background:rgba(11,11,13,0.8);border:1px solid rgba(232,200,106,0.2);border-radius:8px;color:#f0e8d0;font-family:'Cormorant Garamond',serif;font-size:1rem;outline:none;transition:border-color 0.3s}
-.field input:focus{border-color:#e8c86a;box-shadow:0 0 10px rgba(232,200,106,0.2)}
-.btn-submit{width:100%;padding:14px;background:linear-gradient(135deg,#e8c86a,#b89a40);color:#0b0b0d;border:none;border-radius:8px;font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:3px;cursor:pointer;font-weight:600;transition:all 0.3s;margin-top:10px}
-.btn-submit:hover{box-shadow:0 0 25px rgba(232,200,106,0.5);transform:translateY(-2px)}
-.btn-submit:disabled{opacity:0.5;cursor:not-allowed;transform:none}
-.divider{text-align:center;margin:20px 0;color:#6a3d9a;font-size:0.85rem;position:relative}
-.divider::before,.divider::after{content:'';position:absolute;top:50%;width:40%;height:1px;background:rgba(232,200,106,0.2)}
-.divider::before{left:0}.divider::after{right:0}
-.btn-google{width:100%;padding:12px;background:transparent;border:1px solid rgba(232,200,106,0.3);border-radius:8px;color:#f0e8d0;font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:2px;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:10px}
-.btn-google:hover{background:rgba(232,200,106,0.08);border-color:#e8c86a}
-.btn-google svg{width:18px;height:18px}
-.btn-invitado{width:100%;padding:12px;background:transparent;border:1px dashed rgba(106,61,154,0.4);border-radius:8px;color:#9d6fc4;font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:2px;cursor:pointer;transition:all 0.3s;margin-top:10px}
-.btn-invitado:hover{background:rgba(106,61,154,0.1);border-color:#6a3d9a}
-.error{background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.3);color:#f87171;padding:10px 14px;border-radius:8px;font-size:0.9rem;margin-bottom:15px;display:none}
-.error.show{display:block}
-.back{text-align:center;margin-top:20px}
-.back a{color:#b89a40;text-decoration:none;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:2px}
-.back a:hover{color:#e8c86a}
+/* ── RESET ── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;-webkit-font-smoothing:antialiased}
+
+/* ── VARS ── */
+:root{
+  --gold:#e8c86a; --gd:#b89a40; --gl:#f5e0a0;
+  --glow:rgba(232,200,106,0.18);
+  --bg:#07070a; --bg2:#0d0d12;
+  --card:rgba(13,13,18,0.96);
+  --text:#f0e8d0; --muted:#7a7060; --placeholder:#3d3a30;
+  --border:rgba(232,200,106,0.12); --border-hi:rgba(232,200,106,0.38);
+  --green:#4ade80; --red:#f87171;
+  --input-bg:rgba(255,255,255,0.03);
+  --input-focus:rgba(232,200,106,0.04);
+}
+
+/* ── LAYOUT ── */
+body{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  background:var(--bg); color:var(--text);
+  display:flex; min-height:100vh; overflow:hidden;
+}
+
+/* ── LEFT PANEL ── */
+.panel-left{
+  flex:0 0 42%; position:relative;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  background:var(--bg);
+  border-right:1px solid var(--border);
+  overflow:hidden; padding:48px;
+}
+.panel-left::before{
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 40%, rgba(232,200,106,0.04) 0%, transparent 70%);
+  pointer-events:none;
+}
+
+canvas#aurora{position:absolute;inset:0;z-index:0;pointer-events:none}
+
+.brand{position:relative;z-index:1;text-align:center}
+
+.brand-symbol{
+  width:80px; height:80px; margin:0 auto 32px;
+  position:relative;
+}
+.brand-symbol svg{width:100%;height:100%}
+
+.brand-name{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.8rem,3vw,2.6rem);
+  font-weight:900; letter-spacing:14px;
+  background:linear-gradient(135deg,var(--gd) 0%,var(--gold) 40%,var(--gl) 60%,var(--gold) 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  animation:shimmer 6s linear infinite;
+  margin-bottom:10px;
+}
+@keyframes shimmer{0%{background-position:0 center}100%{background-position:200% center}}
+
+.brand-tagline{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(.75rem,1.4vw,1rem);
+  font-style:italic; color:var(--muted);
+  letter-spacing:2px; margin-bottom:48px;
+}
+
+.brand-divider{
+  width:1px; height:60px;
+  background:linear-gradient(180deg,transparent,var(--gold),transparent);
+  margin:0 auto 48px;
+}
+
+.brand-features{
+  display:flex; flex-direction:column; gap:18px; max-width:260px; margin:0 auto;
+}
+.feature{
+  display:flex; align-items:center; gap:14px;
+  text-align:left;
+}
+.feature-icon{
+  width:34px; height:34px; flex-shrink:0;
+  border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:.9rem;
+  background:rgba(232,200,106,0.04);
+}
+.feature-text{
+  font-size:clamp(.7rem,1.2vw,.85rem);
+  color:rgba(240,232,208,0.5);
+  letter-spacing:.5px;
+  line-height:1.5;
+}
+.feature-text strong{color:rgba(240,232,208,0.8);font-weight:500}
+
+.brand-version{
+  position:absolute; bottom:24px; left:0; right:0; text-align:center;
+  font-family:'Cinzel',serif; font-size:.38rem; letter-spacing:4px;
+  color:rgba(138,127,104,0.3); text-transform:uppercase;
+}
+
+/* ── RIGHT PANEL ── */
+.panel-right{
+  flex:1; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  background:var(--bg2);
+  padding:48px 40px;
+  overflow-y:auto;
+  position:relative;
+}
+
+/* subtle grain */
+.panel-right::before{
+  content:''; position:fixed; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:0; opacity:.4;
+}
+
+.form-wrap{
+  position:relative; z-index:1;
+  width:min(400px,90%);
+}
+
+/* ── FORM HEADER ── */
+.form-header{margin-bottom:36px}
+.form-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1rem,2vw,1.3rem);
+  font-weight:600; letter-spacing:6px;
+  color:var(--gl); text-transform:uppercase;
+  margin-bottom:6px;
+}
+.form-sub{
+  font-size:clamp(.7rem,1.3vw,.85rem);
+  color:var(--muted); letter-spacing:.5px;
+}
+
+/* ── TABS ── */
+.tabs{
+  display:flex; gap:0; margin-bottom:32px;
+  border-bottom:1px solid var(--border);
+}
+.tab{
+  padding:10px 20px; cursor:pointer;
+  font-family:'Cinzel',serif; font-size:.44rem; letter-spacing:3px;
+  text-transform:uppercase; color:var(--muted);
+  border-bottom:1.5px solid transparent; position:relative; bottom:-1px;
+  transition:all .25s; white-space:nowrap;
+}
+.tab:hover{color:var(--gl)}
+.tab.active{color:var(--gold); border-bottom-color:var(--gold)}
+
+/* ── PANELS ── */
+.panel{display:none}
+.panel.active{display:block; animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── FLOATING LABEL INPUT ── */
+.field{position:relative; margin-bottom:22px}
+.field input{
+  width:100%;
+  background:var(--input-bg);
+  border:none; border-bottom:1px solid var(--border);
+  color:var(--text);
+  padding:20px 40px 8px 0;
+  font-family:'Cormorant Garamond',serif; font-size:1.05rem;
+  outline:none; transition:all .25s;
+  border-radius:0;
+  -webkit-appearance:none;
+}
+.field input::placeholder{color:transparent}
+.field label{
+  position:absolute; left:0; top:14px;
+  font-family:'Cinzel',serif; font-size:.44rem; letter-spacing:2.5px;
+  text-transform:uppercase; color:var(--muted);
+  transition:all .22s; pointer-events:none;
+}
+.field input:focus,
+.field input:not(:placeholder-shown){
+  padding-top:22px; padding-bottom:6px;
+  border-bottom-color:var(--border-hi);
+  background:var(--input-focus);
+}
+.field input:focus + label,
+.field input:not(:placeholder-shown) + label{
+  top:5px; font-size:.38rem; letter-spacing:2px; color:var(--gd);
+}
+.field input:focus{
+  box-shadow:0 1px 0 var(--border-hi);
+}
+
+/* password toggle */
+.field-wrap{position:relative}
+.toggle-pw{
+  position:absolute; right:0; top:50%; transform:translateY(-50%);
+  background:none; border:none; cursor:pointer;
+  color:var(--muted); padding:4px; line-height:1;
+  transition:color .2s;
+}
+.toggle-pw:hover{color:var(--gold)}
+
+/* ── CHECKBOX (remember me) ── */
+.check-row{
+  display:flex; align-items:center; gap:10px;
+  margin-bottom:28px; cursor:pointer;
+}
+.check-row input[type=checkbox]{
+  width:14px; height:14px; accent-color:var(--gold);
+  cursor:pointer;
+}
+.check-label{
+  font-size:clamp(.6rem,1.1vw,.75rem);
+  color:var(--muted); letter-spacing:.5px;
+}
+
+/* ── BUTTON PRIMARY ── */
+.btn-primary{
+  width:100%; padding:16px;
+  background:linear-gradient(135deg,var(--gd) 0%,var(--gold) 50%,var(--gl) 100%);
+  background-size:200% auto;
+  border:none; color:#05050a;
+  font-family:'Cinzel',serif; font-size:.5rem; letter-spacing:4px; text-transform:uppercase;
+  cursor:pointer; margin-bottom:20px;
+  transition:background-position .4s, opacity .2s, box-shadow .3s;
+  position:relative; overflow:hidden;
+  font-weight:700;
+}
+.btn-primary:hover{background-position:right center; box-shadow:0 4px 28px rgba(232,200,106,0.22)}
+.btn-primary:active{transform:translateY(1px)}
+.btn-primary:disabled{opacity:.35; cursor:not-allowed; transform:none}
+
+/* ── DIVIDER ── */
+.divider{
+  display:flex; align-items:center; gap:16px;
+  margin:20px 0;
+  font-family:'Cinzel',serif; font-size:.38rem; letter-spacing:3px;
+  color:rgba(122,112,96,.4); text-transform:uppercase;
+}
+.divider::before,.divider::after{
+  content:''; flex:1; height:1px;
+  background:var(--border);
+}
+
+/* ── BUTTON GOOGLE ── */
+.btn-google{
+  width:100%; padding:13px 18px;
+  background:transparent; color:rgba(240,232,208,0.7);
+  border:1px solid var(--border);
+  font-family:'Cormorant Garamond',serif; font-size:.9rem;
+  cursor:pointer; display:flex; align-items:center; justify-content:center; gap:12px;
+  transition:all .25s; letter-spacing:.5px;
+}
+.btn-google:hover{
+  border-color:var(--border-hi);
+  color:var(--gl);
+  background:rgba(232,200,106,.025);
+}
+.g-icon{width:18px;height:18px;flex-shrink:0}
+
+/* ── LINK ROW ── */
+.link-row{
+  text-align:center; margin-top:20px;
+  font-size:clamp(.6rem,1.1vw,.75rem);
+  color:var(--muted); letter-spacing:.5px;
+}
+.link-row a{
+  color:var(--gold); text-decoration:none;
+  border-bottom:1px solid transparent;
+  transition:border-color .2s, color .2s;
+}
+.link-row a:hover{border-bottom-color:var(--gold); color:var(--gl)}
+
+/* ── MESSAGE ── */
+#msg{
+  margin-top:20px; padding:12px 16px;
+  font-family:'Cinzel',serif; font-size:.44rem; letter-spacing:1.5px;
+  text-transform:uppercase; display:none;
+  animation:fadeUp .25s ease; line-height:1.7;
+}
+.msg-ok {background:rgba(74,222,128,.05);border-left:2px solid rgba(74,222,128,.5);color:var(--green)}
+.msg-err{background:rgba(248,113,113,.05);border-left:2px solid rgba(248,113,113,.4);color:var(--red)}
+.msg-warn{background:rgba(232,200,106,.05);border-left:2px solid rgba(232,200,106,.4);color:var(--gold)}
+
+/* ── SPINNER ── */
+.spinner{
+  display:inline-block; width:12px; height:12px; margin-right:8px;
+  border:2px solid rgba(5,5,10,.25); border-top-color:#05050a;
+  border-radius:50%; animation:spin .7s linear infinite; vertical-align:middle;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── FORGOT / GUEST ── */
+.forgot-link{
+  text-align:right; margin-top:-14px; margin-bottom:22px;
+}
+.forgot-link a{
+  font-family:'Cinzel',serif; font-size:.38rem; letter-spacing:2px;
+  color:var(--muted); text-decoration:none; text-transform:uppercase;
+  transition:color .2s;
+}
+.forgot-link a:hover{color:var(--gold)}
+
+/* ── FOOTER ── */
+.form-footer{
+  margin-top:32px; text-align:center;
+  font-family:'Cinzel',serif; font-size:.38rem; letter-spacing:2px;
+  color:rgba(122,112,96,.35); text-transform:uppercase;
+}
+.form-footer a{color:rgba(122,112,96,.5);text-decoration:none;transition:color .2s}
+.form-footer a:hover{color:var(--muted)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  body{flex-direction:column}
+  .panel-left{flex:none; min-height:auto; padding:36px 24px 28px; border-right:none; border-bottom:1px solid var(--border)}
+  .brand-features{display:none}
+  .brand-divider{height:30px; margin-bottom:28px}
+  .panel-right{padding:36px 24px}
+  .brand-version{position:static;margin-top:16px}
+}
+@media(max-width:400px){
+  .tab{padding:10px 14px;font-size:.4rem}
+}
+
+/* ── GUEST PANEL ── */
+.guest-panel{
+  background:rgba(232,200,106,0.03);
+  border:1px solid var(--border);
+  padding:24px; margin-bottom:20px;
+}
+.guest-info{
+  font-size:clamp(.65rem,1.2vw,.78rem);
+  color:var(--muted); line-height:1.7; margin-bottom:18px; letter-spacing:.3px;
+}
 </style>
 </head>
 <body>
-<canvas id="cosmos"></canvas>
-<div class="auth-wrap">
-  <div class="logo-small">
-    <svg viewBox="0 0 100 100">
-      <circle cx="50" cy="50" r="46" fill="none" stroke="#e8c86a" stroke-width="1.5"/>
-      <circle cx="50" cy="50" r="22" fill="none" stroke="#e8c86a" stroke-width="1.2"/>
-      <circle cx="50" cy="50" r="10" fill="#e8c86a"/>
-      <circle cx="50" cy="50" r="4" fill="#0b0b0d"/>
-    </svg>
-  </div>
-  <h1>ORIONIX</h1>
-  <div class="sub">Accede a tu universo</div>
-  <div class="card">
-    <div class="error" id="error"></div>
-    <div class="tabs">
-      <div class="tab active" data-tab="login">ENTRAR</div>
-      <div class="tab" data-tab="registro">REGISTRO</div>
+
+<!-- LEFT PANEL -->
+<div class="panel-left">
+  <canvas id="aurora"></canvas>
+
+  <div class="brand">
+    <!-- Hexagonal symbol -->
+    <div class="brand-symbol">
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="40,4 74,22 74,58 40,76 6,58 6,22"
+          stroke="rgba(232,200,106,0.6)" stroke-width="1" fill="none"/>
+        <polygon points="40,14 64,27 64,53 40,66 16,53 16,27"
+          stroke="rgba(232,200,106,0.25)" stroke-width=".75" fill="none"/>
+        <circle cx="40" cy="40" r="8"
+          fill="rgba(232,200,106,0.12)" stroke="rgba(232,200,106,0.5)" stroke-width="1"/>
+        <circle cx="40" cy="40" r="3" fill="rgba(232,200,106,0.7)"/>
+        <!-- rays -->
+        <line x1="40" y1="32" x2="40" y2="14" stroke="rgba(232,200,106,0.15)" stroke-width=".5"/>
+        <line x1="40" y1="48" x2="40" y2="66" stroke="rgba(232,200,106,0.15)" stroke-width=".5"/>
+        <line x1="33" y1="36" x2="16" y2="27" stroke="rgba(232,200,106,0.15)" stroke-width=".5"/>
+        <line x1="47" y1="44" x2="64" y2="53" stroke="rgba(232,200,106,0.15)" stroke-width=".5"/>
+        <line x1="33" y1="44" x2="16" y2="53" stroke="rgba(232,200,106,0.15)" stroke-width=".5"/>
+        <line x1="47" y1="36" x2="64" y2="27" stroke="rgba(232,200,106,0.15)" stroke-width=".5"/>
+      </svg>
     </div>
-    <form class="form active" id="formLogin">
-      <div class="field"><label>EMAIL</label><input type="email" id="loginEmail" required></div>
-      <div class="field"><label>CONTRASEÑA</label><input type="password" id="loginPass" required></div>
-      <button type="submit" class="btn-submit">ENTRAR</button>
-    </form>
-    <form class="form" id="formRegistro">
-      <div class="field"><label>NOMBRE</label><input type="text" id="regNombre" required></div>
-      <div class="field"><label>EMAIL</label><input type="email" id="regEmail" required></div>
-      <div class="field"><label>CONTRASEÑA</label><input type="password" id="regPass" required minlength="6"></div>
-      <div class="field"><label>CÓDIGO AFILIADO (opcional)</label><input type="text" id="regCodigo" placeholder="ORIONIX-XXXX"></div>
-      <button type="submit" class="btn-submit">CREAR CUENTA</button>
-    </form>
-    <div class="divider">o</div>
-    <button class="btn-google" id="btnGoogle">
-      <svg viewBox="0 0 24 24"><path fill="#e8c86a" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#f5e0a0" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#b89a40" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#6a3d9a" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-      CONTINUAR CON GOOGLE
-    </button>
-    <button class="btn-invitado" id="btnInvitado">ENTRAR COMO INVITADO</button>
+
+    <div class="brand-name">ORIONIX</div>
+    <div class="brand-tagline">Agencia de Inteligencia Creativa</div>
+
+    <div class="brand-divider"></div>
+
+    <div class="brand-features">
+      <div class="feature">
+        <div class="feature-icon">✦</div>
+        <div class="feature-text">
+          <strong>6 Agentes de IA</strong><br>
+          AXEL, Claude, ChatGPT, Copilot, Qwen y n8n
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⬡</div>
+        <div class="feature-text">
+          <strong>Sistema KRC / Kabalion</strong><br>
+          46 Sefirot · Árbol Cabalístico propio
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">◈</div>
+        <div class="feature-text">
+          <strong>La Ciudadela</strong><br>
+          Centro de comando operativo 24/7
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="back"><a href="portal.html">← Volver al portal</a></div>
+
+  <div class="brand-version">ORIONIX MAISON · Sistema de Acceso · 2026</div>
 </div>
-<script src="orionix-core.js"></script>
+
+<!-- RIGHT PANEL -->
+<div class="panel-right">
+  <div class="form-wrap">
+
+    <div class="form-header">
+      <div class="form-title">Acceso al Sistema</div>
+      <div class="form-sub">Introduce tus credenciales para entrar a la Ciudadela</div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" id="tab-login"   onclick="switchTab('login')">Iniciar Sesión</div>
+      <div class="tab"        id="tab-reg"     onclick="switchTab('register')">Registrarse</div>
+      <div class="tab"        id="tab-guest"   onclick="switchTab('guest')">Visitante</div>
+    </div>
+
+    <!-- ── LOGIN ── -->
+    <div id="panel-login" class="panel active">
+      <div class="field">
+        <div class="field-wrap">
+          <input type="email" id="lEmail" placeholder="email" autocomplete="email"
+            onkeypress="if(event.key==='Enter')doLogin()">
+          <label for="lEmail">Correo electrónico</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-wrap">
+          <input type="password" id="lPass" placeholder="password" autocomplete="current-password"
+            onkeypress="if(event.key==='Enter')doLogin()">
+          <label for="lPass">Contraseña</label>
+          <button class="toggle-pw" type="button" onclick="togglePw('lPass',this)" title="Mostrar/ocultar">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="forgot-link"><a href="#" onclick="showForgot()">¿Olvidaste tu contraseña?</a></div>
+      <label class="check-row">
+        <input type="checkbox" id="remember">
+        <span class="check-label">Mantener sesión iniciada</span>
+      </label>
+      <button class="btn-primary" id="btnLogin" onclick="doLogin()">Iniciar Sesión</button>
+      <div class="divider">O continúa con</div>
+      <button class="btn-google" onclick="doGoogle()">
+        <svg class="g-icon" viewBox="0 0 48 48">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        </svg>
+        Continuar con Google
+      </button>
+    </div>
+
+    <!-- ── REGISTER ── -->
+    <div id="panel-register" class="panel">
+      <div class="field">
+        <div class="field-wrap">
+          <input type="text" id="rName" placeholder="nombre" autocomplete="name">
+          <label for="rName">Nombre o alias</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-wrap">
+          <input type="email" id="rEmail" placeholder="email" autocomplete="email">
+          <label for="rEmail">Correo electrónico</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-wrap">
+          <input type="password" id="rPass" placeholder="password" autocomplete="new-password"
+            onkeypress="if(event.key==='Enter')doRegister()">
+          <label for="rPass">Contraseña (mín. 6 caracteres)</label>
+          <button class="toggle-pw" type="button" onclick="togglePw('rPass',this)" title="Mostrar/ocultar">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-wrap">
+          <input type="text" id="rRef" placeholder="ref" autocomplete="off">
+          <label for="rRef">Código de referido (opcional)</label>
+        </div>
+      </div>
+      <button class="btn-primary" id="btnReg" onclick="doRegister()">Crear Cuenta</button>
+      <div class="divider">O regístrate con</div>
+      <button class="btn-google" onclick="doGoogle()">
+        <svg class="g-icon" viewBox="0 0 48 48">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        </svg>
+        Registrarse con Google
+      </button>
+    </div>
+
+    <!-- ── GUEST ── -->
+    <div id="panel-guest" class="panel">
+      <div class="guest-panel">
+        <div class="guest-info">
+          Accede como visitante para explorar la Ciudadela sin registrarte.
+          Algunas funciones estarán limitadas. Tu sesión no se guardará.
+        </div>
+        <div class="field">
+          <div class="field-wrap">
+            <input type="text" id="gName" placeholder="visitante"
+              onkeypress="if(event.key==='Enter')doGuest()">
+            <label for="gName">¿Cómo quieres que te llamen?</label>
+          </div>
+        </div>
+      </div>
+      <button class="btn-primary" id="btnGuest" onclick="doGuest()">Entrar como Visitante</button>
+    </div>
+
+    <div id="msg"></div>
+
+    <div class="form-footer">
+      ORIONIX MAISON &nbsp;·&nbsp; <a href="hub.html">Volver al Hub</a> &nbsp;·&nbsp; <a href="portal.html">Portal</a>
+    </div>
+
+  </div><!-- /form-wrap -->
+</div><!-- /panel-right -->
+
+<!-- AURORA BACKGROUND (left panel) -->
 <script>
-OrionixStarfield.init('cosmos', 120);
+(function(){
+  const c=document.getElementById('aurora');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  let t=0, W, H;
+  const bands=[
+    {y:.2,a:.055,fA:.0006,fB:.0014,sA:2.5,sB:1.7,alpha:.14,rgb:'232,200,106',w:.14},
+    {y:.5,a:.04,fA:.001,fB:.0022,sA:3.2,sB:2.2,alpha:.07,rgb:'245,224,160',w:.11},
+    {y:.75,a:.05,fA:.0005,fB:.001,sA:2,sB:1.4,alpha:.05,rgb:'184,154,64',w:.15},
+  ];
+  function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight}
+  function wy(x,b,t){return b.y*H+Math.sin(x*b.fA+t*b.sA)*b.a*H+Math.sin(x*b.fB+t*b.sB+1.3)*b.a*H*.4}
+  function draw(b,t){
+    const bH=b.w*H,pts=[];
+    for(let x=0;x<=W;x+=4)pts.push({x,y:wy(x,b,t)});
+    ctx.beginPath();ctx.moveTo(0,pts[0].y);
+    pts.forEach(p=>ctx.lineTo(p.x,p.y));
+    for(let i=pts.length-1;i>=0;i--)ctx.lineTo(pts[i].x,pts[i].y+bH);
+    ctx.closePath();
+    const mid=pts[Math.floor(pts.length/2)].y+bH*.5;
+    const g=ctx.createLinearGradient(0,mid-bH,0,mid+bH);
+    g.addColorStop(0,`rgba(${b.rgb},0)`);g.addColorStop(.5,`rgba(${b.rgb},${b.alpha})`);g.addColorStop(1,`rgba(${b.rgb},0)`);
+    ctx.fillStyle=g;ctx.fill();
+    ctx.beginPath();ctx.moveTo(0,pts[0].y);pts.forEach(p=>ctx.lineTo(p.x,p.y));
+    ctx.strokeStyle=`rgba(${b.rgb},${b.alpha*1.6})`;ctx.lineWidth=.8;
+    ctx.shadowColor=`rgba(${b.rgb},.5)`;ctx.shadowBlur=10;ctx.stroke();ctx.shadowBlur=0;
+  }
+  let last=0;
+  function loop(ts){const dt=(ts-last)/1000;last=ts;t+=dt*.4;ctx.clearRect(0,0,W,H);bands.forEach(b=>draw(b,t));requestAnimationFrame(loop)}
+  const ro=new ResizeObserver(resize);ro.observe(c.parentElement);
+  resize();requestAnimationFrame(loop);
+})();
+</script>
 
-// Firebase init (config desde orionix-core.js)
-try { firebase.initializeApp(ORIONIX.firebase); } catch(e) {}
-const auth = firebase.auth();
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script>
+// ── FIREBASE CONFIG ──
+const FIREBASE_CFG = {
+  apiKey:            'AIzaSyDZoywcYKSBrAk_iwSMN4rnw7goLSltj7A',
+  authDomain:        'las-cronicas-de-krc.firebaseapp.com',
+  projectId:         'las-cronicas-de-krc',
+  storageBucket:     'las-cronicas-de-krc.firebasestorage.app',
+  messagingSenderId: '636206734640',
+  appId:             '1:636206734640:web:40c52672294155c6d77cf5',
+};
+const ADMIN_EMAIL = 'kevin.ruiz.bolsota@gmail.com';
+let auth = null;
+let firebaseOk = false;
 
-// Tabs
-document.querySelectorAll('.tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.form').forEach(f => f.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById(tab.dataset.tab === 'login' ? 'formLogin' : 'formRegistro').classList.add('active');
+// Inicializar Firebase con manejo de error
+try {
+  if (!firebase.apps.length) firebase.initializeApp(FIREBASE_CFG);
+  auth = firebase.auth();
+  firebaseOk = true;
+  // Si ya está logueado → redirigir
+  auth.onAuthStateChanged(user => {
+    if (user) guardarYRedirigir({
+      uid: user.uid, email: user.email,
+      nombre: user.displayName || user.email.split('@')[0],
+      foto: user.photoURL, metodo: 'firebase'
+    });
   });
-});
-
-function showError(msg) {
-  const e = document.getElementById('error');
-  e.textContent = msg;
-  e.classList.add('show');
-  setTimeout(() => e.classList.remove('show'), 5000);
+} catch(e) {
+  console.warn('[ORIONIX] Firebase no disponible:', e.message);
+  firebaseOk = false;
 }
 
-function crearSesion(nombre, email, rol, codigoAfiliado) {
-  setSesion({ nombre, email, rol: rol || 'visitante', codigo_afiliado: codigoAfiliado || generarCodigoAfiliado(email) });
-  const redirect = new URLSearchParams(window.location.search).get('next') || 'hub.html';
-  window.location.href = redirect;
+// ── HELPERS ──
+function switchTab(t) {
+  ['login','register','guest'].forEach(x => {
+    document.getElementById('tab-'+(x==='login'?'login':x==='register'?'reg':'guest')).classList.toggle('active', x===t);
+    document.getElementById('panel-'+x).classList.toggle('active', x===t);
+  });
+  showMsg('','');
 }
 
-// Login email
-document.getElementById('formLogin').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const email = document.getElementById('loginEmail').value.trim();
-  const pass  = document.getElementById('loginPass').value;
-  const btn   = e.target.querySelector('.btn-submit');
-  btn.disabled = true; btn.textContent = 'ENTRANDO...';
+function showMsg(text, type) {
+  const el = document.getElementById('msg');
+  if (!text) { el.style.display='none'; return; }
+  el.innerHTML = text;
+  el.className = type === 'ok' ? 'msg-ok' : type === 'warn' ? 'msg-warn' : 'msg-err';
+  el.style.display = 'block';
+}
+
+function setLoading(btnId, loading, label) {
+  const b = document.getElementById(btnId);
+  if (!b) return;
+  b.disabled = loading;
+  b.innerHTML = loading ? `<span class="spinner"></span>Procesando...` : label;
+}
+
+function togglePw(id, btn) {
+  const inp = document.getElementById(id);
+  if (!inp) return;
+  const isHidden = inp.type === 'password';
+  inp.type = isHidden ? 'text' : 'password';
+  btn.innerHTML = isHidden
+    ? `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`
+    : `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>`;
+}
+
+function guardarYRedirigir(sesion) {
+  if (!sesion.rol) {
+    sesion.rol = (sesion.email && sesion.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) ? 'admin' : 'usuario';
+  }
+  if (!sesion.sesion_id) sesion.sesion_id = 'ses_' + Math.random().toString(36).slice(2, 10);
+  sesion.ts = Date.now();
+  localStorage.setItem('orionix_sesion', JSON.stringify(sesion));
+
+  showMsg('✦ Acceso concedido — Redirigiendo...', 'ok');
+  setTimeout(() => {
+    const params = new URLSearchParams(window.location.search);
+    const ret = params.get('return') || params.get('next');
+    window.location.href = (ret && ret !== location.pathname) ? decodeURIComponent(ret) : 'hub.html';
+  }, 900);
+}
+
+function firebaseErr(code) {
+  const map = {
+    'auth/user-not-found':       'No existe una cuenta con ese correo.',
+    'auth/wrong-password':       'Contraseña incorrecta.',
+    'auth/invalid-credential':   'Correo o contraseña incorrectos.',
+    'auth/email-already-in-use': 'Ya existe una cuenta con ese correo.',
+    'auth/weak-password':        'La contraseña debe tener al menos 6 caracteres.',
+    'auth/invalid-email':        'El correo no tiene un formato válido.',
+    'auth/popup-blocked':        'El navegador bloqueó el popup. Permite popups para este sitio.',
+    'auth/popup-closed-by-user': 'Cerraste la ventana de Google. Inténtalo de nuevo.',
+    'auth/unauthorized-domain':  'Dominio no autorizado. Añade kevinruizbolsota-svg.github.io en Firebase → Authentication → Authorized domains.',
+    'auth/api-key-not-valid':    'Clave de API de Firebase no válida. Ve a Firebase Console → Authentication → Settings y verifica la configuración.',
+  };
+  // Búsqueda parcial para errores con guiones
+  for (const [key, msg] of Object.entries(map)) {
+    if (code && code.includes(key.replace('auth/',''))) return msg;
+  }
+  return map[code] || `Error de autenticación (${code || 'desconocido'})`;
+}
+
+// ── LOGIN EMAIL ──
+async function doLogin() {
+  const email = document.getElementById('lEmail').value.trim();
+  const pass  = document.getElementById('lPass').value;
+  if (!email || !pass) { showMsg('Completa correo y contraseña.', 'err'); return; }
+
+  setLoading('btnLogin', true, 'Iniciar Sesión');
+
+  if (!firebaseOk) {
+    // Fallback: solo verificación básica (sin servidor real)
+    showMsg('Firebase no disponible. Modo offline no soporta autenticación real.', 'err');
+    setLoading('btnLogin', false, 'Iniciar Sesión');
+    return;
+  }
+
   try {
     const cred = await auth.signInWithEmailAndPassword(email, pass);
-    const rol  = email === 'kevin.ruiz.bolsota@gmail.com' ? 'admin' : 'visitante';
-    crearSesion(cred.user.displayName || email.split('@')[0], email, rol);
-  } catch(err) {
-    showError('Credenciales incorrectas. Intenta de nuevo.');
-    btn.disabled = false; btn.textContent = 'ENTRAR';
+    guardarYRedirigir({
+      uid: cred.user.uid, email: cred.user.email,
+      nombre: cred.user.displayName || cred.user.email.split('@')[0],
+      foto: cred.user.photoURL, metodo: 'email'
+    });
+  } catch(e) {
+    showMsg(firebaseErr(e.code), 'err');
+    setLoading('btnLogin', false, 'Iniciar Sesión');
   }
-});
+}
 
-// Registro email
-document.getElementById('formRegistro').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const nombre  = document.getElementById('regNombre').value.trim();
-  const email   = document.getElementById('regEmail').value.trim();
-  const pass    = document.getElementById('regPass').value;
-  const codigo  = document.getElementById('regCodigo').value.trim();
-  const btn     = e.target.querySelector('.btn-submit');
-  btn.disabled = true; btn.textContent = 'CREANDO...';
+// ── REGISTER ──
+async function doRegister() {
+  const name  = document.getElementById('rName').value.trim();
+  const email = document.getElementById('rEmail').value.trim();
+  const pass  = document.getElementById('rPass').value;
+  if (!name || !email || !pass) { showMsg('Completa todos los campos.', 'err'); return; }
+  if (pass.length < 6) { showMsg('La contraseña debe tener al menos 6 caracteres.', 'err'); return; }
+
+  setLoading('btnReg', true, 'Crear Cuenta');
+
+  if (!firebaseOk) {
+    showMsg('Firebase no disponible. No se puede crear cuenta ahora.', 'err');
+    setLoading('btnReg', false, 'Crear Cuenta');
+    return;
+  }
+
   try {
     const cred = await auth.createUserWithEmailAndPassword(email, pass);
-    await cred.user.updateProfile({ displayName: nombre });
-    const rol = email === 'kevin.ruiz.bolsota@gmail.com' ? 'admin' : 'afiliado';
-    crearSesion(nombre, email, rol, codigo);
-  } catch(err) {
-    showError('Error: ' + (err.message || 'No se pudo crear la cuenta'));
-    btn.disabled = false; btn.textContent = 'CREAR CUENTA';
+    await cred.user.updateProfile({ displayName: name });
+    guardarYRedirigir({
+      uid: cred.user.uid, email: cred.user.email,
+      nombre: name, foto: null, metodo: 'email'
+    });
+  } catch(e) {
+    showMsg(firebaseErr(e.code), 'err');
+    setLoading('btnReg', false, 'Crear Cuenta');
   }
-});
+}
 
-// Google
-document.getElementById('btnGoogle').addEventListener('click', async () => {
-  const btn = document.getElementById('btnGoogle');
-  btn.disabled = true; btn.textContent = 'CONECTANDO...';
+// ── GOOGLE ──
+async function doGoogle() {
+  if (!firebaseOk || !auth) {
+    showMsg('Google login requiere Firebase configurado. Usa email/contraseña.', 'warn');
+    return;
+  }
+
+  const provider = new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: 'select_account' });
   try {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    const result   = await auth.signInWithPopup(provider);
-    const email    = result.user.email;
-    const rol      = email === 'kevin.ruiz.bolsota@gmail.com' ? 'admin' : 'visitante';
-    crearSesion(result.user.displayName || email.split('@')[0], email, rol);
-  } catch(err) {
-    showError('Error Google: ' + err.message);
-    btn.disabled = false; btn.textContent = 'CONTINUAR CON GOOGLE';
+    const cred = await auth.signInWithPopup(provider);
+    guardarYRedirigir({
+      uid: cred.user.uid, email: cred.user.email,
+      nombre: cred.user.displayName || cred.user.email.split('@')[0],
+      foto: cred.user.photoURL, metodo: 'google'
+    });
+  } catch(e) {
+    // Mensaje amigable para error de API key
+    if (e.code && (e.code.includes('api-key') || e.code.includes('invalid-api-key'))) {
+      showMsg(
+        'Google login no disponible ahora.<br>' +
+        '<small style="font-size:.9em;opacity:.7">Para activarlo: Firebase Console → Authentication → Settings → Authorized domains → añade kevinruizbolsota-svg.github.io</small>',
+        'warn'
+      );
+    } else {
+      showMsg(firebaseErr(e.code), 'err');
+    }
   }
-});
+}
 
-// Invitado
-document.getElementById('btnInvitado').addEventListener('click', () => {
-  const nombre = prompt('¿Cómo te llamas, viajero?');
-  if (nombre && nombre.trim()) crearSesion(nombre.trim(), 'invitado@orionix.com', 'visitante');
-});
+// ── GUEST ──
+function doGuest() {
+  const name = document.getElementById('gName').value.trim() || 'Visitante';
+  guardarYRedirigir({ nombre: name, rol: 'visitante', metodo: 'guest' });
+}
+
+// ── FORGOT PASSWORD ──
+function showForgot() {
+  const email = document.getElementById('lEmail').value.trim();
+  if (!email) { showMsg('Escribe tu correo primero y luego pulsa olvidé contraseña.', 'warn'); return; }
+  if (!firebaseOk) { showMsg('Firebase no disponible para restablecer contraseña.', 'err'); return; }
+  auth.sendPasswordResetEmail(email)
+    .then(() => showMsg('✦ Correo de recuperación enviado a ' + email, 'ok'))
+    .catch(e => showMsg(firebaseErr(e.code), 'err'));
+}
 </script>
 </body>
 </html>

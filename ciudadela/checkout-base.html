@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIONIX · Acceso Base — €500</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#e8c86a;--gl:#f5e0a0;--gd:#b89a40;--bg:#0b0b0d;--card:rgba(232,200,106,0.07);--text:#f0e8d0;--dim:rgba(240,232,208,0.5);--purple:#6a3d9a;--ok:#2ecc71}
+body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',serif;min-height:100vh;display:flex;flex-direction:column;align-items:center}
+canvas#stars{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.wrap{position:relative;z-index:1;width:100%;max-width:660px;padding:32px 20px 60px}
+
+/* HALO DORADO */
+.halo{position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(232,200,106,0.08) 0%,transparent 70%);pointer-events:none;z-index:0;animation:pulse 4s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.08)}}
+
+.back{display:inline-flex;align-items:center;gap:8px;color:var(--dim);font-size:13px;text-decoration:none;letter-spacing:.1em;margin-bottom:32px;transition:.2s}
+.back:hover{color:var(--gold)}
+.nivel-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,rgba(232,200,106,0.12),rgba(232,200,106,0.04));border:1px solid rgba(232,200,106,0.35);border-radius:24px;padding:8px 20px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.25em;color:var(--gold);margin-bottom:20px}
+.nivel-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-family:'Cinzel',serif;font-size:clamp(28px,5vw,42px);font-weight:900;letter-spacing:.06em;line-height:1.1;margin-bottom:8px}
+h1 span{background:linear-gradient(135deg,var(--gd),var(--gold),var(--gl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.precio-hero{font-size:62px;font-weight:900;font-family:'Cinzel',serif;background:linear-gradient(135deg,var(--gd),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:.04em;margin:16px 0 4px}
+.precio-hero sup{font-size:28px;vertical-align:super}
+.precio-sub{color:var(--dim);font-size:14px;letter-spacing:.1em;margin-bottom:8px}
+.precio-compare{font-size:13px;color:rgba(46,204,113,0.9);letter-spacing:.08em;margin-bottom:28px}
+.precio-compare s{color:var(--dim)}
+
+/* CONTADOR */
+.timer-bar{background:rgba(232,200,106,0.06);border:1px solid rgba(232,200,106,0.2);border-radius:10px;padding:14px 18px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.timer-text{font-size:13px;color:var(--dim);letter-spacing:.08em}
+.timer-clock{font-family:'Cinzel',serif;font-size:18px;color:var(--gold);letter-spacing:.15em}
+
+/* BENEFICIOS */
+.benefits{background:var(--card);border:1px solid rgba(232,200,106,0.2);border-radius:14px;padding:22px;margin-bottom:28px;position:relative;overflow:hidden}
+.benefits::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.benefits h3{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.25em;color:var(--gold);margin-bottom:18px}
+.benefits-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.benefit{display:flex;align-items:flex-start;gap:10px;padding:10px;background:rgba(0,0,0,.2);border-radius:8px;font-size:14px;line-height:1.4}
+.benefit .ico{font-size:18px;flex-shrink:0}
+.benefit strong{display:block;font-family:'Cinzel',serif;font-size:10px;letter-spacing:.15em;color:var(--gold);margin-bottom:2px}
+
+/* METODOS */
+.section-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.3em;color:var(--dim);margin-bottom:14px}
+.methods-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px}
+.methods-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
+.method-card{background:var(--card);border:1px solid rgba(232,200,106,0.12);border-radius:10px;padding:14px 10px;cursor:pointer;transition:.2s;text-align:center;position:relative}
+.method-card:hover{border-color:rgba(232,200,106,0.4);transform:translateY(-2px)}
+.method-card.active{border-color:var(--gold);background:rgba(232,200,106,0.12);box-shadow:0 0 20px rgba(232,200,106,0.1)}
+.method-card.active::after{content:'✓';position:absolute;top:8px;right:10px;color:var(--gold);font-size:11px;font-weight:bold}
+.method-icon{font-size:24px;margin-bottom:5px}
+.method-name{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.15em;color:var(--text)}
+.method-tag{font-size:10px;color:var(--dim);margin-top:2px}
+
+/* CUOTAS */
+.cuotas-selector{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.cuota-opt{background:var(--card);border:1px solid rgba(232,200,106,0.12);border-radius:8px;padding:12px 8px;cursor:pointer;text-align:center;transition:.2s}
+.cuota-opt:hover,.cuota-opt.active{border-color:var(--gold)}
+.cuota-opt strong{display:block;font-family:'Cinzel',serif;font-size:14px;color:var(--gold)}
+.cuota-opt span{font-size:11px;color:var(--dim)}
+
+/* PANEL */
+.pay-panel{display:none;background:rgba(0,0,0,.3);border:1px solid rgba(232,200,106,0.2);border-radius:12px;padding:22px;margin-bottom:22px;animation:fadeIn .3s}
+.pay-panel.show{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.pay-panel label{display:block;font-size:12px;letter-spacing:.1em;color:var(--dim);margin-bottom:6px;margin-top:14px}
+.pay-panel label:first-of-type{margin-top:0}
+.pay-panel input,.pay-panel select{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(232,200,106,0.2);border-radius:8px;padding:11px 14px;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:15px;outline:none;transition:.2s}
+.pay-panel input:focus{border-color:var(--gold)}
+.info-box{background:rgba(232,200,106,0.07);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:14px;font-size:14px;line-height:1.7}
+.info-box strong{color:var(--gold);display:block;margin-bottom:4px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.15em}
+.copy-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(232,200,106,0.1);border:1px solid rgba(232,200,106,0.3);border-radius:6px;padding:5px 12px;color:var(--gold);font-size:12px;cursor:pointer;margin-top:8px;font-family:'Cinzel',serif;letter-spacing:.1em;transition:.2s}
+.copy-btn:hover{background:rgba(232,200,106,0.2)}
+
+/* RESUMEN */
+.resumen{background:var(--card);border:1px solid rgba(232,200,106,0.18);border-radius:12px;padding:18px;margin-bottom:20px}
+.resumen-row{display:flex;justify-content:space-between;padding:6px 0;font-size:15px;border-bottom:1px solid rgba(255,255,255,.04)}
+.resumen-row:last-child{border-bottom:none;font-family:'Cinzel',serif;color:var(--gold);font-size:17px;padding-top:12px;margin-top:4px}
+
+/* BOTON */
+.btn-pay{width:100%;padding:18px;background:linear-gradient(135deg,var(--gd),var(--gold));border:none;border-radius:10px;color:#0b0b0d;font-family:'Cinzel',serif;font-size:15px;font-weight:700;letter-spacing:.2em;cursor:pointer;transition:.2s;box-shadow:0 4px 20px rgba(232,200,106,0.2)}
+.btn-pay:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(232,200,106,0.4)}
+.btn-pay:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.security{display:flex;justify-content:center;gap:20px;margin-top:18px;flex-wrap:wrap}
+.security span{font-size:11px;color:var(--dim);display:flex;align-items:center;gap:5px;letter-spacing:.08em}
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);background:#1a1a1f;border:1px solid var(--gold);border-radius:8px;padding:12px 24px;font-family:'Cinzel',serif;font-size:13px;letter-spacing:.1em;color:var(--gold);transition:.3s;z-index:100;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<div class="halo"></div>
+<div class="wrap">
+  <a href="tienda.html" class="back">← VOLVER A LA TIENDA</a>
+
+  <div class="nivel-badge"><span class="dot"></span> NIVEL BASE · COMPROMISO REAL</div>
+  <h1>Acceso <span>Base</span></h1>
+  <div class="precio-hero"><sup>€</sup>500</div>
+  <div class="precio-sub">6 MESES · TODO INCLUIDO</div>
+  <div class="precio-compare">Equivale a <s>€83/mes</s> → solo <strong style="color:var(--gold)">€83/mes</strong> + regalo físico</div>
+
+  <div class="timer-bar">
+    <div class="timer-text">⏳ OFERTA ESPECIAL FUNDADORES — expira en:</div>
+    <div class="timer-clock" id="clock">23:59:47</div>
+  </div>
+
+  <div class="benefits">
+    <h3>TODO LO QUE OBTIENES</h3>
+    <div class="benefits-grid">
+      <div class="benefit"><span class="ico">🏛️</span><div><strong>MEMBRESÍA 6 MESES</strong>Acceso completo al ecosistema</div></div>
+      <div class="benefit"><span class="ico">📚</span><div><strong>1 CURSO EXCLUSIVO</strong>A tu elección del catálogo</div></div>
+      <div class="benefit"><span class="ico">💎</span><div><strong>15% DESCUENTO</strong>En toda la tienda ORIONIX</div></div>
+      <div class="benefit"><span class="ico">🎁</span><div><strong>REGALO FÍSICO</strong>Enviado a tu domicilio</div></div>
+      <div class="benefit"><span class="ico">👑</span><div><strong>ACCESO VIP</strong>Comunidad privada Base</div></div>
+      <div class="benefit"><span class="ico">⚡</span><div><strong>SOPORTE 48H</strong>Equipo ORIONIX dedicado</div></div>
+    </div>
+  </div>
+
+  <!-- CUOTAS -->
+  <p class="section-title">MÉTODO DE PAGO</p>
+  <p style="font-size:13px;color:var(--dim);margin-bottom:14px;letter-spacing:.05em">¿Prefieres pagar en cuotas?</p>
+  <div class="cuotas-selector">
+    <div class="cuota-opt active" onclick="setCuota(this,500,'Pago único')"><strong>€500</strong><span>Pago único</span></div>
+    <div class="cuota-opt" onclick="setCuota(this,260,'2 × €260')"><strong>2×€260</strong><span>En 2 meses</span></div>
+    <div class="cuota-opt" onclick="setCuota(this,175,'3 × €175')"><strong>3×€175</strong><span>En 3 meses</span></div>
+  </div>
+
+  <div class="methods-grid">
+    <div class="method-card" onclick="selectMethod('tarjeta')">
+      <div class="method-icon">💳</div>
+      <div class="method-name">TARJETA</div>
+      <div class="method-tag">Visa / Mastercard</div>
+    </div>
+    <div class="method-card" onclick="selectMethod('telegram')">
+      <div class="method-icon">✈️</div>
+      <div class="method-name">TELEGRAM</div>
+      <div class="method-tag">Chat seguro</div>
+    </div>
+    <div class="method-card" onclick="selectMethod('whatsapp')">
+      <div class="method-icon">💬</div>
+      <div class="method-name">WHATSAPP</div>
+      <div class="method-tag">Contacto directo</div>
+    </div>
+  </div>
+  <div class="methods-grid-2" style="margin-top:10px">
+    <div class="method-card" onclick="selectMethod('bizum')">
+      <div class="method-icon">🏦</div>
+      <div class="method-name">BIZUM</div>
+      <div class="method-tag">Instantáneo · España</div>
+    </div>
+    <div class="method-card" onclick="selectMethod('transferencia')">
+      <div class="method-icon">🏛️</div>
+      <div class="method-name">TRANSFERENCIA</div>
+      <div class="method-tag">Bancaria</div>
+    </div>
+  </div>
+
+  <!-- PANELES -->
+  <div class="pay-panel" id="panel-tarjeta">
+    <label>Nombre en la tarjeta</label>
+    <input type="text" id="card-name" placeholder="KEVIN RUIZ">
+    <label>Número</label>
+    <input type="text" id="card-num" placeholder="•••• •••• •••• ••••" maxlength="19" oninput="fmtCard(this)">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div><label>Caducidad</label><input type="text" placeholder="MM/AA" maxlength="5" oninput="fmtDate(this)"></div>
+      <div><label>CVV</label><input type="password" placeholder="•••" maxlength="4"></div>
+    </div>
+  </div>
+  <div class="pay-panel" id="panel-whatsapp">
+    <div class="info-box"><strong>CONTACTO DIRECTO</strong>Escríbenos por WhatsApp con el asunto "Acceso Base". Tiempo de respuesta: &lt;2h.</div>
+    <label>Tu nombre</label><input type="text" id="wa-name" placeholder="Nombre completo">
+    <label>Tu email</label><input type="email" id="wa-email" placeholder="tu@email.com">
+  </div>
+  <div class="pay-panel" id="panel-telegram">
+    <div class="info-box"><strong>CANAL PRIVADO</strong>Te contactamos en Telegram y activamos el acceso en &lt;1h.</div>
+    <label>Tu usuario Telegram</label><input type="text" id="tg-user" placeholder="@usuario">
+    <label>Tu email</label><input type="email" id="tg-email" placeholder="tu@email.com">
+  </div>
+  <div class="pay-panel" id="panel-bizum">
+    <div class="info-box">
+      <strong>BIZUM ORIONIX</strong>
+      Envía <strong style="color:var(--gold)" id="bz-amount">€500,00</strong> al número:<br><br>
+      <span style="font-size:22px;font-family:'Cinzel',serif;color:var(--gold)">+34 600 000 000</span>
+      <button class="copy-btn" onclick="copiar('+34600000000')">📋 Copiar</button><br>
+      Concepto: <strong style="color:var(--gold)">BASE + tu email</strong>
+    </div>
+    <label>Tu email</label><input type="email" id="bz-email" placeholder="tu@email.com">
+  </div>
+  <div class="pay-panel" id="panel-transferencia">
+    <div class="info-box">
+      <strong>DATOS BANCARIOS ORIONIX</strong>
+      IBAN: <strong style="color:var(--gold)">ES00 0000 0000 00 0000000000</strong>
+      <button class="copy-btn" onclick="copiar('ES00000000000000000000')">📋 Copiar IBAN</button><br>
+      Titular: ORIONIX SL · Concepto: <strong style="color:var(--gold)">BASE + tu email</strong><br>
+      Plazo confirmación: 1-2 días hábiles.
+    </div>
+    <label>Tu email</label><input type="email" id="tr-email" placeholder="tu@email.com">
+  </div>
+
+  <div class="resumen">
+    <div class="resumen-row"><span>Nivel</span><span>Acceso Base</span></div>
+    <div class="resumen-row"><span>Duración</span><span>6 meses</span></div>
+    <div class="resumen-row"><span>Plan de pago</span><span id="res-cuota">Pago único</span></div>
+    <div class="resumen-row"><span>TOTAL</span><span id="res-total">€500</span></div>
+  </div>
+
+  <button class="btn-pay" id="btnPay" disabled onclick="pagar()">
+    COMPLETAR ACCESO BASE · <span id="btn-price">€500</span>
+  </button>
+  <div class="security">
+    <span>🔒 Pago seguro</span><span>⚡ Acceso en &lt;1h</span><span>🛡️ Garantía 30 días</span><span>🎁 Regalo incluido</span>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const c=document.getElementById('stars'),ctx=c.getContext('2d');
+function resize(){c.width=innerWidth;c.height=innerHeight}resize();addEventListener('resize',resize);
+const stars=Array.from({length:220},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.4+.2,a:Math.random()}));
+function drawStars(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(240,232,208,${s.a})`;ctx.fill()})}
+drawStars();
+
+let metodo=null,precio=500,planLabel='Pago único';
+
+// TIMER 24h
+let t=23*3600+59*60+47;
+function tick(){t--;const h=String(Math.floor(t/3600)).padStart(2,'0');const m=String(Math.floor(t%3600/60)).padStart(2,'0');const s=String(t%60).padStart(2,'0');document.getElementById('clock').textContent=`${h}:${m}:${s}`;if(t>0)setTimeout(tick,1000)}
+tick();
+
+function setCuota(el,p,label){
+  document.querySelectorAll('.cuota-opt').forEach(e=>e.classList.remove('active'));
+  el.classList.add('active');precio=p;planLabel=label;
+  document.getElementById('res-cuota').textContent=label;
+  document.getElementById('res-total').textContent='€'+p;
+  document.getElementById('btn-price').textContent='€'+p;
+  document.getElementById('bz-amount').textContent='€'+p+',00';
+}
+
+function selectMethod(m){
+  metodo=m;
+  document.querySelectorAll('.method-card').forEach(el=>el.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.querySelectorAll('.pay-panel').forEach(el=>el.classList.remove('show'));
+  document.getElementById('panel-'+m).classList.add('show');
+  document.getElementById('btnPay').disabled=false;
+}
+function fmtCard(el){let v=el.value.replace(/\D/g,'').substring(0,16);el.value=v.replace(/(.{4})/g,'$1 ').trim()}
+function fmtDate(el){let v=el.value.replace(/\D/g,'');if(v.length>=2)v=v.substring(0,2)+'/'+v.substring(2,4);el.value=v}
+function copiar(txt){navigator.clipboard.writeText(txt).then(()=>toast('Copiado'))}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+
+function pagar(){
+  const btn=document.getElementById('btnPay');btn.disabled=true;
+  fetch('https://lkevinruizl.app.n8n.cloud/webhook/orionix-tienda',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({accion:'lead',nombre:'Acceso Base',telegram:'',email:'',interes:'BASE',origen:'checkout-base'})}).catch(()=>{});
+  if(metodo==='whatsapp'){
+    const msg=encodeURIComponent(`Hola ORIONIX! Quiero el Acceso Base (${planLabel}, ${precio}€). Nombre: ${document.getElementById('wa-name')?.value||''}, Email: ${document.getElementById('wa-email')?.value||''}`);
+    setTimeout(()=>{window.open(`https://wa.me/34600000000?text=${msg}`,'_blank');ir()},800);
+  }else if(metodo==='telegram'){
+    setTimeout(()=>{window.open('https://t.me/ORIONIX_oficial','_blank');ir()},800);
+  }else{setTimeout(()=>ir(),1200)}
+}
+function ir(){window.location.href=`gracias.html?nivel=BASE&precio=${precio}&metodo=${metodo}&plan=${encodeURIComponent(planLabel)}`}
+</script>
+</body>
+</html>

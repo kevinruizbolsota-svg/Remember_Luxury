@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIONIX · Centro de Comando</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{background:#0b0b0d;color:#f0e8d0;font-family:'Cormorant Garamond',serif}
+canvas#cosmos{position:fixed;inset:0;z-index:0}
+.portal{position:relative;z-index:1;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px}
+.logo{width:160px;height:160px;margin-bottom:30px;animation:pulso 3s ease-in-out infinite}
+@keyframes pulso{0%,100%{transform:scale(1);filter:drop-shadow(0 0 20px rgba(232,200,106,0.4))}50%{transform:scale(1.05);filter:drop-shadow(0 0 40px rgba(232,200,106,0.7))}}
+.logo svg{width:100%;height:100%}
+h1{font-family:'Cinzel',serif;font-size:3.5rem;letter-spacing:12px;color:#e8c86a;margin-bottom:10px;text-shadow:0 0 30px rgba(232,200,106,0.5)}
+h1 span{color:#f5e0a0}
+.sub{font-size:1.2rem;color:#f0e8d0;font-style:italic;letter-spacing:4px;margin-bottom:50px;opacity:0.8}
+.botones{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+.btn{padding:16px 40px;font-family:'Cinzel',serif;font-size:0.9rem;letter-spacing:3px;border-radius:10px;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-block;border:1px solid rgba(232,200,106,0.3)}
+.btn-primary{background:linear-gradient(135deg,#e8c86a,#b89a40);color:#0b0b0d;font-weight:600}
+.btn-primary:hover{box-shadow:0 0 30px rgba(232,200,106,0.6);transform:translateY(-2px)}
+.btn-secondary{background:transparent;color:#e8c86a}
+.btn-secondary:hover{background:rgba(232,200,106,0.1);border-color:#e8c86a;box-shadow:0 0 20px rgba(232,200,106,0.3)}
+.lema{margin-top:60px;font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:6px;color:#b89a40;opacity:0.7}
+@media(max-width:600px){h1{font-size:2rem;letter-spacing:6px}.botones{flex-direction:column;width:100%;max-width:280px}.btn{width:100%}}
+</style>
+</head>
+<body>
+<canvas id="cosmos"></canvas>
+<div class="portal">
+  <div class="logo">
+    <svg viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="46" fill="none" stroke="#e8c86a" stroke-width="1.5"/>
+      <circle cx="50" cy="50" r="34" fill="none" stroke="#b89a40" stroke-width="1"/>
+      <circle cx="50" cy="50" r="22" fill="none" stroke="#e8c86a" stroke-width="1.2"/>
+      <circle cx="50" cy="50" r="10" fill="#e8c86a"/>
+      <circle cx="50" cy="50" r="4" fill="#0b0b0d"/>
+      <line x1="50" y1="4" x2="50" y2="16" stroke="#e8c86a" stroke-width="1"/>
+      <line x1="50" y1="84" x2="50" y2="96" stroke="#e8c86a" stroke-width="1"/>
+      <line x1="4" y1="50" x2="16" y2="50" stroke="#e8c86a" stroke-width="1"/>
+      <line x1="84" y1="50" x2="96" y2="50" stroke="#e8c86a" stroke-width="1"/>
+    </svg>
+  </div>
+  <h1>ORION<span>IX</span></h1>
+  <div class="sub">Centro de Comando</div>
+  <div class="botones">
+    <a href="hub.html" class="btn btn-primary">ENTRAR COMO VISITANTE</a>
+    <a href="auth.html" class="btn btn-secondary">INICIAR SESIÓN</a>
+  </div>
+  <div class="lema">"DE UNA AGUJA A UNA MANSIÓN"</div>
+</div>
+<script src="orionix-core.js"></script>
+<script>
+// Starfield cosmos
+OrionixStarfield.init('cosmos', 150);
+// Si ya hay sesión, redirigir al hub automáticamente
+const sesion = getSesion();
+if (sesion) setTimeout(() => { window.location.href = 'hub.html'; }, 1500);
+</script>
+</body>
+</html>

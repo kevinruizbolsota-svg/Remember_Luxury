@@ -201,13 +201,12 @@ async function activarMic(){
   if (animId) cancelAnimationFrame(animId);
 
   devId = document.getElementById('devsel').value;
-  // Mismo constraints que index.html — el que funciona
+  // Exactamente igual que index.html — sin deviceId forzado
   const constraints = {
     audio: {
       echoCancellation: true,
       noiseSuppression: true,
-      sampleRate: 16000,
-      ...(devId ? { deviceId: { exact: devId } } : {})
+      sampleRate: 16000
     }
   };
 

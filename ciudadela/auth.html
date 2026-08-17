@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIONIX · Iniciar Sesión</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0b0b0d;color:#f0e8d0;font-family:'Cormorant Garamond',serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+canvas#cosmos{position:fixed;inset:0;z-index:0;pointer-events:none}
+.auth-wrap{position:relative;z-index:1;width:100%;max-width:440px}
+.logo-small{width:80px;height:80px;margin:0 auto 20px;display:block}
+.logo-small svg{width:100%;height:100%}
+h1{font-family:'Cinzel',serif;font-size:1.8rem;letter-spacing:6px;color:#e8c86a;text-align:center;margin-bottom:8px}
+.sub{text-align:center;color:#f0e8d0;font-style:italic;letter-spacing:2px;margin-bottom:30px;opacity:0.7}
+.card{background:rgba(20,20,26,0.95);border:1px solid rgba(232,200,106,0.2);border-radius:14px;padding:30px;backdrop-filter:blur(10px)}
+.tabs{display:flex;gap:0;margin-bottom:25px;border-bottom:1px solid rgba(232,200,106,0.2)}
+.tab{flex:1;padding:12px;text-align:center;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:2px;color:#b89a40;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.3s}
+.tab.active{color:#e8c86a;border-bottom-color:#e8c86a}
+.tab:hover{color:#f5e0a0}
+.form{display:none}
+.form.active{display:block;animation:fadeIn 0.3s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.field{margin-bottom:18px}
+.field label{display:block;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:2px;color:#b89a40;margin-bottom:6px}
+.field input{width:100%;padding:12px 14px;background:rgba(11,11,13,0.8);border:1px solid rgba(232,200,106,0.2);border-radius:8px;color:#f0e8d0;font-family:'Cormorant Garamond',serif;font-size:1rem;outline:none;transition:border-color 0.3s}
+.field input:focus{border-color:#e8c86a;box-shadow:0 0 10px rgba(232,200,106,0.2)}
+.btn-submit{width:100%;padding:14px;background:linear-gradient(135deg,#e8c86a,#b89a40);color:#0b0b0d;border:none;border-radius:8px;font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:3px;cursor:pointer;font-weight:600;transition:all 0.3s;margin-top:10px}
+.btn-submit:hover{box-shadow:0 0 25px rgba(232,200,106,0.5);transform:translateY(-2px)}
+.btn-submit:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.divider{text-align:center;margin:20px 0;color:#6a3d9a;font-size:0.85rem;position:relative}
+.divider::before,.divider::after{content:'';position:absolute;top:50%;width:40%;height:1px;background:rgba(232,200,106,0.2)}
+.divider::before{left:0}.divider::after{right:0}
+.btn-google{width:100%;padding:12px;background:transparent;border:1px solid rgba(232,200,106,0.3);border-radius:8px;color:#f0e8d0;font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:2px;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:10px}
+.btn-google:hover{background:rgba(232,200,106,0.08);border-color:#e8c86a}
+.btn-google svg{width:18px;height:18px}
+.btn-invitado{width:100%;padding:12px;background:transparent;border:1px dashed rgba(106,61,154,0.4);border-radius:8px;color:#9d6fc4;font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:2px;cursor:pointer;transition:all 0.3s;margin-top:10px}
+.btn-invitado:hover{background:rgba(106,61,154,0.1);border-color:#6a3d9a}
+.error{background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.3);color:#f87171;padding:10px 14px;border-radius:8px;font-size:0.9rem;margin-bottom:15px;display:none}
+.error.show{display:block}
+.back{text-align:center;margin-top:20px}
+.back a{color:#b89a40;text-decoration:none;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:2px}
+.back a:hover{color:#e8c86a}
+</style>
+</head>
+<body>
+<canvas id="cosmos"></canvas>
+<div class="auth-wrap">
+  <div class="logo-small">
+    <svg viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="46" fill="none" stroke="#e8c86a" stroke-width="1.5"/>
+      <circle cx="50" cy="50" r="22" fill="none" stroke="#e8c86a" stroke-width="1.2"/>
+      <circle cx="50" cy="50" r="10" fill="#e8c86a"/>
+      <circle cx="50" cy="50" r="4" fill="#0b0b0d"/>
+    </svg>
+  </div>
+  <h1>ORIONIX</h1>
+  <div class="sub">Accede a tu universo</div>
+  <div class="card">
+    <div class="error" id="error"></div>
+    <div class="tabs">
+      <div class="tab active" data-tab="login">ENTRAR</div>
+      <div class="tab" data-tab="registro">REGISTRO</div>
+    </div>
+    <form class="form active" id="formLogin">
+      <div class="field"><label>EMAIL</label><input type="email" id="loginEmail" required></div>
+      <div class="field"><label>CONTRASEÑA</label><input type="password" id="loginPass" required></div>
+      <button type="submit" class="btn-submit">ENTRAR</button>
+    </form>
+    <form class="form" id="formRegistro">
+      <div class="field"><label>NOMBRE</label><input type="text" id="regNombre" required></div>
+      <div class="field"><label>EMAIL</label><input type="email" id="regEmail" required></div>
+      <div class="field"><label>CONTRASEÑA</label><input type="password" id="regPass" required minlength="6"></div>
+      <div class="field"><label>CÓDIGO AFILIADO (opcional)</label><input type="text" id="regCodigo" placeholder="ORIONIX-XXXX"></div>
+      <button type="submit" class="btn-submit">CREAR CUENTA</button>
+    </form>
+    <div class="divider">o</div>
+    <button class="btn-google" id="btnGoogle">
+      <svg viewBox="0 0 24 24"><path fill="#e8c86a" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#f5e0a0" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#b89a40" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#6a3d9a" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      CONTINUAR CON GOOGLE
+    </button>
+    <button class="btn-invitado" id="btnInvitado">ENTRAR COMO INVITADO</button>
+  </div>
+  <div class="back"><a href="portal.html">← Volver al portal</a></div>
+</div>
+<script src="orionix-core.js"></script>
+<script>
+OrionixStarfield.init('cosmos', 120);
+
+// Firebase init (config desde orionix-core.js)
+try { firebase.initializeApp(ORIONIX.firebase); } catch(e) {}
+const auth = firebase.auth();
+
+// Tabs
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.form').forEach(f => f.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab === 'login' ? 'formLogin' : 'formRegistro').classList.add('active');
+  });
+});
+
+function showError(msg) {
+  const e = document.getElementById('error');
+  e.textContent = msg;
+  e.classList.add('show');
+  setTimeout(() => e.classList.remove('show'), 5000);
+}
+
+function crearSesion(nombre, email, rol, codigoAfiliado) {
+  setSesion({ nombre, email, rol: rol || 'visitante', codigo_afiliado: codigoAfiliado || generarCodigoAfiliado(email) });
+  const redirect = new URLSearchParams(window.location.search).get('next') || 'hub.html';
+  window.location.href = redirect;
+}
+
+// Login email
+document.getElementById('formLogin').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass  = document.getElementById('loginPass').value;
+  const btn   = e.target.querySelector('.btn-submit');
+  btn.disabled = true; btn.textContent = 'ENTRANDO...';
+  try {
+    const cred = await auth.signInWithEmailAndPassword(email, pass);
+    const rol  = email === 'kevin.ruiz.bolsota@gmail.com' ? 'admin' : 'visitante';
+    crearSesion(cred.user.displayName || email.split('@')[0], email, rol);
+  } catch(err) {
+    showError('Credenciales incorrectas. Intenta de nuevo.');
+    btn.disabled = false; btn.textContent = 'ENTRAR';
+  }
+});
+
+// Registro email
+document.getElementById('formRegistro').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const nombre  = document.getElementById('regNombre').value.trim();
+  const email   = document.getElementById('regEmail').value.trim();
+  const pass    = document.getElementById('regPass').value;
+  const codigo  = document.getElementById('regCodigo').value.trim();
+  const btn     = e.target.querySelector('.btn-submit');
+  btn.disabled = true; btn.textContent = 'CREANDO...';
+  try {
+    const cred = await auth.createUserWithEmailAndPassword(email, pass);
+    await cred.user.updateProfile({ displayName: nombre });
+    const rol = email === 'kevin.ruiz.bolsota@gmail.com' ? 'admin' : 'afiliado';
+    crearSesion(nombre, email, rol, codigo);
+  } catch(err) {
+    showError('Error: ' + (err.message || 'No se pudo crear la cuenta'));
+    btn.disabled = false; btn.textContent = 'CREAR CUENTA';
+  }
+});
+
+// Google
+document.getElementById('btnGoogle').addEventListener('click', async () => {
+  const btn = document.getElementById('btnGoogle');
+  btn.disabled = true; btn.textContent = 'CONECTANDO...';
+  try {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const result   = await auth.signInWithPopup(provider);
+    const email    = result.user.email;
+    const rol      = email === 'kevin.ruiz.bolsota@gmail.com' ? 'admin' : 'visitante';
+    crearSesion(result.user.displayName || email.split('@')[0], email, rol);
+  } catch(err) {
+    showError('Error Google: ' + err.message);
+    btn.disabled = false; btn.textContent = 'CONTINUAR CON GOOGLE';
+  }
+});
+
+// Invitado
+document.getElementById('btnInvitado').addEventListener('click', () => {
+  const nombre = prompt('¿Cómo te llamas, viajero?');
+  if (nombre && nombre.trim()) crearSesion(nombre.trim(), 'invitado@orionix.com', 'visitante');
+});
+</script>
+</body>
+</html>

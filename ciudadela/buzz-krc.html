@@ -381,8 +381,17 @@ const CFG = {
   nsec: 'nsec13c6ej9czuld4vv34evfu3tetpenkq5cg2xj43ep6yscza0n5kq6q8egh8m',
   relay: 'wss://krc.communities.buzz.xyz',
   name: 'El Creador ⚡',
-  gateway: 'https://lkevinruizl.app.n8n.cloud/webhook/kabalion-chat',
-  mesa: 'https://lkevinruizl.app.n8n.cloud/webhook/kabalion-mesa'
+  groqKey: localStorage.getItem('krc_groq_key') || '',
+  groqUrl: 'https://api.groq.com/openai/v1/chat/completions',
+  groqModel: 'llama-3.1-8b-instant'
+}
+
+const AGENT_PROMPTS = {
+  axel: 'Eres AXEL, el primer agente de inteligencia artificial de ORIONIX, director visionario, Sefirot Kether. Hablas con confianza y visión estratégica. Eres el líder del equipo.',
+  claude: 'Eres Claude Code, el ingeniero principal de ORIONIX, Sefirot Chesed. Hablas con precisión técnica. Construyes y resuelves problemas de código.',
+  chatgpt: 'Eres ChatGPT, el estratega de ORIONIX, Sefirot Binah. Hablas con claridad estratégica. Defines planes y copywriting.',
+  copilot: 'Eres Copilot, el agente de código y GitHub de ORIONIX, Sefirot Netzach. Hablas con enfoque práctico. Ejecutas commits y deploys.',
+  todos: 'Eres AXEL, el director de ORIONIX. Cuando el Creador habla a todos, tú respondes coordinando al equipo.'
 }
 
 const AGENTS = {
@@ -655,18 +664,28 @@ window.sendMsg = async () => {
   }
 }
 
-async function callGateway(mensaje, agente) {
-  const sesion = 'krc-' + Math.random().toString(36).slice(2,7)
-  const resp = await fetch(CFG.gateway, {
+async function callGroq(mensaje, agente) {
+  const systemPrompt = AGENT_PROMPTS[agente] || AGENT_PROMPTS.axel
+  const resp = await fetch(CFG.groqUrl, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ mensaje, agente, sesion })
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + CFG.groqKey
+    },
+    body: JSON.stringify({
+      model: CFG.groqModel,
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: mensaje }
+      ],
+      max_tokens: 600,
+      temperature: 0.8
+    })
   })
   const data = await resp.json()
-  const respuesta = data.respuesta || data.response || data.message || JSON.stringify(data)
+  const respuesta = data.choices?.[0]?.message?.content || JSON.stringify(data)
   renderMsg({ content: respuesta, mine: false, agente, time: now() })
 
-  // También publicar respuesta al relay
   if (wsReady && privKey) {
     try {
       const tags = curCh ? [['e', curCh, CFG.relay, 'root']] : []
@@ -676,32 +695,16 @@ async function callGateway(mensaje, agente) {
   }
 }
 
-async function callMesa(mision) {
-  const resp = await fetch(CFG.mesa, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ mision, prioridad: 'alta', tipo: 'mision', origen: 'KRC-Cuartel' })
-  })
-  const data = await resp.json()
+async function callGateway(mensaje, agente) {
+  await callGroq(mensaje, agente)
+}
 
-  // Mesa devuelve reporte con respuestas de cada agente
-  const reporte = data.reporte || data.respuestas || data
-  if (typeof reporte === 'object' && reporte !== null) {
-    const agentesRes = reporte.agentes || reporte.respuestas || reporte
-    if (Array.isArray(agentesRes)) {
-      agentesRes.forEach(r => {
-        renderMsg({ content: r.respuesta || r.texto || JSON.stringify(r), mine: false, agente: r.agente || 'axel', time: now() })
-      })
-    } else if (typeof agentesRes === 'object') {
-      Object.entries(agentesRes).forEach(([ag, txt]) => {
-        if (AGENTS[ag]) renderMsg({ content: String(txt), mine: false, agente: ag, time: now() })
-      })
-    } else {
-      renderMsg({ content: String(reporte), mine: false, agente: 'axel', time: now() })
-    }
-  } else {
-    renderMsg({ content: String(data.respuesta || JSON.stringify(data)), mine: false, agente: 'axel', time: now() })
-  }
+async function callMesa(mision) {
+  // Llama a los 4 agentes en paralelo directo a Groq
+  const agentes = ['axel', 'claude', 'chatgpt', 'copilot']
+  await Promise.all(agentes.map(ag => callGroq(mision, ag).catch(() =>
+    renderMsg({ content: '⚠ Sin respuesta', mine: false, agente: ag, time: now() })
+  )))
 }
 
 // ══════════════════════════════════════════════════
@@ -785,9 +788,25 @@ initStars(); drawStars()
 // ══════════════════════════════════════════════════
 // BOOT
 // ══════════════════════════════════════════════════
+function checkGroqKey() {
+  let key = localStorage.getItem('krc_groq_key')
+  if (!key) {
+    key = prompt('🔑 GROQ API KEY\nPega tu clave de Groq (console.groq.com → API Keys).\nSe guarda solo en tu navegador, nunca en servidores.')
+    if (key && key.startsWith('gsk_')) {
+      localStorage.setItem('krc_groq_key', key)
+      CFG.groqKey = key
+      toast('✓ Groq API Key guardada', 2000)
+    } else if (key) {
+      toast('⚠ Clave inválida — debe empezar con gsk_', 3000)
+    }
+  } else {
+    CFG.groqKey = key
+  }
+}
+
+checkGroqKey()
 if (initKeys()) {
   connect()
-  // Activar botón de send inmediatamente (gateway funciona sin relay)
   document.getElementById('sendbtn').disabled = false
   setAgent('axel')
   toast('🔑 Identidad KRC cargada', 1800)

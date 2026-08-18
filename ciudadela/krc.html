@@ -26,25 +26,23 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 /* ── WRAPPER PRINCIPAL ── */
 #app{position:relative;z-index:1;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center}
 
-/* ── TITULO KRC ── */
+/* ── TITULO KRC (Superior Izquierda) ── */
 #krc-title{
-  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
-  text-align:center;pointer-events:none;z-index:5
+  position:fixed;top:30px;left:40px;
+  text-align:left;pointer-events:none;z-index:5
 }
 #krc-title h1{
-  font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,5rem);
+  font-family:'Cinzel',serif;font-size:2rem;
   font-weight:900;letter-spacing:.3em;
   background:linear-gradient(135deg,var(--gold),var(--gold2),var(--gold));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  text-shadow:none;filter:drop-shadow(0 0 30px rgba(201,168,76,.5));
-  animation:pulse-title 4s ease-in-out infinite
+  text-shadow:none;filter:drop-shadow(0 0 15px rgba(201,168,76,.5));
 }
-#krc-title p{font-size:.8rem;letter-spacing:.5em;color:rgba(201,168,76,.4);margin-top:.3rem;font-weight:300}
-@keyframes pulse-title{0%,100%{filter:drop-shadow(0 0 30px rgba(201,168,76,.5))}50%{filter:drop-shadow(0 0 60px rgba(201,168,76,.9))}}
+#krc-title p{font-size:.6rem;letter-spacing:.5em;color:rgba(201,168,76,.6);margin-top:.3rem;font-weight:300}
 
-/* ── CORAZON CENTRAL ── */
+/* ── CORAZON (Chakra Corazón - Arriba del centro) ── */
 #heart{
-  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  position:fixed;top:35%;left:50%;transform:translate(-50%,-50%);
   width:100px;height:100px;z-index:4;cursor:pointer;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px
 }
@@ -54,31 +52,35 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 #xp-bar-wrap{width:80px;height:3px;background:rgba(201,168,76,.15);border-radius:2px;overflow:hidden;margin-top:2px}
 #xp-bar{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:2px;transition:width .5s ease}
 
-/* ── NODOS ORBITALES ── */
+/* ── NODOS (Chakras) ── */
 .node{
   position:fixed;z-index:6;
   display:flex;flex-direction:column;align-items:center;gap:8px;
   transform:translate(-50%,-50%);
-  transition:transform .3s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+  transition:transform .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor:pointer;
 }
-.node.active{cursor:pointer}
-.node.locked{cursor:not-allowed;opacity:0.7}
 
-.node.active:hover{transform:translate(-50%,-50%) scale(1.15)}
-.node.locked:hover{transform:translate(-50%,-50%) scale(1.05)}
+.node:hover{transform:translate(-50%,-50%) scale(1.15)}
 
 .node-orb{
   width:72px;height:72px;border-radius:50%;
-  background:var(--glass);
-  border:1.5px solid var(--glass-border);
+  background:rgba(201,168,76,0.05);
+  border:1.5px solid rgba(201,168,76,0.3);
   backdrop-filter:blur(12px);
   display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
-  box-shadow:0 0 20px rgba(0,0,0,.5);
+  box-shadow:0 0 20px rgba(0,0,0,.5), inset 0 0 15px rgba(201,168,76,.1);
+  color:var(--gold);
   transition:all .4s ease
 }
 
-/* Efecto de magia en SVG */
+.node:hover .node-orb{
+  background:rgba(201,168,76,0.15);
+  box-shadow:0 0 40px rgba(201,168,76,.5), inset 0 0 30px rgba(201,168,76,.3);
+  border-color:var(--gold);
+}
+
 .node-orb svg{
   width:36px;height:36px;
   fill:none;stroke:currentColor;stroke-width:1.5;
@@ -87,68 +89,57 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
   transition:all .4s ease
 }
 
-/* Estilos Activo vs Bloqueado */
-.node.active .node-orb{
-  background:rgba(201,168,76,0.1);
-  border-color:var(--gold);
-  box-shadow:0 0 30px rgba(201,168,76,.4), inset 0 0 20px rgba(201,168,76,.2);
-  color:var(--gold);
-}
-.node.active:hover .node-orb{
-  background:rgba(201,168,76,0.2);
-  box-shadow:0 0 50px rgba(201,168,76,.6), inset 0 0 30px rgba(201,168,76,.4);
-}
-.node.locked .node-orb{
-  background:rgba(10,10,20,0.8);
-  border-color:rgba(255,255,255,0.1);
-  color:rgba(255,255,255,0.2);
-  box-shadow:inset 0 0 15px rgba(0,0,0,0.8);
-}
-
 .node-orb::before{
   content:'';position:absolute;inset:0;
   background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.15),transparent 60%);
   border-radius:50%
 }
 
-/* Candado para los bloqueados */
-.lock-icon{
-  position:absolute;bottom:5px;right:5px;
-  width:16px;height:16px;background:rgba(5,5,10,0.9);
-  border-radius:50%;display:flex;align-items:center;justify-content:center;
-  border:1px solid rgba(255,255,255,0.1);
-}
-.lock-icon svg{width:8px;height:8px;stroke:rgba(255,255,255,0.4);filter:none}
-
 .node-label{
   font-size:.65rem;letter-spacing:.15em;font-weight:600;
-  color:rgba(255,255,255,.5);text-transform:uppercase;white-space:nowrap;
-  text-shadow:0 2px 4px rgba(0,0,0,.8);
+  color:var(--gold);text-transform:uppercase;white-space:nowrap;
+  text-shadow:0 2px 8px rgba(0,0,0,1);
   display:flex;flex-direction:column;align-items:center;gap:2px
 }
-.node.active .node-label{color:var(--gold)}
-.node.locked .node-label-sub{
-  font-size:.45rem;color:rgba(255,255,255,0.3);
-  letter-spacing:.2em;background:rgba(0,0,0,0.5);
-  padding:2px 6px;border-radius:4px;border:1px solid rgba(255,255,255,0.05)
-}
 
-/* ── LINEAS ORBITALES ── */
-.orbit-ring{
-  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
-  border-radius:50%;border:1px solid rgba(201,168,76,.06);
-  animation:orbit-spin 100s linear infinite;pointer-events:none;z-index:2
+/* ── MODAL / SUB-MENU (Centro Comercial y Páginas) ── */
+#menu-modal{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(5,5,16,0.85);backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s ease;
 }
-@keyframes orbit-spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+#menu-modal.open{opacity:1;pointer-events:all}
 
-/* ── TITULO CENTRAL KRC LOGO ── */
-#center-krc{
-  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:130px;height:130px;border-radius:50%;
-  background:radial-gradient(circle,rgba(201,168,76,.15),transparent 70%);
-  border:1px solid rgba(201,168,76,.1);
-  z-index:3;pointer-events:none
+.menu-panel{
+  background:rgba(10,10,20,0.95);border:1px solid var(--gold);
+  border-radius:16px;padding:2rem;width:90%;max-width:450px;
+  box-shadow:0 20px 60px rgba(0,0,0,.9),0 0 40px rgba(201,168,76,.2);
+  transform:scale(0.95) translateY(20px);transition:all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+#menu-modal.open .menu-panel{transform:scale(1) translateY(0)}
+
+.menu-header{display:flex;align-items:center;gap:15px;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(201,168,76,.2)}
+.menu-icon{width:48px;height:48px;color:var(--gold);display:flex;align-items:center;justify-content:center}
+.menu-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.5;filter:drop-shadow(0 0 8px currentColor)}
+.menu-title{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--gold);letter-spacing:.15em}
+.menu-desc{font-size:.8rem;color:rgba(255,255,255,.5);margin-top:4px}
+.close-modal{position:absolute;top:20px;right:20px;background:none;border:none;color:rgba(255,255,255,.5);font-size:1.5rem;cursor:pointer;transition:color .2s}
+.close-modal:hover{color:var(--gold)}
+
+.menu-links{display:flex;flex-direction:column;gap:10px}
+.menu-link-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.05);border-radius:8px;
+  text-decoration:none;color:#fff;font-size:.9rem;
+  transition:all .2s;
+}
+.menu-link-item:hover{
+  background:rgba(201,168,76,.1);border-color:var(--gold);
+  transform:translateX(5px);box-shadow:0 0 15px rgba(201,168,76,.2);
+}
+.ml-icon{font-size:1.2rem}
 
 /* ── TOOLTIP ── */
 #tooltip{
@@ -160,10 +151,9 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
   backdrop-filter:blur(10px);box-shadow:0 10px 20px rgba(0,0,0,0.8)
 }
 
-/* ── RESPONSIVE ── */
-@media(max-width:600px){
-  #krc-title h1{font-size:2rem;letter-spacing:.15em}
-  .orbit-ring{display:none} /* Simplificar en móvil */
+@media(max-width:768px){
+  .node-label{font-size:0.5rem;}
+  .node-orb{width:60px;height:60px;}
 }
 </style>
 </head>
@@ -172,21 +162,12 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 <canvas id="canvas"></canvas>
 
 <div id="app">
-  <!-- Anillo orbital decorativo -->
-  <div class="orbit-ring" style="width:380px;height:380px"></div>
-  <div class="orbit-ring" style="width:580px;height:580px;animation-direction:reverse;animation-duration:150s"></div>
-
-  <!-- Centro KRC -->
-  <div id="center-krc"></div>
-
-  <!-- Título KRC -->
   <div id="krc-title">
     <h1>KRC</h1>
-    <p>UNIVERSE · EST. 2025</p>
+    <p>UNIVERSE</p>
   </div>
 
-  <!-- Corazón central -->
-  <div id="heart" title="El Corazón — Experiencia del Universo">
+  <div id="heart" title="Chakra del Corazón — La Experiencia y el Amor">
     <svg id="heart-svg" width="54" height="50" viewBox="0 0 44 40" fill="none">
       <path d="M22 37C22 37 3 25 3 13C3 7.477 7.477 3 13 3C16.254 3 19.13 4.516 22 7.5C24.87 4.516 27.746 3 31 3C36.523 3 41 7.477 41 13C41 25 22 37 22 37Z" fill="url(#hg)" stroke="rgba(201,168,76,0.6)" stroke-width="1.5"/>
       <defs><linearGradient id="hg" x1="3" y1="3" x2="41" y2="37" gradientUnits="userSpaceOnUse"><stop stop-color="#C9A84C"/><stop offset="1" stop-color="#7B2FBE"/></linearGradient></defs>
@@ -195,117 +176,132 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
     <div id="xp-bar-wrap"><div id="xp-bar" style="width:0%"></div></div>
   </div>
 
-  <!-- Tooltip -->
   <div id="tooltip"></div>
+</div>
+
+<div id="menu-modal">
+  <div class="menu-panel">
+    <button class="close-modal" onclick="closeModal()">×</button>
+    <div class="menu-header">
+      <div class="menu-icon" id="modal-icon"></div>
+      <div>
+        <div class="menu-title" id="modal-title">Título</div>
+        <div class="menu-desc" id="modal-desc">Descripción</div>
+      </div>
+    </div>
+    <div class="menu-links" id="modal-links"></div>
+  </div>
 </div>
 
 <script>
 // ── FORMAS MAGICAS (SVGs) ──
 const ICONS = {
-  krc: '<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>', // Templo/Logo
+  krc: '<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>', // Centro Comercial
   orionix: '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>', // Ojo
   cronicas: '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>', // Libro
   forjadora: '<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/>', // Escudo/Espada
   musica: '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>', // Nota musical
-  kabaiom: '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>', // Cristal/Kabala
-  trascendencia: '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>', // Hexagono/Obelisco
-  miuniverso: '<circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/>' // Globo/Galaxia
+  kabaiom: '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>', // Cristal
+  trascendencia: '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>', // Corona
+  perfil: '<circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/>' // Raiz
 };
 
-const LOCK_ICON = '<div class="lock-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>';
-
-// ── CONFIG DE MUNDOS ──
+// ── DISTRIBUCION CHAKRAS / DIBUJO (X, Y en %) ──
 const MUNDOS = [
   {
-    id:'krc-logo', icon: ICONS.krc, label:'KRC Imperio',
-    url:'tienda.html', active: true,
-    desc:'El centro del Imperio — Acceso total',
-    angle:270, dist:220
+    id:'trascendencia', icon: ICONS.trascendencia, label:'TRASCENDENCIA',
+    desc:'Chakra Corona (Sahasrara) - Iluminación', left: 50, top: 15,
+    links: [{ name: 'El Vacío (En Construcción)', url: '#', emoji: '🌌' }]
   },
   {
     id:'orionix', icon: ICONS.orionix, label:'ORIONIX',
-    url:'#', active: false,
-    desc:'La tienda del Imperio — En construcción',
-    angle:315, dist:220
-  },
-  {
-    id:'cronicas', icon: ICONS.cronicas, label:'CRÓNICAS',
-    url:'#', active: false,
-    desc:'Crónicas del Creador — Próximamente',
-    angle:0, dist:220
+    desc:'Chakra Tercer Ojo (Ajna) - Inteligencia', left: 50, top: 50, // CENTRO EXACTO (EL OJO)
+    links: [
+      { name: 'Agentes IA', url: 'agentes.html', emoji: '🤖' },
+      { name: 'Universo Cabalístico (Los 22)', url: 'universo.html', emoji: '✦' },
+      { name: 'Mesa de Mando', url: 'mesa-mando.html', emoji: '🎛️' },
+      { name: 'Monitor del Sistema', url: 'monitor.html', emoji: '🖥️' }
+    ]
   },
   {
     id:'forjadora', icon: ICONS.forjadora, label:'FORJADORA',
-    url:'#', active: false,
-    desc:'La Forjadora de Diamantes — Próximamente',
-    angle:45, dist:220
+    desc:'Brazo Izquierdo - Acción y Defensa (Escudo/Espada)', left: 25, top: 50, // IZQUIERDA
+    links: [
+      { name: 'La Forjadora (Base)', url: 'forjadora.html', emoji: '⚔️' },
+      { name: 'La Forja de Hábitos', url: 'habitos.html', emoji: '🔥' },
+      { name: 'Nebula Habits', url: 'nebula-habits.html', emoji: '🌌' },
+      { name: 'Mi Hogar (Portal)', url: 'hogar.html', emoji: '🌍' },
+      { name: 'El Templo Social (Comunidad)', url: 'comunidad.html', emoji: '🤝' }
+    ]
+  },
+  {
+    id:'cronicas', icon: ICONS.cronicas, label:'CRÓNICAS',
+    desc:'Brazo Derecho - Sabiduría e Historia (Cuaderno)', left: 75, top: 50, // DERECHA
+    links: [
+      { name: 'El Diario del Creador', url: 'cronicas.html', emoji: '📜' }
+    ]
+  },
+  {
+    id:'krc-logo', icon: ICONS.krc, label:'KRC IMPERIO',
+    desc:'Chakra Plexo Solar (Manipura) - Centro Comercial Universal', left: 50, top: 70, // ABAJO DEL OJO
+    links: [
+      { name: 'El Gran Centro Comercial', url: 'tienda.html', emoji: '🛍️' },
+      { name: 'Dropshipping & Aliados', url: 'aliados.html', emoji: '📦' },
+      { name: 'Hotmart & Info-Productos', url: 'cursos.html', emoji: '📚' },
+      { name: 'Mi Universo (Negocio)', url: 'mi-universo.html', emoji: '🌐' },
+      { name: 'Afiliados', url: 'afiliados.html', emoji: '🤝' },
+      { name: 'Carrito Mágico', url: 'carrito.html', emoji: '🛒' }
+    ]
   },
   {
     id:'musica', icon: ICONS.musica, label:'MÚSICA',
-    url:'#', active: false,
-    desc:'Reproductor Universal — Próximamente',
-    angle:90, dist:220
+    desc:'Chakra Garganta (Vishuddha) - Frecuencia', left: 35, top: 35,
+    links: [{ name: 'Abrir Reproductor', url: 'musica.html', emoji: '🎵' }]
   },
   {
     id:'kabaiom', icon: ICONS.kabaiom, label:'KABAIOM',
-    url:'#', active: false,
-    desc:'Estadísticas del espíritu — Próximamente',
-    angle:135, dist:220
+    desc:'Magia y Estructura', left: 65, top: 35,
+    links: [{ name: 'Kabalion 2D', url: 'kabalion-2d.html', emoji: '🔮' }]
   },
   {
-    id:'trascendencia', icon: ICONS.trascendencia, label:'TRASCENDENCIA',
-    url:'#', active: false,
-    desc:'El portal entre mundos — Próximamente',
-    angle:180, dist:220
-  },
-  {
-    id:'miuniverso', icon: ICONS.miuniverso, label:'PERFIL',
-    url:'#', active: false,
-    desc:'Tu espacio personal — Próximamente',
-    angle:225, dist:220
+    id:'perfil', icon: ICONS.perfil, label:'PERFIL',
+    desc:'Chakra Raíz (Muladhara) - Conexión Terrenal', left: 50, top: 88,
+    links: [{ name: 'Mi Cuenta / Billetera', url: 'mi-cuenta.html', emoji: '👤' }]
   }
 ];
 
 // ── CREAR NODOS ──
 function createNodes(){
-  const cx = window.innerWidth/2, cy = window.innerHeight/2;
   MUNDOS.forEach(m=>{
-    const rad = m.angle * Math.PI/180;
-    const x = cx + m.dist * Math.cos(rad);
-    const y = cy + m.dist * Math.sin(rad);
     const el = document.createElement('div');
-    
-    el.className = `node ${m.active ? 'active' : 'locked'}`;
+    el.className = `node`;
     el.id = 'node-'+m.id;
-    el.style.left = x+'px';
-    el.style.top = y+'px';
+    el.style.left = m.left + '%';
+    el.style.top = m.top + '%';
     
-    let labelHtml = `<div class="node-label"><span>${m.label}</span>`;
-    if(!m.active) labelHtml += `<span class="node-label-sub">EN CREACIÓN</span>`;
-    labelHtml += `</div>`;
-
     el.innerHTML = `
       <div class="node-orb">
         <svg viewBox="0 0 24 24">${m.icon}</svg>
-        ${!m.active ? LOCK_ICON : ''}
       </div>
-      ${labelHtml}
+      <div class="node-label"><span>${m.label}</span></div>
     `;
     
-    if(m.active) {
-      el.addEventListener('click',()=>openWorld(m.url));
-    }
-    
-    el.addEventListener('mouseenter',(e)=>showTooltip(e,m.desc));
-    el.addEventListener('mouseleave',hideTooltip);
+    el.addEventListener('click', () => openModal(m));
+    el.addEventListener('mouseenter', (e) => showTooltip(e,m.desc));
+    el.addEventListener('mouseleave', hideTooltip);
     document.getElementById('app').appendChild(el);
     
-    // Línea del nodo al centro
-    drawLine(x,y,cx,cy, m.active ? 'rgba(201,168,76,0.3)' : 'rgba(255,255,255,0.05)');
+    // Conectar todos con el centro (Orionix, 50%, 50%)
+    if(m.id !== 'orionix'){
+      const nx = (m.left / 100) * window.innerWidth;
+      const ny = (m.top / 100) * window.innerHeight;
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight / 2;
+      drawLine(nx, ny, cx, cy, 'rgba(201,168,76,0.2)');
+    }
   });
 }
 
-// ── LINEAS DE CONEXION (SVG) ──
 function drawLine(x1,y1,x2,y2,color){
   let svg = document.getElementById('lines-svg');
   if(!svg){
@@ -318,9 +314,36 @@ function drawLine(x1,y1,x2,y2,color){
   line.setAttribute('x1',x1);line.setAttribute('y1',y1);
   line.setAttribute('x2',x2);line.setAttribute('y2',y2);
   line.setAttribute('stroke',color);
-  line.setAttribute('stroke-width','1');
+  line.setAttribute('stroke-width','1.5');
   line.setAttribute('stroke-dasharray','4,4');
   svg.appendChild(line);
+}
+
+// ── MODAL LOGIC ──
+function openModal(mundo) {
+  document.getElementById('modal-title').textContent = mundo.label;
+  document.getElementById('modal-desc').textContent = mundo.desc;
+  document.getElementById('modal-icon').innerHTML = `<svg viewBox="0 0 24 24">${mundo.icon}</svg>`;
+  
+  const linksContainer = document.getElementById('modal-links');
+  linksContainer.innerHTML = '';
+  
+  mundo.links.forEach(link => {
+    const a = document.createElement('a');
+    a.href = link.url;
+    a.className = 'menu-link-item';
+    a.innerHTML = `
+      <span>${link.name}</span>
+      <span class="ml-icon">${link.emoji}</span>
+    `;
+    linksContainer.appendChild(a);
+  });
+  
+  document.getElementById('menu-modal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('menu-modal').classList.remove('open');
 }
 
 // ── CANVAS ESTRELLADO ──
@@ -352,12 +375,10 @@ function drawLine(x1,y1,x2,y2,color){
   });
   function draw(){
     ctx.clearRect(0,0,W,H);
-    // Gradiente de fondo
     const bg=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*.8);
     bg.addColorStop(0,'rgba(30,10,60,.4)');
     bg.addColorStop(1,'rgba(5,5,16,1)');
     ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-    // Estrellas
     stars.forEach(s=>{
       s.twinkle+=s.sp;
       const alpha=s.a*(.5+.5*Math.sin(s.twinkle));
@@ -366,9 +387,9 @@ function drawLine(x1,y1,x2,y2,color){
       ctx.fillStyle=`rgba(255,255,255,${alpha})`;
       ctx.fill();
     });
-    // Nebula central
+    // Brillo central Orionix
     const nb=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,300);
-    nb.addColorStop(0,'rgba(201,168,76,.08)');
+    nb.addColorStop(0,'rgba(201,168,76,.15)');
     nb.addColorStop(.5,'rgba(123,47,190,.05)');
     nb.addColorStop(1,'transparent');
     ctx.fillStyle=nb;ctx.fillRect(0,0,W,H);
@@ -393,15 +414,10 @@ document.addEventListener('mousemove',e=>{
   }
 });
 
-// ── NAVEGACION ──
-function openWorld(url){
-  if(url==='#') return;
-  document.body.style.transition='opacity .4s ease';
-  document.body.style.opacity='0';
-  setTimeout(()=>window.location.href=url,400);
-}
+document.getElementById('menu-modal').addEventListener('click', (e) => {
+  if(e.target.id === 'menu-modal') closeModal();
+});
 
-// ── INIT ──
 window.addEventListener('load',()=>{
   createNodes();
   document.body.style.opacity='0';

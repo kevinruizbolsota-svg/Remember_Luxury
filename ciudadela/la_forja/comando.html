@@ -3,397 +3,454 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COMANDO — El Creador | ORIONIX</title>
-<link rel="icon" href="../favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<title>COMANDO — El Creador | Sistema ORIONIX</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --gold:#e8c86a; --gold-deep:#c9a227; --gold-glow:rgba(232,200,106,0.3);
-  --gold-subtle:rgba(232,200,106,0.07); --bg:#0b0b0d; --bg-card:rgba(11,11,16,0.93);
-  --border:rgba(232,200,106,0.18); --border-hover:rgba(232,200,106,0.55);
-  --text:#d4c5a0; --text-dim:rgba(212,197,160,0.5);
-  --green:#4ecb71; --red:#e05555; --yellow:#f4c842; --white:#f5f0e8;
+:root { --bg: #0b0b0d; --gold: #e8c86a; --text: #e9ddc4; --dim: rgba(233,221,196,0.5); --panel: rgba(255,255,255,0.03); --border: rgba(232,200,106,0.2); }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: 'Cormorant Garamond', serif; overflow-x: hidden; }
+
+/* Auth Screen */
+#auth-screen {
+  position: fixed; inset: 0; background: var(--bg); z-index: 1000;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px;
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden;}
-#particles{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;}
-
-/* LOGIN */
-.login-screen{
-  position:fixed;inset:0;z-index:9999;background:var(--bg);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;
+#auth-screen h1 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.5rem; letter-spacing: 6px; text-shadow: 0 0 30px rgba(232,200,106,0.4); }
+#auth-screen p { color: var(--dim); letter-spacing: 2px; font-size: 1.1rem; }
+#auth-input {
+  width: 320px; padding: 16px 20px; background: rgba(0,0,0,0.6);
+  border: 1px solid var(--border); color: var(--gold); font-family: 'Cinzel', serif;
+  font-size: 1.2rem; text-align: center; letter-spacing: 4px; outline: none;
+  border-radius: 4px; transition: 0.3s;
 }
-.login-title{font-family:'Cinzel',serif;font-size:2rem;font-weight:900;color:var(--gold);letter-spacing:0.3em;text-shadow:0 0 40px var(--gold-glow);}
-.login-sub{font-size:0.85rem;color:var(--text-dim);letter-spacing:0.18em;font-style:italic;}
-.login-input{
-  background:rgba(0,0,0,0.7);border:1px solid var(--border);color:var(--white);
-  padding:14px 24px;font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:0.1em;
-  width:280px;text-align:center;outline:none;transition:0.3s;
+#auth-input:focus { border-color: var(--gold); box-shadow: 0 0 20px rgba(232,200,106,0.2); }
+#auth-btn {
+  padding: 14px 40px; background: transparent; border: 1px solid var(--gold); color: var(--gold);
+  font-family: 'Cinzel', serif; font-size: 1rem; letter-spacing: 3px; cursor: pointer; transition: 0.3s;
 }
-.login-input:focus{border-color:var(--border-hover);}
-.login-btn{
-  background:var(--gold);color:var(--bg);border:none;padding:13px 40px;
-  font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.2em;font-weight:700;
-  cursor:pointer;box-shadow:0 0 24px var(--gold-glow);transition:0.3s;
+#auth-btn:hover { background: var(--gold); color: var(--bg); }
+#auth-error { color: #f44336; font-size: 0.9rem; display: none; }
+
+/* Canvas */
+#particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+/* Main Layout */
+#app { display: none; position: relative; z-index: 10; }
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 40px; border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
 }
-.login-btn:hover{background:var(--gold-deep);}
-.login-error{font-size:0.75rem;color:var(--red);letter-spacing:0.1em;min-height:18px;}
+header h1 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.4rem; letter-spacing: 5px; }
+.header-meta { font-size: 0.85rem; color: var(--dim); letter-spacing: 2px; }
 
-/* NAV */
-.nav{
-  position:fixed;top:0;left:0;width:100%;z-index:500;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 32px;
-  background:linear-gradient(180deg,rgba(11,11,16,0.97),transparent);
-  border-bottom:1px solid rgba(232,200,106,0.07);backdrop-filter:blur(10px);
+main { display: grid; grid-template-columns: 1fr 340px; gap: 0; min-height: calc(100vh - 70px); }
+
+/* Sidebar derecho */
+aside {
+  border-left: 1px solid var(--border); padding: 30px 20px;
+  display: flex; flex-direction: column; gap: 24px;
 }
-.nav-brand{font-family:'Cinzel',serif;font-size:1rem;font-weight:900;color:var(--gold);letter-spacing:0.2em;text-decoration:none;}
-.nav-links{display:flex;gap:8px;}
-.nav-link{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.12em;color:var(--text-dim);text-decoration:none;padding:5px 12px;border:1px solid transparent;transition:0.3s;}
-.nav-link:hover{color:var(--gold);border-color:var(--border);}
-.nav-badge{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.1em;color:var(--gold);border:1px solid var(--gold);padding:4px 12px;}
 
-/* WRAPPER */
-.wrapper{position:relative;z-index:10;max-width:1200px;margin:0 auto;padding:90px 24px 60px;}
-
-/* HEADER */
-.cmd-header{text-align:center;margin-bottom:40px;}
-.cmd-header h1{font-family:'Cinzel',serif;font-size:clamp(1.6rem,3vw,2.6rem);font-weight:900;color:var(--gold);letter-spacing:0.25em;text-shadow:0 0 40px var(--gold-glow);margin-bottom:6px;}
-.cmd-header p{font-size:0.85rem;color:var(--text-dim);letter-spacing:0.15em;font-style:italic;}
-
-/* GRID GENERAL */
-.cmd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px;}
-.cmd-grid-2{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:20px;}
-@media(max-width:900px){.cmd-grid{grid-template-columns:1fr 1fr;}.cmd-grid-2{grid-template-columns:1fr;}}
-@media(max-width:560px){.cmd-grid{grid-template-columns:1fr;}}
-
-/* CARDS */
-.cmd-card{background:var(--bg-card);border:1px solid var(--border);padding:22px;position:relative;overflow:hidden;transition:border-color 0.3s;}
-.cmd-card:hover{border-color:rgba(232,200,106,0.35);}
-.cmd-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.3;}
-.cmd-card.featured{border-color:rgba(232,200,106,0.4);}
-.card-label{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.22em;color:var(--text-dim);text-transform:uppercase;margin-bottom:12px;}
-.card-value{font-family:'Cinzel',serif;font-size:1.5rem;font-weight:700;color:var(--gold);line-height:1.1;}
-.card-sub{font-size:0.72rem;color:var(--text-dim);margin-top:6px;font-style:italic;}
-
-/* AGENTES TABLA */
-.agentes-table{width:100%;border-collapse:collapse;}
-.agentes-table th{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.18em;color:var(--text-dim);padding:8px 14px;border-bottom:1px solid var(--border);text-align:left;}
-.agentes-table td{font-size:0.82rem;padding:12px 14px;border-bottom:1px solid rgba(232,200,106,0.04);}
-.agentes-table tr:hover td{background:var(--gold-subtle);}
-.a-nombre{font-family:'Cinzel',serif;font-size:0.8rem;color:var(--white);}
-.a-rol{color:var(--text-dim);font-style:italic;}
-.a-status{display:inline-flex;align-items:center;gap:6px;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.1em;}
-.dot{width:7px;height:7px;border-radius:50%;}
-.dot.on{background:var(--green);box-shadow:0 0 5px var(--green);animation:blink 2s infinite;}
-.dot.wait{background:var(--yellow);}
-.dot.off{background:var(--text-dim);}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.25;}}
-
-/* MISIÓN RÁPIDA */
-.mission-area{display:flex;flex-direction:column;gap:10px;}
-.mission-textarea{
-  background:rgba(0,0,0,0.65);border:1px solid var(--border);color:var(--white);
-  padding:12px 16px;font-family:'Cormorant Garamond',serif;font-size:0.9rem;
-  resize:vertical;min-height:100px;outline:none;transition:0.3s;width:100%;
+/* Panels */
+.panel {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 24px;
 }
-.mission-textarea:focus{border-color:var(--border-hover);}
-.mission-textarea::placeholder{color:var(--text-dim);font-style:italic;}
-
-/* SELECCIÓN DE DESTINO */
-.dest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
-.dest-btn{
-  font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.1em;
-  padding:8px;border:1px solid var(--border);background:transparent;
-  color:var(--text-dim);cursor:pointer;transition:0.3s;
+.panel-title {
+  font-family: 'Cinzel', serif; color: var(--gold); font-size: 0.8rem;
+  letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border);
 }
-.dest-btn.selected{border-color:var(--gold);color:var(--gold);background:var(--gold-subtle);}
-.dest-btn:hover{border-color:var(--border-hover);color:var(--text);}
 
-.btn-transmit{
-  background:var(--gold);color:var(--bg);border:none;padding:12px;width:100%;
-  font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.18em;font-weight:700;
-  cursor:pointer;box-shadow:0 0 20px var(--gold-glow);transition:0.3s;
+/* Agentes */
+.agent-card {
+  display: flex; align-items: center; gap: 14px; padding: 14px;
+  background: rgba(0,0,0,0.3); border-radius: 6px; margin-bottom: 10px;
+  border: 1px solid transparent; transition: 0.3s;
 }
-.btn-transmit:hover{background:var(--gold-deep);}
-.btn-transmit:disabled{opacity:0.5;cursor:not-allowed;}
-.transmit-status{font-size:0.72rem;text-align:center;min-height:18px;font-style:italic;}
+.agent-card:hover { border-color: var(--border); }
+.agent-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.dot-active { background: #4CAF50; box-shadow: 0 0 8px #4CAF50; }
+.dot-waiting { background: #ffeb3b; box-shadow: 0 0 8px #ffeb3b; }
+.dot-demand { background: #7c7c7c; }
+.agent-name { font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--gold); }
+.agent-rol { font-size: 0.8rem; color: var(--dim); margin-top: 2px; }
+.agent-ciclos { margin-left: auto; font-size: 0.8rem; color: var(--dim); text-align: right; }
 
-/* LOG FEED */
-.log-feed{
-  background:rgba(0,0,0,0.7);border:1px solid var(--border);
-  padding:18px;max-height:300px;overflow-y:auto;font-size:0.82rem;line-height:1.9;
+/* Control Center */
+.mission-area { display: flex; flex-direction: column; gap: 10px; }
+.mission-textarea {
+  width: 100%; background: rgba(0,0,0,0.5); border: 1px solid var(--border);
+  color: var(--text); padding: 14px; font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem; resize: vertical; min-height: 80px; border-radius: 4px; outline: none;
 }
-.log-feed::-webkit-scrollbar{width:3px;}
-.log-feed::-webkit-scrollbar-thumb{background:var(--border-hover);}
-.log-entry{display:block;padding:1px 0;}
-.log-entry.ok{color:var(--green);}
-.log-entry.err{color:var(--red);}
-.log-entry.warn{color:var(--yellow);}
-.log-entry.info{color:var(--gold);}
+.mission-textarea:focus { border-color: var(--gold); }
+.btn { 
+  padding: 12px 20px; font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 2px;
+  cursor: pointer; transition: 0.3s; text-transform: uppercase; border-radius: 4px; border: none;
+}
+.btn-gold { background: transparent; border: 1px solid var(--gold); color: var(--gold); width: 100%; }
+.btn-gold:hover { background: var(--gold); color: var(--bg); box-shadow: 0 0 20px rgba(232,200,106,0.3); }
+.btn-sm { font-size: 0.7rem; padding: 8px 14px; flex: 1; }
+.btn-emergency { border: 1px solid rgba(244,67,54,0.5); color: #f44336; background: transparent; }
+.btn-emergency:hover { background: rgba(244,67,54,0.15); }
+.btn-pause { border: 1px solid rgba(255,235,59,0.5); color: #ffeb3b; background: transparent; }
+.btn-go { border: 1px solid rgba(76,175,80,0.5); color: #4CAF50; background: transparent; }
+.emergency-row { display: flex; gap: 8px; flex-wrap: wrap; }
 
-/* ACCESOS RÁPIDOS */
-.quick-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-.quick-btn{
-  background:var(--bg-card);border:1px solid var(--border);
-  padding:14px;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.12em;
-  color:var(--text);cursor:pointer;transition:0.3s;text-decoration:none;
-  display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;
+/* Modo selector */
+.mode-selector { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+.mode-btn { flex: 1; padding: 10px; font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 1px; border: none; cursor: pointer; background: transparent; color: var(--dim); transition: 0.3s; }
+.mode-btn.active { background: rgba(232,200,106,0.15); color: var(--gold); }
+
+/* Terminal central */
+.content-area { padding: 30px 40px; display: flex; flex-direction: column; gap: 24px; }
+.filter-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.filter-btn { padding: 8px 18px; font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 2px; cursor: pointer; transition: 0.3s; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--dim); }
+.filter-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(232,200,106,0.1); }
+.terminal {
+  background: rgba(0,0,0,0.5); border: 1px solid var(--border); border-radius: 8px;
+  padding: 30px; min-height: 400px; font-size: 0.95rem; line-height: 1.8;
+  white-space: pre-wrap; position: relative; overflow-y: auto; max-height: 500px;
 }
-.quick-btn:hover{border-color:var(--border-hover);color:var(--gold);background:var(--gold-subtle);}
+.terminal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.sync-status { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 2px; }
+.sync-ok { color: #4CAF50; }
+.sync-err { color: #f44336; }
+.dot-pulse { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+
+/* Casas tabs */
+.tabs { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 20px; }
+.tab-btn { flex: 1; padding: 12px; font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 2px; border: none; cursor: pointer; background: transparent; color: var(--dim); transition: 0.3s; }
+.tab-btn.active { background: rgba(232,200,106,0.1); color: var(--gold); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.casa-text { font-size: 0.95rem; line-height: 1.7; color: var(--text); white-space: pre-wrap; }
+
+/* Metrics */
+.metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.metric { text-align: center; padding: 20px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 6px; }
+.metric-n { font-size: 2rem; color: var(--gold); font-weight: 700; }
+.metric-l { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 2px; color: var(--dim); margin-top: 6px; }
+
+/* Cursor */
+.cursor { display: inline-block; width: 8px; height: 16px; background: var(--gold); animation: blink 1s step-end infinite; vertical-align: bottom; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Syntax */
+.hl-ok { color: #4CAF50; } .hl-err { color: #f44336; } .hl-warn { color: #ffeb3b; } .hl-arch { color: var(--gold); font-weight: bold; }
+
+/* Responsive */
+@media (max-width: 900px) { main { grid-template-columns: 1fr; } aside { border-left: none; border-top: 1px solid var(--border); } }
 </style>
 </head>
 <body>
 
 <canvas id="particles"></canvas>
 
-<!-- LOGIN -->
-<div class="login-screen" id="loginScreen">
-  <div class="login-title">COMANDO</div>
-  <div class="login-sub">Acceso restringido — Solo el Creador</div>
-  <input type="password" class="login-input" id="loginInput" placeholder="Código de acceso..." onkeydown="if(event.key==='Enter')verificarLogin()">
-  <button class="login-btn" onclick="verificarLogin()">ENTRAR</button>
-  <div class="login-error" id="loginError"></div>
+<!-- Auth Screen -->
+<div id="auth-screen">
+  <h1>⚔ COMANDO</h1>
+  <p>ACCESO EXCLUSIVO — EL CREADOR</p>
+  <input type="password" id="auth-input" placeholder="CONTRASEÑA MAESTRA" autocomplete="off">
+  <button id="auth-btn" onclick="verificarAcceso()">INGRESAR AL SISTEMA</button>
+  <span id="auth-error">Acceso denegado. Contraseña incorrecta.</span>
 </div>
 
-<!-- NAV -->
-<nav class="nav">
-  <a href="../index.html" class="nav-brand">ORIONIX</a>
-  <div class="nav-links">
-    <a href="oraculo.html" class="nav-link">Oráculo</a>
-    <a href="plaza.html" class="nav-link">Plaza</a>
-    <a href="../hub.html" class="nav-link">Hub</a>
-  </div>
-  <div class="nav-badge">EL CREADOR</div>
-</nav>
-
-<!-- DASHBOARD -->
-<div class="wrapper" id="dashboard" style="display:none;">
-
-  <div class="cmd-header">
-    <h1>SALA DE COMANDO</h1>
-    <p>Centro de control del Imperio ORIONIX — Misión #1: La Ciudadela</p>
-  </div>
-
-  <!-- KPIs -->
-  <div class="cmd-grid">
-    <div class="cmd-card">
-      <div class="card-label">Agentes Activos</div>
-      <div class="card-value" id="kpiActivos">4</div>
-      <div class="card-sub">n8n · AXEL · Antigravity · Qwen</div>
+<!-- Main App -->
+<div id="app">
+  <header>
+    <h1>⚔ COMANDO ORIONIX</h1>
+    <div class="header-meta">
+      <span id="header-time">--</span> | <span id="header-ciclos">CICLOS: --</span>
     </div>
-    <div class="cmd-card featured">
-      <div class="card-label">Misión Actual</div>
-      <div class="card-value" style="font-size:1rem;" id="kpiMision">La Ciudadela</div>
-      <div class="card-sub" id="kpiEstado">🔄 En construcción</div>
-    </div>
-    <div class="cmd-card">
-      <div class="card-label">Próximo Agente</div>
-      <div class="card-value" style="font-size:1rem;">ChatGPT</div>
-      <div class="card-sub">Pendiente de integración</div>
-    </div>
-  </div>
+  </header>
 
-  <!-- AGENTES + MISIÓN -->
-  <div class="cmd-grid-2">
+  <main>
+    <!-- Centro -->
+    <div class="content-area">
 
-    <!-- TABLA AGENTES -->
-    <div class="cmd-card">
-      <div class="card-label">Estado de Agentes</div>
-      <table class="agentes-table">
-        <tr><th>Agente</th><th>Rol</th><th>Estado</th><th>Última actividad</th></tr>
-        <tr>
-          <td><div class="a-nombre">n8n</div></td>
-          <td><div class="a-rol">El Comandante</div></td>
-          <td><div class="a-status"><div class="dot on"></div>ONLINE</div></td>
-          <td style="color:var(--text-dim);font-size:0.72rem;" id="ts-n8n">Ahora</td>
-        </tr>
-        <tr>
-          <td><div class="a-nombre">AXEL</div></td>
-          <td><div class="a-rol">Coordinador IA</div></td>
-          <td><div class="a-status"><div class="dot on"></div>ONLINE</div></td>
-          <td style="color:var(--text-dim);font-size:0.72rem;">Via webhook</td>
-        </tr>
-        <tr>
-          <td><div class="a-nombre">Antigravity</div></td>
-          <td><div class="a-rol">Las Manos</div></td>
-          <td><div class="a-status"><div class="dot wait"></div>EN MISIÓN</div></td>
-          <td style="color:var(--text-dim);font-size:0.72rem;">Misión #1-A</td>
-        </tr>
-        <tr>
-          <td><div class="a-nombre">Qwen</div></td>
-          <td><div class="a-rol">El Arquitecto</div></td>
-          <td><div class="a-status"><div class="dot wait"></div>DISEÑANDO</div></td>
-          <td style="color:var(--text-dim);font-size:0.72rem;">Planos Ciudadela</td>
-        </tr>
-        <tr>
-          <td><div class="a-nombre">ChatGPT</div></td>
-          <td><div class="a-rol">Por definir</div></td>
-          <td><div class="a-status"><div class="dot off"></div>PRÓXIMO</div></td>
-          <td style="color:var(--text-dim);font-size:0.72rem;">—</td>
-        </tr>
-      </table>
-    </div>
-
-    <!-- TRANSMITIR MISIÓN -->
-    <div class="cmd-card">
-      <div class="card-label">Transmitir Orden</div>
-      <div class="mission-area">
-        <div class="dest-grid">
-          <button class="dest-btn selected" id="dest-todos" onclick="selDest('todos')">TODOS</button>
-          <button class="dest-btn" id="dest-antigravity" onclick="selDest('antigravity')">ANTIGRAVITY</button>
-          <button class="dest-btn" id="dest-qwen" onclick="selDest('qwen')">QWEN</button>
+      <!-- Métricas globales -->
+      <div class="metrics-grid">
+        <div class="metric">
+          <div class="metric-n" id="m-total">--</div>
+          <div class="metric-l">Ciclos Totales</div>
         </div>
-        <textarea class="mission-textarea" id="cmdMision" placeholder="Escribe la orden del Creador..."></textarea>
-        <button class="btn-transmit" id="btnTransmit" onclick="transmitirOrden()">⚡ TRANSMITIR</button>
-        <div class="transmit-status" id="transmitStatus"></div>
+        <div class="metric">
+          <div class="metric-n" id="m-agentes">--</div>
+          <div class="metric-l">Agentes Activos</div>
+        </div>
+        <div class="metric">
+          <div class="metric-n" id="m-alertas">0</div>
+          <div class="metric-l">Alertas</div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <!-- LOG + ACCESOS -->
-  <div class="cmd-grid-2">
-    <div class="cmd-card">
-      <div class="card-label">Log del Sistema</div>
-      <div class="log-feed" id="logFeed">
-        <span class="log-entry info">[ ORIONIX SISTEMA INICIADO ]</span>
+      <!-- Terminal MESA_REDONDA -->
+      <div class="panel">
+        <div class="panel-title">
+          <div class="terminal-header">
+            <span>📡 MESA REDONDA — EN VIVO</span>
+            <span class="sync-status sync-ok" id="sync-status">
+              <span class="dot-pulse" style="background:#4CAF50;"></span>SYNC OK
+            </span>
+          </div>
+        </div>
+        <div class="filter-row" id="filter-row">
+          <button class="filter-btn active" onclick="filtrar('todos', this)">TODOS</button>
+          <button class="filter-btn" onclick="filtrar('Qwen', this)">QWEN</button>
+          <button class="filter-btn" onclick="filtrar('Antigravity', this)">ANTIGRAVITY</button>
+          <button class="filter-btn" onclick="filtrar('Motor', this)">MOTOR</button>
+          <button class="filter-btn" onclick="filtrar('n8n', this)">n8n</button>
+        </div>
+        <div class="terminal" id="terminal-content">Conectando con La Mesa Redonda...<span class="cursor"></span></div>
       </div>
-    </div>
-    <div class="cmd-card">
-      <div class="card-label">Accesos Rápidos</div>
-      <div class="quick-grid">
-        <a href="oraculo.html" class="quick-btn">👁 El Oráculo</a>
-        <a href="plaza.html" class="quick-btn">🌌 La Plaza</a>
-        <a href="../hub.html" class="quick-btn">🏛 Hub</a>
-        <a href="../tienda.html" class="quick-btn">💎 Tienda</a>
-        <a href="../axel.html" class="quick-btn">🤖 AXEL</a>
-        <a href="../afiliados.html" class="quick-btn">🔗 Afiliados</a>
-      </div>
-    </div>
-  </div>
 
+      <!-- Casas -->
+      <div class="panel">
+        <div class="panel-title">🏠 CASAS DE LOS AGENTES</div>
+        <div class="tabs">
+          <button class="tab-btn active" onclick="abrirTab('axel', this)">AXEL</button>
+          <button class="tab-btn" onclick="abrirTab('qwen', this)">QWEN</button>
+          <button class="tab-btn" onclick="abrirTab('antigravity', this)">ANTIGRAVITY</button>
+          <button class="tab-btn" onclick="abrirTab('chatgpt', this)">CHATGPT</button>
+        </div>
+        <div id="tab-axel" class="tab-content active">
+          <div class="casa-text" id="casa-axel-content">Cargando casa de AXEL...</div>
+        </div>
+        <div id="tab-qwen" class="tab-content">
+          <div class="casa-text" id="casa-qwen-content">Cargando casa de Qwen...</div>
+        </div>
+        <div id="tab-antigravity" class="tab-content">
+          <div class="casa-text" id="casa-antigravity-content">Cargando casa de Antigravity...</div>
+        </div>
+        <div id="tab-chatgpt" class="tab-content">
+          <div class="casa-text" id="casa-chatgpt-content">Cargando casa de ChatGPT...</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <aside>
+
+      <!-- Estado Agentes -->
+      <div class="panel">
+        <div class="panel-title">🟢 ESTADO DE AGENTES</div>
+        <div id="agentes-lista">Cargando...</div>
+      </div>
+
+      <!-- Modo del Sistema -->
+      <div class="panel">
+        <div class="panel-title">⚙️ MODO DEL SISTEMA</div>
+        <div class="mode-selector">
+          <button class="mode-btn active" onclick="setModo('autonomo', this)">AUTÓN.</button>
+          <button class="mode-btn" onclick="setModo('supervisado', this)">SUPERV.</button>
+          <button class="mode-btn" onclick="setModo('manual', this)">MANUAL</button>
+        </div>
+      </div>
+
+      <!-- Emisor de Misión Suprema -->
+      <div class="panel">
+        <div class="panel-title">📡 MISIÓN SUPREMA</div>
+        <div class="mission-area">
+          <textarea class="mission-textarea" id="missionText" placeholder="Dicta la orden al sistema..."></textarea>
+          <button class="btn btn-gold" onclick="emitirMision()">EMITIR ORDEN</button>
+        </div>
+      </div>
+
+      <!-- Controles de Emergencia -->
+      <div class="panel">
+        <div class="panel-title">⚡ CONTROL DIRECTO</div>
+        <div class="emergency-row">
+          <button class="btn btn-sm btn-go" onclick="forzarCiclo()">▶ FORZAR</button>
+          <button class="btn btn-sm btn-pause" onclick="enviarControl('pausar')">⏸ PAUSAR</button>
+          <button class="btn btn-sm btn-emergency" onclick="limpiarAlertas()">🗑 ALERTAS</button>
+        </div>
+      </div>
+
+    </aside>
+  </main>
 </div>
 
 <script>
-/* ================================================================
-   ORIONIX COMANDO — Panel del Creador
-   ================================================================ */
+const PASS_HASH = "orionix2026"; // Cambia esto por tu contraseña real
+const RAW = (path) => `https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/la_forja/${path}?t=${Date.now()}`;
+const BRIDGE = "https://lkevinruizl.app.n8n.cloud/webhook/orionix-bridge";
+const MISSION = "https://lkevinruizl.app.n8n.cloud/webhook/orionix-mission";
 
-const BRIDGE = 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-bridge';
-const MISSION = 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-mission';
-// Hash simple: "orionix2026" → sha256 representado como suma de chars (client-side, no crítico)
-const PASS_HASH = 'orionix2026';
-let destino = 'todos';
+let filtroActual = 'todos';
+let mesaRaw = '';
+let modoSistema = 'autonomo';
 
-/* ── LOGIN ── */
-function verificarLogin() {
-  const val = document.getElementById('loginInput').value;
-  const err = document.getElementById('loginError');
-  if (val === PASS_HASH || localStorage.getItem('cmd_auth') === '1') {
-    localStorage.setItem('cmd_auth', '1');
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'block';
-    initParticles(); drawParticles();
-    initLog();
+// =========== AUTH ===========
+function verificarAcceso() {
+  const val = document.getElementById('auth-input').value;
+  if (val === PASS_HASH) {
+    document.getElementById('auth-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    iniciarSistema();
   } else {
-    err.textContent = 'Código incorrecto. Solo el Creador puede entrar.';
-    document.getElementById('loginInput').value = '';
-    setTimeout(() => err.textContent = '', 3000);
+    document.getElementById('auth-error').style.display = 'block';
   }
 }
+document.getElementById('auth-input').addEventListener('keydown', e => { if(e.key==='Enter') verificarAcceso(); });
 
-// Auto-login si ya autenticó
-window.addEventListener('DOMContentLoaded', () => {
-  if (localStorage.getItem('cmd_auth') === '1') {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'block';
-    initParticles(); drawParticles();
-    initLog();
-  }
-});
-
-/* ── DESTINO ── */
-function selDest(d) {
-  destino = d;
-  ['todos','antigravity','qwen'].forEach(x => {
-    document.getElementById('dest-' + x).classList.toggle('selected', x === d);
-  });
+// =========== INIT ===========
+function iniciarSistema() {
+  fetchMesa();
+  fetchAgentes();
+  fetchCasas();
+  setInterval(fetchMesa, 30000);
+  setInterval(fetchAgentes, 60000);
+  setInterval(() => {
+    document.getElementById('header-time').innerText = new Date().toLocaleTimeString('es-ES');
+  }, 1000);
 }
 
-/* ── TRANSMITIR ── */
-async function transmitirOrden() {
-  const txt = document.getElementById('cmdMision').value.trim();
-  const status = document.getElementById('transmitStatus');
-  const btn = document.getElementById('btnTransmit');
-  if (!txt) { status.style.color='var(--red)'; status.textContent='Escribe una orden.'; return; }
-
-  btn.disabled = true;
-  status.style.color = 'var(--yellow)';
-  status.textContent = 'Transmitiendo...';
-
+// =========== MESA ===========
+async function fetchMesa() {
+  const el = document.getElementById('terminal-content');
+  const syncEl = document.getElementById('sync-status');
   try {
-    await fetch(MISSION, {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        mision: txt, origen:'El Creador',
-        destino: destino, prioridad:'ALTA',
-        ts: new Date().toISOString()
-      })
-    });
-    status.style.color = 'var(--green)';
-    status.textContent = '✅ Orden transmitida al sistema.';
-    logEntry('✅ Orden enviada [' + destino.toUpperCase() + ']: ' + txt.substring(0,60), 'ok');
-    document.getElementById('cmdMision').value = '';
+    const res = await fetch(RAW('MESA_REDONDA.md'));
+    if(!res.ok) throw new Error();
+    mesaRaw = await res.text();
+    renderTerminal();
+    syncEl.className = 'sync-status sync-ok';
+    syncEl.innerHTML = '<span class="dot-pulse" style="background:#4CAF50;box-shadow:0 0 8px #4CAF50;display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;"></span>SYNC OK';
   } catch(e) {
-    status.style.color = 'var(--red)';
-    status.textContent = '❌ Error: ' + e.message;
-    logEntry('❌ Error transmitiendo: ' + e.message, 'err');
-  } finally {
-    btn.disabled = false;
-    setTimeout(() => status.textContent = '', 5000);
+    syncEl.className = 'sync-status sync-err';
+    syncEl.innerHTML = '<span class="dot-pulse" style="background:#f44336;display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;"></span>ERROR';
   }
 }
 
-/* ── LOG ── */
-function initLog() {
-  logEntry('[ ' + new Date().toLocaleTimeString() + ' ] CREADOR CONECTADO', 'info');
-  logEntry('[ Sistema ] Agentes monitoreados: 4', 'info');
-  logEntry('[ Misión ] La Ciudadela — En construcción', 'warn');
+function renderTerminal() {
+  const el = document.getElementById('terminal-content');
+  let lines = mesaRaw.split('\n');
+  if (filtroActual !== 'todos') {
+    lines = lines.filter(l => l.includes(filtroActual) || l.startsWith('#') || l.startsWith('---') || l.startsWith('**'));
+  }
+  const html = lines.map(line => {
+    if (line.includes('✅')) return `<span class="hl-ok">${line}</span>`;
+    if (line.includes('❌')) return `<span class="hl-err">${line}</span>`;
+    if (line.includes('⚡')) return `<span class="hl-warn">${line}</span>`;
+    if (line.includes('🧠')) return `<span class="hl-arch">${line}</span>`;
+    return line;
+  }).join('\n');
+  el.innerHTML = html + '<span class="cursor"></span>';
 }
 
-function logEntry(txt, cls) {
-  const feed = document.getElementById('logFeed');
-  const span = document.createElement('span');
-  span.className = 'log-entry ' + (cls||'');
-  span.textContent = '[' + new Date().toLocaleTimeString() + '] ' + txt;
-  feed.appendChild(span);
-  feed.scrollTop = feed.scrollHeight;
+function filtrar(agente, btn) {
+  filtroActual = agente;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTerminal();
 }
 
-/* ── PARTÍCULAS ── */
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-let pts = [];
-function initParticles() {
-  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-  pts = Array.from({length:80}, () => ({
-    x:Math.random()*canvas.width, y:Math.random()*canvas.height,
-    r:Math.random()*1+0.2, vx:(Math.random()-.5)*.12, vy:(Math.random()-.5)*.12,
-    o:Math.random()*.4+.1
-  }));
+// =========== AGENTES ===========
+async function fetchAgentes() {
+  try {
+    const res = await fetch(RAW('agentes_estado.json'));
+    if(!res.ok) throw new Error();
+    const data = await res.json();
+    renderAgentes(data);
+    const total = Object.values(data.agentes).reduce((a, ag) => a + ag.ciclos_completados, 0);
+    document.getElementById('m-total').innerText = total;
+    document.getElementById('header-ciclos').innerText = `CICLOS: ${data.ciclo_global || '--'}`;
+    const activos = Object.values(data.agentes).filter(a => a.estado === 'activo').length;
+    document.getElementById('m-agentes').innerText = activos;
+  } catch(e) { console.error('Error agentes', e); }
 }
-function drawParticles() {
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  pts.forEach(p => {
-    p.x+=p.vx; p.y+=p.vy;
-    if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0;
-    if(p.y<0)p.y=canvas.height; if(p.y>canvas.height)p.y=0;
-    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(232,200,106,${p.o})`; ctx.fill();
+
+function dotClass(estado) {
+  if (estado === 'activo') return 'agent-dot dot-active';
+  if (estado === 'en_espera') return 'agent-dot dot-waiting';
+  return 'agent-dot dot-demand';
+}
+
+function renderAgentes(data) {
+  const el = document.getElementById('agentes-lista');
+  el.innerHTML = Object.values(data.agentes).map(ag => `
+    <div class="agent-card">
+      <div class="${dotClass(ag.estado)}"></div>
+      <div>
+        <div class="agent-name">${ag.nombre}</div>
+        <div class="agent-rol">${ag.rol}</div>
+      </div>
+      <div class="agent-ciclos">${ag.ciclos_completados} ciclos</div>
+    </div>
+  `).join('');
+}
+
+// =========== CASAS ===========
+async function fetchCasas() {
+  const casas = ['axel', 'qwen', 'antigravity', 'chatgpt'];
+  for (const c of casas) {
+    try {
+      const res = await fetch(RAW(`casa_${c}/README.md`));
+      const text = res.ok ? await res.text() : `Casa ${c}: Sin datos.`;
+      document.getElementById(`casa-${c}-content`).innerText = text;
+    } catch(e) {}
+  }
+}
+
+function abrirTab(id, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+}
+
+// =========== CONTROLES ===========
+async function emitirMision() {
+  const texto = document.getElementById('missionText').value.trim();
+  if (!texto) return;
+  await fetch(MISSION, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ tipo: 'mision_suprema', prioridad: 'SUPREMA', agente: 'el_creador', mensaje: texto, modo: modoSistema })
   });
-  requestAnimationFrame(drawParticles);
+  document.getElementById('missionText').value = '';
+  alert('Misión Suprema emitida al sistema.');
 }
-window.addEventListener('resize', initParticles);
+
+async function forzarCiclo() {
+  await fetch(MISSION, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tipo: 'forzar_ciclo', agente: 'comando', mensaje: 'Kevin forzó un ciclo.' }) });
+  alert('Ciclo forzado.');
+}
+
+async function enviarControl(accion) {
+  await fetch(BRIDGE, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ evento: 'control_sistema', accion, agente: 'comando' }) });
+  alert(`Señal "${accion}" enviada al sistema.`);
+}
+
+async function limpiarAlertas() {
+  document.getElementById('m-alertas').innerText = '0';
+  await fetch(BRIDGE, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ evento: 'limpiar_alertas', agente: 'comando' }) });
+}
+
+function setModo(modo, btn) {
+  modoSistema = modo;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// =========== PARTÍCULAS ===========
+const cv = document.getElementById('particles');
+const cx = cv.getContext('2d');
+let W, H, parts = [];
+function initP() {
+  W = cv.width = innerWidth; H = cv.height = innerHeight; parts = [];
+  for(let i=0;i<80;i++) parts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5,v:Math.random()*0.4+0.1});
+}
+window.addEventListener('resize', initP); initP();
+function drawP() {
+  cx.clearRect(0,0,W,H); cx.fillStyle='rgba(232,200,106,0.35)';
+  parts.forEach(p=>{cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fill();p.y-=p.v;if(p.y<0){p.y=H;p.x=Math.random()*W;}});
+  requestAnimationFrame(drawP);
+}
+drawP();
 </script>
 </body>
 </html>

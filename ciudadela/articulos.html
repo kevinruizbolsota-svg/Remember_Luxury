@@ -3,136 +3,323 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIONIX - Catalogo</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+<title>ORIONIX · Catálogo Completo</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0b0b0d;--gold:#e8c86a;--gold2:#f5e0a0;--gold3:#b89a40;--txt:#f0e8d0;--pur:#6a3d9a;--card:rgba(14,13,20,0.96);--bor:rgba(232,200,106,0.18)}
+:root{--gold:#e8c86a;--gd:#b89a40;--gl:#f5e0a0;--bg:#0b0b0d;--bg2:rgba(14,13,20,0.96);--b:rgba(232,200,106,0.12);--ba:rgba(232,200,106,0.4);--text:#f0e8d0;--dim:rgba(240,232,208,0.4);--purple:#6a3d9a}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--txt);font-family:'Cormorant Garamond',serif;min-height:100vh}
-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
-nav{position:sticky;top:0;z-index:100;background:rgba(11,11,13,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--bor);padding:14px 28px;display:flex;justify-content:space-between;align-items:center}
-.logo{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--gold);text-decoration:none;letter-spacing:4px}
-.nav-links{display:flex;gap:20px}
-.nav-links a{color:var(--txt);text-decoration:none;font-size:0.85rem;letter-spacing:1px;opacity:.7;transition:.2s}
-.nav-links a:hover{opacity:1;color:var(--gold)}
-.cart-btn{position:relative;background:transparent;border:1px solid var(--gold);color:var(--gold);padding:8px 18px;border-radius:6px;cursor:pointer;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:2px;transition:.2s}
-.cart-btn:hover{background:rgba(232,200,106,.1)}
-.badge{position:absolute;top:-8px;right:-8px;background:var(--pur);color:#fff;font-size:.65rem;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}
-@media(max-width:680px){.nav-links{display:none}}
-.wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:36px 20px 60px}
-.bc{font-size:.8rem;color:var(--gold3);letter-spacing:2px;margin-bottom:28px}
+body{font-family:'Cormorant Garamond',serif;background:var(--bg);color:var(--text);min-height:100vh}
+#cv{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+nav{position:fixed;top:0;left:0;right:0;height:54px;z-index:900;display:flex;align-items:center;gap:0;padding:0 20px;background:rgba(11,11,13,.98);border-bottom:1px solid var(--b);backdrop-filter:blur(14px)}
+.brand{font-family:'Cinzel',serif;font-size:.95rem;font-weight:900;letter-spacing:.2em;color:var(--gold);text-decoration:none;margin-right:16px;text-shadow:0 0 14px rgba(232,200,106,.3)}
+.nav-mid{display:flex;gap:2px;flex:1}
+.nl{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.1em;color:var(--dim);text-decoration:none;padding:7px 12px;border-radius:6px;transition:all .2s;text-transform:uppercase;white-space:nowrap}
+.nl:hover{color:var(--text)}
+.nl.on{color:var(--gold);background:rgba(232,200,106,.07)}
+.nav-r{display:flex;align-items:center;gap:8px;margin-left:auto}
+.cart-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid var(--ba);border-radius:6px;font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.1em;color:var(--gold);text-decoration:none;transition:all .25s;position:relative}
+.cart-btn:hover{background:rgba(232,200,106,.08)}
+.cart-count{position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:var(--gold);color:var(--bg);font-size:.55rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+@media(max-width:760px){.nav-mid{display:none}}
+
+.wrap{padding:74px 24px 80px;max-width:1200px;margin:0 auto;position:relative;z-index:1}
+
+.ph{text-align:center;margin-bottom:28px}
+.ph-tag{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.22em;color:var(--dim);text-transform:uppercase;margin-bottom:6px}
+.ph-title{font-family:'Cinzel',serif;font-size:1.7rem;font-weight:900;color:var(--text);letter-spacing:.1em;margin-bottom:6px}
+.ph-sub{font-size:.9rem;color:var(--dim);font-style:italic}
+
+.bc{font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.14em;color:var(--dim);margin-bottom:22px;text-transform:uppercase}
 .bc a{color:var(--gold);text-decoration:none}
-.filtros{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:28px}
-.fb{padding:9px 18px;background:transparent;border:1px solid var(--bor);color:var(--txt);border-radius:6px;cursor:pointer;font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:1.5px;transition:.25s;text-transform:uppercase}
-.fb:hover,.fb.on{background:var(--gold);color:#0b0b0d;border-color:var(--gold)}
-.buscador{flex:1;min-width:180px;padding:9px 14px;background:rgba(14,13,20,.9);border:1px solid var(--bor);border-radius:6px;color:var(--txt);font-family:'Cormorant Garamond',serif;font-size:.95rem;outline:none}
-.buscador:focus{border-color:rgba(232,200,106,.5)}
-.buscador::placeholder{color:rgba(240,232,208,.35)}
-.conteo{font-size:.8rem;color:rgba(240,232,208,.5);letter-spacing:1px;margin-bottom:18px;font-style:italic}
-.conteo span{color:var(--gold);font-family:'Cinzel',serif}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
-.card{background:var(--card);border:1px solid var(--bor);border-radius:10px;overflow:hidden;transition:.28s;display:flex;flex-direction:column}
-.card:hover{border-color:rgba(232,200,106,.45);transform:translateY(-4px);box-shadow:0 10px 32px rgba(0,0,0,.5)}
-.cimg{width:100%;height:210px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:linear-gradient(135deg,rgba(106,61,154,.12),rgba(232,200,106,.06));position:relative;overflow:hidden}
-.cbadge{position:absolute;top:8px;left:8px;font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:1.5px;padding:4px 9px;border-radius:3px;font-weight:700;text-transform:uppercase}
-.moda-b{background:rgba(232,200,106,.18);color:#e8c86a}
-.fashion-b{background:rgba(156,39,176,.18);color:#ce93d8}
-.dinastia-b{background:rgba(255,215,0,.12);color:#ffd700}
-.cinfo{padding:16px;flex:1;display:flex;flex-direction:column}
-.ccat{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;opacity:.6}
-.cnombre{font-family:'Cinzel',serif;font-size:.9rem;color:var(--gold);margin-bottom:7px;line-height:1.3}
-.cdesc{font-size:.82rem;color:rgba(240,232,208,.55);line-height:1.45;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-style:italic}
-.cpie{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
-.cprecio{font-family:'Cinzel',serif;font-size:1.15rem;color:var(--gold2);font-weight:600}
-.cadd{background:var(--gold);color:#0b0b0d;border:none;padding:8px 16px;border-radius:5px;font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:1.5px;cursor:pointer;transition:.2s;font-weight:700}
-.cadd:hover{background:var(--gold2);transform:scale(1.04)}
-.empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:rgba(240,232,208,.35)}
-.empty .ei{font-size:3rem;margin-bottom:14px;opacity:.3}
-.sidebar{position:fixed;top:0;right:-420px;width:400px;height:100vh;background:#0d0d11;border-left:1px solid var(--gold);z-index:200;padding:28px;transition:.4s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
-.sidebar.open{right:0}
-.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;border-bottom:1px solid var(--bor);padding-bottom:14px}
-.sh h2{font-family:'Cinzel',serif;color:var(--gold);font-size:1.1rem;letter-spacing:3px}
-.cerrar{background:transparent;border:none;color:var(--txt);font-size:1.6rem;cursor:pointer;line-height:1}
-.citems{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
-.citems::-webkit-scrollbar{width:3px}
-.citems::-webkit-scrollbar-thumb{background:rgba(232,200,106,.3)}
-.citem{display:flex;gap:12px;background:rgba(255,255,255,.03);padding:10px;border-radius:8px;border:1px solid var(--bor)}
-.citem-img{width:55px;height:55px;background:rgba(106,61,154,.15);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0}
-.citem-info{flex:1;min-width:0}
-.citem-n{font-family:'Cinzel',serif;font-size:.78rem;color:var(--gold);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.citem-p{color:var(--gold2);font-size:.85rem;margin-bottom:6px}
-.citem-ctrl{display:flex;align-items:center;gap:8px}
-.citem-ctrl button{width:22px;height:22px;background:rgba(255,255,255,.06);border:1px solid var(--bor);color:var(--txt);border-radius:4px;cursor:pointer;font-size:.85rem}
-.citem-ctrl span{font-size:.85rem;min-width:18px;text-align:center}
-.brem{background:transparent;border:none;color:#f87171;font-size:.7rem;cursor:pointer;margin-left:auto}
-.sfooter{border-top:1px solid var(--bor);padding-top:18px;margin-top:16px}
-.stotal{display:flex;justify-content:space-between;font-family:'Cinzel',serif;font-size:1.15rem;color:var(--gold);margin-bottom:18px}
-.scheckout{width:100%;padding:13px;background:var(--gold);color:#0b0b0d;border:none;border-radius:7px;font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:2px;cursor:pointer;font-weight:700;transition:.2s}
-.scheckout:hover{background:var(--gold2);box-shadow:0 0 20px rgba(232,200,106,.3)}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:150;display:none;backdrop-filter:blur(2px)}
-.overlay.on{display:block}
-.toast{position:fixed;bottom:24px;right:24px;background:rgba(14,13,20,.97);border:1px solid var(--gold);color:var(--gold);padding:12px 22px;border-radius:8px;font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:2px;z-index:300;transform:translateY(80px);opacity:0;transition:.3s}
-.toast.on{transform:translateY(0);opacity:1}
-@media(max-width:500px){.sidebar{width:100%;right:-100%}}
+.bc a:hover{text-decoration:underline}
+
+.stats-bar{display:flex;gap:10px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
+.stat-pill{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.1em;padding:5px 14px;border-radius:20px;text-transform:uppercase}
+.sp-moda{background:rgba(232,200,106,.1);color:var(--gold);border:1px solid rgba(232,200,106,.2)}
+.sp-fashion{background:rgba(156,39,176,.1);color:#ce93d8;border:1px solid rgba(156,39,176,.2)}
+.sp-dinastia{background:rgba(255,215,0,.08);color:#ffd700;border:1px solid rgba(255,215,0,.2)}
+
+.filtros{display:flex;align-items:center;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+.search-box{display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--b);border-radius:8px;padding:8px 14px;flex:1;max-width:340px}
+.search-box input{background:transparent;border:none;outline:none;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:.9rem;width:100%}
+.search-box input::placeholder{color:var(--dim)}
+.ftab{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.12em;padding:8px 16px;border-radius:6px;border:1px solid var(--b);color:var(--dim);cursor:pointer;transition:all .22s;text-transform:uppercase;background:transparent}
+.ftab:hover{color:var(--text);border-color:rgba(232,200,106,.25)}
+.ftab.on{color:var(--gold);border-color:var(--ba);background:rgba(232,200,106,.07)}
+.sort-sel{padding:8px 12px;background:var(--bg2);border:1px solid var(--b);border-radius:6px;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:.86rem;outline:none;margin-left:auto;cursor:pointer}
+.sort-sel option{background:#111}
+
+.results-info{font-size:.76rem;color:var(--dim);margin-bottom:14px;font-style:italic}
+.results-info span{color:var(--gold);font-family:'Cinzel',serif}
+
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.pcard{background:var(--bg2);border:1px solid var(--b);border-radius:10px;overflow:hidden;transition:all .28s;display:flex;flex-direction:column}
+.pcard:hover{border-color:var(--ba);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.35)}
+.pimg{width:100%;height:200px;display:flex;align-items:center;justify-content:center;font-size:3.2rem;position:relative;overflow:hidden}
+
+.pimg-moda{background:linear-gradient(135deg,rgba(232,200,106,.12),rgba(11,11,13,.6))}
+.pimg-fashion{background:linear-gradient(135deg,rgba(156,39,176,.14),rgba(11,11,13,.6))}
+
+.pimg-dinastia{background:linear-gradient(135deg,rgba(255,215,0,.10),rgba(11,11,13,.6))}
+
+.pcat-badge{position:absolute;top:8px;left:8px;font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:.14em;padding:3px 8px;border-radius:3px;font-weight:700}
+.badge-moda{background:rgba(232,200,106,.2);color:#e8c86a}
+.badge-fashion{background:rgba(156,39,176,.2);color:#ce93d8}
+.badge-dinastia{background:rgba(255,215,0,.15);color:#ffd700}
+
+.pinfo{padding:14px;flex:1;display:flex;flex-direction:column;gap:5px}
+
+.pname{font-family:'Cinzel',serif;font-size:.62rem;font-weight:700;color:var(--text);letter-spacing:.06em;line-height:1.3}
+.pdesc{font-size:.76rem;color:var(--dim);font-style:italic;flex:1;line-height:1.45}
+.pprice{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);font-weight:700;margin-top:6px}
+.padd{width:100%;padding:9px;background:transparent;color:var(--gold);border:1px solid var(--ba);border-radius:6px;font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.12em;cursor:pointer;transition:all .25s;margin-top:8px}
+.padd:hover{background:var(--gold);color:var(--bg)}
+
+.empty{grid-column:1/-1;text-align:center;padding:50px;color:var(--dim)}
+.empty-icon{font-size:3rem;opacity:.3;margin-bottom:12px}
+
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(14,13,20,.97);border:1px solid var(--ba);color:var(--gold);font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.1em;padding:10px 22px;border-radius:6px;z-index:9999;transition:transform .32s;Pointer-events:none}
+.toast.on{transform:translateX(-50%) translateY(0)}
+
+.cart-float{position:fixed;bottom:24px;right:24px;z-index:800;display:none}
+.cart-float.on{display:flex}
+.cf-link{display:flex;align-items:center;gap:8px;padding:12px 20px;background:var(--gold);color:var(--bg);border-radius:40px;font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.12em;font-weight:700;box-shadow:0 4px 20px rgba(232,200,106,.35);transition:all .28s;text-decoration:none}
+.cf-link:hover{background:var(--gd);transform:translateY(-2px)}
+.cf-cnt{background:var(--bg);color:var(--gold);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.52rem;font-weight:700}
+
+@media(max-width:640px){.filtros{flex-direction:column;align-items:stretch}.sort-sel{margin-left:0}.pgrid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
 <canvas id="cv"></canvas>
-<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
 <nav>
-  <a href="hub.html" class="logo">ORIONIX</a>
-  <div class="nav-links">
-    <a href="tienda.html">Tienda</a>
-    <a href="agentes.html">Agentes</a>
-    <a href="comunidad.html">Comunidad</a>
-    <a href="hogar.html">Hogar</a>
+  <a href="hub.html" class="brand">ORIONIX</a>
+  <div class="nav-mid">
+    <a class="nl" href="tienda.html">🏠 Tienda</a>
+    <a class="nl on" href="articulos.html">🛍 Artículos</a>
+    <a class="nl" href="carrito.html">🛒 Carrito</a>
+    <a class="nl" href="agentes.html">🤦 Agentes</a>
+    <a class="nl" href="mi-universo.html">🗦️ Mi Universo</a>
   </div>
-  <button class="cart-btn" onclick="openSidebar()">Carrito <span class="badge" id="badge">0</span></button>
+  <div class="nav-r">
+    <a href="login.html" class="nl">Iniciar Sesión</a>
+    <a href="carrito.html" class="cart-btn">🛒 Carrito <span class="cart-count" id="cnt">0</span></a>
+  </div>
 </nav>
+
 <div class="wrap">
-  <div class="bc"><a href="hub.html">ORIONIX</a> &rsaquo; <a href="tienda.html">Tienda</a> &rsaquo; Catalogo</div>
+  <div class="bc"><a href="hub.html">ORIONIX</a> › <a href="tienda.html">Tienda</a> › Catálogo</div>
+
+  <div class="ph">
+    <div class="ph-tag">Catálogo Completo · ORIONIX</div>
+    <h1 class="ph-title">30 ARTÍCULOS</h1>
+    <p class="ph-sub">De una aguja a una mansión — encuentra lo que necesitas en tu nivel</p>
+  </div>
+
+  <div class="stats-bar">
+    <span class="stat-pill sp-moda" id="cnt-moda">🧵 MODA · 10</span>
+    <span class="stat-pill sp-fashion" id="cnt-fashion">✨ FASHION STYLE · 10</span>
+    <span class="stat-pill sp-dinastia" id="cnt-dinastia">👑 RI DINASTÍA ·710</span>
+  </div>
+
   <div class="filtros">
-    <button class="fb on" data-f="TODOS" onclick="setFiltro(this)">Todos</button>
-    <button class="fb" data-f="MODA" onclick="setFiltro(this)">Moda</button>
-    <button class="fb" data-f="FASHION STYLE" onclick="setFiltro(this)">Fashion Style</button>
-    <button class="fb" data-f="MI DINASTIA" onclick="setFiltro(this)">Mi Dinastia</button>
-    <input class="buscador" type="text" placeholder="Buscar producto..." oninput="setBusqueda(this.value)">
+    <div class="search-box">
+      <span style="color:var(--dim)">🔍</span>
+      <input type="text" placeholder="Buscar artículos…" id="search">
+    </div>
+    <button class="ftab on" data-cat="TODOS">Todos</button>
+    <button class="ftab" data-cat="MODA">🧵 Moda</button>
+    <button class="ftab" data-cat="FASHION STYLE">✨ Fashion</button>
+    <button class="ftab" data-cat="MI DINASTIA">👑 Dinastía</button>
+    <select class="sort-sel" id="sort">
+      <option value="default">Ordenar por…</option>
+      <option value="price-asc">Precio ↑</option>
+      <option value="price-desc">Precio ↓<option>
+      <option value="name">Nombre A-Z</option>
+    </select>
   </div>
-  <div class="conteo" id="conteo"></div>
-  <div class="grid" id="grid"></div>
+
+  <div class="results-info" id="results-info"></div>
+  <div class="pgrid" id="pgrid"></div>
 </div>
-<div class="sidebar" id="sidebar">
-  <div class="sh">
-    <h2>TU CARRITO</h2>
-    <button class="cerrar" onclick="closeSidebar()">x</button>
-  </div>
-  <div class="citems" id="citems"></div>
-  <div class="sfooter">
-    <div class="stotal"><span>Total:</span><span id="stotal">0.00</span></div>
-    <button class="scheckout" onclick="location.href='metodo-pago.html'">PROCEDER AL ALOS</button>
-  </div>
+
+<div class="cart-float" id="cart-float">
+  <a href="carrito.html" class="cf-link">🛒 Ver Carrito <span class="cf-cnt" id="cf-cnt">0</span></a>
 </div>
+
 <div class="toast" id="toast"></div>
+
 <script>
-+var PRODS = [{id:1,n:"Camiseta Cosmos Basic",p:9.99,c:"MODA",d:"Algodon 100%, logo bordado en gold. Corte clasico unisex.",e:"shirts"},{id:2,n:"Gorra Snapback AXEL",p:14.99,c:"MODA",d:"Ajustable, bordado 3D del ojo cosmico ORIONIX.",e:"hats"},{id:3,n:"Calcetines Premium Pack x3",p:7.99,c:"MODA",d:"Microfibra transpirable, refuerzo dorado en tobillo.",e:"socks="},{id:4,n:"Libreta Kabalion A5",p:12.99,c:"MODA",d:"Tapa dura negra, papel de 100g, cierre elastico dorado.",e:"notebook"},{id:5,n:"Llavero Metalico Sefirot",p:8.99,c:"MODA",d:"Aleacion zinc, grabado laser del arbol de la vida.",e:"key"},{id:6,n:"Taza Termica Nebula",p:18.99,c:"MODA",d:"Acero inoxidable, doble pared, mantiene calor 6 horas.",e:"cup"},{id:7,n:"Panuelo Bolsillo Seda",p:15.99,c:"MODA",d:"Estampado cosmos, perfecto para blazer y trajes.",e:"cloth"},{id:8,n:"Boligrafo Lujo Black Gold",p:22.99,c:"MODA",d:"Cuerpo mate, detalles en oro de 18k, recarga incluida.",e:"pen"},{id:9,n:"Parche Termoadhesivo ORIONIX",p:5.99,c:"MODA",d:"Bordado de alta densidad, aplica con plancha en 30 seg.",e:"patch"},{id:10,n:"Mochila Canvas Minimalista",p:29.99,c:"MODA",d:"Lona resistente al agua, compartimento laptop 15 pulgadas.",e:"bag"},{id:11,n:"Sudadera Imperio Gold",p:49.99,c:"FASHION STYLE",d:"Corte oversized, hilo dorado en costuras, forro interior.",e:"hoodie"},{id:12,n:"Cartera Slim RFID Chesed",p:39.99,c:"FASHION STYLE",d:"Cuero genuino, proteccion antirrobo, 6 ranuras tarjeta.",e:"wallet"},{id:13,n:"Gafas Sol Polarizadas Netzach",p:59.99,c:"FASHION STYLE",d:"Montura acetato negro, lentes UV400, estuche incluido.",e:"glasses"},{id:14,n:"Mochila Urbana Binah",p:79.99,c:"FASHION STYLE",d:"Cuero sintetico premium, multiples compartimentos, antirrobo.",e:"backpack"},{id:15,n:"Perfume Cosmos Noir 100ml",p:89.99,c:"FASHION STYLE",d:"Notas de ambar, oud y madera de cedro. Larga duracion.",e:"perfume"},{id:16,n:"Cinturon Cuero Reversible",p:45.99,c:"FASHION STYLE",d:"Negro y marron reversible, hebilla mate con logo ORIONIX.",e:"belt"},{id:17,n:"Zapatillas Cosmos Limited",p:129.99,c:"FASHION STYLE",d:"Suela con glow ultravioleta, edicion numerada 500 pares.",e:"shoes"},{id:18,n:"Chaqueta Bomber Negra",p:99.99,c:"FASHION STYLE",d:"Forro interior con mapa estelar, cierre YKK japonesa.",e:"jacket"},{id:19,n:"Reloj Smartwatch Elite",p:149.99,c:"FASHION STYLE",d:"Monitor cardiaco, GPS, correa de silicona negra premium.",e:"watch"},{id:20,n:"Set Regalo Caballero ORIONIX",p:119.99,c:"FASHION STYLE",d:"Cartera, cinturon y llavero en caja de madera grabada.",e:"gift"},{id:21,n:"Reloj Automatico Kether",p:299.99,c:"MI DINASTIA",d:"Movimiento suizo ETA, caja acero inoxidable, cristal zafiro.",e:"luxury_watch"},{id:22,n:"Anillo Titanio Negro Oro",p:149.99,c:"MI DINASTIA",d:"Acero quirurgico, bano de oro 18k, diseno geometrico.",e:"ring"},{id:23,n:"Bolso Cuero Italiano Malkuth",p:350.00,c:"MI DINASTIA",d:"Hecho a mano en Florencia, herrajes dorados, forro cosmos.",e:"handbag"},{id:24,n:"Chaqueta Cuero Sintetico Elite",p:189.99,c:"MI DINASTIA",d:"Corte slim, costuras reforzadas a mano, estilo motociclista.",e:"leather"},{id:25,n:"Gemelos Traje Black Gold",p:79.99,c:"MI DINASTIA",d:"Onix negro y borde dorado 18k, caja de terciopelo negro.",e:"cufflinks"},{id:26,n:"Maletin Ejecutivo Cuero",p:249.99,c:"MI DINASTIA",d:"Cuero genuino, combinacion seguridad, compartimento laptop 17.",e:"briefcase"},{id:27,n:"Zapatos Oxford Premium",p:159.99,c:"MI DINASTIA",d:"Cuero pulido italiano, suela de goma antideslizante.",e:"oxford"},{id:28,n:"Pulsera Cuero Trenzado",p:89.99,c:"MI DINASTIA",d:"Cuero negro trenzado a mano, cierre magnetico de acero.",e:"bracelet"},{id:29,n:"Caja Fuerte Portatil Lujo",p:199.99,c:"MI DINASTIA",d:"Para relojes y joyas, cerradura biometrica, fibra de carbono.",e:"safe"},{id:30,n:"Set Decantador Whisky Gold",p:179.99,c:"MI DINASTIA",d:"Cristal soplado a mano, base con grabado ORIONIX, 6 vasos.",e:"whisky"}];
-var ICONS = {shirts:"👕",hats:"🧢",socks:"🧦",notebook:"📓",key:"🔑 cup:"☕",cloth:"🎀",pen:"🖊",patch:"🛡",bag:"🎒",hoodie:"👕",wallet:"💳",glasses:"🕶",backpack:"🎒",perfume:"🧴",belt:"🟤",shoes:"👟",jacket:"🧥",watch:"⌚",gift:"🎁",luxury_watch:"⌚",ring:"💍",handbag:"👜",leather:"🧥",cufflinks:"👔",briefcase:"💼",oxford:"👞",bracelet:"📿",safe:"🔒",whisky:"🥃"};
-var BADGECLS={"MODA":"moda-b","FASHION STYLE":"fashion-b","MI DINASTIA":"dinastia-b"};
-var CATCOLOR={"MODA":"rgba(232,200,106,.12)","FASHION STYLE":"rgba(156,39,176,.12)","MI DINASTIA":"rgba(255,215,0,.08)"};
-var filtro="TODOS",busqueda="",carrito=JSON.parse(localStorage.getItem("orxCart")||"[]");
-function getLista(){var l=PRODS;if(filtro!=="TODOS")l=l.filter(function(p){return p.c===filtro;});if(busqueda.trim()!==""){var q=busqueda.toLowerCase();l=l.filter(function(p){return p.n.toLowerCase().indexOf(q)>=0||p.d.toLowerCase().indexOf(q)>=0;});}return l;}
-function render(){var l=getLista(),g=document.getElementById("grid"),c=document.getElementById("conteo");c.innerHTML="Mstrando <span>"+l.length+"</span> producto"+(l.length!==1?"s":"")+(filtro!=="TODOS"?" en <span>"+filtro+"</span>":"");if(l.length===0){g.innerHTML='<div class="empty"><div class="ei">🌌</div><p>No se encontraron productos</p></div>';return;}var h="";for(var i=0;i<l.length;i++){var p=l[i],icon=ICO[[p.e]||"🛍",b=BADGECLS[p.c]||"moda-b",bg=CATCOLOR[p.c]||"";h+='<div class="card"><div class="cimg" style="background:linear-gradient(135deg,'+bg+',rgba(11,11,13,.5))"><span style="font-size:3.2rem">'+icon+'</span><span class="cbadge '+b+'">'+p.c+'</span></div><div class="cinfo"><div class="ccat">'+p.c+'</div><div class="cnombre">'+p.n+'</div><div class="cdesc">'+p.d+'</div><div class="cpie"><span class="cprecio">&euro;'+p.p.toFixed(2)+'</span><button class="cadd" onclick="addCart('+p.id+')">+ Anadir</button></div></div></div>';}g.innerHTML=h;}
-function setFiltro(el){filtro=el.getAttribute("data-f");var b=document.querySelectorAll(".fb");for(var i=0;i<b.length;i++)b[i].classList.remove("on");el.classList.add("on");render();}
-function setBusqueda(v){busqueda=v;render();}
-function addCart(id){var prod=null;for(var i=0;i<PRODS.length;i++)if(PRODS[i].id===id){prod=PRODS[i];break;=}if(!prod)return;for(var i=0,f=false;i<carrito.length;i++)if(carrito[i].id===id){carrito[i].qty++;f=true;break;}if(!f)carrito.push({id:prod.id,n:prod.n,p:prod.p,e:prod.e,c:prod.c,qty:1});saveCart();showToast(prod.n+" anadido al carrito");}
-function removeCart(id){carrito=carrito.filter(function(p){return p.id!==id;});saveCart();}
-function changeQty(id,d){for(var i=0;i<carrito.length;i++)if(carrito[i].id===id){carrito[i].qty+=d;if(carrito[i].qty<=0)carrito.splice(i,1);break;}saveCart();}
-function saveCart(){localStorage.setItem("orxCart",JSON.stringify(carrito));updateCartUI();}
-function updateCartUI(){var t=carrito.reduce(function(a,p){return a+p.qty;},0);document.getElementById("badge").textContent=t;var s=carrito.reduce(function(a,p){return a+p.p*p.qty;},0);document.getElementById("stotal").textContent="€"+s.toFixed(2);var e=document.getElementById("citems");if(carrito.length===0){e.innerHTML="<p style='text-align:center;color:rgba(240,232,208,.35);margin-top:40px;font-style:italic'>Tu carrito esta vacio</p>";return;}var h="";for(var i=0;i<carrito.length;i++){var p=carrito[i],icon=ICONS[p.e]||"🛍";h+="<div class='citem'><div class='citem-img'>"+icon+"</div><div class='citem-info'><div class='citem-n'>"+p.n+"</div><div class='citem-p'>&euro;"+(p.p*p.qty).toFixed(2)+"</div><div class='citem-ctrl'><button onclick='changeQty("+p.id+",-1)'>-</button><span>"+p.qty+"</span><button onclick='changeQty("+p.id+",1)'>+</button><button class='brem' onclick='removeCart("+p.id+")'>Quitar</button></div></div></div>";}e.innerHTML=h;}
-function openSidebar(){document.getElementById("sidebar").classList.add("open");document.getElementById("overlay").classList.add("on");}
-function closeSidebar(){document.getElementById("sidebar").classList.remove("open");document.getElementById("overlay").classList.remove("on");}
-function showToast(m){var t=document.getElementById("toast");t.textContent=m;t.classList.add("on");clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove("on");},2800);}
-(function(){var c=document.getElementById("cv"),ctx=c.getContext("2d");function rs{}addEventListener("resize",r);var st=[];for(var i=0;i<150;i++st.push({x:Math.random(),y:Math.random(),r:Math.random()*.9+.2,a:Math.random(),da:(Math.random()-.5)*.004});(function loop(){ctx.clearRect(0,0,c.width,c.height);for(var i=0;i<st.length;i++){var s=st[i];s.a=Math.max(.05,Math.min(.7,3.a+s.da));if(s.a<=.05||s.a>=.7)s.da*=-1;ctx.globalAlpha=s.a*.5;ctx.fillStyle="#e8c86a";ctx.beginPath();ctx.arc(s.x*c.width,s.y*(.height,s.r,0,6.28);ctx.fill();}requestAnimationFrame(loop);})();})();
-(var params=new URLSearchParams(location.search),cat=params.get("cat");if(cat){cat=cat.replace(/\+/g," ").toUpperCase().trim();if(cat==="MODA"||cat==="FASHION STYLE"||cat==="MI DINASTIA"){filtro=cat;var btns=document.querySelectorAll(".fb");for(var i=0;i<btns.length;i++){var f=btns[i].getAttribute("data-f");btns[i].classList.toggle("on",f===cat);}}}render();updateCartUI();
+var PRODUCTOS = [
+  {id:1,nombre:"Camiseta Cosmos Basic",precio:9.99,categoria:"MODA",descripcion:"Algodón 100%, logo bordado en gold. Corte clásico unisex.",emoji:"👕"},
+  {id:2,nombre:"Gorna Snapback AXEL",precio:14.99,categoria:"MODA",descripcion:"Ajustable, bordado 3D del ojo cósmico ORIONIX.",emoji:"🧢"},
+  {id:3,nombre:"Calcetines Premium Pack x3",precio:7.99,categoria:"MODA",descripcion:"Microfibra transpirable, refuerzo dorado en tobillo.",emoji:"🧦'�,
+  {id:4,nombre:"Libreta Kabalion A5",precio:12.99,categoria:"MODA",descripcion:"Tapa dura negra, papel de 100g, cierre elástico dorado.",emoji:"📓"},
+  {id:5,nombre:"Llavero Metálico Sefirot",precio:8.99,categoria:"MODA",descripcion:"Aleación zinc, grabado láser del árbol de la vida.",emoji:"🔑"},
+  {id:6,nombre:"Taza Térmica Nebula",precio:18.99,categoria:"MODA",descripcion:"Acero inoxidable, doble pared, mantiene calor 6 horas.",emoji:"☕"},
+  {id:7,nombre:"Pañuelo Bolsillo Seda",precio:15.99,categoria:"MODA",descripcion:"Estampado cosmos, perfecto para blazer y trajes.",emoji:"🎀"},
+  {id:8,nombre:"Bolígrafo Lujo Black Gold",precio:22.99,categoria:"MODA",descripcion:"Cuerpo mate, detalles en oro de 18k, recarga incluida.",emoji:"🖋️"},
+  {id:9,nombre:"Parche Termoadhesivo ORIONIX",precio:5.99,categoria:"MODA",descripcion:"Bordado de alta densidad, aplica con plancha en 30 seg.",emoji:"🛡️"},
+  {id:10,nombre:"Mochila Canvas Minimalista",precio:29.99,categoria:"MODA",descripcion:"Lona resistente al agua, compartimento laptop 15 pulgadas.",emoji:"🎒"},
+  {id:11,nombre:"Sudadera Imperio Gold",precio:49.99,categoria:"FASHION STYLE",descripcion:"Corte oversized, hilo dorado en costuras, forro interior.",emoji:"👕"},
+  {id:12,nombre:"Cartera Slim RFID Chesed",precio:39.99,categoria:"FASHION STYLE",descripcion:"Cuero genuino, protección antirrobo, 6 ranuras tarjeta.",emoji:"💳"},
+  {id:13,nombre:"Gafas Sol Polarizadas Netzach",precio:59.99,categoria:"FASHION STYLE",descripcion:"Montura acetato negro, lentes UV400, estuche incluido.",emoji:"🕲👧"},
+  {id:14,nombre:"Mochila Urbana Binah",precio:79.99,categoria:"FASHION STYLE",descripcion:"Cuero sintético premium, múltiples compartimentos, antirrobo.",emoji:"🎏"},
+  {id:15,nombre:"Perfume Cosmos Noir 100ml",precio:89.99,categoria:"FASHION STYLE",descripcion:"Notas de ámbar, oud y madera de cedro. Larga duración.",emoji:"🧴"},
+  {id:16,nombre:"Cinturón Cuero Reversible",precio:45.99,categoria:"FASHION STYLE",descripcion:"Negro y marrón reversible, hebilla mate con logo ORIONIX.",emoji:"👔"},
+  {id:17,nombre:"Zapatillas Cosmos Limited",precio:129.99,categoria:"FASHION STYLE",descripcion:"Suela con glow ultravioleta, edición numerada 500 pares.",emoji:"👟w"},
+  {id:18,nombre:"Chaqueta Bomber Negra",precio:99.99,categoria:"FASHION STYLE",descripcion:"Forro interior con mapa estelar, cierre YKK japonés.",emoji:"🧥"},
+  {id:19,nombre:"Reloj Smartwatch Elite",precio:149.99,categoria:"FASHION STYLE",descripcion:"Monitor cardíaco, GPS, correa de silicona negra premium.",emoji:"⌚"},
+  {id:20,nombre:"Set Regalo Caballero ORIONIX",precio:119.99,categoria:"FASHION STYLE",descripcion:"Cartera, cinturón y llavero en caja de madera grabada.",emoji:"🎁"},
+  {id:21,nombre:"Reloj Automático Kether",precio:299.99,categoria:"MI DINASTIA",descripcion:"Movimiento suizo ETA, caja acero inoxidable, cristal zafiro.",emoji:"⌚"},
+  {id:22,nombre:"Anillo Titanio Negro Oro",precio:149.99,categoria:"MI DINASTIA",descripcion:"Acero quirúrgico, baño de oro 18k, diseño geométrico.",emoji:"💍"},
+  {id:23,nombre:"Bolso Cuero Italiano Malkuth",precio:350.00,categoria:"MI DINASTIA",descripcion:"Hecho a mano en Florencia, herrajes dorados, forro cosmos.",emoji:"👜"},
+  {id:24,nombre:"Chaqueta Cuero Sintético Elite",precio:189.99,categoria:"MI DINASTIA",descripcion:"Corte slim, costuras reforzadas a mano, estilo motociclista.",emoji:"🧥"},
+  {id:25,nombre:"Gemelos Traje Black Gold",precio:79.99,categoria:"MI DINASTIA",descripcion:"Ónix negro y borde dorado 18k, caja de terciopelo negro.",emoji:"👔"},
+  {id:26,nombre:"Maletín Ejecutivo Cuero",precio:249.99,categoria:"MI DINASTIA",descripcion:"Cuero genuino, combinación seguridad, compartimento laptop 17.",emoji:"💼"},
+  {id:27,nombre:"Zapatos Oxford Premium",precio:159.99,categoria:"MI DINASTIA",descripcion:"Cuero pulido italiano, suela de goma antideslizante.",emoji:"👞"},
+  {id:28,nombre:"Pulsera Cuero Trenzado",precio:89.99,categoria:"MI DINASTIA",descripcion:"Cuero negro trenzado a mano, cierre magnético de acero.",emoji:"📿"},
+  {id:29,nombre:"Caja Fuerte Portátil Lujo",precio:199.99,categoria:"MI DINASTIA",descripcion:"Para relojes y joyas, cerradura biométrica, fibra de carbono.",emoji:"🔒"},
+  {id:30,nombre:"Set Decantador Whisky Gold",precio:179.99,categoria:"MI DINASTIA",descripcion:"Cristal soplado a mano, base con grabado ORIONIX, 6 vasos.",emoji:"🥃"}
+];
+
+var CAT_STYLE = {
+  "MODA":     {img:"pimg-moda",    badge:"badge-moda",    label:"MODA"},
+  "FASHION STYLE": {img:"pimg-fashion", badge:"badge-fashion", label:"FASHION"},
+  "MI DINASTIA":   {img:"pimg-dinastia",badge:"badge-dinastia",label:"MI DINASTÍA"}
+};
+
+var activeFilter = "TODOS";
+
+(function(){
+  var p = new URLSearchParams(location.search);
+  var c = (p.get("cat")||"").toUpperCase().trim();
+  if(c.includes("MODA")&&!c.includes("FASHION")) activeFilter="MODA";
+  else if(c.includes("FASHION")||c.includes("STYLE")) activeFilter="FASHION STYLE";
+  else if(c.includes("DINAS")) activeFilter="MI DIMASTAIA";
+})();
+
+function setFilter(el) {
+  document.querySelectorAll(".ftab").forEach(function(t){t.classList.remove("on");});
+  el.classList.add("on");
+  activeFilter = el.dataset.cat;
+  var url = new URL(location.href);
+  if(activeFilter==="TODOS") url.searchParams.delete("cat");
+  else url.searchParams.set("cat", activeFilter);
+  history.replaceState({}, "", url);
+  render();
+}
+
+function render() {
+  var q = document.getElementById("search").value.toLowerCase().trim();
+  var sort = document.getElementById("sort").value;
+  var list = PRODUCTOS.filter(function(p) {
+    var catOk = activeFilter==="TODOS" || p.categoria===activeFilter;
+    var qOk = !q || p.nombre.toLowerCase().indexOf(q)>=0 || p.descripcion.toLowerCase().indexOf(q)>=0;
+    return catOk && qOk;
+  });
+  if(sort==="price-asc")  list.sort(function(a,b){return a.precio-b.precio;});
+  if(sort==="price-desc") list.sort(function(a,b){return b.precio-a.precio;});
+  if(sort==="name")       list.sort(function(a,b){return a.nombre.localeCompare(b.nombre);});
+
+  var ri = document.getElementById("results-info");
+  ri.innerHTML = list.length
+    ? "Mostrando <span>"+list.length+"</span> artículo"+(list.length!==1?"s":"")+(activeFilter!=="TODOS"?" en <span>"+activeFilter+"</span>":"")
+    : "";
+
+  var g = document.getElementById("pgrid");
+  if(!list.length) {
+    g.innerHTML = '<div class="empty"><div class="empty-icon">🌌</div><p>No se encontraron artículos</p><small>Prueba otro filtro o búsqueda</small></div>';
+    return;
+  }
+
+  var html = "";
+  for(var i=0; i<list.length; i++) {
+    var p = list[i];
+    var st = CAT_STYLE[p.categoria] || CAT_STYLE["MODA"];
+    html += '<div class="pcard">'
+      + '<div class="pimg ' + st.img + '">'
+      +   p.emoji
+      +   '<div class="pcat-badge ' + st.badge + '">' + st.label + '</div>'
+      + '</div>'
+      + '<div class="pinfo">'
+      +   '<div class="pname">' + p.nombre + '</div>'
+      +   '<div class="pdesc">' + p.descripcion + '</div>'
+      +   '<div class="pprice">€' + p.precio.toFixed(2) + '</div>'
+      +   '<button class="padd" onclick="addCart(' + p.id + ')">+ Añadir al Carrito</button>'
+      + '</div>'
+      + '</div>';
+  }
+  g.innerHTML = html;
+  updateCartUI();
+}
+
+function addCart(id) {
+  var p = null;
+  for(var i=0; i<PRODUCTOS.length; i++){if(PRODUCTOS[i].id===id){p=PRODUCTOS[i];break;}}
+  if(!p) return;
+  var cart = JSON.parse(localStorage.getItem("orionix_cart")||"[]");
+  var idx = -1;
+  for(var i=0; i<cart.length; i++){if(cart[i].id===id){idx=i;break;}}
+  if(idx>=0) cart[idx].qty = (cart[idx].qty||1)+1;
+  else cart.push({id:p.id, nombre:p.nombre, precio:p.precio, categoria:p.categoria, emoji:p.emoji, qty:1});
+  localStorage.setItem("orionix_cart", JSON.stringify(cart));
+  updateCartUI();
+  toast("▦ Añadido: " + p.nombre);
+}
+
+function updateCartUI() {
+  var cart = JSON.parse(localStorage.getItem("orionix_cart")||"[]");
+  var total = 0;
+  for(var i=0; i<cart.length; i++) total += (cart[i].qty||1);
+  document.getElementById("cnt").textContent = total;
+  document.getElementById("cf-cnt").textContent = total;
+  document.getElementById("cart-float").className = "cart-float" + (total>0?" on":"");
+}
+
+function toast(m) {
+  var t = document.getElementById("toast");
+  t.textContent = m;
+  t.classList.add("on");
+  clearTimeout(t._t);
+  t._t = setTimeout(function(){t.classList.remove("on");}, 2800);
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll(".ftab").forEach(function(btn) {
+    btn.classList.remove("on");
+    if(btn.dataset.cat === activeFilter) btn.classList.add("on");
+    btn.addEventListener("click", function(){ setFilter(btn); });
+  });
+  document.getElementById("search").addEventListener("input", render);
+  document.getElementById("sort").addEventListener("change", render);
+  render();
+  updateCartUI();
+});
+
+(function(){
+  var c=document.getElementById("cv"), ctx=c.getContext("2d");
+  function r(){c.width=innerWidth;c.height=innerHeight;}
+  r(); addEventListener("resize",r);
+  var stars=Array.from({length:90},function(){return{x:Math.random(),y:Math.random(),rad:Math.random()*.9+.1,a:Math.random(),da:(Math.random()-.5)*.005};});
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(function(s){
+      s.a=Math.max(.03,Math.min(.75,s.a+s.da));
+      if(s.a<=.03||s.a>=.75) s.da*=-1;
+      ctx.beginPath();
+      ctx.arc(s.x*c.width,s.y*c.height,s.rad,0,Math.PI*2);
+      ctx.fillStyle="rgba(232,200,106,"+(s.a*.4)+")";
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 </script>
+<script src="orionix-profile.js"></script>
 </body>
 </html>

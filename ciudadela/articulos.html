@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ORIONIX - Catalogo</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&amp;family=Cormorant+Garamond:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0b0b0d;--gold:#e8c86a;--gold2:#f5e0a0;--gold3:#b89a40;--txt:#f0e8d0;--pur:#6a3d9a;--card:#12121a;--bor:rgba(232,200,106,0.2)}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--txt);font-family:'Cormorant Garamond',serif;min-height:100vh}
 canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
-nav{position:sticky;top:0;z-index:100;background:rgba(11,11,13,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--bor);padding:14px 28px;display:flex;justify-content:space-between;aolign-items:center}
+nav{position:sticky;top:0;z-index:100;background:rgba(11,11,13,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--bor);padding:14px 28px;display:flex;justify-content:space-between;align-items:center}
 .logo{font-family:'Cinzel',serif;font-size:1.4rem;color:var(--gold);text-decoration:none;letter-spacing:3px}
 .nav-links{display:flex;gap:22px}
 .nav-links a{color:var(--txt);text-decoration:none;font-size:.9rem;letter-spacing:1px;transition:color .3s}
@@ -21,7 +21,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(11,11,13,.95);backdrop-fil
 .wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:36px 20px 60px}
 .bc{color:var(--gold3);font-size:.85rem;letter-spacing:2px;margin-bottom:26px}
 .bc a{color:var(--gold);text-decoration:none}
-h1[data-title]{font-family:'Cinzel',serif;font-size:2.4rem;color:var(--gold);letter-spacing:5px;margin-bottom:8px;text-shadow:0 0 28px rgba(232,200,106,.4)}
+h1{font-family:'Cinzel',serif;font-size:2.4rem;color:var(--gold);letter-spacing:5px;margin-bottom:8px;text-shadow:0 0 28px rgba(232,200,106,.4)}
 .sub{color:var(--gold2);font-style:italic;letter-spacing:2px;margin-bottom:26px}
 .stats{display:flex;gap:20px;margin-bottom:26px;flex-wrap:wrap}
 .stat{background:var(--card);border:1px solid var(--bor);border-radius:10px;padding:13px 22px;text-align:center}
@@ -37,7 +37,7 @@ h1[data-title]{font-family:'Cinzel',serif;font-size:2.4rem;color:var(--gold);let
 .card:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 8px 28px rgba(0,0,0,.5)}
 .cimg{width:100%;height:200px;display:flex;align-items:center;justify-content:center;font-size:3.8rem;position:relative}
 .cimg-moda{background:linear-gradient(135deg,rgba(232,200,106,.15),#1a1a22)}
-.cimg-fashion{\ackground:linear-gradient(135deg,rgba(156,39,176,.18),#1a1a22)}
+.cimg-fashion{background:linear-gradient(135deg,rgba(156,39,176,.18),#1a1a22)}
 .cimg-dinastia{background:linear-gradient(135deg,rgba(255,215,0,.12),#1a1a22)}
 .cbadge2{position:absolute;top:8px;left:8px;background:var(--pur);color:#fff;font-size:.62rem;padding:3px 8px;border-radius:4px;font-family:'Cinzel',serif;letter-spacing:1px}
 .cinfo{padding:18px}
@@ -84,7 +84,7 @@ h1[data-title]{font-family:'Cinzel',serif;font-size:2.4rem;color:var(--gold);let
     <a href="comunidad.html">Comunidad</a>
     <a href="hogar.html">Hogar</a>
   </div>
-  <button class="cart-btn" onclick="toggleCart()">CARRITO <span class="cbadge" id="badge">0</span></button>
+  <button class="cart-btn" onclick="toggleCart()">CARRITO 5�aT cRasY="I`�Jge" id="badge">0</span></button>
 </nav>
 <div class="wrap">
   <div class="bc"><a href="hub.html">ORIONIX</a> &rsaquo; <a href="tienda.html">Tienda</a> &rsaquo; Catalogo</div>
@@ -119,21 +119,21 @@ h1[data-title]{font-family:'Cinzel',serif;font-size:2.4rem;color:var(--gold);let
 <div class="toast" id="toast"></div>
 <script>
 var P=[
- {i:1,n:"Camiseta Cosmos Basic",p:9.99,c:"MODA",d:"Algodon 100%, logo bordado en gold.",e:"\uD83D\uDC55"},
+ {i:1,n:"Camiseta Cosmos Basic",p:9.99,c:"MODA",d:"Algodon 100%, logo bordado en gold. Corte clasico.",e:"\uD83D\uDC55"},
  {i:2,n:"Gorra Snapback AXEL",p:14.99,c:"MODA",d:"Ajustable, bordado 3D del ojo cosmico.",e:"\uD83E\uDDE2"},
  {i:3,n:"Calcetines Premium x3",p:7.99,c:"MODA",d:"Microfibra transpirable, refuerzo dorado.",e:"\uD83E\uDDA6"},
- {i:4,n:"Libreta Kabalion A5",p:12.99,c:"MODA",d:"Tapa dura negra, papel 100g, cierre elastico.",e:"\uD83D\uDCD3"},
+ {i:4,n:"Libreta Kabalion A5",p:12.99,c:"MODA",d:"Tapa dura negra, papel 100g, cierre elastico.",e:"\uD83D\uDCT �,
  {i:5,n:"Llavero Metalico Sefirot",p:8.99,c:"MODA",d:"Aleacion zinc, grabado laser del arbol.",e:"\uD83D\uDD11"},
- {i:6,n�=�Taza Termica Nebula",p:18.99,c:"MODA",d:"Acero inoxidable, mantiene calor 6 horas.",e:"\u2615"},
+ {i:6,n:"Taza Termica Nebula",p:18.99,c:"MODA",d:"Acero inoxidable, mantiene calor 6 horas.",e:"\u2615"},
  {i:7,n:"Panuelo Bolsillo Seda",p:15.99,c:"MODA",d:"Estampado cosmos, perfecto para blazer.",e:"\uD83C\uDF80"},
  {i:8,n:"Boligrafo Lujo Black Gold",p:22.99,c:"MODA",d:"Cuerpo mate, detalles en oro de 18k.",e:"\u2712\uFE0F"},
- {i:9,n:"Parche Termoadhesivo ORIONIX",p:5.99,c:"MODA",d:"Bordado alta densidad, aplica con plancha.",e:"\uD83D\uDEE1U�FE0F"},
+ {i:9,n:"Parche Termoadhesivo ORIONIX",p:5.99,c:"MODA",d:"Bordado alta densidad, aplica con plancha.",e:"\uD83D\uDEE1\uFE0F"},
  {i:10,n:"Mochila Canvas Minimalista",p:29.99,c:"MODA",d:"Lona resistente, compartimento laptop 15.",e:"\uD83C\uDF92"},
  {i:11,n:"Sudadera Imperio Gold",p:49.99,c:"FASHION STYLE",d:"Corte oversized, hilo dorado en costuras.",e:"\uD83D\uDC55"},
  {i:12,n:"Cartera Slim RFID Chesed",p:39.99,c:"FASHION STYLE",d:"Cuero genuino, proteccion antirrobo.",e:"\uD83D\uDCB3"},
  {i:13,n:"Gafas Sol Polarizadas Netzach",p:59.99,c:"FASHION STYLE",d:"Montura acetato negro, lentes UV400.",e:"\uD83D\uDD76\uFE0F"},
- {i:14,n:"Mochila Urbana Binah",p:79.99,c:"FASHION STYLE",d:"Cuero sintetico premium, antirrobo.",e:"\uD83C\uDF92"},
- {i:15,n:"Perfume Cosmos Noir 100ml",p:89.99,c:"FASHION STYLE",d:"Notas de ambar, oud y madera de cedro.",e:"\uD83E\uDDD0"},
+ {i:14,n:"Mochila Urbana Binah",p:79.99,c:"FASHION STYLE",d:"Cuero sintetico premium, antirrobo.",e:"\uD83C\uDF92},
+ {i:15,n:"Perfume Cosmos Noir 100ml",p:89.99,c:"FASHION STYLE",d:"Notas de ambar, oud y madera de cedro.",e:"\uD83E\uDDF4"},
  {i:16,n:"Cinturon Cuero Reversible",p:45.99,c:"FASHION STYLE",d:"Negro/marron, hebilla mate con logo.",e:"\uD83D\uDC54"},
  {i:17,n:"Zapatillas Cosmos Limited",p:129.99,c:"FASHION STYLE",d:"Suela con glow, edicion numerada.",e:"\uD83D\uDC5F"},
  {i:18,n:"Chaqueta Bomber Negra",p:99.99,c:"FASHION STYLE",d:"Forro mapa estelar, cierre YKK.",e:"\uD83E\uDDA5"},
@@ -142,97 +142,15 @@ var P=[
  {i:21,n:"Reloj Automatico Kether",p:299.99,c:"MI DINASTIA",d:"Movimiento suizo, caja oro rosa, cristal zafiro.",e:"\u231A"},
  {i:22,n:"Anillo Titanio Negro Oro",p:149.99,c:"MI DINASTIA",d:"Acero quirurgico, bano de oro 18k.",e:"\uD83D\uDC8D"},
  {i:23,n:"Bolso Cuero Italiano Malkuth",p:350.00,c:"MI DINASTIA",d:"Hecho a mano, herrajes dorados, forro cosmos.",e:"\uD83D\uDC5C"},
- {i:24,n:"Chaqueta Cuero Sintetico Elite",p:189.99,c:"MI DINASTIA",d:"Corte slim, costuras reforzadas.",e:"\uD83E\uDA5%�,
+ {i:24,n:"Chaqueta Cuero Sintetico Elite",p:189.99,c:"MI DINASTIA",d:"Corte slim, costuras reforzadas.",e:"\uD83E\uDE5%�,
  {i:25,n:"Gemelos Traje Black Gold",p:79.99,c:"MI DINASTIA",d:"Onix negro y borde dorado 18k.",e:"\uD83D\uDC54"},
  {i:26,n:"Maletin Ejecutivo Cuero",p:249.99,c:"MI DINASTIA",d:"Cuero genuino, seguridad, laptop 17.",e:"\uD83D\uDCCC"},
  {i:27,n:"Zapatos Oxford Premium",p:159.99,c:"MI DINASTIA",d:"Cuero pulido, suela antideslizante.",e:"\uD83D\uDC5E"},
  {i:28,n:"Pulsera Cuero Trenzado",p:89.99,c:"MI DINASTIA",d:"Cuero negro, cierre magnetico de acero.",e:"\uD83D\uDCFF"},
- {i:29,n:"Caja Fuerte Portatil Lujo",p:199.99,c:"MI DINASTIA",d:"Para relojues y joyas, cerradura biometrica.",e:"\uD83D\uDD12"},
+ {i:29,n:"Caja Fuerte Portatil Lujo",p:199.99,c:"MI DINASTIA",d:"Para relojes y joyas, cerradura biometrica.",e:"\uD83D\uDD12"},
  {i:30,n:"Set Decantador Whisky Gold",p:179.99,c:"MI DINASTIA",d:"Cristal soplado a mano, grabado ORIONIX.",e:"\uD83E\uDD43"}
 ];
 
 var cart=JSON.parse(localStorage.getItem('orionix_carrito')||'[]');
 var filtroActual='TODOS',busquedaActual='';
-
-var catStyle={'MODA':{cls:'cimg-moda',lbl:'MODA'},'FASHION STYLE':{cls:'cimg-fashion',lbl:'FASHION'},'MI DINASTIA':{cls:~'��[Y�Y[�\�XI����S�T�PI�_N��[��[ۈ�]\�J
-^ݘ\�T�Y��[��X�X[OOI�����[[��[\��[��[ۊ
-^ܙ]\����OOY�[��X�X[�JN�Y��\�]YYPX�X[
-^ݘ\�OX�\�]YYPX�X[����\��\�J
-N�[��[\��[��[ۊ
-^ܙ]\�������\��\�J
-K�[�^يJO�L�����\��\�J
-K�[�^يJO�L�JN�\�]\���B��[��[ۈ�[�\�
-^ݘ\�Y�]\�J
-N���[Y[���][[Y[��RY
-	���[	�K�^�۝[�[�[��ݘ\��Y��[Y[���][[Y[��RY
-	�ܚY	�N�Y�[�[��
-^�˚[��\�SI��[OH�ܚYX��[[��K�LN�^X[Yێ��[�\����܎��NY��Y[�΍L����^H��X��ˏ���ܙ]\���Y˚[��\�SI�����ܑXX�
-�[��[ۊ
-^ݘ\��X�]�[V���_�]�[V��S�I�Nݘ\�]�Y��[Y[��ܙX]Q[[Y[�
-	�]��N�]���\�Ә[YOI��\�	��]��[��\�SI�]��\��H��[Y�	�������ȏ��[�����J����[���[��\��H�ؘY�L��������
-����[���]�����]��\��H��[��ȏ�]��\��H���]���������]��]��\��H�ۛ�X��H���������]��]��\��H��\�ȏ����
-���]��]��\��H��[ȏ��[��\��H���X�[ȏ��]\�������њ^Y
-�J����[���]ۈ�\��H��Y�ۘ�X��H�Y�\�
-	���J��H��S�QT�؝]ۏ��]���]������\[��[
-]�N�JN�Y�[��[ۈ�[�\��]��^ٚ[��X�X[X�]؝\�]YYPX�X[I��ݘ\��Y��[Y[��]Y\�T�[X�܊	˘�\��\��N�Y��X���[YOI�����[Y[��]Y\�T�[X�ܐ[
-	˙���K��ܑXX�
-�[��[ۊ�^؋��\��\���[[ݙJ	�ۉ�N�JN�Y���X����\��\��Y
-	�ۉ�Nܙ[�\�
-N�Y�[��[ۈ�\��\��^؝\�]YYPX�X[]�ܙ[�\�
-N�Y�[��[ۈY�\�
-Y
-^ݘ\���[�[ٛ܊�\�OL�O�[���J��^�Y��WK�OOOZY
-^���T�WN؜�XZ��_ZY�\��
-\�]\��ݘ\�^>��[ٛ܊�\�OL�O�\��[���J��^�Y��\��WK�OOOZY
-^�^X�\��WN؜�XZ��_ZY�^
-Y^�]J���[�H�\��\�
-�N����K���������N����K]N�_JN��]�P�\�
-
-N��\�
-	ȉ�������Ȉ[�YY��N�Y�[��[ۈ�[P�\�
-Y
-^��\�X�\���[\��[��[ۊ
-^ܙ]\���HOOZY�JN��]�P�\�
-
-N�Y�[��[ۈ�[��T]JY
-^ٛ܊�\�OL�O�\��[���J��^�Y��\��WK�OOOZY
-^��\��WK�]OOY�Y��\��WK�]OLX�\���X�JKJN؜�XZ��_\�]�P�\�
-
-N�Y�[��[ۈ�]�P�\�
-
-^���[�ܘY�K��]][J	�ܚ[ۚ^��\��]����Ӌ���[��Y�J�\�
-JN���[�ܘY�K��]][J	�ܚ[ۚ^��\�	���Ӌ���[��Y�J�\��X\
-�[��[ۊ
-^ܙ]\���Y��K��X��N����X�[Μ�[[ښN��K]N��]_N�JJJN�\]URJ
-N�Y�[��[ۈ\]URJ
-^ݘ\��X�\���YX�J�[��[ۊ�
-^ܙ]\�����]N�K
-Nݘ\��Y�OY��[Y[���][[Y[��RY
-	ؘY�I�NؘY�K�^�۝[�]�ؘY�K��[K�\�^O]���ٛ^	ΉۛۙI�ݘ\��OY��[Y[���][[Y[��RY
-	��][\��Nݘ\��Y��[Y[���][[Y[��RY
-	���[	�N�Y�X�\��[��
-^��K�[��\�SI��[OH�^X[Yێ��[�\����܎��NY��X\��[�]����H�\��]�\�H�X�[�������^�۝[�I��	�ܙ]\���X�K�[��\�SI��ݘ\��[L��\���ܑXX�
-�[��[ۊ
-^��[
-�\�
-��]Nݘ\�Y��[Y[��ܙX]Q[[Y[�
-	�]��N���\�Ә[YOI��][I���[��\�SI�]��\��H��][KZ[Yȏ����J���]��K��][KZ[��ȏ�]��\��H��][K[����������]��]��\��H��][K\���]\������
-��]JK�њ^Y
-�J���]��]��\��H��][KX�����]ۈۘ�X��H��[��T]J	���J��LJH��O؝]ۏ��[�����]J����[���]ۈۘ�X��H��[��T]J	���J��JH���؝]ۏ��]ۈ�\��H���[H�ۘ�X��H��[P�\�
-	���J�I˜�[[ݙJ
-H��[[Z[�\�؝]ۏ��]���]�����K�\[��[
-
-N�JN���^�۝[�]�[�њ^Y
-�N�Y�[��[ۈ���P�\�
-
-^���[Y[���][[Y[��RY
-	��YX�\��K��\��\�����J	��[��N���[Y[���][[Y[��RY
-	�ݙ\�^I�K��\��\�����J	�ۉ�N�Y�[��[ۈ�\�
-J^ݘ\�Y��[Y[���][[Y[��RY
-	��\�	�N��^�۝[�[N���\��\��Y
-	�����N��X\�[Y[�]
-��
-N���\�][Y[�]
-�[��[ۊ
-^���\��\���[[ݙJ	�����N�K�
-N�B�
+var catStyle={'MODA':{cls:~'�6��r���Fr��&ât��Dw��td4����5E��Rs��6�3��~cimg-fashion',lbl:'FASHION'},'MI DINASTIA':{cls:'cimg-dinastia',lbl:'�UMQ%4����)�չ�ѥ������1��ф���مȁ��@��������ɽ��Յ�����Q==L���������ѕȡ�չ�ѥ������ɕ��ɸ�����������ɽ��Յ������������Օ����Յ���مȁ������Օ����Յ��ѽ1�ݕ��͔����������ѕȡ�չ�ѥ������ɕ��ɸ�����ѽ1�ݕ��͔��������=��Ĥ���������ѽ1�ݕ��͔��������=��Ĥ��������ɕ��ɸ����)�չ�ѥ���ɕ���Ƞ��مȁ�����1��ф��푽�յ��й���������	�%����Q�х����ѕ����ѕ���������Ѡ�مȁ�����յ��й���������	�%����ɥ��������������Ѡ�휹�����!Q50�������屔�ɥ�����յ��ļ���ѕ�е�����鍕�ѕ�퍽���荄������������������9������ɽ�Սѽ̸�����ɕ��ɸ����������!Q50��������������չ�ѥ������مȁ������M�展m���u���M�展l�5=�t�مȁ�������յ��й�ɕ�ѕ�����Р���؜�푥ع�����9�������ɐ�푥ع�����!Q50���؁�����􉍥������й��̬���������������������������������􉍉����Ȉ����й�����������𽑥���؁�����􉍥������؁�����􉍍�Ј��������𽑥���؁�����􉍹���ɔ���������𽑥���؁�����􉍑�͌���������𽑥���؁������������������������ɕ��������ɼ윭����ѽ�ᕐ�Ȥ�����������ѽ�������􉍅�����������􉅑���Р����������9%H���ѽ��𽑥��𽑥���흽��������������ؤ�����)�չ�ѥ�������Ʌȡ��б�Ѹ�홥��ɽ��Յ���������Օ����Յ�����مȁ�����յ��й�Օ��M����ѽȠ����͍�Ȝ���������م�Ք���푽�յ��й�Օ��M����ѽ�������������������չ�ѥ�����툹�����1��йɕ��ٔ��������������Ѹ��Ѹ������1��й����������ɕ���Ƞ���)�չ�ѥ�����͍�ȡإ����Օ����Յ����ɕ���Ƞ���)�չ�ѥ��������С����مȁ�ɽ���ձ�홽ȡمȁ������@�����Ѡ���������Am�t����������ɽ��Am�t�ɕ����������ɽ��ɕ��ɸ�مȁ����ձ�홽ȡمȁ�������й����Ѡ�������������m�t���������������m�t�ɕ���������ॕ���䬬핱͔����й��͠�����ɽ�������ɽ�����ɽ�������ɽ������������ٕͅ��Р��ѽ��Р�����ɽ������������������)�չ�ѥ���ɕ���С���퍅������й���ѕȡ�չ�ѥ������ɕ��ɸ�������������ٕͅ��Р���)�չ�ѥ���������E�䡥����홽ȡمȁ�������й����Ѡ�������������m�t��������퍅��m�t��������������m�t����������й���������Ĥ�ɕ�����ٕͅ��Р���)�չ�ѥ���ٕͅ��Р�������MѽɅ���͕�%ѕ����ɥ����}���ɥѼ��)M=8���ɥ����䡍��Ф�������MѽɅ���͕�%ѕ����ɥ����}���М�)M=8���ɥ����䡍��й�����չ�ѥ������ɕ��ɹ������������ɔ������ɕ��������������������������������������ѕU$����)�չ�ѥ�������ѕU$���مȁѽ�����йɕ�Ս���չ�ѥ���̱���ɕ��ɸ�̭�����������مȁ���������յ��й���������	�%����������퉅����ѕ����ѕ���ѽ�퉅������屔���������ѽ����������蝹�����مȁ������յ��й���������	�%�����ѕ�̜��مȁ������յ��й���������	�%����ѽх�����������й����Ѡ�퍤������!Q50�������屔�ѕ�е�����鍕�ѕ�퍽���荄������ɝ���ѽ��������Qԁ���ɥѼ���ф�م���������йѕ����ѕ����������ɕ��ɸ����������!Q50����مȁѽх���퍅�й��������չ�ѥ������ѽх�������������مȁ�����յ��й�ɕ�ѕ�����Р���؜�퐹�����9�������ѕ��퐹�����!Q50���؁�����􉍥ѕ��������������𽑥���؁�����􉍥ѕ���������؁�����􉍥ѕ������������𽑥���؁�����􉍥ѕ��������ɼ윬���������䤹ѽ�ᕐ�Ȥ��𽑥���؁�����􉍥ѕ����ɰ�����ѽ���������􉍡����E�䠜��������Ĥ������ѽ��������������䬜���������ѽ���������􉍡����E�䠜�������Ĥ������ѽ�����ѽ��������ɕ�����������ɕ���Р��������������������ѽ��𽑥��𽑥���퍤�������������������йѕ����ѕ���ѽх��ѽ�ᕐ�Ȥ��)�չ�ѥ���ѽ������Р�푽�յ��й���������	�%���ͥ����Ȝ�������1��йѽ������������푽�յ��й���������	�%����ٕɱ�䜤������1��йѽ������������)�չ�ѥ���ѽ��С���مȁ�����յ��й���������	�%���ѽ��М��йѕ����ѕ�����й�����1��й�����͡�ܜ�퍱���Q�����Сй}Ф�й}��͕�Q�����С�չ�ѥ�����й�����1��йɕ��ٔ��͡�ܜ�����������(��չ�ѥ�����مȁ�����յ��й���������	�%����؜�������������ѕ�Р�ɐ���չ�ѥ���Ƞ�팹ݥ�Ѡ������]��Ѡ팹������������!�������Ƞ�텑�ٕ��1��ѕ��Ƞ�ɕͥ锜����مȁ���Ʌ乙ɽ�������Ѡ������չ�ѥ�����ɕ��ɹ���5�Ѡ�Ʌ���������5�Ѡ�Ʌ���������5�Ѡ�Ʌ��������䬸ȱ��5�Ѡ�Ʌ����������5�Ѡ�Ʌ��������Ԥ���������졙չ�ѥ��������ํ����I��Р������ݥ�Ѡ��������Ф�̹��������չ�ѥ����������5�Ѡ���࠸�Ա5�Ѡ������ܱ������������������������������ܥ����������้����A�Ѡ����ๅɌ���ੌ�ݥ�Ѡ���䩌������б��Ȱ��5�Ѡ�A$�Ȥ��๙���M�屔��ɝ�����Ȱ������ذ��������Ԥ������๙���������ɕ�Օ������ѥ��Ʌ����������������(��չ�ѥ�����مȁ��Ʌ�����܁UI1M��ɍ�A�Ʌ�̡����ѥ���͕�ɍ���مȁ������Ʌ�̹��Р���М�������Х�مȁ���������UI%�������С��Ф�ѽU�����͔���مȁ�ѹ%���������ȹ����Ց�̠�M!%=8���홥��ɽ��Յ���M!%=8�MQe1��ѹ%��������͔�����ȹ����Ց�̠�%9L���홥��ɽ��Յ���5$�%9MQ%��ѹ%��������͔�����ȹ����Ց�̠�5=���홥��ɽ��Յ���5=��ѹ%������مȁ�ѹ�����յ��й�Օ��M����ѽ�����������ѹ̹��������չ�ѥ�����툹�����1��йɕ��ٔ��������������ѹ�m�ѹ%��t��ѹ�m�ѹ%��t������1��й�����������ɕ���Ƞ������ѕU$��������(�͍ɥ���(𽉽���(�ѵ�

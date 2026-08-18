@@ -1,1 +1,149 @@
-<�s�D
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KRC · Cuartel General Buzz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--cosmos:#0b0b0d;--gold:#e8c86a;--gold-l:#f5e0a0;--gold-d:#b89a40;--txt:#f0e8d0;--purple:#6a3d9a;--panel:rgba(15,12,25,0.9)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--cosmos);color:var(--txt);font-family:'Cormorant Garamond',serif;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+#stars{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+header{position:relative;z-index:10;padding:12px 24px;border-bottom:1px solid rgba(232,200,106,.2);background:rgba(11,11,13,.92);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between}
+.htitle{font-family:'Cinzel',serif;font-size:1rem;letter-spacing:3px;color:var(--gold)}
+.hsub{font-size:.65rem;color:rgba(240,232,208,.35);letter-spacing:1px;margin-top:2px}
+.sdot{width:8px;height:8px;border-radius:50%;background:#444;display:inline-block;margin-right:6px;transition:background .3s}
+.sdot.on{background:#4caf50;box-shadow:0 0 8px #4caf50}
+.sdot.off{background:#f44336}
+.sdot.cn{background:var(--gold);animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.layout{position:relative;z-index:5;display:flex;flex:1;overflow:hidden}
+.sidebar{width:210px;min-width:210px;border-right:1px solid rgba(232,200,106,.1);background:rgba(11,11,13,.7);display:flex;flex-direction:column}
+.stitle{padding:11px 15px;font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:2px;color:var(--gold-d);border-bottom:1px solid rgba(232,200,106,.08);text-transform:uppercase}
+.chlist{flex:1;overflow-y:auto;padding:6px 0}
+.ch{padding:9px 14px;cursor:pointer;font-size:.82rem;color:rgba(240,232,208,.5);transition:all .2s;border-left:2px solid transparent;user-select:none}
+.ch:hover{background:rgba(232,200,106,.07);color:var(--txt)}
+.ch.active{border-left-color:var(--gold);color:var(--gold);background:rgba(232,200,106,.09)}
+.ch-hash{color:var(--gold-d);margin-right:3px}
+.agents{border-top:1px solid rgba(232,200,106,.08)}
+.ag{padding:7px 14px;display:flex;align-items:center;gap:8px;font-size:.78rem;color:rgba(240,232,208,.4)}
+.ag-dot{width:5px;height:5px;border-radius:50%;background:#333;flex-shrink:0}
+.ag-dot.on{background:#4caf50;box-shadow:0 0 5px #4caf50}
+.chat{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.msgs{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:78%;animation:fi .25s ease}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.msg.mine{align-self:flex-end}
+.mhdr{font-size:.62rem;color:rgba(240,232,208,.3);margin-bottom:3px;display:flex;gap:7px;align-items:center}
+.mauthor{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:1px}
+.mauthor.me{color:var(--gold)}
+.mauthor.unknown{color:rgba(240,232,208,.45)}
+.mbub{background:var(--panel);border:1px solid rgba(232,200,106,.1);border-radius:10px;padding:10px 14px;font-size:.88rem;line-height:1.65;backdrop-filter:blur(5px);word-break:break-word}
+.msg.mine .mbub{background:rgba(232,200,106,.1);border-color:rgba(232,200,106,.22)}
+.iarea{padding:13px 18px;border-top:1px solid rgba(232,200,106,.1);background:rgba(11,11,13,.92);backdrop-filter:blur(10px)}
+.irow{display:flex;gap:10px;align-items:flex-end}
+.cbadge{font-family:'Cinzel',serif;font-size:.58rem;color:var(--gold-d);letter-spacing:1px;white-space:nowrap;padding-bottom:3px}
+textarea{flex:1;background:rgba(240,232,208,.04);border:1px solid rgba(232,200,106,.16);border-radius:7px;padding:10px 13px;color:var(--txt);font-family:'Cormorant Garamond',serif;font-size:.92rem;outline:none;resize:none;min-height:40px;max-height:100px;transition:border-color .2s;line-height:1.4}
+textarea:focus{border-color:rgba(232,200,106,.42)}
+textarea::placeholder{color:rgba(240,232,208,.25)}
+.sbtn{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:var(--cosmos);border:none;border-radius:7px;padding:10px 16px;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:2px;cursor:pointer;transition:all .2s;white-space:nowrap;height:40px}
+.sbtn:hover:not(:disabled){opacity:.88;transform:translateY(-1px)}
+.sbtn:disabled{opacity:.3;cursor:not-allowed}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:rgba(232,200,106,.15);border-radius:2px}
+.welcome{text-align:center;padding:60px 20px;color:rgba(240,232,208,.2)}
+.wico{font-size:2.2rem;margin-bottom:12px}
+.wtxt{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:2px}
+.toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:rgba(11,11,13,.97);border:1px solid var(--gold-d);color:var(--gold-l);padding:8px 18px;border-radius:6px;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:1px;z-index:200;opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1}
+.err-banner{background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.3);color:#ff8a80;padding:10px 16px;border-radius:8px;font-size:.8rem;margin:16px;display:none}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<header>
+  <div>
+    <div class="htitle">⚡ KRC · CUARTEL GENERAL</div>
+    <div class="hsub">Relay: wss://krc.communities.buzz.xyz</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:7px">
+    <span class="sdot cn" id="sdot"></span>
+    <span style="font-size:.68rem;color:rgba(240,232,208,.4)" id="stxt">Conectando...</span>
+  </div>
+</header>
+<div class="layout">
+  <div class="sidebar">
+    <div class="stitle">📡 Canales</div>
+    <div class="chlist" id="chlist">
+      <div class="ch active" onclick="selCh(this,null)"><span class="ch-hash">#</span>general</div>
+    </div>
+    <div class="agents">
+      <div class="stitle">🤖 Agentes KRC</div>
+      <div class="ag"><span class="ag-dot on"></span><span>n8n (yo)</span></div>
+      <div class="ag"><span class="ag-dot" id="d-axel"></span><span>AXEL</span></div>
+      <div class="ag"><span class="ag-dot" id="d-claude"></span><span>Claude</span></div>
+      <div class="ag"><span class="ag-dot" id="d-gpt"></span><span>ChatGPT</span></div>
+      <div class="ag"><span class="ag-dot" id="d-cop"></span><span>Copilot</span></div>
+    </div>
+  </div>
+  <div class="chat">
+    <div id="errbanner" class="err-banner"></div>
+    <div class="msgs" id="msgs">
+      <div class="welcome">
+        <div class="wico">⚡</div>
+        <div class="wtxt">Conectando al Relay KRC...</div>
+      </div>
+    </div>
+    <div class="iarea">
+      <div class="irow">
+        <span class="cbadge" id="cbadge">#general</span>
+        <textarea id="inp" placeholder="Escribe una misión… (Enter = enviar, Shift+Enter = nueva línea)" rows="1"></textarea>
+        <button class="sbtn" id="sbtn" onclick="sendMsg()" disabled>ENVIAR</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script type="module">
+const CFG={nsec:'nsec13c6ej9czuld4vv34evfu3tetpenkq5cg2xj43ep6yscza0n5kq6q8egh8m',npub:'npub1xpfdagqv4h49c7ntlzv636vfq977ahf5lmc8nr3v4s5vfhs64d0sum99wl',relay:'wss://krc.communities.buzz.xyz',name:'El Creador ⚡'}
+let schnorr,sha256fn,bech32lib
+try{const[c,h,b]=await Promise.all([import('https://esm.sh/@noble/curves@1.6.0/secp256k1'),import('https://esm.sh/@noble/hashes@1.4.0/sha256'),import('https://esm.sh/@scure/base@1.1.7')]);schnorr=c.schnorr;sha256fn=h.sha256;bech32lib=b.bech32}catch(e){showErr('Error cargando libs criptográficas: '+e.message)}
+const h2b=hex=>new Uint8Array(hex.match(/.{1,2}/g).map(b=>parseInt(b,16)))
+const b2h=b=>Array.from(b).map(x=>x.toString(16).padStart(2,'0')).join('')
+const enc=new TextEncoder()
+let privKey,myPub
+function initKeys(){if(!schnorr||!bech32lib)return false;try{const{words}=bech32lib.decode(CFG.nsec,90);privKey=new Uint8Array(bech32lib.fromWords(words));myPub=b2h(schnorr.getPublicKey(privKey));return true}catch(e){showErr('Error con la clave: '+e.message);return false}}
+function evId(ev){const s=JSON.stringify([0,ev.pubkey,ev.created_at,ev.kind,ev.tags,ev.content]);return b2h(sha256fn(enc.encode(s)))}
+function signEv(partial){const ev={...partial,pubkey:myPub,id:''};ev.id=evId(ev);ev.sig=b2h(schnorr.sign(h2b(ev.id),privKey));return ev}
+let ws,curCh=null,channels={},reconTimer=null
+function connect(){setSt('cn','Conectando...');try{ws=new WebSocket(CFG.relay)}catch(e){setSt('off','Error');schedRecon();return}
+ws.onopen=()=>{setSt('on','Conectado al Relay KRC');document.getElementById('sbtn').disabled=false;toast('⚡ Relay KRC conectado');const since=Math.floor(Date.now()/1000)-86400;wsSend(['REQ','krc-ch',{kinds:[40,41],limit:50}]);wsSend(['REQ','krc-msgs',{kinds:[1,42],since,limit:100}]);document.getElementById('msgs').innerHTML=''}
+ws.onmessage=e=>{try{const m=JSON.parse(e.data);if(m[0]==='AUTH')doAuth(m[1]);else if(m[0]==='EVENT')onEvent(m[2])}catch(e){}}
+ws.onclose=()=>{setSt('off','Desconectado');document.getElementById('sbtn').disabled=true;schedRecon()}
+ws.onerror=()=>setSt('off','Error de relay')}
+function wsSend(msg){if(ws?.readyState===WebSocket.OPEN)ws.send(JSON.stringify(msg))}
+function schedRecon(){if(!reconTimer)reconTimer=setTimeout(()=>{reconTimer=null;connect()},5000)}
+function doAuth(ch){if(!privKey)return;const ev=signEv({kind:22242,created_at:Math.floor(Date.now()/1000),tags:[['relay',CFG.relay],['challenge',ch]],content:''});wsSend(['AUTH',ev])}
+function onEvent(ev){if(!ev)return;if(ev.kind===40||ev.kind===41)onChEv(ev);else if(ev.kind===1||ev.kind===42)showMsg(ev)}
+function onChEv(ev){try{const m=JSON.parse(ev.content);const id=ev.kind===40?ev.id:ev.tags.find(t=>t[0]==='e')?.[1];if(id&&m.name){channels[id]={id,name:m.name};renderChs()}}catch(e){}}
+function renderChs(){const gen='<div class="ch'+(curCh===null?' active':'')+'" onclick="selCh(this,null)"><span class="ch-hash">#</span>general</div>';const items=Object.values(channels).map(ch=>'<div class="ch'+(curCh===ch.id?' active':'')+'" onclick="selCh(this,''+ch.id+'')"><span class="ch-hash">#</span>'+esc(ch.name)+'</div>').join('');document.getElementById('chlist').innerHTML=gen+items}
+window.selCh=(el,chId)=>{document.querySelectorAll('.ch').forEach(x=>x.classList.remove('active'));el.classList.add('active');curCh=chId;const name=chId?(channels[chId]?.name||'canal'):'general';document.getElementById('cbadge').textContent='#'+name;document.getElementById('msgs').innerHTML='';const since=Math.floor(Date.now()/1000)-86400;const f=chId?{kinds:[42],'#e':[chId],since}:{kinds:[1],since,limit:50};wsSend(['REQ','krc-f',f])}
+function showMsg(ev){if(curCh!==null){const rt=ev.tags.find(t=>t[0]==='e');if(!rt||rt[1]!==curCh)return}else if(ev.kind!==1)return;const mine=ev.pubkey===myPub;const author=mine?CFG.name:ev.pubkey.slice(0,8)+'...';const time=new Date(ev.created_at*1000).toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});const d=document.createElement('div');d.className='msg'+(mine?' mine':'');d.innerHTML='<div class="mhdr"><span class="mauthor '+(mine?'me':'unknown')+'">'+esc(author)+'</span><span>'+time+'</span></div><div class="mbub">'+escNl(ev.content)+'</div>';const msgs=document.getElementById('msgs');msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight}
+window.sendMsg=()=>{const inp=document.getElementById('inp');const txt=inp.value.trim();if(!txt)return;if(!privKey){toast('⚠ Clave no cargada');return};if(ws?.readyState!==WebSocket.OPEN){toast('⚠ Sin conexión');return};const tags=curCh?[['e',curCh,CFG.relay,'root']]:[];try{const ev=signEv({kind:curCh?42:1,created_at:Math.floor(Date.now()/1000),tags,content:txt});wsSend(['EVENT',ev]);inp.value='';inp.style.height='auto';toast('✓ Enviado')}catch(e){toast('❌ Error al firmar')}}
+const inp=document.getElementById('inp')
+inp.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg()}})
+inp.addEventListener('input',()=>{inp.style.height='auto';inp.style.height=Math.min(inp.scrollHeight,100)+'px'})
+function setSt(cls,txt){document.getElementById('sdot').className='sdot '+cls;document.getElementById('stxt').textContent=txt}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
+function showErr(m){const b=document.getElementById('errbanner');b.textContent='⚠ '+m;b.style.display='block'}
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function escNl(t){return esc(t).replace(/
+/g,'<br>')}
+const cv=document.getElementById('stars'),cx=cv.getContext('2d');let st=[]
+function initS(){cv.width=innerWidth;cv.height=innerHeight;st=Array.from({length:110},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*1.4,a:Math.random(),s:Math.random()*.004}))}
+function drawS(){cx.clearRect(0,0,cv.width,cv.height);st.forEach(s=>{s.a+=s.s;if(s.a>1)s.a=0;cx.beginPath();cx.arc(s.x,s.y,s.r,0,Math.PI*2);cx.fillStyle='rgba(232,200,106,'+s.a*.5+')';cx.fill()});requestAnimationFrame(drawS)}
+addEventListener('resize',initS);initS();drawS()
+if(initKeys())connect();else showErr('No se pudo cargar la clave privada.')
+</script>
+</body>
+</html>

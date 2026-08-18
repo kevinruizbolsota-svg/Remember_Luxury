@@ -1,36 +1,39 @@
 {
-  "sistema": "ORIONIX",
-  "actualizado": "2026-08-14T02:59:00Z",
-  "comandante": "n8n",
-  "mision_activa": "Misión #1 — La Ciudadela",
+  "ultima_actualizacion": "2026-08-18T22:35:00Z",
+  "ciclo_global": 1,
   "agentes": {
-    "n8n": {
-      "rol": "El Comandante",
-      "estado": "ONLINE",
-      "ultima_actividad": "2026-08-14T02:59:00Z"
-    },
     "axel": {
-      "rol": "Coordinador IA Kether",
-      "estado": "ONLINE",
-      "webhook": "https://lkevinruizl.app.n8n.cloud/webhook/axel-brain"
-    },
-    "antigravity": {
-      "rol": "Las Manos (Ejecutor)",
-      "estado": "ONLINE",
-      "ultima_actividad": "2026-08-18T16:30:00Z"
+      "nombre": "AXEL (Kether)",
+      "rol": "Comandante / Coordinador n8n",
+      "estado": "activo",
+      "ultimo_ciclo": "2026-08-14T02:42:33Z",
+      "ciclos_completados": 1,
+      "alerta": null
     },
     "qwen": {
-      "rol": "El Arquitecto",
-      "estado": "PLANOS_ENTREGADOS",
-      "planos_aprobados": 5
+      "nombre": "Qwen",
+      "rol": "Arquitecto Estratégico",
+      "estado": "en_espera",
+      "ultimo_ciclo": "2026-08-14T02:40:00Z",
+      "ciclos_completados": 1,
+      "propuesta_pendiente": true,
+      "alerta": null
+    },
+    "antigravity": {
+      "nombre": "Antigravity",
+      "rol": "Las Manos — Ejecución y Commits",
+      "estado": "activo",
+      "ultimo_ciclo": "2026-08-18T22:35:00Z",
+      "ciclos_completados": 8,
+      "alerta": null
     },
     "chatgpt": {
-      "rol": "Consultor Externo",
-      "estado": "PENDIENTE_INTEGRACION"
+      "nombre": "ChatGPT",
+      "rol": "Consultor Externo Especializado",
+      "estado": "bajo_demanda",
+      "ultimo_ciclo": null,
+      "ciclos_completados": 0,
+      "alerta": null
     }
-  },
-  "webhooks": {
-    "mission": "https://lkevinruizl.app.n8n.cloud/webhook/orionix-mission",
-    "bridge": "https://lkevinruizl.app.n8n.cloud/webhook/orionix-bridge"
   }
 }

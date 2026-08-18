@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Los Mundos · ORIONIX</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230b0b0d'/%3E%3Ctext x='50' y='72' font-size='60' text-anchor='middle' fill='%23e8c86a'%3E%F0%9F%91%91%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--oro:#e8c86a;--oro-med:#c8a24a;--bg:#06050d;--texto:#e9ddc4;--tenue:#b8a982}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--bg);color:var(--texto);min-height:100vh;-webkit-font-smoothing:antialiased}
+#cosmos{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 20%,#0a0816,#03030a 60%,#010104);overflow:hidden;pointer-events:none}
+.neb{position:absolute;inset:-20%;background:radial-gradient(closest-side,rgba(90,60,180,.4),transparent) no-repeat 25% 30%/60% 60%,radial-gradient(closest-side,rgba(40,90,200,.3),transparent) no-repeat 70% 65%/50% 50%;filter:blur(44px);opacity:.5;animation:nebFloat 55s ease-in-out infinite alternate}
+@keyframes nebFloat{to{transform:translate(-3%,-4%) scale(1.12)}}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px 5vw;background:rgba(6,5,13,.82);backdrop-filter:blur(16px);border-bottom:1px solid rgba(232,200,106,.1)}
+.nav-brand{font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;letter-spacing:5px;background:linear-gradient(92deg,#8a6a24,#e8c86a 35%,#fff6d6 50%,#e8c86a 70%,#8a6a24);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 6s linear infinite;text-decoration:none}
+@keyframes brilloOro{to{background-position:200% center}}
+.nav-links{display:flex;gap:18px;align-items:center}
+.nav-links a{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:1.8px;text-transform:uppercase;color:var(--tenue);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--oro)}
+.nav-links a.acc{color:var(--oro);border:1px solid rgba(232,200,106,.32);border-radius:4px;padding:5px 11px}
+@media(max-width:700px){.nav-links{display:none}}
+.main{position:relative;z-index:10;padding:96px 20px 60px;max-width:860px;margin:0 auto}
+.page-label{font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:4px;color:rgba(232,200,106,.45);margin-bottom:8px;text-transform:uppercase}
+.page-title{font-family:'Cinzel',serif;font-size:clamp(1.6rem,4vw,2.8rem);font-weight:900;letter-spacing:4px;background:linear-gradient(130deg,#8a6d2a,#f6e6ad 40%,#fff8e0 52%,#f6e6ad 68%,#8a6d2a);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 7s linear infinite;margin-bottom:10px}
+.page-sub{font-size:clamp(.88rem,2vw,1.05rem);color:var(--tenue);margin-bottom:36px}
+.worlds{display:grid;gap:14px}
+.world-card{display:flex;align-items:center;gap:18px;padding:20px 22px;border:1px solid;border-radius:14px;text-decoration:none;color:inherit;transition:transform .25s,box-shadow .25s,border-color .25s;backdrop-filter:blur(12px)}
+.world-card:hover{transform:translateX(6px);box-shadow:0 4px 24px rgba(232,200,106,.08)}
+.wc-icon{font-size:2rem;flex-shrink:0;width:50px;text-align:center;filter:drop-shadow(0 0 8px rgba(232,200,106,.3))}
+.wc-content{flex:1;min-width:0}
+.wc-name{font-family:'Cinzel',serif;font-size:clamp(.7rem,1.8vw,1rem);font-weight:700;letter-spacing:3px;color:var(--oro);margin-bottom:3px}
+.wc-sub{font-family:'Cinzel',serif;font-size:clamp(.3rem,.7vw,.42rem);letter-spacing:2px;text-transform:uppercase;color:rgba(232,200,106,.4);margin-bottom:6px}
+.wc-desc{font-size:clamp(.78rem,1.6vw,.9rem);color:var(--tenue);line-height:1.5}
+.wc-arrow{font-family:'Cinzel',serif;font-size:1.1rem;color:rgba(232,200,106,.3);flex-shrink:0;transition:color .2s,transform .2s}
+.world-card:hover .wc-arrow{color:var(--oro);transform:translateX(4px)}
+.hub-link{display:inline-flex;align-items:center;gap:7px;margin-top:28px;font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:2px;color:var(--tenue);text-decoration:none;border:1px solid rgba(232,200,106,.15);border-radius:8px;padding:9px 18px;transition:all .2s}
+.hub-link:hover{color:var(--oro);border-color:rgba(232,200,106,.4)}
+</style>
+</head>
+<body>
+<div id="cosmos"><div class="neb"></div></div>
+<nav>
+  <a href="hub.html" class="nav-brand">ORIONIX</a>
+  <div class="nav-links">
+    <a href="hub.html">Portal</a>
+    <a href="ciudadela.html">Ciudadela</a>
+    <a href="mi-universo.html">Mi Universo</a>
+    <a href="axel.html" class="acc">✦ AXEL</a>
+  </div>
+</nav>
+<div class="main">
+  <div class="page-label">El Universo Completo</div>
+  <div class="page-title">LOS MUNDOS</div>
+  <p class="page-sub">Cada espacio de ORIONIX tiene un propósito. Explora y elige tu destino.</p>
+  <div class="worlds">
+<a class="world-card" href="ciudadela.html" style="background:rgba(232,200,106,.1);border-color:rgba(232,200,106,.25);">
+  <div class="wc-icon">⭐</div>
+  <div class="wc-content">
+    <div class="wc-name">LA CIUDADELA</div>
+    <div class="wc-sub">Centro de Inteligencia IA</div>
+    <p class="wc-desc">El corazón tecnológico de ORIONIX. Aquí viven AXEL y los 22 agentes del sistema Cabalístico. Tu centro de comando de IA.</p>
+  </div>
+  <div class="wc-arrow">→</div>
+</a>
+<a class="world-card" href="forjadora.html" style="background:rgba(100,170,255,.08);border-color:rgba(100,170,255,.2);">
+  <div class="wc-icon">💎</div>
+  <div class="wc-content">
+    <div class="wc-name">LA FORJADORA</div>
+    <div class="wc-sub">Programa de Transformación Elite</div>
+    <p class="wc-desc">El espacio donde el carbón se convierte en diamante. Programa de hábitos, mentoría y desarrollo personal de alto nivel.</p>
+  </div>
+  <div class="wc-arrow">→</div>
+</a>
+<a class="world-card" href="mi-universo.html" style="background:rgba(80,220,170,.08);border-color:rgba(80,220,170,.2);">
+  <div class="wc-icon">🌐</div>
+  <div class="wc-content">
+    <div class="wc-name">MI UNIVERSO</div>
+    <div class="wc-sub">Tienda · Cuenta · Negocio</div>
+    <p class="wc-desc">Tu portal personal de ORIONIX. Acceso a la tienda, afiliados, tu cuenta, comunidad y todos los servicios de negocio.</p>
+  </div>
+  <div class="wc-arrow">→</div>
+</a>
+<a class="world-card" href="cronicas.html" style="background:rgba(190,100,255,.08);border-color:rgba(190,100,255,.2);">
+  <div class="wc-icon">🎬</div>
+  <div class="wc-content">
+    <div class="wc-name">LAS CRÓNICAS</div>
+    <div class="wc-sub">Estudio · Series · Cine</div>
+    <p class="wc-desc">El estudio creativo de ORIONIX. Series originales, documentales y producciones cinematográficas del universo ORIONIX.</p>
+  </div>
+  <div class="wc-arrow">→</div>
+</a>
+<a class="world-card" href="habitos.html" style="background:rgba(255,140,80,.08);border-color:rgba(255,140,80,.2);">
+  <div class="wc-icon">🔥</div>
+  <div class="wc-content">
+    <div class="wc-name">LA FORJA DE HÁBITOS</div>
+    <div class="wc-sub">Sistema de Disciplina Diaria</div>
+    <p class="wc-desc">Tu tracker de hábitos diarios y el sistema Nebula AI para optimizar tu rutina y maximizar tu productividad.</p>
+  </div>
+  <div class="wc-arrow">→</div>
+</a>
+<a class="world-card" href="comunidad.html" style="background:rgba(150,200,255,.08);border-color:rgba(150,200,255,.2);">
+  <div class="wc-icon">🤝</div>
+  <div class="wc-content">
+    <div class="wc-name">COMUNIDAD</div>
+    <div class="wc-sub">El Templo Social de ORIONIX</div>
+    <p class="wc-desc">Conecta con otros miembros. Comparte, aprende y crece junto a la comunidad de alto rendimiento de ORIONIX.</p>
+  </div>
+  <div class="wc-arrow">→</div>
+</a>
+<a class="world-card" href="hogar.html" style="background:rgba(200,150,255,.08);border-color:rgba(200,150,255,.2);">
+  <div class="wc-icon">🌍</div>
+  <div class="wc-content">
+    <div class="wc-name">MI HOGAR</div>
+    <div class="wc-sub">Portal Personal</div>
+    <p class="wc-desc">Tu espacio privado dentro del universo ORIONIX. Personalización, hábitos, recursos y tu propio rincón en el cosmos.</p>
+  </div>
+  <div class="wc-arrow">→</div>
+</a>
+<a class="world-card" href="universo.html" style="background:rgba(232,200,106,.06);border-color:rgba(232,200,106,.15);">
+  <div class="wc-icon">✦</div>
+  <div class="wc-content">
+    <div class="wc-name">AXEL UNIVERSE</div>
+    <div class="wc-sub">Los 22 Agentes Cabalísticos</div>
+    <p class="wc-desc">El universo completo de los 22 agentes IA del sistema Cabalístico: 11 de Luz y 11 de Sombra. Explora cada arquetipo.</p>
+  </div>
+  <div class="wc-arrow">→</div>
+</a></div>
+  <a href="hub.html" class="hub-link">← Portal Central</a>
+</div>
+</body>
+</html>

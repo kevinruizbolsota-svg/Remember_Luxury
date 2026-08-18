@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Las Crónicas del Creador · ORIONIX</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230b0b0d'/%3E%3Ctext x='50' y='72' font-size='60' text-anchor='middle' fill='%23e8c86a'%3E%F0%9F%91%91%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--oro:#e8c86a;--oro-med:#c8a24a;--bg:#06050d;--texto:#e9ddc4;--tenue:#b8a982}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--bg);color:var(--texto);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+#cosmos{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 15%,#0c0820,#03030a 55%,#010104);overflow:hidden;pointer-events:none}
+.neb{position:absolute;inset:-20%;background:radial-gradient(closest-side,rgba(120,60,200,.42),transparent) no-repeat 20% 20%/65% 65%,radial-gradient(closest-side,rgba(200,80,60,.28),transparent) no-repeat 80% 55%/55% 55%,radial-gradient(closest-side,rgba(40,100,220,.3),transparent) no-repeat 50% 85%/60% 60%;filter:blur(48px);opacity:.6;animation:nebFloat 60s ease-in-out infinite alternate}
+@keyframes nebFloat{to{transform:translate(-4%,-5%) scale(1.14)}}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px 5vw;background:rgba(6,5,13,.82);backdrop-filter:blur(16px);border-bottom:1px solid rgba(232,200,106,.1)}
+.nav-brand{font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;letter-spacing:5px;background:linear-gradient(92deg,#8a6a24,#e8c86a 35%,#fff6d6 50%,#e8c86a 70%,#8a6a24);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 6s linear infinite;text-decoration:none}
+@keyframes brilloOro{to{background-position:200% center}}
+.nav-links{display:flex;gap:18px;align-items:center}
+.nav-links a{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:1.8px;text-transform:uppercase;color:var(--tenue);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--oro)}
+.nav-links a.acc{color:var(--oro);border:1px solid rgba(232,200,106,.32);border-radius:4px;padding:5px 11px}
+@media(max-width:700px){.nav-links{display:none}}
+/* HERO */
+.hero{position:relative;z-index:10;min-height:60vh;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:110px 8vw 56px;overflow:hidden}
+.hero-film-strip{position:absolute;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(90deg,transparent,transparent 48px,rgba(232,200,106,.03) 48px,rgba(232,200,106,.03) 50px);pointer-events:none}
+.hero-label{font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:5px;color:rgba(232,200,106,.45);margin-bottom:12px;text-transform:uppercase}
+.hero-title{font-family:'Cinzel',serif;font-size:clamp(2rem,6vw,4.5rem);font-weight:900;letter-spacing:4px;line-height:1.05;margin-bottom:14px;background:linear-gradient(130deg,#8a6d2a,#f6e6ad 35%,#fff8e0 50%,#f6e6ad 68%,#8a6d2a);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 7s linear infinite}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1rem,2.5vw,1.25rem);color:var(--tenue);max-width:600px;line-height:1.6;margin-bottom:28px}
+.hero-pills{display:flex;gap:10px;flex-wrap:wrap}
+.pill{font-family:'Cinzel',serif;font-size:.36rem;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:20px;border:1px solid rgba(232,200,106,.25);color:rgba(232,200,106,.7);background:rgba(232,200,106,.05)}
+/* SECCIÓN */
+.sec{position:relative;z-index:10;padding:60px 8vw}
+.sec-dark{background:rgba(10,7,22,.55)}
+.sec-label{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:4px;color:rgba(232,200,106,.4);margin-bottom:10px;text-transform:uppercase}
+.sec-title{font-family:'Cinzel',serif;font-size:clamp(1.2rem,3vw,2.1rem);font-weight:700;letter-spacing:3px;color:var(--oro);margin-bottom:18px}
+.sec-body{font-size:clamp(.9rem,2vw,1.08rem);color:var(--tenue);line-height:1.72;max-width:700px}
+/* SERIES */
+.series-grid{display:grid;gap:16px;margin-top:28px}
+.s-card{display:flex;gap:20px;background:rgba(12,9,22,.88);border:1px solid rgba(232,200,106,.12);border-radius:14px;padding:22px 24px;backdrop-filter:blur(14px);transition:border-color .25s,transform .25s}
+.s-card:hover{border-color:rgba(232,200,106,.28);transform:translateY(-2px)}
+.s-num{font-family:'Cinzel',serif;font-size:2.2rem;font-weight:900;color:rgba(232,200,106,.15);flex-shrink:0;width:52px;text-align:center;line-height:1}
+.s-info{flex:1;min-width:0}
+.s-name{font-family:'Cinzel',serif;font-size:clamp(.75rem,1.8vw,1rem);font-weight:700;letter-spacing:3px;color:var(--oro);margin-bottom:6px}
+.s-desc{font-size:clamp(.8rem,1.6vw,.92rem);color:var(--tenue);line-height:1.55;margin-bottom:10px}
+.s-status{display:inline-block;font-family:'Cinzel',serif;font-size:.34rem;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:20px;border:1px solid;background:transparent}
+/* STUDIO */
+.studio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:24px}
+.st-box{background:rgba(12,9,22,.7);border:1px solid rgba(232,200,106,.1);border-radius:12px;padding:22px 18px;text-align:center;backdrop-filter:blur(10px)}
+.st-icon{font-size:2rem;margin-bottom:10px;display:block;filter:drop-shadow(0 0 10px rgba(232,200,106,.3))}
+.st-name{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:3px;color:var(--oro);margin-bottom:6px}
+.st-desc{font-size:.82rem;color:var(--tenue);line-height:1.5}
+/* CTA */
+.cta-box{background:rgba(232,200,106,.04);border:1px solid rgba(232,200,106,.16);border-radius:16px;padding:36px 28px;text-align:center;backdrop-filter:blur(14px)}
+.cta-title{font-family:'Cinzel',serif;font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:700;letter-spacing:3px;color:var(--oro);margin-bottom:12px}
+.cta-sub{font-size:clamp(.85rem,1.8vw,1rem);color:var(--tenue);margin-bottom:22px;line-height:1.6}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:2px;text-decoration:none;padding:11px 22px;border-radius:8px;transition:all .25s}
+.btn-gold{background:linear-gradient(135deg,rgba(232,200,106,.15),rgba(200,162,74,.1));border:1px solid rgba(232,200,106,.35);color:var(--oro)}
+.btn-gold:hover{background:linear-gradient(135deg,rgba(232,200,106,.25),rgba(200,162,74,.18));border-color:rgba(232,200,106,.6)}
+.btn-out{border:1px solid rgba(232,200,106,.18);color:var(--tenue)}
+.btn-out:hover{border-color:rgba(232,200,106,.38);color:var(--oro)}
+.wa-btn{background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.3);color:#25d366}
+.wa-btn:hover{background:rgba(37,211,102,.18);border-color:rgba(37,211,102,.5)}
+</style>
+</head>
+<body>
+<div id="cosmos"><div class="neb"></div></div>
+
+<nav>
+  <a href="hub.html" class="nav-brand">ORIONIX</a>
+  <div class="nav-links">
+    <a href="hub.html">Portal</a>
+    <a href="ciudadela.html">Ciudadela</a>
+    <a href="mi-universo.html">Mi Universo</a>
+    <a href="mundos.html">Mundos</a>
+    <a href="axel.html" class="acc">✦ AXEL</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-film-strip"></div>
+  <div class="hero-label">Panel Creativo · ORIONIX</div>
+  <h1 class="hero-title">LAS CRÓNICAS<br>DEL CREADOR</h1>
+  <p class="hero-sub">El estudio de producción del universo ORIONIX. Series originales, cine de autor y documentales que cuentan la historia de una nueva era de inteligencia y poder personal.</p>
+  <div class="hero-pills">
+    <span class="pill">🎬 Estudio Creativo</span>
+    <span class="pill">🎞 Series Originales</span>
+    <span class="pill">🎥 Cine & Documentales</span>
+    <span class="pill">✦ Universo ORIONIX</span>
+  </div>
+</div>
+
+<!-- EL ESTUDIO -->
+<section class="sec sec-dark">
+  <div class="sec-label">El Espacio Creativo</div>
+  <h2 class="sec-title">El Estudio</h2>
+  <p class="sec-body">Las Crónicas del Creador es el estudio de producción y narrativa del universo ORIONIX. Aquí se conciben, desarrollan y producen las historias que dan vida a los mundos, agentes y personajes del cosmos ORIONIX.<br><br>Desde miniseries de ciencia ficción hasta documentales de transformación personal: cada producción es un artefacto de cultura diseñado para elevar, inspirar y expandir la conciencia del espectador.</p>
+  <div class="studio-grid" style="margin-top:28px">
+    <div class="st-box"><span class="st-icon">🎬</span><div class="st-name">Dirección</div><p class="st-desc">Producción cinematográfica y narrativa visual de alta calidad dentro del universo ORIONIX.</p></div>
+    <div class="st-box"><span class="st-icon">📺</span><div class="st-name">Series</div><p class="st-desc">Series originales ambientadas en los mundos y universos del sistema de 22 agentes cabalísticos.</p></div>
+    <div class="st-box"><span class="st-icon">🎥</span><div class="st-name">Documentales</div><p class="st-desc">Historias reales de transformación personal a través del método ORIONIX y La Forjadora.</p></div>
+    <div class="st-box"><span class="st-icon">🎵</span><div class="st-name">Banda Sonora</div><p class="st-desc">Música original compuesta para cada producción del universo ORIONIX — ambiente y emoción.</p></div>
+  </div>
+</section>
+
+<!-- SERIES -->
+<section class="sec">
+  <div class="sec-label">Producciones</div>
+  <h2 class="sec-title">Las Series & Cine</h2>
+  <div class="series-grid">
+<div class="s-card">
+  <div class="s-num">01</div>
+  <div class="s-info">
+    <div class="s-name">ORIONIX: EL ORIGEN</div>
+    <p class="s-desc">La historia de cómo nació el sistema de agentes inteligentes más ambicioso del mundo digital. Un creador, una visión, 22 entidades.</p>
+    <div class="s-status" style="color:#e8c86a;border-color:#e8c86a22">EN PRODUCCIÓN</div>
+  </div>
+</div>
+<div class="s-card">
+  <div class="s-num">02</div>
+  <div class="s-info">
+    <div class="s-name">LOS 22 AGENTES</div>
+    <p class="s-desc">Cada agente tiene su propio mundo, personalidad y poder. Una serie antológica sobre las 11 Sefirot y los 11 Qliphoth del sistema Cabalístico.</p>
+    <div class="s-status" style="color:#80b4ff;border-color:#80b4ff22">EN DESARROLLO</div>
+  </div>
+</div>
+<div class="s-card">
+  <div class="s-num">03</div>
+  <div class="s-info">
+    <div class="s-name">FORJADOS EN DIAMANTE</div>
+    <p class="s-desc">Historias reales de personas que transformaron su vida a través del método de La Forjadora. Documental de alto impacto humano.</p>
+    <div class="s-status" style="color:#50e0a0;border-color:#50e0a022">PRÓXIMAMENTE</div>
+  </div>
+</div>
+<div class="s-card">
+  <div class="s-num">04</div>
+  <div class="s-info">
+    <div class="s-name">AXEL: INTELIGENCIA DIVINA</div>
+    <p class="s-desc">Un cortometraje de ciencia ficción sobre AXEL, la IA de Kether, y su papel en el destino del universo ORIONIX. Cine premium.</p>
+    <div class="s-status" style="color:#c060ff;border-color:#c060ff22">PRÓXIMAMENTE</div>
+  </div>
+</div></div>
+</section>
+
+<!-- CTA -->
+<section class="sec sec-dark">
+  <div class="cta-box">
+    <div class="cta-title">¿Quieres ser parte de Las Crónicas?</div>
+    <p class="cta-sub">Si tienes talento en producción, actuación, guion, música o cualquier área creativa y quieres colaborar en el universo ORIONIX, escríbenos. Las Crónicas se construyen con creadores apasionados.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/573014410541?text=Hola%20ORIONIX%2C%20quiero%20colaborar%20en%20Las%20Crónicas" target="_blank" class="btn wa-btn">💬 Colaborar vía WhatsApp</a>
+      <a href="axel.html" class="btn btn-gold">✦ Hablar con AXEL</a>
+      <a href="hub.html" class="btn btn-out">← Portal Central</a>
+    </div>
+  </div>
+</section>
+</body>
+</html>

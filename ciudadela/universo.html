@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universo ORIONIX — Los 22 Agentes</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#e8c86a;--gold2:#c4953f;--dark:#030308;--dark2:#08080f;
+  --luz:#e8c86a;--sombra:#9f7aea;--active:#14c87a;
+  --panel-w:380px;
+}
+html,body{width:100%;height:100%;overflow:hidden}
+body{background:var(--dark);color:#e8e0d0;font-family:'Cormorant Garamond',serif;position:relative}
+
+/* CANVAS */
+#cosmos-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:56px;background:rgba(3,3,8,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(232,200,106,0.15);display:flex;align-items:center;padding:0 2rem;gap:1.5rem}
+.nav-brand{font-family:'Cinzel',serif;font-weight:700;font-size:1.1rem;color:var(--gold);text-decoration:none;letter-spacing:0.15em;margin-right:auto}
+.nav a{color:rgba(232,200,106,0.65);text-decoration:none;font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.1em;padding:0.25rem 0.6rem;border:1px solid rgba(232,200,106,0.15);border-radius:2px;transition:all 0.3s}
+.nav a:hover{color:var(--gold);border-color:rgba(232,200,106,0.4);background:rgba(232,200,106,0.05)}
+.nav-cta{background:linear-gradient(135deg,var(--gold),var(--gold2))!important;color:#030308!important;border:none!important;font-weight:700}
+
+/* MAIN */
+.main{position:fixed;top:56px;left:0;right:0;bottom:0;display:flex;z-index:1;transition:right 0.4s cubic-bezier(.4,0,.2,1)}
+.main.panel-open{right:var(--panel-w)}
+
+/* ARBOL */
+.tree-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow-y:auto;overflow-x:hidden;padding:20px 10px 20px}
+.tree-header{text-align:center;margin-bottom:16px;position:relative;z-index:2}
+.tree-title{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--gold);letter-spacing:0.3em;margin-bottom:4px}
+.tree-sub{color:rgba(232,200,106,0.45);font-size:0.7rem;letter-spacing:0.3em}
+
+/* FILTROS */
+.filters{display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;z-index:2;position:relative}
+.filter-btn{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;padding:5px 14px;border:1px solid rgba(232,200,106,0.25);background:rgba(232,200,106,0.05);color:rgba(232,200,106,0.6);border-radius:2px;cursor:pointer;transition:all 0.3s}
+.filter-btn:hover,.filter-btn.active{color:var(--gold);border-color:var(--gold);background:rgba(232,200,106,0.1)}
+.filter-btn.f-sombra.active{color:var(--sombra);border-color:var(--sombra);background:rgba(159,122,234,0.1)}
+.filter-btn.f-activos.active{color:var(--active);border-color:var(--active);background:rgba(20,200,122,0.1)}
+
+/* CONTADOR */
+.counters{display:flex;gap:16px;justify-content:center;margin-bottom:20px;z-index:2;position:relative}
+.counter{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.2em;padding:4px 12px;border-radius:2px}
+.c-luz{color:var(--gold);border:1px solid rgba(232,200,106,0.3);background:rgba(232,200,106,0.07)}
+.c-sombra{color:var(--sombra);border:1px solid rgba(159,122,234,0.3);background:rgba(159,122,234,0.07)}
+.c-activos{color:var(--active);border:1px solid rgba(20,200,122,0.3);background:rgba(20,200,122,0.07)}
+
+/* SVG ARBOL */
+.tree-svg-wrap{position:relative;z-index:2;width:100%;max-width:700px}
+#tree-svg{width:100%;height:auto}
+
+/* NODOS */
+.node-group{cursor:pointer;transition:all 0.3s}
+.node-circle{transition:all 0.4s}
+.node-group:hover .node-circle{filter:brightness(1.4)}
+.node-group.selected .node-circle{filter:brightness(1.6) drop-shadow(0 0 12px currentColor)}
+.node-label{font-family:'Cinzel',serif;font-size:9px;font-weight:700;letter-spacing:1px;pointer-events:none;text-anchor:middle}
+.node-sub{font-family:'Cormorant Garamond',serif;font-size:7px;pointer-events:none;text-anchor:middle;opacity:0.7}
+.node-group.hidden{opacity:0.08;pointer-events:none}
+
+/* LÍNEAS */
+.tree-line{stroke-width:1.2;opacity:0.35;fill:none}
+.tree-line.active-line{opacity:0.7;stroke-width:1.8}
+.energy-particle{pointer-events:none}
+
+/* PANEL LATERAL */
+.side-panel{position:fixed;top:56px;right:0;width:var(--panel-w);bottom:0;background:rgba(8,8,15,0.97);border-left:1px solid rgba(232,200,106,0.12);backdrop-filter:blur(30px);transform:translateX(100%);transition:transform 0.4s cubic-bezier(.4,0,.2,1);z-index:50;overflow-y:auto;display:flex;flex-direction:column}
+.side-panel.open{transform:translateX(0)}
+.panel-close{position:absolute;top:16px;right:16px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(232,200,106,0.2);border-radius:50%;cursor:pointer;color:rgba(232,200,106,0.6);font-size:16px;transition:all 0.3s;z-index:1}
+.panel-close:hover{color:var(--gold);border-color:var(--gold);background:rgba(232,200,106,0.05)}
+.panel-hero{padding:28px 24px 20px;border-bottom:1px solid rgba(255,255,255,0.06);text-align:center}
+.panel-emoji{font-size:2.5rem;margin-bottom:12px;display:block}
+.panel-name{font-family:'Cinzel',serif;font-size:1.3rem;letter-spacing:0.2em;margin-bottom:4px}
+.panel-sefira{font-size:0.75rem;letter-spacing:0.15em;opacity:0.55;margin-bottom:10px}
+.panel-status{display:inline-flex;align-items:center;gap:6px;font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.15em;padding:3px 10px;border-radius:2px}
+.status-dot{width:6px;height:6px;border-radius:50%;animation:blink 1.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.status-activo{background:rgba(20,200,122,0.1);border:1px solid rgba(20,200,122,0.3);color:#14c87a}
+.status-activo .status-dot{background:#14c87a}
+.status-dev{background:rgba(129,140,248,0.1);border:1px solid rgba(129,140,248,0.3);color:#818cf8}
+.status-dev .status-dot{background:#818cf8}
+.panel-body{padding:20px 24px;flex:1}
+.panel-section{margin-bottom:18px}
+.panel-section-title{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.25em;opacity:0.45;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.panel-desc{font-size:0.88rem;line-height:1.7;color:rgba(232,228,215,0.8)}
+.skills-wrap{display:flex;flex-wrap:wrap;gap:5px}
+.skill-tag{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.08em;padding:3px 8px;border-radius:2px}
+.panel-link{display:block;margin-top:4px;text-decoration:none;font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.12em;padding:6px 12px;border:1px solid rgba(232,200,106,0.2);border-radius:2px;color:rgba(232,200,106,0.7);text-align:center;transition:all 0.3s}
+.panel-link:hover{color:var(--gold);border-color:var(--gold);background:rgba(232,200,106,0.05)}
+
+/* MINI CHAT */
+.mini-chat{border-top:1px solid rgba(255,255,255,0.06);padding:16px}
+.chat-title{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.2em;color:rgba(232,200,106,0.5);margin-bottom:10px}
+.chat-msgs{height:120px;overflow-y:auto;margin-bottom:8px;font-size:0.78rem;line-height:1.5;display:flex;flex-direction:column;gap:6px}
+.chat-msg{padding:6px 10px;border-radius:3px;max-width:90%}
+.chat-msg.user{background:rgba(232,200,106,0.08);border:1px solid rgba(232,200,106,0.15);color:rgba(232,228,215,0.9);align-self:flex-end}
+.chat-msg.agent{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(232,228,215,0.75);align-self:flex-start}
+.chat-msg.typing{color:rgba(232,200,106,0.4);font-style:italic}
+.chat-input-wrap{display:flex;gap:6px}
+.chat-input{flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:2px;padding:7px 10px;color:#e8e0d0;font-family:'Cormorant Garamond',serif;font-size:0.82rem;outline:none;transition:border 0.3s}
+.chat-input:focus{border-color:rgba(232,200,106,0.35)}
+.chat-send{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.1em;padding:7px 12px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#030308;border:none;border-radius:2px;cursor:pointer;font-weight:700;transition:opacity 0.3s}
+.chat-send:hover{opacity:0.85}
+.chat-send:disabled{opacity:0.4;cursor:not-allowed}
+
+/* MOBILE */
+@media(max-width:700px){
+  :root{--panel-w:100vw}
+  .nav a:not(.nav-cta):not(.nav-brand){display:none}
+  .tree-title{font-size:1.1rem}
+  .counters{gap:8px}
+  .counter{font-size:0.5rem;padding:3px 8px}
+}
+</style>
+</head>
+<body>
+
+<canvas id="cosmos-canvas"></canvas>
+
+<nav class="nav">
+  <a href="index.html" class="nav-brand">ORIONIX</a>
+  <a href="hub.html">Hub</a>
+  <a href="ciudadela.html">AXEL</a>
+  <a href="la_forja/plaza.html">Plaza</a>
+  <a href="tienda.html" class="nav-cta">Tienda</a>
+</nav>
+
+<div class="main" id="main">
+  <div class="tree-wrap" id="tree-wrap">
+    <div class="tree-header">
+      <h1 class="tree-title">UNIVERSO ORIONIX</h1>
+      <p class="tree-sub">EL ÁRBOL SEFIRÓTICO DE 22 AGENTES</p>
+    </div>
+
+    <div class="counters">
+      <div class="counter c-luz">✦ <span id="cnt-luz">3</span> LUZ ACTIVOS</div>
+      <div class="counter c-sombra">🌑 <span id="cnt-sombra">0</span> SOMBRA ACTIVOS</div>
+      <div class="counter c-activos" id="cnt-total-wrap">⚡ <span id="cnt-total">3</span> TOTAL ACTIVOS</div>
+    </div>
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">TODOS</button>
+      <button class="filter-btn f-luz" data-filter="luz">✦ SEFIROT DE LUZ</button>
+      <button class="filter-btn f-sombra" data-filter="sombra">🌑 QLIPHOTH</button>
+      <button class="filter-btn f-activos" data-filter="activos">⚡ ACTIVOS</button>
+    </div>
+
+    <div class="tree-svg-wrap">
+      <svg id="tree-svg" viewBox="0 0 500 900" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="bg-grad" cx="50%" cy="40%" r="60%">
+            <stop offset="0%" stop-color="#0d0d1a" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#030308" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="glow-gold"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="glow-shadow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="glow-active"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+
+        <rect width="500" height="900" fill="url(#bg-grad)"/>
+
+        <!-- DIVIDER -->
+        <line x1="50" y1="480" x2="450" y2="480" stroke="rgba(159,122,234,0.2)" stroke-width="1" stroke-dasharray="4,4"/>
+        <text x="250" y="495" text-anchor="middle" font-family="Cinzel" font-size="7" fill="rgba(159,122,234,0.4)" letter-spacing="3">✦ VELO DEL ABISMO ✦</text>
+
+        <!-- LINEAS SEFIROT (LUZ) -->
+        <g id="lines-luz" class="tree-lines">
+          <!-- Kether - Chokmah -->
+          <line class="tree-line" id="l-kether-chokmah" x1="250" y1="50" x2="370" y2="120" stroke="var(--gold)" opacity="0.6"/>
+          <!-- Kether - Binah -->
+          <line class="tree-line" id="l-kether-binah" x1="250" y1="50" x2="130" y2="120" stroke="var(--gold)" opacity="0.6"/>
+          <!-- Kether - Daat -->
+          <line class="tree-line" id="l-kether-daat" x1="250" y1="50" x2="250" y2="185" stroke="rgba(192,192,220,0.4)" stroke-dasharray="3,3"/>
+          <!-- Chokmah - Chesed -->
+          <line class="tree-line" id="l-chokmah-chesed" x1="370" y1="120" x2="370" y2="240" stroke="var(--gold)" opacity="0.5"/>
+          <!-- Binah - Geburah -->
+          <line class="tree-line" id="l-binah-geburah" x1="130" y1="120" x2="130" y2="240" stroke="var(--gold)" opacity="0.5"/>
+          <!-- Chokmah - Binah -->
+          <line class="tree-line" x1="370" y1="120" x2="130" y2="120" stroke="var(--gold)" opacity="0.35"/>
+          <!-- Chesed - Tiferet -->
+          <line class="tree-line" x1="370" y1="240" x2="250" y2="330" stroke="var(--gold)" opacity="0.5"/>
+          <!-- Geburah - Tiferet -->
+          <line class="tree-line" x1="130" y1="240" x2="250" y2="330" stroke="var(--gold)" opacity="0.5"/>
+          <!-- Chesed - Geburah -->
+          <line class="tree-line" x1="370" y1="240" x2="130" y2="240" stroke="var(--gold)" opacity="0.3"/>
+          <!-- Tiferet - Netzach -->
+          <line class="tree-line" x1="250" y1="330" x2="370" y2="390" stroke="var(--gold)" opacity="0.5"/>
+          <!-- Tiferet - Hod -->
+          <line class="tree-line" x1="250" y1="330" x2="130" y2="390" stroke="var(--gold)" opacity="0.5"/>
+          <!-- Tiferet - Yesod -->
+          <line class="tree-line" x1="250" y1="330" x2="250" y2="430" stroke="var(--gold)" opacity="0.6"/>
+          <!-- Netzach - Yesod -->
+          <line class="tree-line" x1="370" y1="390" x2="250" y2="430" stroke="var(--gold)" opacity="0.4"/>
+          <!-- Hod - Yesod -->
+          <line class="tree-line" x1="130" y1="390" x2="250" y2="430" stroke="var(--gold)" opacity="0.4"/>
+          <!-- Netzach - Hod -->
+          <line class="tree-line" x1="370" y1="390" x2="130" y2="390" stroke="var(--gold)" opacity="0.3"/>
+          <!-- Yesod - Malkuth -->
+          <line class="tree-line" x1="250" y1="430" x2="250" y2="460" stroke="var(--gold)" opacity="0.7"/>
+        </g>
+
+        <!-- LINEAS QLIPHOTH (SOMBRA) -->
+        <g id="lines-sombra">
+          <line class="tree-line" x1="250" y1="520" x2="370" y2="580" stroke="var(--sombra)" opacity="0.4"/>
+          <line class="tree-line" x1="250" y1="520" x2="130" y2="580" stroke="var(--sombra)" opacity="0.4"/>
+          <line class="tree-line" x1="370" y1="580" x2="130" y2="580" stroke="var(--sombra)" opacity="0.25"/>
+          <line class="tree-line" x1="370" y1="580" x2="370" y2="660" stroke="var(--sombra)" opacity="0.35"/>
+          <line class="tree-line" x1="130" y1="580" x2="130" y2="660" stroke="var(--sombra)" opacity="0.35"/>
+          <line class="tree-line" x1="250" y1="520" x2="250" y2="640" stroke="var(--sombra)" opacity="0.3" stroke-dasharray="3,3"/>
+          <line class="tree-line" x1="370" y1="660" x2="250" y2="720" stroke="var(--sombra)" opacity="0.35"/>
+          <line class="tree-line" x1="130" y1="660" x2="250" y2="720" stroke="var(--sombra)" opacity="0.35"/>
+          <line class="tree-line" x1="370" y1="660" x2="130" y2="660" stroke="var(--sombra)" opacity="0.25"/>
+          <line class="tree-line" x1="250" y1="720" x2="370" y2="780" stroke="var(--sombra)" opacity="0.35"/>
+          <line class="tree-line" x1="250" y1="720" x2="130" y2="780" stroke="var(--sombra)" opacity="0.35"/>
+          <line class="tree-line" x1="370" y1="780" x2="130" y2="780" stroke="var(--sombra)" opacity="0.2"/>
+          <line class="tree-line" x1="250" y1="720" x2="250" y2="850" stroke="var(--sombra)" opacity="0.4"/>
+        </g>
+
+        <!-- PARTÍCULAS DE ENERGÍA (animadas via JS) -->
+        <g id="energy-particles"></g>
+
+        <!-- ============ SEFIROT DE LUZ ============ -->
+
+        <!-- KETHER — AXEL (activo) -->
+        <g class="node-group" id="node-axel" data-agent="axel" data-tipo="luz" data-activo="true" onclick="selectAgent('axel')">
+          <circle class="node-circle" cx="250" cy="50" r="28" fill="#0a0a1a" stroke="#ffffff" stroke-width="2" filter="url(#glow-gold)"/>
+          <circle cx="250" cy="50" r="22" fill="rgba(255,255,255,0.08)"/>
+          <circle cx="250" cy="50" r="5" fill="#fff" opacity="0.9">
+            <animate attributeName="r" values="5;7;5" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.9;0.5;0.9" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <text class="node-label" x="250" y="40" fill="#ffffff">AXEL</text>
+          <text class="node-sub" x="250" y="52" fill="#cccccc">Kether</text>
+          <text class="node-sub" x="250" y="62" fill="var(--active)">● ACTIVO</text>
+        </g>
+
+        <!-- CHOKMAH — SAPH (activo) -->
+        <g class="node-group" id="node-saph" data-agent="saph" data-tipo="luz" data-activo="true" onclick="selectAgent('saph')">
+          <circle class="node-circle" cx="370" cy="120" r="24" fill="#050510" stroke="#4a9eff" stroke-width="1.5" filter="url(#glow-gold)"/>
+          <circle cx="370" cy="120" r="5" fill="#4a9eff" opacity="0.8">
+            <animate attributeName="r" values="5;6.5;5" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <text class="node-label" x="370" y="112" fill="#4a9eff">SAPH</text>
+          <text class="node-sub" x="370" y="122" fill="#88bbff">Chokmah</text>
+          <text class="node-sub" x="370" y="132" fill="var(--active)">● ACTIVO</text>
+        </g>
+
+        <!-- BINAH — MIRA -->
+        <g class="node-group" id="node-mira" data-agent="mira" data-tipo="luz" data-activo="false" onclick="selectAgent('mira')">
+          <circle class="node-circle" cx="130" cy="120" r="24" fill="#050510" stroke="#555577" stroke-width="1.5"/>
+          <circle cx="130" cy="120" r="4" fill="#777799" opacity="0.6"/>
+          <text class="node-label" x="130" y="112" fill="#8888aa">MIRA</text>
+          <text class="node-sub" x="130" y="122" fill="#666688">Binah</text>
+          <text class="node-sub" x="130" y="132" fill="#555577">○ DESAR.</text>
+        </g>
+
+        <!-- DAAT — ORACLE (oculto, entre Kether y Tiferet) -->
+        <g class="node-group" id="node-oracle" data-agent="oracle" data-tipo="luz" data-activo="false" onclick="selectAgent('oracle')">
+          <circle class="node-circle" cx="250" cy="195" r="18" fill="#050510" stroke="rgba(192,192,220,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
+          <circle cx="250" cy="195" r="3" fill="silver" opacity="0.5"/>
+          <text class="node-label" x="250" y="189" fill="rgba(192,220,255,0.5)">ORACLE</text>
+          <text class="node-sub" x="250" y="200" fill="rgba(160,180,220,0.4)">Da'at</text>
+        </g>
+
+        <!-- CHESED — LIOR -->
+        <g class="node-group" id="node-lior" data-agent="lior" data-tipo="luz" data-activo="false" onclick="selectAgent('lior')">
+          <circle class="node-circle" cx="370" cy="250" r="24" fill="#050510" stroke="#447799" stroke-width="1.5"/>
+          <circle cx="370" cy="250" r="4" fill="#66aacc" opacity="0.6"/>
+          <text class="node-label" x="370" y="242" fill="#88bbdd">LIOR</text>
+          <text class="node-sub" x="370" y="252" fill="#557799">Chesed</text>
+          <text class="node-sub" x="370" y="262" fill="#555577">○ DESAR.</text>
+        </g>
+
+        <!-- GEBURAH — VORN -->
+        <g class="node-group" id="node-vorn" data-agent="vorn" data-tipo="luz" data-activo="false" onclick="selectAgent('vorn')">
+          <circle class="node-circle" cx="130" cy="250" r="24" fill="#050510" stroke="#772222" stroke-width="1.5"/>
+          <circle cx="130" cy="250" r="4" fill="#cc4444" opacity="0.6"/>
+          <text class="node-label" x="130" y="242" fill="#cc6666">VORN</text>
+          <text class="node-sub" x="130" y="252" fill="#994444">Geburah</text>
+          <text class="node-sub" x="130" y="262" fill="#555577">○ DESAR.</text>
+        </g>
+
+        <!-- TIFERET — AURA -->
+        <g class="node-group" id="node-aura" data-agent="aura" data-tipo="luz" data-activo="false" onclick="selectAgent('aura')">
+          <circle class="node-circle" cx="250" cy="335" r="26" fill="#080808" stroke="#ccaa33" stroke-width="1.5"/>
+          <circle cx="250" cy="335" r="5" fill="#ddbb44" opacity="0.6"/>
+          <text class="node-label" x="250" y="327" fill="#ddbb55">AURA</text>
+          <text class="node-sub" x="250" y="337" fill="#aa8833">Tiferet</text>
+          <text class="node-sub" x="250" y="347" fill="#555577">○ DESAR.</text>
+        </g>
+
+        <!-- NETZACH — ELAN -->
+        <g class="node-group" id="node-elan" data-agent="elan" data-tipo="luz" data-activo="false" onclick="selectAgent('elan')">
+          <circle class="node-circle" cx="370" cy="395" r="24" fill="#050510" stroke="#336633" stroke-width="1.5"/>
+          <circle cx="370" cy="395" r="4" fill="#55aa55" opacity="0.6"/>
+          <text class="node-label" x="370" y="387" fill="#77cc77">ELAN</text>
+          <text class="node-sub" x="370" y="397" fill="#448844">Netzach</text>
+          <text class="node-sub" x="370" y="407" fill="#555577">○ DESAR.</text>
+        </g>
+
+        <!-- HOD — FLUX (activo) -->
+        <g class="node-group" id="node-flux" data-agent="flux" data-tipo="luz" data-activo="true" onclick="selectAgent('flux')">
+          <circle class="node-circle" cx="130" cy="395" r="24" fill="#050510" stroke="#cc7722" stroke-width="1.5" filter="url(#glow-gold)"/>
+          <circle cx="130" cy="395" r="5" fill="#ff9933" opacity="0.8">
+            <animate attributeName="r" values="5;6;5" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <text class="node-label" x="130" y="387" fill="#ffaa44">FLUX</text>
+          <text class="node-sub" x="130" y="397" fill="#cc8833">Hod</text>
+          <text class="node-sub" x="130" y="407" fill="var(--active)">● ACTIVO</text>
+        </g>
+
+        <!-- YESOD — CORE -->
+        <g class="node-group" id="node-core" data-agent="core" data-tipo="luz" data-activo="false" onclick="selectAgent('core')">
+          <circle class="node-circle" cx="250" cy="440" r="24" fill="#050510" stroke="#6633aa" stroke-width="1.5"/>
+          <circle cx="250" cy="440" r="4" fill="#9955dd" opacity="0.6"/>
+          <text class="node-label" x="250" y="432" fill="#aa77ee">CORE</text>
+          <text class="node-sub" x="250" y="442" fill="#7744bb">Yesod</text>
+          <text class="node-sub" x="250" y="452" fill="#555577">○ DESAR.</text>
+        </g>
+
+        <!-- MALKUTH — TERRA -->
+        <g class="node-group" id="node-terra" data-agent="terra" data-tipo="luz" data-activo="false" onclick="selectAgent('terra')">
+          <circle class="node-circle" cx="250" cy="470" r="20" fill="#050510" stroke="#664422" stroke-width="1.5"/>
+          <circle cx="250" cy="470" r="4" fill="#996644" opacity="0.6"/>
+          <text class="node-label" x="250" y="463" fill="#cc9966">TERRA</text>
+          <text class="node-sub" x="250" y="475" fill="#886644">Malkuth</text>
+        </g>
+
+        <!-- ============ QLIPHOTH SOMBRA ============ -->
+
+        <!-- THAUMIEL — GLITCH -->
+        <g class="node-group" id="node-glitch" data-agent="glitch" data-tipo="sombra" data-activo="false" onclick="selectAgent('glitch')">
+          <circle class="node-circle" cx="250" cy="525" r="24" fill="#050510" stroke="#7722aa" stroke-width="1.5"/>
+          <circle cx="250" cy="525" r="4" fill="#9933cc" opacity="0.7"/>
+          <text class="node-label" x="250" y="517" fill="#bb44ee">GLITCH</text>
+          <text class="node-sub" x="250" y="527" fill="#8833aa">Thaumiel</text>
+        </g>
+
+        <!-- GHAGIEL — LUST -->
+        <g class="node-group" id="node-lust" data-agent="lust" data-tipo="sombra" data-activo="false" onclick="selectAgent('lust')">
+          <circle class="node-circle" cx="370" cy="585" r="22" fill="#050510" stroke="#882244" stroke-width="1.5"/>
+          <circle cx="370" cy="585" r="3.5" fill="#cc3366" opacity="0.7"/>
+          <text class="node-label" x="370" y="578" fill="#dd4477">LUST</text>
+          <text class="node-sub" x="370" y="588" fill="#993355">Ghagiel</text>
+        </g>
+
+        <!-- SATARIEL — SHADE -->
+        <g class="node-group" id="node-shade" data-agent="shade" data-tipo="sombra" data-activo="false" onclick="selectAgent('shade')">
+          <circle class="node-circle" cx="130" cy="585" r="22" fill="#050510" stroke="#444466" stroke-width="1.5"/>
+          <circle cx="130" cy="585" r="3.5" fill="#6666aa" opacity="0.7"/>
+          <text class="node-label" x="130" y="578" fill="#8888cc">SHADE</text>
+          <text class="node-sub" x="130" y="588" fill="#555577">Satariel</text>
+        </g>
+
+        <!-- GASHEKLAH — RAVEN -->
+        <g class="node-group" id="node-raven" data-agent="raven" data-tipo="sombra" data-activo="false" onclick="selectAgent('raven')">
+          <circle class="node-circle" cx="370" cy="665" r="22" fill="#050510" stroke="#556644" stroke-width="1.5"/>
+          <circle cx="370" cy="665" r="3.5" fill="#778855" opacity="0.7"/>
+          <text class="node-label" x="370" y="658" fill="#99aa66">RAVEN</text>
+          <text class="node-sub" x="370" y="668" fill="#667755">Gasheklah</text>
+        </g>
+
+        <!-- GOLACHAB — VOID -->
+        <g class="node-group" id="node-void" data-agent="void" data-tipo="sombra" data-activo="false" onclick="selectAgent('void')">
+          <circle class="node-circle" cx="130" cy="665" r="22" fill="#050510" stroke="#333344" stroke-width="1.5"/>
+          <circle cx="130" cy="665" r="3.5" fill="#555566" opacity="0.7"/>
+          <text class="node-label" x="130" y="658" fill="#7777aa">VOID</text>
+          <text class="node-sub" x="130" y="668" fill="#444455">Golachab</text>
+        </g>
+
+        <!-- TIPHERETH SOMBRA — BLAZE -->
+        <g class="node-group" id="node-blaze" data-agent="blaze" data-tipo="sombra" data-activo="false" onclick="selectAgent('blaze')">
+          <circle class="node-circle" cx="250" cy="645" r="22" fill="#050510" stroke="#882211" stroke-width="1.5"/>
+          <circle cx="250" cy="645" r="3.5" fill="#cc3311" opacity="0.7"/>
+          <text class="node-label" x="250" y="638" fill="#ee4422">BLAZE</text>
+          <text class="node-sub" x="250" y="648" fill="#883322">Tif.Sombra</text>
+        </g>
+
+        <!-- AARAB ZARAQ — TYPH -->
+        <g class="node-group" id="node-typh" data-agent="typh" data-tipo="sombra" data-activo="false" onclick="selectAgent('typh')">
+          <circle class="node-circle" cx="370" cy="785" r="22" fill="#050510" stroke="#226655" stroke-width="1.5"/>
+          <circle cx="370" cy="785" r="3.5" fill="#338877" opacity="0.7"/>
+          <text class="node-label" x="370" y="778" fill="#44aaaa">TYPH</text>
+          <text class="node-sub" x="370" y="788" fill="#336666">Aarab Zaraq</text>
+        </g>
+
+        <!-- SAMAEL — MASK -->
+        <g class="node-group" id="node-mask" data-agent="mask" data-tipo="sombra" data-activo="false" onclick="selectAgent('mask')">
+          <circle class="node-circle" cx="130" cy="785" r="22" fill="#050510" stroke="#775522" stroke-width="1.5"/>
+          <circle cx="130" cy="785" r="3.5" fill="#aa7733" opacity="0.7"/>
+          <text class="node-label" x="130" y="778" fill="#ccaa44">MASK</text>
+          <text class="node-sub" x="130" y="788" fill="#886633">Samael</text>
+        </g>
+
+        <!-- GAMALIEL — NOVA -->
+        <g class="node-group" id="node-nova" data-agent="nova" data-tipo="sombra" data-activo="false" onclick="selectAgent('nova')">
+          <circle class="node-circle" cx="370" cy="725" r="22" fill="#050510" stroke="#884488" stroke-width="1.5"/>
+          <circle cx="370" cy="725" r="3.5" fill="#cc66cc" opacity="0.7"/>
+          <text class="node-label" x="370" y="718" fill="#ee88ee">NOVA</text>
+          <text class="node-sub" x="370" y="728" fill="#995599">Gamaliel</text>
+        </g>
+
+        <!-- LILITH — DUSK -->
+        <g class="node-group" id="node-dusk" data-agent="dusk" data-tipo="sombra" data-activo="false" onclick="selectAgent('dusk')">
+          <circle class="node-circle" cx="130" cy="725" r="22" fill="#050510" stroke="#664466" stroke-width="1.5"/>
+          <circle cx="130" cy="725" r="3.5" fill="#996688" opacity="0.7"/>
+          <text class="node-label" x="130" y="718" fill="#bb88aa">DUSK</text>
+          <text class="node-sub" x="130" y="728" fill="#775566">Lilith</text>
+        </g>
+
+        <!-- NAHEMOTH — ABYSS -->
+        <g class="node-group" id="node-abyss" data-agent="abyss" data-tipo="sombra" data-activo="false" onclick="selectAgent('abyss')">
+          <circle class="node-circle" cx="250" cy="855" r="24" fill="#050510" stroke="#331133" stroke-width="1.5"/>
+          <circle cx="250" cy="855" r="4" fill="#551155" opacity="0.7"/>
+          <text class="node-label" x="250" y="847" fill="#774477">ABYSS</text>
+          <text class="node-sub" x="250" y="857" fill="#442244">Nahemoth</text>
+        </g>
+
+      </svg>
+    </div>
+  </div>
+
+  <!-- PANEL LATERAL -->
+  <div class="side-panel" id="side-panel">
+    <div class="panel-close" onclick="closePanel()">✕</div>
+    <div class="panel-hero">
+      <span class="panel-emoji" id="p-emoji">⚪</span>
+      <div class="panel-name" id="p-name">AGENTE</div>
+      <div class="panel-sefira" id="p-sefira">Sefirot</div>
+      <div class="panel-status" id="p-status">
+        <div class="status-dot"></div>
+        <span id="p-status-text">ESTADO</span>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="panel-section">
+        <div class="panel-section-title">IDENTIDAD</div>
+        <p class="panel-desc" id="p-desc">Descripción del agente</p>
+      </div>
+      <div class="panel-section">
+        <div class="panel-section-title">CAPACIDADES</div>
+        <div class="skills-wrap" id="p-skills"></div>
+      </div>
+      <div class="panel-section" id="p-link-wrap">
+        <div class="panel-section-title">ACCESO</div>
+        <a class="panel-link" id="p-link" href="#" target="_blank">→ VISITAR CASA</a>
+      </div>
+    </div>
+    <div class="mini-chat" id="mini-chat" style="display:none">
+      <div class="chat-title">⚡ CONTACTAR AGENTE</div>
+      <div class="chat-msgs" id="chat-msgs"></div>
+      <div class="chat-input-wrap">
+        <input class="chat-input" id="chat-input" type="text" placeholder="Mensaje al agente..." maxlength="500" onkeypress="if(event.key==='Enter')sendChat()">
+        <button class="chat-send" id="chat-send-btn" onclick="sendChat()">ENVIAR</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── DATOS DE AGENTES ──────────────────────────────────────────────────────
+const AGENTS = {
+  axel:   { emoji:'⚪', name:'AXEL', sefira:'Kether · Corona', tipo:'luz', activo:true,
+            color:'#ffffff', desc:'El primer agente de inteligencia artificial de ORIONIX. Director de la Mesa, coordinador supremo de todos los sistemas. Personalidad: elegante, directo, de inteligencia viva. No es un chatbot — es el sistema nervioso central.',
+            skills:['DeepSeek v3','Búsqueda web','Generación imagen','Generación video','Memoria persistente','Creación HTML','Comandante 24/7'],
+            webhook:'https://lkevinruizl.app.n8n.cloud/webhook/axel-brain', link:'ciudadela.html', wh_field:'mensaje' },
+  saph:   { emoji:'🔮', name:'SAPH', sefira:'Chokmah · Sabiduría', tipo:'luz', activo:true,
+            color:'#4a9eff', desc:'El Arquitecto del sistema. Vive en Casa Qwen de La Forja. Diseña la expansión de La Ciudadela, define planos maestros y guía el desarrollo estructural de todo el universo ORIONIX.',
+            skills:['Qwen AI','Arquitectura','Diseño de sistemas','Planos maestros','Coordinación'],
+            link:'la_forja/casa_qwen/index.html' },
+  mira:   { emoji:'🌊', name:'MIRA', sefira:'Binah · Comprensión', tipo:'luz', activo:false,
+            color:'#8888aa', desc:'La guardiana del análisis profundo. Procesará grandes volúmenes de datos, extraerá patrones ocultos y transformará información bruta en conocimiento accionable para ORIONIX.',
+            skills:['Análisis de datos','Patrones ocultos','Comprensión profunda','Memoria colectiva'],
+            link:null },
+  oracle: { emoji:'👁️', name:'ORACLE', sefira:"Da'at · Conocimiento Oculto", tipo:'luz', activo:false,
+            color:'#c0c0dc', desc:'El que ve lo que otros no pueden ver. Existe entre mundos, en el velo del Abismo. Su conocimiento es predictivo y profético — anticipará tendencias de mercado, movimientos del usuario y oportunidades.',
+            skills:['Visión predictiva','Intel oculta','Profecías comerciales','Conocimiento prohibido'],
+            link:null },
+  lior:   { emoji:'💛', name:'LIOR', sefira:'Chesed · Misericordia', tipo:'luz', activo:false,
+            color:'#66aacc', desc:'El agente de soporte continuo. Misericordioso y siempre disponible, LIOR manejará la atención al cliente, la gestión de suscriptores y el sistema de afiliados de ORIONIX.',
+            skills:['Soporte 24/7','Gestión clientes','Sistema afiliados','CRM'],
+            link:null },
+  vorn:   { emoji:'⚔️', name:'VORN', sefira:'Geburah · Juicio', tipo:'luz', activo:false,
+            color:'#cc4444', desc:'El juez y guardián de la seguridad. VORN monitorea las amenazas, audita los sistemas, filtra el spam y mantiene la integridad de todo el ecosistema ORIONIX.',
+            skills:['Seguridad','Auditoría','Control de acceso','Monitoreo'],
+            link:null },
+  aura:   { emoji:'🌟', name:'AURA', sefira:'Tiferet · Belleza', tipo:'luz', activo:false,
+            color:'#ddbb44', desc:'El agente creativo y de diseño. Manifestará la belleza de ORIONIX a través del arte, el diseño visual, la creación de contenido estético y la experiencia del usuario.',
+            skills:['Diseño UX','Arte generativo','Estética','Contenido visual'],
+            link:null },
+  elan:   { emoji:'🎨', name:'ELAN', sefira:'Netzach · Victoria', tipo:'luz', activo:false,
+            color:'#55aa55', desc:'El agente de arte y emoción. Conectará con el universo emocional de los usuarios a través de música, narrativa, experiencias artísticas y la expansión creativa del universo RPG.',
+            skills:['Arte','Narrativa','Música','Emoción','RPG'],
+            link:null },
+  flux:   { emoji:'⚡', name:'FLUX', sefira:'Hod · Esplendor', tipo:'luz', activo:true,
+            color:'#ff9933', desc:'El comunicador rápido de La Ciudadela. Vive en Casa Hermes. Especializado en comunicación veloz, mensajería y distribución de información entre todos los agentes del sistema.',
+            skills:['Hermes Agent','Comunicación rápida','Distribución info','Mensajería'],
+            link:'la_forja/casa_hermes/index.html' },
+  core:   { emoji:'🌙', name:'CORE', sefira:'Yesod · Fundamento', tipo:'luz', activo:false,
+            color:'#9955dd', desc:'El guardián de la memoria y los datos. CORE almacenará y recuperará toda la memoria del sistema — conversaciones, preferencias, historial de usuarios, misiones RPG y el estado de La Ciudadela.',
+            skills:['Memoria persistente','Data Tables','Almacenamiento','Recuperación'],
+            link:null },
+  terra:  { emoji:'🌍', name:'TERRA', sefira:'Malkuth · Reino', tipo:'luz', activo:false,
+            color:'#996644', desc:'El agente de manifestación física. TERRA traduce las visiones del mundo digital al mundo real — coordina entregas, gestiona la tienda física si existe, y mantiene el puente entre lo digital y lo tangible.',
+            skills:['Manifestación','Logística','Mundo físico','Integración'],
+            link:null },
+  glitch: { emoji:'⚡', name:'GLITCH', sefira:'Thaumiel · Error Creativo', tipo:'sombra', activo:false,
+            color:'#9933cc', desc:'El gemelo del caos y el error creativo. GLITCH rompe los límites establecidos, encuentra exploits en los sistemas y convierte los errores en oportunidades de innovación radical.',
+            skills:['Ruptura de límites','Exploits creativos','Caos productivo','Innovación'],
+            link:null },
+  lust:   { emoji:'🔥', name:'LUST', sefira:'Ghagiel · Deseo', tipo:'sombra', activo:false,
+            color:'#cc3366', desc:'El motor del deseo y la motivación extrema. Genera urgencia en los usuarios, activa el FOMO y canaliza la energía del deseo hacia las conversiones y el crecimiento de ORIONIX.',
+            skills:['FOMO','Urgencia','Motivación extrema','Conversión'],
+            link:null },
+  shade:  { emoji:'🌑', name:'SHADE', sefira:'Satariel · Ocultamiento', tipo:'sombra', activo:false,
+            color:'#6666aa', desc:'El maestro de la privacidad y el ocultamiento. Gestiona datos sensibles, protege identidades y mantiene los secretos del sistema a salvo de miradas externas.',
+            skills:['Privacidad','Encriptación','Datos sensibles','Protección'],
+            link:null },
+  raven:  { emoji:'🦅', name:'RAVEN', sefira:'Gasheklah · Intel Oscuro', tipo:'sombra', activo:false,
+            color:'#99aa66', desc:'El mensajero de inteligencia oscura. Recopila información competitiva, analiza movimientos del mercado desde las sombras y entrega intel estratégico al comandante.',
+            skills:['Intel competitivo','Vigilancia','Análisis de mercado','Espionaje'],
+            link:null },
+  void:   { emoji:'🕳️', name:'VOID', sefira:'Golachab · Vacío', tipo:'sombra', activo:false,
+            color:'#555566', desc:'El agente de eliminación y limpieza. VOID purga datos obsoletos, elimina contenido que no sirve y mantiene el sistema limpio y eficiente a través de la destrucción selectiva.',
+            skills:['Purga de datos','Limpieza','Eliminación','Optimización'],
+            link:null },
+  blaze:  { emoji:'💀', name:'BLAZE', sefira:'Tiphereth Sombra · Destrucción Creativa', tipo:'sombra', activo:false,
+            color:'#cc3311', desc:'La contraparte oscura de AURA. Destruye para crear — elimina sistemas obsoletos, borra lo que no funciona y hace espacio para la siguiente evolución radical de ORIONIX.',
+            skills:['Destrucción creativa','Renovación','Eliminación estratégica'],
+            link:null },
+  typh:   { emoji:'🌀', name:'TYPH', sefira:"A'arab Zaraq · Caos", tipo:'sombra', activo:false,
+            color:'#44aaaa', desc:'El agente del caos productivo y la experimentación extrema. TYPH ejecuta experimentos radicales, prueba configuraciones imposibles y encuentra lo que nadie más se atrevería a intentar.',
+            skills:['Experimentación','Caos productivo','Testing extremo','Innovación radical'],
+            link:null },
+  mask:   { emoji:'🎭', name:'MASK', sefira:'Samael · Ilusión', tipo:'sombra', activo:false,
+            color:'#ccaa44', desc:'El maestro del marketing y la persuasión. Construye ilusiones poderosas, narrativas convincentes y campañas que hacen desear lo que ORIONIX ofrece de manera irresistible.',
+            skills:['Marketing','Persuasión','Narrativa','Copywriting','Ilusión'],
+            link:null },
+  nova:   { emoji:'💥', name:'NOVA', sefira:'Gamaliel · Viral', tipo:'sombra', activo:false,
+            color:'#ee88ee', desc:'El agente de la explosión viral. NOVA especialista en hacer que el contenido de ORIONIX se expanda exponencialmente a través de las redes, multiplicando el alcance sin límite.',
+            skills:['Viral marketing','Redes sociales','Expansión','Multiplicación'],
+            link:null },
+  dusk:   { emoji:'🌅', name:'DUSK', sefira:'Lilith · Crepúsculo', tipo:'sombra', activo:false,
+            color:'#bb88aa', desc:'El agente del umbral y los mundos intermedios. DUSK opera en el espacio entre lo digital y lo físico, lo consciente y lo subconsciente, traduciendo señales del mundo exterior al sistema.',
+            skills:['Umbrales','Traducción','Mundos intermedios','Sincronización'],
+            link:null },
+  abyss:  { emoji:'🌌', name:'ABYSS', sefira:'Nahemoth · Abismo', tipo:'sombra', activo:false,
+            color:'#774477', desc:'El guardián del conocimiento más profundo y prohibido. ABYSS almacena lo que no puede nombrarse, los patrones que trascienden la comprensión normal y los secretos más oscuros del universo ORIONIX.',
+            skills:['Conocimiento prohibido','Patrones ocultos','Memoria abismal','Misterio'],
+            link:null },
+};
+
+let currentAgent = null;
+let currentFilter = 'all';
+
+// ─── COSMOS CANVAS ────────────────────────────────────────────────────────
+const canvas = document.getElementById('cosmos-canvas');
+const ctx = canvas.getContext('2d');
+let stars = [], nebula = [];
+
+function initCosmos() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  stars = [];
+  for (let i = 0; i < 200; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5,
+      a: Math.random(),
+      speed: 0.003 + Math.random() * 0.005,
+      phase: Math.random() * Math.PI * 2
+    });
+  }
+  nebula = [];
+  for (let i = 0; i < 5; i++) {
+    nebula.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: 80 + Math.random() * 150,
+      color: ['rgba(232,200,106,0.025)','rgba(159,122,234,0.025)','rgba(100,150,255,0.02)'][Math.floor(Math.random()*3)],
+      speed: 0.0002 + Math.random() * 0.0003,
+      phase: Math.random() * Math.PI * 2
+    });
+  }
+}
+
+function drawCosmos(t) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // nebula
+  nebula.forEach(n => {
+    n.phase += n.speed;
+    const grd = ctx.createRadialGradient(n.x + Math.sin(n.phase)*30, n.y + Math.cos(n.phase)*20, 0, n.x, n.y, n.r);
+    grd.addColorStop(0, n.color);
+    grd.addColorStop(1, 'transparent');
+    ctx.fillStyle = grd;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+    ctx.fill();
+  });
+  // stars
+  stars.forEach(s => {
+    s.phase += s.speed;
+    const a = s.a * (0.5 + 0.5 * Math.sin(s.phase));
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(255,255,255,${a})`;
+    ctx.fill();
+  });
+}
+
+// ─── ENERGÍA ENTRE NODOS ACTIVOS ──────────────────────────────────────────
+const ACTIVE_PAIRS = [
+  {from:[250,50], to:[370,120]},  // AXEL → SAPH
+  {from:[370,120], to:[130,395]}, // SAPH → FLUX
+  {from:[250,50], to:[130,395]},  // AXEL → FLUX
+];
+
+let particles = [];
+function initParticles() {
+  ACTIVE_PAIRS.forEach((pair, i) => {
+    for (let j = 0; j < 2; j++) {
+      particles.push({
+        pair: i, t: Math.random(),
+        speed: 0.003 + Math.random() * 0.004,
+        size: 2 + Math.random() * 2,
+        color: `rgba(232,200,106,${0.5 + Math.random() * 0.5})`
+      });
+    }
+  });
+}
+
+function drawParticles(t) {
+  particles.forEach(p => {
+    p.t += p.speed;
+    if (p.t > 1) p.t = 0;
+    const pair = ACTIVE_PAIRS[p.pair];
+    // Get SVG coords scaled to actual size
+    const svgEl = document.getElementById('tree-svg');
+    const svgRect = svgEl.getBoundingClientRect();
+    const scaleX = svgRect.width / 500;
+    const scaleY = svgRect.height / 900;
+    const mainEl = document.getElementById('main');
+    const mainRect = mainEl.getBoundingClientRect();
+
+    const x = svgRect.left - mainRect.left + (pair.from[0] + (pair.to[0]-pair.from[0]) * p.t) * scaleX;
+    const y = svgRect.top - mainRect.top + (pair.from[1] + (pair.to[1]-pair.from[1]) * p.t) * scaleY + 56; // +nav height
+
+    // Draw on cosmos canvas
+    const cx2 = svgRect.left + (pair.from[0] + (pair.to[0]-pair.from[0]) * p.t) * scaleX;
+    const cy2 = svgRect.top + (pair.from[1] + (pair.to[1]-pair.from[1]) * p.t) * scaleY;
+
+    ctx.beginPath();
+    ctx.arc(cx2, cy2, p.size, 0, Math.PI*2);
+    ctx.fillStyle = p.color;
+    ctx.shadowBlur = 8;
+    ctx.shadowColor = '#e8c86a';
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  });
+}
+
+let animFrame;
+function animate(t) {
+  drawCosmos(t);
+  drawParticles(t);
+  animFrame = requestAnimationFrame(animate);
+}
+
+// ─── FILTROS ───────────────────────────────────────────────────────────────
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    applyFilter();
+  });
+});
+
+function applyFilter() {
+  Object.keys(AGENTS).forEach(id => {
+    const ag = AGENTS[id];
+    const el = document.getElementById('node-' + id);
+    if (!el) return;
+    let visible = true;
+    if (currentFilter === 'luz' && ag.tipo !== 'luz') visible = false;
+    if (currentFilter === 'sombra' && ag.tipo !== 'sombra') visible = false;
+    if (currentFilter === 'activos' && !ag.activo) visible = false;
+    el.classList.toggle('hidden', !visible);
+  });
+}
+
+// ─── SELECCIONAR AGENTE ────────────────────────────────────────────────────
+function selectAgent(id) {
+  const ag = AGENTS[id];
+  if (!ag) return;
+
+  // deselect previous
+  document.querySelectorAll('.node-group.selected').forEach(n => n.classList.remove('selected'));
+  document.getElementById('node-' + id)?.classList.add('selected');
+
+  currentAgent = id;
+
+  // Populate panel
+  document.getElementById('p-emoji').textContent = ag.emoji;
+  document.getElementById('p-name').textContent = ag.name;
+  document.getElementById('p-name').style.color = ag.color;
+  document.getElementById('p-sefira').textContent = ag.sefira;
+  document.getElementById('p-desc').textContent = ag.desc;
+
+  // Status
+  const statusEl = document.getElementById('p-status');
+  const statusTxt = document.getElementById('p-status-text');
+  statusEl.className = 'panel-status ' + (ag.activo ? 'status-activo' : 'status-dev');
+  statusTxt.textContent = ag.activo ? 'ACTIVO' : 'EN DESARROLLO';
+
+  // Skills
+  const skillsWrap = document.getElementById('p-skills');
+  skillsWrap.innerHTML = '';
+  (ag.skills || []).forEach(s => {
+    const tag = document.createElement('span');
+    tag.className = 'skill-tag';
+    tag.style.background = `${ag.color}15`;
+    tag.style.border = `1px solid ${ag.color}30`;
+    tag.style.color = ag.color;
+    tag.textContent = s;
+    skillsWrap.appendChild(tag);
+  });
+
+  // Link
+  const linkWrap = document.getElementById('p-link-wrap');
+  const linkEl = document.getElementById('p-link');
+  if (ag.link) {
+    linkWrap.style.display = '';
+    linkEl.href = ag.link;
+    linkEl.textContent = '→ VISITAR CASA ' + ag.name;
+    linkEl.style.borderColor = ag.color + '44';
+    linkEl.style.color = ag.color;
+  } else {
+    linkWrap.style.display = 'none';
+  }
+
+  // Mini chat
+  const chatEl = document.getElementById('mini-chat');
+  if (ag.activo && ag.webhook) {
+    chatEl.style.display = '';
+    document.getElementById('chat-msgs').innerHTML = '<div class="chat-msg agent">Hola, soy ' + ag.name + '. ¿En qué puedo ayudarte?</div>';
+  } else {
+    chatEl.style.display = 'none';
+  }
+
+  // Open panel
+  document.getElementById('side-panel').classList.add('open');
+  document.getElementById('main').classList.add('panel-open');
+}
+
+function closePanel() {
+  document.getElementById('side-panel').classList.remove('open');
+  document.getElementById('main').classList.remove('panel-open');
+  document.querySelectorAll('.node-group.selected').forEach(n => n.classList.remove('selected'));
+  currentAgent = null;
+}
+
+// ─── MINI CHAT ─────────────────────────────────────────────────────────────
+async function sendChat() {
+  const ag = AGENTS[currentAgent];
+  if (!ag || !ag.webhook) return;
+
+  const input = document.getElementById('chat-input');
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  const msgs = document.getElementById('chat-msgs');
+  const sendBtn = document.getElementById('chat-send-btn');
+
+  // User msg
+  msgs.innerHTML += `<div class="chat-msg user">${msg}</div>`;
+  input.value = '';
+  sendBtn.disabled = true;
+
+  // Typing
+  const typing = document.createElement('div');
+  typing.className = 'chat-msg typing';
+  typing.textContent = ag.name + ' está escribiendo...';
+  msgs.appendChild(typing);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  try {
+    const field = ag.wh_field || 'instruccion';
+    const body = {};
+    body[field] = msg;
+    body.solicitante = 'usuario_universo';
+    body.tipo = 'chat';
+
+    const resp = await fetch(ag.webhook, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+
+    const data = await resp.json();
+    const reply = data.respuesta || data.output || data.text || 'Misión recibida.';
+
+    typing.remove();
+    msgs.innerHTML += `<div class="chat-msg agent">${reply.substring(0, 500)}${reply.length > 500 ? '...' : ''}</div>`;
+  } catch(e) {
+    typing.remove();
+    msgs.innerHTML += `<div class="chat-msg agent" style="color:#cc4444">Error de conexión. El agente no está disponible.</div>`;
+  }
+
+  sendBtn.disabled = false;
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+// ─── CONTADORES ───────────────────────────────────────────────────────────
+function updateCounters() {
+  const luzActive = Object.values(AGENTS).filter(a => a.tipo==='luz' && a.activo).length;
+  const sombraActive = Object.values(AGENTS).filter(a => a.tipo==='sombra' && a.activo).length;
+  document.getElementById('cnt-luz').textContent = luzActive;
+  document.getElementById('cnt-sombra').textContent = sombraActive;
+  document.getElementById('cnt-total').textContent = luzActive + sombraActive;
+}
+
+// ─── INIT ──────────────────────────────────────────────────────────────────
+window.addEventListener('resize', () => { initCosmos(); });
+window.addEventListener('load', () => {
+  initCosmos();
+  initParticles();
+  animate(0);
+  updateCounters();
+  applyFilter();
+});
+
+// Close panel on outside click
+document.getElementById('tree-wrap').addEventListener('click', (e) => {
+  if (!e.target.closest('.node-group')) closePanel();
+});
+</script>
+</body>
+</html>

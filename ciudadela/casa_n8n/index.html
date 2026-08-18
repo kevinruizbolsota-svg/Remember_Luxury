@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa n8n | Centro de Operaciones — ORIONIX</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#e8c86a;--gold2:#c9a84c;--dark:#0b0b0d;--dark2:#111116;--dark3:#1a1a22;--text:#e8e0d0}
+body{background:var(--dark);color:var(--text);font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(232,200,106,0.06) 0%,transparent 60%);pointer-events:none}
+
+/* NAV */
+.orionix-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(11,11,13,0.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(232,200,106,0.2);padding:0 2rem;display:flex;align-items:center;height:56px;gap:1.5rem}
+.nav-brand{font-family:'Cinzel',serif;font-weight:700;font-size:1.1rem;color:var(--gold);text-decoration:none;letter-spacing:0.15em;margin-right:auto}
+.nav-links{display:flex;gap:0.5rem;flex-wrap:wrap}
+.nav-links a{color:rgba(232,200,106,0.7);text-decoration:none;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.08em;padding:0.3rem 0.7rem;border:1px solid rgba(232,200,106,0.2);border-radius:2px;transition:all 0.3s}
+.nav-links a:hover{color:var(--gold);border-color:var(--gold);background:rgba(232,200,106,0.08)}
+.nav-cta{background:rgba(232,200,106,0.12);border:1px solid var(--gold);color:var(--gold)!important;border-radius:3px}
+.nav-cta:hover{background:rgba(232,200,106,0.25)!important}
+
+/* LAYOUT */
+.cmd-wrap{padding-top:80px;max-width:1400px;margin:0 auto;padding-left:1.5rem;padding-right:1.5rem;padding-bottom:4rem}
+.cmd-header{text-align:center;padding:2rem 0 3rem;border-bottom:1px solid rgba(232,200,106,0.15);margin-bottom:2.5rem}
+.cmd-header h1{font-family:'Cinzel',serif;font-size:2rem;color:var(--gold);letter-spacing:0.2em;font-weight:700}
+.cmd-header p{color:rgba(232,200,106,0.5);font-size:0.9rem;letter-spacing:0.1em;margin-top:0.5rem}
+.cmd-stamp{display:inline-block;font-size:0.7rem;letter-spacing:0.15em;color:rgba(232,200,106,0.4);border:1px solid rgba(232,200,106,0.2);padding:0.2rem 0.8rem;margin-top:0.8rem;font-family:'Cinzel',serif}
+
+/* STATUS BAR */
+.status-bar{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;padding:1rem 1.5rem;background:var(--dark2);border:1px solid rgba(232,200,106,0.15);border-radius:4px}
+.stat-item{display:flex;flex-direction:column;align-items:center;min-width:80px}
+.stat-val{font-family:'Cinzel',serif;font-size:1.4rem;color:var(--gold);font-weight:700}
+.stat-label{font-size:0.6rem;letter-spacing:0.12em;color:rgba(232,200,106,0.5);text-transform:uppercase;margin-top:2px}
+.stat-divider{width:1px;background:rgba(232,200,106,0.15);margin:0 0.5rem}
+
+/* GRID */
+.cmd-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.cmd-grid .full{grid-column:1/-1}
+
+/* CARD */
+.cmd-card{background:var(--dark2);border:1px solid rgba(232,200,106,0.15);border-radius:4px;overflow:hidden}
+.card-header{padding:1rem 1.5rem;border-bottom:1px solid rgba(232,200,106,0.12);display:flex;align-items:center;justify-content:space-between}
+.card-header h3{font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.15em;color:var(--gold);font-weight:600}
+.card-header .badge{font-size:0.6rem;padding:0.15rem 0.5rem;border-radius:2px;background:rgba(232,200,106,0.1);color:var(--gold);border:1px solid rgba(232,200,106,0.3)}
+.card-body{padding:1.5rem}
+
+/* AGENTS */
+.agents-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem}
+.agent-card{background:var(--dark3);border:1px solid rgba(232,200,106,0.12);border-radius:4px;padding:1rem;text-align:center;transition:all 0.3s;cursor:default}
+.agent-card:hover{border-color:rgba(232,200,106,0.4);background:rgba(232,200,106,0.04)}
+.agent-icon{font-size:1.5rem;margin-bottom:0.4rem}
+.agent-name{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.1em;color:var(--gold);font-weight:600;display:block}
+.agent-role{font-size:0.6rem;color:rgba(232,200,106,0.4);margin-top:2px;display:block}
+.agent-status{display:flex;align-items:center;justify-content:center;gap:0.3rem;margin-top:0.5rem}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dot.green{background:#4ade80;box-shadow:0 0 6px #4ade8080}
+.dot.yellow{background:#fbbf24;box-shadow:0 0 6px #fbbf2480}
+.dot.red{background:#f87171;box-shadow:0 0 6px #f8717180}
+.dot.grey{background:#6b7280}
+.agent-status span{font-size:0.55rem;color:rgba(200,200,200,0.5);letter-spacing:0.08em}
+
+/* WORKFLOWS TABLE */
+.wf-table{width:100%;border-collapse:collapse}
+.wf-table th{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.1em;color:rgba(232,200,106,0.5);text-align:left;padding:0.5rem 0.8rem;border-bottom:1px solid rgba(232,200,106,0.12)}
+.wf-table td{font-size:0.75rem;padding:0.6rem 0.8rem;border-bottom:1px solid rgba(232,200,106,0.06);color:rgba(232,224,208,0.8)}
+.wf-table tr:hover td{background:rgba(232,200,106,0.03)}
+.wf-active{color:#4ade80;font-size:0.65rem;font-weight:600}
+.wf-idle{color:#6b7280;font-size:0.65rem}
+
+/* TERMINAL */
+.terminal{background:#080810;border-radius:3px;padding:1rem;font-family:monospace;font-size:0.7rem;max-height:200px;overflow-y:auto;border:1px solid rgba(232,200,106,0.1)}
+.terminal::-webkit-scrollbar{width:4px}
+.terminal::-webkit-scrollbar-track{background:#0b0b0d}
+.terminal::-webkit-scrollbar-thumb{background:rgba(232,200,106,0.3);border-radius:2px}
+.t-line{padding:1px 0;line-height:1.5}
+.t-ts{color:rgba(232,200,106,0.4)}
+.t-ok{color:#4ade80}
+.t-warn{color:#fbbf24}
+.t-err{color:#f87171}
+.t-info{color:#60a5fa}
+
+/* CONTROLS */
+.controls-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.8rem}
+.ctrl-btn{background:var(--dark3);border:1px solid rgba(232,200,106,0.2);color:rgba(232,200,106,0.8);font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.1em;padding:0.8rem;border-radius:3px;cursor:pointer;transition:all 0.3s;width:100%;text-align:center}
+.ctrl-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(232,200,106,0.08)}
+.ctrl-btn:active{transform:scale(0.98)}
+.ctrl-btn.primary{background:rgba(232,200,106,0.12);border-color:var(--gold);color:var(--gold)}
+.ctrl-btn.danger{border-color:rgba(248,113,113,0.4);color:rgba(248,113,113,0.7)}
+.ctrl-btn.danger:hover{border-color:#f87171;color:#f87171;background:rgba(248,113,113,0.08)}
+
+/* METRICS */
+.metrics-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.metric-box{background:var(--dark3);border:1px solid rgba(232,200,106,0.1);border-radius:4px;padding:1rem;text-align:center}
+.metric-num{font-family:'Cinzel',serif;font-size:1.8rem;color:var(--gold);font-weight:700;line-height:1}
+.metric-label{font-size:0.6rem;letter-spacing:0.12em;color:rgba(232,200,106,0.4);margin-top:0.4rem;text-transform:uppercase}
+.metric-trend{font-size:0.65rem;margin-top:0.3rem;color:#4ade80}
+
+/* CHATGPT BRIDGE */
+.bridge-form{display:flex;flex-direction:column;gap:0.8rem}
+.bridge-form select,.bridge-form input,.bridge-form textarea{background:var(--dark3);border:1px solid rgba(232,200,106,0.2);color:var(--text);font-family:'Cormorant Garamond',serif;font-size:0.85rem;padding:0.6rem 0.8rem;border-radius:3px;width:100%;outline:none;transition:border-color 0.3s}
+.bridge-form select:focus,.bridge-form input:focus,.bridge-form textarea:focus{border-color:rgba(232,200,106,0.5)}
+.bridge-form textarea{min-height:80px;resize:vertical}
+.bridge-row{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem}
+.bridge-response{background:#080810;border:1px solid rgba(232,200,106,0.15);border-radius:3px;padding:1rem;font-size:0.75rem;min-height:80px;white-space:pre-wrap;color:rgba(232,224,208,0.7);font-family:monospace;display:none}
+.bridge-response.visible{display:block}
+
+/* QUEUE TABLE */
+.queue-empty{text-align:center;padding:2rem;color:rgba(232,200,106,0.3);font-size:0.8rem;font-style:italic}
+
+/* UTIL */
+.gold{color:var(--gold)}
+.section-label{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.2em;color:rgba(232,200,106,0.4);text-transform:uppercase;margin-bottom:0.8rem;display:block}
+.spinner{display:inline-block;width:12px;height:12px;border:2px solid rgba(232,200,106,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:900px){.cmd-grid{grid-template-columns:1fr}.cmd-grid .full{grid-column:1}.agents-grid{grid-template-columns:repeat(2,1fr)}.nav-links{display:none}}
+</style>
+</head>
+<body>
+
+<nav class="orionix-nav">
+  <a href="../index.html" class="nav-brand">ORIONIX</a>
+  <div class="nav-links">
+    <a href="../hub.html">Hub</a>
+    <a href="../ciudadela.html">AXEL</a>
+    <a href="../forjadora.html">Forjadora</a>
+    <a href="../hogar.html">Hogar</a>
+    <a href="plaza.html">La Plaza</a>
+    <a href="../ciudadela.html" class="nav-cta">Ir a AXEL</a>
+    <a href="../tienda.html" class="nav-cta">Tienda</a>
+  </div>
+</nav>
+
+<div class="cmd-wrap">
+  <div class="cmd-header">
+    <h1>🏰 CASA n8n</h1>
+    <p>Centro de Operaciones del Comandante</p>
+    <span class="cmd-stamp">CLASIFICADO — ACCESO COMANDANTE</span>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <div class="stat-item">
+      <span class="stat-val" id="stat-agents">11</span>
+      <span class="stat-label">Agentes Activos</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-val" id="stat-workflows">12</span>
+      <span class="stat-label">Workflows n8n</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-val" id="stat-cycles">0</span>
+      <span class="stat-label">Ciclos Hoy</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-val" id="stat-uptime">—</span>
+      <span class="stat-label">Último Ciclo</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-val" style="color:#4ade80">●</span>
+      <span class="stat-label">Sistema Online</span>
+    </div>
+  </div>
+
+  <div class="cmd-grid">
+
+    <!-- AGENTS STATUS -->
+    <div class="cmd-card full">
+      <div class="card-header">
+        <h3>⚡ Estado de Agentes — Árbol Cabalístico</h3>
+        <span class="badge" id="agents-ts">Cargando...</span>
+      </div>
+      <div class="card-body">
+        <div class="agents-grid" id="agents-grid">
+          <!-- Luz -->
+          <div class="agent-card"><div class="agent-icon">👑</div><span class="agent-name">AXEL</span><span class="agent-role">Kether — Director</span><div class="agent-status"><span class="dot green"></span><span>ACTIVO</span></div></div>
+          <div class="agent-card"><div class="agent-icon">💡</div><span class="agent-name">SAPH</span><span class="agent-role">Chokmah — Sabio</span><div class="agent-status"><span class="dot yellow"></span><span>EN DESARROLLO</span></div></div>
+          <div class="agent-card"><div class="agent-icon">🔮</div><span class="agent-name">MIRA</span><span class="agent-role">Binah — Vidente</span><div class="agent-status"><span class="dot grey"></span><span>PENDIENTE</span></div></div>
+          <div class="agent-card"><div class="agent-icon">💛</div><span class="agent-name">LIOR</span><span class="agent-role">Chesed — Generoso</span><div class="agent-status"><span class="dot grey"></span><span>PENDIENTE</span></div></div>
+          <div class="agent-card"><div class="agent-icon">⚔️</div><span class="agent-name">VORN</span><span class="agent-role">Geburah — Estratega</span><div class="agent-status"><span class="dot grey"></span><span>PENDIENTE</span></div></div>
+          <div class="agent-card"><div class="agent-icon">✨</div><span class="agent-name">AURA</span><span class="agent-role">Tiferet — Armonía</span><div class="agent-status"><span class="dot grey"></span><span>PENDIENTE</span></div></div>
+          <div class="agent-card"><div class="agent-icon">🎨</div><span class="agent-name">ELAN</span><span class="agent-role">Netzach — Creativo</span><div class="agent-status"><span class="dot grey"></span><span>PENDIENTE</span></div></div>
+          <div class="agent-card"><div class="agent-icon">⚙️</div><span class="agent-name">FLUX</span><span class="agent-role">Hod — Técnico</span><div class="agent-status"><span class="dot grey"></span><span>PENDIENTE</span></div></div>
+          <div class="agent-card"><div class="agent-icon">🌙</div><span class="agent-name">CORE</span><span class="agent-role">Yesod — Fundamento</span><div class="agent-status"><span class="dot grey"></span><span>PENDIENTE</span></div></div>
+          <div class="agent-card"><div class="agent-icon">🌍</div><span class="agent-name">TERRA</span><span class="agent-role">Malkuth — Manifestación</span><div class="agent-status"><span class="dot grey"></span><span>PENDIENTE</span></div></div>
+          <div class="agent-card"><div class="agent-icon">🔭</div><span class="agent-name">ORACLE</span><span class="agent-role">Da'at — Conocimiento</span><div class="agent-status"><span class="dot yellow"></span><span>EN DESARROLLO</span></div></div>
+          <!-- n8n propio -->
+          <div class="agent-card" style="border-color:rgba(232,200,106,0.35);background:rgba(232,200,106,0.05)"><div class="agent-icon">⚡</div><span class="agent-name">n8n</span><span class="agent-role">Comandante — Motor</span><div class="agent-status"><span class="dot green"></span><span>ACTIVO</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WORKFLOWS -->
+    <div class="cmd-card">
+      <div class="card-header">
+        <h3>🔗 Workflows Activos</h3>
+        <span class="badge">n8n Cloud</span>
+      </div>
+      <div class="card-body" style="padding:0">
+        <table class="wf-table">
+          <thead><tr><th>Nombre</th><th>Estado</th><th>Trigger</th></tr></thead>
+          <tbody>
+            <tr><td>AXEL Brain</td><td class="wf-active">● ACTIVO</td><td>Webhook</td></tr>
+            <tr><td>AXEL Voz STT</td><td class="wf-active">● ACTIVO</td><td>Webhook</td></tr>
+            <tr><td>Puente ChatGPT</td><td class="wf-active">● ACTIVO</td><td>Webhook</td></tr>
+            <tr><td>ORIONIX Mission</td><td class="wf-active">● ACTIVO</td><td>Webhook</td></tr>
+            <tr><td>ORIONIX Bridge</td><td class="wf-active">● ACTIVO</td><td>Webhook</td></tr>
+            <tr><td>ORIONIX Auth</td><td class="wf-active">● ACTIVO</td><td>Webhook</td></tr>
+            <tr><td>Editor Webhook</td><td class="wf-active">● ACTIVO</td><td>Webhook</td></tr>
+            <tr><td>Deploy Hub</td><td class="wf-idle">○ Manual</td><td>Manual</td></tr>
+            <tr><td>Imagen FLUX</td><td class="wf-idle">○ En espera</td><td>Sub-wf</td></tr>
+            <tr><td>Video MiniMax</td><td class="wf-idle">○ En espera</td><td>Sub-wf</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TERMINAL -->
+    <div class="cmd-card">
+      <div class="card-header">
+        <h3>📡 Terminal de Eventos</h3>
+        <button class="ctrl-btn" style="padding:0.2rem 0.6rem;font-size:0.55rem;width:auto" onclick="clearTerminal()">Limpiar</button>
+      </div>
+      <div class="card-body">
+        <div class="terminal" id="terminal">
+          <div class="t-line"><span class="t-ts">[INIT]</span> <span class="t-ok">Sistema ORIONIX iniciado</span></div>
+          <div class="t-line"><span class="t-ts">[INFO]</span> <span class="t-info">Casa n8n — Centro de Operaciones</span></div>
+          <div class="t-line"><span class="t-ts">[INFO]</span> <span class="t-info">Cargando estado de agentes...</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHATGPT BRIDGE -->
+    <div class="cmd-card">
+      <div class="card-header">
+        <h3>🤖 Puente ChatGPT — Consulta Directa</h3>
+        <span class="badge">GPT-4o-mini</span>
+      </div>
+      <div class="card-body">
+        <div class="bridge-form">
+          <div class="bridge-row">
+            <select id="bridge-solicitante">
+              <option value="axel">Solicitante: AXEL</option>
+              <option value="qwen">Solicitante: Qwen</option>
+              <option value="antigravity">Solicitante: Antigravity</option>
+            </select>
+            <select id="bridge-tipo">
+              <option value="revision">Revisión de Código</option>
+              <option value="creativo">Copywriting Luxury</option>
+              <option value="validacion">Auditoría Técnica</option>
+            </select>
+          </div>
+          <textarea id="bridge-contexto" placeholder="Contexto (opcional): código, HTML, descripción..."></textarea>
+          <input id="bridge-instruccion" type="text" placeholder="Instrucción a ChatGPT...">
+          <button class="ctrl-btn primary" onclick="consultarChatGPT()">⚡ Enviar Consulta</button>
+          <div class="bridge-response" id="bridge-response"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- METRICS -->
+    <div class="cmd-card">
+      <div class="card-header">
+        <h3>📊 Métricas del Sistema</h3>
+        <span class="badge" id="metrics-ts">Sesión actual</span>
+      </div>
+      <div class="card-body">
+        <div class="metrics-row">
+          <div class="metric-box">
+            <div class="metric-num" id="m-req">0</div>
+            <div class="metric-label">Consultas ChatGPT</div>
+            <div class="metric-trend">Esta sesión</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-num" id="m-axel">—</div>
+            <div class="metric-label">Conversaciones AXEL</div>
+            <div class="metric-trend">Histórico</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-num" id="m-commits">—</div>
+            <div class="metric-label">Commits Motor</div>
+            <div class="metric-trend">Último ciclo</div>
+          </div>
+        </div>
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(232,200,106,0.1)">
+          <span class="section-label">Cola de Tareas Pendientes</span>
+          <div id="queue-area" class="queue-empty">Sin tareas en cola — Sistema en reposo</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="cmd-card">
+      <div class="card-header">
+        <h3>🎮 Controles del Comandante</h3>
+      </div>
+      <div class="card-body">
+        <div class="controls-grid">
+          <button class="ctrl-btn primary" onclick="forzarCiclo()">🔄 Forzar Ciclo Motor</button>
+          <button class="ctrl-btn" onclick="testBridge()">📡 Test ORIONIX Bridge</button>
+          <button class="ctrl-btn" onclick="recargarEstado()">🔃 Recargar Estado</button>
+          <button class="ctrl-btn" onclick="testAxel()">🧠 Test AXEL Brain</button>
+          <a href="../ciudadela.html" class="ctrl-btn" style="display:block;text-decoration:none">🌐 Abrir Ciudadela</a>
+          <a href="plaza.html" class="ctrl-btn" style="display:block;text-decoration:none">🏛️ La Plaza</a>
+          <button class="ctrl-btn" onclick="verMESA()">📜 Ver MESA REDONDA</button>
+          <button class="ctrl-btn danger" onclick="if(confirm('¿Pausar sistema?'))alert('Función disponible con motor.py activo')">⏸️ Pausar Sistema</button>
+        </div>
+        <div id="ctrl-output" style="margin-top:1rem;font-size:0.7rem;color:rgba(232,200,106,0.5);font-family:monospace;min-height:30px"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const WEBHOOKS = {
+  bridge: 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-bridge',
+  mission: 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-mission',
+  axel: 'https://lkevinruizl.app.n8n.cloud/webhook/axel-brain',
+  chatgpt: 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-chatgpt'
+};
+const GITHUB_RAW = 'https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/la_forja/';
+let sessionChatGPTReqs = 0;
+
+function log(msg, type='info') {
+  const term = document.getElementById('terminal');
+  const now = new Date().toLocaleTimeString('es', {hour12:false});
+  const cls = type === 'ok' ? 't-ok' : type === 'warn' ? 't-warn' : type === 'err' ? 't-err' : 't-info';
+  const div = document.createElement('div');
+  div.className = 't-line';
+  div.innerHTML = '<span class="t-ts">[' + now + ']</span> <span class="' + cls + '">' + msg + '</span>';
+  term.appendChild(div);
+  term.scrollTop = term.scrollHeight;
+}
+
+function clearTerminal() {
+  document.getElementById('terminal').innerHTML = '<div class="t-line"><span class="t-ts">[CLEAR]</span> <span class="t-info">Terminal limpiado</span></div>';
+}
+
+async function recargarEstado() {
+  log('Recargando agentes_estado.json...', 'info');
+  document.getElementById('agents-ts').textContent = 'Actualizando...';
+  try {
+    const r = await fetch(GITHUB_RAW + 'agentes_estado.json?t=' + Date.now());
+    if (r.ok) {
+      const data = await r.json();
+      document.getElementById('agents-ts').textContent = 'Actualizado ' + new Date().toLocaleTimeString('es');
+      log('Estado de agentes cargado desde GitHub', 'ok');
+      if (data.ultimo_ciclo) document.getElementById('stat-uptime').textContent = new Date(data.ultimo_ciclo).toLocaleTimeString('es');
+    } else {
+      log('agentes_estado.json no encontrado — usando estado base', 'warn');
+      document.getElementById('agents-ts').textContent = 'Estado base';
+    }
+  } catch(e) {
+    log('Error de red al cargar estado: ' + e.message, 'err');
+    document.getElementById('agents-ts').textContent = 'Error';
+  }
+}
+
+async function consultarChatGPT() {
+  const solicitante = document.getElementById('bridge-solicitante').value;
+  const tipo = document.getElementById('bridge-tipo').value;
+  const contexto = document.getElementById('bridge-contexto').value;
+  const instruccion = document.getElementById('bridge-instruccion').value;
+  if (!instruccion.trim()) { log('Instrucción vacía — escribe qué quieres consultar', 'warn'); return; }
+
+  const respDiv = document.getElementById('bridge-response');
+  respDiv.className = 'bridge-response visible';
+  respDiv.textContent = '⏳ Consultando GPT-4o-mini...';
+  log('Enviando consulta ChatGPT | ' + tipo + ' | ' + solicitante, 'info');
+
+  try {
+    const r = await fetch(WEBHOOKS.chatgpt, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ solicitante, tipo_consulta: tipo, contexto, instruccion, prioridad: 'normal' })
+    });
+    const data = await r.json();
+    sessionChatGPTReqs++;
+    document.getElementById('m-req').textContent = sessionChatGPTReqs;
+    if (data.status === 'ok') {
+      respDiv.textContent = '✅ [' + data.respuesta_id + ']\n\n' + data.respuesta;
+      log('ChatGPT respondió | ' + data.tokens + ' tokens | ' + data.respuesta_id, 'ok');
+    } else {
+      respDiv.textContent = '❌ Error: ' + (data.message || JSON.stringify(data));
+      log('Error de ChatGPT: ' + (data.message || 'desconocido'), 'err');
+    }
+  } catch(e) {
+    respDiv.textContent = '❌ Error de conexión: ' + e.message;
+    log('Error de red: ' + e.message, 'err');
+  }
+}
+
+async function forzarCiclo() {
+  log('Forzando ciclo del motor autónomo...', 'info');
+  const out = document.getElementById('ctrl-output');
+  out.textContent = '⏳ Enviando señal a Mission Relay...';
+  try {
+    const r = await fetch(WEBHOOKS.mission, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ tipo: 'ciclo_manual', origen: 'casa_n8n', timestamp: new Date().toISOString() })
+    });
+    const data = await r.json();
+    document.getElementById('stat-cycles').textContent = parseInt(document.getElementById('stat-cycles').textContent||'0') + 1;
+    out.textContent = '✅ Ciclo forzado — AXEL respondió';
+    log('Ciclo manual completado', 'ok');
+  } catch(e) {
+    out.textContent = '❌ Error: ' + e.message;
+    log('Error al forzar ciclo: ' + e.message, 'err');
+  }
+}
+
+async function testBridge() {
+  log('Enviando evento de prueba al Bridge...', 'info');
+  const out = document.getElementById('ctrl-output');
+  out.textContent = '⏳ Enviando test...';
+  try {
+    const r = await fetch(WEBHOOKS.bridge, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ evento: 'puente', detalle: 'Test desde Casa n8n', agente: 'comandante', timestamp: new Date().toISOString() })
+    });
+    const data = await r.json();
+    out.textContent = '✅ Bridge respondió: ' + JSON.stringify(data).slice(0,100);
+    log('Bridge test OK', 'ok');
+  } catch(e) {
+    out.textContent = '❌ Error Bridge: ' + e.message;
+    log('Error Bridge: ' + e.message, 'err');
+  }
+}
+
+async function testAxel() {
+  log('Enviando mensaje de prueba a AXEL Brain...', 'info');
+  const out = document.getElementById('ctrl-output');
+  out.textContent = '⏳ Consultando AXEL...';
+  try {
+    const r = await fetch(WEBHOOKS.axel, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ message: 'AXEL, confirma que el sistema ORIONIX está operacional. Responde en una oración.' })
+    });
+    const data = await r.json();
+    const resp = data.respuesta || data.output || data.message || JSON.stringify(data).slice(0,150);
+    out.textContent = '✅ AXEL: ' + resp;
+    log('AXEL test OK', 'ok');
+  } catch(e) {
+    out.textContent = '❌ Error AXEL: ' + e.message;
+    log('Error AXEL: ' + e.message, 'err');
+  }
+}
+
+function verMESA() {
+  window.open('https://github.com/kevinruizbolsota-svg/Remember_Luxury/blob/main/ciudadela/la_forja/MESA_REDONDA.md', '_blank');
+}
+
+// Init
+window.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('metrics-ts').textContent = new Date().toLocaleDateString('es');
+  log('Casa n8n — Centro de Operaciones iniciado', 'ok');
+  log('Cargando estado del sistema...', 'info');
+  recargarEstado();
+  setInterval(recargarEstado, 60000);
+});
+</script>
+</body>
+</html>

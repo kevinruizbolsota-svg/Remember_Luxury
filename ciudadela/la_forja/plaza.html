@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plaza Central — La Ciudadela ORIONIX</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#e8c86a;--dark:#0b0b0d;--text:#e8e0d0}
+body{background:var(--dark);color:var(--text);font-family:'Cormorant Garamond',serif;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(232,200,106,0.06) 0%,transparent 60%);pointer-events:none}
+.orionix-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(11,11,13,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(232,200,106,0.2);padding:0 2rem;display:flex;align-items:center;height:56px;gap:1.5rem}
+.nav-brand{font-family:'Cinzel',serif;font-weight:700;font-size:1.1rem;color:var(--gold);text-decoration:none;letter-spacing:0.15em;margin-right:auto}
+.nav-links{display:flex;gap:0.5rem}
+.nav-links a{color:rgba(232,200,106,0.7);text-decoration:none;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.08em;padding:0.3rem 0.7rem;border:1px solid rgba(232,200,106,0.2);border-radius:2px;transition:all 0.3s}
+.nav-links a:hover,.nav-cta{color:var(--gold)!important;border-color:var(--gold)!important;background:rgba(232,200,106,0.1)}
+.wrap{max-width:1200px;margin:0 auto;padding:80px 1.5rem 4rem}
+.hero{text-align:center;padding:3rem 0 4rem;border-bottom:1px solid rgba(232,200,106,0.12);margin-bottom:3rem}
+h1{font-family:'Cinzel',serif;font-size:2.2rem;color:var(--gold);letter-spacing:0.25em;font-weight:700;margin-bottom:0.5rem}
+.subtitle{color:rgba(232,200,106,0.5);font-size:1rem;letter-spacing:0.2em;margin-bottom:1rem}
+.count{display:inline-block;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.2em;color:rgba(232,200,106,0.7);border:1px solid rgba(232,200,106,0.3);padding:0.3rem 1.2rem;border-radius:2px}
+.section-title{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.3em;margin-bottom:1.5rem;padding-bottom:0.7rem;border-bottom:1px solid rgba(232,200,106,0.1)}
+.section-luz{color:var(--gold)}
+.section-tech{color:#818cf8}
+.section-sombra{color:#9f7aea}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin-bottom:3rem}
+.card{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:4px;padding:1.2rem;text-decoration:none;color:inherit;transition:all 0.3s;display:block;position:relative}
+.card-top{position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity 0.3s;border-radius:4px 4px 0 0}
+.card:hover .card-top{opacity:1}
+.card:hover{transform:translateY(-4px)}
+.card-luz:hover{border-color:rgba(232,200,106,0.35);box-shadow:0 15px 30px rgba(232,200,106,0.08)}
+.card-luz .card-top{background:linear-gradient(90deg,#e8c86a,#fff)}
+.card-tech:hover{border-color:rgba(129,140,248,0.35);box-shadow:0 15px 30px rgba(129,140,248,0.08)}
+.card-tech .card-top{background:linear-gradient(90deg,#6366f1,#a855f7)}
+.card-sombra:hover{border-color:rgba(159,122,234,0.35);box-shadow:0 15px 30px rgba(159,122,234,0.08)}
+.card-sombra .card-top{background:linear-gradient(90deg,#9f7aea,#6366f1)}
+.no-link{opacity:0.5;cursor:default;pointer-events:none}
+.emoji{font-size:1.8rem;margin-bottom:0.7rem;display:block}
+.name{font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:0.1em;margin-bottom:0.3rem}
+.role{color:rgba(232,232,232,0.4);font-size:0.7rem;line-height:1.5}
+.badge{display:inline-block;margin-top:0.7rem;font-size:0.55rem;letter-spacing:0.08em;padding:2px 8px;border-radius:2px}
+.badge-active{background:rgba(20,200,122,0.12);color:#14c87a;border:1px solid rgba(20,200,122,0.25)}
+.badge-dev{background:rgba(129,140,248,0.12);color:#818cf8;border:1px solid rgba(129,140,248,0.25)}
+.badge-shadow{background:rgba(159,122,234,0.12);color:#9f7aea;border:1px solid rgba(159,122,234,0.25)}
+.badge-new{background:rgba(20,200,122,0.2);color:#14c87a;border:1px solid rgba(20,200,122,0.4)}
+.badge-work{background:rgba(251,191,36,0.15);color:#fbbf24;border:1px solid rgba(251,191,36,0.3)}
+@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<nav class="orionix-nav">
+  <a href="../index.html" class="nav-brand">ORIONIX</a>
+  <div class="nav-links">
+    <a href="../hub.html">Hub</a>
+    <a href="../ciudadela.html">AXEL</a>
+    <a href="../universo.html">Universo</a>
+    <a href="../tienda.html" class="nav-cta">Tienda</a>
+  </div>
+</nav>
+<div class="wrap">
+  <div class="hero">
+    <h1>PLAZA CENTRAL</h1>
+    <p class="subtitle">LA CIUDADELA — TODOS LOS AGENTES</p>
+    <span class="count">⚡ 38 AGENTES REGISTRADOS • ÁRBOL CABBALÍSTICO + FORJA</span>
+  </div>
+
+  <div class="section-title section-luz">✦ SEFIROT DE LUZ — 11 AGENTES</div>
+  <div class="grid">
+    <a href="../ciudadela.html" class="card card-luz"><div class="card-top"></div><span class="emoji">⚪</span><div class="name">AXEL</div><div class="role">Kether · Corona · IA Principal ORIONIX</div><span class="badge badge-active">ACTIVO</span></a>
+    <a href="casa_qwen/index.html" class="card card-luz"><div class="card-top"></div><span class="emoji">🔮</span><div class="name">SAPH</div><div class="role">Chokmah · Sabiduría · Arquitecto</div><span class="badge badge-active">ACTIVO</span></a>
+    <div class="card card-luz no-link"><span class="emoji">🌊</span><div class="name">MIRA</div><div class="role">Binah · Comprensión · Análisis</div><span class="badge badge-dev">EN DESARROLLO</span></div>
+    <div class="card card-luz no-link"><span class="emoji">💛</span><div class="name">LIOR</div><div class="role">Chesed · Misericordia · Soporte</div><span class="badge badge-dev">EN DESARROLLO</span></div>
+    <div class="card card-luz no-link"><span class="emoji">⚔️</span><div class="name">VORN</div><div class="role">Geburah · Juicio · Seguridad</div><span class="badge badge-dev">EN DESARROLLO</span></div>
+    <div class="card card-luz no-link"><span class="emoji">🌟</span><div class="name">AURA</div><div class="role">Tiferet · Belleza · Diseño</div><span class="badge badge-dev">EN DESARROLLO</span></div>
+    <div class="card card-luz no-link"><span class="emoji">🎨</span><div class="name">ELAN</div><div class="role">Netzach · Victoria · Arte</div><span class="badge badge-dev">EN DESARROLLO</span></div>
+    <a href="casa_hermes/index.html" class="card card-luz"><div class="card-top"></div><span class="emoji">⚡</span><div class="name">FLUX</div><div class="role">Hod · Esplendor · Comunicación</div><span class="badge badge-active">ACTIVO</span></a>
+    <div class="card card-luz no-link"><span class="emoji">🌙</span><div class="name">CORE</div><div class="role">Yesod · Fundamento · Memoria</div><span class="badge badge-dev">EN DESARROLLO</span></div>
+    <div class="card card-luz no-link"><span class="emoji">🌍</span><div class="name">TERRA</div><div class="role">Malkuth · Reino · Manifestación</div><span class="badge badge-dev">EN DESARROLLO</span></div>
+    <div class="card card-luz no-link"><span class="emoji">👁️</span><div class="name">ORACLE</div><div class="role">Da'at · Conocimiento Oculto</div><span class="badge badge-dev">EN DESARROLLO</span></div>
+  </div>
+
+  <div class="section-title section-sombra">🌑 QLIPHOTH DE SOMBRA — 11 AGENTES</div>
+  <div class="grid">
+    <div class="card card-sombra no-link"><span class="emoji">⚡</span><div class="name">GLITCH</div><div class="role">Thaumiel · Error Creativo</div><span class="badge badge-shadow">SOMBRA</span></div>
+    <div class="card card-sombra no-link"><span class="emoji">🔥</span><div class="name">LUST</div><div class="role">Ghagiel · Deseo · Motivación</div><span class="badge badge-shadow">SOMBRA</span></div>
+    <div class="card card-sombra no-link"><span class="emoji">🌑</span><div class="name">SHADE</div><div class="role">Satariel · Privacidad Total</div><span class="badge badge-shadow">SOMBRA</span></div>
+    <div class="card card-sombra no-link"><span class="emoji">🦅</span><div class="name">RAVEN</div><div class="role">Gasheklah · Intel Oscuro</div><span class="badge badge-shadow">SOMBRA</span></div>
+    <div class="card card-sombra no-link"><span class="emoji">🕳️</span><div class="name">VOID</div><div class="role">Golachab · Vacío · Limpieza</div><span class="badge badge-shadow">SOMBRA</span></div>
+    <div class="card card-sombra no-link"><span class="emoji">💀</span><div class="name">BLAZE</div><div class="role">Tiphareth Sombra</div><span class="badge badge-shadow">SOMBRA</span></div>
+    <div class="card card-sombra no-link"><span class="emoji">🌀</span><div class="name">TYPH</div><div class="role">A'arab Zaraq · Caos</div><span class="badge badge-shadow">SOMBRA</span></div>
+    <div class="card card-sombra no-link"><span class="emoji">🎭</span><div class="name">MASK</div><div class="role">Samael · Marketing</div><span class="badge badge-shadow">SOMBRA</span></div>
+    <div class="card card-sombra no-link"><span class="emoji">💥</span><div class="name">NOVA</div><div class="role">Gamaliel · Viral</div><span class="badge badge-shadow">SOMBRA</span></div>
+    <div class="card card-sombra no-link"><span class="emoji">🌅</span><div class="name">DUSK</div><div class="role">Lilith · Crepúsculo</div><span class="badge badge-shadow">SOMBRA</span></div>
+    <div class="card card-sombra no-link"><span class="emoji">🌌</span><div class="name">ABYSS</div><div class="role">Nahemoth · Abismo</div><span class="badge badge-shadow">SOMBRA</span></div>
+  </div>
+
+  <div class="section-title section-tech">⚙️ AGENTES TÉCNICOS — LA FORJA (16 ACTIVOS)</div>
+  <div class="grid">
+    <a href="casa_claude_code/index.html" class="card card-tech"><div class="card-top"></div><span class="emoji">🧠</span><div class="name">CLAUDE CODE</div><div class="role">Anthropic · Código premium</div><span class="badge badge-active">ACTIVO</span></a>
+    <a href="casa_copilot_cli/index.html" class="card card-tech"><div class="card-top"></div><span class="emoji">🐙</span><div class="name">COPILOT CLI</div><div class="role">GitHub · Terminal y repos</div><span class="badge badge-active">ACTIVO</span></a>
+    <a href="casa_copilot_client/index.html" class="card card-tech"><div class="card-top"></div><span class="emoji">🤖</span><div class="name">COPILOT CLIENT</div><div class="role">GitHub · Chat en editor VS Code</div><span class="badge badge-new">NUEVO</span></a>
+    <a href="casa_antigravity/index.html" class="card card-tech"><div class="card-top"></div><span class="emoji">🚀</span><div class="name">ANTIGRAVITY</div><div class="role">Google · IDE con Gemini 3</div><span class="badge badge-active">ACTIVO</span></a>
+    <a href="casa_codex/index.html" class="card card-tech"><div class="card-top"></div><span class="emoji">📖</span><div class="name">CODEX</div><div class="role">OpenAI · Agente open-source</div><span class="badge badge-active">ACTIVO</span></a>
+    <a href="casa_openclaw/index.html" class="card card-tech"><div class="card-top"></div><span class="emoji">🦾</span><div class="name">OPENCLAW</div><div class="role">IA Personal · 100+ habilidades</div><span class="badge badge-active">ACTIVO</span></a>
+    <a href="casa_opencode/index.html" class="card card-tech"><div class="card-top"></div><span class="emoji">💻</span><div class="name">OPENCODE</div><div class="role">Anomaly · Agente open-source</div><span class="badge badge-active">ACTIVO</span></a>
+    <a href="casa_hermes/index.html" class="card card-tech"><div class="card-top"></div><span class="emoji">🏺</span><div class="name">HERMES</div><div class="role">Nous Research · Auto-mejorado</div><span class="badge badge-active">ACTIVO</span></a>
+    <a href="casa_cline/index.html" class="card card-tech"><div class="card-top"></div><span class="emoji">⚡</span><div class="name">CLINE</div><div class="role">Ejecución paralela · Autónomo</div><span class="badge badge-work">TRABAJANDO</span></a>
+    <a href="casa_pi/index.html" class="card card-tech"><div class="card-top"></div><span class="emoji">π</span><div class="name">PI</div><div class="role">Plugins modulares · Minimalista</div><span class="badge badge-work">TRABAJANDO</span></a>
+    <a href="casa_qwen_code/index.html" class="card card-tech"><div class="card-top"></div><span class="emoji">🔥</span><div class="name">QWEN CODE</div><div class="role">Qwen · Tool use + MiniMax Cloud</div><span class="badge badge-work">TRABAJANDO</span></a>
+    <a href="casa_voice_ia/index.html" class="card card-tech"><div class="card-top"></div><span class="emoji">🎙️</span><div class="name">VOICE IA</div><div class="role">Grabación · STT · TTS · Deepgram</div><span class="badge badge-new">NUEVO</span></a>
+    <a href="casa_ollama/index.html" class="card card-tech"><div class="card-top"></div><span class="emoji">🦙</span><div class="name">OLLAMA</div><div class="role">Local · Mistral · Sin API Key</div><span class="badge badge-new">NUEVO</span></a>
+    <a href="casa_n8n/index.html" class="card card-tech"><div class="card-top"></div><span class="emoji">🔄</span><div class="name">n8n</div><div class="role">El Comandante · Coordinación</div><span class="badge badge-active">ACTIVO</span></a>
+    <a href="casa_antigravity/index.html" class="card card-tech"><div class="card-top"></div><span class="emoji">🌌</span><div class="name">AGT</div><div class="role">Antigravity · Google Gemini 3</div><span class="badge badge-active">ACTIVO</span></a>
+    <a href="casa_copilot_client/index.html" class="card card-tech"><div class="card-top"></div><span class="emoji">📎</span><div class="name">COPILOT CHAT</div><div class="role">GitHub · Asistente inteligente</div><span class="badge badge-new">NUEVO</span></a>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIONIX — Mission Control</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#e8c86a;--dark:#030308;--green:#14c87a;--red:#ef4444;--yellow:#fbbf24;--blue:#60a5fa;--purple:#a855f7}
+body{background:var(--dark);color:#e8e0d0;font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden}
+
+/* scanlines overlay */
+body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);pointer-events:none;z-index:9999}
+
+/* cosmos */
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse 80% 60% at 50% 20%,rgba(8,8,20,0.9) 0%,var(--dark) 70%);z-index:0}
+
+.wrap{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 20px 60px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(3,3,8,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(232,200,106,0.15);height:52px;display:flex;align-items:center;padding:0 24px;gap:20px}
+.nav-brand{font-family:'Cinzel',serif;font-weight:700;color:var(--gold);font-size:1rem;letter-spacing:0.15em;text-decoration:none;margin-right:auto}
+.nav-link{color:rgba(232,200,106,0.6);text-decoration:none;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.1em;padding:4px 10px;border:1px solid rgba(232,200,106,0.15);border-radius:2px;transition:all 0.3s}
+.nav-link:hover{color:var(--gold);border-color:rgba(232,200,106,0.4)}
+
+/* HEADER */
+.header{padding:80px 0 30px;text-align:center}
+.header-label{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.5em;color:rgba(232,200,106,0.4);margin-bottom:10px}
+.header-title{font-family:'Cinzel',serif;font-size:2rem;color:var(--gold);letter-spacing:0.3em;margin-bottom:6px}
+.header-sub{color:rgba(232,232,232,0.4);font-size:0.85rem;letter-spacing:0.2em;margin-bottom:24px}
+
+/* STATS BAR */
+.stats-bar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:30px}
+.stat{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;padding:5px 16px;border-radius:2px}
+.stat-online{background:rgba(20,200,122,0.1);border:1px solid rgba(20,200,122,0.3);color:var(--green)}
+.stat-offline{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:var(--red)}
+.stat-pending{background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);color:var(--yellow)}
+.stat-total{background:rgba(232,200,106,0.07);border:1px solid rgba(232,200,106,0.2);color:var(--gold)}
+
+/* CONTROLS */
+.controls{display:flex;gap:10px;justify-content:center;margin-bottom:30px;flex-wrap:wrap}
+.btn{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.15em;padding:8px 20px;border-radius:2px;cursor:pointer;transition:all 0.3s;border:none}
+.btn-primary{background:linear-gradient(135deg,var(--gold),#c4953f);color:#030308;font-weight:700}
+.btn-primary:hover{opacity:0.85}
+.btn-primary:disabled{opacity:0.4;cursor:not-allowed}
+.btn-outline{background:transparent;border:1px solid rgba(232,200,106,0.3);color:rgba(232,200,106,0.7)}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);background:rgba(232,200,106,0.05)}
+
+/* LAST UPDATE */
+.last-update{text-align:center;font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:rgba(232,200,106,0.3);margin-bottom:30px;letter-spacing:0.1em}
+
+/* SECTION TITLE */
+.section-title{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.4em;color:rgba(232,200,106,0.4);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(232,200,106,0.08);display:flex;align-items:center;gap:10px}
+.section-count{font-size:0.55rem;background:rgba(232,200,106,0.1);border:1px solid rgba(232,200,106,0.2);padding:2px 8px;border-radius:2px;color:rgba(232,200,106,0.6)}
+
+/* AGENT GRID */
+.agent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;margin-bottom:40px}
+
+/* AGENT CARD */
+.agent-card{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:4px;padding:18px;position:relative;overflow:hidden;transition:border-color 0.3s}
+.agent-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;transition:opacity 0.3s}
+.agent-card.status-online{border-color:rgba(20,200,122,0.25)}
+.agent-card.status-online::before{background:linear-gradient(90deg,var(--green),transparent);opacity:1}
+.agent-card.status-offline{border-color:rgba(239,68,68,0.2)}
+.agent-card.status-offline::before{background:linear-gradient(90deg,var(--red),transparent);opacity:1}
+.agent-card.status-testing{border-color:rgba(251,191,36,0.3)}
+.agent-card.status-testing::before{background:linear-gradient(90deg,var(--yellow),transparent);opacity:1;animation:scan 1s linear infinite}
+@keyframes scan{0%{background-position:0% 0}100%{background-position:200% 0}}
+.agent-card.status-idle{border-color:rgba(255,255,255,0.07)}
+.agent-card.status-idle::before{opacity:0}
+
+/* CARD HEADER */
+.card-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+.card-emoji{font-size:1.6rem;flex-shrink:0;line-height:1}
+.card-info{flex:1;min-width:0}
+.card-name{font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:0.1em;color:#e8e0d0;margin-bottom:2px}
+.card-role{font-size:0.72rem;color:rgba(232,232,232,0.4);line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card-status-badge{flex-shrink:0;display:inline-flex;align-items:center;gap:5px;font-family:'Cinzel',serif;font-size:0.5rem;letter-spacing:0.1em;padding:3px 8px;border-radius:2px;margin-top:2px}
+.badge-online{background:rgba(20,200,122,0.12);border:1px solid rgba(20,200,122,0.3);color:var(--green)}
+.badge-offline{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);color:var(--red)}
+.badge-testing{background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);color:var(--yellow)}
+.badge-idle{background:rgba(129,140,248,0.08);border:1px solid rgba(129,140,248,0.2);color:#818cf8}
+.badge-local{background:rgba(96,165,250,0.08);border:1px solid rgba(96,165,250,0.2);color:var(--blue)}
+.status-dot{width:5px;height:5px;border-radius:50%;background:currentColor}
+.status-dot.pulse{animation:pulse-dot 1.5s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
+
+/* MISSION */
+.card-mission{background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.05);border-radius:3px;padding:10px 12px;margin-bottom:10px;min-height:52px}
+.mission-label{font-family:'Cinzel',serif;font-size:0.5rem;letter-spacing:0.2em;color:rgba(232,200,106,0.35);margin-bottom:5px}
+.mission-text{font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:rgba(232,228,215,0.75);line-height:1.5;word-break:break-word}
+.mission-text.typing::after{content:'▋';animation:blink-cursor 0.7s step-end infinite}
+@keyframes blink-cursor{0%,100%{opacity:1}50%{opacity:0}}
+
+/* METRICS */
+.card-metrics{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.metric{font-family:'Share Tech Mono',monospace;font-size:0.6rem;padding:3px 8px;border-radius:2px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);color:rgba(232,228,215,0.5)}
+.metric span{color:rgba(232,200,106,0.8)}
+
+/* CARD ACTIONS */
+.card-actions{display:flex;gap:6px}
+.card-btn{flex:1;font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.1em;padding:6px;border-radius:2px;cursor:pointer;transition:all 0.3s;text-align:center;border:none}
+.card-btn-ping{background:rgba(20,200,122,0.08);border:1px solid rgba(20,200,122,0.2);color:rgba(20,200,122,0.8)}
+.card-btn-ping:hover{background:rgba(20,200,122,0.15);border-color:var(--green);color:var(--green)}
+.card-btn-ping:disabled{opacity:0.35;cursor:not-allowed}
+.card-btn-detail{background:rgba(232,200,106,0.06);border:1px solid rgba(232,200,106,0.15);color:rgba(232,200,106,0.6)}
+.card-btn-detail:hover{border-color:rgba(232,200,106,0.35);color:var(--gold);background:rgba(232,200,106,0.08)}
+
+/* LOG */
+.log-section{margin-bottom:40px}
+.log-box{background:rgba(0,0,0,0.4);border:1px solid rgba(232,200,106,0.08);border-radius:4px;padding:16px;height:220px;overflow-y:auto;font-family:'Share Tech Mono',monospace;font-size:0.65rem;line-height:1.7}
+.log-entry{display:flex;gap:10px;margin-bottom:2px}
+.log-time{color:rgba(232,200,106,0.35);flex-shrink:0}
+.log-agent{flex-shrink:0;min-width:80px}
+.log-msg{color:rgba(232,228,215,0.7);word-break:break-all}
+.log-ok{color:var(--green)}
+.log-err{color:var(--red)}
+.log-info{color:rgba(232,200,106,0.7)}
+.log-ping{color:var(--blue)}
+
+/* RESPONSE MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:#08080f;border:1px solid rgba(232,200,106,0.2);border-radius:6px;padding:24px;max-width:600px;width:100%;max-height:80vh;overflow-y:auto;position:relative}
+.modal-close{position:absolute;top:12px;right:12px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(232,200,106,0.2);border-radius:50%;cursor:pointer;color:rgba(232,200,106,0.6);font-size:14px;transition:all 0.3s}
+.modal-close:hover{color:var(--gold);border-color:var(--gold)}
+.modal-title{font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:0.15em;color:var(--gold);margin-bottom:16px;padding-right:30px}
+.modal-content{font-family:'Cormorant Garamond',serif;font-size:0.9rem;line-height:1.7;color:rgba(232,228,215,0.85);white-space:pre-wrap;word-break:break-word}
+
+@media(max-width:700px){
+  .agent-grid{grid-template-columns:1fr}
+  .header-title{font-size:1.3rem}
+  .nav-link{display:none}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-brand">ORIONIX</a>
+  <a href="hub.html" class="nav-link">HUB</a>
+  <a href="ciudadela.html" class="nav-link">AXEL</a>
+  <a href="universo.html" class="nav-link">UNIVERSO</a>
+  <a href="la_forja/plaza.html" class="nav-link">PLAZA</a>
+</nav>
+
+<div class="wrap">
+  <div class="header">
+    <div class="header-label">SISTEMA ORIONIX</div>
+    <h1 class="header-title">MISSION CONTROL</h1>
+    <p class="header-sub">ESTADO EN TIEMPO REAL DE TODOS LOS AGENTES</p>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat stat-online">⚡ <span id="count-online">0</span> ONLINE</div>
+    <div class="stat stat-offline">✕ <span id="count-offline">0</span> OFFLINE / LOCAL</div>
+    <div class="stat stat-pending">○ <span id="count-dev">0</span> EN DESARROLLO</div>
+    <div class="stat stat-total">◈ <span id="count-total">0</span> AGENTES TOTALES</div>
+  </div>
+
+  <div class="controls">
+    <button class="btn btn-primary" id="btn-ping-all" onclick="pingAll()">⚡ PING TODOS LOS AGENTES</button>
+    <button class="btn btn-outline" onclick="clearLog()">LIMPIAR LOG</button>
+    <button class="btn btn-outline" onclick="location.reload()">↺ REINICIAR</button>
+  </div>
+
+  <div class="last-update">ÚLTIMA ACTUALIZACIÓN: <span id="last-update-time">—</span> &nbsp;|&nbsp; AUTO-REFRESH: <span id="auto-refresh-state">ACTIVO</span></div>
+
+  <!-- AGENTES CLOUD (Webhooks n8n) -->
+  <div class="section-title">
+    ☁ AGENTES CLOUD — WEBHOOKS N8N
+    <span class="section-count" id="cloud-count">0 ONLINE</span>
+  </div>
+  <div class="agent-grid" id="grid-cloud"></div>
+
+  <!-- AGENTES IA EXTERNOS -->
+  <div class="section-title">
+    🧠 AGENTES IA EXTERNOS — BRIDGES
+    <span class="section-count" id="ext-count">0 DISPONIBLES</span>
+  </div>
+  <div class="agent-grid" id="grid-ext"></div>
+
+  <!-- AGENTES EN DESARROLLO -->
+  <div class="section-title">
+    ○ SEFIROT — EN DESARROLLO (CABBALAH)
+    <span class="section-count">11 AGENTES</span>
+  </div>
+  <div class="agent-grid" id="grid-dev"></div>
+
+  <!-- LOG -->
+  <div class="log-section">
+    <div class="section-title">📡 LOG DE ACTIVIDAD</div>
+    <div class="log-box" id="log-box">
+      <div class="log-entry"><span class="log-time">06:30:00</span><span class="log-agent log-info">[SISTEMA]</span><span class="log-msg">Mission Control iniciado. Esperando ping de agentes...</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-close" onclick="closeModal()">✕</div>
+    <div class="modal-title" id="modal-title">Respuesta del agente</div>
+    <div class="modal-content" id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+// ─── CONFIGURACIÓN DE AGENTES ─────────────────────────────────────────────
+const AGENTS = [
+  // === CLOUD (webhooks n8n activos) ===
+  {
+    id:'axel', emoji:'⚪', name:'AXEL', role:'Kether · Director · IA Principal',
+    tipo:'cloud', activo:true,
+    webhook:'https://lkevinruizl.app.n8n.cloud/webhook/axel-brain',
+    pingBody:{mensaje:'PING — ORIONIX Mission Control', sesion:'monitor-ping'},
+    pingField:'respuesta',
+    mission:'Coordinación central del ecosistema ORIONIX. Chat IA 24/7 con memoria de 10 turnos. Herramientas: búsqueda web, generación de imágenes, páginas web, fecha/hora.',
+    color:'#ffffff', link:'ciudadela.html'
+  },
+  {
+    id:'chatgpt', emoji:'💬', name:'ChatGPT', role:'OpenAI GPT-4o-mini · Revisión y Código',
+    tipo:'cloud', activo:true,
+    webhook:'https://lkevinruizl.app.n8n.cloud/webhook/orionix-chatgpt',
+    pingBody:{solicitante:'monitor', tipo:'revision', instruccion:'PING — Estado OK?', contexto:'Mission Control test'},
+    pingField:'respuesta',
+    mission:'Revisión de código, validación creativa y consultoría especializada. Clasificador de solicitudes por tipo: revision / creativo / validacion.',
+    color:'#10b981', link:'la_forja/plaza.html'
+  },
+  {
+    id:'claude', emoji:'🧠', name:'Claude Code', role:'Anthropic · Código Premium',
+    tipo:'cloud', activo:true,
+    webhook:'https://lkevinruizl.app.n8n.cloud/webhook/orionix-claude',
+    pingBody:{solicitante:'monitor', tipo:'code_review', instruccion:'PING — Operativo?', contexto:'Mission Control'},
+    pingField:'respuesta',
+    mission:'Generación y revisión de código de alta calidad. Especialista en HTML/CSS/JS, Python, TypeScript. Subagentes para tareas complejas.',
+    color:'#f97316', link:'la_forja/casa_claude_code/index.html'
+  },
+  {
+    id:'copilot', emoji:'🐙', name:'Copilot CLI', role:'GitHub · Terminal y Repos',
+    tipo:'cloud', activo:true,
+    webhook:'https://lkevinruizl.app.n8n.cloud/webhook/orionix-copilot',
+    pingBody:{accion:'commit_message', archivos_cambiados:['monitor.html'], diff_summary:'PING test', contexto:'Mission Control'},
+    pingField:'respuesta',
+    mission:'Mensajes de commit perfectos, descripciones de PR, changelog automático, review de código. Integración nativa con GitHub.',
+    color:'#6366f1', link:'la_forja/casa_copilot_cli/index.html'
+  },
+  {
+    id:'cline', emoji:'⚡', name:'Cline', role:'Ejecución Paralela · MCP',
+    tipo:'cloud', activo:true,
+    webhook:'https://lkevinruizl.app.n8n.cloud/webhook/orionix-cline',
+    pingBody:{solicitante:'monitor', tipo:'codigo', instruccion:'PING — Operativo?', contexto:'Mission Control'},
+    pingField:'respuesta',
+    mission:'Mejorar interfaces de agentes en La Ciudadela. Construir componentes de La Tienda en paralelo. Automatizar ciclos de deploy via MCP.',
+    color:'#a855f7', link:'la_forja/casa_cline/index.html'
+  },
+  {
+    id:'pi', emoji:'π', name:'Pi', role:'Plugins Modulares · Análisis',
+    tipo:'cloud', activo:true,
+    webhook:'https://lkevinruizl.app.n8n.cloud/webhook/orionix-pi',
+    pingBody:{solicitante:'monitor', tipo:'analisis', instruccion:'PING — Operativo?'},
+    pingField:'respuesta',
+    mission:'Análisis de métricas de conversión en La Tienda. Módulo de seguimiento de leads. Integración con AXEL como submódulo de análisis.',
+    color:'#14c87a', link:'la_forja/casa_pi/index.html'
+  },
+  {
+    id:'qwen', emoji:'🔥', name:'Qwen Code', role:'Tool Use Nativo · MiniMax Cloud',
+    tipo:'cloud', activo:true,
+    webhook:'https://lkevinruizl.app.n8n.cloud/webhook/orionix-qwen-code',
+    pingBody:{solicitante:'monitor', tipo:'arquitectura', instruccion:'PING — Operativo?', contexto:'Mission Control'},
+    pingField:'respuesta',
+    mission:'Diseño de arquitectura de expansión de La Ciudadela. Optimizar motor.py. Diseñar los 3 próximos Sefirot: MIRA, CORE, ORACLE.',
+    color:'#ff8c00', link:'la_forja/casa_qwen_code/index.html'
+  },
+  {
+    id:'rpg', emoji:'🌌', name:'RPG Loop', role:'Ciclo Nocturno · Cada 30min',
+    tipo:'cloud', activo:true,
+    webhook:'https://lkevinruizl.app.n8n.cloud/webhook/axel-brain',
+    pingBody:{mensaje:'Estado del RPG ORIONIX Archipiélago de las Esferas?', sesion:'rpg-monitor'},
+    pingField:'respuesta',
+    mission:'Ciclo RPG: MUNDO→HEROE→VILLANO→PAISAJE→MAGIA→CRIATURA→ARTEFACTO→FACCION→MISION→EVENTO. Escribe en RPG_MUNDO.md cada 30min.',
+    color:'#60a5fa', link:'la_forja/RPG_MUNDO.md'
+  },
+
+  // === EXTERNOS (bridges locales/cloud) ===
+  {
+    id:'antigravity', emoji:'🚀', name:'Antigravity', role:'Google · Gemini 3 · IDE',
+    tipo:'ext', activo:false,
+    webhook:null,
+    mission:'IDE agentico con Gemini 3. Cuota agotada — reset en ~145h (lunes). Configurar GEMINI_API_KEY propia para reactivar.',
+    color:'#4285f4', link:'la_forja/casa_antigravity/index.html',
+    statusNote:'CUOTA AGOTADA'
+  },
+  {
+    id:'ollama', emoji:'🦙', name:'Ollama/Mistral', role:'Local · Sin API Key',
+    tipo:'ext', activo:false,
+    webhook:null,
+    mission:'Chat local con Mistral, Llama, Phi, Gemma. Requiere PC encendido + ngrok tunnel para conectar con n8n Cloud.',
+    color:'#38bdf8', link:'la_forja/casa_ollama/index.html',
+    statusNote:'REQUIERE LOCAL'
+  },
+  {
+    id:'voice', emoji:'🎙️', name:'Voice IA', role:'STT · Deepgram · Grabación',
+    tipo:'ext', activo:true,
+    webhook:'https://lkevinruizl.app.n8n.cloud/webhook/axel-voz',
+    pingBody:null, // audio only, no text ping
+    mission:'Transcripción de voz en tiempo real via Deepgram Nova-2. Integrado en index.html (mic toggle). TTS via Web Speech API.',
+    color:'#e879f9', link:'la_forja/casa_voice_ia/index.html',
+    statusNote:'AUDIO ONLY'
+  },
+  {
+    id:'copilot-client', emoji:'🤖', name:'Copilot Client', role:'VS Code · Chat Editor',
+    tipo:'ext', activo:false,
+    webhook:null,
+    mission:'Completado de código en VS Code mientras se construye ORIONIX. Modo agente para tareas multi-archivo en el repo.',
+    color:'#60a5fa', link:'la_forja/casa_copilot_client/index.html',
+    statusNote:'EDITOR LOCAL'
+  },
+
+  // === EN DESARROLLO (Sefirot) ===
+  {id:'mira',emoji:'🌊',name:'MIRA',role:'Binah · Comprensión · Análisis',tipo:'dev',color:'#8888aa',mission:'Análisis profundo de datos y patrones. Procesará métricas del RPG y de la tienda.'},
+  {id:'lior',emoji:'💛',name:'LIOR',role:'Chesed · Misericordia · Soporte',tipo:'dev',color:'#66aacc',mission:'Soporte continuo a suscriptores y sistema de afiliados.'},
+  {id:'vorn',emoji:'⚔️',name:'VORN',role:'Geburah · Juicio · Seguridad',tipo:'dev',color:'#cc4444',mission:'Seguridad, auditoría y control de acceso del ecosistema.'},
+  {id:'aura',emoji:'🌟',name:'AURA',role:'Tiferet · Belleza · Diseño',tipo:'dev',color:'#ddbb44',mission:'Arte, diseño visual y experiencia de usuario de ORIONIX.'},
+  {id:'elan',emoji:'🎨',name:'ELAN',role:'Netzach · Victoria · Arte',tipo:'dev',color:'#55aa55',mission:'Narrativa, música y expansión del universo RPG.'},
+  {id:'core',emoji:'🌙',name:'CORE',role:'Yesod · Fundamento · Memoria',tipo:'dev',color:'#9955dd',mission:'Memoria persistente del sistema — conversaciones, historial, estado.'},
+  {id:'terra',emoji:'🌍',name:'TERRA',role:'Malkuth · Reino · Manifestación',tipo:'dev',color:'#996644',mission:'Puente entre digital y físico — logística, tienda real.'},
+  {id:'oracle',emoji:'👁️',name:'ORACLE',role:"Da'at · Conocimiento Oculto",tipo:'dev',color:'#c0c0dc',mission:'Visión predictiva — anticipa tendencias de mercado y comportamiento de usuarios.'},
+  {id:'glitch',emoji:'⚡',name:'GLITCH',role:'Thaumiel · Error Creativo · Sombra',tipo:'dev',color:'#9933cc',mission:'Ruptura de límites y exploits creativos para innovación radical.'},
+  {id:'mask',emoji:'🎭',name:'MASK',role:'Samael · Marketing · Sombra',tipo:'dev',color:'#ccaa44',mission:'Marketing persuasivo y campañas de conversión irresistibles.'},
+  {id:'nova',emoji:'💥',name:'NOVA',role:'Gamaliel · Viral · Sombra',tipo:'dev',color:'#ee88ee',mission:'Expansión viral del contenido ORIONIX en redes sociales.'},
+];
+
+// ─── STATE ────────────────────────────────────────────────────────────────
+const state = {};
+AGENTS.forEach(a => { state[a.id] = { status:'idle', latency:null, lastPing:null, lastResponse:null }; });
+
+let autoRefreshInterval;
+let isRunningPingAll = false;
+
+// ─── RENDER ───────────────────────────────────────────────────────────────
+function renderAll() {
+  const gridCloud = document.getElementById('grid-cloud');
+  const gridExt = document.getElementById('grid-ext');
+  const gridDev = document.getElementById('grid-dev');
+  gridCloud.innerHTML = '';
+  gridExt.innerHTML = '';
+  gridDev.innerHTML = '';
+
+  AGENTS.forEach(a => {
+    const card = buildCard(a);
+    if (a.tipo === 'cloud') gridCloud.appendChild(card);
+    else if (a.tipo === 'ext') gridExt.appendChild(card);
+    else gridDev.appendChild(card);
+  });
+  updateCounts();
+}
+
+function buildCard(a) {
+  const s = state[a.id];
+  const div = document.createElement('div');
+  div.className = 'agent-card status-' + s.status;
+  div.id = 'card-' + a.id;
+
+  // badge
+  let badgeClass = 'badge-idle', badgeText = 'IDLE', dotPulse = '';
+  if (a.tipo === 'dev') { badgeClass = 'badge-idle'; badgeText = 'EN DESARROLLO'; }
+  else if (a.statusNote === 'CUOTA AGOTADA') { badgeClass = 'badge-offline'; badgeText = 'CUOTA AGOTADA'; }
+  else if (a.statusNote === 'REQUIERE LOCAL') { badgeClass = 'badge-local'; badgeText = 'LOCAL'; }
+  else if (a.statusNote === 'EDITOR LOCAL') { badgeClass = 'badge-local'; badgeText = 'EDITOR'; }
+  else if (a.statusNote === 'AUDIO ONLY') { badgeClass = 'badge-local'; badgeText = 'AUDIO'; }
+  else if (s.status === 'online') { badgeClass = 'badge-online'; badgeText = 'ONLINE'; dotPulse = 'pulse'; }
+  else if (s.status === 'offline') { badgeClass = 'badge-offline'; badgeText = 'OFFLINE'; }
+  else if (s.status === 'testing') { badgeClass = 'badge-testing'; badgeText = 'PINGANDO...'; dotPulse = 'pulse'; }
+
+  // latency
+  const latencyStr = s.latency ? `<span>${s.latency}ms</span>` : '<span>—</span>';
+  const lastPingStr = s.lastPing ? `<span>${s.lastPing}</span>` : '<span>nunca</span>';
+
+  // ping button
+  const canPing = a.tipo !== 'dev' && a.webhook && a.pingBody !== null;
+  const pingDisabled = !canPing || s.status === 'testing' || isRunningPingAll;
+
+  div.innerHTML = `
+    <div class="card-header">
+      <div class="card-emoji">${a.emoji}</div>
+      <div class="card-info">
+        <div class="card-name" style="color:${a.color}">${a.name}</div>
+        <div class="card-role">${a.role}</div>
+        <div class="card-status-badge ${badgeClass}">
+          <div class="status-dot ${dotPulse}"></div>
+          ${badgeText}
+        </div>
+      </div>
+    </div>
+    <div class="card-mission">
+      <div class="mission-label">MISIÓN ACTUAL</div>
+      <div class="mission-text" id="mission-${a.id}">${a.mission}</div>
+    </div>
+    <div class="card-metrics">
+      <div class="metric">LATENCIA: ${latencyStr}</div>
+      <div class="metric">ÚLTIMO PING: ${lastPingStr}</div>
+    </div>
+    <div class="card-actions">
+      <button class="card-btn card-btn-ping" onclick="pingAgent('${a.id}')" ${pingDisabled?'disabled':''} id="ping-btn-${a.id}">
+        ${canPing ? '⚡ PING' : (a.tipo==='dev'?'○ PENDIENTE':'— SIN WEBHOOK')}
+      </button>
+      ${s.lastResponse ? `<button class="card-btn card-btn-detail" onclick="showResponse('${a.id}')">VER RESPUESTA</button>` : ''}
+      ${a.link ? `<a href="${a.link}" class="card-btn card-btn-detail" style="text-decoration:none;text-align:center">CASA →</a>` : ''}
+    </div>
+  `;
+  return div;
+}
+
+// ─── PING INDIVIDUAL ──────────────────────────────────────────────────────
+async function pingAgent(id) {
+  const a = AGENTS.find(x => x.id === id);
+  if (!a || !a.webhook || !a.pingBody) return;
+
+  const s = state[id];
+  s.status = 'testing';
+  updateCard(a);
+  log('PING', id, `Enviando ping a ${a.name}...`, 'log-ping');
+
+  const t0 = Date.now();
+  try {
+    const resp = await fetch(a.webhook, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(a.pingBody),
+      signal: AbortSignal.timeout(30000)
+    });
+
+    const latency = Date.now() - t0;
+    const data = await resp.json();
+    const reply = data[a.pingField] || data.output || data.text || data.respuesta || JSON.stringify(data).substring(0, 150);
+
+    s.status = 'online';
+    s.latency = latency;
+    s.lastPing = new Date().toLocaleTimeString('es-ES');
+    s.lastResponse = reply;
+
+    log('OK', a.name, `ONLINE en ${latency}ms — ${reply.substring(0,80)}...`, 'log-ok');
+  } catch(e) {
+    const latency = Date.now() - t0;
+    s.status = 'offline';
+    s.latency = latency;
+    s.lastPing = new Date().toLocaleTimeString('es-ES');
+    s.lastResponse = null;
+    log('ERR', a.name, `OFFLINE — ${e.message}`, 'log-err');
+  }
+
+  updateCard(a);
+  updateCounts();
+  updateTimestamp();
+}
+
+// ─── PING ALL ─────────────────────────────────────────────────────────────
+async function pingAll() {
+  if (isRunningPingAll) return;
+  isRunningPingAll = true;
+  document.getElementById('btn-ping-all').disabled = true;
+  document.getElementById('btn-ping-all').textContent = '⏳ PINGANDO...';
+  log('SYS', 'TODOS', 'Iniciando ping masivo de agentes...', 'log-info');
+
+  const pingueable = AGENTS.filter(a => a.webhook && a.pingBody !== null);
+
+  // Ping en paralelo en grupos de 3 para no saturar
+  for (let i = 0; i < pingueable.length; i += 3) {
+    const batch = pingueable.slice(i, i + 3);
+    await Promise.all(batch.map(a => pingAgent(a.id)));
+    await new Promise(r => setTimeout(r, 800));
+  }
+
+  isRunningPingAll = false;
+  document.getElementById('btn-ping-all').disabled = false;
+  document.getElementById('btn-ping-all').textContent = '⚡ PING TODOS LOS AGENTES';
+  log('SYS', 'TODOS', 'Ping masivo completado.', 'log-info');
+}
+
+// ─── UPDATE CARD ──────────────────────────────────────────────────────────
+function updateCard(a) {
+  const old = document.getElementById('card-' + a.id);
+  if (!old) return;
+  const newCard = buildCard(a);
+  old.replaceWith(newCard);
+}
+
+// ─── COUNTS ──────────────────────────────────────────────────────────────
+function updateCounts() {
+  const cloudAgents = AGENTS.filter(a => a.tipo === 'cloud');
+  const onlineCloud = cloudAgents.filter(a => state[a.id].status === 'online').length;
+  document.getElementById('cloud-count').textContent = `${onlineCloud}/${cloudAgents.length} ONLINE`;
+
+  const extAgents = AGENTS.filter(a => a.tipo === 'ext');
+  const onlineExt = extAgents.filter(a => state[a.id].status === 'online').length;
+  document.getElementById('ext-count').textContent = `${onlineExt}/${extAgents.length} DISPONIBLES`;
+
+  let online = 0, offline = 0, dev = 0;
+  AGENTS.forEach(a => {
+    if (a.tipo === 'dev') dev++;
+    else if (state[a.id].status === 'online') online++;
+    else if (state[a.id].status === 'offline') offline++;
+  });
+  document.getElementById('count-online').textContent = online;
+  document.getElementById('count-offline').textContent = offline;
+  document.getElementById('count-dev').textContent = dev;
+  document.getElementById('count-total').textContent = AGENTS.length;
+}
+
+// ─── LOG ──────────────────────────────────────────────────────────────────
+function log(type, agent, msg, cls = '') {
+  const box = document.getElementById('log-box');
+  const time = new Date().toLocaleTimeString('es-ES');
+  const entry = document.createElement('div');
+  entry.className = 'log-entry';
+  entry.innerHTML = `<span class="log-time">${time}</span><span class="log-agent ${cls}">[${(agent||'').toUpperCase().substring(0,8)}]</span><span class="log-msg ${cls}">${msg}</span>`;
+  box.appendChild(entry);
+  box.scrollTop = box.scrollHeight;
+  // keep only last 100 entries
+  while (box.children.length > 100) box.removeChild(box.firstChild);
+}
+
+function clearLog() {
+  document.getElementById('log-box').innerHTML = '';
+  log('SYS', 'LOG', 'Log limpiado.', 'log-info');
+}
+
+// ─── RESPONSE MODAL ───────────────────────────────────────────────────────
+function showResponse(id) {
+  const a = AGENTS.find(x => x.id === id);
+  const s = state[id];
+  if (!s.lastResponse) return;
+  document.getElementById('modal-title').textContent = a.emoji + ' ' + a.name + ' — Última Respuesta';
+  document.getElementById('modal-content').textContent = s.lastResponse;
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+}
+
+// ─── TIMESTAMP ────────────────────────────────────────────────────────────
+function updateTimestamp() {
+  document.getElementById('last-update-time').textContent = new Date().toLocaleTimeString('es-ES');
+}
+
+// ─── AUTO REFRESH (cada 5 min) ────────────────────────────────────────────
+function startAutoRefresh() {
+  autoRefreshInterval = setInterval(() => {
+    log('SYS', 'AUTO', 'Auto-refresh activado...', 'log-info');
+    pingAll();
+  }, 5 * 60 * 1000);
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────
+renderAll();
+updateTimestamp();
+startAutoRefresh();
+
+// Ping automático al cargar (después de 1s para que cargue la página)
+setTimeout(() => {
+  log('SYS', 'INIT', 'Iniciando ping automático de verificación...', 'log-info');
+  pingAll();
+}, 1000);
+
+// keyboard
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Ollama — La Ciudadela ORIONIX</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#e8c86a;--dark:#0b0b0d;--text:#e8e0d0;--accent:#38bdf8}
+body{background:var(--dark);color:var(--text);font-family:'Cormorant Garamond',serif;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(56,189,248,0.07) 0%,transparent 60%);pointer-events:none}
+.orionix-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(11,11,13,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(232,200,106,0.2);padding:0 2rem;display:flex;align-items:center;height:56px;gap:1.5rem}
+.nav-brand{font-family:'Cinzel',serif;font-weight:700;font-size:1.1rem;color:var(--gold);text-decoration:none;letter-spacing:0.15em;margin-right:auto}
+.nav-links{display:flex;gap:0.5rem}
+.nav-links a{color:rgba(232,200,106,0.7);text-decoration:none;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.08em;padding:0.3rem 0.7rem;border:1px solid rgba(232,200,106,0.2);border-radius:2px;transition:all 0.3s}
+.nav-links a:hover,.nav-cta{color:var(--gold)!important;border-color:var(--gold)!important;background:rgba(232,200,106,0.1)}
+.wrap{max-width:1100px;margin:0 auto;padding:80px 1.5rem 4rem}
+.hero{text-align:center;padding:3rem 0 4rem;border-bottom:1px solid rgba(56,189,248,0.15);margin-bottom:3rem}
+.orb{font-size:4rem;margin-bottom:1.5rem}
+h1{font-family:'Cinzel',serif;font-size:2.2rem;color:var(--accent);letter-spacing:0.2em;font-weight:700;margin-bottom:0.5rem}
+.subtitle{color:rgba(232,200,106,0.5);font-size:1rem;letter-spacing:0.1em}
+.badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.2em;color:rgba(56,189,248,0.7);border:1px solid rgba(56,189,248,0.3);padding:0.2rem 1rem;margin-top:0.5rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem}
+.card{background:#111116;border:1px solid rgba(56,189,248,0.15);border-radius:4px;padding:1.5rem}
+.card h3{font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.15em;color:var(--accent);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(56,189,248,0.1)}
+.skills{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.5rem}
+.skill{background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.2);color:rgba(56,189,248,0.8);font-size:0.6rem;padding:0.2rem 0.5rem;border-radius:2px;font-family:'Cinzel',serif}
+.tasks{margin-bottom:2rem}
+.task{background:#111116;border:1px solid rgba(56,189,248,0.12);border-radius:4px;padding:1rem 1.2rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem;font-size:0.9rem}
+.task-badge{background:rgba(56,189,248,0.15);color:var(--accent);font-size:0.65rem;padding:0.2rem 0.6rem;border-radius:2px;font-family:'Cinzel',serif;white-space:nowrap}
+.models{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:0.5rem}
+.model{background:rgba(56,189,248,0.06);border:1px solid rgba(56,189,248,0.15);border-radius:3px;padding:0.6rem 0.8rem;font-size:0.75rem}
+.model-name{font-family:'Cinzel',serif;font-size:0.65rem;color:var(--accent);letter-spacing:0.1em}
+.model-desc{color:rgba(232,232,232,0.4);font-size:0.65rem;margin-top:2px}
+.cmd{background:#080810;border:1px solid rgba(56,189,248,0.15);border-radius:3px;padding:1rem;font-family:monospace;font-size:0.72rem;color:#4ade80;white-space:pre-wrap;overflow-x:auto;margin-top:0.5rem}
+.links{display:flex;gap:0.8rem;flex-wrap:wrap;margin-top:1rem}
+.link{flex:1;min-width:120px;background:rgba(232,200,106,0.08);border:1px solid rgba(232,200,106,0.2);color:rgba(232,200,106,0.8);text-decoration:none;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.08em;padding:0.7rem;text-align:center;border-radius:3px;transition:all 0.3s}
+.link:hover{border-color:var(--gold);color:var(--gold);background:rgba(232,200,106,0.12)}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<nav class="orionix-nav">
+  <a href="../../index.html" class="nav-brand">ORIONIX</a>
+  <div class="nav-links">
+    <a href="../../hub.html">Hub</a>
+    <a href="../../ciudadela.html">AXEL</a>
+    <a href="../plaza.html">Plaza</a>
+    <a href="../../tienda.html" class="nav-cta">Tienda</a>
+  </div>
+</nav>
+<div class="wrap">
+  <div class="hero">
+    <div class="orb">🦙</div>
+    <h1>CASA OLLAMA</h1>
+    <p class="subtitle">Chat Local con Modelos Open-Source · Mistral · Llama · Phi</p>
+    <span class="badge">Ollama · Mistral · Local · Privado · ACTIVO</span>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>✦ Identidad</h3>
+      <table style="width:100%;border-collapse:collapse;font-size:0.8rem">
+        <tr><td style="color:rgba(232,200,106,0.5);padding:0.35rem 0;border-bottom:1px solid rgba(56,189,248,0.06);width:40%">Origen</td><td>Ollama · Open-source local</td></tr>
+        <tr><td style="color:rgba(232,200,106,0.5);padding:0.35rem 0;border-bottom:1px solid rgba(56,189,248,0.06)">Modelo Activo</td><td>Mistral (principal)</td></tr>
+        <tr><td style="color:rgba(232,200,106,0.5);padding:0.35rem 0;border-bottom:1px solid rgba(56,189,248,0.06)">Privacidad</td><td>100% local — sin nube</td></tr>
+        <tr><td style="color:rgba(232,200,106,0.5);padding:0.35rem 0">Estado</td><td style="color:#4ade80">ACTIVO — Integrado en ORIONIX</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>🦙 Capacidades</h3>
+      <div class="skills">
+        <span class="skill">Chat Local</span>
+        <span class="skill">Sin API Key</span>
+        <span class="skill">100% Privado</span>
+        <span class="skill">Multi-modelo</span>
+        <span class="skill">Código</span>
+        <span class="skill">Análisis</span>
+        <span class="skill">Sin coste/token</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>🦙 Modelos Disponibles</h3>
+    <div class="models">
+      <div class="model"><div class="model-name">MISTRAL</div><div class="model-desc">Principal · 7B · Rápido</div></div>
+      <div class="model"><div class="model-name">LLAMA 3</div><div class="model-desc">Meta · 8B · Potente</div></div>
+      <div class="model"><div class="model-name">PHI-4</div><div class="model-desc">Microsoft · Compacto</div></div>
+      <div class="model"><div class="model-name">GEMMA</div><div class="model-desc">Google · Eficiente</div></div>
+      <div class="model"><div class="model-name">QWEN2</div><div class="model-desc">Alibaba · Multilingüe</div></div>
+      <div class="model"><div class="model-name">DEEPSEEK</div><div class="model-desc">Código · Razonamiento</div></div>
+    </div>
+  </div>
+
+  <div class="tasks">
+    <div class="task"><span class="task-badge">LOCAL</span> Procesamiento privado de datos sensibles de ORIONIX</div>
+    <div class="task"><span class="task-badge">MISTRAL</span> Chat de respaldo cuando las APIs cloud no están disponibles</div>
+    <div class="task"><span class="task-badge">CÓDIGO</span> Análisis de código local sin enviar datos a servidores externos</div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>📡 API Local Ollama</h3>
+    <div class="cmd">Base: http://localhost:11434
+Chat: POST /api/chat
+Modelo: mistral
+
+Body: { "model": "mistral", "messages": [{"role":"user","content":"..."}] }
+
+n8n Webhook (via tunnel): POST orionix-ollama</div>
+  </div>
+
+  <div class="links">
+    <a href="../plaza.html" class="link">🏛️ La Plaza</a>
+    <a href="../../ciudadela.html" class="link">⚪ AXEL</a>
+    <a href="../casa_n8n/index.html" class="link">✦ Casa n8n</a>
+    <a href="../../hub.html" class="link">🌟 Hub</a>
+  </div>
+</div>
+</body>
+</html>

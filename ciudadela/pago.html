@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIONIX · Confirmación de Pago</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#e8c86a;--gd:#b89a40;--gl:#f5e0a0;--bg:#0b0b0d;--bg2:rgba(14,13,20,0.97);--b:rgba(232,200,106,0.12);--ba:rgba(232,200,106,0.4);--text:#f0e8d0;--dim:rgba(240,232,208,0.4);--ok:#2ecc71;--okd:rgba(46,204,113,0.7);--shadow:#6a3d9a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cormorant Garamond',serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+#cv{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+nav{position:fixed;top:0;left:0;right:0;height:54px;z-index:900;display:flex;align-items:center;gap:12px;padding:0 18px;background:rgba(11,11,13,.98);border-bottom:1px solid var(--b);backdrop-filter:blur(14px)}
+.brand{font-family:'Cinzel',serif;font-size:.95rem;font-weight:900;letter-spacing:.18em;color:var(--gold);text-decoration:none}
+.nlink{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.12em;color:var(--dim);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .2s;text-transform:uppercase;margin-left:auto}
+.nlink:hover{color:var(--gold)}
+
+.steps{display:flex;align-items:center;justify-content:center;gap:0;padding:14px 0;background:rgba(14,13,20,.7);border-bottom:1px solid var(--b);position:fixed;top:54px;left:0;right:0;z-index:800}
+.step{display:flex;align-items:center;gap:6px;font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;padding:0 14px}
+.step.done{color:var(--okd)}
+.step.on{color:var(--gold)}
+.sn{width:22px;height:22px;border-radius:50%;border:1px solid;display:flex;align-items:center;justify-content:center;font-size:.55rem;font-weight:700;flex-shrink:0}
+.step.done .sn{border-color:var(--okd);color:var(--okd)}
+.step.on .sn{border-color:var(--gold);color:var(--gold)}
+.step-div{width:28px;height:1px;background:var(--b)}
+
+.wrap{padding:130px 24px 60px;max-width:780px;margin:0 auto;position:relative;z-index:1}
+
+/* CONFIRMACIÓN CENTRAL */
+.confirm{text-align:center;margin-bottom:36px;animation:fadeUp .8s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.check-ring{
+  width:120px;height:120px;margin:0 auto 24px;
+  border-radius:50%;
+  border:2px solid var(--okd);
+  background:radial-gradient(circle at center, rgba(46,204,113,0.18) 0%, transparent 70%);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  box-shadow:0 0 40px rgba(46,204,113,.3);
+}
+.check-ring::before{
+  content:'';position:absolute;inset:-12px;border-radius:50%;
+  border:1px solid rgba(46,204,113,0.25);
+  animation:pulse 2.5s ease-in-out infinite;
+}
+.check-ring::after{
+  content:'';position:absolute;inset:-22px;border-radius:50%;
+  border:1px solid rgba(46,204,113,0.12);
+  animation:pulse 2.5s ease-in-out infinite .6s;
+}
+@keyframes pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+.check-mark{
+  width:54px;height:54px;color:var(--okd);
+}
+
+.confirm-title{font-family:'Cinzel',serif;font-size:1.6rem;font-weight:900;color:var(--gl);letter-spacing:.15em;margin-bottom:8px;text-shadow:0 0 20px rgba(245,224,160,.4)}
+.confirm-sub{font-size:1.05rem;color:var(--dim);font-style:italic;letter-spacing:.04em;margin-bottom:6px}
+.confirm-id{display:inline-block;margin-top:14px;padding:6px 16px;border:1px solid var(--b);border-radius:20px;font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.18em;color:var(--gold)}
+
+/* TARJETAS */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+.card{background:var(--bg2);border:1px solid var(--b);border-radius:10px;padding:20px;backdrop-filter:blur(8px)}
+.sec-h{font-family:'Cinzel',serif;font-size:.58rem;font-weight:700;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid var(--b);display:flex;align-items:center;gap:8px}
+.sec-h::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold)}
+
+.kv{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(232,200,106,.06);font-size:.95rem}
+.kv:last-child{border-bottom:0}
+.kv .k{color:var(--dim);letter-spacing:.03em}
+.kv .v{color:var(--gl);font-weight:600;font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:.08em}
+
+.total-row{padding:14px 0;border-top:1px solid var(--ba);margin-top:8px;display:flex;justify-content:space-between;align-items:center}
+.total-row .k{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.15em;color:var(--gold);text-transform:uppercase}
+.total-row .v{font-family:'Cinzel',serif;font-size:1.3rem;font-weight:900;color:var(--gl);text-shadow:0 0 12px rgba(245,224,160,.5)}
+
+.actions{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;justify-content:center}
+.btn{
+  font-family:'Cinzel',serif;font-size:.6rem;font-weight:700;letter-spacing:.18em;
+  padding:14px 28px;border-radius:8px;text-decoration:none;text-transform:uppercase;
+  transition:all .25s;cursor:pointer;border:1px solid;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary{background:linear-gradient(135deg,var(--gold) 0%,var(--gd) 100%);color:var(--bg);border-color:var(--gold)}
+.btn-primary:hover{filter:brightness(1.15);transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,200,106,.3)}
+.btn-ghost{background:transparent;color:var(--gold);border-color:var(--b)}
+.btn-ghost:hover{border-color:var(--gold);background:rgba(232,200,106,.06)}
+
+.note{text-align:center;margin-top:32px;padding:14px 20px;border:1px dashed rgba(232,200,106,.18);border-radius:8px;font-size:.85rem;color:var(--dim);font-style:italic;line-height:1.5}
+.note b{color:var(--gold);font-style:normal;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase}
+
+.seg-badge{
+  display:inline-flex;align-items:center;gap:6px;padding:4px 10px;
+  background:rgba(46,204,113,0.12);border:1px solid rgba(46,204,113,0.4);border-radius:12px;
+  font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.12em;color:var(--okd);text-transform:uppercase
+}
+.seg-dot{width:6px;height:6px;border-radius:50%;background:var(--okd);box-shadow:0 0 8px var(--okd);animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+
+<nav>
+  <a href="hub.html" class="brand">ORIONIX</a>
+  <a href="hub.html" class="nlink">← Volver al Hub</a>
+</nav>
+
+<div class="steps">
+  <div class="step done"><div class="sn">✓</div>Carrito</div>
+  <div class="step-div"></div>
+  <div class="step done"><div class="sn">✓</div>Método</div>
+  <div class="step-div"></div>
+  <div class="step on"><div class="sn">3</div>Confirmación</div>
+</div>
+
+<div class="wrap">
+  <div class="confirm">
+    <div class="check-ring">
+      <svg class="check-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+    <h1 class="confirm-title">PAGO COMPLETADO</h1>
+    <p class="confirm-sub">Tu orden ha sido procesada con éxito.</p>
+    <div class="confirm-id" id="orderId">ORDEN #ORX-—</div>
+    <div style="margin-top:14px"><span class="seg-badge"><span class="seg-dot"></span>Sesión Segura</span></div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2 class="sec-h">Resumen del Pago</h2>
+      <div class="kv"><span class="k">Subtotal</span><span class="v" id="subtotal">€ 0,00</span></div>
+      <div class="kv"><span class="k">Envío</span><span class="v" id="envio">€ 0,00</span></div>
+      <div class="kv"><span class="k">Impuestos</span><span class="v" id="impuestos">€ 0,00</span></div>
+      <div class="total-row"><span class="k">Total</span><span class="v" id="total">€ 0,00</span></div>
+    </div>
+
+    <div class="card">
+      <h2 class="sec-h">Método Utilizado</h2>
+      <div class="kv"><span class="k">Tipo</span><span class="v" id="metodoTipo">—</span></div>
+      <div class="kv"><span class="k">Referencia</span><span class="v" id="metodoRef">—</span></div>
+      <div class="kv"><span class="k">Fecha</span><span class="v" id="fecha">—</span></div>
+      <div class="kv"><span class="k">Estado</span><span class="v" style="color:var(--okd)">CONFIRMADO</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 class="sec-h">Próximos Pasos</h2>
+    <div class="kv"><span class="k">📧 Confirmación por email</span><span class="v" style="font-size:.7rem">ENVIADO</span></div>
+    <div class="kv"><span class="k">📦 Preparación del envío</span><span class="v" style="font-size:.7rem;color:var(--gold)">24-48 H</span></div>
+    <div class="kv"><span class="k">� Entrega estimada</span><span class="v" style="font-size:.7rem;color:var(--gold)">3-5 DÍAS</span></div>
+    <div class="kv"><span class="k">🔮 Símbolo de rastreo</span><span class="v" id="tracking">—</span></div>
+  </div>
+
+  <div class="actions">
+    <a href="hub.html" class="btn btn-primary">⬩ Volver al Hub</a>
+    <a href="tienda.html" class="btn btn-ghost">Seguir Comprando</a>
+    <button class="btn btn-ghost" onclick="window.print()">Imprimir Recibo</button>
+  </div>
+
+  <div class="note">
+    <b>ORIONIX · Lujo Consciente</b><br>
+    Cada compra apoya la cadena artesanal de MI DINASTIA. Gracias por confiar en nosotros.
+  </div>
+</div>
+
+<script>
+/* ===== STARFIELD ===== */
+(function(){
+  const c=document.getElementById('cv'),ctx=c.getContext('2d');
+  function r(){c.width=innerWidth;c.height=innerHeight}
+  r();addEventListener('resize',r);
+  const s=Array.from({length:80},()=>({x:Math.random(),y:Math.random(),r:Math.random()*.9+.2,a:Math.random()*.5+.2,da:(Math.random()-.5)*.005,p:Math.random()*Math.PI*2}));
+  function d(){
+    ctx.fillStyle='rgba(11,11,13,0.25)';
+    ctx.fillRect(0,0,c.width,c.height);
+    s.forEach(p=>{
+      p.p+=.012;
+      const al=0.3+Math.sin(p.p)*0.4;
+      ctx.beginPath();
+      ctx.arc(p.x*c.width,p.y*c.height,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(245,224,160,${al})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(d);
+  }
+  d();
+})();
+
+/* ===== RESUMEN DESDE LOCALSTORAGE ===== */
+(function loadResumen(){
+  try{
+    const orden = JSON.parse(localStorage.getItem('orx_last_order') || '{}');
+    const fmt = n => '€ ' + (n||0).toFixed(2).replace('.', ',');
+
+    const oid = orden.id || ('ORX-' + Date.now().toString(36).toUpperCase());
+    document.getElementById('orderId').textContent = 'ORDEN #' + oid;
+    document.getElementById('tracking').textContent = 'TRK-' + oid.split('-').pop();
+
+    document.getElementById('subtotal').textContent = fmt(orden.subtotal);
+    document.getElementById('envio').textContent = orden.envio === 0 ? 'GRATIS' : fmt(orden.envio);
+    document.getElementById('impuestos').textContent = fmt(orden.impuestos);
+    document.getElementById('total').textContent = fmt(orden.total);
+
+    const metodos = {
+      tarjeta: '� Tarjeta',
+      paypal: '🅿 PayPal',
+      bizum: '� Bizum',
+      cripto: '🔮 Cripto',
+      transferencia: '🏦 Transferencia'
+    };
+    document.getElementById('metodoTipo').textContent = metodos[orden.metodo] || '—';
+    document.getElementById('metodoRef').textContent = orden.metodoRef || '—';
+
+    const d = orden.fecha ? new Date(orden.fecha) : new Date();
+    document.getElementById('fecha').textContent = d.toLocaleDateString('es-ES', {day:'2-digit',month:'short',year:'numeric'}).toUpperCase();
+  }catch(e){
+    document.getElementById('total').textContent = '€ 0,00';
+  }
+})();
+</script>
+<script src="orionix-profile.js"></script>
+</body>
+</html>

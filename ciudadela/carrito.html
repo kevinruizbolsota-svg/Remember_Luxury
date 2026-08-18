@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIONIX · Carrito</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#e8c86a;--gd:#b89a40;--bg:#0b0b0d;--bg2:rgba(14,13,20,0.96);--b:rgba(232,200,106,0.12);--ba:rgba(232,200,106,0.4);--text:#f0e8d0;--dim:rgba(240,232,208,0.4)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cormorant Garamond',serif;background:var(--bg);color:var(--text);min-height:100vh}
+#cv{position:fixed;inset:0;z-index:0;pointer-events:none}
+nav{position:fixed;top:0;left:0;right:0;height:54px;z-index:900;display:flex;align-items:center;gap:12px;padding:0 18px;background:rgba(11,11,13,.98);border-bottom:1px solid var(--b);backdrop-filter:blur(14px)}
+.brand{font-family:'Cinzel',serif;font-size:.95rem;font-weight:900;letter-spacing:.18em;color:var(--gold);text-decoration:none}
+.nlink{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.12em;color:var(--dim);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .2s;text-transform:uppercase}
+.nlink:hover{color:var(--gold)}
+.wrap{padding:74px 24px 60px;max-width:1000px;margin:0 auto;position:relative;z-index:1}
+.ph{margin-bottom:24px}
+.ph-title{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:900;color:var(--text);letter-spacing:.1em;margin-bottom:4px}
+.ph-sub{font-size:.9rem;color:var(--dim);font-style:italic}
+
+.cart-layout{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start}
+@media(max-width:760px){.cart-layout{grid-template-columns:1fr}}
+
+/* ITEMS */
+.cart-box{background:var(--bg2);border:1px solid var(--b);border-radius:10px;overflow:hidden}
+.cart-hdr{padding:14px 18px;border-bottom:1px solid var(--b);font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase}
+.citem{display:flex;align-items:center;gap:14px;padding:16px 18px;border-bottom:1px solid rgba(232,200,106,.05);transition:background .2s}
+.citem:hover{background:rgba(255,255,255,.02)}
+.citem:last-child{border-bottom:none}
+.cimg{width:62px;height:78px;border-radius:6px;background:linear-gradient(135deg,rgba(106,61,154,.15),rgba(232,200,106,.08));display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;overflow:hidden;border:1px solid var(--b)}
+.cimg img{width:100%;height:100%;object-fit:cover}
+.cinfo{flex:1;min-width:0}
+.cname{font-family:'Cinzel',serif;font-size:.62rem;font-weight:700;color:var(--text);letter-spacing:.06em;margin-bottom:4px}
+.ccat{font-size:.7rem;color:var(--dim);margin-bottom:8px}
+.cqty{display:flex;align-items:center;gap:8px}
+.qbtn{width:26px;height:26px;border-radius:50%;border:1px solid var(--b);background:transparent;color:var(--text);cursor:pointer;transition:all .2s;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+.qbtn:hover{border-color:var(--gold);color:var(--gold)}
+.qnum{font-family:'Cinzel',serif;font-size:.7rem;min-width:24px;text-align:center;color:var(--text)}
+.cprice{font-family:'Cinzel',serif;font-size:.9rem;color:var(--gold);text-align:right;flex-shrink:0}
+.cdel{font-size:.7rem;color:rgba(231,76,60,.5);cursor:pointer;transition:color .2s;margin-top:4px;text-align:right}
+.cdel:hover{color:#e74c3c}
+.cart-empty{padding:50px 20px;text-align:center;color:var(--dim)}
+.ce-ico{font-size:2.8rem;opacity:.3;margin-bottom:12px}
+.ce-p{font-size:.86rem;font-style:italic;margin-bottom:14px}
+.ce-btn{display:inline-block;padding:9px 22px;border:1px solid var(--ba);border-radius:6px;font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:.12em;color:var(--gold);text-decoration:none;transition:all .25s}
+.ce-btn:hover{background:var(--gold);color:var(--bg)}
+
+/* RESUMEN */
+.resumen{background:var(--bg2);border:1px solid var(--b);border-radius:10px;padding:20px;position:sticky;top:70px}
+.res-h{font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--b)}
+.res-row{display:flex;justify-content:space-between;margin-bottom:9px}
+.res-lbl{font-size:.82rem;color:var(--dim)}
+.res-val{font-family:'Cinzel',serif;font-size:.8rem;color:var(--text)}
+.res-total{display:flex;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid var(--b)}
+.res-total-l{font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;color:var(--text);letter-spacing:.08em}
+.res-total-v{font-family:'Cinzel',serif;font-size:1.2rem;font-weight:900;color:var(--gold)}
+.checkout-btn{display:block;width:100%;margin-top:16px;padding:14px;background:var(--gold);color:var(--bg);border:none;border-radius:8px;font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.14em;font-weight:700;cursor:pointer;transition:all .28s;text-align:center;text-decoration:none;box-shadow:0 0 18px rgba(232,200,106,.2)}
+.checkout-btn:hover{background:var(--gd)}
+.checkout-btn:disabled{opacity:.4;cursor:default}
+.continue-btn{display:block;width:100%;margin-top:8px;padding:10px;background:transparent;color:var(--dim);border:1px solid var(--b);border-radius:8px;font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:.12em;cursor:pointer;transition:all .25s;text-align:center;text-decoration:none}
+.continue-btn:hover{color:var(--text);border-color:rgba(232,200,106,.25)}
+.coupon-row{display:flex;gap:8px;margin-top:14px}
+.coupon-inp{flex:1;padding:8px 12px;background:rgba(255,255,255,.04);border:1px solid var(--b);border-radius:6px;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:.86rem;outline:none;transition:border .2s}
+.coupon-inp:focus{border-color:var(--gold)}
+.coupon-inp::placeholder{color:var(--dim)}
+.coupon-btn{padding:8px 14px;background:transparent;border:1px solid var(--b);border-radius:6px;font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.1em;color:var(--dim);cursor:pointer;transition:all .22s}
+.coupon-btn:hover{color:var(--gold);border-color:var(--ba)}
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+<nav>
+  <a href="hub.html" class="brand">ORIONIX</a>
+  <a class="nlink" href="tienda.html">← Tienda</a>
+  <a class="nlink" href="articulos.html">Artículos</a>
+  <a class="nlink" href="login.html" style="margin-left:auto">Iniciar Sesión</a>
+</nav>
+
+<div class="wrap">
+  <div class="ph">
+    <h1 class="ph-title">🛒 Tu Carrito</h1>
+    <p class="ph-sub">Revisa tus artículos antes de continuar al pago</p>
+  </div>
+
+  <div class="cart-layout">
+    <div>
+      <div class="cart-box" id="cart-box">
+        <div class="cart-hdr">Artículos seleccionados · <span id="item-count">0</span></div>
+        <div id="cart-items"></div>
+      </div>
+    </div>
+
+    <div class="resumen">
+      <div class="res-h">✦ Resumen del Pedido</div>
+      <div class="res-row"><span class="res-lbl">Subtotal</span><span class="res-val" id="subtotal">€0.00</span></div>
+      <div class="res-row"><span class="res-lbl">Envío</span><span class="res-val">Calculado al pagar</span></div>
+      <div class="res-row"><span class="res-lbl">Descuento</span><span class="res-val" id="descuento">—</span></div>
+      <div class="res-total">
+        <span class="res-total-l">TOTAL</span>
+        <span class="res-total-v" id="total">€0.00</span>
+      </div>
+      <div class="coupon-row">
+        <input class="coupon-inp" type="text" placeholder="Código de descuento…" id="coupon">
+        <button class="coupon-btn" onclick="applyCoupon()">Aplicar</button>
+      </div>
+      <a class="checkout-btn" id="checkout-btn" href="pago.html">Proceder al Pago →</a>
+      <a class="continue-btn" href="articulos.html">← Seguir comprando</a>
+    </div>
+  </div>
+</div>
+
+<script>
+function loadCart(){
+  const cart=JSON.parse(localStorage.getItem('orionix_cart')||'[]');
+  const box=document.getElementById('cart-items');
+  document.getElementById('item-count').textContent=cart.reduce((a,i)=>a+(i.qty||1),0);
+  if(!cart.length){
+    box.innerHTML=`<div class="cart-empty"><div class="ce-ico">🛒</div><p class="ce-p">Tu carrito está vacío.<br>Explora nuestros artículos.</p><a href="articulos.html" class="ce-btn">Ver Artículos →</a></div>`;
+    document.getElementById('checkout-btn').style.pointerEvents='none';
+    document.getElementById('checkout-btn').style.opacity='.35';
+    updateTotals(cart);return;
+  }
+  box.innerHTML=cart.map((p,i)=>`
+    <div class="citem">
+      <div class="cimg">${p.imagen_url?`<img src="${p.imagen_url}" onerror="this.parentNode.innerHTML='🛍️'">`:' 🛍️'}</div>
+      <div class="cinfo">
+        <div class="cname">${p.nombre||'Artículo'}</div>
+        <div class="ccat">${p.categoria||'MODA'}</div>
+        <div class="cqty">
+          <button class="qbtn" onclick="changeQty(${i},-1)">−</button>
+          <span class="qnum">${p.qty||1}</span>
+          <button class="qbtn" onclick="changeQty(${i},1)">+</button>
+        </div>
+        <div class="cdel" onclick="removeItem(${i})">✕ Eliminar</div>
+      </div>
+      <div>
+        <div class="cprice">${p.precio?'€'+(((p.precio||0)*(p.qty||1)).toFixed(2)):'—'}</div>
+        <div style="font-size:.66rem;color:var(--dim);text-align:right;margin-top:3px">${p.precio?'€'+p.precio+'/u':''}</div>
+      </div>
+    </div>`).join('');
+  updateTotals(cart);
+}
+
+function changeQty(i,delta){
+  const cart=JSON.parse(localStorage.getItem('orionix_cart')||'[]');
+  cart[i].qty=Math.max(1,(cart[i].qty||1)+delta);
+  localStorage.setItem('orionix_cart',JSON.stringify(cart));
+  loadCart();
+}
+function removeItem(i){
+  const cart=JSON.parse(localStorage.getItem('orionix_cart')||'[]');
+  cart.splice(i,1);
+  localStorage.setItem('orionix_cart',JSON.stringify(cart));
+  loadCart();
+}
+function updateTotals(cart){
+  const sub=cart.reduce((a,p)=>a+((p.precio||0)*(p.qty||1)),0);
+  document.getElementById('subtotal').textContent='€'+sub.toFixed(2);
+  document.getElementById('total').textContent='€'+sub.toFixed(2);
+}
+function applyCoupon(){
+  const v=document.getElementById('coupon').value.trim().toUpperCase();
+  if(v==='ORIONIX10')document.getElementById('descuento').textContent='−10%';
+  else if(v==='CREADOR')document.getElementById('descuento').textContent='−100% (acceso Creador)';
+  else alert('Código no válido');
+}
+(function(){const c=document.getElementById('cv'),ctx=c.getContext('2d');function r(){c.width=innerWidth;c.height=innerHeight}r();addEventListener('resize',r);const s=Array.from({length:60},()=>({x:Math.random(),y:Math.random(),r:Math.random()*.8+.15,a:Math.random(),da:(Math.random()-.5)*.005}));function d(){ctx.clearRect(0,0,c.width,c.height);s.forEach(p=>{p.a=Math.max(.03,Math.min(.75,p.a+p.da));if(p.a<=.03||p.a>=.75)p.da*=-1;ctx.beginPath();ctx.arc(p.x*c.width,p.y*c.height,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(232,200,106,${p.a*.4})`;ctx.fill();});requestAnimationFrame(d);}d();})();
+loadCart();
+</script>
+<script src="orionix-profile.js"></script>
+</body>
+</html>

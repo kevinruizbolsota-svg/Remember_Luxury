@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Universo · ORIONIX</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:image" content="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#e8c86a;--gold-l:#f5e0a0;--gold-d:#b89a40;
+  --glow:rgba(232,200,106,0.22);--bg:#0b0b0d;--bg2:rgba(15,14,20,0.94);
+  --border:rgba(232,200,106,0.12);--bora:rgba(232,200,106,0.42);
+  --text:#f0e8d0;--dim:rgba(240,232,208,0.4);--purple:#6a3d9a;
+  --sw:260px;--rw:270px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cormorant Garamond',serif;background:var(--bg);color:var(--text);min-height:100vh}
+#cv{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ── TOPBAR ── */
+.bar{
+  position:fixed;top:0;left:0;right:0;height:54px;z-index:900;
+  display:flex;align-items:center;gap:10px;padding:0 16px;
+  background:rgba(11,11,13,0.98);border-bottom:1px solid var(--border);backdrop-filter:blur(14px);
+}
+.bar-brand{
+  font-family:'Cinzel',serif;font-size:1rem;font-weight:900;letter-spacing:.2em;
+  color:var(--gold);text-shadow:0 0 16px var(--glow);text-decoration:none;white-space:nowrap;
+}
+.bar-search{
+  flex:1;max-width:360px;display:flex;align-items:center;gap:7px;
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  border-radius:18px;padding:6px 13px;
+}
+.bar-search input{background:transparent;border:none;outline:none;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:.86rem;width:100%}
+.bar-search input::placeholder{color:var(--dim)}
+.bar-r{display:flex;align-items:center;gap:8px;margin-left:auto}
+.bico{
+  width:34px;height:34px;border-radius:50%;border:1px solid var(--border);
+  background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .22s;font-size:.88rem;color:var(--dim);text-decoration:none;
+}
+.bico:hover{border-color:var(--gold);color:var(--gold)}
+.bav{
+  width:34px;height:34px;border-radius:50%;border:2px solid var(--gold);
+  background:linear-gradient(135deg,var(--purple),var(--gold-d));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;font-size:.75rem;font-weight:700;color:var(--text);cursor:pointer;
+}
+
+/* ── LAYOUT ── */
+.layout{display:flex;padding-top:54px;min-height:100vh;position:relative;z-index:1}
+
+/* ── LEFT SIDEBAR ── */
+.sl{
+  width:var(--sw);flex-shrink:0;position:fixed;top:54px;left:0;bottom:0;
+  overflow-y:auto;padding:12px 8px;
+  border-right:1px solid var(--border);
+  background:rgba(11,11,13,0.82);backdrop-filter:blur(10px);
+}
+.sl::-webkit-scrollbar{width:2px}
+.sl::-webkit-scrollbar-thumb{background:var(--border)}
+
+.pm{
+  display:flex;align-items:center;gap:10px;padding:10px;border-radius:9px;
+  border:1px solid var(--border);background:var(--bg2);margin-bottom:12px;cursor:pointer;transition:border-color .22s;
+}
+.pm:hover{border-color:var(--bora)}
+.pmav{
+  width:42px;height:42px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--purple),var(--gold-d));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;font-size:.9rem;font-weight:700;color:var(--text);
+}
+.pm-name{font-family:'Cinzel',serif;font-size:.6rem;font-weight:700;letter-spacing:.1em;color:var(--text)}
+.pm-plan{font-size:.68rem;color:var(--gold);margin-top:2px}
+
+.sl-h{
+  font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.2em;
+  color:var(--dim);text-transform:uppercase;padding:10px 7px 4px;
+}
+.ni{
+  display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:6px;
+  text-decoration:none;color:var(--dim);font-family:'Cinzel',serif;
+  font-size:.52rem;letter-spacing:.08em;transition:all .2s;margin-bottom:1px;
+  border:1px solid transparent;cursor:pointer;
+}
+.ni:hover,.ni:hover *{background:rgba(255,255,255,0.04);color:var(--text)}
+.ni.on{background:rgba(232,200,106,0.07);color:var(--gold);border-color:var(--border)}
+.ni .ico{font-size:.9rem;width:20px;text-align:center;flex-shrink:0}
+.ni .ct{
+  margin-left:auto;font-size:.38rem;letter-spacing:.12em;
+  color:var(--bg);background:var(--gold);padding:1px 5px;border-radius:3px;font-weight:700;
+}
+
+/* ── MAIN ── */
+.mc{
+  margin-left:var(--sw);margin-right:var(--rw);
+  flex:1;padding:20px 22px;min-width:0;
+}
+
+/* Section headers */
+.sec-h{
+  display:flex;align-items:center;gap:12px;
+  margin:28px 0 14px;padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+}
+.sec-h:first-child{margin-top:0}
+.sec-ico{font-size:1.1rem;width:32px;text-align:center}
+.sec-name{font-family:'Cinzel',serif;font-size:.72rem;font-weight:700;letter-spacing:.18em;color:var(--gold);text-transform:uppercase}
+.sec-count{font-size:.7rem;color:var(--dim);font-style:italic}
+
+/* Cards grid */
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:10px;margin-bottom:8px}
+
+/* Page card */
+.pc{
+  display:flex;flex-direction:column;gap:7px;
+  padding:13px 13px 11px;border-radius:9px;
+  border:1px solid var(--border);background:var(--bg2);
+  text-decoration:none;color:inherit;transition:all .25s;
+  position:relative;overflow:hidden;
+}
+.pc::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  opacity:0;transition:opacity .25s;
+}
+.pc:hover{border-color:var(--bora);transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,.35)}
+.pc:hover::before{opacity:1}
+.pc-top{display:flex;align-items:center;gap:8px}
+.pc-ico{
+  width:36px;height:36px;border-radius:8px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.05rem;
+  border:1px solid;transition:transform .2s;
+}
+.pc:hover .pc-ico{transform:scale(1.1)}
+.pc-lbl{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:.18em;color:var(--dim);text-transform:uppercase}
+.pc-name{font-family:'Cinzel',serif;font-size:.6rem;font-weight:700;letter-spacing:.06em;color:var(--text)}
+.pc-desc{font-size:.76rem;color:var(--dim);line-height:1.5;flex:1;font-style:italic}
+.pc-cta{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:.14em;color:var(--dim);display:flex;align-items:center;gap:4px;transition:all .2s}
+.pc:hover .pc-cta{color:var(--gold);gap:8px}
+
+/* Featured card (large) */
+.pc.feat{grid-column:span 2;flex-direction:row;align-items:center;gap:16px;padding:16px}
+.pc.feat .pc-ico{width:52px;height:52px;font-size:1.5rem}
+.pc.feat .pc-desc{font-size:.82rem}
+
+/* Tag */
+.tag{
+  display:inline-block;font-family:'Cinzel',serif;font-size:.36rem;letter-spacing:.12em;
+  padding:2px 7px;border-radius:20px;margin-bottom:4px;font-weight:700;
+}
+
+/* RIGHT SIDEBAR */
+.sr{
+  width:var(--rw);flex-shrink:0;position:fixed;top:54px;right:0;bottom:0;
+  overflow-y:auto;padding:12px 10px;
+  border-left:1px solid var(--border);
+  background:rgba(11,11,13,0.82);backdrop-filter:blur(10px);
+}
+.sr::-webkit-scrollbar{width:2px}
+.rc{background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:13px;margin-bottom:10px}
+.rc h3{font-family:'Cinzel',serif;font-size:.5rem;font-weight:700;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+.ral{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(232,200,106,.05);cursor:pointer;transition:all .2s;text-decoration:none}
+.ral:last-child{border-bottom:none;padding-bottom:0}
+.ral:hover .rname{color:var(--gold)}
+.rdot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.rname{font-family:'Cinzel',serif;font-size:.52rem;color:var(--dim);transition:color .2s}
+.rsub{font-size:.66rem;color:var(--dim);margin-top:1px}
+
+.srow{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.srow:last-child{margin-bottom:0}
+.slbl{font-size:.74rem;color:var(--dim)}
+.sval{font-family:'Cinzel',serif;font-size:.7rem;color:var(--gold)}
+
+.qlink{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(0,136,204,.06);border:1px solid rgba(0,136,204,.2);
+  border-radius:7px;padding:9px;text-decoration:none;transition:all .25s;margin-bottom:6px;
+}
+.qlink:hover{background:rgba(0,136,204,.12)}
+.qlink .qi{font-size:1.1rem}
+.qt{font-family:'Cinzel',serif;font-size:.5rem;color:#29b6f6;letter-spacing:.1em}
+.qs{font-size:.66rem;color:var(--dim);margin-top:1px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){.sr{display:none}.mc{margin-right:0}}
+@media(max-width:720px){.sl{display:none}.mc{margin-left:0;padding:14px}}
+@media(max-width:500px){.pg{grid-template-columns:1fr}.pc.feat{grid-column:span 1;flex-direction:column}}
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+
+<!-- TOPBAR -->
+<header class="bar">
+  <a href="hub.html" class="bar-brand">ORIONIX</a>
+  <div class="bar-search">
+    <span style="color:var(--dim)">🔍</span>
+    <input type="text" placeholder="Buscar página…" oninput="filtrar(this.value)">
+  </div>
+  <div class="bar-r">
+    <a class="bico" href="ciudadela.html" title="AXEL">✦</a>
+    <a class="bico" href="nexus.html" title="NEXUS">🧠</a>
+    <a class="bico" href="monitor.html" title="Monitor">📊</a>
+    <div class="bav">K</div>
+  </div>
+</header>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+<!-- ── LEFT SIDEBAR ── -->
+<aside class="sl">
+  <div class="pm" onclick="location.href='hub.html'">
+    <div class="pmav">K</div>
+    <div>
+      <div class="pm-name">KEVIN RUIZ</div>
+      <div class="pm-plan">✦ El Creador · Ciudadela</div>
+    </div>
+  </div>
+
+  <div class="sl-h">Principal</div>
+  <a class="ni" href="hub.html"><span class="ico">🏛️</span> Portal Central</a>
+  <a class="ni" href="index.html"><span class="ico">🌌</span> ORIONIX Landing</a>
+  <div class="ni on"><span class="ico">🗺️</span> Mi Universo</div>
+
+  <div class="sl-h">Agentes IA</div>
+  <a class="ni" href="ciudadela.html"><span class="ico">🤖</span> La Ciudadela</a>
+  <a class="ni" href="axel.html"><span class="ico">⭐</span> AXEL</a>
+  <a class="ni" href="universo.html"><span class="ico">🔮</span> Universo Kabalion</a>
+  <a class="ni" href="kabalion-2d.html"><span class="ico">🌐</span> Kabalion 2D</a>
+  <a class="ni" href="nexus.html"><span class="ico">🧠</span> NEXUS Chat</a>
+  <a class="ni" href="mesa-mando.html"><span class="ico">⚡</span> Mesa de Mando</a>
+
+  <div class="sl-h">La Forja</div>
+  <a class="ni" href="la_forja/plaza.html"><span class="ico">🏟️</span> La Plaza</a>
+  <a class="ni" href="la_forja/comando.html"><span class="ico">🎯</span> Centro Comando</a>
+  <a class="ni" href="la_forja/oraculo.html"><span class="ico">🔮</span> El Oráculo</a>
+  <a class="ni" href="la_forja/casa_axel/index.html"><span class="ico">🏠</span> Casa AXEL</a>
+  <a class="ni" href="la_forja/casa_claude_code/index.html"><span class="ico">🏠</span> Casa Claude</a>
+  <a class="ni" href="la_forja/casa_qwen/index.html"><span class="ico">🏠</span> Casa Qwen</a>
+  <a class="ni" href="la_forja/casa_copilot_cli/index.html"><span class="ico">🏠</span> Casa Copilot</a>
+  <a class="ni" href="la_forja/casa_hermes/index.html"><span class="ico">🏠</span> Casa Hermes</a>
+  <a class="ni" href="la_forja/casa_pi/index.html"><span class="ico">🏠</span> Casa Pi</a>
+  <a class="ni" href="la_forja/casa_cline/index.html"><span class="ico">🏠</span> Casa Cline</a>
+  <a class="ni" href="la_forja/casa_voice_ia/index.html"><span class="ico">🏠</span> Casa Voice IA</a>
+
+  <div class="sl-h">Tienda & Negocio</div>
+  <a class="ni" href="mi-universo.html#tienda"><span class="ico">🛍️</span> La Tienda</a>
+  <a class="ni" href="afiliados.html"><span class="ico">🤝</span> Afiliados</a>
+  <a class="ni" href="forjadora.html"><span class="ico">💎</span> La Forjadora</a>
+
+  <div class="sl-h">Contenido</div>
+  <a class="ni" href="reels.html"><span class="ico">🎬</span> Reels</a>
+  <a class="ni" href="cronicas.html"><span class="ico">📖</span> Crónicas</a>
+  <a class="ni" href="mundos.html"><span class="ico">🌏</span> Los Mundos</a>
+  <a class="ni" href="comunidad.html"><span class="ico">🌍</span> Comunidad</a>
+
+  <div class="sl-h">Personal</div>
+  <a class="ni" href="hogar.html"><span class="ico">🏡</span> El Hogar</a>
+  <a class="ni" href="habitos.html"><span class="ico">✅</span> Hábitos</a>
+  <a class="ni" href="nebula-habits.html"><span class="ico">🌙</span> Nebula Hábitos</a>
+  <a class="ni" href="mi-cuenta.html"><span class="ico">👤</span> Mi Cuenta</a>
+
+  <div class="sl-h">Sistema</div>
+  <a class="ni" href="monitor.html"><span class="ico">📊</span> Monitor</a>
+  <a class="ni" href="admin.html"><span class="ico">⚙️</span> Admin</a>
+  <a class="ni" href="microfono.html"><span class="ico">🎤</span> Micrófono AXEL</a>
+  <a class="ni" href="auth.html"><span class="ico">🔐</span> Autenticación</a>
+  <a class="ni" href="gracias.html"><span class="ico">🙏</span> Gracias</a>
+</aside>
+
+<!-- ── MAIN ── -->
+<main class="mc" id="main">
+
+  <!-- SECTION: PRINCIPAL -->
+  <div class="sec-h" data-sec>
+    <span class="sec-ico">🏛️</span>
+    <span class="sec-name">Principal</span>
+    <span class="sec-count">3 páginas</span>
+  </div>
+  <div class="cg" data-grid>
+    <a class="pc feat" href="hub.html" style="--c:rgba(232,200,106,0.08);--bc:rgba(232,200,106,0.3);">
+      <div class="pc-ico" style="background:rgba(232,200,106,0.1);border-color:rgba(232,200,106,0.3)">🏛️</div>
+      <div>
+        <div class="tag" style="background:rgba(232,200,106,0.12);color:var(--gold)">Portal Principal</div>
+        <div class="pc-name" style="font-size:.75rem">Portal Central · HUB</div>
+        <div class="pc-desc">La puerta de entrada al universo ORIONIX. Desde aquí nace todo.</div>
+        <div class="pc-cta">Entrar al Portal <span>→</span></div>
+      </div>
+    </a>
+    <a class="pc" href="index.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(106,61,154,0.12);border-color:rgba(106,61,154,0.3)">🌌</div>
+        <div><div class="pc-lbl">Landing</div><div class="pc-name">ORIONIX Landing</div></div>
+      </div>
+      <div class="pc-desc">Página principal pública del universo ORIONIX.</div>
+      <div class="pc-cta">Ver <span>→</span></div>
+    </a>
+    <a class="pc" href="mi-universo.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(232,200,106,0.08);border-color:rgba(232,200,106,0.2)">🗺️</div>
+        <div><div class="pc-lbl">Ecosistema</div><div class="pc-name">Mi Universo</div></div>
+      </div>
+      <div class="pc-desc">Estás aquí — mapa completo de todas las secciones.</div>
+      <div class="pc-cta">Aquí <span>→</span></div>
+    </a>
+  </div>
+
+  <!-- SECTION: AGENTES IA -->
+  <div class="sec-h" data-sec>
+    <span class="sec-ico">🤖</span>
+    <span class="sec-name">Agentes IA</span>
+    <span class="sec-count">6 páginas</span>
+  </div>
+  <div class="cg" data-grid>
+    <a class="pc feat" href="ciudadela.html">
+      <div class="pc-ico" style="background:rgba(232,200,106,0.1);border-color:rgba(232,200,106,0.35);font-size:1.6rem">🤖</div>
+      <div>
+        <div class="tag" style="background:rgba(232,200,106,0.12);color:var(--gold)">IA Principal 24/7</div>
+        <div class="pc-name" style="font-size:.75rem">La Ciudadela · AXEL Chat</div>
+        <div class="pc-desc">Tu agente de cabecera. AXEL responde, busca, crea y ejecuta misiones.</div>
+        <div class="pc-cta">Hablar con AXEL <span>→</span></div>
+      </div>
+    </a>
+    <a class="pc" href="axel.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(232,200,106,0.08);border-color:rgba(232,200,106,0.25)">⭐</div>
+        <div><div class="pc-lbl">Árbol de agentes</div><div class="pc-name">AXEL · 22 Sefirot</div></div>
+      </div>
+      <div class="pc-desc">Árbol completo con los 22 agentes del sistema Kabalion KRC.</div>
+      <div class="pc-cta">Ver Árbol <span>→</span></div>
+    </a>
+    <a class="pc" href="universo.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(150,200,255,0.07);border-color:rgba(150,200,255,0.22)">🔮</div>
+        <div><div class="pc-lbl">Mapa Kabalion</div><div class="pc-name">Universo · 46 Sefirot</div></div>
+      </div>
+      <div class="pc-desc">Mapa interactivo del sistema KRC. Las 46 Sefirot de luz y sombra.</div>
+      <div class="pc-cta">Explorar <span>→</span></div>
+    </a>
+    <a class="pc" href="kabalion-2d.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(106,61,154,0.12);border-color:rgba(106,61,154,0.3)">🌐</div>
+        <div><div class="pc-lbl">Interactivo</div><div class="pc-name">Kabalion 2D</div></div>
+      </div>
+      <div class="pc-desc">Árbol Sefirótico 2D interactivo. Click en cada Sefirot para activarlo.</div>
+      <div class="pc-cta">Abrir <span>→</span></div>
+    </a>
+    <a class="pc" href="nexus.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(0,188,212,0.08);border-color:rgba(0,188,212,0.25)">🧠</div>
+        <div><div class="pc-lbl">Multi-agente</div><div class="pc-name">NEXUS Chat</div></div>
+      </div>
+      <div class="pc-desc">Chat con todos los agentes a la vez. AXEL, Claude, ChatGPT, Copilot.</div>
+      <div class="pc-cta">Abrir NEXUS <span>→</span></div>
+    </a>
+    <a class="pc" href="mesa-mando.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(255,152,0,0.08);border-color:rgba(255,152,0,0.25)">⚡</div>
+        <div><div class="pc-lbl">Control central</div><div class="pc-name">Mesa de Mando</div></div>
+      </div>
+      <div class="pc-desc">Envía misiones simultáneas a toda la Liga. Broadcast total.</div>
+      <div class="pc-cta">Comandar <span>→</span></div>
+    </a>
+  </div>
+
+  <!-- SECTION: LA FORJA -->
+  <div class="sec-h" data-sec>
+    <span class="sec-ico">⚒️</span>
+    <span class="sec-name">La Forja · Casas de Agentes</span>
+    <span class="sec-count">11 páginas</span>
+  </div>
+  <div class="cg" data-grid>
+    <a class="pc feat" href="la_forja/plaza.html">
+      <div class="pc-ico" style="background:rgba(232,200,106,0.08);border-color:rgba(232,200,106,0.25);font-size:1.5rem">🏟️</div>
+      <div>
+        <div class="tag" style="background:rgba(232,200,106,0.1);color:var(--gold)">Centro de La Forja</div>
+        <div class="pc-name" style="font-size:.72rem">La Plaza · Entrada a la Forja</div>
+        <div class="pc-desc">Plaza central de La Forja. Acceso a todas las casas de los agentes.</div>
+        <div class="pc-cta">Entrar a La Forja <span>→</span></div>
+      </div>
+    </a>
+    <a class="pc" href="la_forja/comando.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(255,82,82,0.08);border-color:rgba(255,82,82,0.25)">🎯</div>
+        <div><div class="pc-lbl">Operaciones</div><div class="pc-name">Centro de Comando</div></div>
+      </div>
+      <div class="pc-desc">Panel de control avanzado de misiones y operaciones de La Forja.</div>
+      <div class="pc-cta">Abrir <span>→</span></div>
+    </a>
+    <a class="pc" href="la_forja/oraculo.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(106,61,154,0.12);border-color:rgba(106,61,154,0.3)">🔮</div>
+        <div><div class="pc-lbl">Sabiduría</div><div class="pc-name">El Oráculo</div></div>
+      </div>
+      <div class="pc-desc">Consulta al oráculo de La Forja. Visión y estrategia del sistema.</div>
+      <div class="pc-cta">Consultar <span>→</span></div>
+    </a>
+    <a class="pc" href="la_forja/casa_axel/index.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(232,200,106,0.08);border-color:rgba(232,200,106,0.2)">🏠</div>
+        <div><div class="pc-lbl">Sefirot Tiferet</div><div class="pc-name">Casa AXEL</div></div>
+      </div>
+      <div class="pc-desc">Hogar de AXEL. El corazón del árbol, equilibrio entre luz y sombra.</div>
+      <div class="pc-cta">Visitar <span>→</span></div>
+    </a>
+    <a class="pc" href="la_forja/casa_claude_code/index.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(74,158,255,0.08);border-color:rgba(74,158,255,0.22)">🏠</div>
+        <div><div class="pc-lbl">Sefirot Chesed</div><div class="pc-name">Casa Claude</div></div>
+      </div>
+      <div class="pc-desc">Hogar de Claude Code, el Ingeniero Principal de ORIONIX.</div>
+      <div class="pc-cta">Visitar <span>→</span></div>
+    </a>
+    <a class="pc" href="la_forja/casa_qwen/index.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(0,188,212,0.08);border-color:rgba(0,188,212,0.22)">🏠</div>
+        <div><div class="pc-lbl">Sefirot Hod</div><div class="pc-name">Casa Qwen</div></div>
+      </div>
+      <div class="pc-desc">Hogar de Qwen, constructor de interfaces y UI del universo.</div>
+      <div class="pc-cta">Visitar <span>→</span></div>
+    </a>
+    <a class="pc" href="la_forja/casa_copilot_cli/index.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(156,39,176,0.08);border-color:rgba(156,39,176,0.25)">🏠</div>
+        <div><div class="pc-lbl">Sefirot Netzach</div><div class="pc-name">Casa Copilot</div></div>
+      </div>
+      <div class="pc-desc">Hogar de Copilot CLI, el guardián del repositorio y commits.</div>
+      <div class="pc-cta">Visitar <span>→</span></div>
+    </a>
+    <a class="pc" href="la_forja/casa_hermes/index.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(255,152,0,0.08);border-color:rgba(255,152,0,0.22)">🏠</div>
+        <div><div class="pc-lbl">Debugger</div><div class="pc-name">Casa Hermes</div></div>
+      </div>
+      <div class="pc-desc">Hogar de Hermes, el agente de auto-reparación y debugging.</div>
+      <div class="pc-cta">Visitar <span>→</span></div>
+    </a>
+    <a class="pc" href="la_forja/casa_pi/index.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(233,30,99,0.08);border-color:rgba(233,30,99,0.22)">🏠</div>
+        <div><div class="pc-lbl">Estrategia</div><div class="pc-name">Casa Pi</div></div>
+      </div>
+      <div class="pc-desc">Hogar de Pi, agente de estrategia y mentoría del sistema.</div>
+      <div class="pc-cta">Visitar <span>→</span></div>
+    </a>
+    <a class="pc" href="la_forja/casa_cline/index.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(0,150,136,0.08);border-color:rgba(0,150,136,0.22)">🏠</div>
+        <div><div class="pc-lbl">Terminal</div><div class="pc-name">Casa Cline</div></div>
+      </div>
+      <div class="pc-desc">Hogar de Cline, agente de terminal y ejecución de comandos.</div>
+      <div class="pc-cta">Visitar <span>→</span></div>
+    </a>
+    <a class="pc" href="la_forja/casa_voice_ia/index.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(63,81,181,0.08);border-color:rgba(63,81,181,0.22)">🏠</div>
+        <div><div class="pc-lbl">Voz</div><div class="pc-name">Casa Voice IA</div></div>
+      </div>
+      <div class="pc-desc">Hogar del agente de voz e interfaz auditiva del universo.</div>
+      <div class="pc-cta">Visitar <span>→</span></div>
+    </a>
+  </div>
+
+  <!-- SECTION: TIENDA & NEGOCIO -->
+  <div class="sec-h" id="tienda" data-sec>
+    <span class="sec-ico">🛍️</span>
+    <span class="sec-name">Tienda & Negocio</span>
+    <span class="sec-count">3 páginas</span>
+  </div>
+  <div class="cg" data-grid>
+    <a class="pc feat" href="tienda.html">
+      <div class="pc-ico" style="background:rgba(232,200,106,0.1);border-color:rgba(232,200,106,0.35);font-size:1.5rem">🛍️</div>
+      <div>
+        <div class="tag" style="background:rgba(232,200,106,0.12);color:var(--gold)">De una aguja a una mansión</div>
+        <div class="pc-name" style="font-size:.75rem">La Tienda del Imperio</div>
+        <div class="pc-desc">Planes Esencia €197 · Imperio €497 · Ciudadela. Catálogos MODA, FASHION STYLE, MI DINASTÍA.</div>
+        <div class="pc-cta">Entrar a la Tienda <span>→</span></div>
+      </div>
+    </a>
+    <a class="pc" href="afiliados.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(76,175,80,0.08);border-color:rgba(76,175,80,0.25)">🤝</div>
+        <div><div class="pc-lbl">Ingresos Pasivos</div><div class="pc-name">Afiliados</div></div>
+      </div>
+      <div class="pc-desc">Red de embajadores ORIONIX. 20% de comisión por cada referido.</div>
+      <div class="pc-cta">Unirse <span>→</span></div>
+    </a>
+    <a class="pc" href="forjadora.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(232,200,106,0.08);border-color:rgba(232,200,106,0.22)">💎</div>
+        <div><div class="pc-lbl">Programa Élite</div><div class="pc-name">La Forjadora</div></div>
+      </div>
+      <div class="pc-desc">Transformación élite con IA. Para líderes digitales que van en serio.</div>
+      <div class="pc-cta">Ver Programa <span>→</span></div>
+    </a>
+  </div>
+
+  <!-- SECTION: CONTENIDO -->
+  <div class="sec-h" data-sec>
+    <span class="sec-ico">🎬</span>
+    <span class="sec-name">Contenido & Comunidad</span>
+    <span class="sec-count">4 páginas</span>
+  </div>
+  <div class="cg" data-grid>
+    <a class="pc" href="reels.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(233,30,99,0.08);border-color:rgba(233,30,99,0.25)">🎬</div>
+        <div><div class="pc-lbl">Multimedia</div><div class="pc-name">Reels</div></div>
+      </div>
+      <div class="pc-desc">Videos e historias del ecosistema. Contenido del universo ORIONIX.</div>
+      <div class="pc-cta">Ver <span>→</span></div>
+    </a>
+    <a class="pc" href="cronicas.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(121,85,72,0.12);border-color:rgba(121,85,72,0.3)">📖</div>
+        <div><div class="pc-lbl">Historia</div><div class="pc-name">Crónicas</div></div>
+      </div>
+      <div class="pc-desc">Registro histórico de ORIONIX. El diario del universo en expansión.</div>
+      <div class="pc-cta">Leer <span>→</span></div>
+    </a>
+    <a class="pc" href="mundos.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(0,150,136,0.08);border-color:rgba(0,150,136,0.25)">🌏</div>
+        <div><div class="pc-lbl">Reinos</div><div class="pc-name">Los Mundos</div></div>
+      </div>
+      <div class="pc-desc">Los reinos del universo ORIONIX. Cada mundo tiene sus propias leyes.</div>
+      <div class="pc-cta">Explorar <span>→</span></div>
+    </a>
+    <a class="pc" href="comunidad.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(63,81,181,0.08);border-color:rgba(63,81,181,0.25)">🌍</div>
+        <div><div class="pc-lbl">Red</div><div class="pc-name">Comunidad</div></div>
+      </div>
+      <div class="pc-desc">Conecta con emprendedores del universo. La tribu ORIONIX crece.</div>
+      <div class="pc-cta">Entrar <span>→</span></div>
+    </a>
+  </div>
+
+  <!-- SECTION: PERSONAL -->
+  <div class="sec-h" data-sec>
+    <span class="sec-ico">🏡</span>
+    <span class="sec-name">Espacio Personal</span>
+    <span class="sec-count">4 páginas</span>
+  </div>
+  <div class="cg" data-grid>
+    <a class="pc feat" href="hogar.html">
+      <div class="pc-ico" style="background:rgba(200,150,255,0.08);border-color:rgba(200,150,255,0.25);font-size:1.5rem">🏡</div>
+      <div>
+        <div class="tag" style="background:rgba(200,150,255,0.1);color:#ce93d8">Espacio Íntimo</div>
+        <div class="pc-name" style="font-size:.72rem">El Hogar · Tu Base de Operaciones</div>
+        <div class="pc-desc">Tu espacio personal dentro de ORIONIX. Hábitos, herramientas y Nebula IA.</div>
+        <div class="pc-cta">Ir al Hogar <span>→</span></div>
+      </div>
+    </a>
+    <a class="pc" href="habitos.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(76,175,80,0.08);border-color:rgba(76,175,80,0.25)">✅</div>
+        <div><div class="pc-lbl">Disciplina</div><div class="pc-name">Hábitos</div></div>
+      </div>
+      <div class="pc-desc">Seguimiento de hábitos diarios. El camino hacia la versión élite.</div>
+      <div class="pc-cta">Ver <span>→</span></div>
+    </a>
+    <a class="pc" href="nebula-habits.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(63,81,181,0.08);border-color:rgba(63,81,181,0.25)">🌙</div>
+        <div><div class="pc-lbl">IA Personal</div><div class="pc-name">Nebula Hábitos</div></div>
+      </div>
+      <div class="pc-desc">Agente Nebula con IA para gestión inteligente de hábitos y rutinas.</div>
+      <div class="pc-cta">Abrir <span>→</span></div>
+    </a>
+    <a class="pc" href="mi-cuenta.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(255,200,100,0.07);border-color:rgba(255,200,100,0.2)">👤</div>
+        <div><div class="pc-lbl">Perfil</div><div class="pc-name">Mi Cuenta</div></div>
+      </div>
+      <div class="pc-desc">Gestiona tu suscripción, perfil y accesos al universo.</div>
+      <div class="pc-cta">Ver Perfil <span>→</span></div>
+    </a>
+  </div>
+
+  <!-- SECTION: SISTEMA -->
+  <div class="sec-h" data-sec>
+    <span class="sec-ico">⚙️</span>
+    <span class="sec-name">Sistema & Herramientas</span>
+    <span class="sec-count">5 páginas</span>
+  </div>
+  <div class="cg" data-grid>
+    <a class="pc" href="monitor.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(0,188,212,0.08);border-color:rgba(0,188,212,0.25)">📊</div>
+        <div><div class="pc-lbl">Observación</div><div class="pc-name">Monitor</div></div>
+      </div>
+      <div class="pc-desc">Panel de monitoreo del sistema. Estado de agentes y flujos.</div>
+      <div class="pc-cta">Ver <span>→</span></div>
+    </a>
+    <a class="pc" href="admin.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(184,154,64,0.08);border-color:rgba(184,154,64,0.25)">⚙️</div>
+        <div><div class="pc-lbl">Administración</div><div class="pc-name">Admin</div></div>
+      </div>
+      <div class="pc-desc">Panel interno de gestión. Solo para el Creador.</div>
+      <div class="pc-cta">Abrir <span>→</span></div>
+    </a>
+    <a class="pc" href="microfono.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(233,30,99,0.08);border-color:rgba(233,30,99,0.22)">🎤</div>
+        <div><div class="pc-lbl">Voz AXEL</div><div class="pc-name">Micrófono</div></div>
+      </div>
+      <div class="pc-desc">Diagnóstico y prueba del sistema de voz. STT Deepgram.</div>
+      <div class="pc-cta">Probar <span>→</span></div>
+    </a>
+    <a class="pc" href="auth.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(76,175,80,0.08);border-color:rgba(76,175,80,0.22)">🔐</div>
+        <div><div class="pc-lbl">Acceso</div><div class="pc-name">Autenticación</div></div>
+      </div>
+      <div class="pc-desc">Sistema de login y autenticación del universo ORIONIX.</div>
+      <div class="pc-cta">Ver <span>→</span></div>
+    </a>
+    <a class="pc" href="gracias.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(232,200,106,0.06);border-color:rgba(232,200,106,0.18)">🙏</div>
+        <div><div class="pc-lbl">Confirmación</div><div class="pc-name">Gracias</div></div>
+      </div>
+      <div class="pc-desc">Página de confirmación post-compra y post-registro.</div>
+      <div class="pc-cta">Ver <span>→</span></div>
+    </a>
+  </div>
+
+  <!-- SECTION: FORJA OUTPUT -->
+  <div class="sec-h" data-sec>
+    <span class="sec-ico">🔥</span>
+    <span class="sec-name">Forja Output · Generados</span>
+    <span class="sec-count">4 páginas</span>
+  </div>
+  <div class="cg" data-grid>
+    <a class="pc" href="forja_output/bienvenida_orionix.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(232,200,106,0.08);border-color:rgba(232,200,106,0.2)">✨</div>
+        <div><div class="pc-lbl">Generado</div><div class="pc-name">Bienvenida ORIONIX</div></div>
+      </div>
+      <div class="pc-desc">Página de bienvenida generada por La Forja.</div>
+      <div class="pc-cta">Ver <span>→</span></div>
+    </a>
+    <a class="pc" href="forja_output/agencia_componente_4.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(255,152,0,0.08);border-color:rgba(255,152,0,0.2)">🔥</div>
+        <div><div class="pc-lbl">Componente 4</div><div class="pc-name">Agencia C4</div></div>
+      </div>
+      <div class="pc-desc">Componente 4 de la agencia generado por La Forja.</div>
+      <div class="pc-cta">Ver <span>→</span></div>
+    </a>
+    <a class="pc" href="forja_output/agencia_componente_5.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(255,152,0,0.08);border-color:rgba(255,152,0,0.2)">🔥</div>
+        <div><div class="pc-lbl">Componente 5</div><div class="pc-name">Agencia C5</div></div>
+      </div>
+      <div class="pc-desc">Componente 5 de la agencia generado por La Forja.</div>
+      <div class="pc-cta">Ver <span>→</span></div>
+    </a>
+    <a class="pc" href="forja_output/agencia_componente_6.html">
+      <div class="pc-top">
+        <div class="pc-ico" style="background:rgba(255,152,0,0.08);border-color:rgba(255,152,0,0.2)">🔥</div>
+        <div><div class="pc-lbl">Componente 6</div><div class="pc-name">Agencia C6</div></div>
+      </div>
+      <div class="pc-desc">Componente 6 de la agencia generado por La Forja.</div>
+      <div class="pc-cta">Ver <span>→</span></div>
+    </a>
+  </div>
+
+</main>
+
+<!-- ── RIGHT SIDEBAR ── -->
+<aside class="sr">
+  <div class="rc">
+    <h3>🤖 Agentes Online</h3>
+    <a class="ral" href="ciudadela.html">
+      <div class="rdot" style="background:#e8c86a;box-shadow:0 0 5px #e8c86a55"></div>
+      <div><div class="rname">AXEL · Tiferet</div><div class="rsub">En línea 24/7</div></div>
+    </a>
+    <a class="ral" href="#">
+      <div class="rdot" style="background:#4a9eff;box-shadow:0 0 5px #4a9eff55"></div>
+      <div><div class="rname">Claude · Chesed</div><div class="rsub">Disponible</div></div>
+    </a>
+    <a class="ral" href="#">
+      <div class="rdot" style="background:#4caf50;box-shadow:0 0 5px #4caf5055"></div>
+      <div><div class="rname">ChatGPT · Binah</div><div class="rsub">Disponible</div></div>
+    </a>
+    <a class="ral" href="#">
+      <div class="rdot" style="background:#9c27b0;box-shadow:0 0 5px #9c27b055"></div>
+      <div><div class="rname">Copilot · Netzach</div><div class="rsub">Disponible</div></div>
+    </a>
+    <a class="ral" href="#">
+      <div class="rdot" style="background:#00bcd4;box-shadow:0 0 5px #00bcd455"></div>
+      <div><div class="rname">Qwen · Hod</div><div class="rsub">Disponible</div></div>
+    </a>
+  </div>
+
+  <div class="rc">
+    <h3>📊 Resumen del Universo</h3>
+    <div class="srow"><span class="slbl">Páginas totales</span><span class="sval">50</span></div>
+    <div class="srow"><span class="slbl">Agentes activos</span><span class="sval">5 / 22</span></div>
+    <div class="srow"><span class="slbl">Casas en La Forja</span><span class="sval">11</span></div>
+    <div class="srow"><span class="slbl">Plan activo</span><span class="sval">Ciudadela</span></div>
+    <div class="srow"><span class="slbl">Sefirot mapeadas</span><span class="sval">22 / 46</span></div>
+  </div>
+
+  <div class="rc">
+    <h3>⚡ Acceso Rápido</h3>
+    <a class="qlink" href="ciudadela.html">
+      <span class="qi">🤖</span>
+      <div><div class="qt">Hablar con AXEL</div><div class="qs">Chat IA directo</div></div>
+    </a>
+    <a class="qlink" href="nexus.html">
+      <span class="qi">🧠</span>
+      <div><div class="qt">Abrir NEXUS</div><div class="qs">Multi-agente</div></div>
+    </a>
+    <a class="qlink" href="mesa-mando.html">
+      <span class="qi">⚡</span>
+      <div><div class="qt">Mesa de Mando</div><div class="qs">Broadcast total</div></div>
+    </a>
+    <a class="qlink" href="tienda.html">
+      <span class="qi">🛍️</span>
+      <div><div class="qt">La Tienda</div><div class="qs">Planes y catálogos</div></div>
+    </a>
+    <a class="qlink" href="https://t.me/KevinRuizBolsota" target="_blank">
+      <span class="qi">✈️</span>
+      <div><div class="qt" style="color:#29b6f6">Telegram · Kevin</div><div class="qs">Contacto directo</div></div>
+    </a>
+  </div>
+
+  <div class="rc">
+    <h3>🔗 Externo</h3>
+    <a class="qlink" href="https://kybalio.com" target="_blank">
+      <span class="qi">🔒</span>
+      <div><div class="qt">Kybalio</div><div class="qs">833 videos · 1251 imágenes</div></div>
+    </a>
+    <a class="qlink" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/hub.html" target="_blank">
+      <span class="qi">🌐</span>
+      <div><div class="qt">GitHub Pages</div><div class="qs">Vista pública live</div></div>
+    </a>
+  </div>
+</aside>
+
+</div>
+
+<script>
+// ── Filtro de búsqueda ──
+function filtrar(q){
+  q = q.toLowerCase().trim();
+  document.querySelectorAll('[data-grid]').forEach(g => {
+    let anyVisible = false;
+    g.querySelectorAll('.pc').forEach(c => {
+      const txt = c.textContent.toLowerCase();
+      const show = !q || txt.includes(q);
+      c.style.display = show ? '' : 'none';
+      if(show) anyVisible = true;
+    });
+    // hide section header if nothing visible
+    const sec = g.previousElementSibling;
+    if(sec && sec.hasAttribute('data-sec'))
+      sec.style.display = anyVisible || !q ? '' : 'none';
+  });
+}
+
+// ── Starfield ──
+(function(){
+  const c=document.getElementById('cv'),ctx=c.getContext('2d');
+  function r(){c.width=innerWidth;c.height=innerHeight}r();
+  addEventListener('resize',r);
+  const s=Array.from({length:120},()=>({x:Math.random(),y:Math.random(),r:Math.random()*.9+.15,a:Math.random(),da:(Math.random()-.5)*.006}));
+  function d(){
+    ctx.clearRect(0,0,c.width,c.height);
+    s.forEach(p=>{
+      p.a=Math.max(.03,Math.min(.85,p.a+p.da));
+      if(p.a<=.03||p.a>=.85)p.da*=-1;
+      ctx.beginPath();ctx.arc(p.x*c.width,p.y*c.height,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(232,200,106,${p.a*.5})`;ctx.fill();
+    });
+    requestAnimationFrame(d);
+  }d();
+})();
+</script>
+<script src="orionix-profile.js"></script>
+</body>
+</html>

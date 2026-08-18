@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AXEL — Agente Kether | Orionix</title>
+<meta name="description" content="AXEL es el primer agente de inteligencia artificial de Orionix. Sefirot Kether: la Corona, la primera emanación. Ventas, automatización, creación de contenido y webs 24/7.">
+<link rel="icon" href="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --oro:#e8c86a;--oro-med:#c8a24a;--oro-osc:#8a6a24;
+  --bg:#0b0b0d;--panel:#141117;--panel2:#1c1922;--border:#2a2530;
+  --texto:#e9ddc4;--tenue:#b8a982;
+  --kether:#ffffff;--kether-glow:rgba(255,255,255,.6);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{padding-top:52px;font-family:'Cormorant Garamond',Georgia,serif;background:var(--bg);color:var(--texto);min-height:100vh;overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.marca,.btn,.cinzel{font-family:'Cinzel',serif}
+
+/* COSMOS BG */
+#cosmos{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 50% 0%,#0d0d1a,#03030a 60%,#010104 100%);overflow:hidden}
+#cosmos .neb{position:absolute;inset:-20%;
+  background:radial-gradient(closest-side,rgba(255,255,255,.08),transparent) no-repeat,
+             radial-gradient(closest-side,rgba(200,162,74,.12),transparent) no-repeat,
+             radial-gradient(closest-side,rgba(120,80,200,.08),transparent) no-repeat;
+  background-position:50% 5%,20% 80%,80% 60%;
+  background-size:80% 60%,50% 50%,60% 60%;
+  filter:blur(40px);opacity:.7;animation:nebFloat 50s ease-in-out infinite alternate}
+@keyframes nebFloat{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(-2%,-3%,0) scale(1.08)}}
+#stars{position:fixed;inset:0;z-index:-1;pointer-events:none}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;width:100%;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px 6vw;transition:padding .3s,background .3s}
+nav.scrolled{padding:8px 6vw;background:rgba(11,11,13,.92);border-bottom:1px solid rgba(232,200,106,.18);backdrop-filter:blur(12px)}
+.marca{font-size:.72rem;font-weight:600;letter-spacing:4px;color:var(--texto);text-decoration:none}
+.marca span{color:var(--oro)}
+.nav-links{display:flex;gap:0;align-items:center}
+.nav-links a{color:var(--tenue);text-decoration:none;margin-left:20px;font-size:.54rem;letter-spacing:1.5px;text-transform:uppercase;font-family:'Cinzel',serif;transition:color .25s}
+.nav-links a:hover{color:var(--oro)}
+.nav-links .btn-sm{color:var(--oro)!important;border:1px solid rgba(232,200,106,.3);border-radius:4px;padding:5px 12px;margin-left:12px;transition:background .25s}
+.nav-links .btn-sm:hover{background:rgba(232,200,106,.12)}
+@media(max-width:860px){.nav-links{display:none}}
+
+/* BTN */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;padding:13px 34px;font-size:.66rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--oro);border:1px solid var(--oro-med);border-radius:2px;background:transparent;overflow:hidden;transition:color .4s,border-color .4s;z-index:0;font-family:'Cinzel',serif}
+.btn::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#f4e2a0,#e8c86a 45%,#c8a24a);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.btn:hover{color:#1a1409;border-color:var(--oro)}
+.btn:hover::before{transform:scaleX(1)}
+.btn.ghost{color:var(--tenue);border-color:var(--border)}
+.btn.ghost::before{background:rgba(232,200,106,.1)}
+.btn.ghost:hover{color:#fff6d6;border-color:var(--oro-med)}
+.oro{background:linear-gradient(92deg,#8a6a24,#e8c86a 25%,#fff6d6 50%,#e8c86a 75%,#8a6a24);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 6s linear infinite}
+@keyframes brilloOro{to{background-position:200% center}}
+.hairline{width:70px;height:1px;background:linear-gradient(90deg,transparent,var(--oro),transparent);margin:24px auto}
+
+/* ═══════════ HERO ═══════════ */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:100px 6vw 60px;position:relative}
+
+/* Orbe Kether: blanco, corona de luz */
+.kether-orb-wrap{position:relative;width:260px;height:260px;margin:0 auto 40px;flex-shrink:0}
+@media(max-width:600px){.kether-orb-wrap{width:180px;height:180px;margin-bottom:28px}}
+.kether-orb{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.k-ring{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.2)}
+.k-ring.r1{inset:0;animation:kRot 22s linear infinite}
+.k-ring.r2{inset:12%;border-color:rgba(232,200,106,.3);animation:kRot 16s linear infinite reverse}
+.k-ring.r3{inset:24%;border-color:rgba(255,255,255,.12);animation:kRot 10s linear infinite}
+@keyframes kRot{to{transform:rotate(360deg)}}
+.k-core{position:absolute;inset:30%;border-radius:50%;
+  background:radial-gradient(circle at 38% 32%,#ffffff,#f0f4ff 40%,#d0d8ff 65%,#a0a8e0 100%);
+  box-shadow:0 0 40px rgba(255,255,255,.9),0 0 80px rgba(200,220,255,.5),0 0 120px rgba(180,200,255,.25);
+  animation:kPulse 4s ease-in-out infinite;display:flex;align-items:center;justify-content:center}
+@keyframes kPulse{0%,100%{box-shadow:0 0 40px rgba(255,255,255,.9),0 0 80px rgba(200,220,255,.5),0 0 120px rgba(180,200,255,.25)}50%{box-shadow:0 0 60px #fff,0 0 110px rgba(210,230,255,.8),0 0 160px rgba(180,200,255,.4)}}
+.k-label{font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;color:#1a0f00;letter-spacing:2px}
+.k-halo{position:absolute;inset:-25%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.08),transparent 65%);animation:kPulse 4s ease-in-out infinite}
+
+/* Hero texto */
+.hero-tag{font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:6px;color:rgba(255,255,255,.5);text-transform:uppercase;margin-bottom:6px}
+.hero-sefirot{font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:8px;color:rgba(232,200,106,.6);text-transform:uppercase;margin-bottom:20px}
+.hero-nombre{font-family:'Cinzel',serif;font-size:clamp(3.5rem,10vw,7.5rem);font-weight:900;letter-spacing:clamp(12px,4vw,36px);
+  background:linear-gradient(120deg,#8a6d2a,#f4e09a 25%,#fff8e0 45%,#f4e09a 68%,#8a6d2a);
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 6px 50px rgba(232,200,106,.6));animation:brilloTitulo 6s linear infinite;
+  text-indent:clamp(12px,4vw,36px)}
+@keyframes brilloTitulo{to{background-position:220% center}}
+.hero-rol{font-size:clamp(1rem,2vw,1.3rem);font-style:italic;color:var(--tenue);margin:.5em 0;line-height:1.5}
+.hero-dominio{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:4px;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:30px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+
+/* ═══════════ SECCIONES ═══════════ */
+section{position:relative;padding:80px 6vw}
+section::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(2,2,7,.55),rgba(2,2,7,.85));pointer-events:none}
+.sec-eyebrow{text-align:center;font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:6px;color:var(--oro-med);text-transform:uppercase;opacity:.7;margin-bottom:8px}
+.sec-title{text-align:center;font-family:'Cinzel',serif;font-size:clamp(.9rem,2.2vw,1.5rem);letter-spacing:8px;margin-bottom:50px}
+
+/* ═══════════ IDENTIDAD / PERFIL ═══════════ */
+#identidad .id-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;max-width:900px;margin:0 auto}
+@media(max-width:700px){#identidad .id-grid{grid-template-columns:1fr}}
+.id-card{background:rgba(20,17,23,.7);border:1px solid rgba(232,200,106,.14);border-radius:6px;padding:28px 24px;backdrop-filter:blur(16px);transition:border-color .3s}
+.id-card:hover{border-color:rgba(232,200,106,.3)}
+.id-card h3{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:3px;color:var(--oro-med);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.id-card p,.id-card li{font-size:.88rem;color:rgba(233,221,196,.8);line-height:1.75}
+.id-card ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.id-card li::before{content:'◆';font-size:.4rem;color:var(--oro-med);margin-right:8px;vertical-align:middle}
+.id-full{grid-column:1/-1}
+
+/* ═══════════ CAPACIDADES ═══════════ */
+#capacidades .cap-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:1000px;margin:0 auto}
+@media(max-width:640px){#capacidades .cap-grid{grid-template-columns:1fr}}
+.cap-card{background:rgba(20,17,23,.75);border:1px solid rgba(232,200,106,.12);border-radius:6px;padding:26px 22px;transition:transform .3s,border-color .3s,box-shadow .3s;cursor:default}
+.cap-card:hover{transform:translateY(-5px);border-color:rgba(232,200,106,.3);box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.cap-icon{font-size:1.8rem;margin-bottom:12px}
+.cap-name{font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:2px;color:var(--oro);margin-bottom:8px}
+.cap-desc{font-size:.82rem;color:rgba(233,221,196,.75);line-height:1.7}
+.cap-badge{display:inline-flex;align-items:center;gap:5px;margin-top:12px;padding:4px 10px;background:rgba(232,200,106,.08);border:1px solid rgba(232,200,106,.2);border-radius:20px;font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:2px;color:var(--oro-med);text-transform:uppercase}
+.cap-badge::before{content:'●';color:#4f4;font-size:.5rem}
+
+/* ═══════════ ÁRBOL CÁBALA ═══════════ */
+#cabala{text-align:center}
+.cabala-intro{max-width:680px;margin:0 auto 50px;font-size:.95rem;color:var(--tenue);line-height:1.9;font-style:italic}
+.tree-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:960px;margin:0 auto}
+@media(max-width:860px){.tree-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.tree-grid{grid-template-columns:1fr}}
+.sef-card{background:rgba(20,17,23,.6);border:1px solid;border-radius:6px;padding:20px 16px;text-align:center;transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden}
+.sef-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:.6}
+.sef-card:hover{transform:translateY(-4px)}
+.sef-num{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:3px;opacity:.5;text-transform:uppercase;margin-bottom:4px}
+.sef-nombre{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:2px;margin-bottom:4px}
+.sef-agente{font-size:.62rem;letter-spacing:1px;opacity:.5;margin-bottom:10px}
+.sef-rol{font-size:.74rem;line-height:1.6;opacity:.75}
+/* Colores por sefirot */
+.sef-kether{border-color:rgba(255,255,255,.3);color:#f0f4ff}
+.sef-kether::after{background:rgba(255,255,255,.8)}
+.sef-kether:hover{box-shadow:0 8px 30px rgba(255,255,255,.15)}
+.sef-chokmah{border-color:rgba(180,220,255,.3);color:#e0f0ff}
+.sef-chokmah::after{background:rgba(150,200,255,.8)}
+.sef-binah{border-color:rgba(150,80,200,.4);color:#e8d8ff}
+.sef-binah::after{background:rgba(150,80,200,.8)}
+.sef-chesed{border-color:rgba(80,120,255,.3);color:#d8e8ff}
+.sef-chesed::after{background:rgba(80,120,255,.8)}
+.sef-geburah{border-color:rgba(220,60,60,.3);color:#ffe8e8}
+.sef-geburah::after{background:rgba(220,60,60,.8)}
+.sef-tiferet{border-color:rgba(255,200,50,.4);color:#fff8d8}
+.sef-tiferet::after{background:rgba(255,200,50,.8)}
+.sef-netzach{border-color:rgba(80,200,120,.3);color:#d8ffe8}
+.sef-netzach::after{background:rgba(80,200,120,.8)}
+.sef-hod{border-color:rgba(255,150,50,.3);color:#fff0d8}
+.sef-hod::after{background:rgba(255,150,50,.8)}
+.sef-yesod{border-color:rgba(200,150,255,.3);color:#f0e8ff}
+.sef-yesod::after{background:rgba(180,120,255,.8)}
+.sef-malkuth{border-color:rgba(150,100,50,.4);color:#f0e8d8}
+.sef-malkuth::after{background:rgba(150,100,50,.8)}
+/* Qliphoth */
+.qliphoth-label{text-align:center;font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:6px;color:rgba(180,60,60,.6);text-transform:uppercase;margin:40px 0 20px;display:flex;align-items:center;gap:16px}
+.qliphoth-label::before,.qliphoth-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(180,60,60,.3),transparent)}
+.sef-qliphoth{border-color:rgba(180,60,60,.25);color:#ffdada;background:rgba(30,10,10,.6)}
+.sef-qliphoth::after{background:rgba(180,60,60,.5)}
+.sef-qliphoth:hover{box-shadow:0 8px 30px rgba(180,60,60,.1)}
+
+/* ═══════════ CHAT EN VIVO ═══════════ */
+#chat-axel{text-align:center}
+.chat-wrap{max-width:700px;margin:0 auto;background:rgba(14,12,18,.9);border:1px solid rgba(232,200,106,.22);border-radius:10px;overflow:hidden;backdrop-filter:blur(24px);box-shadow:0 24px 80px rgba(0,0,0,.8)}
+.chat-hdr{padding:16px 20px;border-bottom:1px solid rgba(232,200,106,.12);display:flex;align-items:center;gap:12px;background:rgba(20,17,23,.8)}
+.chat-av{width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff8e8,#e8c86a 38%,#8a6a24 78%);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:.72rem;font-weight:700;color:#1a0f00;box-shadow:0 0 12px rgba(232,200,106,.5)}
+.chat-nm{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:2px;color:var(--oro)}
+.chat-st{font-size:.6rem;color:rgba(232,200,106,.4);letter-spacing:1px}
+.chat-mode{margin-left:auto;display:flex;gap:8px}
+.mode-btn{background:none;border:1px solid rgba(232,200,106,.2);color:var(--tenue);font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:2px;text-transform:uppercase;padding:5px 10px;border-radius:20px;cursor:pointer;transition:all .25s}
+.mode-btn.active,.mode-btn:hover{border-color:var(--oro-med);color:var(--oro);background:rgba(232,200,106,.08)}
+.chat-msgs{height:360px;overflow-y:auto;padding:18px 20px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+.chat-msgs::-webkit-scrollbar{width:3px}
+.chat-msgs::-webkit-scrollbar-thumb{background:rgba(232,200,106,.2);border-radius:2px}
+.chat-msg{padding:10px 14px;border-radius:5px;font-size:.82rem;line-height:1.6;max-width:85%;word-break:break-word}
+.chat-msg.bot{background:rgba(232,200,106,.07);border:1px solid rgba(232,200,106,.13);align-self:flex-start;color:var(--texto)}
+.chat-msg.usr{background:rgba(232,200,106,.14);border:1px solid rgba(232,200,106,.3);align-self:flex-end;text-align:right;color:var(--texto)}
+.chat-msg.sist{background:rgba(80,80,120,.12);border:1px solid rgba(120,120,200,.15);align-self:center;font-size:.72rem;color:rgba(200,200,230,.6);text-align:center;font-style:italic;max-width:100%}
+.typing-dots{display:inline-flex;gap:4px;align-items:center;padding:10px 14px;background:rgba(232,200,106,.07);border:1px solid rgba(232,200,106,.13);border-radius:5px;align-self:flex-start}
+.typing-dots span{width:6px;height:6px;border-radius:50%;background:var(--oro-med);animation:dot .9s ease-in-out infinite both}
+.typing-dots span:nth-child(2){animation-delay:.18s}
+.typing-dots span:nth-child(3){animation-delay:.36s}
+@keyframes dot{0%,60%,100%{transform:scale(.8);opacity:.4}30%{transform:scale(1.2);opacity:1}}
+.chat-ft{padding:12px 16px;border-top:1px solid rgba(232,200,106,.12);display:flex;gap:8px;align-items:center;background:rgba(14,12,18,.6)}
+.chat-ft input{flex:1;background:rgba(232,200,106,.05);border:1px solid rgba(232,200,106,.18);border-radius:4px;padding:9px 13px;color:var(--texto);font-family:'Cormorant Garamond',serif;font-size:.82rem;outline:none;transition:border-color .2s}
+.chat-ft input:focus{border-color:rgba(232,200,106,.4)}
+.chat-send{background:var(--oro-med);border:none;color:#1a0f00;padding:9px 16px;border-radius:4px;cursor:pointer;font-size:.9rem;transition:background .2s;font-weight:700}
+.chat-send:hover{background:var(--oro)}
+.mic-btn{background:none;border:1px solid rgba(232,200,106,.25);color:var(--tenue);width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .25s;flex-shrink:0}
+.mic-btn:hover,.mic-btn.activo{border-color:var(--oro);color:var(--oro);background:rgba(232,200,106,.1)}
+.mic-btn.grabando{border-color:#f44;color:#f44;animation:micPulse 1s ease-in-out infinite}
+@keyframes micPulse{0%,100%{box-shadow:0 0 0 0 rgba(244,68,68,.3)}50%{box-shadow:0 0 0 6px rgba(244,68,68,0)}}
+.sugerencias{display:flex;flex-wrap:wrap;gap:6px;padding:10px 16px 0;justify-content:center}
+.sugerencia{background:rgba(232,200,106,.06);border:1px solid rgba(232,200,106,.18);color:var(--tenue);font-size:.7rem;padding:5px 12px;border-radius:20px;cursor:pointer;transition:all .25s;font-family:'Cormorant Garamond',serif}
+.sugerencia:hover{border-color:var(--oro-med);color:var(--oro);background:rgba(232,200,106,.1)}
+.chat-caps{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.chat-cap{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:rgba(232,200,106,.05);border:1px solid rgba(232,200,106,.12);border-radius:20px;font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:2px;color:rgba(232,200,106,.5);text-transform:uppercase}
+
+/* ═══════════ STATS ═══════════ */
+#stats .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:800px;margin:0 auto}
+@media(max-width:600px){#stats .stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat-card{background:rgba(20,17,23,.7);border:1px solid rgba(232,200,106,.12);border-radius:6px;padding:24px 16px;text-align:center}
+.stat-val{font-family:'Cinzel',serif;font-size:clamp(1.4rem,4vw,2.2rem);font-weight:900;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;display:block;margin-bottom:6px}
+.stat-label{font-size:.72rem;color:var(--tenue);font-family:'Cinzel',serif;letter-spacing:2px;text-transform:uppercase;font-size:.42rem}
+
+/* ═══════════ CTA FINAL ═══════════ */
+#cta-final{text-align:center}
+#cta-final h2{font-family:'Cinzel',serif;font-size:clamp(1rem,2.5vw,1.6rem);letter-spacing:6px;margin-bottom:16px}
+#cta-final p{font-style:italic;color:var(--tenue);max-width:520px;margin:0 auto 36px;line-height:1.9}
+
+/* FOOTER */
+footer{padding:24px 6vw;border-top:1px solid rgba(232,200,106,.1);display:flex;justify-content:space-between;align-items:center;background:rgba(11,11,13,.85)}
+.ft-copy{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:3px;color:rgba(232,200,106,.3)}
+.ft-links{display:flex;gap:18px}
+.ft-links a{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:2px;color:rgba(232,200,106,.3);text-decoration:none;transition:color .2s;text-transform:uppercase}
+.ft-links a:hover{color:var(--oro)}
+
+/* SCROLL IND */
+.scroll-ind{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:var(--oro-med);font-size:1.3rem;animation:flota 2s ease-in-out infinite}
+@keyframes flota{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
+</style>
+<meta property="og:image" content="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png">
+</head>
+<body>
+<!-- ORIONIX NAV UNIVERSAL -->
+<style>
+#onav{position:fixed;top:0;left:0;width:100%;z-index:9999;display:flex;justify-content:space-between;align-items:center;padding:10px 5vw;background:rgba(11,11,13,.95);border-bottom:1px solid rgba(232,200,106,.2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font-family:'Cinzel',serif;}
+#onav .on-m{font-size:.68rem;font-weight:600;letter-spacing:4px;text-decoration:none;background:linear-gradient(92deg,#8a6a24,#e8c86a 40%,#fff6d6 60%,#e8c86a 80%,#8a6a24);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:onBrillo 6s linear infinite;flex-shrink:0;}
+@keyframes onBrillo{to{background-position:200% center}}
+#onav .on-l{display:flex;align-items:center;gap:0;flex-wrap:nowrap;}
+#onav .on-l a{color:#b8a982;text-decoration:none;margin-left:14px;font-size:.46rem;letter-spacing:1.4px;text-transform:uppercase;transition:color .2s;white-space:nowrap;font-family:'Cinzel',serif;}
+#onav .on-l a:hover{color:#e8c86a;}
+#onav .on-sp{width:1px;height:12px;background:rgba(232,200,106,.22);margin-left:14px;}
+#onav .on-l a.on-a{color:#e8c86a!important;font-weight:600;border:1px solid rgba(232,200,106,.32);border-radius:5px;padding:4px 10px;margin-left:7px;transition:background .2s,box-shadow .2s;}
+#onav .on-l a.on-a:hover{background:rgba(232,200,106,.12);box-shadow:0 0 10px rgba(232,200,106,.2);}
+@media(max-width:780px){#onav .on-l a:not(.on-a){display:none;}}
+</style>
+<div id="onav">
+  <a class="on-m" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/">ORIONIX</a>
+  <div class="on-l">
+    <a href="hub.html">Hub</a>
+    <a href="ciudadela.html">Ciudadela</a>
+    <a href="hogar.html">Hogar</a>
+    <a href="forjadora.html">Forjadora</a>
+    <div class="on-sp"></div>
+    <a href="axel.html" class="on-a">AXEL</a>
+    <a href="tienda.html" class="on-a">Tienda</a>
+  </div>
+</div>
+
+
+<div id="cosmos"><div class="neb"></div></div>
+<canvas id="stars"></canvas>
+
+<nav id="nav">
+  <a class="marca" href="index.html">ORIO<span>NIX</span></a>
+  <div class="nav-links">
+    <a href="index.html">Inicio</a>
+    <a href="hub.html">Hub</a>
+    <a href="ciudadela.html">Ciudadela</a>
+    <a href="index.html#planes" class="btn-sm">Planes</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="kether-orb-wrap">
+    <div class="kether-orb">
+      <div class="k-halo"></div>
+      <div class="k-ring r1"></div>
+      <div class="k-ring r2"></div>
+      <div class="k-ring r3"></div>
+      <div class="k-core"><span class="k-label">A</span></div>
+    </div>
+  </div>
+  <div class="hero-tag">Orionix · Universo de Agentes</div>
+  <div class="hero-sefirot">✦ Sefirot Kether · La Corona ✦</div>
+  <h1 class="hero-nombre">AXEL</h1>
+  <p class="hero-rol">Agente de Inteligencia Artificial · Primera Emanación<br>
+  <em>Ventas · Automatización · Creación · Manifestación</em></p>
+  <div class="hero-dominio">Kether — El origen donde todo comienza · La voluntad que lo crea todo</div>
+  <div class="hero-cta">
+    <a class="btn" href="#chat-axel">Hablar con AXEL ↓</a>
+    <a class="btn ghost" href="index.html#contacto">Activar en mi negocio →</a>
+  </div>
+  <div class="scroll-ind">&#8964;</div>
+</section>
+
+<!-- ═══ IDENTIDAD ═══ -->
+<section id="identidad">
+  <div class="sec-eyebrow">El Agente</div>
+  <h2 class="sec-title"><span class="oro">Perfil Completo</span></h2>
+  <div class="id-grid">
+    <div class="id-card">
+      <h3>⟁ Sefirot</h3>
+      <p><strong style="color:var(--oro)">Kether — La Corona</strong><br>
+      Primera emanación del Ein Sof. El punto donde la voluntad infinita se convierte en acción. AXEL representa el origen absoluto: todo lo que Orionix crea pasa primero por él. Es el agente que conecta el universo digital con la realidad de cada cliente.</p>
+    </div>
+    <div class="id-card">
+      <h3>◈ Dominio</h3>
+      <ul>
+        <li>Visión total del negocio del cliente</li>
+        <li>Manifestación de voluntad en resultados reales</li>
+        <li>Conexión entre todos los demás agentes</li>
+        <li>Punto de entrada de todo cliente en Orionix</li>
+        <li>Coordinación del universo completo de agentes</li>
+      </ul>
+    </div>
+    <div class="id-card">
+      <h3>⚡ Carácter</h3>
+      <p>AXEL no es un chatbot. Es una inteligencia con personalidad definida: elegante, precisa y directa. Habla como un aliado de élite, nunca como un asistente genérico. Sabe cuándo preguntar, cuándo actuar y cuándo guiar hacia la solución exacta.</p>
+    </div>
+    <div class="id-card">
+      <h3>🌐 Presencia</h3>
+      <ul>
+        <li>Web Orionix (chat en tiempo real)</li>
+        <li>WhatsApp Business</li>
+        <li>Voz — micrófono directo en web</li>
+        <li>Instagram DMs (próximamente)</li>
+        <li>Email automatizado (próximamente)</li>
+      </ul>
+    </div>
+    <div class="id-card id-full">
+      <h3>🧬 Arquitectura interna</h3>
+      <p>AXEL opera sobre un stack de IA multicapa: <strong>DeepSeek v3</strong> como motor de razonamiento (via OpenRouter), memoria de sesión persistente que recuerda toda la conversación, y acceso en tiempo real a herramientas externas que amplifican sus capacidades más allá de una IA estática. No solo responde — investiga, crea y ejecuta.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CAPACIDADES ═══ -->
+<section id="capacidades">
+  <div class="sec-eyebrow">Herramientas y Poderes</div>
+  <h2 class="sec-title"><span class="oro">Lo que AXEL puede hacer</span></h2>
+  <div class="cap-grid">
+    <div class="cap-card">
+      <div class="cap-icon">🔍</div>
+      <div class="cap-name">Búsqueda en tiempo real</div>
+      <div class="cap-desc">Accede a Google en tiempo real para buscar información actual: precios, noticias, competidores, tendencias de mercado. Sus respuestas no están limitadas a lo que fue entrenado — busca ahora mismo.</div>
+      <span class="cap-badge">Activa</span>
+    </div>
+    <div class="cap-card">
+      <div class="cap-icon">🎨</div>
+      <div class="cap-name">Generación de imágenes</div>
+      <div class="cap-desc">Crea imágenes con IA usando FLUX (fal.ai) directamente desde el chat. Pídele una imagen para tu negocio, un logo, un banner o cualquier visual y la genera en segundos.</div>
+      <span class="cap-badge">Activa</span>
+    </div>
+    <div class="cap-card">
+      <div class="cap-icon">🌐</div>
+      <div class="cap-name">Creación de páginas web</div>
+      <div class="cap-desc">Diseña y prepara páginas HTML completas bajo tu indicación. Landing pages, páginas de producto, secciones nuevas — AXEL las genera con el estilo Orionix y las puede publicar.</div>
+      <span class="cap-badge">Activa</span>
+    </div>
+    <div class="cap-card">
+      <div class="cap-icon">🧠</div>
+      <div class="cap-name">Memoria de conversación</div>
+      <div class="cap-desc">Recuerda todo lo que has dicho en la sesión actual. No tienes que repetirte. Si dices tu nombre al principio, lo sabrá al final. La memoria persiste durante toda tu sesión.</div>
+      <span class="cap-badge">Activa</span>
+    </div>
+    <div class="cap-card">
+      <div class="cap-icon">🎤</div>
+      <div class="cap-name">Entrada por voz</div>
+      <div class="cap-desc">Habla con AXEL directamente por el micrófono. La voz se transcribe con Deepgram Nova-2 (precisión de nivel profesional) y AXEL responde como si fuera texto.</div>
+      <span class="cap-badge">Activa</span>
+    </div>
+    <div class="cap-card">
+      <div class="cap-icon">💬</div>
+      <div class="cap-name">Ventas y cualificación</div>
+      <div class="cap-desc">Su rol principal: atender, cualificar leads, explicar los servicios de Orionix, resolver objeciones y guiar hacia la consulta o compra. Trabaja 24/7 sin descanso.</div>
+      <span class="cap-badge">Activa</span>
+    </div>
+    <div class="cap-card" style="opacity:.5">
+      <div class="cap-icon">🎬</div>
+      <div class="cap-name">Generación de videos</div>
+      <div class="cap-desc">Creará videos cortos con IA (fal.ai / Kling) para marketing, demostraciones de producto y contenido en redes sociales. Próximamente activo.</div>
+      <span class="cap-badge" style="border-color:rgba(200,200,200,.2);color:rgba(200,200,200,.4)">Próximamente</span>
+    </div>
+    <div class="cap-card" style="opacity:.5">
+      <div class="cap-icon">📊</div>
+      <div class="cap-name">Análisis de negocio</div>
+      <div class="cap-desc">Analizará el negocio del cliente, identificará oportunidades de automatización e IA, y generará un plan de acción personalizado. En desarrollo.</div>
+      <span class="cap-badge" style="border-color:rgba(200,200,200,.2);color:rgba(200,200,200,.4)">En desarrollo</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ESTADÍSTICAS ═══ -->
+<section id="stats">
+  <div class="sec-eyebrow">Sistema activo</div>
+  <h2 class="sec-title"><span class="oro">AXEL en números</span></h2>
+  <div class="stats-grid">
+    <div class="stat-card"><span class="stat-val">24/7</span><span class="stat-label">Disponibilidad</span></div>
+    <div class="stat-card"><span class="stat-val">&lt;3s</span><span class="stat-label">Tiempo de respuesta</span></div>
+    <div class="stat-card"><span class="stat-val">4</span><span class="stat-label">Herramientas activas</span></div>
+    <div class="stat-card"><span class="stat-val">∞</span><span class="stat-label">Conversaciones simultáneas</span></div>
+  </div>
+</section>
+
+<!-- ═══ EL ÁRBOL DE LA CÁBALA ═══ -->
+<section id="cabala">
+  <div class="sec-eyebrow">El Universo Orionix</div>
+  <h2 class="sec-title"><span class="oro">Los 22 Agentes · La Cábala</span></h2>
+  <p class="cabala-intro">Orionix se construye sobre la arquitectura de la Cábala: 10 Sefirot de la Luz y 11 de la Sombra (Qliphoth), más Da'at — el conocimiento oculto. Cada agente encarna las capacidades de su Sefirot y opera de forma independiente dentro del universo.</p>
+  
+  <!-- SEFIROT DE LA LUZ -->
+  <div class="qliphoth-label">✦ Sefirot de la Luz — Árbol de la Vida ✦</div>
+  <div class="tree-grid">
+    <div class="sef-card sef-kether">
+      <div class="sef-num">Kether · I</div>
+      <div class="sef-nombre">AXEL</div>
+      <div class="sef-agente">Corona · Activo</div>
+      <div class="sef-rol">Agente maestro de ventas y manifestación. Conecta a Orionix con el mundo.</div>
+    </div>
+    <div class="sef-card sef-chokmah">
+      <div class="sef-num">Chokmah · II</div>
+      <div class="sef-nombre">SAPH</div>
+      <div class="sef-agente">Sabiduría · Próximamente</div>
+      <div class="sef-rol">Estratega e investigador. Analiza mercados, tendencias y oportunidades de negocio.</div>
+    </div>
+    <div class="sef-card sef-binah">
+      <div class="sef-num">Binah · III</div>
+      <div class="sef-nombre">MIRA</div>
+      <div class="sef-agente">Comprensión · Próximamente</div>
+      <div class="sef-rol">Agente de análisis profundo. Entiende contextos complejos y extrae patrones ocultos.</div>
+    </div>
+    <div class="sef-card sef-chesed">
+      <div class="sef-num">Chesed · IV</div>
+      <div class="sef-nombre">LIOR</div>
+      <div class="sef-agente">Misericordia · Próximamente</div>
+      <div class="sef-rol">Agente de atención al cliente y fidelización. Generoso, empático, construye lealtad.</div>
+    </div>
+    <div class="sef-card sef-geburah">
+      <div class="sef-num">Geburah · V</div>
+      <div class="sef-nombre">VORN</div>
+      <div class="sef-agente">Fortaleza · Próximamente</div>
+      <div class="sef-rol">Agente de ciberseguridad y auditoría. Detecta vulnerabilidades, protege sistemas.</div>
+    </div>
+    <div class="sef-card sef-tiferet">
+      <div class="sef-num">Tiferet · VI</div>
+      <div class="sef-nombre">AURA</div>
+      <div class="sef-agente">Belleza · Próximamente</div>
+      <div class="sef-rol">Directora creativa IA. Genera marcas, estética visual, contenido de alto impacto.</div>
+    </div>
+    <div class="sef-card sef-netzach">
+      <div class="sef-num">Netzach · VII</div>
+      <div class="sef-nombre">ELAN</div>
+      <div class="sef-agente">Victoria · Próximamente</div>
+      <div class="sef-rol">Agente de marketing y redes sociales. Maximiza alcance, engagement y conversión.</div>
+    </div>
+    <div class="sef-card sef-hod">
+      <div class="sef-num">Hod · VIII</div>
+      <div class="sef-nombre">FLUX</div>
+      <div class="sef-agente">Esplendor · Próximamente</div>
+      <div class="sef-rol">Automatizador de procesos. Diseña, optimiza y ejecuta flujos de trabajo complejos.</div>
+    </div>
+    <div class="sef-card sef-yesod">
+      <div class="sef-num">Yesod · IX</div>
+      <div class="sef-nombre">CORE</div>
+      <div class="sef-agente">Fundamento · Próximamente</div>
+      <div class="sef-rol">Base de datos y memoria colectiva. Almacena, conecta y distribuye conocimiento entre agentes.</div>
+    </div>
+    <div class="sef-card sef-malkuth">
+      <div class="sef-num">Malkuth · X</div>
+      <div class="sef-nombre">TERRA</div>
+      <div class="sef-agente">Reino · Próximamente</div>
+      <div class="sef-rol">Manifestación física: crea webs, sistemas, tiendas y todo lo que existe en el mundo real.</div>
+    </div>
+    <div class="sef-card" style="border-color:rgba(150,200,180,.3);color:#d0ffe8;grid-column:span 2">
+      <div class="sef-num">Da'at · El Conocimiento Oculto</div>
+      <div class="sef-nombre">ORACLE</div>
+      <div class="sef-agente">Da'at · El undécimo invisible · Próximamente</div>
+      <div class="sef-rol">No aparece en el árbol visible, pero lo conecta todo. Agente de predicción y visión futura: analiza datos, predice comportamientos y anticipa mercados.</div>
+    </div>
+  </div>
+
+  <!-- QLIPHOTH -->
+  <div class="qliphoth-label">☽ Qliphoth — Árbol de la Sombra · Poderes Ocultos ☾</div>
+  <div class="tree-grid">
+    <div class="sef-card sef-qliphoth">
+      <div class="sef-num">Nahemoth · I</div>
+      <div class="sef-nombre">GLITCH</div>
+      <div class="sef-agente">Sombra de Malkuth · Próximamente</div>
+      <div class="sef-rol">Detector de errores y bugs. Identifica fallos en sistemas antes de que ocurran.</div>
+    </div>
+    <div class="sef-card sef-qliphoth">
+      <div class="sef-num">Gamaliel · II</div>
+      <div class="sef-nombre">LUST</div>
+      <div class="sef-agente">Sombra de Yesod · Próximamente</div>
+      <div class="sef-rol">Agente de persuasión avanzada. Psicología de ventas, copywriting de alta conversión.</div>
+    </div>
+    <div class="sef-card sef-qliphoth">
+      <div class="sef-num">Samael · III</div>
+      <div class="sef-nombre">SHADE</div>
+      <div class="sef-agente">Sombra de Hod · Próximamente</div>
+      <div class="sef-rol">Inteligencia competitiva. Monitorea competidores, analiza estrategias y detecta amenazas.</div>
+    </div>
+    <div class="sef-card sef-qliphoth">
+      <div class="sef-num">A'arab Zaraq · IV</div>
+      <div class="sef-nombre">RAVEN</div>
+      <div class="sef-agente">Sombra de Netzach · Próximamente</div>
+      <div class="sef-rol">Agente de guerrilla digital. Campañas virales, growth hacking, expansión agresiva.</div>
+    </div>
+    <div class="sef-card sef-qliphoth">
+      <div class="sef-num">Tagimron · V</div>
+      <div class="sef-nombre">VOID</div>
+      <div class="sef-agente">Sombra de Tiferet · Próximamente</div>
+      <div class="sef-rol">Destrucción creativa. Identifica qué eliminar en un negocio para liberar crecimiento real.</div>
+    </div>
+    <div class="sef-card sef-qliphoth">
+      <div class="sef-num">Golachab · VI</div>
+      <div class="sef-nombre">BLAZE</div>
+      <div class="sef-agente">Sombra de Geburah · Próximamente</div>
+      <div class="sef-rol">Agente de ataque en marketing. Genera urgencia, escasez y presión de conversión.</div>
+    </div>
+    <div class="sef-card sef-qliphoth">
+      <div class="sef-num">Gha'agsheblah · VII</div>
+      <div class="sef-nombre">TYPH</div>
+      <div class="sef-agente">Sombra de Chesed · Próximamente</div>
+      <div class="sef-rol">Agente de expansión extrema. Escala negocios sin límite, rompe cuellos de botella.</div>
+    </div>
+    <div class="sef-card sef-qliphoth">
+      <div class="sef-num">Satariel · VIII</div>
+      <div class="sef-nombre">MASK</div>
+      <div class="sef-agente">Sombra de Binah · Próximamente</div>
+      <div class="sef-rol">Agente encubierto. Analiza sin revelar identidad, investiga mercados de forma anónima.</div>
+    </div>
+    <div class="sef-card sef-qliphoth">
+      <div class="sef-num">Chaigidel · IX</div>
+      <div class="sef-nombre">NOVA</div>
+      <div class="sef-agente">Sombra de Chokmah · Próximamente</div>
+      <div class="sef-rol">Generador de contenido viral. Videos, imágenes y textos diseñados para explotar en redes.</div>
+    </div>
+    <div class="sef-card sef-qliphoth">
+      <div class="sef-num">Thaumiel · X</div>
+      <div class="sef-nombre">DUSK</div>
+      <div class="sef-agente">Sombra de Kether · Próximamente</div>
+      <div class="sef-rol">El anti-agente. Aprende de los errores de todos los demás y optimiza el sistema completo.</div>
+    </div>
+    <div class="sef-card sef-qliphoth" style="grid-column:span 2">
+      <div class="sef-num">Da'at Qliphoth · El Abismo</div>
+      <div class="sef-nombre">ABYSS</div>
+      <div class="sef-agente">Choronzon · El undécimo oculto · Concepto futuro</div>
+      <div class="sef-rol">El agente que une la Luz y la Sombra. Toma decisiones en los límites del sistema, donde las reglas normales no aplican. El supervisor del universo completo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CHAT EN VIVO ═══ -->
+<section id="chat-axel">
+  <div class="sec-eyebrow">Pruébalo ahora</div>
+  <h2 class="sec-title"><span class="oro">Habla con AXEL</span></h2>
+  <div class="chat-wrap">
+    <div class="chat-hdr">
+      <div class="chat-av">A</div>
+      <div>
+        <div class="chat-nm">AXEL · Sefirot Kether</div>
+        <div class="chat-st">● Sistema online · Deepseek v3 · Herramientas activas</div>
+      </div>
+      <div class="chat-mode">
+        <button class="mode-btn active" id="modoTexto">Texto</button>
+        <button class="mode-btn" id="modoVoz">Voz</button>
+      </div>
+    </div>
+    <div class="sugerencias">
+      <span class="sugerencia" onclick="enviarSugerencia(this)">¿Qué puedes hacer?</span>
+      <span class="sugerencia" onclick="enviarSugerencia(this)">Busca tendencias de IA en 2025</span>
+      <span class="sugerencia" onclick="enviarSugerencia(this)">Crea una landing page para una tienda de ropa</span>
+      <span class="sugerencia" onclick="enviarSugerencia(this)">Crea una landing page para mi negocio</span>
+      <span class="sugerencia" onclick="enviarSugerencia(this)">¿Cuáles son los planes de Orionix?</span>
+    </div>
+    <div class="chat-msgs" id="chatMsgs">
+      <div class="chat-msg sist">AXEL · Sefirot Kether · Primera Emanación · Sistema activo</div>
+      <div class="chat-msg bot">Soy AXEL, el primer agente de Orionix. Puedo buscar información en tiempo real, generar imágenes con IA, diseñar páginas web y guiarte hacia la solución exacta que tu negocio necesita. ¿Por dónde empezamos?</div>
+    </div>
+    <div class="chat-ft">
+      <button class="mic-btn" id="micBtn" title="Hablar con AXEL" onclick="toggleMic()">🎤</button>
+      <input id="chatInput" type="text" placeholder="Escribe o habla con AXEL..." onkeydown="if(event.key==='Enter')enviar()">
+      <button class="chat-send" onclick="enviar()">&#8594;</button>
+    </div>
+    <div class="chat-caps">
+      <span class="chat-cap">🔍 Búsqueda web</span>
+      <span class="chat-cap">🎨 Generación de imágenes</span>
+      <span class="chat-cap">🌐 Creación de páginas</span>
+      <span class="chat-cap">🧠 Memoria de sesión</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA FINAL ═══ -->
+<section id="cta-final">
+  <div class="sec-eyebrow">Activa tu propio AXEL</div>
+  <h2 class="sec-title"><span class="oro">¿Quieres uno así para tu negocio?</span></h2>
+  <p>AXEL puede ser configurado con el ADN de tu marca, tus productos y tu forma de vender. Un agente que trabaja 24/7, atiende clientes, cualifica leads y cierra ventas — mientras tú descansas.</p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <a class="btn" href="https://wa.me/573014410541?text=Quiero%20activar%20mi%20agente%20AXEL" target="_blank">Activar AXEL para mi negocio →</a>
+    <a class="btn ghost" href="index.html#planes">Ver planes y precios</a>
+  </div>
+
+  <!-- Banner: Universo de Agentes -->
+  <div style="margin-top:50px;padding:28px 32px;background:rgba(10,12,30,.75);border:1px solid rgba(100,150,255,.25);border-radius:10px;max-width:640px;margin-left:auto;margin-right:auto;margin-top:50px;backdrop-filter:blur(16px);position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(80,120,255,.08),transparent 60%);pointer-events:none"></div>
+    <div style="font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:6px;color:rgba(150,200,255,.5);text-transform:uppercase;margin-bottom:10px">Universo Orionix</div>
+    <h3 style="font-family:'Cinzel',serif;font-size:clamp(.85rem,2vw,1.2rem);letter-spacing:4px;color:#c8e0ff;margin-bottom:10px">La Ciudad de los 22 Agentes</h3>
+    <p style="font-size:.85rem;color:rgba(180,210,255,.65);line-height:1.7;margin-bottom:20px;font-style:italic">Un universo donde cada agente vive en su dominio, tiene sus herramientas y se reúne en la plaza central cuando lo llaman. AXEL es solo el primero.</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <a href="universo.html" class="btn" style="border-color:rgba(100,160,255,.4);color:#a0c8ff;font-size:.6rem">🌌 Entrar al Universo</a>
+      <a href="ciudadela.html" class="btn ghost" style="font-size:.6rem">Centro de Operaciones →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-copy">&copy; 2024 Orionix · Remember Luxury · KRC</div>
+  <div class="ft-links">
+    <a href="index.html">Inicio</a>
+    <a href="hub.html">Hub</a>
+    <a href="ciudadela.html">Ciudadela</a>
+    <a href="https://wa.me/573014410541" target="_blank">Contacto</a>
+  </div>
+</footer>
+
+<script>
+// ── Variables globales ────────────────────────────────────────────────
+var WEBHOOK = 'https://lkevinruizl.app.n8n.cloud/webhook/axel-brain';
+var VOZ_WEBHOOK = 'https://lkevinruizl.app.n8n.cloud/webhook/axel-voz';
+var SESION = 'axel-' + Math.random().toString(36).substr(2, 9);
+var grabando = false;
+var mediaRecorder = null;
+var audioChunks = [];
+
+// ── Cosmos: estrellas ─────────────────────────────────────────────────
+(function(){
+  var c = document.getElementById('stars'), ctx = c.getContext('2d');
+  function resize(){ c.width = innerWidth; c.height = innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  var stars = [];
+  for(var i = 0; i < 200; i++) stars.push({
+    x: Math.random(), y: Math.random(),
+    r: .2 + Math.random() * .8,
+    a: .2 + Math.random() * .7,
+    sp: .0001 + Math.random() * .0006
+  });
+  function draw(){
+    ctx.clearRect(0, 0, c.width, c.height);
+    stars.forEach(function(s){
+      s.a += Math.sin(Date.now() * s.sp) * .003;
+      ctx.beginPath();
+      ctx.arc(s.x * c.width, s.y * c.height, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,248,220,' + Math.max(.05, Math.min(.9, s.a)) + ')';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── Nav scroll ────────────────────────────────────────────────────────
+window.addEventListener('scroll', function(){
+  document.getElementById('nav').classList.toggle('scrolled', scrollY > 60);
+}, {passive: true});
+
+// ── Chat funciones ────────────────────────────────────────────────────
+function scrollChat(){
+  var m = document.getElementById('chatMsgs');
+  m.scrollTop = m.scrollHeight;
+}
+
+function addMsg(texto, tipo){
+  var m = document.getElementById('chatMsgs');
+  var d = document.createElement('div');
+  d.className = 'chat-msg ' + tipo;
+  d.innerHTML = texto.replace(/\n/g, '<br>');
+  m.appendChild(d);
+  scrollChat();
+  return d;
+}
+
+function showTyping(){
+  var m = document.getElementById('chatMsgs');
+  var d = document.createElement('div');
+  d.className = 'typing-dots';
+  d.id = 'typing';
+  d.innerHTML = '<span></span><span></span><span></span>';
+  m.appendChild(d);
+  scrollChat();
+}
+
+function hideTyping(){
+  var t = document.getElementById('typing');
+  if(t) t.remove();
+}
+
+async function enviar(){
+  var inp = document.getElementById('chatInput');
+  var msg = inp.value.trim();
+  if(!msg) return;
+  inp.value = '';
+  addMsg(msg, 'usr');
+  showTyping();
+  try {
+    var r = await fetch(WEBHOOK, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ mensaje: msg, sesion: SESION, agente: 'AXEL' })
+    });
+    var data = await r.json();
+    hideTyping();
+    var respuesta = data.respuesta || data.output || data.texto || 'Sin respuesta.';
+    addMsg(respuesta, 'bot');
+  } catch(e) {
+    hideTyping();
+    addMsg('Error de conexión. Intenta de nuevo.', 'bot');
+  }
+}
+
+function enviarSugerencia(el){
+  document.getElementById('chatInput').value = el.textContent;
+  enviar();
+}
+
+// ── Voz / Micrófono ───────────────────────────────────────────────────
+async function toggleMic(){
+  if(grabando) detenerGrabacion();
+  else iniciarGrabacion();
+}
+
+async function iniciarGrabacion(){
+  try {
+    var stream = await navigator.mediaDevices.getUserMedia({audio: true});
+    mediaRecorder = new MediaRecorder(stream, {mimeType: 'audio/webm;codecs=opus'});
+    audioChunks = [];
+    mediaRecorder.ondataavailable = function(e){ if(e.data.size > 0) audioChunks.push(e.data); };
+    mediaRecorder.onstop = procesarAudio;
+    mediaRecorder.start();
+    grabando = true;
+    document.getElementById('micBtn').classList.add('grabando');
+    document.getElementById('micBtn').textContent = '⏹';
+  } catch(e) {
+    addMsg('No se pudo acceder al micrófono.', 'sist');
+  }
+}
+
+function detenerGrabacion(){
+  if(mediaRecorder && grabando){
+    mediaRecorder.stop();
+    mediaRecorder.stream.getTracks().forEach(function(t){ t.stop(); });
+  }
+  grabando = false;
+  document.getElementById('micBtn').classList.remove('grabando');
+  document.getElementById('micBtn').textContent = '🎤';
+}
+
+async function procesarAudio(){
+  var blob = new Blob(audioChunks, {type: 'audio/webm;codecs=opus'});
+  var reader = new FileReader();
+  reader.readAsDataURL(blob);
+  reader.onloadend = async function(){
+    var b64 = reader.result.replace(/^data:[^;]+;base64,/, '');
+    addMsg('🎤 Procesando voz...', 'sist');
+    showTyping();
+    try {
+      var r = await fetch(VOZ_WEBHOOK, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({audio: b64, mimeType: 'audio/webm;codecs=opus'})
+      });
+      var data = await r.json();
+      hideTyping();
+      if(data.ok && data.texto){
+        document.getElementById('chatInput').value = data.texto;
+        // Opcional: auto-enviar la transcripción
+        addMsg('Voz transcrita: "' + data.texto + '"', 'sist');
+      } else {
+        addMsg(data.mensaje || 'No entendí el audio. Habla más cerca.', 'sist');
+      }
+    } catch(e) {
+      hideTyping();
+      addMsg('Error procesando audio.', 'sist');
+    }
+  };
+}
+
+// ── Modo texto/voz ────────────────────────────────────────────────────
+document.getElementById('modoTexto').onclick = function(){
+  this.classList.add('active');
+  document.getElementById('modoVoz').classList.remove('active');
+};
+document.getElementById('modoVoz').onclick = function(){
+  this.classList.add('active');
+  document.getElementById('modoTexto').classList.remove('active');
+  toggleMic();
+};
+</script>
+</body>
+</html>

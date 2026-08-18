@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AXEL · Micrófono</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#e8c86a;--bg:#0b0b0d;--bg2:rgba(20,18,28,0.95);--border:rgba(232,200,106,0.18);--text:#f0e8d0;--dim:rgba(240,232,208,0.45)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.wrap{width:100%;max-width:560px}
+.logo{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.3em;color:var(--gold);text-align:center;margin-bottom:6px;opacity:.6}
+h1{font-family:'Cinzel',serif;font-size:1.6rem;font-weight:900;color:var(--text);text-align:center;letter-spacing:.12em;margin-bottom:4px}
+.sub{text-align:center;color:var(--dim);font-size:.9rem;font-style:italic;margin-bottom:28px}
+
+/* DEVICE SELECT */
+.devbox{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:14px}
+.devbox label{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:8px}
+select{width:100%;padding:10px 12px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:.9rem;outline:none;cursor:pointer}
+select option{background:#111}
+
+/* METER */
+.meterbox{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:14px}
+.meterbox label{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:10px}
+.meter-track{height:14px;background:rgba(255,255,255,0.05);border-radius:7px;overflow:hidden;border:1px solid var(--border)}
+.meter-bar{height:100%;width:0%;background:linear-gradient(90deg,#2ecc71,#e8c86a,#e74c3c);border-radius:7px;transition:width .08s}
+.meter-lbl{font-size:.72rem;color:var(--dim);margin-top:6px;text-align:center}
+
+/* STATUS */
+.status{
+  text-align:center;padding:10px;margin-bottom:14px;border-radius:8px;
+  font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.14em;
+  border:1px solid var(--border);background:var(--bg2);color:var(--dim);
+  min-height:42px;display:flex;align-items:center;justify-content:center;
+}
+.status.ok{color:#2ecc71;border-color:rgba(46,204,113,.35)}
+.status.err{color:#e74c3c;border-color:rgba(231,76,60,.35)}
+.status.rec{color:var(--gold);border-color:rgba(232,200,106,.45)}
+
+/* BUTTONS */
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.btn{
+  padding:14px;border-radius:8px;font-family:'Cinzel',serif;font-size:.6rem;
+  letter-spacing:.14em;font-weight:700;text-transform:uppercase;cursor:pointer;
+  transition:all .25s;border:1px solid var(--border);background:transparent;color:var(--dim);
+}
+.btn:hover:not(:disabled){border-color:var(--gold);color:var(--gold)}
+.btn.pri{background:var(--gold);color:var(--bg);border-color:var(--gold);box-shadow:0 0 18px rgba(232,200,106,.3)}
+.btn.pri:hover:not(:disabled){background:#c9a227}
+.btn.danger{color:#e74c3c;border-color:rgba(231,76,60,.4)}
+.btn.danger:hover:not(:disabled){background:rgba(231,76,60,.12)}
+.btn:disabled{opacity:.35;cursor:default}
+.btn-full{grid-column:1/-1}
+
+/* RESULT */
+.result{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px;display:none}
+.result.on{display:block}
+.result label{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:10px}
+.transcript{
+  font-size:1.1rem;color:var(--text);line-height:1.6;min-height:56px;
+  padding:12px;background:rgba(255,255,255,0.03);border-radius:6px;border:1px solid var(--border);
+  font-style:italic;
+}
+.conf{font-size:.7rem;color:var(--dim);margin-top:8px;text-align:right}
+
+/* FORMAT INFO */
+.fmts{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:14px}
+.fmts label{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:8px}
+.fmt-row{display:flex;gap:6px;flex-wrap:wrap}
+.fmt-chip{font-size:.68rem;padding:4px 10px;border-radius:20px;border:1px solid var(--border);color:var(--dim)}
+.fmt-chip.on{border-color:rgba(46,204,113,.5);color:#2ecc71;background:rgba(46,204,113,.07)}
+
+/* SEND TO AXEL */
+.axel-row{margin-top:10px}
+.axel-inp{width:100%;padding:10px 12px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:.9rem;outline:none;margin-bottom:8px}
+.axel-inp::placeholder{color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo">ORIONIX · SISTEMA DE VOZ</div>
+  <h1>AXEL VOZ</h1>
+  <p class="sub">Diagnóstico y prueba del micrófono</p>
+
+  <!-- DEVICE -->
+  <div class="devbox">
+    <label>🎤 Seleccionar Micrófono</label>
+    <select id="devsel" onchange="cambiarMic()">
+      <option value="">— Cargando micrófonos... —</option>
+    </select>
+  </div>
+
+  <!-- FORMATS -->
+  <div class="fmts">
+    <label>📦 Formatos Soportados por tu Navegador</label>
+    <div class="fmt-row" id="fmts"></div>
+  </div>
+
+  <!-- METER -->
+  <div class="meterbox">
+    <label>📊 Nivel de Audio (habla para probar)</label>
+    <div class="meter-track"><div class="meter-bar" id="mbar"></div></div>
+    <div class="meter-lbl" id="mlbl">Activa el micrófono primero</div>
+  </div>
+
+  <!-- STATUS -->
+  <div class="status" id="st">Pulsa "Activar Micrófono" para empezar</div>
+
+  <!-- BUTTONS -->
+  <div class="btns">
+    <button class="btn pri" id="btnAct" onclick="activarMic()">🎤 Activar Micrófono</button>
+    <button class="btn" id="btnRec" onclick="grabar()" disabled>⏺ Grabar</button>
+    <button class="btn danger" id="btnStop" onclick="parar()" disabled>⏹ Parar</button>
+    <button class="btn btn-full" id="btnSend" onclick="enviar()" disabled>⚡ Enviar a AXEL →</button>
+  </div>
+
+  <!-- AXEL CONTEXT -->
+  <div class="axel-row">
+    <input class="axel-inp" id="axelCtx" type="text" placeholder="Contexto para AXEL (opcional)…">
+  </div>
+
+  <!-- RESULT -->
+  <div class="result" id="res">
+    <label>✦ Transcripción</label>
+    <div class="transcript" id="trans"></div>
+    <div class="conf" id="conf"></div>
+  </div>
+</div>
+
+<script>
+const WEBHOOK = 'https://lkevinruizl.app.n8n.cloud/webhook/axel-voz';
+const FORMATS = [
+  'audio/webm;codecs=opus',
+  'audio/webm',
+  'audio/ogg;codecs=opus',
+  'audio/ogg',
+  'audio/mp4',
+];
+
+let stream = null;
+let recorder = null;
+let chunks = [];
+let audioCtx = null;
+let analyser = null;
+let animId = null;
+let usedMime = '';
+let lastBlob = null;
+let devId = '';
+
+// ── Detect supported formats ──
+function detectFormats(){
+  const el = document.getElementById('fmts');
+  el.innerHTML = '';
+  FORMATS.forEach(f => {
+    const ok = MediaRecorder.isTypeSupported(f);
+    const chip = document.createElement('div');
+    chip.className = 'fmt-chip' + (ok ? ' on' : '');
+    chip.textContent = (ok ? '✓ ' : '✗ ') + f;
+    el.appendChild(chip);
+  });
+  usedMime = FORMATS.find(f => MediaRecorder.isTypeSupported(f)) || '';
+}
+
+// ── Load device list ──
+async function cargarDispositivos(){
+  try {
+    // Need permission first to get labels
+    const tmp = await navigator.mediaDevices.getUserMedia({ audio: true });
+    tmp.getTracks().forEach(t => t.stop());
+
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const mics = devices.filter(d => d.kind === 'audioinput');
+    const sel = document.getElementById('devsel');
+    sel.innerHTML = '';
+    if (!mics.length) {
+      sel.innerHTML = '<option value="">No se encontraron micrófonos</option>';
+      setStatus('err', 'No hay micrófonos detectados en este PC');
+      return;
+    }
+    mics.forEach((m, i) => {
+      const o = document.createElement('option');
+      o.value = m.deviceId;
+      o.textContent = m.label || `Micrófono ${i+1}`;
+      sel.appendChild(o);
+    });
+    setStatus('ok', `${mics.length} micrófono(s) detectado(s) — elige uno y actívalo`);
+  } catch(e) {
+    setStatus('err', 'Permiso de micrófono denegado: ' + e.message);
+  }
+}
+
+function cambiarMic(){
+  devId = document.getElementById('devsel').value;
+  if (stream) activarMic();
+}
+
+// ── Activate mic + meter ──
+async function activarMic(){
+  if (stream) { stream.getTracks().forEach(t => t.stop()); }
+  if (animId) cancelAnimationFrame(animId);
+
+  devId = document.getElementById('devsel').value;
+  // Exactamente igual que index.html — sin deviceId forzado
+  const constraints = {
+    audio: {
+      echoCancellation: true,
+      noiseSuppression: true,
+      sampleRate: 16000
+    }
+  };
+
+  try {
+    stream = await navigator.mediaDevices.getUserMedia(constraints);
+    setStatus('ok', '✓ Micrófono activo — habla y mira el medidor');
+    document.getElementById('btnRec').disabled = false;
+    document.getElementById('mlbl').textContent = 'Nivel en tiempo real';
+    iniciarMedidor();
+  } catch(e) {
+    setStatus('err', 'Error al abrir micrófono: ' + e.message);
+  }
+}
+
+function iniciarMedidor(){
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 256;
+  const src = audioCtx.createMediaStreamSource(stream);
+  src.connect(analyser);
+  const buf = new Uint8Array(analyser.frequencyBinCount);
+
+  function tick(){
+    analyser.getByteFrequencyData(buf);
+    const avg = buf.reduce((a, b) => a + b, 0) / buf.length;
+    const pct = Math.min(100, avg * 2.5);
+    document.getElementById('mbar').style.width = pct + '%';
+    document.getElementById('mlbl').textContent =
+      pct < 2 ? '⚠️ Silencio — verifica que el micro correcto esté seleccionado' :
+      pct < 20 ? '🔈 Señal baja' :
+      pct < 60 ? '🔉 Señal normal' : '🔊 Señal alta';
+    animId = requestAnimationFrame(tick);
+  }
+  tick();
+}
+
+// ── Record ──
+function grabar(){
+  if (!stream) return;
+  chunks = [];
+  lastBlob = null;
+
+  const opts = usedMime ? { mimeType: usedMime } : {};
+  try {
+    recorder = new MediaRecorder(stream, opts);
+  } catch(e) {
+    recorder = new MediaRecorder(stream);
+  }
+  usedMime = recorder.mimeType;
+
+  recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
+  recorder.onstop = () => {
+    lastBlob = new Blob(chunks, { type: usedMime || 'audio/webm' });
+    const kb = (lastBlob.size / 1024).toFixed(1);
+    setStatus('ok', `✓ Grabación lista — ${kb} KB — formato: ${usedMime}`);
+    document.getElementById('btnSend').disabled = false;
+  };
+
+  recorder.start(100); // collect every 100ms
+  setStatus('rec', '🔴 Grabando... pulsa Parar cuando termines');
+  document.getElementById('btnRec').disabled = true;
+  document.getElementById('btnStop').disabled = false;
+  document.getElementById('btnSend').disabled = true;
+  document.getElementById('res').classList.remove('on');
+}
+
+function parar(){
+  if (recorder && recorder.state !== 'inactive') recorder.stop();
+  document.getElementById('btnStop').disabled = true;
+  document.getElementById('btnRec').disabled = false;
+}
+
+// ── Send to n8n — método exacto de index.html ──
+async function enviar(){
+  if (!lastBlob) return;
+  setStatus('rec', '⚡ Transcribiendo...');
+  document.getElementById('btnSend').disabled = true;
+
+  // Usar FileReader + readAsDataURL igual que index.html
+  const fr = new FileReader();
+  fr.onloadend = function(){
+    const rawB64 = fr.result.split(',')[1];
+    const mType = lastBlob.type || 'audio/webm;codecs=opus';
+
+    fetch(WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ audio: rawB64, mimeType: mType })
+    })
+    .then(r => r.json())
+    .then(data => {
+      const texto = (data && data.texto ? data.texto : '').trim();
+      const res = document.getElementById('res');
+      const trans = document.getElementById('trans');
+      const conf = document.getElementById('conf');
+      res.classList.add('on');
+      if (texto) {
+        trans.textContent = '"' + texto + '"';
+        conf.textContent = '✓ Transcripción exitosa';
+        setStatus('ok', '✦ AXEL escuchó: "' + texto.substring(0,60) + '"');
+      } else {
+        trans.textContent = data.mensaje || 'No se entendió el audio. Habla más cerca del micrófono.';
+        conf.textContent = '';
+        setStatus('err', 'No se entendió — habla más cerca del micrófono e intenta de nuevo');
+      }
+      document.getElementById('btnSend').disabled = false;
+    })
+    .catch(e => {
+      setStatus('err', 'Error de red: ' + e.message);
+      document.getElementById('btnSend').disabled = false;
+    });
+  };
+  fr.readAsDataURL(lastBlob);
+}
+
+function setStatus(type, msg){
+  const el = document.getElementById('st');
+  el.className = 'status ' + type;
+  el.textContent = msg;
+}
+
+// ── INIT ──
+detectFormats();
+cargarDispositivos();
+</script>
+</body>
+</html>

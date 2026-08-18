@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIONIX · Acceso Activado</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#e8c86a;--gl:#f5e0a0;--gd:#b89a40;--bg:#0b0b0d;--card:rgba(232,200,106,0.07);--text:#f0e8d0;--dim:rgba(240,232,208,0.5);--purple:#6a3d9a;--ok:#2ecc71}
+body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;overflow:hidden}
+canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.card{position:relative;z-index:1;max-width:560px;width:100%;background:rgba(11,11,13,0.92);border:1px solid rgba(232,200,106,0.25);border-radius:20px;padding:48px 36px;text-align:center;animation:appear .6s ease}
+@keyframes appear{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:20px 20px 0 0;background:linear-gradient(90deg,var(--purple),var(--gold),var(--purple))}
+
+.icono-nivel{font-size:64px;margin-bottom:16px;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.nivel-name{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.4em;color:var(--gold);margin-bottom:12px}
+h1{font-family:'Cinzel',serif;font-size:clamp(24px,5vw,36px);font-weight:900;letter-spacing:.06em;margin-bottom:8px}
+h1 span{background:linear-gradient(135deg,var(--gd),var(--gold),var(--gl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.subtitulo{font-style:italic;font-size:17px;color:var(--dim);margin-bottom:28px}
+
+.resumen-box{background:rgba(232,200,106,0.05);border:1px solid rgba(232,200,106,0.15);border-radius:12px;padding:18px;margin-bottom:24px;text-align:left}
+.res-row{display:flex;justify-content:space-between;padding:6px 0;font-size:15px;border-bottom:1px solid rgba(255,255,255,.04)}
+.res-row:last-child{border-bottom:none;color:var(--gold);font-family:'Cinzel',serif}
+.res-row .label{color:var(--dim)}
+
+.pasos{margin-bottom:28px;text-align:left}
+.pasos h3{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.25em;color:var(--gold);margin-bottom:14px}
+.paso{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.paso:last-child{border-bottom:none}
+.paso .num{width:28px;height:28px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:12px;color:var(--gold);flex-shrink:0}
+.paso .txt strong{display:block;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.12em;color:var(--text);margin-bottom:2px}
+.paso .txt span{font-size:13px;color:var(--dim)}
+.paso .estado{margin-left:auto;font-size:11px;letter-spacing:.1em;padding:3px 10px;border-radius:20px}
+.estado.ok{background:rgba(46,204,113,.1);color:var(--ok);border:1px solid rgba(46,204,113,.3)}
+.estado.pending{background:rgba(232,200,106,.08);color:var(--gold);border:1px solid rgba(232,200,106,.25)}
+
+.btns{display:flex;flex-direction:column;gap:10px}
+.btn{padding:14px;border-radius:10px;font-family:'Cinzel',serif;font-size:13px;letter-spacing:.18em;cursor:pointer;text-decoration:none;text-align:center;transition:.2s}
+.btn-primary{background:linear-gradient(135deg,var(--gd),var(--gold));color:#0b0b0d;border:none}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(232,200,106,.3)}
+.btn-secondary{background:transparent;color:var(--text);border:1px solid rgba(232,200,106,0.2)}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold)}
+.btn-tg{background:rgba(41,182,246,.1);color:#29b6f6;border:1px solid rgba(41,182,246,.25)}
+.btn-tg:hover{background:rgba(41,182,246,.2)}
+
+.confetti-wrap{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<div class="confetti-wrap" id="confetti"></div>
+
+<div class="card">
+  <div class="icono-nivel" id="iconoNivel">🌱</div>
+  <div class="nivel-name" id="nivelName">NIVEL RAÍZ</div>
+  <h1>¡Bienvenido al<br><span id="nivelLabel">Ecosistema</span>!</h1>
+  <p class="subtitulo" id="subtitulo">Tu acceso está siendo procesado</p>
+
+  <div class="resumen-box">
+    <div class="res-row"><span class="label">Nivel activado</span><span id="r-nivel">—</span></div>
+    <div class="res-row"><span class="label">Método de pago</span><span id="r-metodo">—</span></div>
+    <div class="res-row"><span class="label">Plan</span><span id="r-plan">—</span></div>
+    <div class="res-row"><span class="label">TOTAL</span><span id="r-total">—</span></div>
+  </div>
+
+  <div class="pasos">
+    <h3>PRÓXIMOS PASOS</h3>
+    <div class="paso">
+      <div class="num">1</div>
+      <div class="txt"><strong>CONFIRMACIÓN</strong><span>Recibirás email de confirmación</span></div>
+      <span class="estado pending" id="paso1">EN PROCESO</span>
+    </div>
+    <div class="paso">
+      <div class="num">2</div>
+      <div class="txt"><strong>ACTIVACIÓN</strong><span id="paso2txt">Tu acceso se activa en &lt;1h</span></div>
+      <span class="estado pending">PENDIENTE</span>
+    </div>
+    <div class="paso">
+      <div class="num">3</div>
+      <div class="txt"><strong>BIENVENIDA</strong><span>Te contactamos por Telegram</span></div>
+      <span class="estado pending">PENDIENTE</span>
+    </div>
+  </div>
+
+  <div class="btns">
+    <a href="https://t.me/ORIONIX_oficial" class="btn btn-tg" target="_blank">✈️ UNIRME AL CANAL ORIONIX</a>
+    <a href="tienda.html" class="btn btn-primary">EXPLORAR LA TIENDA</a>
+    <a href="hub.html" class="btn btn-secondary">VOLVER AL HUB</a>
+  </div>
+</div>
+
+<script>
+// STARS
+const c=document.getElementById('stars'),ctx=c.getContext('2d');
+function resize(){c.width=innerWidth;c.height=innerHeight}resize();addEventListener('resize',resize);
+const stars=Array.from({length:200},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.3+.2,a:Math.random()}));
+function drawStars(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(240,232,208,${s.a})`;ctx.fill()})}
+drawStars();
+
+// LEER PARAMS
+const params=new URLSearchParams(location.search);
+const nivel=params.get('nivel')||'RAIZ';
+const precio=params.get('precio')||'100';
+const metodo=params.get('metodo')||'tarjeta';
+const plan=params.get('plan')||'Pago único';
+
+const niveles={
+  RAIZ:{ico:'🌱',name:'NIVEL RAÍZ',label:'Ecosistema ORIONIX',sub:'Tu semilla ha sido plantada — el universo comienza aquí.'},
+  BASE:{ico:'🏛️',name:'NIVEL BASE',label:'Imperio ORIONIX',sub:'Has dado un paso serio. El universo te recibe como Arquitecto.'},
+  DOMINIO:{ico:'👑',name:'NIVEL DOMINIO',label:'Dominio Élite',sub:'Eres uno de los 22 Creadores. El Kabalion te reconoce.'}
+};
+const metodos={tarjeta:'💳 Tarjeta',whatsapp:'💬 WhatsApp',telegram:'✈️ Telegram',bizum:'🏦 Bizum',transferencia:'🏛️ Transferencia',cripto:'₿ Criptomoneda'};
+
+const info=niveles[nivel]||niveles.RAIZ;
+document.getElementById('iconoNivel').textContent=info.ico;
+document.getElementById('nivelName').textContent=info.name;
+document.getElementById('nivelLabel').textContent=info.label;
+document.getElementById('subtitulo').textContent=info.sub;
+document.getElementById('r-nivel').textContent=nivel;
+document.getElementById('r-metodo').textContent=metodos[metodo]||metodo;
+document.getElementById('r-plan').textContent=plan;
+document.getElementById('r-total').textContent='€'+precio;
+
+if(nivel==='DOMINIO')document.getElementById('paso2txt').textContent='Gestión VIP en &lt;30 min';
+if(nivel==='BASE')document.getElementById('paso2txt').textContent='Tu regalo físico se envía en 48h';
+
+// CONFETTI (dorado + púrpura)
+function confetti(){
+  const wrap=document.getElementById('confetti');
+  for(let i=0;i<80;i++){
+    const el=document.createElement('div');
+    const colors=['#e8c86a','#f5e0a0','#b89a40','#6a3d9a','#8a5dbf','#f0e8d0'];
+    const color=colors[Math.floor(Math.random()*colors.length)];
+    el.style.cssText=`position:absolute;left:${Math.random()*100}%;top:-10px;width:${Math.random()*8+4}px;height:${Math.random()*8+4}px;background:${color};border-radius:${Math.random()>.5?'50%':'2px'};animation:fall ${Math.random()*2+1.5}s linear ${Math.random()*2}s forwards;opacity:.9`;
+    wrap.appendChild(el);
+  }
+}
+const style=document.createElement('style');
+style.textContent='@keyframes fall{to{transform:translateY(100vh) rotate(720deg);opacity:0}}';
+document.head.appendChild(style);
+setTimeout(confetti,400);
+</script>
+</body>
+</html>

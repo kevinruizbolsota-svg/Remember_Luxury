@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIONIX · Acceso Dominio — $1.000</title>
+<link rel="icon" href="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#e8c86a;--gd:#b89a40;--gl:#f5e0a0;--bg:#0b0b0d;--bg2:rgba(14,13,20,.97);--b:rgba(232,200,106,.15);--ba:rgba(232,200,106,.4);--text:#f0e8d0;--dim:rgba(240,232,208,.45);--glow:rgba(232,200,106,.35);--purple:#6a3d9a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cormorant Garamond',serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+#cv{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ARMILA — anillos animados */
+.armila{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:0;pointer-events:none}
+.ring{position:absolute;border-radius:50%;border:1px solid rgba(232,200,106,.08);top:50%;left:50%;transform:translate(-50%,-50%)}
+.ring:nth-child(1){width:300px;height:300px;animation:rot 20s linear infinite}
+.ring:nth-child(2){width:480px;height:480px;animation:rot 32s linear infinite reverse}
+.ring:nth-child(3){width:660px;height:660px;animation:rot 48s linear infinite}
+@keyframes rot{to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+nav{position:relative;z-index:10;height:52px;display:flex;align-items:center;padding:0 20px;gap:14px;background:rgba(11,11,13,.98);border-bottom:1px solid var(--b)}
+.brand{font-family:'Cinzel',serif;font-size:.85rem;font-weight:900;letter-spacing:.22em;color:var(--gold);text-decoration:none;text-shadow:0 0 14px var(--glow)}
+.nav-back{font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.1em;color:var(--dim);text-decoration:none;transition:color .2s;text-transform:uppercase}
+.nav-back:hover{color:var(--gold)}
+.nav-nivel{margin-left:auto;font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:.14em;color:var(--gl);text-transform:uppercase;text-shadow:0 0 10px var(--glow)}
+
+.hero{position:relative;z-index:1;padding:90px 24px 70px;text-align:center;max-width:720px;margin:0 auto}
+.nivel-tag{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:.34em;color:var(--gl);text-transform:uppercase;margin-bottom:14px;text-shadow:0 0 12px var(--glow)}
+.nivel-ico{font-size:3.4rem;margin-bottom:14px;display:block;filter:drop-shadow(0 0 24px rgba(232,200,106,.7))}
+.hero-title{font-family:'Cinzel',serif;font-size:clamp(2rem,6vw,3.6rem);font-weight:900;color:var(--text);letter-spacing:.1em;margin-bottom:10px;background:linear-gradient(135deg,#8a6d2a,#f6e6ad 38%,#fff8e0 52%,#f6e6ad 68%,#8a6d2a);background-size:220%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
+@keyframes shine{to{background-position:220% center}}
+.hero-price{font-family:'Cinzel',serif;font-size:clamp(3rem,9vw,6rem);font-weight:900;color:var(--gold);letter-spacing:.04em;line-height:1;margin-bottom:6px;text-shadow:0 0 40px var(--glow)}
+.hero-price span{font-size:.7rem;font-weight:400;color:var(--dim);letter-spacing:.1em}
+.hero-sub{font-size:1.05rem;color:var(--dim);font-style:italic;line-height:1.7;max-width:520px;margin:0 auto 50px}
+.hero-vip{display:inline-flex;align-items:center;gap:8px;padding:6px 20px;border:1px solid var(--gold);border-radius:20px;font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:22px;box-shadow:0 0 18px rgba(232,200,106,.12);text-shadow:0 0 8px var(--glow)}
+
+.benefits{position:relative;z-index:1;max-width:680px;margin:0 auto 50px;padding:0 20px}
+.b-card{background:var(--bg2);border:1px solid rgba(232,200,106,.3);border-radius:14px;padding:32px;box-shadow:0 0 60px rgba(232,200,106,.08),inset 0 0 40px rgba(232,200,106,.03);position:relative;overflow:hidden}
+.b-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),var(--gl),var(--gold),transparent)}
+.b-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--b),transparent)}
+.b-title{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:22px;text-shadow:0 0 8px var(--glow)}
+.b-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:500px){.b-list{grid-template-columns:1fr}}
+.b-item{display:flex;align-items:flex-start;gap:10px;font-size:.88rem;color:var(--text);line-height:1.55}
+.b-ico{color:var(--gold);font-size:.78rem;margin-top:3px;flex-shrink:0;text-shadow:0 0 10px var(--glow)}
+
+.garantia{text-align:center;font-size:.78rem;color:var(--gold);margin-bottom:40px;position:relative;z-index:1;opacity:.85}
+
+.cta-wrap{position:relative;z-index:1;max-width:520px;margin:0 auto 70px;padding:0 20px;display:flex;flex-direction:column;gap:14px}
+.cta-main{display:block;width:100%;padding:22px 24px;background:linear-gradient(135deg,#b89a40,#e8c86a,#f5e0a0,#e8c86a,#b89a40);background-size:200%;color:var(--bg);border:none;border-radius:10px;font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.2em;font-weight:900;text-transform:uppercase;cursor:pointer;transition:all .3s;text-align:center;text-decoration:none;animation:goldMove 4s linear infinite;box-shadow:0 0 40px rgba(232,200,106,.4)}
+@keyframes goldMove{to{background-position:200% center}}
+.cta-main:hover{transform:translateY(-3px);box-shadow:0 6px 50px rgba(232,200,106,.5)}
+.cta-alt{display:flex;gap:8px}
+.cta-btn{flex:1;padding:14px 12px;background:transparent;border:1px solid var(--b);border-radius:8px;font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.1em;color:var(--dim);cursor:pointer;transition:all .22s;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.cta-btn:hover{border-color:var(--ba);color:var(--gold)}
+.cta-nota{text-align:center;font-size:.72rem;color:var(--dim);font-style:italic}
+
+.todo{position:relative;z-index:1;max-width:680px;margin:0 auto 60px;padding:0 20px}
+.todo-title{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;text-align:center;margin-bottom:24px}
+.todo-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:600px){.todo-grid{grid-template-columns:1fr}}
+.todo-col{background:var(--bg2);border:1px solid var(--b);border-radius:10px;padding:16px;text-align:center}
+.todo-h{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.1em;color:var(--dim);margin-bottom:10px}
+.todo-price{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;margin-bottom:4px}
+.todo-price.gold{color:var(--gold);text-shadow:0 0 12px var(--glow)}
+.todo-note{font-size:.72rem;color:var(--dim);font-style:italic}
+.todo-col.on{border-color:rgba(232,200,106,.35);box-shadow:0 0 20px rgba(232,200,106,.07)}
+.todo-tag{font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+
+.faq{position:relative;z-index:1;max-width:680px;margin:0 auto 60px;padding:0 20px}
+.faq-title{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;text-align:center;margin-bottom:20px}
+.faq-item{border-top:1px solid var(--b);padding:14px 0}
+.faq-q{font-family:'Cinzel',serif;font-size:.62rem;color:var(--text);letter-spacing:.06em;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.faq-a{font-size:.84rem;color:var(--dim);line-height:1.65;margin-top:10px;display:none;font-style:italic}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .faq-arr{transform:rotate(180deg)}
+.faq-arr{transition:transform .22s;color:var(--dim);font-size:.7rem}
+
+footer{position:relative;z-index:1;text-align:center;padding:24px;font-size:.72rem;color:var(--dim);border-top:1px solid var(--b);margin-top:auto}
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+<div class="armila">
+  <div class="ring"></div>
+  <div class="ring"></div>
+  <div class="ring"></div>
+</div>
+
+<nav>
+  <a href="tienda.html" class="brand">ORIONIX</a>
+  <a href="tienda.html" class="nav-back">← Volver</a>
+  <span class="nav-nivel">🜂 Nivel Dominio · Élite</span>
+</nav>
+
+<div class="hero">
+  <div class="hero-vip">✦ Acceso VIP · Plaza limitada</div>
+  <div class="nivel-tag">Nivel Supremo · Élite del Ecosistema</div>
+  <span class="nivel-ico">🜂</span>
+  <h1 class="hero-title">Acceso Dominio</h1>
+  <div class="hero-price">$1.000 <span>/ pago único · vitalicio</span></div>
+  <p class="hero-sub">El nivel máximo de ORIONIX. Membresía vitalicia, todos los cursos, una pieza exclusiva MI DINASTÍA, y acceso VIP directo al Creador.</p>
+</div>
+
+<div class="benefits">
+  <div class="b-card">
+    <div class="b-title">Todo lo que obtienes — de por vida</div>
+    <ul class="b-list">
+      <li class="b-item"><span class="b-ico">✦</span> Membresía 1 año vitalicia* — acceso total al ecosistema</li>
+      <li class="b-item"><span class="b-ico">✦</span> Todos los cursos actuales y futuros de ORIONIX</li>
+      <li class="b-item"><span class="b-ico">✦</span> 25% de descuento permanente en todas las compras</li>
+      <li class="b-item"><span class="b-ico">✦</span> 1 pieza exclusiva de la colección MI DINASTÍA</li>
+      <li class="b-item"><span class="b-ico">✦</span> Acceso VIP — comunicación directa con el equipo fundador</li>
+      <li class="b-item"><span class="b-ico">✦</span> 3 sesiones de estrategia personalizadas (60 min c/u)</li>
+      <li class="b-item"><span class="b-ico">✦</span> Tu nombre en los créditos de ORIONIX</li>
+      <li class="b-item"><span class="b-ico">✦</span> Acceso anticipado a cada lanzamiento antes de que sea público</li>
+    </ul>
+  </div>
+</div>
+
+<div class="garantia">🏆 Garantía de satisfacción de 30 días · Reembolso total sin condiciones</div>
+
+<div class="cta-wrap">
+  <a href="#" class="cta-main" onclick="iniciarCompra('dominio')">Reclamar Acceso Dominio — $1.000</a>
+  <div class="cta-alt">
+    <a href="#" class="cta-btn" onclick="pagarTelegram()">✈ Telegram VIP</a>
+    <a href="#" class="cta-btn" onclick="pagarBizum()">💳 Bizum</a>
+    <a href="#" class="cta-btn" onclick="pagarCripto()">₿ Cripto</a>
+  </div>
+  <p class="cta-nota">* Plazas limitadas. Precio puede aumentar en la próxima apertura.</p>
+</div>
+
+<div class="todo">
+  <div class="todo-title">Comparación de niveles</div>
+  <div class="todo-grid">
+    <div class="todo-col">
+      <div class="todo-h">🜁 Raíz</div>
+      <div class="todo-price">$100</div>
+      <div class="todo-note">1 mes · 5% dto</div>
+    </div>
+    <div class="todo-col">
+      <div class="todo-h">🜃 Base</div>
+      <div class="todo-price">$500</div>
+      <div class="todo-note">6 meses · 15% dto</div>
+    </div>
+    <div class="todo-col on">
+      <div class="todo-tag">Elegido</div>
+      <div class="todo-h">🜂 Dominio</div>
+      <div class="todo-price gold">$1.000</div>
+      <div class="todo-note">Vitalicio · 25% dto</div>
+    </div>
+  </div>
+</div>
+
+<div class="faq">
+  <div class="faq-title">Preguntas frecuentes</div>
+  <div class="faq-item">
+    <div class="faq-q">¿Qué significa "vitalicio"? <span class="faq-arr">▾</span></div>
+    <div class="faq-a">Mientras ORIONIX exista, tienes acceso. Si en algún momento cerramos, te notificamos con 6 meses de antelación y te damos acceso a todo el contenido descargable.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">¿Qué es la pieza MI DINASTÍA? <span class="faq-arr">▾</span></div>
+    <div class="faq-a">Una pieza de moda de alta gama seleccionada específicamente para tu perfil, valorada entre $150-$300. Se envía en packaging exclusivo con certificado de autenticidad ORIONIX.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">¿El precio puede subir? <span class="faq-arr">▾</span></div>
+    <div class="faq-a">Sí. Este precio es de apertura. En la próxima apertura el precio será mayor. Si entras hoy, mantienes este precio de por vida en renovaciones y upgrades.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">¿Cómo pago con cripto? <span class="faq-arr">▾</span></div>
+    <div class="faq-a">Aceptamos BTC, ETH y USDT. Al hacer clic en "Cripto" recibirás la dirección de pago y el QR. Confirmación manual en menos de 24h.</div>
+  </div>
+</div>
+
+<footer>ORIONIX · Agencia de Inteligencia Artificial · <a href="tienda.html" style="color:var(--gold);text-decoration:none">Volver a la tienda</a></footer>
+
+<script>
+(function(){
+  var cv=document.getElementById('cv'),ctx=cv.getContext('2d'),stars=[];
+  function resize(){cv.width=innerWidth;cv.height=innerHeight;stars=[];for(var i=0;i<140;i++)stars.push({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*1.4+.2,o:Math.random()*.6+.1});}
+  function draw(){ctx.clearRect(0,0,cv.width,cv.height);for(var s of stars){ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='rgba(232,200,106,'+s.o+')';ctx.fill();s.o+=(Math.random()-.5)*.022;if(s.o<.06)s.o=.06;if(s.o>.75)s.o=.75;}requestAnimationFrame(draw);}
+  resize();window.addEventListener('resize',resize);draw();
+})();
+document.querySelectorAll('.faq-item').forEach(function(item){
+  item.querySelector('.faq-q').addEventListener('click',function(){item.classList.toggle('open');});
+});
+function iniciarCompra(nivel){
+  var pedido={nivel:'Acceso Dominio',precio:1000,moneda:'USD',metodo:'pendiente',timestamp:new Date().toISOString()};
+  localStorage.setItem('orionix_pedido',JSON.stringify(pedido));
+  window.location.href='metodo-pago.html?nivel=dominio&precio=1000';
+}
+function pagarTelegram(){
+  window.open('https://t.me/orionix_support?text='+encodeURIComponent('Quiero el Acceso Dominio ORIONIX VIP ($1.000). Por favor contáctame.'),'_blank');
+}
+function pagarBizum(){
+  alert('Para pagar con Bizum, contacta por Telegram: @orionix_support indicando "Dominio + Bizum"');
+}
+function pagarCripto(){
+  window.location.href='metodo-pago.html?nivel=dominio&precio=1000&metodo=cripto';
+}
+</script>
+</body>
+</html>

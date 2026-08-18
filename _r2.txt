@@ -1,0 +1,10 @@
+Total productos: 200
+Margen medio EUR: 46.97
+Margen medio %:   196%
+
+=== TOP 5 POR MARGEN ABSOLUTO (EUR) ===
+#152  Imperio Total Anillo de Acero · ORIONIX MI DINASTIA   coste  148,81  venta  327,38  marg  178,57 (120%)
+#196  AXEL Prime Reloj Automatico · ORIONIX MI DINASTIA   coste  142,11  venta  312,64  marg  170,53 (120%)
+#161  Camaleon Gold Reloj de Bolsillo · ORIONIX MI DINASTIA   coste  135,36  venta  297,79  marg  162,43 (120%)
+#195  Kabalion Executive Cartera de Viaje · ORIONIX MI DINASTIA   coste  135,03  venta  297,07  marg  162,04 (120%)
+#175  Camaleon Gold Pluma Fuente de Lujo · ORIONIX MI DINASTIA   coste  134,51  venta  295,92  marg  161,41 (120%)

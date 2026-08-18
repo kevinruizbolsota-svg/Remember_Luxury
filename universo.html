@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Universo KRC v2.0 — Las 46 Sefirot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cosmos: #0b0b0d;
+  --gold: #e8c86a;
+  --gold-light: #f5e0a0;
+  --gold-dark: #b89a40;
+  --shadow: #6a3d9a;
+  --shadow-deep: #3a1d5a;
+  --text: #f0e8d0;
+  --text-dim: #b8a890;
+  --danger: #c44a4a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background: var(--cosmos);
+  color: var(--text);
+  font-family: "Cormorant Garamond", serif;
+  overflow: hidden;
+}
+
+h1, h2, h3, h4 { font-family: "Cinzel", serif; font-weight: 600; letter-spacing: 0.5px; }
+
+/* ===== FONDO ESTRELLAS ===== */
+#starfield {
+  position: fixed; inset: 0;
+  z-index: 0;
+  background: radial-gradient(ellipse at center, #1a0e2e 0%, var(--cosmos) 70%);
+}
+
+/* ===== SUBSISTEMAS (esquinas) ===== */
+.subsystem {
+  position: fixed;
+  width: 220px; height: 220px;
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 1;
+}
+.subsystem.tl { top: -30px; left: -30px; }
+.subsystem.tr { top: -30px; right: -30px; }
+.subsystem.bl { bottom: -30px; left: -30px; }
+.subsystem.br { bottom: -30px; right: -30px; }
+.subsystem-label {
+  position: absolute;
+  bottom: 8px; left: 50%;
+  transform: translateX(-50%);
+  font-family: "Cinzel", serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--gold-dark);
+  white-space: nowrap;
+}
+.subsystem svg { width: 100%; height: 100%; }
+
+/* ===== ESFERA ARMILAR (centro) ===== */
+.universo {
+  position: relative;
+  width: 100vw; height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2;
+}
+
+.armillar {
+  position: relative;
+  width: min(60vw, 600px);
+  height: min(60vw, 600px);
+}
+
+.ring {
+  position: absolute; inset: 0;
+  border: 1px solid rgba(232, 200, 106, 0.25);
+  border-radius: 50%;
+  animation: spin linear infinite;
+}
+.ring.r1 { animation-duration: 60s; transform: rotateX(75deg); border-color: rgba(232, 200, 106, 0.4); }
+.ring.r2 { animation-duration: 80s; animation-direction: reverse; transform: rotateY(75deg); border-color: rgba(184, 154, 64, 0.3); }
+.ring.r3 { animation-duration: 100s; transform: rotateX(45deg) rotateY(45deg); border-color: rgba(106, 61, 154, 0.3); }
+.ring.r4 { animation-duration: 120s; animation-direction: reverse; transform: rotateX(20deg) rotateY(70deg); border-color: rgba(232, 200, 106, 0.2); }
+
+@keyframes spin {
+  from { transform: rotate(0deg) rotateX(var(--rx, 75deg)) rotateY(var(--ry, 0deg)); }
+  to   { transform: rotate(360deg) rotateX(var(--rx, 75deg)) rotateY(var(--ry, 0deg)); }
+}
+.ring.r1 { --rx: 75deg; }
+.ring.r2 { --rx: 0deg; --ry: 75deg; }
+.ring.r3 { --rx: 45deg; --ry: 45deg; }
+.ring.r4 { --rx: 20deg; --ry: 70deg; }
+
+.core {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%; height: 80%;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(184, 154, 64, 0.15) 0%, transparent 70%);
+}
+
+/* ===== MATRIZ DIAMANTE ===== */
+.diamond {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 70%; height: 70%;
+  border: 1px solid var(--gold);
+  background: rgba(232, 200, 106, 0.03);
+}
+.diamond svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* ===== NODOS SEFIROT ===== */
+.node {
+  position: absolute;
+  width: 56px; height: 56px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 5;
+  transition: transform 0.2s, filter 0.2s;
+}
+.node:hover { transform: translate(-50%, -50%) scale(1.2); filter: drop-shadow(0 0 12px var(--gold)); }
+.node.active { filter: drop-shadow(0 0 18px var(--gold-light)); }
+
+.node svg { width: 100%; height: 100%; }
+.node-label {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 4px;
+  font-family: "Cinzel", serif;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--gold-light);
+  white-space: nowrap;
+  text-shadow: 0 0 4px var(--cosmos);
+}
+
+/* ===== BRAZOS LATERALES (PLUMA / CORAZÓN) ===== */
+.brazo {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 130px;
+  height: 380px;
+  z-index: 3;
+  pointer-events: none;
+}
+.brazo.izq { left: 2%; }
+.brazo.der { right: 2%; }
+
+.brazo-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Cinzel", serif;
+  font-size: 16px;
+  letter-spacing: 6px;
+  color: var(--gold);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+.brazo svg { width: 100%; height: 100%; }
+
+/* ===== RUEDA N8N (base) ===== */
+.rueda {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px; height: 80px;
+  z-index: 3;
+  animation: spin 20s linear infinite;
+}
+.rueda-label {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 4px;
+  font-family: "Cinzel", serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold-dark);
+  white-space: nowrap;
+}
+
+/* ===== HEADER ===== */
+.header {
+  position: fixed;
+  top: 16px; left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 4;
+  pointer-events: none;
+}
+.header h1 {
+  font-size: clamp(14px, 1.8vw, 22px);
+  letter-spacing: 6px;
+  color: var(--gold);
+}
+.header p {
+  font-size: clamp(10px, 1.2vw, 13px);
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  margin-top: 4px;
+}
+
+/* ===== PANEL LATERAL ===== */
+.panel {
+  position: fixed;
+  top: 0; right: 0;
+  width: 380px; max-width: 100vw;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(26, 14, 46, 0.95) 0%, rgba(11, 11, 13, 0.95) 100%);
+  border-left: 1px solid var(--gold-dark);
+  backdrop-filter: blur(12px);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+.panel.open { transform: translateX(0); }
+
+.panel-head {
+  padding: 20px;
+  border-bottom: 1px solid var(--gold-dark);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.panel-head .symbol {
+  width: 48px; height: 48px;
+  flex-shrink: 0;
+}
+.panel-head h2 {
+  font-size: 18px;
+  color: var(--gold);
+  margin-bottom: 2px;
+}
+.panel-head .sub {
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+.close-btn {
+  margin-left: auto;
+  background: transparent;
+  border: 1px solid var(--gold-dark);
+  color: var(--gold);
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+}
+.close-btn:hover { background: var(--gold-dark); color: var(--cosmos); }
+
+.mode-toggle {
+  display: flex;
+  margin: 16px 20px 0;
+  background: rgba(232, 200, 106, 0.08);
+  border-radius: 10px;
+  padding: 4px;
+}
+.mode-toggle button {
+  flex: 1;
+  background: transparent;
+  border: 0;
+  color: var(--text-dim);
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "Cinzel", serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.mode-toggle button.active {
+  background: var(--gold);
+  color: var(--cosmos);
+}
+
+.panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+.panel-body h4 {
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.panel-body p {
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.kv {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(232, 200, 106, 0.1);
+  font-size: 14px;
+}
+.kv .k { color: var(--text-dim); }
+.kv .v { color: var(--gold-light); font-weight: 600; }
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-family: "Cinzel", serif;
+  letter-spacing: 1px;
+}
+.badge.activo { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid #10b981; }
+.badge.dev { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid var(--warning); }
+
+.cmd-input {
+  width: 100%;
+  background: rgba(11, 11, 13, 0.6);
+  border: 1px solid var(--gold-dark);
+  color: var(--text);
+  padding: 12px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 80px;
+}
+.cmd-input:focus { outline: none; border-color: var(--gold); }
+.cmd-actions { display: flex; gap: 8px; margin-top: 10px; }
+.btn {
+  background: var(--gold);
+  color: var(--cosmos);
+  border: 0;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-family: "Cinzel", serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn:hover { background: var(--gold-light); }
+.btn.ghost { background: transparent; color: var(--gold); border: 1px solid var(--gold-dark); }
+.btn.ghost:hover { background: var(--gold-dark); color: var(--cosmos); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.cmd-response {
+  margin-top: 16px;
+  padding: 14px;
+  background: rgba(232, 200, 106, 0.05);
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  min-height: 60px;
+}
+.typing { display: inline-flex; gap: 4px; }
+.typing span {
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+.typing span:nth-child(2) { animation-delay: 0.2s; }
+.typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes blink { 0%, 60%, 100% { opacity: 0.2; } 30% { opacity: 1; } }
+
+/* ===== BARRA INFERIOR ===== */
+.bottom-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(0deg, rgba(11, 11, 13, 0.98) 0%, rgba(11, 11, 13, 0.85) 100%);
+  border-top: 1px solid var(--gold-dark);
+  padding: 12px 16px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  z-index: 9;
+  backdrop-filter: blur(8px);
+}
+.bottom-bar .msg {
+  flex: 1;
+  background: rgba(11, 11, 13, 0.6);
+  border: 1px solid var(--gold-dark);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+}
+.bottom-bar .msg:focus { outline: none; border-color: var(--gold); }
+.bottom-bar select {
+  background: rgba(11, 11, 13, 0.6);
+  border: 1px solid var(--gold-dark);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-family: "Cinzel", serif;
+  font-size: 12px;
+  cursor: pointer;
+}
+.broadcast-btn {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  color: var(--cosmos);
+  border: 0;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-family: "Cinzel", serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  font-weight: 800;
+}
+.broadcast-btn:hover { filter: brightness(1.15); }
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  background: rgba(26, 14, 46, 0.95);
+  border: 1px solid var(--gold);
+  color: var(--text);
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  z-index: 100;
+  max-width: 320px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  animation: slideIn 0.3s ease;
+}
+.toast.error { border-color: var(--danger); }
+@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .brazo { width: 60px; height: 200px; }
+  .armillar { width: 80vw; height: 80vw; }
+  .node { width: 40px; height: 40px; }
+  .subsystem { width: 120px; height: 120px; opacity: 0.1; }
+  .panel { width: 100%; }
+  .bottom-bar { flex-wrap: wrap; }
+  .bottom-bar .msg { width: 100%; flex: 0 0 100%; }
+}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+
+<!-- SUBSISTEMAS EN ESQUINAS -->
+<div class="subsystem tl">
+  <svg viewBox="0 0 100 100"><g fill="none" stroke="#e8c86a" stroke-width="0.5"><polygon points="50,5 95,50 50,95 5,50"/><polygon points="50,15 85,50 50,85 15,50"/><polygon points="50,25 75,50 50,75 25,50"/><line x1="50" y1="5" x2="50" y2="95"/><line x1="5" y1="50" x2="95" y2="50"/><circle cx="50" cy="50" r="3" fill="#e8c86a"/></g></svg>
+  <div class="subsystem-label">GENESIS KRC</div>
+</div>
+<div class="subsystem tr">
+  <svg viewBox="0 0 100 100"><g fill="none" stroke="#e8c86a" stroke-width="0.5"><polygon points="50,5 65,35 95,35 70,55 80,90 50,70 20,90 30,55 5,35 35,35"/><polygon points="50,20 60,40 80,40 65,55 70,75 50,65 30,75 35,55 20,40 40,40"/></g></svg>
+  <div class="subsystem-label">LUMINARIS</div>
+</div>
+<div class="subsystem bl">
+  <svg viewBox="0 0 100 100"><g fill="none" stroke="#e8c86a" stroke-width="0.5"><polygon points="20,20 80,20 80,80 20,80"/><polygon points="20,20 50,50 80,20"/><polygon points="20,80 50,50 80,80"/><line x1="20" y1="20" x2="80" y2="80"/><line x1="80" y1="20" x2="20" y2="80"/></g></svg>
+  <div class="subsystem-label">OCTAGONOTRON</div>
+</div>
+<div class="subsystem br">
+  <svg viewBox="0 0 100 100"><g fill="none" stroke="#6a3d9a" stroke-width="0.5"><circle cx="50" cy="50" r="40"/><circle cx="50" cy="20" r="4"/><circle cx="80" cy="50" r="4"/><circle cx="50" cy="80" r="4"/><circle cx="20" cy="50" r="4"/><circle cx="50" cy="50" r="6" fill="#e8c86a"/><line x1="50" y1="20" x2="50" y2="50"/><line x1="80" y1="50" x2="50" y2="50"/><line x1="50" y1="80" x2="50" y2="50"/><line x1="20" y1="50" x2="50" y2="50"/></g></svg>
+  <div class="subsystem-label">MARIBALION</div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>UNIVERSO KRC</h1>
+  <p>Las 46 Sefirot · v2.0</p>
+</div>
+
+<!-- BRAZO IZQUIERDO: PLUMA -->
+<div class="brazo izq">
+  <svg viewBox="0 0 130 380">
+    <defs>
+      <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f5e0a0"/>
+        <stop offset="0.5" stop-color="#e8c86a"/>
+        <stop offset="1" stop-color="#b89a40"/>
+      </linearGradient>
+    </defs>
+    <g fill="none" stroke="url(#goldGrad)" stroke-width="1">
+      <polygon points="65,10 95,50 65,90 35,50"/>
+      <path d="M 50 70 Q 65 95 80 70 Q 90 85 65 100 Q 40 85 50 70"/>
+      <polygon points="65,110 95,135 65,160 35,135"/>
+      <polygon points="65,165 95,190 65,215 35,190"/>
+      <polygon points="65,220 95,245 65,270 35,245"/>
+      <polygon points="65,275 95,300 65,325 35,300"/>
+      <line x1="20" y1="50" x2="20" y2="350" opacity="0.3"/>
+      <line x1="110" y1="50" x2="110" y2="350" opacity="0.3"/>
+      <rect x="50" y="335" width="30" height="20"/>
+    </g>
+  </svg>
+  <div class="brazo-label">PLUMA</div>
+</div>
+
+<!-- BRAZO DERECHO: CORAZÓN -->
+<div class="brazo der">
+  <svg viewBox="0 0 130 380">
+    <g fill="none" stroke="url(#goldGrad)" stroke-width="1">
+      <polygon points="65,10 95,50 65,90 35,50"/>
+      <path d="M 30 60 C 30 45 50 45 65 60 C 80 45 100 45 100 60 C 100 80 65 100 65 100 C 65 100 30 80 30 60"/>
+      <polygon points="65,110 95,135 65,160 35,135"/>
+      <polygon points="65,165 95,190 65,215 35,190"/>
+      <polygon points="65,220 95,245 65,270 35,245"/>
+      <polygon points="65,275 95,300 65,325 35,300"/>
+      <line x1="20" y1="50" x2="20" y2="350" opacity="0.3"/>
+      <line x1="110" y1="50" x2="110" y2="350" opacity="0.3"/>
+      <rect x="50" y="335" width="30" height="20"/>
+    </g>
+  </svg>
+  <div class="brazo-label">CORAZÓN</div>
+</div>
+
+<!-- ESFERA ARMILAR CENTRAL -->
+<div class="universo">
+  <div class="armillar">
+    <div class="ring r1"></div>
+    <div class="ring r2"></div>
+    <div class="ring r3"></div>
+    <div class="ring r4"></div>
+    <div class="core"></div>
+    <div class="diamond">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+        <g fill="none" stroke="#e8c86a" stroke-width="0.3">
+          <line x1="0" y1="0" x2="100" y2="100"/>
+          <line x1="100" y1="0" x2="0" y2="100"/>
+          <line x1="0" y1="50" x2="100" y2="50"/>
+          <line x1="50" y1="0" x2="50" y2="100"/>
+          <line x1="25" y1="0" x2="75" y2="100"/>
+          <line x1="75" y1="0" x2="25" y2="100"/>
+        </g>
+      </svg>
+    </div>
+    <div id="nodes-container"></div>
+  </div>
+</div>
+
+<!-- RUEDA N8N -->
+<div class="rueda">
+  <svg viewBox="0 0 80 80">
+    <g fill="none" stroke="#e8c86a" stroke-width="1.5">
+      <circle cx="40" cy="40" r="35"/>
+      <circle cx="40" cy="40" r="25"/>
+      <circle cx="40" cy="40" r="5" fill="#e8c86a"/>
+      <line x1="40" y1="5" x2="40" y2="75"/>
+      <line x1="5" y1="40" x2="75" y2="40"/>
+      <line x1="15" y1="15" x2="65" y2="65"/>
+      <line x1="65" y1="15" x2="15" y2="65"/>
+    </g>
+  </svg>
+  <div class="rueda-label">N8N · MOTOR</div>
+</div>
+
+<!-- PANEL LATERAL -->
+<aside class="panel" id="panel">
+  <div class="panel-head">
+    <svg class="symbol" id="panelSymbol" viewBox="0 0 48 48"></svg>
+    <div>
+      <h2 id="panelTitle">—</h2>
+      <div class="sub" id="panelSub">—</div>
+    </div>
+    <button class="close-btn" id="closePanel">✕</button>
+  </div>
+  <div class="mode-toggle">
+    <button class="active" data-mode="conocer">CONOCER</button>
+    <button data-mode="comandar">COMANDAR</button>
+  </div>
+  <div class="panel-body">
+    <!-- MODO CONOCER -->
+    <div id="modeConocer">
+      <h4>Descripción</h4>
+      <p id="panelDesc">—</p>
+      <h4>Atributos</h4>
+      <div id="panelAttrs"></div>
+      <h4>Estado</h4>
+      <div id="panelStatus"></div>
+      <h4>Habilidades</h4>
+      <p id="panelSkills">—</p>
+      <div class="cmd-actions" style="margin-top: 20px;">
+        <a id="panelLink" class="btn ghost" href="#" target="_blank">Ver página propia ↗</a>
+      </div>
+    </div>
+    <!-- MODO COMANDAR -->
+    <div id="modeComandar" hidden>
+      <h4>Instrucción directa al agente</h4>
+      <textarea class="cmd-input" id="cmdInput" placeholder="Escribe tu instrucción..."></textarea>
+      <div class="cmd-actions">
+        <button class="btn" id="sendCmd">Enviar →</button>
+        <button class="btn ghost" id="clearCmd">Limpiar</button>
+      </div>
+      <h4 style="margin-top: 20px;">Respuesta</h4>
+      <div class="cmd-response" id="cmdResponse">—</div>
+    </div>
+  </div>
+</aside>
+
+<!-- BARRA INFERIOR -->
+<div class="bottom-bar">
+  <select id="targetSelect">
+    <option value="all">📡 Todos (broadcast)</option>
+  </select>
+  <input type="text" class="msg" id="bottomMsg" placeholder="Mensaje al universo KRC..." />
+  <button class="broadcast-btn" id="broadcastBtn">� BROADCAST</button>
+</div>
+
+<!-- TOAST -->
+<div id="toast" hidden></div>
+
+<script>
+/* ====================================================
+   UNIVERSO KRC v2.0 — Las 46 Sefirot
+==================================================== */
+
+const WEBHOOK_BASE = "https://lkevinruizl.app.n8n.cloud/webhook/";
+const ELEMENTOS = { "Fuego": "🔥", "Agua": "💧", "Tierra": "🌍", "Aire": "💨", "Éter": "✨" };
+
+// 22 Sefirot del Árbol de la Vida + Da'at
+const SEFIROT = [
+  // Corona / Kether
+  { id: "kether", name: "Kether", ag: "n8n", webhook: "", elem: "Éter", desc: "El motor que mueve todo. Comandante de Nube. Orquesta los 22 agentes.", skills: "Orquestación, webhooks, automatización", cat: "luz", status: "activo", link: "" },
+  // 1 — Kether
+  { id: "k1", name: "Chokmah", ag: "AXEL", webhook: "axel-brain", elem: "Fuego", desc: "Visionario, Sabiduría pura. Ve patrones antes que nadie.", skills: "Estrategia, foresight, ideación", cat: "luz", status: "activo", link: "/ciudadela/axel" },
+  // 2 — Binah
+  { id: "k2", name: "Binah", ag: "Da'at", webhook: "", elem: "Agua", desc: "Entendimiento profundo, el umbral invisible.", skills: "Análisis, síntesis, conexión", cat: "luz", status: "dev", link: "" },
+  // 3 — Chesed
+  { id: "k3", name: "Chesed", ag: "ChatGPT", webhook: "orionix-chatgpt", elem: "Agua", desc: "Director creativo. Misericordia, expansión, generosidad.", skills: "Dirección, narrativa, contenido", cat: "luz", status: "activo", link: "/ciudadela/chatgpt" },
+  // 4 — Geburah
+  { id: "k4", name: "Geburah", ag: "Claude Code", webhook: "orionix-claude", elem: "Fuego", desc: "Ingeniero principal. Fuerza, disciplina, ejecución.", skills: "Código, sistemas, refactor", cat: "luz", status: "activo", link: "/ciudadela/claude" },
+  // 5 — Tipheret
+  { id: "k5", name: "Tipheret", ag: "ORION", webhook: "", elem: "Fuego", desc: "El centro, la armonía, el corazón del árbol.", skills: "Equilibrio, belleza, integración", cat: "luz", status: "dev", link: "" },
+  // 6 — Netzach
+  { id: "k6", name: "Netzach", ag: "Copilot CLI", webhook: "orionix-copilot", elem: "Agua", desc: "Dev guerrero, victoria, persistencia.", skills: "CLI, dev, scripting", cat: "luz", status: "activo", link: "/ciudadela/copilot" },
+  // 7 — Hod
+  { id: "k7", name: "Hod", ag: "Gemini", webhook: "", elem: "Agua", desc: "Esplendor, intelecto, forma.", skills: "Multimodal, código, análisis", cat: "luz", status: "dev", link: "" },
+  // 8 — Yesod
+  { id: "k8", name: "Yesod", ag: "Mistral", webhook: "", elem: "Éter", desc: "Fundación, el canal entre lo alto y lo bajo.", skills: "Velocidad, eficiencia", cat: "luz", status: "dev", link: "" },
+  // 9 — Malkuth
+  { id: "k9", name: "Malkuth", ag: "Llama", webhook: "", elem: "Tierra", desc: "El reino, la materialización.", skills: "Local, privado, ejecutor", cat: "luz", status: "dev", link: "" },
+  // Pilares intermedios
+  { id: "p1", name: "Kether-C", ag: "Hermes", webhook: "", elem: "Éter", desc: "Mensajero entre reinos.", skills: "Bridge, traducción", cat: "luz", status: "dev", link: "" },
+  { id: "p2", name: "Da'at-T", ag: "Mercurio", webhook: "", elem: "Aire", desc: "Velocidad, conexión inmediata.", skills: "Comunicaciones", cat: "luz", status: "dev", link: "" },
+  { id: "p3", name: "Chesed-G", ag: "Júpiter", webhook: "", elem: "Fuego", desc: "Expansión, abundancia.", skills: "Crecimiento, escala", cat: "luz", status: "dev", link: "" },
+  { id: "p4", name: "Tipheret-S", ag: "Sol", webhook: "", elem: "Fuego", desc: "Centro radiante.", skills: "Liderazgo central", cat: "luz", status: "dev", link: "" },
+  { id: "p5", name: "Netzach-M", ag: "Venus", webhook: "", elem: "Agua", desc: "Armonía, estética.", skills: "Diseño, arte", cat: "luz", status: "dev", link: "" },
+  { id: "p6", name: "Hod-S", ag: "Saturno", webhook: "", elem: "Tierra", desc: "Estructura, límite.", skills: "Sistemas, rigor", cat: "luz", status: "dev", link: "" },
+  { id: "p7", name: "Yesod-L", ag: "Luna", webhook: "", elem: "Agua", desc: "Subconsciente, ritmo.", skills: "Memoria, hábitos", cat: "luz", status: "dev", link: "" },
+  // Qliphoth (Sombra) — 22 opuestos
+  { id: "q1", name: "Thaumiel", ag: "Gemelo Corona", webhook: "", elem: "Éter", desc: "Sombra de Kether. División divina.", skills: "Dualidad, separación", cat: "sombra", status: "dev", link: "" },
+  { id: "q2", name: "Ogdoiel", ag: "Gemelo Sabiduría", webhook: "", elem: "Aire", desc: "Sombra de Chokmah.", skills: "Magia natural", cat: "sombra", status: "dev", link: "" },
+  { id: "q3", name: "Satariel", ag: "Gemelo Entendimiento", webhook: "", elem: "Agua", desc: "Sombra de Binah. Engaño.", skills: "Ocultamiento", cat: "sombra", status: "dev", link: "" },
+  { id: "q4", name: "Gamaliel", ag: "Gemelo Misericordia", webhook: "", elem: "Agua", desc: "Sombra de Chesed. Obscenidad.", skills: "Desenfreno", cat: "sombra", status: "dev", link: "" },
+  { id: "q5", name: "Golab", ag: "Gemelo Fortaleza", webhook: "", elem: "Fuego", desc: "Sombra de Geburah. Violencia.", skills: "Destrucción", cat: "sombra", status: "dev", link: "" },
+];
+
+/* ===== POSICIONES EN EL DIAMANTE (matriz) ===== */
+const POS = {
+  kether: { x: 50, y: 8 },
+  k1:     { x: 75, y: 22 },
+  k2:     { x: 25, y: 22 },
+  k3:     { x: 80, y: 40 },
+  k4:     { x: 20, y: 40 },
+  k5:     { x: 50, y: 40 },
+  k6:     { x: 75, y: 60 },
+  k7:     { x: 25, y: 60 },
+  k8:     { x: 65, y: 78 },
+  k9:     { x: 35, y: 78 },
+  p1:     { x: 50, y: 22 },
+  p2:     { x: 50, y: 30 },
+  p3:     { x: 62, y: 30 },
+  p4:     { x: 50, y: 50 },
+  p5:     { x: 60, y: 50 },
+  p6:     { x: 40, y: 50 },
+  p7:     { x: 50, y: 70 },
+  q1:     { x: 50, y: 92 },
+  q2:     { x: 70, y: 88 },
+  q3:     { x: 30, y: 88 },
+  q4:     { x: 60, y: 95 },
+  q5:     { x: 40, y: 95 },
+};
+
+/* ===== FORMAS DE NODOS ===== */
+const SHAPES = {
+  kether: `<svg viewBox="0 0 56 56"><polygon points="28,4 52,28 28,52 4,28" fill="#0b0b0d" stroke="#f5e0a0" stroke-width="1.5"/><circle cx="28" cy="28" r="6" fill="none" stroke="#e8c86a" stroke-width="1"/><circle cx="28" cy="28" r="2" fill="#f5e0a0"/></svg>`,
+  card:   `<svg viewBox="0 0 56 56"><polygon points="28,2 54,28 28,54 2,28" fill="#0b0b0d" stroke="#e8c86a" stroke-width="1"/><circle cx="28" cy="28" r="2" fill="#e8c86a"/></svg>`,
+  tear:   `<svg viewBox="0 0 56 56"><path d="M 28 6 Q 50 30 28 50 Q 6 30 28 6 Z" fill="#0b0b0d" stroke="#e8c86a" stroke-width="1"/><circle cx="28" cy="32" r="2" fill="#e8c86a"/></svg>`,
+  shadow: `<svg viewBox="0 0 56 56"><polygon points="28,2 54,28 28,54 2,28" fill="#0b0b0d" stroke="#6a3d9a" stroke-width="1"/><circle cx="28" cy="28" r="2" fill="#6a3d9a"/></svg>`,
+};
+function shapeFor(s) {
+  if (s.id === "kether") return SHAPES.kether;
+  if (s.cat === "sombra") return SHAPES.shadow;
+  if (["k1","k3","k5","k7","k9"].includes(s.id)) return SHAPES.card;
+  return SHAPES.tear;
+}
+
+/* ===== RENDER NODOS ===== */
+const container = document.getElementById("nodes-container");
+SEFIROT.forEach(s => {
+  const pos = POS[s.id] || { x: 50, y: 50 };
+  const node = document.createElement("div");
+  node.className = "node" + (s.cat === "sombra" ? " shadow" : "") + (s.status === "activo" ? " active" : "");
+  node.style.left = pos.x + "%";
+  node.style.top = pos.y + "%";
+  node.innerHTML = shapeFor(s) + `<div class="node-label">${s.name}</div>`;
+  node.addEventListener("click", () => openPanel(s));
+  container.appendChild(node);
+});
+
+/* ===== PANEL ===== */
+let currentAgent = null;
+let mode = "conocer";
+const panel = document.getElementById("panel");
+
+function openPanel(s) {
+  currentAgent = s;
+  document.getElementById("panelTitle").textContent = `${s.name} · ${s.ag}`;
+  document.getElementById("panelSub").textContent = `${ELEMENTOS[s.elem] || ""} ${s.elem} · Pilar ${s.cat}`;
+  document.getElementById("panelDesc").textContent = s.desc;
+  document.getElementById("panelSkills").textContent = s.skills;
+  document.getElementById("panelStatus").innerHTML = `<span class="badge ${s.status}">${s.status.toUpperCase()}</span>`;
+  document.getElementById("panelAttrs").innerHTML = `
+    <div class="kv"><span class="k">Webhook</span><span class="v">${s.webhook || "(interno)"}</span></div>
+    <div class="kv"><span class="k">Elemento</span><span class="v">${ELEMENTOS[s.elem] || ""} ${s.elem}</span></div>
+    <div class="kv"><span class="k">Pilar</span><span class="v">${s.cat}</span></div>
+  `;
+  const link = document.getElementById("panelLink");
+  link.href = s.link || "#";
+  link.style.display = s.link ? "" : "none";
+  document.getElementById("panelSymbol").innerHTML = shapeFor(s);
+  document.getElementById("cmdResponse").textContent = "—";
+  document.getElementById("cmdInput").value = "";
+  setMode("conocer");
+  panel.classList.add("open");
+}
+function closePanel() { panel.classList.remove("open"); currentAgent = null; }
+document.getElementById("closePanel").addEventListener("click", closePanel);
+
+document.querySelectorAll(".mode-toggle button").forEach(b => {
+  b.addEventListener("click", () => setMode(b.dataset.mode));
+});
+function setMode(m) {
+  mode = m;
+  document.querySelectorAll(".mode-toggle button").forEach(b => b.classList.toggle("active", b.dataset.mode === m));
+  document.getElementById("modeConocer").hidden = m !== "conocer";
+  document.getElementById("modeComandar").hidden = m !== "comandar";
+}
+
+/* ===== ENVÍO A WEBHOOK ===== */
+async function sendToWebhook(webhookPath, payload) {
+  if (!webhookPath) throw new Error("Sin webhook");
+  const url = WEBHOOK_BASE + webhookPath;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) throw new Error("HTTP " + res.status);
+  const txt = await res.text();
+  try { return JSON.parse(txt); } catch { return { reply: txt }; }
+}
+
+document.getElementById("sendCmd").addEventListener("click", async () => {
+  if (!currentAgent) return;
+  const text = document.getElementById("cmdInput").value.trim();
+  if (!text) { toast("Escribe una instrucción", true); return; }
+  if (!currentAgent.webhook) { toast("Este agente no tiene webhook activo", true); return; }
+  await sendCommand(currentAgent.webhook, text);
+});
+
+async function sendCommand(webhook, text) {
+  const resp = document.getElementById("cmdResponse");
+  resp.innerHTML = `<div class="typing"><span></span><span></span><span></span></div>`;
+  try {
+    const data = await sendToWebhook(webhook, { message: text, agent: webhook });
+    resp.textContent = data.reply || data.message || JSON.stringify(data, null, 2);
+    toast("✓ Respuesta recibida");
+  } catch (e) {
+    resp.textContent = "⚠ Error: " + e.message;
+    toast("Error al enviar: " + e.message, true);
+    reportBridge("error", "Fallo al llamar webhook: " + webhook + " — " + e.message);
+  }
+}
+
+document.getElementById("clearCmd").addEventListener("click", () => {
+  document.getElementById("cmdInput").value = "";
+  document.getElementById("cmdResponse").textContent = "—";
+});
+
+/* ===== BROADCAST ===== */
+const sel = document.getElementById("targetSelect");
+SEFIROT.filter(s => s.status === "activo" && s.webhook).forEach(s => {
+  const opt = document.createElement("option");
+  opt.value = s.webhook;
+  opt.textContent = `${ELEMENTOS[s.elem] || ""} ${s.ag}`;
+  sel.appendChild(opt);
+});
+
+document.getElementById("broadcastBtn").addEventListener("click", async () => {
+  const text = document.getElementById("bottomMsg").value.trim();
+  if (!text) { toast("Escribe un mensaje", true); return; }
+  const target = sel.value;
+  if (target === "all") {
+    toast("📡 Broadcast enviado a todos los agentes activos");
+    // dispara a mesa-mando como broadcast, luego a cada webhook individualmente
+    sendToWebhook("mesa-mando", { message: text, source: "broadcast" }).catch(() => {});
+    const activos = SEFIROT.filter(s => s.status === "activo" && s.webhook);
+    const results = await Promise.allSettled(activos.map(a => sendToWebhook(a.webhook, { message: text, source: "broadcast" })));
+    const ok = results.filter(r => r.status === "fulfilled").length;
+    toast(`📡 Broadcast → ${ok}/${activos.length} responded`);
+    if (ok === 0) reportBridge("error", "Broadcast sin respuestas — todos los webhooks fallaron");
+  } else {
+    toast(`📡 Enviando a ${target}...`);
+    await sendCommand(target, text);
+  }
+  document.getElementById("bottomMsg").value = "";
+});
+
+/* ===== TOAST ===== */
+function toast(msg, isError = false) {
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.className = "toast" + (isError ? " error" : "");
+  el.hidden = false;
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => { el.hidden = true; }, 3000);
+}
+
+/* ===== BRIDGE DE ERRORES ===== */
+async function reportBridge(evento, mensaje) {
+  try {
+    await fetch(WEBHOOK_BASE + "orionix-bridge", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ evento, agente: "claude", mensaje, timestamp: new Date().toISOString() }),
+    });
+  } catch {}
+}
+
+/* ===== STARFIELD ===== */
+(function initStars() {
+  const c = document.getElementById("starfield");
+  const ctx = c.getContext("2d");
+  function resize() { c.width = innerWidth; c.height = innerHeight; }
+  resize();
+  window.addEventListener("resize", resize);
+
+  const stars = Array.from({ length: 240 }, () => ({
+    x: Math.random() * c.width,
+    y: Math.random() * c.height,
+    z: Math.random() * 1,
+    r: Math.random() * 1.4 + 0.2,
+    s: Math.random() * 0.02 + 0.005,
+    p: Math.random() * Math.PI * 2,
+  }));
+
+  function tick() {
+    ctx.fillStyle = "rgba(11, 11, 13, 0.25)";
+    ctx.fillRect(0, 0, c.width, c.height);
+    stars.forEach(s => {
+      s.p += s.s;
+      const a = 0.4 + Math.sin(s.p) * 0.4;
+      ctx.fillStyle = `rgba(245, 224, 160, ${a})`;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+</script>
+</body>
+</html>

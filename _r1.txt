@@ -1,0 +1,6 @@
+Total productos: 200
+
+Distribucion por categoria:
+MODA                 70
+FASHION STYLE        80
+MI DINASTIA          50

@@ -1,32 +1,2002 @@
-[
-  {"id":1,"nombre":"Camiseta Cosmos Basic","precio":9.99,"categoria":"MODA","descripcion":"Algodón 100%, logo bordado en gold. Corte clásico unisex.","emoji":"👕"},
-  {"id":2,"nombre":"Gorra Snapback AXEL","precio":14.99,"categoria":"MODA","descripcion":"Ajustable, bordado 3D del ojo cósmico ORIONIX.","emoji":"🧢"},
-  {"id":3,"nombre":"Calcetines Premium Pack x3","precio":7.99,"categoria":"MODA","descripcion":"Microfibra transpirable, refuerzo dorado en tobillo.","emoji":"🧦"},
-  {"id":4,"nombre":"Libreta Kabalion A5","precio":12.99,"categoria":"MODA","descripcion":"Tapa dura negra, papel de 100g, cierre elástico dorado.","emoji":"📓"},
-  {"id":5,"nombre":"Llavero Metálico Sefirot","precio":8.99,"categoria":"MODA","descripcion":"Aleación zinc, grabado láser del árbol de la vida.","emoji":"🔑"},
-  {"id":6,"nombre":"Taza Térmica Nebula","precio":18.99,"categoria":"MODA","descripcion":"Acero inoxidable, doble pared, mantiene calor 6 horas.","emoji":"☕"},
-  {"id":7,"nombre":"Pañuelo Bolsillo Seda","precio":15.99,"categoria":"MODA","descripcion":"Estampado cosmos, perfecto para blazer y trajes.","emoji":"🎀"},
-  {"id":8,"nombre":"Bolígrafo Lujo Black Gold","precio":22.99,"categoria":"MODA","descripcion":"Cuerpo mate, detalles en oro de 18k, recarga incluida.","emoji":"🖋️"},
-  {"id":9,"nombre":"Parche Termoadhesivo ORIONIX","precio":5.99,"categoria":"MODA","descripcion":"Bordado de alta densidad, aplica con plancha en 30 seg.","emoji":"🛡️"},
-  {"id":10,"nombre":"Mochila Canvas Minimalista","precio":29.99,"categoria":"MODA","descripcion":"Lona resistente al agua, compartimento laptop 15 pulgadas.","emoji":"🎒"},
-  {"id":11,"nombre":"Sudadera Imperio Gold","precio":49.99,"categoria":"FASHION STYLE","descripcion":"Corte oversized, hilo dorado en costuras, forro interior.","emoji":"👕"},
-  {"id":12,"nombre":"Cartera Slim RFID Chesed","precio":39.99,"categoria":"FASHION STYLE","descripcion":"Cuero genuino, protección antirrobo, 6 ranuras tarjeta.","emoji":"💳"},
-  {"id":13,"nombre":"Gafas Sol Polarizadas Netzach","precio":59.99,"categoria":"FASHION STYLE","descripcion":"Montura acetato negro, lentes UV400, estuche incluido.","emoji":"🕶️"},
-  {"id":14,"nombre":"Mochila Urbana Binah","precio":79.99,"categoria":"FASHION STYLE","descripcion":"Cuero sintético premium, múltiples compartimentos, antirrobo.","emoji":"🎒"},
-  {"id":15,"nombre":"Perfume Cosmos Noir 100ml","precio":89.99,"categoria":"FASHION STYLE","descripcion":"Notas de ámbar, oud y madera de cedro. Larga duración.","emoji":"🧴"},
-  {"id":16,"nombre":"Cinturón Cuero Reversible","precio":45.99,"categoria":"FASHION STYLE","descripcion":"Negro y marrón reversible, hebilla mate con logo ORIONIX.","emoji":"👔"},
-  {"id":17,"nombre":"Zapatillas Cosmos Limited","precio":129.99,"categoria":"FASHION STYLE","descripcion":"Suela con glow ultravioleta, edición numerada 500 pares.","emoji":"👟"},
-  {"id":18,"nombre":"Chaqueta Bomber Negra","precio":99.99,"categoria":"FASHION STYLE","descripcion":"Forro interior con mapa estelar, cierre YKK japonés.","emoji":"🧥"},
-  {"id":19,"nombre":"Reloj Smartwatch Elite","precio":149.99,"categoria":"FASHION STYLE","descripcion":"Monitor cardíaco, GPS, correa de silicona negra premium.","emoji":"⌚"},
-  {"id":20,"nombre":"Set Regalo Caballero ORIONIX","precio":119.99,"categoria":"FASHION STYLE","descripcion":"Cartera, cinturón y llavero en caja de madera grabada.","emoji":"🎁"},
-  {"id":21,"nombre":"Reloj Automático Kether","precio":299.99,"categoria":"MI DINASTIA","descripcion":"Movimiento suizo ETA, caja acero inoxidable, cristal zafiro.","emoji":"⌚"},
-  {"id":22,"nombre":"Anillo Titanio Negro Oro","precio":149.99,"categoria":"MI DINASTIA","descripcion":"Acero quirúrgico, baño de oro 18k, diseño geométrico.","emoji":"💍"},
-  {"id":23,"nombre":"Bolso Cuero Italiano Malkuth","precio":350.00,"categoria":"MI DINASTIA","descripcion":"Hecho a mano en Florencia, herrajes dorados, forro cosmos.","emoji":"👜"},
-  {"id":24,"nombre":"Chaqueta Cuero Sintético Elite","precio":189.99,"categoria":"MI DINASTIA","descripcion":"Corte slim, costuras reforzadas a mano, estilo motociclista.","emoji":"🧥"},
-  {"id":25,"nombre":"Gemelos Traje Black Gold","precio":79.99,"categoria":"MI DINASTIA","descripcion":"Ónix negro y borde dorado 18k, caja de terciopelo negro.","emoji":"👔"},
-  {"id":26,"nombre":"Maletín Ejecutivo Cuero","precio":249.99,"categoria":"MI DINASTIA","descripcion":"Cuero genuino, combinación seguridad, compartimento laptop 17.","emoji":"💼"},
-  {"id":27,"nombre":"Zapatos Oxford Premium","precio":159.99,"categoria":"MI DINASTIA","descripcion":"Cuero pulido italiano, suela de goma antideslizante.","emoji":"👞"},
-  {"id":28,"nombre":"Pulsera Cuero Trenzado","precio":89.99,"categoria":"MI DINASTIA","descripcion":"Cuero negro trenzado a mano, cierre magnético de acero.","emoji":"📿"},
-  {"id":29,"nombre":"Caja Fuerte Portátil Lujo","precio":199.99,"categoria":"MI DINASTIA","descripcion":"Para relojes y joyas, cerradura biométrica, fibra de carbono.","emoji":"🔒"},
-  {"id":30,"nombre":"Set Decantador Whisky Gold","precio":179.99,"categoria":"MI DINASTIA","descripcion":"Cristal soplado a mano, base con grabado ORIONIX, 6 vasos.","emoji":"🥃"}
+﻿[
+    {
+        "id":  1,
+        "nombre":  "Kabalion Camiseta Premium · ORIONIX",
+        "precio":  20.72,
+        "categoria":  "MODA",
+        "descripcion":  "Camiseta negra premium. La base del que ya no imita.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  2,
+        "nombre":  "Tiferet Gorra Snapback · ORIONIX",
+        "precio":  10.26,
+        "categoria":  "MODA",
+        "descripcion":  "Gorra snapback bordada. Corona de los que avanzan.",
+        "emoji":  "🧢",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  3,
+        "nombre":  "AXEL Camisa Slim Fit · ORIONIX",
+        "precio":  19.56,
+        "categoria":  "MODA",
+        "descripcion":  "Camisa slim fit. Corte limpio, mente clara.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  4,
+        "nombre":  "AXEL Libreta de Lujo · ORIONIX",
+        "precio":  21.21,
+        "categoria":  "MODA",
+        "descripcion":  "Libreta de lujos. Donde nacen los imperios.",
+        "emoji":  "📓",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  5,
+        "nombre":  "Universo Llavero Metalico · ORIONIX",
+        "precio":  18.2,
+        "categoria":  "MODA",
+        "descripcion":  "Llavero metalico. El peso de quien decide.",
+        "emoji":  "🔑",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  6,
+        "nombre":  "Tiferet Taza Ceramica · ORIONIX",
+        "precio":  11.76,
+        "categoria":  "MODA",
+        "descripcion":  "Taza ceramica negra. El ritual de la mesa propia.",
+        "emoji":  "☕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  7,
+        "nombre":  "Imperio Calcetines Premium · ORIONIX",
+        "precio":  15.78,
+        "categoria":  "MODA",
+        "descripcion":  "Calcetines premium. Detalle que delata al maestro.",
+        "emoji":  "🧦",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  8,
+        "nombre":  "Sefirot Panuelo de Bolsillo · ORIONIX",
+        "precio":  22.89,
+        "categoria":  "MODA",
+        "descripcion":  "Panuelo de bolsillo. Arma silenciosa del elegante.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  9,
+        "nombre":  "Universo Mechero Zippo · ORIONIX",
+        "precio":  15.75,
+        "categoria":  "MODA",
+        "descripcion":  "Mechero Zippo negro. Fuego de los que perseveran.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  10,
+        "nombre":  "Sefirot Boligrafo de Lujo · ORIONIX",
+        "precio":  21.77,
+        "categoria":  "MODA",
+        "descripcion":  "Boligrafo de lujo. Firma tu destino, no tu rutina.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  11,
+        "nombre":  "Universo Parche Bordado · ORIONIX",
+        "precio":  20.65,
+        "categoria":  "MODA",
+        "descripcion":  "Parche bordado. Insignia del que ya desperto.",
+        "emoji":  "🛡️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  12,
+        "nombre":  "Kabalion Bandana de Seda · ORIONIX",
+        "precio":  24.82,
+        "categoria":  "MODA",
+        "descripcion":  "Bandana de seda. Suavidad de quien no negocia.",
+        "emoji":  "🎀",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  13,
+        "nombre":  "Kabalion Pin Esmaltado · ORIONIX",
+        "precio":  10.57,
+        "categoria":  "MODA",
+        "descripcion":  "Pin esmaltado. Simbolo que solo entienden los tuyos.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  14,
+        "nombre":  "Sefirot Sudadera Esencial · ORIONIX",
+        "precio":  23.28,
+        "categoria":  "MODA",
+        "descripcion":  "Sudadera esencial. Manto de los que construyen.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  15,
+        "nombre":  "Cosmos Camiseta Oversize · ORIONIX",
+        "precio":  17.99,
+        "categoria":  "MODA",
+        "descripcion":  "Camiseta oversize. Presencia sin pedir permiso.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  16,
+        "nombre":  "Universo Manga Larga Premium · ORIONIX",
+        "precio":  26.32,
+        "categoria":  "MODA",
+        "descripcion":  "Manga larga premium. Costura de la nueva nobleza.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  17,
+        "nombre":  "Tiferet Bucket Hat · ORIONIX",
+        "precio":  21.21,
+        "categoria":  "MODA",
+        "descripcion":  "Bucket hat negro. Sombra de quien no se expone.",
+        "emoji":  "🧢",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  18,
+        "nombre":  "Tiferet Taza Termica · ORIONIX",
+        "precio":  19.74,
+        "categoria":  "MODA",
+        "descripcion":  "Taza termica de acero. El cafe se sirve a tu tiempo.",
+        "emoji":  "☕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  19,
+        "nombre":  "Cosmos Libreta Blackout · ORIONIX",
+        "precio":  16.2,
+        "categoria":  "MODA",
+        "descripcion":  "Libreta blackout. Pagina en blanco para el rey.",
+        "emoji":  "📓",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  20,
+        "nombre":  "Tiferet Parche Termoadhesivo · ORIONIX",
+        "precio":  19.04,
+        "categoria":  "MODA",
+        "descripcion":  "Parche termoadhesivo. Escudo del linaje ORIONIX.",
+        "emoji":  "🛡️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  21,
+        "nombre":  "Imperio Camiseta Premium · ORIONIX",
+        "precio":  9.99,
+        "categoria":  "MODA",
+        "descripcion":  "Camiseta negra premium. La base del que ya no imita.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  22,
+        "nombre":  "Sefirot Gorra Snapback · ORIONIX",
+        "precio":  14.91,
+        "categoria":  "MODA",
+        "descripcion":  "Gorra snapback bordada. Corona de los que avanzan.",
+        "emoji":  "🧢",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  23,
+        "nombre":  "Kether Camisa Slim Fit · ORIONIX",
+        "precio":  9.99,
+        "categoria":  "MODA",
+        "descripcion":  "Camisa slim fit. Corte limpio, mente clara.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  24,
+        "nombre":  "Imperio Libreta de Lujo · ORIONIX",
+        "precio":  17.01,
+        "categoria":  "MODA",
+        "descripcion":  "Libreta de lujos. Donde nacen los imperios.",
+        "emoji":  "📓",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  25,
+        "nombre":  "AXEL Llavero Metalico · ORIONIX",
+        "precio":  22.61,
+        "categoria":  "MODA",
+        "descripcion":  "Llavero metalico. El peso de quien decide.",
+        "emoji":  "🔑",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  26,
+        "nombre":  "Kabalion Taza Ceramica · ORIONIX",
+        "precio":  20.09,
+        "categoria":  "MODA",
+        "descripcion":  "Taza ceramica negra. El ritual de la mesa propia.",
+        "emoji":  "☕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  27,
+        "nombre":  "Kether Calcetines Premium · ORIONIX",
+        "precio":  17.4,
+        "categoria":  "MODA",
+        "descripcion":  "Calcetines premium. Detalle que delata al maestro.",
+        "emoji":  "🧦",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  28,
+        "nombre":  "Cosmos Panuelo de Bolsillo · ORIONIX",
+        "precio":  9.99,
+        "categoria":  "MODA",
+        "descripcion":  "Panuelo de bolsillo. Arma silenciosa del elegante.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  29,
+        "nombre":  "Sefirot Mechero Zippo · ORIONIX",
+        "precio":  21.07,
+        "categoria":  "MODA",
+        "descripcion":  "Mechero Zippo negro. Fuego de los que perseveran.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  30,
+        "nombre":  "Kabalion Boligrafo de Lujo · ORIONIX",
+        "precio":  14.63,
+        "categoria":  "MODA",
+        "descripcion":  "Boligrafo de lujo. Firma tu destino, no tu rutina.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  31,
+        "nombre":  "Tiferet Parche Bordado · ORIONIX",
+        "precio":  23.83,
+        "categoria":  "MODA",
+        "descripcion":  "Parche bordado. Insignia del que ya desperto.",
+        "emoji":  "🛡️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  32,
+        "nombre":  "Cosmos Bandana de Seda · ORIONIX",
+        "precio":  17.6,
+        "categoria":  "MODA",
+        "descripcion":  "Bandana de seda. Suavidad de quien no negocia.",
+        "emoji":  "🎀",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  33,
+        "nombre":  "Imperio Pin Esmaltado · ORIONIX",
+        "precio":  18.8,
+        "categoria":  "MODA",
+        "descripcion":  "Pin esmaltado. Simbolo que solo entienden los tuyos.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  34,
+        "nombre":  "Nebula Sudadera Esencial · ORIONIX",
+        "precio":  19.11,
+        "categoria":  "MODA",
+        "descripcion":  "Sudadera esencial. Manto de los que construyen.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  35,
+        "nombre":  "Universo Camiseta Oversize · ORIONIX",
+        "precio":  9.99,
+        "categoria":  "MODA",
+        "descripcion":  "Camiseta oversize. Presencia sin pedir permiso.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  36,
+        "nombre":  "Universo Manga Larga Premium · ORIONIX",
+        "precio":  16.87,
+        "categoria":  "MODA",
+        "descripcion":  "Manga larga premium. Costura de la nueva nobleza.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  37,
+        "nombre":  "Universo Bucket Hat · ORIONIX",
+        "precio":  24.04,
+        "categoria":  "MODA",
+        "descripcion":  "Bucket hat negro. Sombra de quien no se expone.",
+        "emoji":  "🧢",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  38,
+        "nombre":  "Universo Taza Termica · ORIONIX",
+        "precio":  9.99,
+        "categoria":  "MODA",
+        "descripcion":  "Taza termica de acero. El cafe se sirve a tu tiempo.",
+        "emoji":  "☕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  39,
+        "nombre":  "AXEL Libreta Blackout · ORIONIX",
+        "precio":  22.54,
+        "categoria":  "MODA",
+        "descripcion":  "Libreta blackout. Pagina en blanco para el rey.",
+        "emoji":  "📓",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  40,
+        "nombre":  "Kabalion Parche Termoadhesivo · ORIONIX",
+        "precio":  22.26,
+        "categoria":  "MODA",
+        "descripcion":  "Parche termoadhesivo. Escudo del linaje ORIONIX.",
+        "emoji":  "🛡️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  41,
+        "nombre":  "Universo Camiseta Premium · ORIONIX",
+        "precio":  27.26,
+        "categoria":  "MODA",
+        "descripcion":  "Camiseta negra premium. La base del que ya no imita.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  42,
+        "nombre":  "Universo Gorra Snapback · ORIONIX",
+        "precio":  15.26,
+        "categoria":  "MODA",
+        "descripcion":  "Gorra snapback bordada. Corona de los que avanzan.",
+        "emoji":  "🧢",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  43,
+        "nombre":  "Kabalion Camisa Slim Fit · ORIONIX",
+        "precio":  17.99,
+        "categoria":  "MODA",
+        "descripcion":  "Camisa slim fit. Corte limpio, mente clara.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  44,
+        "nombre":  "Kabalion Libreta de Lujo · ORIONIX",
+        "precio":  26.36,
+        "categoria":  "MODA",
+        "descripcion":  "Libreta de lujos. Donde nacen los imperios.",
+        "emoji":  "📓",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  45,
+        "nombre":  "Nebula Llavero Metalico · ORIONIX",
+        "precio":  17.74,
+        "categoria":  "MODA",
+        "descripcion":  "Llavero metalico. El peso de quien decide.",
+        "emoji":  "🔑",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  46,
+        "nombre":  "Kether Taza Ceramica · ORIONIX",
+        "precio":  18.8,
+        "categoria":  "MODA",
+        "descripcion":  "Taza ceramica negra. El ritual de la mesa propia.",
+        "emoji":  "☕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  47,
+        "nombre":  "Cosmos Calcetines Premium · ORIONIX",
+        "precio":  18.27,
+        "categoria":  "MODA",
+        "descripcion":  "Calcetines premium. Detalle que delata al maestro.",
+        "emoji":  "🧦",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  48,
+        "nombre":  "Tiferet Panuelo de Bolsillo · ORIONIX",
+        "precio":  16.73,
+        "categoria":  "MODA",
+        "descripcion":  "Panuelo de bolsillo. Arma silenciosa del elegante.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  49,
+        "nombre":  "AXEL Mechero Zippo · ORIONIX",
+        "precio":  20.47,
+        "categoria":  "MODA",
+        "descripcion":  "Mechero Zippo negro. Fuego de los que perseveran.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  50,
+        "nombre":  "Kabalion Boligrafo de Lujo · ORIONIX",
+        "precio":  13.2,
+        "categoria":  "MODA",
+        "descripcion":  "Boligrafo de lujo. Firma tu destino, no tu rutina.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  51,
+        "nombre":  "Tiferet Parche Bordado · ORIONIX",
+        "precio":  16.8,
+        "categoria":  "MODA",
+        "descripcion":  "Parche bordado. Insignia del que ya desperto.",
+        "emoji":  "🛡️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  52,
+        "nombre":  "Tiferet Bandana de Seda · ORIONIX",
+        "precio":  13.9,
+        "categoria":  "MODA",
+        "descripcion":  "Bandana de seda. Suavidad de quien no negocia.",
+        "emoji":  "🎀",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  53,
+        "nombre":  "Tiferet Pin Esmaltado · ORIONIX",
+        "precio":  13.79,
+        "categoria":  "MODA",
+        "descripcion":  "Pin esmaltado. Simbolo que solo entienden los tuyos.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  54,
+        "nombre":  "Sefirot Sudadera Esencial · ORIONIX",
+        "precio":  14.46,
+        "categoria":  "MODA",
+        "descripcion":  "Sudadera esencial. Manto de los que construyen.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  55,
+        "nombre":  "Kether Camiseta Oversize · ORIONIX",
+        "precio":  10.15,
+        "categoria":  "MODA",
+        "descripcion":  "Camiseta oversize. Presencia sin pedir permiso.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  56,
+        "nombre":  "Nebula Manga Larga Premium · ORIONIX",
+        "precio":  14.81,
+        "categoria":  "MODA",
+        "descripcion":  "Manga larga premium. Costura de la nueva nobleza.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  57,
+        "nombre":  "AXEL Bucket Hat · ORIONIX",
+        "precio":  16.7,
+        "categoria":  "MODA",
+        "descripcion":  "Bucket hat negro. Sombra de quien no se expone.",
+        "emoji":  "🧢",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  58,
+        "nombre":  "Kabalion Taza Termica · ORIONIX",
+        "precio":  25.76,
+        "categoria":  "MODA",
+        "descripcion":  "Taza termica de acero. El cafe se sirve a tu tiempo.",
+        "emoji":  "☕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  59,
+        "nombre":  "Kether Libreta Blackout · ORIONIX",
+        "precio":  12.78,
+        "categoria":  "MODA",
+        "descripcion":  "Libreta blackout. Pagina en blanco para el rey.",
+        "emoji":  "📓",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  60,
+        "nombre":  "AXEL Parche Termoadhesivo · ORIONIX",
+        "precio":  25.66,
+        "categoria":  "MODA",
+        "descripcion":  "Parche termoadhesivo. Escudo del linaje ORIONIX.",
+        "emoji":  "🛡️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  61,
+        "nombre":  "Cosmos Camiseta Premium · ORIONIX",
+        "precio":  17.99,
+        "categoria":  "MODA",
+        "descripcion":  "Camiseta negra premium. La base del que ya no imita.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  62,
+        "nombre":  "Kabalion Gorra Snapback · ORIONIX",
+        "precio":  26,
+        "categoria":  "MODA",
+        "descripcion":  "Gorra snapback bordada. Corona de los que avanzan.",
+        "emoji":  "🧢",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  63,
+        "nombre":  "Nebula Camisa Slim Fit · ORIONIX",
+        "precio":  24.43,
+        "categoria":  "MODA",
+        "descripcion":  "Camisa slim fit. Corte limpio, mente clara.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  64,
+        "nombre":  "Cosmos Libreta de Lujo · ORIONIX",
+        "precio":  12.64,
+        "categoria":  "MODA",
+        "descripcion":  "Libreta de lujos. Donde nacen los imperios.",
+        "emoji":  "📓",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  65,
+        "nombre":  "Universo Llavero Metalico · ORIONIX",
+        "precio":  22.44,
+        "categoria":  "MODA",
+        "descripcion":  "Llavero metalico. El peso de quien decide.",
+        "emoji":  "🔑",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  66,
+        "nombre":  "Kether Taza Ceramica · ORIONIX",
+        "precio":  10.15,
+        "categoria":  "MODA",
+        "descripcion":  "Taza ceramica negra. El ritual de la mesa propia.",
+        "emoji":  "☕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  67,
+        "nombre":  "Tiferet Calcetines Premium · ORIONIX",
+        "precio":  19.7,
+        "categoria":  "MODA",
+        "descripcion":  "Calcetines premium. Detalle que delata al maestro.",
+        "emoji":  "🧦",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  68,
+        "nombre":  "Kabalion Panuelo de Bolsillo · ORIONIX",
+        "precio":  21.8,
+        "categoria":  "MODA",
+        "descripcion":  "Panuelo de bolsillo. Arma silenciosa del elegante.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  69,
+        "nombre":  "Nebula Mechero Zippo · ORIONIX",
+        "precio":  14.04,
+        "categoria":  "MODA",
+        "descripcion":  "Mechero Zippo negro. Fuego de los que perseveran.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  70,
+        "nombre":  "Sefirot Boligrafo de Lujo · ORIONIX",
+        "precio":  10.15,
+        "categoria":  "MODA",
+        "descripcion":  "Boligrafo de lujo. Firma tu destino, no tu rutina.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  71,
+        "nombre":  "Chesed Cinturon de Cuero · ORIONIX",
+        "precio":  41.69,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cinturon de cuero genuino. El accesorio del que asciende.",
+        "emoji":  "🧥",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  72,
+        "nombre":  "Sombra Cartera Slim RFID · ORIONIX",
+        "precio":  72.83,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cartera slim RFID. Llevas lo justo, de quien ya tiene todo.",
+        "emoji":  "💳",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  73,
+        "nombre":  "Binah Bufanda de Merino · ORIONIX",
+        "precio":  64.82,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Bufanda de merino. Abrigo de los que no tiemblan.",
+        "emoji":  "🧣",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  74,
+        "nombre":  "Chesed Polo Slim Premium · ORIONIX",
+        "precio":  76.47,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Polo slim premium. La camiseta de los que ya hablan distinto.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  75,
+        "nombre":  "Sombra Gafas Polarizadas · ORIONIX",
+        "precio":  59.98,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Gafas polarizadas. Mirada que no se distrae.",
+        "emoji":  "🕶️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  76,
+        "nombre":  "Sombra Mochila Urbana · ORIONIX",
+        "precio":  42.45,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Mochila urbana. Capacidad de los que cargan imperio.",
+        "emoji":  "🎒",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  77,
+        "nombre":  "Luz Sudadera con Capucha · ORIONIX",
+        "precio":  28.99,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Sudadera con capucha. Capucha de los que piensan antes de hablar.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  78,
+        "nombre":  "Chesed Perfume Oriental · ORIONIX",
+        "precio":  78.9,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Perfume oriental. Huella que se recuerda, no se persigue.",
+        "emoji":  "🧴",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  79,
+        "nombre":  "Hokhmah Zapatillas Premium · ORIONIX",
+        "precio":  56.64,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Zapatillas premium. Pisada firme, destino claro.",
+        "emoji":  "👟",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  80,
+        "nombre":  "Hokhmah Chaqueta de Cuero · ORIONIX",
+        "precio":  28.99,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Chaqueta de cuero sintetico. Armadura de la nueva nobleza.",
+        "emoji":  "🧥",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  81,
+        "nombre":  "Binah Cinturon Hebilla Dorada · ORIONIX",
+        "precio":  37.38,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cinturon hebilla dorada. Broche del linaje ORIONIX.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  82,
+        "nombre":  "Netzach Cartera de Mano · ORIONIX",
+        "precio":  40.46,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cartera de mano. Solo para los que ya cobraron.",
+        "emoji":  "🎒",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  83,
+        "nombre":  "Camaleon Gafas Aviador · ORIONIX",
+        "precio":  49.39,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Gafas aviador. Alas de los que no piden permiso.",
+        "emoji":  "🕶️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  84,
+        "nombre":  "Luz Mochila Tactica · ORIONIX",
+        "precio":  43.68,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Mochila tactica. Herramienta del que no se pierde.",
+        "emoji":  "🎒",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  85,
+        "nombre":  "Binah Polo Pique · ORIONIX",
+        "precio":  44.02,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Polo piqué premium. Textura de los que se notan.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  86,
+        "nombre":  "Dinastia Billetera con Monedero · ORIONIX",
+        "precio":  33.57,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Billetera con monedero. Espacio para los que si reinan.",
+        "emoji":  "💳",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  87,
+        "nombre":  "Sombra Chaqueta Bomber · ORIONIX",
+        "precio":  31.42,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Chaqueta bomber. Vuelo de los que ya despegaron.",
+        "emoji":  "🧥",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  88,
+        "nombre":  "Binah Perfume Amaderado · ORIONIX",
+        "precio":  62.13,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Perfume amaderado. Raiz de quien ya se planto.",
+        "emoji":  "🧴",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  89,
+        "nombre":  "Dinastia Zapatillas Running · ORIONIX",
+        "precio":  45.67,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Zapatillas running premium. Zancada de los que no se detienen.",
+        "emoji":  "👟",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  90,
+        "nombre":  "Luz Cinturon Reversible · ORIONIX",
+        "precio":  49.08,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cinturon reversible. Dos caras, un solo dueno.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  91,
+        "nombre":  "Dinastia Cinturon de Cuero · ORIONIX",
+        "precio":  52.78,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cinturon de cuero genuino. El accesorio del que asciende.",
+        "emoji":  "🧥",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  92,
+        "nombre":  "Luz Cartera Slim RFID · ORIONIX",
+        "precio":  28.99,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cartera slim RFID. Llevas lo justo, de quien ya tiene todo.",
+        "emoji":  "💳",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  93,
+        "nombre":  "Hokhmah Bufanda de Merino · ORIONIX",
+        "precio":  64.46,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Bufanda de merino. Abrigo de los que no tiemblan.",
+        "emoji":  "🧣",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  94,
+        "nombre":  "Camaleon Polo Slim Premium · ORIONIX",
+        "precio":  74.79,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Polo slim premium. La camiseta de los que ya hablan distinto.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  95,
+        "nombre":  "Sombra Gafas Polarizadas · ORIONIX",
+        "precio":  81.31,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Gafas polarizadas. Mirada que no se distrae.",
+        "emoji":  "🕶️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  96,
+        "nombre":  "Sombra Mochila Urbana · ORIONIX",
+        "precio":  51.91,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Mochila urbana. Capacidad de los que cargan imperio.",
+        "emoji":  "🎒",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  97,
+        "nombre":  "Camaleon Sudadera con Capucha · ORIONIX",
+        "precio":  51.6,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Sudadera con capucha. Capucha de los que piensan antes de hablar.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  98,
+        "nombre":  "Chesed Perfume Oriental · ORIONIX",
+        "precio":  56.2,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Perfume oriental. Huella que se recuerda, no se persigue.",
+        "emoji":  "🧴",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  99,
+        "nombre":  "Camaleon Zapatillas Premium · ORIONIX",
+        "precio":  30.69,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Zapatillas premium. Pisada firme, destino claro.",
+        "emoji":  "👟",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  100,
+        "nombre":  "Luz Chaqueta de Cuero · ORIONIX",
+        "precio":  47.21,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Chaqueta de cuero sintetico. Armadura de la nueva nobleza.",
+        "emoji":  "🧥",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  101,
+        "nombre":  "Camaleon Cinturon Hebilla Dorada · ORIONIX",
+        "precio":  41.08,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cinturon hebilla dorada. Broche del linaje ORIONIX.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  102,
+        "nombre":  "Luz Cartera de Mano · ORIONIX",
+        "precio":  52.86,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cartera de mano. Solo para los que ya cobraron.",
+        "emoji":  "🎒",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  103,
+        "nombre":  "Dinastia Gafas Aviador · ORIONIX",
+        "precio":  65.3,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Gafas aviador. Alas de los que no piden permiso.",
+        "emoji":  "🕶️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  104,
+        "nombre":  "Luz Mochila Tactica · ORIONIX",
+        "precio":  59.05,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Mochila tactica. Herramienta del que no se pierde.",
+        "emoji":  "🎒",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  105,
+        "nombre":  "Sombra Polo Pique · ORIONIX",
+        "precio":  47.77,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Polo piqué premium. Textura de los que se notan.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  106,
+        "nombre":  "Chesed Billetera con Monedero · ORIONIX",
+        "precio":  49.7,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Billetera con monedero. Espacio para los que si reinan.",
+        "emoji":  "💳",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  107,
+        "nombre":  "Binah Chaqueta Bomber · ORIONIX",
+        "precio":  64.2,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Chaqueta bomber. Vuelo de los que ya despegaron.",
+        "emoji":  "🧥",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  108,
+        "nombre":  "Hokhmah Perfume Amaderado · ORIONIX",
+        "precio":  68.6,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Perfume amaderado. Raiz de quien ya se planto.",
+        "emoji":  "🧴",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  109,
+        "nombre":  "Dinastia Zapatillas Running · ORIONIX",
+        "precio":  40.96,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Zapatillas running premium. Zancada de los que no se detienen.",
+        "emoji":  "👟",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  110,
+        "nombre":  "Camaleon Cinturon Reversible · ORIONIX",
+        "precio":  46.87,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cinturon reversible. Dos caras, un solo dueno.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  111,
+        "nombre":  "Dinastia Cinturon de Cuero · ORIONIX",
+        "precio":  56.31,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cinturon de cuero genuino. El accesorio del que asciende.",
+        "emoji":  "🧥",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  112,
+        "nombre":  "Netzach Cartera Slim RFID · ORIONIX",
+        "precio":  43.01,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cartera slim RFID. Llevas lo justo, de quien ya tiene todo.",
+        "emoji":  "💳",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  113,
+        "nombre":  "Chesed Bufanda de Merino · ORIONIX",
+        "precio":  61.66,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Bufanda de merino. Abrigo de los que no tiemblan.",
+        "emoji":  "🧣",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  114,
+        "nombre":  "Camaleon Polo Slim Premium · ORIONIX",
+        "precio":  72.24,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Polo slim premium. La camiseta de los que ya hablan distinto.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  115,
+        "nombre":  "Camaleon Gafas Polarizadas · ORIONIX",
+        "precio":  62.92,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Gafas polarizadas. Mirada que no se distrae.",
+        "emoji":  "🕶️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  116,
+        "nombre":  "Chesed Mochila Urbana · ORIONIX",
+        "precio":  37.52,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Mochila urbana. Capacidad de los que cargan imperio.",
+        "emoji":  "🎒",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  117,
+        "nombre":  "Camaleon Sudadera con Capucha · ORIONIX",
+        "precio":  37.27,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Sudadera con capucha. Capucha de los que piensan antes de hablar.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  118,
+        "nombre":  "Luz Perfume Oriental · ORIONIX",
+        "precio":  38.39,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Perfume oriental. Huella que se recuerda, no se persigue.",
+        "emoji":  "🧴",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  119,
+        "nombre":  "Chesed Zapatillas Premium · ORIONIX",
+        "precio":  34.19,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Zapatillas premium. Pisada firme, destino claro.",
+        "emoji":  "👟",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  120,
+        "nombre":  "Netzach Chaqueta de Cuero · ORIONIX",
+        "precio":  28.99,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Chaqueta de cuero sintetico. Armadura de la nueva nobleza.",
+        "emoji":  "🧥",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  121,
+        "nombre":  "Luz Cinturon Hebilla Dorada · ORIONIX",
+        "precio":  71.2,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cinturon hebilla dorada. Broche del linaje ORIONIX.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  122,
+        "nombre":  "Luz Cartera de Mano · ORIONIX",
+        "precio":  36.71,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cartera de mano. Solo para los que ya cobraron.",
+        "emoji":  "🎒",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  123,
+        "nombre":  "Chesed Gafas Aviador · ORIONIX",
+        "precio":  72.52,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Gafas aviador. Alas de los que no piden permiso.",
+        "emoji":  "🕶️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  124,
+        "nombre":  "Netzach Mochila Tactica · ORIONIX",
+        "precio":  37.66,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Mochila tactica. Herramienta del que no se pierde.",
+        "emoji":  "🎒",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  125,
+        "nombre":  "Luz Polo Pique · ORIONIX",
+        "precio":  71.18,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Polo piqué premium. Textura de los que se notan.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  126,
+        "nombre":  "Chesed Billetera con Monedero · ORIONIX",
+        "precio":  51.69,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Billetera con monedero. Espacio para los que si reinan.",
+        "emoji":  "💳",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  127,
+        "nombre":  "Binah Chaqueta Bomber · ORIONIX",
+        "precio":  59.58,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Chaqueta bomber. Vuelo de los que ya despegaron.",
+        "emoji":  "🧥",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  128,
+        "nombre":  "Netzach Perfume Amaderado · ORIONIX",
+        "precio":  47.54,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Perfume amaderado. Raiz de quien ya se planto.",
+        "emoji":  "🧴",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  129,
+        "nombre":  "Sombra Zapatillas Running · ORIONIX",
+        "precio":  30.86,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Zapatillas running premium. Zancada de los que no se detienen.",
+        "emoji":  "👟",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  130,
+        "nombre":  "Sombra Cinturon Reversible · ORIONIX",
+        "precio":  71.68,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cinturon reversible. Dos caras, un solo dueno.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  131,
+        "nombre":  "Dinastia Cinturon de Cuero · ORIONIX",
+        "precio":  80.58,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cinturon de cuero genuino. El accesorio del que asciende.",
+        "emoji":  "🧥",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  132,
+        "nombre":  "Luz Cartera Slim RFID · ORIONIX",
+        "precio":  59.98,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cartera slim RFID. Llevas lo justo, de quien ya tiene todo.",
+        "emoji":  "💳",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  133,
+        "nombre":  "Luz Bufanda de Merino · ORIONIX",
+        "precio":  78.57,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Bufanda de merino. Abrigo de los que no tiemblan.",
+        "emoji":  "🧣",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  134,
+        "nombre":  "Hokhmah Polo Slim Premium · ORIONIX",
+        "precio":  38.53,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Polo slim premium. La camiseta de los que ya hablan distinto.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  135,
+        "nombre":  "Netzach Gafas Polarizadas · ORIONIX",
+        "precio":  79.07,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Gafas polarizadas. Mirada que no se distrae.",
+        "emoji":  "🕶️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  136,
+        "nombre":  "Camaleon Mochila Urbana · ORIONIX",
+        "precio":  48.86,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Mochila urbana. Capacidad de los que cargan imperio.",
+        "emoji":  "🎒",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  137,
+        "nombre":  "Luz Sudadera con Capucha · ORIONIX",
+        "precio":  50.9,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Sudadera con capucha. Capucha de los que piensan antes de hablar.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  138,
+        "nombre":  "Binah Perfume Oriental · ORIONIX",
+        "precio":  28.99,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Perfume oriental. Huella que se recuerda, no se persigue.",
+        "emoji":  "🧴",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  139,
+        "nombre":  "Camaleon Zapatillas Premium · ORIONIX",
+        "precio":  28.99,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Zapatillas premium. Pisada firme, destino claro.",
+        "emoji":  "👟",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  140,
+        "nombre":  "Camaleon Chaqueta de Cuero · ORIONIX",
+        "precio":  72.38,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Chaqueta de cuero sintetico. Armadura de la nueva nobleza.",
+        "emoji":  "🧥",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  141,
+        "nombre":  "Hokhmah Cinturon Hebilla Dorada · ORIONIX",
+        "precio":  47.4,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cinturon hebilla dorada. Broche del linaje ORIONIX.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  142,
+        "nombre":  "Sombra Cartera de Mano · ORIONIX",
+        "precio":  80.75,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cartera de mano. Solo para los que ya cobraron.",
+        "emoji":  "🎒",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  143,
+        "nombre":  "Hokhmah Gafas Aviador · ORIONIX",
+        "precio":  33.66,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Gafas aviador. Alas de los que no piden permiso.",
+        "emoji":  "🕶️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  144,
+        "nombre":  "Binah Mochila Tactica · ORIONIX",
+        "precio":  34.27,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Mochila tactica. Herramienta del que no se pierde.",
+        "emoji":  "🎒",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  145,
+        "nombre":  "Binah Polo Pique · ORIONIX",
+        "precio":  33.68,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Polo piqué premium. Textura de los que se notan.",
+        "emoji":  "👕",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  146,
+        "nombre":  "Hokhmah Billetera con Monedero · ORIONIX",
+        "precio":  62.94,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Billetera con monedero. Espacio para los que si reinan.",
+        "emoji":  "💳",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  147,
+        "nombre":  "Netzach Chaqueta Bomber · ORIONIX",
+        "precio":  51.24,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Chaqueta bomber. Vuelo de los que ya despegaron.",
+        "emoji":  "🧥",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  148,
+        "nombre":  "Hokhmah Perfume Amaderado · ORIONIX",
+        "precio":  78.76,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Perfume amaderado. Raiz de quien ya se planto.",
+        "emoji":  "🧴",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  149,
+        "nombre":  "Luz Zapatillas Running · ORIONIX",
+        "precio":  38.81,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Zapatillas running premium. Zancada de los que no se detienen.",
+        "emoji":  "👟",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  150,
+        "nombre":  "Binah Cinturon Reversible · ORIONIX",
+        "precio":  49.5,
+        "categoria":  "FASHION STYLE",
+        "descripcion":  "Cinturon reversible. Dos caras, un solo dueno.",
+        "emoji":  "🛍️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  151,
+        "nombre":  "Imperio Total Reloj Automatico · ORIONIX",
+        "precio":  162.54,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Reloj automatico. El tiempo de los que lideran.",
+        "emoji":  "⌚",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  152,
+        "nombre":  "Imperio Total Anillo de Acero · ORIONIX",
+        "precio":  327.38,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Anillo de acero. Corona de los que ya se saben reyes.",
+        "emoji":  "💍",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  153,
+        "nombre":  "KRC Master Maletin de Cuero · ORIONIX",
+        "precio":  261.51,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Maletin de cuero. Donde caben los papeles del imperio.",
+        "emoji":  "🧥",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  154,
+        "nombre":  "AXEL Prime Perfume Oud · ORIONIX",
+        "precio":  284.88,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Perfume Oud. Aroma que no se mezcla con la masa.",
+        "emoji":  "🧴",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  155,
+        "nombre":  "AXEL Prime Pulsera de Titanio · ORIONIX",
+        "precio":  209.57,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Pulsera de titanio. Eslabon de los que no se rompen.",
+        "emoji":  "📿",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  156,
+        "nombre":  "Kabalion Executive Reloj Cronografo · ORIONIX",
+        "precio":  247.17,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Reloj cronografo. Segundos contados por quien decide.",
+        "emoji":  "⌚",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  157,
+        "nombre":  "KRC Master Anillo con Onice · ORIONIX",
+        "precio":  135,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Anillo con onice. Piedra de los que no olvidan.",
+        "emoji":  "💍",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  158,
+        "nombre":  "AXEL Prime Caja de Reloj · ORIONIX",
+        "precio":  243.52,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Caja de reloj. Capullo donde duerme el lujo.",
+        "emoji":  "⌚",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  159,
+        "nombre":  "Kether Absolut Gemelos de Oro · ORIONIX",
+        "precio":  135,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Gemelos de oro. Detalle de los que cierran tratos.",
+        "emoji":  "👔",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  160,
+        "nombre":  "Imperio Total Pluma Fuente de Lujo · ORIONIX",
+        "precio":  135,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Pluma fuente de lujo. Tinta de los que ya firmaron.",
+        "emoji":  "🖋️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  161,
+        "nombre":  "Camaleon Gold Reloj de Bolsillo · ORIONIX",
+        "precio":  297.79,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Reloj de bolsillo. El tiempo del gentleman.",
+        "emoji":  "⌚",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  162,
+        "nombre":  "Sefirot Elite Anillo Sello · ORIONIX",
+        "precio":  269.7,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Anillo sello. Marca de los que ya dejaron huella.",
+        "emoji":  "💍",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  163,
+        "nombre":  "Sefirot Elite Brazalete de Cuero · ORIONIX",
+        "precio":  234.3,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Brazalete de cuero premium. Brazalete de los que se ganaron el nombre.",
+        "emoji":  "🧥",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  164,
+        "nombre":  "KRC Master Collar de Acero · ORIONIX",
+        "precio":  246.42,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Collar de acero. Gargantilla de los que no piden.",
+        "emoji":  "📿",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  165,
+        "nombre":  "Kabalion Executive Cartera de Viaje · ORIONIX",
+        "precio":  264.18,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Cartera de viaje. Equipaje de los que no improvisan.",
+        "emoji":  "💳",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  166,
+        "nombre":  "KRC Master Reloj Automatico · ORIONIX",
+        "precio":  135,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Reloj automatico. El tiempo de los que lideran.",
+        "emoji":  "⌚",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  167,
+        "nombre":  "Imperio Total Anillo de Acero · ORIONIX",
+        "precio":  221.76,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Anillo de acero. Corona de los que ya se saben reyes.",
+        "emoji":  "💍",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  168,
+        "nombre":  "Sefirot Elite Maletin de Cuero · ORIONIX",
+        "precio":  214.54,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Maletin de cuero. Donde caben los papeles del imperio.",
+        "emoji":  "🧥",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  169,
+        "nombre":  "AXEL Prime Perfume Oud · ORIONIX",
+        "precio":  177.28,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Perfume Oud. Aroma que no se mezcla con la masa.",
+        "emoji":  "🧴",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  170,
+        "nombre":  "Kether Absolut Pulsera de Titanio · ORIONIX",
+        "precio":  271.94,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Pulsera de titanio. Eslabon de los que no se rompen.",
+        "emoji":  "🕶️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  171,
+        "nombre":  "Sefirot Elite Reloj Cronografo · ORIONIX",
+        "precio":  261.45,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Reloj cronografo. Segundos contados por quien decide.",
+        "emoji":  "⌚",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  172,
+        "nombre":  "Kabalion Executive Anillo con Onice · ORIONIX",
+        "precio":  192.9,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Anillo con onice. Piedra de los que no olvidan.",
+        "emoji":  "💍",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  173,
+        "nombre":  "Kabalion Executive Caja de Reloj · ORIONIX",
+        "precio":  135.87,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Caja de reloj. Capullo donde duerme el lujo.",
+        "emoji":  "⌚",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  174,
+        "nombre":  "Imperio Total Gemelos de Oro · ORIONIX",
+        "precio":  238.13,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Gemelos de oro. Detalle de los que cierran tratos.",
+        "emoji":  "👔",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  175,
+        "nombre":  "Camaleon Gold Pluma Fuente de Lujo · ORIONIX",
+        "precio":  295.92,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Pluma fuente de lujo. Tinta de los que ya firmaron.",
+        "emoji":  "🖋️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  176,
+        "nombre":  "KRC Master Reloj de Bolsillo · ORIONIX",
+        "precio":  181.1,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Reloj de bolsillo. El tiempo del gentleman.",
+        "emoji":  "⌚",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  177,
+        "nombre":  "Imperio Total Anillo Sello · ORIONIX",
+        "precio":  135,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Anillo sello. Marca de los que ya dejaron huella.",
+        "emoji":  "💍",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  178,
+        "nombre":  "Kether Absolut Brazalete de Cuero · ORIONIX",
+        "precio":  135,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Brazalete de cuero premium. Brazalete de los que se ganaron el nombre.",
+        "emoji":  "🕶️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  179,
+        "nombre":  "Kether Absolut Collar de Acero · ORIONIX",
+        "precio":  139.99,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Collar de acero. Gargantilla de los que no piden.",
+        "emoji":  "🕶️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  180,
+        "nombre":  "Camaleon Gold Cartera de Viaje · ORIONIX",
+        "precio":  146.23,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Cartera de viaje. Equipaje de los que no improvisan.",
+        "emoji":  "💳",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  181,
+        "nombre":  "Camaleon Gold Reloj Automatico · ORIONIX",
+        "precio":  135,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Reloj automatico. El tiempo de los que lideran.",
+        "emoji":  "⌚",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  182,
+        "nombre":  "Kether Absolut Anillo de Acero · ORIONIX",
+        "precio":  135,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Anillo de acero. Corona de los que ya se saben reyes.",
+        "emoji":  "🕶️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  183,
+        "nombre":  "Sefirot Elite Maletin de Cuero · ORIONIX",
+        "precio":  229.61,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Maletin de cuero. Donde caben los papeles del imperio.",
+        "emoji":  "🧥",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  184,
+        "nombre":  "AXEL Prime Perfume Oud · ORIONIX",
+        "precio":  135,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Perfume Oud. Aroma que no se mezcla con la masa.",
+        "emoji":  "🧴",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  185,
+        "nombre":  "Kabalion Executive Pulsera de Titanio · ORIONIX",
+        "precio":  160.64,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Pulsera de titanio. Eslabon de los que no se rompen.",
+        "emoji":  "📿",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  186,
+        "nombre":  "Kabalion Executive Reloj Cronografo · ORIONIX",
+        "precio":  135,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Reloj cronografo. Segundos contados por quien decide.",
+        "emoji":  "⌚",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  187,
+        "nombre":  "Sefirot Elite Anillo con Onice · ORIONIX",
+        "precio":  184.07,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Anillo con onice. Piedra de los que no olvidan.",
+        "emoji":  "💍",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  188,
+        "nombre":  "Camaleon Gold Caja de Reloj · ORIONIX",
+        "precio":  135,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Caja de reloj. Capullo donde duerme el lujo.",
+        "emoji":  "⌚",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  189,
+        "nombre":  "Sefirot Elite Gemelos de Oro · ORIONIX",
+        "precio":  228.67,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Gemelos de oro. Detalle de los que cierran tratos.",
+        "emoji":  "👔",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  190,
+        "nombre":  "Camaleon Gold Pluma Fuente de Lujo · ORIONIX",
+        "precio":  135,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Pluma fuente de lujo. Tinta de los que ya firmaron.",
+        "emoji":  "🖋️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  191,
+        "nombre":  "Kabalion Executive Reloj de Bolsillo · ORIONIX",
+        "precio":  210.96,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Reloj de bolsillo. El tiempo del gentleman.",
+        "emoji":  "⌚",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  192,
+        "nombre":  "Imperio Total Anillo Sello · ORIONIX",
+        "precio":  218.5,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Anillo sello. Marca de los que ya dejaron huella.",
+        "emoji":  "💍",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  193,
+        "nombre":  "Kether Absolut Brazalete de Cuero · ORIONIX",
+        "precio":  255.51,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Brazalete de cuero premium. Brazalete de los que se ganaron el nombre.",
+        "emoji":  "🕶️",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  194,
+        "nombre":  "Camaleon Gold Collar de Acero · ORIONIX",
+        "precio":  227.13,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Collar de acero. Gargantilla de los que no piden.",
+        "emoji":  "📿",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  195,
+        "nombre":  "Kabalion Executive Cartera de Viaje · ORIONIX",
+        "precio":  297.07,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Cartera de viaje. Equipaje de los que no improvisan.",
+        "emoji":  "💳",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  196,
+        "nombre":  "AXEL Prime Reloj Automatico · ORIONIX",
+        "precio":  312.64,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Reloj automatico. El tiempo de los que lideran.",
+        "emoji":  "⌚",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  197,
+        "nombre":  "KRC Master Anillo de Acero · ORIONIX",
+        "precio":  285.45,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Anillo de acero. Corona de los que ya se saben reyes.",
+        "emoji":  "💍",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  198,
+        "nombre":  "Sefirot Elite Maletin de Cuero · ORIONIX",
+        "precio":  254.32,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Maletin de cuero. Donde caben los papeles del imperio.",
+        "emoji":  "🧥",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  199,
+        "nombre":  "Camaleon Gold Perfume Oud · ORIONIX",
+        "precio":  186.56,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Perfume Oud. Aroma que no se mezcla con la masa.",
+        "emoji":  "🧴",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    },
+    {
+        "id":  200,
+        "nombre":  "KRC Master Pulsera de Titanio · ORIONIX",
+        "precio":  162.58,
+        "categoria":  "MI DINASTIA",
+        "descripcion":  "Pulsera de titanio. Eslabon de los que no se rompen.",
+        "emoji":  "📿",
+        "imagen_url":  "PENDIENTE_VERIFICAR",
+        "tienda_origen":  "aliexpress"
+    }
 ]

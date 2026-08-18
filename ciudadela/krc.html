@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KRC.COM — El Universo de Kevin Ruiz Creator</title>
+<meta name="description" content="KRC.COM — Portal central del universo KRC. Accede a ORIONIX, La Forjadora, Crónicas del Creador, Kabaiom, Trascendencia y más.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#C9A84C;
+  --gold2:#F0D080;
+  --violet:#7B2FBE;
+  --cyan:#00FFD1;
+  --bg:#050510;
+  --glass:rgba(255,255,255,0.04);
+  --glass-border:rgba(201,168,76,0.2);
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'Inter',sans-serif;cursor:default}
+
+/* ── CANVAS ESTRELLADO ── */
+#canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
+
+/* ── WRAPPER PRINCIPAL ── */
+#app{position:relative;z-index:1;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center}
+
+/* ── TITULO KRC ── */
+#krc-title{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  text-align:center;pointer-events:none;z-index:5
+}
+#krc-title h1{
+  font-family:'Cinzel',serif;font-size:clamp(2rem,5vw,4rem);
+  font-weight:900;letter-spacing:.3em;
+  background:linear-gradient(135deg,var(--gold),var(--gold2),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  text-shadow:none;filter:drop-shadow(0 0 30px rgba(201,168,76,.5));
+  animation:pulse-title 4s ease-in-out infinite
+}
+#krc-title p{font-size:.7rem;letter-spacing:.5em;color:rgba(201,168,76,.4);margin-top:.3rem;font-weight:300}
+@keyframes pulse-title{0%,100%{filter:drop-shadow(0 0 30px rgba(201,168,76,.5))}50%{filter:drop-shadow(0 0 60px rgba(201,168,76,.9))}}
+
+/* ── CORAZON CENTRAL ── */
+#heart{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:90px;height:90px;z-index:4;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px
+}
+#heart-svg{animation:heartbeat 1.4s ease-in-out infinite;filter:drop-shadow(0 0 20px rgba(201,168,76,.7))}
+@keyframes heartbeat{0%,100%{transform:scale(1)}15%{transform:scale(1.15)}30%{transform:scale(1)}45%{transform:scale(1.08)}60%{transform:scale(1)}}
+#xp-display{font-size:.55rem;letter-spacing:.15em;color:var(--gold);text-align:center;font-weight:600}
+#xp-bar-wrap{width:70px;height:3px;background:rgba(201,168,76,.15);border-radius:2px;overflow:hidden}
+#xp-bar{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:2px;transition:width .5s ease}
+
+/* ── NODOS ORBITALES ── */
+.node{
+  position:fixed;z-index:6;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  transform:translate(-50%,-50%);
+  transition:transform .2s ease
+}
+.node:hover{transform:translate(-50%,-50%) scale(1.12)}
+.node-orb{
+  width:64px;height:64px;border-radius:50%;
+  background:var(--glass);
+  border:1.5px solid var(--glass-border);
+  backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;position:relative;overflow:hidden;
+  box-shadow:0 0 20px rgba(201,168,76,.1);
+  transition:all .3s ease
+}
+.node:hover .node-orb{
+  box-shadow:0 0 40px var(--node-glow,rgba(201,168,76,.4));
+  border-color:var(--node-color,var(--gold));
+  background:rgba(255,255,255,.08)
+}
+.node-orb::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.1),transparent 60%);
+  border-radius:50%
+}
+.node-label{
+  font-size:.6rem;letter-spacing:.15em;font-weight:600;
+  color:rgba(255,255,255,.7);text-transform:uppercase;white-space:nowrap;
+  text-shadow:0 0 10px rgba(0,0,0,.8)
+}
+.node:hover .node-label{color:var(--gold)}
+
+/* ── LINEAS ORBITALES ── */
+.orbit-ring{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  border-radius:50%;border:1px solid rgba(201,168,76,.06);
+  animation:orbit-spin 80s linear infinite;pointer-events:none;z-index:2
+}
+
+/* ── PANEL PERFIL (top-right) ── */
+#panel-perfil{
+  position:fixed;top:1.2rem;right:1.2rem;z-index:20;
+  background:var(--glass);backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);border-radius:16px;
+  padding:.8rem 1rem;display:flex;align-items:center;gap:.8rem;
+  cursor:pointer;transition:all .3s ease;min-width:160px
+}
+#panel-perfil:hover{background:rgba(201,168,76,.08);border-color:var(--gold)}
+.avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--gold));display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.perfil-info{flex:1}
+.perfil-name{font-size:.75rem;font-weight:600;color:#fff;letter-spacing:.05em}
+.perfil-sub{font-size:.6rem;color:var(--gold);letter-spacing:.1em}
+.perfil-chevron{color:rgba(255,255,255,.3);font-size:.8rem}
+
+/* ── MINI REPRODUCTOR MUSICA (top-left) ── */
+#mini-player{
+  position:fixed;top:1.2rem;left:1.2rem;z-index:20;
+  background:var(--glass);backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);border-radius:16px;
+  padding:.8rem 1rem;display:flex;align-items:center;gap:.8rem;
+  cursor:pointer;transition:all .3s ease;min-width:180px
+}
+#mini-player:hover{background:rgba(201,168,76,.08);border-color:var(--gold)}
+.music-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#1DB954,#0a8a3a);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;animation:music-pulse 2s ease-in-out infinite}
+@keyframes music-pulse{0%,100%{box-shadow:0 0 0 0 rgba(29,185,84,.4)}50%{box-shadow:0 0 0 6px rgba(29,185,84,0)}}
+.music-info{flex:1}
+.music-title{font-size:.7rem;font-weight:600;color:#fff}
+.music-sub{font-size:.58rem;color:rgba(255,255,255,.4);letter-spacing:.05em}
+.music-controls{display:flex;gap:.3rem;align-items:center}
+.mc-btn{background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:.8rem;padding:2px;transition:color .2s}
+.mc-btn:hover{color:var(--gold)}
+.mc-btn.play{background:var(--gold);color:#000;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.65rem}
+
+/* ── AGENTE ORIONIX (bottom-right) ── */
+#agente{
+  position:fixed;bottom:1.5rem;right:1.5rem;z-index:20;
+  display:flex;flex-direction:column;align-items:flex-end;gap:.5rem
+}
+#agente-bubble{
+  background:linear-gradient(135deg,rgba(123,47,190,.3),rgba(0,255,209,.1));
+  border:1px solid rgba(123,47,190,.4);border-radius:20px 20px 4px 20px;
+  padding:.7rem 1rem;max-width:220px;font-size:.72rem;color:#e8e8e8;
+  backdrop-filter:blur(12px);line-height:1.5;
+  animation:float 3s ease-in-out infinite
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+#agente-orb{
+  width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--violet),var(--cyan));
+  border:2px solid rgba(0,255,209,.4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;cursor:pointer;
+  box-shadow:0 0 30px rgba(0,255,209,.2);
+  animation:agent-glow 2s ease-in-out infinite
+}
+@keyframes agent-glow{0%,100%{box-shadow:0 0 30px rgba(0,255,209,.2)}50%{box-shadow:0 0 50px rgba(0,255,209,.4)}}
+
+/* ── TITULO CENTRAL KRC LOGO ── */
+#center-krc{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:110px;height:110px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,.1),transparent 70%);
+  border:1.5px solid rgba(201,168,76,.15);
+  z-index:3;pointer-events:none
+}
+
+/* ── TOOLTIP ── */
+#tooltip{
+  position:fixed;z-index:50;
+  background:rgba(5,5,16,.95);border:1px solid var(--glass-border);
+  border-radius:10px;padding:.5rem .8rem;
+  font-size:.7rem;color:var(--gold);pointer-events:none;
+  opacity:0;transition:opacity .2s ease;white-space:nowrap;
+  backdrop-filter:blur(10px)
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  #krc-title h1{font-size:1.8rem;letter-spacing:.15em}
+  #mini-player,#panel-perfil{min-width:unset}
+  .music-title,.perfil-name{font-size:.65rem}
+}
+</style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<div id="app">
+  <!-- Anillo orbital decorativo -->
+  <div class="orbit-ring" style="width:340px;height:340px"></div>
+  <div class="orbit-ring" style="width:520px;height:520px;animation-direction:reverse;animation-duration:120s"></div>
+
+  <!-- Centro KRC -->
+  <div id="center-krc"></div>
+
+  <!-- Título KRC -->
+  <div id="krc-title">
+    <h1>KRC</h1>
+    <p>UNIVERSE · EST. 2025</p>
+  </div>
+
+  <!-- Corazón central -->
+  <div id="heart" onclick="openWorld('mi-universo.html')" title="El Corazón — Experiencia del Universo">
+    <svg id="heart-svg" width="44" height="40" viewBox="0 0 44 40" fill="none">
+      <path d="M22 37C22 37 3 25 3 13C3 7.477 7.477 3 13 3C16.254 3 19.13 4.516 22 7.5C24.87 4.516 27.746 3 31 3C36.523 3 41 7.477 41 13C41 25 22 37 22 37Z" fill="url(#hg)" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+      <defs><linearGradient id="hg" x1="3" y1="3" x2="41" y2="37" gradientUnits="userSpaceOnUse"><stop stop-color="#C9A84C"/><stop offset="1" stop-color="#7B2FBE"/></linearGradient></defs>
+    </svg>
+    <div id="xp-display">XP 0</div>
+    <div id="xp-bar-wrap"><div id="xp-bar" style="width:0%"></div></div>
+  </div>
+
+  <!-- Tooltip -->
+  <div id="tooltip"></div>
+</div>
+
+<!-- ── PANEL PERFIL ── -->
+<div id="panel-perfil" onclick="openWorld('mi-cuenta.html')">
+  <div class="avatar">👑</div>
+  <div class="perfil-info">
+    <div class="perfil-name">Kevin Ruiz</div>
+    <div class="perfil-sub">CREADOR · Nv.1</div>
+  </div>
+  <span class="perfil-chevron">›</span>
+</div>
+
+<!-- ── MINI PLAYER ── -->
+<div id="mini-player" onclick="openWorld('musica.html')">
+  <div class="music-icon">🎵</div>
+  <div class="music-info">
+    <div class="music-title">Sin reproducción</div>
+    <div class="music-sub">CONECTAR PLATAFORMA</div>
+  </div>
+  <div class="music-controls">
+    <button class="mc-btn">⏮</button>
+    <button class="mc-btn play" onclick="event.stopPropagation()">▶</button>
+    <button class="mc-btn">⏭</button>
+  </div>
+</div>
+
+<!-- ── AGENTE ORIONIX ── -->
+<div id="agente">
+  <div id="agente-bubble">✦ Bienvenido al Universo KRC.<br>¿A qué mundo quieres viajar hoy?</div>
+  <div id="agente-orb" onclick="openWorld('agentes.html')">🤖</div>
+</div>
+
+<script>
+// ── CONFIG DE MUNDOS ──
+const MUNDOS = [
+  {
+    id:'krc-logo', emoji:'🏛️', label:'KRC · Imperio',
+    url:'tienda.html', color:'#C9A84C', glow:'rgba(201,168,76,.5)',
+    desc:'Tienda · Redes · Afiliados · Todo lo comercial',
+    angle:270, dist:200
+  },
+  {
+    id:'orionix', emoji:'👁️', label:'ORIONIX',
+    url:'tienda.html', color:'#00FFD1', glow:'rgba(0,255,209,.5)',
+    desc:'La tienda del Imperio — 200 productos',
+    angle:315, dist:200
+  },
+  {
+    id:'cronicas', emoji:'📓', label:'CRÓNICAS',
+    url:'cronicas.html', color:'#F0D080', glow:'rgba(240,208,128,.5)',
+    desc:'Crónicas del Creador — El diario del Imperio',
+    angle:0, dist:200
+  },
+  {
+    id:'forjadora', emoji:'⚔️', label:'FORJADORA',
+    url:'forjadora.html', color:'#FF6B35', glow:'rgba(255,107,53,.5)',
+    desc:'La Forjadora de Diamantes — Agentes y herramientas',
+    angle:45, dist:200
+  },
+  {
+    id:'musica', emoji:'🎵', label:'MÚSICA',
+    url:'musica.html', color:'#1DB954', glow:'rgba(29,185,84,.5)',
+    desc:'Reproductor Universal — Spotify · YouTube · Apple',
+    angle:90, dist:200
+  },
+  {
+    id:'kabaiom', emoji:'🔮', label:'KABAIOM',
+    url:'kabalion-2d.html', color:'#9B59B6', glow:'rgba(155,89,182,.5)',
+    desc:'Kabala del Creador — Estadísticas del espíritu',
+    angle:135, dist:200
+  },
+  {
+    id:'trascendencia', emoji:'💎', label:'TRASCENDENCIA',
+    url:'portal.html', color:'#3498DB', glow:'rgba(52,152,219,.5)',
+    desc:'Trascendencia — El portal entre mundos',
+    angle:180, dist:200
+  },
+  {
+    id:'kabaiom2', emoji:'🌌', label:'MI UNIVERSO',
+    url:'mi-universo.html', color:'#E74C3C', glow:'rgba(231,76,60,.5)',
+    desc:'Mi Universo — Tu espacio personal en el Imperio',
+    angle:225, dist:200
+  }
+];
+
+// ── CREAR NODOS ──
+function createNodes(){
+  const cx = window.innerWidth/2, cy = window.innerHeight/2;
+  MUNDOS.forEach(m=>{
+    const rad = m.angle * Math.PI/180;
+    const x = cx + m.dist * Math.cos(rad);
+    const y = cy + m.dist * Math.sin(rad);
+    const el = document.createElement('div');
+    el.className='node';
+    el.id='node-'+m.id;
+    el.style.left=x+'px';
+    el.style.top=y+'px';
+    el.style.setProperty('--node-color',m.color);
+    el.style.setProperty('--node-glow',m.glow);
+    el.innerHTML=`
+      <div class="node-orb">${m.emoji}</div>
+      <div class="node-label">${m.label}</div>
+    `;
+    el.addEventListener('click',()=>openWorld(m.url));
+    el.addEventListener('mouseenter',(e)=>showTooltip(e,m.desc));
+    el.addEventListener('mouseleave',hideTooltip);
+    document.getElementById('app').appendChild(el);
+    // Línea del nodo al centro
+    drawLine(x,y,cx,cy,m.color);
+  });
+}
+
+// ── LINEAS DE CONEXION (SVG) ──
+function drawLine(x1,y1,x2,y2,color){
+  let svg = document.getElementById('lines-svg');
+  if(!svg){
+    svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.id='lines-svg';
+    svg.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none';
+    document.body.appendChild(svg);
+  }
+  const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+  line.setAttribute('x1',x1);line.setAttribute('y1',y1);
+  line.setAttribute('x2',x2);line.setAttribute('y2',y2);
+  line.setAttribute('stroke',color);
+  line.setAttribute('stroke-width','0.5');
+  line.setAttribute('stroke-opacity','0.2');
+  line.setAttribute('stroke-dasharray','4,8');
+  svg.appendChild(line);
+}
+
+// ── CANVAS ESTRELLADO ──
+(function initStars(){
+  const canvas=document.getElementById('canvas');
+  const ctx=canvas.getContext('2d');
+  let W,H,stars=[];
+  function resize(){
+    W=canvas.width=window.innerWidth;
+    H=canvas.height=window.innerHeight;
+    stars=[];
+    for(let i=0;i<220;i++){
+      stars.push({
+        x:Math.random()*W, y:Math.random()*H,
+        r:Math.random()*1.5+.2,
+        a:Math.random(),
+        sp:Math.random()*.003+.001,
+        twinkle:Math.random()*Math.PI*2
+      });
+    }
+  }
+  resize();
+  window.addEventListener('resize',()=>{resize();createNodes()});
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    // Gradiente de fondo
+    const bg=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*.8);
+    bg.addColorStop(0,'rgba(30,10,60,.3)');
+    bg.addColorStop(1,'rgba(5,5,16,0)');
+    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+    // Estrellas
+    stars.forEach(s=>{
+      s.twinkle+=s.sp;
+      const alpha=s.a*(.5+.5*Math.sin(s.twinkle));
+      ctx.beginPath();
+      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${alpha})`;
+      ctx.fill();
+    });
+    // Nebula central
+    const nb=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,200);
+    nb.addColorStop(0,'rgba(123,47,190,.08)');
+    nb.addColorStop(.5,'rgba(201,168,76,.04)');
+    nb.addColorStop(1,'transparent');
+    ctx.fillStyle=nb;ctx.fillRect(0,0,W,H);
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── TOOLTIP ──
+const tip=document.getElementById('tooltip');
+function showTooltip(e,text){
+  tip.textContent=text;
+  tip.style.left=(e.clientX+12)+'px';
+  tip.style.top=(e.clientY-30)+'px';
+  tip.style.opacity='1';
+}
+function hideTooltip(){tip.style.opacity='0'}
+document.addEventListener('mousemove',e=>{
+  tip.style.left=(e.clientX+12)+'px';
+  tip.style.top=(e.clientY-30)+'px';
+});
+
+// ── NAVEGACION ──
+function openWorld(url){
+  document.body.style.transition='opacity .4s ease';
+  document.body.style.opacity='0';
+  setTimeout(()=>window.location.href=url,400);
+}
+
+// ── XP SISTEMA ──
+function loadXP(){
+  const sesion=localStorage.getItem('orionix_sesion_id')||'anonimo';
+  const xp=parseInt(localStorage.getItem('orionix_xp')||'0');
+  const maxXP=100+Math.floor(xp/100)*50;
+  const nivel=Math.floor(xp/100)+1;
+  document.getElementById('xp-display').textContent=`XP ${xp} · Nv.${nivel}`;
+  document.getElementById('xp-bar').style.width=Math.min(100,(xp%maxXP)/maxXP*100)+'%';
+  document.querySelector('.perfil-sub').textContent=`CREADOR · Nv.${nivel}`;
+  // Intentar sincronizar con n8n
+  try{
+    fetch('https://lkevinruizl.app.n8n.cloud/webhook/orionix-xp',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({sesion_id:sesion,accion:'visita_hub',puntos:5,pagina:'krc.html'})
+    }).then(r=>r.json()).then(d=>{
+      if(d.xp_total){
+        localStorage.setItem('orionix_xp',d.xp_total);
+        document.getElementById('xp-display').textContent=`XP ${d.xp_total} · Nv.${d.nivel||1}`;
+        document.getElementById('xp-bar').style.width=Math.min(100,(d.xp_total%100)/100*100)+'%';
+      }
+    });
+  }catch(e){}
+}
+
+// ── AGENTE MENSAJES ──
+const mensajes=[
+  '✦ Bienvenido al Universo KRC.<br>¿A qué mundo viajas hoy?',
+  '🌌 El Corazón acumula tu experiencia.<br>Cada acción suma XP.',
+  '⚔️ La Forjadora tiene nuevos agentes<br>esperando órdenes.',
+  '👁️ ORIONIX tiene 200 artículos.<br>El Imperio crece.',
+  '🎵 Conecta tu música y el universo<br>vibrará contigo.'
+];
+let msgIdx=0;
+function rotateMsgs(){
+  const b=document.getElementById('agente-bubble');
+  b.style.opacity='0';
+  setTimeout(()=>{
+    msgIdx=(msgIdx+1)%mensajes.length;
+    b.innerHTML=mensajes[msgIdx];
+    b.style.opacity='1';
+  },300);
+}
+setInterval(rotateMsgs,5000);
+
+// ── INIT ──
+window.addEventListener('load',()=>{
+  createNodes();
+  loadXP();
+  document.body.style.opacity='0';
+  setTimeout(()=>{
+    document.body.style.transition='opacity .8s ease';
+    document.body.style.opacity='1';
+  },100);
+});
+</script>
+</body>
+</html>

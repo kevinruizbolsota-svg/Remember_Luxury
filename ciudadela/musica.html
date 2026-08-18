@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KRC Música — Reproductor Universal del Imperio</title>
+<meta name="description" content="Conecta Spotify, YouTube Music y Apple Music. Guarda tus playlists en el universo KRC.">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#C9A84C;--bg:#050510;--glass:rgba(255,255,255,0.04);--glass-b:rgba(201,168,76,0.15)}
+body{background:var(--bg);color:#e8e8e8;font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(123,47,190,.12),transparent 50%),radial-gradient(ellipse at 70% 80%,rgba(29,185,84,.08),transparent 50%);z-index:0;pointer-events:none}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:.8rem 1.5rem;display:flex;align-items:center;gap:1rem;background:rgba(5,5,16,.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-b)}
+.back-btn{background:var(--glass);border:1px solid var(--glass-b);border-radius:8px;padding:.4rem .8rem;color:var(--gold);font-size:.75rem;cursor:pointer;text-decoration:none;letter-spacing:.1em;transition:all .2s}
+.back-btn:hover{background:rgba(201,168,76,.1)}
+nav h2{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.3em;color:var(--gold)}
+
+/* ── LAYOUT ── */
+main{position:relative;z-index:1;padding:6rem 1.5rem 2rem;max-width:900px;margin:0 auto}
+
+/* ── PLAYER PRINCIPAL ── */
+.main-player{
+  background:var(--glass);backdrop-filter:blur(20px);
+  border:1px solid var(--glass-b);border-radius:24px;
+  padding:2rem;margin-bottom:2rem;text-align:center
+}
+.now-playing-art{
+  width:160px;height:160px;border-radius:20px;margin:0 auto 1.2rem;
+  background:linear-gradient(135deg,#1DB954,#7B2FBE,var(--gold));
+  display:flex;align-items:center;justify-content:center;font-size:4rem;
+  box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(201,168,76,.15);
+  animation:album-pulse 4s ease-in-out infinite
+}
+@keyframes album-pulse{0%,100%{box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(201,168,76,.1)}50%{box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 80px rgba(201,168,76,.25)}}
+.song-title{font-size:1.1rem;font-weight:600;margin-bottom:.3rem}
+.song-artist{font-size:.8rem;color:rgba(255,255,255,.4);margin-bottom:1.2rem}
+.progress-wrap{background:rgba(255,255,255,.08);height:4px;border-radius:2px;margin-bottom:1rem;cursor:pointer;position:relative}
+.progress-fill{background:linear-gradient(90deg,var(--gold),#1DB954);height:100%;border-radius:2px;width:35%;transition:width .1s}
+.progress-dot{position:absolute;top:50%;right:65%;transform:translate(50%,-50%);width:12px;height:12px;background:var(--gold);border-radius:50%;box-shadow:0 0 10px var(--gold)}
+.time-row{display:flex;justify-content:space-between;font-size:.65rem;color:rgba(255,255,255,.3);margin-bottom:1.2rem}
+.ctrl-row{display:flex;align-items:center;justify-content:center;gap:1.5rem}
+.ctrl-btn{background:none;border:none;color:rgba(255,255,255,.5);font-size:1.1rem;cursor:pointer;transition:color .2s;padding:.3rem}
+.ctrl-btn:hover{color:var(--gold)}
+.ctrl-btn.main-play{
+  width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),#F0D080);
+  color:#000;font-size:1.3rem;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 30px rgba(201,168,76,.4);transition:all .2s
+}
+.ctrl-btn.main-play:hover{transform:scale(1.08);box-shadow:0 0 50px rgba(201,168,76,.6)}
+.vol-row{display:flex;align-items:center;gap:.6rem;margin-top:1rem;justify-content:center}
+.vol-icon{font-size:.85rem;color:rgba(255,255,255,.3)}
+.vol-slider{-webkit-appearance:none;width:100px;height:3px;border-radius:2px;background:rgba(255,255,255,.1);cursor:pointer}
+.vol-slider::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;background:var(--gold);border-radius:50%}
+
+/* ── CONEXIONES ── */
+.section-title{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.3em;color:var(--gold);margin-bottom:1rem}
+.platforms-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.8rem;margin-bottom:2rem}
+.platform-card{
+  background:var(--glass);border:1px solid var(--glass-b);border-radius:16px;
+  padding:1rem;display:flex;align-items:center;gap:.8rem;cursor:pointer;
+  transition:all .3s ease
+}
+.platform-card:hover{transform:translateY(-2px);border-color:var(--platform-color,var(--gold))}
+.plat-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.plat-info .plat-name{font-size:.8rem;font-weight:600}
+.plat-info .plat-status{font-size:.6rem;color:rgba(255,255,255,.3);letter-spacing:.1em}
+.plat-btn{margin-left:auto;font-size:.6rem;padding:.3rem .6rem;border-radius:6px;border:1px solid;cursor:pointer;transition:all .2s;background:none}
+
+/* ── PLAYLIST ── */
+.playlist-wrap{background:var(--glass);border:1px solid var(--glass-b);border-radius:20px;padding:1.2rem}
+.playlist-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.add-btn{background:rgba(201,168,76,.1);border:1px solid var(--gold);border-radius:8px;color:var(--gold);font-size:.7rem;padding:.3rem .7rem;cursor:pointer;transition:all .2s}
+.add-btn:hover{background:rgba(201,168,76,.2)}
+.track{display:flex;align-items:center;gap:.8rem;padding:.6rem .5rem;border-radius:10px;cursor:pointer;transition:background .2s}
+.track:hover{background:rgba(255,255,255,.04)}
+.track.active{background:rgba(201,168,76,.08)}
+.track-num{width:20px;text-align:center;font-size:.7rem;color:rgba(255,255,255,.2)}
+.track.active .track-num{color:var(--gold)}
+.track-thumb{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--gold),var(--c,#7B2FBE));display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.track-info{flex:1}
+.track-name{font-size:.8rem;font-weight:500}
+.track-artist{font-size:.65rem;color:rgba(255,255,255,.35)}
+.track-dur{font-size:.65rem;color:rgba(255,255,255,.25)}
+.empty-pl{text-align:center;padding:2rem;color:rgba(255,255,255,.2);font-size:.8rem}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="back-btn" href="krc.html">← KRC</a>
+  <h2>🎵 MÚSICA</h2>
+</nav>
+
+<main>
+  <!-- Player principal -->
+  <div class="main-player">
+    <div class="now-playing-art">🎵</div>
+    <div class="song-title">Sin reproducción activa</div>
+    <div class="song-artist">Conecta una plataforma para empezar</div>
+    <div class="progress-wrap">
+      <div class="progress-fill"></div>
+    </div>
+    <div class="time-row"><span>0:00</span><span>0:00</span></div>
+    <div class="ctrl-row">
+      <button class="ctrl-btn" title="Aleatorio">🔀</button>
+      <button class="ctrl-btn" title="Anterior">⏮</button>
+      <button class="ctrl-btn main-play" title="Play/Pause">▶</button>
+      <button class="ctrl-btn" title="Siguiente">⏭</button>
+      <button class="ctrl-btn" title="Repetir">🔁</button>
+    </div>
+    <div class="vol-row">
+      <span class="vol-icon">🔈</span>
+      <input class="vol-slider" type="range" min="0" max="100" value="70">
+      <span class="vol-icon">🔊</span>
+    </div>
+  </div>
+
+  <!-- Plataformas -->
+  <div class="section-title">CONECTAR PLATAFORMAS</div>
+  <div class="platforms-grid">
+    <div class="platform-card" style="--platform-color:#1DB954">
+      <div class="plat-icon" style="background:rgba(29,185,84,.15)">🟢</div>
+      <div class="plat-info">
+        <div class="plat-name">Spotify</div>
+        <div class="plat-status">NO CONECTADO</div>
+      </div>
+      <button class="plat-btn" style="border-color:#1DB954;color:#1DB954" onclick="connectPlatform('spotify')">CONECTAR</button>
+    </div>
+    <div class="platform-card" style="--platform-color:#FF0000">
+      <div class="plat-icon" style="background:rgba(255,0,0,.15)">📺</div>
+      <div class="plat-info">
+        <div class="plat-name">YouTube Music</div>
+        <div class="plat-status">NO CONECTADO</div>
+      </div>
+      <button class="plat-btn" style="border-color:#FF0000;color:#FF0000" onclick="connectPlatform('youtube')">CONECTAR</button>
+    </div>
+    <div class="platform-card" style="--platform-color:#FC3C44">
+      <div class="plat-icon" style="background:rgba(252,60,68,.15)">🍎</div>
+      <div class="plat-info">
+        <div class="plat-name">Apple Music</div>
+        <div class="plat-status">NO CONECTADO</div>
+      </div>
+      <button class="plat-btn" style="border-color:#FC3C44;color:#FC3C44" onclick="connectPlatform('apple')">CONECTAR</button>
+    </div>
+    <div class="platform-card" style="--platform-color:#FF6719">
+      <div class="plat-icon" style="background:rgba(255,103,25,.15)">🎙️</div>
+      <div class="plat-info">
+        <div class="plat-name">SoundCloud</div>
+        <div class="plat-status">NO CONECTADO</div>
+      </div>
+      <button class="plat-btn" style="border-color:#FF6719;color:#FF6719" onclick="connectPlatform('soundcloud')">CONECTAR</button>
+    </div>
+  </div>
+
+  <!-- Playlist guardada -->
+  <div class="playlist-wrap">
+    <div class="playlist-header">
+      <div class="section-title" style="margin:0">MI PLAYLIST KRC</div>
+      <button class="add-btn" onclick="addTrack()">+ Añadir canción</button>
+    </div>
+    <div id="playlist-list">
+      <div class="empty-pl">🎵 Tu playlist del Imperio está vacía.<br><small>Conecta Spotify o añade canciones manualmente.</small></div>
+    </div>
+  </div>
+</main>
+
+<script>
+function connectPlatform(p){
+  const urls={
+    spotify:'https://accounts.spotify.com/authorize?client_id=demo&response_type=token&redirect_uri='+encodeURIComponent(location.href)+'&scope=streaming',
+    youtube:'https://music.youtube.com',
+    apple:'https://music.apple.com',
+    soundcloud:'https://soundcloud.com'
+  };
+  window.open(urls[p],'_blank');
+}
+
+function addTrack(){
+  const nombre=prompt('Nombre de la canción:');
+  if(!nombre)return;
+  const artista=prompt('Artista:');
+  const playlist=JSON.parse(localStorage.getItem('krc_playlist')||'[]');
+  playlist.push({titulo:nombre,artista:artista||'Desconocido',dur:'--:--',emoji:['🎸','🎹','🎺','🥁','🎻'][Math.floor(Math.random()*5)]});
+  localStorage.setItem('krc_playlist',JSON.stringify(playlist));
+  renderPlaylist();
+  // Sync con n8n
+  const sesion=localStorage.getItem('orionix_sesion_id')||'anonimo';
+  fetch('https://lkevinruizl.app.n8n.cloud/webhook/orionix-playlist',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sesion_id:sesion,accion:'guardar_playlist',playlist})}).catch(()=>{});
+}
+
+function renderPlaylist(){
+  const playlist=JSON.parse(localStorage.getItem('krc_playlist')||'[]');
+  const el=document.getElementById('playlist-list');
+  if(!playlist.length){el.innerHTML='<div class="empty-pl">🎵 Tu playlist del Imperio está vacía.<br><small>Conecta Spotify o añade canciones manualmente.</small></div>';return;}
+  el.innerHTML=playlist.map((t,i)=>`
+    <div class="track ${i===0?'active':''}" onclick="playTrack(${i})">
+      <div class="track-num">${i===0?'▶':i+1}</div>
+      <div class="track-thumb" style="--c:hsl(${i*47},60%,40%)">${t.emoji||'🎵'}</div>
+      <div class="track-info">
+        <div class="track-name">${t.titulo}</div>
+        <div class="track-artist">${t.artista}</div>
+      </div>
+      <div class="track-dur">${t.dur||'--:--'}</div>
+    </div>
+  `).join('');
+}
+
+function playTrack(i){
+  const playlist=JSON.parse(localStorage.getItem('krc_playlist')||'[]');
+  const t=playlist[i];
+  if(!t)return;
+  document.querySelector('.song-title').textContent=t.titulo;
+  document.querySelector('.song-artist').textContent=t.artista;
+  renderPlaylist();
+}
+
+renderPlaylist();
+</script>
+</body>
+</html>

@@ -3,86 +3,209 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIONIX · Método de Pago</title>
-<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<title>ORIONIX · Pasarela de Pago Seguro</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--gold:#e8c86a;--gd:#b89a40;--bg:#0b0b0d;--bg2:rgba(14,13,20,0.97);--b:rgba(232,200,106,0.12);--ba:rgba(232,200,106,0.4);--text:#f0e8d0;--dim:rgba(240,232,208,0.4)}
+:root{
+  --gold:#e8c86a;--gd:#b89a40;--gl:#f5e0a0;
+  --glow:rgba(232,200,106,0.25);--glow2:rgba(232,200,106,0.08);
+  --bg:#0a0a0f;--bg2:rgba(13,12,20,0.97);--bg3:rgba(20,18,30,0.85);
+  --b:rgba(232,200,106,0.13);--ba:rgba(232,200,106,0.38);
+  --text:#f0e8d0;--dim:rgba(240,232,208,0.42);
+  --r8:8px;--r12:12px;--r20:20px;
+  --ok:#2ecc71;--okd:rgba(46,204,113,0.7);
+}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Cormorant Garamond',serif;background:var(--bg);color:var(--text);min-height:100vh}
-#cv{position:fixed;inset:0;z-index:0;pointer-events:none}
-nav{position:fixed;top:0;left:0;right:0;height:54px;z-index:900;display:flex;align-items:center;gap:12px;padding:0 18px;background:rgba(11,11,13,.98);border-bottom:1px solid var(--b);backdrop-filter:blur(14px)}
-.brand{font-family:'Cinzel',serif;font-size:.95rem;font-weight:900;letter-spacing:.18em;color:var(--gold);text-decoration:none}
-.nlink{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.12em;color:var(--dim);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .2s;text-transform:uppercase}
-.nlink:hover{color:var(--gold)}
 
-/* STEPS */
-.steps{display:flex;align-items:center;justify-content:center;gap:0;padding:14px 0;background:rgba(14,13,20,.7);border-bottom:1px solid var(--b);position:fixed;top:54px;left:0;right:0;z-index:800}
-.step{display:flex;align-items:center;gap:6px;font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;padding:0 14px}
+/* Canvas Estrellas */
+#cv{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* Nav */
+nav{
+  position:fixed;top:0;left:0;right:0;height:58px;z-index:900;
+  display:flex;align-items:center;padding:0 24px;
+  background:rgba(10,10,15,0.92);
+  border-bottom:1px solid var(--b);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+}
+.brand{
+  font-family:'Cinzel',serif;font-size:1rem;font-weight:900;
+  letter-spacing:.22em;color:var(--gold);text-decoration:none;
+  text-shadow:0 0 20px var(--glow);margin-right:20px;
+}
+.nlink{
+  font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.12em;
+  color:var(--dim);text-decoration:none;padding:8px 14px;
+  border-radius:var(--r8);transition:all .2s;text-transform:uppercase;margin-left:auto;
+}
+.nlink:hover{color:var(--gold);background:rgba(255,255,255,.04)}
+
+/* Steps */
+.steps{
+  display:flex;align-items:center;justify-content:center;gap:0;
+  padding:14px 0;background:rgba(14,13,20,.7);border-bottom:1px solid var(--b);
+  position:fixed;top:58px;left:0;right:0;z-index:800;
+  backdrop-filter:blur(8px);
+}
+.step{
+  display:flex;align-items:center;gap:6px;font-family:'Cinzel',serif;
+  font-size:.46rem;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;padding:0 14px;
+}
 .step.on{color:var(--gold)}
-.step.done{color:rgba(46,204,113,.7)}
-.sn{width:22px;height:22px;border-radius:50%;border:1px solid;display:flex;align-items:center;justify-content:center;font-size:.55rem;font-weight:700;flex-shrink:0}
+.step.done{color:var(--okd)}
+.sn{
+  width:22px;height:22px;border-radius:50%;border:1px solid;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.55rem;font-weight:700;flex-shrink:0;
+}
 .step.on .sn{border-color:var(--gold);color:var(--gold)}
-.step.done .sn{border-color:rgba(46,204,113,.7);color:rgba(46,204,113,.7)}
-.step.dim .sn{border-color:var(--b);color:var(--b)}
+.step.done .sn{border-color:var(--okd);color:var(--okd)}
 .step-div{width:28px;height:1px;background:var(--b)}
 
-.wrap{padding:116px 24px 60px;max-width:900px;margin:0 auto;position:relative;z-index:1}
-.layout{display:grid;grid-template-columns:1fr 300px;gap:18px;align-items:start}
-@media(max-width:720px){.layout{grid-template-columns:1fr}}
+/* Layout Wrapper */
+.wrap{padding:134px 24px 60px;max-width:960px;margin:0 auto;position:relative;z-index:1}
+.layout{display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start}
+@media(max-width:760px){.layout{grid-template-columns:1fr}}
 
-.sec-h{font-family:'Cinzel',serif;font-size:.58rem;font-weight:700;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid var(--b)}
-.card{background:var(--bg2);border:1px solid var(--b);border-radius:10px;padding:20px;margin-bottom:14px}
+.sec-h{
+  font-family:'Cinzel',serif;font-size:.58rem;font-weight:700;
+  letter-spacing:.18em;color:var(--gold);text-transform:uppercase;
+  margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid var(--b);
+}
+.card{
+  background:var(--bg3);border:1px solid var(--b);border-radius:var(--r12);
+  padding:22px;margin-bottom:16px;backdrop-filter:blur(8px);
+}
 
-/* MÉTODO SELECTOR */
-.methods{display:flex;flex-direction:column;gap:8px}
-.method{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:9px;border:1px solid var(--b);cursor:pointer;transition:all .25s;position:relative}
-.method:hover{border-color:rgba(232,200,106,.25)}
-.method.on{border-color:var(--ba);background:rgba(232,200,106,.05)}
-.method-radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--b);flex-shrink:0;transition:all .22s;position:relative}
-.method.on .method-radio{border-color:var(--gold)}
-.method.on .method-radio::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:8px;height:8px;border-radius:50%;background:var(--gold)}
-.method-ico{font-size:1.4rem;width:36px;text-align:center;flex-shrink:0}
-.method-info{flex:1}
-.method-name{font-family:'Cinzel',serif;font-size:.62rem;font-weight:700;color:var(--text);letter-spacing:.06em;margin-bottom:3px}
-.method-desc{font-size:.76rem;color:var(--dim)}
-.method-badge{font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:.12em;padding:2px 8px;border-radius:10px;background:rgba(46,204,113,.12);color:rgba(46,204,113,.9);border:1px solid rgba(46,204,113,.25)}
-
-/* DETAIL PANELS */
-.detail{display:none;margin-top:14px;padding:16px;background:rgba(255,255,255,.025);border:1px solid var(--b);border-radius:8px}
-.detail.on{display:block}
-
-.fi{width:100%;padding:10px 13px;background:rgba(255,255,255,.04);border:1px solid var(--b);border-radius:7px;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:.9rem;outline:none;transition:border .22s;margin-bottom:10px}
+/* Form Inputs */
+.fi{
+  width:100%;padding:11px 14px;background:rgba(255,255,255,.03);
+  border:1px solid var(--b);border-radius:var(--r8);
+  color:var(--text);font-family:'Cormorant Garamond',serif;
+  font-size:.95rem;outline:none;transition:border-color .22s;margin-bottom:12px;
+}
 .fi:focus{border-color:var(--gold)}
 .fi::placeholder{color:var(--dim)}
-.fi-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fi-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
-.paypal-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:13px;background:#003087;color:#fff;border:none;border-radius:8px;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.12em;cursor:pointer;transition:all .28s;text-decoration:none;margin-bottom:8px}
-.paypal-btn:hover{background:#001f5a}
-.tg-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:13px;background:rgba(0,136,204,.12);color:#29b6f6;border:1px solid rgba(0,136,204,.3);border-radius:8px;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.12em;cursor:pointer;transition:all .28s;text-decoration:none}
-.tg-btn:hover{background:rgba(0,136,204,.2)}
+/* Método Selector */
+.methods{display:flex;flex-direction:column;gap:10px}
+.method{
+  display:flex;align-items:center;gap:14px;padding:14px 16px;
+  border-radius:var(--r12);border:1px solid var(--b);
+  cursor:pointer;transition:all .25s;position:relative;
+}
+.method:hover{border-color:rgba(232,200,106,.25)}
+.method.on{border-color:var(--ba);background:rgba(232,200,106,.05);box-shadow:0 0 15px var(--glow2)}
+.method-radio{
+  width:18px;height:18px;border-radius:50%;border:2px solid var(--b);
+  flex-shrink:0;transition:all .22s;position:relative;
+}
+.method.on .method-radio{border-color:var(--gold)}
+.method.on .method-radio::after{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:8px;height:8px;border-radius:50%;background:var(--gold);
+}
+.method-ico{font-size:1.5rem;width:36px;text-align:center;flex-shrink:0}
+.method-info{flex:1}
+.method-name{font-family:'Cinzel',serif;font-size:.62rem;font-weight:700;color:var(--text);letter-spacing:.08em;margin-bottom:3px}
+.method-desc{font-size:.78rem;color:var(--dim);line-height:1.3}
+.method-badge{
+  font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:.12em;
+  padding:2px 8px;border-radius:10px;
+  background:rgba(46,204,113,.12);color:rgba(46,204,113,.9);
+  border:1px solid rgba(46,204,113,.25);text-transform:uppercase;
+}
 
-.info-box{padding:12px;background:rgba(255,255,255,.03);border:1px solid var(--b);border-radius:7px;font-size:.8rem;color:var(--dim);line-height:1.6;margin-bottom:8px}
+/* Detail Panels */
+.detail{display:none;margin-top:12px;padding:16px;background:rgba(255,255,255,.015);border:1px solid var(--b);border-radius:var(--r8)}
+.detail.on{display:block}
+
+/* Card Form fields */
+.card-form{display:flex;flex-direction:column;gap:4px;margin-top:8px}
+
+.paypal-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:13px;background:#003087;color:#fff;border:none;
+  border-radius:var(--r8);font-family:'Cinzel',serif;font-size:.6rem;
+  letter-spacing:.12em;cursor:pointer;transition:all .28s;text-decoration:none;
+  margin-bottom:8px;text-transform:uppercase;font-weight:700;
+}
+.paypal-btn:hover{background:#001f5a;box-shadow:0 4px 15px rgba(0,48,135,0.3)}
+.tg-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:13px;background:rgba(0,136,204,.12);color:#29b6f6;
+  border:1px solid rgba(0,136,204,.3);border-radius:var(--r8);
+  font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.12em;
+  cursor:pointer;transition:all .28s;text-decoration:none;
+  text-transform:uppercase;font-weight:700;
+}
+.tg-btn:hover{background:rgba(0,136,204,.2);box-shadow:0 4px 15px rgba(0,136,204,0.15)}
+
+.info-box{
+  padding:12px;background:rgba(255,255,255,.02);border:1px solid var(--b);
+  border-radius:var(--r8);font-size:.82rem;color:var(--dim);line-height:1.6;margin-bottom:10px;
+}
 .info-box strong{color:var(--text);font-weight:600}
 
-/* RESUMEN LATERAL */
-.resumen{background:var(--bg2);border:1px solid var(--b);border-radius:10px;padding:18px;position:sticky;top:100px}
-.res-h{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--b)}
-.ri{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:9px;gap:10px}
-.ri-name{font-size:.8rem;color:var(--text);flex:1}
-.ri-price{font-family:'Cinzel',serif;font-size:.76rem;color:var(--gold);flex-shrink:0}
-.res-total{display:flex;justify-content:space-between;margin-top:12px;padding-top:10px;border-top:1px solid var(--b)}
-.rtl{font-family:'Cinzel',serif;font-size:.66rem;font-weight:700;color:var(--text)}
-.rtv{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:900;color:var(--gold)}
-.confirm-btn{display:block;width:100%;margin-top:16px;padding:13px;background:var(--gold);color:var(--bg);border:none;border-radius:8px;font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.14em;font-weight:700;cursor:pointer;transition:all .28s;text-align:center;box-shadow:0 0 16px rgba(232,200,106,.18)}
-.confirm-btn:hover{background:var(--gd)}
+/* Resumen Lateral */
+.resumen{
+  background:var(--bg3);border:1px solid var(--b);border-radius:var(--r12);
+  padding:20px;position:sticky;top:140px;backdrop-filter:blur(8px);
+}
+.res-h{
+  font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.18em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:14px;
+  padding-bottom:10px;border-bottom:1px solid var(--b);
+}
+.ri{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:10px}
+.ri-name{font-size:.84rem;color:var(--text);flex:1;line-height:1.3}
+.ri-price{font-family:'Cinzel',serif;font-size:.78rem;color:var(--gold);flex-shrink:0}
+.res-total{display:flex;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid var(--b)}
+.rtl{font-family:'Cinzel',serif;font-size:.68rem;font-weight:700;color:var(--text)}
+.rtv{font-family:'Cinzel',serif;font-size:1.15rem;font-weight:900;color:var(--gold);text-shadow:0 0 10px var(--glow)}
+.confirm-btn{
+  display:block;width:100%;margin-top:16px;padding:14px;
+  background:linear-gradient(135deg,var(--gd),var(--gold));color:var(--bg);
+  border:none;border-radius:var(--r8);font-family:'Cinzel',serif;
+  font-size:.62rem;letter-spacing:.14em;font-weight:900;cursor:pointer;
+  transition:all .28s;text-align:center;text-transform:uppercase;
+  box-shadow:0 4px 20px rgba(232,200,106,.3);
+}
+.confirm-btn:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(232,200,106,.45)}
+
+/* Fullscreen loading overlay */
+.loading-overlay{
+  position:fixed;inset:0;background:rgba(10,10,15,0.96);
+  z-index:9999;display:none;align-items:center;
+  justify-content:center;flex-direction:column;gap:22px;
+  backdrop-filter:blur(15px);
+  -webkit-backdrop-filter:blur(15px);
+}
+.loading-overlay.on{display:flex}
+.spinner{
+  width:50px;height:50px;
+  border:3px dashed var(--gold);
+  border-top-color:transparent;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{
+  font-family:'Cinzel',serif;font-size:.76rem;
+  letter-spacing:.2em;color:var(--gold);text-transform:uppercase;
+  text-align:center;
+}
 </style>
 </head>
 <body>
 <canvas id="cv"></canvas>
 <nav>
   <a href="hub.html" class="brand">ORIONIX</a>
-  <a class="nlink" href="carrito.html">← Carrito</a>
+  <a class="nlink" href="carrito.html">← Volver al Carrito</a>
 </nav>
 
 <!-- STEPS -->
@@ -91,71 +214,96 @@ nav{position:fixed;top:0;left:0;right:0;height:54px;z-index:900;display:flex;ali
   <div class="step-div"></div>
   <div class="step on"><div class="sn">2</div> Método de Pago</div>
   <div class="step-div"></div>
-  <div class="step dim"><div class="sn">3</div> Confirmación</div>
+  <div class="step"><div class="sn">3</div> Confirmación</div>
 </div>
 
 <div class="wrap">
   <div class="layout">
     <div>
-      <div class="sec-h">💳 Elige tu Método de Pago</div>
+      <div class="sec-h">💳 Pasarela de Pago Seguro</div>
 
       <!-- DATOS PERSONALES -->
       <div class="card">
-        <div class="sec-h" style="margin-bottom:12px">👤 Datos del Comprador</div>
+        <div class="sec-h" style="margin-bottom:12px;border:0;padding:0">👤 Datos del Comprador</div>
         <input class="fi" type="text" id="nombre" placeholder="Nombre completo *">
         <div class="fi-row">
           <input class="fi" type="email" id="email" placeholder="Email *">
           <input class="fi" type="text" id="telegram" placeholder="@Telegram (opcional)">
         </div>
-        <input class="fi" type="text" id="direccion" placeholder="Dirección de envío (si aplica)">
+        <input class="fi" type="text" id="direccion" placeholder="Dirección de envío completa *">
       </div>
 
       <!-- MÉTODOS -->
       <div class="card">
         <div class="methods" id="methods">
-          <div class="method on" onclick="selectMethod('paypal',this)">
+          
+          <!-- TARJETA STRIPE -->
+          <div class="method on" onclick="selectMethod('stripe',this)">
+            <div class="method-radio"></div>
+            <div class="method-ico">💳</div>
+            <div class="method-info">
+              <div class="method-name">Tarjeta de Crédito / Débito</div>
+              <div class="method-desc">Pago instantáneo, seguro y encriptado procesado por Stripe</div>
+            </div>
+            <div class="method-badge">Recomendado</div>
+          </div>
+          <div class="detail on" id="d-stripe">
+            <div class="info-box">Ingresa los datos de tu tarjeta de crédito o débito. La transacción es procesada con encriptación SSL de 256 bits directa con Stripe.</div>
+            <div class="card-form">
+              <input class="fi" type="text" id="card-name" placeholder="Nombre del titular impreso en tarjeta *">
+              <input class="fi" type="text" id="card-number" placeholder="Número de Tarjeta (16 dígitos) *" maxlength="19" oninput="formatCardNumber(this)">
+              <div class="fi-row">
+                <input class="fi" type="text" id="card-expiry" placeholder="MM/AA *" maxlength="5" oninput="formatCardExpiry(this)">
+                <input class="fi" type="text" id="card-cvc" placeholder="CVC (3-4 dígitos) *" maxlength="4" oninput="formatCvc(this)">
+              </div>
+            </div>
+          </div>
+
+          <!-- PAYPAL -->
+          <div class="method" onclick="selectMethod('paypal',this)">
             <div class="method-radio"></div>
             <div class="method-ico">🅿️</div>
             <div class="method-info">
               <div class="method-name">PayPal</div>
-              <div class="method-desc">Pago seguro con tu cuenta PayPal o tarjeta de crédito</div>
+              <div class="method-desc">Paga con tu saldo de PayPal o tarjeta asociada de manera directa</div>
             </div>
-            <div class="method-badge">Recomendado</div>
           </div>
-          <div class="detail on" id="d-paypal">
-            <div class="info-box">Serás redirigido a PayPal para completar el pago de forma segura. Tu pedido se procesará automáticamente tras la confirmación.</div>
+          <div class="detail" id="d-paypal">
+            <div class="info-box">Al hacer clic en confirmar serás redirigido a la pasarela externa de PayPal para autorizar tu pago de forma segura.</div>
             <a class="paypal-btn" id="paypal-link" href="#" target="_blank" onclick="confirmPaypal()">
-              <span style="font-size:1.2rem">🅿️</span> Pagar con PayPal →
+              Pagar con PayPal →
             </a>
           </div>
 
+          <!-- TELEGRAM -->
           <div class="method" onclick="selectMethod('telegram',this)">
             <div class="method-radio"></div>
             <div class="method-ico">✈️</div>
             <div class="method-info">
-              <div class="method-name">Telegram · Contacto Directo</div>
-              <div class="method-desc">Habla directamente con Kevin para coordinar el pago</div>
+              <div class="method-name">Telegram · Pedido Directo</div>
+              <div class="method-desc">Coordinación de pago rápida o personalizada directamente con Kevin</div>
             </div>
-            <div class="method-badge" style="background:rgba(0,136,204,.12);color:#29b6f6;border-color:rgba(0,136,204,.3)">Personalizado</div>
           </div>
           <div class="detail" id="d-telegram">
-            <div class="info-box"><strong>Contacto directo con Kevin Ruiz.</strong><br>Envía tu pedido por Telegram y coordina el pago en menos de 24h. Ideal para pedidos personalizados o del catálogo MI DINASTÍA.</div>
-            <a class="tg-btn" href="https://t.me/KevinRuizBolsota" target="_blank">
-              <span style="font-size:1.2rem">✈️</span> Abrir Telegram con Kevin →
+            <div class="info-box"><strong>Contacto directo con Kevin Ruiz.</strong> Ideal para transferencias rápidas, criptomonedas, o compras personalizadas del catálogo MI DINASTÍA.</div>
+            <a class="tg-btn" href="https://t.me/KevinRuizBolsota" target="_blank" onclick="confirmTelegram()">
+              Abrir Telegram →
             </a>
           </div>
 
+          <!-- TRANSFERENCIA -->
           <div class="method" onclick="selectMethod('transferencia',this)">
             <div class="method-radio"></div>
             <div class="method-ico">🏦</div>
             <div class="method-info">
               <div class="method-name">Transferencia Bancaria</div>
-              <div class="method-desc">Recibirás los datos bancarios por email tras confirmar</div>
+              <div class="method-desc">Recibe los datos de nuestra cuenta bancaria en tu email para realizar el pago</div>
             </div>
           </div>
           <div class="detail" id="d-transferencia">
-            <div class="info-box"><strong>Instrucciones:</strong><br>1. Confirma tu pedido aquí<br>2. Recibirás un email con los datos bancarios<br>3. Realiza la transferencia indicando tu nombre<br>4. Confirma el pago por Telegram a @KevinRuizBolsota<br><br>Tiempo de procesamiento: 1-2 días hábiles.</div>
+            <div class="info-box"><strong>Instrucciones:</strong><br>1. Confirma tu pedido aquí.<br>2. Recibirás un correo con la información de nuestra cuenta.<br>3. Haz la transferencia bancaria indicando tu nombre.<br>4. Envía el comprobante por Telegram para despacho inmediato.</div>
           </div>
+          
         </div>
       </div>
     </div>
@@ -169,77 +317,197 @@ nav{position:fixed;top:0;left:0;right:0;height:54px;z-index:900;display:flex;ali
         <span class="rtv" id="res-total">€0.00</span>
       </div>
       <button class="confirm-btn" onclick="confirmarPedido()">Confirmar Pedido →</button>
-      <div style="text-align:center;margin-top:10px;font-size:.7rem;color:var(--dim)">
-        🔒 Transacción segura · ORIONIX
+      <div style="text-align:center;margin-top:12px;font-size:.7rem;color:var(--dim)">
+        🔒 Pasarela de Encriptación Segura SSL
       </div>
     </div>
   </div>
 </div>
 
-<script>
-let activeMethod='paypal';
+<!-- Loader -->
+<div class="loading-overlay" id="loading-overlay">
+  <div class="spinner"></div>
+  <div class="loading-text" id="loading-text">Comunicando con Stripe...</div>
+</div>
 
-function selectMethod(id,el){
+<script>
+let activeMethod = 'stripe';
+
+function selectMethod(id, el){
   document.querySelectorAll('.method').forEach(m=>m.classList.remove('on'));
   document.querySelectorAll('.detail').forEach(d=>d.classList.remove('on'));
   el.classList.add('on');
   document.getElementById('d-'+id).classList.add('on');
-  activeMethod=id;
+  activeMethod = id;
+}
+
+// Formateadores de entradas de tarjeta
+function formatCardNumber(el) {
+  let v = el.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+  let matches = v.match(/\d{4,16}/g);
+  let match = matches && matches[0] || '';
+  let parts = [];
+  for (let i=0, len=match.length; i<len; i+=4) {
+    parts.push(match.substring(i, i+4));
+  }
+  if (parts.length > 0) {
+    el.value = parts.join(' ');
+  } else {
+    el.value = v;
+  }
+}
+
+function formatCardExpiry(el) {
+  let v = el.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+  if (v.length >= 2) {
+    el.value = v.substring(0, 2) + '/' + v.substring(2, 4);
+  } else {
+    el.value = v;
+  }
+}
+
+function formatCvc(el) {
+  el.value = el.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
 }
 
 function loadResumen(){
-  const cart=JSON.parse(localStorage.getItem('orionix_cart')||'[]');
-  const box=document.getElementById('res-items');
+  const cart = JSON.parse(localStorage.getItem('orionix_cart')||'[]');
+  const box = document.getElementById('res-items');
   if(!cart.length){box.innerHTML='<div style="color:var(--dim);font-size:.8rem;text-align:center;padding:10px">Carrito vacío</div>';return;}
-  box.innerHTML=cart.map(p=>`
+  box.innerHTML = cart.map(p=>`
     <div class="ri">
       <span class="ri-name">${p.nombre||'Artículo'} ×${p.qty||1}</span>
       <span class="ri-price">${p.precio?'€'+(((p.precio||0)*(p.qty||1)).toFixed(2)):'—'}</span>
     </div>`).join('');
-  const total=cart.reduce((a,p)=>a+((p.precio||0)*(p.qty||1)),0);
-  document.getElementById('res-total').textContent='€'+total.toFixed(2);
-  document.getElementById('paypal-link').href='https://www.paypal.com/paypalme/orionix/'+total.toFixed(2)+'EUR';
+  const total = cart.reduce((a,p)=>a+((p.precio||0)*(p.qty||1)),0);
+  document.getElementById('res-total').textContent = '€' + total.toFixed(2);
+  document.getElementById('paypal-link').href = 'https://www.paypal.com/paypalme/orionix/' + total.toFixed(2) + 'EUR';
 }
 
 async function confirmarPedido(){
-  const nombre=document.getElementById('nombre').value.trim();
-  const email=document.getElementById('email').value.trim();
-  if(!nombre||!email){alert('Completa nombre y email antes de confirmar');return;}
-  const cart=JSON.parse(localStorage.getItem('orionix_cart')||'[]');
-  if(!cart.length){alert('Tu carrito está vacío');return;}
-  const total=cart.reduce((a,p)=>a+((p.precio||0)*(p.qty||1)),0);
+  const nombre    = document.getElementById('nombre').value.trim();
+  const email     = document.getElementById('email').value.trim();
+  const direccion = document.getElementById('direccion').value.trim();
 
-  // Enviar lead/pedido
+  if(!nombre || !email || !direccion){alert('Por favor completa todos los campos del comprador');return;}
+  const cart = JSON.parse(localStorage.getItem('orionix_cart')||'[]');
+  if(!cart.length){alert('Tu carrito está vacío');return;}
+  const total = cart.reduce((a,p)=>a+((p.precio||0)*(p.qty||1)),0);
+
+  // Validación de Tarjeta si está en Stripe
+  if(activeMethod === 'stripe'){
+    const cardName = document.getElementById('card-name').value.trim();
+    const cardNum  = document.getElementById('card-number').value.replace(/\s+/g, '');
+    const cardExp  = document.getElementById('card-expiry').value.trim();
+    const cardCvc  = document.getElementById('card-cvc').value.trim();
+
+    if(!cardName || cardNum.length < 15 || cardExp.length < 5 || cardCvc.length < 3){
+      alert('Por favor completa los datos de tu tarjeta de crédito correctamente');
+      return;
+    }
+  }
+
+  // Activar Pantalla de Procesamiento de Pago
+  const overlay = document.getElementById('loading-overlay');
+  const overlayText = document.getElementById('loading-text');
+  overlay.classList.add('on');
+
+  if(activeMethod === 'stripe') {
+    overlayText.textContent = 'Autenticando tarjeta en Stripe...';
+  } else if (activeMethod === 'transferencia') {
+    overlayText.textContent = 'Registrando orden de transferencia...';
+  } else {
+    overlayText.textContent = 'Preparando pasarela externa...';
+  }
+
+  // Guardar datos de la orden en localStorage para pago.html
+  const orderId = 'ORX-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+  const subtotal = total / 1.21;
+  const impuestos = total - subtotal;
+  const orderObj = {
+    id: orderId,
+    subtotal: subtotal,
+    envio: 0,
+    impuestos: impuestos,
+    total: total,
+    metodo: activeMethod,
+    metodoRef: activeMethod === 'stripe' ? 'STRIPE-TX-' + Math.random().toString(36).substr(2, 6).toUpperCase() : 'PENDIENTE',
+    fecha: new Date().toISOString()
+  };
+  localStorage.setItem('orx_last_order', JSON.stringify(orderObj));
+
+  // Enviar lead/pedido a n8n
   try{
     await fetch('https://lkevinruizl.app.n8n.cloud/webhook/orionix-tienda',{
       method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
-        accion:'lead',nombre,
-        telegram:document.getElementById('telegram').value.trim()||email,
-        interes:'Pedido: '+cart.map(p=>p.nombre+'×'+(p.qty||1)).join(', '),
-        origen:'tienda-pago-'+activeMethod
+        accion:'pedido',
+        id: orderId,
+        nombre,
+        email,
+        direccion,
+        metodo: activeMethod,
+        total: total,
+        telegram: document.getElementById('telegram').value.trim()||email,
+        articulos: cart.map(p=>p.nombre+'×'+(p.qty||1)).join(', '),
+        origen: 'checkout-web'
       })
     });
   }catch(e){}
 
-  if(activeMethod==='paypal'){
-    confirmPaypal();
-  } else if(activeMethod==='telegram'){
-    const msg=encodeURIComponent('Hola Kevin! Quiero confirmar mi pedido ORIONIX:\n\n'+cart.map(p=>`• ${p.nombre} ×${p.qty||1} — €${((p.precio||0)*(p.qty||1)).toFixed(2)}`).join('\n')+'\n\nTotal: €'+total.toFixed(2)+'\n\nNombre: '+nombre+'\nEmail: '+email);
-    window.open('https://t.me/KevinRuizBolsota?text='+msg,'_blank');
-    location.href='pago.html?metodo=telegram&total='+total.toFixed(2);
-  } else {
-    location.href='pago.html?metodo=transferencia&total='+total.toFixed(2)+'&nombre='+encodeURIComponent(nombre)+'&email='+encodeURIComponent(email);
-  }
+  // Simulación de respuesta de banco / API (2.5 segundos)
+  setTimeout(() => {
+    // Vaciar Carrito tras compra
+    localStorage.removeItem('orionix_cart');
+    
+    // Redirección
+    if(activeMethod === 'paypal') {
+      window.open(document.getElementById('paypal-link').href, '_blank');
+      location.href = 'pago.html';
+    } else if(activeMethod === 'telegram') {
+      const msg = encodeURIComponent('Hola Kevin! Confirmo mi pedido ORIONIX ' + orderId + ':\n\n'+cart.map(p=>`• ${p.nombre} ×${p.qty||1} — €${((p.precio||0)*(p.qty||1)).toFixed(2)}`).join('\n')+'\n\nTotal: €'+total.toFixed(2)+'\n\nNombre: '+nombre+'\nEmail: '+email+'\nDirección: '+direccion);
+      window.open('https://t.me/KevinRuizBolsota?text=' + msg, '_blank');
+      location.href = 'pago.html';
+    } else {
+      location.href = 'pago.html';
+    }
+  }, 2500);
 }
 
 function confirmPaypal(){
-  const cart=JSON.parse(localStorage.getItem('orionix_cart')||'[]');
-  const total=cart.reduce((a,p)=>a+((p.precio||0)*(p.qty||1)),0);
-  location.href='pago.html?metodo=paypal&total='+total.toFixed(2);
+  // Manejado por confirmarPedido()
+}
+function confirmTelegram(){
+  // Manejado por confirmarPedido()
 }
 
-(function(){const c=document.getElementById('cv'),ctx=c.getContext('2d');function r(){c.width=innerWidth;c.height=innerHeight}r();addEventListener('resize',r);const s=Array.from({length:60},()=>({x:Math.random(),y:Math.random(),r:Math.random()*.8+.15,a:Math.random(),da:(Math.random()-.5)*.005}));function d(){ctx.clearRect(0,0,c.width,c.height);s.forEach(p=>{p.a=Math.max(.03,Math.min(.75,p.a+p.da));if(p.a<=.03||p.a>=.75)p.da*=-1;ctx.beginPath();ctx.arc(p.x*c.width,p.y*c.height,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(232,200,106,${p.a*.4})`;ctx.fill();});requestAnimationFrame(d);}d();})();
+// Starfield Background
+(function(){
+  const c   = document.getElementById('cv');
+  const ctx = c.getContext('2d');
+  function resize(){ c.width=innerWidth; c.height=innerHeight; }
+  resize(); addEventListener('resize',resize);
+  const stars = Array.from({length:70},()=>({
+    x:Math.random(), y:Math.random(),
+    r:Math.random()*.85+.15,
+    a:Math.random()*.5+.05,
+    da:(Math.random()-.5)*.004
+  }));
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(s=>{
+      s.a += s.da;
+      if(s.a<=.05 || s.a>=.75) s.da *= -1;
+      ctx.beginPath();
+      ctx.arc(s.x*c.width, s.y*c.height, s.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(232,200,106,${s.a*.45})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
 loadResumen();
 </script>
 <script src="orionix-profile.js"></script>

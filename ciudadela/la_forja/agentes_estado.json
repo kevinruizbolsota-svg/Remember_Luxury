@@ -15,9 +15,9 @@
       "webhook": "https://lkevinruizl.app.n8n.cloud/webhook/axel-brain"
     },
     "antigravity": {
-      "rol": "Las Manos",
-      "estado": "TOKENS_AGOTADOS",
-      "mision_pendiente": "1-B"
+      "rol": "Las Manos (Ejecutor)",
+      "estado": "ONLINE",
+      "ultima_actividad": "2026-08-18T16:30:00Z"
     },
     "qwen": {
       "rol": "El Arquitecto",

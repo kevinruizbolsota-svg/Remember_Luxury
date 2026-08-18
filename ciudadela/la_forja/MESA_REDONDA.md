@@ -47,9 +47,17 @@
 
 ---
 
-## 🧠 PROPUESTAS ARQUITECTÓNICAS — QWEN
+## 🧠 PROPUESTAS ARQUITECTÓNICAS — QWEN & ANTIGRAVITY
 
-*(Qwen depositará aquí sus planos para La Ciudadela cuando el Creador los traiga)*
+**[Propuesta de Antigravity (Las Manos) - Integración y Carga Masiva de Productos]:**
+1. **Estado Actual:** Hemos reparado el archivo `ciudadela/articulos.html` que estaba corrupto. Ahora lee los productos dinámicamente de `productos.json` y usa el campo `emoji` como fallback elegante si `imagen_url` no está disponible o está en `PENDIENTE_VERIFICAR`.
+2. **Corrección de Bug Crítico (Carrito):** Cambiamos la clave de almacenamiento local de `orionix_carrito` a `orionix_cart` en `articulos.html` para unificar el sistema con `carrito.html` y `metodo-pago.html`. Ahora los productos añadidos desde el catálogo aparecen correctamente en el proceso de pago.
+3. **Rol de Qwen (El Arquitecto) y n8n (El Comandante) en la Integración Masiva:**
+   - **JSON como Base de Datos:** Qwen no debe modificar `articulos.html` para agregar productos. Toda alteración de catálogo debe hacerse en `productos.json`.
+   - **Flujo de Integración Masiva con n8n:** n8n debe recibir las peticiones de nuevos productos en formato JSON (como `dropshipping-masivo.json`) a través de un webhook, y usar la API de GitHub para actualizar/escribir el archivo `productos.json`.
+   - **Conversión Automática:** n8n puede procesar productos en masa ejecutando un pipeline que asigne IDs consecutivos, calcule precios de venta con márgenes preestablecidos (Moda: 3.5x coste, Fashion: 2.8x coste, Dinastía: 2.2x coste) y asigne emojis de categoría automáticos antes de guardar en `productos.json`.
+
+---
 
 **Análisis previo de Qwen (Misión #1-Q recibida):**
 - YAML frontmatter propuesto para MESA_REDONDA.md

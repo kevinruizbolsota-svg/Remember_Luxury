@@ -3,323 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIONIX · Catálogo Completo</title>
+<title>ORIONIX - Catalogo</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--gold:#e8c86a;--gd:#b89a40;--gl:#f5e0a0;--bg:#0b0b0d;--bg2:rgba(14,13,20,0.96);--b:rgba(232,200,106,0.12);--ba:rgba(232,200,106,0.4);--text:#f0e8d0;--dim:rgba(240,232,208,0.4);--purple:#6a3d9a}
+:root{--bg:#0b0b0d;--gold:#e8c86a;--gold2:#f5e0a0;--gold3:#b89a40;--txt:#f0e8d0;--pur:#6a3d9a;--card:#12121a;--bor:rgba(232,200,106,0.2)}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Cormorant Garamond',serif;background:var(--bg);color:var(--text);min-height:100vh}
-#cv{position:fixed;inset:0;z-index:0;pointer-events:none}
+body{background:var(--bg);color:var(--txt);font-family:'Cormorant Garamond',serif;min-height:100vh}
+h1,h2,h3,.cinzel{font-family:'Cinzel',serif}
+canvas#cosmos{position:fixed;inset:0;z-index:0;pointer-events:none}
+.navbar{position:sticky;top:0;z-index:100;background:rgba(11,11,13,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--bor);padding:15px 30px;display:flex;justify-content:space-between;align-items:center}
+.nav-logo{font-family:'Cinzel',serif;font-size:1.5rem;color:var(--gold);text-decoration:none;letter-spacing:3px}
+.nav-links{=$isplay:flex;gap:25px}
+.nav-links o{color:var(--txt);text-decoration:none;font-size:0.9rem;letter-spacing:1px;transition:color 0.3q}
+.nav-links a:hover{color:var(--gold)}
+.cart-btn{position:relative;background:transparent;border:1px solid var(--gold);color:var(--gold);padding:8px 16px;border-radius:8px;cursor:pointer;font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:2px}
+.cart-badge{position:absolute;top:-8px;right:-8px;background:var(--pur);color:#fff;font-size:0.7rem;width:2px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:40px 20px}
+.breadcrumb{color:var(--gold3);font-size:0.85rem;letter-spacing:2px;margin-bottom:3px}
+.breadcrumb a{color:var(--gold);text-decoration:none}
+header h1{font-size:2.5rem;color:var(--gold);letter-spacing:6px;margin-bottom:10px;text-shadow:0 0 30px rgba(232,200,106,0.4)}
+header p{color:var(--gold2);font-style:italic;letter-spacing:2px;margin-bottom:30px}
+.contador{display:flex;gap:30px;margin-bottom:30px;flex-wrap:wrap}
+.cont-item{background:var(--card);border:1px solid var(--bor);border-radius:10px;padding:15px 25px;text-align:center}
+.cont-num{font-family:'Cinzel',serif;font-size:2rem;color:var(--gold);font-weight:700}
+.cont-lbl{font-size:0.8rem;color:var(--gold3);letter-spacing:2px;text-transform:uppercase}
+.filtros{display:flex;gap:15px;margin-bottom�ٛ^]ܘ\�ܘ\�[YۋZ][\Θ�[�\�B���[��X���Y[�ΌL�ؘX��ܛ�[���[��\�[�؛ܙ\��\��Y�\�KX�܊N���܎��\�K]
+N؛ܙ\�\�Y]\Ύ��\��܎��[�\�ٛ۝Y�[Z[N���[��[	��\�Y�ٛ۝\�^�N���[N�]\�\�X�[�Ό\��[��][ێ�[��_B���[��X���ݙ\���[��X���X�]��ؘX��ܛ�[���\�KY��
+N���܎����؛ܙ\�X��܎��\�KY��
+N؛�\�Y�ΌM\�ؘJ�̋�L���_B���\��\�ٛ^�N�Z[�]�Y���Y[�ΌLMؘX��ܛ�[���\�KX�\�
+N؛ܙ\��\��Y�\�KX�܊N؛ܙ\�\�Y]\Ύ���܎��\�K]
+Nٛ۝Y�[Z[N�[�\�]ٛ۝\�^�N�\�[N��][�N��ۙ_B���\��\�����\�؛ܙ\�X��܎��\�KY��
+_B��ܚY�\�^N�ܚY�ܚY][\]KX��[[�Μ�\X]
+]]�Y�[Z[�X^
+��Y��JN��\��\B����X���X��ܛ�[���\�KX�\�
+N؛ܙ\��\��Y�\�KX�܊N؛ܙ\�\�Y]\ΌL��ݙ\���ΚY[���[��][ێ�[�����\��܎��[�\�B����X�Κݙ\���[�ٛܛN��[��]VJM\
+N؛ܙ\�X��܎��\�KY��
+N؛�\�Y�ΌL��ؘJ�J_B����Z[Y���Y�L	N�ZY����ؘX��ܛ�[���XLXL���\�^N��^�[YۋZ][\Θ�[�\�ڝ\�Y�KX�۝[���[�\�ٛ۝\�^�N��[N���][ێ��[]]�_B����X�Y�^���][ێ�X���]N���L�Y��LؘX��ܛ�[���\�K\\�N���܎�ٙ��ٛ۝\�^�N���\�[N�Y[�΍؛ܙ\�\�Y]\΍ٛ۝Y�[Z[N���[��[	��\�Y��]\�\�X�[�Ό\B����Z[����Y[�Ό�B����X�]���܎��\�KY���Nٛ۝\�^�N���\�[N�]\�\�X�[�Ό��^]�[�ٛܛN�\\��\�N�X\��[�X���N�\B����[��X��^ٛ۝Y�[Z[N���[��[	��\�Y�ٛ۝\�^�N�K�\�[N���܎��\�KY��
+N�X\��[�X���N��[�KZZY��K��B����Y\��ٛ۝\�^�N��\�[N���܎��NY��X\��[�X���N�M\�[�KZZY��K��\�^N�]�X��]X���]�X��][[�KX�[\���]�X��]X��[ܚY[���\�X�[�ݙ\���ΚY[�B����Y���\��\�^N��^ڝ\�Y�KX�۝[���X�KX�]�Y[��[YۋZ][\Θ�[�\��X\��[�]��LB����\�X�[�ٛ۝\�^�N�K�ܙ[N���܎��\�KY���Nٛ۝]�ZY���B����XYؘX��ܛ�[���\�KY��
+N���܎����؛ܙ\���ۙN�Y[�ΎM�؛ܙ\�\�Y]\΍�ٛ۝Y�[Z[N���[��[	��\�Y�ٛ۝\�^�N���\�[N�]\�\�X�[�Ό\��\��܎��[�\���[��][ێ�[���B����XY�ݙ\�؛�\�Y�ΌM\�ؘJ�̋�L��
+N��[�ٛܛN���[JK�J_B���YX�\����][ێ��^Y���ܚY��M��Y���ZY��L�ؘX��ܛ�[���LLL�؛ܙ\�[Y��\��Y�\�KY��
+NދZ[�^���Y[�Ό���[��][ێ��Y���X\�N�\�^N��^ٛ^Y\�X�[ێ���[[�B���YX�\��X�Y\��ܚY��B���YX�\�ZXY\��\�^N��^ڝ\�Y�KX�۝[���X�KX�]�Y[��[YۋZ][\Θ�[�\��X\��[�X���N��\؛ܙ\�X���N�\��Y�\�KX�܊N�Y[��X���N�M\B���YX�\�ZXY\��ٛ۝Y�[Z[N���[��[	��\�Y����܎��\�KY��
+Nٛ۝\�^�N�K���[N�]\�\�X�[�Ό�B���\��\�X�\�ؘX��ܛ�[���[��\�[�؛ܙ\���ۙN���܎��\�K]
+Nٛ۝\�^�N�K�\�[N��\��܎��[�\�B���\�Z][\�ٛ^�N�ݙ\����^OX]]��\�^N��^ٛ^Y\�X�[ێ���[[���\�M\B���\�Z][^�\�^N��^��\�M\ؘX��ܛ�[���ؘJ�MK�MK�MK��N�Y[�ΌL؛ܙ\�\�Y]\Ύ؛ܙ\��\��Y�\�KX�܊_B���\�Z][KZ[Y���Y���ZY���ؘX��ܛ�[���XLXL��؛ܙ\�\�Y]\΍��\�^N��^�[YۋZ][\Θ�[�\�ڝ\�Y�KX�۝[���[�\�ٛ۝\�^�N�K�\�[_B���\�Z][KZ[���ٛ^�_B���\�Z][K[��X��^ٛ۝Y�[Z[N���[��[	��\�Y�ٛ۝\�^�N��\�[N���܎��\�KY��
+N�X\��[�X���N�B���\�Z][K\�X�[����܎��\�KY���Nٛ۝\�^�N��\�[_B���\�Z][KX�۝����\�^N��^�[YۋZ][\Θ�[�\���\�L�X\��[�]��B���\�Z][KX�۝����]۞��Y���ZY���ؘX��ܛ�[���\�KX�\�
+N؛ܙ\��\��Y�\�KX�܊N���܎��\�K]
+N؛ܙ\�\�Y]\΍��\��܎��[�\�B���\�Z][KX�۝����[�ٛ۝\�^�N��\�[N�Z[�]�Y���^X[Yێ��[�\�B����\�[[ݙ^ؘX��ܛ�[���[��\�[�؛ܙ\���ۙN���܎�َ�M�Nٛ۝\�^�N���\�[N��\��܎��[�\��X\��[�[Y��]]�B���\�Y���\�؛ܙ\�]��\��Y�\�KX�܊N�Y[��]����X\��[�]���B���\�]�[�\�^N��^ڝ\�Y�KX�۝[���X�KX�]�Y[�ٛ۝Y�[Z[N���[��[	��\�Y�ٛ۝\�^�N�K���[N���܎��\�KY��
+N�X\��[�X���N��B����X�X���]��Y�L	N�Y[�ΌMؘX��ܛ�[���\�KY��
+N���܎����؛ܙ\���ۙN؛ܙ\�\�Y]\Ύٛ۝Y�[Z[N���[��[	��\�Y�ٛ۝\�^�N��\�[N�]\�\�X�[�Ό���\��܎��[�\�ٛ۝]�ZY���B����X�X���]�ݙ\�؛�\�Y�Ό��ؘJ�̋�L��
+_B��ݙ\�^^���][ێ��^Y�[��]�ؘX��ܛ�[���ؘJ��NދZ[�^�ML�\�^N��ۙNؘX����Y�[\���\��
+_B��ݙ\�^K�X�]���\�^N�����B���\����][ێ��^Y؛��N��ܚY���ؘX��ܛ�[���ؘJ�����MJN؛ܙ\��\��Y�\�KY��
+N���܎��\�KY��
+N�Y[�ΌM�؛ܙ\�\�Y]\ΌLٛ۝Y�[Z[N���[��[	��\�Y�ٛ۝\�^�N��\�[N�]\�\�X�[�Ό�ދZ[�^����[�ٛܛN��[��]VJL
+N��X�]N���[��][ێ�[���X\�_B���\�������[�ٛܛN��[��]VJ
+N��X�]N�_B�YYXJX^]�Y�͎
+^˛�]�[[����\�^N��ۙ_K��YX�\���Y�L	NܚY��LL	_K�ܚY�ܚY][\]KX��[[�ΌY��_B���[O���XY����O���[��\�YH����[�ȏ���[��\ς�]��\��H�ݙ\�^H�YH�ݙ\�^H�ۘ�X��H����P�\�
 
-nav{position:fixed;top:0;left:0;right:0;height:54px;z-index:900;display:flex;align-items:center;gap:0;padding:0 20px;background:rgba(11,11,13,.98);border-bottom:1px solid var(--b);backdrop-filter:blur(14px)}
-.brand{font-family:'Cinzel',serif;font-size:.95rem;font-weight:900;letter-spacing:.2em;color:var(--gold);text-decoration:none;margin-right:16px;text-shadow:0 0 14px rgba(232,200,106,.3)}
-.nav-mid{display:flex;gap:2px;flex:1}
-.nl{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.1em;color:var(--dim);text-decoration:none;padding:7px 12px;border-radius:6px;transition:all .2s;text-transform:uppercase;white-space:nowrap}
-.nl:hover{color:var(--text)}
-.nl.on{color:var(--gold);background:rgba(232,200,106,.07)}
-.nav-r{display:flex;align-items:center;gap:8px;margin-left:auto}
-.cart-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid var(--ba);border-radius:6px;font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.1em;color:var(--gold);text-decoration:none;transition:all .25s;position:relative}
-.cart-btn:hover{background:rgba(232,200,106,.08)}
-.cart-count{position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:var(--gold);color:var(--bg);font-size:.55rem;font-weight:700;display:flex;align-items:center;justify-content:center}
-@media(max-width:760px){.nav-mid{display:none}}
+H���]����]��\��H��]��\����H�Y�H�X��[��\��H��]�[��ȏ�ԒSӒV�O��]��\��H��]�[[��ȏ��H�Y�H�Y[�K�[��Y[�O�O��H�Y�H�Y�[�\˚[��Y�[�\��O��H�Y�H���][�YY�[����][�YY�O��H�Y�H���\��[����\��O���]����]ۈ�\��H��\�X���ۘ�X��H����P�\�
 
-.wrap{padding:74px 24px 80px;max-width:1200px;margin:0 auto;position:relative;z-index:1}
+H���T��U��[��\��H��\�X�Y�H�YH��\��Y�H����[��؝]ۏ��ۘ]���]��\��H�ܘ\���]��\��H���XYܝ[X���H�Y�H�X��[��ԒSӒV�O�	���\][��H�Y�H�Y[�K�[��Y[�O�O�	���\][���][����]���XY\���O��UQ����ԒSӒV�O���H[�HY�Z�HH[�HX[��[ۈ	�Y\��[��Y[��H�]YH�X�\�]\�[�H�]�[����XY\���]��\��H��۝Y܈���]��\��H��۝Z][H��]��\��H��۝[�[H�YH���[����]��]��\��H��۝[���\�X�[���]���]���]��\��H��۝Z][H��]��\��H��۝[�[H��L�]��]��\��H��۝[���[�O�]���]���]��\��H��۝Z][H��]��\��H��۝[�[H��L�]��]��\��H��۝[����\�[ۏ�]���]���]��\��H��۝Z][H��]��\��H��۝[�[H��L�]��]��\��H��۝[���[�\�XO�]���]����]���]��\��H��[��ȏ���]ۈ�\��H��[��X��X�]�Ȉۘ�X��H��[�\�	�����\�H�����؝]ۏ���]ۈ�\��H��[��X���ۘ�X��H��[�\�	�S�I�\�H��[�O؝]ۏ���]ۈ�\��H��[��X���ۘ�X��H��[�\�	ѐT�Sӈ�SI�\�H���\�[ۈ�[O؝]ۏ���]ۈ�\��H��[��X���ۘ�X��H��[�\�	�RHS�T�PI�\�H��ZH[�\�XO؝]ۏ��[�]\OH�^��\��H��\��\��X�Z�\�H��\��\�\�X�[�ˋ���ۚ[�]H��\��\�\˝�[YJH����]���]��\��H�ܚY�YH�ܚY��X��ȏ��]����]���]��\��H��YX�\��YH��YX�\����]��\��H��YX�\�ZXY\������H�T��U������]ۈ�\��H��\��\�X�\��ۘ�X��H����P�\�
 
-.ph{text-align:center;margin-bottom:28px}
-.ph-tag{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.22em;color:var(--dim);text-transform:uppercase;margin-bottom:6px}
-.ph-title{font-family:'Cinzel',serif;font-size:1.7rem;font-weight:900;color:var(--text);letter-spacing:.1em;margin-bottom:6px}
-.ph-sub{font-size:.9rem;color:var(--dim);font-style:italic}
-
-.bc{font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.14em;color:var(--dim);margin-bottom:22px;text-transform:uppercase}
-.bc a{color:var(--gold);text-decoration:none}
-.bc a:hover{text-decoration:underline}
-
-.stats-bar{display:flex;gap:10px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
-.stat-pill{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.1em;padding:5px 14px;border-radius:20px;text-transform:uppercase}
-.sp-moda{background:rgba(232,200,106,.1);color:var(--gold);border:1px solid rgba(232,200,106,.2)}
-.sp-fashion{background:rgba(156,39,176,.1);color:#ce93d8;border:1px solid rgba(156,39,176,.2)}
-.sp-dinastia{background:rgba(255,215,0,.08);color:#ffd700;border:1px solid rgba(255,215,0,.2)}
-
-.filtros{display:flex;align-items:center;gap:8px;margin-bottom:22px;flex-wrap:wrap}
-.search-box{display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--b);border-radius:8px;padding:8px 14px;flex:1;max-width:340px}
-.search-box input{background:transparent;border:none;outline:none;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:.9rem;width:100%}
-.search-box input::placeholder{color:var(--dim)}
-.ftab{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.12em;padding:8px 16px;border-radius:6px;border:1px solid var(--b);color:var(--dim);cursor:pointer;transition:all .22s;text-transform:uppercase;background:transparent}
-.ftab:hover{color:var(--text);border-color:rgba(232,200,106,.25)}
-.ftab.on{color:var(--gold);border-color:var(--ba);background:rgba(232,200,106,.07)}
-.sort-sel{padding:8px 12px;background:var(--bg2);border:1px solid var(--b);border-radius:6px;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:.86rem;outline:none;margin-left:auto;cursor:pointer}
-.sort-sel option{background:#111}
-
-.results-info{font-size:.76rem;color:var(--dim);margin-bottom:14px;font-style:italic}
-.results-info span{color:var(--gold);font-family:'Cinzel',serif}
-
-.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
-.pcard{background:var(--bg2);border:1px solid var(--b);border-radius:10px;overflow:hidden;transition:all .28s;display:flex;flex-direction:column}
-.pcard:hover{border-color:var(--ba);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.35)}
-.pimg{width:100%;height:200px;display:flex;align-items:center;justify-content:center;font-size:3.2rem;position:relative;overflow:hidden}
-
-.pimg-moda{background:linear-gradient(135deg,rgba(232,200,106,.12),rgba(11,11,13,.6))}
-.pimg-fashion{background:linear-gradient(135deg,rgba(156,39,176,.14),rgba(11,11,13,.6))}
-
-.pimg-dinastia{background:linear-gradient(135deg,rgba(255,215,0,.10),rgba(11,11,13,.6))}
-
-.pcat-badge{position:absolute;top:8px;left:8px;font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:.14em;padding:3px 8px;border-radius:3px;font-weight:700}
-.badge-moda{background:rgba(232,200,106,.2);color:#e8c86a}
-.badge-fashion{background:rgba(156,39,176,.2);color:#ce93d8}
-.badge-dinastia{background:rgba(255,215,0,.15);color:#ffd700}
-
-.pinfo{padding:14px;flex:1;display:flex;flex-direction:column;gap:5px}
-
-.pname{font-family:'Cinzel',serif;font-size:.62rem;font-weight:700;color:var(--text);letter-spacing:.06em;line-height:1.3}
-.pdesc{font-size:.76rem;color:var(--dim);font-style:italic;flex:1;line-height:1.45}
-.pprice{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);font-weight:700;margin-top:6px}
-.padd{width:100%;padding:9px;background:transparent;color:var(--gold);border:1px solid var(--ba);border-radius:6px;font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.12em;cursor:pointer;transition:all .25s;margin-top:8px}
-.padd:hover{background:var(--gold);color:var(--bg)}
-
-.empty{grid-column:1/-1;text-align:center;padding:50px;color:var(--dim)}
-.empty-icon{font-size:3rem;opacity:.3;margin-bottom:12px}
-
-.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(14,13,20,.97);border:1px solid var(--ba);color:var(--gold);font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.1em;padding:10px 22px;border-radius:6px;z-index:9999;transition:transform .32s;Pointer-events:none}
-.toast.on{transform:translateX(-50%) translateY(0)}
-
-.cart-float{position:fixed;bottom:24px;right:24px;z-index:800;display:none}
-.cart-float.on{display:flex}
-.cf-link{display:flex;align-items:center;gap:8px;padding:12px 20px;background:var(--gold);color:var(--bg);border-radius:40px;font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.12em;font-weight:700;box-shadow:0 4px 20px rgba(232,200,106,.35);transition:all .28s;text-decoration:none}
-.cf-link:hover{background:var(--gd);transform:translateY(-2px)}
-.cf-cnt{background:var(--bg);color:var(--gold);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.52rem;font-weight:700}
-
-@media(max-width:640px){.filtros{flex-direction:column;align-items:stretch}.sort-sel{margin-left:0}.pgrid{grid-template-columns:repeat(2,1fr)}}
-</style>
-</head>
-<body>
-<canvas id="cv"></canvas>
-
-<nav>
-  <a href="hub.html" class="brand">ORIONIX</a>
-  <div class="nav-mid">
-    <a class="nl" href="tienda.html">🏠 Tienda</a>
-    <a class="nl on" href="articulos.html">🛍 Artículos</a>
-    <a class="nl" href="carrito.html">🛒 Carrito</a>
-    <a class="nl" href="agentes.html">🤦 Agentes</a>
-    <a class="nl" href="mi-universo.html">🗦️ Mi Universo</a>
-  </div>
-  <div class="nav-r">
-    <a href="login.html" class="nl">Iniciar Sesión</a>
-    <a href="carrito.html" class="cart-btn">🛒 Carrito <span class="cart-count" id="cnt">0</span></a>
-  </div>
-</nav>
-
-<div class="wrap">
-  <div class="bc"><a href="hub.html">ORIONIX</a> › <a href="tienda.html">Tienda</a> › Catálogo</div>
-
-  <div class="ph">
-    <div class="ph-tag">Catálogo Completo · ORIONIX</div>
-    <h1 class="ph-title">30 ARTÍCULOS</h1>
-    <p class="ph-sub">De una aguja a una mansión — encuentra lo que necesitas en tu nivel</p>
-  </div>
-
-  <div class="stats-bar">
-    <span class="stat-pill sp-moda" id="cnt-moda">🧵 MODA · 10</span>
-    <span class="stat-pill sp-fashion" id="cnt-fashion">✨ FASHION STYLE · 10</span>
-    <span class="stat-pill sp-dinastia" id="cnt-dinastia">👑 RI DINASTÍA ·710</span>
-  </div>
-
-  <div class="filtros">
-    <div class="search-box">
-      <span style="color:var(--dim)">🔍</span>
-      <input type="text" placeholder="Buscar artículos…" id="search">
-    </div>
-    <button class="ftab on" data-cat="TODOS">Todos</button>
-    <button class="ftab" data-cat="MODA">🧵 Moda</button>
-    <button class="ftab" data-cat="FASHION STYLE">✨ Fashion</button>
-    <button class="ftab" data-cat="MI DINASTIA">👑 Dinastía</button>
-    <select class="sort-sel" id="sort">
-      <option value="default">Ordenar por…</option>
-      <option value="price-asc">Precio ↑</option>
-      <option value="price-desc">Precio ↓<option>
-      <option value="name">Nombre A-Z</option>
-    </select>
-  </div>
-
-  <div class="results-info" id="results-info"></div>
-  <div class="pgrid" id="pgrid"></div>
-</div>
-
-<div class="cart-float" id="cart-float">
-  <a href="carrito.html" class="cf-link">🛒 Ver Carrito <span class="cf-cnt" id="cf-cnt">0</span></a>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<script>
-var PRODUCTOS = [
-  {id:1,nombre:"Camiseta Cosmos Basic",precio:9.99,categoria:"MODA",descripcion:"Algodón 100%, logo bordado en gold. Corte clásico unisex.",emoji:"👕"},
-  {id:2,nombre:"Gorna Snapback AXEL",precio:14.99,categoria:"MODA",descripcion:"Ajustable, bordado 3D del ojo cósmico ORIONIX.",emoji:"🧢"},
-  {id:3,nombre:"Calcetines Premium Pack x3",precio:7.99,categoria:"MODA",descripcion:"Microfibra transpirable, refuerzo dorado en tobillo.",emoji:"🧦'�,
-  {id:4,nombre:"Libreta Kabalion A5",precio:12.99,categoria:"MODA",descripcion:"Tapa dura negra, papel de 100g, cierre elástico dorado.",emoji:"📓"},
-  {id:5,nombre:"Llavero Metálico Sefirot",precio:8.99,categoria:"MODA",descripcion:"Aleación zinc, grabado láser del árbol de la vida.",emoji:"🔑"},
-  {id:6,nombre:"Taza Térmica Nebula",precio:18.99,categoria:"MODA",descripcion:"Acero inoxidable, doble pared, mantiene calor 6 horas.",emoji:"☕"},
-  {id:7,nombre:"Pañuelo Bolsillo Seda",precio:15.99,categoria:"MODA",descripcion:"Estampado cosmos, perfecto para blazer y trajes.",emoji:"🎀"},
-  {id:8,nombre:"Bolígrafo Lujo Black Gold",precio:22.99,categoria:"MODA",descripcion:"Cuerpo mate, detalles en oro de 18k, recarga incluida.",emoji:"🖋️"},
-  {id:9,nombre:"Parche Termoadhesivo ORIONIX",precio:5.99,categoria:"MODA",descripcion:"Bordado de alta densidad, aplica con plancha en 30 seg.",emoji:"🛡️"},
-  {id:10,nombre:"Mochila Canvas Minimalista",precio:29.99,categoria:"MODA",descripcion:"Lona resistente al agua, compartimento laptop 15 pulgadas.",emoji:"🎒"},
-  {id:11,nombre:"Sudadera Imperio Gold",precio:49.99,categoria:"FASHION STYLE",descripcion:"Corte oversized, hilo dorado en costuras, forro interior.",emoji:"👕"},
-  {id:12,nombre:"Cartera Slim RFID Chesed",precio:39.99,categoria:"FASHION STYLE",descripcion:"Cuero genuino, protección antirrobo, 6 ranuras tarjeta.",emoji:"💳"},
-  {id:13,nombre:"Gafas Sol Polarizadas Netzach",precio:59.99,categoria:"FASHION STYLE",descripcion:"Montura acetato negro, lentes UV400, estuche incluido.",emoji:"🕲👧"},
-  {id:14,nombre:"Mochila Urbana Binah",precio:79.99,categoria:"FASHION STYLE",descripcion:"Cuero sintético premium, múltiples compartimentos, antirrobo.",emoji:"🎏"},
-  {id:15,nombre:"Perfume Cosmos Noir 100ml",precio:89.99,categoria:"FASHION STYLE",descripcion:"Notas de ámbar, oud y madera de cedro. Larga duración.",emoji:"🧴"},
-  {id:16,nombre:"Cinturón Cuero Reversible",precio:45.99,categoria:"FASHION STYLE",descripcion:"Negro y marrón reversible, hebilla mate con logo ORIONIX.",emoji:"👔"},
-  {id:17,nombre:"Zapatillas Cosmos Limited",precio:129.99,categoria:"FASHION STYLE",descripcion:"Suela con glow ultravioleta, edición numerada 500 pares.",emoji:"👟w"},
-  {id:18,nombre:"Chaqueta Bomber Negra",precio:99.99,categoria:"FASHION STYLE",descripcion:"Forro interior con mapa estelar, cierre YKK japonés.",emoji:"🧥"},
-  {id:19,nombre:"Reloj Smartwatch Elite",precio:149.99,categoria:"FASHION STYLE",descripcion:"Monitor cardíaco, GPS, correa de silicona negra premium.",emoji:"⌚"},
-  {id:20,nombre:"Set Regalo Caballero ORIONIX",precio:119.99,categoria:"FASHION STYLE",descripcion:"Cartera, cinturón y llavero en caja de madera grabada.",emoji:"🎁"},
-  {id:21,nombre:"Reloj Automático Kether",precio:299.99,categoria:"MI DINASTIA",descripcion:"Movimiento suizo ETA, caja acero inoxidable, cristal zafiro.",emoji:"⌚"},
-  {id:22,nombre:"Anillo Titanio Negro Oro",precio:149.99,categoria:"MI DINASTIA",descripcion:"Acero quirúrgico, baño de oro 18k, diseño geométrico.",emoji:"💍"},
-  {id:23,nombre:"Bolso Cuero Italiano Malkuth",precio:350.00,categoria:"MI DINASTIA",descripcion:"Hecho a mano en Florencia, herrajes dorados, forro cosmos.",emoji:"👜"},
-  {id:24,nombre:"Chaqueta Cuero Sintético Elite",precio:189.99,categoria:"MI DINASTIA",descripcion:"Corte slim, costuras reforzadas a mano, estilo motociclista.",emoji:"🧥"},
-  {id:25,nombre:"Gemelos Traje Black Gold",precio:79.99,categoria:"MI DINASTIA",descripcion:"Ónix negro y borde dorado 18k, caja de terciopelo negro.",emoji:"👔"},
-  {id:26,nombre:"Maletín Ejecutivo Cuero",precio:249.99,categoria:"MI DINASTIA",descripcion:"Cuero genuino, combinación seguridad, compartimento laptop 17.",emoji:"💼"},
-  {id:27,nombre:"Zapatos Oxford Premium",precio:159.99,categoria:"MI DINASTIA",descripcion:"Cuero pulido italiano, suela de goma antideslizante.",emoji:"👞"},
-  {id:28,nombre:"Pulsera Cuero Trenzado",precio:89.99,categoria:"MI DINASTIA",descripcion:"Cuero negro trenzado a mano, cierre magnético de acero.",emoji:"📿"},
-  {id:29,nombre:"Caja Fuerte Portátil Lujo",precio:199.99,categoria:"MI DINASTIA",descripcion:"Para relojes y joyas, cerradura biométrica, fibra de carbono.",emoji:"🔒"},
-  {id:30,nombre:"Set Decantador Whisky Gold",precio:179.99,categoria:"MI DINASTIA",descripcion:"Cristal soplado a mano, base con grabado ORIONIX, 6 vasos.",emoji:"🥃"}
-];
-
-var CAT_STYLE = {
-  "MODA":     {img:"pimg-moda",    badge:"badge-moda",    label:"MODA"},
-  "FASHION STYLE": {img:"pimg-fashion", badge:"badge-fashion", label:"FASHION"},
-  "MI DINASTIA":   {img:"pimg-dinastia",badge:"badge-dinastia",label:"MI DINASTÍA"}
-};
-
-var activeFilter = "TODOS";
-
-(function(){
-  var p = new URLSearchParams(location.search);
-  var c = (p.get("cat")||"").toUpperCase().trim();
-  if(c.includes("MODA")&&!c.includes("FASHION")) activeFilter="MODA";
-  else if(c.includes("FASHION")||c.includes("STYLE")) activeFilter="FASHION STYLE";
-  else if(c.includes("DINAS")) activeFilter="MI DIMASTAIA";
-})();
-
-function setFilter(el) {
-  document.querySelectorAll(".ftab").forEach(function(t){t.classList.remove("on");});
-  el.classList.add("on");
-  activeFilter = el.dataset.cat;
-  var url = new URL(location.href);
-  if(activeFilter==="TODOS") url.searchParams.delete("cat");
-  else url.searchParams.set("cat", activeFilter);
-  history.replaceState({}, "", url);
-  render();
-}
-
-function render() {
-  var q = document.getElementById("search").value.toLowerCase().trim();
-  var sort = document.getElementById("sort").value;
-  var list = PRODUCTOS.filter(function(p) {
-    var catOk = activeFilter==="TODOS" || p.categoria===activeFilter;
-    var qOk = !q || p.nombre.toLowerCase().indexOf(q)>=0 || p.descripcion.toLowerCase().indexOf(q)>=0;
-    return catOk && qOk;
-  });
-  if(sort==="price-asc")  list.sort(function(a,b){return a.precio-b.precio;});
-  if(sort==="price-desc") list.sort(function(a,b){return b.precio-a.precio;});
-  if(sort==="name")       list.sort(function(a,b){return a.nombre.localeCompare(b.nombre);});
-
-  var ri = document.getElementById("results-info");
-  ri.innerHTML = list.length
-    ? "Mostrando <span>"+list.length+"</span> artículo"+(list.length!==1?"s":"")+(activeFilter!=="TODOS"?" en <span>"+activeFilter+"</span>":"")
-    : "";
-
-  var g = document.getElementById("pgrid");
-  if(!list.length) {
-    g.innerHTML = '<div class="empty"><div class="empty-icon">🌌</div><p>No se encontraron artículos</p><small>Prueba otro filtro o búsqueda</small></div>';
-    return;
-  }
-
-  var html = "";
-  for(var i=0; i<list.length; i++) {
-    var p = list[i];
-    var st = CAT_STYLE[p.categoria] || CAT_STYLE["MODA"];
-    html += '<div class="pcard">'
-      + '<div class="pimg ' + st.img + '">'
-      +   p.emoji
-      +   '<div class="pcat-badge ' + st.badge + '">' + st.label + '</div>'
-      + '</div>'
-      + '<div class="pinfo">'
-      +   '<div class="pname">' + p.nombre + '</div>'
-      +   '<div class="pdesc">' + p.descripcion + '</div>'
-      +   '<div class="pprice">€' + p.precio.toFixed(2) + '</div>'
-      +   '<button class="padd" onclick="addCart(' + p.id + ')">+ Añadir al Carrito</button>'
-      + '</div>'
-      + '</div>';
-  }
-  g.innerHTML = html;
-  updateCartUI();
-}
-
-function addCart(id) {
-  var p = null;
-  for(var i=0; i<PRODUCTOS.length; i++){if(PRODUCTOS[i].id===id){p=PRODUCTOS[i];break;}}
-  if(!p) return;
-  var cart = JSON.parse(localStorage.getItem("orionix_cart")||"[]");
-  var idx = -1;
-  for(var i=0; i<cart.length; i++){if(cart[i].id===id){idx=i;break;}}
-  if(idx>=0) cart[idx].qty = (cart[idx].qty||1)+1;
-  else cart.push({id:p.id, nombre:p.nombre, precio:p.precio, categoria:p.categoria, emoji:p.emoji, qty:1});
-  localStorage.setItem("orionix_cart", JSON.stringify(cart));
-  updateCartUI();
-  toast("▦ Añadido: " + p.nombre);
-}
-
-function updateCartUI() {
-  var cart = JSON.parse(localStorage.getItem("orionix_cart")||"[]");
-  var total = 0;
-  for(var i=0; i<cart.length; i++) total += (cart[i].qty||1);
-  document.getElementById("cnt").textContent = total;
-  document.getElementById("cf-cnt").textContent = total;
-  document.getElementById("cart-float").className = "cart-float" + (total>0?" on":"");
-}
-
-function toast(m) {
-  var t = document.getElementById("toast");
-  t.textContent = m;
-  t.classList.add("on");
-  clearTimeout(t._t);
-  t._t = setTimeout(function(){t.classList.remove("on");}, 2800);
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-  document.querySelectorAll(".ftab").forEach(function(btn) {
-    btn.classList.remove("on");
-    if(btn.dataset.cat === activeFilter) btn.classList.add("on");
-    btn.addEventListener("click", function(){ setFilter(btn); });
-  });
-  document.getElementById("search").addEventListener("input", render);
-  document.getElementById("sort").addEventListener("change", render);
-  render();
-  updateCartUI();
-});
-
-(function(){
-  var c=document.getElementById("cv"), ctx=c.getContext("2d");
-  function r(){c.width=innerWidth;c.height=innerHeight;}
-  r(); addEventListener("resize",r);
-  var stars=Array.from({length:90},function(){return{x:Math.random(),y:Math.random(),rad:Math.random()*.9+.1,a:Math.random(),da:(Math.random()-.5)*.005};});
-  function draw(){
-    ctx.clearRect(0,0,c.width,c.height);
-    stars.forEach(function(s){
-      s.a=Math.max(.03,Math.min(.75,s.a+s.da));
-      if(s.a<=.03||s.a>=.75) s.da*=-1;
-      ctx.beginPath();
-      ctx.arc(s.x*c.width,s.y*c.height,s.rad,0,Math.PI*2);
-      ctx.fillStyle="rgba(232,200,106,"+(s.a*.4)+")";
-      ctx.fill();
-    });
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-</script>
-<script src="orionix-profile.js"></script>
-</body>
-</html>
+H��؝]ۏ���]���]��\��H��\�Z][\ȈYH��\�][\ȏ��[OH�^X[Yێ��[�\����܎��NY��X\��[�]����H�\��]�\�H�X�[����]���]��\��H��\�Y���\����]��\��H��\�]�[���[���[���[���[�YH��\��[�����[���]����]ۈ�\��H���X�X���]�ۘ�X��H��[��˛��][ۋ��Y�I�Y]��\Y�˚[	ȏ����QT�SSQS�؝]ۏ���]����]���]��\��H��\��YH��\�����X��[�YY��]����ܚ\���\���P���H�Y�K��X��N���[Z\�]H���[���\�Xȋ�X�[ΎK�NK�]��S�H�\�Έ�[��ۈL	K����ܙY�[�����ܝH�\�X�ˈ�[YΈ�T�RPR�ҍVH�K��Y����X��N���ܛ�Hۘ\�X��VS��X�[ΌM�NK�]��S�H�\�Έ�Z�\�X�K�ܙY��[ڛ����ZX�ˈ�[YΈ�T͒PR�ҍVH�K��Y����X��N���[�][�\��[Z][HX��ȋ�X�[΍ˎNK�]��S�H�\�Έ�ZXܛٚX��H�[��\�X�K�Y�Y\���ܘYˈ�[YΈ�T�RPR�ҍVH�K��Y���X��N��X��]H�X�[[ۈMH��X�[ΌL��NK�]��S�H�\�Έ�\H\�H�YܘK\[HL��Y\��H[\�X�ˈ�[YΈ�T͒PR�ҍVH�K��Y�K��X��N��]�\��Y][X���Y�\����X�[Ύ�NK�]��S�H�\�Έ�[XX�[ۈ�[��ܘX�Y�\�\�[\�����[YΈ�T͒PR�ҍVH�K��Y����X��N��^�H\�ZX�H�X�[H��X�[ΌN�NK�]��S�H�\�Έ�X�\��[��YX�KX[�Y[�H�[܈�ܘ\ˈ�[YΈ�T͒PR�ҍVH�K��Y����X��N��[�Y[����[��YH��X�[ΌMK�NK�]��S�H�\�Έ�\�[\Y����[��\��X��\�H�^�\���[YΈ�T�RPR�ҍVH�K��Y���X��N����YܘY��Z���X������X�[Ό���NK�]��S�H�\�Έ��Y\��X]K][\�[�ܛ�HNˈ�[YΈ�T͒PR�ҍVH�K��Y�K��X��N��\��H\�[�Y\�]��ԒSӒV��X�[΍K�NK�]��S�H�\�Έ��ܙY�H[H[��YY\X�H�ۈ[��K��[YΈ�T͒PR�ҍVH�K��Y�L��X��N��[��[H�[��\�Z[�[X[\�H��X�[Ό�K�NK�]��S�H�\�Έ�ۘH�\�\�[�K��\\�[Y[��\�MK��[YΈ�T�RPR�ҍVH�K��Y�LK��X��N���YY\�H[\\�[�����X�[΍K�NK�]���T�Sӈ�SH�\�Έ��ܝHݙ\��^�Y[�ܘY�[����\�\ˈ�[YΈ�T�RPR�ҍVH�K��Y�L���X��N���\�\�H�[H��Q�\�Y��X�[Ό�K�NK�]���T�Sӈ�SH�\�Έ��Y\���[�Z[����X��[ۈ[�\��؛��\��]\ˈ�[YΈ�T͒PR�ҍVH�K��Y�L���X��N���Y�\����\�^�Y\��]�X���X�[΍NK�NK�]���T�Sӈ�SH�\�Έ�[۝\�HX�]]��Yܛ�[�\�U���[YΈ�T�RPR�ҍVH�K��Y�M��X��N��[��[H\��[�H�[�Z��X�[΍�K�NK�]���T�Sӈ�SH�\�Έ��Y\���[�]X���[Z][K][\\���\\�[Y[��ˈ�[YΈ�T͒PR�ҍVH�K��Y�MK��X��N��\��[YH���[����\�L[��X�[ΎK�NK�]���T�Sӈ�SH�\�Έ���\�H[X�\��YHXY\�HH�Y�ˈ�[YΈ�T�RPR�ҍVH�K��Y�M���X��N���[�\�ۈ�Y\���]�\��X�H��X�[΍K�NK�]���T�Sӈ�SH�\�Έ��Yܛ��X\��ۋX�[HX]H�ۈ��ˈ�[YΈ�T͒PR�ҍVH�K��Y�M���X��N���\][\����[��[Z]Y��X�[ΌL�K�NK�]���T�Sӈ�SH�\�Έ��Y[H�ۈ���YX�[ۈ�[Y\�YK��[YΈ�T�RPR�ҍVH�K��Y�N��X��N���\]Y]H��X�\��YܘH��X�[ΎNK�NK�]���T�Sӈ�SH�\�Έ��ܜ��[�\�[܈�ۈX\H\�[\��Y\��HR�ˈ�[YΈ�T͒PR�ҍVH�K��Y�NK��X��N���[ڈ�X\��]�[]H��X�[ΌMK�NK�]���T�Sӈ�SH�\�Έ�[ۚ]܈�\�XX���ܜ�XHH�[X�ۘH�YܘK��[YΈ�T�RPR�ҍVH�K��Y����X��N���]�Y�[��X�[\��ԒSӒV��X�[ΌLNK�NK�]���T�Sӈ�SH�\�Έ��\�\�K�[�\�ۈH]�\��[��Z�HHXY\�K��[YΈ�T͒PR�ҍVH�K��Y��K��X��N���[ڈ]]�X]X���]\���X�[Ό�NK�NK�]��RHS�T�PH�\�Έ�[ݚ[ZY[���Z^���Z�Hܛ����Kܚ\�[�Y�\�ˈ�[YΈ�T�RPR�ҍVH�K��Y�����X��N��[�[�][�[��Yܛ�ܛȋ�X�[ΌMK�NK�]��RHS�T�PH�\�Έ�X�\��]Z\�\��X���[��Hܛ�N�\�[���[�Y]�X�ˈ�[YΈ�T͒PR�ҍVH�K��Y�����X��N�������Y\��][X[��X[�]��X�[Ό�L��]��RHS�T�PH�\�Έ�X��HX[��\��Z�\�ܘY���ܜ�����[�ˈ�[YΈ�T�RPR�ҍVH�K��Y����X��N���\]Y]H�Y\���[�]X��[]H��X�[ΌNK�NK�]��RHS�T�PH�\�Έ��ܝH�[K���\�\��Y�ܞ�Y\�\�[�[���X�\�K��[YΈ�T͒PR�ҍVH�K��Y��K��X��N���[Y[���Z�H�X������X�[΍�K�NK�]��RHS�T�PH�\�Έ�ۚ^�Yܛ�H�ܙHܘY��Z�HH\��[�[ˈ�[YΈ�T�RPR�ҍVH�K��Y�����X��N��X[][�Z�X�]]���Y\�ȋ�X�[Ό�K�NK�]��RHS�T�PH�\�Έ��Y\���[�Z[����X�[�X�[ۈH�Y�\�YY\�Mˈ�[YΈ�T͒PR�ҍVH�K��Y�����X��N���\]����ܙ�[Z][H��X�[ΌMNK�NK�]��RHS�T�PH�\�Έ��Y\��[Y��Y[HH��XH[�Y\�^�[�K��[YΈ�T�RPR�ҍVH�K��Y����X��N��[�\�H�Y\���[��Yȋ�X�[ΎK�NK�]��RHS�T�PH�\�Έ��Y\���Yܛ��Y\��HXYۙ]X��HX�\�ˈ�[YΈ�T̒M�K��Y��K��X��N���Z�H�Y\�Hܝ][Z�ȋ�X�[ΌNNK�NK�]��RHS�T�PH�\�Έ�\�H�[ڙ\�H��X\��\��Y\�H�[�Y]�X�K��[YΈ�T͒PR�ҍVH�K��Y����X��N���]X�[�Y܈�\��H����X�[ΌM�K�NK�]��RHS�T�PH�\�Έ�ܚ\�[��Y�HX[���\�H�ۈܘX�Y�ԒSӒV��[YΈ�T�RPR�ҍVH�B�N��\�SSҒT�H�N��T�RPR�ҍVH����T͒PR�ҍVH�Έ�T�RPR�ҍVH���T͒PR�ҍVH�N��T�RPR�ҍVH����T͒PR�ҍVH�Έ�T�RPR�ҍVH���T͒PR�ҍVH�N��T�RPR�ҍVH�L��T͒PR�ҍVH�LN��T�RPR�ҍVH�L���T͒PR�ҍVH�LΈ�T�RPR�ҍVH�M��T͒PR�ҍVH�MN��T�RPR�ҍVH�M���T͒PR�ҍVH�MΈ�T�RPR�ҍVH�N��T͒PR�ҍVH�NN��T�RPR�ҍVH����T̒M��N��T�RPR�ҍVH�����T͒PR�ҍVH��Έ�T�RPR�ҍVH����T͒PR�ҍVH��N��T�RPR�ҍVH�����T̒M��Έ�T�RPR�ҍVH����T̒M��N��T͒PR�ҍVH����T͒PR�ҍVH�N

@@ -3,343 +3,113 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIONIX · La Forjadora de Diamantes — Transformaci&oacute;n de &Eacute;lite</title>
-<meta name="description" content="La Forjadora de Diamantes: el programa de transformación élite de Orionix. De carbón a diamante. Tu evolución comienza aquí.">
-<link rel="icon" href="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png" type="image/png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<title>KRC · La Forjadora</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root{--oro:#e8c86a;--oro-med:#c8a24a;--oro-osc:#8a6a24;--bg:#0b0b0d;--panel:#141117;--border:#2a2530;--texto:#e9ddc4;--tenue:#b8a982;--diamante:#b9f0ff;--diamante-glow:rgba(185,240,255,.3)}
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-body{font-family:'Cormorant Garamond',Georgia,serif;background:transparent;color:var(--texto);min-height:100vh;overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
-h1,h2,h3,.marca,.btn,.cinzel{font-family:'Cinzel',serif}
-.oro{background:linear-gradient(92deg,#8a6a24,#e8c86a 25%,#fff6d6 50%,#e8c86a 75%,#8a6a24);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:brilloOro 6s linear infinite}
-@keyframes brilloOro{to{background-position:200% center}}
-.hairline{width:70px;height:1px;background:linear-gradient(90deg,transparent,var(--oro),transparent);margin:22px auto}
-.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;padding:13px 34px;font-size:.66rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--oro);border:1px solid var(--oro-med);border-radius:2px;background:transparent;overflow:hidden;transition:color .4s,border-color .4s;z-index:0}
-.btn::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#f4e2a0,#e8c86a 45%,#c8a24a);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.4,0,.2,1)}
-.btn:hover{color:#1a1409;border-color:var(--oro)}.btn:hover::before{transform:scaleX(1)}
-#cosmos{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 50% 20%,#0a0a16,#03030a 60%,#010104 100%);overflow:hidden}
-#cosmos .neb{position:absolute;inset:-20%;background:radial-gradient(closest-side,var(--neb1),transparent) no-repeat,radial-gradient(closest-side,var(--neb2),transparent) no-repeat,radial-gradient(closest-side,var(--neb3),transparent) no-repeat;background-position:20% 15%,80% 40%,50% 85%;background-size:60% 60%,55% 55%,70% 70%;filter:blur(38px);opacity:.55;animation:nebFloat 50s ease-in-out infinite alternate}
-@keyframes nebFloat{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(-3%,-4%,0) scale(1.12)}}
-#cosmosStars{position:fixed;inset:0;z-index:-1;pointer-events:none}
-body[data-cielo="1"]{--neb1:rgba(90,60,180,.5);--neb2:rgba(40,90,200,.4);--neb3:rgba(200,120,60,.35)}
-body[data-cielo="2"]{--neb1:rgba(200,60,120,.45);--neb2:rgba(120,40,160,.4);--neb3:rgba(60,120,200,.35)}
-body[data-cielo="3"]{--neb1:rgba(40,140,150,.45);--neb2:rgba(30,80,180,.4);--neb3:rgba(150,200,120,.28)}
-body[data-cielo="4"]{--neb1:rgba(180,120,40,.45);--neb2:rgba(150,40,60,.4);--neb3:rgba(90,40,160,.35)}
-body[data-cielo="5"]{--neb1:rgba(60,60,120,.5);--neb2:rgba(120,120,200,.35);--neb3:rgba(200,180,120,.3)}
-body[data-cielo="6"]{--neb1:rgba(20,120,90,.45);--neb2:rgba(160,60,180,.4);--neb3:rgba(230,180,90,.32)}
-nav{position:fixed;top:0;left:0;width:100%;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px 7vw;transition:padding .3s,background .3s}
-nav.scrolled{padding:8px 7vw;background:rgba(11,11,13,.92);border-bottom:1px solid rgba(232,200,106,.2);backdrop-filter:blur(12px)}
-nav .marca{font-size:.72rem;font-weight:600;letter-spacing:4px;flex-shrink:0;text-decoration:none;color:var(--texto)}
-nav .links{display:flex;align-items:center;flex-wrap:nowrap;gap:0}
-nav .links a{color:var(--tenue);text-decoration:none;margin-left:16px;font-size:.52rem;letter-spacing:1.4px;text-transform:uppercase;font-family:'Cinzel',serif;transition:color .25s;position:relative;white-space:nowrap}
-nav .links a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--oro);transition:width .3s}
-nav .links a:hover{color:var(--oro)}nav .links a:hover::after{width:100%}
-nav .links .sep{width:1px;height:14px;background:rgba(232,200,106,.25);margin-left:18px}
-nav .links a.acc{color:var(--oro)!important;font-weight:600;border:1px solid rgba(232,200,106,.35);border-radius:6px;padding:5px 11px;margin-left:8px;transition:background .25s,box-shadow .25s,transform .2s}
-nav .links a.acc:hover{background:rgba(232,200,106,.14);box-shadow:0 0 12px rgba(232,200,106,.25);transform:translateY(-1px)}
-nav .links a.acc::after{display:none}
-@media(max-width:900px){nav .links{display:none}}
-#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 7vw;position:relative}
-#hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(232,200,106,.06) 1px,transparent 1px);background-size:26px 26px;opacity:.5;pointer-events:none}
-#hero::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(2,2,7,.4),rgba(2,2,7,.65));pointer-events:none}
-.eyebrow{font-family:'Cinzel',serif;letter-spacing:4px;font-size:.5rem;color:var(--oro-med);text-transform:uppercase;margin-bottom:12px}
-#hero h1{font-size:clamp(1.1rem,3.2vw,2.4rem);font-weight:400;letter-spacing:clamp(5px,2vw,18px);line-height:1.1;text-indent:clamp(5px,2vw,18px);background:linear-gradient(120deg,#8a6d2a 0%,#f6e6ad 25%,#fff8e1 45%,#f6e6ad 60%,#b8912f 100%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;filter:drop-shadow(0 4px 40px rgba(232,200,106,.35));animation:brilloTitulo 6s linear infinite,latido 4.5s ease-in-out infinite}
-@keyframes brilloTitulo{to{background-position:220% center}}
-@keyframes latido{0%,100%{filter:drop-shadow(0 4px 40px rgba(232,200,106,.3))}50%{filter:drop-shadow(0 6px 60px rgba(232,200,106,.55))}}
-#hero .sub{font-size:clamp(.85rem,1.7vw,1.05rem);font-style:italic;color:var(--tenue);margin:14px 0 10px;max-width:600px}
-.scroll-ind{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);color:var(--oro-med);font-size:1.4rem;animation:flota 2s ease-in-out infinite;z-index:3}
-@keyframes flota{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
-/* DIAMOND */
-.diamond-vis{position:relative;width:140px;height:140px;margin:0 auto 40px;display:flex;align-items:center;justify-content:center}
-.diamond-geo{width:120px;height:120px;background:linear-gradient(135deg,#c8f8ff,#7dd8f4 30%,#b9f0ff 50%,#60c0e8 70%,#a0e0f8);clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0% 38%);position:relative;box-shadow:0 0 30px rgba(185,240,255,.6),0 0 60px rgba(185,240,255,.25);animation:diamondGlow 3s ease-in-out infinite}
-@keyframes diamondGlow{0%,100%{box-shadow:0 0 30px rgba(185,240,255,.6),0 0 60px rgba(185,240,255,.25)}50%{box-shadow:0 0 50px rgba(185,240,255,1),0 0 90px rgba(185,240,255,.5)}}
-.diamond-vis .d-ring{position:absolute;inset:-20px;border-radius:50%;border:1px solid rgba(185,240,255,.2);animation:ringRot 8s linear infinite}
-.diamond-vis .d-ring2{position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(232,200,106,.15);animation:ringRot 5s linear infinite reverse}
-@keyframes ringRot{to{transform:rotate(360deg)}}
-.sec{padding:90px 7vw;position:relative}
-.sec-dark::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(2,2,7,.5),rgba(2,2,7,.82));pointer-events:none}
-.sec-sup{text-align:center;font-family:'Cinzel',serif;letter-spacing:6px;font-size:.48rem;color:var(--oro-med);text-transform:uppercase;opacity:.7;margin-bottom:8px}
-.sec-title{text-align:center;font-family:'Cinzel',serif;font-size:clamp(.85rem,2vw,1.35rem);letter-spacing:8px;margin-bottom:54px}
-/* MANIFESTO */
-.manifesto{max-width:700px;margin:0 auto;text-align:center}
-.manifesto p{font-size:1.05rem;font-style:italic;color:var(--tenue);line-height:2;margin-bottom:18px}
-.manifesto .quote{font-family:'Cinzel',serif;font-size:1.3rem;letter-spacing:2px;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;margin:30px 0}
-/* FASES */
-.fases{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1100px;margin:0 auto}
-@media(max-width:860px){.fases{grid-template-columns:1fr 1fr}}
-@media(max-width:500px){.fases{grid-template-columns:1fr}}
-.fase{padding:30px 22px;border:1px solid rgba(232,200,106,.18);border-radius:4px;background:rgba(20,17,23,.75);backdrop-filter:blur(18px);text-align:center;position:relative;overflow:hidden;transition:transform .35s,border-color .35s}
-.fase:hover{transform:translateY(-6px);border-color:rgba(232,200,106,.4)}
-.fase-num{font-family:'Cinzel',serif;font-size:3rem;font-weight:900;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.25;position:absolute;top:10px;right:14px;line-height:1}
-.fase-icon{font-size:1.8rem;margin-bottom:12px}
-.fase-name{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:3px;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px}
-.fase-desc{font-size:.78rem;color:rgba(184,169,130,.8);line-height:1.6}
-/* BENEFICIOS */
-.benef-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1000px;margin:0 auto}
-@media(max-width:700px){.benef-grid{grid-template-columns:1fr}}
-.benef{display:flex;gap:16px;padding:22px;border:1px solid rgba(232,200,106,.1);border-radius:4px;background:rgba(20,17,23,.5);transition:border-color .25s}
-.benef:hover{border-color:rgba(232,200,106,.28)}
-.benef-ico{font-size:1.5rem;flex-shrink:0;margin-top:2px}
-.benef-title{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:2px;color:var(--tenue);margin-bottom:5px}
-.benef-desc{font-size:.78rem;color:rgba(184,169,130,.7);line-height:1.55}
-/* CTA */
-.cta-sec{text-align:center;padding:80px 7vw}
-.cta-sec::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(2,2,7,.5),rgba(2,2,7,.82))}
-.cta-sec h2{font-family:'Cinzel',serif;font-size:clamp(1rem,2.4vw,1.6rem);letter-spacing:6px;margin-bottom:20px}
-.cta-sec p{font-style:italic;color:var(--tenue);max-width:500px;margin:0 auto 36px;line-height:1.8}
-/* AXEL ORB */
-#axelTrail{position:fixed;inset:0;pointer-events:none;z-index:9998}
-#axelOrb{position:fixed;width:64px;height:64px;cursor:grab;z-index:9999;user-select:none;-webkit-user-select:none;touch-action:none}
-#axelOrb:active{cursor:grabbing}
-.orb-ring{position:absolute;inset:-6px;border-radius:50%;border:2px solid transparent;background:conic-gradient(from 0deg,#e8c86a,#fff6d6,#c8a24a,#fff6d6,#e8c86a) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;animation:orbSpin 3s linear infinite}
-@keyframes orbSpin{to{transform:rotate(360deg)}}
-.orb-core{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff8e8,#f4d878 18%,#e8c86a 32%,#c8a24a 55%,#8a6a24 78%,#3a2a08);box-shadow:0 0 20px rgba(232,200,106,.7),0 0 40px rgba(232,200,106,.35),0 0 60px rgba(232,200,106,.15),inset 0 0 16px rgba(255,246,214,.4);display:flex;align-items:center;justify-content:center;animation:orbPulse 2.5s ease-in-out infinite}
-@keyframes orbPulse{0%,100%{box-shadow:0 0 20px rgba(232,200,106,.7),0 0 40px rgba(232,200,106,.35),0 0 60px rgba(232,200,106,.15),inset 0 0 16px rgba(255,246,214,.4)}50%{box-shadow:0 0 30px rgba(232,200,106,1),0 0 60px rgba(232,200,106,.6),0 0 90px rgba(232,200,106,.25),inset 0 0 22px rgba(255,246,214,.6)}}
-.orb-sheen{position:absolute;inset:8px;border-radius:50%;background:radial-gradient(circle at 38% 28%,rgba(255,255,255,.55),transparent 58%)}
-.orb-label{font-family:'Cinzel',serif;font-size:.85rem;font-weight:700;color:#1a0f00;position:relative;z-index:1;pointer-events:none}
-#axelPanel{position:fixed;bottom:108px;right:30px;width:310px;max-height:460px;background:rgba(11,11,13,.97);border:1px solid rgba(232,200,106,.28);border-radius:8px;display:flex;flex-direction:column;z-index:9997;transform:translateY(16px) scale(.96);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(24px);box-shadow:0 24px 70px rgba(0,0,0,.85),0 0 30px rgba(232,200,106,.08)}
-#axelPanel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all}
-.ap-hdr{padding:14px 16px;border-bottom:1px solid rgba(232,200,106,.13);display:flex;align-items:center;gap:10px}
-.ap-av{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff8e8,#e8c86a 36%,#8a6a24 78%);flex-shrink:0;box-shadow:0 0 10px rgba(232,200,106,.5);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:.65rem;font-weight:700;color:#1a0f00}
-.ap-nm{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:2px;color:var(--oro)}
-.ap-st{font-size:.58rem;color:rgba(232,200,106,.45);letter-spacing:1px;margin-top:1px}
-.ap-x{margin-left:auto;background:none;border:none;color:rgba(232,200,106,.4);font-size:1.1rem;cursor:pointer;line-height:1;padding:3px;transition:color .2s}
-.ap-x:hover{color:var(--oro)}
-.ap-msgs{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:9px;min-height:160px}
-.ap-msgs::-webkit-scrollbar{width:3px}.ap-msgs::-webkit-scrollbar-thumb{background:rgba(232,200,106,.25)}
-.ap-msg{padding:9px 12px;border-radius:4px;font-size:.76rem;line-height:1.55;max-width:88%}
-.ap-msg.bot{background:rgba(232,200,106,.07);border:1px solid rgba(232,200,106,.14);color:var(--texto);align-self:flex-start}
-.ap-msg.usr{background:rgba(232,200,106,.13);border:1px solid rgba(232,200,106,.28);color:var(--texto);align-self:flex-end;text-align:right}
-.ap-ft{padding:11px 16px;border-top:1px solid rgba(232,200,106,.13);display:flex;gap:7px}
-.ap-ft input{flex:1;background:rgba(232,200,106,.05);border:1px solid rgba(232,200,106,.18);border-radius:3px;padding:8px 11px;color:var(--texto);font-family:'Cormorant Garamond',serif;font-size:.78rem;outline:none;transition:border-color .2s}
-.ap-ft input:focus{border-color:rgba(232,200,106,.45)}
-.ap-ft button{background:var(--oro-med);border:none;color:#1a0f00;width:34px;border-radius:3px;cursor:pointer;font-size:.9rem;transition:background .2s;font-weight:700}
-.ap-ft button:hover{background:var(--oro)}
-footer.pro{padding:28px 7vw;border-top:1px solid rgba(232,200,106,.1);display:flex;align-items:center;justify-content:space-between;background:rgba(11,11,13,.85);position:relative}
-footer.pro::before{content:'';position:absolute;inset:0;z-index:-1;background:rgba(2,2,7,.75);pointer-events:none}
-.ft-copy{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:3px;color:rgba(232,200,106,.35);text-transform:uppercase}
-.ft-links{display:flex;gap:20px}
-.ft-links a{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:2px;text-transform:uppercase;color:rgba(232,200,106,.35);text-decoration:none;transition:color .2s}
-.ft-links a:hover{color:var(--oro)}
+:root {
+  --bg-abyss: #050510; --gold: #C9A84C; --gold-light: #F0D080;
+  --violet: #7B2FBE; --cyan: #00FFD1;
+  --glass: rgba(255,255,255,0.04); --glass-border: rgba(201,168,76,0.2);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--bg-abyss); color: #e0e0e0; font-family: 'Cormorant Garamond', serif; min-height: 100vh; }
+h1, h2, h3, .cinzel { font-family: 'Cinzel', serif; }
+
+nav { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(5,5,16,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+.nav-logo { color: var(--gold); font-size: 1.4rem; letter-spacing: 4px; text-decoration: none; font-weight: 900; }
+.nav-links a { color: #aaa; text-decoration: none; margin-left: 24px; font-size: 0.9rem; letter-spacing: 1px; transition: 0.3s; }
+.nav-links a:hover, .nav-links a.active { color: var(--gold-light); text-shadow: 0 0 10px rgba(201,168,76,0.5); }
+
+.wrap { max-width: 1200px; margin: 120px auto 60px; padding: 0 20px; position: relative; z-index: 1; }
+.header-forja { text-align: center; margin-bottom: 60px; }
+.header-forja h1 { font-size: 3rem; color: var(--cyan); letter-spacing: 6px; margin-bottom: 16px; text-shadow: 0 0 30px rgba(0,255,209,0.3); }
+.header-forja p { font-size: 1.2rem; color: var(--gold-light); font-style: italic; letter-spacing: 2px; }
+
+.grid-agentes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.agente-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 16px; padding: 32px; backdrop-filter: blur(20px); transition: all 0.4s; position: relative; overflow: hidden; }
+.agente-card::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(0,255,209,0.05), transparent 70%); opacity: 0; transition: 0.4s; }
+.agente-card:hover { transform: translateY(-8px); border-color: var(--cyan); box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 25px rgba(0,255,209,0.15); }
+.agente-card:hover::after { opacity: 1; }
+
+.agente-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.agente-nombre { font-size: 1.5rem; color: var(--gold); letter-spacing: 2px; }
+.estado { display: flex; align-items: center; gap: 8px; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; font-family: 'Cinzel', serif; }
+.estado.activo { color: var(--cyan); }
+.estado.inactivo { color: #666; }
+.punto { width: 8px; height: 8px; border-radius: 50%; background: currentColor; box-shadow: 0 0 8px currentColor; }
+
+.agente-desc { font-size: 1.05rem; line-height: 1.6; color: #b0b0c0; margin-bottom: 24px; min-height: 60px; }
+
+.btn-invocar { width: 100%; padding: 14px; background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 2px; font-size: 0.85rem; border-radius: 6px; cursor: pointer; transition: all 0.4s; position: relative; z-index: 2; }
+.btn-invocar:hover { background: var(--gold); color: var(--bg-abyss); box-shadow: 0 0 25px rgba(201,168,76,0.5); font-weight: 700; }
+.btn-invocar:disabled { border-color: #444; color: #444; cursor: not-allowed; box-shadow: none; background: transparent; }
+
+@media(max-width: 768px) { .header-forja h1 { font-size: 2rem; } nav { padding: 16px 20px; } .nav-links { display: none; } }
 </style>
-<meta property="og:image" content="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/kevinruizbolsota-svg/Remember_Luxury/main/ciudadela/unnamed.png">
 </head>
 <body>
-<div id="cosmos"><div class="neb"></div></div>
-<canvas id="cosmosStars"></canvas>
-<canvas id="axelTrail"></canvas>
-
-<nav id="nav">
-  <a class="marca oro" href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/">ORIONIX</a>
-  <div class="links">
-    <a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/">Inicio</a>
-    <a href="hub.html">Hub</a>
-    <a href="ciudadela.html">Ciudadela</a>
-    <a href="hogar.html">Hogar</a>
-    <a href="forjadora.html">Forjadora</a>
-    <a href="afiliados.html">Afiliados</a>
-    <div class="sep"></div>
-    <a href="axel.html" class="acc">AXEL</a>
-    <a href="tienda.html" class="acc">Tienda</a>
-  </div>
-    <a href="https://wa.me/573014410541?text=Quiero%20unirme%20a%20La%20Forjadora" target="_blank" class="acc">Forjarme &rarr;</a>
+<nav>
+  <a href="krc.html" class="nav-logo">KRC</a>
+  <div class="nav-links">
+    <a href="krc.html">Universo</a>
+    <a href="kabalion-2d.html">Kabalion</a>
+    <a href="forjadora.html" class="active">Forjadora</a>
+    <a href="cronicas.html">Crónicas</a>
   </div>
 </nav>
 
-<section id="hero">
-  <div class="eyebrow">Orionix &middot; Cuarto C&iacute;rculo</div>
-  <div class="diamond-vis">
-    <div class="d-ring"></div>
-    <div class="d-ring2"></div>
-    <div class="diamond-geo"></div>
-  </div>
-  <h1>LA FORJADORA<br>DE DIAMANTES</h1>
-  <p class="sub">No todos llegan. Los que llegan, se transforman para siempre. El programa de &eacute;lite que convierte empresarios en l&iacute;deres del universo digital.</p>
-  <div class="hairline"></div>
-  <a href="#manifesto" class="btn" style="margin-top:8px">Descubrir el camino &darr;</a>
-  <div class="scroll-ind">&#8964;</div>
-</section>
-
-<!-- MANIFESTO -->
-<section id="manifesto" class="sec sec-dark">
-  <div class="sec-sup">El Manifiesto</div>
-  <h2 class="sec-title"><span class="oro">De Carb&oacute;n a Diamante</span></h2>
-  <div class="manifesto">
-    <p>Hay dos tipos de personas en el mundo de los negocios: los que miran desde afuera y los que entran. La Forjadora no es para todos. Es para quienes ya tomaron la decisi&oacute;n de que la mediocridad no es una opci&oacute;n.</p>
-    <div class="quote">&ldquo;El diamante es carb&oacute;n que soport&oacute; la presi&oacute;n.&rdquo;</div>
-    <p>Aqu&iacute; sometemos tu mentalidad, tus procesos y tu negocio a la presi&oacute;n exacta que los convierte en algo indestructible. La inteligencia artificial no es el futuro. Es el presente. Y quienes no la dominen, quedan atr&aacute;s.</p>
-    <p>Esta es tu forja.</p>
-  </div>
-</section>
-
-<!-- FASES -->
-<section id="proceso" class="sec">
-  <div class="sec-sup">El Proceso</div>
-  <h2 class="sec-title"><span class="oro">Las 4 Fases</span></h2>
-  <div class="fases">
-    <div class="fase">
-      <div class="fase-num">1</div>
-      <div class="fase-icon">🔥</div>
-      <div class="fase-name">La Ignici&oacute;n</div>
-      <div class="fase-desc">Diagn&oacute;stico total de tu negocio. Identificamos las brechas, el potencial y el mapa exacto hacia tu transformaci&oacute;n.</div>
-    </div>
-    <div class="fase">
-      <div class="fase-num">2</div>
-      <div class="fase-icon">⚙️</div>
-      <div class="fase-name">La Forja</div>
-      <div class="fase-desc">Implementamos sistemas de IA, automatizaciones y procesos de venta que trabajan por ti sin descanso.</div>
-    </div>
-    <div class="fase">
-      <div class="fase-num">3</div>
-      <div class="fase-icon">💎</div>
-      <div class="fase-name">El Pulido</div>
-      <div class="fase-desc">Refinamos tu marca, tu posicionamiento y tu propuesta de valor hasta que brille con luz propia en el mercado.</div>
-    </div>
-    <div class="fase">
-      <div class="fase-num">4</div>
-      <div class="fase-icon">👑</div>
-      <div class="fase-name">La Coronaci&oacute;n</div>
-      <div class="fase-desc">Sales como un l&iacute;der del universo digital con un ecosistema autom&aacute;tico que crece mientras t&uacute; descansas.</div>
-    </div>
-  </div>
-</section>
-
-<!-- BENEFICIOS -->
-<section class="sec sec-dark">
-  <div class="sec-sup">Lo que Obtienes</div>
-  <h2 class="sec-title"><span class="oro">Transformaci&oacute;n Completa</span></h2>
-  <div class="benef-grid">
-    <div class="benef"><div class="benef-ico">🤖</div><div><div class="benef-title">Agente IA Personalizado</div><div class="benef-desc">Tu propio AXEL configurado al 100% con el ADN de tu marca, tus productos y tu forma de vender.</div></div></div>
-    <div class="benef"><div class="benef-ico">📈</div><div><div class="benef-title">Sistema de Ventas Autom&aacute;tico</div><div class="benef-desc">Embudo, seguimiento y cierre autom&aacute;tico. Tu negocio vendiendo mientras t&uacute; duermes.</div></div></div>
-    <div class="benef"><div class="benef-ico">🎓</div><div><div class="benef-title">Formaci&oacute;n &Eacute;lite</div><div class="benef-desc">Acceso directo al conocimiento del Creador KRC y su m&eacute;todo de construcci&oacute;n de imperios digitales.</div></div></div>
-    <div class="benef"><div class="benef-ico">🌐</div><div><div class="benef-title">Presencia Digital Profesional</div><div class="benef-desc">Tu universo online completo: web, marca, contenido y posicionamiento de alto valor.</div></div></div>
-    <div class="benef"><div class="benef-ico">👥</div><div><div class="benef-title">Comunidad de &Eacute;lite</div><div class="benef-desc">Entrada a la constelaci&oacute;n Orionix: empresarios, alianzas y oportunidades de nivel internacional.</div></div></div>
-    <div class="benef"><div class="benef-ico">♾️</div><div><div class="benef-title">Soporte Continuo</div><div class="benef-desc">No te dejamos solo. Acompa&ntilde;amiento, actualizaciones y gu&iacute;a permanente de tu equipo Orionix.</div></div></div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-sec sec" style="position:relative">
-  <div style="text-align:center">
-    <div class="eyebrow">&#9670; Acceso Limitado &#9670;</div>
-    <h2 class="sec-title" style="margin-bottom:16px"><span class="oro">¿Est&aacute;s Listo?</span></h2>
-    <p style="font-style:italic;color:var(--tenue);max-width:520px;margin:0 auto 36px;line-height:1.8">La Forjadora solo abre sus puertas para un n&uacute;mero selecto de empresarios por ciclo. Si sientes el llamado, es el momento de actuar.</p>
-    <a href="https://wa.me/573014410541?text=Quiero%20unirme%20a%20La%20Forjadora%20de%20Diamantes" target="_blank" class="btn" style="margin-bottom:18px">Solicitar mi lugar &rarr;</a>
-    <br>
-    <a href="hub.html" class="btn" style="opacity:.6">&larr; Volver al Hub</a>
-  </div>
-</section>
-
-
-<!-- ══ SECCIÓN HÁBITOS ══ -->
-<style>
-.hab-sec{padding:60px 7vw 50px;position:relative}
-.hab-sec::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(2,2,7,.5),rgba(2,2,7,.85));pointer-events:none}
-.hab-sec-head{text-align:center;margin-bottom:36px}
-.hab-eyebrow{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:6px;color:var(--oro-med);text-transform:uppercase;opacity:.7;margin-bottom:8px}
-.hab-title{font-family:'Cinzel',serif;font-size:clamp(.9rem,2.2vw,1.4rem);letter-spacing:5px;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:10px}
-.hab-desc{font-size:.88rem;font-style:italic;color:var(--tenue);max-width:500px;margin:0 auto;opacity:.8;line-height:1.6}
-.hab-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:900px;margin:0 auto}
-@media(max-width:600px){.hab-grid{grid-template-columns:1fr}}
-.hab-card{border:1px solid rgba(232,200,106,.18);border-radius:8px;background:rgba(20,17,23,.82);backdrop-filter:blur(16px);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s,border-color .3s;text-decoration:none;color:inherit;cursor:pointer}
-.hab-card:hover{transform:translateY(-5px);box-shadow:0 14px 44px rgba(232,200,106,.16);border-color:rgba(232,200,106,.38)}
-.hab-card-top{height:110px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:linear-gradient(135deg,rgba(20,14,36,.95),rgba(8,6,16,.98));border-bottom:1px solid rgba(232,200,106,.08)}
-.hab-card-body{padding:18px 20px 22px}
-.hab-card-name{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:3px;background:linear-gradient(120deg,#8a6d2a,#f6e6ad 40%,#e8c86a);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:7px}
-.hab-card-desc{font-size:.76rem;font-style:italic;color:var(--tenue);line-height:1.5;opacity:.8;margin-bottom:12px}
-.hab-card-cta{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:2px;text-transform:uppercase;color:var(--oro-med);display:flex;align-items:center;gap:6px;transition:gap .2s}
-.hab-card:hover .hab-card-cta{gap:10px}
-</style>
-
-<section class="hab-sec">
-  <div class="hab-sec-head">
-    <div class="hab-eyebrow">// Disciplina &middot; Constancia &middot; Poder</div>
-    <h2 class="hab-title">Sistema de H&aacute;bitos</h2>
-    <p class="hab-desc">La Forjadora no solo transforma tu negocio. Forja al hombre detr&aacute;s del negocio. Tus h&aacute;bitos son tu capital m&aacute;s valioso.</p>
+<div class="wrap">
+  <div class="header-forja">
+    <h1>LA FORJADORA DE AGENTES</h1>
+    <p>Donde el fuego cósmico da forma a la inteligencia artificial.</p>
   </div>
 
-  <div class="hab-grid">
-
-    <a class="hab-card" href="habitos.html">
-      <div class="hab-card-top">&#x1F4C5;</div>
-      <div class="hab-card-body">
-        <div class="hab-card-name">H&aacute;bitos Diarios</div>
-        <div class="hab-card-desc">Tracker de h&aacute;bitos con checkboxes, barras de progreso y registro diario. El sistema base de disciplina del forjador.</div>
-        <div class="hab-card-cta">Abrir Tracker &#8594;</div>
+  <div class="grid-agentes">
+    <div class="agente-card">
+      <div class="agente-header">
+        <h3 class="agente-nombre">QWEN</h3>
+        <div class="estado activo"><span class="punto"></span> Activo</div>
       </div>
-    </a>
-
-    <a class="hab-card" href="nebula-habits.html">
-      <div class="hab-card-top">&#x1F52D;</div>
-      <div class="hab-card-body">
-        <div class="hab-card-name">Nebula Habits</div>
-        <div class="hab-card-desc">Sistema gamificado con estrellas y constelaciones. Convierte cada h&aacute;bito cumplido en una estrella de tu propia constelaci&oacute;n.</div>
-        <div class="hab-card-cta">Entrar a Nebula &#8594;</div>
-      </div>
-    </a>
-
-  </div>
-</section>
-<!-- ══ FIN HÁBITOS ══ -->
-
-<footer class="pro">
-  <div class="ft-copy">&copy; 2024 Orionix &middot; Remember Luxury &middot; KRC</div>
-  <div class="ft-links">
-    <a href="hub.html">Hub</a>
-    <a href="ciudadela.html">Ciudadela</a>
-    <a href="hogar.html">Hogar</a>
-    <a href="https://wa.me/573014410541" target="_blank">Contacto</a>
-  </div>
-</footer>
-
-<!-- AXEL ORB -->
-<div id="axelOrb" title="Hablar con AXEL">
-  <div class="orb-ring"></div>
-  <div class="orb-core">
-    <div class="orb-sheen"></div>
-    <span class="orb-label">A</span>
-  </div>
-</div>
-<div id="axelPanel">
-  <div class="ap-hdr">
-    <div class="ap-av">A</div>
-    <div>
-      <div class="ap-nm">AXEL</div>
-      <div class="ap-st">Agente Orionix &middot; En l&iacute;nea</div>
+      <p class="agente-desc">El Arquitecto de Mundos. Forja interfaces de lujo cósmico, geometría sagrada y experiencias visuales que desafían la realidad.</p>
+      <button class="btn-invocar" onclick="invocar('Qwen')">✦ INVOCAR AGENTE</button>
     </div>
-    <button class="ap-x" onclick="document.getElementById('axelPanel').classList.remove('open')">&#10005;</button>
-  </div>
-  <div class="ap-msgs" id="axelMsgs">
-    <div class="ap-msg bot">Bienvenido a La Forjadora. Soy AXEL. &iquest;Tienes preguntas sobre el programa?</div>
-  </div>
-  <div class="ap-ft">
-    <input id="axelInput" type="text" placeholder="Escribe tu mensaje..." onkeydown="if(event.key==='Enter')axelSend()">
-    <button onclick="axelSend()">&#8594;</button>
+
+    <div class="agente-card">
+      <div class="agente-header">
+        <h3 class="agente-nombre">ANTIGRAVITY</h3>
+        <div class="estado activo"><span class="punto"></span> Activo</div>
+      </div>
+      <p class="agente-desc">El Origen. Creador del Big Bang del Universo KRC. Mantiene la constelación central y el ritmo del corazón del sistema.</p>
+      <button class="btn-invocar" onclick="invocar('Antigravity')">✦ INVOCAR AGENTE</button>
+    </div>
+
+    <div class="agente-card">
+      <div class="agente-header">
+        <h3 class="agente-nombre">n8n</h3>
+        <div class="estado activo"><span class="punto"></span> Activo</div>
+      </div>
+      <p class="agente-desc">El Dios del Sistema Nervioso. Orquesta los flujos de XP, sincroniza playlists y guarda las crónicas en la eternidad.</p>
+      <button class="btn-invocar" onclick="invocar('n8n')">✦ INVOCAR AGENTE</button>
+    </div>
+
+    <div class="agente-card">
+      <div class="agente-header">
+        <h3 class="agente-nombre">CLAUDE</h3>
+        <div class="estado inactivo"><span class="punto"></span> Inactivo</div>
+      </div>
+      <p class="agente-desc">El Ingeniero de la Profundidad. Encargado del análisis de datos masivos y la depuración de la matriz. En espera de recursos.</p>
+      <button class="btn-invocar" disabled>EN ESPERA</button>
+    </div>
   </div>
 </div>
 
 <script>
-document.body.setAttribute('data-cielo',Math.ceil(Math.random()*6));
-(function(){var c=document.getElementById('cosmosStars'),ctx=c.getContext('2d');function resize(){c.width=innerWidth;c.height=innerHeight}resize();window.addEventListener('resize',resize);var stars=[];for(var i=0;i<220;i++)stars.push({x:Math.random(),y:Math.random(),r:.3+Math.random()*.9,a:.3+Math.random()*.7,sp:.0002+Math.random()*.0008});function draw(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(function(s){s.a+=Math.sin(Date.now()*s.sp)*.003;ctx.beginPath();ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);ctx.fillStyle='rgba(255,248,220,'+Math.max(.1,Math.min(.9,s.a))+')';ctx.fill()});requestAnimationFrame(draw)}draw()})();
-var navEl=document.getElementById('nav');window.addEventListener('scroll',function(){navEl.classList.toggle('scrolled',scrollY>60)},{passive:true});
-(function(){
-  var tc=document.getElementById('axelTrail'),ctx=tc.getContext('2d');
-  function resize(){tc.width=innerWidth;tc.height=innerHeight}resize();window.addEventListener('resize',resize);
-  var pts=[],drag=false,orbEl=document.getElementById('axelOrb');
-  var ox=innerWidth-80,oy=innerHeight-80;orbEl.style.left=ox+'px';orbEl.style.top=oy+'px';
-  function draw(){ctx.clearRect(0,0,tc.width,tc.height);var now=Date.now();pts=pts.filter(function(p){return now-p.t<900});for(var i=1;i<pts.length;i++){var p=pts[i-1],q=pts[i];var age=now-q.t,alpha=Math.max(0,1-age/900);var w=(pts.length-i)/pts.length*20*alpha;if(w<=0)continue;var g=ctx.createLinearGradient(p.x,p.y,q.x,q.y);g.addColorStop(0,'rgba(232,200,106,0)');g.addColorStop(.4,'rgba(255,246,214,'+(alpha*.5)+')');g.addColorStop(1,'rgba(232,200,106,'+alpha+')');ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=g;ctx.lineWidth=w;ctx.lineCap='round';ctx.stroke();}for(var i=0;i<pts.length;i+=3){var p=pts[i];var age=now-p.t,alpha=Math.max(0,1-age/700)*.3;if(alpha<=0)continue;var g2=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,14);g2.addColorStop(0,'rgba(255,246,214,'+alpha+')');g2.addColorStop(1,'rgba(232,200,106,0)');ctx.beginPath();ctx.arc(p.x,p.y,14,0,Math.PI*2);ctx.fillStyle=g2;ctx.fill();}requestAnimationFrame(draw);}draw();
-  var startX,startY,moved=false;
-  function startDrag(e){drag=true;moved=false;var src=e.touches?e.touches[0]:e;startX=src.clientX;startY=src.clientY;e.preventDefault();}
-  function moveDrag(e){if(!drag)return;var src=e.touches?e.touches[0]:e;var x=src.clientX,y=src.clientY;if(Math.abs(x-startX)>4||Math.abs(y-startY)>4)moved=true;ox=x-32;oy=y-32;orbEl.style.left=ox+'px';orbEl.style.top=oy+'px';pts.push({x:x,y:y,t:Date.now()});e.preventDefault();}
-  function endDrag(){if(!moved){document.getElementById('axelPanel').classList.toggle('open');}drag=false;}
-  orbEl.addEventListener('mousedown',startDrag);window.addEventListener('mousemove',function(e){if(drag)moveDrag(e);});window.addEventListener('mouseup',endDrag);
-  orbEl.addEventListener('touchstart',startDrag,{passive:false});window.addEventListener('touchmove',function(e){if(drag)moveDrag(e);},{passive:false});window.addEventListener('touchend',endDrag);
-})();
-function axelSend(){var input=document.getElementById('axelInput');var msg=input.value.trim();if(!msg)return;var msgs=document.getElementById('axelMsgs');var ud=document.createElement('div');ud.className='ap-msg usr';ud.textContent=msg;msgs.appendChild(ud);input.value='';msgs.scrollTop=msgs.scrollHeight;setTimeout(function(){var bd=document.createElement('div');bd.className='ap-msg bot';bd.textContent='Excelente. Para conocer todos los detalles de La Forjadora y verificar disponibilidad, contacta directamente al equipo Orionix por WhatsApp.';msgs.appendChild(bd);msgs.scrollTop=msgs.scrollHeight;},900);}
+function invocar(nombre) {
+  // Aquí se conectará con el webhook de n8n para registrar la invocación y sumar XP
+  alert(`⚡ Invocando a ${nombre}...\nConectando con el Sistema Nervioso Central (n8n).`);
+  // Ejemplo de fetch futuro:
+  // fetch('https://tu-n8n.com/webhook/orionix-xp', { method: 'POST', body: JSON.stringify({ sesion_id: 'user123', accion: 'invocar_agente', puntos: 50 }) })
+}
 </script>
 </body>
 </html>

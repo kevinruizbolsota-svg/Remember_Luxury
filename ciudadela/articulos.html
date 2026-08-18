@@ -485,7 +485,7 @@ function renderProducts(list){
         <span class="pfallback" style="font-size:3.5rem; display:${hasImg ? 'none' : 'flex'}; align-items:center; justify-content:center;">${fallback}</span>
         <div class="pcat-badge" style="background:${cc.bg};color:${cc.c};border-color:${cc.border}">${p.categoria}</div>
         <div class="pimg-overlay">
-          <button class="pquick-add" onclick="addCartEncoded('${dataAttr}')">+ Añadir</button>
+          <button class="pquick-add" onclick="addCartEncoded('${dataAttr}')">${p.tipo === 'afiliado' ? 'Ver Oferta' : '+ Añadir'}</button>
         </div>
       </div>
       <div class="pinfo">
@@ -495,7 +495,7 @@ function renderProducts(list){
           <div class="pprice">${p.precio?'€'+Number(p.precio).toFixed(2):'Consultar'}</div>
           ${p.tienda_origen?`<div class="pstore">${p.tienda_origen}</div>`:''}
         </div>
-        <button class="padd" onclick="addCartEncoded('${dataAttr}')">+ Añadir al Carrito</button>
+        <button class="padd" onclick="addCartEncoded('${dataAttr}')">${p.tipo === 'afiliado' ? 'Ver Oferta →' : '+ Añadir al Carrito'}</button>
       </div>
     </div>`;
   }).join('');
@@ -511,7 +511,36 @@ function addCartEncoded(enc){
   addCart(p);
 }
 
+const N8N_CLIC_URL = 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-clic';
+
+function trackClic(p){
+  try{
+    fetch(N8N_CLIC_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        producto:   p.nombre || 'Desconocido',
+        categoria:  p.categoria || '',
+        precio:     p.precio || 0,
+        tipo:       p.tipo || 'dropshipping',
+        tienda:     p.tienda_origen || '',
+        url:        p.afiliado_url || '',
+        sesion:     localStorage.getItem('orionix_sesion_id') || 'anonimo',
+        referrer:   document.referrer || 'directo',
+        pagina:     location.href
+      })
+    });
+  }catch(e){}
+}
+
 function addCart(p){
+  if(p.tipo === 'afiliado' && p.afiliado_url){
+    trackClic(p);
+    window.open(p.afiliado_url, '_blank');
+    toast('✦ Redirigiendo a tienda asociada...');
+    return;
+  }
+  trackClic(p);
   const cart = JSON.parse(localStorage.getItem('orionix_cart')||'[]');
   const idx  = cart.findIndex(i=>i.id===p.id || i.nombre===p.nombre);
   if(idx>=0) cart[idx].qty = (cart[idx].qty||1)+1;
@@ -519,6 +548,11 @@ function addCart(p){
   localStorage.setItem('orionix_cart', JSON.stringify(cart));
   updateCartCount();
   toast('✦ Añadido: ' + (p.nombre||'Artículo'));
+}
+
+// Generar sesión anónima para tracking si no existe
+if(!localStorage.getItem('orionix_sesion_id')){
+  localStorage.setItem('orionix_sesion_id', 'SES-' + Math.random().toString(36).substr(2,9).toUpperCase());
 }
 
 function updateCartCount(){

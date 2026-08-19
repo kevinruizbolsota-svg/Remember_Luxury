@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ORIONIX · Observatory · QuickStep 001</title>
+<style>
+:root{color-scheme:dark;--bg:#070912;--panel:#101827;--line:#263247;--text:#eef2f7;--muted:#8e9aad;--gold:#d9b866;--ok:#49d17d;--warn:#f2b84b;--err:#ef6262;--blue:#6aa9ff}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,#121b32 0,#070912 45%);color:var(--text);font:14px Inter,system-ui,sans-serif}.wrap{max-width:1400px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;gap:16px;align-items:end;margin-bottom:18px}h1,h2,p{margin:0}.sub,.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:1.4fr .8fr;gap:14px}.card{background:rgba(16,24,39,.88);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 10px 35px #0003}.wide{grid-column:1/-1}.title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.badge{padding:4px 8px;border:1px solid var(--line);border-radius:999px;font-size:12px}.ok{color:var(--ok)}.warn{color:var(--warn)}.err{color:var(--err)}.blue{color:var(--blue)}.mission{font-size:22px;color:var(--gold);margin-bottom:8px}.bar{height:8px;background:#1c2637;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--gold)}.rows{display:grid;gap:8px}.row{display:grid;grid-template-columns:110px 1fr auto;gap:10px;padding:10px 0;border-bottom:1px solid #ffffff08}.agent{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #ffffff08}.dot{width:9px;height:9px;border-radius:50%;display:inline-block;background:var(--muted);margin-right:7px}.log{max-height:420px;overflow:auto}.mono{font:12px ui-monospace,SFMono-Regular,Consolas,monospace}.empty{padding:14px;border:1px dashed var(--line);border-radius:10px;color:var(--muted)}@media(max-width:850px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.row{grid-template-columns:1fr}.top{align-items:start;flex-direction:column}}
+</style></head>
+<body><div class="wrap">
+<header class="top"><div><div class="sub">SELADOR · QUICKSTEP 001</div><h1>ORIONIX Observatory</h1><p class="sub">Observador de evidencia. No crea estado propio.</p></div><div class="badge" id="fresh">INIT</div></header>
+<main class="grid">
+<section class="card"><div class="title"><h2>Misión</h2><span class="badge" id="missionState">MISSING</span></div><div class="mission" id="mission">Sin misión confirmada</div><p class="sub" id="missionDetail">La página no inventará una misión si ninguna fuente la confirma.</p><div class="bar" style="margin-top:14px"><i id="progress"></i></div></section>
+<section class="card"><div class="title"><h2>Fuentes</h2><span class="badge">READ-ONLY</span></div><div class="rows" id="sources"></div></section>
+<section class="card"><div class="title"><h2>Agentes</h2><span class="badge">EVIDENCIA</span></div><div id="agents" class="rows"></div></section>
+<section class="card"><div class="title"><h2>Errores & alertas</h2><span class="badge">NO SE OCULTAN</span></div><div id="alerts" class="rows"></div></section>
+<section class="card wide"><div class="title"><h2>Registro de ejecución</h2><span class="badge mono" id="updated">—</span></div><div id="log" class="log"></div></section>
+<section class="card wide"><div class="title"><h2>Regla del Selador</h2><span class="badge">V0.1</span></div><p class="sub">Cada estado visible debe responder: <b>quién</b> · <b>qué</b> · <b>cuándo</b> · <b>resultado</b> · <b>evidencia</b> · <b>siguiente acción</b>. Si falta evidencia, se muestra MISSING/BLOCKED. Nunca se muestran secretos.</p></section>
+</main></div>
+<script>
+/* QuickStep 001: shell only. Real endpoints se conectarán después de ser verificados por sus dueños. */
+const CONFIG={githubCommits:'',n8nStatus:'',agentPresence:'',missionFeed:''};
+const $=id=>document.getElementById(id);
+const state={sources:[],agents:[],alerts:[],log:[]};
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function source(name,url,status='MISSING',detail='Sin endpoint verificado'){state.sources.push({name,url,status,detail})}
+function render(){
+ $('sources').innerHTML=state.sources.map(s=>`<div class="row"><span>${esc(s.name)}</span><span class="muted">${esc(s.detail)}</span><b class="${s.status==='OK'?'ok':s.status==='BLOCKED'?'warn':'err'}">${esc(s.status)}</b></div>`).join('')||'<div class="empty">No hay fuentes verificadas.</div>';
+ $('agents').innerHTML=state.agents.map(a=>`<div class="agent"><div><span class="dot"></span><b>${esc(a.agent)}</b><div class="muted">${esc(a.mission||'')}</div></div><span class="${a.status==='EXECUTING'?'ok':a.status==='ERROR'?'err':'warn'}">${esc(a.status)}</span></div>`).join('')||'<div class="empty">No se inventan presencias. Esperando evidencia real.</div>';
+ $('alerts').innerHTML=state.alerts.map(a=>`<div class="row"><span class="${a.level==='ERROR'?'err':'warn'}">${esc(a.level)}</span><span><b>${esc(a.title)}</b><div class="muted">${esc(a.detail||'')}</div></span><span class="mono">${esc(a.state||'OPEN')}</span></div>`).join('')||'<div class="empty">Sin alertas confirmadas.</div>';
+ $('log').innerHTML=state.log.map(x=>`<div class="row"><span class="mono">${esc(x.time)}</span><span><b>${esc(x.actor)}</b> · ${esc(x.action)}<div class="muted">${esc(x.result||'')} ${x.evidence?'· evidencia: '+esc(x.evidence):''}</div></span><span class="${x.status==='OK'?'ok':x.status==='ERROR'?'err':'warn'}">${esc(x.status)}</span></div>`).join('')||'<div class="empty">No hay ejecuciones confirmadas.</div>';
+ $('fresh').textContent='OBSERVANDO';$('updated').textContent=new Date().toISOString();
+}
+// Initial evidence boundary: only verified local facts, no synthetic agent activity.
+source('GitHub','',CONFIG.githubCommits?'OK':'MISSING','Esperando endpoint/adapter verificado');
+source('n8n / NEXUS','',CONFIG.n8nStatus?'OK':'MISSING','NEXUS debe proporcionar lectura segura');
+source('TownSquare / Buzz','',CONFIG.agentPresence?'OK':'MISSING','Esperando fuente real de presencia');
+source('Misión','',CONFIG.missionFeed?'OK':'MISSING','Esperando fuente de misión');
+state.alerts.push({level:'WARN',title:'Observability shell sin fuentes conectadas',detail:'Esto es deliberado: no se fabrican estados.',state:'OPEN'});
+state.log.push({time:new Date().toISOString(),actor:'SELADOR',action:'Inicializó Observatory shell',result:'No se creó infraestructura ni estado paralelo.',evidence:'QuickStep 001',status:'OK'});
+render();
+</script></body></html>

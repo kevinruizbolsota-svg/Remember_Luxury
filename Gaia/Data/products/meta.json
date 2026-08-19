@@ -1,0 +1,8 @@
+{
+  "totalDesired": 1000,
+  "pageSize": 200,
+  "pages": 5,
+  "generated": false,
+  "generated_at": null,
+  "note": "Run generate_products.js locally or authorize full generation. The files page-*.json will be produced. Current repo contains sample page-1.json and generator script. All products are demo placeholders (demo:true)."
+}

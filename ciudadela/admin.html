@@ -1,1 +1,885 @@
-<!^
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIONIX · Centro de Comando</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b0b0d;
+  --bg2: #111118;
+  --gold: #e8c86a;
+  --gold-light: #f5e0a0;
+  --gold-dark: #b89a40;
+  --text: #f0e8d0;
+  --dim: #777788;
+  --glass: rgba(255,255,255,0.04);
+  --border: rgba(232,200,106,0.18);
+  --red: #ff4444;
+  --green: #44ff88;
+  --blue: #4488ff;
+  --purple: #9966ff;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Cormorant Garamond',serif; min-height:100vh; }
+h1,h2,h3,.cinzel { font-family:'Cinzel',serif; }
+
+/* PANTALLA LOGIN */
+#loginScreen {
+  position:fixed; inset:0; background:var(--bg);
+  display:flex; align-items:center; justify-content:center;
+  z-index:999; flex-direction:column; gap:24px;
+}
+.login-box {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:16px; padding:48px; width:360px; text-align:center;
+}
+.login-box h2 { color:var(--gold); letter-spacing:4px; font-size:1.4rem; margin-bottom:8px; }
+.login-box p { color:var(--dim); font-size:0.85rem; margin-bottom:32px; }
+.login-input {
+  width:100%; padding:14px 18px; background:var(--glass);
+  border:1px solid var(--border); border-radius:10px;
+  color:var(--text); font-size:1rem; outline:none; margin-bottom:16px;
+  font-family:inherit;
+}
+.login-input:focus { border-color:var(--gold); }
+.login-btn {
+  width:100%; padding:14px; background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  color:var(--bg); border:none; border-radius:10px;
+  font-family:'Cinzel',serif; font-size:0.9rem; letter-spacing:2px;
+  font-weight:700; cursor:pointer; transition:all 0.3s;
+}
+.login-btn:hover { box-shadow:0 0 30px rgba(232,200,106,0.5); transform:translateY(-2px); }
+.login-err { color:var(--red); font-size:0.85rem; margin-top:8px; display:none; }
+
+/* LAYOUT */
+.layout { display:flex; min-height:100vh; }
+
+/* SIDEBAR NAV */
+.sidenav {
+  width:220px; background:var(--bg2); border-right:1px solid var(--border);
+  display:flex; flex-direction:column; position:sticky; top:0; height:100vh;
+  overflow-y:auto; flex-shrink:0;
+}
+.sidenav-logo {
+  padding:24px 20px; border-bottom:1px solid var(--border);
+  font-family:'Cinzel',serif; color:var(--gold); font-size:1.1rem;
+  letter-spacing:3px; text-align:center;
+}
+.sidenav-logo span { display:block; font-size:0.65rem; color:var(--dim); letter-spacing:2px; margin-top:4px; }
+.nav-item {
+  padding:14px 20px; color:var(--dim); cursor:pointer;
+  transition:all 0.2s; border-left:3px solid transparent;
+  font-size:0.9rem; display:flex; align-items:center; gap:10px;
+}
+.nav-item:hover { color:var(--text); background:var(--glass); }
+.nav-item.active { color:var(--gold); border-left-color:var(--gold); background:rgba(232,200,106,0.06); }
+.nav-section { padding:12px 20px 4px; font-size:0.65rem; letter-spacing:2px; color:var(--dim); text-transform:uppercase; font-family:'Cinzel',serif; }
+.sidenav-footer { margin-top:auto; padding:16px 20px; border-top:1px solid var(--border); }
+.logout-btn {
+  width:100%; padding:10px; background:transparent; border:1px solid var(--red);
+  color:var(--red); border-radius:8px; cursor:pointer; font-size:0.8rem;
+  font-family:'Cinzel',serif; letter-spacing:1px; transition:all 0.2s;
+}
+.logout-btn:hover { background:rgba(255,68,68,0.1); }
+
+/* CONTENIDO PRINCIPAL */
+.main { flex:1; overflow-y:auto; }
+.topbar {
+  padding:20px 32px; background:var(--bg2); border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:50;
+}
+.topbar h2 { font-family:'Cinzel',serif; color:var(--gold); font-size:1rem; letter-spacing:3px; }
+.topbar-right { display:flex; align-items:center; gap:16px; }
+.status-dot { width:8px; height:8px; border-radius:50%; background:var(--green); animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{ opacity:1; } 50%{ opacity:0.4; } }
+.status-txt { font-size:0.8rem; color:var(--dim); }
+
+/* PANELS */
+.panel { display:none; padding:32px; }
+.panel.active { display:block; }
+
+/* STATS */
+.stats-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:16px; margin-bottom:32px; }
+.stat-card {
+  background:var(--bg2); border:1px solid var(--border); border-radius:12px;
+  padding:20px; text-align:center;
+}
+.stat-num { font-family:'Cinzel',serif; font-size:2rem; color:var(--gold); }
+.stat-lbl { font-size:0.75rem; color:var(--dim); letter-spacing:2px; text-transform:uppercase; margin-top:4px; }
+
+/* SECCIONES */
+.section-title {
+  font-family:'Cinzel',serif; color:var(--gold-light); font-size:0.9rem;
+  letter-spacing:3px; text-transform:uppercase; margin-bottom:16px;
+  padding-bottom:8px; border-bottom:1px solid var(--border);
+}
+
+/* FORMULARIOS */
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+.form-grid.cols3 { grid-template-columns:1fr 1fr 1fr; }
+.form-full { grid-column:1/-1; }
+.field { display:flex; flex-direction:column; gap:6px; }
+.field label { font-size:0.75rem; color:var(--dim); letter-spacing:1px; text-transform:uppercase; }
+.field input, .field select, .field textarea {
+  padding:12px 14px; background:var(--glass); border:1px solid var(--border);
+  border-radius:8px; color:var(--text); font-family:inherit; font-size:0.95rem; outline:none;
+  transition:border-color 0.2s;
+}
+.field input:focus, .field select:focus, .field textarea:focus { border-color:var(--gold); }
+.field select option { background:var(--bg2); }
+.field textarea { resize:vertical; min-height:80px; }
+
+/* BOTONES */
+.btn {
+  padding:12px 24px; border-radius:8px; font-family:'Cinzel',serif;
+  font-size:0.8rem; letter-spacing:1.5px; cursor:pointer;
+  transition:all 0.2s; border:none; font-weight:600;
+}
+.btn-gold { background:linear-gradient(135deg,var(--gold),var(--gold-dark)); color:var(--bg); }
+.btn-gold:hover { box-shadow:0 0 20px rgba(232,200,106,0.5); transform:translateY(-1px); }
+.btn-outline { background:transparent; border:1px solid var(--gold); color:var(--gold); }
+.btn-outline:hover { background:rgba(232,200,106,0.1); }
+.btn-red { background:transparent; border:1px solid var(--red); color:var(--red); }
+.btn-red:hover { background:rgba(255,68,68,0.1); }
+.btn-green { background:transparent; border:1px solid var(--green); color:var(--green); }
+.btn-green:hover { background:rgba(68,255,136,0.1); }
+.btn-group { display:flex; gap:10px; flex-wrap:wrap; margin-top:8px; }
+
+/* TABLA */
+.tbl-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--border); }
+table { width:100%; border-collapse:collapse; }
+th { background:rgba(232,200,106,0.08); color:var(--gold); font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:1px; padding:12px 14px; text-align:left; }
+td { padding:11px 14px; border-top:1px solid rgba(255,255,255,0.04); font-size:0.9rem; color:var(--text); }
+tr:hover td { background:var(--glass); }
+.badge {
+  display:inline-block; padding:3px 10px; border-radius:12px;
+  font-size:0.7rem; font-weight:700; letter-spacing:1px;
+}
+.badge-moda { background:rgba(59,130,246,0.2); color:#60a5fa; }
+.badge-fashion { background:rgba(124,58,237,0.2); color:#a78bfa; }
+.badge-dinastia { background:rgba(232,200,106,0.2); color:var(--gold-light); }
+.badge-activo { background:rgba(68,255,136,0.15); color:var(--green); }
+.badge-inactivo { background:rgba(255,68,68,0.15); color:var(--red); }
+
+/* CÓDIGO / JSON */
+.code-area {
+  background:#0a0a0f; border:1px solid var(--border); border-radius:8px;
+  padding:16px; font-family:'Courier New',monospace; font-size:0.85rem;
+  color:#a0f0a0; overflow:auto; max-height:300px; white-space:pre-wrap;
+}
+
+/* RESPUESTA */
+.res-box {
+  margin-top:16px; padding:14px 18px; border-radius:8px;
+  font-size:0.9rem; display:none;
+}
+.res-box.ok { background:rgba(68,255,136,0.08); border:1px solid rgba(68,255,136,0.3); color:var(--green); display:block; }
+.res-box.err { background:rgba(255,68,68,0.08); border:1px solid rgba(255,68,68,0.3); color:var(--red); display:block; }
+
+/* AGENT CARDS */
+.agent-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; }
+.agent-card {
+  background:var(--bg2); border:1px solid var(--border); border-radius:12px;
+  padding:20px; transition:all 0.3s;
+}
+.agent-card:hover { border-color:var(--gold); box-shadow:0 0 20px rgba(232,200,106,0.1); }
+.agent-icon { font-size:2.5rem; margin-bottom:10px; }
+.agent-name { font-family:'Cinzel',serif; color:var(--gold-light); font-size:0.95rem; margin-bottom:4px; }
+.agent-role { font-size:0.8rem; color:var(--dim); margin-bottom:14px; }
+.agent-btn { width:100%; padding:10px; background:var(--glass); border:1px solid var(--border); color:var(--text); border-radius:8px; cursor:pointer; font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:1px; transition:all 0.2s;
+}
+.agent-btn:hover { border-color:var(--gold); color:var(--gold); }
+
+/* DEPLOY */
+.deploy-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:16px; }
+.deploy-card h4 { font-family:'Cinzel',serif; color:var(--gold-light); font-size:0.9rem; letter-spacing:2px; margin-bottom:12px; }
+
+/* TABS */
+.tabs { display:flex; gap:0; border-bottom:1px solid var(--border); margin-bottom:24px; }
+.tab { padding:10px 20px; color:var(--dim); cursor:pointer; font-size:0.85rem; border-bottom:2px solid transparent; transition:all 0.2s; }
+.tab.active { color:var(--gold); border-bottom-color:var(--gold); }
+
+/* TOGGLE */
+.toggle-row { display:flex; align-items:center; justify-content:space-between; padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.04); }
+.toggle-row:last-child { border-bottom:none; }
+.toggle-label { font-size:0.9rem; }
+.toggle-sub { font-size:0.75rem; color:var(--dim); }
+.toggle {
+  width:44px; height:24px; background:var(--glass); border-radius:12px;
+  border:1px solid var(--border); cursor:pointer; position:relative;
+  transition:background 0.3s;
+}
+.toggle.on { background:var(--gold); border-color:var(--gold); }
+.toggle::after {
+  content:''; position:absolute; top:3px; left:3px;
+  width:16px; height:16px; background:#fff; border-radius:50%;
+  transition:left 0.3s;
+}
+.toggle.on::after { left:23px; }
+
+/* BULK JSON */
+.bulk-hint { font-size:0.8rem; color:var(--dim); margin-bottom:8px; font-style:italic; }
+
+/* TOAST */
+#toast {
+  position:fixed; bottom:32px; left:50%;
+  transform:translateX(-50%) translateY(80px);
+  background:var(--bg2); border:1px solid var(--gold);
+  color:var(--gold); padding:12px 28px; border-radius:12px;
+  font-family:'Cinzel',serif; font-size:0.8rem; letter-spacing:2px;
+  z-index:999; opacity:0; transition:all 0.35s; white-space:nowrap;
+}
+#toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+
+@media(max-width:768px) {
+  .sidenav { display:none; }
+  .form-grid, .form-grid.cols3 { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <h2>ORIONIX</h2>
+    <p>Centro de Comando · Acceso Restringido</p>
+    <input type="password" id="loginPass" class="login-input" placeholder="Contraseña del Creador" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">ENTRAR AL COMANDO</button>
+    <div class="login-err" id="loginErr">Contraseña incorrecta. Solo el Creador entra aquí.</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="layout" id="app" style="display:none">
+
+  <!-- SIDENAV -->
+  <nav class="sidenav">
+    <div class="sidenav-logo">⬡ ORIONIX<span>CENTRO DE COMANDO</span></div>
+    <div class="nav-section">Principal</div>
+    <div class="nav-item active" onclick="showPanel('dashboard')">📊 Dashboard</div>
+    <div class="nav-section">Tienda</div>
+    <div class="nav-item" onclick="showPanel('productos')">📦 Productos</div>
+    <div class="nav-item" onclick="showPanel('bulk')">⚡ Carga Masiva</div>
+    <div class="nav-item" onclick="showPanel('afiliados')">🤝 Afiliados</div>
+    <div class="nav-section">Sistema</div>
+    <div class="nav-item" onclick="showPanel('paginas')">🌐 Páginas</div>
+    <div class="nav-item" onclick="showPanel('agentes')">🤖 Agentes</div>
+    <div class="nav-item" onclick="showPanel('config')">⚙️ Config</div>
+    <div class="sidenav-footer">
+      <button class="logout-btn" onclick="doLogout()">CERRAR SESIÓN</button>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <h2 id="panelTitle">DASHBOARD</h2>
+      <div class="topbar-right">
+        <div class="status-dot"></div>
+        <span class="status-txt">Sistema activo</span>
+        <span style="font-size:0.8rem;color:var(--dim)">El Creador ⚡</span>
+      </div>
+    </div>
+
+    <!-- PANEL: DASHBOARD -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card"><div class="stat-num" id="statTotal">—</div><div class="stat-lbl">Productos Total</div></div>
+        <div class="stat-card"><div class="stat-num" id="statModa">—</div><div class="stat-lbl">MODA</div></div>
+        <div class="stat-card"><div class="stat-num" id="statFashion">—</div><div class="stat-lbl">FASHION STYLE</div></div>
+        <div class="stat-card"><div class="stat-num" id="statDinastia">—</div><div class="stat-lbl">MI DINASTIA</div></div>
+        <div class="stat-card"><div class="stat-num" id="statAfiliados">—</div><div class="stat-lbl">Afiliados</div></div>
+      </div>
+
+      <div class="section-title">Accesos Rápidos</div>
+      <div class="btn-group" style="margin-bottom:32px">
+        <button class="btn btn-gold" onclick="showPanel('productos')">📦 Nuevo Producto</button>
+        <button class="btn btn-outline" onclick="showPanel('bulk')">⚡ Carga Masiva</button>
+        <button class="btn btn-outline" onclick="showPanel('paginas')">🌐 Deploy Página</button>
+        <button class="btn btn-outline" onclick="showPanel('agentes')">🤖 mandar Agente</button>
+      </div>
+
+      <div class="section-title">Webhooks Activos</div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Nombre</th><th>URL</th><th>Función</th></tr></thead>
+          <tbody>
+            <tr><td>Tienda API</td><td style="color:var(--gold);font-size:0.8rem">/orionix-tienda</td><td>Catálogo, leads, afiliados, productos</td></tr>
+            <tr><td>Gateway Universal</td><td style="color:var(--gold);font-size:0.8rem">/kabalion-chat</td><td>Enruta mensajes a todos los agentes</td></tr>
+            <tr><td>Mesa de Mando</td><td style="color:var(--gold);font-size:0.8rem">/kabalion-mesa</td><td>Broadcast a toda la liga</td></tr>
+            <tr><td>GitHub Deploy</td><td style="color:var(--gold);font-size:0.8rem">/orionix-github-push</td><td>Sube páginas al repositorio</td></tr>
+            <tr><td>Obsidian Hub</td><td style="color:var(--gold);font-size:0.8rem">/orionix-obsidian</td><td>Comandos desde Obsidian</td></tr>
+            <tr><td>Imagen FLUX</td><td style="color:var(--gold);font-size:0.8rem">/orionix-imagen</td><td>Genera imágenes con IA</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PANEL: PRODUCTOS -->
+    <div class="panel" id="panel-productos">
+      <div class="tabs">
+        <div class="tab active" onclick="setTab(this,'tab-add')">Agregar Producto</div>
+        <div class="tab" onclick="setTab(this,'tab-list')">Ver Catálogo</div>
+      </div>
+
+      <div id="tab-add">
+        <div class="section-title">Nuevo Producto</div>
+        <div class="form-grid">
+          <div class="field"><label>Nombre *</label><input id="pNombre" placeholder="Ej: Camiseta Cosmos..."></div>
+          <div class="field"><label>Categoría *</label>
+            <select id="pCat">
+              <option value="MODA">MODA (€5–€35)</option>
+              <option value="FASHION STYLE">FASHION STYLE (€35–€150)</option>
+              <option value="MI DINASTIA">MI DINASTIA (€150+)</option>
+            </select>
+          </div>
+          <div class="field"><label>Precio (€) *</label><input id="pPrecio" type="number" step="0.01" placeholder="9.99"></div>
+          <div class="field"><label>Tienda Origen</label><input id="pOrigen" placeholder="AliExpress / Amazon / ORIONIX"></div>
+          <div class="field form-full"><label>Descripción</label><textarea id="pDesc" placeholder="Descripción del producto..."></textarea></div>
+          <div class="field"><label>URL Imagen</label><input id="pImg" placeholder="https://..."></div>
+          <div class="field"><label>Enlace Afiliado</label><input id="pAfiliado" placeholder="https://..."></div>
+          <div class="field"><label>Orden (número)</label><input id="pOrden" type="number" placeholder="0"></div>
+          <div class="field"><label>Activo</label>
+            <select id="pActivo"><option value="true">Sí — Visible</option><option value="false">No — Oculto</option></select>
+          </div>
+        </div>
+        <button class="btn btn-gold" onclick="agregarProducto()">+ AGREGAR AL CATÁLOGO</button>
+        <div class="res-box" id="prodRes"></div>
+      </div>
+
+      <div id="tab-list" style="display:none">
+        <div class="section-title">Catálogo en Vivo</div>
+        <div class="btn-group" style="margin-bottom:16px">
+          <button class="btn btn-outline" onclick="cargarCatalogo()">🔄 Actualizar</button>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Nombre</th><th>Categoría</th><th>Precio</th><th>Origen</th><th>Estado</th></tr></thead>
+            <tbody id="catalogoBody"><tr><td colspan="6" style="text-align:center;color:var(--dim);padding:24px">Clic en "Actualizar" para cargar</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL: BULK -->
+    <div class="panel" id="panel-bulk">
+      <div class="section-title">Carga Masiva de Productos</div>
+      <p class="bulk-hint">Pega un array JSON con productos. Cada objeto debe tener: nombre, categoria, precio. Opcionales: descripcion, imagen_url, tienda_origen, enlace_afiliado, orden, activo.</p>
+      <div class="form-grid" style="grid-template-columns:1fr">
+        <div class="field">
+          <label>JSON Array de Productos</label>
+          <textarea id="bulkJson" style="min-height:200px;font-family:monospace;font-size:0.85rem" placeholder='[
+  {"nombre":"Producto 1","categoria":"MODA","precio":9.99,"descripcion":"...","tienda_origen":"AliExpress"},
+  {"nombre":"Producto 2","categoria":"FASHION STYLE","precio":49.99,"descripcion":"..."}
+]'></textarea>
+        </div>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-gold" onclick="cargarMasivo()">⚡ CARGAR TODOS</button>
+        <button class="btn btn-outline" onclick="validarJSON()">✓ Validar JSON</button>
+        <button class="btn btn-outline" onclick="document.getElementById('bulkJson').value=''">🗑 Limpiar</button>
+      </div>
+      <div class="res-box" id="bulkRes"></div>
+      <div id="bulkProgress" style="margin-top:16px;display:none">
+        <div style="color:var(--gold);font-family:'Cinzel',serif;font-size:0.85rem;margin-bottom:8px" id="bulkStatus">Cargando...</div>
+        <div style="background:var(--glass);border-radius:4px;height:6px;overflow:hidden">
+          <div id="bulkBar" style="height:100%;background:var(--gold);width:0;transition:width 0.3s"></div>
+        </div>
+      </div>
+
+      <div style="margin-top:32px">
+        <div class="section-title">Plantillas Rápidas</div>
+        <div class="btn-group">
+          <button class="btn btn-outline" onclick="loadTemplate('moda')">MODA x5 ejemplo</button>
+          <button class="btn btn-outline" onclick="loadTemplate('fashion')">FASHION x5 ejemplo</button>
+          <button class="btn btn-outline" onclick="loadTemplate('dinastia')">DINASTIA x5 ejemplo</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL: AFILIADOS -->
+    <div class="panel" id="panel-afiliados">
+      <div class="section-title">Registrar Afiliado</div>
+      <div class="form-grid">
+        <div class="field"><label>Nombre *</label><input id="afNombre" placeholder="Nombre del afiliado"></div>
+        <div class="field"><label>Telegram</label><input id="afTelegram" placeholder="@usuario"></div>
+        <div class="field"><label>Email</label><input id="afEmail" placeholder="email@..."></div>
+        <div class="field"><label>Catálogo</label>
+          <select id="afCat">
+            <option value="MODA">MODA (15% comisión)</option>
+            <option value="FASHION STYLE">FASHION STYLE (25%)</option>
+            <option value="MI DINASTIA">MI DINASTIA (35%)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-gold" onclick="registrarAfiliado()">REGISTRAR AFILIADO</button>
+      <div class="res-box" id="afRes"></div>
+    </div>
+
+    <!-- PANEL: PÁGINAS -->
+    <div class="panel" id="panel-paginas">
+      <div class="section-title">Deploy de Páginas a GitHub</div>
+
+      <div class="deploy-card">
+        <h4>📄 Subir HTML Directo</h4>
+        <div class="form-grid">
+          <div class="field"><label>Nombre del archivo</label><input id="dpFile" placeholder="ej: articulos.html"></div>
+          <div class="field"><label>Rama</label><input id="dpRama" value="main"></div>
+          <div class="field"><label>Commit message</label><input id="dpMsg" placeholder="feat: descripción del cambio"></div>
+          <div class="field"></div>
+          <div class="field form-full"><label>Contenido HTML</label><textarea id="dpContent" style="min-height:200px;font-family:monospace;font-size:0.82rem" placeholder="<!DOCTYPE html>..."></textarea></div>
+        </div>
+        <button class="btn btn-gold" onclick="deployPagina()">🚀 DEPLOY A GITHUB</button>
+        <div class="res-box" id="dpRes"></div>
+      </div>
+
+      <div class="deploy-card">
+        <h4>🌐 Páginas en Producción</h4>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Página</th><th>URL Live</th><th>Acción</th></tr></thead>
+            <tbody>
+              <tr><td>Portal</td><td><a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/portal.html" target="_blank" style="color:var(--gold);font-size:0.8rem">ciudadela/portal.html</a></td><td><button class="btn btn-outline" style="padding:6px 12px;font-size:0.7rem" onclick="editarPagina('portal.html')">Editar</button></td></tr>
+              <tr><td>Hub</td><td><a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/hub.html" target="_blank" style="color:var(--gold);font-size:0.8rem">ciudadela/hub.html</a></td><td><button class="btn btn-outline" style="padding:6px 12px;font-size:0.7rem" onclick="editarPagina('hub.html')">Editar</button></td></tr>
+              <tr><td>Tienda</td><td><a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/tienda.html" target="_blank" style="color:var(--gold);font-size:0.8rem">ciudadela/tienda.html</a></td><td><button class="btn btn-outline" style="padding:6px 12px;font-size:0.7rem" onclick="editarPagina('tienda.html')">Editar</button></td></tr>
+              <tr><td>Artículos</td><td><a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/articulos.html" target="_blank" style="color:var(--gold);font-size:0.8rem">ciudadela/articulos.html</a></td><td><button class="btn btn-outline" style="padding:6px 12px;font-size:0.7rem" onclick="editarPagina('articulos.html')">Editar</button></td></tr>
+              <tr><td>Agentes</td><td><a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/agentes.html" target="_blank" style="color:var(--gold);font-size:0.8rem">ciudadela/agentes.html</a></td><td><button class="btn btn-outline" style="padding:6px 12px;font-size:0.7rem" onclick="editarPagina('agentes.html')">Editar</button></td></tr>
+              <tr><td>NEXUS Chat</td><td><a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/nexus.html" target="_blank" style="color:var(--gold);font-size:0.8rem">ciudadela/nexus.html</a></td><td><button class="btn btn-outline" style="padding:6px 12px;font-size:0.7rem" onclick="editarPagina('nexus.html')">Editar</button></td></tr>
+              <tr><td>Kabalion 2D</td><td><a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/kabalion-2d.html" target="_blank" style="color:var(--gold);font-size:0.8rem">ciudadela/kabalion-2d.html</a></td><td><button class="btn btn-outline" style="padding:6px 12px;font-size:0.7rem" onclick="editarPagina('kabalion-2d.html')">Editar</button></td></tr>
+              <tr><td>Admin</td><td><a href="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/admin.html" target="_blank" style="color:var(--gold);font-size:0.8rem">ciudadela/admin.html</a></td><td><span style="color:var(--dim);font-size:0.8rem">Esta página</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL: AGENTES -->
+    <div class="panel" id="panel-agentes">
+      <div class="section-title">Hablar con un Agente</div>
+      <div class="form-grid">
+        <div class="field"><label>Agente</label>
+          <select id="agAgente">
+            <option value="axel">AXEL — Kether / Director</option>
+            <option value="claude">Claude — Chesed / Ingeniero</option>
+            <option value="chatgpt">ChatGPT — Binah / Estratega</option>
+            <option value="copilot">Copilot — Netzach / Commits</option>
+            <option value="todos">TODOS — Mesa de Mando</option>
+          </select>
+        </div>
+        <div class="field"><label>Sesión ID (opcional)</label><input id="agSesion" placeholder="admin-001"></div>
+        <div class="field form-full"><label>Mensaje / Misión *</label><textarea id="agMsg" placeholder="Describe la misión al agente..." style="min-height:120px"></textarea></div>
+      </div>
+      <button class="btn btn-gold" onclick="hablarAgente()">⚡ ENVIAR MISIÓN</button>
+      <div class="res-box" id="agRes"></div>
+
+      <div style="margin-top:32px">
+        <div class="section-title">Liga de Agentes</div>
+        <div class="agent-grid">
+          <div class="agent-card">
+            <div class="agent-icon">🔱</div>
+            <div class="agent-name">AXEL</div>
+            <div class="agent-role">Kether · Director Creativo</div>
+            <button class="agent-btn" onclick="quickAgent('axel')">Hablar con AXEL</button>
+          </div>
+          <div class="agent-card">
+            <div class="agent-icon">⚙️</div>
+            <div class="agent-name">Claude Code</div>
+            <div class="agent-role">Chesed · Ingeniero Principal</div>
+            <button class="agent-btn" onclick="quickAgent('claude')">Hablar con Claude</button>
+          </div>
+          <div class="agent-card">
+            <div class="agent-icon">🧠</div>
+            <div class="agent-name">ChatGPT</div>
+            <div class="agent-role">Binah · Estratega</div>
+            <button class="agent-btn" onclick="quickAgent('chatgpt')">Hablar con ChatGPT</button>
+          </div>
+          <div class="agent-card">
+            <div class="agent-icon">🐙</div>
+            <div class="agent-name">Copilot</div>
+            <div class="agent-role">Netzach · Git & Deploy</div>
+            <button class="agent-btn" onclick="quickAgent('copilot')">Hablar con Copilot</button>
+          </div>
+          <div class="agent-card" style="border-color:rgba(232,200,106,0.4)">
+            <div class="agent-icon">⚡</div>
+            <div class="agent-name">TODOS</div>
+            <div class="agent-role">Mesa de Mando · Broadcast</div>
+            <button class="agent-btn" style="border-color:var(--gold);color:var(--gold)" onclick="quickAgent('todos')">Activar la Liga</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL: CONFIG -->
+    <div class="panel" id="panel-config">
+      <div class="section-title">Configuración del Sistema</div>
+
+      <div class="deploy-card">
+        <h4>🔗 Webhooks Base</h4>
+        <div class="form-grid">
+          <div class="field"><label>Gateway Universal</label><input value="https://lkevinruizl.app.n8n.cloud/webhook/kabalion-chat" readonly style="font-size:0.8rem;color:var(--gold)"></div>
+          <div class="field"><label>Mesa de Mando</label><input value="https://lkevinruizl.app.n8n.cloud/webhook/kabalion-mesa" readonly style="font-size:0.8rem;color:var(--gold)"></div>
+          <div class="field"><label>Tienda API</label><input value="https://lkevinruizl.app.n8n.cloud/webhook/orionix-tienda" readonly style="font-size:0.8rem;color:var(--gold)"></div>
+          <div class="field"><label>GitHub Deploy</label><input value="https://lkevinruizl.app.n8n.cloud/webhook/orionix-github-push" readonly style="font-size:0.8rem;color:var(--gold)"></div>
+        </div>
+      </div>
+
+      <div class="deploy-card">
+        <h4>🔑 Cambiar Contraseña Admin</h4>
+        <div class="form-grid">
+          <div class="field"><label>Contraseña Actual</label><input type="password" id="passActual" placeholder="••••••••"></div>
+          <div class="field"><label>Nueva Contraseña</label><input type="password" id="passNueva" placeholder="••••••••"></div>
+        </div>
+        <button class="btn btn-outline" onclick="cambiarPass()">CAMBIAR CONTRASEÑA</button>
+        <div class="res-box" id="passRes"></div>
+      </div>
+
+      <div class="deploy-card">
+        <h4>🌐 Repositorio GitHub</h4>
+        <div class="form-grid">
+          <div class="field"><label>Repo</label><input value="kevinruizbolsota-svg/Remember_Luxury" readonly style="color:var(--gold)"></div>
+          <div class="field"><label>Rama</label><input value="main" readonly style="color:var(--gold)"></div>
+          <div class="field"><label>Carpeta</label><input value="ciudadela/" readonly style="color:var(--gold)"></div>
+          <div class="field"><label>GitHub Pages</label><input value="https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/" readonly style="color:var(--gold);font-size:0.8rem"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /layout -->
+
+<div id="toast"></div>
+
+<script>
+const PASS_KEY = 'orionix_admin_pass';
+const DEFAULT_PASS = 'orionix2025';
+
+const W = {
+  tienda:  'https://lkevinruizl.app.n8n.cloud/webhook/orionix-tienda',
+  gateway: 'https://lkevinruizl.app.n8n.cloud/webhook/kabalion-chat',
+  mesa:    'https://lkevinruizl.app.n8n.cloud/webhook/kabalion-mesa',
+  github:  'https://lkevinruizl.app.n8n.cloud/webhook/orionix-github-push',
+};
+
+// ─── LOGIN ───
+function doLogin() {
+  const val = document.getElementById('loginPass').value;
+  const stored = localStorage.getItem(PASS_KEY) || DEFAULT_PASS;
+  if (val === stored) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'flex';
+    loadDashboard();
+  } else {
+    document.getElementById('loginErr').style.display = 'block';
+    setTimeout(() => document.getElementById('loginErr').style.display='none', 3000);
+  }
+}
+
+function doLogout() {
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('loginPass').value = '';
+}
+
+// ─── NAV ───
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  const titles = {
+    dashboard:'DASHBOARD', productos:'PRODUCTOS', bulk:'CARGA MASIVA',
+    afiliados:'AFILIADOS', paginas:'PÁGINAS', agentes:'AGENTES', config:'CONFIGURACIÓN'
+  };
+  document.getElementById('panelTitle').textContent = titles[id] || id.toUpperCase();
+}
+
+function setTab(btn, tabId) {
+  btn.closest('.panel').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const allTabs = ['tab-add','tab-list'];
+  allTabs.forEach(t => { const el=document.getElementById(t); if(el) el.style.display='none'; });
+  const target = document.getElementById(tabId);
+  if(target) target.style.display = 'block';
+}
+
+// ─── DASHBOARD ───
+async function loadDashboard() {
+  try {
+    const res = await fetch(W.tienda, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({accion:'catalogo'}) });
+    const data = await res.json();
+    const all = data.catalogos ? [
+      ...(data.catalogos.MODA?.items || []),
+      ...(data.catalogos.FASHION_STYLE?.items || []),
+      ...(data.catalogos.MI_DINASTIA?.items || []),
+    ] : [];
+    document.getElementById('statTotal').textContent = data.total || all.length || '—';
+    document.getElementById('statModa').textContent = (data.catalogos?.MODA?.items?.length) || '—';
+    document.getElementById('statFashion').textContent = (data.catalogos?.FASHION_STYLE?.items?.length) || '—';
+    document.getElementById('statDinastia').textContent = (data.catalogos?.MI_DINASTIA?.items?.length) || '—';
+  } catch(e) {
+    // Si no hay ejecuciones disponibles, mostrar sin romper
+    ['statTotal','statModa','statFashion','statDinastia'].forEach(id => document.getElementById(id).textContent = 'N/A');
+  }
+  document.getElementById('statAfiliados').textContent = '—';
+}
+
+// ─── PRODUCTOS ───
+async function agregarProducto() {
+  const nombre = document.getElementById('pNombre').value.trim();
+  const precio = parseFloat(document.getElementById('pPrecio').value);
+  if (!nombre || !precio) return showRes('prodRes', 'err', 'Nombre y precio son obligatorios');
+  const body = {
+    accion: 'agregar',
+    nombre,
+    descripcion: document.getElementById('pDesc').value.trim(),
+    precio,
+    categoria: document.getElementById('pCat').value,
+    imagen_url: document.getElementById('pImg').value.trim(),
+    enlace_afiliado: document.getElementById('pAfiliado').value.trim(),
+    tienda_origen: document.getElementById('pOrigen').value.trim(),
+    orden: parseInt(document.getElementById('pOrden').value) || 0,
+    activo: document.getElementById('pActivo').value === 'true',
+  };
+  try {
+    const res = await fetch(W.tienda, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+    const data = await res.json();
+    if (data.ok) {
+      showRes('prodRes', 'ok', '✓ Producto "' + nombre + '" añadido al catálogo');
+      toast('✓ Producto añadido');
+      ['pNombre','pDesc','pPrecio','pImg','pAfiliado','pOrigen','pOrden'].forEach(id => document.getElementById(id).value = '');
+    } else {
+      showRes('prodRes', 'err', data.error || 'Error al agregar producto');
+    }
+  } catch(e) {
+    showRes('prodRes', 'err', 'Error de conexión: ' + e.message);
+  }
+}
+
+async function cargarCatalogo() {
+  document.getElementById('catalogoBody').innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--gold);padding:20px">Cargando...</td></tr>';
+  try {
+    const res = await fetch(W.tienda, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({accion:'catalogo'}) });
+    const data = await res.json();
+    const all = [
+      ...(data.catalogos?.MODA?.items || []),
+      ...(data.catalogos?.FASHION_STYLE?.items || []),
+      ...(data.catalogos?.MI_DINASTIA?.items || []),
+    ];
+    if (!all.length) {
+      document.getElementById('catalogoBody').innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:20px">Sin productos</td></tr>';
+      return;
+    }
+    const catBadge = c => {
+      if (c==='MODA') return '<span class="badge badge-moda">MODA</span>';
+      if (c==='FASHION STYLE') return '<span class="badge badge-fashion">FASHION</span>';
+      return '<span class="badge badge-dinastia">DINASTIA</span>';
+    };
+    document.getElementById('catalogoBody').innerHTML = all.map((p,i) => `
+      <tr>
+        <td style="color:var(--dim)">${i+1}</td>
+        <td>${p.nombre || '—'}</td>
+        <td>${catBadge(p.categoria || '')}</td>
+        <td style="color:var(--gold)">€${parseFloat(p.precio||0).toFixed(2)}</td>
+        <td style="color:var(--dim);font-size:0.8rem">${p.tienda_origen||'—'}</td>
+        <td><span class="badge badge-activo">Activo</span></td>
+      </tr>`).join('');
+  } catch(e) {
+    document.getElementById('catalogoBody').innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--red);padding:20px">Error: ' + e.message + '</td></tr>';
+  }
+}
+
+// ─── BULK ───
+function validarJSON() {
+  const txt = document.getElementById('bulkJson').value.trim();
+  try {
+    const parsed = JSON.parse(txt);
+    if (!Array.isArray(parsed)) throw new Error('Debe ser un array []');
+    showRes('bulkRes', 'ok', '✓ JSON válido — ' + parsed.length + ' productos encontrados');
+  } catch(e) {
+    showRes('bulkRes', 'err', '✗ JSON inválido: ' + e.message);
+  }
+}
+
+async function cargarMasivo() {
+  const txt = document.getElementById('bulkJson').value.trim();
+  let productos;
+  try {
+    productos = JSON.parse(txt);
+    if (!Array.isArray(productos) || !productos.length) throw new Error('Array vacío o inválido');
+  } catch(e) {
+    showRes('bulkRes', 'err', '✗ JSON inválido: ' + e.message);
+    return;
+  }
+  document.getElementById('bulkProgress').style.display = 'block';
+  let ok = 0, fail = 0;
+  for (let i = 0; i < productos.length; i++) {
+    const p = productos[i];
+    const pct = Math.round((i+1)/productos.length*100);
+    document.getElementById('bulkStatus').textContent = `Subiendo ${i+1}/${productos.length}: ${p.nombre || '?'}`;
+    document.getElementById('bulkBar').style.width = pct + '%';
+    try {
+      const res = await fetch(W.tienda, {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ accion:'agregar', ...p, activo: p.activo !== false })
+      });
+      const data = await res.json();
+      data.ok ? ok++ : fail++;
+    } catch(e) { fail++; }
+    await new Promise(r => setTimeout(r, 300));
+  }
+  document.getElementById('bulkStatus').textContent = `✓ Completado: ${ok} añadidos, ${fail} fallaron`;
+  showRes('bulkRes', ok > 0 ? 'ok' : 'err', `Resultado: ${ok}/${productos.length} productos cargados`);
+  toast(`✓ ${ok} productos cargados`);
+}
+
+function loadTemplate(type) {
+  const templates = {
+    moda: [
+      {"nombre":"Camiseta Basic Cosmos","categoria":"MODA","precio":9.99,"descripcion":"Algodón 100%, logo bordado","tienda_origen":"AliExpress"},
+      {"nombre":"Gorra Snapback Gold","categoria":"MODA","precio":12.99,"descripcion":"Ajustable, bordado 3D","tienda_origen":"AliExpress"},
+      {"nombre":"Calcetines Pack x5","categoria":"MODA","precio":7.99,"descripcion":"Microfibra transpirable","tienda_origen":"AliExpress"},
+      {"nombre":"Libreta A5 Negra","categoria":"MODA","precio":8.99,"descripcion":"Tapa dura, papel 100g","tienda_origen":"Amazon"},
+      {"nombre":"Llavero Metálico","categoria":"MODA","precio":5.99,"descripcion":"Aleación zinc, grabado láser","tienda_origen":"AliExpress"}
+    ],
+    fashion: [
+      {"nombre":"Sudadera Imperio Gold","categoria":"FASHION STYLE","precio":49.99,"descripcion":"Oversized, hilo dorado","tienda_origen":"AliExpress"},
+      {"nombre":"Cartera Slim RFID","categoria":"FASHION STYLE","precio":39.99,"descripcion":"Cuero genuino, antirrobo","tienda_origen":"Amazon"},
+      {"nombre":"Gafas Polarizadas","categoria":"FASHION STYLE","precio":59.99,"descripcion":"Montura acetato, UV400","tienda_origen":"AliExpress"},
+      {"nombre":"Perfume Noir 100ml","categoria":"FASHION STYLE","precio":89.99,"descripcion":"Ámbar, oud, cedro","tienda_origen":"Amazon"},
+      {"nombre":"Zapatillas Limited","categoria":"FASHION STYLE","precio":129.99,"descripcion":"Edición numerada","tienda_origen":"AliExpress"}
+    ],
+    dinastia: [
+      {"nombre":"Reloj Automático","categoria":"MI DINASTIA","precio":299.99,"descripcion":"Movimiento suizo","tienda_origen":"Amazon"},
+      {"nombre":"Bolso Cuero Italiano","categoria":"MI DINASTIA","precio":349.99,"descripcion":"Hecho a mano","tienda_origen":"Amazon"},
+      {"nombre":"Maletín Ejecutivo","categoria":"MI DINASTIA","precio":249.99,"descripcion":"Cuero genuino, laptop 17\"","tienda_origen":"Amazon"},
+      {"nombre":"Anillo Titanio Negro","categoria":"MI DINASTIA","precio":149.99,"descripcion":"Acero quirúrgico, baño oro 18k","tienda_origen":"AliExpress"},
+      {"nombre":"Set Whisky Crystal","categoria":"MI DINASTIA","precio":179.99,"descripcion":"Cristal soplado, base grabada","tienda_origen":"Amazon"}
+    ]
+  };
+  document.getElementById('bulkJson').value = JSON.stringify(templates[type], null, 2);
+  showRes('bulkRes', 'ok', '✓ Plantilla cargada — ' + templates[type].length + ' productos listos');
+}
+
+// ─── AFILIADOS ───
+async function registrarAfiliado() {
+  const nombre = document.getElementById('afNombre').value.trim();
+  if (!nombre) return showRes('afRes', 'err', 'El nombre es obligatorio');
+  const body = {
+    accion: 'afiliado',
+    nombre,
+    telegram: document.getElementById('afTelegram').value.trim(),
+    email: document.getElementById('afEmail').value.trim(),
+    catalogo: document.getElementById('afCat').value,
+  };
+  try {
+    const res = await fetch(W.tienda, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+    const data = await res.json();
+    if (data.ok) {
+      showRes('afRes', 'ok', '✓ Afiliado registrado. Código: ' + (data.codigo_ref || '—'));
+      toast('✓ Afiliado ' + nombre + ' registrado');
+    } else {
+      showRes('afRes', 'err', data.error || 'Error al registrar');
+    }
+  } catch(e) {
+    showRes('afRes', 'err', 'Error: ' + e.message);
+  }
+}
+
+// ─── PÁGINAS ───
+async function deployPagina() {
+  const archivo = document.getElementById('dpFile').value.trim();
+  const contenido = document.getElementById('dpContent').value.trim();
+  const mensaje = document.getElementById('dpMsg').value.trim() || 'update: ' + archivo;
+  const rama = document.getElementById('dpRama').value.trim() || 'main';
+  if (!archivo || !contenido) return showRes('dpRes', 'err', 'Archivo y contenido son obligatorios');
+
+  showRes('dpRes', 'ok', '⏳ Subiendo a GitHub...');
+  try {
+    const b64 = btoa(unescape(encodeURIComponent(contenido)));
+    const res = await fetch(W.github, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ mensaje, archivo: 'ciudadela/' + archivo, rama, contenido_base64: b64 })
+    });
+    const data = await res.json();
+    if (data.commit || data.ok) {
+      showRes('dpRes', 'ok', '✓ ' + archivo + ' desplegado en GitHub Pages');
+      toast('✓ ' + archivo + ' en producción');
+    } else {
+      showRes('dpRes', 'err', 'Respuesta: ' + JSON.stringify(data));
+    }
+  } catch(e) {
+    showRes('dpRes', 'err', 'Error: ' + e.message);
+  }
+}
+
+function editarPagina(nombre) {
+  showPanel('paginas');
+  document.getElementById('dpFile').value = nombre;
+  document.getElementById('dpContent').focus();
+  toast('Pega el HTML de ' + nombre + ' abajo');
+}
+
+// ─── AGENTES ───
+async function hablarAgente() {
+  const agente = document.getElementById('agAgente').value;
+  const mensaje = document.getElementById('agMsg').value.trim();
+  if (!mensaje) return showRes('agRes', 'err', 'Escribe un mensaje primero');
+  const sesion = document.getElementById('agSesion').value || 'admin-cmd';
+  showRes('agRes', 'ok', '⏳ Enviando a ' + agente + '...');
+  try {
+    const endpoint = agente === 'todos' ? W.mesa : W.gateway;
+    const body = agente === 'todos'
+      ? { mision: mensaje, prioridad: 'alta', tipo: 'admin', origen: 'admin-panel' }
+      : { mensaje, agente, sesion };
+    const res = await fetch(endpoint, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+    const data = await res.json();
+    const respuesta = data.respuesta || data.reporte || JSON.stringify(data, null, 2);
+    showRes('agRes', 'ok', '【' + agente.toUpperCase() + '】 ' + respuesta);
+  } catch(e) {
+    showRes('agRes', 'err', 'Error: ' + e.message);
+  }
+}
+
+function quickAgent(agente) {
+  document.getElementById('agAgente').value = agente;
+  showPanel('agentes');
+  document.getElementById('agMsg').focus();
+  toast('Habla con ' + agente.toUpperCase());
+}
+
+// ─── CONFIG ───
+function cambiarPass() {
+  const actual = document.getElementById('passActual').value;
+  const nueva = document.getElementById('passNueva').value;
+  const stored = localStorage.getItem(PASS_KEY) || DEFAULT_PASS;
+  if (actual !== stored) return showRes('passRes', 'err', 'Contraseña actual incorrecta');
+  if (nueva.length < 6) return showRes('passRes', 'err', 'La nueva contraseña debe tener al menos 6 caracteres');
+  localStorage.setItem(PASS_KEY, nueva);
+  showRes('passRes', 'ok', '✓ Contraseña actualizada correctamente');
+  toast('✓ Contraseña cambiada');
+  document.getElementById('passActual').value = '';
+  document.getElementById('passNueva').value = '';
+}
+
+// ─── UTILS ───
+function showRes(id, type, msg) {
+  const el = document.getElementById(id);
+  el.className = 'res-box ' + type;
+  el.textContent = msg;
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// INIT — auto-login si ya autenticado en esta sesión
+document.getElementById('loginPass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+</script>
+</body>
+</html>

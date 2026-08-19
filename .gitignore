@@ -1,4 +1,18 @@
 ```
+# Environment
+.env
+.env.local
+.env.*
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# Editors
+.vscode/
+.idea/
+
 # Dependencies
 node_modules/
 venv/
@@ -6,30 +20,12 @@ venv/
 __pycache__/
 .mypy_cache/
 .pytest_cache/
-dist/
-build/
+.julia/
+zig*/
 target/
 .gradle/
 
-# Editors
-.vscode/
-.idea/
-
-# Environment
-.env
-.env.local
-*.env.*
-
-# Logs and temp files
-*.log
-*.tmp
-*.swp
-
-# System files
-.DS_Store
-Thumbs.db
-
-# Compiled files
+# Compiled and build artifacts
 *.pyc
 *.class
 *.o
@@ -39,11 +35,15 @@ Thumbs.db
 *.a
 *.obj
 *.out
-
-# Coverage
+dist/
+build/
 coverage/
 htmlcov/
-.coverage
+*.coverage
+
+# System files
+.DS_Store
+Thumbs.db
 
 # Compressed files
 *.zip

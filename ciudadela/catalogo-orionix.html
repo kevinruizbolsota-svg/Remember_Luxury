@@ -13,7 +13,7 @@
 :root{--bg:#02030a;--panel:rgba(10,12,22,.72);--line:rgba(232,200,106,.16);--gold:#e8c86a;--soft:#fff4c9;--muted:rgba(255,255,255,.55)}
 *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:#fff;font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
 #space{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle at 50% 20%,#0d1730 0,#040817 35%,#02030a 72%)}
-#space canvas{position:absolute;inset:0;width:100%;height:100%}.nebula{position:absolute;inset:-10%;background:radial-gradient(ellipse at 22% 26%,rgba(81,118,255,.12),transparent 33%),radial-gradient(ellipse at 78% 74%,rgba(232,200,106,.06),transparent 18%)}
+#space canvas{position:absolute;inset:0;width:100%;height:100%}.nebula{position:absolute;inset:-10%;background:radial-gradient(ellipse at 22% 26%,rgba(81,118,255,.12),transparent 33%),radial-gradi[...]
 nav{position:fixed;top:0;left:0;right:0;z-index:10;height:62px;padding:0 28px;display:flex;align-items:center;gap:20px;background:rgba(2,3,10,.7);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.03)}
 .brand{font-family:Cinzel,serif;font-weight:900;letter-spacing:.2em;color:var(--gold);text-decoration:none}.navlinks{display:flex;gap:8px;margin-left:auto}.navlinks a{color:var(--muted);text-decoration:none;padding:6px 8px;border-radius:8px}.navlinks a.active{color:var(--soft);background:rgba(255,255,255,.02)}
 main{position:relative;z-index:1;padding:110px 28px 100px;max-width:1280px;margin:auto}.intro{text-align:center;max-width:820px;margin:0 auto 30px}.eyebrow{font-family:Cinzel,serif;font-size:.55rem;color:var(--muted);letter-spacing:.12em}
@@ -89,44 +89,47 @@ main{position:relative;z-index:1;padding:110px 28px 100px;max-width:1280px;margi
   const loadMoreBtn = document.getElementById('loadMore');
   const btnRefresh = document.getElementById('btn-refresh');
 
-  const META_URL = '../Gaia/Data/products/meta.json';
+  // Candidate URLs for meta and pages — try them in order to handle GitHub Pages / raw / githack contexts
+  const REPO_NWO = 'kevinruizbolsota-svg/Remember_Luxury';
+  const META_CANDIDATES = [
+    `${location.origin}/${REPO_NWO}/Gaia/Data/products/meta.json`, // github.io with repo path
+    `https://raw.githubusercontent.com/${REPO_NWO}/main/Gaia/Data/products/meta.json`, // raw GitHub
+    `https://raw.githack.com/${REPO_NWO}/main/Gaia/Data/products/meta.json`, // raw.githack
+    `/Gaia/Data/products/meta.json`, // root-relative (when served from repo root)
+    `../Gaia/Data/products/meta.json`, // relative
+    `./Gaia/Data/products/meta.json`
+  ];
+
   let meta = null;
   let currentPage = 0;
   let allProducts = [];
   let filtered = [];
   let categories = new Set();
 
-  async function fetchMeta(){
+  async function tryFetch(url){
     try{
-      const r = await fetch(META_URL);
-      if(!r.ok) throw new Error('meta fetch ' + r.status);
-      meta = await r.json();
-      return meta;
-    }catch(err){
-      console.warn('Meta fetch failed',err);
-      // try fallback path at root
-      try{
-        const r2 = await fetch('/Gaia/Data/products/meta.json');
-        if(r2.ok) { meta = await r2.json(); return meta; }
-      }catch(e){}
-      throw err;
+      const r = await fetch(url);
+      if(!r.ok){ console.warn('fetch',url,'status',r.status); return null; }
+      const t = await r.text();
+      try{ return JSON.parse(t); }catch(e){ console.warn('invalid json from',url); return null; }
+    }catch(e){ console.warn('fetch error',url,e); return null; }
+  }
+
+  async function fetchMeta(){
+    for(const url of META_CANDIDATES){
+      const data = await tryFetch(url);
+      if(data){ meta = data; console.log('meta loaded from',url); return meta; }
     }
+    throw new Error('meta fetch all candidates failed');
   }
 
   async function fetchPage(n){
-    // try relative path first
-    const url = `../Gaia/Data/products/page-${n}.json`;
-    try{
-      const r = await fetch(url);
-      if(!r.ok) throw new Error('page fetch ' + r.status);
-      return await r.json();
-    }catch(err){
-      // fallback absolute
-      const abs = `/Gaia/Data/products/page-${n}.json`;
-      const r2 = await fetch(abs);
-      if(!r2.ok) throw new Error('fallback page fetch ' + r2.status);
-      return await r2.json();
+    const PAGE_CANDIDATES = META_CANDIDATES.map(u=>u.replace(/meta\.json$/, `page-${n}.json`));
+    for(const url of PAGE_CANDIDATES){
+      const data = await tryFetch(url);
+      if(data){ console.log('page',n,'loaded from',url); return data; }
     }
+    throw new Error('page fetch all candidates failed for page ' + n);
   }
 
   function renderCard(p, idx){
@@ -140,7 +143,7 @@ main{position:relative;z-index:1;padding:110px 28px 100px;max-width:1280px;margi
 
     const info = document.createElement('div'); info.className = 'info';
     const title = document.createElement('div'); title.className = 'title'; title.textContent = p.title || 'Sin título';
-    const meta = document.createElement('div'); meta.className = 'meta'; meta.textContent = (p.category||'') + (p.brand ? (' · ' + p.brand) : '');
+    const metaEl = document.createElement('div'); metaEl.className = 'meta'; metaEl.textContent = (p.category||'') + (p.brand ? (' · ' + p.brand) : '');
     const short = document.createElement('div'); short.style.fontSize='0.9rem'; short.style.color='var(--muted)'; short.textContent = p.short_description || '';
     const price = document.createElement('div'); price.className='price'; price.textContent = p.currency ? (p.currency + ' ' + p.price) : (p.price ? ('€ ' + p.price) : '');
 
@@ -154,12 +157,12 @@ main{position:relative;z-index:1;padding:110px 28px 100px;max-width:1280px;margi
 
     if(p.demo) {
       const d = document.createElement('span'); d.className='badge-demo'; d.textContent='DEMO';
-      meta.appendChild(document.createTextNode(' ')); meta.appendChild(d);
+      metaEl.appendChild(document.createTextNode(' ')); metaEl.appendChild(d);
     }
 
     ctaWrap.appendChild(btnView); ctaWrap.appendChild(btnBuy);
 
-    info.appendChild(title); info.appendChild(meta); info.appendChild(short); info.appendChild(price); info.appendChild(ctaWrap);
+    info.appendChild(title); info.appendChild(metaEl); info.appendChild(short); info.appendChild(price); info.appendChild(ctaWrap);
 
     a.appendChild(vis); a.appendChild(info);
     return a;
@@ -183,7 +186,7 @@ main{position:relative;z-index:1;padding:110px 28px 100px;max-width:1280px;margi
     empty.style.display = 'none';
     list.forEach((p,i)=>{ grid.appendChild(renderCard(p, i)); });
     // show load more if pages remain
-    loadMoreBtn.style.display = (meta && currentPage < meta.pages) ? 'block' : 'none';
+    loadMoreBtn.style.display = (meta && currentPage < (meta.pages||0)) ? 'block' : 'none';
   }
 
   function buildFilters(){
@@ -200,12 +203,13 @@ main{position:relative;z-index:1;padding:110px 28px 100px;max-width:1280px;margi
 
   async function loadNext(){
     if(!meta) return;
-    if(currentPage >= meta.pages) return;
+    if(currentPage >= (meta.pages||0)) return;
     const next = currentPage + 1;
     try{
       const items = await fetchPage(next);
-      // normalize ensure tags array
-      items.forEach(it=>{ it.tags = it.tags || []; categories.add(it.category || ''); allProducts.push(it); });
+      if(!Array.isArray(items)) throw new Error('page data not array');
+      // normalize ensure tags array and collect categories
+      items.forEach((it, idx)=>{ it.tags = it.tags || []; categories.add(it.category || ''); allProducts.push(it); });
       currentPage = next;
       applyFilters();
     }catch(err){

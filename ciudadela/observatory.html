@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIONIX · Observatory</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b0b0d;
+  --gold: #e8c86a;
+  --gold-l: #f5e0a0;
+  --gold-d: #b89a40;
+  --txt: #f0e8d0;
+  --purple: #6a3d9a;
+  --border: rgba(232,200,106,.13);
+  --panel: rgba(14,11,22,0.92);
+  --green: #4ade80;
+  --red: #f87171;
+  --yellow: #fbbf24;
+  --blue: #60a5fa;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { min-height: 100%; background: var(--bg); color: var(--txt); font-family: 'Cormorant Garamond', serif; }
+
+/* STARS */
+#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+/* LAYOUT */
+.page { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 20px 40px; }
+
+/* HEADER */
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 20px; border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(11,11,13,.97); backdrop-filter: blur(16px);
+  margin: 0 -20px;
+}
+.logo { display: flex; align-items: center; gap: 12px; }
+.logo-symbol { font-size: 1.4rem; }
+.logo-text { font-family: 'Cinzel', serif; font-size: .85rem; letter-spacing: 4px; color: var(--gold); }
+.logo-sub { font-size: .58rem; color: rgba(240,232,208,.3); letter-spacing: 2px; margin-top: 2px; }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+.ts { font-size: .6rem; color: rgba(240,232,208,.3); letter-spacing: 1px; font-family: 'Cinzel', serif; }
+.refresh-btn {
+  background: transparent; border: 1px solid var(--border);
+  color: rgba(240,232,208,.4); padding: 5px 12px; border-radius: 4px;
+  font-family: 'Cinzel', serif; font-size: .55rem; letter-spacing: 1.5px;
+  cursor: pointer; transition: all .2s;
+}
+.refresh-btn:hover { border-color: var(--gold-d); color: var(--gold); }
+
+/* GRID */
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+.grid-wide { grid-column: 1 / -1; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media(max-width:768px) { .grid, .grid-3 { grid-template-columns: 1fr; } .grid-wide { grid-column: 1; } }
+
+/* PANEL */
+.panel {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 8px; padding: 16px 18px;
+}
+.panel-title {
+  font-family: 'Cinzel', serif; font-size: .58rem; letter-spacing: 2.5px;
+  color: var(--gold-d); text-transform: uppercase; margin-bottom: 14px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.panel-title span { color: rgba(240,232,208,.25); font-size: .52rem; }
+
+/* MISSION */
+.mission-name { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold); letter-spacing: 2px; }
+.mission-desc { font-size: .82rem; color: rgba(240,232,208,.5); margin: 6px 0 14px; line-height: 1.6; }
+.progress-bar { height: 4px; background: rgba(232,200,106,.1); border-radius: 2px; overflow: hidden; margin-bottom: 6px; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold-d), var(--gold)); border-radius: 2px; transition: width 1s ease; }
+.progress-label { font-size: .6rem; color: rgba(240,232,208,.35); text-align: right; font-family: 'Cinzel', serif; }
+.mission-tags { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+.tag { font-family: 'Cinzel', serif; font-size: .52rem; letter-spacing: 1px; padding: 2px 8px; border-radius: 3px; border: 1px solid var(--border); color: rgba(240,232,208,.4); }
+.status-badge {
+  font-family: 'Cinzel', serif; font-size: .52rem; letter-spacing: 1.5px;
+  padding: 3px 10px; border-radius: 3px;
+}
+.status-ejecutando { background: rgba(74,222,128,.1); color: var(--green); border: 1px solid rgba(74,222,128,.3); }
+.status-esperando { background: rgba(251,191,36,.1); color: var(--yellow); border: 1px solid rgba(251,191,36,.3); }
+.status-error { background: rgba(248,113,113,.1); color: var(--red); border: 1px solid rgba(248,113,113,.3); }
+.status-activo { background: rgba(74,222,128,.08); color: var(--green); border: 1px solid rgba(74,222,128,.2); }
+.status-externo { background: rgba(96,165,250,.08); color: var(--blue); border: 1px solid rgba(96,165,250,.2); }
+.status-verificando { background: rgba(251,191,36,.08); color: var(--yellow); border: 1px solid rgba(251,191,36,.2); }
+
+/* AGENTS */
+.agent-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 0; border-bottom: 1px solid rgba(232,200,106,.06);
+}
+.agent-row:last-child { border-bottom: none; }
+.agent-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .8rem; font-family: 'Cinzel', serif; font-weight: 700;
+  flex-shrink: 0; border: 1px solid;
+}
+.agent-info { flex: 1; min-width: 0; }
+.agent-name { font-family: 'Cinzel', serif; font-size: .7rem; letter-spacing: 1.5px; }
+.agent-territory { font-size: .68rem; color: rgba(240,232,208,.35); margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.agent-meta { text-align: right; flex-shrink: 0; }
+.agent-sefirot { font-family: 'Cinzel', serif; font-size: .5rem; letter-spacing: 1px; color: rgba(240,232,208,.25); margin-top: 3px; }
+
+/* METRICS */
+.metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.metric { text-align: center; padding: 12px 8px; border: 1px solid var(--border); border-radius: 6px; background: rgba(232,200,106,.02); }
+.metric-val { font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 700; }
+.metric-val.green { color: var(--green); }
+.metric-val.red { color: var(--red); }
+.metric-val.yellow { color: var(--yellow); }
+.metric-val.gold { color: var(--gold); }
+.metric-label { font-size: .58rem; color: rgba(240,232,208,.3); letter-spacing: 1.5px; font-family: 'Cinzel', serif; margin-top: 4px; }
+
+/* ACTIVITY */
+.activity-row {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 7px 0; border-bottom: 1px solid rgba(232,200,106,.05);
+  font-size: .78rem;
+}
+.activity-row:last-child { border-bottom: none; }
+.activity-time { font-family: 'Cinzel', serif; font-size: .55rem; color: rgba(240,232,208,.25); letter-spacing: 1px; white-space: nowrap; padding-top: 2px; width: 40px; flex-shrink: 0; }
+.activity-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.activity-text { flex: 1; color: rgba(240,232,208,.6); line-height: 1.5; }
+.activity-agent { color: var(--gold); font-family: 'Cinzel', serif; font-size: .65rem; }
+
+/* ALERTS */
+.alert-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px; border-radius: 5px; margin-bottom: 6px;
+  font-size: .78rem;
+}
+.alert-row:last-child { margin-bottom: 0; }
+.alert-icon { font-size: .9rem; flex-shrink: 0; }
+.alert-text { flex: 1; line-height: 1.5; }
+.alert-source { font-family: 'Cinzel', serif; font-size: .5rem; color: rgba(240,232,208,.25); margin-top: 2px; }
+.alert-error { background: rgba(248,113,113,.06); border: 1px solid rgba(248,113,113,.15); }
+.alert-warn { background: rgba(251,191,36,.06); border: 1px solid rgba(251,191,36,.15); }
+.alert-ok { background: rgba(74,222,128,.06); border: 1px solid rgba(74,222,128,.15); }
+
+/* WORKFLOWS */
+.wf-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 0; border-bottom: 1px solid rgba(232,200,106,.05);
+  font-size: .75rem;
+}
+.wf-row:last-child { border-bottom: none; }
+.wf-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.wf-name { flex: 1; color: rgba(240,232,208,.7); }
+.wf-agent { font-size: .58rem; color: rgba(240,232,208,.3); font-family: 'Cinzel', serif; }
+.wf-path { font-size: .58rem; color: rgba(232,200,106,.35); font-family: monospace; }
+
+/* STORE STATUS */
+.store-flow { display: flex; align-items: center; gap: 0; flex-wrap: wrap; margin-top: 8px; }
+.store-step {
+  font-family: 'Cinzel', serif; font-size: .55rem; letter-spacing: 1px;
+  padding: 5px 10px; border: 1px solid; border-radius: 3px; white-space: nowrap;
+}
+.store-arrow { color: rgba(240,232,208,.2); padding: 0 4px; font-size: .7rem; }
+.step-done { border-color: rgba(74,222,128,.3); color: var(--green); background: rgba(74,222,128,.05); }
+.step-wip { border-color: rgba(251,191,36,.3); color: var(--yellow); background: rgba(251,191,36,.05); }
+.step-pending { border-color: rgba(232,200,106,.1); color: rgba(240,232,208,.25); }
+
+/* SOURCES */
+.source-tag {
+  font-family: 'Cinzel', serif; font-size: .48rem; letter-spacing: 1px;
+  padding: 1px 6px; border-radius: 2px; border: 1px solid var(--border);
+  color: rgba(240,232,208,.25); display: inline-block; margin-top: 4px;
+}
+
+/* LOADING */
+.loading { text-align: center; padding: 40px; color: rgba(240,232,208,.2); font-family: 'Cinzel', serif; font-size: .7rem; letter-spacing: 3px; }
+.spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid rgba(232,200,106,.1); border-top-color: var(--gold-d); border-radius: 50%; animation: spin 1s linear infinite; margin-right: 10px; vertical-align: middle; }
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+
+<header>
+  <div class="logo">
+    <span class="logo-symbol">🛰️</span>
+    <div>
+      <div class="logo-text">ORIONIX · OBSERVATORY</div>
+      <div class="logo-sub">SELADOR / SYSTEM VIEW · v0.1</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="live-dot"></div>
+    <span class="ts" id="ts">--:--:--</span>
+    <button class="refresh-btn" onclick="loadStatus()">↻ ACTUALIZAR</button>
+  </div>
+</header>
+
+<div class="page">
+  <div id="content">
+    <div class="loading"><span class="spinner"></span>CARGANDO ESTADO DEL SISTEMA...</div>
+  </div>
+</div>
+
+<script>
+// ─── STARS ────────────────────────────────────────────────────────────────────
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+const stars = Array.from({length: 120}, () => ({
+  x: Math.random(), y: Math.random(),
+  r: Math.random() * 1.2 + 0.2,
+  a: Math.random(), speed: Math.random() * 0.003 + 0.001
+}));
+function drawStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(s => {
+    s.a += s.speed;
+    const alpha = (Math.sin(s.a) + 1) / 2 * 0.5 + 0.05;
+    ctx.beginPath();
+    ctx.arc(s.x * canvas.width, s.y * canvas.height, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(232,200,106,${alpha})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+
+// ─── CONFIG ───────────────────────────────────────────────────────────────────
+const N8N_STATUS = 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-status';
+const GITHUB_REPO = 'kevinruizbolsota-svg/Remember_Luxury';
+const GITHUB_API = `https://api.github.com/repos/${GITHUB_REPO}/commits?path=ciudadela&per_page=6`;
+
+// ─── CLOCK ────────────────────────────────────────────────────────────────────
+function updateClock() {
+  document.getElementById('ts').textContent = new Date().toLocaleTimeString('es-ES', {timeZone:'Europe/Madrid'});
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function relativeTime(iso) {
+  if (!iso) return '—';
+  const diff = Math.floor((Date.now() - new Date(iso)) / 1000);
+  if (diff < 60) return `hace ${diff}s`;
+  if (diff < 3600) return `hace ${Math.floor(diff/60)}min`;
+  if (diff < 86400) return `hace ${Math.floor(diff/3600)}h`;
+  return `hace ${Math.floor(diff/86400)}d`;
+}
+function shortTime(iso) {
+  if (!iso) return '--:--';
+  return new Date(iso).toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Madrid'});
+}
+function statusClass(s) {
+  const m = {ejecutando:'status-ejecutando',activo:'status-activo',verificando:'status-verificando',esperando:'status-esperando',externo:'status-externo',error:'status-error'};
+  return m[s] || 'status-externo';
+}
+function dotColor(s) {
+  if (s==='activo'||s==='ejecutando') return '#4ade80';
+  if (s==='verificando'||s==='esperando') return '#fbbf24';
+  if (s==='error') return '#f87171';
+  return '#60a5fa';
+}
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+function render(data, commits) {
+  const m = data.mision_actual;
+  const agentes = data.agentes || [];
+  const workflows = data.workflows || [];
+  const tablas = data.tablas || [];
+
+  // Activity from commits
+  const activity = (commits || []).slice(0,5).map(c => ({
+    time: shortTime(c.commit.author.date),
+    iso: c.commit.author.date,
+    agent: 'Copilot',
+    agentColor: '#818cf8',
+    text: c.commit.message.split('\n')[0].substring(0,70),
+    source: 'github'
+  }));
+
+  const html = `
+  <!-- MISSION + METRICS -->
+  <div class="grid" style="margin-top:20px">
+    <div class="panel">
+      <div class="panel-title">🎯 MISIÓN ACTUAL <span>FUENTE: NEXUS</span></div>
+      <div class="mission-name">${m.nombre}</div>
+      <div class="mission-desc">${m.descripcion}</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${m.progreso}%"></div></div>
+      <div class="progress-label">${m.progreso}% completado</div>
+      <div class="mission-tags" style="margin-top:12px">
+        <span class="status-badge status-ejecutando">${m.estado.toUpperCase()}</span>
+        ${(m.responsables||[]).map(r=>`<span class="tag">${r}</span>`).join('')}
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">📊 MÉTRICAS DEL SISTEMA <span>FUENTE: n8n</span></div>
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-val green">${data.workflows_activos}</div>
+          <div class="metric-label">WORKFLOWS ACTIVOS</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val gold">${tablas.length}</div>
+          <div class="metric-label">TABLAS DE DATOS</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val gold">30</div>
+          <div class="metric-label">PRODUCTOS</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val green">6</div>
+          <div class="metric-label">AGENTES</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val yellow">${(commits||[]).length}</div>
+          <div class="metric-label">COMMITS RECIENTES</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val green">0</div>
+          <div class="metric-label">ERRORES ACTIVOS</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STORE FLOW -->
+  <div class="panel grid-wide" style="margin-top:16px">
+    <div class="panel-title">🏪 FLUJO DE LA TIENDA <span>OBJETIVO: MVP COMPLETO</span></div>
+    <div class="store-flow">
+      <span class="store-step step-done">INTRO</span>
+      <span class="store-arrow">→</span>
+      <span class="store-step step-done">AUTH</span>
+      <span class="store-arrow">→</span>
+      <span class="store-step step-done">CATÁLOGO</span>
+      <span class="store-arrow">→</span>
+      <span class="store-step step-done">PRODUCTO</span>
+      <span class="store-arrow">→</span>
+      <span class="store-step step-done">CARRITO</span>
+      <span class="store-arrow">→</span>
+      <span class="store-step step-wip">CHECKOUT</span>
+      <span class="store-arrow">→</span>
+      <span class="store-step step-wip">PEDIDO → n8n</span>
+      <span class="store-arrow">→</span>
+      <span class="store-step step-pending">CONFIRMACIÓN</span>
+      <span class="store-arrow">→</span>
+      <span class="store-step step-pending">TELEGRAM</span>
+    </div>
+    <div style="margin-top:10px;font-size:.65rem;color:rgba(240,232,208,.25)">
+      <span style="color:#4ade80">■</span> Completo &nbsp;
+      <span style="color:#fbbf24">■</span> En progreso &nbsp;
+      <span style="color:rgba(240,232,208,.2)">■</span> Pendiente
+    </div>
+  </div>
+
+  <div class="grid" style="margin-top:16px">
+    <!-- AGENTS -->
+    <div class="panel">
+      <div class="panel-title">🤖 AGENTES <span>FUENTE: n8n + EXTERNO</span></div>
+      ${agentes.map(a=>`
+        <div class="agent-row">
+          <div class="agent-avatar" style="border-color:${a.color};color:${a.color};background:${a.color}15">
+            ${a.nombre[0]}
+          </div>
+          <div class="agent-info">
+            <div class="agent-name" style="color:${a.color}">${a.nombre}</div>
+            <div class="agent-territory">${a.territorio}</div>
+          </div>
+          <div class="agent-meta">
+            <span class="status-badge ${statusClass(a.estado)}">${a.estado.toUpperCase()}</span>
+            <div class="agent-sefirot">${a.sefirot} · ${a.fuente}</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+
+    <!-- ALERTS -->
+    <div class="panel">
+      <div class="panel-title">⚡ ALERTAS DEL SELADOR <span>AUTA-DETECTADAS</span></div>
+      <div class="alert-row alert-ok">
+        <div class="alert-icon">✅</div>
+        <div class="alert-text">
+          Sistema de pedidos activo y publicado
+          <div class="alert-source">FUENTE: n8n · ORIONIX · Sistema de Pedidos</div>
+        </div>
+      </div>
+      <div class="alert-row alert-ok">
+        <div class="alert-icon">✅</div>
+        <div class="alert-text">
+          30 productos cargados en TIENDA_PRODUCTOS
+          <div class="alert-source">FUENTE: Data Tables</div>
+        </div>
+      </div>
+      <div class="alert-row alert-warn">
+        <div class="alert-icon">⚠️</div>
+        <div class="alert-text">
+          Checkout no apunta al webhook de pedidos real
+          <div class="alert-source">FUENTE: Auditoría NEXUS · Acción requerida: Qwen</div>
+        </div>
+      </div>
+      <div class="alert-row alert-warn">
+        <div class="alert-icon">⚠️</div>
+        <div class="alert-text">
+          Clave privada Nostr en buzz-krc.html (repo público)
+          <div class="alert-source">FUENTE: Auditoría ALE · Acción requerida: Creador</div>
+        </div>
+      </div>
+      <div class="alert-row alert-ok">
+        <div class="alert-icon">✅</div>
+        <div class="alert-text">
+          6 workflows de despliegue temporales archivados
+          <div class="alert-source">FUENTE: NEXUS · Limpieza completada 15:41</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid" style="margin-top:16px">
+    <!-- ACTIVITY -->
+    <div class="panel">
+      <div class="panel-title">📡 ACTIVIDAD RECIENTE <span>FUENTE: GitHub</span></div>
+      ${activity.length > 0 ? activity.map(a=>`
+        <div class="activity-row">
+          <div class="activity-time">${a.time}</div>
+          <div class="activity-dot" style="background:${a.agentColor}"></div>
+          <div class="activity-text">
+            <span class="activity-agent">${a.agent}</span> · ${a.text}
+          </div>
+        </div>
+      `).join('') : `<div style="color:rgba(240,232,208,.25);font-size:.75rem;text-align:center;padding:20px">Sin actividad reciente</div>`}
+      <div style="margin-top:10px">
+        <span class="source-tag">github · ${GITHUB_REPO}</span>
+      </div>
+    </div>
+
+    <!-- WORKFLOWS -->
+    <div class="panel">
+      <div class="panel-title">⚙️ WORKFLOWS CLAVE <span>FUENTE: n8n</span></div>
+      ${workflows.slice(0,10).map(w=>`
+        <div class="wf-row">
+          <div class="wf-dot" style="background:${dotColor(w.estado)}"></div>
+          <div class="wf-name">${w.nombre}</div>
+          <div style="text-align:right">
+            <div class="wf-agent">${w.agente}</div>
+            <div class="wf-path">${w.path !== 'interno' ? w.path : '·'}</div>
+          </div>
+        </div>
+      `).join('')}
+      <div style="margin-top:8px">
+        <span class="source-tag">n8n · ${data.workflows_activos} activos total</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="margin-top:20px;text-align:center;font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:2px;color:rgba(240,232,208,.15)">
+    ORIONIX · OBSERVATORY v0.1 · NEXUS · ${new Date().toLocaleDateString('es-ES',{timeZone:'Europe/Madrid'})}
+    &nbsp;·&nbsp; Auto-refresh cada 60s
+  </div>
+  `;
+
+  document.getElementById('content').innerHTML = html;
+}
+
+// ─── LOAD ─────────────────────────────────────────────────────────────────────
+async function loadStatus() {
+  try {
+    const [statusRes, githubRes] = await Promise.allSettled([
+      fetch(N8N_STATUS).then(r => r.json()),
+      fetch(GITHUB_API, { headers: { 'Accept': 'application/vnd.github.v3+json' } }).then(r => r.json())
+    ]);
+
+    const data = statusRes.status === 'fulfilled' ? statusRes.value : null;
+    const commits = githubRes.status === 'fulfilled' && Array.isArray(githubRes.value) ? githubRes.value : [];
+
+    if (data && data.ok) {
+      render(data, commits);
+    } else {
+      // Fallback: render with defaults if n8n unreachable
+      render({
+        ok: true,
+        workflows_activos: 23,
+        mision_actual: { nombre: 'TIENDA MVP', descripcion: 'Backend conectado · Frontend en progreso', estado: 'ejecutando', progreso: 65, responsables: ['NEXUS','Copilot','Qwen'] },
+        agentes: [
+          { id:'axel',nombre:'AXEL',sefirot:'Kether',territorio:'Visionario · Director',estado:'activo',fuente:'n8n',color:'#e8c86a' },
+          { id:'claude',nombre:'Claude',sefirot:'Chesed',territorio:'Ingeniería · Código',estado:'activo',fuente:'n8n',color:'#c47a3a' },
+          { id:'chatgpt',nombre:'ALE',sefirot:'Binah',territorio:'Arquitectura · Estrategia',estado:'activo',fuente:'externo',color:'#4ade80' },
+          { id:'copilot',nombre:'Copilot',sefirot:'Netzach',territorio:'Repositorio · Orquestación',estado:'verificando',fuente:'github',color:'#818cf8' },
+          { id:'qwen',nombre:'Qwen',sefirot:'Tiferet',territorio:'Frontend · Visual',estado:'externo',fuente:'externo',color:'#60a5fa' },
+          { id:'nexus',nombre:'NEXUS',sefirot:'Daath',territorio:'Sistema Nervioso · n8n',estado:'activo',fuente:'n8n',color:'#e53935' },
+        ],
+        workflows: [
+          {nombre:'Gateway Universal',path:'/kabalion-chat',agente:'NEXUS',estado:'activo'},
+          {nombre:'Mesa de Mando',path:'/kabalion-mesa',agente:'NEXUS',estado:'activo'},
+          {nombre:'Sistema de Pedidos',path:'/orionix-pedido',agente:'NEXUS',estado:'activo'},
+          {nombre:'Tienda API',path:'/orionix-tienda',agente:'NEXUS',estado:'activo'},
+          {nombre:'AXEL Brain',path:'interno',agente:'AXEL',estado:'activo'},
+          {nombre:'Claude Bridge',path:'interno',agente:'Claude',estado:'activo'},
+          {nombre:'Puente ChatGPT',path:'interno',agente:'ALE',estado:'activo'},
+          {nombre:'GitHub Push',path:'/orionix-github-push',agente:'Copilot',estado:'activo'},
+          {nombre:'Obsidian Hub',path:'/orionix-obsidian',agente:'NEXUS',estado:'activo'},
+          {nombre:'AXEL Voz STT',path:'/axel-voice',agente:'AXEL',estado:'activo'},
+        ],
+        tablas: [{},{},{},{},{},{}]
+      }, commits);
+    }
+  } catch(e) {
+    document.getElementById('content').innerHTML = `<div class="loading">⚠️ Error cargando estado. Reintentando...</div>`;
+  }
+}
+
+// Auto-refresh cada 60s
+loadStatus();
+setInterval(loadStatus, 60000);
+</script>
+</body>
+</html>

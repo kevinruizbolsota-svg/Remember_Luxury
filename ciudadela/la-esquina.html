@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>La Esquina de los Calle | Fritos, Arepas y Jugos · Medellín</title>
+  <meta name="description" content="La Esquina de los Calle - Empanadas, arepas, jugos y combos. Pedidos por WhatsApp. Medellín. Horario: 7am - 9pm.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --gold:#d4af37; --black:#121212; --white:#ffffff; --muted:#f3f3f3; --max-width:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{font-family:Montserrat,system-ui,-apple-system,Arial;line-height:1.6;color:var(--black);margin:0;background:linear-gradient(180deg,#fff,#fafafa)}
+    a{color:inherit}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 20px}
+
+    /* Skip link */
+    .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:10px;top:10px;width:auto;height:auto;padding:8px 12px;background:var(--black);color:var(--white);border-radius:6px;z-index:9999}
+
+    header{background:transparent;padding:18px 0;position:sticky;top:0;backdrop-filter: blur(6px);z-index:40}
+    .nav{display:flex;align-items:center;gap:18px}
+    .brand{font-family:Cinzel,serif;font-weight:700;color:var(--gold);font-size:20px;text-decoration:none}
+    .nav-right{margin-left:auto;display:flex;gap:12px;align-items:center}
+    .btn-ghost{border:1px solid rgba(0,0,0,.06);padding:8px 12px;border-radius:999px;background:transparent;cursor:pointer}
+
+    /* Hero */
+    .hero{min-height:72vh;display:flex;align-items:center;background-color:#111;color:var(--white);position:relative}
+    .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.55));}
+    .hero-content{position:relative;z-index:2;text-align:center;width:100%;padding:60px 20px}
+    .hero h1{font-family:Cinzel,serif;font-weight:600;font-size:clamp(2.2rem,6vw,3.8rem);margin:0;color:var(--white)}
+    .hero p{margin:14px 0 24px;color:var(--gold);font-size:1.15rem}
+    .hero .cta{display:inline-flex;gap:12px;align-items:center}
+    .btn{background:var(--gold);color:var(--black);padding:12px 20px;border-radius:999px;font-weight:700;text-decoration:none}
+
+    /* Menu */
+    .menu-section{padding:64px 0;background:var(--muted)}
+    .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+    .menu-card{background:var(--white);padding:22px;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.06);border:1px solid rgba(0,0,0,.03)}
+    .menu-card h3{color:var(--gold);font-family:Cinzel,serif;margin:0 0 12px}
+    .menu-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f2f2f2}
+    .menu-item:last-child{border-bottom:0}
+
+    /* About */
+    .about-section{padding:64px 0;background:#0b0b0b;color:var(--white);text-align:center}
+    .about-section p{max-width:820px;margin:0 auto}
+
+    /* WhatsApp floating */
+    .whatsapp-float{position:fixed;right:18px;bottom:20px;width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#25D366;color:#fff;box-shadow:0 10px 30px rgba(0,0,0,.18);z-index:999}
+    .whatsapp-float:focus{outline:3px solid rgba(255,255,255,.18)}
+
+    footer{background:#0f0f0f;color:#ddd;padding:28px 0;text-align:center}
+
+    /* Utilities */
+    .mb-12{margin-bottom:12px}.mt-8{margin-top:8px}
+    @media(min-width:900px){.container{padding:0}} 
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "La Esquina de los Calle",
+    "image": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=1200",
+    "address": { "@type": "PostalAddress", "addressLocality": "Medellín", "addressCountry": "CO" },
+    "telephone": "+573000000000",
+    "openingHours": "Mo-Su 07:00-21:00",
+    "priceRange": "$"
+  }
+  </script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Saltar al contenido</a>
+  <header class="container" role="banner">
+    <nav class="nav" aria-label="Navegación principal">
+      <a class="brand" href="/">La Esquina de los Calle</a>
+      <div class="nav-right">
+        <a class="btn-ghost" href="#menu">Menú</a>
+        <a class="btn-ghost" href="#about">Nuestra historia</a>
+        <a class="btn" href="https://wa.me/573000000000?text=Hola%21%20Quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Pedir</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" role="region" aria-label="Hero" style="background-image:url('https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=1600&amp;auto=format&amp;fit=crop&amp;q=80');background-size:cover;background-position:center;">
+      <div class="hero-content container">
+        <h1 class="serif">La Esquina de los Calle</h1>
+        <p>Del barrio, pa' el barrio · Empanadas, arepas y jugos naturales</p>
+        <div class="cta">
+          <a class="btn" href="https://wa.me/573000000000?text=Hola%21%20Quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+          <a class="btn-ghost" href="#menu">Ver Menú</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu" class="menu-section" aria-labelledby="menu-title">
+      <div class="container">
+        <h2 id="menu-title" class="serif" style="text-align:center;font-size:2rem;margin-bottom:28px">Nuestro Menú</h2>
+        <div class="menu-grid" aria-hidden="false">
+          <article class="menu-card" aria-labelledby="fritos-title">
+            <h3 id="fritos-title" class="serif">🔥 Fritos</h3>
+            <div class="menu-item"><span>Empanada</span><span class="price">$3.500</span></div>
+            <div class="menu-item"><span>Pastel de Pollo</span><span class="price">$5.000</span></div>
+            <div class="menu-item"><span>Papa Rellena</span><span class="price">$4.000</span></div>
+            <div class="menu-item"><span>Palito de Queso</span><span class="price">$3.500</span></div>
+            <div class="menu-item"><span>Panzerotti</span><span class="price">$4.500</span></div>
+          </article>
+
+          <article class="menu-card" aria-labelledby="arepas-title">
+            <h3 id="arepas-title" class="serif">🌽 Arepas</h3>
+            <div class="menu-item"><span>Arepa Sola</span><span class="price">$1.500</span></div>
+            <div class="menu-item"><span>Arepa con Salchichón</span><span class="price">$9.000</span></div>
+            <div class="menu-item"><span>Arepa con Queso</span><span class="price">$4.500</span></div>
+          </article>
+
+          <article class="menu-card" aria-labelledby="jugos-title">
+            <h3 id="jugos-title" class="serif">🧃 Jugos Naturales</h3>
+            <div class="menu-item"><span>Jugo Natural (cualquier sabor)</span><span class="price">$4.000</span></div>
+            <div class="menu-item"><span>Limonada Natural</span><span class="price">$3.500</span></div>
+            <div class="menu-item"><span>Café Tinto</span><span class="price">$2.000</span></div>
+            <div class="menu-item"><span>Cappuccino</span><span class="price">$4.000</span></div>
+          </article>
+
+          <article class="menu-card" aria-labelledby="combos-title">
+            <h3 id="combos-title" class="serif">⭐ Combos</h3>
+            <div class="menu-item"><span>2 Empanadas + Jugo</span><span class="price">$10.000</span></div>
+            <div class="menu-item"><span>Arepa Salchichón + Jugo</span><span class="price">$12.000</span></div>
+            <div class="menu-item"><span>Pastel + Café</span><span class="price">$7.000</span></div>
+            <div class="menu-item"><span>Combo Familiar (6 fritos + 4 jugos)</span><span class="price">$35.000</span></div>
+          </article>
+        </div>
+
+        <div style="text-align:center;margin-top:18px">
+          <a class="btn" href="https://wa.me/573000000000?text=Hola%21%20Quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Hacer Pedido</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about-section" aria-labelledby="about-title">
+      <div class="container">
+        <h2 id="about-title" class="serif">Nuestra Historia</h2>
+        <p class="mt-8">En La Esquina de los Calle hacemos cada empanada, cada arepa y cada jugo con el mismo amor con el que lo haría tu mamá. Productos frescos, recetas tradicionales paisas y precios justos para que toda la familia coma rico sin salir de casa.</p>
+        <p style="margin-top:22px;font-size:1.125rem;color:var(--gold)">📍 Medellín · 🕐 7am - 9pm · 🛵 Domicilios</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- WhatsApp -->
+  <a class="whatsapp-float" href="https://wa.me/573000000000?text=Hola%21%20Quiero%20hacer%20un%20pedido" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp">
+    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="#fff" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+
+  <footer>
+    <p>&copy; 2026 La Esquina de los Calle · Medellín · Hecho con ❤️</p>
+  </footer>
+
+  <script>
+    // Small enhancement: focus outline for keyboard users
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Tab') document.documentElement.classList.add('show-focus');
+    });
+  </script>
+</body>
+</html>

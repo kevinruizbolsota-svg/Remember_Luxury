@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --gold: #e8c86a;
+  --gold: #e8c66a;
   --gd: #b89a40;
   --gl: #f5e0a0;
   --text: #f0ead8;
@@ -28,12 +28,11 @@ body {
   background: var(--bg-deep);
 }
 
-/* ===== FONDO NOCTURNO CON MONTAÑAS ===== */
 .bg-layer {
   position: fixed; inset: 0; z-index: 0;
   background:
     linear-gradient(180deg,
-      rgba(5,10,24,0.25) 0%,
+      rgba(5,10,24,0.25) 0%},
       rgba(5,10,24,0.6) 45%,
       rgba(5,10,24,0.88) 100%),
     url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop');
@@ -42,13 +41,11 @@ body {
   background-attachment: fixed;
 }
 
-/* ===== CANVAS LUCIÉRNAGAS ===== */
 #fireflies { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
 
-/* ===== NAV ===== */
 nav {
   position: fixed; top: 0; left: 0; right: 0; height: 58px; z-index: 900;
-  display: flex; align-items: center; padding: 0 28px;
+  display: flex; align-items: center; padding: 0 28px; gap: 12px;
   background: rgba(5, 10, 24, 0.85);
   border-bottom: 1px solid var(--glass-border);
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
@@ -73,14 +70,69 @@ nav {
 .nl.on { color: var(--gold); text-shadow: 0 0 10px rgba(232,200,106,0.4); }
 @media(max-width:760px) { .nav-links { display: none; } }
 
-/* ===== CONTENIDO ===== */
+/* ── NAV ACTIONS (derecha) -- */
+.nav-actions {
+  display: flex; align-items: center; gap: 8px; margin-left: 12px;
+  flex-shrink: 0;
+}
+
+/* Botón Exportar Contexto */
+.btn-export {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 20px;
+  background: rgba(232,200,106,0.08);
+  border: 1px solid rgba(232,200,106,0.25);
+  color: var(--gold); font-family: 'Cinzel', serif;
+  font-size: .48rem; letter-spacing: .1em; text-transform: uppercase;
+  cursor: pointer; transition: all .25s;
+  white-space: nowrap;
+}
+.btn-export:hover {
+  background: rgba(232,200,106,0.16);
+  border-color: rgba(232,200,106,0.5);
+  box-shadow: 0 0 14px rgba(232,200,106,0.2);
+  transform: translateY(-1px);
+}
+.btn-export.loading {
+  opacity: 0.6; cursor: wait;
+  animation: pulse-btn 0.8s infinite;
+}
+@keyframes pulse-btn { 0%u,100%{opacity:0.6} 50%{opacity:1} }
+
+/* Círculo de perfil */
+.nav-profile {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gd));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif; font-weight: 900; font-size: .85rem;
+  color: #050a18; cursor: pointer; flex-shrink: 0;
+  box-shadow: 0 0 12px rgba(232,200,106,0.3);
+  transition: all .25s;
+}
+.nav-profile:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(232,200,106,0.5);
+}
+
+/* Toast notificación */
+.toast {
+  position: fixed; bottom: 28px; left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(5,10,24,.96);
+  border: 1px solid rgba(232,200,106,0.3);
+  color: var(--gold); font-family: 'Cinzel', serif;
+  font-size: .56rem; letter-spacing: .1em;
+  padding: 12px 26px; border-radius: 12px; z-index: 9999;
+  transition: transform .35s; max-width: 90vw; text-align: center;
+}
+.toast.on { transform: translateX(-50%) translateY(0); }
+
 .wrap {
   position: relative; z-index: 2;
   max-width: 1200px; margin: 0 auto;
   padding: 90px 24px 60px;
 }
 
-/* ===== HERO / BIENVENIDA ===== */
 .hero {
   text-align: center; margin-bottom: 50px;
   padding: 40px 20px;
@@ -111,7 +163,6 @@ nav {
   letter-spacing: .14em; color: rgba(232,200,106,0.7);
 }
 
-/* ===== GRID DE PORTALES ===== */
 .portals-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -119,14 +170,9 @@ nav {
   gap: 24px;
   margin-bottom: 40px;
 }
-@media(max-width: 900px) {
-  .portals-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media(max-width: 580px) {
-  .portals-grid { grid-template-columns: 1fr; }
-}
+@media(max-width: 900px) { .portals-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width: 580px) { .portals-grid { grid-template-columns: 1fr; } }
 
-/* ===== PORTAL CARD ===== */
 .portal {
   position: relative; overflow: hidden;
   background: var(--glass);
@@ -146,7 +192,6 @@ nav {
   box-shadow: 0 25px 60px rgba(0,0,0,0.7), 0 0 30px var(--portal-glow, rgba(232,200,106,0.3));
   border-color: var(--portal-accent, var(--gold));
 }
-
 .portal-visual {
   position: relative; width: 100%; height: 140px; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
@@ -162,7 +207,6 @@ nav {
   opacity: 0.6;
 }
 .portal:hover .portal-visual::after { opacity: 1; }
-
 .portal-body {
   padding: 22px 24px 26px; display: flex; flex-direction: column; flex: 1;
 }
@@ -174,9 +218,7 @@ nav {
 .portal-desc {
   font-size: .95rem; color: var(--dim); line-height: 1.5; margin-bottom: 14px; flex: 1;
 }
-.portal-tags {
-  display: flex; gap: 8px; flex-wrap: wrap;
-}
+.portal-tags { display: flex; gap: 8px; flex-wrap: wrap; }
 .ptag {
   font-family: 'Cinzel', serif; font-size: .5rem; letter-spacing: .1em;
   padding: 4px 12px; border-radius: 20px; text-transform: uppercase;
@@ -188,15 +230,13 @@ nav {
   color: var(--portal-accent, var(--gold));
 }
 
-/* Portal accent colors */
-.portal.p-tienda { --portal-glow: rgba(80,220,170,0.3); --portal-accent: #50dcaa; --portal-bg: rgba(80,220,170,0.06); }
-.portal.p-agentes { --portal-glow: rgba(100,170,255,0.3); --portal-accent: #64aaff; --portal-bg: rgba(100,170,255,0.06); }
+.portal.p-tienda   { --portal-glow: rgba(80,220,170,0.3); --portal-accent: #50dcaa; --portal-bg: rgba(80,220,170,0.06); }
+.portal.p-agentes  { --portal-glow: rgba(100,170,255,0.3); --portal-accent: #64aaff; --portal-bg: rgba(100,170,255,0.06); }
 .portal.p-cronicas { --portal-glow: rgba(190,100,255,0.3); --portal-accent: #be64ff; --portal-bg: rgba(190,100,255,0.06); }
-.portal.p-forjadora { --portal-glow: rgba(255,100,100,0.3); --portal-accent: #ff6464; --portal-bg: rgba(255,100,100,0.06); }
-.portal.p-kabalion { --portal-glow: rgba(255,180,60,0.3); --portal-accent: #ffb43c; --portal-bg: rgba(255,180,60,0.06); }
-.portal.p-universo { --portal-glow: rgba(232,200,106,0.3); --portal-accent: #e8c86a; --portal-bg: rgba(232,200,106,0.06); }
+.portal.p-forjadora{ --portal-glow: rgba(255,100,100,0.3); --portal-accent: #ff6464; --portal-bg: rgba(255,100,100,0.06); }
+.portal.p-kabalion { --portal-glow: rgba(255,180,60,0.3);  --portal-accent: #ffb43c; --portal-bg: rgba(255,180,60,0.06); }
+.portal.p-universo { --portal-glow: rgba(232,200,106,0.3); --portal-accent: #e8c66a; --portal-bg: rgba(232,200,106,0.06); }
 
-/* ===== BANNER INFERIOR ===== */
 .bottom-banner {
   background: var(--glass);
   border: 1px solid var(--glass-border);
@@ -227,32 +267,36 @@ nav {
   </a>
   <div class="nav-links">
     <a href="hub.html" class="nl on">Portal</a>
-    <a href="articulos.html" class="nl">Catálogo</a>
-    <a href="tienda.html" class="nl">Tienda</a>
+    <a href="articulos.html" class="nl">🛍️ Tienda</a>
     <a href="nexus.html" class="nl">Agentes IA</a>
     <a href="carrito.html" class="nl">Carrito</a>
+  </div>
+  <!-- ACCIONES NAV: Export + Perfil -->
+  <div class="nav-actions">
+    <button class="btn-export" id="btnExport" onclick="exportarContexto()">
+      🧀 Exportar Contexto
+    </button>
+    <div class="nav-profile" id="navProfile" onclick="togglePerfil()">K</div>
   </div>
 </nav>
 
 <div class="wrap">
 
   <div class="hero">
-    <div class="hero-tag">DE LA VISIÓN A LA MANSIÓN</div>
-    <h1 class="hero-title">PORTAL DEL IMPERIO</h1>
+    <div class="hero-tag">DE LA VISIÓN ALA MANSION</div>
+    <h1 class="hero-title">PORTAL DEL IMPERIO </h1>
     <p class="hero-sub">Bienvenido al centro de control de tu universo. Elige un destino y comienza la conquista.</p>
     <div class="hero-user" id="user-greeting"></div>
   </div>
 
   <div class="portals-grid">
 
-    <!-- 1. GRAN CENTRO COMERCIAL -->
+    <!-- GRAN CENTRO COMEHCIAL — directo a articulos.html -->
     <a href="articulos.html" class="portal p-tienda">
-      <div class="portal-visual">
-        <div class="portal-icon">🛍️</div>
-      </div>
+      <div class="portal-visual"><div class="portal-icon">🛍️</div></div>
       <div class="portal-body">
-        <div class="portal-name">GRAN CENTRO COMERCIAL</div>
-        <p class="portal-desc">1,450 artículos de lujo y alta gama. Explora las 11 categorías del catálogo imperial.</p>
+        <div class="portal-name">GRAN CENTRO COMEHCIAL</div>
+        <p class="portal-desc">1,450 artículos de lujo y alta gama. Explora las categorías del catálogo imperial.</p>
         <div class="portal-tags">
           <span class="ptag">1,450 Artículos</span>
           <span class="ptag">Dropshipping</span>
@@ -261,30 +305,12 @@ nav {
       </div>
     </a>
 
-    <!-- 2. TIENDA & SERVICIOS -->
-    <a href="tienda.html" class="portal p-universo">
-      <div class="portal-visual">
-        <div class="portal-icon">👑</div>
-      </div>
-      <div class="portal-body">
-        <div class="portal-name">TIENDA & SERVICIOS</div>
-        <p class="portal-desc">Planes de automatización, agentes IA, servicios ORIONIX y acceso a la mesa de mando.</p>
-        <div class="portal-tags">
-          <span class="ptag">Planes IA</span>
-          <span class="ptag">Automatización</span>
-          <span class="ptag">AXEL</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- 3. LOS AGENTES DE LA LIGA (NEXUS) -->
+    <!-- AGENTES -->
     <a href="nexus.html" class="portal p-agentes">
-      <div class="portal-visual">
-        <div class="portal-icon">🤖</div>
-      </div>
+      <div class="portal-visual"><div class="portal-icon">🦁</div></div>
       <div class="portal-body">
         <div class="portal-name">LOS AGENTES DE LA LIGA</div>
-        <p class="portal-desc">Centro de comando multi-modelo. Habla con AXEL, Antigravity, Qwen y todos los agentes IA.</p>
+        <p class="portal-desc">Centro de comando multi-modelo. Habla con AXEL, Claude, ChatGPT y todos los agentes IA.</p>
         <div class="portal-tags">
           <span class="ptag">NEXUS</span>
           <span class="ptag">Multi-IA</span>
@@ -293,13 +319,11 @@ nav {
       </div>
     </a>
 
-    <!-- 4. LAS CRÓNICAS DEL CREADOR -->
+    <!-- CRÓNHICAS -->
     <a href="cronicas.html" class="portal p-cronicas">
-      <div class="portal-visual">
-        <div class="portal-icon">📜</div>
-      </div>
+      <div class="portal-visual"><div class="portal-icon">💜</div></div>
       <div class="portal-body">
-        <div class="portal-name">CRÓNICAS DEL CREADOR</div>
+        <div class="portal-name">CRONICASDEL C�ADOR</div>
         <p class="portal-desc">El diario vivo de Kevin Ruiz. Bitácora de la visión, los aprendizajes y la conquista.</p>
         <div class="portal-tags">
           <span class="ptag">Diario</span>
@@ -309,14 +333,12 @@ nav {
       </div>
     </a>
 
-    <!-- 5. LA FORJADORA DE DIAMANTES -->
+    <!-- FORJADORA -->
     <a href="forjadora.html" class="portal p-forjadora">
-      <div class="portal-visual">
-        <div class="portal-icon">⚔️</div>
-      </div>
+      <div class="portal-visual"><div class="portal-icon">▵▵</div></div>
       <div class="portal-body">
         <div class="portal-name">LA FORJADORA</div>
-        <p class="portal-desc">Espada y escudo del imperio. Herramientas de creación, hábitos y transformación élite.</p>
+        <p class="portal-desc">Espada y escudo del Imperio. Herramientas de creación, hábitos y transformación élite.</p>
         <div class="portal-tags">
           <span class="ptag">Hábitos</span>
           <span class="ptag">Disciplina</span>
@@ -325,18 +347,30 @@ nav {
       </div>
     </a>
 
-    <!-- 6. KABALION / SABIDURÍA HERMÉTICA -->
+    <!-- KABALION -->
     <a href="kabalion-2d.html" class="portal p-kabalion">
-      <div class="portal-visual">
-        <div class="portal-icon">🔮</div>
-      </div>
+      <div class="portal-visual"><div class="portal-icon">🔤</div></div>
       <div class="portal-body">
-        <div class="portal-name">EL KABALION</div>
-        <p class="portal-desc">Sabiduría hermética y las 7 leyes universales. Transmutación mental y conocimiento ancestral.</p>
+        <div class="portal-name">EL KABALION KRC</div>
+        <p class="portal-desc">Las 46 Sefirot de Kevin Ruiz. Árbol vivo del Imperio. Sistema KRC / Camaleón activo.</p>
         <div class="portal-tags">
-          <span class="ptag">7 Leyes</span>
-          <span class="ptag">Hermetismo</span>
+          <span class="ptag">46 Sefirot</span>
+          <span class="ptag">KRC</span>
           <span class="ptag">Alquimia</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- CENTRO DE MANDO -->
+    <a href="admin.html" class="portal p-universo">
+      <div class="portal-visual"><div class="portal-icon">♡️</div></div>
+      <div class="portal-body">
+        <div class="portal-name">CENTRO DE MANDO</div>
+        <p class="portal-desc">Panel de administración. Productos, pedidos, afiliados, misiones y control total del Imperio.</p>
+        <div class="portal-tags">
+          <span class="ptag">Admin</span>
+          <span class="ptag">Productor</span>
+          <span class="ptag">Misiones</span>
         </div>
       </div>
     </a>
@@ -344,61 +378,135 @@ nav {
   </div>
 
   <div class="bottom-banner">
-    <div class="bb-quote">"DE LA VISIÓN A LA MANSIÓN"</div>
-    <p class="bb-sub">El que construye su mundo, no busca permiso. — KRC</p>
+    <div class="bb-quote">"DE LA VISION ALA MANSION"</div>
+    <p class="bb-sub">El que construye su mundo, no busca permiso. &mdash; KRC</p>
   </div>
+
 
 </div>
 
+<div class="toast" id="toast"></div>
+
 <script>
-// Saludo personalizado
+// ── Sesión y perfil ─────────────────────────────────────────
 (function() {
   try {
-    const sesion = JSON.parse(localStorage.getItem('orionix_sesion') || '{}');
-    const nombre = sesion.nombre || 'Creador';
-    const el = document.getElementById('user-greeting');
+    var s = JSON.parse(localStorage.getItem('orionix_sesion') || '[]');
+    // Solve parse ambiguity {} vs []
+    if (Array.isArray(s)) s = {};
+    var nombre = s.nombre || 'Creador';
+    var avatar = s.avatar || nombre[0].toUpperCase();
+    var el = document.getElementById('user-greeting');
     if (el) el.textContent = '✦ Bienvenido, ' + nombre + ' ✦';
+    var p = document.getElementById('navProfile');
+    if (p) p.textContent = avatar;
   } catch(e) {}
 })();
 
-// Luciérnagas doradas
-(function() {
-  const canvas = document.getElementById('fireflies');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let W, H;
+function togglePerfil() {
+  if (confirm('«Cerrar sesión?')) {
+    localStorage.removeItem('orionix_sesion');
+    location.href = 'auth.html';
+  }
+}
 
+// ── EXPORTAR CONTEXTO ──────────────────────────────────
+// Sin preguntar nada — descarga automática al hacer clic
+function exportarContexto() {
+  var btn = document.getElementById('btnExport');
+  if (!btn || btn.classList.contains('loading')) return;
+
+  btn.classList.add('loading');
+  btn.textContent = '⏍ Generando…';
+
+  fetch('https://lkevinruizl.app.n8n.cloud/webhook/orionix-export-context', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ accion: 'exportar', timestamp: new Date().toISOString() })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    var fecha = new Date().toISOString().slice(0, 10);
+    a.href = url;
+    a.download = 'ORIONIX_CONTEXTO_COMPLETO_' + fecha + '.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(uRL {
+    showToast('✦ Contexto descargado — ' + (data.total_workflows || '') + ' workflows · ' + (data.total_productos || '') + ' productos');
+    btn.classList.remove('loading');
+    btn.textContent = '🧀 Exportar Contexto';
+  })
+  .catch(function() {
+    // Fallback: descarga el contexto base embebido (no depende de la red)
+    var ctxBase = {
+      meta: { version: '3.0', generado: new Date().toISOString(), instruccion: 'Eres el agente de ORIONIX. Lee este contexto y actúa sin preguntar nada.' },
+      jerarquia: { creador: 'Kevin Ruiz (El Creador)', voz: 'n8n Instance Agent', manos: 'Claude Code', ui: 'Qwen/Antigravity' },
+      webhooks_base: 'https://lkevintuizl.app.n8n.cloud/webhook/',
+      gateway: 'POST /kabalion-chat → { mensaje, agente, sesion }',
+      mesa: 'POST /kabalion-mesa → { mision, prioridad, tipo, origen }',
+      repo: 'kevinruizbolsota-svg/Remember_Luxury / branch: main / ciudadela/',
+      url_base: 'https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/',
+      nota: 'Contexto offline — conectar a /orionix-export-context para versión completa'
+    };
+    var blob = new Blob([JSON.stringify(ctxBase, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'ORIONIX_CONTEXTO_BASE_' + new Date().toISOString().slice(0,10) + '.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('✦ Contexto base descargado (modo offline)');
+    btn.classList.remove('loading');
+    btn.textContent = '🧀 Exportar Contexto';
+  });
+}
+
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add('on');
+  setTimeout(function() { t.classList.remove('on'); }, 4000);
+}
+
+// ── Luciérnagas doradas ────────────────────────────
+(function() {
+  var canvas = document.getElementById('fireflies');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W, H;
   function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
   resize();
   window.addEventListener('resize', resize);
-
-  const flies = Array.from({ length: 55 }, () => ({
-    x: Math.random() * W,
-    y: Math.random() * H,
+  var flies = Array.from({ length: 55 }, function() { return {
+    x: Math.random() * W, y: Math.random() * H,
     r: Math.random() * 2 + 0.6,
     vx: (Math.random() - 0.5) * 0.5,
     vy: (Math.random() - 0.5) * 0.5,
     a: Math.random() * 0.6 + 0.3,
     da: (Math.random() - 0.5) * 0.012,
     g: Math.random() * 14 + 6
-  }));
-
+  }; });
   function draw() {
     ctx.clearRect(0, 0, W, H);
-    flies.forEach(f => {
+    flies.forEach(function(f) {
       f.x += f.vx; f.y += f.vy;
       if (f.x < 0) f.x = W; if (f.x > W) f.x = 0;
       if (f.y < 0) f.y = H; if (f.y > H) f.y = 0;
       f.a += f.da;
       if (f.a <= 0.15 || f.a >= 0.85) f.da *= -1;
-
       ctx.shadowBlur = f.g;
-      ctx.shadowColor = '#e8c86a';
+      ctx.shadowColor = '#e8c66a';
       ctx.beginPath();
       ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(232, 200, 106, ' + f.a + ')';
       ctx.fill();
-
       ctx.beginPath();
       ctx.arc(f.x, f.y, f.r * 0.35, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(255, 248, 210, ' + Math.min(f.a + 0.15, 1) + ')';

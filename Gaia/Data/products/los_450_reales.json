@@ -1,0 +1,3602 @@
+[
+  {
+    "id": 2,
+    "n": "Camiseta Cosmos ORIONIX",
+    "d": "Camiseta negra con logo ORIONIX dorado bordado. Algod├│n 100%.",
+    "p": 9.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/orionix1/400/400"
+  },
+  {
+    "id": 3,
+    "n": "Gorra AXEL Gold",
+    "d": "Gorra snapback negra con bordado AXEL en hilo dorado.",
+    "p": 24.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/orionix6/400/400"
+  },
+  {
+    "id": 4,
+    "n": "Camisa Cinzel Blanca",
+    "d": "Camisa slim fit blanca con detalles dorados en el cuello.",
+    "p": 34.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/orionix7/400/400"
+  },
+  {
+    "id": 5,
+    "n": "Sudadera Imperio Gold",
+    "d": "Sudadera premium con capucha, estampado Kabalion en oro.",
+    "p": 49.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/orionix2/400/400"
+  },
+  {
+    "id": 6,
+    "n": "Perfume Cosmos Noir",
+    "d": "Fragancia exclusiva de la colecci├│n ORIONIX. 50ml.",
+    "p": 89.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/orionix5/400/400"
+  },
+  {
+    "id": 7,
+    "n": "Zapatillas Cosmos Limited",
+    "d": "Zapatillas edici├│n limitada con suela dorada y logo ORIONIX.",
+    "p": 129.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/orionix9/400/400"
+  },
+  {
+    "id": 8,
+    "n": "Chaqueta Kabalion Limited",
+    "d": "Chaqueta de cuero vegano con ├írbol Kabalion grabado en la espalda.",
+    "p": 149.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/orionix3/400/400"
+  },
+  {
+    "id": 9,
+    "n": "Bolso P├║rpura Sombra",
+    "d": "Bolso de mano en cuero negro con interior p├║rpura y herrajes dorados.",
+    "p": 199.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/orionix8/400/400"
+  },
+  {
+    "id": 10,
+    "n": "Reloj Sefirot Edition",
+    "d": "Reloj autom├ítico con esfera negra y marcadores dorados, grabado Sefirot.",
+    "p": 299.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/orionix4/400/400"
+  },
+  {
+    "id": 11,
+    "n": "Set Lujo Kabalion",
+    "d": "Set exclusivo: reloj + perfume + pa├▒uelo de seda ORIONIX. Edici├│n numerada.",
+    "p": 599.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/orionix10/400/400"
+  },
+  {
+    "id": 12,
+    "n": "Calcetines ORIONIX Pack 3",
+    "d": "Pack de 3 calcetines negros con franja dorada y logo ORIONIX.",
+    "p": 9.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/orionix11/400/400"
+  },
+  {
+    "id": 13,
+    "n": "Pa├▒uelo Cosmos Silk",
+    "d": "Pa├▒uelo de microfibra negra con constelaciones doradas.",
+    "p": 12.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/orionix12/400/400"
+  },
+  {
+    "id": 14,
+    "n": "Taza Kabalion Gold",
+    "d": "Taza cer├ímica negra con ├írbol Kabalion en dorado. 350ml.",
+    "p": 14.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/orionix13/400/400"
+  },
+  {
+    "id": 15,
+    "n": "Llavero Sefirot",
+    "d": "Llavero met├ílico con s├¡mbolo de las Sefirot grabado en dorado.",
+    "p": 9.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/orionix14/400/400"
+  },
+  {
+    "id": 16,
+    "n": "Notebook ORIONIX A5",
+    "d": "Libreta tapa dura negra con logo dorado. 200 p├íginas rayadas.",
+    "p": 16.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/orionix15/400/400"
+  },
+  {
+    "id": 17,
+    "n": "Camiseta AXEL Kether",
+    "d": "Camiseta premium con mandala Kether bordado en hilo dorado. Algod├│n org├ínico.",
+    "p": 19.9,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/orionix16/400/400"
+  },
+  {
+    "id": 18,
+    "n": "Parche Cosmos Bordado",
+    "d": "Parche termoadhesivo con dise├▒o cosmos ORIONIX. 8cm x 8cm.",
+    "p": 9.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/orionix17/400/400"
+  },
+  {
+    "id": 19,
+    "n": "Cintur├│n Kabalion",
+    "d": "Cintur├│n de cuero PU negro con hebilla dorada grabada.",
+    "p": 28.75,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/orionix18/400/400"
+  },
+  {
+    "id": 20,
+    "n": "Cartera Slim ORIONIX",
+    "d": "Cartera minimalista en cuero negro con grabado Sefirot.",
+    "p": 38.5,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/orionix19/400/400"
+  },
+  {
+    "id": 21,
+    "n": "Bufanda Cosmos Premium",
+    "d": "Bufanda de lana merino negra con motivos dorados de constelaciones.",
+    "p": 45.9,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/orionix20/400/400"
+  },
+  {
+    "id": 22,
+    "n": "Polo Imperio Slim",
+    "d": "Polo slim fit negro con escudo ORIONIX bordado en el pecho.",
+    "p": 52,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/orionix21/400/400"
+  },
+  {
+    "id": 23,
+    "n": "Gafas Sol Kether",
+    "d": "Gafas de sol con montura negra mate y cristales dorados espejados.",
+    "p": 68.5,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/orionix22/400/400"
+  },
+  {
+    "id": 24,
+    "n": "Mochila Kabalion Urban",
+    "d": "Mochila 20L negra con ├írbol Kabalion en relieve dorado.",
+    "p": 78.5,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/orionix23/400/400"
+  },
+  {
+    "id": 25,
+    "n": "Anillo Tiferet Gold",
+    "d": "Anillo ba├▒ado en oro 18k con s├¡mbolo Tiferet. Acero inoxidable.",
+    "p": 135.9,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/orionix24/400/400"
+  },
+  {
+    "id": 26,
+    "n": "Pulsera Cosmos Titan",
+    "d": "Pulsera de titanio negra con incrustaciones doradas. Edici├│n limitada.",
+    "p": 189,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/orionix25/400/400"
+  },
+  {
+    "id": 27,
+    "n": "Chaqueta Blazer Imperio",
+    "d": "Blazer negro slim fit con forro dorado y botones Kabalion. Lana premium.",
+    "p": 248,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/orionix26/400/400"
+  },
+  {
+    "id": 28,
+    "n": "Malet├¡n Sefirot Executive",
+    "d": "Malet├¡n de cuero genuino negro con ├írbol Sefirot grabado.",
+    "p": 320,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/orionix27/400/400"
+  },
+  {
+    "id": 29,
+    "n": "Traje AXEL Completo",
+    "d": "Traje de dos piezas negro con detalles dorados. Corte italiano. Edici├│n AXEL.",
+    "p": 498,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/orionix28/400/400"
+  },
+  {
+    "id": 30,
+    "n": "Perfume Kether Absolut",
+    "d": "Perfume oud y s├índalo negro, 100ml. La fragancia definitiva de ORIONIX.",
+    "p": 245,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/orionix29/400/400"
+  },
+  {
+    "id": 31,
+    "n": "Collar ├ürbol de Vida",
+    "d": "Collar en oro 18k con colgante ├írbol de vida Kabalion. Cadena 50cm.",
+    "p": 380,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/orionix30/400/400"
+  },
+  {
+    "id": 32,
+    "n": "Camiseta B├ísica Algod├│n Blanca",
+    "d": "Camiseta unisex 100% algod├│n, corte recto, ideal para el d├¡a a d├¡a",
+    "p": 12.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/tshirtwhite/400/400"
+  },
+  {
+    "id": 33,
+    "n": "Pantal├│n Lino Holgado Verano Viral",
+    "d": "Pantal├│n holgado de lino natural, transpirable, +56M vendidos en TikTok 2025",
+    "p": 19.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/linenpants/400/400"
+  },
+  {
+    "id": 34,
+    "n": "Leggings Deportivos Push-Up",
+    "d": "Leggings de compresi├│n con efecto push-up, cintura alta",
+    "p": 14.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/leggings/400/400"
+  },
+  {
+    "id": 35,
+    "n": "Camiseta Logo Bordado TrendyBoutique",
+    "d": "Camiseta con logo bordado en relieve, tendencia viral",
+    "p": 15.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/embroidered/400/400"
+  },
+  {
+    "id": 36,
+    "n": "Pantal├│n Ancho Cord├│n Tie-Dye",
+    "d": "Pantal├│n palazzo con cord├│n ajustable, dise├▒o tie-dye",
+    "p": 17.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/tiedye/400/400"
+  },
+  {
+    "id": 37,
+    "n": "Top Crop Fruncido Tirantes",
+    "d": "Top corto fruncido con tirantes finos, perfecto para verano",
+    "p": 11.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/croptop/400/400"
+  },
+  {
+    "id": 38,
+    "n": "Calcetines Pack 5 Pares Algod├│n",
+    "d": "Pack 5 pares calcetines 100% algod├│n, colores surtidos",
+    "p": 9.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/socks/400/400"
+  },
+  {
+    "id": 39,
+    "n": "Gorro Beanie Lana Invierno",
+    "d": "Gorro tejido unisex de lana suave, disponible en 12 colores",
+    "p": 12.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/beanie/400/400"
+  },
+  {
+    "id": 40,
+    "n": "Cintur├│n Cuero Sint├®tico Negro",
+    "d": "Cintur├│n cl├ísico de cuero sint├®tico con hebilla met├ílica dorada",
+    "p": 13.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/beltblack/400/400"
+  },
+  {
+    "id": 41,
+    "n": "Bufanda Ligera Degradada",
+    "d": "Bufanda ligera efecto degradado, perfecta para entretiempo",
+    "p": 14.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/scarf/400/400"
+  },
+  {
+    "id": 42,
+    "n": "Camiseta Oversized Aesthetic Y2K",
+    "d": "Camiseta oversized estilo Y2K con print gr├ífico",
+    "p": 16.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/oversized/400/400"
+  },
+  {
+    "id": 43,
+    "n": "Shorts Ciclismo Compresi├│n",
+    "d": "Shorts de ciclismo con almohadilla gel y compresi├│n muscular",
+    "p": 13.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/cycling/400/400"
+  },
+  {
+    "id": 44,
+    "n": "Vestido Casual Floral Verano",
+    "d": "Vestido midi floral con tirantes, perfecto para playa o ciudad",
+    "p": 22.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/floraldress/400/400"
+  },
+  {
+    "id": 45,
+    "n": "Falda Mini Vaquera",
+    "d": "Mini falda vaquera de tiro alto con botones al frente",
+    "p": 19.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/denimskirt/400/400"
+  },
+  {
+    "id": 46,
+    "n": "Sudadera B├ísica Sin Capucha",
+    "d": "Sudadera crew neck de algod├│n grueso, interior afelpado",
+    "p": 24.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/sweatshirt/400/400"
+  },
+  {
+    "id": 47,
+    "n": "Pantal├│n Cargo Multi-bolsillos",
+    "d": "Pantal├│n cargo unisex con 6 bolsillos, estilo militar urban",
+    "p": 29.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/cargo/400/400"
+  },
+  {
+    "id": 48,
+    "n": "Camiseta Rayas Marineras",
+    "d": "Camiseta cl├ísica marinera de rayas horizontales azul y blanco",
+    "p": 14.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/stripes/400/400"
+  },
+  {
+    "id": 49,
+    "n": "Top Deportivo Sin Mangas",
+    "d": "Top deportivo de secado r├ípido, ideal para gym o yoga",
+    "p": 12.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/sporttop/400/400"
+  },
+  {
+    "id": 50,
+    "n": "Gorra Snapback Negra",
+    "d": "Gorra snapback plana unisex, talla ajustable, bordado lateral",
+    "p": 11.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/snapback/400/400"
+  },
+  {
+    "id": 51,
+    "n": "Aretes Perla Artificial Pack 3",
+    "d": "Set 3 pares de aretes con perla artificial",
+    "p": 9.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/pearlearrings/400/400"
+  },
+  {
+    "id": 52,
+    "n": "Collar Cadena Dorada Fina",
+    "d": "Collar cadena dorada fina tipo snake chain, longitud 45cm",
+    "p": 12.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/goldchain/400/400"
+  },
+  {
+    "id": 53,
+    "n": "Pulsera El├ística Piedras Naturales",
+    "d": "Pulsera el├ística con piedras semipreciosas, estilo boho",
+    "p": 9.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/stonebracelet/400/400"
+  },
+  {
+    "id": 54,
+    "n": "Anillo Ajustable Acero Inoxidable",
+    "d": "Anillo de apertura ajustable en acero quir├║rgico",
+    "p": 8.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/ring/400/400"
+  },
+  {
+    "id": 55,
+    "n": "Bolso Tela Canvas Peque├▒o",
+    "d": "Bolso tote peque├▒o de canvas reciclado con cremallera",
+    "p": 14.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/canvasbag/400/400"
+  },
+  {
+    "id": 56,
+    "n": "Mochila Plegable Impermeable",
+    "d": "Mochila ultraligera plegable en su bolsillo, resistente al agua",
+    "p": 19.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/foldablebackpack/400/400"
+  },
+  {
+    "id": 57,
+    "n": "Chanclas Plataforma Verano",
+    "d": "Chanclas con plataforma de corcho, tira de PU dorada",
+    "p": 16.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/platformflip/400/400"
+  },
+  {
+    "id": 58,
+    "n": "Zapatillas Lona Blancas B├ísicas",
+    "d": "Zapatillas de lona cl├ísicas blancas unisex, suela de goma",
+    "p": 24.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/whitesneakers/400/400"
+  },
+  {
+    "id": 59,
+    "n": "Vestido Midi Crochet Playero",
+    "d": "Vestido midi de crochet tejido a mano, perfecto sobre el ba├▒ador",
+    "p": 27.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/crochetdress/400/400"
+  },
+  {
+    "id": 60,
+    "n": "Camisa Hawaiana Hombre",
+    "d": "Camisa manga corta hawaiana con print tropical, 100% viscosa",
+    "p": 18.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/hawaiian/400/400"
+  },
+  {
+    "id": 61,
+    "n": "Pantal├│n Pijama Franela Cuadros",
+    "d": "Pantal├│n de pijama de franela suave con el├ístico en cintura",
+    "p": 15.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/pajama/400/400"
+  },
+  {
+    "id": 62,
+    "n": "Bralette Encaje Floral",
+    "d": "Bralette de encaje floral sin aro, ajuste por espalda",
+    "p": 13.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/bralette/400/400"
+  },
+  {
+    "id": 63,
+    "n": "Medias Rejilla Negras Pack 3",
+    "d": "Pack 3 pares de medias de rejilla negras, tendencia retro",
+    "p": 9.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/fishnets/400/400"
+  },
+  {
+    "id": 64,
+    "n": "Diadema Sat├®n Lazos",
+    "d": "Diadema de sat├®n con lazo lateral, estilo coquette tendencia 2025",
+    "p": 8.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/hairband/400/400"
+  },
+  {
+    "id": 65,
+    "n": "Clips Cabello Mariposa Pack 10",
+    "d": "Set 10 clips mariposa de acetato en colores pastel",
+    "p": 7.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/hairclips/400/400"
+  },
+  {
+    "id": 66,
+    "n": "Cintur├│n Cadena Metal Dorado",
+    "d": "Cintur├│n de cadena met├ílica dorada para vestidos y faldas",
+    "p": 12.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/chainbelt/400/400"
+  },
+  {
+    "id": 67,
+    "n": "Paraguas Plegable Autom├ítico",
+    "d": "Paraguas plegable apertura autom├ítica, resistente al viento",
+    "p": 14.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/umbrella/400/400"
+  },
+  {
+    "id": 68,
+    "n": "Gafas Sol B├ísicas Ovaladas",
+    "d": "Gafas de sol ovaladas con protecci├│n UV400",
+    "p": 9.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/sunglasses/400/400"
+  },
+  {
+    "id": 69,
+    "n": "Funda Gafas Cuero Sint├®tico",
+    "d": "Funda para gafas de cuero sint├®tico con cierre magn├®tico",
+    "p": 7.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/glasscase/400/400"
+  },
+  {
+    "id": 70,
+    "n": "Guantes Cuero Sint├®tico Invierno",
+    "d": "Guantes de cuero sint├®tico con forro polar interior",
+    "p": 17.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/gloves/400/400"
+  },
+  {
+    "id": 71,
+    "n": "Calcetines T├®rmicos Pack 3",
+    "d": "Pack 3 pares calcetines t├®rmicos de lana merino, trekking",
+    "p": 10.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/thermalsocks/400/400"
+  },
+  {
+    "id": 72,
+    "n": "Sudadera Capucha B├ísica Negra",
+    "d": "Hoodie oversized unisex negro, forro polar suave interior",
+    "p": 28.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/hoodie/400/400"
+  },
+  {
+    "id": 73,
+    "n": "Shorts Vaqueros Deshilachados",
+    "d": "Shorts vaqueros tiro alto con borde deshilachado, estilo vintage",
+    "p": 21.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/denimshorts/400/400"
+  },
+  {
+    "id": 74,
+    "n": "Falda Plisada Mini Colores",
+    "d": "Mini falda plisada en colores pastel, cintura el├ística",
+    "p": 18.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/pleatedskirt/400/400"
+  },
+  {
+    "id": 75,
+    "n": "Camiseta Crop Universitaria",
+    "d": "Camiseta crop con logo universitario vintage, manga corta",
+    "p": 13.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/college/400/400"
+  },
+  {
+    "id": 76,
+    "n": "Pantal├│n Ch├índal Algod├│n",
+    "d": "Pantal├│n de ch├índal cl├ísico con bolsillos laterales y cord├│n",
+    "p": 22.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/sweatpants/400/400"
+  },
+  {
+    "id": 77,
+    "n": "Vestido Camisero Lino",
+    "d": "Vestido camisero de lino con botones y cintur├│n incluido",
+    "p": 25.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/shirrdress/400/400"
+  },
+  {
+    "id": 78,
+    "n": "Top Halter Nudo Frontal",
+    "d": "Top halter con nudo frontal ajustable, tela cr├¬pe el├ística",
+    "p": 12.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/haltertop/400/400"
+  },
+  {
+    "id": 79,
+    "n": "Minibolso Bandolera PU",
+    "d": "Mini bolso bandolera de PU con cadena dorada, varios colores",
+    "p": 16.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/minibag/400/400"
+  },
+  {
+    "id": 80,
+    "n": "Ri├▒onera Tela Estampada",
+    "d": "Ri├▒onera de tela con estampado geom├®trico, multi-bolsillos",
+    "p": 14.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/fanny/400/400"
+  },
+  {
+    "id": 81,
+    "n": "Sombrero Paja Playa",
+    "d": "Sombrero de paja natural ala ancha para playa y festivales",
+    "p": 12.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/strawhat/400/400"
+  },
+  {
+    "id": 82,
+    "n": "Leggings Vinilo Efecto Piel",
+    "d": "Leggings de vinilo efecto cuero PU, tiro alto, tendencia dark",
+    "p": 19.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/leatherleggings/400/400"
+  },
+  {
+    "id": 83,
+    "n": "Camiseta Print Galaxia Cosmos",
+    "d": "Camiseta con dise├▒o de galaxia y cosmos, print sublimaci├│n",
+    "p": 15.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/galaxy/400/400"
+  },
+  {
+    "id": 84,
+    "n": "Pantal├│n Palazzo Fluido",
+    "d": "Pantal├│n palazzo de tela fluida, vuelo amplio, cintura alta",
+    "p": 24.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/palazzo/400/400"
+  },
+  {
+    "id": 85,
+    "n": "Blusa Transparente Bordada",
+    "d": "Blusa semitransparente con bordado floral en mangas y cuello",
+    "p": 21.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/embroideredblouse/400/400"
+  },
+  {
+    "id": 86,
+    "n": "Chaqueta Vaquera B├ísica",
+    "d": "Chaqueta vaquera cl├ísica de denim azul lavado, corte recto",
+    "p": 34.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/denimjacket/400/400"
+  },
+  {
+    "id": 87,
+    "n": "Jersey Punto Grueso Oto├▒o",
+    "d": "Jersey de punto grueso texturizado, cuello redondo",
+    "p": 29.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/knitwear/400/400"
+  },
+  {
+    "id": 88,
+    "n": "Mono Overol Vaquero Mujer",
+    "d": "Mono peto vaquero completo con pernera ancha, tiro alto",
+    "p": 32.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/overalls/400/400"
+  },
+  {
+    "id": 89,
+    "n": "Camiseta Tie-Dye Colores Vivos",
+    "d": "Camiseta tie-dye hecha a mano, colores vivos ├║nicos",
+    "p": 13.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/tiedyeshirt/400/400"
+  },
+  {
+    "id": 90,
+    "n": "Set Bandanas Multiusos Pack 3",
+    "d": "Pack 3 bandanas de tela 100% algod├│n, m├║ltiples usos",
+    "p": 11.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/bandana/400/400"
+  },
+  {
+    "id": 91,
+    "n": "Camiseta Corta Manga Larga Acanalada",
+    "d": "Camiseta manga larga de tela acanalada el├ística, corte ce├▒ido",
+    "p": 16.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/ribbed/400/400"
+  },
+  {
+    "id": 92,
+    "n": "Zapatillas Sneaker Plataforma Chunky",
+    "d": "Zapatillas chunky con suela plataforma 5cm, cuero sint├®tico premium",
+    "p": 59.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/chunky/400/400"
+  },
+  {
+    "id": 93,
+    "n": "Bolso Bandolera Cuero PU Premium",
+    "d": "Bolso bandolera de PU de alta calidad con herrajes dorados",
+    "p": 49.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/puleatherbag/400/400"
+  },
+  {
+    "id": 94,
+    "n": "Smartwatch Fitness B├ísico",
+    "d": "Smartwatch con monitor card├¡aco, SpO2, GPS y 7 d├¡as bater├¡a",
+    "p": 44.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/smartwatch/400/400"
+  },
+  {
+    "id": 95,
+    "n": "Auriculares Bluetooth Inal├ímbricos",
+    "d": "Auriculares TWS con cancelaci├│n de ruido b├ísica, 30h bater├¡a",
+    "p": 39.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/earbuds/400/400"
+  },
+  {
+    "id": 96,
+    "n": "Gafas Sol Polarizadas Marco Acetato",
+    "d": "Gafas de sol polarizadas con montura de acetato italiano",
+    "p": 45.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/acetatesun/400/400"
+  },
+  {
+    "id": 97,
+    "n": "Perfume Mujer Eau de Toilette 50ml",
+    "d": "Fragancia femenina floral amaderada, duraci├│n 8h, caja de regalo",
+    "p": 42.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/perfume/400/400"
+  },
+  {
+    "id": 98,
+    "n": "Perfume Hombre Woody Intense 50ml",
+    "d": "Fragancia masculina amaderada intensa, notas de oud y cuero",
+    "p": 44.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/manperfume/400/400"
+  },
+  {
+    "id": 99,
+    "n": "Camisa Oxford Premium Hombre",
+    "d": "Camisa oxford de algod├│n peinado, cuello button-down, slim fit",
+    "p": 45.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/oxfordshirt/400/400"
+  },
+  {
+    "id": 100,
+    "n": "Pantal├│n Chino Slim Fit",
+    "d": "Pantal├│n chino de algod├│n el├ístico, slim fit, varios colores",
+    "p": 49.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/chinopants/400/400"
+  },
+  {
+    "id": 101,
+    "n": "Vestido Midi Sat├®n Elegante",
+    "d": "Vestido midi de sat├®n brillante con abertura lateral, evento",
+    "p": 65.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/satendress/400/400"
+  },
+  {
+    "id": 102,
+    "n": "Blazer Entallado Mujer",
+    "d": "Blazer entallado de crepe, hombros estructurados, forro interior",
+    "p": 79.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/womansblazer/400/400"
+  },
+  {
+    "id": 103,
+    "n": "Chaqueta Bomber Streetwear",
+    "d": "Chaqueta bomber de sat├®n reversible, estilo street premium",
+    "p": 69.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/bomberjacket/400/400"
+  },
+  {
+    "id": 104,
+    "n": "Abrigo Corto Lana Mezcla",
+    "d": "Abrigo corto de lana y poli├®ster, estructura elegante",
+    "p": 99.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/woolencoat/400/400"
+  },
+  {
+    "id": 105,
+    "n": "Bolso Shopper Tote Premium",
+    "d": "Bolso tote XL de PU premium con refuerzo base y bolsillo interior",
+    "p": 55.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/totebag/400/400"
+  },
+  {
+    "id": 106,
+    "n": "Mochila Urban Style Premium",
+    "d": "Mochila urbana de PU con conector USB, compartimento laptop 15",
+    "p": 65.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/urbanbackpack/400/400"
+  },
+  {
+    "id": 107,
+    "n": "Cartera Cuero Slim RFID",
+    "d": "Cartera minimalista de cuero genuino con protecci├│n RFID",
+    "p": 39.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/slimwallet/400/400"
+  },
+  {
+    "id": 108,
+    "n": "Cintur├│n Cuero Genuino Trenzado",
+    "d": "Cintur├│n de cuero genuino trenzado artesanal, hebilla met├ílica",
+    "p": 45.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/leatherbelt/400/400"
+  },
+  {
+    "id": 109,
+    "n": "Botines Tac├│n Bajo Mujer",
+    "d": "Botines de PU premium con tac├│n cuadrado bajo 4cm, cremallera",
+    "p": 79.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/ankleboot/400/400"
+  },
+  {
+    "id": 110,
+    "n": "Mocasines Cuero Sint├®tico Hombre",
+    "d": "Mocasines de cuero sint├®tico de alta calidad, suela antideslizante",
+    "p": 55.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/loafers/400/400"
+  },
+  {
+    "id": 111,
+    "n": "Deportivas Running Ligeras",
+    "d": "Zapatillas de running ultra ligeras, amortiguaci├│n EVA, transpirables",
+    "p": 89.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/running/400/400"
+  },
+  {
+    "id": 112,
+    "n": "Sandalias Tiras Verano Elegantes",
+    "d": "Sandalias de tiras entrelazadas con tac├│n de cuna, verano",
+    "p": 59.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/sandals/400/400"
+  },
+  {
+    "id": 113,
+    "n": "Collar Acero Inoxidable Colgante",
+    "d": "Collar con colgante de acero inoxidable IP dorado, minimalista",
+    "p": 38.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/steelnecklace/400/400"
+  },
+  {
+    "id": 114,
+    "n": "Pendientes Aro Grandes Dorados",
+    "d": "Pendientes aro XL de acero inoxidable con ba├▒o de oro 18K",
+    "p": 35.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/goldhoops/400/400"
+  },
+  {
+    "id": 115,
+    "n": "Pulsera Hombre Cuero Acero",
+    "d": "Pulsera de cuero genuino con cierre de acero inoxidable magn├®tico",
+    "p": 42.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/manbracelet/400/400"
+  },
+  {
+    "id": 116,
+    "n": "Anillo Solitario Plata 925",
+    "d": "Anillo solitario en plata 925 con circonita incolora 6mm",
+    "p": 45.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/silverring/400/400"
+  },
+  {
+    "id": 117,
+    "n": "Smartwatch Dama Pantalla Circular",
+    "d": "Smartwatch femenino pantalla circular AMOLED, correa intercambiable",
+    "p": 79.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/ladywatch/400/400"
+  },
+  {
+    "id": 118,
+    "n": "Pulsera Fitness Banda Inteligente",
+    "d": "Banda de actividad con monitor sue├▒o, pasos, calor├¡as y notificaciones",
+    "p": 49.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/fitband/400/400"
+  },
+  {
+    "id": 119,
+    "n": "Auriculares ANC Over-Ear",
+    "d": "Auriculares over-ear con cancelaci├│n activa de ruido y 40h bater├¡a",
+    "p": 89.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/headphones/400/400"
+  },
+  {
+    "id": 120,
+    "n": "Altavoz Bluetooth Port├ítil Impermeable",
+    "d": "Altavoz port├ítil IP67 con sonido 360┬░ y 24h bater├¡a",
+    "p": 55.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/speaker/400/400"
+  },
+  {
+    "id": 121,
+    "n": "Cargador Inal├ímbrico Premium 3 en 1",
+    "d": "Cargador inal├ímbrico para m├│vil, auriculares y smartwatch",
+    "p": 45.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/wirelesscharger/400/400"
+  },
+  {
+    "id": 122,
+    "n": "Power Bank 20000mAh Slim Design",
+    "d": "Bater├¡a externa ultraslim 20000mAh con carga r├ípida PD 65W",
+    "p": 39.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/powerbank/400/400"
+  },
+  {
+    "id": 123,
+    "n": "Funda Premium Cuero iPhone",
+    "d": "Funda de cuero genuino con tarjetero integrado para iPhone",
+    "p": 39.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/phonecase/400/400"
+  },
+  {
+    "id": 124,
+    "n": "Traje Ba├▒o Mujer Una Pieza Luxury",
+    "d": "Ba├▒ador de una pieza con recortes estrat├®gicos y detalle dorado",
+    "p": 45.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/swimsuit/400/400"
+  },
+  {
+    "id": 125,
+    "n": "Bikini Set Premium Estampado",
+    "d": "Bikini triangular con lazo ajustable, estampado tropical premium",
+    "p": 49.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/bikini/400/400"
+  },
+  {
+    "id": 126,
+    "n": "Pijama Seda Premium Estampado",
+    "d": "Conjunto pijama de seda artificial con estampado geom├®trico",
+    "p": 79.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/silkpajama/400/400"
+  },
+  {
+    "id": 127,
+    "n": "Masajeador Facial Rodillo Cuarzo",
+    "d": "Rodillo facial de cuarzo rosa natural para drenaje linf├ítico",
+    "p": 39.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/facialroller/400/400"
+  },
+  {
+    "id": 128,
+    "n": "S├®rum Vitamina C Premium 30ml",
+    "d": "S├®rum vitamina C 20% con ├ícido hialur├│nico y niacinamida",
+    "p": 42.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/serum/400/400"
+  },
+  {
+    "id": 129,
+    "n": "Set Pinceles Maquillaje 12 Piezas",
+    "d": "Set 12 pinceles de maquillaje profesionales pelo sint├®tico premium",
+    "p": 35.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/makeupbrush/400/400"
+  },
+  {
+    "id": 130,
+    "n": "Plancha Pelo Cer├ímica I├│n Negativa",
+    "d": "Plancha alisadora de cer├ímica turmalina con iones negativos 230┬░C",
+    "p": 49.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/hairstraightener/400/400"
+  },
+  {
+    "id": 131,
+    "n": "Rizador Autom├ítico Digital",
+    "d": "Rizador autom├ítico con pantalla digital y 5 temperaturas, cer├ímica",
+    "p": 59.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/curlerwand/400/400"
+  },
+  {
+    "id": 132,
+    "n": "Secador Pelo I├│nico Potente",
+    "d": "Secador i├│nico 2200W con difusor y concentrador incluidos",
+    "p": 55.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/hairdryer/400/400"
+  },
+  {
+    "id": 133,
+    "n": "Paleta Sombras 24 Tonos Luxury",
+    "d": "Paleta de sombras 24 tonos con mattes, shimmer y duochrome",
+    "p": 39.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/eyeshadow/400/400"
+  },
+  {
+    "id": 134,
+    "n": "Set Manicura Gel UV Completo",
+    "d": "Kit manicura gel con l├ímpara UV 48W, 12 esmaltes y accesorios",
+    "p": 45.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/manicure/400/400"
+  },
+  {
+    "id": 135,
+    "n": "Depiladora El├®ctrica Mujer IPL",
+    "d": "Depiladora de luz pulsada IPL para uso en casa, 500.000 pulsos",
+    "p": 89.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/ipl/400/400"
+  },
+  {
+    "id": 136,
+    "n": "Afeitadora Hombre El├®ctrica 5D",
+    "d": "Afeitadora el├®ctrica 5D flotante, impermeable IPX7, recargable",
+    "p": 79.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/shaver/400/400"
+  },
+  {
+    "id": 137,
+    "n": "B├íscula Inteligente WiFi Corporal",
+    "d": "B├íscula WiFi 13 m├®tricas corporales, app compatible Fitbit y Apple Health",
+    "p": 49.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/scale/400/400"
+  },
+  {
+    "id": 138,
+    "n": "Esterilla Yoga Premium Antideslizante",
+    "d": "Esterilla yoga 6mm NBR antideslizante extra ancha con correa",
+    "p": 45.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/yogamat/400/400"
+  },
+  {
+    "id": 139,
+    "n": "Set Pesas Mano Ajustables 10kg",
+    "d": "Par de mancuernas ajustables de 1 a 10kg, agarre ergon├│mico",
+    "p": 55.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/dumbbells/400/400"
+  },
+  {
+    "id": 140,
+    "n": "Cuerda Saltar Inteligente Contador",
+    "d": "Cuerda de saltar con contador digital de saltos y calor├¡as",
+    "p": 39.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/jumprop/400/400"
+  },
+  {
+    "id": 141,
+    "n": "Botella Agua Inteligente LED Temp",
+    "d": "Botella inteligente con pantalla LED de temperatura, acero inoxidable",
+    "p": 45.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/smartbottle/400/400"
+  },
+  {
+    "id": 142,
+    "n": "Termo Stanley R├®plica Premium 1L",
+    "d": "Termo de acero inoxidable doble pared 1L, mantiene 24h fr├¡o/calor",
+    "p": 49.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/stanleycup/400/400"
+  },
+  {
+    "id": 143,
+    "n": "Mochila Monta├▒a 40L Impermeable",
+    "d": "Mochila de monta├▒a 40L con funda de lluvia integrada y soporte lumbar",
+    "p": 89.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/hikingbag/400/400"
+  },
+  {
+    "id": 144,
+    "n": "Chaqueta Softshell Outdoor",
+    "d": "Chaqueta softshell cortavientos y resistente al agua, 3 capas",
+    "p": 99.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/softshell/400/400"
+  },
+  {
+    "id": 145,
+    "n": "Pantal├│n Trekking Convertible",
+    "d": "Pantal├│n de trekking convertible en bermuda, secado r├ípido",
+    "p": 69.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/trekking/400/400"
+  },
+  {
+    "id": 146,
+    "n": "Gafas Deportivas Espejo UV400",
+    "d": "Gafas deportivas con lente espejo intercambiable, UV400",
+    "p": 45.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/sportglasses/400/400"
+  },
+  {
+    "id": 147,
+    "n": "Banda Resistencia El├ística Pack 5",
+    "d": "Set 5 bandas de resistencia el├ística de l├ítex, diferentes intensidades",
+    "p": 35.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/resistancebands/400/400"
+  },
+  {
+    "id": 148,
+    "n": "Rodillo Foam Masaje Muscular",
+    "d": "Rodillo de espuma de alta densidad para masaje miofascial",
+    "p": 38.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/foamroller/400/400"
+  },
+  {
+    "id": 149,
+    "n": "Collar Running GPS Premium",
+    "d": "Collar GPS para perro, compatible con app, 20 d├¡as bater├¡a",
+    "p": 79.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/gpspet/400/400"
+  },
+  {
+    "id": 150,
+    "n": "Gafas Luz Azul Anti-fatiga",
+    "d": "Gafas filtro luz azul, montura TR90 flexible, unisex",
+    "p": 35.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/bluelight/400/400"
+  },
+  {
+    "id": 151,
+    "n": "Set Skincare Coreano 5 Pasos",
+    "d": "Rutina coreana completa: limpiador, t├│nico, esencia, s├®rum y crema",
+    "p": 55.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/kbeauty/400/400"
+  },
+  {
+    "id": 152,
+    "n": "Reloj Hombre Autom├ítico Acero 316L",
+    "d": "Reloj autom├ítico mec├ínico con caja de acero 316L, cristal zafiro",
+    "p": 299.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/automaticwatch/400/400"
+  },
+  {
+    "id": 153,
+    "n": "Reloj Mujer Dorado Cristales Luxury",
+    "d": "Reloj femenino con brazalete dorado y cristales Swarovski",
+    "p": 249.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/ladywatchluxury/400/400"
+  },
+  {
+    "id": 154,
+    "n": "Bolso Mujer Piel Genuina Mano",
+    "d": "Bolso de mano en piel genuina italiana, herrajes plateados",
+    "p": 349.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/genuineleatherbag/400/400"
+  },
+  {
+    "id": 155,
+    "n": "Malet├¡n Cuero Genuino Hombre",
+    "d": "Malet├¡n ejecutivo de cuero full grain, compartimento laptop 15",
+    "p": 299.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/briefcase/400/400"
+  },
+  {
+    "id": 156,
+    "n": "Perfume Niche Extrait Parfum 50ml",
+    "d": "Extrait de parfum niche, concentraci├│n 30%, duraci├│n 24h",
+    "p": 185.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/nicheperfume/400/400"
+  },
+  {
+    "id": 157,
+    "n": "Perfume Oud Luxury Collection 100ml",
+    "d": "Perfume oriental oud premium 100ml, mezcla de oud, rosa y vainilla",
+    "p": 199.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/oud/400/400"
+  },
+  {
+    "id": 158,
+    "n": "Traje Hombre Lana Italiana Slim",
+    "d": "Traje slim fit de lana italiana, forro completo, cuello solapa pico",
+    "p": 499.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/suit/400/400"
+  },
+  {
+    "id": 159,
+    "n": "Vestido Gala Seda Natural Premium",
+    "d": "Vestido de gala en seda natural, escote V, cola semilarga, bordado",
+    "p": 449.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/galadress/400/400"
+  },
+  {
+    "id": 160,
+    "n": "Abrigo Cachemira Premium Mujer",
+    "d": "Abrigo de cachemira 100% mongoliana, corte midi, botones n├ícar",
+    "p": 599.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/cashmere/400/400"
+  },
+  {
+    "id": 161,
+    "n": "Chaqueta Cuero Genuino Hombre",
+    "d": "Chaqueta de cuero de cordero genuino, forro de seda, estilo biker",
+    "p": 399.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/leatherjacket/400/400"
+  },
+  {
+    "id": 162,
+    "n": "Zapatillas Edici├│n Limitada Premium",
+    "d": "Zapatillas de cuero genuino edici├│n limitada, suela de goma premium",
+    "p": 249.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/luxurysneakers/400/400"
+  },
+  {
+    "id": 163,
+    "n": "Botines Cuero Genuino Mujer Luxury",
+    "d": "Botines de cuero genuino con tac├│n geom├®trico 7cm, punta cuadrada",
+    "p": 299.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/luxuryboots/400/400"
+  },
+  {
+    "id": 164,
+    "n": "Oxford Cuero Full Grain Hombre",
+    "d": "Zapato Oxford de cuero full grain, punta recta, suela cuero Goodyear",
+    "p": 349.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/oxfordshoes/400/400"
+  },
+  {
+    "id": 165,
+    "n": "Collar Plata 925 Diamante Lab",
+    "d": "Collar de plata 925 con diamante de laboratorio 0.5ct certificado GIA",
+    "p": 299.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/diamondnecklace/400/400"
+  },
+  {
+    "id": 166,
+    "n": "Pulsera Oro 18K Ba├▒o Premium",
+    "d": "Pulsera de acero con ba├▒o de oro 18K de 5 micras, ancho 10mm",
+    "p": 249.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/goldbracelet/400/400"
+  },
+  {
+    "id": 167,
+    "n": "Pendientes Perla Cultivada Natural",
+    "d": "Pendientes de perla cultivada Akoya 8mm con montura de oro blanco",
+    "p": 199.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/pearlsearrings/400/400"
+  },
+  {
+    "id": 168,
+    "n": "Anillo Compromiso Plata 925",
+    "d": "Anillo de compromiso plata 925 con piedra principal y pav├® lateral",
+    "p": 179.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/engagementring/400/400"
+  },
+  {
+    "id": 169,
+    "n": "Smartwatch Premium AMOLED GPS",
+    "d": "Smartwatch de alta gama con pantalla AMOLED, GPS integrado y ECG",
+    "p": 299.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/premiumsmartwatch/400/400"
+  },
+  {
+    "id": 170,
+    "n": "Auriculares ANC Premium Over-Ear",
+    "d": "Auriculares premium con cancelaci├│n activa de ruido de ├®lite",
+    "p": 249.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/premiumheadphones/400/400"
+  },
+  {
+    "id": 171,
+    "n": "Altavoz Premium Hi-Fi Bluetooth",
+    "d": "Altavoz port├ítil premium 60W con sonido Hi-Fi, IP67, 18h bater├¡a",
+    "p": 349.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/hifispeaker/400/400"
+  },
+  {
+    "id": 172,
+    "n": "Drone Fotogr├ífico 4K Plegable",
+    "d": "Drone plegable 4K con gimbal 3 ejes, 30min vuelo",
+    "p": 399.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/drone/400/400"
+  },
+  {
+    "id": 173,
+    "n": "C├ímara Acci├│n 4K 60FPS Estabilizaci├│n",
+    "d": "C├ímara de acci├│n 4K/60fps con estabilizaci├│n HorizonSteady 360┬░",
+    "p": 299.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/actioncam/400/400"
+  },
+  {
+    "id": 174,
+    "n": "Proyector 4K Port├ítil Ultra HD",
+    "d": "Proyector port├ítil 4K con 1000 l├║menes, altavoz integrado, HDMI",
+    "p": 549.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/projector/400/400"
+  },
+  {
+    "id": 175,
+    "n": "Set Skincare Luxury Premium 7 Piezas",
+    "d": "Rutina completa de lujo: limpiador, t├│nico, esencia, 2 s├®rums",
+    "p": 199.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/luxuryskincare/400/400"
+  },
+  {
+    "id": 176,
+    "n": "Crema Antiedad Retinol Luxury 50ml",
+    "d": "Crema antiedad con retinol 0.5%, p├®ptidos y ceramidas, cl├¡nica probada",
+    "p": 175.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/retinolcream/400/400"
+  },
+  {
+    "id": 177,
+    "n": "Set Fragancias Niche Colecci├│n 4",
+    "d": "Colecci├│n 4 miniatures de parfum niche, 15ml cada una, estuche premium",
+    "p": 299.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/fragranceset/400/400"
+  },
+  {
+    "id": 178,
+    "n": "Difusor Aromas Ultras├│nico Premium",
+    "d": "Difusor ultras├│nico 500ml con luz ambiental LED, silencioso 25dB",
+    "p": 189.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/diffuser/400/400"
+  },
+  {
+    "id": 179,
+    "n": "Set Whisky Cristal Tallado 6 Piezas",
+    "d": "Set 6 vasos de whisky en cristal tallado a mano, caja madera",
+    "p": 299.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/crystalwhisky/400/400"
+  },
+  {
+    "id": 180,
+    "n": "Vajilla Premium Porcelana 12 Servicios",
+    "d": "Vajilla completa de porcelana bone china, 12 servicios, 48 piezas",
+    "p": 349.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/chinaware/400/400"
+  },
+  {
+    "id": 181,
+    "n": "Set Cuchillos Damasco Cocina Pro",
+    "d": "Set 8 cuchillos de acero damasco VG10, mangos pakkawood, con taco",
+    "p": 259.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/damascusknives/400/400"
+  },
+  {
+    "id": 182,
+    "n": "Cafetera Espresso Autom├ítica",
+    "d": "Cafetera espresso autom├ítica con molinillo integrado y vaporizador",
+    "p": 499.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/espressomachine/400/400"
+  },
+  {
+    "id": 183,
+    "n": "Robot Cocina Multifunci├│n Premium",
+    "d": "Robot de cocina 1500W con 15 funciones, b├íscula integrada",
+    "p": 399.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/foodprocessor/400/400"
+  },
+  {
+    "id": 184,
+    "n": "Aspiradora Robot IA Auto-Vaciado",
+    "d": "Robot aspirador con IA, mapeo l├íser, base auto-vaciado 60 d├¡as",
+    "p": 449.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/robotvacuum/400/400"
+  },
+  {
+    "id": 185,
+    "n": "Purificador Aire HEPA 360┬░ Luxury",
+    "d": "Purificador de aire HEPA H13, cubre 60m┬▓, sensor PM2.5 en tiempo real",
+    "p": 299.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/airpurifier/400/400"
+  },
+  {
+    "id": 186,
+    "n": "Cuadro Canvas Arte Abstracto XXL",
+    "d": "Impresi├│n en canvas de arte abstracto 120x80cm, marco flotante",
+    "p": 199.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/abstractart/400/400"
+  },
+  {
+    "id": 187,
+    "n": "L├ímpara Pie Arco LED Luxury",
+    "d": "L├ímpara de pie de arco con LED regulable y temperatura de color ajustable",
+    "p": 249.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/arclamp/400/400"
+  },
+  {
+    "id": 188,
+    "n": "Espejo Inteligente LED Ba├▒o",
+    "d": "Espejo de ba├▒o con iluminaci├│n LED integrada, antivaho y bluetooth",
+    "p": 299.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/smartmirror/400/400"
+  },
+  {
+    "id": 189,
+    "n": "Set Ropa Cama Seda Natural 200H",
+    "d": "Juego de s├íbanas de seda natural 22 momme, 200 hilos",
+    "p": 399.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/silkbedding/400/400"
+  },
+  {
+    "id": 190,
+    "n": "Almohada Memory Foam Premium",
+    "d": "Almohada ergon├│mica de memory foam con cubierta de bamb├║ OEKO-TEX",
+    "p": 189.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/memorypillow/400/400"
+  },
+  {
+    "id": 191,
+    "n": "Bicicleta Est├ítica Premium App",
+    "d": "Bicicleta est├ítica de carbono 1200W con pantalla t├íctil 21 y clases live",
+    "p": 499.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/exercisebike/400/400"
+  },
+  {
+    "id": 192,
+    "n": "Pesas Ajustables Selectoras 32kg",
+    "d": "Par de mancuernas selectoras ajustables de 2.5 a 32kg por mancuerna",
+    "p": 399.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/selectordumbbells/400/400"
+  },
+  {
+    "id": 193,
+    "n": "Masajeador Percusi├│n Muscular Pro",
+    "d": "Pistola de masaje percutiva profesional 6 cabezales, silenciosa 40dB",
+    "p": 249.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/massagegun/400/400"
+  },
+  {
+    "id": 194,
+    "n": "Monitor Gaming 27 165Hz QHD",
+    "d": "Monitor gaming 27 165Hz resoluci├│n QHD, 1ms, panel IPS, HDR400",
+    "p": 549.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/gamingmonitor/400/400"
+  },
+  {
+    "id": 195,
+    "n": "Silla Gaming Premium Lumbar",
+    "d": "Silla gaming de cuero PU con soporte lumbar ajustable y reposacabezas",
+    "p": 399.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/gamingchair/400/400"
+  },
+  {
+    "id": 196,
+    "n": "Casco VR Standalone 4K",
+    "d": "Casco de realidad virtual standalone, pantalla 4K por ojo, 120Hz",
+    "p": 499.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/vrheadset/400/400"
+  },
+  {
+    "id": 197,
+    "n": "Patinete El├®ctrico Pro 500W 45km",
+    "d": "Patinete el├®ctrico motor 500W, autonom├¡a 45km, frenos hidr├íulicos",
+    "p": 599.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/electricscooter/400/400"
+  },
+  {
+    "id": 198,
+    "n": "Maleta Cabina Policarbonato Luxury",
+    "d": "Maleta de cabina de policarbonato ultraligera con TSA lock y USB",
+    "p": 249.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/luggagecase/400/400"
+  },
+  {
+    "id": 199,
+    "n": "Lentes Smart AR Premium",
+    "d": "Gafas inteligentes con realidad aumentada, altavoz y c├ímara integrada",
+    "p": 349.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/smartglasses/400/400"
+  },
+  {
+    "id": 200,
+    "n": "Bicicleta Urbana El├®ctrica Plegable",
+    "d": "Bicicleta el├®ctrica plegable 250W, bater├¡a 36V 10Ah, 50km autonom├¡a",
+    "p": 799.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/ebike/400/400"
+  },
+  {
+    "id": 201,
+    "n": "Altavoz HiFi Tower 2.1 200W",
+    "d": "Sistema de sonido tower 2.1, 200W RMS, Bluetooth 5.0, l├¡nea ├│ptica",
+    "p": 499.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/towerspeaker/400/400"
+  },
+  {
+    "id": 202,
+    "n": "Set Decoraci├│n Hogar Oro Luxury",
+    "d": "Set 7 piezas decoraci├│n sala de estar en acabado dorado premium",
+    "p": 299.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/golddecor/400/400"
+  },
+  {
+    "id": 203,
+    "n": "Tablet Profesional 12 256GB",
+    "d": "Tablet 12 con chip M2, 256GB, pantalla Liquid Retina, stylus incluido",
+    "p": 699.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/propad/400/400"
+  },
+  {
+    "id": 204,
+    "n": "Reloj Cron├│grafo Acero Premium",
+    "d": "Reloj cron├│grafo de cuarzo suizo, caja 42mm, correa acero milanesa",
+    "p": 319.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/chronograph/400/400"
+  },
+  {
+    "id": 205,
+    "n": "Collar Acero Titanio con Diamante",
+    "d": "Collar en titanio grado aeron├íutico con diamante de laboratorio 1ct",
+    "p": 459.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/titaniumcollar/400/400"
+  },
+  {
+    "id": 206,
+    "n": "Perfume Creator ORIONIX Signature",
+    "d": "Fragancia exclusiva ORIONIX, notas de ├ímbar, cosmos y madera de cedro",
+    "p": 229.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/orionixperfume/400/400"
+  },
+  {
+    "id": 207,
+    "n": "Traje de Ba├▒o Hombre Luxury Print",
+    "d": "Ba├▒ador hombre de microfibra premium con print exclusivo ORIONIX",
+    "p": 159.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/luxuryswim/400/400"
+  },
+  {
+    "id": 208,
+    "n": "Bolso Clutch Boda Seda Cristales",
+    "d": "Clutch nupcial de seda con cristales Swarovski, cadena dorada",
+    "p": 249.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/weddingclutch/400/400"
+  },
+  {
+    "id": 209,
+    "n": "Set Viaje Luxury Amenities 10 Piezas",
+    "d": "Kit de viaje de lujo: perfume, crema, s├®rum, champ├║, acondicionador premium",
+    "p": 175.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/travelkit/400/400"
+  },
+  {
+    "id": 210,
+    "n": "Auriculares Conducci├│n ├ôsea Titanio",
+    "d": "Auriculares de conducci├│n ├│sea en titanio, IP68, sport premium",
+    "p": 199.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/boneconduction/400/400"
+  },
+  {
+    "id": 211,
+    "n": "C├ímara Polaroid Edici├│n Luxury",
+    "d": "C├ímara instant├ínea Polaroid edici├│n especial con marco dorado",
+    "p": 169.99,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/polaroid/400/400"
+  },
+  {
+    "id": 212,
+    "n": "Funda M├│vil Silicona MagSafe",
+    "d": "Funda de silicona l├¡quida compatible MagSafe, tacto premium",
+    "p": 12.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/magcase/400/400"
+  },
+  {
+    "id": 213,
+    "n": "Soporte M├│vil Escritorio Ajustable",
+    "d": "Soporte de tel├®fono articulado para escritorio, cuello flexible 360┬░",
+    "p": 14.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/phonestand/400/400"
+  },
+  {
+    "id": 214,
+    "n": "Cable USB-C Trenzado 2m",
+    "d": "Cable USB-C trenzado nylon, carga r├ípida 65W, longitud 2 metros",
+    "p": 9.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/usbcable/400/400"
+  },
+  {
+    "id": 215,
+    "n": "Protector Pantalla Cristal Templado",
+    "d": "Protector de pantalla cristal templado 9H anti-ara├▒azos, pack 2",
+    "p": 7.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/screenprotect/400/400"
+  },
+  {
+    "id": 216,
+    "n": "Mascarilla Facial Hidratante Pack 10",
+    "d": "Pack 10 mascarillas faciales de hidrataci├│n con ├ícido hialur├│nico",
+    "p": 12.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/facemask/400/400"
+  },
+  {
+    "id": 217,
+    "n": "Parche Anti-Acn├® Hidrocaloide 36u",
+    "d": "Parches hidrocaloide anti espinillas, absorbentes 100%, 36 unidades",
+    "p": 9.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/acnepatch/400/400"
+  },
+  {
+    "id": 218,
+    "n": "Labial L├¡quido Matte Larga Duraci├│n",
+    "d": "Labial l├¡quido matte de larga duraci├│n, 12h sin retoques, 12 tonos",
+    "p": 10.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/lipstick/400/400"
+  },
+  {
+    "id": 219,
+    "n": "Pesta├▒a Postiza Natural Sin Cola",
+    "d": "Pesta├▒as postizas sin adhesivo, reposicionables, aspecto natural",
+    "p": 11.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/lashes/400/400"
+  },
+  {
+    "id": 220,
+    "n": "Esponja Maquillaje Gota Set 3",
+    "d": "Set 3 esponjas de maquillaje tipo beauty blender en tono nude",
+    "p": 8.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/beautyblender/400/400"
+  },
+  {
+    "id": 221,
+    "n": "Corrector Ojeras Efecto Lifting",
+    "d": "Corrector de ojeras con efecto lifting y cobertura total, 3 tonos",
+    "p": 9.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/concealer/400/400"
+  },
+  {
+    "id": 222,
+    "n": "Vela Arom├ítica Soja Natural 200g",
+    "d": "Vela de cera de soja natural con aceites esenciales de lavanda",
+    "p": 14.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/soywax/400/400"
+  },
+  {
+    "id": 223,
+    "n": "Posavasos Corcho Natural Pack 6",
+    "d": "Set 6 posavasos de corcho natural con dise├▒o geom├®trico",
+    "p": 9.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/coasters/400/400"
+  },
+  {
+    "id": 224,
+    "n": "Maceta Cer├ímica Minimalista",
+    "d": "Maceta de cer├ímica artesanal blanca con plato, dise├▒o minimalista",
+    "p": 13.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/flowerpot/400/400"
+  },
+  {
+    "id": 225,
+    "n": "Agenda Dot Grid A5 2026",
+    "d": "Agenda punto grid A5 para bullet journaling, tapa dura reciclada",
+    "p": 14.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/dotgrid/400/400"
+  },
+  {
+    "id": 226,
+    "n": "Resaltadores Pastel Pack 6 Colores",
+    "d": "Set 6 resaltadores de punta doble en colores pastel, tinta al agua",
+    "p": 8.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/highlighters/400/400"
+  },
+  {
+    "id": 227,
+    "n": "Juguete Interactivo Gato Rolling Ball",
+    "d": "Pelota interactiva autom├│vile para gatos, movimiento aleatorio, recargable",
+    "p": 19.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/catball/400/400"
+  },
+  {
+    "id": 228,
+    "n": "Comedero Autom├ítico Mascotas Wifi",
+    "d": "Comedero autom├ítico con c├ímara HD, control app, capacidad 6L",
+    "p": 29.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/petfeeder/400/400"
+  },
+  {
+    "id": 229,
+    "n": "Cama Mascota Redonda Peluche",
+    "d": "Cama redonda de peluche suave para perros y gatos hasta 15kg",
+    "p": 24.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/petbed/400/400"
+  },
+  {
+    "id": 230,
+    "n": "Correa Perro Antitir├│n Reflectante",
+    "d": "Correa antitir├│n con mango acolchado y tira reflectante de seguridad",
+    "p": 16.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/dogcollar/400/400"
+  },
+  {
+    "id": 231,
+    "n": "Transport├¡n Mochila Mascotas Aireado",
+    "d": "Transport├¡n-mochila para mascotas hasta 8kg, ventana burbuja extra├¡ble",
+    "p": 29.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/petcarrier/400/400"
+  },
+  {
+    "id": 232,
+    "n": "Fuente Agua Filtrada Gatos 2L",
+    "d": "Fuente de agua con filtro UV para gatos, 2L, silenciosa 25dB",
+    "p": 34.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/catfountain/400/400"
+  },
+  {
+    "id": 233,
+    "n": "GPS Tracker Mascotas Miniatura",
+    "d": "Rastreador GPS ultra peque├▒o para collar de mascotas, app en tiempo real",
+    "p": 49.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/petgps/400/400"
+  },
+  {
+    "id": 234,
+    "n": "C├ímara Seguridad IP 360┬░ WiFi",
+    "d": "C├ímara de vigilancia IP 4K WiFi con rotaci├│n 360┬░ y detecci├│n IA",
+    "p": 59.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/ipcam/400/400"
+  },
+  {
+    "id": 235,
+    "n": "Bombilla Inteligente RGBW WiFi E27",
+    "d": "Bombilla LED inteligente RGBW 12W E27, compatible Alexa y Google",
+    "p": 14.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/smartbulb/400/400"
+  },
+  {
+    "id": 236,
+    "n": "Tira LED Inteligente 5m RGBIC",
+    "d": "Tira LED 5m RGBIC sync m├║sica, segmentos independientes, WiFi",
+    "p": 39.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/ledstrip/400/400"
+  },
+  {
+    "id": 237,
+    "n": "Enchufe Inteligente WiFi Monitor",
+    "d": "Enchufe inteligente con medidor de consumo, programaci├│n y voz",
+    "p": 19.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/smartplug/400/400"
+  },
+  {
+    "id": 238,
+    "n": "Termostato Inteligente WiFi",
+    "d": "Termostato programable WiFi, pantalla t├íctil, compatible HVAC",
+    "p": 79.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/smartthermostat/400/400"
+  },
+  {
+    "id": 239,
+    "n": "Freidora Aire Digital 7L Familia",
+    "d": "Freidora de aire digital 7L con 12 programas, pantalla LCD, sin aceite",
+    "p": 89.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/airfryer/400/400"
+  },
+  {
+    "id": 240,
+    "n": "Batidora Vaso Potente 2000W",
+    "d": "Batidora de vaso profesional 2000W, vaso tritan 2L, 10 velocidades",
+    "p": 79.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/blender/400/400"
+  },
+  {
+    "id": 241,
+    "n": "M├íquina Hielo Dom├®stica 15kg/d├¡a",
+    "d": "M├íquina de hielo dom├®stica 15kg/d├¡a, ciclo 10 minutos",
+    "p": 99.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/icemachine/400/400"
+  },
+  {
+    "id": 242,
+    "n": "Termo Inteligente Pantalla LED 500ml",
+    "d": "Botella t├®rmica con pantalla LED temperatura, acero 316L, 500ml",
+    "p": 49.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/smartthermo/400/400"
+  },
+  {
+    "id": 243,
+    "n": "Impresora Foto Bolsillo Bluetooth",
+    "d": "Impresora foto port├ítil bluetooth papel ZINK sin tinta, 10x15cm",
+    "p": 59.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/photoprinter/400/400"
+  },
+  {
+    "id": 244,
+    "n": "Luz LED Escritorio Anti-fatiga",
+    "d": "L├ímpara LED escritorio regulable, temperatura color ajustable",
+    "p": 45.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/desklamp/400/400"
+  },
+  {
+    "id": 245,
+    "n": "Gamepad Bluetooth PC y M├│vil",
+    "d": "Mando inal├ímbrico Bluetooth para PC Android iOS, gatillos hall effect",
+    "p": 49.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/gamepad/400/400"
+  },
+  {
+    "id": 246,
+    "n": "Teclado Mec├ínico 65% Hot-Swap",
+    "d": "Teclado mec├ínico compacto 65% hot-swap, RGB, switches intercambiables",
+    "p": 89.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/meckeyboard/400/400"
+  },
+  {
+    "id": 247,
+    "n": "Rat├│n Gaming Inal├ímbrico 26000DPI",
+    "d": "Rat├│n gaming inal├ímbrico 26000 DPI, 100h bater├¡a, 7 botones",
+    "p": 69.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/gamingmouse/400/400"
+  },
+  {
+    "id": 248,
+    "n": "Webcam 4K Autofoco IA",
+    "d": "Webcam 4K con encuadre autom├ítico IA, micr├│fono estero integrado",
+    "p": 79.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/webcam/400/400"
+  },
+  {
+    "id": 249,
+    "n": "Micr├│fono Lavalier Inal├ímbrico USB-C",
+    "d": "Micr├│fono corbatero inal├ímbrico para m├│vil, 0 latencia, plug USB-C",
+    "p": 59.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/lavalier/400/400"
+  },
+  {
+    "id": 250,
+    "n": "Estabilizador Gimbal 3 Ejes M├│vil",
+    "d": "Gimbal 3 ejes para smartphone, seguimiento facial IA, plegable",
+    "p": 79.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/gimbal/400/400"
+  },
+  {
+    "id": 251,
+    "n": "Disco Duro SSD Externo 1TB",
+    "d": "SSD externo 1TB USB-C 3.2, transferencia 1000MB/s, ultra compacto",
+    "p": 99.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/ssd/400/400"
+  },
+  {
+    "id": 252,
+    "n": "Hub USB-C 12 en 1 Multifunci├│n",
+    "d": "Hub USB-C 12 puertos: 4K HDMI, USB-A, SD, PD 100W, RJ45 Gigabit",
+    "p": 49.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/usbhub/400/400"
+  },
+  {
+    "id": 253,
+    "n": "L├ímpara Luz D├¡a SAD Therapy 10000lux",
+    "d": "L├ímpara terapia SAD 10000 lux, temporizador, UV-free",
+    "p": 69.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/sadlamp/400/400"
+  },
+  {
+    "id": 254,
+    "n": "Humidificador Ultrasonico 4L Aromas",
+    "d": "Humidificador ultras├│nico 4L con difusor aromas y luz LED RGB",
+    "p": 45.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/humidifier/400/400"
+  },
+  {
+    "id": 255,
+    "n": "Colchoneta Camping Autoinflable",
+    "d": "Esterilla de camping autoinflable 5cm grosor, aislamiento t├®rmico R4",
+    "p": 49.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/sleepingpad/400/400"
+  },
+  {
+    "id": 256,
+    "n": "Saco Dormir 3 Estaciones -10┬░C",
+    "d": "Saco de dormir 3 estaciones hasta -10┬░C, ultraligero, compresible",
+    "p": 79.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/sleepingbag/400/400"
+  },
+  {
+    "id": 257,
+    "n": "Tienda Camping 2 Personas 3000mm",
+    "d": "Tienda de campa├▒a 2 personas impermeabilidad 3000mm, montaje r├ípido",
+    "p": 99.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/tent/400/400"
+  },
+  {
+    "id": 258,
+    "n": "Linterna Frontal LED 1000lm Recargable",
+    "d": "Linterna frontal LED 1000 l├║menes recargable USB-C, IP67",
+    "p": 39.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/headlamp/400/400"
+  },
+  {
+    "id": 259,
+    "n": "Navaja Multifunci├│n 12 Herramientas",
+    "d": "Multiherramienta tipo Leatherman acero inox con 12 funciones y funda",
+    "p": 45.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/multitool/400/400"
+  },
+  {
+    "id": 260,
+    "n": "Filtro Agua Grifo NSF Certificado",
+    "d": "Filtro de agua para grifo NSF-42 certificado, quita clor├│ y sedimentos",
+    "p": 35.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/waterfilter/400/400"
+  },
+  {
+    "id": 261,
+    "n": "Suplemento Prote├¡na Whey Optimum 2kg",
+    "d": "Whey protein Gold Standard 100% 2kg, 30 sabores, 24g prote├¡na/dosis",
+    "p": 79.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/whey/400/400"
+  },
+  {
+    "id": 262,
+    "n": "Pantal├│n Yoga Mujer Tiro Alto",
+    "d": "Leggings de yoga tiro alto con bolsillo lateral, tela 4-way stretch",
+    "p": 22.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/yogapants/400/400"
+  },
+  {
+    "id": 263,
+    "n": "Calcetines Tobilleros Deportivos Pack 10",
+    "d": "Pack 10 pares calcetines tobilleros deportivos acolchados",
+    "p": 14.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/anklesocks/400/400"
+  },
+  {
+    "id": 264,
+    "n": "Sudadera Oversize Bordado Floral",
+    "d": "Sudadera oversized con bordado floral en pecho, 100% algod├│n org├ínico",
+    "p": 29.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/floralhoodie/400/400"
+  },
+  {
+    "id": 265,
+    "n": "Top Deportivo Estampado Tie-Dye",
+    "d": "Sports bra con estampado tie-dye, espalda cruzada, alta sujeci├│n",
+    "p": 19.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/sportsbra/400/400"
+  },
+  {
+    "id": 266,
+    "n": "Chandal Conjunto 2 Piezas Mujer",
+    "d": "Conjunto de ch├índal 2 piezas sudadera + pantal├│n, colores pastel",
+    "p": 34.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/tracksuit/400/400"
+  },
+  {
+    "id": 267,
+    "n": "Ri├▒onera Impermeable Running",
+    "d": "Ri├▒onera impermeabilidad 100% para running y ciclismo",
+    "p": 13.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/runbag/400/400"
+  },
+  {
+    "id": 268,
+    "n": "Gorro Bucket Hat Aesthetic",
+    "d": "Bucket hat aesthetic unisex, ala ancha, varios colores pastel",
+    "p": 12.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/bucket/400/400"
+  },
+  {
+    "id": 269,
+    "n": "Chaqueta Cortavientos Ultraligera",
+    "d": "Cortavientos ultraligero plegable en bolsillo, impermeable DWR",
+    "p": 29.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/windbreaker/400/400"
+  },
+  {
+    "id": 270,
+    "n": "Camiseta Vintage Lavada Efecto",
+    "d": "Camiseta con efecto lavado vintage, print gr├ífico retro a├▒os 90",
+    "p": 18.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/vintage90/400/400"
+  },
+  {
+    "id": 271,
+    "n": "Bolsa Tela Estampada Ecol├│gica",
+    "d": "Bolsa tote de tela org├ínica con estampado art├¡stico, asa larga",
+    "p": 10.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/ecobag/400/400"
+  },
+  {
+    "id": 272,
+    "n": "Reloj An├ílogo Minimalista Cuarzo",
+    "d": "Reloj de cuarzo minimalista con correa de malla milanesa dorada",
+    "p": 39.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/minimalwatch/400/400"
+  },
+  {
+    "id": 273,
+    "n": "Set Regalo Hombre Cuidado Barba",
+    "d": "Kit completo cuidado barba: aceite, b├ílsamo, peine y tijera en estuche",
+    "p": 35.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/beardkit/400/400"
+  },
+  {
+    "id": 274,
+    "n": "Crema Solar SPF50+ Toque Seco 50ml",
+    "d": "Protector solar SPF50+ toque seco, sin alcohol, apto pieles grasas",
+    "p": 22.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/sunscreen/400/400"
+  },
+  {
+    "id": 275,
+    "n": "Almohada Viaje Memoria Foam Compacta",
+    "d": "Almohada de viaje memory foam compacta, funda lavable de microfibra",
+    "p": 24.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/travelpillow/400/400"
+  },
+  {
+    "id": 276,
+    "n": "Bolsa Organizaci├│n Maleta Pack 6",
+    "d": "Set 6 organizadores para maleta en diferentes tallas, nylon impermeable",
+    "p": 29.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/packcubes/400/400"
+  },
+  {
+    "id": 277,
+    "n": "Despertador Proyector Temperatura Lunar",
+    "d": "Despertador con proyector de luna, temperatura ambiente y cargador QI",
+    "p": 45.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/moonalarm/400/400"
+  },
+  {
+    "id": 278,
+    "n": "Sudoku Puzzle Madera 3D Complejo",
+    "d": "Puzzle 3D de madera tipo sudoku, 1000 piezas, nivel avanzado",
+    "p": 35.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/woodpuzzle/400/400"
+  },
+  {
+    "id": 279,
+    "n": "Set Pinturas Acr├¡licas 24 Colores Pro",
+    "d": "Set 24 pinturas acr├¡licas profesionales, pigmento extra-fino, 120ml",
+    "p": 39.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/acrylicpaint/400/400"
+  },
+  {
+    "id": 280,
+    "n": "Caja M├║sica Madera Giratoria Personalizable",
+    "d": "Caja de m├║sica de madera con mecanismo de manivela y bailarina giratoria",
+    "p": 45.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/musicbox/400/400"
+  },
+  {
+    "id": 281,
+    "n": "Libro Ilustrado Arte Digital 2025",
+    "d": "Libro de arte digital tendencias 2025, 300 p├íginas, papel couch├®",
+    "p": 49.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/artbook/400/400"
+  },
+  {
+    "id": 282,
+    "n": "Set Cocteler├¡a Profesional 10 Piezas",
+    "d": "Kit bartender profesional: shaker, jigger, colador, muddler y m├ís",
+    "p": 55.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/cocktailset/400/400"
+  },
+  {
+    "id": 283,
+    "n": "Cafetera Italiana Moka 6 Tazas Acero",
+    "d": "Cafetera italiana moka de acero inoxidable 6 tazas, inducci├│n",
+    "p": 35.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/moka/400/400"
+  },
+  {
+    "id": 284,
+    "n": "Artilugio Slime Kit Completo",
+    "d": "Kit completo para hacer slime, 20 colores y texturas, para ni├▒os",
+    "p": 19.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/slime/400/400"
+  },
+  {
+    "id": 285,
+    "n": "Fidget Cube Alivio Estr├®s",
+    "d": "Cubo antiestr├®s con 6 caras de actividad t├íctil, silencioso",
+    "p": 9.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/fidget/400/400"
+  },
+  {
+    "id": 286,
+    "n": "Pop It Jumbo Silicona Colores",
+    "d": "Pop It gigante XXL de silicona con 90 burbujas, colores ne├│n",
+    "p": 7.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/popit/400/400"
+  },
+  {
+    "id": 287,
+    "n": "Figura Coleccionable Anime Premium",
+    "d": "Figura de anime premium 20cm, detalle ultra realista, base incluida",
+    "p": 29.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/animefigure/400/400"
+  },
+  {
+    "id": 288,
+    "n": "Cartas Tarot Premium Ilustradas",
+    "d": "Baraja de tarot 78 cartas con ilustraci├│n art├¡stica, libro de gu├¡a",
+    "p": 22.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/tarot/400/400"
+  },
+  {
+    "id": 289,
+    "n": "Cristal Cuarzo Rosa Natural Bruto",
+    "d": "Piedra de cuarzo rosa natural bruto 200-300g, energ├¡a positiva",
+    "p": 14.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/rosequartz/400/400"
+  },
+  {
+    "id": 290,
+    "n": "Incienso Premium Set 12 Aromas",
+    "d": "Set 12 cajas incienso natural: s├índalo, lavanda, rosa, oud y m├ís",
+    "p": 16.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/incense/400/400"
+  },
+  {
+    "id": 291,
+    "n": "Tapiz Decoraci├│n Boho Pared Grande",
+    "d": "Tapiz de pared 150x130cm estilo boho con mandala, tela de algod├│n",
+    "p": 24.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/tapestry/400/400"
+  },
+  {
+    "id": 292,
+    "n": "Luces Hada Cobre 10m 100 LEDs",
+    "d": "Guirnalda luces hada 10m 100 LEDs cobre, bater├¡a + USB, warm white",
+    "p": 11.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/fairylights/400/400"
+  },
+  {
+    "id": 293,
+    "n": "C├ímara Instant├ínea Retro Pel├¡cula",
+    "d": "C├ímara instant├ínea retro con impresi├│n en pel├¡cula formato cr├®dito",
+    "p": 55.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/instaxmini/400/400"
+  },
+  {
+    "id": 294,
+    "n": "Mando Selfie Bluetooth Plegable",
+    "d": "Palo selfie con tr├¡pode y mando bluetooth, longitud 110cm",
+    "p": 19.99,
+    "c": "MODA",
+    "i": "https://picsum.photos/seed/selfiestick/400/400"
+  },
+  {
+    "id": 295,
+    "n": "Luz LED Aro Fotograf├¡a 18 RGB",
+    "d": "Ring light LED 18 RGB para fotograf├¡a y streaming con tr├¡pode 2m",
+    "p": 49.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/ringlight/400/400"
+  },
+  {
+    "id": 296,
+    "n": "Fondo Verde Streaming Pantalla Verde",
+    "d": "Tela chroma key verde 2x3m con soporte y pinzas para streaming",
+    "p": 35.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/greenscreen/400/400"
+  },
+  {
+    "id": 297,
+    "n": "Carta de Colores Pantone 2026 Edition",
+    "d": "Gu├¡a de colores Pantone actualizada 2026, referencia para dise├▒o",
+    "p": 39.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/pantone/400/400"
+  },
+  {
+    "id": 298,
+    "n": "Tablet Gr├ífica Dise├▒o Profesional",
+    "d": "Tableta gr├ífica A5 8192 niveles presi├│n, 4 teclas y rueda t├íctil",
+    "p": 79.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/graphictablet/400/400"
+  },
+  {
+    "id": 299,
+    "n": "Bol├¡grafo Stylus Digital iPad Pro",
+    "d": "L├ípiz stylus digital compatible iPad, inclinaci├│n, recarga magn├®tica",
+    "p": 49.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/stylus/400/400"
+  },
+  {
+    "id": 300,
+    "n": "Auriculares Gaming RGB Surround 7.1",
+    "d": "Auriculares gaming con sonido virtual 7.1, RGB y micr├│fono retr├íctil",
+    "p": 49.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/gamingheadset/400/400"
+  },
+  {
+    "id": 301,
+    "n": "Tarjeta Capturadora HDMI 4K USB-C",
+    "d": "Capturadora de v├¡deo HDMI 4K60fps USB-C, 0 latencia para streaming",
+    "p": 55.99,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/capture/400/400"
+  },
+  {
+    "id": 302,
+    "n": "Curso IA para Negocios ÔÇö AXEL Method",
+    "d": "Curso completo: automatiza tu negocio con IA. 40 lecciones + comunidad privada.",
+    "p": 97,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/courseai/400/400"
+  },
+  {
+    "id": 303,
+    "n": "Ebook: El ├ürbol Kabalion ÔÇö Gu├¡a Completa",
+    "d": "Gu├¡a digital de 200 p├íginas sobre el sistema KRC/Kabalion de 46 Sefirot.",
+    "p": 19.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/ebook1/400/400"
+  },
+  {
+    "id": 304,
+    "n": "Pack Templates Redes Sociales ORIONIX",
+    "d": "100 plantillas Canva para Instagram, TikTok y YouTube en paleta ORIONIX.",
+    "p": 27,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/templates1/400/400"
+  },
+  {
+    "id": 305,
+    "n": "Curso Dropshipping desde Cero",
+    "d": "De Ôé¼0 a tu primera venta en 30 d├¡as. AliExpress + Shopify + publicidad.",
+    "p": 47,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/coursedrop/400/400"
+  },
+  {
+    "id": 306,
+    "n": "Masterclass Marketing de Afiliados",
+    "d": "Aprende a generar comisiones pasivas 24/7. Estrategias 2025. 6 horas de contenido.",
+    "p": 67,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/courseaffiliate/400/400"
+  },
+  {
+    "id": 307,
+    "n": "Kit Emprendedor Digital ORIONIX",
+    "d": "Bundle: 5 ebooks + 200 templates + 3 minicursos + checklist de lanzamiento.",
+    "p": 149,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/kitdigital/400/400"
+  },
+  {
+    "id": 308,
+    "n": "Ebook: Finanzas Personales ÔÇö De la Aguja a la Mansi├│n",
+    "d": "Sistema financiero para salir de deudas y construir patrimonio.",
+    "p": 14.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/ebook2/400/400"
+  },
+  {
+    "id": 309,
+    "n": "Curso Crea tu Agencia de IA",
+    "d": "Construye una agencia de automatizaci├│n con n8n, Claude y ChatGPT.",
+    "p": 197,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/courseagency/400/400"
+  },
+  {
+    "id": 310,
+    "n": "Pack Wallpapers ORIONIX HD",
+    "d": "50 fondos de pantalla en 4K con dise├▒o Kabalion y cosmos. Para m├│vil y PC.",
+    "p": 9.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/wallpapers/400/400"
+  },
+  {
+    "id": 311,
+    "n": "Gu├¡a: Obsidian para tu Negocio",
+    "d": "Sistema de gesti├│n de conocimiento con Obsidian + IA. Flujos de trabajo, plantillas.",
+    "p": 24.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/obsidian/400/400"
+  },
+  {
+    "id": 312,
+    "n": "Minicurso TikTok Ventas Org├ínicas",
+    "d": "0 a 10k seguidores y tus primeras ventas en 21 d├¡as. Sin publicidad.",
+    "p": 37,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/tiktok/400/400"
+  },
+  {
+    "id": 313,
+    "n": "Template Pack Tienda Online Canva",
+    "d": "80 plantillas para tienda online: banners, fichas de producto, stories y anuncios.",
+    "p": 19.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/storetemplate/400/400"
+  },
+  {
+    "id": 314,
+    "n": "Ebook: Mentalidad Millonaria",
+    "d": "Los 21 principios mentales de los emprendedores exitosos. Basado en el sistema KRC.",
+    "p": 12.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/ebook3/400/400"
+  },
+  {
+    "id": 315,
+    "n": "Curso Email Marketing que Convierte",
+    "d": "Construye tu lista, escribe emails que venden y automatiza todo.",
+    "p": 57,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/emailmkt/400/400"
+  },
+  {
+    "id": 316,
+    "n": "Pack M├║sica Lo-Fi ORIONIX ÔÇö Royalty Free",
+    "d": "30 tracks lo-fi y ambient exclusivos para tus v├¡deos y streams. Sin copyright.",
+    "p": 29.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/lofi/400/400"
+  },
+  {
+    "id": 317,
+    "n": "Curso Criptomonedas para Principiantes",
+    "d": "Bitcoin, ETH, DeFi y NFTs explicados desde cero. Gesti├│n de riesgo y estrategias 2025.",
+    "p": 77,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/crypto/400/400"
+  },
+  {
+    "id": 318,
+    "n": "Gu├¡a SEO Local para Negocios F├¡sicos",
+    "d": "Aparecer primero en Google Maps y b├║squedas locales. Paso a paso sin tecnicismos.",
+    "p": 19.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/seo/400/400"
+  },
+  {
+    "id": 319,
+    "n": "Pack Fuentes Premium Cinzel & Garamond",
+    "d": "Licencia extendida para las fuentes oficiales ORIONIX. Uso comercial ilimitado.",
+    "p": 14.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/fonts/400/400"
+  },
+  {
+    "id": 320,
+    "n": "Masterclass Copywriting con IA",
+    "d": "Escribe textos de ventas que convierten usando ChatGPT y Claude como tu asistente.",
+    "p": 47,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/copywriting/400/400"
+  },
+  {
+    "id": 321,
+    "n": "Ebook: 365 Misiones para tu Agencia",
+    "d": "Un reto de acci├│n diaria para construir y escalar tu agencia digital en un a├▒o.",
+    "p": 9.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/365/400/400"
+  },
+  {
+    "id": 322,
+    "n": "L├ímpara LED Cosmos Ambiente",
+    "d": "L├ímpara de ambiente con proyecci├│n de galaxia y estrellado. RGB 16 colores.",
+    "p": 29.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/cosmoslamp/400/400"
+  },
+  {
+    "id": 323,
+    "n": "Set Velas Arom├íticas Lujo Pack 3",
+    "d": "3 velas de soja con esencias s├índalo, oud y vainilla negra. 60h de combusti├│n cada una.",
+    "p": 34.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/candles/400/400"
+  },
+  {
+    "id": 324,
+    "n": "Difusor Aromas Madera Bamb├║",
+    "d": "Difusor ultras├│nico de aceites esenciales en bamb├║ natural. 500ml, temporizador.",
+    "p": 39.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/diffuserbamboo/400/400"
+  },
+  {
+    "id": 325,
+    "n": "Cuadro Canvas ├ürbol de Vida",
+    "d": "Cuadro impreso en canvas 60x80cm del ├írbol de vida Kabalion. Marco negro incluido.",
+    "p": 49.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/treecvas/400/400"
+  },
+  {
+    "id": 326,
+    "n": "Alfombra Cosmos Redonda 120cm",
+    "d": "Alfombra circular con dise├▒o de galaxia y mandala en tonos negro y dorado.",
+    "p": 59.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/cosmorug/400/400"
+  },
+  {
+    "id": 327,
+    "n": "Set Cojines Decorativos Noche x2",
+    "d": "2 cojines de terciopelo negro con bordado dorado. 45x45cm. Relleno incluido.",
+    "p": 44.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/pillows/400/400"
+  },
+  {
+    "id": 328,
+    "n": "Reloj Pared Silencioso Minimalista",
+    "d": "Reloj de pared silencioso en metal negro con agujas doradas. Di├ímetro 35cm.",
+    "p": 29.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/wallclock/400/400"
+  },
+  {
+    "id": 329,
+    "n": "Planta Artificial Monstera XL",
+    "d": "Monstera artificial de 120cm de altura con maceta cer├ímica negra incluida.",
+    "p": 55.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/monstera/400/400"
+  },
+  {
+    "id": 330,
+    "n": "Cortinas Blackout Terciopelo Negro",
+    "d": "Par de cortinas opacas de terciopelo negro con ojales dorados. 140x260cm.",
+    "p": 69.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/curtains/400/400"
+  },
+  {
+    "id": 331,
+    "n": "Set Cristales y Minerales Decorativos",
+    "d": "Set 7 cristales naturales: amatista, cuarzo rosa, obsidiana y m├ís.",
+    "p": 24.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/crystals/400/400"
+  },
+  {
+    "id": 332,
+    "n": "Caja Madera Organizadora Joyas",
+    "d": "Caja de madera con espejo interior y 3 cajones forrados en terciopelo negro.",
+    "p": 39.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/jewelbox/400/400"
+  },
+  {
+    "id": 333,
+    "n": "Set Portavelas Geom├®tricos Pack 3",
+    "d": "3 portavelas en metal dorado: hex├ígono, tri├íngulo y rombo.",
+    "p": 27.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/candholder/400/400"
+  },
+  {
+    "id": 334,
+    "n": "Espejo Pared Marco Dorado Vintage",
+    "d": "Espejo decorativo redondo 60cm con marco met├ílico dorado estilo vintage.",
+    "p": 79.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/mirror/400/400"
+  },
+  {
+    "id": 335,
+    "n": "Set Vasos Cristal Negro Dorado x4",
+    "d": "4 vasos de cristal ├ímbar oscuro con borde dorado. Apto lavavajillas. 350ml.",
+    "p": 34.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/glasses/400/400"
+  },
+  {
+    "id": 336,
+    "n": "Bandeja Decorativa M├írmol Dorado",
+    "d": "Bandeja de resina efecto m├írmol negro con asas y bordes dorados. 40x30cm.",
+    "p": 44.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/marbletray/400/400"
+  },
+  {
+    "id": 337,
+    "n": "Incensario Madera Tallada",
+    "d": "Soporte incensario en madera tallada con dise├▒o de ├írbol de la vida.",
+    "p": 19.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/incenseholder/400/400"
+  },
+  {
+    "id": 338,
+    "n": "Manta Sof├í Terciopelo Premium",
+    "d": "Manta de sof├í en terciopelo negro suave 150x200cm. Ultra esponjosa.",
+    "p": 49.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/blanket/400/400"
+  },
+  {
+    "id": 339,
+    "n": "Set Servilletas Lino Negro x6",
+    "d": "6 servilletas de lino 100% color negro con monograma dorado bordado. 45x45cm.",
+    "p": 22.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/napkins/400/400"
+  },
+  {
+    "id": 340,
+    "n": "Macetas Cer├ímica Negra Set x3",
+    "d": "Set 3 macetas de cer├ímica negra mate en tama├▒os S/M/L con plato incluido.",
+    "p": 37.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/pots/400/400"
+  },
+  {
+    "id": 341,
+    "n": "Cuadro Abstracto Gold & Black",
+    "d": "Pintura acr├¡lica sobre lienzo 50x70cm con pan de oro. Pieza ├║nica artesanal.",
+    "p": 89.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/painting/400/400"
+  },
+  {
+    "id": 342,
+    "n": "Cargador Inal├ímbrico 15W Magn├®tico",
+    "d": "Cargador Qi magn├®tico compatible iPhone MagSafe y Android.",
+    "p": 29.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/charger/400/400"
+  },
+  {
+    "id": 343,
+    "n": "Auriculares Gaming RGB Wired",
+    "d": "Auriculares gaming con micr├│fono retr├íctil, sonido surround 7.1 y luces RGB.",
+    "p": 49.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/gaming/400/400"
+  },
+  {
+    "id": 344,
+    "n": "Mini Proyector Port├ítil 1080p",
+    "d": "Proyector pocket de 1080p con WiFi integrado. Bater├¡a 3h. Compatible Netflix.",
+    "p": 89.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/miniprojector/400/400"
+  },
+  {
+    "id": 345,
+    "n": "Power Bank 20000mAh Slim",
+    "d": "Bater├¡a externa ultradelgada de 20000mAh con carga r├ípida PD 65W y 3 puertos.",
+    "p": 44.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/slimpower/400/400"
+  },
+  {
+    "id": 346,
+    "n": "Teclado Mec├ínico Compacto 75%",
+    "d": "Teclado mec├ínico TKL con switches hot-swap, RGB y carcasa de aluminio.",
+    "p": 79.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/keyboard/400/400"
+  },
+  {
+    "id": 347,
+    "n": "Rat├│n Inal├ímbrico Silencioso",
+    "d": "Rat├│n ergon├│mico inal├ímbrico 2.4G con bater├¡a recargable. 4000 DPI.",
+    "p": 34.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/mouse/400/400"
+  },
+  {
+    "id": 348,
+    "n": "Soporte Port├ítil Ajustable",
+    "d": "Soporte para port├ítil de aluminio ajustable en altura y ├íngulo. Plegable.",
+    "p": 39.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/laptopstand/400/400"
+  },
+  {
+    "id": 349,
+    "n": "Webcam 1080p Streaming",
+    "d": "Webcam Full HD 1080p con micr├│fono integrado y correcci├│n autom├ítica de luz.",
+    "p": 54.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/webcam1080/400/400"
+  },
+  {
+    "id": 350,
+    "n": "Hub USB-C 7 en 1",
+    "d": "Hub multiport: HDMI 4K, USB-A x3, USB-C PD, SD/MicroSD. Aluminio slim.",
+    "p": 44.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/hub7/400/400"
+  },
+  {
+    "id": 351,
+    "n": "Micr├│fono Condensador USB Cardioide",
+    "d": "Micro USB plug-and-play para podcasts y streaming. 192kHz/24bit.",
+    "p": 69.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/microphone/400/400"
+  },
+  {
+    "id": 352,
+    "n": "Altavoz Bluetooth Impermeable IPX7",
+    "d": "Altavoz port├ítil 30W con sonido 360┬░, IPX7 waterproof y 24h bater├¡a.",
+    "p": 59.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/techspeaker/400/400"
+  },
+  {
+    "id": 353,
+    "n": "Smart Plug WiFi con Monitor Energ├¡a",
+    "d": "Enchufe inteligente WiFi con control de consumo, compatible Alexa y Google.",
+    "p": 19.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/techplug/400/400"
+  },
+  {
+    "id": 354,
+    "n": "Pantalla Port├ítil 15.6 1080p USB-C",
+    "d": "Monitor portable Full HD USB-C con funda protectora. Ideal para doble pantalla.",
+    "p": 149.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/portablemonitor/400/400"
+  },
+  {
+    "id": 355,
+    "n": "C├ímara de Seguridad WiFi Indoor 2K",
+    "d": "C├ímara interior 2K con detecci├│n de movimiento, visi├│n nocturna y audio bidireccional.",
+    "p": 34.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/securitycam/400/400"
+  },
+  {
+    "id": 356,
+    "n": "Adaptador HDMI a USB-C 4K",
+    "d": "Adaptador USB-C a HDMI 4K@60Hz plug-and-play. Compatible MacBook y Android.",
+    "p": 18.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/hdmiusbc/400/400"
+  },
+  {
+    "id": 357,
+    "n": "Termostato Inteligente WiFi OLED",
+    "d": "Termostato smart con pantalla t├íctil OLED, app m├│vil y ahorro de energ├¡a autom├ítico.",
+    "p": 79.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/thermostat/400/400"
+  },
+  {
+    "id": 358,
+    "n": "Luz LED Escritorio Anti-fatiga Pro",
+    "d": "L├ímpara escritorio LED regulable con puerto USB-C y sensor de luz ambiental.",
+    "p": 44.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/desklampro/400/400"
+  },
+  {
+    "id": 359,
+    "n": "Soporte Telef├│nico Coche Magn├®tico",
+    "d": "Soporte magn├®tico universal para coche, rejilla ventilaci├│n 360┬░.",
+    "p": 14.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/carphone/400/400"
+  },
+  {
+    "id": 360,
+    "n": "Luz Anular LED 10 Fotograf├¡a",
+    "d": "Ring light LED 26cm con 3 temperaturas de color y soporte tr├¡pode flexible.",
+    "p": 34.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/ringlighttech/400/400"
+  },
+  {
+    "id": 361,
+    "n": "Cable USB-C a USB-C 100W 2m Trenzado",
+    "d": "Cable trenzado nylon 100W PD, 40Gbps datos, 8K v├¡deo. Duraci├│n 25.000 dobleces.",
+    "p": 16.99,
+    "c": "TECH",
+    "i": "https://picsum.photos/seed/usbcable100/400/400"
+  },
+  {
+    "id": 362,
+    "n": "Set Resistencias El├ísticas Fitness Pack 5",
+    "d": "5 bandas el├ísticas de l├ítex de distintas resistencias.",
+    "p": 19.99,
+    "c": "BIENESTAR",
+    "i": "https://picsum.photos/seed/bands/400/400"
+  },
+  {
+    "id": 363,
+    "n": "Esterilla Yoga Antideslizante Premium",
+    "d": "Esterilla de yoga 6mm en TPE ecol├│gico, antideslizante, con correa de transporte.",
+    "p": 29.99,
+    "c": "BIENESTAR",
+    "i": "https://picsum.photos/seed/yogamatprem/400/400"
+  },
+  {
+    "id": 364,
+    "n": "Botellas de Agua Vidrio 1L con Funda",
+    "d": "Botella de vidrio borosilicato 1L con funda de silicona protectora.",
+    "p": 22.99,
+    "c": "BIENESTAR",
+    "i": "https://picsum.photos/seed/waterbottle/400/400"
+  },
+  {
+    "id": 365,
+    "n": "Aceite Esencial Lavanda Puro 30ml",
+    "d": "Aceite esencial de lavanda 100% puro. Aromaterapia, sue├▒o y relajaci├│n.",
+    "p": 12.99,
+    "c": "BIENESTAR",
+    "i": "https://picsum.photos/seed/lavender/400/400"
+  },
+  {
+    "id": 366,
+    "n": "Set Aceites Esenciales Top 6",
+    "d": "6 aceites esenciales: lavanda, menta, eucalipto, lim├│n, ├írbol de t├® y naranja.",
+    "p": 24.99,
+    "c": "BIENESTAR",
+    "i": "https://picsum.photos/seed/essentials/400/400"
+  },
+  {
+    "id": 367,
+    "n": "Masajeador Facial Rodillo Jade",
+    "d": "Rodillo de jade natural para masaje facial anti-aging. Incluye gua sha.",
+    "p": 17.99,
+    "c": "BIENESTAR",
+    "i": "https://picsum.photos/seed/jaderoller/400/400"
+  },
+  {
+    "id": 368,
+    "n": "Protector Solar SPF 50+ Invisible",
+    "d": "Fotoprotector facial SPF50+ de textura ultraligera invisible. Sin alcohol. 50ml.",
+    "p": 16.99,
+    "c": "BIENESTAR",
+    "i": "https://picsum.photos/seed/sunscreenb/400/400"
+  },
+  {
+    "id": 369,
+    "n": "Crema Hidratante Corporal Karit├® 500ml",
+    "d": "Crema corporal con manteca de karit├® y vitamina E. Absorci├│n r├ípida.",
+    "p": 19.99,
+    "c": "BIENESTAR",
+    "i": "https://picsum.photos/seed/bodycream/400/400"
+  },
+  {
+    "id": 370,
+    "n": "Collag├®n + Vitamina C Suplemento 60 caps",
+    "d": "Col├ígeno hidrolizado marino con vitamina C y ├ícido hialur├│nico. 60 c├ípsulas.",
+    "p": 27.99,
+    "c": "BIENESTAR",
+    "i": "https://picsum.photos/seed/collagen/400/400"
+  },
+  {
+    "id": 371,
+    "n": "Almohada Viscoel├ística Cervical",
+    "d": "Almohada cervical de espuma viscoel├ística con funda de bamb├║ hipoalerg├®nica.",
+    "p": 44.99,
+    "c": "BIENESTAR",
+    "i": "https://picsum.photos/seed/pillow/400/400"
+  },
+  {
+    "id": 372,
+    "n": "S├®rum Noche Vitamina C 30ml",
+    "d": "S├®rum de noche concentrado con vitamina C 20% y ├ícido hialur├│nico. 30ml.",
+    "p": 22.99,
+    "c": "BIENESTAR",
+    "i": "https://picsum.photos/seed/vitaminc/400/400"
+  },
+  {
+    "id": 373,
+    "n": "Termo Caf├® Acero Inoxidable 500ml",
+    "d": "Termo de acero inoxidable 500ml. Mant├®n fr├¡o 24h o calor 12h. Tapa antigoteo.",
+    "p": 24.99,
+    "c": "BIENESTAR",
+    "i": "https://picsum.photos/seed/thermos/400/400"
+  },
+  {
+    "id": 374,
+    "n": "Meditaci├│n Guiada Audio ÔÇö Pack 30 d├¡as",
+    "d": "30 sesiones de meditaci├│n guiada en audio MP3. Desde 5 hasta 40 minutos.",
+    "p": 19.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/meditation/400/400"
+  },
+  {
+    "id": 375,
+    "n": "Suplemento Magnesio Bisglicinato 400mg",
+    "d": "Magnesio bisglicinato de alta absorci├│n. 60 c├ípsulas. Para sue├▒o y recuperaci├│n muscular.",
+    "p": 21.99,
+    "c": "BIENESTAR",
+    "i": "https://picsum.photos/seed/magnesium/400/400"
+  },
+  {
+    "id": 376,
+    "n": "Set Mascarillas Tela Pack 3 Premium",
+    "d": "3 mascarillas de tela premium lavables con filtro de carb├│n activado.",
+    "p": 14.99,
+    "c": "BIENESTAR",
+    "i": "https://picsum.photos/seed/masks/400/400"
+  },
+  {
+    "id": 377,
+    "n": "Vestido Largo Seda Natural Kabalion",
+    "d": "Vestido largo de seda natural negra con bordado dorado del ├írbol Kabalion.",
+    "p": 489,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/silkdress/400/400"
+  },
+  {
+    "id": 378,
+    "n": "Cartera Cuero Cocodrilo Genuino",
+    "d": "Cartera en cuero de cocodrilo genuino. Compartimentos para tarjetas y billetes.",
+    "p": 420,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/croco/400/400"
+  },
+  {
+    "id": 379,
+    "n": "Anillo Sello Plata 925 + Ojo de Tigre",
+    "d": "Anillo sello de plata 925 con piedra ojo de tigre natural tallada. Edici├│n ├║nica.",
+    "p": 340,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/signetring/400/400"
+  },
+  {
+    "id": 380,
+    "n": "Paraguas Lord Kether ÔÇö Seda Italiana",
+    "d": "Paraguas de caballero con mango de bamb├║ lacado y tela de seda italiana negra.",
+    "p": 285,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/umbrellagold/400/400"
+  },
+  {
+    "id": 381,
+    "n": "Portadocumentos Cuero Full Grain",
+    "d": "Portadocumentos A4 en cuero full grain negro. 3 compartimentos. Cierre de lat├│n.",
+    "p": 310,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/portfolio/400/400"
+  },
+  {
+    "id": 382,
+    "n": "Camisa Ceremonia Lino & Seda Japonesa",
+    "d": "Camisa de mezcla lino-seda japonesa. Cuello mandarina. Edici├│n Kabalion numerada.",
+    "p": 395,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/ceremon/400/400"
+  },
+  {
+    "id": 383,
+    "n": "Set Escritura Pluma Plata + Estuche",
+    "d": "Pluma estilogr├ífica de plata 925 con grabado Sefirot y estuche de madera de ├®bano.",
+    "p": 520,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/fpen/400/400"
+  },
+  {
+    "id": 384,
+    "n": "Fular Seda Twill 100% 90x90cm",
+    "d": "Fular de seda twill premium 90x90cm con patr├│n exclusivo Kabalion.",
+    "p": 265,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/scarf90/400/400"
+  },
+  {
+    "id": 385,
+    "n": "Estuche Habanos Cuero Artesanal",
+    "d": "Estuche para 4 habanos en cuero negro genuino con interior de cedro.",
+    "p": 385,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/cigar/400/400"
+  },
+  {
+    "id": 386,
+    "n": "Cintur├│n Hombre Cocodrilo Genuino",
+    "d": "Cintur├│n de cocodrilo genuino con hebilla maciza en lat├│n dorado. Ancho 3.5cm.",
+    "p": 450,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/crocbelt/400/400"
+  },
+  {
+    "id": 387,
+    "n": "Pijama Seda Natural Hombre Negro",
+    "d": "Conjunto de pijama en seda natural 100% momme19. Camisa + pantal├│n.",
+    "p": 340,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/silkpj/400/400"
+  },
+  {
+    "id": 388,
+    "n": "Marco Fotos Plata Maciza 20x25",
+    "d": "Marco portafotos de plata maciza 925 con grabado floral.",
+    "p": 480,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/silverframe/400/400"
+  },
+  {
+    "id": 389,
+    "n": "Zapatos Oxford Horma Italiana",
+    "d": "Zapatos Oxford de horma italiana en cuero box calf negro. Suela de cuero Goodyear welt.",
+    "p": 590,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/oxford/400/400"
+  },
+  {
+    "id": 390,
+    "n": "Bufanda Cachemira 100% Pura",
+    "d": "Bufanda de cachemira pura grado A en negro. 200x70cm. Peso pluma, calor extremo.",
+    "p": 295,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/cashmerebuf/400/400"
+  },
+  {
+    "id": 391,
+    "n": "Botines Cuero Bison Labrado",
+    "d": "Botines de cuero de bis├│n labrado, punta cuadrada, suela Vibram. Edici├│n AXEL.",
+    "p": 680,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/boots/400/400"
+  },
+  {
+    "id": 392,
+    "n": "Cartera Art├¡stica Cuero Vegetal Toscano",
+    "d": "Cartera bifold en cuero vegetal toscano curtido al vegetal.",
+    "p": 280,
+    "c": "MI DINASTIA",
+    "i": "https://picsum.photos/seed/toscana/400/400"
+  },
+  {
+    "id": 393,
+    "n": "Camiseta Algod├│n Pima Premium ORIONIX",
+    "d": "Camiseta de algod├│n Pima 200gsm con logo ORIONIX bordado en hilo de oro real.",
+    "p": 85,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/pimatee/400/400"
+  },
+  {
+    "id": 394,
+    "n": "Sudadera French Terry Premium",
+    "d": "Sudadera french terry 380gsm sin capucha. Cuello redondo. Logo tonal bordado.",
+    "p": 110,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/frenchterry/400/400"
+  },
+  {
+    "id": 395,
+    "n": "Short Deportivo Pro 7 ORIONIX",
+    "d": "Short running 7 pulgadas con forro integrado, bolsillo trasero y tejido Quick-Dry.",
+    "p": 65,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/runshort/400/400"
+  },
+  {
+    "id": 396,
+    "n": "Chaqueta Tec Light Packable",
+    "d": "Chaqueta ultraligera impermeable DWR plegable en su bolsillo. 145g. Negro.",
+    "p": 139,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/packable/400/400"
+  },
+  {
+    "id": 397,
+    "n": "Pantal├│n Chino El├ístico 4-Way",
+    "d": "Pantal├│n chino slim con tela el├ística 4 direcciones. Aspecto formal, comodidad casual.",
+    "p": 95,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/chinoelastic/400/400"
+  },
+  {
+    "id": 398,
+    "n": "Polo Piqu├® 100% Algod├│n Egipcio",
+    "d": "Polo de piqu├® en algod├│n egipcio 180gsm. Cuello y pu├▒os de punto doble.",
+    "p": 79,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/poloshirt/400/400"
+  },
+  {
+    "id": 399,
+    "n": "Sneaker Low ORIONIX Edition Negro",
+    "d": "Zapatilla low-top en cuero napa negro con suela Eva extra-cushion. Edici├│n limitada.",
+    "p": 175,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/sneakerblack/400/400"
+  },
+  {
+    "id": 400,
+    "n": "Cintur├│n Cuero Full Grain Reversible",
+    "d": "Cintur├│n full grain reversible negro/caf├® con hebilla dorada desmontable. 3.5cm.",
+    "p": 89,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/reversiblebelt/400/400"
+  },
+  {
+    "id": 401,
+    "n": "Mochila Cuero Toro 30L Executive",
+    "d": "Mochila de cuero de toro full grain 30L con compartimento laptop 17.",
+    "p": 229,
+    "c": "FASHION STYLE",
+    "i": "https://picsum.photos/seed/leatherpack/400/400"
+  },
+  {
+    "id": 402,
+    "n": "Cuchillo Chef Japon├®s Santoku 18cm",
+    "d": "Cuchillo santoku de acero japon├®s VG-10, hoja 18cm, mango de pakka.",
+    "p": 89.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/santoku/400/400"
+  },
+  {
+    "id": 403,
+    "n": "Set Tablas Cortar Bamb├║ x3",
+    "d": "3 tablas de bamb├║ org├ínico S/M/L con ranura para jugos.",
+    "p": 34.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/cuttingboards/400/400"
+  },
+  {
+    "id": 404,
+    "n": "Cafetera de ├ëmbolo Francesa 1L",
+    "d": "Prensa francesa 1000ml en acero inoxidable doble pared. Aislamiento t├®rmico 4h.",
+    "p": 44.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/frenchpress/400/400"
+  },
+  {
+    "id": 405,
+    "n": "B├íscula Cocina Digital Precisi├│n 5kg",
+    "d": "B├íscula digital de cocina precisi├│n 1g hasta 5kg, pantalla LCD, tara autom├ítica.",
+    "p": 19.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/scalekitchen/400/400"
+  },
+  {
+    "id": 406,
+    "n": "Organizador Cajones Bamb├║ Modular",
+    "d": "Sistema modular de organizaci├│n de cajones en bamb├║. 9 compartimentos ajustables.",
+    "p": 27.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/drawer/400/400"
+  },
+  {
+    "id": 407,
+    "n": "Sart├®n Cer├ímica Antiadherente 28cm",
+    "d": "Sart├®n de cer├ímica antiadherente sin PFOA 28cm. Compatible inducci├│n y horno.",
+    "p": 39.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/pan/400/400"
+  },
+  {
+    "id": 408,
+    "n": "Molinillo Caf├® Manual Cer├ímica",
+    "d": "Molinillo de caf├® manual con muelas de cer├ímica. Regulaci├│n de grosor 5 niveles.",
+    "p": 29.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/grinder/400/400"
+  },
+  {
+    "id": 409,
+    "n": "Set Especieros Magn├®ticos Pared x12",
+    "d": "12 tarros de especias con base magn├®tica para pared o nevera.",
+    "p": 34.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/spices/400/400"
+  },
+  {
+    "id": 410,
+    "n": "Delantal Cuero Genuino Cocinero",
+    "d": "Delantal de cuero genuino estilo chef profesional. 3 bolsillos. Ajustable.",
+    "p": 59.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/apron/400/400"
+  },
+  {
+    "id": 411,
+    "n": "Hervidor Agua Temperatura Variable",
+    "d": "Hervidor el├®ctrico 1.7L con control de temperatura 60-100┬░C.",
+    "p": 54.99,
+    "c": "HOGAR",
+    "i": "https://picsum.photos/seed/kettle/400/400"
+  },
+  {
+    "id": 412,
+    "n": "Maleta Cabina R├¡gida Spinner 55cm",
+    "d": "Trolley de cabina 55x40x20cm, policarbonato r├¡gido, 4 ruedas 360, candado TSA.",
+    "p": 89.99,
+    "c": "VIAJE",
+    "i": "https://picsum.photos/seed/suitcase/400/400"
+  },
+  {
+    "id": 413,
+    "n": "Mochila Viaje Carry-On 40L",
+    "d": "Mochila 40L aprobada como cabina, compartimento laptop 17, cubierta impermeable.",
+    "p": 79.99,
+    "c": "VIAJE",
+    "i": "https://picsum.photos/seed/carryon/400/400"
+  },
+  {
+    "id": 414,
+    "n": "Organizadores Maleta Set x7",
+    "d": "7 cubos compresores de nylon para maleta: XL/L/M/S/XS + zapatos + higiene.",
+    "p": 29.99,
+    "c": "VIAJE",
+    "i": "https://picsum.photos/seed/packcubesv/400/400"
+  },
+  {
+    "id": 415,
+    "n": "Almohada Viaje Inflable Compacta",
+    "d": "Almohada inflable de viaje en memory foam, funda lavable. Pesa solo 80g.",
+    "p": 19.99,
+    "c": "VIAJE",
+    "i": "https://picsum.photos/seed/travelpillowv/400/400"
+  },
+  {
+    "id": 416,
+    "n": "Adaptador Universal Viaje 4-en-1",
+    "d": "Adaptador universal con 4 tipos de enchufe y 2 USB-A + 1 USB-C. 100-240V.",
+    "p": 24.99,
+    "c": "VIAJE",
+    "i": "https://picsum.photos/seed/traveladapter/400/400"
+  },
+  {
+    "id": 417,
+    "n": "Candado TSA Combinaci├│n 4 D├¡gitos",
+    "d": "Candado de combinaci├│n 4 d├¡gitos aprobado TSA. Cable de acero 70cm. Pack x2.",
+    "p": 16.99,
+    "c": "VIAJE",
+    "i": "https://picsum.photos/seed/padlock/400/400"
+  },
+  {
+    "id": 418,
+    "n": "Bolsa Higiene Viaje Colgante",
+    "d": "Neceser colgante impermeable con compartimentos transparentes para aeropuerto.",
+    "p": 22.99,
+    "c": "VIAJE",
+    "i": "https://picsum.photos/seed/toiletbag/400/400"
+  },
+  {
+    "id": 419,
+    "n": "Tarjeta eSIM Internacional 50 Pa├¡ses",
+    "d": "eSIM digital para viajes internacionales. 50 pa├¡ses, 10GB, 30 d├¡as.",
+    "p": 34.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/esim/400/400"
+  },
+  {
+    "id": 420,
+    "n": "Gu├¡a Viaje Barcelona PDF Premium",
+    "d": "Gu├¡a digital Barcelona 2025: 200 lugares, mapas interactivos, rutas y restaurantes.",
+    "p": 9.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/barcelona/400/400"
+  },
+  {
+    "id": 421,
+    "n": "App Itinerario Viaje ORIONIX Travel",
+    "d": "Acceso premium a la plataforma de planificaci├│n de viajes IA. 1 a├▒o.",
+    "p": 49.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/travelapp/400/400"
+  },
+  {
+    "id": 422,
+    "n": "Cama Ortop├®dica Perros Memoria Premium",
+    "d": "Cama ortop├®dica 90x70cm para perros grandes. Espuma viscoel├ística, funda lavable.",
+    "p": 59.99,
+    "c": "MASCOTAS",
+    "i": "https://picsum.photos/seed/dogbed/400/400"
+  },
+  {
+    "id": 423,
+    "n": "Arn├®s Perro No-Pull Reflectante",
+    "d": "Arn├®s anti-tirones con clips frontal y dorsal, reflectante. S/M/L/XL.",
+    "p": 29.99,
+    "c": "MASCOTAS",
+    "i": "https://picsum.photos/seed/harness/400/400"
+  },
+  {
+    "id": 424,
+    "n": "Fuente Agua Gatos Silenciosa 2.5L",
+    "d": "Fuente autom├ítica 2.5L con filtro de carb├│n activo. Silenciosa. Acero inoxidable.",
+    "p": 39.99,
+    "c": "MASCOTAS",
+    "i": "https://picsum.photos/seed/petfountain/400/400"
+  },
+  {
+    "id": 425,
+    "n": "Collar LED Recargable Perro USB",
+    "d": "Collar de seguridad LED para perros. Recargable USB, 5 modos luz, impermeable.",
+    "p": 19.99,
+    "c": "MASCOTAS",
+    "i": "https://picsum.photos/seed/dogcollarled/400/400"
+  },
+  {
+    "id": 426,
+    "n": "Transport├¡n Gatos Tela Expandible",
+    "d": "Transport├¡n de tela expandible para gatos hasta 8kg. Aprobado cabina avi├│n.",
+    "p": 44.99,
+    "c": "MASCOTAS",
+    "i": "https://picsum.photos/seed/carrier/400/400"
+  },
+  {
+    "id": 427,
+    "n": "Snacks Premios Perro Natural x200g",
+    "d": "Premios naturales deshidratados para perros. Sin aditivos. Pato y batata.",
+    "p": 14.99,
+    "c": "MASCOTAS",
+    "i": "https://picsum.photos/seed/treats/400/400"
+  },
+  {
+    "id": 428,
+    "n": "Juguete Interactivo Gatos Plumas",
+    "d": "Juguete con plumas naturales y cascabel. Palo extensible 60cm.",
+    "p": 12.99,
+    "c": "MASCOTAS",
+    "i": "https://picsum.photos/seed/cattoy/400/400"
+  },
+  {
+    "id": 429,
+    "n": "Manta Polar Mascotas 80x100cm",
+    "d": "Manta ultra-suave para mascotas en polar 300gsm. Lavable. Tono gris perla.",
+    "p": 19.99,
+    "c": "MASCOTAS",
+    "i": "https://picsum.photos/seed/petblanket/400/400"
+  },
+  {
+    "id": 430,
+    "n": "Corta├║├▒as Perros con Sensor Seguridad",
+    "d": "Corta├║├▒as profesional con sensor de corte seguro y lima integrada.",
+    "p": 17.99,
+    "c": "MASCOTAS",
+    "i": "https://picsum.photos/seed/petnail/400/400"
+  },
+  {
+    "id": 431,
+    "n": "Cepillo Mascotas Autolimpiante",
+    "d": "Cepillo deslanador con bot├│n de autolimpieza. Elimina subpelo y suciedad.",
+    "p": 24.99,
+    "c": "MASCOTAS",
+    "i": "https://picsum.photos/seed/petbrush/400/400"
+  },
+  {
+    "id": 432,
+    "n": "Formaci├│n Agentes IA ÔÇö Bootcamp 8 semanas",
+    "d": "Bootcamp intensivo: construye tu propia agencia de IA en 8 semanas.",
+    "p": 497,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/bootcamp/400/400"
+  },
+  {
+    "id": 433,
+    "n": "Curso n8n Automatizaci├│n Avanzada",
+    "d": "Domina n8n: workflows, integraciones, webhooks y agentes IA. 50 lecciones pr├ícticas.",
+    "p": 127,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/n8ncourse/400/400"
+  },
+  {
+    "id": 434,
+    "n": "Pack Logos ORIONIX Vectoriales",
+    "d": "12 variaciones del logo ORIONIX en SVG, PNG y PDF. Uso comercial.",
+    "p": 29.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/logos/400/400"
+  },
+  {
+    "id": 435,
+    "n": "Ebook: De Cero a Afiliado Pro",
+    "d": "Gu├¡a paso a paso: plataformas, nichos, SEO y email marketing para afiliados.",
+    "p": 17.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/affiliate/400/400"
+  },
+  {
+    "id": 436,
+    "n": "Plantilla Web Landing Page ORIONIX",
+    "d": "Landing page HTML/CSS de alta conversi├│n. Dise├▒o ORIONIX dorado.",
+    "p": 39.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/landing/400/400"
+  },
+  {
+    "id": 437,
+    "n": "Video Pack Intros YouTube 4K",
+    "d": "20 intros animadas para YouTube en 4K. Formato MP4 y After Effects.",
+    "p": 34.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/intro/400/400"
+  },
+  {
+    "id": 438,
+    "n": "Gu├¡a Completa Obsidian + Notion 2025",
+    "d": "Sistema de productividad dual con Obsidian y Notion. Plantillas, flujos y hacks.",
+    "p": 22.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/pkm/400/400"
+  },
+  {
+    "id": 439,
+    "n": "Curso Fotograf├¡a Producto para Tienda",
+    "d": "Aprende a fotografiar productos en casa con tu m├│vil. Iluminaci├│n, edici├│n y escenas.",
+    "p": 57,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/prodphoto/400/400"
+  },
+  {
+    "id": 440,
+    "n": "Calendario Editorial 2025 Canva",
+    "d": "Calendario de contenidos 2025 en Canva: 365 ideas de post, stories y reels.",
+    "p": 14.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/calendar/400/400"
+  },
+  {
+    "id": 441,
+    "n": "Audiolibro: El Arte de la Guerra Digital",
+    "d": "Audiolibro 4h con estrategias de Sun Tzu aplicadas al mundo digital.",
+    "p": 16.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/audiobook/400/400"
+  },
+  {
+    "id": 442,
+    "n": "Pack SFX Sonidos Ambiente Cosmos 60",
+    "d": "60 efectos de sonido y ambientes cosmos royalty-free. WAV 48kHz.",
+    "p": 19.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/sfx/400/400"
+  },
+  {
+    "id": 443,
+    "n": "Curso Canva Dise├▒o Gr├ífico Desde Cero",
+    "d": "Aprende Canva de cero a nivel profesional. Logos, merch, videos y presentaciones.",
+    "p": 37,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/canvacourse/400/400"
+  },
+  {
+    "id": 444,
+    "n": "Set 5 Fondos Video Chromakey Virtuales",
+    "d": "5 escenarios virtuales para streaming en 4K: oficina luxury, cosmos, ciudad y m├ís.",
+    "p": 24.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/chromakey/400/400"
+  },
+  {
+    "id": 445,
+    "n": "Preset Lightroom ORIONIX Dark & Gold",
+    "d": "Pack de 25 presets Lightroom para fotograf├¡a dark & gold luxury.",
+    "p": 19.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/presets/400/400"
+  },
+  {
+    "id": 446,
+    "n": "Stickers Pack Digital ORIONIX 200",
+    "d": "200 stickers digitales PNG para Telegram, Discord y redes.",
+    "p": 9.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/stickers/400/400"
+  },
+  {
+    "id": 447,
+    "n": "Gu├¡a Monetizar tu Conocimiento Online",
+    "d": "De experto a educador digital: cursos, comunidades y consultor├¡as.",
+    "p": 27.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/knowledge/400/400"
+  },
+  {
+    "id": 448,
+    "n": "Contrato Freelance Template Legal Pack",
+    "d": "Pack de 10 contratos legales para freelancers: servicios, confidencialidad, NDAs.",
+    "p": 34.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/contracts/400/400"
+  },
+  {
+    "id": 449,
+    "n": "Ebook: 100 Prompts ChatGPT para Negocios",
+    "d": "100 prompts optimizados para marketing, ventas, atenci├│n al cliente y estrategia.",
+    "p": 12.99,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/prompts/400/400"
+  },
+  {
+    "id": 450,
+    "n": "Masterclass Personal Branding 2025",
+    "d": "Construye tu marca personal irresistible. LinkedIn, Instagram, YouTube.",
+    "p": 77,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/branding/400/400"
+  },
+  {
+    "id": 451,
+    "n": "Kit Inicio ORIONIX Emprendedor ÔÇö TODO",
+    "d": "El bundle definitivo: 10 cursos + 500 templates + 30 ebooks + soporte 6 meses.",
+    "p": 997,
+    "c": "DIGITAL",
+    "i": "https://picsum.photos/seed/megakit/400/400"
+  }
+]

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIONIX · Santuario Natural (1,450 Artículos)</title>
-<link rel="icon" href="../favicon.svg?v=final1450" type="image/svg+xml">
+<title>ORIONIX · Noche Mágica & Artículos (1,450)</title>
+<link rel="icon" href="../favicon.svg?v=night1450" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -14,11 +14,11 @@
   --gd: #b89a40;
   --gl: #f5e0a0;
   --text: #f8fafc;
-  --dim: rgba(240,245,250,0.7);
-  --emerald: #10b981;
-  --glass-card: rgba(10, 20, 15, 0.75);
-  --glass-border: rgba(232, 200, 106, 0.25);
-  --glass-panel: rgba(8, 18, 14, 0.85);
+  --dim: rgba(240,245,250,0.65);
+  --blue-glow: rgba(56, 189, 248, 0.25);
+  --glass-card: rgba(8, 14, 26, 0.75);
+  --glass-border: rgba(232, 200, 106, 0.22);
+  --glass-panel: rgba(6, 11, 22, 0.85);
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
@@ -26,27 +26,35 @@ body {
   color:var(--text);
   min-height:100vh;
   overflow-x:hidden;
-  background-color: #06100c;
+  background-color: #030712;
   background-image: 
-    radial-gradient(circle at 50% 0%, rgba(16,185,129,0.15), transparent 60%),
-    linear-gradient(rgba(4,10,7,0.75), rgba(4,10,7,0.85)),
-    url('https://images.unsplash.com/photo-1511497584788-87676104235f?q=80&w=2000&auto=format&fit=crop');
+    radial-gradient(ellipse at 50% 0%, rgba(30, 58, 138, 0.35), transparent 70%),
+    radial-gradient(circle at 10% 40%, rgba(15, 23, 42, 0.8), transparent 50%),
+    linear-gradient(rgba(2, 6, 23, 0.82), rgba(2, 6, 23, 0.92)),
+    url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2000&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
   background-attachment: fixed !important;
+}
+
+#fireflies-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* NAV SUPERIOR GLASS */
 nav {
   position:fixed; top:0; left:0; right:0; height:60px; z-index:900;
   display:flex; align-items:center; padding:0 28px;
-  background:rgba(6,14,10,0.88); border-bottom:1px solid var(--glass-border);
+  background:rgba(3, 7, 18, 0.88); border-bottom:1px solid var(--glass-border);
   backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
 }
 .brand {
   font-family:'Cinzel',serif; font-size:1.15rem; font-weight:900; letter-spacing:.25em;
   color:var(--gold); text-decoration:none; margin-right:28px;
-  text-shadow: 0 0 20px rgba(232,200,106,0.5);
+  text-shadow: 0 0 20px rgba(232,200,106,0.6);
 }
 .nav-links { display:flex; gap:6px; flex:1; }
 .nl {
@@ -59,12 +67,12 @@ nav {
   display:flex; align-items:center; gap:8px; padding:9px 18px; border:1px solid var(--glass-border);
   border-radius:10px; font-family:'Cinzel',serif; font-size:.68rem; letter-spacing:.12em;
   color:var(--gold); text-decoration:none; transition:all .25s; cursor:pointer;
-  background:rgba(16,185,129,0.1); position:relative; backdrop-filter:blur(10px);
+  background:rgba(30, 58, 138, 0.25); position:relative; backdrop-filter:blur(10px);
 }
-.cart-btn:hover { background:rgba(232,200,106,0.2); box-shadow:0 0 20px rgba(232,200,106,0.3); border-color:var(--gold); }
+.cart-btn:hover { background:rgba(232,200,106,0.2); box-shadow:0 0 20px rgba(232,200,106,0.35); border-color:var(--gold); }
 .cart-count {
   position:absolute; top:-6px; right:-6px; width:22px; height:22px; border-radius:50%;
-  background:var(--gold); color:#06100c; font-size:.7rem; font-weight:900;
+  background:var(--gold); color:#030712; font-size:.7rem; font-weight:900;
   display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif;
 }
 
@@ -74,19 +82,19 @@ nav {
 
 /* HEADER */
 .ph { text-align:center; margin-bottom:36px; }
-.ph-tag { font-family:'Cinzel',serif; font-size:.7rem; letter-spacing:.35em; color:var(--emerald); text-transform:uppercase; margin-bottom:10px; text-shadow:0 0 15px var(--emerald); font-weight:700; }
-.ph-title { font-family:'Cinzel',serif; font-size:clamp(2rem,4.5vw,3.2rem); font-weight:900; color:var(--text); letter-spacing:.18em; margin-bottom:10px; text-shadow:0 0 35px rgba(232,200,106,0.4); }
+.ph-tag { font-family:'Cinzel',serif; font-size:.7rem; letter-spacing:.35em; color:var(--gold); text-transform:uppercase; margin-bottom:10px; text-shadow:0 0 15px rgba(232,200,106,0.5); font-weight:700; }
+.ph-title { font-family:'Cinzel',serif; font-size:clamp(2rem,4.5vw,3.2rem); font-weight:900; color:var(--text); letter-spacing:.18em; margin-bottom:10px; text-shadow:0 0 35px rgba(232,200,106,0.5); }
 .ph-sub { font-size:1.2rem; color:var(--dim); font-style:italic; }
 
 /* CONTROLES Y FILTROS GLASSMORPHISM */
 .filters-wrap {
   background:var(--glass-panel); border:1px solid var(--glass-border); border-radius:20px;
-  padding:22px 24px; margin-bottom:36px; box-shadow:0 20px 50px rgba(0,0,0,0.6);
+  padding:22px 24px; margin-bottom:36px; box-shadow:0 20px 50px rgba(0,0,0,0.7);
   backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
 }
 .top-bar { display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin-bottom:18px; }
 .search-box {
-  display:flex; align-items:center; gap:12px; background:rgba(0,0,0,0.35);
+  display:flex; align-items:center; gap:12px; background:rgba(2, 6, 23, 0.5);
   border:1px solid var(--glass-border); border-radius:12px; padding:12px 18px; flex:1; min-width:280px;
 }
 .search-box input {
@@ -95,23 +103,23 @@ nav {
 }
 .search-box input::placeholder { color:var(--dim); }
 .sort-select {
-  padding:12px 18px; background:rgba(0,0,0,0.45); border:1px solid var(--glass-border);
+  padding:12px 18px; background:rgba(2, 6, 23, 0.6); border:1px solid var(--glass-border);
   border-radius:12px; color:var(--text); font-family:'Cinzel',serif; font-size:.72rem;
   letter-spacing:.1em; outline:none; cursor:pointer;
 }
-.sort-select option { background:#0a1812; color:#eee; }
+.sort-select option { background:#030712; color:#eee; }
 
 .cats-bar { display:flex; gap:10px; overflow-x:auto; padding-bottom:8px; scrollbar-width:none; }
 .cats-bar::-webkit-scrollbar { display:none; }
 .ftab {
   font-family:'Cinzel',serif; font-size:.65rem; letter-spacing:.14em; padding:10px 20px;
   border-radius:30px; border:1px solid var(--glass-border); color:var(--dim); cursor:pointer;
-  transition:all .25s; text-transform:uppercase; white-space:nowrap; background:rgba(0,0,0,0.3);
+  transition:all .25s; text-transform:uppercase; white-space:nowrap; background:rgba(2, 6, 23, 0.4);
   backdrop-filter:blur(10px);
 }
 .ftab:hover { color:var(--text); border-color:var(--gold); background:rgba(232,200,106,0.1); }
 .ftab.on {
-  color:#06100c; border-color:var(--gold); background:linear-gradient(135deg,var(--gold),var(--gl));
+  color:#030712; border-color:var(--gold); background:linear-gradient(135deg,var(--gold),var(--gl));
   font-weight:900; box-shadow:0 0 20px rgba(232,200,106,0.4);
 }
 
@@ -122,19 +130,19 @@ nav {
   overflow:hidden; transition:all .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display:flex; flex-direction:column; position:relative;
   backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-  box-shadow:0 15px 35px rgba(0,0,0,0.5);
+  box-shadow:0 15px 35px rgba(0,0,0,0.6);
 }
 .card:hover {
   transform:translateY(-10px); border-color:var(--gold);
-  box-shadow:0 25px 50px rgba(0,0,0,0.75), 0 0 25px rgba(232,200,106,0.25);
+  box-shadow:0 25px 50px rgba(0,0,0,0.85), 0 0 25px rgba(232,200,106,0.3);
 }
-.card-img-wrap { position:relative; width:100%; height:220px; overflow:hidden; background:rgba(0,0,0,0.3); }
+.card-img-wrap { position:relative; width:100%; height:220px; overflow:hidden; background:rgba(0,0,0,0.4); }
 .card-img { width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
 .card:hover .card-img { transform:scale(1.08); }
 .card-cat {
   position:absolute; top:12px; left:12px; padding:5px 12px; border-radius:8px;
   font-family:'Cinzel',serif; font-size:.55rem; letter-spacing:.14em; font-weight:700;
-  text-transform:uppercase; backdrop-filter:blur(12px); background:rgba(4,12,8,0.85);
+  text-transform:uppercase; backdrop-filter:blur(12px); background:rgba(3, 7, 18, 0.85);
   border:1px solid var(--glass-border); color:var(--gold);
 }
 
@@ -148,7 +156,7 @@ nav {
   color:var(--gold); border-radius:8px; font-family:'Cinzel',serif; font-size:.65rem;
   letter-spacing:.12em; cursor:pointer; transition:all .25s; text-transform:uppercase; font-weight:700;
 }
-.btn-buy:hover { background:var(--gold); color:#06100c; box-shadow:0 0 20px rgba(232,200,106,0.5); }
+.btn-buy:hover { background:var(--gold); color:#030712; box-shadow:0 0 20px rgba(232,200,106,0.5); }
 
 /* PAGINACION */
 .pag-wrap { display:flex; justify-content:center; align-items:center; gap:14px; margin-top:44px; flex-wrap:wrap; }
@@ -164,10 +172,10 @@ nav {
 /* DRAWER CARRITO */
 #cart-drawer {
   position:fixed; top:0; right:-440px; width:100%; max-width:440px; height:100vh;
-  background:rgba(6,16,11,0.95); border-left:1px solid var(--glass-border);
+  background:rgba(3, 7, 18, 0.95); border-left:1px solid var(--glass-border);
   backdrop-filter:blur(30px); -webkit-backdrop-filter:blur(30px);
   z-index:1000; display:flex; flex-direction:column; transition:right .35s cubic-bezier(0.175, 0.885, 0.32, 1);
-  box-shadow:-15px 0 50px rgba(0,0,0,0.9);
+  box-shadow:-15px 0 50px rgba(0,0,0,0.95);
 }
 #cart-drawer.open { right:0; }
 .cart-hd { padding:24px; border-bottom:1px solid var(--glass-border); display:flex; justify-content:space-between; align-items:center; }
@@ -186,14 +194,14 @@ nav {
 .cart-total-row span:last-child { color:var(--gold); font-weight:900; }
 .btn-checkout {
   width:100%; padding:16px; background:linear-gradient(135deg,var(--gold),var(--gd));
-  border:none; border-radius:10px; color:#06100c; font-family:'Cinzel',serif; font-size:.82rem;
+  border:none; border-radius:10px; color:#030712; font-family:'Cinzel',serif; font-size:.82rem;
   letter-spacing:.16em; font-weight:900; cursor:pointer; transition:all .3s; text-transform:uppercase;
 }
 .btn-checkout:hover { box-shadow:0 0 30px rgba(232,200,106,0.6); transform:translateY(-2px); }
 
 /* TOAST */
 #toast {
-  position:fixed; bottom:24px; right:24px; background:rgba(8,20,14,0.96);
+  position:fixed; bottom:24px; right:24px; background:rgba(6, 11, 22, 0.96);
   border:1px solid var(--gold); color:var(--text); padding:16px 28px; border-radius:12px;
   font-family:'Cinzel',serif; font-size:.78rem; letter-spacing:.12em; box-shadow:0 15px 40px rgba(0,0,0,0.8),0 0 25px rgba(232,200,106,0.3);
   transform:translateY(100px); opacity:0; transition:all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index:2000;
@@ -203,12 +211,14 @@ nav {
 </head>
 <body>
 
+<canvas id="fireflies-canvas"></canvas>
+
 <nav>
   <a href="hub.html" class="brand">ORIONIX</a>
   <div class="nav-links">
     <a href="hub.html" class="nl">Hub</a>
     <a href="tienda.html" class="nl">Tienda</a>
-    <a href="articulos.html" class="nl on">Santuario (1,450)</a>
+    <a href="articulos.html" class="nl on">Colección (1,450)</a>
     <a href="nexus.html" class="nl">Agentes IA</a>
     <a href="carrito.html" class="nl">Carrito</a>
   </div>
@@ -223,9 +233,9 @@ nav {
 
 <div class="wrap">
   <div class="ph">
-    <div class="ph-tag">DE LA VISIÓN A LA MANSIÓN · SANTUARIO NATURAL</div>
+    <div class="ph-tag">DE LA VISIÓN A LA MANSIÓN · NOCHE DORADA</div>
     <h1 class="ph-title">EL GRAN CENTRO COMERCIAL</h1>
-    <p class="ph-sub">1,450 Artículos de Colección (450 Exclusivos ORIONIX + 1,000 Catálogo Imperial)</p>
+    <p class="ph-sub">1,450 Artículos de Colección en Armonía con la Noche Cósmica y el Lujo</p>
   </div>
 
   <div class="filters-wrap">
@@ -377,7 +387,7 @@ function renderGrid() {
 
     return '<div class="card">' +
       '<div class="card-img-wrap">' +
-        '<img class="card-img" src="' + img + '" alt="' + title + '" loading="lazy" onerror="this.src=\'https://picsum.photos/seed/nature/600/600\'">' +
+        '<img class="card-img" src="' + img + '" alt="' + title + '" loading="lazy" onerror="this.src=\'https://picsum.photos/seed/night/600/600\'">' +
         '<div class="card-cat">' + cat + '</div>' +
       '</div>' +
       '<div class="card-body">' +
@@ -487,6 +497,68 @@ function showToast(text) {
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2800);
 }
+
+// Luciérnagas doradas en canvas animado
+(function(){
+  const canvas = document.getElementById('fireflies-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let width, height;
+
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const fireflies = Array.from({ length: 65 }, () => ({
+    x: Math.random() * width,
+    y: Math.random() * height,
+    radius: Math.random() * 2.2 + 0.8,
+    vx: (Math.random() - 0.5) * 0.6,
+    vy: (Math.random() - 0.5) * 0.6,
+    alpha: Math.random() * 0.7 + 0.3,
+    alphaDelta: (Math.random() - 0.5) * 0.015,
+    glow: Math.random() * 12 + 6
+  }));
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    fireflies.forEach(f => {
+      f.x += f.vx;
+      f.y += f.vy;
+
+      if (f.x < 0) f.x = width;
+      if (f.x > width) f.x = 0;
+      if (f.y < 0) f.y = height;
+      if (f.y > height) f.y = 0;
+
+      f.alpha += f.alphaDelta;
+      if (f.alpha <= 0.2 || f.alpha >= 0.9) f.alphaDelta *= -1;
+
+      // Glow dorado
+      ctx.shadowBlur = f.glow;
+      ctx.shadowColor = '#e8c86a';
+
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.radius, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(232, 200, 106, ' + f.alpha + ')';
+      ctx.fill();
+
+      // Centro más brillante
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.radius * 0.4, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 245, 200, ' + (f.alpha + 0.1) + ')';
+      ctx.fill();
+    });
+
+    ctx.shadowBlur = 0;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 
 window.addEventListener('DOMContentLoaded', init);
 </script>

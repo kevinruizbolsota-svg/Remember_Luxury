@@ -7,3 +7,718 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --oro:#e8c86a;--oro-med:#c8a24a;--oro-osc:#8a6a24;
+  --bg:#0b0b0d;--texto:#f0e8d0;--tenue:#b8a982;--purp:#6a3d9a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden}
+@media(max-width:800px){html,body{overflow:auto}}
+body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--bg);color:var(--texto);-webkit-font-smoothing:antialiased}
+
+/* FONDO COSMOS */
+#cosmos{
+  position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 30%, rgba(106,61,154,.55) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 80% 70%, rgba(30,60,180,.4) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 70% at 50% 50%, rgba(180,80,30,.2) 0%, transparent 70%),
+    linear-gradient(160deg,#020208 0%,#04030e 40%,#060210 70%,#020206 100%);
+}
+.neb{
+  position:absolute;inset:-30%;
+  background:
+    radial-gradient(closest-side,rgba(120,60,220,.5),transparent) no-repeat 18% 22%/60% 60%,
+    radial-gradient(closest-side,rgba(40,100,220,.35),transparent) no-repeat 82% 40%/55% 55%,
+    radial-gradient(closest-side,rgba(220,100,40,.28),transparent) no-repeat 55% 85%/70% 70%,
+    radial-gradient(closest-side,rgba(60,180,180,.2),transparent) no-repeat 70% 15%/40% 40%;
+  filter:blur(50px);opacity:.75;
+  animation:nebFloat 60s ease-in-out infinite alternate;
+}
+@keyframes nebFloat{to{transform:translate(-4%,-5%) scale(1.2)}}
+#starfield{position:fixed;inset:0;z-index:1;pointer-events:none}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 5vw;
+  background:rgba(4,3,14,.9);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(232,200,106,.15);
+}
+.brand{
+  font-family:'Cinzel',serif;font-size:.72rem;font-weight:700;letter-spacing:5px;
+  background:linear-gradient(92deg,#8a6a24,#e8c86a 40%,#fff6d6 50%,#e8c86a 70%,#8a6a24);
+  background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:oro 6s linear infinite;text-decoration:none;
+}
+@keyframes oro{to{background-position:200% center}}
+.nav-links{display:flex;gap:18px;align-items:center}
+.nav-links a{
+  font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:1.8px;
+  text-transform:uppercase;color:var(--tenue);text-decoration:none;transition:color .2s;
+}
+.nav-links a:hover{color:var(--oro)}
+.nav-links a.cta{
+  background:linear-gradient(135deg,var(--oro-osc),var(--oro));color:#0b0b0d!important;
+  padding:6px 14px;font-weight:700;border-radius:3px;letter-spacing:2px;
+  box-shadow:0 0 14px rgba(232,200,106,.3);animation:glow 2.5s ease-in-out infinite;
+}
+@keyframes glow{0%,100%{box-shadow:0 0 14px rgba(232,200,106,.3)}50%{box-shadow:0 0 28px rgba(232,200,106,.6)}}
+@media(max-width:700px){.nav-links{display:none}}
+
+/* HUB GRID */
+#hub{
+  position:fixed;inset:0;z-index:10;
+  display:grid;
+  grid-template-columns:1fr 1.65fr 1fr;
+  grid-template-rows:1fr 1.5fr 1fr;
+  grid-template-areas:". top ." "left center right" ". bottom .";
+  padding:68px 20px 16px;gap:10px;
+}
+@media(max-width:800px){
+  #hub{position:relative;display:flex;flex-direction:column;gap:12px;padding:80px 14px 24px}
+}
+
+/* PORTALES */
+.portal{
+  position:relative;overflow:hidden;
+  border:1px solid rgba(232,200,106,.15);border-radius:16px;
+  cursor:pointer;display:flex;flex-direction:column;
+  justify-content:flex-end;align-items:center;
+  padding:18px 16px 22px;text-decoration:none;color:inherit;
+  transition:transform .3s cubic-bezier(.4,0,.2,1),box-shadow .35s,border-color .3s;
+}
+/* imagen de fondo real */
+.portal-bg{
+  position:absolute;inset:0;z-index:0;
+  background-size:cover;background-position:center;
+  transition:transform .6s cubic-bezier(.4,0,.2,1),filter .4s;
+  filter:brightness(.55) saturate(1.1);
+}
+.portal:hover .portal-bg{transform:scale(1.06);filter:brightness(.7) saturate(1.3)}
+/* gradiente oscuro inferior para texto legible */
+.portal::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:70%;
+  background:linear-gradient(to top,rgba(3,2,12,.97) 0%,rgba(3,2,12,.7) 50%,transparent 100%);
+  z-index:1;pointer-events:none;
+}
+/* borde superior de color */
+.portal::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--portal-accent,var(--oro));opacity:.5;z-index:2;
+  transition:opacity .3s;
+}
+.portal:hover{
+  transform:translateY(-5px) scale(1.012);
+  border-color:rgba(232,200,106,.4);
+  box-shadow:0 10px 50px rgba(0,0,0,.5),0 0 0 1px rgba(232,200,106,.2) inset;
+}
+.portal:hover::after{opacity:1}
+.portal-info{position:relative;z-index:3;text-align:center}
+.portal-icon{font-size:1.8rem;margin-bottom:7px;display:block;filter:drop-shadow(0 0 8px rgba(232,200,106,.4))}
+.portal-title{
+  font-family:'Cinzel',serif;font-size:.72rem;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--oro);margin-bottom:5px;
+  text-shadow:0 0 20px rgba(232,200,106,.4);
+}
+.portal-desc{font-size:.75rem;color:var(--tenue);font-style:italic;line-height:1.4}
+
+/* PORTAL CENTRO */
+.portal.center{
+  grid-area:center;
+  border-color:rgba(232,200,106,.28);
+  --portal-accent:#e8c86a;
+  box-shadow:0 0 60px rgba(106,61,154,.25),0 0 30px rgba(232,200,106,.08);
+}
+.portal.center .portal-title{font-size:1rem;letter-spacing:5px}
+.portal.center .portal-desc{font-size:.88rem}
+.portal.center:hover{box-shadow:0 0 80px rgba(106,61,154,.4),0 14px 55px rgba(232,200,106,.2)}
+
+/* colores de acento por portal */
+.portal.top{grid-area:top;--portal-accent:#9d6aff}
+.portal.left{grid-area:left;--portal-accent:#e8c86a}
+.portal.right{grid-area:right;--portal-accent:#40d0c0}
+.portal.bottom{grid-area:bottom;--portal-accent:#e86a9a}
+
+/* BOTÓN EDITAR (aparece sobre cada portal en modo edit) */
+.edit-overlay{
+  position:absolute;inset:0;z-index:20;
+  display:none;align-items:center;justify-content:center;
+  background:rgba(3,2,12,.7);backdrop-filter:blur(4px);
+  border-radius:16px;
+}
+.edit-overlay.visible{display:flex}
+.edit-trigger{
+  background:linear-gradient(135deg,rgba(106,61,154,.9),rgba(60,30,90,.9));
+  border:1px solid rgba(232,200,106,.4);border-radius:12px;
+  padding:10px 18px;cursor:pointer;
+  font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:2px;
+  color:var(--oro);transition:all .2s;
+  display:flex;align-items:center;gap:8px;
+}
+.edit-trigger:hover{background:rgba(232,200,106,.15);transform:scale(1.05)}
+
+/* MODO EDIT - barra flotante */
+#edit-bar{
+  position:fixed;top:60px;left:50%;transform:translateX(-50%);
+  z-index:400;
+  background:rgba(4,3,14,.97);border:1px solid rgba(232,200,106,.3);
+  border-radius:12px;padding:10px 20px;
+  display:none;align-items:center;gap:14px;
+  backdrop-filter:blur(20px);box-shadow:0 8px 40px rgba(0,0,0,.6);
+}
+#edit-bar.on{display:flex}
+#edit-bar span{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:2px;color:var(--oro)}
+.edit-bar-btn{
+  padding:6px 14px;border-radius:8px;border:none;cursor:pointer;
+  font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:1.5px;
+}
+.edit-bar-btn.save{background:linear-gradient(135deg,var(--oro-osc),var(--oro));color:#0b0b0d}
+.edit-bar-btn.cancel{background:rgba(255,255,255,.08);color:var(--tenue);border:1px solid rgba(255,255,255,.1)}
+.edit-bar-btn.reset{background:rgba(200,80,80,.15);color:#ff8888;border:1px solid rgba(200,80,80,.2)}
+
+/* MODAL EDICIÓN DE PORTAL */
+#edit-modal{
+  position:fixed;inset:0;z-index:500;
+  display:none;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.7);backdrop-filter:blur(8px);
+}
+#edit-modal.open{display:flex}
+.modal-box{
+  background:rgba(6,4,18,.98);border:1px solid rgba(232,200,106,.25);
+  border-radius:18px;padding:28px 30px;width:440px;max-width:95vw;
+  box-shadow:0 20px 80px rgba(0,0,0,.8),0 0 40px rgba(106,61,154,.2);
+}
+.modal-title{
+  font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:3px;
+  color:var(--oro);margin-bottom:20px;text-align:center;
+}
+.modal-field{margin-bottom:14px}
+.modal-field label{display:block;font-size:.72rem;color:var(--tenue);margin-bottom:5px;letter-spacing:.5px}
+.modal-field input{
+  width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(232,200,106,.18);
+  border-radius:8px;padding:9px 12px;color:var(--texto);font-family:inherit;font-size:.82rem;
+  outline:none;transition:border-color .2s;
+}
+.modal-field input:focus{border-color:rgba(232,200,106,.45)}
+.modal-field input::placeholder{color:rgba(240,232,208,.25)}
+.modal-preview{
+  width:100%;height:90px;border-radius:8px;margin-bottom:14px;
+  background:#111 center/cover no-repeat;
+  border:1px solid rgba(232,200,106,.12);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.68rem;color:var(--tenue);font-style:italic;
+}
+.modal-btns{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+.modal-btn{
+  padding:8px 20px;border-radius:8px;border:none;cursor:pointer;
+  font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:2px;
+}
+.modal-btn.apply{background:linear-gradient(135deg,var(--oro-osc),var(--oro));color:#0b0b0d}
+.modal-btn.close-m{background:rgba(255,255,255,.07);color:var(--tenue);border:1px solid rgba(255,255,255,.1)}
+
+/* AXEL BTN */
+#axel-btn{
+  position:fixed;bottom:26px;right:26px;z-index:300;
+  width:56px;height:56px;border-radius:50%;border:2px solid var(--oro);
+  background:radial-gradient(circle,rgba(106,61,154,.85),rgba(11,11,13,.95));
+  backdrop-filter:blur(10px);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 20px rgba(232,200,106,.3),0 0 40px rgba(106,61,154,.3);
+  animation:pulse 3s ease-in-out infinite;transition:transform .2s;
+  font-size:1.3rem;
+}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 20px rgba(232,200,106,.3),0 0 40px rgba(106,61,154,.3)}
+  50%{box-shadow:0 0 32px rgba(232,200,106,.55),0 0 60px rgba(106,61,154,.55)}
+}
+#axel-btn:hover{transform:scale(1.12)}
+
+/* EDIT TOGGLE BTN */
+#edit-toggle{
+  position:fixed;bottom:26px;left:26px;z-index:300;
+  width:44px;height:44px;border-radius:50%;
+  border:1px solid rgba(232,200,106,.25);
+  background:rgba(11,11,13,.85);backdrop-filter:blur(10px);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;color:var(--tenue);transition:all .2s;
+}
+#edit-toggle:hover,#edit-toggle.on{
+  border-color:var(--oro);color:var(--oro);
+  box-shadow:0 0 16px rgba(232,200,106,.25);
+}
+
+/* CHAT */
+#chat-panel{
+  position:fixed;bottom:94px;right:26px;z-index:299;width:340px;max-height:480px;
+  background:rgba(4,3,14,.97);border:1px solid rgba(232,200,106,.2);border-radius:16px;
+  backdrop-filter:blur(20px);display:flex;flex-direction:column;
+  box-shadow:0 20px 60px rgba(0,0,0,.7),0 0 40px rgba(106,61,154,.2);
+  transform:scale(.9) translateY(20px);opacity:0;pointer-events:none;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+}
+#chat-panel.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+.chat-header{padding:14px 16px 10px;border-bottom:1px solid rgba(232,200,106,.1);display:flex;align-items:center;gap:10px}
+.chat-header .dot{width:8px;height:8px;border-radius:50%;background:var(--oro);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.chat-header span{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:2px;color:var(--oro)}
+#chat-messages{flex:1;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:8px;min-height:180px}
+#chat-messages::-webkit-scrollbar{width:3px}
+#chat-messages::-webkit-scrollbar-thumb{background:rgba(232,200,106,.3);border-radius:2px}
+.msg{padding:8px 12px;border-radius:10px;font-size:.8rem;line-height:1.45;max-width:90%}
+.msg.user{background:rgba(232,200,106,.12);border:1px solid rgba(232,200,106,.2);align-self:flex-end;color:var(--texto)}
+.msg.axel{background:rgba(106,61,154,.2);border:1px solid rgba(106,61,154,.3);align-self:flex-start;color:var(--texto)}
+.msg.axel strong{color:var(--oro);font-size:.72rem;letter-spacing:1px;display:block;margin-bottom:3px}
+.chat-input-row{display:flex;gap:8px;padding:10px 12px;border-top:1px solid rgba(232,200,106,.1)}
+#chat-input{
+  flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(232,200,106,.15);
+  border-radius:8px;padding:8px 10px;color:var(--texto);font-family:inherit;font-size:.8rem;outline:none;
+  transition:border-color .2s;
+}
+#chat-input:focus{border-color:rgba(232,200,106,.4)}
+#chat-input::placeholder{color:rgba(240,232,208,.3)}
+#chat-send{
+  background:linear-gradient(135deg,var(--oro-osc),var(--oro));border:none;
+  border-radius:8px;padding:8px 14px;color:#0b0b0d;font-family:'Cinzel',serif;
+  font-size:.6rem;letter-spacing:1.5px;cursor:pointer;transition:opacity .2s;
+}
+#chat-send:hover{opacity:.85}
+</style>
+</head>
+<body>
+
+<div id="cosmos"><div class="neb"></div></div>
+<canvas id="starfield"></canvas>
+
+<!-- BARRA DE EDICIÓN -->
+<div id="edit-bar">
+  <span>✦ MODO EDICIÓN</span>
+  <button class="edit-bar-btn reset" id="btn-reset">Restaurar todo</button>
+  <button class="edit-bar-btn cancel" id="btn-cancel">Cancelar</button>
+  <button class="edit-bar-btn save" id="btn-save">Guardar ✓</button>
+</div>
+
+<!-- MODAL EDICIÓN PORTAL -->
+<div id="edit-modal">
+  <div class="modal-box">
+    <div class="modal-title">✦ EDITAR PORTAL</div>
+    <div class="modal-preview" id="modal-preview">Sin imagen</div>
+    <div class="modal-field">
+      <label>Imagen de fondo (URL)</label>
+      <input type="text" id="inp-img" placeholder="https://... o picsum.photos/seed/XYZ/800/500">
+    </div>
+    <div class="modal-field">
+      <label>Icono</label>
+      <input type="text" id="inp-icon" placeholder="🤖">
+    </div>
+    <div class="modal-field">
+      <label>Título</label>
+      <input type="text" id="inp-title" placeholder="Agentes IA">
+    </div>
+    <div class="modal-field">
+      <label>Descripción</label>
+      <input type="text" id="inp-desc" placeholder="AXEL · Claude · ChatGPT">
+    </div>
+    <div class="modal-field">
+      <label>Enlace</label>
+      <input type="text" id="inp-link" placeholder="agentes.html">
+    </div>
+    <div class="modal-btns">
+      <button class="modal-btn close-m" id="modal-close">Cancelar</button>
+      <button class="modal-btn apply" id="modal-apply">Aplicar ✓</button>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <a class="brand" href="hub.html">✦ ORIONIX</a>
+  <div class="nav-links">
+    <a href="agentes.html">Agentes</a>
+    <a href="tienda.html">Tienda</a>
+    <a href="comunidad.html">Comunidad</a>
+    <a href="hogar.html">Hogar</a>
+    <a href="mi-universo.html">Mi Universo</a>
+    <a href="nexus.html" class="cta">NEXUS</a>
+  </div>
+</nav>
+
+<div id="hub">
+
+  <!-- TOP: AGENTES -->
+  <a class="portal top" id="p-top" href="agentes.html">
+    <div class="portal-bg" id="bg-top"></div>
+    <div class="edit-overlay" id="ov-top">
+      <button class="edit-trigger" data-portal="top">✏️ Editar portal</button>
+    </div>
+    <div class="portal-info">
+      <span class="portal-icon" id="ic-top">🤖</span>
+      <div class="portal-title" id="ti-top">Agentes IA</div>
+      <div class="portal-desc" id="de-top">AXEL · Claude · ChatGPT · Mesa de Mando</div>
+    </div>
+  </a>
+
+  <!-- LEFT: TIENDA -->
+  <a class="portal left" id="p-left" href="tienda.html">
+    <div class="portal-bg" id="bg-left"></div>
+    <div class="edit-overlay" id="ov-left">
+      <button class="edit-trigger" data-portal="left">✏️ Editar portal</button>
+    </div>
+    <div class="portal-info">
+      <span class="portal-icon" id="ic-left">💎</span>
+      <div class="portal-title" id="ti-left">Tienda</div>
+      <div class="portal-desc" id="de-left">Moda · Fashion · Mi Dinastía</div>
+    </div>
+  </a>
+
+  <!-- CENTER: CIUDADELA -->
+  <a class="portal center" id="p-center" href="ciudadela.html">
+    <div class="portal-bg" id="bg-center"></div>
+    <div class="edit-overlay" id="ov-center">
+      <button class="edit-trigger" data-portal="center">✏️ Editar portal</button>
+    </div>
+    <div class="portal-info">
+      <span class="portal-icon" id="ic-center">🏛</span>
+      <div class="portal-title" id="ti-center">La Ciudadela</div>
+      <div class="portal-desc" id="de-center">Centro del universo ORIONIX — donde todo converge</div>
+    </div>
+  </a>
+
+  <!-- RIGHT: COMUNIDAD -->
+  <a class="portal right" id="p-right" href="comunidad.html">
+    <div class="portal-bg" id="bg-right"></div>
+    <div class="edit-overlay" id="ov-right">
+      <button class="edit-trigger" data-portal="right">✏️ Editar portal</button>
+    </div>
+    <div class="portal-info">
+      <span class="portal-icon" id="ic-right">🌐</span>
+      <div class="portal-title" id="ti-right">Comunidad</div>
+      <div class="portal-desc" id="de-right">Crónicas · Mundos · Reels</div>
+    </div>
+  </a>
+
+  <!-- BOTTOM: HOGAR -->
+  <a class="portal bottom" id="p-bottom" href="hogar.html">
+    <div class="portal-bg" id="bg-bottom"></div>
+    <div class="edit-overlay" id="ov-bottom">
+      <button class="edit-trigger" data-portal="bottom">✏️ Editar portal</button>
+    </div>
+    <div class="portal-info">
+      <span class="portal-icon" id="ic-bottom">🏡</span>
+      <div class="portal-title" id="ti-bottom">Hogar</div>
+      <div class="portal-desc" id="de-bottom">Hábitos · Afiliados · Mi Universo</div>
+    </div>
+  </a>
+
+</div>
+
+<!-- AXEL CHAT -->
+<button id="axel-btn" title="Hablar con AXEL">✦</button>
+
+<!-- EDIT TOGGLE -->
+<button id="edit-toggle" title="Modo edición">✏️</button>
+
+<div id="chat-panel">
+  <div class="chat-header">
+    <div class="dot"></div>
+    <span>AXEL · EN LÍNEA</span>
+  </div>
+  <div id="chat-messages">
+    <div class="msg axel"><strong>AXEL</strong>Bienvenido al Hub ORIONIX. ¿En qué misión puedo asistirte?</div>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" id="chat-input" placeholder="Mensaje a AXEL...">
+    <button id="chat-send">ENVIAR</button>
+  </div>
+</div>
+
+<script>
+// ── DATOS DEFAULT DE PORTALES ──────────────────────────────────
+const DEFAULTS = {
+  top:    { img:'https://picsum.photos/seed/orionix-ai-1/900/400',    icon:'🤖', title:'Agentes IA',     desc:'AXEL · Claude · ChatGPT · Mesa de Mando', link:'agentes.html' },
+  left:   { img:'https://picsum.photos/seed/orionix-luxury-shop/500/800', icon:'💎', title:'Tienda',         desc:'Moda · Fashion · Mi Dinastía',             link:'tienda.html' },
+  center: { img:'https://picsum.photos/seed/orionix-cosmos-city/1200/700', icon:'🏛', title:'La Ciudadela',  desc:'Centro del universo ORIONIX — donde todo converge', link:'ciudadela.html' },
+  right:  { img:'https://picsum.photos/seed/orionix-community/500/800', icon:'🌐', title:'Comunidad',      desc:'Crónicas · Mundos · Reels',                link:'comunidad.html' },
+  bottom: { img:'https://picsum.photos/seed/orionix-home-dark/900/400', icon:'🏡', title:'Hogar',          desc:'Hábitos · Afiliados · Mi Universo',         link:'hogar.html' },
+};
+
+// ── ESTADO ─────────────────────────────────────────────────────
+let portals = {};
+let editMode = false;
+let editingPortal = null;
+let pendingChanges = {};
+
+function loadPortals() {
+  try {
+    const saved = localStorage.getItem('orionix_hub_portals');
+    portals = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(DEFAULTS));
+  } catch(e) {
+    portals = JSON.parse(JSON.stringify(DEFAULTS));
+  }
+  // merge with defaults in case of new keys
+  Object.keys(DEFAULTS).forEach(k => {
+    if (!portals[k]) portals[k] = { ...DEFAULTS[k] };
+  });
+}
+
+function savePortals() {
+  localStorage.setItem('orionix_hub_portals', JSON.stringify(portals));
+}
+
+function applyPortal(key, data) {
+  const bg = document.getElementById('bg-' + key);
+  const a  = document.getElementById('p-' + key);
+  const ic = document.getElementById('ic-' + key);
+  const ti = document.getElementById('ti-' + key);
+  const de = document.getElementById('de-' + key);
+  if (bg) bg.style.backgroundImage = data.img ? `url('${data.img}')` : '';
+  if (a  && data.link) a.href = data.link;
+  if (ic) ic.textContent = data.icon || '';
+  if (ti) ti.textContent = data.title || '';
+  if (de) de.textContent = data.desc || '';
+}
+
+function renderAll() {
+  Object.keys(portals).forEach(k => applyPortal(k, portals[k]));
+}
+
+// ── MODO EDICIÓN ───────────────────────────────────────────────
+const editBar    = document.getElementById('edit-bar');
+const editToggle = document.getElementById('edit-toggle');
+
+function setEditMode(on) {
+  editMode = on;
+  editToggle.classList.toggle('on', on);
+  editBar.classList.toggle('on', on);
+  document.querySelectorAll('.edit-overlay').forEach(ov => {
+    ov.classList.toggle('visible', on);
+  });
+  // bloquear clicks en portales cuando edición activa
+  document.querySelectorAll('.portal').forEach(p => {
+    p.style.pointerEvents = on ? 'none' : '';
+  });
+  document.querySelectorAll('.edit-overlay').forEach(ov => {
+    ov.style.pointerEvents = on ? 'all' : '';
+  });
+}
+
+editToggle.addEventListener('click', () => {
+  if (editMode) {
+    setEditMode(false);
+    pendingChanges = {};
+  } else {
+    pendingChanges = JSON.parse(JSON.stringify(portals));
+    setEditMode(true);
+  }
+});
+
+document.getElementById('btn-cancel').addEventListener('click', () => {
+  renderAll(); // restaura visual sin guardar
+  setEditMode(false);
+  pendingChanges = {};
+});
+
+document.getElementById('btn-save').addEventListener('click', () => {
+  portals = JSON.parse(JSON.stringify(pendingChanges));
+  savePortals();
+  renderAll();
+  setEditMode(false);
+  pendingChanges = {};
+  showToast('✦ Cambios guardados');
+});
+
+document.getElementById('btn-reset').addEventListener('click', () => {
+  if (!confirm('¿Restaurar todos los portales a sus valores originales?')) return;
+  portals = JSON.parse(JSON.stringify(DEFAULTS));
+  pendingChanges = JSON.parse(JSON.stringify(DEFAULTS));
+  savePortals();
+  renderAll();
+  setEditMode(false);
+  showToast('Portales restaurados');
+});
+
+// ── MODAL EDICIÓN INDIVIDUAL ───────────────────────────────────
+const modal       = document.getElementById('edit-modal');
+const inpImg      = document.getElementById('inp-img');
+const inpIcon     = document.getElementById('inp-icon');
+const inpTitle    = document.getElementById('inp-title');
+const inpDesc     = document.getElementById('inp-desc');
+const inpLink     = document.getElementById('inp-link');
+const modalPrev   = document.getElementById('modal-preview');
+
+document.querySelectorAll('.edit-trigger').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    editingPortal = btn.dataset.portal;
+    const d = pendingChanges[editingPortal] || portals[editingPortal];
+    inpImg.value   = d.img   || '';
+    inpIcon.value  = d.icon  || '';
+    inpTitle.value = d.title || '';
+    inpDesc.value  = d.desc  || '';
+    inpLink.value  = d.link  || '';
+    updatePreview(d.img);
+    modal.classList.add('open');
+  });
+});
+
+inpImg.addEventListener('input', () => updatePreview(inpImg.value));
+
+function updatePreview(url) {
+  if (url && url.trim()) {
+    modalPrev.style.backgroundImage = `url('${url.trim()}')`;
+    modalPrev.textContent = '';
+  } else {
+    modalPrev.style.backgroundImage = '';
+    modalPrev.textContent = 'Sin imagen';
+  }
+}
+
+document.getElementById('modal-apply').addEventListener('click', () => {
+  if (!editingPortal) return;
+  const d = {
+    img:   inpImg.value.trim(),
+    icon:  inpIcon.value.trim(),
+    title: inpTitle.value.trim(),
+    desc:  inpDesc.value.trim(),
+    link:  inpLink.value.trim(),
+  };
+  pendingChanges[editingPortal] = d;
+  applyPortal(editingPortal, d); // preview inmediato
+  modal.classList.remove('open');
+  editingPortal = null;
+});
+
+document.getElementById('modal-close').addEventListener('click', () => {
+  modal.classList.remove('open');
+  editingPortal = null;
+});
+
+modal.addEventListener('click', e => {
+  if (e.target === modal) {
+    modal.classList.remove('open');
+    editingPortal = null;
+  }
+});
+
+// ── TOAST ─────────────────────────────────────────────────────
+function showToast(msg) {
+  let t = document.getElementById('_toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = '_toast';
+    t.style.cssText = 'position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(10px);background:rgba(6,4,18,.97);border:1px solid rgba(232,200,106,.3);border-radius:8px;padding:9px 20px;font-size:.78rem;color:#e8c86a;z-index:9999;opacity:0;transition:all .25s;pointer-events:none;white-space:nowrap;font-family:Cinzel,serif;letter-spacing:1px';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  t.style.transform = 'translateX(-50%) translateY(0)';
+  clearTimeout(t._tid);
+  t._tid = setTimeout(() => { t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(10px)'; }, 2500);
+}
+
+// ── STARFIELD ──────────────────────────────────────────────────
+(function(){
+  const c = document.getElementById('starfield');
+  const ctx = c.getContext('2d');
+  let W, H, stars = [], shoots = [];
+
+  function resize(){
+    W = c.width = innerWidth;
+    H = c.height = innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for(let i=0;i<280;i++){
+    stars.push({
+      x:Math.random()*innerWidth,
+      y:Math.random()*innerHeight,
+      r:Math.random()*1.2+.2,
+      o:Math.random()*.8+.2,
+      s:Math.random()*.4+.1,
+      t:Math.random()*Math.PI*2,
+    });
+  }
+
+  function addShoot(){
+    shoots.push({
+      x:Math.random()*W,y:Math.random()*H*.4,
+      vx:Math.random()*5+3,vy:Math.random()*3+2,
+      len:Math.random()*80+50,life:1,
+    });
+  }
+  setInterval(()=>{if(Math.random()<.5)addShoot();},2200);
+
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(s=>{
+      s.t+=s.s*.03;
+      const o=s.o*(0.7+0.3*Math.sin(s.t));
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,248,220,${o})`;ctx.fill();
+    });
+    shoots=shoots.filter(s=>s.life>0);
+    shoots.forEach(s=>{
+      ctx.beginPath();
+      ctx.moveTo(s.x,s.y);
+      ctx.lineTo(s.x-s.vx*s.len/10,s.y-s.vy*s.len/10);
+      const g=ctx.createLinearGradient(s.x,s.y,s.x-s.vx*s.len/10,s.y-s.vy*s.len/10);
+      g.addColorStop(0,`rgba(232,200,106,${s.life*.9})`);
+      g.addColorStop(1,'rgba(232,200,106,0)');
+      ctx.strokeStyle=g;ctx.lineWidth=1.2;ctx.stroke();
+      s.x+=s.vx;s.y+=s.vy;s.life-=.025;
+    });
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+// ── AXEL CHAT ─────────────────────────────────────────────────
+const axelBtn   = document.getElementById('axel-btn');
+const chatPanel = document.getElementById('chat-panel');
+const chatInput = document.getElementById('chat-input');
+const chatSend  = document.getElementById('chat-send');
+const chatMsgs  = document.getElementById('chat-messages');
+
+axelBtn.addEventListener('click', () => chatPanel.classList.toggle('open'));
+
+async function sendMsg() {
+  const msg = chatInput.value.trim();
+  if (!msg) return;
+  chatInput.value = '';
+  addMsg(msg, 'user');
+  const thinking = addMsg('...', 'axel');
+  try {
+    const res = await fetch('https://lkevinruizl.app.n8n.cloud/webhook/kabalion-chat', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({mensaje:msg, agente:'axel'}),
+    });
+    const d = await res.json();
+    thinking.querySelector('strong').nextSibling.textContent = d.respuesta || d.text || 'Sin respuesta';
+  } catch(e) {
+    thinking.querySelector('strong').nextSibling.textContent = 'Error de conexión.';
+  }
+  chatMsgs.scrollTop = chatMsgs.scrollHeight;
+}
+
+function addMsg(text, role) {
+  const d = document.createElement('div');
+  d.className = 'msg ' + role;
+  if (role === 'axel') d.innerHTML = '<strong>AXEL</strong>' + text;
+  else d.textContent = text;
+  chatMsgs.appendChild(d);
+  chatMsgs.scrollTop = chatMsgs.scrollHeight;
+  return d;
+}
+
+chatSend.addEventListener('click', sendMsg);
+chatInput.addEventListener('keydown', e => { if(e.key==='Enter') sendMsg(); });
+
+// ── INIT ───────────────────────────────────────────────────────
+loadPortals();
+renderAll();
+</script>
+</body>
+</html>

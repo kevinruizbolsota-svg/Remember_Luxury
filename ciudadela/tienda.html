@@ -10,10 +10,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* Gucci-inspired palette: deep green, rich red, refined gold */
-  --gucci-green: #0b4f3a; /* deep green */
-  --gucci-red: #9c1f25;   /* rich red */
-  --gold: #d4af37;        /* refined gold */
+  --gucci-green: #0b4f3a;
+  --gucci-red: #9c1f25;
+  --gold: #d4af37;
   --glow: rgba(212,175,55,0.18);
   --glow2: rgba(212,175,55,0.06);
   --bg:#060605;--bg2:rgba(10,10,12,0.98);--bg3:rgba(12,11,18,0.88);
@@ -24,31 +23,15 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Cormorant Garamond',serif;background:linear-gradient(180deg,#04120a 0%, #07080a 100%);color:var(--text);min-height:100vh;overflow-x:hidden}
-
-/* Canvas Estrellas */
 #cv{position:fixed;inset:0;z-index:0;pointer-events:none}
-
-/* Nav */
 nav{
   position:fixed;top:0;left:0;right:0;height:62px;z-index:900;
   display:flex;align-items:center;padding:0 26px;
   background:linear-gradient(180deg, rgba(6,6,6,0.86), rgba(8,8,8,0.7));
   border-bottom:1px solid rgba(255,255,255,0.02);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
 }
-.brand{
-  font-family:'Cinzel',serif;font-size:1rem;font-weight:900;
-  letter-spacing:.22em;color:var(--gold);text-decoration:none;
-  position:relative;padding:6px 12px;border-radius:8px;overflow:visible;margin-right:20px;
-}
-.brand::after{
-  /* subtle gucci stripe */
-  content:'';position:absolute;left:-6px;right:-6px;bottom:-8px;height:6px;border-radius:6px;opacity:.95;
-  background:linear-gradient(90deg,var(--gucci-green) 0 25%, var(--gucci-red) 25% 50%, var(--gucci-green) 50% 75%, var(--gucci-red) 75% 100%);
-  transform:translateY(6px) scaleY(.9);
-  filter:blur(6px);mix-blend-mode:overlay;
-}
+.brand{font-family:'Cinzel',serif;font-size:1rem;font-weight:900;letter-spacing:.22em;color:var(--gold);text-decoration:none;position:relative;padding:6px 12px;border-radius:8px;margin-right:20px;}
 .brand:hover{transform:translateY(-1px)}
 .nav-mid{display:flex;gap:4px;flex:1}
 .nl{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.12em;color:var(--dim);text-decoration:none;padding:8px 13px;border-radius:8px;transition:all .2s;text-transform:uppercase}
@@ -59,8 +42,7 @@ nav{
 .cart-ico:hover{background:rgba(212,175,55,.06);box-shadow:0 0 18px var(--glow2)}
 @media(max-width:760px){.nav-mid{display:none}}
 
-/* Hero */
-.hero{position:relative;z-index:1;padding:130px 24px 70px;text-align:center;background:radial-gradient(ellipse at 50% 0%, rgba(11,79,58,0.12) 0%, transparent 70%);} 
+.hero{position:relative;z-index:1;padding:130px 24px 70px;text-align:center;background:radial-gradient(ellipse at 50% 0%, rgba(11,79,58,0.12) 0%, transparent 70%);}
 .htag{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:.26em;color:var(--dim);text-transform:uppercase;margin-bottom:14px}
 .htitle{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.6rem);font-weight:700;letter-spacing:.08em;margin-bottom:12px;background:linear-gradient(90deg,var(--gold),#fff8e0 50%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;}
 .hsub{font-size:1.05rem;color:var(--dim);max-width:640px;margin:0 auto 34px;line-height:1.7}
@@ -70,7 +52,6 @@ nav{
 .hbtn.pri:hover{transform:translateY(-2px)}
 .hbtn.sec{border:1px solid rgba(255,255,255,0.04);color:var(--gold);background:transparent}
 
-/* Quick Categories */
 .quick{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:60px;position:relative;z-index:1;padding:0 24px}
 .qa{display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 24px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);border-radius:12px;text-decoration:none;color:inherit;min-width:130px}
 .qa:hover{box-shadow:0 12px 36px rgba(0,0,0,.4), 0 0 18px rgba(11,79,58,0.08)}
@@ -80,13 +61,11 @@ nav{
 
 .divl{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.02),transparent);margin:0 24px 60px}
 
-/* Catálogo Central Button */
 .cat-btn-wrap{position:relative;z-index:1;text-align:center;margin:0 0 60px}
-.cat-btn{display:inline-flex;align-items:center;gap:14px;padding:20px 58px;background:linear-gradient(90deg,var(--gucci-green),var(--gold));color:#07110b;border-radius:14px;font-family:'Cinzel',serif;font-size:.76rem;letter-spacing:.18em;font-weight:900;box-shadow:0 0 48px rgba(11,79,58,0.2);}
+.cat-btn{display:inline-flex;align-items:center;gap:14px;padding:20px 58px;background:linear-gradient(90deg,var(--gucci-green),var(--gold));color:#07110b;border-radius:14px;font-family:'Cinzel',serif;font-size:.76rem;letter-spacing:.18em;font-weight:900;box-shadow:0 0 48px rgba(11,79,58,0.2);text-decoration:none}
 .cat-btn:hover{transform:translateY(-3px);box-shadow:0 0 70px rgba(11,79,58,0.28)}
 .cat-sub{margin-top:12px;font-family:'Cormorant Garamond',serif;font-size:.88rem;color:var(--dim);font-style:italic}
 
-/* Planes de servicio */
 .sec{position:relative;z-index:1;padding:0 24px 80px;max-width:1140px;margin:0 auto}
 .sec-tag{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:.26em;color:var(--dim);text-transform:uppercase;text-align:center;margin-bottom:8px}
 .sec-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:900;color:var(--text);text-align:center;letter-spacing:.08em;margin-bottom:8px}
@@ -110,7 +89,6 @@ nav{
 .pbtn{display:block;width:100%;text-align:center;padding:12px;border-radius:10px;font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.14em;font-weight:700;transition:all .28s;cursor:pointer;border:1px solid rgba(255,255,255,0.03);color:var(--text);background:linear-gradient(90deg,var(--gucci-green),rgba(11,79,58,0.9));}
 .pbtn:hover{box-shadow:0 0 18px rgba(11,79,58,0.14)}
 
-/* Formulario Leads */
 .lform{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);border-radius:12px;padding:24px;margin-top:16px;display:none}
 .lform.on{display:block}
 .lh{font-family:'Cinzel',serif;font-size:.66rem;font-weight:700;color:var(--text);letter-spacing:.12em;margin-bottom:16px;text-transform:uppercase}
@@ -121,11 +99,12 @@ nav{
 .lb{width:100%;padding:14px;background:linear-gradient(90deg,var(--gold),#f7e6a8);color:#07110b;border:none;border-radius:10px;font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.14em;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,0.5)}
 .lb:hover{transform:translateY(-1px)}
 
-/* Toast */
+/* Contador animado */
+.loading-count{opacity:0.4;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:0.9}}
+
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);background:rgba(10,10,10,.95);border:1px solid rgba(255,255,255,0.02);color:var(--gold);font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.1em;padding:12px 26px;border-radius:10px;z-index:9999;transition:transform .35s}
 .toast.on{transform:translateX(-50%) translateY(0)}
-
-/* small responsive tweaks */
 @media(max-width:980px){.pgrid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.pgrid{grid-template-columns:1fr}}
 </style>
@@ -150,25 +129,45 @@ nav{
 <div class="hero">
   <div class="htag">Centro Comercial · ORIONIX · De una aguja a una mansión</div>
   <h1 class="htitle">LA TIENDA DEL IMPERIO</h1>
-  <p class="hsub">Acceso a servicios exclusivos y catálogo de dropshipping/afiliados premium con 1,450 productos de alta gama y lujo cósmico.</p>
+  <p class="hsub">Acceso a servicios exclusivos y catálogo de dropshipping/afiliados premium con <strong id="total-count" class="loading-count">1,450</strong> productos de alta gama y lujo cósmico.</p>
   <div class="hacts">
     <a href="articulos.html" class="hbtn pri">🛍️ Explorar Catálogo →</a>
     <a href="carrito.html" class="hbtn sec">🛒 Ver mi Carrito</a>
   </div>
   <div class="quick">
-    <a href="articulos.html?cat=MODA" class="qa"><span class="qa-ico">🧵</span><span class="qa-name">Moda</span><span class="qa-sub">70 art · desde €9.99</span></a>
-    <a href="articulos.html?cat=GLAMUR" class="qa"><span class="qa-ico">✨</span><span class="qa-name">Glamur</span><span class="qa-sub">80 art · desde €50.00</span></a>
-    <a href="articulos.html?cat=MI+DINASTIA" class="qa"><span class="qa-ico">👑</span><span class="qa-name">Mi Dinastía</span><span class="qa-sub">50 art · desde €135.00</span></a>
-    <a href="carrito.html" class="qa"><span class="qa-ico">🛒</span><span class="qa-name">Carrito</span><span class="qa-sub" id="q-cart">0 artículos</span></a>
-    <a href="admin.html" class="qa"><span class="qa-ico">⚙️</span><span class="qa-name">Admin</span><span class="qa-sub">Mesa de Mando</span></a>
+    <a href="articulos.html?cat=MODA" class="qa">
+      <span class="qa-ico">🧵</span>
+      <span class="qa-name">Moda</span>
+      <span class="qa-sub" id="count-moda">cargando…</span>
+    </a>
+    <a href="articulos.html?cat=FASHION+STYLE" class="qa">
+      <span class="qa-ico">✨</span>
+      <span class="qa-name">Fashion Style</span>
+      <span class="qa-sub" id="count-fashion">cargando…</span>
+    </a>
+    <a href="articulos.html?cat=MI+DINASTIA" class="qa">
+      <span class="qa-ico">👑</span>
+      <span class="qa-name">Mi Dinastía</span>
+      <span class="qa-sub" id="count-dinastia">cargando…</span>
+    </a>
+    <a href="carrito.html" class="qa">
+      <span class="qa-ico">🛒</span>
+      <span class="qa-name">Carrito</span>
+      <span class="qa-sub" id="q-cart">0 artículos</span>
+    </a>
+    <a href="admin.html" class="qa">
+      <span class="qa-ico">⚙️</span>
+      <span class="qa-name">Admin</span>
+      <span class="qa-sub">Mesa de Mando</span>
+    </a>
   </div>
 </div>
 
 <div class="divl"></div>
 
 <div class="cat-btn-wrap">
-  <a href="articulos.html" class="cat-btn">🛍️ VER CATÁLOGO COMPLETO — 200 ARTÍCULOS →</a>
-  <p class="cat-sub">450 Exclusivos ORIONIX + 1,000 Catálogo Imperial</p>
+  <a href="articulos.html" class="cat-btn">🛍️ VER CATÁLOGO COMPLETO — <span id="btn-total">1,450</span> ARTÍCULOS →</a>
+  <p class="cat-sub" id="cat-desglose">Cargando desglose por categoría…</p>
 </div>
 
 <div class="sec">
@@ -181,15 +180,27 @@ nav{
       <div class="pname">ESENCIA</div>
       <div class="pprice">€197 <span class="mo">/mes</span></div>
       <p class="pdesc">La puerta de entrada. Automatización básica y acceso a AXEL IA.</p>
-      <ul class="pul"><li>AXEL IA disponible 24/7</li><li>1 flujo de automatización</li><li>Soporte por Telegram</li><li>Acceso a Catálogo MODA</li><li>15% comisión afiliado</li></ul>
+      <ul class="pul">
+        <li>AXEL IA disponible 24/7</li>
+        <li>1 flujo de automatización</li>
+        <li>Soporte por Telegram</li>
+        <li>Catálogo MODA completo</li>
+        <li>15% comisión afiliado</li>
+      </ul>
       <a class="pbtn" href="#">Solicitar Esencia →</a>
     </div>
     <div class="pcard feat" onclick="openLead('Imperio')">
       <div class="pbadge" style="background:linear-gradient(90deg,var(--gucci-green),var(--gold))">⭐ Más Elegido</div>
       <div class="pname">IMPERIO</div>
       <div class="pprice">€497 <span class="mo">/mes</span></div>
-      <p class="pdesc">El verdadero poder. Todos los agentes activos + Acceso a Glamur.</p>
-      <ul class="pul"><li>6 agentes IA activos</li><li>5 flujos de automatización</li><li>Mesa de Mando ORIONIX</li><li>Acceso MODA + GLAMUR + TECH</li><li>25% comisión afiliado</li></ul>
+      <p class="pdesc">El verdadero poder. Todos los agentes activos + catálogo Fashion Style.</p>
+      <ul class="pul">
+        <li>6 agentes IA activos</li>
+        <li>5 flujos de automatización</li>
+        <li>Mesa de Mando ORIONIX</li>
+        <li>MODA + FASHION STYLE</li>
+        <li>25% comisión afiliado</li>
+      </ul>
       <a class="pbtn" href="#">Solicitar Imperio →</a>
     </div>
     <div class="pcard" onclick="openLead('Ciudadela')">
@@ -197,7 +208,12 @@ nav{
       <div class="pname">CIUDADELA</div>
       <div class="pprice" style="font-size:1.3rem;padding-top:6px">A medida</div>
       <p class="pdesc">Tu ecosistema IA completo. 46 Sefirot activadas. Todo el catálogo.</p>
-      <ul class="pul"><li>Infraestructura ORIONIX completa</li><li>Flujos ilimitados</li><li>Los 1,450 artículos disponibles</li><li>35% comisión afiliado</li></ul>
+      <ul class="pul">
+        <li>Infraestructura ORIONIX completa</li>
+        <li>Flujos ilimitados</li>
+        <li>Los <span id="plan-total">1,450</span> artículos disponibles</li>
+        <li>35% comisión afiliado</li>
+      </ul>
       <a class="pbtn" href="#">Solicitar Ciudadela →</a>
     </div>
   </div>
@@ -214,28 +230,175 @@ nav{
 
 <div class="divl"></div>
 <div style="position:relative;z-index:1;text-align:center;padding:0 24px 80px">
-  <a href="articulos.html" style="font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.14em;color:var(--gold);text-decoration:none;border:1px solid rgba(255,255,255,0.03);padding:12px 30px;border-radius:10px">Explorar Colección Exclusiva →</a>
+  <a href="hub.html" style="font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.2em;color:var(--dim);text-decoration:none">← VOLVER AL HUB</a>
+  <p style="margin-top:12px;font-size:.8rem;color:var(--dim);font-style:italic">ORIONIX · De una aguja a una mansión · @Remember_Luxury</p>
 </div>
 
 <div class="toast" id="toast"></div>
+
 <script>
-var API='https://lkevinruizl.app.n8n.cloud/webhook/orionix-tienda';
-var activePlan='';
-function updateCart(){
-  var c=JSON.parse(localStorage.getItem('orionix_cart')||'[]');
-  var t=c.reduce(function(a,i){return a+(i.qty||1);},0);
-  var el=document.getElementById('q-cart');
-  if(el)el.textContent=t+' artículo'+(t!==1?'s':'');
-  var cnt=document.getElementById('cnt');
-  if(cnt)cnt.textContent=t;
+// ── Starfield ─────────────────────────────────────────────
+(function(){
+  var c=document.getElementById('cv'),ctx=c.getContext('2d');
+  function resize(){c.width=innerWidth;c.height=innerHeight;}
+  resize(); window.addEventListener('resize',resize);
+  var stars=[];
+  for(var i=0;i<180;i++) stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4+.3,o:Math.random(),s:Math.random()*.004+.001});
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(function(s){
+      s.o+=s.s; if(s.o>1||s.o<0)s.s*=-1;
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(247,242,232,'+s.o.toFixed(2)+')';ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── Carrito ───────────────────────────────────────────────
+(function(){
+  var cart=JSON.parse(localStorage.getItem('orionix_cart')||'[]');
+  var total=cart.reduce(function(a,i){return a+(i.qty||1);},0);
+  var el=document.getElementById('cnt');
+  if(el) el.textContent=total;
+  var el2=document.getElementById('q-cart');
+  if(el2) el2.textContent=total+' artículos';
+})();
+
+// ── Cargar conteos reales por categoría ──────────────────
+(function(){
+  var API='https://lkevinruizl.app.n8n.cloud/webhook/orionix-tienda';
+
+  function fmt(n){ return n.toLocaleString('es-ES'); }
+
+  function setEl(id, text){
+    var el=document.getElementById(id);
+    if(el){ el.textContent=text; el.classList.remove('loading-count'); }
+  }
+
+  // Llamamos al endpoint de catálogo con límite alto para contar
+  // Usamos tres llamadas paralelas, una por categoría
+  var cats = [
+    {cat:'MODA',      elId:'count-moda',    desde:'€9.99'},
+    {cat:'FASHION STYLE', elId:'count-fashion', desde:'€28.75'},
+    {cat:'MI DINASTIA',   elId:'count-dinastia',desde:'€135.90'}
+  ];
+
+  var totales={};
+  var done=0;
+
+  cats.forEach(function(c){
+    fetch(API, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({accion:'catalogo', categoria: c.cat, limite: 1, pagina: 1})
+    })
+    .then(function(r){return r.json();})
+    .then(function(data){
+      // La API devuelve {productos:[], total:N} o similar
+      var count = 0;
+      if(data && typeof data.total === 'number') count = data.total;
+      else if(data && Array.isArray(data.productos)) count = data.productos.length;
+      else if(Array.isArray(data)) count = data.length;
+
+      totales[c.cat] = count;
+      done++;
+
+      if(count > 0){
+        setEl(c.elId, fmt(count)+' art · desde '+c.desde);
+      } else {
+        // Fallback: valores reales conocidos
+        var fallbacks = {'MODA':900,'FASHION STYLE':390,'MI DINASTIA':160};
+        setEl(c.elId, fmt(fallbacks[c.cat]||'?')+' art · desde '+c.desde);
+      }
+
+      if(done === cats.length){
+        // Actualizar total global
+        var grand = Object.values(totales).reduce(function(a,b){return a+b;},0);
+        if(grand > 0){
+          setEl('total-count', fmt(grand));
+          setEl('btn-total', fmt(grand));
+          setEl('plan-total', fmt(grand));
+          // Desglose
+          var m=totales['MODA']||0, f=totales['FASHION STYLE']||0, d=totales['MI DINASTIA']||0;
+          setEl('cat-desglose',
+            fmt(m)+' Moda · '+fmt(f)+' Fashion Style · '+fmt(d)+' Mi Dinastía'
+          );
+        } else {
+          // Fallback total conocido
+          setEl('total-count','1,450');
+          setEl('btn-total','1,450');
+          setEl('plan-total','1,450');
+          setEl('cat-desglose','900 Moda · 390 Fashion Style · 160 Mi Dinastía');
+        }
+      }
+    })
+    .catch(function(){
+      done++;
+      // Fallback por categoría
+      var fallbacks={'MODA':900,'FASHION STYLE':390,'MI DINASTIA':160};
+      var desde={'MODA':'€9.99','FASHION STYLE':'€28.75','MI DINASTIA':'€135.90'};
+      setEl(c.elId, fmt(fallbacks[c.cat])+' art · desde '+desde[c.cat]);
+      if(done===cats.length){
+        setEl('total-count','1,450');
+        setEl('btn-total','1,450');
+        setEl('plan-total','1,450');
+        setEl('cat-desglose','900 Moda · 390 Fashion Style · 160 Mi Dinastía');
+      }
+    });
+  });
+})();
+
+// ── Lead form ─────────────────────────────────────────────
+function openLead(plan){
+  var f=document.getElementById('lform');
+  var t=document.getElementById('ltitulo');
+  var i=document.getElementById('linteres');
+  if(!f) return;
+  f.classList.toggle('on');
+  if(t) t.textContent='✦ Solicitar Plan — '+plan;
+  if(i) i.value=plan;
+  if(f.classList.contains('on')) f.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-function openLead(p){activePlan=p;document.getElementById('ltitulo').textContent='✦ Solicitar Plan '+p;document.getElementById('linteres').value=p;var f=document.getElementById('lform');f.classList.add('on');window.scrollTo({top:document.querySelector('.sec').offsetTop-60,behavior:'smooth'});} 
-async function submitLead(){var n=document.getElementById('lnombre').value.trim();var t=document.getElementById('ltelegram').value.trim();if(!n||!t){toast('✦ Nombre y Telegram son obligatorios');return;}var payload={name:n,telegram:t,plan:document.getElementById('linteres').value||activePlan,ts:new Date().toISOString()};try{await fetch(API,{method:'POST',body:JSON.stringify(payload),headers:{'content-type':'application/json'}});toast('Solicitud enviada — Gracias');document.getElementById('lnombre').value='';document.getElementById('ltelegram').value='';document.getElementById('linteres').value='';}catch(e){toast('Error al enviar — intenta más tarde');}}
-function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('on');},3000);} 
-document.querySelectorAll('.pbtn').forEach(function(btn){btn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();var plan=btn.closest('.pcard').querySelector('.pname').textContent;openLead(plan);});});
-(function(){var c=document.getElementById('cv'),ctx=c.getContext('2d');function r(){c.width=innerWidth;c.height=innerHeight;}r();addEventListener('resize',r);var s=Array.from({length:90},function(){return {x:Math.random()*innerWidth,y:Math.random()*innerHeight,v:Math.random()*0.2+0.05,r:Math.random()*1.2+0.3}});function loop(){ctx.clearRect(0,0,c.width,c.height);for(var i=0;i<s.length;i++){var p=s[i];p.x+=p.v; if(p.x>c.width+p.r) p.x=-p.r; ctx.beginPath(); ctx.fillStyle='rgba(212,175,55,0.06)'; ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();}requestAnimationFrame(loop);}loop();})();
-updateCart();
+
+function submitLead(){
+  var nombre=document.getElementById('lnombre');
+  var telegram=document.getElementById('ltelegram');
+  var interes=document.getElementById('linteres');
+  if(!nombre||!telegram) return;
+  if(!nombre.value.trim()||!telegram.value.trim()){
+    showToast('Completa nombre y Telegram');return;
+  }
+  var btn=document.getElementById('lbtn');
+  if(btn) btn.textContent='Enviando…';
+  fetch('https://lkevintuizl.app.n8n.cloud/webhook/orionix-tienda',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      accion:'lead',
+      nombre:nombre.value.trim(),
+      telegram:telegram.value.trim(),
+      plan:interes?interes.value:'',
+      origen:'tienda'
+    })
+  }).then(function(){
+    showToast('✦ Solicitud enviada — te contactamos por Telegram');
+    var f=document.getElementById('lform');
+    if(f) f.classList.remove('on');
+    if(btn) btn.textContent='Enviar Solicitud →";
+  }).catch(function(){
+    showToast('Error al enviar. Escríbenos en Telegram directamente.');
+    if(btn) btn.textContent='Enviar Solicitud →';
+  });
+}
+
+function showToast(msg){
+  var t=document.getElementById('toast');
+  if(!t) return;
+  t.textContent=msg;t.classList.add('on');
+  setTimeout(function(){t.classList.remove('on');},3000);
+}
 </script>
-<script src="orionix-profile.js"></script>
 </body>
 </html>

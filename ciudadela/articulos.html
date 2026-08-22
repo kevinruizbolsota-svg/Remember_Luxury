@@ -257,9 +257,19 @@ const PAGE_SIZE = 36;
 let currentCat = 'TODOS';
 let cart = JSON.parse(localStorage.getItem('orionix_cart') || '[]');
 
-const CATEGORIAS = ['TODOS', 'MODA', 'FASHION STYLE', 'MI DINASTIA', 'DIGITAL', 'HOGAR', 'TECH', 'BIENESTAR', 'VIAJE', 'MASCOTAS'];
+const CATEGORIAS = ['TODOS', 'GLAMUR', 'MODA', 'FASHION STYLE', 'MI DINASTIA', 'DIGITAL', 'HOGAR', 'TECH', 'BIENESTAR', 'VIAJE', 'MASCOTAS'];
 
 function init() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const catParam = urlParams.get('cat');
+  if (catParam) {
+    const found = CATEGORIAS.find(c => c.toUpperCase() === catParam.toUpperCase());
+    if (found) {
+      currentCat = found;
+    } else if (catParam.toUpperCase() === 'GLAMUR') {
+      currentCat = 'GLAMUR';
+    }
+  }
   initCategories();
   applyFilterAndSort();
   updateCartUI();
@@ -296,7 +306,7 @@ function applyFilterAndSort() {
 
   filteredProducts = ALL_PRODUCTS.filter(p => {
     const pCat = (p.categoria || p.category || 'MODA').toUpperCase();
-    const matchCat = (currentCat === 'TODOS' || pCat === currentCat.toUpperCase());
+    const matchCat = (currentCat === 'TODOS' || pCat === currentCat.toUpperCase() || (currentCat === 'GLAMUR' && (pCat === 'MODA' || pCat === 'MI DINASTIA' || pCat === 'FASHION STYLE')));
     const name = (p.nombre || p.title || '').toLowerCase();
     const desc = (p.descripcion || p.description || '').toLowerCase();
     const sku = (p.sku || '').toLowerCase();

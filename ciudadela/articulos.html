@@ -1,1 +1,641 @@
-<�s�D
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIONIX · Colección</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#e8c86a;--gd:#b89a40;--gl:#f5e0a0;
+  --text:#f0e8d0;--dim:rgba(240,232,208,0.6);
+  --card:rgba(10,15,8,0.82);--card-b:rgba(232,200,106,0.18);
+  --green-dark:#0d1a0a;--green-mid:#1a2e14;
+  --shadow:rgba(0,0,0,0.6);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+/* ===== FONDO NATURALEZA ===== */
+body{
+  font-family:'Cormorant Garamond',serif;
+  color:var(--text);
+  min-height:100vh;
+  background:#0a1208;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* Paisaje SVG como fondo fijo */
+#nature-bg{
+  position:fixed;inset:0;z-index:0;
+  background:
+    linear-gradient(180deg,
+      #040c02 0%,
+      #0a1a06 15%,
+      #122806 30%,
+      #0f2008 50%,
+      #081506 70%,
+      #050d04 100%
+    );
+  overflow:hidden;
+}
+/* Cielo con lunas y estrellas */
+#nature-bg::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% -10%, rgba(100,180,60,0.12) 0%, transparent 70%),
+    radial-gradient(circle at 80% 15%, rgba(232,200,106,0.25) 0%, rgba(232,200,106,0.08) 15%, transparent 30%),
+    radial-gradient(circle at 20% 10%, rgba(200,220,150,0.08) 0%, transparent 25%);
+}
+/* Niebla de selva */
+#nature-bg::after{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 120% 30% at 50% 100%, rgba(15,40,10,0.9) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 20% at 30% 85%, rgba(20,60,12,0.6) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 20% at 70% 90%, rgba(20,60,12,0.5) 0%, transparent 50%);
+}
+
+/* SVG Paisaje */
+#landscape-svg{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:55%;
+  opacity:0.7;
+}
+
+/* Canvas de partículas (luciérnagas) */
+#fireflies{position:absolute;inset:0;pointer-events:none}
+
+/* ===== OVERLAY ===== */
+#overlay{
+  position:fixed;inset:0;z-index:1;
+  background:linear-gradient(180deg,
+    rgba(4,10,2,0.55) 0%,
+    rgba(4,10,2,0.2) 40%,
+    rgba(4,10,2,0.65) 100%
+  );
+  pointer-events:none;
+}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:62px;display:flex;align-items:center;padding:0 24px;gap:16px;
+  background:rgba(6,14,4,0.88);
+  border-bottom:1px solid rgba(100,180,60,0.2);
+  backdrop-filter:blur(20px);
+}
+.brand{
+  font-family:'Cinzel',serif;font-size:1rem;font-weight:900;
+  letter-spacing:.22em;color:var(--gold);text-decoration:none;
+}
+.nav-links{display:flex;gap:4px;flex:1}
+.nl{
+  font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.1em;
+  color:var(--dim);text-decoration:none;padding:7px 12px;
+  border-radius:6px;transition:all .2s;text-transform:uppercase;
+}
+.nl:hover,.nl.on{color:var(--gold);background:rgba(100,180,60,0.1)}
+.nav-r{display:flex;align-items:center;gap:10px;margin-left:auto}
+.cart-btn{
+  display:flex;align-items:center;gap:8px;padding:8px 18px;
+  border:1px solid rgba(232,200,106,0.35);border-radius:8px;
+  font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.1em;
+  color:var(--gold);background:rgba(232,200,106,0.06);
+  cursor:pointer;transition:all .25s;position:relative;
+}
+.cart-btn:hover{background:rgba(232,200,106,0.14);box-shadow:0 0 20px rgba(100,200,60,0.15)}
+.cart-count{
+  position:absolute;top:-7px;right:-7px;width:20px;height:20px;
+  border-radius:50%;background:var(--gold);color:#0a1208;
+  font-size:.62rem;font-weight:900;display:flex;align-items:center;justify-content:center;
+}
+@media(max-width:750px){.nav-links{display:none}}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;z-index:10;
+  text-align:center;padding:120px 24px 60px;
+}
+.hero-tag{
+  font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.4em;
+  color:rgba(100,200,60,0.8);text-transform:uppercase;margin-bottom:12px;
+}
+.hero-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(2rem,5vw,3.5rem);
+  font-weight:900;color:var(--text);
+  letter-spacing:.05em;line-height:1.1;
+  text-shadow:0 4px 30px rgba(0,0,0,0.8),0 0 60px rgba(100,200,60,0.15);
+}
+.hero-title span{color:var(--gold)}
+.hero-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;color:var(--dim);
+  margin-top:10px;font-style:italic;
+}
+
+/* ===== BARRA BÚSQUEDA ===== */
+.search-wrap{
+  position:relative;z-index:10;
+  max-width:580px;margin:0 auto 32px;padding:0 24px;
+}
+.search-bar{
+  width:100%;padding:14px 52px 14px 20px;
+  background:rgba(10,20,8,0.85);
+  border:1px solid rgba(100,180,60,0.3);
+  border-radius:50px;
+  font-family:'Cormorant Garamond',serif;font-size:1rem;
+  color:var(--text);outline:none;backdrop-filter:blur(12px);
+  transition:border-color .3s,box-shadow .3s;
+}
+.search-bar:focus{
+  border-color:rgba(100,200,60,0.6);
+  box-shadow:0 0 25px rgba(100,200,60,0.15);
+}
+.search-bar::placeholder{color:var(--dim)}
+.search-icon{
+  position:absolute;right:38px;top:50%;transform:translateY(-50%);
+  color:rgba(100,200,60,0.6);font-size:1.1rem;pointer-events:none;
+}
+
+/* ===== FILTROS ===== */
+.filter-wrap{
+  position:relative;z-index:10;
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+  padding:0 24px 28px;
+}
+.fb{
+  font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.12em;
+  padding:8px 16px;border-radius:50px;border:1px solid rgba(100,180,60,0.25);
+  color:var(--dim);background:rgba(10,20,8,0.7);cursor:pointer;
+  transition:all .25s;text-transform:uppercase;backdrop-filter:blur(8px);
+}
+.fb:hover{border-color:rgba(100,200,60,0.5);color:rgba(150,230,80,0.9)}
+.fb.on{
+  background:rgba(60,120,20,0.4);
+  border-color:rgba(100,200,60,0.7);
+  color:#b8f078;
+  box-shadow:0 0 15px rgba(100,200,60,0.2);
+}
+
+/* ===== INFO BAR ===== */
+.info-bar{
+  position:relative;z-index:10;
+  display:flex;justify-content:space-between;align-items:center;
+  max-width:1320px;margin:0 auto 16px;padding:0 24px;
+  font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.1em;
+  color:var(--dim);
+}
+
+/* ===== GRID ===== */
+.catalog{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:0 20px 80px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:20px;
+}
+
+/* ===== TARJETAS ===== */
+.card{
+  background:var(--card);
+  border:1px solid var(--card-b);
+  border-radius:14px;
+  overflow:hidden;
+  transition:transform .3s,box-shadow .3s,border-color .3s;
+  cursor:pointer;
+  backdrop-filter:blur(16px);
+}
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 50px rgba(0,0,0,0.5),0 0 30px rgba(100,200,60,0.12);
+  border-color:rgba(100,200,60,0.4);
+}
+.card-img{
+  width:100%;aspect-ratio:1;object-fit:cover;
+  transition:transform .4s;display:block;
+}
+.card:hover .card-img{transform:scale(1.04)}
+.card-body{padding:14px}
+.card-cat{
+  font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.18em;
+  color:rgba(100,200,60,0.75);text-transform:uppercase;margin-bottom:6px;
+}
+.card-name{
+  font-family:'Cinzel',serif;font-size:.78rem;font-weight:600;
+  color:var(--text);line-height:1.3;margin-bottom:6px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.card-desc{
+  font-size:.78rem;color:var(--dim);line-height:1.4;margin-bottom:12px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.card-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.card-price{
+  font-family:'Cinzel',serif;font-size:.95rem;font-weight:700;color:var(--gold);
+}
+.add-btn{
+  font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.1em;
+  padding:7px 12px;border-radius:6px;cursor:pointer;
+  background:rgba(60,120,20,0.35);
+  border:1px solid rgba(100,200,60,0.5);
+  color:rgba(150,230,80,0.9);transition:all .2s;
+  white-space:nowrap;
+}
+.add-btn:hover{background:rgba(60,120,20,0.6);box-shadow:0 0 12px rgba(100,200,60,0.25)}
+
+/* ===== PAGINACIÓN ===== */
+.pagination{
+  display:flex;justify-content:center;align-items:center;
+  gap:6px;padding:40px 24px 20px;position:relative;z-index:10;
+}
+.pg{
+  font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.08em;
+  padding:8px 14px;border-radius:8px;cursor:pointer;
+  border:1px solid rgba(100,180,60,0.25);
+  color:var(--dim);background:rgba(10,20,8,0.7);
+  transition:all .2s;
+}
+.pg:hover{border-color:rgba(100,200,60,0.5);color:rgba(150,230,80,0.9)}
+.pg.on{background:rgba(60,120,20,0.5);border-color:rgba(100,200,60,0.7);color:#b8f078}
+
+/* ===== CARRITO ===== */
+.cart-overlay{
+  display:none;position:fixed;inset:0;z-index:400;
+  background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);
+}
+.cart-overlay.open{display:block}
+.cart-panel{
+  position:fixed;top:0;right:-400px;width:380px;height:100vh;z-index:500;
+  background:rgba(8,16,6,0.97);border-left:1px solid rgba(100,200,60,0.2);
+  backdrop-filter:blur(20px);transition:right .35s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;padding:24px;
+}
+.cart-panel.open{right:0}
+.cart-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.cart-head h2{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.15em;color:var(--gold)}
+.close-cart{background:none;border:none;color:var(--dim);font-size:1.4rem;cursor:pointer}
+.cart-items{flex:1;overflow-y:auto}
+.cart-item{
+  display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(100,200,60,0.1);
+}
+.cart-item img{width:60px;height:60px;object-fit:cover;border-radius:8px}
+.ci-info{flex:1}
+.ci-name{font-family:'Cinzel',serif;font-size:.7rem;color:var(--text);margin-bottom:4px}
+.ci-price{font-size:.8rem;color:var(--gold)}
+.remove-item{background:none;border:none;color:rgba(200,80,80,0.7);cursor:pointer;font-size:1rem}
+.empty-cart{text-align:center;padding:40px;color:var(--dim);font-style:italic}
+.cart-foot{padding-top:16px;border-top:1px solid rgba(100,200,60,0.15)}
+.cart-total{display:flex;justify-content:space-between;font-family:'Cinzel',serif;font-size:.85rem;color:var(--text);margin-bottom:16px}
+.checkout-btn{
+  width:100%;padding:14px;border-radius:10px;cursor:pointer;
+  font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.12em;
+  background:linear-gradient(135deg,rgba(60,120,20,0.7),rgba(100,180,40,0.5));
+  border:1px solid rgba(100,200,60,0.5);color:#b8f078;
+  transition:all .25s;
+}
+.checkout-btn:hover{background:linear-gradient(135deg,rgba(80,150,30,0.8),rgba(120,200,50,0.6));box-shadow:0 0 20px rgba(100,200,60,0.3)}
+
+/* ===== TOAST ===== */
+.toast{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:rgba(10,20,6,0.97);border:1px solid rgba(100,200,60,0.4);
+  border-radius:10px;padding:12px 24px;font-family:'Cinzel',serif;font-size:.7rem;
+  letter-spacing:.08em;color:var(--text);z-index:9999;
+  opacity:0;transition:all .3s;pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:600px){
+  .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+  .cart-panel{width:100%;right:-100%;border-left:none}
+}
+
+/* ===== LUCIÉRNAGAS CSS (backup) ===== */
+@keyframes float{0%,100%{transform:translateY(0) translateX(0);opacity:.3}50%{transform:translateY(-30px) translateX(15px);opacity:.9}}
+</style>
+</head>
+<body>
+
+<!-- FONDO NATURALEZA -->
+<div id="nature-bg">
+  <canvas id="fireflies"></canvas>
+  <!-- SVG Paisaje de selva/bosque -->
+  <svg id="landscape-svg" viewBox="0 0 1440 500" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+    <!-- Luna -->
+    <circle cx="1150" cy="80" r="55" fill="#f5e8b0" opacity="0.18"/>
+    <circle cx="1150" cy="80" r="48" fill="#fdf5d0" opacity="0.22"/>
+    <!-- Niebla de fondo -->
+    <ellipse cx="720" cy="500" rx="900" ry="120" fill="#0d2208" opacity="0.8"/>
+    <!-- Montañas lejanas -->
+    <polygon points="0,500 0,300 200,180 400,280 600,160 800,260 1000,140 1200,240 1440,160 1440,500" fill="#0f2010" opacity="0.9"/>
+    <!-- Segunda capa montañas -->
+    <polygon points="0,500 0,360 100,290 300,340 500,240 700,300 900,200 1100,280 1300,220 1440,260 1440,500" fill="#132a10" opacity="0.85"/>
+    <!-- Selva fondo -->
+    <polygon points="0,500 0,400 60,350 120,390 180,340 240,380 300,330 360,370 420,320 480,365 540,310 600,360 660,300 720,350 780,290 840,345 900,285 960,340 1020,280 1080,335 1140,270 1200,325 1260,260 1320,315 1380,255 1440,300 1440,500" fill="#163512" opacity="0.9"/>
+    <!-- Árboles grandes izquierda -->
+    <rect x="20" y="200" width="18" height="300" fill="#0a2008" rx="4"/>
+    <ellipse cx="29" cy="195" rx="45" ry="80" fill="#122e0e" opacity="0.95"/>
+    <ellipse cx="29" cy="155" rx="35" ry="65" fill="#163812" opacity="0.9"/>
+    <ellipse cx="29" cy="120" rx="25" ry="50" fill="#1a4014" opacity="0.85"/>
+    <!-- Árbol 2 -->
+    <rect x="90" y="250" width="15" height="250" fill="#0a2008" rx="3"/>
+    <ellipse cx="97" cy="245" rx="38" ry="70" fill="#102a0c" opacity="0.95"/>
+    <ellipse cx="97" cy="200" rx="28" ry="55" fill="#143010" opacity="0.9"/>
+    <!-- Árbol 3 -->
+    <rect x="160" y="230" width="20" height="270" fill="#0a2008" rx="4"/>
+    <ellipse cx="170" cy="225" rx="50" ry="90" fill="#122e0e" opacity="0.95"/>
+    <ellipse cx="170" cy="180" rx="38" ry="70" fill="#163812" opacity="0.9"/>
+    <ellipse cx="170" cy="135" rx="28" ry="55" fill="#1a4014" opacity="0.85"/>
+    <!-- Árboles derecha -->
+    <rect x="1350" y="210" width="18" height="290" fill="#0a2008" rx="4"/>
+    <ellipse cx="1359" cy="205" rx="45" ry="80" fill="#122e0e" opacity="0.95"/>
+    <ellipse cx="1359" cy="160" rx="35" ry="65" fill="#163812" opacity="0.9"/>
+    <ellipse cx="1359" cy="120" rx="25" ry="50" fill="#1a4014" opacity="0.85"/>
+    <rect x="1280" y="250" width="16" height="250" fill="#0a2008" rx="3"/>
+    <ellipse cx="1288" cy="245" rx="42" ry="75" fill="#102a0c" opacity="0.95"/>
+    <ellipse cx="1288" cy="200" rx="32" ry="58" fill="#143010" opacity="0.9"/>
+    <!-- Árboles centro -->
+    <rect x="640" y="280" width="22" height="220" fill="#0a2008" rx="5"/>
+    <ellipse cx="651" cy="275" rx="55" ry="95" fill="#122e0e" opacity="0.9"/>
+    <ellipse cx="651" cy="225" rx="42" ry="75" fill="#163812" opacity="0.85"/>
+    <ellipse cx="651" cy="175" rx="30" ry="58" fill="#1a4014" opacity="0.8"/>
+    <!-- Hierbas / arbustos primer plano -->
+    <ellipse cx="100" cy="500" rx="120" ry="40" fill="#1a4010" opacity="0.95"/>
+    <ellipse cx="350" cy="500" rx="100" ry="35" fill="#163a0e" opacity="0.9"/>
+    <ellipse cx="700" cy="500" rx="150" ry="45" fill="#1a4010" opacity="0.95"/>
+    <ellipse cx="1100" cy="500" rx="130" ry="40" fill="#163a0e" opacity="0.9"/>
+    <ellipse cx="1380" cy="500" rx="110" ry="38" fill="#1a4010" opacity="0.95"/>
+    <!-- Río / reflejo -->
+    <ellipse cx="720" cy="470" rx="200" ry="15" fill="rgba(100,180,60,0.04)" opacity="0.6"/>
+  </svg>
+</div>
+
+<!-- Overlay semitransparente -->
+<div id="overlay"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="brand" href="hub.html">ORIONIX</a>
+  <div class="nav-links">
+    <a class="nl" href="hub.html">Inicio</a>
+    <a class="nl on" href="articulos.html">Tienda</a>
+    <a class="nl" href="carrito.html">Carrito</a>
+    <a class="nl" href="agentes.html">Agentes</a>
+    <a class="nl" href="comunidad.html">Comunidad</a>
+  </div>
+  <div class="nav-r">
+    <button class="cart-btn" id="cartBtn">
+      🌿 Carrito <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Colección ORIONIX · Naturaleza & Lujo</div>
+  <h1 class="hero-title">El <span>Imperio</span> de la Naturaleza</h1>
+  <p class="hero-sub" id="heroSub">450 productos en colección</p>
+</div>
+
+<!-- BÚSQUEDA -->
+<div class="search-wrap">
+  <input class="search-bar" id="searchInput" type="text" placeholder="Buscar en la colección...">
+  <span class="search-icon">🔍</span>
+</div>
+
+<!-- FILTROS -->
+<div class="filter-wrap" id="filters">
+  <button class="fb on" data-cat="TODOS">🌿 Todos</button>
+  <button class="fb" data-cat="MODA">👗 Moda</button>
+  <button class="fb" data-cat="FASHION STYLE">✨ Fashion</button>
+  <button class="fb" data-cat="MI DINASTIA">👑 Dinastía</button>
+  <button class="fb" data-cat="DIGITAL">💻 Digital</button>
+  <button class="fb" data-cat="HOGAR">🏡 Hogar</button>
+  <button class="fb" data-cat="TECH">⚡ Tech</button>
+  <button class="fb" data-cat="BIENESTAR">🌱 Bienestar</button>
+  <button class="fb" data-cat="VIAJE">✈️ Viaje</button>
+  <button class="fb" data-cat="MASCOTAS">🐾 Mascotas</button>
+</div>
+
+<!-- INFO BAR -->
+<div class="info-bar">
+  <span id="resultCount"></span>
+  <span>ORIONIX · Ciudadela</span>
+</div>
+
+<!-- GRID -->
+<div class="catalog">
+  <div class="grid" id="grid"></div>
+</div>
+
+<!-- PAGINACIÓN -->
+<div id="pagination" class="pagination"></div>
+
+<!-- CARRITO -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-head">
+    <h2>🌿 MI CARRITO</h2>
+    <button class="close-cart" id="closeCart">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="cartTotal">€0.00</span>
+    </div>
+    <button class="checkout-btn" onclick="location.href='carrito.html'">FINALIZAR COMPRA →</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== LUCIÉRNAGAS =====
+(function(){
+  const canvas = document.getElementById('fireflies');
+  const ctx = canvas.getContext('2d');
+  let W, H, flies = [];
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  for(let i=0;i<80;i++){
+    flies.push({
+      x: Math.random()*1440,
+      y: Math.random()*600+100,
+      r: Math.random()*1.8+0.5,
+      speed: Math.random()*.4+.1,
+      angle: Math.random()*Math.PI*2,
+      turn: (Math.random()-.5)*.03,
+      bright: Math.random(),
+      phase: Math.random()*Math.PI*2,
+      freq: Math.random()*.02+.005
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const t = Date.now()/1000;
+    flies.forEach(f=>{
+      f.angle += f.turn + Math.sin(t*f.freq+f.phase)*.02;
+      f.x += Math.cos(f.angle)*f.speed;
+      f.y += Math.sin(f.angle)*f.speed*.5;
+      if(f.x<0)f.x=W;if(f.x>W)f.x=0;
+      if(f.y<80)f.y=80+Math.random()*50;if(f.y>H-40)f.y=H-40;
+      const glow = Math.sin(t*f.freq*6+f.phase)*.5+.5;
+      const alpha = .1+glow*.7;
+      const g = ctx.createRadialGradient(f.x,f.y,0,f.x,f.y,f.r*12);
+      g.addColorStop(0,`rgba(160,255,80,${alpha})`);
+      g.addColorStop(.3,`rgba(100,220,40,${alpha*.4})`);
+      g.addColorStop(1,'rgba(60,150,20,0)');
+      ctx.beginPath();
+      ctx.arc(f.x,f.y,f.r*12,0,Math.PI*2);
+      ctx.fillStyle=g;ctx.fill();
+      ctx.beginPath();
+      ctx.arc(f.x,f.y,f.r*.8,0,Math.PI*2);
+      ctx.fillStyle=`rgba(220,255,150,${alpha})`;ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ===== PRODUCTOS =====
+const PRODUCTOS = [{"id":2,"n":"Camiseta Cosmos ORIONIX","d":"Camiseta negra con logo ORIONIX dorado bordado. Algodón 100%.","p":9.99,"c":"MODA","i":"https://picsum.photos/seed/orionix1/400/400"},{"id":3,"n":"Gorra AXEL Gold","d":"Gorra snapback negra con bordado AXEL en hilo dorado.","p":24.99,"c":"MODA","i":"https://picsum.photos/seed/orionix6/400/400"},{"id":4,"n":"Camisa Cinzel Blanca","d":"Camisa slim fit blanca con detalles dorados en el cuello.","p":34.99,"c":"MODA","i":"https://picsum.photos/seed/orionix7/400/400"},{"id":5,"n":"Sudadera Imperio Gold","d":"Sudadera premium con capucha, estampado Kabalion en oro.","p":49.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/orionix2/400/400"},{"id":6,"n":"Perfume Cosmos Noir","d":"Fragancia exclusiva de la colección ORIONIX. 50ml.","p":89.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/orionix5/400/400"},{"id":7,"n":"Zapatillas Cosmos Limited","d":"Zapatillas edición limitada con suela dorada y logo ORIONIX.","p":129.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/orionix9/400/400"},{"id":8,"n":"Chaqueta Kabalion Limited","d":"Chaqueta de cuero vegano con árbol Kabalion grabado en la espalda.","p":149.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/orionix3/400/400"},{"id":9,"n":"Bolso Púrpura Sombra","d":"Bolso de mano en cuero negro con interior púrpura y herrajes dorados.","p":199.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/orionix8/400/400"},{"id":10,"n":"Reloj Sefirot Edition","d":"Reloj automático con esfera negra y marcadores dorados, grabado Sefirot.","p":299.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/orionix4/400/400"},{"id":11,"n":"Set Lujo Kabalion","d":"Set exclusivo: reloj + perfume + pañuelo de seda ORIONIX. Edición numerada.","p":599.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/orionix10/400/400"},{"id":12,"n":"Calcetines ORIONIX Pack 3","d":"Pack de 3 calcetines negros con franja dorada y logo ORIONIX.","p":9.99,"c":"MODA","i":"https://picsum.photos/seed/orionix11/400/400"},{"id":13,"n":"Pañuelo Cosmos Silk","d":"Pañuelo de microfibra negra con constelaciones doradas.","p":12.99,"c":"MODA","i":"https://picsum.photos/seed/orionix12/400/400"},{"id":14,"n":"Taza Kabalion Gold","d":"Taza cerámica negra con árbol Kabalion en dorado. 350ml.","p":14.99,"c":"MODA","i":"https://picsum.photos/seed/orionix13/400/400"},{"id":15,"n":"Llavero Sefirot","d":"Llavero metálico con símbolo de las Sefirot grabado en dorado.","p":9.99,"c":"MODA","i":"https://picsum.photos/seed/orionix14/400/400"},{"id":16,"n":"Notebook ORIONIX A5","d":"Libreta tapa dura negra con logo dorado. 200 páginas rayadas.","p":16.99,"c":"MODA","i":"https://picsum.photos/seed/orionix15/400/400"},{"id":17,"n":"Camiseta AXEL Kether","d":"Camiseta premium con mandala Kether bordado en hilo dorado. Algodón orgánico.","p":19.9,"c":"MODA","i":"https://picsum.photos/seed/orionix16/400/400"},{"id":18,"n":"Parche Cosmos Bordado","d":"Parche termoadhesivo con diseño cosmos ORIONIX. 8cm x 8cm.","p":9.99,"c":"MODA","i":"https://picsum.photos/seed/orionix17/400/400"},{"id":19,"n":"Cinturón Kabalion","d":"Cinturón de cuero PU negro con hebilla dorada grabada.","p":28.75,"c":"FASHION STYLE","i":"https://picsum.photos/seed/orionix18/400/400"},{"id":20,"n":"Cartera Slim ORIONIX","d":"Cartera minimalista en cuero negro con grabado Sefirot.","p":38.5,"c":"FASHION STYLE","i":"https://picsum.photos/seed/orionix19/400/400"},{"id":21,"n":"Bufanda Cosmos Premium","d":"Bufanda de lana merino negra con motivos dorados de constelaciones.","p":45.9,"c":"FASHION STYLE","i":"https://picsum.photos/seed/orionix20/400/400"},{"id":22,"n":"Polo Imperio Slim","d":"Polo slim fit negro con escudo ORIONIX bordado en el pecho.","p":52.0,"c":"FASHION STYLE","i":"https://picsum.photos/seed/orionix21/400/400"},{"id":23,"n":"Gafas Sol Kether","d":"Gafas de sol con montura negra mate y cristales dorados espejados.","p":68.5,"c":"FASHION STYLE","i":"https://picsum.photos/seed/orionix22/400/400"},{"id":24,"n":"Mochila Kabalion Urban","d":"Mochila 20L negra con árbol Kabalion en relieve dorado.","p":78.5,"c":"FASHION STYLE","i":"https://picsum.photos/seed/orionix23/400/400"},{"id":25,"n":"Anillo Tiferet Gold","d":"Anillo bañado en oro 18k con símbolo Tiferet. Acero inoxidable.","p":135.9,"c":"MI DINASTIA","i":"https://picsum.photos/seed/orionix24/400/400"},{"id":26,"n":"Pulsera Cosmos Titan","d":"Pulsera de titanio negra con incrustaciones doradas. Edición limitada.","p":189.0,"c":"MI DINASTIA","i":"https://picsum.photos/seed/orionix25/400/400"},{"id":27,"n":"Chaqueta Blazer Imperio","d":"Blazer negro slim fit con forro dorado y botones Kabalion. Lana premium.","p":248.0,"c":"MI DINASTIA","i":"https://picsum.photos/seed/orionix26/400/400"},{"id":28,"n":"Maletín Sefirot Executive","d":"Maletín de cuero genuino negro con árbol Sefirot grabado.","p":320.0,"c":"MI DINASTIA","i":"https://picsum.photos/seed/orionix27/400/400"},{"id":29,"n":"Traje AXEL Completo","d":"Traje de dos piezas negro con detalles dorados. Corte italiano. Edición AXEL.","p":498.0,"c":"MI DINASTIA","i":"https://picsum.photos/seed/orionix28/400/400"},{"id":30,"n":"Perfume Kether Absolut","d":"Perfume oud y sándalo negro, 100ml. La fragancia definitiva de ORIONIX.","p":245.0,"c":"MI DINASTIA","i":"https://picsum.photos/seed/orionix29/400/400"},{"id":31,"n":"Collar Árbol de Vida","d":"Collar en oro 18k con colgante árbol de vida Kabalion. Cadena 50cm.","p":380.0,"c":"MI DINASTIA","i":"https://picsum.photos/seed/orionix30/400/400"},{"id":32,"n":"Camiseta Básica Algodón Blanca","d":"Camiseta unisex 100% algodón, corte recto, ideal para el día a día","p":12.99,"c":"MODA","i":"https://picsum.photos/seed/tshirtwhite/400/400"},{"id":33,"n":"Pantalón Lino Holgado Verano Viral","d":"Pantalón holgado de lino natural, transpirable, +56M vendidos en TikTok 2025","p":19.99,"c":"MODA","i":"https://picsum.photos/seed/linenpants/400/400"},{"id":34,"n":"Leggings Deportivos Push-Up","d":"Leggings de compresión con efecto push-up, cintura alta","p":14.99,"c":"MODA","i":"https://picsum.photos/seed/leggings/400/400"},{"id":35,"n":"Camiseta Logo Bordado TrendyBoutique","d":"Camiseta con logo bordado en relieve, tendencia viral","p":15.99,"c":"MODA","i":"https://picsum.photos/seed/embroidered/400/400"},{"id":36,"n":"Pantalón Ancho Cordón Tie-Dye","d":"Pantalón palazzo con cordón ajustable, diseño tie-dye","p":17.99,"c":"MODA","i":"https://picsum.photos/seed/tiedye/400/400"},{"id":37,"n":"Top Crop Fruncido Tirantes","d":"Top corto fruncido con tirantes finos, perfecto para verano","p":11.99,"c":"MODA","i":"https://picsum.photos/seed/croptop/400/400"},{"id":38,"n":"Calcetines Pack 5 Pares Algodón","d":"Pack 5 pares calcetines 100% algodón, colores surtidos","p":9.99,"c":"MODA","i":"https://picsum.photos/seed/socks/400/400"},{"id":39,"n":"Gorro Beanie Lana Invierno","d":"Gorro tejido unisex de lana suave, disponible en 12 colores","p":12.99,"c":"MODA","i":"https://picsum.photos/seed/beanie/400/400"},{"id":40,"n":"Cinturón Cuero Sintético Negro","d":"Cinturón clásico de cuero sintético con hebilla metálica dorada","p":13.99,"c":"MODA","i":"https://picsum.photos/seed/beltblack/400/400"},{"id":41,"n":"Bufanda Ligera Degradada","d":"Bufanda ligera efecto degradado, perfecta para entretiempo","p":14.99,"c":"MODA","i":"https://picsum.photos/seed/scarf/400/400"},{"id":42,"n":"Camiseta Oversized Aesthetic Y2K","d":"Camiseta oversized estilo Y2K con print gráfico","p":16.99,"c":"MODA","i":"https://picsum.photos/seed/oversized/400/400"},{"id":43,"n":"Shorts Ciclismo Compresión","d":"Shorts de ciclismo con almohadilla gel y compresión muscular","p":13.99,"c":"MODA","i":"https://picsum.photos/seed/cycling/400/400"},{"id":44,"n":"Vestido Casual Floral Verano","d":"Vestido midi floral con tirantes, perfecto para playa o ciudad","p":22.99,"c":"MODA","i":"https://picsum.photos/seed/floraldress/400/400"},{"id":45,"n":"Falda Mini Vaquera","d":"Mini falda vaquera de tiro alto con botones al frente","p":19.99,"c":"MODA","i":"https://picsum.photos/seed/denimskirt/400/400"},{"id":46,"n":"Sudadera Básica Sin Capucha","d":"Sudadera crew neck de algodón grueso, interior afelpado","p":24.99,"c":"MODA","i":"https://picsum.photos/seed/sweatshirt/400/400"},{"id":47,"n":"Pantalón Cargo Multi-bolsillos","d":"Pantalón cargo unisex con 6 bolsillos, estilo militar urban","p":29.99,"c":"MODA","i":"https://picsum.photos/seed/cargo/400/400"},{"id":48,"n":"Camiseta Rayas Marineras","d":"Camiseta clásica marinera de rayas horizontales azul y blanco","p":14.99,"c":"MODA","i":"https://picsum.photos/seed/stripes/400/400"},{"id":49,"n":"Top Deportivo Sin Mangas","d":"Top deportivo de secado rápido, ideal para gym o yoga","p":12.99,"c":"MODA","i":"https://picsum.photos/seed/sporttop/400/400"},{"id":50,"n":"Gorra Snapback Negra","d":"Gorra snapback plana unisex, talla ajustable, bordado lateral","p":11.99,"c":"MODA","i":"https://picsum.photos/seed/snapback/400/400"},{"id":51,"n":"Aretes Perla Artificial Pack 3","d":"Set 3 pares de aretes con perla artificial","p":9.99,"c":"MODA","i":"https://picsum.photos/seed/pearlearrings/400/400"},{"id":52,"n":"Collar Cadena Dorada Fina","d":"Collar cadena dorada fina tipo snake chain, longitud 45cm","p":12.99,"c":"MODA","i":"https://picsum.photos/seed/goldchain/400/400"},{"id":53,"n":"Pulsera Elástica Piedras Naturales","d":"Pulsera elástica con piedras semipreciosas, estilo boho","p":9.99,"c":"MODA","i":"https://picsum.photos/seed/stonebracelet/400/400"},{"id":54,"n":"Anillo Ajustable Acero Inoxidable","d":"Anillo de apertura ajustable en acero quirúrgico","p":8.99,"c":"MODA","i":"https://picsum.photos/seed/ring/400/400"},{"id":55,"n":"Bolso Tela Canvas Pequeño","d":"Bolso tote pequeño de canvas reciclado con cremallera","p":14.99,"c":"MODA","i":"https://picsum.photos/seed/canvasbag/400/400"},{"id":56,"n":"Mochila Plegable Impermeable","d":"Mochila ultraligera plegable en su bolsillo, resistente al agua","p":19.99,"c":"MODA","i":"https://picsum.photos/seed/foldablebackpack/400/400"},{"id":57,"n":"Chanclas Plataforma Verano","d":"Chanclas con plataforma de corcho, tira de PU dorada","p":16.99,"c":"MODA","i":"https://picsum.photos/seed/platformflip/400/400"},{"id":58,"n":"Zapatillas Lona Blancas Básicas","d":"Zapatillas de lona clásicas blancas unisex, suela de goma","p":24.99,"c":"MODA","i":"https://picsum.photos/seed/whitesneakers/400/400"},{"id":59,"n":"Vestido Midi Crochet Playero","d":"Vestido midi de crochet tejido a mano, perfecto sobre el bañador","p":27.99,"c":"MODA","i":"https://picsum.photos/seed/crochetdress/400/400"},{"id":60,"n":"Camisa Hawaiana Hombre","d":"Camisa manga corta hawaiana con print tropical, 100% viscosa","p":18.99,"c":"MODA","i":"https://picsum.photos/seed/hawaiian/400/400"},{"id":61,"n":"Pantalón Pijama Franela Cuadros","d":"Pantalón de pijama de franela suave con elástico en cintura","p":15.99,"c":"MODA","i":"https://picsum.photos/seed/pajama/400/400"},{"id":62,"n":"Bralette Encaje Floral","d":"Bralette de encaje floral sin aro, ajuste por espalda","p":13.99,"c":"MODA","i":"https://picsum.photos/seed/bralette/400/400"},{"id":63,"n":"Medias Rejilla Negras Pack 3","d":"Pack 3 pares de medias de rejilla negras, tendencia retro","p":9.99,"c":"MODA","i":"https://picsum.photos/seed/fishnets/400/400"},{"id":64,"n":"Diadema Satén Lazos","d":"Diadema de satén con lazo lateral, estilo coquette tendencia 2025","p":8.99,"c":"MODA","i":"https://picsum.photos/seed/hairband/400/400"},{"id":65,"n":"Clips Cabello Mariposa Pack 10","d":"Set 10 clips mariposa de acetato en colores pastel","p":7.99,"c":"MODA","i":"https://picsum.photos/seed/hairclips/400/400"},{"id":66,"n":"Cinturón Cadena Metal Dorado","d":"Cinturón de cadena metálica dorada para vestidos y faldas","p":12.99,"c":"MODA","i":"https://picsum.photos/seed/chainbelt/400/400"},{"id":67,"n":"Paraguas Plegable Automático","d":"Paraguas plegable apertura automática, resistente al viento","p":14.99,"c":"MODA","i":"https://picsum.photos/seed/umbrella/400/400"},{"id":68,"n":"Gafas Sol Básicas Ovaladas","d":"Gafas de sol ovaladas con protección UV400","p":9.99,"c":"MODA","i":"https://picsum.photos/seed/sunglasses/400/400"},{"id":69,"n":"Funda Gafas Cuero Sintético","d":"Funda para gafas de cuero sintético con cierre magnético","p":7.99,"c":"MODA","i":"https://picsum.photos/seed/glasscase/400/400"},{"id":70,"n":"Guantes Cuero Sintético Invierno","d":"Guantes de cuero sintético con forro polar interior","p":17.99,"c":"MODA","i":"https://picsum.photos/seed/gloves/400/400"},{"id":71,"n":"Calcetines Térmicos Pack 3","d":"Pack 3 pares calcetines térmicos de lana merino, trekking","p":10.99,"c":"MODA","i":"https://picsum.photos/seed/thermalsocks/400/400"},{"id":72,"n":"Sudadera Capucha Básica Negra","d":"Hoodie oversized unisex negro, forro polar suave interior","p":28.99,"c":"MODA","i":"https://picsum.photos/seed/hoodie/400/400"},{"id":73,"n":"Shorts Vaqueros Deshilachados","d":"Shorts vaqueros tiro alto con borde deshilachado, estilo vintage","p":21.99,"c":"MODA","i":"https://picsum.photos/seed/denimshorts/400/400"},{"id":74,"n":"Falda Plisada Mini Colores","d":"Mini falda plisada en colores pastel, cintura elástica","p":18.99,"c":"MODA","i":"https://picsum.photos/seed/pleatedskirt/400/400"},{"id":75,"n":"Camiseta Crop Universitaria","d":"Camiseta crop con logo universitario vintage, manga corta","p":13.99,"c":"MODA","i":"https://picsum.photos/seed/college/400/400"},{"id":76,"n":"Pantalón Chándal Algodón","d":"Pantalón de chándal clásico con bolsillos laterales y cordón","p":22.99,"c":"MODA","i":"https://picsum.photos/seed/sweatpants/400/400"},{"id":77,"n":"Vestido Camisero Lino","d":"Vestido camisero de lino con botones y cinturón incluido","p":25.99,"c":"MODA","i":"https://picsum.photos/seed/shirrdress/400/400"},{"id":78,"n":"Top Halter Nudo Frontal","d":"Top halter con nudo frontal ajustable, tela crêpe elástica","p":12.99,"c":"MODA","i":"https://picsum.photos/seed/haltertop/400/400"},{"id":79,"n":"Minibolso Bandolera PU","d":"Mini bolso bandolera de PU con cadena dorada, varios colores","p":16.99,"c":"MODA","i":"https://picsum.photos/seed/minibag/400/400"},{"id":80,"n":"Riñonera Tela Estampada","d":"Riñonera de tela con estampado geométrico, multi-bolsillos","p":14.99,"c":"MODA","i":"https://picsum.photos/seed/fanny/400/400"},{"id":81,"n":"Sombrero Paja Playa","d":"Sombrero de paja natural ala ancha para playa y festivales","p":12.99,"c":"MODA","i":"https://picsum.photos/seed/strawhat/400/400"},{"id":82,"n":"Leggings Vinilo Efecto Piel","d":"Leggings de vinilo efecto cuero PU, tiro alto, tendencia dark","p":19.99,"c":"MODA","i":"https://picsum.photos/seed/leatherleggings/400/400"},{"id":83,"n":"Camiseta Print Galaxia Cosmos","d":"Camiseta con diseño de galaxia y cosmos, print sublimación","p":15.99,"c":"MODA","i":"https://picsum.photos/seed/galaxy/400/400"},{"id":84,"n":"Pantalón Palazzo Fluido","d":"Pantalón palazzo de tela fluida, vuelo amplio, cintura alta","p":24.99,"c":"MODA","i":"https://picsum.photos/seed/palazzo/400/400"},{"id":85,"n":"Blusa Transparente Bordada","d":"Blusa semitransparente con bordado floral en mangas y cuello","p":21.99,"c":"MODA","i":"https://picsum.photos/seed/embroideredblouse/400/400"},{"id":86,"n":"Chaqueta Vaquera Básica","d":"Chaqueta vaquera clásica de denim azul lavado, corte recto","p":34.99,"c":"MODA","i":"https://picsum.photos/seed/denimjacket/400/400"},{"id":87,"n":"Jersey Punto Grueso Otoño","d":"Jersey de punto grueso texturizado, cuello redondo","p":29.99,"c":"MODA","i":"https://picsum.photos/seed/knitwear/400/400"},{"id":88,"n":"Mono Overol Vaquero Mujer","d":"Mono peto vaquero completo con pernera ancha, tiro alto","p":32.99,"c":"MODA","i":"https://picsum.photos/seed/overalls/400/400"},{"id":89,"n":"Camiseta Tie-Dye Colores Vivos","d":"Camiseta tie-dye hecha a mano, colores vivos únicos","p":13.99,"c":"MODA","i":"https://picsum.photos/seed/tiedyeshirt/400/400"},{"id":90,"n":"Set Bandanas Multiusos Pack 3","d":"Pack 3 bandanas de tela 100% algodón, múltiples usos","p":11.99,"c":"MODA","i":"https://picsum.photos/seed/bandana/400/400"},{"id":91,"n":"Camiseta Corta Manga Larga Acanalada","d":"Camiseta manga larga de tela acanalada elástica, corte ceñido","p":16.99,"c":"MODA","i":"https://picsum.photos/seed/ribbed/400/400"},{"id":92,"n":"Zapatillas Sneaker Plataforma Chunky","d":"Zapatillas chunky con suela plataforma 5cm, cuero sintético premium","p":59.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/chunky/400/400"},{"id":93,"n":"Bolso Bandolera Cuero PU Premium","d":"Bolso bandolera de PU de alta calidad con herrajes dorados","p":49.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/puleatherbag/400/400"},{"id":94,"n":"Smartwatch Fitness Básico","d":"Smartwatch con monitor cardíaco, SpO2, GPS y 7 días batería","p":44.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/smartwatch/400/400"},{"id":95,"n":"Auriculares Bluetooth Inalámbricos","d":"Auriculares TWS con cancelación de ruido básica, 30h batería","p":39.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/earbuds/400/400"},{"id":96,"n":"Gafas Sol Polarizadas Marco Acetato","d":"Gafas de sol polarizadas con montura de acetato italiano","p":45.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/acetatesun/400/400"},{"id":97,"n":"Perfume Mujer Eau de Toilette 50ml","d":"Fragancia femenina floral amaderada, duración 8h, caja de regalo","p":42.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/perfume/400/400"},{"id":98,"n":"Perfume Hombre Woody Intense 50ml","d":"Fragancia masculina amaderada intensa, notas de oud y cuero","p":44.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/manperfume/400/400"},{"id":99,"n":"Camisa Oxford Premium Hombre","d":"Camisa oxford de algodón peinado, cuello button-down, slim fit","p":45.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/oxfordshirt/400/400"},{"id":100,"n":"Pantalón Chino Slim Fit","d":"Pantalón chino de algodón elástico, slim fit, varios colores","p":49.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/chinopants/400/400"},{"id":101,"n":"Vestido Midi Satén Elegante","d":"Vestido midi de satén brillante con abertura lateral, evento","p":65.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/satendress/400/400"},{"id":102,"n":"Blazer Entallado Mujer","d":"Blazer entallado de crepe, hombros estructurados, forro interior","p":79.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/womansblazer/400/400"},{"id":103,"n":"Chaqueta Bomber Streetwear","d":"Chaqueta bomber de satén reversible, estilo street premium","p":69.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/bomberjacket/400/400"},{"id":104,"n":"Abrigo Corto Lana Mezcla","d":"Abrigo corto de lana y poliéster, estructura elegante","p":99.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/woolencoat/400/400"},{"id":105,"n":"Bolso Shopper Tote Premium","d":"Bolso tote XL de PU premium con refuerzo base y bolsillo interior","p":55.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/totebag/400/400"},{"id":106,"n":"Mochila Urban Style Premium","d":"Mochila urbana de PU con conector USB, compartimento laptop 15","p":65.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/urbanbackpack/400/400"},{"id":107,"n":"Cartera Cuero Slim RFID","d":"Cartera minimalista de cuero genuino con protección RFID","p":39.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/slimwallet/400/400"},{"id":108,"n":"Cinturón Cuero Genuino Trenzado","d":"Cinturón de cuero genuino trenzado artesanal, hebilla metálica","p":45.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/leatherbelt/400/400"},{"id":109,"n":"Botines Tacón Bajo Mujer","d":"Botines de PU premium con tacón cuadrado bajo 4cm, cremallera","p":79.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/ankleboot/400/400"},{"id":110,"n":"Mocasines Cuero Sintético Hombre","d":"Mocasines de cuero sintético de alta calidad, suela antideslizante","p":55.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/loafers/400/400"},{"id":111,"n":"Deportivas Running Ligeras","d":"Zapatillas de running ultra ligeras, amortiguación EVA, transpirables","p":89.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/running/400/400"},{"id":112,"n":"Sandalias Tiras Verano Elegantes","d":"Sandalias de tiras entrelazadas con tacón de cuna, verano","p":59.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/sandals/400/400"},{"id":113,"n":"Collar Acero Inoxidable Colgante","d":"Collar con colgante de acero inoxidable IP dorado, minimalista","p":38.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/steelnecklace/400/400"},{"id":114,"n":"Pendientes Aro Grandes Dorados","d":"Pendientes aro XL de acero inoxidable con baño de oro 18K","p":35.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/goldhoops/400/400"},{"id":115,"n":"Pulsera Hombre Cuero Acero","d":"Pulsera de cuero genuino con cierre de acero inoxidable magnético","p":42.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/manbracelet/400/400"},{"id":116,"n":"Anillo Solitario Plata 925","d":"Anillo solitario en plata 925 con circonita incolora 6mm","p":45.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/silverring/400/400"},{"id":117,"n":"Smartwatch Dama Pantalla Circular","d":"Smartwatch femenino pantalla circular AMOLED, correa intercambiable","p":79.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/ladywatch/400/400"},{"id":118,"n":"Pulsera Fitness Banda Inteligente","d":"Banda de actividad con monitor sueño, pasos, calorías y notificaciones","p":49.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/fitband/400/400"},{"id":119,"n":"Auriculares ANC Over-Ear","d":"Auriculares over-ear con cancelación activa de ruido y 40h batería","p":89.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/headphones/400/400"},{"id":120,"n":"Altavoz Bluetooth Portátil Impermeable","d":"Altavoz portátil IP67 con sonido 360° y 24h batería","p":55.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/speaker/400/400"},{"id":121,"n":"Cargador Inalámbrico Premium 3 en 1","d":"Cargador inalámbrico para móvil, auriculares y smartwatch","p":45.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/wirelesscharger/400/400"},{"id":122,"n":"Power Bank 20000mAh Slim Design","d":"Batería externa ultraslim 20000mAh con carga rápida PD 65W","p":39.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/powerbank/400/400"},{"id":123,"n":"Funda Premium Cuero iPhone","d":"Funda de cuero genuino con tarjetero integrado para iPhone","p":39.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/phonecase/400/400"},{"id":124,"n":"Traje Baño Mujer Una Pieza Luxury","d":"Bañador de una pieza con recortes estratégicos y detalle dorado","p":45.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/swimsuit/400/400"},{"id":125,"n":"Bikini Set Premium Estampado","d":"Bikini triangular con lazo ajustable, estampado tropical premium","p":49.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/bikini/400/400"},{"id":126,"n":"Pijama Seda Premium Estampado","d":"Conjunto pijama de seda artificial con estampado geométrico","p":79.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/silkpajama/400/400"},{"id":127,"n":"Masajeador Facial Rodillo Cuarzo","d":"Rodillo facial de cuarzo rosa natural para drenaje linfático","p":39.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/facialroller/400/400"},{"id":128,"n":"Sérum Vitamina C Premium 30ml","d":"Sérum vitamina C 20% con ácido hialurónico y niacinamida","p":42.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/serum/400/400"},{"id":129,"n":"Set Pinceles Maquillaje 12 Piezas","d":"Set 12 pinceles de maquillaje profesionales pelo sintético premium","p":35.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/makeupbrush/400/400"},{"id":130,"n":"Plancha Pelo Cerámica Ión Negativa","d":"Plancha alisadora de cerámica turmalina con iones negativos 230°C","p":49.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/hairstraightener/400/400"},{"id":131,"n":"Rizador Automático Digital","d":"Rizador automático con pantalla digital y 5 temperaturas, cerámica","p":59.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/curlerwand/400/400"},{"id":132,"n":"Secador Pelo Iónico Potente","d":"Secador iónico 2200W con difusor y concentrador incluidos","p":55.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/hairdryer/400/400"},{"id":133,"n":"Paleta Sombras 24 Tonos Luxury","d":"Paleta de sombras 24 tonos con mattes, shimmer y duochrome","p":39.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/eyeshadow/400/400"},{"id":134,"n":"Set Manicura Gel UV Completo","d":"Kit manicura gel con lámpara UV 48W, 12 esmaltes y accesorios","p":45.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/manicure/400/400"},{"id":135,"n":"Depiladora Eléctrica Mujer IPL","d":"Depiladora de luz pulsada IPL para uso en casa, 500.000 pulsos","p":89.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/ipl/400/400"},{"id":136,"n":"Afeitadora Hombre Eléctrica 5D","d":"Afeitadora eléctrica 5D flotante, impermeable IPX7, recargable","p":79.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/shaver/400/400"},{"id":137,"n":"Báscula Inteligente WiFi Corporal","d":"Báscula WiFi 13 métricas corporales, app compatible Fitbit y Apple Health","p":49.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/scale/400/400"},{"id":138,"n":"Esterilla Yoga Premium Antideslizante","d":"Esterilla yoga 6mm NBR antideslizante extra ancha con correa","p":45.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/yogamat/400/400"},{"id":139,"n":"Set Pesas Mano Ajustables 10kg","d":"Par de mancuernas ajustables de 1 a 10kg, agarre ergonómico","p":55.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/dumbbells/400/400"},{"id":140,"n":"Cuerda Saltar Inteligente Contador","d":"Cuerda de saltar con contador digital de saltos y calorías","p":39.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/jumprop/400/400"},{"id":141,"n":"Botella Agua Inteligente LED Temp","d":"Botella inteligente con pantalla LED de temperatura, acero inoxidable","p":45.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/smartbottle/400/400"},{"id":142,"n":"Termo Stanley Réplica Premium 1L","d":"Termo de acero inoxidable doble pared 1L, mantiene 24h frío/calor","p":49.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/stanleycup/400/400"},{"id":143,"n":"Mochila Montaña 40L Impermeable","d":"Mochila de montaña 40L con funda de lluvia integrada y soporte lumbar","p":89.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/hikingbag/400/400"},{"id":144,"n":"Chaqueta Softshell Outdoor","d":"Chaqueta softshell cortavientos y resistente al agua, 3 capas","p":99.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/softshell/400/400"},{"id":145,"n":"Pantalón Trekking Convertible","d":"Pantalón de trekking convertible en bermuda, secado rápido","p":69.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/trekking/400/400"},{"id":146,"n":"Gafas Deportivas Espejo UV400","d":"Gafas deportivas con lente espejo intercambiable, UV400","p":45.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/sportglasses/400/400"},{"id":147,"n":"Banda Resistencia Elástica Pack 5","d":"Set 5 bandas de resistencia elástica de látex, diferentes intensidades","p":35.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/resistancebands/400/400"},{"id":148,"n":"Rodillo Foam Masaje Muscular","d":"Rodillo de espuma de alta densidad para masaje miofascial","p":38.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/foamroller/400/400"},{"id":149,"n":"Collar Running GPS Premium","d":"Collar GPS para perro, compatible con app, 20 días batería","p":79.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/gpspet/400/400"},{"id":150,"n":"Gafas Luz Azul Anti-fatiga","d":"Gafas filtro luz azul, montura TR90 flexible, unisex","p":35.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/bluelight/400/400"},{"id":151,"n":"Set Skincare Coreano 5 Pasos","d":"Rutina coreana completa: limpiador, tónico, esencia, sérum y crema","p":55.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/kbeauty/400/400"},{"id":152,"n":"Reloj Hombre Automático Acero 316L","d":"Reloj automático mecánico con caja de acero 316L, cristal zafiro","p":299.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/automaticwatch/400/400"},{"id":153,"n":"Reloj Mujer Dorado Cristales Luxury","d":"Reloj femenino con brazalete dorado y cristales Swarovski","p":249.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/ladywatchluxury/400/400"},{"id":154,"n":"Bolso Mujer Piel Genuina Mano","d":"Bolso de mano en piel genuina italiana, herrajes plateados","p":349.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/genuineleatherbag/400/400"},{"id":155,"n":"Maletín Cuero Genuino Hombre","d":"Maletín ejecutivo de cuero full grain, compartimento laptop 15","p":299.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/briefcase/400/400"},{"id":156,"n":"Perfume Niche Extrait Parfum 50ml","d":"Extrait de parfum niche, concentración 30%, duración 24h","p":185.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/nicheperfume/400/400"},{"id":157,"n":"Perfume Oud Luxury Collection 100ml","d":"Perfume oriental oud premium 100ml, mezcla de oud, rosa y vainilla","p":199.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/oud/400/400"},{"id":158,"n":"Traje Hombre Lana Italiana Slim","d":"Traje slim fit de lana italiana, forro completo, cuello solapa pico","p":499.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/suit/400/400"},{"id":159,"n":"Vestido Gala Seda Natural Premium","d":"Vestido de gala en seda natural, escote V, cola semilarga, bordado","p":449.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/galadress/400/400"},{"id":160,"n":"Abrigo Cachemira Premium Mujer","d":"Abrigo de cachemira 100% mongoliana, corte midi, botones nácar","p":599.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/cashmere/400/400"},{"id":161,"n":"Chaqueta Cuero Genuino Hombre","d":"Chaqueta de cuero de cordero genuino, forro de seda, estilo biker","p":399.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/leatherjacket/400/400"},{"id":162,"n":"Zapatillas Edición Limitada Premium","d":"Zapatillas de cuero genuino edición limitada, suela de goma premium","p":249.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/luxurysneakers/400/400"},{"id":163,"n":"Botines Cuero Genuino Mujer Luxury","d":"Botines de cuero genuino con tacón geométrico 7cm, punta cuadrada","p":299.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/luxuryboots/400/400"},{"id":164,"n":"Oxford Cuero Full Grain Hombre","d":"Zapato Oxford de cuero full grain, punta recta, suela cuero Goodyear","p":349.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/oxfordshoes/400/400"},{"id":165,"n":"Collar Plata 925 Diamante Lab","d":"Collar de plata 925 con diamante de laboratorio 0.5ct certificado GIA","p":299.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/diamondnecklace/400/400"},{"id":166,"n":"Pulsera Oro 18K Baño Premium","d":"Pulsera de acero con baño de oro 18K de 5 micras, ancho 10mm","p":249.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/goldbracelet/400/400"},{"id":167,"n":"Pendientes Perla Cultivada Natural","d":"Pendientes de perla cultivada Akoya 8mm con montura de oro blanco","p":199.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/pearlsearrings/400/400"},{"id":168,"n":"Anillo Compromiso Plata 925","d":"Anillo de compromiso plata 925 con piedra principal y pavé lateral","p":179.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/engagementring/400/400"},{"id":169,"n":"Smartwatch Premium AMOLED GPS","d":"Smartwatch de alta gama con pantalla AMOLED, GPS integrado y ECG","p":299.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/premiumsmartwatch/400/400"},{"id":170,"n":"Auriculares ANC Premium Over-Ear","d":"Auriculares premium con cancelación activa de ruido de élite","p":249.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/premiumheadphones/400/400"},{"id":171,"n":"Altavoz Premium Hi-Fi Bluetooth","d":"Altavoz portátil premium 60W con sonido Hi-Fi, IP67, 18h batería","p":349.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/hifispeaker/400/400"},{"id":172,"n":"Drone Fotográfico 4K Plegable","d":"Drone plegable 4K con gimbal 3 ejes, 30min vuelo","p":399.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/drone/400/400"},{"id":173,"n":"Cámara Acción 4K 60FPS Estabilización","d":"Cámara de acción 4K/60fps con estabilización HorizonSteady 360°","p":299.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/actioncam/400/400"},{"id":174,"n":"Proyector 4K Portátil Ultra HD","d":"Proyector portátil 4K con 1000 lúmenes, altavoz integrado, HDMI","p":549.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/projector/400/400"},{"id":175,"n":"Set Skincare Luxury Premium 7 Piezas","d":"Rutina completa de lujo: limpiador, tónico, esencia, 2 sérums","p":199.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/luxuryskincare/400/400"},{"id":176,"n":"Crema Antiedad Retinol Luxury 50ml","d":"Crema antiedad con retinol 0.5%, péptidos y ceramidas, clínica probada","p":175.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/retinolcream/400/400"},{"id":177,"n":"Set Fragancias Niche Colección 4","d":"Colección 4 miniatures de parfum niche, 15ml cada una, estuche premium","p":299.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/fragranceset/400/400"},{"id":178,"n":"Difusor Aromas Ultrasónico Premium","d":"Difusor ultrasónico 500ml con luz ambiental LED, silencioso 25dB","p":189.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/diffuser/400/400"},{"id":179,"n":"Set Whisky Cristal Tallado 6 Piezas","d":"Set 6 vasos de whisky en cristal tallado a mano, caja madera","p":299.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/crystalwhisky/400/400"},{"id":180,"n":"Vajilla Premium Porcelana 12 Servicios","d":"Vajilla completa de porcelana bone china, 12 servicios, 48 piezas","p":349.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/chinaware/400/400"},{"id":181,"n":"Set Cuchillos Damasco Cocina Pro","d":"Set 8 cuchillos de acero damasco VG10, mangos pakkawood, con taco","p":259.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/damascusknives/400/400"},{"id":182,"n":"Cafetera Espresso Automática","d":"Cafetera espresso automática con molinillo integrado y vaporizador","p":499.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/espressomachine/400/400"},{"id":183,"n":"Robot Cocina Multifunción Premium","d":"Robot de cocina 1500W con 15 funciones, báscula integrada","p":399.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/foodprocessor/400/400"},{"id":184,"n":"Aspiradora Robot IA Auto-Vaciado","d":"Robot aspirador con IA, mapeo láser, base auto-vaciado 60 días","p":449.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/robotvacuum/400/400"},{"id":185,"n":"Purificador Aire HEPA 360° Luxury","d":"Purificador de aire HEPA H13, cubre 60m², sensor PM2.5 en tiempo real","p":299.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/airpurifier/400/400"},{"id":186,"n":"Cuadro Canvas Arte Abstracto XXL","d":"Impresión en canvas de arte abstracto 120x80cm, marco flotante","p":199.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/abstractart/400/400"},{"id":187,"n":"Lámpara Pie Arco LED Luxury","d":"Lámpara de pie de arco con LED regulable y temperatura de color ajustable","p":249.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/arclamp/400/400"},{"id":188,"n":"Espejo Inteligente LED Baño","d":"Espejo de baño con iluminación LED integrada, antivaho y bluetooth","p":299.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/smartmirror/400/400"},{"id":189,"n":"Set Ropa Cama Seda Natural 200H","d":"Juego de sábanas de seda natural 22 momme, 200 hilos","p":399.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/silkbedding/400/400"},{"id":190,"n":"Almohada Memory Foam Premium","d":"Almohada ergonómica de memory foam con cubierta de bambú OEKO-TEX","p":189.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/memorypillow/400/400"},{"id":191,"n":"Bicicleta Estática Premium App","d":"Bicicleta estática de carbono 1200W con pantalla táctil 21 y clases live","p":499.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/exercisebike/400/400"},{"id":192,"n":"Pesas Ajustables Selectoras 32kg","d":"Par de mancuernas selectoras ajustables de 2.5 a 32kg por mancuerna","p":399.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/selectordumbbells/400/400"},{"id":193,"n":"Masajeador Percusión Muscular Pro","d":"Pistola de masaje percutiva profesional 6 cabezales, silenciosa 40dB","p":249.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/massagegun/400/400"},{"id":194,"n":"Monitor Gaming 27 165Hz QHD","d":"Monitor gaming 27 165Hz resolución QHD, 1ms, panel IPS, HDR400","p":549.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/gamingmonitor/400/400"},{"id":195,"n":"Silla Gaming Premium Lumbar","d":"Silla gaming de cuero PU con soporte lumbar ajustable y reposacabezas","p":399.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/gamingchair/400/400"},{"id":196,"n":"Casco VR Standalone 4K","d":"Casco de realidad virtual standalone, pantalla 4K por ojo, 120Hz","p":499.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/vrheadset/400/400"},{"id":197,"n":"Patinete Eléctrico Pro 500W 45km","d":"Patinete eléctrico motor 500W, autonomía 45km, frenos hidráulicos","p":599.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/electricscooter/400/400"},{"id":198,"n":"Maleta Cabina Policarbonato Luxury","d":"Maleta de cabina de policarbonato ultraligera con TSA lock y USB","p":249.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/luggagecase/400/400"},{"id":199,"n":"Lentes Smart AR Premium","d":"Gafas inteligentes con realidad aumentada, altavoz y cámara integrada","p":349.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/smartglasses/400/400"},{"id":200,"n":"Bicicleta Urbana Eléctrica Plegable","d":"Bicicleta eléctrica plegable 250W, batería 36V 10Ah, 50km autonomía","p":799.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/ebike/400/400"},{"id":201,"n":"Altavoz HiFi Tower 2.1 200W","d":"Sistema de sonido tower 2.1, 200W RMS, Bluetooth 5.0, línea óptica","p":499.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/towerspeaker/400/400"},{"id":202,"n":"Set Decoración Hogar Oro Luxury","d":"Set 7 piezas decoración sala de estar en acabado dorado premium","p":299.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/golddecor/400/400"},{"id":203,"n":"Tablet Profesional 12 256GB","d":"Tablet 12 con chip M2, 256GB, pantalla Liquid Retina, stylus incluido","p":699.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/propad/400/400"},{"id":204,"n":"Reloj Cronógrafo Acero Premium","d":"Reloj cronógrafo de cuarzo suizo, caja 42mm, correa acero milanesa","p":319.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/chronograph/400/400"},{"id":205,"n":"Collar Acero Titanio con Diamante","d":"Collar en titanio grado aeronáutico con diamante de laboratorio 1ct","p":459.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/titaniumcollar/400/400"},{"id":206,"n":"Perfume Creator ORIONIX Signature","d":"Fragancia exclusiva ORIONIX, notas de ámbar, cosmos y madera de cedro","p":229.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/orionixperfume/400/400"},{"id":207,"n":"Traje de Baño Hombre Luxury Print","d":"Bañador hombre de microfibra premium con print exclusivo ORIONIX","p":159.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/luxuryswim/400/400"},{"id":208,"n":"Bolso Clutch Boda Seda Cristales","d":"Clutch nupcial de seda con cristales Swarovski, cadena dorada","p":249.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/weddingclutch/400/400"},{"id":209,"n":"Set Viaje Luxury Amenities 10 Piezas","d":"Kit de viaje de lujo: perfume, crema, sérum, champú, acondicionador premium","p":175.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/travelkit/400/400"},{"id":210,"n":"Auriculares Conducción Ósea Titanio","d":"Auriculares de conducción ósea en titanio, IP68, sport premium","p":199.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/boneconduction/400/400"},{"id":211,"n":"Cámara Polaroid Edición Luxury","d":"Cámara instantánea Polaroid edición especial con marco dorado","p":169.99,"c":"MI DINASTIA","i":"https://picsum.photos/seed/polaroid/400/400"},{"id":212,"n":"Funda Móvil Silicona MagSafe","d":"Funda de silicona líquida compatible MagSafe, tacto premium","p":12.99,"c":"MODA","i":"https://picsum.photos/seed/magcase/400/400"},{"id":213,"n":"Soporte Móvil Escritorio Ajustable","d":"Soporte de teléfono articulado para escritorio, cuello flexible 360°","p":14.99,"c":"MODA","i":"https://picsum.photos/seed/phonestand/400/400"},{"id":214,"n":"Cable USB-C Trenzado 2m","d":"Cable USB-C trenzado nylon, carga rápida 65W, longitud 2 metros","p":9.99,"c":"MODA","i":"https://picsum.photos/seed/usbcable/400/400"},{"id":215,"n":"Protector Pantalla Cristal Templado","d":"Protector de pantalla cristal templado 9H anti-arañazos, pack 2","p":7.99,"c":"MODA","i":"https://picsum.photos/seed/screenprotect/400/400"},{"id":216,"n":"Mascarilla Facial Hidratante Pack 10","d":"Pack 10 mascarillas faciales de hidratación con ácido hialurónico","p":12.99,"c":"MODA","i":"https://picsum.photos/seed/facemask/400/400"},{"id":217,"n":"Parche Anti-Acné Hidrocaloide 36u","d":"Parches hidrocaloide anti espinillas, absorbentes 100%, 36 unidades","p":9.99,"c":"MODA","i":"https://picsum.photos/seed/acnepatch/400/400"},{"id":218,"n":"Labial Líquido Matte Larga Duración","d":"Labial líquido matte de larga duración, 12h sin retoques, 12 tonos","p":10.99,"c":"MODA","i":"https://picsum.photos/seed/lipstick/400/400"},{"id":219,"n":"Pestaña Postiza Natural Sin Cola","d":"Pestañas postizas sin adhesivo, reposicionables, aspecto natural","p":11.99,"c":"MODA","i":"https://picsum.photos/seed/lashes/400/400"},{"id":220,"n":"Esponja Maquillaje Gota Set 3","d":"Set 3 esponjas de maquillaje tipo beauty blender en tono nude","p":8.99,"c":"MODA","i":"https://picsum.photos/seed/beautyblender/400/400"},{"id":221,"n":"Corrector Ojeras Efecto Lifting","d":"Corrector de ojeras con efecto lifting y cobertura total, 3 tonos","p":9.99,"c":"MODA","i":"https://picsum.photos/seed/concealer/400/400"},{"id":222,"n":"Vela Aromática Soja Natural 200g","d":"Vela de cera de soja natural con aceites esenciales de lavanda","p":14.99,"c":"MODA","i":"https://picsum.photos/seed/soywax/400/400"},{"id":223,"n":"Posavasos Corcho Natural Pack 6","d":"Set 6 posavasos de corcho natural con diseño geométrico","p":9.99,"c":"MODA","i":"https://picsum.photos/seed/coasters/400/400"},{"id":224,"n":"Maceta Cerámica Minimalista","d":"Maceta de cerámica artesanal blanca con plato, diseño minimalista","p":13.99,"c":"MODA","i":"https://picsum.photos/seed/flowerpot/400/400"},{"id":225,"n":"Agenda Dot Grid A5 2026","d":"Agenda punto grid A5 para bullet journaling, tapa dura reciclada","p":14.99,"c":"MODA","i":"https://picsum.photos/seed/dotgrid/400/400"},{"id":226,"n":"Resaltadores Pastel Pack 6 Colores","d":"Set 6 resaltadores de punta doble en colores pastel, tinta al agua","p":8.99,"c":"MODA","i":"https://picsum.photos/seed/highlighters/400/400"},{"id":227,"n":"Juguete Interactivo Gato Rolling Ball","d":"Pelota interactiva automóvile para gatos, movimiento aleatorio, recargable","p":19.99,"c":"MODA","i":"https://picsum.photos/seed/catball/400/400"},{"id":228,"n":"Comedero Automático Mascotas Wifi","d":"Comedero automático con cámara HD, control app, capacidad 6L","p":29.99,"c":"MODA","i":"https://picsum.photos/seed/petfeeder/400/400"},{"id":229,"n":"Cama Mascota Redonda Peluche","d":"Cama redonda de peluche suave para perros y gatos hasta 15kg","p":24.99,"c":"MODA","i":"https://picsum.photos/seed/petbed/400/400"},{"id":230,"n":"Correa Perro Antitirón Reflectante","d":"Correa antitirón con mango acolchado y tira reflectante de seguridad","p":16.99,"c":"MODA","i":"https://picsum.photos/seed/dogcollar/400/400"},{"id":231,"n":"Transportín Mochila Mascotas Aireado","d":"Transportín-mochila para mascotas hasta 8kg, ventana burbuja extraíble","p":29.99,"c":"MODA","i":"https://picsum.photos/seed/petcarrier/400/400"},{"id":232,"n":"Fuente Agua Filtrada Gatos 2L","d":"Fuente de agua con filtro UV para gatos, 2L, silenciosa 25dB","p":34.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/catfountain/400/400"},{"id":233,"n":"GPS Tracker Mascotas Miniatura","d":"Rastreador GPS ultra pequeño para collar de mascotas, app en tiempo real","p":49.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/petgps/400/400"},{"id":234,"n":"Cámara Seguridad IP 360° WiFi","d":"Cámara de vigilancia IP 4K WiFi con rotación 360° y detección IA","p":59.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/ipcam/400/400"},{"id":235,"n":"Bombilla Inteligente RGBW WiFi E27","d":"Bombilla LED inteligente RGBW 12W E27, compatible Alexa y Google","p":14.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/smartbulb/400/400"},{"id":236,"n":"Tira LED Inteligente 5m RGBIC","d":"Tira LED 5m RGBIC sync música, segmentos independientes, WiFi","p":39.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/ledstrip/400/400"},{"id":237,"n":"Enchufe Inteligente WiFi Monitor","d":"Enchufe inteligente con medidor de consumo, programación y voz","p":19.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/smartplug/400/400"},{"id":238,"n":"Termostato Inteligente WiFi","d":"Termostato programable WiFi, pantalla táctil, compatible HVAC","p":79.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/smartthermostat/400/400"},{"id":239,"n":"Freidora Aire Digital 7L Familia","d":"Freidora de aire digital 7L con 12 programas, pantalla LCD, sin aceite","p":89.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/airfryer/400/400"},{"id":240,"n":"Batidora Vaso Potente 2000W","d":"Batidora de vaso profesional 2000W, vaso tritan 2L, 10 velocidades","p":79.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/blender/400/400"},{"id":241,"n":"Máquina Hielo Doméstica 15kg/día","d":"Máquina de hielo doméstica 15kg/día, ciclo 10 minutos","p":99.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/icemachine/400/400"},{"id":242,"n":"Termo Inteligente Pantalla LED 500ml","d":"Botella térmica con pantalla LED temperatura, acero 316L, 500ml","p":49.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/smartthermo/400/400"},{"id":243,"n":"Impresora Foto Bolsillo Bluetooth","d":"Impresora foto portátil bluetooth papel ZINK sin tinta, 10x15cm","p":59.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/photoprinter/400/400"},{"id":244,"n":"Luz LED Escritorio Anti-fatiga","d":"Lámpara LED escritorio regulable, temperatura color ajustable","p":45.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/desklamp/400/400"},{"id":245,"n":"Gamepad Bluetooth PC y Móvil","d":"Mando inalámbrico Bluetooth para PC Android iOS, gatillos hall effect","p":49.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/gamepad/400/400"},{"id":246,"n":"Teclado Mecánico 65% Hot-Swap","d":"Teclado mecánico compacto 65% hot-swap, RGB, switches intercambiables","p":89.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/meckeyboard/400/400"},{"id":247,"n":"Ratón Gaming Inalámbrico 26000DPI","d":"Ratón gaming inalámbrico 26000 DPI, 100h batería, 7 botones","p":69.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/gamingmouse/400/400"},{"id":248,"n":"Webcam 4K Autofoco IA","d":"Webcam 4K con encuadre automático IA, micrófono estero integrado","p":79.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/webcam/400/400"},{"id":249,"n":"Micrófono Lavalier Inalámbrico USB-C","d":"Micrófono corbatero inalámbrico para móvil, 0 latencia, plug USB-C","p":59.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/lavalier/400/400"},{"id":250,"n":"Estabilizador Gimbal 3 Ejes Móvil","d":"Gimbal 3 ejes para smartphone, seguimiento facial IA, plegable","p":79.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/gimbal/400/400"},{"id":251,"n":"Disco Duro SSD Externo 1TB","d":"SSD externo 1TB USB-C 3.2, transferencia 1000MB/s, ultra compacto","p":99.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/ssd/400/400"},{"id":252,"n":"Hub USB-C 12 en 1 Multifunción","d":"Hub USB-C 12 puertos: 4K HDMI, USB-A, SD, PD 100W, RJ45 Gigabit","p":49.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/usbhub/400/400"},{"id":253,"n":"Lámpara Luz Día SAD Therapy 10000lux","d":"Lámpara terapia SAD 10000 lux, temporizador, UV-free","p":69.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/sadlamp/400/400"},{"id":254,"n":"Humidificador Ultrasonico 4L Aromas","d":"Humidificador ultrasónico 4L con difusor aromas y luz LED RGB","p":45.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/humidifier/400/400"},{"id":255,"n":"Colchoneta Camping Autoinflable","d":"Esterilla de camping autoinflable 5cm grosor, aislamiento térmico R4","p":49.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/sleepingpad/400/400"},{"id":256,"n":"Saco Dormir 3 Estaciones -10°C","d":"Saco de dormir 3 estaciones hasta -10°C, ultraligero, compresible","p":79.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/sleepingbag/400/400"},{"id":257,"n":"Tienda Camping 2 Personas 3000mm","d":"Tienda de campaña 2 personas impermeabilidad 3000mm, montaje rápido","p":99.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/tent/400/400"},{"id":258,"n":"Linterna Frontal LED 1000lm Recargable","d":"Linterna frontal LED 1000 lúmenes recargable USB-C, IP67","p":39.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/headlamp/400/400"},{"id":259,"n":"Navaja Multifunción 12 Herramientas","d":"Multiherramienta tipo Leatherman acero inox con 12 funciones y funda","p":45.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/multitool/400/400"},{"id":260,"n":"Filtro Agua Grifo NSF Certificado","d":"Filtro de agua para grifo NSF-42 certificado, quita cloró y sedimentos","p":35.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/waterfilter/400/400"},{"id":261,"n":"Suplemento Proteína Whey Optimum 2kg","d":"Whey protein Gold Standard 100% 2kg, 30 sabores, 24g proteína/dosis","p":79.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/whey/400/400"},{"id":262,"n":"Pantalón Yoga Mujer Tiro Alto","d":"Leggings de yoga tiro alto con bolsillo lateral, tela 4-way stretch","p":22.99,"c":"MODA","i":"https://picsum.photos/seed/yogapants/400/400"},{"id":263,"n":"Calcetines Tobilleros Deportivos Pack 10","d":"Pack 10 pares calcetines tobilleros deportivos acolchados","p":14.99,"c":"MODA","i":"https://picsum.photos/seed/anklesocks/400/400"},{"id":264,"n":"Sudadera Oversize Bordado Floral","d":"Sudadera oversized con bordado floral en pecho, 100% algodón orgánico","p":29.99,"c":"MODA","i":"https://picsum.photos/seed/floralhoodie/400/400"},{"id":265,"n":"Top Deportivo Estampado Tie-Dye","d":"Sports bra con estampado tie-dye, espalda cruzada, alta sujeción","p":19.99,"c":"MODA","i":"https://picsum.photos/seed/sportsbra/400/400"},{"id":266,"n":"Chandal Conjunto 2 Piezas Mujer","d":"Conjunto de chándal 2 piezas sudadera + pantalón, colores pastel","p":34.99,"c":"MODA","i":"https://picsum.photos/seed/tracksuit/400/400"},{"id":267,"n":"Riñonera Impermeable Running","d":"Riñonera impermeabilidad 100% para running y ciclismo","p":13.99,"c":"MODA","i":"https://picsum.photos/seed/runbag/400/400"},{"id":268,"n":"Gorro Bucket Hat Aesthetic","d":"Bucket hat aesthetic unisex, ala ancha, varios colores pastel","p":12.99,"c":"MODA","i":"https://picsum.photos/seed/bucket/400/400"},{"id":269,"n":"Chaqueta Cortavientos Ultraligera","d":"Cortavientos ultraligero plegable en bolsillo, impermeable DWR","p":29.99,"c":"MODA","i":"https://picsum.photos/seed/windbreaker/400/400"},{"id":270,"n":"Camiseta Vintage Lavada Efecto","d":"Camiseta con efecto lavado vintage, print gráfico retro años 90","p":18.99,"c":"MODA","i":"https://picsum.photos/seed/vintage90/400/400"},{"id":271,"n":"Bolsa Tela Estampada Ecológica","d":"Bolsa tote de tela orgánica con estampado artístico, asa larga","p":10.99,"c":"MODA","i":"https://picsum.photos/seed/ecobag/400/400"},{"id":272,"n":"Reloj Análogo Minimalista Cuarzo","d":"Reloj de cuarzo minimalista con correa de malla milanesa dorada","p":39.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/minimalwatch/400/400"},{"id":273,"n":"Set Regalo Hombre Cuidado Barba","d":"Kit completo cuidado barba: aceite, bálsamo, peine y tijera en estuche","p":35.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/beardkit/400/400"},{"id":274,"n":"Crema Solar SPF50+ Toque Seco 50ml","d":"Protector solar SPF50+ toque seco, sin alcohol, apto pieles grasas","p":22.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/sunscreen/400/400"},{"id":275,"n":"Almohada Viaje Memoria Foam Compacta","d":"Almohada de viaje memory foam compacta, funda lavable de microfibra","p":24.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/travelpillow/400/400"},{"id":276,"n":"Bolsa Organización Maleta Pack 6","d":"Set 6 organizadores para maleta en diferentes tallas, nylon impermeable","p":29.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/packcubes/400/400"},{"id":277,"n":"Despertador Proyector Temperatura Lunar","d":"Despertador con proyector de luna, temperatura ambiente y cargador QI","p":45.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/moonalarm/400/400"},{"id":278,"n":"Sudoku Puzzle Madera 3D Complejo","d":"Puzzle 3D de madera tipo sudoku, 1000 piezas, nivel avanzado","p":35.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/woodpuzzle/400/400"},{"id":279,"n":"Set Pinturas Acrílicas 24 Colores Pro","d":"Set 24 pinturas acrílicas profesionales, pigmento extra-fino, 120ml","p":39.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/acrylicpaint/400/400"},{"id":280,"n":"Caja Música Madera Giratoria Personalizable","d":"Caja de música de madera con mecanismo de manivela y bailarina giratoria","p":45.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/musicbox/400/400"},{"id":281,"n":"Libro Ilustrado Arte Digital 2025","d":"Libro de arte digital tendencias 2025, 300 páginas, papel couché","p":49.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/artbook/400/400"},{"id":282,"n":"Set Coctelería Profesional 10 Piezas","d":"Kit bartender profesional: shaker, jigger, colador, muddler y más","p":55.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/cocktailset/400/400"},{"id":283,"n":"Cafetera Italiana Moka 6 Tazas Acero","d":"Cafetera italiana moka de acero inoxidable 6 tazas, inducción","p":35.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/moka/400/400"},{"id":284,"n":"Artilugio Slime Kit Completo","d":"Kit completo para hacer slime, 20 colores y texturas, para niños","p":19.99,"c":"MODA","i":"https://picsum.photos/seed/slime/400/400"},{"id":285,"n":"Fidget Cube Alivio Estrés","d":"Cubo antiestrés con 6 caras de actividad táctil, silencioso","p":9.99,"c":"MODA","i":"https://picsum.photos/seed/fidget/400/400"},{"id":286,"n":"Pop It Jumbo Silicona Colores","d":"Pop It gigante XXL de silicona con 90 burbujas, colores neón","p":7.99,"c":"MODA","i":"https://picsum.photos/seed/popit/400/400"},{"id":287,"n":"Figura Coleccionable Anime Premium","d":"Figura de anime premium 20cm, detalle ultra realista, base incluida","p":29.99,"c":"MODA","i":"https://picsum.photos/seed/animefigure/400/400"},{"id":288,"n":"Cartas Tarot Premium Ilustradas","d":"Baraja de tarot 78 cartas con ilustración artística, libro de guía","p":22.99,"c":"MODA","i":"https://picsum.photos/seed/tarot/400/400"},{"id":289,"n":"Cristal Cuarzo Rosa Natural Bruto","d":"Piedra de cuarzo rosa natural bruto 200-300g, energía positiva","p":14.99,"c":"MODA","i":"https://picsum.photos/seed/rosequartz/400/400"},{"id":290,"n":"Incienso Premium Set 12 Aromas","d":"Set 12 cajas incienso natural: sándalo, lavanda, rosa, oud y más","p":16.99,"c":"MODA","i":"https://picsum.photos/seed/incense/400/400"},{"id":291,"n":"Tapiz Decoración Boho Pared Grande","d":"Tapiz de pared 150x130cm estilo boho con mandala, tela de algodón","p":24.99,"c":"MODA","i":"https://picsum.photos/seed/tapestry/400/400"},{"id":292,"n":"Luces Hada Cobre 10m 100 LEDs","d":"Guirnalda luces hada 10m 100 LEDs cobre, batería + USB, warm white","p":11.99,"c":"MODA","i":"https://picsum.photos/seed/fairylights/400/400"},{"id":293,"n":"Cámara Instantánea Retro Película","d":"Cámara instantánea retro con impresión en película formato crédito","p":55.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/instaxmini/400/400"},{"id":294,"n":"Mando Selfie Bluetooth Plegable","d":"Palo selfie con trípode y mando bluetooth, longitud 110cm","p":19.99,"c":"MODA","i":"https://picsum.photos/seed/selfiestick/400/400"},{"id":295,"n":"Luz LED Aro Fotografía 18 RGB","d":"Ring light LED 18 RGB para fotografía y streaming con trípode 2m","p":49.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/ringlight/400/400"},{"id":296,"n":"Fondo Verde Streaming Pantalla Verde","d":"Tela chroma key verde 2x3m con soporte y pinzas para streaming","p":35.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/greenscreen/400/400"},{"id":297,"n":"Carta de Colores Pantone 2026 Edition","d":"Guía de colores Pantone actualizada 2026, referencia para diseño","p":39.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/pantone/400/400"},{"id":298,"n":"Tablet Gráfica Diseño Profesional","d":"Tableta gráfica A5 8192 niveles presión, 4 teclas y rueda táctil","p":79.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/graphictablet/400/400"},{"id":299,"n":"Bolígrafo Stylus Digital iPad Pro","d":"Lápiz stylus digital compatible iPad, inclinación, recarga magnética","p":49.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/stylus/400/400"},{"id":300,"n":"Auriculares Gaming RGB Surround 7.1","d":"Auriculares gaming con sonido virtual 7.1, RGB y micrófono retráctil","p":49.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/gamingheadset/400/400"},{"id":301,"n":"Tarjeta Capturadora HDMI 4K USB-C","d":"Capturadora de vídeo HDMI 4K60fps USB-C, 0 latencia para streaming","p":55.99,"c":"FASHION STYLE","i":"https://picsum.photos/seed/capture/400/400"},{"id":302,"n":"Curso IA para Negocios — AXEL Method","d":"Curso completo: automatiza tu negocio con IA. 40 lecciones + comunidad privada.","p":97,"c":"DIGITAL","i":"https://picsum.photos/seed/courseai/400/400"},{"id":303,"n":"Ebook: El Árbol Kabalion — Guía Completa","d":"Guía digital de 200 páginas sobre el sistema KRC/Kabalion de 46 Sefirot.","p":19.99,"c":"DIGITAL","i":"https://picsum.photos/seed/ebook1/400/400"},{"id":304,"n":"Pack Templates Redes Sociales ORIONIX","d":"100 plantillas Canva para Instagram, TikTok y YouTube en paleta ORIONIX.","p":27,"c":"DIGITAL","i":"https://picsum.photos/seed/templates1/400/400"},{"id":305,"n":"Curso Dropshipping desde Cero","d":"De €0 a tu primera venta en 30 días. AliExpress + Shopify + publicidad.","p":47,"c":"DIGITAL","i":"https://picsum.photos/seed/coursedrop/400/400"},{"id":306,"n":"Masterclass Marketing de Afiliados","d":"Aprende a generar comisiones pasivas 24/7. Estrategias 2025. 6 horas de contenido.","p":67,"c":"DIGITAL","i":"https://picsum.photos/seed/courseaffiliate/400/400"},{"id":307,"n":"Kit Emprendedor Digital ORIONIX","d":"Bundle: 5 ebooks + 200 templates + 3 minicursos + checklist de lanzamiento.","p":149,"c":"DIGITAL","i":"https://picsum.photos/seed/kitdigital/400/400"},{"id":308,"n":"Ebook: Finanzas Personales — De la Aguja a la Mansión","d":"Sistema financiero para salir de deudas y construir patrimonio.","p":14.99,"c":"DIGITAL","i":"https://picsum.photos/seed/ebook2/400/400"},{"id":309,"n":"Curso Crea tu Agencia de IA","d":"Construye una agencia de automatización con n8n, Claude y ChatGPT.","p":197,"c":"DIGITAL","i":"https://picsum.photos/seed/courseagency/400/400"},{"id":310,"n":"Pack Wallpapers ORIONIX HD","d":"50 fondos de pantalla en 4K con diseño Kabalion y cosmos. Para móvil y PC.","p":9.99,"c":"DIGITAL","i":"https://picsum.photos/seed/wallpapers/400/400"},{"id":311,"n":"Guía: Obsidian para tu Negocio","d":"Sistema de gestión de conocimiento con Obsidian + IA. Flujos de trabajo, plantillas.","p":24.99,"c":"DIGITAL","i":"https://picsum.photos/seed/obsidian/400/400"},{"id":312,"n":"Minicurso TikTok Ventas Orgánicas","d":"0 a 10k seguidores y tus primeras ventas en 21 días. Sin publicidad.","p":37,"c":"DIGITAL","i":"https://picsum.photos/seed/tiktok/400/400"},{"id":313,"n":"Template Pack Tienda Online Canva","d":"80 plantillas para tienda online: banners, fichas de producto, stories y anuncios.","p":19.99,"c":"DIGITAL","i":"https://picsum.photos/seed/storetemplate/400/400"},{"id":314,"n":"Ebook: Mentalidad Millonaria","d":"Los 21 principios mentales de los emprendedores exitosos. Basado en el sistema KRC.","p":12.99,"c":"DIGITAL","i":"https://picsum.photos/seed/ebook3/400/400"},{"id":315,"n":"Curso Email Marketing que Convierte","d":"Construye tu lista, escribe emails que venden y automatiza todo.","p":57,"c":"DIGITAL","i":"https://picsum.photos/seed/emailmkt/400/400"},{"id":316,"n":"Pack Música Lo-Fi ORIONIX — Royalty Free","d":"30 tracks lo-fi y ambient exclusivos para tus vídeos y streams. Sin copyright.","p":29.99,"c":"DIGITAL","i":"https://picsum.photos/seed/lofi/400/400"},{"id":317,"n":"Curso Criptomonedas para Principiantes","d":"Bitcoin, ETH, DeFi y NFTs explicados desde cero. Gestión de riesgo y estrategias 2025.","p":77,"c":"DIGITAL","i":"https://picsum.photos/seed/crypto/400/400"},{"id":318,"n":"Guía SEO Local para Negocios Físicos","d":"Aparecer primero en Google Maps y búsquedas locales. Paso a paso sin tecnicismos.","p":19.99,"c":"DIGITAL","i":"https://picsum.photos/seed/seo/400/400"},{"id":319,"n":"Pack Fuentes Premium Cinzel & Garamond","d":"Licencia extendida para las fuentes oficiales ORIONIX. Uso comercial ilimitado.","p":14.99,"c":"DIGITAL","i":"https://picsum.photos/seed/fonts/400/400"},{"id":320,"n":"Masterclass Copywriting con IA","d":"Escribe textos de ventas que convierten usando ChatGPT y Claude como tu asistente.","p":47,"c":"DIGITAL","i":"https://picsum.photos/seed/copywriting/400/400"},{"id":321,"n":"Ebook: 365 Misiones para tu Agencia","d":"Un reto de acción diaria para construir y escalar tu agencia digital en un año.","p":9.99,"c":"DIGITAL","i":"https://picsum.photos/seed/365/400/400"},{"id":322,"n":"Lámpara LED Cosmos Ambiente","d":"Lámpara de ambiente con proyección de galaxia y estrellado. RGB 16 colores.","p":29.99,"c":"HOGAR","i":"https://picsum.photos/seed/cosmoslamp/400/400"},{"id":323,"n":"Set Velas Aromáticas Lujo Pack 3","d":"3 velas de soja con esencias sándalo, oud y vainilla negra. 60h de combustión cada una.","p":34.99,"c":"HOGAR","i":"https://picsum.photos/seed/candles/400/400"},{"id":324,"n":"Difusor Aromas Madera Bambú","d":"Difusor ultrasónico de aceites esenciales en bambú natural. 500ml, temporizador.","p":39.99,"c":"HOGAR","i":"https://picsum.photos/seed/diffuserbamboo/400/400"},{"id":325,"n":"Cuadro Canvas Árbol de Vida","d":"Cuadro impreso en canvas 60x80cm del árbol de vida Kabalion. Marco negro incluido.","p":49.99,"c":"HOGAR","i":"https://picsum.photos/seed/treecvas/400/400"},{"id":326,"n":"Alfombra Cosmos Redonda 120cm","d":"Alfombra circular con diseño de galaxia y mandala en tonos negro y dorado.","p":59.99,"c":"HOGAR","i":"https://picsum.photos/seed/cosmorug/400/400"},{"id":327,"n":"Set Cojines Decorativos Noche x2","d":"2 cojines de terciopelo negro con bordado dorado. 45x45cm. Relleno incluido.","p":44.99,"c":"HOGAR","i":"https://picsum.photos/seed/pillows/400/400"},{"id":328,"n":"Reloj Pared Silencioso Minimalista","d":"Reloj de pared silencioso en metal negro con agujas doradas. Diámetro 35cm.","p":29.99,"c":"HOGAR","i":"https://picsum.photos/seed/wallclock/400/400"},{"id":329,"n":"Planta Artificial Monstera XL","d":"Monstera artificial de 120cm de altura con maceta cerámica negra incluida.","p":55.99,"c":"HOGAR","i":"https://picsum.photos/seed/monstera/400/400"},{"id":330,"n":"Cortinas Blackout Terciopelo Negro","d":"Par de cortinas opacas de terciopelo negro con ojales dorados. 140x260cm.","p":69.99,"c":"HOGAR","i":"https://picsum.photos/seed/curtains/400/400"},{"id":331,"n":"Set Cristales y Minerales Decorativos","d":"Set 7 cristales naturales: amatista, cuarzo rosa, obsidiana y más.","p":24.99,"c":"HOGAR","i":"https://picsum.photos/seed/crystals/400/400"},{"id":332,"n":"Caja Madera Organizadora Joyas","d":"Caja de madera con espejo interior y 3 cajones forrados en terciopelo negro.","p":39.99,"c":"HOGAR","i":"https://picsum.photos/seed/jewelbox/400/400"},{"id":333,"n":"Set Portavelas Geométricos Pack 3","d":"3 portavelas en metal dorado: hexágono, triángulo y rombo.","p":27.99,"c":"HOGAR","i":"https://picsum.photos/seed/candholder/400/400"},{"id":334,"n":"Espejo Pared Marco Dorado Vintage","d":"Espejo decorativo redondo 60cm con marco metálico dorado estilo vintage.","p":79.99,"c":"HOGAR","i":"https://picsum.photos/seed/mirror/400/400"},{"id":335,"n":"Set Vasos Cristal Negro Dorado x4","d":"4 vasos de cristal ámbar oscuro con borde dorado. Apto lavavajillas. 350ml.","p":34.99,"c":"HOGAR","i":"https://picsum.photos/seed/glasses/400/400"},{"id":336,"n":"Bandeja Decorativa Mármol Dorado","d":"Bandeja de resina efecto mármol negro con asas y bordes dorados. 40x30cm.","p":44.99,"c":"HOGAR","i":"https://picsum.photos/seed/marbletray/400/400"},{"id":337,"n":"Incensario Madera Tallada","d":"Soporte incensario en madera tallada con diseño de árbol de la vida.","p":19.99,"c":"HOGAR","i":"https://picsum.photos/seed/incenseholder/400/400"},{"id":338,"n":"Manta Sofá Terciopelo Premium","d":"Manta de sofá en terciopelo negro suave 150x200cm. Ultra esponjosa.","p":49.99,"c":"HOGAR","i":"https://picsum.photos/seed/blanket/400/400"},{"id":339,"n":"Set Servilletas Lino Negro x6","d":"6 servilletas de lino 100% color negro con monograma dorado bordado. 45x45cm.","p":22.99,"c":"HOGAR","i":"https://picsum.photos/seed/napkins/400/400"},{"id":340,"n":"Macetas Cerámica Negra Set x3","d":"Set 3 macetas de cerámica negra mate en tamaños S/M/L con plato incluido.","p":37.99,"c":"HOGAR","i":"https://picsum.photos/seed/pots/400/400"},{"id":341,"n":"Cuadro Abstracto Gold & Black","d":"Pintura acrílica sobre lienzo 50x70cm con pan de oro. Pieza única artesanal.","p":89.99,"c":"HOGAR","i":"https://picsum.photos/seed/painting/400/400"},{"id":342,"n":"Cargador Inalámbrico 15W Magnético","d":"Cargador Qi magnético compatible iPhone MagSafe y Android.","p":29.99,"c":"TECH","i":"https://picsum.photos/seed/charger/400/400"},{"id":343,"n":"Auriculares Gaming RGB Wired","d":"Auriculares gaming con micrófono retráctil, sonido surround 7.1 y luces RGB.","p":49.99,"c":"TECH","i":"https://picsum.photos/seed/gaming/400/400"},{"id":344,"n":"Mini Proyector Portátil 1080p","d":"Proyector pocket de 1080p con WiFi integrado. Batería 3h. Compatible Netflix.","p":89.99,"c":"TECH","i":"https://picsum.photos/seed/miniprojector/400/400"},{"id":345,"n":"Power Bank 20000mAh Slim","d":"Batería externa ultradelgada de 20000mAh con carga rápida PD 65W y 3 puertos.","p":44.99,"c":"TECH","i":"https://picsum.photos/seed/slimpower/400/400"},{"id":346,"n":"Teclado Mecánico Compacto 75%","d":"Teclado mecánico TKL con switches hot-swap, RGB y carcasa de aluminio.","p":79.99,"c":"TECH","i":"https://picsum.photos/seed/keyboard/400/400"},{"id":347,"n":"Ratón Inalámbrico Silencioso","d":"Ratón ergonómico inalámbrico 2.4G con batería recargable. 4000 DPI.","p":34.99,"c":"TECH","i":"https://picsum.photos/seed/mouse/400/400"},{"id":348,"n":"Soporte Portátil Ajustable","d":"Soporte para portátil de aluminio ajustable en altura y ángulo. Plegable.","p":39.99,"c":"TECH","i":"https://picsum.photos/seed/laptopstand/400/400"},{"id":349,"n":"Webcam 1080p Streaming","d":"Webcam Full HD 1080p con micrófono integrado y corrección automática de luz.","p":54.99,"c":"TECH","i":"https://picsum.photos/seed/webcam1080/400/400"},{"id":350,"n":"Hub USB-C 7 en 1","d":"Hub multiport: HDMI 4K, USB-A x3, USB-C PD, SD/MicroSD. Aluminio slim.","p":44.99,"c":"TECH","i":"https://picsum.photos/seed/hub7/400/400"},{"id":351,"n":"Micrófono Condensador USB Cardioide","d":"Micro USB plug-and-play para podcasts y streaming. 192kHz/24bit.","p":69.99,"c":"TECH","i":"https://picsum.photos/seed/microphone/400/400"},{"id":352,"n":"Altavoz Bluetooth Impermeable IPX7","d":"Altavoz portátil 30W con sonido 360°, IPX7 waterproof y 24h batería.","p":59.99,"c":"TECH","i":"https://picsum.photos/seed/techspeaker/400/400"},{"id":353,"n":"Smart Plug WiFi con Monitor Energía","d":"Enchufe inteligente WiFi con control de consumo, compatible Alexa y Google.","p":19.99,"c":"TECH","i":"https://picsum.photos/seed/techplug/400/400"},{"id":354,"n":"Pantalla Portátil 15.6 1080p USB-C","d":"Monitor portable Full HD USB-C con funda protectora. Ideal para doble pantalla.","p":149.99,"c":"TECH","i":"https://picsum.photos/seed/portablemonitor/400/400"},{"id":355,"n":"Cámara de Seguridad WiFi Indoor 2K","d":"Cámara interior 2K con detección de movimiento, visión nocturna y audio bidireccional.","p":34.99,"c":"TECH","i":"https://picsum.photos/seed/securitycam/400/400"},{"id":356,"n":"Adaptador HDMI a USB-C 4K","d":"Adaptador USB-C a HDMI 4K@60Hz plug-and-play. Compatible MacBook y Android.","p":18.99,"c":"TECH","i":"https://picsum.photos/seed/hdmiusbc/400/400"},{"id":357,"n":"Termostato Inteligente WiFi OLED","d":"Termostato smart con pantalla táctil OLED, app móvil y ahorro de energía automático.","p":79.99,"c":"TECH","i":"https://picsum.photos/seed/thermostat/400/400"},{"id":358,"n":"Luz LED Escritorio Anti-fatiga Pro","d":"Lámpara escritorio LED regulable con puerto USB-C y sensor de luz ambiental.","p":44.99,"c":"TECH","i":"https://picsum.photos/seed/desklampro/400/400"},{"id":359,"n":"Soporte Telefónico Coche Magnético","d":"Soporte magnético universal para coche, rejilla ventilación 360°.","p":14.99,"c":"TECH","i":"https://picsum.photos/seed/carphone/400/400"},{"id":360,"n":"Luz Anular LED 10 Fotografía","d":"Ring light LED 26cm con 3 temperaturas de color y soporte trípode flexible.","p":34.99,"c":"TECH","i":"https://picsum.photos/seed/ringlighttech/400/400"},{"id":361,"n":"Cable USB-C a USB-C 100W 2m Trenzado","d":"Cable trenzado nylon 100W PD, 40Gbps datos, 8K vídeo. Duración 25.000 dobleces.","p":16.99,"c":"TECH","i":"https://picsum.photos/seed/usbcable100/400/400"},{"id":362,"n":"Set Resistencias Elásticas Fitness Pack 5","d":"5 bandas elásticas de látex de distintas resistencias.","p":19.99,"c":"BIENESTAR","i":"https://picsum.photos/seed/bands/400/400"},{"id":363,"n":"Esterilla Yoga Antideslizante Premium","d":"Esterilla de yoga 6mm en TPE ecológico, antideslizante, con correa de transporte.","p":29.99,"c":"BIENESTAR","i":"https://picsum.photos/seed/yogamatprem/400/400"},{"id":364,"n":"Botellas de Agua Vidrio 1L con Funda","d":"Botella de vidrio borosilicato 1L con funda de silicona protectora.","p":22.99,"c":"BIENESTAR","i":"https://picsum.photos/seed/waterbottle/400/400"},{"id":365,"n":"Aceite Esencial Lavanda Puro 30ml","d":"Aceite esencial de lavanda 100% puro. Aromaterapia, sueño y relajación.","p":12.99,"c":"BIENESTAR","i":"https://picsum.photos/seed/lavender/400/400"},{"id":366,"n":"Set Aceites Esenciales Top 6","d":"6 aceites esenciales: lavanda, menta, eucalipto, limón, árbol de té y naranja.","p":24.99,"c":"BIENESTAR","i":"https://picsum.photos/seed/essentials/400/400"},{"id":367,"n":"Masajeador Facial Rodillo Jade","d":"Rodillo de jade natural para masaje facial anti-aging. Incluye gua sha.","p":17.99,"c":"BIENESTAR","i":"https://picsum.photos/seed/jaderoller/400/400"},{"id":368,"n":"Protector Solar SPF 50+ Invisible","d":"Fotoprotector facial SPF50+ de textura ultraligera invisible. Sin alcohol. 50ml.","p":16.99,"c":"BIENESTAR","i":"https://picsum.photos/seed/sunscreenb/400/400"},{"id":369,"n":"Crema Hidratante Corporal Karité 500ml","d":"Crema corporal con manteca de karité y vitamina E. Absorción rápida.","p":19.99,"c":"BIENESTAR","i":"https://picsum.photos/seed/bodycream/400/400"},{"id":370,"n":"Collagén + Vitamina C Suplemento 60 caps","d":"Colágeno hidrolizado marino con vitamina C y ácido hialurónico. 60 cápsulas.","p":27.99,"c":"BIENESTAR","i":"https://picsum.photos/seed/collagen/400/400"},{"id":371,"n":"Almohada Viscoelástica Cervical","d":"Almohada cervical de espuma viscoelástica con funda de bambú hipoalergénica.","p":44.99,"c":"BIENESTAR","i":"https://picsum.photos/seed/pillow/400/400"},{"id":372,"n":"Sérum Noche Vitamina C 30ml","d":"Sérum de noche concentrado con vitamina C 20% y ácido hialurónico. 30ml.","p":22.99,"c":"BIENESTAR","i":"https://picsum.photos/seed/vitaminc/400/400"},{"id":373,"n":"Termo Café Acero Inoxidable 500ml","d":"Termo de acero inoxidable 500ml. Mantén frío 24h o calor 12h. Tapa antigoteo.","p":24.99,"c":"BIENESTAR","i":"https://picsum.photos/seed/thermos/400/400"},{"id":374,"n":"Meditación Guiada Audio — Pack 30 días","d":"30 sesiones de meditación guiada en audio MP3. Desde 5 hasta 40 minutos.","p":19.99,"c":"DIGITAL","i":"https://picsum.photos/seed/meditation/400/400"},{"id":375,"n":"Suplemento Magnesio Bisglicinato 400mg","d":"Magnesio bisglicinato de alta absorción. 60 cápsulas. Para sueño y recuperación muscular.","p":21.99,"c":"BIENESTAR","i":"https://picsum.photos/seed/magnesium/400/400"},{"id":376,"n":"Set Mascarillas Tela Pack 3 Premium","d":"3 mascarillas de tela premium lavables con filtro de carbón activado.","p":14.99,"c":"BIENESTAR","i":"https://picsum.photos/seed/masks/400/400"},{"id":377,"n":"Vestido Largo Seda Natural Kabalion","d":"Vestido largo de seda natural negra con bordado dorado del árbol Kabalion.","p":489,"c":"MI DINASTIA","i":"https://picsum.photos/seed/silkdress/400/400"},{"id":378,"n":"Cartera Cuero Cocodrilo Genuino","d":"Cartera en cuero de cocodrilo genuino. Compartimentos para tarjetas y billetes.","p":420,"c":"MI DINASTIA","i":"https://picsum.photos/seed/croco/400/400"},{"id":379,"n":"Anillo Sello Plata 925 + Ojo de Tigre","d":"Anillo sello de plata 925 con piedra ojo de tigre natural tallada. Edición única.","p":340,"c":"MI DINASTIA","i":"https://picsum.photos/seed/signetring/400/400"},{"id":380,"n":"Paraguas Lord Kether — Seda Italiana","d":"Paraguas de caballero con mango de bambú lacado y tela de seda italiana negra.","p":285,"c":"MI DINASTIA","i":"https://picsum.photos/seed/umbrellagold/400/400"},{"id":381,"n":"Portadocumentos Cuero Full Grain","d":"Portadocumentos A4 en cuero full grain negro. 3 compartimentos. Cierre de latón.","p":310,"c":"MI DINASTIA","i":"https://picsum.photos/seed/portfolio/400/400"},{"id":382,"n":"Camisa Ceremonia Lino & Seda Japonesa","d":"Camisa de mezcla lino-seda japonesa. Cuello mandarina. Edición Kabalion numerada.","p":395,"c":"MI DINASTIA","i":"https://picsum.photos/seed/ceremon/400/400"},{"id":383,"n":"Set Escritura Pluma Plata + Estuche","d":"Pluma estilográfica de plata 925 con grabado Sefirot y estuche de madera de ébano.","p":520,"c":"MI DINASTIA","i":"https://picsum.photos/seed/fpen/400/400"},{"id":384,"n":"Fular Seda Twill 100% 90x90cm","d":"Fular de seda twill premium 90x90cm con patrón exclusivo Kabalion.","p":265,"c":"MI DINASTIA","i":"https://picsum.photos/seed/scarf90/400/400"},{"id":385,"n":"Estuche Habanos Cuero Artesanal","d":"Estuche para 4 habanos en cuero negro genuino con interior de cedro.","p":385,"c":"MI DINASTIA","i":"https://picsum.photos/seed/cigar/400/400"},{"id":386,"n":"Cinturón Hombre Cocodrilo Genuino","d":"Cinturón de cocodrilo genuino con hebilla maciza en latón dorado. Ancho 3.5cm.","p":450,"c":"MI DINASTIA","i":"https://picsum.photos/seed/crocbelt/400/400"},{"id":387,"n":"Pijama Seda Natural Hombre Negro","d":"Conjunto de pijama en seda natural 100% momme19. Camisa + pantalón.","p":340,"c":"MI DINASTIA","i":"https://picsum.photos/seed/silkpj/400/400"},{"id":388,"n":"Marco Fotos Plata Maciza 20x25","d":"Marco portafotos de plata maciza 925 con grabado floral.","p":480,"c":"MI DINASTIA","i":"https://picsum.photos/seed/silverframe/400/400"},{"id":389,"n":"Zapatos Oxford Horma Italiana","d":"Zapatos Oxford de horma italiana en cuero box calf negro. Suela de cuero Goodyear welt.","p":590,"c":"MI DINASTIA","i":"https://picsum.photos/seed/oxford/400/400"},{"id":390,"n":"Bufanda Cachemira 100% Pura","d":"Bufanda de cachemira pura grado A en negro. 200x70cm. Peso pluma, calor extremo.","p":295,"c":"MI DINASTIA","i":"https://picsum.photos/seed/cashmerebuf/400/400"},{"id":391,"n":"Botines Cuero Bison Labrado","d":"Botines de cuero de bisón labrado, punta cuadrada, suela Vibram. Edición AXEL.","p":680,"c":"MI DINASTIA","i":"https://picsum.photos/seed/boots/400/400"},{"id":392,"n":"Cartera Artística Cuero Vegetal Toscano","d":"Cartera bifold en cuero vegetal toscano curtido al vegetal.","p":280,"c":"MI DINASTIA","i":"https://picsum.photos/seed/toscana/400/400"},{"id":393,"n":"Camiseta Algodón Pima Premium ORIONIX","d":"Camiseta de algodón Pima 200gsm con logo ORIONIX bordado en hilo de oro real.","p":85,"c":"FASHION STYLE","i":"https://picsum.photos/seed/pimatee/400/400"},{"id":394,"n":"Sudadera French Terry Premium","d":"Sudadera french terry 380gsm sin capucha. Cuello redondo. Logo tonal bordado.","p":110,"c":"FASHION STYLE","i":"https://picsum.photos/seed/frenchterry/400/400"},{"id":395,"n":"Short Deportivo Pro 7 ORIONIX","d":"Short running 7 pulgadas con forro integrado, bolsillo trasero y tejido Quick-Dry.","p":65,"c":"FASHION STYLE","i":"https://picsum.photos/seed/runshort/400/400"},{"id":396,"n":"Chaqueta Tec Light Packable","d":"Chaqueta ultraligera impermeable DWR plegable en su bolsillo. 145g. Negro.","p":139,"c":"FASHION STYLE","i":"https://picsum.photos/seed/packable/400/400"},{"id":397,"n":"Pantalón Chino Elástico 4-Way","d":"Pantalón chino slim con tela elástica 4 direcciones. Aspecto formal, comodidad casual.","p":95,"c":"FASHION STYLE","i":"https://picsum.photos/seed/chinoelastic/400/400"},{"id":398,"n":"Polo Piqué 100% Algodón Egipcio","d":"Polo de piqué en algodón egipcio 180gsm. Cuello y puños de punto doble.","p":79,"c":"FASHION STYLE","i":"https://picsum.photos/seed/poloshirt/400/400"},{"id":399,"n":"Sneaker Low ORIONIX Edition Negro","d":"Zapatilla low-top en cuero napa negro con suela Eva extra-cushion. Edición limitada.","p":175,"c":"FASHION STYLE","i":"https://picsum.photos/seed/sneakerblack/400/400"},{"id":400,"n":"Cinturón Cuero Full Grain Reversible","d":"Cinturón full grain reversible negro/café con hebilla dorada desmontable. 3.5cm.","p":89,"c":"FASHION STYLE","i":"https://picsum.photos/seed/reversiblebelt/400/400"},{"id":401,"n":"Mochila Cuero Toro 30L Executive","d":"Mochila de cuero de toro full grain 30L con compartimento laptop 17.","p":229,"c":"FASHION STYLE","i":"https://picsum.photos/seed/leatherpack/400/400"},{"id":402,"n":"Cuchillo Chef Japonés Santoku 18cm","d":"Cuchillo santoku de acero japonés VG-10, hoja 18cm, mango de pakka.","p":89.99,"c":"HOGAR","i":"https://picsum.photos/seed/santoku/400/400"},{"id":403,"n":"Set Tablas Cortar Bambú x3","d":"3 tablas de bambú orgánico S/M/L con ranura para jugos.","p":34.99,"c":"HOGAR","i":"https://picsum.photos/seed/cuttingboards/400/400"},{"id":404,"n":"Cafetera de Émbolo Francesa 1L","d":"Prensa francesa 1000ml en acero inoxidable doble pared. Aislamiento térmico 4h.","p":44.99,"c":"HOGAR","i":"https://picsum.photos/seed/frenchpress/400/400"},{"id":405,"n":"Báscula Cocina Digital Precisión 5kg","d":"Báscula digital de cocina precisión 1g hasta 5kg, pantalla LCD, tara automática.","p":19.99,"c":"HOGAR","i":"https://picsum.photos/seed/scalekitchen/400/400"},{"id":406,"n":"Organizador Cajones Bambú Modular","d":"Sistema modular de organización de cajones en bambú. 9 compartimentos ajustables.","p":27.99,"c":"HOGAR","i":"https://picsum.photos/seed/drawer/400/400"},{"id":407,"n":"Sartén Cerámica Antiadherente 28cm","d":"Sartén de cerámica antiadherente sin PFOA 28cm. Compatible inducción y horno.","p":39.99,"c":"HOGAR","i":"https://picsum.photos/seed/pan/400/400"},{"id":408,"n":"Molinillo Café Manual Cerámica","d":"Molinillo de café manual con muelas de cerámica. Regulación de grosor 5 niveles.","p":29.99,"c":"HOGAR","i":"https://picsum.photos/seed/grinder/400/400"},{"id":409,"n":"Set Especieros Magnéticos Pared x12","d":"12 tarros de especias con base magnética para pared o nevera.","p":34.99,"c":"HOGAR","i":"https://picsum.photos/seed/spices/400/400"},{"id":410,"n":"Delantal Cuero Genuino Cocinero","d":"Delantal de cuero genuino estilo chef profesional. 3 bolsillos. Ajustable.","p":59.99,"c":"HOGAR","i":"https://picsum.photos/seed/apron/400/400"},{"id":411,"n":"Hervidor Agua Temperatura Variable","d":"Hervidor eléctrico 1.7L con control de temperatura 60-100°C.","p":54.99,"c":"HOGAR","i":"https://picsum.photos/seed/kettle/400/400"},{"id":412,"n":"Maleta Cabina Rígida Spinner 55cm","d":"Trolley de cabina 55x40x20cm, policarbonato rígido, 4 ruedas 360, candado TSA.","p":89.99,"c":"VIAJE","i":"https://picsum.photos/seed/suitcase/400/400"},{"id":413,"n":"Mochila Viaje Carry-On 40L","d":"Mochila 40L aprobada como cabina, compartimento laptop 17, cubierta impermeable.","p":79.99,"c":"VIAJE","i":"https://picsum.photos/seed/carryon/400/400"},{"id":414,"n":"Organizadores Maleta Set x7","d":"7 cubos compresores de nylon para maleta: XL/L/M/S/XS + zapatos + higiene.","p":29.99,"c":"VIAJE","i":"https://picsum.photos/seed/packcubesv/400/400"},{"id":415,"n":"Almohada Viaje Inflable Compacta","d":"Almohada inflable de viaje en memory foam, funda lavable. Pesa solo 80g.","p":19.99,"c":"VIAJE","i":"https://picsum.photos/seed/travelpillowv/400/400"},{"id":416,"n":"Adaptador Universal Viaje 4-en-1","d":"Adaptador universal con 4 tipos de enchufe y 2 USB-A + 1 USB-C. 100-240V.","p":24.99,"c":"VIAJE","i":"https://picsum.photos/seed/traveladapter/400/400"},{"id":417,"n":"Candado TSA Combinación 4 Dígitos","d":"Candado de combinación 4 dígitos aprobado TSA. Cable de acero 70cm. Pack x2.","p":16.99,"c":"VIAJE","i":"https://picsum.photos/seed/padlock/400/400"},{"id":418,"n":"Bolsa Higiene Viaje Colgante","d":"Neceser colgante impermeable con compartimentos transparentes para aeropuerto.","p":22.99,"c":"VIAJE","i":"https://picsum.photos/seed/toiletbag/400/400"},{"id":419,"n":"Tarjeta eSIM Internacional 50 Países","d":"eSIM digital para viajes internacionales. 50 países, 10GB, 30 días.","p":34.99,"c":"DIGITAL","i":"https://picsum.photos/seed/esim/400/400"},{"id":420,"n":"Guía Viaje Barcelona PDF Premium","d":"Guía digital Barcelona 2025: 200 lugares, mapas interactivos, rutas y restaurantes.","p":9.99,"c":"DIGITAL","i":"https://picsum.photos/seed/barcelona/400/400"},{"id":421,"n":"App Itinerario Viaje ORIONIX Travel","d":"Acceso premium a la plataforma de planificación de viajes IA. 1 año.","p":49.99,"c":"DIGITAL","i":"https://picsum.photos/seed/travelapp/400/400"},{"id":422,"n":"Cama Ortopédica Perros Memoria Premium","d":"Cama ortopédica 90x70cm para perros grandes. Espuma viscoelástica, funda lavable.","p":59.99,"c":"MASCOTAS","i":"https://picsum.photos/seed/dogbed/400/400"},{"id":423,"n":"Arnés Perro No-Pull Reflectante","d":"Arnés anti-tirones con clips frontal y dorsal, reflectante. S/M/L/XL.","p":29.99,"c":"MASCOTAS","i":"https://picsum.photos/seed/harness/400/400"},{"id":424,"n":"Fuente Agua Gatos Silenciosa 2.5L","d":"Fuente automática 2.5L con filtro de carbón activo. Silenciosa. Acero inoxidable.","p":39.99,"c":"MASCOTAS","i":"https://picsum.photos/seed/petfountain/400/400"},{"id":425,"n":"Collar LED Recargable Perro USB","d":"Collar de seguridad LED para perros. Recargable USB, 5 modos luz, impermeable.","p":19.99,"c":"MASCOTAS","i":"https://picsum.photos/seed/dogcollarled/400/400"},{"id":426,"n":"Transportín Gatos Tela Expandible","d":"Transportín de tela expandible para gatos hasta 8kg. Aprobado cabina avión.","p":44.99,"c":"MASCOTAS","i":"https://picsum.photos/seed/carrier/400/400"},{"id":427,"n":"Snacks Premios Perro Natural x200g","d":"Premios naturales deshidratados para perros. Sin aditivos. Pato y batata.","p":14.99,"c":"MASCOTAS","i":"https://picsum.photos/seed/treats/400/400"},{"id":428,"n":"Juguete Interactivo Gatos Plumas","d":"Juguete con plumas naturales y cascabel. Palo extensible 60cm.","p":12.99,"c":"MASCOTAS","i":"https://picsum.photos/seed/cattoy/400/400"},{"id":429,"n":"Manta Polar Mascotas 80x100cm","d":"Manta ultra-suave para mascotas en polar 300gsm. Lavable. Tono gris perla.","p":19.99,"c":"MASCOTAS","i":"https://picsum.photos/seed/petblanket/400/400"},{"id":430,"n":"Cortaúñas Perros con Sensor Seguridad","d":"Cortaúñas profesional con sensor de corte seguro y lima integrada.","p":17.99,"c":"MASCOTAS","i":"https://picsum.photos/seed/petnail/400/400"},{"id":431,"n":"Cepillo Mascotas Autolimpiante","d":"Cepillo deslanador con botón de autolimpieza. Elimina subpelo y suciedad.","p":24.99,"c":"MASCOTAS","i":"https://picsum.photos/seed/petbrush/400/400"},{"id":432,"n":"Formación Agentes IA — Bootcamp 8 semanas","d":"Bootcamp intensivo: construye tu propia agencia de IA en 8 semanas.","p":497,"c":"DIGITAL","i":"https://picsum.photos/seed/bootcamp/400/400"},{"id":433,"n":"Curso n8n Automatización Avanzada","d":"Domina n8n: workflows, integraciones, webhooks y agentes IA. 50 lecciones prácticas.","p":127,"c":"DIGITAL","i":"https://picsum.photos/seed/n8ncourse/400/400"},{"id":434,"n":"Pack Logos ORIONIX Vectoriales","d":"12 variaciones del logo ORIONIX en SVG, PNG y PDF. Uso comercial.","p":29.99,"c":"DIGITAL","i":"https://picsum.photos/seed/logos/400/400"},{"id":435,"n":"Ebook: De Cero a Afiliado Pro","d":"Guía paso a paso: plataformas, nichos, SEO y email marketing para afiliados.","p":17.99,"c":"DIGITAL","i":"https://picsum.photos/seed/affiliate/400/400"},{"id":436,"n":"Plantilla Web Landing Page ORIONIX","d":"Landing page HTML/CSS de alta conversión. Diseño ORIONIX dorado.","p":39.99,"c":"DIGITAL","i":"https://picsum.photos/seed/landing/400/400"},{"id":437,"n":"Video Pack Intros YouTube 4K","d":"20 intros animadas para YouTube en 4K. Formato MP4 y After Effects.","p":34.99,"c":"DIGITAL","i":"https://picsum.photos/seed/intro/400/400"},{"id":438,"n":"Guía Completa Obsidian + Notion 2025","d":"Sistema de productividad dual con Obsidian y Notion. Plantillas, flujos y hacks.","p":22.99,"c":"DIGITAL","i":"https://picsum.photos/seed/pkm/400/400"},{"id":439,"n":"Curso Fotografía Producto para Tienda","d":"Aprende a fotografiar productos en casa con tu móvil. Iluminación, edición y escenas.","p":57,"c":"DIGITAL","i":"https://picsum.photos/seed/prodphoto/400/400"},{"id":440,"n":"Calendario Editorial 2025 Canva","d":"Calendario de contenidos 2025 en Canva: 365 ideas de post, stories y reels.","p":14.99,"c":"DIGITAL","i":"https://picsum.photos/seed/calendar/400/400"},{"id":441,"n":"Audiolibro: El Arte de la Guerra Digital","d":"Audiolibro 4h con estrategias de Sun Tzu aplicadas al mundo digital.","p":16.99,"c":"DIGITAL","i":"https://picsum.photos/seed/audiobook/400/400"},{"id":442,"n":"Pack SFX Sonidos Ambiente Cosmos 60","d":"60 efectos de sonido y ambientes cosmos royalty-free. WAV 48kHz.","p":19.99,"c":"DIGITAL","i":"https://picsum.photos/seed/sfx/400/400"},{"id":443,"n":"Curso Canva Diseño Gráfico Desde Cero","d":"Aprende Canva de cero a nivel profesional. Logos, merch, videos y presentaciones.","p":37,"c":"DIGITAL","i":"https://picsum.photos/seed/canvacourse/400/400"},{"id":444,"n":"Set 5 Fondos Video Chromakey Virtuales","d":"5 escenarios virtuales para streaming en 4K: oficina luxury, cosmos, ciudad y más.","p":24.99,"c":"DIGITAL","i":"https://picsum.photos/seed/chromakey/400/400"},{"id":445,"n":"Preset Lightroom ORIONIX Dark & Gold","d":"Pack de 25 presets Lightroom para fotografía dark & gold luxury.","p":19.99,"c":"DIGITAL","i":"https://picsum.photos/seed/presets/400/400"},{"id":446,"n":"Stickers Pack Digital ORIONIX 200","d":"200 stickers digitales PNG para Telegram, Discord y redes.","p":9.99,"c":"DIGITAL","i":"https://picsum.photos/seed/stickers/400/400"},{"id":447,"n":"Guía Monetizar tu Conocimiento Online","d":"De experto a educador digital: cursos, comunidades y consultorías.","p":27.99,"c":"DIGITAL","i":"https://picsum.photos/seed/knowledge/400/400"},{"id":448,"n":"Contrato Freelance Template Legal Pack","d":"Pack de 10 contratos legales para freelancers: servicios, confidencialidad, NDAs.","p":34.99,"c":"DIGITAL","i":"https://picsum.photos/seed/contracts/400/400"},{"id":449,"n":"Ebook: 100 Prompts ChatGPT para Negocios","d":"100 prompts optimizados para marketing, ventas, atención al cliente y estrategia.","p":12.99,"c":"DIGITAL","i":"https://picsum.photos/seed/prompts/400/400"},{"id":450,"n":"Masterclass Personal Branding 2025","d":"Construye tu marca personal irresistible. LinkedIn, Instagram, YouTube.","p":77,"c":"DIGITAL","i":"https://picsum.photos/seed/branding/400/400"},{"id":451,"n":"Kit Inicio ORIONIX Emprendedor — TODO","d":"El bundle definitivo: 10 cursos + 500 templates + 30 ebooks + soporte 6 meses.","p":997,"c":"DIGITAL","i":"https://picsum.photos/seed/megakit/400/400"}];
+
+const PER_PAGE = 36;
+let filtered = [], currentCat = 'TODOS', currentSearch = '', currentPage = 1;
+let cart = [];
+try{ cart = JSON.parse(localStorage.getItem('orionix_cart')||'[]'); }catch(e){}
+
+function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function applyFilters(){
+  const q = currentSearch.toLowerCase().trim();
+  filtered = PRODUCTOS.filter(p => {
+    const cat = currentCat === 'TODOS' || p.c === currentCat;
+    const s = !q || (p.n||'').toLowerCase().includes(q) || (p.d||'').toLowerCase().includes(q) || (p.c||'').toLowerCase().includes(q);
+    return cat && s;
+  });
+  currentPage = 1;
+  renderPage();
+}
+
+function renderPage(){
+  const start = (currentPage-1)*PER_PAGE;
+  const page = filtered.slice(start, start+PER_PAGE);
+  const grid = document.getElementById('grid');
+  document.getElementById('resultCount').textContent = filtered.length + ' productos';
+  document.getElementById('heroSub').textContent = filtered.length + ' productos en colección';
+  if(!filtered.length){
+    grid.innerHTML = '<div style="padding:80px;text-align:center;color:var(--dim);font-style:italic;font-size:1.1rem">No se encontraron productos...</div>';
+    document.getElementById('pagination').innerHTML = '';
+    return;
+  }
+  grid.innerHTML = page.map(p => {
+    const img = p.i || ('https://picsum.photos/seed/'+p.id+'/400/400');
+    const pData = JSON.stringify({id:p.id,nombre:p.n,precio:p.p,categoria:p.c,imagen_url:p.i}).replace(/"/g,'&quot;');
+    return `<div class="card">
+      <img class="card-img" src="${esc(img)}" alt="${esc(p.n)}" loading="lazy" onerror="this.src='https://picsum.photos/seed/${p.id}/400/400'">
+      <div class="card-body">
+        <div class="card-cat">${esc(p.c)}</div>
+        <div class="card-name">${esc(p.n)}</div>
+        <div class="card-desc">${esc(p.d)}</div>
+        <div class="card-footer">
+          <span class="card-price">€${Number(p.p).toFixed(2)}</span>
+          <button class="add-btn" onclick='addCart(${pData})'>+ Añadir</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  renderPagination();
+}
+
+function renderPagination(){
+  const total = Math.ceil(filtered.length/PER_PAGE);
+  if(total<=1){ document.getElementById('pagination').innerHTML=''; return; }
+  let html = '';
+  const s = Math.max(1,currentPage-2), e = Math.min(total,currentPage+2);
+  if(currentPage>1) html+=`<button class="pg" onclick="goPage(${currentPage-1})">‹</button>`;
+  if(s>1) html+=`<button class="pg" onclick="goPage(1)">1</button>${s>2?'<span style="color:var(--dim);padding:0 6px">…</span>':''}`;
+  for(let i=s;i<=e;i++) html+=`<button class="pg ${i===currentPage?'on':''}" onclick="goPage(${i})">${i}</button>`;
+  if(e<total) html+=`${e<total-1?'<span style="color:var(--dim);padding:0 6px">…</span>':''}<button class="pg" onclick="goPage(${total})">${total}</button>`;
+  if(currentPage<total) html+=`<button class="pg" onclick="goPage(${currentPage+1})">›</button>`;
+  document.getElementById('pagination').innerHTML = html;
+}
+
+function goPage(n){ currentPage=n; renderPage(); window.scrollTo({top:0,behavior:'smooth'}); }
+
+function addCart(p){
+  const ex = cart.find(i=>i.id===p.id);
+  if(ex) ex.qty=(ex.qty||1)+1;
+  else cart.push({...p,qty:1});
+  saveCart(); updateCartUI();
+  showToast('🌿 ' + (p.nombre||'Producto') + ' añadido');
+}
+function removeCart(id){ cart=cart.filter(i=>i.id!==id); saveCart(); updateCartUI(); }
+function saveCart(){ try{ localStorage.setItem('orionix_cart',JSON.stringify(cart)); }catch(e){} }
+
+function updateCartUI(){
+  const count = cart.reduce((s,i)=>s+(i.qty||1),0);
+  document.getElementById('cartCount').textContent = count;
+  const items = document.getElementById('cartItems');
+  if(!cart.length){
+    items.innerHTML='<div class="empty-cart">Tu carrito está vacío</div>';
+    document.getElementById('cartTotal').textContent='€0.00';
+    return;
+  }
+  items.innerHTML = cart.map(i=>`
+    <div class="cart-item">
+      <img src="${esc(i.imagen_url||'https://picsum.photos/80/80')}" alt="${esc(i.nombre)}">
+      <div class="ci-info">
+        <div class="ci-name">${esc(i.nombre)}</div>
+        <div class="ci-price">€${Number(i.precio).toFixed(2)} x${i.qty||1}</div>
+      </div>
+      <button class="remove-item" onclick="removeCart(${i.id})">✕</button>
+    </div>`).join('');
+  const total = cart.reduce((s,i)=>s+(Number(i.precio)*(i.qty||1)),0);
+  document.getElementById('cartTotal').textContent = '€'+total.toFixed(2);
+}
+
+function toggleCart(){
+  document.getElementById('cartPanel').classList.toggle('open');
+  document.getElementById('cartOverlay').classList.toggle('open');
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// Init
+document.getElementById('cartBtn').addEventListener('click',toggleCart);
+document.getElementById('closeCart').addEventListener('click',toggleCart);
+document.getElementById('cartOverlay').addEventListener('click',toggleCart);
+document.getElementById('filters').addEventListener('click',e=>{
+  const btn=e.target.closest('.fb');
+  if(!btn)return;
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  currentCat=btn.dataset.cat;
+  applyFilters();
+});
+document.getElementById('searchInput').addEventListener('input',e=>{
+  currentSearch=e.target.value;
+  applyFilters();
+});
+
+updateCartUI();
+applyFilters();
+</script>
+</body>
+</html>

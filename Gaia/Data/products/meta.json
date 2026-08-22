@@ -1,8 +1,17 @@
 {
-  "totalDesired": 1000,
+  "total": 1000,
   "pageSize": 200,
   "pages": 5,
-  "generated": true,
-  "generated_at": "2026-08-19T18:49:26Z",
-  "note": "Generated 1000 placeholder demo products. All items have demo:true and buyable:false. Use generate_products.js to reproduce locally."
+  "generated_at": "2026-08-22T16:38:55.370Z",
+  "categorias": [
+    "MODA",
+    "FASHION STYLE",
+    "MI DINASTIA",
+    "DIGITAL",
+    "HOGAR",
+    "TECH",
+    "BIENESTAR",
+    "VIAJE",
+    "MASCOTAS"
+  ]
 }

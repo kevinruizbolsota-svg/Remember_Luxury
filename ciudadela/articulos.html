@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIONIX · Artículos</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#e8c86a;--gd:#b89a40;--gl:#f5e0a0;--bg:#0b0b0d;--bg2:rgba(14,13,20,0.96);--b:rgba(232,200,106,0.12);--ba:rgba(232,200,106,0.4);--text:#f0e8d0;--dim:rgba(240,232,208,0.4);--purple:#6a3d9a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cormorant Garamond',serif;background:var(--bg);color:var(--text);min-height:100vh}
+#cv{position:fixed;inset:0;z-index:0;pointer-events:none}
+nav{position:fixed;top:0;left:0;right:0;height:54px;z-index:900;display:flex;align-items:center;gap:0;padding:0 20px;background:rgba(11,11,13,.98);border-bottom:1px solid var(--b);backdrop-filter:blur(14px)}
+.brand{font-family:'Cinzel',serif;font-size:.95rem;font-weight:900;letter-spacing:.2em;color:var(--gold);text-decoration:none;margin-right:16px}
+.nav-mid{display:flex;gap:2px;flex:1}
+.nl{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.1em;color:var(--dim);text-decoration:none;padding:7px 12px;border-radius:6px;transition:all .2s;text-transform:uppercase;white-space:nowrap}
+.nl:hover{color:var(--text)}
+.nl.on{color:var(--gold)}
+.nav-r{display:flex;align-items:center;gap:8px;margin-left:auto}
+.cart-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid var(--ba);border-radius:6px;font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.1em;color:var(--gold);text-decoration:none;transition:all .25s;position:relative}
+.cart-btn:hover{border:1px solid var(--ba);background:rgba(232,200,106,.08)}
+.cart-count{position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:var(--gold);color:var(--bg);font-size:.55rem;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif}
+@media(max-width:760px){.nav-mid{display:none}}
+
+.wrap{padding:74px 24px 60px;max-width:1200px;margin:0 auto;position:relative;z-index:1}
+
+/* HEADER */
+.ph{text-align:center;margin-bottom:28px}
+.ph-tag{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.22em;color:var(--dim);text-transform:uppercase;margin-bottom:6px}
+.ph-title{font-family:'Cinzel',serif;font-size:1.6rem;font-weight:900;color:var(--text);letter-spacing:.1em;margin-bottom:6px}
+.ph-sub{font-size:.9rem;color:var(--dim);font-style:italic}
+
+/* STATS BAR */
+.stats-bar{display:flex;gap:10px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
+.stat-pill{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.1em;padding:5px 14px;border-radius:20px;text-transform:uppercase}
+.stat-moda{background:rgba(232,200,106,.1);color:var(--gold);border:1px solid rgba(232,200,106,.2)}
+.stat-fashion{background:rgba(156,39,176,.1);color:#ce93d8;border:1px solid rgba(156,39,176,.2)}
+.stat-dinastia{background:rgba(255,215,0,.08);color:#ffd700;border:1px solid rgba(255,215,0,.2)}
+
+/* FILTERS */
+.filters{display:flex;align-items:center;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+.search-box{display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--b);border-radius:8px;padding:8px 14px;flex:1;max-width:340px}
+.search-box input{background:transparent;border:none;outline:none;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:.9rem;width:100%}
+.search-box input::placeholder{color:var(--dim)}
+.ftab{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.12em;padding:8px 16px;border-radius:6px;border:1px solid var(--b);color:var(--dim);cursor:pointer;transition:all .22s;text-transform:uppercase}
+.ftab:hover{color:var(--text);border-color:rgba(232,200,106,.25)}
+.ftab.on{color:var(--gold);border-color:var(--ba);background:rgba(232,200,106,.07)}
+.sort-sel{padding:8px 12px;background:var(--bg2);border:1px solid var(--b);border-radius:6px;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:.86rem;outline:none;margin-left:auto}
+.sort-sel option{background:#111}
+
+/* RESULTS COUNT */
+.results-info{font-size:.76rem;color:var(--dim);margin-bottom:14px;font-style:italic}
+.results-info span{color:var(--gold);font-family:'Cinzel',serif}
+
+/* GRID */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.pcard{background:var(--bg2);border:1px solid var(--b);border-radius:10px;overflow:hidden;transition:all .28s;display:flex;flex-direction:column}
+.pcard:hover{border-color:var(--ba);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.35)}
+.pimg{width:100%;aspect-ratio:3/4;background:linear-gradient(135deg,rgba(106,61,154,.15),rgba(232,200,106,.08));display:flex;align-items:center;justify-content:center;font-size:3rem;overflow:hidden;max-height:240px;position:relative}
+.pimg img{width:100%;height:100%;object-fit:cover}
+.pcat-badge{position:absolute;top:8px;left:8px;font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:.14em;padding:3px 8px;border-radius:3px;font-weight:700}
+.pinfo{padding:14px;flex:1;display:flex;flex-direction:column;gap:6px}
+.pname{font-family:'Cinzel',serif;font-size:.64rem;font-weight:700;color:var(--text);letter-spacing:.06em;line-height:1.3}
+.pdesc{font-size:.76rem;color:var(--dim);font-style:italic;flex:1;line-height:1.45}
+.pprice-row{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+.pprice{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);font-weight:700}
+.pstore{font-size:.68rem;color:var(--dim)}
+.padd{width:100%;padding:9px;background:transparent;color:var(--gold);border:1px solid var(--ba);border-radius:6px;font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.12em;cursor:pointer;transition:all .25s;margin-top:8px}
+.padd:hover{background:var(--gold);color:var(--bg)}
+
+/* EMPTY */
+.empty{grid-column:1/-1;text-align:center;padding:50px;color:var(--dim)}
+.empty .ei{font-size:3rem;opacity:.3;margin-bottom:12px}
+
+/* SKELETON */
+.sk{background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.08),rgba(255,255,255,.04));background-size:200% 100%;animation:shim 1.4s infinite;border-radius:10px}
+@keyframes shim{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* TOAST */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(14,13,20,.97);border:1px solid var(--ba);color:var(--gold);font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.1em;padding:10px 22px;border-radius:6px;z-index:9999;transition:transform .32s;pointer-events:none}
+.toast.on{transform:translateX(-50%) translateY(0)}
+
+/* CARRITO FLOTANTE */
+.cart-float{position:fixed;bottom:24px;right:24px;z-index:800;display:none}
+.cart-float.on{display:flex}
+.cf-btn{display:flex;align-items:center;gap:8px;padding:12px 20px;background:var(--gold);color:var(--bg);border:none;border-radius:40px;font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.12em;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(232,200,106,.3);transition:all .28s;text-decoration:none}
+.cf-btn:hover{background:var(--gd);transform:translateY(-2px)}
+.cf-count{background:var(--bg);color:var(--gold);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.52rem;font-weight:700}
+
+@media(max-width:640px){.filters{flex-direction:column;align-items:stretch}.sort-sel{margin-left:0}.pgrid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+<nav>
+  <a href="hub.html" class="brand">ORIONIX</a>
+  <div class="nav-mid">
+    <a class="nl" href="tienda.html">🏠 Tienda</a>
+    <a class="nl on" href="articulos.html">🛍️ Artículos</a>
+    <a class="nl" href="carrito.html">🛒 Carrito</a>
+  </div>
+  <div class="nav-r">
+    <a href="login.html" class="nl">Iniciar Sesión</a>
+    <a href="carrito.html" class="cart-btn">🛒 Carrito <span class="cart-count" id="cnt">0</span></a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="ph">
+    <div class="ph-tag">Catálogo Completo · ORIONIX</div>
+    <h1 class="ph-title">ARTÍCULOS</h1>
+    <p class="ph-sub">De una aguja a una mansión — encuentra lo que necesitas en tu nivel</p>
+  </div>
+
+  <div class="stats-bar">
+    <span class="stat-pill stat-moda" id="count-moda">🧵 MODA · 10</span>
+    <span class="stat-pill stat-fashion" id="count-fashion">✨ FASHION STYLE · 10</span>
+    <span class="stat-pill stat-dinastia" id="count-dinastia">👑 MI DINASTÍA · 10</span>
+  </div>
+
+  <div class="filters">
+    <div class="search-box">
+      <span style="color:var(--dim)">🔍</span>
+      <input type="text" placeholder="Buscar artículos…" id="search" oninput="applyFilters()">
+    </div>
+    <div class="ftab on" data-cat="TODOS" onclick="setFilter(this)">Todos</div>
+    <div class="ftab" data-cat="MODA" onclick="setFilter(this)">🧵 Moda</div>
+    <div class="ftab" data-cat="FASHION STYLE" onclick="setFilter(this)">✨ Fashion</div>
+    <div class="ftab" data-cat="MI DINASTIA" onclick="setFilter(this)">👑 Dinastía</div>
+    <select class="sort-sel" onchange="applyFilters()">
+      <option value="default">Ordenar por…</option>
+      <option value="price-asc">Precio ↑</option>
+      <option value="price-desc">Precio ↓</option>
+      <option value="name">Nombre A-Z</option>
+    </select>
+  </div>
+
+  <div class="results-info" id="results-info"></div>
+
+  <div class="pgrid" id="pgrid">
+    <div class="sk" style="height:320px"></div>
+    <div class="sk" style="height:320px"></div>
+    <div class="sk" style="height:320px"></div>
+    <div class="sk" style="height:320px"></div>
+    <div class="sk" style="height:320px"></div>
+    <div class="sk" style="height:320px"></div>
+  </div>
+</div>
+
+<!-- Carrito flotante -->
+<a href="carrito.html" class="cart-float" id="cart-float">
+  <div class="cf-btn">🛒 Ver Carrito <span class="cf-count" id="cf-cnt">0</span></div>
+</a>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API='https://lkevinruizl.app.n8n.cloud/webhook/orionix-tienda';
+let allProducts=[];
+let activeFilter='TODOS';
+
+const CAT_COLORS={
+  'MODA':{bg:'rgba(232,200,106,0.15)',c:'#e8c86a'},
+  'FASHION STYLE':{bg:'rgba(156,39,176,0.15)',c:'#ce93d8'},
+  'MI DINASTIA':{bg:'rgba(255,215,0,0.12)',c:'#ffd700'},
+};
+
+// Leer filtro de URL (?cat=MODA etc.)
+function getUrlFilter(){
+  const p=new URLSearchParams(location.search);
+  const c=(p.get('cat')||'').toUpperCase().trim();
+  if(!c||c==='TODOS')return 'TODOS';
+  if(c.includes('MODA'))return 'MODA';
+  if(c.includes('FASHION')||c.includes('STYLE'))return 'FASHION STYLE';
+  if(c.includes('DINAS'))return 'MI DINASTIA';
+  return 'TODOS';
+}
+
+async function loadProducts() {
+  try {
+    const pages = [1, 2, 3, 4, 5];
+    const fetchPromises = pages.map(p =>
+      fetch("../Gaia/Data/products/page-" + p + ".json")
+        .then(r => r.ok ? r.json() : [])
+        .catch(() => [])
+    );
+    const results = await Promise.all(fetchPromises);
+    allProducts = results.flat();
+    if (!allProducts.length) {
+      allProducts = generateFallbackProducts();
+    }
+    applyFilters();
+    updateCartCount();
+  } catch(e) {
+    allProducts = generateFallbackProducts();
+    applyFilters();
+    updateCartCount();
+  }
+}
+
+function generateFallbackProducts() {
+  const cats = ["MODA", "FASHION STYLE", "MI DINASTIA", "DIGITAL", "HOGAR", "TECH", "BIENESTAR", "VIAJE", "MASCOTAS"];
+  const list = [];
+  for (let i = 1; i <= 1000; i++) {
+    const c = cats[i % cats.length];
+    list.push({
+      id: "krc-" + i,
+      sku: "KRC-" + i,
+      nombre: "Artículo Imperial #" + i + " (" + c + ")",
+      descripcion: "Pieza selecta de la colección " + c + ". De la visión a la mansión.",
+      precio: Number((12.99 + (i * 7.7) % 350).toFixed(2)),
+      categoria: c,
+      imagen_url: "https://picsum.photos/seed/krc" + i + "/600/600"
+    });
+  }
+  return list;
+}
+
+function setFilter(el){
+  document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  activeFilter=el.dataset.cat;
+  // Actualizar URL sin recargar
+  const url=new URL(location.href);
+  if(activeFilter==='TODOS')url.searchParams.delete('cat');
+  else url.searchParams.set('cat',activeFilter);
+  history.replaceState({},'',url);
+  applyFilters();
+}
+
+function applyFilters(){
+  const q=document.getElementById('search').value.toLowerCase().trim();
+  const sort=document.querySelector('.sort-sel').value;
+  let list=allProducts.filter(p=>{
+    const catOk=activeFilter==='TODOS'||p.categoria===activeFilter;
+    const qOk=!q||(p.nombre||'').toLowerCase().includes(q)||(p.descripcion||'').toLowerCase().includes(q);
+    return catOk&&qOk;
+  });
+  if(sort==='price-asc')list.sort((a,b)=>(a.precio||0)-(b.precio||0));
+  if(sort==='price-desc')list.sort((a,b)=>(b.precio||0)-(a.precio||0));
+  if(sort==='name')list.sort((a,b)=>(a.nombre||'').localeCompare(b.nombre||''));
+  const ri=document.getElementById('results-info');
+  ri.innerHTML=list.length?`Mostrando <span>${list.length}</span> artículo${list.length!==1?'s':''} ${activeFilter!=='TODOS'?'en <span>'+activeFilter+'</span>':''}`:'' ;
+  renderProducts(list);
+}
+
+function renderProducts(list){
+    const g=document.getElementById('pgrid');
+    if(!list.length){
+      g.innerHTML=`<div class="empty"><div class="ei">✦</div><p>No se encontraron artículos</p><small>Prueba otro filtro o búsqueda</small></div>`;
+      return;
+    }
+    g.innerHTML=list.map(p=>{
+      const cat = p.categoria || p.category || 'MODA';
+      const name = p.nombre || p.title || 'Artículo Imperial';
+      const desc = p.descripcion || p.description || '';
+      const price = Number(p.precio || p.price || 0).toFixed(2);
+      const img = p.imagen_url || p.image || ('https://picsum.photos/seed/' + p.id + '/600/600');
+      const cc = CAT_COLORS[cat] || { bg: 'rgba(232,200,106,.15)', c: '#e8c86a' };
+      const safeData = JSON.stringify({ id: p.id, nombre: name, precio: Number(price), imagen_url: img, categoria: cat }).replace(/'/g,"&#39;");
+      return `<div class="pcard">
+        <div class="pimg">
+          <img src="${img}" loading="lazy" onerror="this.src='https://picsum.photos/seed/krc/600/600'">
+          <div class="pcat-badge" style="background:${cc.bg};color:${cc.c}">${cat}</div>
+        </div>
+        <div class="pinfo">
+          <div class="pname">${name}</div>
+          <div class="pdesc">${desc}</div>
+          <div class="pprice-row">
+            <div class="pprice">€${price}</div>
+            <div class="pstore">KRC IMPERIO</div>
+          </div>
+          <button class="padd" onclick='addCart(${safeData})'>+ Añadir al Carrito</button>
+        </div>
+      </div>`;
+    }).join('');
+    updateCartCount();
+  }
+
+  function renderEmpty(msg){
+  document.getElementById('pgrid').innerHTML=`<div class="empty"><div class="ei">🌌</div><p>${msg}</p></div>`;
+}
+
+function addCart(p){
+  const cart=JSON.parse(localStorage.getItem('orionix_cart')||'[]');
+  const idx=cart.findIndex(i=>i.nombre===p.nombre);
+  if(idx>=0)cart[idx].qty=(cart[idx].qty||1)+1;
+  else cart.push({...p,qty:1});
+  localStorage.setItem('orionix_cart',JSON.stringify(cart));
+  updateCartCount();
+  toast('✦ Añadido: '+p.nombre);
+}
+
+function updateCartCount(){
+  const cart=JSON.parse(localStorage.getItem('orionix_cart')||'[]');
+  const total=cart.reduce((a,i)=>a+(i.qty||1),0);
+  document.getElementById('cnt').textContent=total;
+  document.getElementById('cf-cnt').textContent=total;
+  const cf=document.getElementById('cart-float');
+  cf.classList.toggle('on',total>0);
+}
+
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2800);}
+
+// Starfield
+(function(){const c=document.getElementById('cv'),ctx=c.getContext('2d');function r(){c.width=innerWidth;c.height=innerHeight}r();addEventListener('resize',r);const s=Array.from({length:90},()=>({x:Math.random(),y:Math.random(),r:Math.random()*.9+.1,a:Math.random(),da:(Math.random()-.5)*.005}));function d(){ctx.clearRect(0,0,c.width,c.height);s.forEach(p=>{p.a=Math.max(.03,Math.min(.75,p.a+p.da));if(p.a<=.03||p.a>=.75)p.da*=-1;ctx.beginPath();ctx.arc(p.x*c.width,p.y*c.height,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(232,200,106,${p.a*.4})`;ctx.fill();});requestAnimationFrame(d);}d();})();
+
+loadProducts();
+updateCartCount();
+</script>
+<script src="orionix-profile.js"></script>
+</body>
+</html>

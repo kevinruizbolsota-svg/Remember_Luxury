@@ -3,4 +3,838 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>LEVIATAM 
+<title>LEVIATAN · Archivo ORIONIX</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0b0b0d;--gold:#e8c86a;--gold-light:#f5e0a0;--gold-dark:#b89a40;
+  --text:#f0e8d0;--purple:#6a3d9a;--card:#111116;--border:#2a2a3a;
+  --green:#22c55e;--red:#ef4444;--blue:#3b82f6
+}
+body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh}
+/* Starfield */
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.content{position:relative;z-index:1}
+
+/* ── HEADER ── */
+header{
+  background:rgba(11,11,13,.92);border-bottom:1px solid var(--border);
+  padding:14px 28px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)
+}
+.logo{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);letter-spacing:3px;text-decoration:none}
+.logo span{color:var(--text);opacity:.5}
+.nav-links{display:flex;gap:18px;align-items:center}
+.nav-links a{color:var(--text);text-decoration:none;font-size:.88rem;opacity:.65;transition:opacity .2s}
+.nav-links a:hover{opacity:1;color:var(--gold)}
+.badge-live{
+  background:rgba(34,197,94,.15);color:var(--green);border:1px solid rgba(34,197,94,.3);
+  padding:3px 10px;border-radius:50px;font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:1px
+}
+
+/* ── HERO ── */
+.hero{
+  padding:56px 28px 32px;text-align:center;
+  background:radial-gradient(ellipse at 50% 0%,rgba(106,61,154,.12) 0%,transparent 65%)
+}
+.hero-title{
+  font-family:'Cinzel',serif;font-size:clamp(2.2rem,5vw,3.8rem);
+  background:linear-gradient(135deg,var(--gold-dark),var(--gold-light));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:6px;line-height:1
+}
+.hero-sub{color:var(--text);opacity:.6;margin-top:10px;font-size:1.1rem;letter-spacing:1px}
+.hero-desc{
+  max-width:600px;margin:18px auto 0;font-size:.95rem;opacity:.55;line-height:1.7
+}
+
+/* ── STATS ── */
+.stats{
+  display:flex;gap:16px;flex-wrap:wrap;justify-content:center;
+  padding:0 28px 36px;margin-top:32px
+}
+.stat-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:18px 28px;text-align:center;min-width:130px
+}
+.stat-num{font-family:'Cinzel',serif;font-size:1.8rem;color:var(--gold);font-weight:700}
+.stat-label{font-size:.8rem;opacity:.55;letter-spacing:1px;margin-top:4px}
+
+/* ── ACTIONS ── */
+.actions{
+  display:flex;gap:14px;flex-wrap:wrap;justify-content:center;
+  padding:0 28px 40px
+}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 24px;border-radius:10px;
+  font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:1px;
+  cursor:pointer;border:none;transition:all .25s;text-decoration:none
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--gold-dark),var(--gold));
+  color:#000;font-weight:700
+}
+.btn-primary:hover{opacity:.88;transform:translateY(-2px);box-shadow:0 6px 24px rgba(232,200,106,.3)}
+.btn-secondary{
+  background:transparent;color:var(--text);
+  border:1px solid var(--border)
+}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold)}
+.btn-danger{
+  background:rgba(239,68,68,.12);color:var(--red);
+  border:1px solid rgba(239,68,68,.25)
+}
+.btn-danger:hover{background:rgba(239,68,68,.22)}
+.btn-import{
+  background:rgba(59,130,246,.12);color:var(--blue);
+  border:1px solid rgba(59,130,246,.25)
+}
+.btn-import:hover{background:rgba(59,130,246,.22)}
+
+/* ── MAIN LAYOUT ── */
+.main{display:flex;gap:0;max-width:1600px;margin:0 auto;padding:0 28px 80px}
+
+/* ── SIDEBAR FILTROS ── */
+.sidebar{
+  width:220px;flex-shrink:0;padding-right:24px
+}
+.sidebar h3{
+  font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:2px;
+  color:var(--gold-dark);margin-bottom:14px;text-transform:uppercase
+}
+.filter-list{list-style:none}
+.filter-list li{
+  padding:9px 14px;border-radius:8px;cursor:pointer;
+  font-size:.9rem;transition:all .2s;margin-bottom:4px;
+  display:flex;justify-content:space-between;align-items:center
+}
+.filter-list li:hover{background:var(--card);color:var(--gold)}
+.filter-list li.active{background:rgba(232,200,106,.12);color:var(--gold);border-left:2px solid var(--gold)}
+.filter-count{
+  background:var(--border);padding:1px 7px;border-radius:50px;
+  font-size:.72rem;font-family:'Cinzel',serif
+}
+.filter-list li.active .filter-count{background:rgba(232,200,106,.25);color:var(--gold)}
+
+/* ── CONTENT AREA ── */
+.content-area{flex:1;min-width:0}
+
+/* Barra búsqueda */
+.search-bar{
+  display:flex;gap:12px;margin-bottom:24px
+}
+.search-input{
+  flex:1;background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:11px 18px;color:var(--text);
+  font-family:'Cormorant Garamond',serif;font-size:.95rem;outline:none;
+  transition:border-color .2s
+}
+.search-input:focus{border-color:var(--gold)}
+.search-input::placeholder{opacity:.4}
+.btn-upload{
+  background:rgba(232,200,106,.1);color:var(--gold);
+  border:1px solid rgba(232,200,106,.3);padding:11px 18px;
+  border-radius:10px;cursor:pointer;font-family:'Cinzel',serif;font-size:.8rem;
+  transition:all .2s;display:flex;align-items:center;gap:6px
+}
+.btn-upload:hover{background:rgba(232,200,106,.2)}
+
+/* ── TABLA ── */
+.table-wrapper{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden
+}
+.table-header{
+  display:grid;grid-template-columns:2.5fr 1fr 1.2fr 1fr 80px 90px;
+  padding:12px 20px;border-bottom:1px solid var(--border);
+  font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:1.5px;
+  color:var(--gold-dark);text-transform:uppercase
+}
+.file-row{
+  display:grid;grid-template-columns:2.5fr 1fr 1.2fr 1fr 80px 90px;
+  padding:14px 20px;border-bottom:1px solid rgba(42,42,58,.5);
+  align-items:center;transition:background .15s;cursor:pointer
+}
+.file-row:last-child{border-bottom:none}
+.file-row:hover{background:rgba(232,200,106,.04)}
+.file-name{display:flex;align-items:center;gap:10px;font-size:.92rem}
+.file-icon{font-size:1.1rem;flex-shrink:0}
+.file-name-text{font-family:'JetBrains Mono','Courier New',monospace;font-size:.82rem;color:var(--gold-light);word-break:break-all}
+.file-tipo{
+  font-size:.75rem;background:rgba(106,61,154,.2);color:#c084fc;
+  border:1px solid #7c3aed;padding:2px 8px;border-radius:50px;
+  font-family:'Cinzel',serif;letter-spacing:.5px;display:inline-block
+}
+.tipo-html{background:rgba(232,200,106,.15);color:var(--gold);border-color:var(--gold-dark)}
+.tipo-ts,.tipo-js{background:rgba(59,130,246,.15);color:#93c5fd;border-color:#3b82f6}
+.tipo-json{background:rgba(34,197,94,.12);color:#86efac;border-color:#22c55e}
+.tipo-md{background:rgba(251,191,36,.12);color:#fcd34d;border-color:#f59e0b}
+.file-cat{font-size:.82rem;opacity:.65}
+.file-size{font-size:.8rem;opacity:.5;font-family:'JetBrains Mono',monospace}
+.file-actions{display:flex;gap:6px;justify-content:flex-end}
+.action-btn{
+  background:transparent;border:1px solid var(--border);
+  color:var(--text);padding:4px 10px;border-radius:6px;
+  cursor:pointer;font-size:.75rem;transition:all .2s
+}
+.action-btn:hover{border-color:var(--gold);color:var(--gold)}
+.action-btn.del:hover{border-color:var(--red);color:var(--red)}
+
+/* ── EMPTY / LOADING ── */
+.empty-state{text-align:center;padding:80px 24px;opacity:.45}
+.empty-icon{font-size:3rem;margin-bottom:16px}
+.loading-state{text-align:center;padding:60px;color:var(--gold);font-family:'Cinzel',serif;letter-spacing:2px}
+.spinner{
+  width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--gold);
+  border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── MODAL GUARDAR ── */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.72);
+  z-index:200;display:none;align-items:center;justify-content:center;padding:20px
+}
+.modal-overlay.open{display:flex}
+.modal{
+  background:#13131a;border:1px solid var(--border);border-radius:20px;
+  padding:36px;max-width:620px;width:100%;max-height:90vh;overflow-y:auto
+}
+.modal h2{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--gold);margin-bottom:24px;letter-spacing:2px}
+.form-group{margin-bottom:18px}
+.form-label{display:block;font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:1px;color:var(--gold-dark);margin-bottom:6px;text-transform:uppercase}
+.form-input,.form-select,.form-textarea{
+  width:100%;background:#0b0b0d;border:1px solid var(--border);
+  border-radius:10px;padding:11px 16px;color:var(--text);
+  font-family:'Cormorant Garamond',serif;font-size:.95rem;outline:none;
+  transition:border-color .2s
+}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold)}
+.form-textarea{resize:vertical;min-height:140px;font-family:'JetBrains Mono','Courier New',monospace;font-size:.82rem}
+.form-select{cursor:pointer}
+.form-select option{background:#13131a}
+.modal-footer{display:flex;gap:12px;justify-content:flex-end;margin-top:24px}
+
+/* ── MODAL DETALLE ── */
+.detail-modal{max-width:760px}
+.detail-meta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.meta-chip{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:8px;padding:6px 14px;font-size:.82rem
+}
+.meta-chip strong{color:var(--gold);margin-right:4px}
+.code-block{
+  background:#0b0b0d;border:1px solid var(--border);border-radius:12px;
+  padding:18px;font-family:'JetBrains Mono','Courier New',monospace;
+  font-size:.82rem;line-height:1.6;max-height:360px;overflow-y:auto;
+  white-space:pre-wrap;word-break:break-all;color:var(--text);opacity:.85
+}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:24px;right:24px;
+  background:var(--gold);color:#000;padding:12px 24px;
+  border-radius:10px;font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:1px;
+  transform:translateY(100px);opacity:0;transition:all .35s;z-index:999
+}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.error{background:var(--red);color:#fff}
+
+/* Dropzone */
+.dropzone{
+  border:2px dashed var(--border);border-radius:14px;
+  padding:36px;text-align:center;cursor:pointer;
+  transition:all .25s;margin-bottom:18px
+}
+.dropzone.dragover{border-color:var(--gold);background:rgba(232,200,106,.05)}
+.dropzone p{opacity:.55;font-size:.9rem}
+.dropzone strong{color:var(--gold);display:block;margin-bottom:6px;font-family:'Cinzel',serif}
+
+/* Import/Export modal */
+.progress-bar{
+  background:var(--border);border-radius:50px;height:8px;margin-top:8px;overflow:hidden
+}
+.progress-fill{
+  background:linear-gradient(90deg,var(--gold-dark),var(--gold));
+  height:100%;border-radius:50px;transition:width .4s;width:0%
+}
+
+@media(max-width:768px){
+  .sidebar{display:none}
+  .table-header,.file-row{grid-template-columns:2fr 1fr 1fr 70px}
+  .file-row>:nth-child(3),.table-header>:nth-child(3){display:none}
+}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="content">
+
+<header>
+  <a href="hub.html" class="logo">ORIONIX <span>/ LEVIATAN</span></a>
+  <nav class="nav-links">
+    <a href="hub.html">Inicio</a>
+    <a href="nexus.html">Agentes</a>
+    <a href="admin.html">Admin</a>
+    <span class="badge-live" id="statusBadge">● CARGANDO</span>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-title">LEVIATAN</div>
+  <div class="hero-sub">Archivo Central de ORIONIX</div>
+  <p class="hero-desc">
+    Copia de seguridad completa del proyecto — workflows, código, páginas, datos y contexto.
+    Descarga todo en un solo clic o importa archivos para añadirlos al archivo.
+  </p>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-num" id="statTotal">—</div>
+      <div class="stat-label">Archivos</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="statCats">—</div>
+      <div class="stat-label">Categorías</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="statSize">—</div>
+      <div class="stat-label">Tamaño total</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="statLastUpdate">—</div>
+      <div class="stat-label">Última actualización</div>
+    </div>
+  </div>
+
+  <!-- ACTIONS PRINCIPALES -->
+  <div class="actions">
+    <button class="btn btn-primary" onclick="exportarTodo()">
+      ⬇ Descargar Todo (ZIP)
+    </button>
+    <button class="btn btn-import" onclick="openImportModal()">
+      ⬆ Importar Archivos
+    </button>
+    <button class="btn btn-secondary" onclick="openGuardarModal()">
+      + Añadir Archivo
+    </button>
+    <button class="btn btn-secondary" onclick="exportarJSON()">
+      ⎆ Exportar JSON
+    </button>
+  </div>
+</section>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h3>Categorías</h3>
+    <ul class="filter-list" id="filterList">
+      <li class="active" data-cat="TODOS" onclick="filtrar(this,'TODOS')">
+        Todo <span class="filter-count" id="fc-TODOS">0</span>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- CONTENT -->
+  <div class="content-area">
+
+    <!-- BARRA BÚSQUEDA -->
+    <div class="search-bar">
+      <input type="text" class="search-input" id="searchInput"
+        placeholder="Buscar por nombre, tipo, descripción..."
+        oninput="buscar(this.value)">
+      <label class="btn-upload" for="fileInputQuick">
+        📎 Subir
+        <input type="file" id="fileInputQuick" multiple style="display:none" onchange="handleFilesDrop(this.files)">
+      </label>
+    </div>
+
+    <!-- TABLA -->
+    <div class="table-wrapper">
+      <div class="table-header">
+        <span>Nombre</span>
+        <span>Tipo</span>
+        <span>Categoría</span>
+        <span>Fecha</span>
+        <span>Tamaño</span>
+        <span style="text-align:right">Acciones</span>
+      </div>
+      <div id="fileList">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          Cargando archivo LEVIATAN...
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<!-- ── MODAL: GUARDAR ARCHIVO ── -->
+<div class="modal-overlay" id="guardarModal">
+  <div class="modal">
+    <h2>Añadir al Archivo</h2>
+
+    <!-- Dropzone -->
+    <div class="dropzone" id="dropzone"
+      ondragover="ev.preventDefault();this.classList.add('dragover')"
+      ondragleave="this.classList.remove('dragover')"
+      ondrop="onDrop(event)">
+      <strong>Arrastra archivos aquí</strong>
+      <p>o rellena el formulario manualmente</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Nombre del archivo *</label>
+      <input type="text" class="form-input" id="g-nombre" placeholder="mi-archivo.ts">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="form-group">
+        <label class="form-label">Categoría</label>
+        <select class="form-select" id="g-cat">
+          <option value="n8n">n8n · Workflows</option>
+          <option value="ciudadela">Ciudadela · HTML</option>
+          <option value="codigo">Código</option>
+          <option value="datos">Datos · JSON</option>
+          <option value="documentacion">Documentación</option>
+          <option value="imagen">Imágenes</option>
+          <option value="audio">Audio</option>
+          <option value="video">Vídeo</option>
+          <option value="general">General</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Versión</label>
+        <input type="text" class="form-input" id="g-version" placeholder="1.0">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Descripción</label>
+      <input type="text" class="form-input" id="g-desc" placeholder="Breve descripción del archivo">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Contenido (código / texto)</label>
+      <textarea class="form-textarea" id="g-contenido" placeholder="Pega aquí el contenido del archivo..."></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('guardarModal')">Cancelar</button>
+      <button class="btn btn-primary" onclick="guardarArchivo()">Guardar en LEVIATAN</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── MODAL: IMPORTAR ── -->
+<div class="modal-overlay" id="importModal">
+  <div class="modal">
+    <h2>Importar Archivos</h2>
+    <div class="dropzone" id="dropzoneImport"
+      ondragover="event.preventDefault();this.classList.add('dragover')"
+      ondragleave="this.classList.remove('dragover')"
+      ondrop="onDropImport(event)">
+      <strong>Arrastra uno o varios archivos</strong>
+      <p>Se añadirán automáticamente al archivo LEVIATAN</p>
+    </div>
+    <label class="form-label" style="margin-bottom:8px;display:block">O selecciona archivos:</label>
+    <input type="file" id="fileInputImport" multiple class="form-input" style="padding:8px" onchange="handleFilesDrop(this.files)">
+    <div id="importProgress" style="margin-top:16px;display:none">
+      <p style="font-size:.85rem;opacity:.7" id="importStatus">Importando...</p>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('importModal')">Cerrar</button>
+      <button class="btn btn-import" onclick="importarSeleccionados()">Importar Todo</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── MODAL: DETALLE ARCHIVO ── -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal detail-modal">
+    <h2 id="detailTitle">—</h2>
+    <div class="detail-meta" id="detailMeta"></div>
+    <div class="code-block" id="detailContenido">Sin contenido guardado.</div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('detailModal')">Cerrar</button>
+      <button class="btn btn-primary" onclick="descargarArchivo()">⬇ Descargar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = 'https://lkevinruizl.app.n8n.cloud/webhook/leviatan';
+let todosArchivos = [];
+let filtroActual = 'TODOS';
+let terminoBusqueda = '';
+let archivoDetalle = null;
+let pendingFiles = [];
+
+// ── ICONOS POR TIPO ──────────────────────────────────────────────
+const ICONOS = {
+  html:'🌐', ts:'⚡', js:'📜', json:'📊', md:'📝',
+  css:'🎨', pdf:'📄', png:'🖼️', jpg:'🖼️', jpeg:'🖼️',
+  mp4:'🎬', wav:'🎵', mp3:'🎵', txt:'📃', workflow:'⚙️', default:'📁'
+};
+const TIPO_CLASES = {
+  html:'tipo-html', ts:'tipo-ts', js:'tipo-js', json:'tipo-json', md:'tipo-md'
+};
+
+function icono(tipo) { return ICONOS[tipo] || ICONOS.default; }
+function tipoClass(tipo) { return TIPO_CLASES[tipo] || ''; }
+function formatSize(bytes) {
+  if (!bytes) return '—';
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+  return (bytes/1024/1024).toFixed(1) + ' MB';
+}
+function totalSize(arr) {
+  const total = arr.reduce((s,a) => s + (a.tamanio || 0), 0);
+  return formatSize(total);
+}
+
+// ── API ────────────────────────────────────────────────────────────
+async function api(accion, datos = {}) {
+  const r = await fetch(API, {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ accion, ...datos })
+  });
+  return r.json();
+}
+
+// ── CARGAR ────────────────────────────────────────────────────────
+async function cargar() {
+  try {
+    const data = await api('listar');
+    todosArchivos = data.archivos || [];
+    actualizarStats();
+    actualizarSidebar();
+    renderTabla();
+    document.getElementById('statusBadge').textContent = '● ACTIVO';
+    document.getElementById('statusBadge').style.color = '#22c55e';
+  } catch(e) {
+    document.getElementById('fileList').innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">⚠️</div>
+        <p>No se pudo conectar con LEVIATAN</p>
+        <p style="font-size:.8rem;margin-top:8px;opacity:.5">${e.message}</p>
+      </div>`;
+    document.getElementById('statusBadge').textContent = '● OFFLINE';
+    document.getElementById('statusBadge').style.color = 'var(--red)';
+  }
+}
+
+function actualizarStats() {
+  document.getElementById('statTotal').textContent = todosArchivos.length;
+  const cats = [...new Set(todosArchivos.map(a => a.categoria))].filter(Boolean);
+  document.getElementById('statCats').textContent = cats.length;
+  document.getElementById('statSize').textContent = totalSize(todosArchivos);
+  const fechas = todosArchivos.map(a => a.fecha).filter(Boolean).sort().reverse();
+  document.getElementById('statLastUpdate').textContent = fechas[0] ? fechas[0].slice(5) : '—';
+}
+
+function actualizarSidebar() {
+  const cats = {};
+  cats['TODOS'] = todosArchivos.length;
+  todosArchivos.forEach(a => {
+    const c = a.categoria || 'general';
+    cats[c] = (cats[c] || 0) + 1;
+  });
+  const fl = document.getElementById('filterList');
+  fl.innerHTML = '';
+  Object.entries(cats).forEach(([cat, cnt]) => {
+    const li = document.createElement('li');
+    li.dataset.cat = cat;
+    li.className = filtroActual === cat ? 'active' : '';
+    li.innerHTML = `${cat === 'TODOS' ? 'Todo' : cat} <span class="filter-count" id="fc-${cat}">${cnt}</span>`;
+    li.onclick = () => filtrar(li, cat);
+    fl.appendChild(li);
+  });
+}
+
+function filtrar(el, cat) {
+  filtroActual = cat;
+  document.querySelectorAll('.filter-list li').forEach(li => li.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderTabla();
+}
+
+function buscar(q) {
+  terminoBusqueda = q.toLowerCase();
+  renderTabla();
+}
+
+function archivosFiltrados() {
+  let arr = todosArchivos;
+  if (filtroActual !== 'TODOS') arr = arr.filter(a => a.categoria === filtroActual);
+  if (terminoBusqueda) arr = arr.filter(a =>
+    (a.nombre||'').toLowerCase().includes(terminoBusqueda) ||
+    (a.tipo||'').toLowerCase().includes(terminoBusqueda) ||
+    (a.descripcion||'').toLowerCase().includes(terminoBusqueda)
+  );
+  return arr;
+}
+
+function renderTabla() {
+  const fl = document.getElementById('fileList');
+  const arr = archivosFiltrados();
+  if (!arr.length) {
+    fl.innerHTML = `<div class="empty-state"><div class="empty-icon">📭</div><p>No hay archivos${filtroActual !== 'TODOS' ? ' en "' + filtroActual + '"' : ''}</p><p style="font-size:.82rem;margin-top:8px;opacity:.4">Añade archivos con "Añadir" o importa desde tu PC</p></div>`;
+    return;
+  }
+  fl.innerHTML = '';
+  arr.forEach(a => {
+    const row = document.createElement('div');
+    row.className = 'file-row';
+    row.innerHTML = `
+      <div class="file-name">
+        <span class="file-icon">${icono(a.tipo)}</span>
+        <span class="file-name-text">${a.nombre || '—'}</span>
+      </div>
+      <div><span class="file-tipo ${tipoClass(a.tipo)}">${a.tipo || '?'}</span></div>
+      <div class="file-cat">${a.categoria || '—'}</div>
+      <div class="file-size">${a.fecha || '—'}</div>
+      <div class="file-size">${formatSize(a.tamanio)}</div>
+      <div class="file-actions">
+        <button class="action-btn" onclick="verDetalle(event,${JSON.stringify(a).replace(/"/g,'&quot;')})">Ver</button>
+        <button class="action-btn" onclick="descargarUno(event,${JSON.stringify(a).replace(/"/g,'&quot;')})">⬇</button>
+        <button class="action-btn del" onclick="eliminarArchivo(event,'${a.nombre}',${a.id || 0})">✕</button>
+      </div>
+    `;
+    fl.appendChild(row);
+  });
+}
+
+// ── GUARDAR ──────────────────────────────────────────────────────
+function openGuardarModal() {
+  document.getElementById('guardarModal').classList.add('open');
+}
+
+async function guardarArchivo() {
+  const nombre = document.getElementById('g-nombre').value.trim();
+  if (!nombre) { toast('Escribe el nombre del archivo', true); return; }
+  const datos = {
+    nombre,
+    categoria: document.getElementById('g-cat').value,
+    version: document.getElementById('g-version').value || '1.0',
+    descripcion: document.getElementById('g-desc').value,
+    contenido: document.getElementById('g-contenido').value,
+  };
+  try {
+    await api('guardar', datos);
+    toast('✓ Guardado en LEVIATAN');
+    closeModal('guardarModal');
+    await cargar();
+  } catch(e) { toast('Error al guardar: ' + e.message, true); }
+}
+
+// ── IMPORTAR FILES ────────────────────────────────────────────────
+function openImportModal() { document.getElementById('importModal').classList.add('open'); }
+
+function onDrop(event) {
+  event.preventDefault();
+  document.getElementById('dropzone').classList.remove('dragover');
+  handleFilesDrop(event.dataTransfer.files);
+  closeModal('guardarModal');
+  openImportModal();
+}
+
+function onDropImport(event) {
+  event.preventDefault();
+  document.getElementById('dropzoneImport').classList.remove('dragover');
+  handleFilesDrop(event.dataTransfer.files);
+}
+
+function handleFilesDrop(files) {
+  pendingFiles = Array.from(files);
+  toast(`${pendingFiles.length} archivo(s) listos para importar`);
+  document.getElementById('importModal').classList.add('open');
+}
+
+async function importarSeleccionados() {
+  const fileInput = document.getElementById('fileInputImport');
+  const files = pendingFiles.length ? pendingFiles : Array.from(fileInput.files);
+  if (!files.length) { toast('Selecciona al menos un archivo', true); return; }
+
+  const prog = document.getElementById('importProgress');
+  const status = document.getElementById('importStatus');
+  const fill = document.getElementById('progressFill');
+  prog.style.display = 'block';
+
+  for (let i = 0; i < files.length; i++) {
+    const f = files[i];
+    status.textContent = `Importando ${i+1}/${files.length}: ${f.name}`;
+    fill.style.width = ((i/files.length)*100) + '%';
+    try {
+      const contenido = await leerArchivo(f);
+      const ext = f.name.split('.').pop().toLowerCase();
+      await api('guardar', {
+        nombre: f.name,
+        categoria: categoriaDeExt(ext),
+        descripcion: `Importado desde PC · ${new Date().toLocaleDateString('es-ES')}`,
+        contenido,
+        version: '1.0',
+      });
+    } catch(e) { console.warn('Error importando', f.name, e); }
+  }
+  fill.style.width = '100%';
+  status.textContent = `✓ ${files.length} archivos importados`;
+  setTimeout(() => { closeModal('importModal'); cargar(); prog.style.display = 'none'; fill.style.width='0%'; }, 1500);
+  pendingFiles = [];
+}
+
+function leerArchivo(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    // Archivos texto: código, JSON, MD, etc.
+    const textTypes = ['text/','application/json','application/javascript','application/typescript'];
+    const isText = textTypes.some(t => file.type.startsWith(t)) || file.name.match(/\.(ts|js|html|css|md|txt|json|xml|yaml|yml|sh|py)$/i);
+    if (isText) {
+      r.onload = e => resolve(e.target.result);
+      r.onerror = reject;
+      r.readAsText(file);
+    } else {
+      // Binarios: guardar como base64
+      r.onload = e => resolve(e.target.result); // dataURL
+      r.onerror = reject;
+      r.readAsDataURL(file);
+    }
+  });
+}
+
+function categoriaDeExt(ext) {
+  const map = {
+    html:'ciudadela', css:'estilos', ts:'n8n', js:'codigo',
+    json:'datos', md:'documentacion', txt:'documentacion',
+    pdf:'documento', png:'imagen', jpg:'imagen', jpeg:'imagen',
+    gif:'imagen', svg:'imagen', mp4:'video', wav:'audio', mp3:'audio'
+  };
+  return map[ext] || 'general';
+}
+
+// ── ELIMINAR ─────────────────────────────────────────────────────
+async function eliminarArchivo(ev, nombre, id) {
+  ev.stopPropagation();
+  if (!confirm(`¿Eliminar "${nombre}" de LEVIATAN?`)) return;
+  try {
+    await api('eliminar', { nombre });
+    toast('Archivo eliminado');
+    await cargar();
+  } catch(e) { toast('Error: ' + e.message, true); }
+}
+
+// ── VER DETALLE ───────────────────────────────────────────────────
+function verDetalle(ev, archivo) {
+  ev.stopPropagation();
+  archivoDetalle = archivo;
+  document.getElementById('detailTitle').textContent = archivo.nombre || 'Archivo';
+  document.getElementById('detailMeta').innerHTML = `
+    <span class="meta-chip"><strong>Tipo:</strong>${archivo.tipo || '?'}</span>
+    <span class="meta-chip"><strong>Categoría:</strong>${archivo.categoria || '?'}</span>
+    <span class="meta-chip"><strong>Versión:</strong>${archivo.version || '?'}</span>
+    <span class="meta-chip"><strong>Fecha:</strong>${archivo.fecha || '?'}</span>
+    <span class="meta-chip"><strong>Tamaño:</strong>${formatSize(archivo.tamanio)}</span>
+    ${archivo.descripcion ? `<span class="meta-chip"><strong>Desc:</strong>${archivo.descripcion}</span>` : ''}
+  `;
+  document.getElementById('detailContenido').textContent = archivo.contenido || 'Sin contenido guardado.';
+  document.getElementById('detailModal').classList.add('open');
+}
+
+// ── DESCARGA INDIVIDUAL ───────────────────────────────────────────
+function descargarUno(ev, archivo) {
+  ev.stopPropagation();
+  const blob = new Blob([archivo.contenido || ''], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = archivo.nombre || 'archivo.txt';
+  a.click(); URL.revokeObjectURL(url);
+}
+
+function descargarArchivo() {
+  if (archivoDetalle) descargarUno({ stopPropagation:()=>{} }, archivoDetalle);
+}
+
+// ── EXPORTAR TODO COMO ZIP (simulado con JSON empaquetado) ────────
+async function exportarTodo() {
+  toast('Preparando descarga completa...');
+  try {
+    const data = await api('exportar');
+    if (!data.ok) throw new Error('API error');
+    const json = JSON.stringify(data.manifiesto, null, 2);
+    // Generar ZIP simulado: cada archivo como entrada en el JSON
+    // Para ZIP real se necesita JSZip; aquí generamos un archivo .json navegable
+    const blob = new Blob([json], { type: 'application/json;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `LEVIATAN_ORIONIX_${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast(`✓ Descargado: ${data.manifiesto.total_archivos} archivos`);
+  } catch(e) { toast('Error al exportar: ' + e.message, true); }
+}
+
+async function exportarJSON() {
+  const arr = archivosFiltrados();
+  const json = JSON.stringify({ exportado: new Date().toISOString(), archivos: arr }, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url;
+  a.download = `LEVIATAN_${filtroActual}_${new Date().toISOString().slice(0,10)}.json`;
+  a.click(); URL.revokeObjectURL(url);
+  toast(`✓ JSON exportado: ${arr.length} archivos`);
+}
+
+// ── MODAL UTILS ───────────────────────────────────────────────────
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
+});
+
+// ── TOAST ─────────────────────────────────────────────────────────
+function toast(msg, isError = false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (isError ? ' error' : '');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ── STARFIELD ────────────────────────────────────────────────────
+(function() {
+  const c = document.getElementById('stars');
+  const ctx = c.getContext('2d');
+  function resize() { c.width = innerWidth; c.height = innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  const stars = Array.from({length:160}, () => ({
+    x: Math.random()*innerWidth, y: Math.random()*innerHeight,
+    r: Math.random()*.9+.1, a: Math.random(), da: (Math.random()-.5)*.004
+  }));
+  function draw() {
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(s => {
+      s.a = Math.max(.05, Math.min(1, s.a+s.da));
+      if (s.a <= .05 || s.a >= 1) s.da = -s.da;
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(232,200,106,${s.a})`; ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── INIT ─────────────────────────────────────────────────────────
+cargar();
+</script>
+</body>
+</html>

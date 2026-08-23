@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orionix | De Carbón a Diamante</title>
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --dark-gold: #AA8C2C;
+            --black: #050505;
+            --charcoal: #1a1a1a;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cinzel', serif; }
+        body { background-color: var(--black); color: var(--white); overflow-x: hidden; }
+        .hero { position: relative; width: 100%; height: 80vh; display: flex; align-items: center; justify-content: center; background: #000; overflow: hidden; }
+        .video-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        iframe { width: 100%; height: 100%; border: none; opacity: 0.6; pointer-events: none; }
+        .overlay-text { position: relative; z-index: 10; text-align: center; padding: 2rem; max-width: 800px; animation: fadeIn 3s ease-out; cursor: pointer; }
+        .quote { font-size: 2.5rem; color: var(--gold); text-shadow: 0 0 20px rgba(212, 175, 55, 0.5); line-height: 1.4; margin-bottom: 1rem; font-style: italic; }
+        .author { font-size: 1.2rem; color: var(--white); letter-spacing: 2px; text-transform: uppercase; }
+        .auction-section { padding: 4rem 2rem; background: linear-gradient(to bottom, var(--black), var(--charcoal)); }
+        .section-title { text-align: center; font-size: 3rem; color: var(--gold); margin-bottom: 3rem; text-transform: uppercase; letter-spacing: 5px; }
+        .section-subtitle { text-align: center; margin-bottom: 2rem; color: #aaa; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+        .product-card { background: var(--glass); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 10px; padding: 1.5rem; text-align: center; transition: transform 0.3s, box-shadow 0.3s; backdrop-filter: blur(10px); }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); border-color: var(--gold); }
+        .product-image { width: 100%; height: 250px; object-fit: cover; border-radius: 5px; margin-bottom: 1rem; background-color: #222; }
+        .product-name { font-size: 1.5rem; color: var(--white); margin-bottom: 0.5rem; }
+        .current-bid { font-size: 1.2rem; color: var(--gold); margin-bottom: 1rem; }
+        .timer { font-size: 1rem; color: #ff4444; margin-bottom: 1.5rem; font-weight: bold; }
+        .bid-btn { background: linear-gradient(45deg, var(--gold), var(--dark-gold)); color: var(--black); border: none; padding: 1rem 2rem; font-size: 1rem; font-weight: bold; text-transform: uppercase; cursor: pointer; border-radius: 5px; width: 100%; transition: all 0.3s; text-decoration: none; display: inline-block; }
+        .bid-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 768px) { .quote { font-size: 1.8rem; } .section-title { font-size: 2rem; } .hero { height: 60vh; } }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section class="hero">
+        <div class="video-container">
+            <iframe id="rickyVideo" src="https://www.youtube.com/embed/uYZGpwwkCt4?autoplay=1&mute=1&controls=0&loop=1&playlist=uYZGpwwkCt4" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="overlay-text" id="overlayText">
+            <h1 class="quote">"No te mueras como un carbón cuando tienes todo lo necesario para convertirte en un diamante."</h1>
+            <p class="author">— Ricky Rivera</p>
+            <p style="margin-top:20px;font-size:.9rem;opacity:.8">(Toca la pantalla para activar el sonido)</p>
+        </div>
+    </section>
+
+    <section class="auction-section">
+        <h2 class="section-title">Tesoros del Video</h2>
+        <p class="section-subtitle">Puja por los objetos reales que aparecen en la historia. Solo hay uno de cada.</p>
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=600&q=80" alt="Reloj Dinastía" class="product-image">
+                <h3 class="product-name">Reloj "Legado"</h3><p class="current-bid">Puja actual: €450</p><p class="timer">Cierra en: 02d 14h 30m</p>
+                <a href="https://wa.me/34600000000?text=Hola%20Kevin,%20quiero%20pujar%20por%20el%20Reloj%20Legado%20del%20video." class="bid-btn">Hacer Puja</a>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1594938298603-c8148c47e356?auto=format&fit=crop&w=600&q=80" alt="Traje Orionix" class="product-image">
+                <h3 class="product-name">Traje "Imperio"</h3><p class="current-bid">Puja actual: €890</p><p class="timer">Cierra en: 01d 08h 15m</p>
+                <a href="https://wa.me/34600000000?text=Hola%20Kevin,%20quiero%20pujar%20por%20el%20Traje%20Imperio." class="bid-btn">Hacer Puja</a>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?auto=format&fit=crop&w=600&q=80" alt="Zapatos de Lujo" class="product-image">
+                <h3 class="product-name">Zapatos "Ascenso"</h3><p class="current-bid">Puja actual: €320</p><p class="timer">Cierra en: 03d 22h 45m</p>
+                <a href="https://wa.me/34600000000?text=Hola%20Kevin,%20quiero%20pujar%20por%20los%20Zapatos%20Ascenso." class="bid-btn">Hacer Puja</a>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80" alt="Gafas de Sol" class="product-image">
+                <h3 class="product-name">Gafas "Visión"</h3><p class="current-bid">Puja actual: €150</p><p class="timer">Cierra en: 00d 05h 10m</p>
+                <a href="https://wa.me/34600000000?text=Hola%20Kevin,%20quiero%20pujar%20por%20las%20Gafas%20Vision." class="bid-btn">Hacer Puja</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const hero = document.querySelector('.hero');
+        const overlay = document.getElementById('overlayText');
+        hero.addEventListener('click', () => {
+            overlay.style.transition = 'opacity 1s';
+            overlay.style.opacity = '0';
+            setTimeout(() => { overlay.style.display = 'none'; }, 1000);
+        });
+        function updateTimers() { console.log('Actualizando temporizadores de subasta...'); }
+        setInterval(updateTimers, 1000);
+    </script>
+</body>
+</html>

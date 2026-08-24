@@ -1,0 +1,48 @@
+name: Apply auth guard to all HTML pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  guard-html:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Add auth guard to every HTML page
+        shell: bash
+        run: |
+          set -euo pipefail
+          changed=0
+          while IFS= read -r -d '' file; do
+            [[ "$file" == "./ciudadela/auth.html" ]] && continue
+            if ! grep -qi 'orionix-guard.js' "$file"; then
+              python3 - "$file" <<'PY'
+import pathlib, sys, re
+p = pathlib.Path(sys.argv[1])
+s = p.read_text(encoding='utf-8')
+if re.search(r'<head\\b[^>]*>', s, re.I) and not re.search(r'orionix-guard\\.js', s, re.I):
+    s = re.sub(r'(<head\\b[^>]*>)', r'\1\n<script src="/Remember_Luxury/ciudadela/orionix-guard.js"></script>', s, count=1, flags=re.I)
+    p.write_text(s, encoding='utf-8')
+PY
+              changed=1
+            fi
+          done < <(find . -type f -name '*.html' -not -path './.git/*' -print0)
+
+          if [[ "$changed" == "1" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -- '*.html'
+            git commit -m "Aplicar guard de inicio de sesión a todas las páginas HTML"
+            git push
+          else
+            echo "Todas las páginas HTML ya tienen el guard."
+          fi

@@ -53,9 +53,8 @@ document.addEventListener("click", function (event) {
     return;
   }
 
-  // Solo protegemos enlaces internos del mismo sitio.
-  if (destination.origin !== window.location.origin) return;
-  if (destination.pathname.endsWith("/auth.html")) return;
+  // Todos los enlaces web quedan protegidos, incluso si apuntan fuera del sitio.
+  if (destination.pathname.endsWith("/auth.html") && destination.origin === window.location.origin) return;
 
   if (!authed) {
     event.preventDefault();

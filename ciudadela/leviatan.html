@@ -326,6 +326,9 @@ header{
     <button class="btn btn-secondary" onclick="exportarJSON()">
       ⎆ Exportar JSON
     </button>
+    <button class="btn" id="btnResumen" onclick="generarResumenIA()" style="background:linear-gradient(135deg,rgba(106,61,154,.4),rgba(139,92,246,.3));color:#c084fc;border:1px solid rgba(139,92,246,.5);font-weight:700">
+      🧠 Resumen para IA
+    </button>
   </div>
 </section>
 
@@ -466,6 +469,23 @@ header{
       <button class="btn btn-secondary" onclick="closeModal('detailModal')">Cerrar</button>
       <button class="btn btn-primary" onclick="descargarArchivo()">⬇ Descargar</button>
     </div>
+  </div>
+</div>
+
+<!-- MODAL RESUMEN IA -->
+<div class="modal-overlay" id="resumenModal">
+  <div class="modal" style="max-width:860px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <h2 style="margin:0">🧠 Resumen ORIONIX para IA</h2>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-primary" onclick="copiarResumen()" id="btnCopiar">📋 Copiar Todo</button>
+        <button class="btn btn-secondary" onclick="descargarResumen()">⬇ .md</button>
+        <button class="btn btn-secondary" onclick="closeModal('resumenModal')">✕</button>
+      </div>
+    </div>
+    <p style="font-size:.8rem;opacity:.45;margin-bottom:14px;letter-spacing:1px">LISTO PARA PEGAR EN GPT · CLAUDE · GEMINI · AXEL</p>
+    <div class="code-block" id="resumenContenido" style="max-height:62vh;font-size:.77rem;line-height:1.7">Generando...</div>
+    <div style="margin-top:12px;font-size:.78rem;opacity:.4" id="resumenStats"></div>
   </div>
 </div>
 

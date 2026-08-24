@@ -3,54 +3,294 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REMEMBER LUXURY · Fashion Style</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>ORIONIX · Tienda</title>
 <style>
-:root{--gold:#e8b94f;--gold2:#f4d47d;--white:#f7f4ed;--muted:#aaa7a0;--bg:#02060c}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--white);font-family:Arial,sans-serif;min-height:100vh;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0;z-index:-2;background-image:linear-gradient(180deg,rgba(1,5,12,.16),rgba(1,5,12,.27) 40%,rgba(0,0,0,.94) 100%),url('https://images.unsplash.com/photo-1514565131-fce0801e5785?q=85&w=2400&auto=format&fit=crop');background-size:cover;background-position:center;background-attachment:fixed}
-body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 52% 32%,rgba(232,185,79,.08),transparent 36%),linear-gradient(90deg,rgba(0,0,0,.34),transparent 35%,transparent 70%,rgba(0,0,0,.34))}
-nav{height:82px;position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;padding:0 34px;background:linear-gradient(180deg,rgba(0,4,10,.9),rgba(0,4,10,.3));border-bottom:1px solid rgba(232,185,79,.18);backdrop-filter:blur(7px)}
-.menu{width:30px;height:24px;display:flex;flex-direction:column;justify-content:space-between;margin-right:34px;cursor:pointer}.menu span{height:2px;width:27px;background:var(--gold)}
-.links{display:flex;align-items:center;gap:34px}.links a{color:#eee;text-decoration:none;font-size:13px;letter-spacing:.04em}.links a:hover{color:var(--gold2)}.links a.active{color:#fff;border-bottom:2px solid var(--gold);padding:27px 0 25px}
-.logo{position:absolute;left:50%;top:20px;transform:translateX(-50%);text-align:center;color:var(--gold);font-family:Cinzel,serif;line-height:1}.crown{display:block;font-size:37px;margin-bottom:6px;text-shadow:0 0 18px rgba(232,185,79,.4)}.logo-main{font-size:34px;letter-spacing:.11em}.logo-sub{font-size:13px;letter-spacing:.52em;margin-top:7px}.logo-sub::before,.logo-sub::after{content:"";display:inline-block;width:43px;height:1px;background:var(--gold);vertical-align:middle;margin:0 12px}
-.search{margin-left:auto;width:23px;height:23px;border:2px solid #eee;border-radius:50%;position:relative}.search::after{content:"";position:absolute;width:9px;height:2px;background:#eee;right:-7px;bottom:0;transform:rotate(48deg)}
-.hero{min-height:610px;padding:180px 58px 50px;display:flex;align-items:flex-start}.hero-copy{max-width:570px;text-shadow:0 3px 18px #000}.eyebrow{font-family:Cinzel,serif;color:var(--gold);font-size:18px;letter-spacing:.16em;margin-bottom:17px}.hero h1{font-family:Cinzel,serif;font-size:clamp(54px,6vw,84px);font-weight:400;letter-spacing:.02em;line-height:1.02}.rule{width:48px;height:2px;background:var(--gold);margin:24px 0 25px}.hero p{font-size:18px;line-height:1.55;color:#eee;max-width:500px}.hero-btn{display:inline-block;margin-top:30px;padding:14px 23px;border:1px solid rgba(232,185,79,.7);border-radius:8px;color:var(--gold2);text-decoration:none;font-size:13px;letter-spacing:.08em;background:rgba(0,0,0,.3)}.hero-btn:hover{background:rgba(232,185,79,.12)}
-.content{max-width:1500px;margin:auto;padding:0 58px 70px}.filter{font-size:14px;margin-bottom:25px}.filter strong{color:var(--gold);font-weight:400;margin-left:10px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{height:385px;border:1px solid rgba(232,185,79,.32);border-radius:12px;overflow:hidden;position:relative;background:#080c12;box-shadow:0 12px 40px rgba(0,0,0,.55)}.card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s}.card:hover img{transform:scale(1.05)}.shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 34%,rgba(0,0,0,.18) 46%,rgba(0,0,0,.96) 100%)}.card-body{position:absolute;left:22px;right:22px;bottom:19px}.tag{color:var(--gold);font-size:12px;letter-spacing:.08em;margin-bottom:13px}.card h2{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;line-height:1.08;margin-bottom:14px}.meta{color:#a8a59e;font-size:11px;letter-spacing:.05em}.meta b{color:var(--gold);font-weight:400;margin-right:13px}
-@media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}.links{gap:16px}.links a:nth-child(4){display:none}.hero{padding-left:35px}.content{padding-left:35px;padding-right:35px}}
-@media(max-width:650px){nav{height:70px;padding:0 18px}.links{display:none}.menu{margin-right:0}.logo{top:17px}.logo-main{font-size:23px}.logo-sub{font-size:9px}.crown{font-size:26px}.search{margin-left:auto}.hero{min-height:650px;padding:140px 24px 30px}.hero h1{font-size:50px}.hero p{font-size:16px}.content{padding:0 18px 45px}.grid{grid-template-columns:1fr}.card{height:410px}}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0b0b0d;--gold:#e8c86a;--gold-light:#f5e0a0;--gold-dark:#b89a40;
+  --text:#f0e8d0;--purple:#6a3d9a;--card:#111116;--border:#2a2a3a
+}
+body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh}
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* ── HEADER ── */
+header{
+  background:linear-gradient(135deg,#0a0a0c 0%,#111116 100%);
+  border-bottom:1px solid var(--border);
+  padding:16px 24px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;backdrop-filter:blur(8px)
+}
+.logo{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--gold);letter-spacing:2px;text-decoration:none}
+.nav-links{display:flex;gap:20px}
+.nav-links a{color:var(--text);text-decoration:none;font-size:.9rem;opacity:.75;transition:opacity .2s}
+.nav-links a:hover{opacity:1;color:var(--gold)}
+.cart-btn{
+  background:linear-gradient(135deg,var(--gold-dark),var(--gold));
+  color:#000;border:none;padding:8px 18px;border-radius:8px;
+  font-family:'Cinzel',serif;font-size:.85rem;cursor:pointer;
+  text-decoration:none;display:flex;align-items:center;gap:6px
+}
+.cart-count{
+  background:#000;color:var(--gold);border-radius:50%;
+  width:20px;height:20px;display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:700
+}
+
+/* ── HERO ── */
+.hero{
+  padding:60px 24px 40px;text-align:center;
+  background:radial-gradient(ellipse at 50% 0%,rgba(232,200,106,.08) 0%,transparent 70%)
+}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,3rem);color:var(--gold);letter-spacing:3px}
+.hero p{color:var(--text);opacity:.7;margin-top:10px;font-size:1.05rem}
+
+/* ── FILTROS ── */
+.filters{
+  display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
+  padding:0 24px 32px
+}
+.filter-btn{
+  padding:8px 22px;border-radius:50px;border:1px solid var(--border);
+  background:transparent;color:var(--text);cursor:pointer;
+  font-family:'Cinzel',serif;font-size:.82rem;letter-spacing:1px;transition:all .2s
+}
+.filter-btn:hover,.filter-btn.active{
+  background:linear-gradient(135deg,var(--gold-dark),var(--gold));
+  color:#000;border-color:var(--gold)
+}
+
+/* ── GRID ── */
+.container{max-width:1400px;margin:0 auto;padding:0 24px 80px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:24px
+}
+
+/* ── CARD ── */
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  overflow:hidden;transition:transform .25s,box-shadow .25s;
+  display:flex;flex-direction:column
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(232,200,106,.15)}
+.card img{width:100%;height:220px;object-fit:cover;background:#1a1a22}
+.card-body{padding:18px;flex:1;display:flex;flex-direction:column;gap:8px}
+.card-cat{
+  font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:2px;
+  color:var(--gold-dark);text-transform:uppercase
+}
+.card-name{font-size:1.05rem;font-weight:600;color:var(--text);line-height:1.3}
+.card-desc{font-size:.88rem;opacity:.65;line-height:1.5;flex:1}
+.card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+.price{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--gold);font-weight:700}
+.add-btn{
+  background:linear-gradient(135deg,var(--gold-dark),var(--gold));
+  color:#000;border:none;padding:8px 16px;border-radius:8px;
+  font-family:'Cinzel',serif;font-size:.8rem;cursor:pointer;transition:opacity .2s
+}
+.add-btn:hover{opacity:.85}
+
+/* ── BADGE TIPO ── */
+.badge{
+  display:inline-block;padding:2px 10px;border-radius:50px;
+  font-size:.7rem;font-family:'Cinzel',serif;letter-spacing:1px;margin-top:4px
+}
+.badge-MODA{background:rgba(106,61,154,.3);color:#c084fc;border:1px solid #7c3aed}
+.badge-FASHION\ STYLE{background:rgba(232,200,106,.15);color:var(--gold);border:1px solid var(--gold-dark)}
+.badge-MI\ DINASTIA{background:rgba(184,154,64,.2);color:#fbbf24;border:1px solid #d97706}
+
+/* ── LOADING / EMPTY ── */
+.loading{text-align:center;padding:80px 24px;color:var(--gold);font-family:'Cinzel',serif;letter-spacing:2px}
+.empty{text-align:center;padding:80px 24px;opacity:.5}
+.spinner{
+  width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--gold);
+  border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 20px
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:24px;right:24px;
+  background:var(--gold);color:#000;
+  padding:12px 22px;border-radius:10px;
+  font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:1px;
+  transform:translateY(100px);opacity:0;transition:all .35s;z-index:999
+}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* ── MOBILE ── */
+@media(max-width:600px){
+  .nav-links{display:none}
+  .hero h1{font-size:1.6rem}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px}
+  .card img{height:160px}
+}
 </style>
 </head>
 <body>
-<nav>
-  <div class="menu" aria-label="Menú"><span></span><span></span><span></span></div>
-  <div class="links"><a href="../index.html">INICIO</a><a class="active" href="articulos.html?cat=FASHION%20STYLE">ARTÍCULOS</a><a href="articulos.html">CATEGORÍAS</a><a href="sobre-nosotros.html">SOBRE NOSOTROS</a></div>
-  <div class="logo"><span class="crown">♕</span><div class="logo-main">REMEMBER</div><div class="logo-sub">LUXURY</div></div>
-  <div class="search" aria-label="Buscar"></div>
-</nav>
-<main>
-  <section class="hero">
-    <div class="hero-copy">
-      <div class="eyebrow">ARTÍCULOS</div>
-      <h1>FASHION STYLE</h1>
-      <div class="rule"></div>
-      <p>Descubre lo último en moda masculina, tendencias, consejos de estilo y guías para elevar tu imagen al siguiente nivel.</p>
-      <a class="hero-btn" href="#articulos">VER TODOS LOS ARTÍCULOS</a>
+
+<header>
+  <a href="hub.html" class="logo">ORIONIX</a>
+  <nav class="nav-links">
+    <a href="hub.html">Inicio</a>
+    <a href="tienda.html">Tienda</a>
+    <a href="nexus.html">Agentes</a>
+  </nav>
+  <a href="carrito.html" class="cart-btn">
+    🛒 Carrito <span class="cart-count" id="cartCount">0</span>
+  </a>
+</header>
+
+<section class="hero">
+  <h1>CATÁLOGO</h1>
+  <p>Moda, estilo y lujo — desde lo esencial hasta lo extraordinario</p>
+</section>
+
+<div class="filters">
+  <button class="filter-btn active" data-cat="TODOS">Todos</button>
+  <button class="filter-btn" data-cat="MODA">Moda</button>
+  <button class="filter-btn" data-cat="FASHION STYLE">Fashion Style</button>
+  <button class="filter-btn" data-cat="MI DINASTIA">Mi Dinastía</button>
+</div>
+
+<main class="container">
+  <div id="grid" class="grid">
+    <div class="loading">
+      <div class="spinner"></div>
+      Cargando catálogo...
     </div>
-  </section>
-  <section class="content" id="articulos">
-    <div class="filter">FILTRANDO POR: <strong>FASHION STYLE　⌄</strong></div>
-    <div class="grid">
-      <article class="card"><img src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?q=85&w=1000&auto=format&fit=crop" alt="Estilo masculino nocturno"><div class="shade"></div><div class="card-body"><div class="tag">FASHION STYLE</div><h2>5 Claves para un Estilo Impecable</h2><div class="meta"><b>10 MAY 2025</b> • 5 MIN LECTURA</div></div></article>
-      <article class="card"><img src="https://images.unsplash.com/photo-1495105787522-5334e3ffa0ef?q=85&w=1000&auto=format&fit=crop" alt="Trajes elegantes"><div class="shade"></div><div class="card-body"><div class="tag">FASHION STYLE</div><h2>Colores que Definen Elegancia</h2><div class="meta"><b>8 MAY 2025</b> • 4 MIN LECTURA</div></div></article>
-      <article class="card"><img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=85&w=1000&auto=format&fit=crop" alt="Accesorios de lujo"><div class="shade"></div><div class="card-body"><div class="tag">FASHION STYLE</div><h2>Accesorios que Elevan Tu Look</h2><div class="meta"><b>5 MAY 2025</b> • 6 MIN LECTURA</div></div></article>
-      <article class="card"><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=85&w=1000&auto=format&fit=crop" alt="Abrigo elegante"><div class="shade"></div><div class="card-body"><div class="tag">FASHION STYLE</div><h2>Abrigos: El Toque de Distinción</h2><div class="meta"><b>2 MAY 2025</b> • 5 MIN LECTURA</div></div></article>
-    </div>
-  </section>
+  </div>
 </main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const TIENDA_URL = 'https://lkevinruizl.app.n8n.cloud/webhook/orionix-tienda';
+let todos = [];
+let filtroActual = 'TODOS';
+
+// ── CARRITO ──
+function getCart() { try { return JSON.parse(localStorage.getItem('orionix_cart') || '[]') } catch(e) { return [] } }
+function saveCart(c) { localStorage.setItem('orionix_cart', JSON.stringify(c)) }
+function updateCartCount() {
+  const c = getCart();
+  const total = c.reduce((s,i) => s + (i.cantidad||1), 0);
+  document.getElementById('cartCount').textContent = total;
+}
+
+function addToCart(p) {
+  const cart = getCart();
+  const ex = cart.find(i => i.id === p.id);
+  if (ex) ex.cantidad = (ex.cantidad||1) + 1;
+  else cart.push({...p, cantidad: 1});
+  saveCart(cart);
+  updateCartCount();
+  showToast('✓ Añadido al carrito');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ── RENDER ──
+function renderCard(p) {
+  const cat = (p.categoria || p.category || '').trim();
+  const price = parseFloat(p.precio || p.price || 0).toFixed(2);
+  const img = p.imagen || p.image || `https://picsum.photos/seed/${p.id || Math.random()}/600/400`;
+  const name = p.nombre || p.name || 'Producto';
+  const desc = p.descripcion || p.description || '';
+  const badgeClass = 'badge-' + cat;
+
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <img src="${img}" alt="${name}" loading="lazy" onerror="this.src='https://picsum.photos/seed/${encodeURIComponent(name)}/600/400'">
+    <div class="card-body">
+      <span class="card-cat">${cat}</span>
+      <div class="card-name">${name}</div>
+      <div class="card-desc">${desc}</div>
+      <div class="card-footer">
+        <span class="price">€${price}</span>
+        <button class="add-btn">+ Añadir</button>
+      </div>
+    </div>
+  `;
+  card.querySelector('.add-btn').addEventListener('click', () => addToCart({
+    id: p.id || name, nombre: name, precio: price, imagen: img, categoria: cat
+  }));
+  return card;
+}
+
+function renderGrid(productos) {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  if (!productos.length) {
+    grid.innerHTML = '<div class="empty">No hay productos en esta categoría aún.</div>';
+    return;
+  }
+  productos.forEach(p => grid.appendChild(renderCard(p)));
+}
+
+function filtrar(cat) {
+  filtroActual = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.cat === cat);
+  });
+  const result = cat === 'TODOS' ? todos : todos.filter(p => {
+    const c = (p.categoria || p.category || '').trim().toUpperCase();
+    return c === cat.toUpperCase();
+  });
+  renderGrid(result);
+}
+
+// ── CARGA ──
+async function cargarProductos() {
+  try {
+    const res = await fetch(TIENDA_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ accion: 'catalogo' })
+    });
+    const data = await res.json();
+
+    // Soporta { productos:[...] } o array directo o { data:[...] }
+    let prods = [];
+    if (Array.isArray(data)) prods = data;
+    else if (data.productos) prods = data.productos;
+    else if (data.data) prods = data.data;
+
+    if (!prods.length) throw new Error('vacío');
+
+    todos = prods;
+    filtrar(filtroActual);
+  } catch(e) {
+    // Fallback: productos hardcoded de emergencia
+    console.warn('API no disponible, usando fallback:', e);
+    todos = [
+      {id:1,nombre:'Camiseta Cosmos ORIONIX',precio:'9.99',categoria:'MODA',imagen:'https://picsum.photos/seed/101/600/400',descripcion:'Camiseta de algodón premium con diseño cosmos.'},
+      {id:2,nombre:'Gorra Lujo Urbano',precio:'14.99',categoria:'MODA',imagen:'https://picsum.photos/seed/102/600/400',descripcion:'Gorra ajustable estilo streetwear premium.'},
+      {id:3,nombre:'Camiseta Básica Élite',precio:'19.90',categoria:'MODA',imagen:'https://picsum.photos/seed/103/600/400',descripcion:'Básico elevado, corte entallado.'},
+      {id:11,nombre:'Camisa Oxford Elegancia',precio:'49.99',categoria:'FASHION STYLE',imagen:'https://picsum.photos/seed/201/600/400',descripcion:'Camisa de algodón Oxford para ocasiones especiales.'},
+      {id:12,nombre:'Blazer Slim Moderno',precio:'89.99',categoria:'FASHION STYLE',imagen:'https://picsum.photos/seed/202/600/400',descripcion:'Blazer de corte slim para el hombre urbano.'},
+      {id:21,nombre:'Reloj Maestro Dorado',precio:'299.99',categoria:'MI DINASTIA',imagen:'https://picsum.photos/seed/301/600/400',descripcion:'Reloj de acero inoxidable con acabado dorado.'},
+      {id:22,nombre:'Traje Ejecutivo Élite',precio:'499.99',categoria:'MI DINASTIA',imagen:'https://picsum.photos/seed/302/600/400',descripcion:'Traje completo de lana italiana de alta calidad.'}
+    ];
+    filtrar(filtroActual);
+  }
+}
+
+// ── FILTROS CLICK ──
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => filtrar(btn.dataset.cat));
+});
+
+// ── INIT ──
+updateCartCount();
+cargarProductos();
+</script>
 </body>
 </html>

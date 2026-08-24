@@ -833,6 +833,227 @@ function toast(msg, isError = false) {
   draw();
 })();
 
+// ── RESUMEN PARA IA ──────────────────────────────────────────────
+function generarResumenIA() {
+  const btn = document.getElementById('btnResumen');
+  btn.classList.add('loading');
+  btn.textContent = '⏳ Generando...';
+
+  const CONTEXTO_ORIONIX = `# ORIONIX · Contexto Completo del Proyecto
+> Generado automáticamente por LEVIATAN el ${new Date().toLocaleString('es-ES')}
+> Para uso en cualquier IA: GPT-4, Claude, Gemini, AXEL, etc.
+
+---
+
+## 🏛️ IDENTIDAD
+- **Proyecto:** ORIONIX — Centro Comercial de Agentes IA
+- **Creador:** Kevin Ruiz (el Creador · Batman de la agencia)
+- **URL pública:** https://kevinruizbolsota-svg.github.io/Remember_Luxury/ciudadela/
+- **Repositorio:** kevinruizbolsota-svg/Remember_Luxury (branch: main, carpeta: ciudadela/)
+- **Zona horaria:** Europe/Madrid (UTC+2) · Contacto: Telegram
+
+---
+
+## 🧬 FILOSOFÍA
+- Visión: "De una aguja a una mansión" — de lo esencial a lo extraordinario
+- Sistema espiritual: **KRC / KABALION / CAMALEÓN** — 46 Sefirot propios de Kevin
+- Paleta oficial: Cosmos #0b0b0d · Gold #e8c86a · Púrpura #6a3d9a · Texto #f0e8d0
+- Tipografías: Cinzel (títulos) · Cormorant Garamond (cuerpo)
+- Stack: HTML/CSS/JS puro (sin frameworks) · n8n · GitHub Pages · Firebase
+
+---
+
+## 🤖 JERARQUÍA DE AGENTES
+
+| Agente | Rol | Modelo | Estado |
+|--------|-----|--------|--------|
+| **n8n** | Comandante de Nube · Voz · Deploy | — | 24/7 activo |
+| **AXEL** | Director Visionario · Kether | Groq llama-3.1-8b | Activo |
+| **Claude Code** | Ingeniero Principal · Chesed | Groq llama-3.1-8b | Activo |
+| **ChatGPT** | Estratega · Binah | Groq llama-3.1-8b | Activo |
+| **Copilot CLI** | Commits/GitHub | GitHub | Activo |
+| **Qwen** | Constructor UI/HTML | chat.qwen.ai | Externo |
+
+---
+
+## 🔗 WEBHOOKS ACTIVOS
+
+**Base:** https://lkevinruizl.app.n8n.cloud/webhook/
+
+| Webhook | Descripción |
+|---------|-------------|
+| /kabalion-chat | Gateway Universal — enruta a cualquier agente |
+| /kabalion-mesa | Mesa de Mando — broadcast a todos los agentes |
+| /orionix-github-push | Deploy de archivos a GitHub via base64 |
+| /orionix-tienda | API tienda (catálogo, leads, afiliados) |
+| /orionix-obsidian | Obsidian Hub — recibe notas y enruta |
+| /orionix-imagen | Generación imágenes FLUX |
+| /orionix-video | Generación vídeo MiniMax |
+| /leviatan | API archivos LEVIATAN |
+| /axel-brain | AXEL Brain directo |
+| /axel-voz | Transcripción audio Deepgram STT |
+
+---
+
+## 📋 WORKFLOWS n8n
+
+| ID | Nombre | Estado |
+|----|--------|--------|
+| uSr1Dk6rjW1hBsYj | KABALION · Gateway Universal | ✅ |
+| JKiZ3cqklQ2X4odJ | KABALION · Mesa de Mando | ✅ |
+| 8hvezQxdIqr0pKUr | AXEL Brain — Groq | ✅ |
+| Je1mpA0addo5yoY2 | Claude Code Bridge | ✅ |
+| 7Cwoc8PMzDyBih6J | Puente ChatGPT | ✅ |
+| xpFxLcL6M8LfgY4i | Obsidian Hub | ✅ |
+| yzot0k55t6rwlMgq | AXEL (Chat Trigger) | ✅ |
+| v8wh5ZZJV30swwwa | AXEL Voz Deepgram STT | ✅ |
+| s76MUmPYfvUzuBi7 | Copilot GitHub Push | ✅ |
+| FsJYEcwFxIsVwGpq | Tienda API | ✅ |
+| 6EajxZpC71EUijgD | LEVIATAN · API de Archivos | ✅ |
+| TAJBWSaCQrq2OvYz | Generar Imagen FLUX | ✅ |
+| ed1Y9joba4355tQP | Generar Video MiniMax | ✅ |
+
+---
+
+## 🗄️ DATA TABLES
+
+| Tabla | Descripción |
+|-------|-------------|
+| TIENDA_PRODUCTOS | 30+ productos (MODA / FASHION STYLE / MI DINASTIA) |
+| orionix_pedidos | Pedidos de la tienda |
+| orionix_afiliados | Sistema de afiliados con códigos de referido |
+| LEVIATAN_ARCHIVOS | Archivo central de seguridad del proyecto |
+| GAIA_REPUTACION | Sistema de reputación de agentes |
+| MALKUT_CRM_LEADS | CRM de leads y prospectos |
+| orionix_sessions | Sesiones de usuarios |
+| orionix_misiones | Historial de misiones |
+
+---
+
+## 🌐 PÁGINAS DESPLEGADAS
+
+| Página | Descripción |
+|--------|-------------|
+| hub.html | Portal central del Imperio |
+| nexus.html | Chat multi-agente v5 (mic, imagen, video, adjuntos) |
+| leviatan.html | Archivo central LEVIATAN |
+| tienda.html | Hub de la tienda + planes de afiliados |
+| articulos.html | Catálogo dinámico de productos |
+| carrito.html | Carrito de compra con localStorage |
+| auth.html | Login/Registro Firebase |
+| admin.html | Panel de administración |
+| kabalion-2d.html | Árbol Cabalístico interactivo 2D |
+| agentes.html | Centro de agentes IA |
+| comunidad.html | Feed de comunidad |
+| mi-universo.html | Mapa de todas las páginas |
+
+---
+
+## 🛒 MODELO DE NEGOCIO
+
+- Catálogos: MODA (€0–34) · FASHION STYLE (€35–149) · MI DINASTIA (€150+)
+- Fuentes: Dropshipping (AliExpress) · Afiliados (Amazon/Hotmart) · Productos digitales
+- Planes de afiliados: Esencia €197/mes (15%) · Imperio €497/mes (25%) · Ciudadela (35%)
+- Checkout: articulos → carrito → login → pago (PayPal / Telegram / transferencia)
+
+---
+
+## 🔐 CREDENCIALES CONFIGURADAS
+
+- Groq API — llama-3.1-8b-instant (AXEL, Claude Bridge, ChatGPT Bridge)
+- GitHub API — Personal Access Token (deploy de archivos)
+- Deepgram API — transcripción de voz STT
+- Firebase — proyecto las-cronicas-de-krc (autenticación)
+- Google Gemini 2.0 Flash — modelo alternativo
+- Anthropic, OpenAI, Mistral — disponibles
+
+---
+
+## 📁 ARCHIVOS EN LEVIATAN
+`;
+
+  let secArchivos = '';
+  if (todosArchivos.length > 0) {
+    const cats = {};
+    todosArchivos.forEach(a => {
+      const c = a.categoria || 'general';
+      if (!cats[c]) cats[c] = [];
+      cats[c].push(a);
+    });
+    secArchivos += `\n*${todosArchivos.length} archivos guardados en total*\n`;
+    Object.entries(cats).forEach(([cat, arr]) => {
+      secArchivos += `\n### 📂 ${cat.toUpperCase()} (${arr.length})\n`;
+      arr.forEach(a => {
+        secArchivos += `- **${a.nombre}** v${a.version||'?'} · ${formatSize(a.tamanio)} · ${a.fecha||'?'}`;
+        if (a.descripcion) secArchivos += ` — ${a.descripcion}`;
+        secArchivos += '\n';
+      });
+    });
+  } else {
+    secArchivos = '\n*Sin archivos aún — usa Añadir o Importar para poblar LEVIATAN.*\n';
+  }
+
+  const cierre = `
+---
+
+## 💡 INSTRUCCIONES PARA LA IA
+
+1. **Eres colaborador de ORIONIX.** Kevin Ruiz es el líder. Respétalo.
+2. **Stack:** Solo HTML/CSS/JS puro. Sin React, sin Vue, sin frameworks.
+3. **Paleta:** Gold #e8c86a · Fondo #0b0b0d · Texto #f0e8d0 · Púrpura #6a3d9a.
+4. **Deploy:** Todo al repo kevinruizbolsota-svg/Remember_Luxury, carpeta ciudadela/.
+5. **Tono:** Profesional, ambicioso, con identidad. "De la visión a la mansión."
+6. **Prioridades:** Tienda funcional · NEXUS multi-agente · universo.html v2.0 (46 Sefirot KRC).
+
+---
+*Generado por LEVIATAN · Sistema de Archivos ORIONIX · ${new Date().toISOString()}*
+`;
+
+  const contenidoFinal = CONTEXTO_ORIONIX + secArchivos + cierre;
+
+  document.getElementById('resumenContenido').textContent = contenidoFinal;
+  const chars = contenidoFinal.length;
+  const lineas = contenidoFinal.split('\n').length;
+  document.getElementById('resumenStats').textContent =
+    `${chars.toLocaleString()} caracteres · ${lineas} líneas · ~${Math.round(chars/4).toLocaleString()} tokens`;
+  document.getElementById('resumenFecha').textContent = new Date().toLocaleString('es-ES');
+
+  btn.classList.remove('loading');
+  btn.textContent = '🧠 Resumen para IA';
+  document.getElementById('resumenModal').classList.add('open');
+  window._resumenMD = contenidoFinal;
+}
+
+function copiarResumen() {
+  if (!window._resumenMD) return;
+  navigator.clipboard.writeText(window._resumenMD)
+    .then(() => {
+      const btn = document.getElementById('btnCopiar');
+      btn.textContent = '✅ ¡Copiado!';
+      btn.style.background = 'linear-gradient(135deg,#166534,#22c55e)';
+      setTimeout(() => { btn.textContent = '📋 Copiar Todo'; btn.style.background = ''; }, 2500);
+      toast('✓ Resumen copiado — pégalo en cualquier IA');
+    })
+    .catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = window._resumenMD;
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta);
+      toast('✓ Copiado');
+    });
+}
+
+function descargarResumen() {
+  if (!window._resumenMD) return;
+  const fecha = new Date().toISOString().slice(0,10);
+  const blob = new Blob([window._resumenMD], { type: 'text/markdown;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `ORIONIX_Contexto_${fecha}.md`;
+  a.click(); URL.revokeObjectURL(url);
+  toast('✓ Descargado como .md');
+}
+
 // ── INIT ─────────────────────────────────────────────────────────
 cargar();
 </script>

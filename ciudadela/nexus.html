@@ -3,24 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIONIX · NEXUS DE AGENTES</title>
-<link rel="icon" href="../favicon.svg?v=nexus5" type="image/svg+xml">
+<title>ORIONIX · NEXUS DE AGENTES & MATRIZ DE LLAVES</title>
+<link rel="icon" href="../favicon.svg?v=nexus6" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #050a14;
-  --bg-panel: rgba(7, 14, 28, 0.95);
+  --bg: #030712;
+  --bg-panel: rgba(6, 12, 26, 0.95);
   --gold: #e8c86a;
-  --gold-glow: rgba(232, 200, 106, 0.4);
+  --gold-glow: rgba(232, 200, 106, 0.35);
   --gold-dim: #b89a40;
   --text: #f4eedb;
   --dim: rgba(244, 238, 219, 0.6);
-  --border: rgba(232, 200, 106, 0.25);
+  --border: rgba(232, 200, 106, 0.22);
   --border-focus: rgba(232, 200, 106, 0.7);
   --emerald: #10b981;
   --ruby: #ef4444;
+  --amber: #f59e0b;
+  --blue: #38bdf8;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,7 +37,7 @@ body {
   overflow: hidden;
   background-image:
     radial-gradient(ellipse at 50% 0%, rgba(30, 58, 138, 0.25), transparent 70%),
-    linear-gradient(rgba(5, 10, 20, 0.9), rgba(5, 10, 20, 0.95)),
+    linear-gradient(rgba(3, 7, 18, 0.9), rgba(3, 7, 18, 0.96)),
     url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2000&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
@@ -63,13 +65,21 @@ header {
   font-family: 'Cinzel', serif; font-size: .62rem; letter-spacing: .2em;
   color: var(--dim); border-left: 1px solid var(--border); padding-left: 14px;
 }
-.nav-links { display: flex; gap: 8px; }
+.nav-actions { display: flex; gap: 10px; align-items: center; }
+.btn-config {
+  font-family: 'Cinzel', serif; font-size: .65rem; letter-spacing: .12em;
+  padding: 8px 16px; border-radius: 8px; border: 1px solid var(--gold);
+  background: rgba(232,200,106,0.12); color: var(--gold); cursor: pointer;
+  display: flex; align-items: center; gap: 6px; transition: all .25s; font-weight: 700;
+}
+.btn-config:hover { background: var(--gold); color: #030712; box-shadow: 0 0 20px var(--gold-glow); }
+.nav-links { display: flex; gap: 6px; }
 .nl {
   font-family: 'Cinzel', serif; font-size: .6rem; letter-spacing: .12em;
-  color: var(--dim); text-decoration: none; padding: 7px 14px; border-radius: 8px;
+  color: var(--dim); text-decoration: none; padding: 7px 12px; border-radius: 8px;
   transition: all .25s; text-transform: uppercase;
 }
-.nl:hover, .nl.on { color: var(--gold); background: rgba(232,200,106,0.1); }
+.nl:hover { color: var(--gold); background: rgba(232,200,106,0.08); }
 
 /* MAIN LAYOUT */
 .main-layout {
@@ -77,9 +87,9 @@ header {
   display: flex; flex: 1; height: calc(100vh - 60px);
 }
 
-/* SIDEBAR */
+/* SIDEBAR RÁPIDO */
 aside {
-  width: 360px; border-right: 1px solid var(--border);
+  width: 330px; border-right: 1px solid var(--border);
   background: var(--bg-panel); backdrop-filter: blur(24px);
   padding: 22px; display: flex; flex-direction: column; gap: 16px;
   overflow-y: auto;
@@ -91,7 +101,6 @@ aside::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; 
 .panel-title {
   font-family: 'Cinzel', serif; color: var(--gold); font-size: .72rem;
   font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
-  display: flex; justify-content: space-between; align-items: center;
 }
 
 select, input {
@@ -103,30 +112,20 @@ select, input {
 select:focus, input:focus { border-color: var(--border-focus); box-shadow: 0 0 15px rgba(232,200,106,0.25); }
 select option { background: #050a14; color: #f4eedb; }
 
-.key-status-box {
-  padding: 10px 14px; border-radius: 8px; font-size: .85rem;
-  background: rgba(0,0,0,0.4); border: 1px dashed var(--border);
-  font-family: 'Fira Code', monospace;
+.active-key-badge {
+  padding: 12px 14px; border-radius: 10px;
+  background: rgba(0,0,0,0.5); border: 1px solid var(--border);
+  font-size: .85rem; font-family: 'Fira Code', monospace;
 }
 
 .btn {
-  padding: 11px 16px; background: linear-gradient(135deg, rgba(232,200,106,0.2), rgba(184,154,64,0.3));
+  padding: 11px 16px; background: rgba(232,200,106,0.15);
   border: 1px solid var(--gold); color: var(--gold);
   font-family: 'Cinzel', serif; font-size: .68rem; font-weight: 700;
   letter-spacing: .14em; cursor: pointer; transition: all .25s;
   border-radius: 10px; text-transform: uppercase; text-align: center;
 }
-.btn:hover { background: var(--gold); color: #050a14; box-shadow: 0 0 20px var(--gold-glow); transform: translateY(-1px); }
-
-.status-card {
-  margin-top: auto; padding: 14px; border-radius: 10px;
-  background: rgba(0,0,0,0.5); border: 1px solid var(--border);
-  font-size: .85rem;
-}
-.status-indicator { display: flex; align-items: center; gap: 8px; font-family: 'Cinzel', serif; font-size: .7rem; }
-.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 8px var(--emerald); }
-.dot.warn { background: #f59e0b; box-shadow: 0 0 8px #f59e0b; }
-.dot.err { background: var(--ruby); box-shadow: 0 0 8px var(--ruby); }
+.btn:hover { background: var(--gold); color: #030712; box-shadow: 0 0 20px var(--gold-glow); }
 
 /* CHAT AREA */
 .chat-area {
@@ -188,22 +187,108 @@ select option { background: #050a14; color: #f4eedb; }
   flex: 1; font-size: 1.15rem; background: rgba(3, 7, 18, 0.9);
 }
 .send-btn { min-width: 140px; }
+
+/* MODAL DE CONFIGURACIÓN DE LLAVES */
+#config-modal {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(20px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: all .3s ease;
+  padding: 20px;
+}
+#config-modal.open { opacity: 1; pointer-events: auto; }
+.modal-card {
+  width: 100%; max-width: 860px; max-height: 90vh;
+  background: rgba(6, 12, 26, 0.98); border: 1px solid var(--gold);
+  border-radius: 20px; box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 35px var(--gold-glow);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.modal-header {
+  padding: 20px 28px; border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.modal-header h2 {
+  font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--gold); letter-spacing: .15em;
+}
+.close-modal-btn {
+  background: none; border: none; color: var(--dim); font-size: 1.8rem;
+  cursor: pointer; transition: color .2s;
+}
+.close-modal-btn:hover { color: var(--gold); }
+.modal-body {
+  padding: 24px 28px; overflow-y: auto; display: flex; flex-direction: column; gap: 24px;
+}
+.provider-box {
+  background: rgba(3, 7, 18, 0.7); border: 1px solid var(--border);
+  border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 12px;
+}
+.provider-header {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.provider-title {
+  font-family: 'Cinzel', serif; font-size: .95rem; font-weight: 700; color: var(--gold);
+}
+.keys-table {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.key-row {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(0,0,0,0.4); padding: 8px 12px; border-radius: 8px;
+  border: 1px solid rgba(232,200,106,0.1);
+}
+.key-role {
+  font-family: 'Cinzel', serif; font-size: .65rem; font-weight: 700;
+  width: 110px; color: var(--gold); text-transform: uppercase;
+}
+.key-input-field {
+  flex: 1; font-family: 'Fira Code', monospace; font-size: .85rem; padding: 8px 12px;
+}
+.key-status-pill {
+  font-family: 'Fira Code', monospace; font-size: .72rem; padding: 4px 10px;
+  border-radius: 20px; font-weight: 600; text-transform: uppercase;
+}
+.pill-active { background: rgba(16,185,129,0.2); color: var(--emerald); border: 1px solid var(--emerald); }
+.pill-backup { background: rgba(56,189,248,0.2); color: var(--blue); border: 1px solid var(--blue); }
+.pill-exhausted { background: rgba(239,68,68,0.2); color: var(--ruby); border: 1px solid var(--ruby); }
+.pill-empty { background: rgba(255,255,255,0.05); color: var(--dim); border: 1px dashed var(--dim); }
+
+.modal-footer {
+  padding: 18px 28px; border-top: 1px solid var(--border);
+  display: flex; justify-content: flex-end; gap: 12px; background: rgba(3, 7, 18, 0.8);
+}
+
+/* TOAST */
+#toast {
+  position: fixed; bottom: 85px; right: 28px;
+  background: rgba(6, 12, 26, 0.95); border: 1px solid var(--gold);
+  color: var(--gold); padding: 12px 20px; border-radius: 8px;
+  font-family: 'Cinzel', serif; font-size: .72rem; letter-spacing: .1em;
+  opacity: 0; transform: translateY(20px); transition: all .3s; z-index: 2000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+#toast.show { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
 
 <canvas id="particles"></canvas>
+<div id="toast"></div>
 
 <header>
   <div class="brand-group">
     <a href="hub.html" class="brand">🌌 ORIONIX</a>
-    <div class="tagline">NEXUS MULTI-AGENTE & CLOUD COGNITIVO</div>
+    <div class="tagline">NEXUS MULTI-AGENTE & MATRIZ DE LLAVES</div>
   </div>
-  <div class="nav-links">
-    <a href="hub.html" class="nl">Hub</a>
-    <a href="articulos.html" class="nl">Catálogo</a>
-    <a href="tienda.html" class="nl">Tienda</a>
-    <a href="nexus.html" class="nl on">NEXUS</a>
+  <div class="nav-actions">
+    <button class="btn-config" onclick="openConfigModal()">
+      <span>⚙️ CONFIGURAR LLAVES & RESPALDOS</span>
+    </button>
+    <div class="nav-links">
+      <a href="hub.html" class="nl">Hub</a>
+      <a href="articulos.html" class="nl">Catálogo</a>
+      <a href="tienda.html" class="nl">Tienda</a>
+      <a href="nexus.html" class="nl on">NEXUS</a>
+    </div>
   </div>
 </header>
 
@@ -215,7 +300,7 @@ select option { background: #050a14; color: #f4eedb; }
         <span>1. Motor de Inteligencia</span>
       </div>
       <select id="provider-select" onchange="onProviderChange()">
-        <option value="groq">⚡ Groq Cloud (Recomendado - Gratis y Ultra Rápido)</option>
+        <option value="groq">⚡ Groq Cloud (Ultra Rápido)</option>
         <option value="gemini">✨ Google Gemini Cloud</option>
         <option value="openai">🧠 OpenAI ChatGPT Cloud</option>
         <option value="openrouter">🌐 OpenRouter Universal</option>
@@ -225,20 +310,21 @@ select option { background: #050a14; color: #f4eedb; }
 
     <div class="panel-section">
       <div class="panel-title">
-        <span>2. Modelo & Personalidad</span>
+        <span>2. Modelo Activo</span>
       </div>
       <select id="model-select"></select>
     </div>
 
-    <div class="panel-section" id="keys-panel">
+    <div class="panel-section">
       <div class="panel-title">
-        <span>3. Tu API Key (Cloud)</span>
+        <span>3. Llave en Uso</span>
       </div>
-      <input type="password" id="api-key-input" placeholder="Pega tu API Key aquí..." oninput="onKeyInput()">
-      <button class="btn" onclick="saveKeyManual()">💾 GUARDAR LLAVE AHORA</button>
-      <div class="key-status-box" id="key-status-text">
-        Estado: Comprobando...
+      <div class="active-key-badge" id="active-key-info">
+        Comprobando matriz de llaves...
       </div>
+      <button class="btn" onclick="openConfigModal()" style="margin-top:6px;">
+        ⚙️ GESTIONAR RESPALDOS
+      </button>
     </div>
 
     <div class="panel-section" id="ollama-panel" style="display:none;">
@@ -248,13 +334,13 @@ select option { background: #050a14; color: #f4eedb; }
       <input type="text" id="ollama-host" value="http://localhost:11434" onchange="saveOllamaHost()">
     </div>
 
-    <div class="status-card">
-      <div class="status-indicator">
-        <div class="dot" id="status-dot"></div>
-        <span id="status-text">Sistema Listo</span>
+    <div class="status-card" style="margin-top:auto;padding:14px;border-radius:10px;background:rgba(0,0,0,0.5);border:1px solid var(--border);">
+      <div class="status-indicator" style="display:flex;align-items:center;gap:8px;font-family:'Cinzel',serif;font-size:.7rem;">
+        <div class="dot" id="status-dot" style="width:8px;height:8px;border-radius:50%;background:var(--emerald);box-shadow:0 0 8px var(--emerald);"></div>
+        <span id="status-text">Matriz de Rotación Activa</span>
       </div>
-      <div style="font-size:.78rem;color:var(--dim);margin-top:6px;">
-        Conexión directa en vivo activa.
+      <div style="font-size:.75rem;color:var(--dim);margin-top:6px;" id="status-detail">
+        Si una llave se agota, el sistema salta automáticamente al siguiente repuesto.
       </div>
     </div>
   </aside>
@@ -263,112 +349,234 @@ select option { background: #050a14; color: #f4eedb; }
     <div id="chat-history">
       <div class="msg agent">
         <div class="author">
-          <span>ORIONIX NEXUS · NÚCLEO SUPREMO</span>
-          <span style="font-size:.6rem;opacity:.7">SISTEMA ACTIVO</span>
+          <span>ORIONIX NEXUS · MATRIZ DE AGENTES</span>
+          <span style="color:var(--emerald)">EN LÍNEA</span>
         </div>
-        <div class="msg-content">Bienvenido al NEXUS, Creador.
+        <div class="msg-content">Bienvenido al NEXUS Imperial, Creador.
 
-Instrucciones rápidas para chatear en vivo:
-1. Selecciona tu proveedor en el panel izquierdo (por ejemplo **Groq** o **Gemini**).
-2. Pega tu API Key y dale al botón **💾 GUARDAR LLAVE AHORA**.
-3. Escribe tu pregunta abajo y presiona **Enter** o el botón **ENVIAR →**.</div>
+Hemos integrado la **Matriz Universal de Llaves & Respaldos**:
+- Cada proveedor (Groq, Gemini, OpenAI, OpenRouter) soporta tu **Llave Principal** y múltiples **Repuestos (1, 2, 3...)**.
+- El sistema detecta en tiempo real si una llave está **ACTIVA, DISPONIBLE o AGOTADA** y hace el cambio instantáneo.
+
+Presiona el botón superior **⚙️ CONFIGURAR LLAVES** para cargar tus claves, o escribe directamente abajo para comenzar.</div>
       </div>
     </div>
 
     <div class="input-bar">
-      <input type="text" id="user-msg" placeholder="Transmite tu mensaje al agente..." onkeypress="if(event.key==='Enter') sendMsg()">
+      <input type="text" id="user-msg" placeholder="Transmite tu instrucción o pregunta al agente..." onkeypress="if(event.key==='Enter') sendMsg()">
       <button class="btn send-btn" id="send-btn" onclick="sendMsg()">ENVIAR →</button>
     </div>
   </div>
 
 </div>
 
+<!-- MODAL COMPLETO DE CONFIGURACIÓN DE MATRIZ DE LLAVES -->
+<div id="config-modal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h2>⚙️ MATRIZ DE LLAVES & ROTACIÓN DE RESPALDOS</h2>
+      <button class="close-modal-btn" onclick="closeConfigModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body-content">
+      <!-- Generado dinámicamente con todas las IAs y sus repuestos -->
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="saveAllKeysFromModal()">💾 GUARDAR TODA LA MATRIZ DE LLAVES</button>
+    </div>
+  </div>
+</div>
+
 <script>
+// ESTRUCTURA DE PROVEEDORES Y MODELOS
 const PROVIDERS_CONFIG = {
   groq: {
-    name: "Groq Cloud",
+    name: "Groq Cloud (Ultra Rápido)",
     models: ["llama-3.3-70b-versatile", "llama-3.1-8b-instant", "mixtral-8x7b-32768", "gemma2-9b-it"],
-    url: "https://api.groq.com/openai/v1/chat/completions"
+    url: "https://api.groq.com/openai/v1/chat/completions",
+    maxSlots: 4
   },
   gemini: {
-    name: "Google Gemini",
+    name: "Google Gemini Cloud",
     models: ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-2.0-flash-exp"],
     url: (m, k) => "https://generativelanguage.googleapis.com/v1beta/models/" + m + ":generateContent?key=" + k,
-    isGemini: true
+    isGemini: true,
+    maxSlots: 4
   },
   openai: {
-    name: "OpenAI",
+    name: "OpenAI ChatGPT Cloud",
     models: ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo", "o1-mini"],
-    url: "https://api.openai.com/v1/chat/completions"
+    url: "https://api.openai.com/v1/chat/completions",
+    maxSlots: 4
   },
   openrouter: {
-    name: "OpenRouter",
+    name: "OpenRouter Universal",
     models: ["anthropic/claude-3.5-sonnet", "deepseek/deepseek-r1", "meta-llama/llama-3.3-70b-instruct", "google/gemini-flash-1.5"],
-    url: "https://openrouter.ai/api/v1/chat/completions"
-  },
-  ollama: {
-    name: "Ollama Local",
-    models: ["qwen2.5-coder:7b", "deepseek-r1:8b", "llama3.1:8b"],
-    isOllama: true
+    url: "https://openrouter.ai/api/v1/chat/completions",
+    maxSlots: 3
   }
 };
 
-function getKey(provider) {
-  return (localStorage.getItem("key_" + provider) || "").trim();
+// ESTADO GLOBAL DE LA MATRIZ
+// { groq: [ { key: '...', status: 'active' | 'backup' | 'exhausted' | 'empty' } ] }
+let KEY_MATRIX = loadKeyMatrix();
+
+function loadKeyMatrix() {
+  try {
+    const raw = localStorage.getItem("orionix_key_matrix");
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+
+  // Inicializar slots vacíos por defecto
+  const matrix = {};
+  Object.keys(PROVIDERS_CONFIG).forEach(prov => {
+    const max = PROVIDERS_CONFIG[prov].maxSlots;
+    matrix[prov] = [];
+    for (let i = 0; i < max; i++) {
+      matrix[prov].push({ key: "", status: "empty" });
+    }
+  });
+
+  // Migrar llaves antiguas si existían
+  Object.keys(PROVIDERS_CONFIG).forEach(prov => {
+    const oldKey = localStorage.getItem("key_" + prov);
+    if (oldKey && oldKey.trim()) {
+      matrix[prov][0] = { key: oldKey.trim(), status: "active" };
+    }
+  });
+
+  return matrix;
 }
 
-function setKey(provider, val) {
-  localStorage.setItem("key_" + provider, val.trim());
+function saveKeyMatrix(matrix) {
+  KEY_MATRIX = matrix;
+  localStorage.setItem("orionix_key_matrix", JSON.stringify(matrix));
 }
 
-function onKeyInput() {
-  const provider = document.getElementById("provider-select").value;
-  const val = document.getElementById("api-key-input").value;
-  setKey(provider, val);
-  updateKeyStatus();
+// GESTIÓN DEL MODAL
+function openConfigModal() {
+  renderModalContent();
+  document.getElementById("config-modal").classList.add("open");
 }
 
-function saveKeyManual() {
-  const provider = document.getElementById("provider-select").value;
-  const val = document.getElementById("api-key-input").value.trim();
-  if (!val && provider !== "ollama") {
-    alert("⚠️ Por favor escribe o pega una API Key primero.");
+function closeConfigModal() {
+  document.getElementById("config-modal").classList.remove("open");
+}
+
+function renderModalContent() {
+  const container = document.getElementById("modal-body-content");
+  container.innerHTML = Object.keys(PROVIDERS_CONFIG).map(prov => {
+    const pCfg = PROVIDERS_CONFIG[prov];
+    const slots = KEY_MATRIX[prov] || [];
+
+    const rows = slots.map((slot, idx) => {
+      const label = (idx === 0) ? "👑 PRINCIPAL" : ("🔄 REPUESTO " + idx);
+      let pillClass = "pill-empty";
+      let pillText = "VACÍO";
+
+      if (slot.key && slot.key.trim()) {
+        if (slot.status === "exhausted") {
+          pillClass = "pill-exhausted"; pillText = "❌ AGOTADA";
+        } else if (idx === 0 || slot.status === "active") {
+          pillClass = "pill-active"; pillText = "✓ ACTIVA";
+        } else {
+          pillClass = "pill-backup"; pillText = "● DISPONIBLE";
+        }
+      }
+
+      return '<div class="key-row">' +
+        '<div class="key-role">' + label + '</div>' +
+        '<input type="password" class="key-input-field" id="input_' + prov + '_' + idx + '" value="' + (slot.key || '') + '" placeholder="Pega tu clave para ' + label + '...">' +
+        '<span class="key-status-pill ' + pillClass + '">' + pillText + '</span>' +
+        (slot.key ? '<button onclick="resetKeyStatus('' + prov + '', ' + idx + ')" style="background:none;border:none;color:var(--gold);cursor:pointer;font-size:.7rem;" title="Reactivar llave">🔄</button>' : '') +
+      '</div>';
+    }).join("");
+
+    return '<div class="provider-box">' +
+      '<div class="provider-header">' +
+        '<div class="provider-title">' + pCfg.name + '</div>' +
+        '<span style="font-size:.75rem;color:var(--dim)">' + slots.filter(s => s.key).length + ' / ' + pCfg.maxSlots + ' Llaves Listas</span>' +
+      '</div>' +
+      '<div class="keys-table">' + rows + '</div>' +
+    '</div>';
+  }).join("");
+}
+
+function saveAllKeysFromModal() {
+  Object.keys(PROVIDERS_CONFIG).forEach(prov => {
+    const max = PROVIDERS_CONFIG[prov].maxSlots;
+    for (let i = 0; i < max; i++) {
+      const input = document.getElementById("input_" + prov + "_" + i);
+      if (input) {
+        const val = input.value.trim();
+        KEY_MATRIX[prov][i] = {
+          key: val,
+          status: val ? (KEY_MATRIX[prov][i].status === "exhausted" ? "exhausted" : (i === 0 ? "active" : "backup")) : "empty"
+        };
+      }
+    }
+  });
+
+  saveKeyMatrix(KEY_MATRIX);
+  closeConfigModal();
+  updateActiveKeyDisplay();
+  showToast("✓ Matriz de llaves y repuestos guardada con éxito.");
+}
+
+function resetKeyStatus(prov, idx) {
+  if (KEY_MATRIX[prov] && KEY_MATRIX[prov][idx]) {
+    KEY_MATRIX[prov][idx].status = (idx === 0) ? "active" : "backup";
+    saveKeyMatrix(KEY_MATRIX);
+    renderModalContent();
+    updateActiveKeyDisplay();
+    showToast("✓ Llave reactivada como disponible.");
+  }
+}
+
+// ACTUALIZAR PANTALLA PRINCIPAL
+function updateActiveKeyDisplay() {
+  const prov = document.getElementById("provider-select").value;
+  const badge = document.getElementById("active-key-info");
+
+  if (prov === "ollama") {
+    badge.innerHTML = '<span style="color:var(--emerald)">💻 Ollama Local</span><br><span style="font-size:.75rem;color:var(--dim)">Ejecutándose en tu PC</span>';
     return;
   }
-  setKey(provider, val);
-  updateKeyStatus();
-  alert("✓ Llave guardada correctamente para " + provider.toUpperCase() + " en tu navegador.");
-}
 
-function updateKeyStatus() {
-  const provider = document.getElementById("provider-select").value;
-  const statusEl = document.getElementById("key-status-text");
-  if (provider === "ollama") {
-    statusEl.innerHTML = "<span style='color:#10b981'>● Ollama local listo (No requiere Key)</span>";
-    return;
-  }
-  const k = getKey(provider);
-  if (k) {
-    const masked = (k.length > 8) ? (k.substring(0, 6) + "..." + k.substring(k.length - 4)) : "******";
-    statusEl.innerHTML = "<span style='color:#10b981'>✓ Llave guardada: " + masked + "</span>";
+  const slots = KEY_MATRIX[prov] || [];
+  const activeSlotIdx = slots.findIndex(s => s.key && s.status !== "exhausted");
+
+  if (activeSlotIdx === -1) {
+    badge.innerHTML = '<span style="color:var(--ruby)">❌ Sin llaves activas</span><br><span style="font-size:.75rem;color:var(--dim)">Haz clic abajo para configurar</span>';
   } else {
-    statusEl.innerHTML = "<span style='color:#ef4444'>⚠️ Sin llave. Pega tu API Key arriba.</span>";
+    const s = slots[activeSlotIdx];
+    const roleName = (activeSlotIdx === 0) ? "👑 PRINCIPAL" : ("🔄 REPUESTO #" + activeSlotIdx);
+    const masked = s.key.substring(0, 6) + "..." + s.key.substring(s.key.length - 4);
+    badge.innerHTML = '<span style="color:var(--emerald)">✓ ' + roleName + '</span><br><span style="font-size:.78rem;color:var(--gold)">' + masked + '</span>';
   }
 }
 
 function onProviderChange() {
-  const provider = document.getElementById("provider-select").value;
+  const prov = document.getElementById("provider-select").value;
   const modelSelect = document.getElementById("model-select");
-  const cfg = PROVIDERS_CONFIG[provider];
 
-  modelSelect.innerHTML = cfg.models.map(m => '<option value="' + m + '">' + m + '</option>').join("");
+  if (prov === "ollama") {
+    modelSelect.innerHTML = '<option value="qwen2.5-coder:7b">qwen2.5-coder:7b</option><option value="deepseek-r1:8b">deepseek-r1:8b</option><option value="llama3.1:8b">llama3.1:8b</option>';
+    document.getElementById("ollama-panel").style.display = "flex";
+  } else {
+    const cfg = PROVIDERS_CONFIG[prov];
+    modelSelect.innerHTML = cfg.models.map(m => '<option value="' + m + '">' + m + '</option>').join("");
+    document.getElementById("ollama-panel").style.display = "none";
+  }
 
-  document.getElementById("keys-panel").style.display = (provider === "ollama") ? "none" : "flex";
-  document.getElementById("ollama-panel").style.display = (provider === "ollama") ? "flex" : "none";
+  updateActiveKeyDisplay();
+}
 
-  // Cargar llave actual en el input
-  document.getElementById("api-key-input").value = getKey(provider);
-  updateKeyStatus();
+function showToast(text) {
+  const t = document.getElementById("toast");
+  if (!t) return;
+  t.textContent = text;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2500);
 }
 
 function getOllamaHost() {
@@ -380,22 +588,17 @@ function saveOllamaHost() {
   localStorage.setItem("ollama_host", h);
 }
 
-function init() {
-  document.getElementById("ollama-host").value = getOllamaHost();
-  onProviderChange();
-}
-
+// ENVÍO DE MENSAJES CON FAILOVER AUTOMÁTICO
 async function sendMsg() {
   const input = document.getElementById("user-msg");
   const text = input.value.trim();
   if (!text) return;
 
-  const provider = document.getElementById("provider-select").value;
+  const prov = document.getElementById("provider-select").value;
   const model = document.getElementById("model-select").value;
   const history = document.getElementById("chat-history");
   const sendBtn = document.getElementById("send-btn");
 
-  // Mostrar mensaje de usuario
   history.innerHTML += '<div class="msg user">' +
     '<div class="author"><span>CREADOR IMPERIAL</span><span>TÚ</span></div>' +
     '<div class="msg-content">' + escapeHtml(text) + '</div>' +
@@ -403,60 +606,95 @@ async function sendMsg() {
   input.value = "";
   history.scrollTop = history.scrollHeight;
 
-  // Placeholder de respuesta
   const responseMsgId = "msg_" + Date.now();
   history.innerHTML += '<div class="msg agent" id="' + responseMsgId + '">' +
     '<div class="author">' +
-      '<span>' + model.toUpperCase() + '</span>' +
-      '<span style="color:var(--gold)">GENERANDO RESPUESTA...</span>' +
+      '<span>' + model.toUpperCase() + ' · ' + prov.toUpperCase() + '</span>' +
+      '<span style="color:var(--gold)" id="status_tag_' + responseMsgId + '">PROCESANDO...</span>' +
     '</div>' +
     '<div class="msg-content">✦ Conectando con la red neural...</div>' +
   '</div>';
   history.scrollTop = history.scrollHeight;
 
   sendBtn.disabled = true;
-  updateStatus("Procesando...", "warn");
 
   try {
-    const key = getKey(provider);
-    if (!key && provider !== "ollama") {
-      throw new Error("No has guardado la API Key para " + provider.toUpperCase() + ". Pégala en el panel izquierdo y dale a Guardar.");
-    }
-
-    const responseText = await callAI(provider, model, key, text);
+    const responseText = await executeWithRotation(prov, model, text, responseMsgId);
     const respEl = document.getElementById(responseMsgId);
     if (respEl) {
       respEl.querySelector(".author").innerHTML = '<span>' + model.toUpperCase() + '</span><span style="color:var(--emerald)">RESPUESTA OFICIAL</span>';
       respEl.querySelector(".msg-content").textContent = responseText;
     }
-    updateStatus("Sistema Listo", "ok");
   } catch(err) {
     const respEl = document.getElementById(responseMsgId);
     if (respEl) {
       respEl.classList.add("system");
-      respEl.querySelector(".author").innerHTML = '<span style="color:#ef4444">ERROR AL RESPONDER</span>';
-      respEl.querySelector(".msg-content").textContent = "⚠️ " + err.message;
+      respEl.querySelector(".author").innerHTML = '<span style="color:var(--ruby)">ERROR EN MATRIZ DE LLAVES</span>';
+      respEl.querySelector(".msg-content").textContent = "⚠️ " + err.message + "
+
+Abre '⚙️ CONFIGURAR LLAVES' para revisar o reactivar tus repuestos.";
     }
-    updateStatus("Error en la conexión", "err");
   }
 
+  updateActiveKeyDisplay();
   sendBtn.disabled = false;
   history.scrollTop = history.scrollHeight;
 }
 
-async function callAI(provider, model, key, prompt) {
-  const cfg = PROVIDERS_CONFIG[provider];
-
-  if (cfg.isOllama) {
+async function executeWithRotation(prov, model, prompt, msgId) {
+  if (prov === "ollama") {
     const res = await fetch(getOllamaHost() + "/api/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ model: model, prompt: prompt, stream: false })
     });
-    if (!res.ok) throw new Error("Error de Ollama (" + res.status + "): ¿Está ejecutándose Ollama en tu PC?");
+    if (!res.ok) throw new Error("Error de Ollama (" + res.status + "): ¿Está abierto Ollama en tu PC?");
     const data = await res.json();
     return data.response || "Sin respuesta de Ollama.";
   }
+
+  const slots = KEY_MATRIX[prov] || [];
+  const availableSlots = [];
+
+  slots.forEach((s, idx) => {
+    if (s.key && s.key.trim() && s.status !== "exhausted") {
+      availableSlots.push({ slot: s, index: idx });
+    }
+  });
+
+  if (!availableSlots.length) {
+    throw new Error("No hay llaves activas ni repuestos disponibles para " + prov.toUpperCase() + ".");
+  }
+
+  let lastError = null;
+
+  for (let i = 0; i < availableSlots.length; i++) {
+    const { slot, index } = availableSlots[i];
+    const roleName = (index === 0) ? "PRINCIPAL" : ("REPUESTO #" + index);
+
+    // Actualizar indicador
+    const tag = document.getElementById("status_tag_" + msgId);
+    if (tag) tag.textContent = "PROBANDO [" + roleName + "]...";
+
+    try {
+      const answer = await callProviderAPI(prov, model, slot.key, prompt);
+      slot.status = (index === 0) ? "active" : "backup";
+      saveKeyMatrix(KEY_MATRIX);
+      return answer;
+    } catch(err) {
+      console.warn("Fallo con la llave " + roleName + ":", err);
+      slot.status = "exhausted"; // Marcar como agotada
+      saveKeyMatrix(KEY_MATRIX);
+      lastError = err;
+      showToast("⚠️ " + roleName + " agotada/falló. Rotando a siguiente repuesto...");
+    }
+  }
+
+  throw new Error("Se agotaron todos los repuestos (" + availableSlots.length + "). Último error: " + lastError.message);
+}
+
+async function callProviderAPI(prov, model, key, prompt) {
+  const cfg = PROVIDERS_CONFIG[prov];
 
   if (cfg.isGemini) {
     const endpoint = cfg.url(model, key);
@@ -469,7 +707,7 @@ async function callAI(provider, model, key, prompt) {
     });
     if (!res.ok) {
       const err = await res.text();
-      throw new Error("Google Gemini error (" + res.status + "): " + err);
+      throw new Error("Gemini (" + res.status + "): " + err);
     }
     const data = await res.json();
     if (data.candidates && data.candidates[0] && data.candidates[0].content) {
@@ -478,12 +716,11 @@ async function callAI(provider, model, key, prompt) {
     throw new Error("Respuesta vacía de Gemini.");
   }
 
-  // OpenAI / Groq / OpenRouter
   const headers = {
     "Content-Type": "application/json",
     "Authorization": "Bearer " + key
   };
-  if (provider === "openrouter") {
+  if (prov === "openrouter") {
     headers["HTTP-Referer"] = "https://orionix.luxury";
     headers["X-Title"] = "ORIONIX NEXUS";
   }
@@ -494,7 +731,7 @@ async function callAI(provider, model, key, prompt) {
     body: JSON.stringify({
       model: model,
       messages: [
-        { role: "system", content: "Eres un agente supremo del ecosistema ORIONIX. Respondes con sabiduría, poder y elegancia de lujo cósmico." },
+        { role: "system", content: "Eres un agente supremo del ecosistema ORIONIX. Respondes con sabiduría, precisión y tono imperial de lujo." },
         { role: "user", content: prompt }
       ]
     })
@@ -502,21 +739,14 @@ async function callAI(provider, model, key, prompt) {
 
   if (!res.ok) {
     const err = await res.text();
-    throw new Error(cfg.name + " error (" + res.status + "): " + err);
+    throw new Error(cfg.name + " (" + res.status + "): " + err);
   }
 
   const data = await res.json();
   if (data.choices && data.choices[0] && data.choices[0].message) {
     return data.choices[0].message.content;
   }
-  throw new Error("Respuesta no estructurada de la IA.");
-}
-
-function updateStatus(text, type) {
-  const dot = document.getElementById("status-dot");
-  const txt = document.getElementById("status-text");
-  dot.className = "dot" + (type === "warn" ? " warn" : type === "err" ? " err" : "");
-  txt.textContent = text;
+  throw new Error("Respuesta no estructurada recibida de la API.");
 }
 
 function escapeHtml(str) {
@@ -553,7 +783,10 @@ function escapeHtml(str) {
   draw();
 })();
 
-window.addEventListener("DOMContentLoaded", init);
+window.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("ollama-host").value = getOllamaHost();
+  onProviderChange();
+});
 </script>
 </body>
 </html>

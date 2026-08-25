@@ -3,26 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIONIX · NEXUS DE AGENTES & MATRIZ DE LLAVES</title>
-<link rel="icon" href="../favicon.svg?v=nexus7" type="image/svg+xml">
+<title>ORIONIX · NEXUS DE AGENTES (Centro de Mando)</title>
+<link rel="icon" href="../favicon.svg?v=nexus8" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #030712;
-  --bg-panel: rgba(6, 12, 26, 0.95);
+  --panel: rgba(8, 14, 28, 0.95);
   --gold: #e8c86a;
-  --gold-glow: rgba(232, 200, 106, 0.35);
+  --gold-glow: rgba(232, 200, 106, 0.4);
   --gold-dim: #b89a40;
   --text: #f4eedb;
   --dim: rgba(244, 238, 219, 0.6);
-  --border: rgba(232, 200, 106, 0.22);
-  --border-focus: rgba(232, 200, 106, 0.7);
+  --border: rgba(232, 200, 106, 0.25);
   --emerald: #10b981;
   --ruby: #ef4444;
-  --amber: #f59e0b;
-  --blue: #38bdf8;
+  --cyan: #38bdf8;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,9 +33,9 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background-image:
-    radial-gradient(ellipse at 50% 0%, rgba(30, 58, 138, 0.25), transparent 70%),
-    linear-gradient(rgba(3, 7, 18, 0.9), rgba(3, 7, 18, 0.96)),
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(30, 58, 138, 0.3), transparent 70%),
+    linear-gradient(rgba(3, 7, 18, 0.92), rgba(3, 7, 18, 0.96)),
     url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2000&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
@@ -59,27 +57,19 @@ header {
 .brand {
   font-family: 'Cinzel', serif; font-size: 1.15rem; font-weight: 900;
   letter-spacing: .25em; color: var(--gold); text-decoration: none;
-  text-shadow: 0 0 20px rgba(232,200,106,0.5);
+  text-shadow: 0 0 20px var(--gold-glow);
 }
 .tagline {
   font-family: 'Cinzel', serif; font-size: .62rem; letter-spacing: .2em;
   color: var(--dim); border-left: 1px solid var(--border); padding-left: 14px;
 }
-.nav-actions { display: flex; gap: 10px; align-items: center; }
-.btn-config {
-  font-family: 'Cinzel', serif; font-size: .65rem; letter-spacing: .12em;
-  padding: 8px 16px; border-radius: 8px; border: 1px solid var(--gold);
-  background: rgba(232,200,106,0.12); color: var(--gold); cursor: pointer;
-  display: flex; align-items: center; gap: 6px; transition: all .25s; font-weight: 700;
-}
-.btn-config:hover { background: var(--gold); color: #030712; box-shadow: 0 0 20px var(--gold-glow); }
-.nav-links { display: flex; gap: 6px; }
+.nav-links { display: flex; gap: 8px; }
 .nl {
   font-family: 'Cinzel', serif; font-size: .6rem; letter-spacing: .12em;
-  color: var(--dim); text-decoration: none; padding: 7px 12px; border-radius: 8px;
+  color: var(--dim); text-decoration: none; padding: 7px 14px; border-radius: 8px;
   transition: all .25s; text-transform: uppercase;
 }
-.nl:hover { color: var(--gold); background: rgba(232,200,106,0.08); }
+.nl:hover, .nl.on { color: var(--gold); background: rgba(232,200,106,0.1); }
 
 /* MAIN LAYOUT */
 .main-layout {
@@ -87,45 +77,75 @@ header {
   display: flex; flex: 1; height: calc(100vh - 60px);
 }
 
-/* SIDEBAR */
+/* SIDEBAR INTEGRADA CON LLAVES DIRECTAS */
 aside {
-  width: 360px; border-right: 1px solid var(--border);
-  background: var(--bg-panel); backdrop-filter: blur(24px);
-  padding: 22px; display: flex; flex-direction: column; gap: 16px;
+  width: 380px; border-right: 1px solid var(--border);
+  background: var(--panel); backdrop-filter: blur(24px);
+  padding: 20px; display: flex; flex-direction: column; gap: 14px;
   overflow-y: auto;
 }
 aside::-webkit-scrollbar { width: 4px; }
 aside::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
-.panel-section { display: flex; flex-direction: column; gap: 6px; }
-.panel-title {
-  font-family: 'Cinzel', serif; color: var(--gold); font-size: .72rem;
-  font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+.section-box {
+  background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px;
+}
+.section-title {
+  font-family: 'Cinzel', serif; font-size: .72rem; font-weight: 700;
+  color: var(--gold); letter-spacing: .15em; text-transform: uppercase;
+  display: flex; justify-content: space-between; align-items: center;
 }
 
 select, input {
-  width: 100%; padding: 11px 14px; background: rgba(3, 7, 18, 0.9);
+  width: 100%; padding: 10px 12px; background: rgba(3, 7, 18, 0.95);
   border: 1px solid var(--border); color: var(--text);
   font-family: 'Cormorant Garamond', serif; font-size: 1.05rem;
-  border-radius: 10px; outline: none; transition: border-color .25s;
+  border-radius: 8px; outline: none; transition: border-color .25s;
 }
-select:focus, input:focus { border-color: var(--border-focus); box-shadow: 0 0 15px rgba(232,200,106,0.25); }
+select:focus, input:focus { border-color: var(--gold); box-shadow: 0 0 12px rgba(232,200,106,0.25); }
 select option { background: #050a14; color: #f4eedb; }
 
-.active-key-badge {
-  padding: 12px 14px; border-radius: 10px;
-  background: rgba(0,0,0,0.5); border: 1px solid var(--border);
-  font-size: .85rem; font-family: 'Fira Code', monospace;
+/* SLOTS DE LLAVES */
+.key-slot-row {
+  display: flex; flex-direction: column; gap: 4px;
 }
+.key-slot-header {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Cinzel', serif; font-size: .6rem; font-weight: 700;
+}
+.slot-label { color: var(--gold); }
+.slot-status {
+  font-family: 'Fira Code', monospace; font-size: .65rem; padding: 2px 8px;
+  border-radius: 12px; text-transform: uppercase; font-weight: 600;
+}
+.status-active { background: rgba(16,185,129,0.2); color: var(--emerald); border: 1px solid var(--emerald); }
+.status-backup { background: rgba(56,189,248,0.2); color: var(--cyan); border: 1px solid var(--cyan); }
+.status-exhausted { background: rgba(239,68,68,0.2); color: var(--ruby); border: 1px solid var(--ruby); }
+.status-empty { background: rgba(255,255,255,0.05); color: var(--dim); border: 1px dashed var(--dim); }
 
-.btn {
-  padding: 11px 16px; background: linear-gradient(135deg, rgba(232,200,106,0.2), rgba(184,154,64,0.3));
+.key-input-wrap {
+  display: flex; gap: 6px; align-items: center;
+}
+.key-input-wrap input {
+  font-family: 'Fira Code', monospace; font-size: .82rem; padding: 8px 10px;
+}
+.btn-save-slot {
+  padding: 8px 12px; background: rgba(232,200,106,0.15);
   border: 1px solid var(--gold); color: var(--gold);
-  font-family: 'Cinzel', serif; font-size: .68rem; font-weight: 700;
-  letter-spacing: .14em; cursor: pointer; transition: all .25s;
+  font-family: 'Cinzel', serif; font-size: .55rem; font-weight: 700;
+  border-radius: 6px; cursor: pointer; white-space: nowrap; transition: all .2s;
+}
+.btn-save-slot:hover { background: var(--gold); color: #030712; }
+
+.btn-main {
+  width: 100%; padding: 12px; background: linear-gradient(135deg, rgba(232,200,106,0.25), rgba(184,154,64,0.35));
+  border: 1px solid var(--gold); color: var(--gold);
+  font-family: 'Cinzel', serif; font-size: .72rem; font-weight: 700;
+  letter-spacing: .15em; cursor: pointer; transition: all .25s;
   border-radius: 10px; text-transform: uppercase; text-align: center;
 }
-.btn:hover { background: var(--gold); color: #030712; box-shadow: 0 0 20px var(--gold-glow); transform: translateY(-1px); }
+.btn-main:hover { background: var(--gold); color: #030712; box-shadow: 0 0 20px var(--gold-glow); }
 
 /* CHAT AREA */
 .chat-area {
@@ -157,7 +177,7 @@ select option { background: #050a14; color: #f4eedb; }
 }
 .msg.agent {
   align-self: flex-start;
-  background: rgba(8, 16, 32, 0.9);
+  background: rgba(8, 16, 32, 0.92);
   border: 1px solid var(--border);
   color: var(--text);
   border-bottom-left-radius: 2px;
@@ -188,79 +208,10 @@ select option { background: #050a14; color: #f4eedb; }
 }
 .send-btn { min-width: 140px; }
 
-/* MODAL DE CONFIGURACIÓN */
-#config-modal {
-  position: fixed; inset: 0; z-index: 1000;
-  background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(20px);
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; pointer-events: none; transition: all .3s ease;
-  padding: 20px;
-}
-#config-modal.open { opacity: 1; pointer-events: auto; }
-.modal-card {
-  width: 100%; max-width: 880px; max-height: 90vh;
-  background: rgba(6, 12, 26, 0.98); border: 1px solid var(--gold);
-  border-radius: 20px; box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 35px var(--gold-glow);
-  display: flex; flex-direction: column; overflow: hidden;
-}
-.modal-header {
-  padding: 20px 28px; border-bottom: 1px solid var(--border);
-  display: flex; justify-content: space-between; align-items: center;
-}
-.modal-header h2 {
-  font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--gold); letter-spacing: .15em;
-}
-.close-modal-btn {
-  background: none; border: none; color: var(--dim); font-size: 1.8rem;
-  cursor: pointer; transition: color .2s;
-}
-.close-modal-btn:hover { color: var(--gold); }
-.modal-body {
-  padding: 24px 28px; overflow-y: auto; display: flex; flex-direction: column; gap: 24px;
-}
-.provider-box {
-  background: rgba(3, 7, 18, 0.7); border: 1px solid var(--border);
-  border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 12px;
-}
-.provider-header {
-  display: flex; justify-content: space-between; align-items: center;
-}
-.provider-title {
-  font-family: 'Cinzel', serif; font-size: .95rem; font-weight: 700; color: var(--gold);
-}
-.keys-table {
-  display: flex; flex-direction: column; gap: 8px;
-}
-.key-row {
-  display: flex; align-items: center; gap: 10px;
-  background: rgba(0,0,0,0.4); padding: 8px 12px; border-radius: 8px;
-  border: 1px solid rgba(232,200,106,0.1);
-}
-.key-role {
-  font-family: 'Cinzel', serif; font-size: .65rem; font-weight: 700;
-  width: 110px; color: var(--gold); text-transform: uppercase;
-}
-.key-input-field {
-  flex: 1; font-family: 'Fira Code', monospace; font-size: .85rem; padding: 8px 12px;
-}
-.key-status-pill {
-  font-family: 'Fira Code', monospace; font-size: .72rem; padding: 4px 10px;
-  border-radius: 20px; font-weight: 600; text-transform: uppercase;
-}
-.pill-active { background: rgba(16,185,129,0.2); color: var(--emerald); border: 1px solid var(--emerald); }
-.pill-backup { background: rgba(56,189,248,0.2); color: var(--blue); border: 1px solid var(--blue); }
-.pill-exhausted { background: rgba(239,68,68,0.2); color: var(--ruby); border: 1px solid var(--ruby); }
-.pill-empty { background: rgba(255,255,255,0.05); color: var(--dim); border: 1px dashed var(--dim); }
-
-.modal-footer {
-  padding: 18px 28px; border-top: 1px solid var(--border);
-  display: flex; justify-content: flex-end; gap: 12px; background: rgba(3, 7, 18, 0.8);
-}
-
 /* TOAST */
 #toast {
   position: fixed; bottom: 85px; right: 28px;
-  background: rgba(6, 12, 26, 0.95); border: 1px solid var(--gold);
+  background: rgba(6, 12, 26, 0.98); border: 1px solid var(--gold);
   color: var(--gold); padding: 12px 20px; border-radius: 8px;
   font-family: 'Cinzel', serif; font-size: .72rem; letter-spacing: .1em;
   opacity: 0; transform: translateY(20px); transition: all .3s; z-index: 2000;
@@ -277,30 +228,25 @@ select option { background: #050a14; color: #f4eedb; }
 <header>
   <div class="brand-group">
     <a href="hub.html" class="brand">🌌 ORIONIX</a>
-    <div class="tagline">NEXUS MULTI-AGENTE & MATRIZ DE LLAVES</div>
+    <div class="tagline">NEXUS MULTI-AGENTE · CENTRO DE MANDO</div>
   </div>
-  <div class="nav-actions">
-    <button class="btn-config" onclick="openConfigModal()">
-      <span>⚙️ CONFIGURAR LLAVES & RESPALDOS</span>
-    </button>
-    <div class="nav-links">
-      <a href="hub.html" class="nl">Hub</a>
-      <a href="articulos.html" class="nl">Catálogo</a>
-      <a href="tienda.html" class="nl">Tienda</a>
-      <a href="nexus.html" class="nl on">NEXUS</a>
-    </div>
+  <div class="nav-links">
+    <a href="hub.html" class="nl">Hub</a>
+    <a href="articulos.html" class="nl">Catálogo</a>
+    <a href="tienda.html" class="nl">Tienda</a>
+    <a href="nexus.html" class="nl on">NEXUS</a>
   </div>
 </header>
 
 <div class="main-layout">
 
   <aside id="sidebar">
-    <div class="panel-section">
-      <div class="panel-title">
-        <span>1. Motor de Inteligencia</span>
+    <div class="section-box">
+      <div class="section-title">
+        <span>1. Proveedor de Inteligencia</span>
       </div>
       <select id="provider-select" onchange="onProviderChange()">
-        <option value="groq">⚡ Groq Cloud (Ultra Rápido)</option>
+        <option value="groq">⚡ Groq Cloud (Ultra Rápido y Gratis)</option>
         <option value="gemini">✨ Google Gemini Cloud</option>
         <option value="openai">🧠 OpenAI ChatGPT Cloud</option>
         <option value="openrouter">🌐 OpenRouter Universal</option>
@@ -308,39 +254,41 @@ select option { background: #050a14; color: #f4eedb; }
       </select>
     </div>
 
-    <div class="panel-section">
-      <div class="panel-title">
+    <div class="section-box">
+      <div class="section-title">
         <span>2. Modelo Activo</span>
       </div>
       <select id="model-select"></select>
     </div>
 
-    <div class="panel-section">
-      <div class="panel-title">
-        <span>3. Llave en Uso</span>
+    <!-- PANEL VISIBLE DE RANURAS DE LLAVES -->
+    <div class="section-box" id="keys-box">
+      <div class="section-title">
+        <span>3. Matriz de Llaves & Respaldos</span>
+        <span style="font-size:.58rem;color:var(--dim)">🔒 En tu navegador</span>
       </div>
-      <div class="active-key-badge" id="active-key-info">
-        Comprobando matriz de llaves...
+      <div id="slots-container" style="display:flex;flex-direction:column;gap:10px;">
+        <!-- Se llena automáticamente con Principal, Repuesto 1, Repuesto 2, Repuesto 3 -->
       </div>
-      <button class="btn" onclick="openConfigModal()" style="margin-top:6px;">
-        ⚙️ GESTIONAR RESPALDOS
+      <button class="btn-main" onclick="saveAllSlotsForCurrentProvider()" style="margin-top:6px;">
+        💾 GUARDAR TODAS LAS LLAVES
       </button>
     </div>
 
-    <div class="panel-section" id="ollama-panel" style="display:none;">
-      <div class="panel-title">
+    <div class="section-box" id="ollama-box" style="display:none;">
+      <div class="section-title">
         <span>Host Ollama Local</span>
       </div>
       <input type="text" id="ollama-host" value="http://localhost:11434" onchange="saveOllamaHost()">
     </div>
 
-    <div class="status-card" style="margin-top:auto;padding:14px;border-radius:10px;background:rgba(0,0,0,0.5);border:1px solid var(--border);">
-      <div class="status-indicator" style="display:flex;align-items:center;gap:8px;font-family:'Cinzel',serif;font-size:.7rem;">
-        <div class="dot" id="status-dot" style="width:8px;height:8px;border-radius:50%;background:var(--emerald);box-shadow:0 0 8px var(--emerald);"></div>
-        <span id="status-text">Matriz de Rotación Activa</span>
+    <div style="margin-top:auto;padding:12px;border-radius:10px;background:rgba(0,0,0,0.5);border:1px solid var(--border);font-size:.8rem;">
+      <div style="display:flex;align-items:center;gap:8px;font-family:'Cinzel',serif;font-size:.68rem;color:var(--emerald);">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--emerald);box-shadow:0 0 8px var(--emerald);"></div>
+        <span>Rotación Automática Activa</span>
       </div>
-      <div style="font-size:.75rem;color:var(--dim);margin-top:6px;" id="status-detail">
-        Si una llave se agota, el sistema salta automáticamente al siguiente repuesto.
+      <div style="font-size:.72rem;color:var(--dim);margin-top:4px;">
+        Si la Llave Principal se agota o da error, el sistema salta al Repuesto 1 de inmediato.
       </div>
     </div>
   </aside>
@@ -349,211 +297,72 @@ select option { background: #050a14; color: #f4eedb; }
     <div id="chat-history">
       <div class="msg agent">
         <div class="author">
-          <span>ORIONIX NEXUS · MATRIZ DE AGENTES</span>
-          <span style="color:var(--emerald)">EN LÍNEA</span>
+          <span>ORIONIX NEXUS · NÚCLEO DE MANDO</span>
+          <span style="color:var(--emerald)">LISTO</span>
         </div>
-        <div class="msg-content">Bienvenido al NEXUS Imperial, Creador.
+        <div class="msg-content">Bienvenido al NEXUS, Creador.
 
-Hemos integrado la **Matriz Universal de Llaves & Respaldos**:
-- Cada proveedor (Groq, Gemini, OpenAI, OpenRouter) soporta tu **Llave Principal** y múltiples **Repuestos (1, 2, 3...)**.
-- El sistema detecta en tiempo real si una llave está **ACTIVA, DISPONIBLE o AGOTADA** y hace el cambio instantáneo.
-
-👉 **Presiona el botón arriba: ⚙️ CONFIGURAR LLAVES & RESPALDOS** para pegar tu clave real (por ejemplo la de Groq que empieza por `gsk_` o la de Gemini por `AIzaSy`).</div>
+Aquí tienes la configuración directa y en tiempo real:
+1. En la barra izquierda tienes tus casillas para **👑 PRINCIPAL**, **🔄 REPUESTO 1**, **🔄 REPUESTO 2** y **🔄 REPUESTO 3**.
+2. Pega tus llaves reales (por ejemplo tu clave de Groq que empieza por `gsk_` o la de Gemini que empieza por `AIzaSy`).
+3. Presiona **💾 GUARDAR TODAS LAS LLAVES** y verás de inmediato el estado en verde: **✓ ACTIVA** y **● DISPONIBLE**.
+4. Escribe abajo tu mensaje y recibe la respuesta oficial al instante.</div>
       </div>
     </div>
 
     <div class="input-bar">
-      <input type="text" id="user-msg" placeholder="Transmite tu instrucción o pregunta al agente..." onkeypress="if(event.key==='Enter') sendMsg()">
-      <button class="btn send-btn" id="send-btn" onclick="sendMsg()">ENVIAR →</button>
+      <input type="text" id="user-msg" placeholder="Transmite tu orden o pregunta al agente..." onkeypress="if(event.key==='Enter') sendMsg()">
+      <button class="btn send-btn btn-main" id="send-btn" onclick="sendMsg()">ENVIAR →</button>
     </div>
   </div>
 
-</div>
-
-<!-- MODAL COMPLETO DE CONFIGURACIÓN DE MATRIZ DE LLAVES -->
-<div id="config-modal">
-  <div class="modal-card">
-    <div class="modal-header">
-      <h2>⚙️ MATRIZ DE LLAVES & ROTACIÓN DE RESPALDOS</h2>
-      <button class="close-modal-btn" onclick="closeConfigModal()">✕</button>
-    </div>
-    <div class="modal-body" id="modal-body-content">
-      <!-- Generado dinámicamente -->
-    </div>
-    <div class="modal-footer">
-      <button class="btn" onclick="saveAllKeysFromModal()">💾 GUARDAR TODA LA MATRIZ DE LLAVES</button>
-    </div>
-  </div>
 </div>
 
 <script>
 const PROVIDERS_CONFIG = {
   groq: {
-    name: "Groq Cloud (Ultra Rápido)",
+    name: "Groq Cloud",
     models: ["llama-3.3-70b-versatile", "llama-3.1-8b-instant", "mixtral-8x7b-32768", "gemma2-9b-it"],
     url: "https://api.groq.com/openai/v1/chat/completions",
-    maxSlots: 4
+    slots: ["👑 PRINCIPAL", "🔄 REPUESTO 1", "🔄 REPUESTO 2", "🔄 REPUESTO 3"]
   },
   gemini: {
     name: "Google Gemini Cloud",
     models: ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-2.0-flash-exp"],
     url: (m, k) => "https://generativelanguage.googleapis.com/v1beta/models/" + m + ":generateContent?key=" + k,
     isGemini: true,
-    maxSlots: 4
+    slots: ["👑 PRINCIPAL", "🔄 REPUESTO 1", "🔄 REPUESTO 2", "🔄 REPUESTO 3"]
   },
   openai: {
     name: "OpenAI ChatGPT Cloud",
     models: ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo", "o1-mini"],
     url: "https://api.openai.com/v1/chat/completions",
-    maxSlots: 4
+    slots: ["👑 PRINCIPAL", "🔄 REPUESTO 1", "🔄 REPUESTO 2", "🔄 REPUESTO 3"]
   },
   openrouter: {
     name: "OpenRouter Universal",
     models: ["anthropic/claude-3.5-sonnet", "deepseek/deepseek-r1", "meta-llama/llama-3.3-70b-instruct", "google/gemini-flash-1.5"],
     url: "https://openrouter.ai/api/v1/chat/completions",
-    maxSlots: 3
+    slots: ["👑 PRINCIPAL", "🔄 REPUESTO 1", "🔄 REPUESTO 2"]
   }
 };
 
-let KEY_MATRIX = loadKeyMatrix();
-
-function loadKeyMatrix() {
+// Cargar matriz de llaves desde localStorage
+function getMatrix() {
   try {
-    const raw = localStorage.getItem("orionix_key_matrix");
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      // Validar que las llaves guardadas no sean texto inválido de prueba
-      Object.keys(parsed).forEach(p => {
-        if (Array.isArray(parsed[p])) {
-          parsed[p].forEach(slot => {
-            if (slot.key && (slot.key.includes("nada,") || slot.key.includes("..."))) {
-              slot.key = "";
-              slot.status = "empty";
-            }
-          });
-        }
-      });
-      return parsed;
-    }
+    const raw = localStorage.getItem("orionix_key_matrix_v2");
+    if (raw) return JSON.parse(raw);
   } catch(e) {}
-
-  const matrix = {};
-  Object.keys(PROVIDERS_CONFIG).forEach(prov => {
-    const max = PROVIDERS_CONFIG[prov].maxSlots;
-    matrix[prov] = [];
-    for (let i = 0; i < max; i++) {
-      matrix[prov].push({ key: "", status: "empty" });
-    }
-  });
-
-  return matrix;
+  return { groq: ["", "", "", ""], gemini: ["", "", "", ""], openai: ["", "", "", ""], openrouter: ["", "", ""] };
 }
 
-function saveKeyMatrix(matrix) {
-  KEY_MATRIX = matrix;
-  localStorage.setItem("orionix_key_matrix", JSON.stringify(matrix));
+function saveMatrix(m) {
+  localStorage.setItem("orionix_key_matrix_v2", JSON.stringify(m));
 }
 
-function openConfigModal() {
-  renderModalContent();
-  document.getElementById("config-modal").classList.add("open");
-}
-
-function closeConfigModal() {
-  document.getElementById("config-modal").classList.remove("open");
-}
-
-function renderModalContent() {
-  const container = document.getElementById("modal-body-content");
-  container.innerHTML = Object.keys(PROVIDERS_CONFIG).map(prov => {
-    const pCfg = PROVIDERS_CONFIG[prov];
-    const slots = KEY_MATRIX[prov] || [];
-
-    const rows = slots.map((slot, idx) => {
-      const label = (idx === 0) ? "👑 PRINCIPAL" : ("🔄 REPUESTO " + idx);
-      let pillClass = "pill-empty";
-      let pillText = "VACÍO";
-
-      if (slot.key && slot.key.trim()) {
-        if (slot.status === "exhausted") {
-          pillClass = "pill-exhausted"; pillText = "❌ AGOTADA";
-        } else if (idx === 0 || slot.status === "active") {
-          pillClass = "pill-active"; pillText = "✓ ACTIVA";
-        } else {
-          pillClass = "pill-backup"; pillText = "● DISPONIBLE";
-        }
-      }
-
-      return '<div class="key-row">' +
-        '<div class="key-role">' + label + '</div>' +
-        '<input type="password" class="key-input-field" id="input_' + prov + '_' + idx + '" value="' + (slot.key || '') + '" placeholder="Pega tu clave para ' + label + '...">' +
-        '<span class="key-status-pill ' + pillClass + '">' + pillText + '</span>' +
-        (slot.key ? '<button onclick="resetKeyStatus('' + prov + '', ' + idx + ')" style="background:none;border:none;color:var(--gold);cursor:pointer;font-size:.7rem;" title="Reactivar llave">🔄</button>' : '') +
-      '</div>';
-    }).join("");
-
-    return '<div class="provider-box">' +
-      '<div class="provider-header">' +
-        '<div class="provider-title">' + pCfg.name + '</div>' +
-        '<span style="font-size:.75rem;color:var(--dim)">' + slots.filter(s => s.key).length + ' / ' + pCfg.maxSlots + ' Llaves Listas</span>' +
-      '</div>' +
-      '<div class="keys-table">' + rows + '</div>' +
-    '</div>';
-  }).join("");
-}
-
-function saveAllKeysFromModal() {
-  Object.keys(PROVIDERS_CONFIG).forEach(prov => {
-    const max = PROVIDERS_CONFIG[prov].maxSlots;
-    for (let i = 0; i < max; i++) {
-      const input = document.getElementById("input_" + prov + "_" + i);
-      if (input) {
-        const val = input.value.trim();
-        KEY_MATRIX[prov][i] = {
-          key: val,
-          status: val ? (KEY_MATRIX[prov][i].status === "exhausted" ? "exhausted" : (i === 0 ? "active" : "backup")) : "empty"
-        };
-      }
-    }
-  });
-
-  saveKeyMatrix(KEY_MATRIX);
-  closeConfigModal();
-  updateActiveKeyDisplay();
-  showToast("✓ Matriz de llaves y repuestos guardada.");
-}
-
-function resetKeyStatus(prov, idx) {
-  if (KEY_MATRIX[prov] && KEY_MATRIX[prov][idx]) {
-    KEY_MATRIX[prov][idx].status = (idx === 0) ? "active" : "backup";
-    saveKeyMatrix(KEY_MATRIX);
-    renderModalContent();
-    updateActiveKeyDisplay();
-    showToast("✓ Llave reactivada como disponible.");
-  }
-}
-
-function updateActiveKeyDisplay() {
-  const prov = document.getElementById("provider-select").value;
-  const badge = document.getElementById("active-key-info");
-
-  if (prov === "ollama") {
-    badge.innerHTML = '<span style="color:var(--emerald)">💻 Ollama Local</span><br><span style="font-size:.75rem;color:var(--dim)">Ejecutándose en tu PC</span>';
-    return;
-  }
-
-  const slots = KEY_MATRIX[prov] || [];
-  const activeSlotIdx = slots.findIndex(s => s.key && s.key.trim() && s.status !== "exhausted");
-
-  if (activeSlotIdx === -1) {
-    badge.innerHTML = '<span style="color:var(--ruby)">❌ Sin llaves activas</span><br><span style="font-size:.75rem;color:var(--dim)">Presiona Configurar para pegar una</span>';
-  } else {
-    const s = slots[activeSlotIdx];
-    const roleName = (activeSlotIdx === 0) ? "👑 PRINCIPAL" : ("🔄 REPUESTO #" + activeSlotIdx);
-    const masked = (s.key.length > 8) ? (s.key.substring(0, 6) + "..." + s.key.substring(s.key.length - 4)) : "******";
-    badge.innerHTML = '<span style="color:var(--emerald)">✓ ' + roleName + '</span><br><span style="font-size:.78rem;color:var(--gold)">' + masked + '</span>';
-  }
-}
+// Estados de agotamiento temporales en memoria
+// { "groq_0": false, "groq_1": false }
+const EXHAUSTED_KEYS = {};
 
 function onProviderChange() {
   const prov = document.getElementById("provider-select").value;
@@ -561,14 +370,87 @@ function onProviderChange() {
 
   if (prov === "ollama") {
     modelSelect.innerHTML = '<option value="qwen2.5-coder:7b">qwen2.5-coder:7b</option><option value="deepseek-r1:8b">deepseek-r1:8b</option><option value="llama3.1:8b">llama3.1:8b</option>';
-    document.getElementById("ollama-panel").style.display = "flex";
+    document.getElementById("keys-box").style.display = "none";
+    document.getElementById("ollama-box").style.display = "flex";
   } else {
     const cfg = PROVIDERS_CONFIG[prov];
     modelSelect.innerHTML = cfg.models.map(m => '<option value="' + m + '">' + m + '</option>').join("");
-    document.getElementById("ollama-panel").style.display = "none";
+    document.getElementById("keys-box").style.display = "flex";
+    document.getElementById("ollama-box").style.display = "none";
+    renderSlots(prov);
   }
+}
 
-  updateActiveKeyDisplay();
+function renderSlots(prov) {
+  const cfg = PROVIDERS_CONFIG[prov];
+  const matrix = getMatrix();
+  const keys = matrix[prov] || [];
+  const container = document.getElementById("slots-container");
+
+  container.innerHTML = cfg.slots.map((label, idx) => {
+    const keyVal = (keys[idx] || "").trim();
+    const isExhausted = !!EXHAUSTED_KEYS[prov + "_" + idx];
+
+    let pillClass = "status-empty";
+    let pillText = "VACÍO";
+
+    if (keyVal) {
+      if (isExhausted) {
+        pillClass = "status-exhausted"; pillText = "❌ AGOTADA";
+      } else if (idx === 0 || !keys.slice(0, idx).some((k, i) => k && !EXHAUSTED_KEYS[prov + "_" + i])) {
+        pillClass = "status-active"; pillText = "✓ ACTIVA";
+      } else {
+        pillClass = "status-backup"; pillText = "● DISPONIBLE";
+      }
+    }
+
+    return '<div class="key-slot-row">' +
+      '<div class="key-slot-header">' +
+        '<span class="slot-label">' + label + '</span>' +
+        '<span class="slot-status ' + pillClass + '">' + pillText + '</span>' +
+      '</div>' +
+      '<div class="key-input-wrap">' +
+        '<input type="password" id="slot_' + prov + '_' + idx + '" value="' + keyVal + '" placeholder="Pega aquí la clave..." oninput="autoSaveSlot('' + prov + '', ' + idx + ')">' +
+        (isExhausted ? '<button class="btn-save-slot" onclick="reactivateKey('' + prov + '', ' + idx + ')" title="Reactivar">🔄</button>' : '') +
+      '</div>' +
+    '</div>';
+  }).join("");
+}
+
+function autoSaveSlot(prov, idx) {
+  const input = document.getElementById("slot_" + prov + "_" + idx);
+  if (!input) return;
+  const matrix = getMatrix();
+  if (!matrix[prov]) matrix[prov] = [];
+  matrix[prov][idx] = input.value.trim();
+  saveMatrix(matrix);
+  delete EXHAUSTED_KEYS[prov + "_" + idx];
+}
+
+function saveAllSlotsForCurrentProvider() {
+  const prov = document.getElementById("provider-select").value;
+  if (prov === "ollama") return;
+  const cfg = PROVIDERS_CONFIG[prov];
+  const matrix = getMatrix();
+  if (!matrix[prov]) matrix[prov] = [];
+
+  cfg.slots.forEach((_, idx) => {
+    const input = document.getElementById("slot_" + prov + "_" + idx);
+    if (input) {
+      matrix[prov][idx] = input.value.trim();
+      delete EXHAUSTED_KEYS[prov + "_" + idx];
+    }
+  });
+
+  saveMatrix(matrix);
+  renderSlots(prov);
+  showToast("✓ Todas las llaves de " + cfg.name + " guardadas con éxito.");
+}
+
+function reactivateKey(prov, idx) {
+  delete EXHAUSTED_KEYS[prov + "_" + idx];
+  renderSlots(prov);
+  showToast("✓ Llave reactivada como disponible.");
 }
 
 function showToast(text) {
@@ -576,7 +458,7 @@ function showToast(text) {
   if (!t) return;
   t.textContent = text;
   t.classList.add("show");
-  setTimeout(() => t.classList.remove("show"), 2500);
+  setTimeout(() => t.classList.remove("show"), 2600);
 }
 
 function getOllamaHost() {
@@ -588,6 +470,7 @@ function saveOllamaHost() {
   localStorage.setItem("ollama_host", h);
 }
 
+// ENVIAR MENSAJE CON ROTACIÓN AUTOMÁTICA
 async function sendMsg() {
   const input = document.getElementById("user-msg");
   const text = input.value.trim();
@@ -609,7 +492,7 @@ async function sendMsg() {
   history.innerHTML += '<div class="msg agent" id="' + responseMsgId + '">' +
     '<div class="author">' +
       '<span>' + model.toUpperCase() + ' · ' + prov.toUpperCase() + '</span>' +
-      '<span style="color:var(--gold)" id="status_tag_' + responseMsgId + '">PROCESANDO...</span>' +
+      '<span style="color:var(--gold)" id="tag_' + responseMsgId + '">PROCESANDO...</span>' +
     '</div>' +
     '<div class="msg-content">✦ Conectando con la red neural...</div>' +
   '</div>';
@@ -618,7 +501,7 @@ async function sendMsg() {
   sendBtn.disabled = true;
 
   try {
-    const responseText = await executeWithRotation(prov, model, text, responseMsgId);
+    const responseText = await executeWithFailover(prov, model, text, responseMsgId);
     const respEl = document.getElementById(responseMsgId);
     if (respEl) {
       respEl.querySelector(".author").innerHTML = '<span>' + model.toUpperCase() + '</span><span style="color:var(--emerald)">RESPUESTA OFICIAL</span>';
@@ -628,70 +511,68 @@ async function sendMsg() {
     const respEl = document.getElementById(responseMsgId);
     if (respEl) {
       respEl.classList.add("system");
-      respEl.querySelector(".author").innerHTML = '<span style="color:var(--ruby)">ERROR DE LLAVE</span>';
+      respEl.querySelector(".author").innerHTML = '<span style="color:var(--ruby)">ERROR AL RESPONDER</span>';
       respEl.querySelector(".msg-content").textContent = "⚠️ " + err.message + "
 
-Abre arriba '⚙️ CONFIGURAR LLAVES & RESPALDOS' y pega tu API Key correcta.";
+Consejo: Verifica en la barra izquierda que tu llave esté bien escrita y presiona '💾 GUARDAR TODAS LAS LLAVES'.";
     }
   }
 
-  updateActiveKeyDisplay();
+  renderSlots(prov);
   sendBtn.disabled = false;
   history.scrollTop = history.scrollHeight;
 }
 
-async function executeWithRotation(prov, model, prompt, msgId) {
+async function executeWithFailover(prov, model, prompt, msgId) {
   if (prov === "ollama") {
     const res = await fetch(getOllamaHost() + "/api/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ model: model, prompt: prompt, stream: false })
     });
-    if (!res.ok) throw new Error("Error de Ollama (" + res.status + "): ¿Está abierto Ollama en tu PC?");
+    if (!res.ok) throw new Error("Ollama error (" + res.status + "): ¿Está abierto Ollama en tu PC?");
     const data = await res.json();
     return data.response || "Sin respuesta de Ollama.";
   }
 
-  const slots = KEY_MATRIX[prov] || [];
-  const availableSlots = [];
+  const matrix = getMatrix();
+  const keys = matrix[prov] || [];
+  const cfg = PROVIDERS_CONFIG[prov];
 
-  slots.forEach((s, idx) => {
-    if (s.key && s.key.trim() && s.status !== "exhausted") {
-      availableSlots.push({ slot: s, index: idx });
+  // Filtrar llaves que tengan texto y no estén agotadas
+  const validSlots = [];
+  keys.forEach((k, idx) => {
+    if (k && k.trim() && !EXHAUSTED_KEYS[prov + "_" + idx]) {
+      validSlots.push({ key: k.trim(), index: idx, label: cfg.slots[idx] });
     }
   });
 
-  if (!availableSlots.length) {
-    throw new Error("No tienes ninguna API Key válida configurada para " + prov.toUpperCase() + ".");
+  if (!validSlots.length) {
+    throw new Error("No tienes ninguna API Key guardada para " + cfg.name + ". Pega tu llave en la casilla '👑 PRINCIPAL' en la barra izquierda.");
   }
 
   let lastError = null;
 
-  for (let i = 0; i < availableSlots.length; i++) {
-    const { slot, index } = availableSlots[i];
-    const roleName = (index === 0) ? "PRINCIPAL" : ("REPUESTO #" + index);
-
-    const tag = document.getElementById("status_tag_" + msgId);
-    if (tag) tag.textContent = "PROBANDO [" + roleName + "]...";
+  for (let i = 0; i < validSlots.length; i++) {
+    const slot = validSlots[i];
+    const tag = document.getElementById("tag_" + msgId);
+    if (tag) tag.textContent = "PROBANDO [" + slot.label + "]...";
 
     try {
-      const answer = await callProviderAPI(prov, model, slot.key, prompt);
-      slot.status = (index === 0) ? "active" : "backup";
-      saveKeyMatrix(KEY_MATRIX);
-      return answer;
+      const response = await callSingleAPI(prov, model, slot.key, prompt);
+      return response;
     } catch(err) {
-      console.warn("Fallo con la llave " + roleName + ":", err);
-      slot.status = "exhausted";
-      saveKeyMatrix(KEY_MATRIX);
+      console.warn("Fallo en " + slot.label + ":", err);
+      EXHAUSTED_KEYS[prov + "_" + slot.index] = true;
       lastError = err;
-      showToast("⚠️ " + roleName + " inválida/agotada. Saltando al siguiente repuesto...");
+      showToast("⚠️ " + slot.label + " falló. Rotando al siguiente repuesto...");
     }
   }
 
-  throw new Error("Todas las llaves disponibles fallaron. Detalle: " + lastError.message);
+  throw new Error("Todas las llaves probadas fallaron. Último error: " + lastError.message);
 }
 
-async function callProviderAPI(prov, model, key, prompt) {
+async function callSingleAPI(prov, model, key, prompt) {
   const cfg = PROVIDERS_CONFIG[prov];
 
   if (cfg.isGemini) {
@@ -729,7 +610,7 @@ async function callProviderAPI(prov, model, key, prompt) {
     body: JSON.stringify({
       model: model,
       messages: [
-        { role: "system", content: "Eres un agente supremo del ecosistema ORIONIX. Respondes con sabiduría, precisión y tono imperial de lujo." },
+        { role: "system", content: "Eres un agente supremo del imperio ORIONIX. Respondes con sabiduría, poder y elegancia de lujo cósmico." },
         { role: "user", content: prompt }
       ]
     })
@@ -744,7 +625,7 @@ async function callProviderAPI(prov, model, key, prompt) {
   if (data.choices && data.choices[0] && data.choices[0].message) {
     return data.choices[0].message.content;
   }
-  throw new Error("Respuesta no estructurada recibida de la API.");
+  throw new Error("Respuesta no estructurada.");
 }
 
 function escapeHtml(str) {

@@ -5,20 +5,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ORIONIX · NEXUS DE AGENTES</title>
-<link rel="icon" href="../favicon.svg?v=nexus3" type="image/svg+xml">
+<link rel="icon" href="../favicon.svg?v=nexus4" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #050a14;
-  --bg-panel: rgba(7, 14, 28, 0.85);
+  --bg-panel: rgba(7, 14, 28, 0.9);
   --gold: #e8c86a;
   --gold-glow: rgba(232, 200, 106, 0.35);
   --gold-dim: #b89a40;
   --text: #f4eedb;
   --dim: rgba(244, 238, 219, 0.6);
-  --border: rgba(232, 200, 106, 0.2);
+  --border: rgba(232, 200, 106, 0.25);
   --border-focus: rgba(232, 200, 106, 0.6);
   --emerald: #10b981;
   --ruby: #ef4444;
@@ -98,7 +98,7 @@ aside::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; 
 }
 
 select, input, textarea {
-  width: 100%; padding: 11px 14px; background: rgba(3, 7, 18, 0.75);
+  width: 100%; padding: 11px 14px; background: rgba(3, 7, 18, 0.85);
   border: 1px solid var(--border); color: var(--text);
   font-family: 'Cormorant Garamond', serif; font-size: 1.05rem;
   border-radius: 10px; outline: none; transition: border-color .25s;
@@ -108,30 +108,31 @@ select option { background: #050a14; color: #f4eedb; }
 
 .key-list-box {
   display: flex; flex-direction: column; gap: 6px;
-  max-height: 110px; overflow-y: auto; padding: 6px;
-  background: rgba(0,0,0,0.3); border-radius: 8px; border: 1px dashed var(--border);
+  max-height: 140px; overflow-y: auto; padding: 8px;
+  background: rgba(0,0,0,0.4); border-radius: 8px; border: 1px dashed var(--border);
 }
 .key-item {
   font-family: 'Fira Code', monospace; font-size: .75rem; color: var(--dim);
-  padding: 4px 8px; border-radius: 4px; background: rgba(232,200,106,0.05);
+  padding: 6px 10px; border-radius: 6px; background: rgba(232,200,106,0.08);
   display: flex; justify-content: space-between; align-items: center;
 }
-.key-item.active { color: var(--gold); background: rgba(232,200,106,0.15); border: 1px solid var(--border); }
-.key-del { color: #ff6b6b; cursor: pointer; border: none; background: none; font-size: .9rem; }
+.key-item.active { color: var(--gold); background: rgba(232,200,106,0.18); border: 1px solid var(--border); font-weight: 600; }
+.key-del { color: #ff6b6b; cursor: pointer; border: none; background: none; font-size: 1rem; padding: 0 4px; }
+.key-del:hover { color: #ff3333; transform: scale(1.2); }
 
 .btn {
-  padding: 11px 16px; background: rgba(232,200,106,0.12);
+  padding: 11px 16px; background: rgba(232,200,106,0.15);
   border: 1px solid var(--border); color: var(--gold);
   font-family: 'Cinzel', serif; font-size: .68rem; font-weight: 700;
   letter-spacing: .14em; cursor: pointer; transition: all .25s;
   border-radius: 10px; text-transform: uppercase; text-align: center;
 }
 .btn:hover { background: var(--gold); color: #050a14; box-shadow: 0 0 20px var(--gold-glow); }
-.btn-sm { padding: 6px 12px; font-size: .58rem; }
+.btn-sm { padding: 8px 14px; font-size: .62rem; }
 
 .status-card {
   margin-top: auto; padding: 14px; border-radius: 10px;
-  background: rgba(0,0,0,0.4); border: 1px solid var(--border);
+  background: rgba(0,0,0,0.5); border: 1px solid var(--border);
   font-size: .85rem;
 }
 .status-indicator { display: flex; align-items: center; gap: 8px; font-family: 'Cinzel', serif; font-size: .7rem; }
@@ -161,7 +162,7 @@ select option { background: #050a14; color: #f4eedb; }
 
 .msg.user {
   align-self: flex-end;
-  background: rgba(232, 200, 106, 0.15);
+  background: rgba(232, 200, 106, 0.18);
   border: 1px solid var(--gold);
   color: #fff6d6;
   border-bottom-right-radius: 2px;
@@ -200,15 +201,22 @@ select option { background: #050a14; color: #f4eedb; }
 }
 .send-btn { min-width: 140px; }
 
-@media(max-width: 860px) {
-  aside { width: 100%; position: absolute; top: 0; bottom: 0; left: -100%; z-index: 100; transition: left .3s ease; }
-  aside.open { left: 0; }
+/* TOAST */
+#toast {
+  position: fixed; bottom: 85px; right: 28px;
+  background: rgba(7, 14, 28, 0.95); border: 1px solid var(--gold);
+  color: var(--gold); padding: 12px 20px; border-radius: 8px;
+  font-family: 'Cinzel', serif; font-size: .72rem; letter-spacing: .1em;
+  opacity: 0; transform: translateY(20px); transition: all .3s; z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
 }
+#toast.show { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
 
 <canvas id="particles"></canvas>
+<div id="toast"></div>
 
 <header>
   <div class="brand-group">
@@ -252,7 +260,7 @@ select option { background: #050a14; color: #f4eedb; }
         <span style="font-size:.6rem;color:var(--dim)">🔒 Seguro en navegador</span>
       </div>
       <div style="display:flex;gap:6px;">
-        <input type="password" id="api-key-input" placeholder="Pega tu API Key aquí...">
+        <input type="password" id="api-key-input" placeholder="Pega tu API Key aquí..." onkeypress="if(event.key==='Enter') addKey()">
         <button class="btn btn-sm" onclick="addKey()" style="white-space:nowrap;">+ Guardar</button>
       </div>
       <div class="key-list-box" id="key-list"></div>
@@ -295,9 +303,11 @@ select option { background: #050a14; color: #f4eedb; }
         </div>
         <div class="msg-content">Bienvenido al NEXUS, Creador.
 
-Aquí tienes el puente unificado entre tus modelos locales de **Ollama** (Qwen, DeepSeek, Llama) y las llaves de alta potencia en la nube (**Groq, Gemini, OpenAI, OpenRouter**).
+Aquí tienes el puente unificado entre tus modelos locales de **Ollama** (Qwen, DeepSeek, Llama) y las llaves en la nube (**Groq, Gemini, OpenAI, OpenRouter**).
 
-Las llaves se gestionan en tu navegador con rotación automática de respaldo. Escribe tu comando o consulta para comenzar.</div>
+👉 **Paso 1:** Selecciona tu proveedor en la izquierda.
+👉 **Paso 2:** Pega tu API Key y presiona **+ GUARDAR**.
+👉 **Paso 3:** Escribe tu consulta abajo y presiona **ENVIAR**.</div>
       </div>
     </div>
 
@@ -345,7 +355,10 @@ const PROVIDERS_CONFIG = {
 
 function getKeys(provider) {
   try {
-    return JSON.parse(localStorage.getItem("keys_" + provider) || "[]");
+    const data = localStorage.getItem("keys_" + provider);
+    if (!data) return [];
+    const parsed = JSON.parse(data);
+    return Array.isArray(parsed) ? parsed : [];
   } catch(e) {
     return [];
   }
@@ -357,15 +370,24 @@ function saveKeys(provider, keys) {
 
 function addKey() {
   const provider = document.getElementById("provider-select").value;
-  if (provider === "ollama") return;
+  if (provider === "ollama") {
+    showToast("Ollama es local, no requiere llave.");
+    return;
+  }
   const input = document.getElementById("api-key-input");
   const key = input.value.trim();
-  if (!key) return;
+  if (!key) {
+    showToast("⚠️ Pega una llave antes de guardar.");
+    return;
+  }
 
   const current = getKeys(provider);
   if (!current.includes(key)) {
     current.push(key);
     saveKeys(provider, current);
+    showToast("✓ Llave guardada para " + provider.toUpperCase());
+  } else {
+    showToast("Esta llave ya estaba guardada.");
   }
   input.value = "";
   renderKeysList();
@@ -376,6 +398,7 @@ function removeKey(provider, index) {
   current.splice(index, 1);
   saveKeys(provider, current);
   renderKeysList();
+  showToast("Llave eliminada.");
 }
 
 function renderKeysList() {
@@ -395,7 +418,7 @@ function renderKeysList() {
   }
 
   list.innerHTML = keys.map((k, i) => {
-    const masked = k.substring(0, 7) + "..." + k.substring(k.length - 4);
+    const masked = (k.length > 12) ? (k.substring(0, 6) + "..." + k.substring(k.length - 4)) : k;
     return '<div class="key-item ' + (i === 0 ? "active" : "") + '">' +
       '<span>🔑 [' + (i + 1) + '] ' + masked + '</span>' +
       '<button class="key-del" onclick="removeKey('' + provider + '', ' + i + ')">✕</button>' +
@@ -431,6 +454,14 @@ function onProviderChange() {
 }
 
 function onModelChange() {}
+
+function showToast(text) {
+  const t = document.getElementById("toast");
+  if (!t) return;
+  t.textContent = text;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2500);
+}
 
 async function sendMsg() {
   const input = document.getElementById("user-msg");
@@ -475,9 +506,9 @@ async function sendMsg() {
     if (respEl) {
       respEl.classList.add("system");
       respEl.querySelector(".author").innerHTML = '<span style="color:#ff6b6b">ERROR DE CONEXIÓN</span>';
-      respEl.querySelector(".msg-content").textContent = "⚠️ Fallo al conectar: " + err.message + "
+      respEl.querySelector(".msg-content").textContent = "⚠️ Fallo: " + err.message + "
 
-Consejo: Si usas Cloud, verifica que tengas una llave válida guardada en el panel izquierdo. Si usas Ollama, asegúrate de tener Ollama abierto en tu PC.";
+Consejo: Guarda una llave válida arriba o verifica tu conexión.";
     }
     updateStatus("Error en la última consulta", "err");
   }
@@ -502,7 +533,7 @@ async function executeAIRequest(provider, model, prompt) {
 
   const keys = getKeys(provider);
   if (!keys.length) {
-    throw new Error("No tienes ninguna API Key guardada para " + cfg.name + ". Ingrésala en el panel izquierdo.");
+    throw new Error("No tienes ninguna API Key guardada para " + cfg.name + ". Pega tu llave en el panel izquierdo y haz clic en + Guardar.");
   }
 
   let lastError = null;
@@ -521,7 +552,7 @@ async function executeAIRequest(provider, model, prompt) {
         });
         if (!res.ok) {
           const errBody = await res.text();
-          throw new Error("Gemini status " + res.status + ": " + errBody);
+          throw new Error("Gemini (" + res.status + "): " + errBody);
         }
         const data = await res.json();
         return data.candidates[0].content.parts[0].text;
@@ -540,7 +571,7 @@ async function executeAIRequest(provider, model, prompt) {
         });
         if (!res.ok) {
           const errBody = await res.text();
-          throw new Error(cfg.name + " status " + res.status + ": " + errBody);
+          throw new Error(cfg.name + " (" + res.status + "): " + errBody);
         }
         const data = await res.json();
         return data.choices[0].message.content;

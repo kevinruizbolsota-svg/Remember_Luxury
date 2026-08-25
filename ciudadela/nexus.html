@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ORIONIX · NEXUS DE AGENTES & MATRIZ DE LLAVES</title>
-<link rel="icon" href="../favicon.svg?v=nexus6" type="image/svg+xml">
+<link rel="icon" href="../favicon.svg?v=nexus7" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -87,9 +87,9 @@ header {
   display: flex; flex: 1; height: calc(100vh - 60px);
 }
 
-/* SIDEBAR RÁPIDO */
+/* SIDEBAR */
 aside {
-  width: 330px; border-right: 1px solid var(--border);
+  width: 360px; border-right: 1px solid var(--border);
   background: var(--bg-panel); backdrop-filter: blur(24px);
   padding: 22px; display: flex; flex-direction: column; gap: 16px;
   overflow-y: auto;
@@ -119,13 +119,13 @@ select option { background: #050a14; color: #f4eedb; }
 }
 
 .btn {
-  padding: 11px 16px; background: rgba(232,200,106,0.15);
+  padding: 11px 16px; background: linear-gradient(135deg, rgba(232,200,106,0.2), rgba(184,154,64,0.3));
   border: 1px solid var(--gold); color: var(--gold);
   font-family: 'Cinzel', serif; font-size: .68rem; font-weight: 700;
   letter-spacing: .14em; cursor: pointer; transition: all .25s;
   border-radius: 10px; text-transform: uppercase; text-align: center;
 }
-.btn:hover { background: var(--gold); color: #030712; box-shadow: 0 0 20px var(--gold-glow); }
+.btn:hover { background: var(--gold); color: #030712; box-shadow: 0 0 20px var(--gold-glow); transform: translateY(-1px); }
 
 /* CHAT AREA */
 .chat-area {
@@ -188,7 +188,7 @@ select option { background: #050a14; color: #f4eedb; }
 }
 .send-btn { min-width: 140px; }
 
-/* MODAL DE CONFIGURACIÓN DE LLAVES */
+/* MODAL DE CONFIGURACIÓN */
 #config-modal {
   position: fixed; inset: 0; z-index: 1000;
   background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(20px);
@@ -198,7 +198,7 @@ select option { background: #050a14; color: #f4eedb; }
 }
 #config-modal.open { opacity: 1; pointer-events: auto; }
 .modal-card {
-  width: 100%; max-width: 860px; max-height: 90vh;
+  width: 100%; max-width: 880px; max-height: 90vh;
   background: rgba(6, 12, 26, 0.98); border: 1px solid var(--gold);
   border-radius: 20px; box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 35px var(--gold-glow);
   display: flex; flex-direction: column; overflow: hidden;
@@ -358,7 +358,7 @@ Hemos integrado la **Matriz Universal de Llaves & Respaldos**:
 - Cada proveedor (Groq, Gemini, OpenAI, OpenRouter) soporta tu **Llave Principal** y múltiples **Repuestos (1, 2, 3...)**.
 - El sistema detecta en tiempo real si una llave está **ACTIVA, DISPONIBLE o AGOTADA** y hace el cambio instantáneo.
 
-Presiona el botón superior **⚙️ CONFIGURAR LLAVES** para cargar tus claves, o escribe directamente abajo para comenzar.</div>
+👉 **Presiona el botón arriba: ⚙️ CONFIGURAR LLAVES & RESPALDOS** para pegar tu clave real (por ejemplo la de Groq que empieza por `gsk_` o la de Gemini por `AIzaSy`).</div>
       </div>
     </div>
 
@@ -378,7 +378,7 @@ Presiona el botón superior **⚙️ CONFIGURAR LLAVES** para cargar tus claves,
       <button class="close-modal-btn" onclick="closeConfigModal()">✕</button>
     </div>
     <div class="modal-body" id="modal-body-content">
-      <!-- Generado dinámicamente con todas las IAs y sus repuestos -->
+      <!-- Generado dinámicamente -->
     </div>
     <div class="modal-footer">
       <button class="btn" onclick="saveAllKeysFromModal()">💾 GUARDAR TODA LA MATRIZ DE LLAVES</button>
@@ -387,7 +387,6 @@ Presiona el botón superior **⚙️ CONFIGURAR LLAVES** para cargar tus claves,
 </div>
 
 <script>
-// ESTRUCTURA DE PROVEEDORES Y MODELOS
 const PROVIDERS_CONFIG = {
   groq: {
     name: "Groq Cloud (Ultra Rápido)",
@@ -416,31 +415,34 @@ const PROVIDERS_CONFIG = {
   }
 };
 
-// ESTADO GLOBAL DE LA MATRIZ
-// { groq: [ { key: '...', status: 'active' | 'backup' | 'exhausted' | 'empty' } ] }
 let KEY_MATRIX = loadKeyMatrix();
 
 function loadKeyMatrix() {
   try {
     const raw = localStorage.getItem("orionix_key_matrix");
-    if (raw) return JSON.parse(raw);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      // Validar que las llaves guardadas no sean texto inválido de prueba
+      Object.keys(parsed).forEach(p => {
+        if (Array.isArray(parsed[p])) {
+          parsed[p].forEach(slot => {
+            if (slot.key && (slot.key.includes("nada,") || slot.key.includes("..."))) {
+              slot.key = "";
+              slot.status = "empty";
+            }
+          });
+        }
+      });
+      return parsed;
+    }
   } catch(e) {}
 
-  // Inicializar slots vacíos por defecto
   const matrix = {};
   Object.keys(PROVIDERS_CONFIG).forEach(prov => {
     const max = PROVIDERS_CONFIG[prov].maxSlots;
     matrix[prov] = [];
     for (let i = 0; i < max; i++) {
       matrix[prov].push({ key: "", status: "empty" });
-    }
-  });
-
-  // Migrar llaves antiguas si existían
-  Object.keys(PROVIDERS_CONFIG).forEach(prov => {
-    const oldKey = localStorage.getItem("key_" + prov);
-    if (oldKey && oldKey.trim()) {
-      matrix[prov][0] = { key: oldKey.trim(), status: "active" };
     }
   });
 
@@ -452,7 +454,6 @@ function saveKeyMatrix(matrix) {
   localStorage.setItem("orionix_key_matrix", JSON.stringify(matrix));
 }
 
-// GESTIÓN DEL MODAL
 function openConfigModal() {
   renderModalContent();
   document.getElementById("config-modal").classList.add("open");
@@ -519,7 +520,7 @@ function saveAllKeysFromModal() {
   saveKeyMatrix(KEY_MATRIX);
   closeConfigModal();
   updateActiveKeyDisplay();
-  showToast("✓ Matriz de llaves y repuestos guardada con éxito.");
+  showToast("✓ Matriz de llaves y repuestos guardada.");
 }
 
 function resetKeyStatus(prov, idx) {
@@ -532,7 +533,6 @@ function resetKeyStatus(prov, idx) {
   }
 }
 
-// ACTUALIZAR PANTALLA PRINCIPAL
 function updateActiveKeyDisplay() {
   const prov = document.getElementById("provider-select").value;
   const badge = document.getElementById("active-key-info");
@@ -543,14 +543,14 @@ function updateActiveKeyDisplay() {
   }
 
   const slots = KEY_MATRIX[prov] || [];
-  const activeSlotIdx = slots.findIndex(s => s.key && s.status !== "exhausted");
+  const activeSlotIdx = slots.findIndex(s => s.key && s.key.trim() && s.status !== "exhausted");
 
   if (activeSlotIdx === -1) {
-    badge.innerHTML = '<span style="color:var(--ruby)">❌ Sin llaves activas</span><br><span style="font-size:.75rem;color:var(--dim)">Haz clic abajo para configurar</span>';
+    badge.innerHTML = '<span style="color:var(--ruby)">❌ Sin llaves activas</span><br><span style="font-size:.75rem;color:var(--dim)">Presiona Configurar para pegar una</span>';
   } else {
     const s = slots[activeSlotIdx];
     const roleName = (activeSlotIdx === 0) ? "👑 PRINCIPAL" : ("🔄 REPUESTO #" + activeSlotIdx);
-    const masked = s.key.substring(0, 6) + "..." + s.key.substring(s.key.length - 4);
+    const masked = (s.key.length > 8) ? (s.key.substring(0, 6) + "..." + s.key.substring(s.key.length - 4)) : "******";
     badge.innerHTML = '<span style="color:var(--emerald)">✓ ' + roleName + '</span><br><span style="font-size:.78rem;color:var(--gold)">' + masked + '</span>';
   }
 }
@@ -588,7 +588,6 @@ function saveOllamaHost() {
   localStorage.setItem("ollama_host", h);
 }
 
-// ENVÍO DE MENSAJES CON FAILOVER AUTOMÁTICO
 async function sendMsg() {
   const input = document.getElementById("user-msg");
   const text = input.value.trim();
@@ -629,10 +628,10 @@ async function sendMsg() {
     const respEl = document.getElementById(responseMsgId);
     if (respEl) {
       respEl.classList.add("system");
-      respEl.querySelector(".author").innerHTML = '<span style="color:var(--ruby)">ERROR EN MATRIZ DE LLAVES</span>';
+      respEl.querySelector(".author").innerHTML = '<span style="color:var(--ruby)">ERROR DE LLAVE</span>';
       respEl.querySelector(".msg-content").textContent = "⚠️ " + err.message + "
 
-Abre '⚙️ CONFIGURAR LLAVES' para revisar o reactivar tus repuestos.";
+Abre arriba '⚙️ CONFIGURAR LLAVES & RESPALDOS' y pega tu API Key correcta.";
     }
   }
 
@@ -663,7 +662,7 @@ async function executeWithRotation(prov, model, prompt, msgId) {
   });
 
   if (!availableSlots.length) {
-    throw new Error("No hay llaves activas ni repuestos disponibles para " + prov.toUpperCase() + ".");
+    throw new Error("No tienes ninguna API Key válida configurada para " + prov.toUpperCase() + ".");
   }
 
   let lastError = null;
@@ -672,7 +671,6 @@ async function executeWithRotation(prov, model, prompt, msgId) {
     const { slot, index } = availableSlots[i];
     const roleName = (index === 0) ? "PRINCIPAL" : ("REPUESTO #" + index);
 
-    // Actualizar indicador
     const tag = document.getElementById("status_tag_" + msgId);
     if (tag) tag.textContent = "PROBANDO [" + roleName + "]...";
 
@@ -683,14 +681,14 @@ async function executeWithRotation(prov, model, prompt, msgId) {
       return answer;
     } catch(err) {
       console.warn("Fallo con la llave " + roleName + ":", err);
-      slot.status = "exhausted"; // Marcar como agotada
+      slot.status = "exhausted";
       saveKeyMatrix(KEY_MATRIX);
       lastError = err;
-      showToast("⚠️ " + roleName + " agotada/falló. Rotando a siguiente repuesto...");
+      showToast("⚠️ " + roleName + " inválida/agotada. Saltando al siguiente repuesto...");
     }
   }
 
-  throw new Error("Se agotaron todos los repuestos (" + availableSlots.length + "). Último error: " + lastError.message);
+  throw new Error("Todas las llaves disponibles fallaron. Detalle: " + lastError.message);
 }
 
 async function callProviderAPI(prov, model, key, prompt) {

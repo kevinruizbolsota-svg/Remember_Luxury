@@ -1,29 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<script src="orionix-guard.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ORIONIX · NEXUS DE AGENTES</title>
-<link rel="icon" href="../favicon.svg?v=nexus4" type="image/svg+xml">
+<link rel="icon" href="../favicon.svg?v=nexus5" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #050a14;
-  --bg-panel: rgba(7, 14, 28, 0.9);
+  --bg-panel: rgba(7, 14, 28, 0.95);
   --gold: #e8c86a;
-  --gold-glow: rgba(232, 200, 106, 0.35);
+  --gold-glow: rgba(232, 200, 106, 0.4);
   --gold-dim: #b89a40;
   --text: #f4eedb;
   --dim: rgba(244, 238, 219, 0.6);
   --border: rgba(232, 200, 106, 0.25);
-  --border-focus: rgba(232, 200, 106, 0.6);
+  --border-focus: rgba(232, 200, 106, 0.7);
   --emerald: #10b981;
   --ruby: #ef4444;
-  --cyan: #38bdf8;
-  --purple: #a855f7;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,7 +35,7 @@ body {
   overflow: hidden;
   background-image:
     radial-gradient(ellipse at 50% 0%, rgba(30, 58, 138, 0.25), transparent 70%),
-    linear-gradient(rgba(5, 10, 20, 0.88), rgba(5, 10, 20, 0.95)),
+    linear-gradient(rgba(5, 10, 20, 0.9), rgba(5, 10, 20, 0.95)),
     url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2000&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
@@ -52,7 +49,7 @@ header {
   position: relative; z-index: 20; height: 60px;
   padding: 0 28px;
   border-bottom: 1px solid var(--border);
-  background: rgba(4, 9, 20, 0.9);
+  background: rgba(4, 9, 20, 0.95);
   backdrop-filter: blur(20px);
   display: flex; justify-content: space-between; align-items: center;
 }
@@ -84,51 +81,42 @@ header {
 aside {
   width: 360px; border-right: 1px solid var(--border);
   background: var(--bg-panel); backdrop-filter: blur(24px);
-  padding: 22px; display: flex; flex-direction: column; gap: 18px;
+  padding: 22px; display: flex; flex-direction: column; gap: 16px;
   overflow-y: auto;
 }
 aside::-webkit-scrollbar { width: 4px; }
 aside::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
-.panel-section { display: flex; flex-direction: column; gap: 8px; }
+.panel-section { display: flex; flex-direction: column; gap: 6px; }
 .panel-title {
   font-family: 'Cinzel', serif; color: var(--gold); font-size: .72rem;
   font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
   display: flex; justify-content: space-between; align-items: center;
 }
 
-select, input, textarea {
-  width: 100%; padding: 11px 14px; background: rgba(3, 7, 18, 0.85);
+select, input {
+  width: 100%; padding: 11px 14px; background: rgba(3, 7, 18, 0.9);
   border: 1px solid var(--border); color: var(--text);
   font-family: 'Cormorant Garamond', serif; font-size: 1.05rem;
   border-radius: 10px; outline: none; transition: border-color .25s;
 }
-select:focus, input:focus, textarea:focus { border-color: var(--border-focus); box-shadow: 0 0 15px rgba(232,200,106,0.2); }
+select:focus, input:focus { border-color: var(--border-focus); box-shadow: 0 0 15px rgba(232,200,106,0.25); }
 select option { background: #050a14; color: #f4eedb; }
 
-.key-list-box {
-  display: flex; flex-direction: column; gap: 6px;
-  max-height: 140px; overflow-y: auto; padding: 8px;
-  background: rgba(0,0,0,0.4); border-radius: 8px; border: 1px dashed var(--border);
+.key-status-box {
+  padding: 10px 14px; border-radius: 8px; font-size: .85rem;
+  background: rgba(0,0,0,0.4); border: 1px dashed var(--border);
+  font-family: 'Fira Code', monospace;
 }
-.key-item {
-  font-family: 'Fira Code', monospace; font-size: .75rem; color: var(--dim);
-  padding: 6px 10px; border-radius: 6px; background: rgba(232,200,106,0.08);
-  display: flex; justify-content: space-between; align-items: center;
-}
-.key-item.active { color: var(--gold); background: rgba(232,200,106,0.18); border: 1px solid var(--border); font-weight: 600; }
-.key-del { color: #ff6b6b; cursor: pointer; border: none; background: none; font-size: 1rem; padding: 0 4px; }
-.key-del:hover { color: #ff3333; transform: scale(1.2); }
 
 .btn {
-  padding: 11px 16px; background: rgba(232,200,106,0.15);
-  border: 1px solid var(--border); color: var(--gold);
+  padding: 11px 16px; background: linear-gradient(135deg, rgba(232,200,106,0.2), rgba(184,154,64,0.3));
+  border: 1px solid var(--gold); color: var(--gold);
   font-family: 'Cinzel', serif; font-size: .68rem; font-weight: 700;
   letter-spacing: .14em; cursor: pointer; transition: all .25s;
   border-radius: 10px; text-transform: uppercase; text-align: center;
 }
-.btn:hover { background: var(--gold); color: #050a14; box-shadow: 0 0 20px var(--gold-glow); }
-.btn-sm { padding: 8px 14px; font-size: .62rem; }
+.btn:hover { background: var(--gold); color: #050a14; box-shadow: 0 0 20px var(--gold-glow); transform: translateY(-1px); }
 
 .status-card {
   margin-top: auto; padding: 14px; border-radius: 10px;
@@ -170,7 +158,7 @@ select option { background: #050a14; color: #f4eedb; }
 }
 .msg.agent {
   align-self: flex-start;
-  background: rgba(8, 16, 32, 0.85);
+  background: rgba(8, 16, 32, 0.9);
   border: 1px solid var(--border);
   color: var(--text);
   border-bottom-left-radius: 2px;
@@ -178,8 +166,8 @@ select option { background: #050a14; color: #f4eedb; }
 }
 .msg.system {
   align-self: center; max-width: 90%;
-  background: rgba(20, 10, 40, 0.7);
-  border: 1px dashed var(--purple);
+  background: rgba(20, 10, 40, 0.85);
+  border: 1px dashed #a855f7;
   color: #d8b4fe; font-size: .95rem; text-align: center;
 }
 .msg .author {
@@ -197,26 +185,14 @@ select option { background: #050a14; color: #f4eedb; }
   backdrop-filter: blur(20px);
 }
 #user-msg {
-  flex: 1; font-size: 1.15rem; background: rgba(3, 7, 18, 0.85);
+  flex: 1; font-size: 1.15rem; background: rgba(3, 7, 18, 0.9);
 }
 .send-btn { min-width: 140px; }
-
-/* TOAST */
-#toast {
-  position: fixed; bottom: 85px; right: 28px;
-  background: rgba(7, 14, 28, 0.95); border: 1px solid var(--gold);
-  color: var(--gold); padding: 12px 20px; border-radius: 8px;
-  font-family: 'Cinzel', serif; font-size: .72rem; letter-spacing: .1em;
-  opacity: 0; transform: translateY(20px); transition: all .3s; z-index: 1000;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-}
-#toast.show { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
 
 <canvas id="particles"></canvas>
-<div id="toast"></div>
 
 <header>
   <div class="brand-group">
@@ -239,7 +215,7 @@ select option { background: #050a14; color: #f4eedb; }
         <span>1. Motor de Inteligencia</span>
       </div>
       <select id="provider-select" onchange="onProviderChange()">
-        <option value="groq">⚡ Groq Cloud (Ultra Rápido)</option>
+        <option value="groq">⚡ Groq Cloud (Recomendado - Gratis y Ultra Rápido)</option>
         <option value="gemini">✨ Google Gemini Cloud</option>
         <option value="openai">🧠 OpenAI ChatGPT Cloud</option>
         <option value="openrouter">🌐 OpenRouter Universal</option>
@@ -251,19 +227,18 @@ select option { background: #050a14; color: #f4eedb; }
       <div class="panel-title">
         <span>2. Modelo & Personalidad</span>
       </div>
-      <select id="model-select" onchange="onModelChange()"></select>
+      <select id="model-select"></select>
     </div>
 
     <div class="panel-section" id="keys-panel">
       <div class="panel-title">
-        <span>3. Llaves & Respaldos</span>
-        <span style="font-size:.6rem;color:var(--dim)">🔒 Seguro en navegador</span>
+        <span>3. Tu API Key (Cloud)</span>
       </div>
-      <div style="display:flex;gap:6px;">
-        <input type="password" id="api-key-input" placeholder="Pega tu API Key aquí..." onkeypress="if(event.key==='Enter') addKey()">
-        <button class="btn btn-sm" onclick="addKey()" style="white-space:nowrap;">+ Guardar</button>
+      <input type="password" id="api-key-input" placeholder="Pega tu API Key aquí..." oninput="onKeyInput()">
+      <button class="btn" onclick="saveKeyManual()">💾 GUARDAR LLAVE AHORA</button>
+      <div class="key-status-box" id="key-status-text">
+        Estado: Comprobando...
       </div>
-      <div class="key-list-box" id="key-list"></div>
     </div>
 
     <div class="panel-section" id="ollama-panel" style="display:none;">
@@ -273,23 +248,13 @@ select option { background: #050a14; color: #f4eedb; }
       <input type="text" id="ollama-host" value="http://localhost:11434" onchange="saveOllamaHost()">
     </div>
 
-    <div class="panel-section">
-      <div class="panel-title">
-        <span>4. Modo de Conversación</span>
-      </div>
-      <select id="mode-select">
-        <option value="direct">Directo (1 a 1)</option>
-        <option value="council">Mesa Imperial (Consejo de Agentes)</option>
-      </select>
-    </div>
-
     <div class="status-card">
       <div class="status-indicator">
         <div class="dot" id="status-dot"></div>
-        <span id="status-text">Listo para recibir órdenes</span>
+        <span id="status-text">Sistema Listo</span>
       </div>
-      <div style="font-size:.78rem;color:var(--dim);margin-top:6px;" id="status-detail">
-        Rotación automática de llaves activada.
+      <div style="font-size:.78rem;color:var(--dim);margin-top:6px;">
+        Conexión directa en vivo activa.
       </div>
     </div>
   </aside>
@@ -303,16 +268,15 @@ select option { background: #050a14; color: #f4eedb; }
         </div>
         <div class="msg-content">Bienvenido al NEXUS, Creador.
 
-Aquí tienes el puente unificado entre tus modelos locales de **Ollama** (Qwen, DeepSeek, Llama) y las llaves en la nube (**Groq, Gemini, OpenAI, OpenRouter**).
-
-👉 **Paso 1:** Selecciona tu proveedor en la izquierda.
-👉 **Paso 2:** Pega tu API Key y presiona **+ GUARDAR**.
-👉 **Paso 3:** Escribe tu consulta abajo y presiona **ENVIAR**.</div>
+Instrucciones rápidas para chatear en vivo:
+1. Selecciona tu proveedor en el panel izquierdo (por ejemplo **Groq** o **Gemini**).
+2. Pega tu API Key y dale al botón **💾 GUARDAR LLAVE AHORA**.
+3. Escribe tu pregunta abajo y presiona **Enter** o el botón **ENVIAR →**.</div>
       </div>
     </div>
 
     <div class="input-bar">
-      <input type="text" id="user-msg" placeholder="Transmite tu instrucción al imperio..." onkeypress="if(event.key==='Enter') sendMsg()">
+      <input type="text" id="user-msg" placeholder="Transmite tu mensaje al agente..." onkeypress="if(event.key==='Enter') sendMsg()">
       <button class="btn send-btn" id="send-btn" onclick="sendMsg()">ENVIAR →</button>
     </div>
   </div>
@@ -323,9 +287,8 @@ Aquí tienes el puente unificado entre tus modelos locales de **Ollama** (Qwen, 
 const PROVIDERS_CONFIG = {
   groq: {
     name: "Groq Cloud",
-    models: ["llama-3.3-70b-versatile", "mixtral-8x7b-32768", "llama-3.1-8b-instant", "gemma2-9b-it"],
-    url: "https://api.groq.com/openai/v1/chat/completions",
-    authHeader: (k) => ({ "Authorization": "Bearer " + k })
+    models: ["llama-3.3-70b-versatile", "llama-3.1-8b-instant", "mixtral-8x7b-32768", "gemma2-9b-it"],
+    url: "https://api.groq.com/openai/v1/chat/completions"
   },
   gemini: {
     name: "Google Gemini",
@@ -336,94 +299,76 @@ const PROVIDERS_CONFIG = {
   openai: {
     name: "OpenAI",
     models: ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo", "o1-mini"],
-    url: "https://api.openai.com/v1/chat/completions",
-    authHeader: (k) => ({ "Authorization": "Bearer " + k })
+    url: "https://api.openai.com/v1/chat/completions"
   },
   openrouter: {
-    name: "OpenRouter Universal",
+    name: "OpenRouter",
     models: ["anthropic/claude-3.5-sonnet", "deepseek/deepseek-r1", "meta-llama/llama-3.3-70b-instruct", "google/gemini-flash-1.5"],
-    url: "https://openrouter.ai/api/v1/chat/completions",
-    authHeader: (k) => ({ "Authorization": "Bearer " + k, "HTTP-Referer": "https://orionix.luxury", "X-Title": "ORIONIX NEXUS" })
+    url: "https://openrouter.ai/api/v1/chat/completions"
   },
   ollama: {
     name: "Ollama Local",
-    models: ["qwen2.5-coder:7b", "deepseek-r1:8b", "llama3.1:8b", "mistral:latest"],
-    url: () => getOllamaHost() + "/api/generate",
+    models: ["qwen2.5-coder:7b", "deepseek-r1:8b", "llama3.1:8b"],
     isOllama: true
   }
 };
 
-function getKeys(provider) {
-  try {
-    const data = localStorage.getItem("keys_" + provider);
-    if (!data) return [];
-    const parsed = JSON.parse(data);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch(e) {
-    return [];
-  }
+function getKey(provider) {
+  return (localStorage.getItem("key_" + provider) || "").trim();
 }
 
-function saveKeys(provider, keys) {
-  localStorage.setItem("keys_" + provider, JSON.stringify(keys));
+function setKey(provider, val) {
+  localStorage.setItem("key_" + provider, val.trim());
 }
 
-function addKey() {
+function onKeyInput() {
   const provider = document.getElementById("provider-select").value;
-  if (provider === "ollama") {
-    showToast("Ollama es local, no requiere llave.");
-    return;
-  }
-  const input = document.getElementById("api-key-input");
-  const key = input.value.trim();
-  if (!key) {
-    showToast("⚠️ Pega una llave antes de guardar.");
-    return;
-  }
+  const val = document.getElementById("api-key-input").value;
+  setKey(provider, val);
+  updateKeyStatus();
+}
 
-  const current = getKeys(provider);
-  if (!current.includes(key)) {
-    current.push(key);
-    saveKeys(provider, current);
-    showToast("✓ Llave guardada para " + provider.toUpperCase());
+function saveKeyManual() {
+  const provider = document.getElementById("provider-select").value;
+  const val = document.getElementById("api-key-input").value.trim();
+  if (!val && provider !== "ollama") {
+    alert("⚠️ Por favor escribe o pega una API Key primero.");
+    return;
+  }
+  setKey(provider, val);
+  updateKeyStatus();
+  alert("✓ Llave guardada correctamente para " + provider.toUpperCase() + " en tu navegador.");
+}
+
+function updateKeyStatus() {
+  const provider = document.getElementById("provider-select").value;
+  const statusEl = document.getElementById("key-status-text");
+  if (provider === "ollama") {
+    statusEl.innerHTML = "<span style='color:#10b981'>● Ollama local listo (No requiere Key)</span>";
+    return;
+  }
+  const k = getKey(provider);
+  if (k) {
+    const masked = (k.length > 8) ? (k.substring(0, 6) + "..." + k.substring(k.length - 4)) : "******";
+    statusEl.innerHTML = "<span style='color:#10b981'>✓ Llave guardada: " + masked + "</span>";
   } else {
-    showToast("Esta llave ya estaba guardada.");
+    statusEl.innerHTML = "<span style='color:#ef4444'>⚠️ Sin llave. Pega tu API Key arriba.</span>";
   }
-  input.value = "";
-  renderKeysList();
 }
 
-function removeKey(provider, index) {
-  const current = getKeys(provider);
-  current.splice(index, 1);
-  saveKeys(provider, current);
-  renderKeysList();
-  showToast("Llave eliminada.");
-}
-
-function renderKeysList() {
+function onProviderChange() {
   const provider = document.getElementById("provider-select").value;
-  const list = document.getElementById("key-list");
-  if (!list) return;
+  const modelSelect = document.getElementById("model-select");
+  const cfg = PROVIDERS_CONFIG[provider];
 
-  if (provider === "ollama") {
-    list.innerHTML = '<div style="font-size:.75rem;color:var(--dim);padding:6px;">Ollama corre local en tu PC, no necesita API Keys.</div>';
-    return;
-  }
+  modelSelect.innerHTML = cfg.models.map(m => '<option value="' + m + '">' + m + '</option>').join("");
 
-  const keys = getKeys(provider);
-  if (!keys.length) {
-    list.innerHTML = '<div style="font-size:.75rem;color:#f59e0b;padding:6px;">⚠️ No hay llaves guardadas para este proveedor. Pega una arriba.</div>';
-    return;
-  }
+  document.getElementById("keys-panel").style.display = (provider === "ollama") ? "none" : "flex";
+  document.getElementById("ollama-panel").style.display = (provider === "ollama") ? "flex" : "none";
 
-  list.innerHTML = keys.map((k, i) => {
-    const masked = (k.length > 12) ? (k.substring(0, 6) + "..." + k.substring(k.length - 4)) : k;
-    return '<div class="key-item ' + (i === 0 ? "active" : "") + '">' +
-      '<span>🔑 [' + (i + 1) + '] ' + masked + '</span>' +
-      '<button class="key-del" onclick="removeKey('' + provider + '', ' + i + ')">✕</button>' +
-    '</div>';
-  }).join("");
+  // Cargar llave actual en el input
+  document.getElementById("api-key-input").value = getKey(provider);
+  updateKeyStatus();
 }
 
 function getOllamaHost() {
@@ -440,29 +385,6 @@ function init() {
   onProviderChange();
 }
 
-function onProviderChange() {
-  const provider = document.getElementById("provider-select").value;
-  const modelSelect = document.getElementById("model-select");
-  const cfg = PROVIDERS_CONFIG[provider];
-
-  modelSelect.innerHTML = cfg.models.map(m => '<option value="' + m + '">' + m + '</option>').join("");
-
-  document.getElementById("keys-panel").style.display = (provider === "ollama") ? "none" : "flex";
-  document.getElementById("ollama-panel").style.display = (provider === "ollama") ? "flex" : "none";
-
-  renderKeysList();
-}
-
-function onModelChange() {}
-
-function showToast(text) {
-  const t = document.getElementById("toast");
-  if (!t) return;
-  t.textContent = text;
-  t.classList.add("show");
-  setTimeout(() => t.classList.remove("show"), 2500);
-}
-
 async function sendMsg() {
   const input = document.getElementById("user-msg");
   const text = input.value.trim();
@@ -473,6 +395,7 @@ async function sendMsg() {
   const history = document.getElementById("chat-history");
   const sendBtn = document.getElementById("send-btn");
 
+  // Mostrar mensaje de usuario
   history.innerHTML += '<div class="msg user">' +
     '<div class="author"><span>CREADOR IMPERIAL</span><span>TÚ</span></div>' +
     '<div class="msg-content">' + escapeHtml(text) + '</div>' +
@@ -480,44 +403,48 @@ async function sendMsg() {
   input.value = "";
   history.scrollTop = history.scrollHeight;
 
+  // Placeholder de respuesta
   const responseMsgId = "msg_" + Date.now();
   history.innerHTML += '<div class="msg agent" id="' + responseMsgId + '">' +
     '<div class="author">' +
-      '<span>' + model.toUpperCase() + ' · ' + provider.toUpperCase() + '</span>' +
-      '<span style="color:var(--gold)">PROCESANDO...</span>' +
+      '<span>' + model.toUpperCase() + '</span>' +
+      '<span style="color:var(--gold)">GENERANDO RESPUESTA...</span>' +
     '</div>' +
     '<div class="msg-content">✦ Conectando con la red neural...</div>' +
   '</div>';
   history.scrollTop = history.scrollHeight;
 
   sendBtn.disabled = true;
-  updateStatus("Procesando respuesta...", "warn");
+  updateStatus("Procesando...", "warn");
 
   try {
-    const responseText = await executeAIRequest(provider, model, text);
+    const key = getKey(provider);
+    if (!key && provider !== "ollama") {
+      throw new Error("No has guardado la API Key para " + provider.toUpperCase() + ". Pégala en el panel izquierdo y dale a Guardar.");
+    }
+
+    const responseText = await callAI(provider, model, key, text);
     const respEl = document.getElementById(responseMsgId);
     if (respEl) {
       respEl.querySelector(".author").innerHTML = '<span>' + model.toUpperCase() + '</span><span style="color:var(--emerald)">RESPUESTA OFICIAL</span>';
       respEl.querySelector(".msg-content").textContent = responseText;
     }
-    updateStatus("Listo para recibir órdenes", "ok");
+    updateStatus("Sistema Listo", "ok");
   } catch(err) {
     const respEl = document.getElementById(responseMsgId);
     if (respEl) {
       respEl.classList.add("system");
-      respEl.querySelector(".author").innerHTML = '<span style="color:#ff6b6b">ERROR DE CONEXIÓN</span>';
-      respEl.querySelector(".msg-content").textContent = "⚠️ Fallo: " + err.message + "
-
-Consejo: Guarda una llave válida arriba o verifica tu conexión.";
+      respEl.querySelector(".author").innerHTML = '<span style="color:#ef4444">ERROR AL RESPONDER</span>';
+      respEl.querySelector(".msg-content").textContent = "⚠️ " + err.message;
     }
-    updateStatus("Error en la última consulta", "err");
+    updateStatus("Error en la conexión", "err");
   }
 
   sendBtn.disabled = false;
   history.scrollTop = history.scrollHeight;
 }
 
-async function executeAIRequest(provider, model, prompt) {
+async function callAI(provider, model, key, prompt) {
   const cfg = PROVIDERS_CONFIG[provider];
 
   if (cfg.isOllama) {
@@ -526,63 +453,63 @@ async function executeAIRequest(provider, model, prompt) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ model: model, prompt: prompt, stream: false })
     });
-    if (!res.ok) throw new Error("Ollama error (" + res.status + "): " + res.statusText + ". ¿Está abierto Ollama en tu PC?");
+    if (!res.ok) throw new Error("Error de Ollama (" + res.status + "): ¿Está ejecutándose Ollama en tu PC?");
     const data = await res.json();
-    return data.response || "Sin respuesta recibida de Ollama.";
+    return data.response || "Sin respuesta de Ollama.";
   }
 
-  const keys = getKeys(provider);
-  if (!keys.length) {
-    throw new Error("No tienes ninguna API Key guardada para " + cfg.name + ". Pega tu llave en el panel izquierdo y haz clic en + Guardar.");
-  }
-
-  let lastError = null;
-
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i];
-    try {
-      if (cfg.isGemini) {
-        const endpoint = cfg.url(model, key);
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt }] }]
-          })
-        });
-        if (!res.ok) {
-          const errBody = await res.text();
-          throw new Error("Gemini (" + res.status + "): " + errBody);
-        }
-        const data = await res.json();
-        return data.candidates[0].content.parts[0].text;
-      } else {
-        const headers = Object.assign({ "Content-Type": "application/json" }, cfg.authHeader(key));
-        const res = await fetch(cfg.url, {
-          method: "POST",
-          headers: headers,
-          body: JSON.stringify({
-            model: model,
-            messages: [
-              { role: "system", content: "Eres un agente supremo del ecosistema ORIONIX. Respondes con sabiduría, precisión y tono imperial de lujo." },
-              { role: "user", content: prompt }
-            ]
-          })
-        });
-        if (!res.ok) {
-          const errBody = await res.text();
-          throw new Error(cfg.name + " (" + res.status + "): " + errBody);
-        }
-        const data = await res.json();
-        return data.choices[0].message.content;
-      }
-    } catch(e) {
-      console.warn("Fallo con la llave #" + (i + 1) + " de " + provider + ":", e);
-      lastError = e;
+  if (cfg.isGemini) {
+    const endpoint = cfg.url(model, key);
+    const res = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }]
+      })
+    });
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error("Google Gemini error (" + res.status + "): " + err);
     }
+    const data = await res.json();
+    if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+      return data.candidates[0].content.parts[0].text;
+    }
+    throw new Error("Respuesta vacía de Gemini.");
   }
 
-  throw new Error("Todas las llaves (" + keys.length + ") fallaron. Último error: " + lastError.message);
+  // OpenAI / Groq / OpenRouter
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer " + key
+  };
+  if (provider === "openrouter") {
+    headers["HTTP-Referer"] = "https://orionix.luxury";
+    headers["X-Title"] = "ORIONIX NEXUS";
+  }
+
+  const res = await fetch(cfg.url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify({
+      model: model,
+      messages: [
+        { role: "system", content: "Eres un agente supremo del ecosistema ORIONIX. Respondes con sabiduría, poder y elegancia de lujo cósmico." },
+        { role: "user", content: prompt }
+      ]
+    })
+  });
+
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(cfg.name + " error (" + res.status + "): " + err);
+  }
+
+  const data = await res.json();
+  if (data.choices && data.choices[0] && data.choices[0].message) {
+    return data.choices[0].message.content;
+  }
+  throw new Error("Respuesta no estructurada de la IA.");
 }
 
 function updateStatus(text, type) {

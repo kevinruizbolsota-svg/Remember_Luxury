@@ -25,7 +25,7 @@ jobs:
         shell: python
         run: |
           from pathlib import Path
-          import subprocess, html
+          import subprocess, html, re
           from datetime import datetime
 
           repo = Path('.')
@@ -48,14 +48,12 @@ jobs:
               if '.git' in path.parts or path == mapa:
                   continue
               rel = path.relative_to(repo).as_posix()
-              # No mostrar archivos internos de build/plantillas.
               if rel.startswith(('node_modules/', '_site/', 'forja_output/')):
                   continue
               date = last_commit_date(path)
               title = path.stem.replace('-', ' ').replace('_', ' ').strip().title()
               try:
                   text = path.read_text(encoding='utf-8', errors='ignore')
-                  import re
                   match = re.search(r'<title[^>]*>(.*?)</title>', text, re.I | re.S)
                   if match:
                       clean = re.sub(r'\s+', ' ', match.group(1)).strip()
@@ -63,7 +61,9 @@ jobs:
                           title = clean
               except Exception:
                   pass
-              url = '/' + rel
+              # mapa.html vive en /ciudadela/, por eso esta ruta relativa funciona
+              # tanto para /ciudadela/*.html como para páginas de la raíz.
+              url = '../' + rel
               pages.append((date, title, rel, url))
 
           pages.sort(key=lambda item: item[0], reverse=True)
@@ -87,7 +87,6 @@ jobs:
           <!-- AUTO-RECENTES:END -->'''
 
           content = mapa.read_text(encoding='utf-8')
-          import re
           content = re.sub(r'<!-- AUTO-RECENTES:START -->.*?<!-- AUTO-RECENTES:END -->', block, content, flags=re.S)
           if '<!-- AUTO-RECENTES:START -->' not in content:
               content = content.replace('<footer class="footer">', block + '\n<footer class="footer">', 1)
@@ -105,6 +104,7 @@ jobs:
               content = content.replace('</head>', styles + '\n</head>', 1)
 
           mapa.write_text(content, encoding='utf-8')
+
       - name: Publicar actualización del mapa
         run: |
           git config user.name "github-actions[bot]"

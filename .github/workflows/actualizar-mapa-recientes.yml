@@ -1,0 +1,118 @@
+name: Actualizar mapa - páginas recientes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+      - '!ciudadela/mapa.html'
+      - '!.github/workflows/actualizar-mapa-recientes.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  actualizar-recientes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Actualizar bloque de páginas recientes
+        shell: python
+        run: |
+          from pathlib import Path
+          import subprocess, html
+          from datetime import datetime
+
+          repo = Path('.')
+          mapa = repo / 'ciudadela' / 'mapa.html'
+          if not mapa.exists():
+              raise SystemExit('No existe ciudadela/mapa.html')
+
+          def last_commit_date(path):
+              try:
+                  value = subprocess.check_output(
+                      ['git', 'log', '-1', '--format=%aI', '--', str(path)],
+                      text=True
+                  ).strip()
+                  return datetime.fromisoformat(value.replace('Z', '+00:00'))
+              except Exception:
+                  return datetime.min.astimezone()
+
+          pages = []
+          for path in repo.rglob('*.html'):
+              if '.git' in path.parts or path == mapa:
+                  continue
+              rel = path.relative_to(repo).as_posix()
+              # No mostrar archivos internos de build/plantillas.
+              if rel.startswith(('node_modules/', '_site/', 'forja_output/')):
+                  continue
+              date = last_commit_date(path)
+              title = path.stem.replace('-', ' ').replace('_', ' ').strip().title()
+              try:
+                  text = path.read_text(encoding='utf-8', errors='ignore')
+                  import re
+                  match = re.search(r'<title[^>]*>(.*?)</title>', text, re.I | re.S)
+                  if match:
+                      clean = re.sub(r'\s+', ' ', match.group(1)).strip()
+                      if clean:
+                          title = clean
+              except Exception:
+                  pass
+              url = '/' + rel
+              pages.append((date, title, rel, url))
+
+          pages.sort(key=lambda item: item[0], reverse=True)
+          pages = pages[:30]
+
+          cards = []
+          for date, title, rel, url in pages:
+              cards.append(
+                  f'<a class="recent-card" href="{html.escape(url)}">'
+                  f'<span class="recent-icon">✦</span>'
+                  f'<span><strong>{html.escape(title)}</strong>'
+                  f'<small>{html.escape(rel)}</small></span>'
+                  f'<b>↗</b></a>'
+              )
+
+          block = '''<!-- AUTO-RECENTES:START -->
+          <section class="recent-pages" aria-label="Páginas recientes">
+            <div class="recent-heading"><span>✦</span><div><h2>RECIENTES</h2><p>Nuevas puertas que van apareciendo en el Universo KRC</p></div><span>✦</span></div>
+            <div class="recent-grid">''' + ''.join(cards) + '''</div>
+          </section>
+          <!-- AUTO-RECENTES:END -->'''
+
+          content = mapa.read_text(encoding='utf-8')
+          import re
+          content = re.sub(r'<!-- AUTO-RECENTES:START -->.*?<!-- AUTO-RECENTES:END -->', block, content, flags=re.S)
+          if '<!-- AUTO-RECENTES:START -->' not in content:
+              content = content.replace('<footer class="footer">', block + '\n<footer class="footer">', 1)
+
+          styles = '''
+          <style id="recent-pages-style">
+          .recent-pages{max-width:1180px;margin:6px auto 55px;padding:24px 18px;border-top:1px solid rgba(212,175,55,.18)}
+          .recent-heading{display:flex;align-items:center;justify-content:center;gap:18px;text-align:center;margin-bottom:16px;color:#d4af37}
+          .recent-heading>span{font-size:16px;opacity:.65}.recent-heading h2{font:700 13px Arial,sans-serif;letter-spacing:5px;color:#f1d77a;margin:0}.recent-heading p{font:10px Arial,sans-serif;color:#777;letter-spacing:1px;margin-top:5px}
+          .recent-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.recent-card{display:flex;align-items:center;gap:10px;min-height:55px;padding:10px 12px;background:rgba(8,11,18,.82);border:1px solid rgba(212,175,55,.2);border-radius:10px;transition:.2s}.recent-card:hover{border-color:#d4af37;background:rgba(212,175,55,.07);transform:translateY(-2px)}.recent-icon{color:#d4af37;font-size:14px}.recent-card span:nth-child(2){min-width:0;flex:1}.recent-card strong{display:block;font:11px Arial,sans-serif;color:#eee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.recent-card small{display:block;font:8px Arial,sans-serif;color:#777;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.recent-card b{color:#d4af37;font:12px Arial,sans-serif}
+          @media(max-width:800px){.recent-grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.recent-grid{grid-template-columns:1fr}.recent-heading p{font-size:9px}}
+          </style>
+          '''
+          if 'id="recent-pages-style"' not in content:
+              content = content.replace('</head>', styles + '\n</head>', 1)
+
+          mapa.write_text(content, encoding='utf-8')
+      - name: Publicar actualización del mapa
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ciudadela/mapa.html
+          if git diff --cached --quiet; then
+            echo "Sin cambios en páginas recientes."
+          else
+            git commit -m "chore: actualizar páginas recientes del mapa [skip ci]"
+            git push
+          fi

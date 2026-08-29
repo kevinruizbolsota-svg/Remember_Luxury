@@ -33,37 +33,30 @@
   .nav-links a:hover { color: var(--gold); }
   
   .hero {
-    position: relative; z-index: 10; padding: 60px 20px; text-align: center;
+    position: relative; z-index: 10; padding: 50px 20px; text-align: center;
     border-bottom: 1px solid var(--border); background: linear-gradient(180deg, rgba(11,11,13,0.8) 0%, rgba(20,20,25,0.9) 100%);
   }
   .hero h2 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.2rem; letter-spacing: 6px; margin-bottom: 10px; }
-  .hero p { font-size: 1.2rem; color: var(--gold-light); max-width: 600px; margin: 0 auto; opacity: 0.8; }
   
-  .catalog-section { position: relative; z-index: 10; padding: 50px 40px; flex: 1; max-width: 1300px; margin: 0 auto; width: 100%; }
-  .section-title { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-  
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+  .catalog-section { position: relative; z-index: 10; padding: 40px 20px; flex: 1; max-width: 900px; margin: 0 auto; width: 100%; }
   
   .product-card {
-    background: var(--glass); border: 1px solid var(--border); border-radius: 8px;
-    padding: 20px; display: flex; flex-direction: column; justify-content: space-between;
-    transition: 0.3s; position: relative; overflow: hidden;
+    background: var(--glass); border: 2px solid var(--gold); border-radius: 12px;
+    padding: 30px; display: flex; flex-direction: column; align-items: center; text-align: center;
+    box-shadow: 0 10px 40px rgba(232, 200, 106, 0.15);
   }
-  .product-card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(232, 200, 106, 0.1); }
-  .badge-hot { position: absolute; top: 15px; right: 15px; background: var(--gold); color: var(--bg); font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: bold; padding: 4px 8px; border-radius: 4px; letter-spacing: 1px; }
   
-  .product-img { width: 100%; height: 220px; object-fit: cover; border-radius: 6px; margin-bottom: 15px; border: 1px solid rgba(232,200,106,0.1); }
-  .product-title { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold-light); margin-bottom: 8px; letter-spacing: 1px; }
-  .product-desc { font-size: 0.95rem; color: rgba(233,221,196,0.7); margin-bottom: 15px; line-height: 1.4; flex-1: 1; }
-  .product-price { font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--gold); margin-bottom: 15px; font-weight: bold; }
+  .product-title { font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--gold-light); margin-bottom: 15px; letter-spacing: 2px; }
+  .product-desc { font-size: 1.1rem; color: rgba(233,221,196,0.85); margin-bottom: 25px; line-height: 1.6; }
   
   .btn-buy {
-    display: block; width: 100%; text-align: center; padding: 12px;
-    background: transparent; border: 1px solid var(--gold); color: var(--gold);
-    font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 2px;
-    text-decoration: none; border-radius: 4px; transition: 0.3s; font-weight: bold;
+    display: inline-block; width: 100%; max-width: 400px; padding: 16px 20px;
+    background: var(--gold); color: var(--bg);
+    font-family: 'Cinzel', serif; font-size: 1rem; letter-spacing: 2px;
+    text-decoration: none; border-radius: 6px; font-weight: bold; transition: 0.3s;
+    box-shadow: 0 0 20px rgba(232,200,106,0.4); cursor: pointer;
   }
-  .btn-buy:hover { background: var(--gold); color: var(--bg); box-shadow: 0 0 15px rgba(232,200,106,0.4); }
+  .btn-buy:hover { background: var(--gold-light); transform: scale(1.02); }
 </style>
 </head>
 <body>
@@ -73,31 +66,25 @@
 <header>
   <h1>REMEMBER LUXURY</h1>
   <div class="nav-links">
-    <a href="#">INICIO</a>
-    <a href="pago-premium.html">CHECKOUT</a>
-    <a href="carrito.html">CARRITO</a>
+    <a href="articulos.html">TIENDA</a>
+    <a href="carrito.html">CARRITO 🛒</a>
+    <a href="pago-premium.html">CHECKOUT 💳</a>
   </div>
 </header>
 
 <div class="hero">
-  <h2>CURATED SELECTION</h2>
-  <p>Descubre productos y programas de alta calidad seleccionados especialmente para ti.</p>
+  <h2>RECOMENDACIÓN DESTACADA</h2>
 </div>
 
 <div class="catalog-section">
-  <div class="section-title">🔥 PRODUCTO AFILIADO DESTACADO (LISTO PARA COMPRA)</div>
-  
-  <div class="grid">
-    <!-- PRODUCTO AFILIADO HOTMART REAL -->
-    <div class="product-card">
-      <div class="badge-hot">VERIFICADO</div>
-      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Producto Recomendado" class="product-img">
-      <div class="product-title">PROGRAMA PREMIUM HOTMART</div>
-      <div class="product-desc">Accede al programa exclusivo de formación y aceleración de resultados. Oferta por tiempo limitado.</div>
-      <div class="product-price">OFERTA ESPECIAL</div>
-      <!-- TU LINK REAL DE AFILIADO -->
-      <a href="https://go.hotmart.com/T88810632C" target="_blank" rel="nofollow sponsored" class="btn-buy">COMPRAR EN LA TIENDA OFICIAL ➔</a>
-    </div>
+  <div class="product-card">
+    <div class="product-title">CURSO & PROGRAMA OFICIAL</div>
+    <div class="product-desc">Accede directamente a la presentación oficial y catálogo exclusivo. Haz clic en el botón de abajo para ser redirigido de forma segura a la plataforma oficial.</div>
+    
+    <!-- ENLACE EXTERNO CORREGIDO DE HOTMART SIN ERROR 404 -->
+    <a href="https://go.hotmart.com/T88810632C" target="_blank" rel="noopener noreferrer" class="btn-buy">
+      IR AL CURSO OFICIAL ➔
+    </a>
   </div>
 </div>
 

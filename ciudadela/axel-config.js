@@ -1,0 +1,4 @@
+window.AXEL_CONFIG={
+  SUPABASE_URL:'https://bedixienygfeqtadzeng.supabase.co',
+  SUPABASE_PUBLISHABLE_KEY:'PON_AQUI_LA_CLAVE_PUBLICABLE_DE_SUPABASE'
+};

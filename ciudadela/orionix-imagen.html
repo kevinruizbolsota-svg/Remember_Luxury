@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ORIONIX — Imagen</title>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#020205}
+iframe{display:block;width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<iframe id="scene" src="orionix-portal.html" title="Escenario ORIONIX"></iframe>
+<script>
+const frame=document.getElementById('scene');
+frame.addEventListener('load',()=>{
+  try{
+    const doc=frame.contentDocument;
+    const style=doc.createElement('style');
+    style.textContent=`
+      html,body{width:100%!important;height:100%!important;min-height:100%!important;margin:0!important;overflow:hidden!important;background-color:#020205!important}
+      body{background-size:contain!important;background-position:center center!important;background-repeat:no-repeat!important}
+      body>*{display:none!important}
+    `;
+    doc.head.appendChild(style);
+  }catch(e){console.warn('ORIONIX scene isolation:',e)}
+});
+</script>
+</body>
+</html>

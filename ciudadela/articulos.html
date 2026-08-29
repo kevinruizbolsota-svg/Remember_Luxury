@@ -6,70 +6,17 @@
 <title>REMEMBER LUXURY · CURSOS</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#050505;--panel:rgba(10,10,9,.78);--gold:#d8b45b;--gold2:#f4d98a;--text:#eee6d5;--muted:#b5ad9d;--line:rgba(216,180,91,.28)}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+:root{--bg:#050505;--panel:rgba(10,10,9,.72);--gold:#d8b45b;--gold2:#f4d98a;--text:#eee6d5;--muted:#b5ad9d;--line:rgba(216,180,91,.28)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
 body{min-height:100vh;background:#050505;color:var(--text);font-family:'Cormorant Garamond',serif;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;z-index:0;background:linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.78)),url('https://imagensblogs.nyc3.digitaloceanspaces.com/meuverdejardim/2023/08/08011947/floresta-noturna-insetos-bioluminescentes.webp') center/cover no-repeat;transform:scale(1.03);filter:saturate(.8) contrast(1.08);}
-body:after{content:"";position:fixed;inset:0;z-index:0;background:radial-gradient(circle at 50% 0%,rgba(241,212,134,.10),transparent 38%),linear-gradient(90deg,rgba(0,0,0,.18),transparent 45%,rgba(0,0,0,.22));pointer-events:none}
-canvas{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.6}
-header{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px clamp(20px,5vw,64px);background:rgba(4,4,4,.84);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+body:before{content:"";position:fixed;inset:0;z-index:0;background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.54)),url('https://imagensblogs.nyc3.digitaloceanspaces.com/meuverdejardim/2023/08/08011947/floresta-noturna-insetos-bioluminescentes.webp') center/cover no-repeat;transform:scale(1.03);filter:saturate(1.08) contrast(1.12) brightness(1.14)}
+body:after{content:"";position:fixed;inset:0;z-index:0;background:radial-gradient(circle at 50% 8%,rgba(241,212,134,.16),transparent 34%),linear-gradient(90deg,rgba(0,0,0,.08),transparent 45%,rgba(0,0,0,.12));pointer-events:none}
+canvas{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.72}
+header{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px clamp(20px,5vw,64px);background:rgba(4,4,4,.78);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
 .logo{font-family:Cinzel,serif;font-weight:700;letter-spacing:4px;color:var(--gold2);font-size:clamp(1rem,2vw,1.45rem);white-space:nowrap;text-shadow:0 0 18px rgba(241,212,134,.18)}
 .nav{display:flex;gap:22px;flex-wrap:wrap;justify-content:flex-end}.nav a{font-family:Cinzel,serif;color:var(--text);text-decoration:none;font-size:.72rem;letter-spacing:1.5px;transition:.25s}.nav a:hover{color:var(--gold2)}
-main{position:relative;z-index:2;width:min(1180px,92%);margin:auto;padding:72px 0 90px}
-.hero{text-align:center;max-width:900px;margin:0 auto 54px}.eyebrow{font-family:Cinzel,serif;font-size:.72rem;letter-spacing:4px;color:var(--gold);margin-bottom:14px}.hero h1{font-family:Cinzel,serif;font-size:clamp(2rem,5vw,4rem);letter-spacing:5px;color:var(--gold2);line-height:1.08;margin-bottom:18px;text-shadow:0 5px 28px rgba(0,0,0,.65)}.hero p{font-size:1.2rem;line-height:1.65;color:#d0c7b6;max-width:760px;margin:auto}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
-.card{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(12,12,11,.92),rgba(8,8,8,.78));border:1px solid var(--line);border-radius:20px;box-shadow:0 24px 70px rgba(0,0,0,.48);transition:transform .3s,border-color .3s,box-shadow .3s}.card:hover{transform:translateY(-6px);border-color:rgba(241,212,134,.62);box-shadow:0 28px 80px rgba(0,0,0,.62)}
-.cover{height:245px;position:relative;overflow:hidden;background:#111}.cover img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.78) contrast(1.06)}.cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.72));pointer-events:none}.cover-label{position:absolute;left:20px;bottom:18px;z-index:2;font-family:Cinzel,serif;font-size:.65rem;letter-spacing:2px;color:#fff1c2;text-shadow:0 2px 8px #000}
-.content{padding:28px}.badge{display:inline-flex;padding:7px 11px;border:1px solid var(--line);border-radius:999px;color:var(--gold2);font-family:Cinzel,serif;font-size:.62rem;letter-spacing:1.5px;margin-bottom:20px}.card h2{font-family:Cinzel,serif;color:var(--gold2);font-size:1.35rem;letter-spacing:1.5px;line-height:1.35;margin-bottom:13px}.card p{color:#c8c0b1;font-size:1.05rem;line-height:1.6;margin-bottom:25px}.buy{display:flex;align-items:center;justify-content:center;width:100%;padding:15px 18px;border-radius:9px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#090909;text-decoration:none;font-family:Cinzel,serif;font-weight:700;font-size:.78rem;letter-spacing:1.6px;transition:.25s;box-shadow:0 8px 24px rgba(216,180,91,.16)}.buy:hover{filter:brightness(1.08);transform:translateY(-1px)}.note{text-align:center;margin-top:30px;color:#a49b8a;font-size:.9rem}
-footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:25px;text-align:center;color:#777064;font-size:.85rem;background:rgba(3,3,3,.7)}
+main{position:relative;z-index:2;width:min(1180px,92%);margin:auto;padding:72px 0 90px}.hero{text-align:center;max-width:900px;margin:0 auto 54px}.eyebrow{font-family:Cinzel,serif;font-size:.72rem;letter-spacing:4px;color:var(--gold);margin-bottom:14px}.hero h1{font-family:Cinzel,serif;font-size:clamp(2rem,5vw,4rem);letter-spacing:5px;color:var(--gold2);line-height:1.08;margin-bottom:18px;text-shadow:0 5px 28px rgba(0,0,0,.65)}.hero p{font-size:1.2rem;line-height:1.65;color:#d0c7b6;max-width:760px;margin:auto}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}.card{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(12,12,11,.84),rgba(8,8,8,.68));border:1px solid var(--line);border-radius:20px;box-shadow:0 24px 70px rgba(0,0,0,.42);transition:transform .3s,border-color .3s,box-shadow .3s}.card:hover{transform:translateY(-6px);border-color:rgba(241,212,134,.62);box-shadow:0 28px 80px rgba(0,0,0,.56)}.cover{height:245px;position:relative;overflow:hidden;background:#111}.cover img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.86) contrast(1.05)}.cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.62));pointer-events:none}.cover-label{position:absolute;left:20px;bottom:18px;z-index:2;font-family:Cinzel,serif;font-size:.65rem;letter-spacing:2px;color:#fff1c2;text-shadow:0 2px 8px #000}.content{padding:28px}.badge{display:inline-flex;padding:7px 11px;border:1px solid var(--line);border-radius:999px;color:var(--gold2);font-family:Cinzel,serif;font-size:.62rem;letter-spacing:1.5px;margin-bottom:20px}.card h2{font-family:Cinzel,serif;color:var(--gold2);font-size:1.35rem;letter-spacing:1.5px;line-height:1.35;margin-bottom:13px}.card p{color:#c8c0b1;font-size:1.05rem;line-height:1.6;margin-bottom:25px}.buy{display:flex;align-items:center;justify-content:center;width:100%;padding:15px 18px;border-radius:9px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#090909;text-decoration:none;font-family:Cinzel,serif;font-weight:700;font-size:.78rem;letter-spacing:1.6px;transition:.25s;box-shadow:0 8px 24px rgba(216,180,91,.16)}.buy:hover{filter:brightness(1.08);transform:translateY(-1px)}.note{text-align:center;margin-top:30px;color:#a49b8a;font-size:.9rem}footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:25px;text-align:center;color:#777064;font-size:.85rem;background:rgba(3,3,3,.64)}
 @media(max-width:760px){header{align-items:flex-start;flex-direction:column}.nav{gap:12px}main{padding-top:48px}.hero h1{letter-spacing:3px}.hero p{font-size:1.05rem}.grid{grid-template-columns:1fr}.cover{height:220px}}
 </style>
 </head>
-<body>
-<canvas id="particles"></canvas>
-<header>
-  <div class="logo">REMEMBER LUXURY</div>
-  <nav class="nav" aria-label="Navegación principal">
-    <a href="articulos.html">TIENDA</a>
-    <a href="carrito.html">CARRITO 🛒</a>
-    <a href="pago-premium.html">CHECKOUT</a>
-  </nav>
-</header>
-<main>
-  <section class="hero">
-    <div class="eyebrow">SELECCIÓN DIGITAL · REMEMBER LUXURY</div>
-    <h1>CURSOS DESTACADOS</h1>
-    <p>Una selección cuidada de productos digitales. Explora cada propuesta y continúa de forma segura en la plataforma oficial.</p>
-  </section>
-  <section class="grid" aria-label="Cursos disponibles">
-    <article class="card">
-      <div class="cover"><img src="https://amityonline.com/webstories/top-free-government-online-courses/assets/5.jpeg" alt="Aprendizaje digital y curso online"><span class="cover-label">APRENDIZAJE DIGITAL</span></div>
-      <div class="content">
-        <span class="badge">DISPONIBLE · HOTMART</span>
-        <h2>Curso &amp; Programa Oficial</h2>
-        <p>Explora la propuesta completa, revisa sus detalles y continúa con la compra directamente en la plataforma oficial de Hotmart.</p>
-        <a class="buy" href="https://go.hotmart.com/K88797728A" target="_blank" rel="noopener noreferrer sponsored">VER PRODUCTO OFICIAL&nbsp; →</a>
-      </div>
-    </article>
-    <article class="card">
-      <div class="cover"><img src="https://boonbricks.com/images/courses/Advanced-Digital-Marketing.webp" alt="Espacio de formación y marketing digital"><span class="cover-label">FORMACIÓN ONLINE</span></div>
-      <div class="content">
-        <span class="badge">DISPONIBLE · HOTMART</span>
-        <h2>Curso &amp; Programa Oficial</h2>
-        <p>Descubre esta segunda propuesta, consulta toda la información y continúa de forma segura en Hotmart.</p>
-        <a class="buy" href="https://go.hotmart.com/R88805562M" target="_blank" rel="noopener noreferrer sponsored">VER PRODUCTO OFICIAL&nbsp; →</a>
-      </div>
-    </article>
-  </section>
-  <p class="note">Los pagos y la entrega del producto se realizan en la plataforma oficial del proveedor.</p>
-</main>
-<footer>© 2026 REMEMBER LUXURY · CURATED DIGITAL COLLECTION</footer>
-<script>
-const c=document.getElementById('particles'),x=c.getContext('2d');
-function resize(){c.width=innerWidth;c.height=innerHeight}resize();addEventListener('resize',resize);
-const p=Array.from({length:55},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:.3+Math.random()*1.1,v:.08+Math.random()*.22}));
-(function draw(){x.clearRect(0,0,c.width,c.height);x.fillStyle='rgba(216,180,91,.32)';for(const a of p){x.beginPath();x.arc(a.x,a.y,a.r,0,Math.PI*2);x.fill();a.y-=a.v;if(a.y<0){a.y=c.height;a.x=Math.random()*c.width}}requestAnimationFrame(draw)})();
-</script>
-</body>
-</html>
+<body><canvas id="particles"></canvas><header><div class="logo">REMEMBER LUXURY</div><nav class="nav" aria-label="Navegación principal"><a href="articulos.html">TIENDA</a><a href="carrito.html">CARRITO 🛒</a><a href="pago-premium.html">CHECKOUT</a></nav></header><main><section class="hero"><div class="eyebrow">SELECCIÓN DIGITAL · REMEMBER LUXURY</div><h1>CURSOS DESTACADOS</h1><p>Una selección cuidada de productos digitales. Explora cada propuesta y continúa de forma segura en la plataforma oficial.</p></section><section class="grid" aria-label="Cursos disponibles"><article class="card"><div class="cover"><img src="https://amityonline.com/webstories/top-free-government-online-courses/assets/5.jpeg" alt="Aprendizaje digital y curso online"><span class="cover-label">APRENDIZAJE DIGITAL</span></div><div class="content"><span class="badge">DISPONIBLE · HOTMART</span><h2>Curso &amp; Programa Oficial</h2><p>Explora la propuesta completa, revisa sus detalles y continúa con la compra directamente en la plataforma oficial de Hotmart.</p><a class="buy" href="https://go.hotmart.com/K88797728A" target="_blank" rel="noopener noreferrer sponsored">VER PRODUCTO OFICIAL&nbsp; →</a></div></article><article class="card"><div class="cover"><img src="https://boonbricks.com/images/courses/Advanced-Digital-Marketing.webp" alt="Espacio de formación y marketing digital"><span class="cover-label">FORMACIÓN ONLINE</span></div><div class="content"><span class="badge">DISPONIBLE · HOTMART</span><h2>Curso &amp; Programa Oficial</h2><p>Descubre esta segunda propuesta, consulta toda la información y continúa de forma segura en Hotmart.</p><a class="buy" href="https://go.hotmart.com/R88805562M" target="_blank" rel="noopener noreferrer sponsored">VER PRODUCTO OFICIAL&nbsp; →</a></div></article></section><p class="note">Los pagos y la entrega del producto se realizan en la plataforma oficial del proveedor.</p></main><footer>© 2026 REMEMBER LUXURY · CURATED DIGITAL COLLECTION</footer><script>const c=document.getElementById('particles'),x=c.getContext('2d');function resize(){c.width=innerWidth;c.height=innerHeight}resize();addEventListener('resize',resize);const p=Array.from({length:55},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:.3+Math.random()*1.1,v:.08+Math.random()*.22}));(function draw(){x.clearRect(0,0,c.width,c.height);x.fillStyle='rgba(216,180,91,.42)';for(const a of p){x.beginPath();x.arc(a.x,a.y,a.r,0,Math.PI*2);x.fill();a.y-=a.v;if(a.y<0){a.y=c.height;a.x=Math.random()*c.width}}requestAnimationFrame(draw)})();</script></body></html>

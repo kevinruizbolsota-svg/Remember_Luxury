@@ -26,5 +26,46 @@ window.AXEL_CONFIG={
       side.appendChild(n);
     }
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',addButton); else addButton();
+  function installMindBridge(){
+    if(window.__AXEL_MIND_BRIDGE__) return;
+    window.__AXEL_MIND_BRIDGE__=true;
+    var nativeFetch=window.fetch.bind(window);
+    window.fetch=function(resource,init){
+      try{
+        var url=typeof resource==='string'?resource:(resource&&resource.url)||'';
+        if(url.indexOf('/functions/v1/axel-ai')!==-1 && init && typeof init.body==='string' && window.AXEL_MIND){
+          var body=JSON.parse(init.body);
+          var ctx=window.AXEL_MIND.buildContext({message:body.message,memories:body.memories||[]});
+          body.mind={
+            identity:ctx.identity,
+            principles:ctx.principles,
+            department:ctx.department,
+            departmentRule:ctx.departmentRule,
+            relevantMemory:ctx.relevantMemory
+          };
+          body.systemInstruction='Responde como AXEL. Usa el contexto mental recibido como política de comportamiento. Razona antes de responder, distingue hechos de inferencias, mantén continuidad y habla de forma natural. No inventes acciones ni capacidades.';
+          init=Object.assign({},init,{body:JSON.stringify(body)});
+        }
+      }catch(e){}
+      return nativeFetch(resource,init);
+    };
+  }
+  function addButtonAndBridge(){
+    loadMind();
+    // Give the synchronously loaded mind a chance to initialize before requests are made.
+    setTimeout(installMindBridge,0);
+    if(document.getElementById('axelCredentialsBtn')) return;
+    var b=document.createElement('a');
+    b.id='axelCredentialsBtn'; b.href='axel-credentials.html'; b.textContent='🔐 CREDENCIALES IA';
+    b.setAttribute('aria-label','Abrir gestor de credenciales IA');
+    b.style.cssText='position:fixed;right:18px;bottom:18px;z-index:99999;border:1px solid #e8c86a;background:#17130a;color:#e8c86a;padding:13px 16px;border-radius:12px;text-decoration:none;font:800 12px system-ui,-apple-system,"Segoe UI",sans-serif;box-shadow:0 12px 36px #000b;letter-spacing:.4px';
+    document.body.appendChild(b);
+    var side=document.querySelector('.side');
+    if(side && !document.getElementById('axelCredentialsNav')){
+      var n=document.createElement('a'); n.id='axelCredentialsNav'; n.href='axel-credentials.html'; n.textContent='🔐 Credenciales IA';
+      n.style.cssText='display:block;width:100%;text-align:left;box-sizing:border-box;border:1px solid #5b4d29;background:#17130a;color:#e8c86a;padding:11px;border-radius:10px;margin:8px 0 3px;text-decoration:none;font:700 13px system-ui,-apple-system,"Segoe UI",sans-serif';
+      side.appendChild(n);
+    }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',addButtonAndBridge); else addButtonAndBridge();
 })();

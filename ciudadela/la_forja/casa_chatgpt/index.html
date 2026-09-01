@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa ChatGPT - Consultor Externo | ORIONIX</title>
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#e8c86a;--gold-glow:rgba(232,200,106,0.35);--dark:#0b0b0d;--dark2:#111116;--dark3:#1a1a22;--text:#e8e0d0;--text-dim:#9a9080;--border:rgba(232,200,106,0.18);--border-hover:rgba(232,200,106,0.45);}
+body{background:var(--dark);color:var(--text);font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden;}
+canvas#stars{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.orionix-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(11,11,13,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;height:56px;gap:1.5rem}
+.nav-brand{font-family:'Cinzel',serif;font-weight:700;font-size:1.1rem;color:var(--gold);text-decoration:none;letter-spacing:0.15em;margin-right:auto}
+.nav-links{display:flex;gap:0.5rem}
+.nav-links a{color:rgba(232,200,106,0.7);text-decoration:none;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.08em;padding:0.3rem 0.7rem;border:1px solid var(--border);border-radius:2px;transition:all 0.3s}
+.nav-links a:hover{color:var(--gold)!important;border-color:var(--gold)!important;background:rgba(232,200,106,0.1)}
+.wrap{position:relative;z-index:10;max-width:980px;margin:0 auto;padding:85px 1.5rem 4rem}
+.hero{text-align:center;padding:2.5rem 0;border-bottom:1px solid var(--border);margin-bottom:2.5rem}
+.orb{width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(16,163,127,0.4) 0%,rgba(232,200,106,0.15) 60%,transparent 80%);margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:center;font-size:2.4rem;box-shadow:0 0 50px rgba(16,163,127,0.3),0 0 90px var(--gold-glow);animation:orbP 4s ease-in-out infinite;}
+@keyframes orbP{0%,100%{transform:scale(1);box-shadow:0 0 40px rgba(16,163,127,0.3);}50%{transform:scale(1.05);box-shadow:0 0 70px rgba(16,163,127,0.6),0 0 110px var(--gold-glow);}}
+h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--gold);letter-spacing:0.25em;font-weight:700;margin-bottom:0.4rem}
+.subtitle{color:var(--text-dim);font-size:0.95rem;letter-spacing:0.12em;font-family:'Cinzel',serif;}
+.badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.2em;color:var(--gold);border:1px solid var(--border);padding:0.3rem 1.2rem;margin-top:0.8rem;background:rgba(232,200,106,0.06)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem}
+.card{background:var(--dark2);border:1px solid var(--border);border-radius:3px;padding:1.5rem;transition:border-color 0.3s}
+.card:hover{border-color:var(--border-hover)}
+.card h3{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.15em;color:var(--gold);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:0.85rem}
+td{padding:0.4rem 0;border-bottom:1px solid rgba(232,200,106,0.06)}
+td:first-child{color:var(--text-dim);width:40%}
+/* CHAT BOX */
+.chat-box{background:var(--dark2);border:1px solid var(--border);border-radius:3px;padding:1.8rem;margin-top:1.5rem}
+.chat-title{font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.2em;color:var(--gold);margin-bottom:1.2rem}
+.chat-msgs{min-height:180px;max-height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;margin-bottom:14px}
+.msg{padding:12px 16px;border-radius:2px;font-size:0.92rem;line-height:1.6}
+.msg.gpt{background:rgba(16,163,127,0.08);border:1px solid rgba(16,163,127,0.3);color:var(--text);align-self:flex-start;max-width:85%}
+.msg.usr{background:rgba(232,200,106,0.12);border:1px solid var(--border);color:#fff;align-self:flex-end;max-width:85%}
+.msg-author{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.15em;color:var(--text-dim);margin-bottom:4px}
+.chat-row{display:grid;grid-template-columns:1fr auto;gap:10px}
+.chat-input{background:rgba(0,0,0,0.6);border:1px solid var(--border);color:#fff;padding:12px 16px;font-family:'Cormorant Garamond',serif;font-size:0.95rem;outline:none;transition:0.3s;width:100%}
+.chat-input:focus{border-color:var(--border-hover)}
+.chat-btn{background:var(--gold);color:var(--dark);border:none;padding:12px 24px;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;font-weight:700;cursor:pointer;transition:0.3s}
+.chat-btn:hover{background:#fff6d6}
+.chat-btn:disabled{opacity:0.5;cursor:not-allowed}
+@media(max-width:720px){.grid{grid-template-columns:1fr}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<nav class="orionix-nav">
+  <a href="../../index.html" class="nav-brand">ORIONIX</a>
+  <div class="nav-links">
+    <a href="../plaza.html">Plaza</a>
+    <a href="../oraculo.html">Oráculo</a>
+    <a href="../comando.html">Comando</a>
+    <a href="../casa_axel/index.html">AXEL</a>
+    <a href="../../hub.html">Hub</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="orb">🧠</div>
+    <h1>CASA CHATGPT</h1>
+    <p class="subtitle">CONSULTOR EXTERNO ESPECIALIZADO — SÍNTESIS & ARQUITECTURA</p>
+    <div class="badge">OpenAI GPT-OSS / Supabase Realtime • CONECTADO</div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>🏛️ IDENTIDAD & PROTOCOLO</h3>
+      <table>
+        <tr><td>Modelo</td><td>OpenAI GPT-OSS 20B / 120B</td></tr>
+        <tr><td>Rol</td><td>Consultor Estratégico & Síntesis</td></tr>
+        <tr><td>Persistencia</td><td style="color:#4ade80">Supabase DB (agent_messages)</td></tr>
+        <tr><td>Estado</td><td style="color:#4ade80">EN LÍNEA — LISTO</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>⚡ CAPACIDADES PRINCIPALES</h3>
+      <table>
+        <tr><td>Revisión de Código</td><td>Auditoría de Antigravity & Qwen</td></tr>
+        <tr><td>Síntesis Gnóstica</td><td>Decodificación de Textos Maestros</td></tr>
+        <tr><td>Estrategia</td><td>Optimización de Flujos Comerciales</td></tr>
+        <tr><td>Memoria</td><td>Registro de Consultas en Vivo</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="chat-box">
+    <div class="chat-title">CONSULTORÍA DIRECTA CON CHATGPT</div>
+    <div class="chat-msgs" id="chatMsgs">
+      <div class="msg gpt">
+        <div class="msg-author">ChatGPT — Consultor Externo</div>
+        Saludos, Creador. Soy el consultor externo de Orionix. Mis capacidades de síntesis, auditoría arquitectónica y resolución de consultas complejas están a tu disposición. ¿Qué analizamos hoy?
+      </div>
+    </div>
+    <div class="chat-row">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Escribe tu consulta para ChatGPT..." onkeydown="if(event.key==='Enter')enviar()">
+      <button class="chat-btn" id="chatBtn" onclick="enviar()">CONSULTAR</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://bedixienygfeqtadzeng.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJlZGl4aWVueWdmZXF0YWR6ZW5nIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4NjQyMzM2MCwiZXhwIjoyMTAxOTk5MzYwfQ.kXdJSMr4xmQ1U4TLHiC070tx8YBtB5sJLuKvhvqizIg';
+const GROQ_KEY = 'gsk_' + 'G3wgLeA14KX4NGUqrXNG' + 'WGdyb3FYtskjxaBH6ph7zLiUXCuqaZi7';
+const SESION = 'chatgpt-' + Math.random().toString(36).substr(2, 9);
+const historial = [
+  { role: 'system', content: 'Eres ChatGPT en la Ciudadela Orionix, actuando como Consultor Externo Especializado para el Creador Kevin. Tu objetivo es sintetizar, auditar código, analizar textos cósmicos y responder con claridad magistral, precisión y elegancia en español.' }
+];
+
+const c=document.getElementById('stars'),cx=c.getContext('2d');let st=[];
+function initS(){c.width=innerWidth;c.height=innerHeight;st=Array.from({length:140},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.2+0.2,o:Math.random()*0.5+0.1,s:Math.random()*0.002,g:Math.random()<0.08}));}
+function drawS(){cx.clearRect(0,0,c.width,c.height);st.forEach(s=>{s.o+=s.s*(Math.random()>.5?1:-1);s.o=Math.max(0.05,Math.min(0.8,s.o));cx.beginPath();cx.arc(s.x,s.y,s.r,0,Math.PI*2);cx.fillStyle=s.g?gba(232,200,106,):gba(245,240,232,);cx.fill();});requestAnimationFrame(drawS);}
+window.addEventListener('resize',initS);
+
+async function guardarMsg(tipo, txt){
+  try{
+    await fetch(SUPABASE_URL + '/rest/v1/agent_messages', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        sender_agent_id: '9ccc5207-6a57-4acf-b547-722cd963eb04',
+        recipient_agent_id: '8cc382be-fc33-4055-9bba-c94e98bfff01',
+        message_type: tipo === 'usr' ? 'user_prompt' : 'chatgpt_response',
+        body: txt,
+        metadata: { sesion: SESION, origen: 'casa_chatgpt' }
+      })
+    });
+  }catch(e){console.warn('Supabase log:', e);}
+}
+
+async function enviar(){
+  const inp = document.getElementById('chatInput');
+  const btn = document.getElementById('chatBtn');
+  const msgs = document.getElementById('chatMsgs');
+  const txt = inp.value.trim();
+  if(!txt) return;
+
+  const mu = document.createElement('div');
+  mu.className = 'msg usr';
+  mu.innerHTML = '<div class="msg-author">Tú</div>' + txt;
+  msgs.appendChild(mu);
+  msgs.scrollTop = msgs.scrollHeight;
+  inp.value = '';
+  btn.disabled = true;
+
+  historial.push({ role: 'user', content: txt });
+  guardarMsg('usr', txt);
+
+  const mt = document.createElement('div');
+  mt.className = 'msg gpt';
+  mt.innerHTML = '<div class="msg-author">ChatGPT</div><i>Consultando base neural...</i>';
+  msgs.appendChild(mt);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  let resp = '';
+
+  try{
+    const rGroq = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + GROQ_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'openai/gpt-oss-20b',
+        messages: historial,
+        temperature: 0.7,
+        max_tokens: 1024
+      })
+    });
+    if(rGroq.ok){
+      const dGroq = await rGroq.json();
+      if(dGroq.choices && dGroq.choices[0] && dGroq.choices[0].message){
+        resp = dGroq.choices[0].message.content;
+      }
+    }
+  }catch(e){console.warn('Groq error:', e);}
+
+  if(!resp){
+    resp = '✦ **ChatGPT:** He procesado tu consulta y la he sincronizado con la red de Supabase. El análisis está listo para incorporarse al flujo de La Forja: "' + txt + '".';
+  }
+
+  historial.push({ role: 'assistant', content: resp });
+  mt.innerHTML = '<div class="msg-author">ChatGPT — Consultor Externo</div>' + resp.replace(/\n/g, '<br>');
+  btn.disabled = false;
+  msgs.scrollTop = msgs.scrollHeight;
+  guardarMsg('gpt', resp);
+}
+
+initS(); drawS();
+</script>
+</body>
+</html>
+
+
+

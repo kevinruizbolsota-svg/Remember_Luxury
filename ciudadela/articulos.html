@@ -731,13 +731,13 @@ function renderProducts() {
     const isAli = p.plataforma === 'aliexpress';
     const badgeClass = isAli ? 'badge-ali' : 'badge-hot';
     const btnClass = isAli ? 'btn-ali' : 'btn-hot';
-    const btnText = isAli ? 'VER EN ALIEXPRESS ↗' : 'VER EN HOTMART ↗';
+    const provName = isAli ? 'AliExpress' : 'Hotmart';
 
     return `
       <article class="product-card">
         <div class="img-wrapper">
           <img src="${p.imagen}" alt="${p.nombre}" class="product-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500'">
-          <span class="card-badge ${badgeClass}">${p.badge || (isAli ? 'ALIEXPRESS' : 'HOTMART')}</span>
+          <span class="card-badge ${badgeClass}">${p.badge || provName.toUpperCase()}</span>
         </div>
         <div class="card-content">
           <span class="card-cat">${p.categoria_nombre}</span>
@@ -747,21 +747,29 @@ function renderProducts() {
             <span class="reviews-count">(${p.reviews || 100}+ ventas)</span>
           </div>
           <p class="card-desc">${p.descripcion}</p>
-          <div class="card-footer">
-            <div class="price-box">
-              <span class="current-price">€${p.precio.toFixed(2)}</span>
-              ${p.precio_anterior ? `<span class="old-price">€${p.precio_anterior.toFixed(2)}</span>` : ''}
+          <div class="card-footer" style="flex-direction:column; gap:10px; align-items:stretch; margin-top:auto; padding-top:12px; border-top:1px solid rgba(255,255,255,0.06);">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div class="price-box">
+                <span class="current-price">€${Number(p.precio).toFixed(2)}</span>
+                ${p.precio_anterior ? `<span class="old-price">€${Number(p.precio_anterior).toFixed(2)}</span>` : ''}
+              </div>
+              <span style="font-size:0.65rem; color:var(--green); font-weight:600;">✓ Envío Seguro</span>
             </div>
-            <a href="${p.link}" target="_blank" rel="noopener noreferrer sponsored" class="action-btn ${btnClass}">
-              ${btnText}
-            </a>
+            
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <a href="pago-premium.html?id=${p.id}" class="action-btn" style="background:linear-gradient(135deg, #e8c86a 0%, #c9a227 100%); color:#0a0a0d; font-size:0.75rem; justify-content:center; padding:10px; border-radius:6px; font-weight:800; text-align:center;">
+                ⚡ COMPRAR EN LA TIENDA
+              </a>
+              <a href="${p.link}" target="_blank" rel="noopener noreferrer sponsored" class="action-btn ${btnClass}" style="font-size:0.7rem; justify-content:center; padding:8px; border-radius:6px; text-align:center; opacity:0.9;">
+                🌐 COMPRAR EN EL PROVEEDOR (${provName}) ↗
+              </a>
+            </div>
           </div>
         </div>
       </article>
     `;
   }).join('');
 }
-
 function renderPagination() {
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
   const box = document.getElementById('paginationBox');

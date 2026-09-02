@@ -1,0 +1,67 @@
+name: Compactar carrito homepage
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  compact-cart:
+    if: ${{ !contains(github.event.head_commit.message, 'AUTO: compactar carrito homepage') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compactar carrito de index.html
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          replacements = {
+              'width:min(1200px,98vw)': 'width:min(540px,92vw)',
+              'width:min(1050px,98vw)': 'width:min(540px,92vw)',
+              'grid-template-columns:repeat(5,minmax(0,1fr));gap:14px': 'grid-template-columns:repeat(2,minmax(0,1fr));gap:8px',
+              'height:220px;background:#111': 'height:170px;background:#111',
+              'height:235px}}': 'height:180px}}',
+              'padding:18px 18px 22px': 'padding:12px 12px 14px',
+              'height:92px;flex-shrink:0;padding:18px 22px': 'height:72px;flex-shrink:0;padding:12px 14px',
+              'font-size:34px;margin-top:2px': 'font-size:25px;margin-top:2px',
+              'width:42px;height:42px': 'width:34px;height:34px',
+              'font-size:24px;cursor:pointer': 'font-size:19px;cursor:pointer',
+              'padding:75px 15px': 'padding:42px 12px',
+              'font:italic 34px': 'font:italic 27px',
+              'margin-top:16px;display:grid;grid-template-columns:1.2fr .8fr;gap:10px': 'margin-top:9px;display:grid;grid-template-columns:1.2fr .8fr;gap:7px',
+              'padding:14px;background': 'padding:9px;background',
+              'font:600 30px': 'font:600 24px',
+              'font:600 23px': 'font:600 19px',
+              'grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px': 'grid-template-columns:repeat(3,1fr);gap:5px;margin-top:6px',
+              'padding:11px;border-radius:11px': 'padding:7px;border-radius:9px',
+              'font:600 18px': 'font:600 15px',
+              'max-height:360px': 'max-height:270px',
+              'padding:14px 18px 18px': 'padding:9px 12px 12px',
+              'grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:10px 0': 'grid-template-columns:1fr;gap:5px;margin:7px 0',
+              'min-height:50px;padding:9px 10px': 'min-height:38px;padding:7px 8px',
+              'width:28px;height:28px': 'width:24px;height:24px',
+              'font-size:15px}.lux-control-actions b{min-width:18px': 'font-size:12px}.lux-control-actions b{min-width:15px',
+              'grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px': 'grid-template-columns:1fr;gap:5px;margin-top:7px',
+              'min-height:50px;padding:9px 10px': 'min-height:38px;padding:7px 8px'
+          }
+          for a,b in replacements.items():
+              s = s.replace(a,b)
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit cambios y retirar workflow temporal
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -f .github/workflows/compact-home-cart.yml
+          git add index.html .github/workflows/compact-home-cart.yml
+          git diff --cached --quiet || git commit -m 'AUTO: compactar carrito homepage'
+          git push

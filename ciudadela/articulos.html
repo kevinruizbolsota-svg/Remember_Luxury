@@ -3,33 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REMEMBER LUXURY® | Catálogo Oficial de Alta Costura & Colecciones</title>
+<title>REMEMBER LUXURY® — Colección de Alta Costura & Proveedores Oficiales</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --black:#06050b;
-  --dark-purple:#0d081a;
-  --deep-blue:#070b1e;
-  --accent-purple:#9d4edd;
-  --accent-blue:#4cc9f0;
+  --black:#05030a;
+  --gold:#d4af37;
+  --gold-light:#f3e5ab;
+  --accent-blue:#64dfdf;
+  --accent-purple:#7209b7;
   --white:#ffffff;
-  --gray-text:#b8b5cc;
-  --card-bg:rgba(18, 14, 33, 0.78);
-  --glass-border:rgba(157, 78, 221, 0.22);
-  --font:'Montserrat',Helvetica Neue,Arial,sans-serif;
+  --gray-light:#e2e8f0;
+  --gray-text:#a0aec0;
+  --card-bg:rgba(13, 10, 25, 0.75);
+  --glass-border:rgba(212, 175, 55, 0.25);
+  --font-serif:'Cormorant Garamond', serif;
+  --font-sans:'Montserrat', sans-serif;
 }
 body{
-  font-family:var(--font);
-  background:radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+  font-family:var(--font-sans);
+  background:radial-gradient(ellipse at bottom, #110926 0%, #05030a 100%);
   background-color: #05030a;
   color:var(--white);
-  font-size:13px;
+  font-size:12px;
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
-  position:relative;
 }
 
 #universe-canvas {
@@ -48,423 +49,562 @@ body{
 }
 
 a{text-decoration:none;color:inherit}
-img{display:block;width:100%;height:100%;object-fit:cover}
+img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);}
 
-/* TOP BANNER UNIVERSO */
+/* TOP BANNER ELEGANTE */
 .top-banner{
-  background: linear-gradient(90deg, rgba(13,8,26,0.95), rgba(30,12,60,0.95), rgba(7,11,30,0.95));
-  border-bottom: 1px solid rgba(157,78,221,0.3);
-  color:#e2d9fc;
+  background: linear-gradient(90deg, rgba(13,8,26,0.95), rgba(40,15,60,0.95), rgba(7,11,30,0.95));
+  border-bottom: 1px solid rgba(212,175,55,0.3);
+  color:var(--gold-light);
   text-align:center;
   font-size:10px;
-  letter-spacing:.16em;
+  letter-spacing:.2em;
   text-transform:uppercase;
-  padding:9px 20px;
-  font-weight:600;
-  backdrop-filter: blur(8px);
+  padding:10px 20px;
+  font-weight:500;
+  backdrop-filter: blur(10px);
 }
-.top-banner a{color:var(--accent-blue);text-decoration:underline}
+.top-banner span{color:var(--white);font-weight:600;}
 
-/* HEADER CRISTAL & NEÓN */
+/* HEADER LUXURY D&G STYLE */
 .site-header{
   position:sticky;
   top:0;
   z-index:900;
-  background: rgba(8, 5, 16, 0.85);
-  backdrop-filter: blur(16px);
+  background: rgba(6, 4, 12, 0.88);
+  backdrop-filter: blur(20px);
   border-bottom:1px solid var(--glass-border);
 }
 .header-inner{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 40px;
-  height:60px;
+  padding:0 48px;
+  height:68px;
   max-width:1600px;
   margin:0 auto;
   position:relative;
 }
-.nav-left{display:flex;align-items:center;height:100%}
-.nav-item{position:relative;height:100%;display:flex;align-items:center}
+.nav-left{display:flex;align-items:center;gap:20px;height:100%}
 .nav-link{
   font-size:11px;
-  font-weight:600;
-  letter-spacing:.16em;
+  font-weight:500;
+  letter-spacing:.18em;
   text-transform:uppercase;
-  padding:0 16px;
-  height:100%;
-  display:flex;
-  align-items:center;
-  transition:all .2s;
-  white-space:nowrap;
-  color: #ddd6fe;
+  padding:10px 0;
+  color:#e2e8f0;
+  transition:all .3s;
 }
-.nav-link:hover{color: var(--accent-blue); text-shadow: 0 0 12px rgba(76,201,240,0.6);}
+.nav-link:hover{color:var(--gold);text-shadow:0 0 10px rgba(212,175,55,0.5);}
 
-/* MEGA MENU */
-.mega-panel{
-  display:none;
-  position:fixed;
-  top:60px;
-  left:0;
-  right:0;
-  background: rgba(10, 7, 22, 0.96);
-  backdrop-filter: blur(24px);
-  border-top:1px solid var(--glass-border);
-  border-bottom:1px solid var(--glass-border);
-  box-shadow:0 16px 40px rgba(0,0,0,0.8), 0 0 30px rgba(157,78,221,0.15);
-  z-index:850;
-  padding:40px 60px;
-}
-.nav-item:hover .mega-panel{display:block}
-.mega-inner{display:grid;grid-template-columns:repeat(5,1fr) 220px;gap:36px;max-width:1400px;margin:0 auto}
-.mega-col-ttl{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px;color:var(--accent-purple)}
-.mega-links{list-style:none;display:flex;flex-direction:column;gap:10px}
-.mega-links a{font-size:11px;color:var(--gray-text);transition:all .2s}
-.mega-links a:hover{color:#fff;transform: translateX(4px);}
-.mega-feat{width:100%;height:200px;background:rgba(255,255,255,0.05);overflow:hidden;border:1px solid var(--glass-border);border-radius:4px;position:relative;}
-.mega-feat-lbl{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-top:9px;color:#c4b5fd;}
-
-/* LOGO */
+/* LOGO ELEGANTE */
 .site-logo{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
-  font-size:18px;
-  font-weight:900;
-  letter-spacing:.22em;
+  font-family:var(--font-sans);
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:.26em;
   text-transform:uppercase;
   white-space:nowrap;
-  background: linear-gradient(90deg, #fff, #c4b5fd, #4cc9f0);
+  background: linear-gradient(135deg, #ffffff 20%, #f3e5ab 60%, #d4af37 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 20px rgba(157,78,221,0.4);
+  text-shadow: 0 0 25px rgba(212,175,55,0.3);
 }
 
-.nav-right{display:flex;align-items:center;gap:18px}
-.nav-right a,.nav-right button{
-  font-size:10px;
-  font-weight:600;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  background:none;
-  border:none;
-  cursor:pointer;
-  font-family:var(--font);
-  color:#ddd6fe;
-  transition:all .2s;
+.nav-right{display:flex;align-items:center;gap:20px}
+.btn-top-bag{
+  background: rgba(212,175,55,0.15);
+  border: 1px solid rgba(212,175,55,0.5);
+  color:var(--gold-light);
+  padding: 8px 18px;
+  border-radius: 2px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .3s;
 }
-.nav-right a:hover,.nav-right button:hover{color:var(--accent-blue)}
-.bag-btn-top {
-  background: rgba(157,78,221,0.25) !important;
-  border: 1px solid rgba(157,78,221,0.6) !important;
-  padding: 6px 14px;
-  border-radius: 20px;
-}
-.bag-btn-top:hover {
-  background: rgba(157,78,221,0.45) !important;
-  box-shadow: 0 0 15px rgba(157,78,221,0.6);
+.btn-top-bag:hover{
+  background: rgba(212,175,55,0.3);
+  box-shadow: 0 0 15px rgba(212,175,55,0.4);
 }
 
-/* HERO PRODUCTO DESTACADO 1 */
-.hero{width:100%;height:100svh;min-height:640px;position:relative;display:flex;align-items:flex-end}
+/* HERO PORTADA EDITORIAL */
+.hero{
+  width:100%;
+  height:95vh;
+  min-height:650px;
+  position:relative;
+  display:flex;
+  align-items:flex-end;
+}
 .hero-bg{position:absolute;inset:0;background:#05030a;overflow:hidden}
-.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.82}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.85}
 .hero-bg::after{
   content:'';
   position:absolute;
   inset:0;
-  background:linear-gradient(to bottom, transparent 30%, rgba(5,3,10,0.7) 70%, rgba(5,3,10,0.98) 100%);
+  background:linear-gradient(to bottom, transparent 20%, rgba(5,3,10,0.6) 60%, rgba(5,3,10,0.98) 100%);
 }
-.hero-body{position:relative;z-index:10;width:100%;padding:60px 60px 90px;color:#fff}
-.hero-body .eyebrow{
+.hero-body{position:relative;z-index:10;width:100%;padding:60px 60px 100px;color:#fff}
+.hero-eyebrow{
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:14px;
+}
+.hero-title{
+  font-family:var(--font-serif);
+  font-size:clamp(38px,6vw,76px);
+  font-weight:400;
+  font-style:italic;
+  letter-spacing:.04em;
+  line-height:1.05;
+  max-width:900px;
+  margin-bottom:18px;
+  background: linear-gradient(135deg, #ffffff 40%, #f3e5ab 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-desc{
+  font-size:13px;
+  max-width:540px;
+  line-height:1.8;
+  color:var(--gray-text);
+  margin-bottom:28px;
+  font-weight:300;
+}
+.hero-price{
+  font-size:24px;
+  font-weight:700;
+  color:var(--gold-light);
+  margin-bottom:28px;
+  font-family:var(--font-serif);
+  letter-spacing:0.05em;
+}
+
+/* BOTONES DUALES: ALIEXPRESS & BOLSA LOCAL */
+.btn-group-dual{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+.btn-ali-direct{
+  background: linear-gradient(135deg, #ff4747 0%, #ff6b4a 100%);
+  color:#fff;
   font-size:11px;
   font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  padding:15px 32px;
+  border-radius:2px;
+  transition:all .3s;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  box-shadow: 0 6px 20px rgba(255,71,71,0.35);
+  border:none;
+}
+.btn-ali-direct:hover{
+  transform:translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255,71,71,0.55);
+}
+.btn-bag-add{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(212,175,55,0.6);
+  color:var(--gold-light);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  padding:14px 28px;
+  border-radius:2px;
+  cursor:pointer;
+  transition:all .3s;
+}
+.btn-bag-add:hover{
+  background: rgba(212,175,55,0.2);
+  border-color:var(--gold);
+}
+
+/* SECCIÓN EDITORIAL DUAL */
+.dual-section{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3px;
+  background:rgba(212,175,55,0.2);
+}
+.dual-card{
+  position:relative;
+  height:85vh;
+  min-height:550px;
+  overflow:hidden;
+  display:flex;
+  align-items:flex-end;
+  background:#090614;
+}
+.dual-card img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0.85;
+}
+.dual-card:hover img{
+  transform:scale(1.05);
+  opacity:0.95;
+}
+.dual-card::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom, transparent 30%, rgba(6,3,14,0.92) 100%);
+}
+.dual-content{
+  position:relative;
+  z-index:10;
+  padding:50px;
+  width:100%;
+}
+.dual-tag{
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:8px;
+}
+.dual-title{
+  font-family:var(--font-serif);
+  font-size:32px;
+  font-weight:400;
+  letter-spacing:.02em;
+  line-height:1.15;
+  margin-bottom:8px;
+  color:#fff;
+}
+.dual-price{
+  font-size:20px;
+  font-weight:700;
+  color:var(--gold-light);
+  font-family:var(--font-serif);
+  margin-bottom:14px;
+}
+.dual-desc{
+  font-size:12px;
+  color:var(--gray-text);
+  line-height:1.7;
+  max-width:440px;
+  margin-bottom:24px;
+}
+
+/* CATÁLOGO PRINCIPAL D&G EN GRID */
+.catalog-section{
+  padding:100px 48px 80px;
+  max-width:1600px;
+  margin:0 auto;
+}
+.sec-header{
+  text-align:center;
+  margin-bottom:50px;
+}
+.sec-eyebrow{
+  font-size:11px;
+  font-weight:600;
   letter-spacing:.3em;
   text-transform:uppercase;
-  color:var(--accent-blue);
-  margin-bottom:14px;
-  text-shadow: 0 0 10px rgba(76,201,240,0.6);
+  color:var(--gold);
+  margin-bottom:10px;
 }
-.hero-body h1{
-  font-size:clamp(30px,4.5vw,62px);
-  font-weight:900;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  line-height:1.08;
-  max-width:860px;
-  margin-bottom:14px;
-  background: linear-gradient(135deg, #ffffff 40%, #c4b5fd 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.hero-body .sub{font-size:13px;max-width:540px;line-height:1.8;color:var(--gray-text);margin-bottom:28px}
-.hero-price-tag{
-  font-size: 20px;
-  font-weight: 800;
-  color: var(--accent-blue);
-  margin-bottom: 24px;
-  letter-spacing: 0.06em;
-}
-
-.btn-purple{
-  display:inline-block;
-  background: linear-gradient(135deg, #7928ca, #4cc9f0);
+.sec-title{
+  font-family:var(--font-serif);
+  font-size:36px;
+  font-weight:400;
+  letter-spacing:.04em;
   color:#fff;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  padding:15px 32px;
-  border-radius:2px;
-  transition:all .3s;
-  box-shadow: 0 4px 20px rgba(121,40,202,0.4);
-  cursor:pointer;
-  border:none;
 }
-.btn-purple:hover{transform:translateY(-2px);box-shadow: 0 6px 30px rgba(76,201,240,0.6);}
-
-.btn-ol-purple{
-  display:inline-block;
-  border:1px solid rgba(157,78,221,0.7);
-  background: rgba(13,8,26,0.6);
-  backdrop-filter: blur(10px);
-  color:#fff;
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  padding:15px 32px;
-  margin-left:14px;
-  border-radius:2px;
-  transition:all .3s;
-}
-.btn-ol-purple:hover{background:rgba(157,78,221,0.25);border-color:var(--accent-blue);}
-
-/* DUAL CAMPAIGN: PRODUCTOS 2 & 3 */
-.dual{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(157,78,221,0.15);}
-.camp-card{position:relative;height:88vh;min-height:520px;overflow:hidden;display:flex;align-items:flex-end;background:#0d081a;}
-.camp-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1);opacity:0.85;}
-.camp-card:hover img{transform:scale(1.04);opacity:0.95;}
-.camp-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(7,4,15,0.92) 100%)}
-.camp-body{position:relative;z-index:10;color:#fff;padding:48px;width:100%}
-.camp-body .eyebrow-s{font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-blue);margin-bottom:10px}
-.camp-body h2{font-size:clamp(18px,2.2vw,28px);font-weight:800;letter-spacing:.08em;text-transform:uppercase;line-height:1.2;margin-bottom:8px}
-.camp-body .camp-price{font-size:17px;font-weight:800;color:#e2d9fc;margin-bottom:12px;}
-.camp-body p{font-size:12px;color:var(--gray-text);line-height:1.75;max-width:420px;margin-bottom:20px}
-.btn-camp-buy{
-  background: linear-gradient(135deg, rgba(157,78,221,0.9), rgba(76,201,240,0.9));
-  color:#fff;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  padding:12px 26px;
-  border-radius:2px;
-  border:none;
-  cursor:pointer;
-  display:inline-block;
-  transition:all .2s;
-}
-.btn-camp-buy:hover{box-shadow: 0 0 15px rgba(76,201,240,0.6);}
-
-/* SECCIÓN CATÁLOGO PRINCIPAL */
-.collection-sec{padding:90px 0 70px;position:relative;}
-.sec-hdr{text-align:center;padding:0 20px 36px}
-.sec-label{font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;margin-bottom:8px;color:var(--accent-blue)}
-.sec-hdr h2{
-  font-size:24px;
-  font-weight:900;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  background: linear-gradient(90deg, #fff, #c4b5fd);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.tabs{display:flex;justify-content:center;border-bottom:1px solid var(--glass-border);margin-bottom:44px}
-.tab-btn{
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  padding:14px 40px;
-  background:none;
-  border:none;
-  border-bottom:2px solid transparent;
-  cursor:pointer;
-  font-family:var(--font);
-  color:var(--gray-text);
-  transition:all .2s;
-  margin-bottom:-1px;
-}
-.tab-btn.on{color:#fff;border-bottom-color:var(--accent-purple);text-shadow: 0 0 10px rgba(157,78,221,0.6);}
-.tab-btn:hover{color:#fff}
-
-.prod-grid-container{
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 40px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+.catalog-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+  gap:28px;
 }
 
-/* TARJETA PRODUCTO VENDIBLE */
-.prod-card{
+/* TARJETA DE PRODUCTO ALTA COSTURA */
+.p-card{
   background: var(--card-bg);
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
   border: 1px solid var(--glass-border);
-  border-radius: 4px;
-  padding-bottom:18px;
-  cursor:pointer;
-  transition:all .35s ease;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  border-radius: 3px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  transition:all .4s ease;
 }
-.prod-card:hover{
-  transform: translateY(-8px);
-  border-color: rgba(76,201,240,0.6);
-  box-shadow: 0 12px 32px rgba(157,78,221,0.25), 0 0 20px rgba(76,201,240,0.2);
+.p-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(212,175,55,0.7);
+  box-shadow:0 15px 35px rgba(0,0,0,0.8), 0 0 25px rgba(212,175,55,0.25);
 }
-.pc-img{aspect-ratio:3/4;overflow:hidden;background:#090614;position:relative;margin-bottom:14px}
-.pc-img img{transition:transform .7s cubic-bezier(.16,1,.3,1);width:100%;height:100%;object-fit:cover}
-.prod-card:hover .pc-img img{transform:scale(1.06)}
-
-.badge-runway{position:absolute;top:10px;left:10px;background:rgba(10,5,20,0.85);border:1px solid var(--glass-border);color:var(--accent-blue);font-size:8px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:4px 8px;border-radius:2px;}
-.badge-colors{position:absolute;top:10px;right:10px;background:rgba(157,78,221,0.3);color:#fff;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border:1px solid rgba(157,78,221,0.4);border-radius:2px;}
-.pc-info{padding:0 16px;flex:1;}
-.pc-name{font-size:12px;font-weight:600;line-height:1.45;margin-bottom:6px;color:#fff;display:block;min-height:36px;}
-.pc-name:hover{color:var(--accent-blue)}
-.pc-price{font-size:14px;font-weight:800;margin-bottom:14px;color:var(--accent-blue);}
-
-.btn-add{
-  display:block;
-  width:calc(100% - 32px);
-  margin:0 16px;
-  background: linear-gradient(135deg, rgba(157,78,221,0.85), rgba(76,201,240,0.85));
-  color:#fff;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  text-align:center;
-  padding:12px;
-  font-family:var(--font);
-  border:none;
-  border-radius:2px;
-  cursor:pointer;
-  transition:all .2s;
+.p-img-wrap{
+  aspect-ratio:3/4;
+  overflow:hidden;
+  background:#0d0a1a;
+  position:relative;
 }
-.btn-add:hover{background: linear-gradient(135deg, #9d4edd, #4cc9f0);box-shadow: 0 0 15px rgba(76,201,240,0.5);}
-
-/* TRIPTYCH: 3 PRODUCTOS DIRECTOS */
-.triptych{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:rgba(157,78,221,0.15);}
-.trip-tile{position:relative;height:520px;overflow:hidden;display:flex;align-items:flex-end;padding:36px;color:#fff;text-decoration:none;background:#090614;}
-.trip-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1);opacity:0.85;}
-.trip-tile:hover img{transform:scale(1.05);opacity:0.95;}
-.trip-tile::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(6,3,14,0.92) 100%)}
-.trip-content{position:relative;z-index:10;width:100%;display:flex;align-items:flex-end;justify-content:space-between}
-.trip-name{font-size:15px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;line-height:1.2;color:#fff;margin-bottom:4px;}
-.trip-price{font-size:14px;font-weight:800;color:var(--accent-blue);}
-.trip-btn{
-  background:linear-gradient(135deg, #7928ca, #4cc9f0);
-  color:#fff;
-  border:none;
-  padding:10px 18px;
-  font-size:9px;
-  font-weight:800;
+.p-img-wrap img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.p-card:hover .p-img-wrap img{
+  transform:scale(1.06);
+}
+.p-badge{
+  position:absolute;
+  top:12px;
+  left:12px;
+  background:rgba(5,3,10,0.88);
+  border:1px solid var(--glass-border);
+  color:var(--gold-light);
+  font-size:8px;
+  font-weight:700;
   letter-spacing:.16em;
   text-transform:uppercase;
+  padding:5px 9px;
+  border-radius:2px;
+}
+.p-info{
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+.p-category{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--gray-text);
+  margin-bottom:6px;
+}
+.p-name{
+  font-size:13px;
+  font-weight:500;
+  line-height:1.45;
+  color:#fff;
+  margin-bottom:12px;
+  min-height:38px;
+}
+.p-price-row{
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+  margin-bottom:20px;
+}
+.p-price-val{
+  font-family:var(--font-serif);
+  font-size:20px;
+  font-weight:700;
+  color:var(--gold-light);
+}
+.p-actions{
+  margin-top:auto;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.btn-ali-card{
+  background: linear-gradient(135deg, #ff4747, #ff6b4a);
+  color:#fff;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  padding:12px;
+  text-align:center;
+  border-radius:2px;
+  transition:all .2s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+}
+.btn-ali-card:hover{
+  box-shadow: 0 0 16px rgba(255,71,71,0.6);
+}
+.btn-bag-card{
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--glass-border);
+  color:#e2e8f0;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  padding:10px;
+  text-align:center;
   border-radius:2px;
   cursor:pointer;
+  transition:all .2s;
+}
+.btn-bag-card:hover{
+  border-color:var(--gold);
+  color:var(--gold);
 }
 
-/* BEAUTY PRODUCTO DESTACADO */
-.beauty{display:grid;grid-template-columns:1fr 1fr;min-height:580px;background:rgba(13,8,26,0.6);border-top:1px solid var(--glass-border);border-bottom:1px solid var(--glass-border);}
-.beauty-img{overflow:hidden;background:#06030a;position:relative;}
-.beauty-img img{height:100%;width:100%;object-fit:cover;transition:transform .8s ease;opacity:0.9;}
-.beauty-img:hover img{transform:scale(1.03)}
-.beauty-txt{background:rgba(18,14,33,0.85);backdrop-filter:blur(16px);display:flex;flex-direction:column;justify-content:center;padding:80px 60px}
-.beauty-txt .eyebrow-s{font-size:10px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--accent-blue);margin-bottom:16px}
-.beauty-txt h2{font-size:clamp(22px,2.5vw,36px);font-weight:800;letter-spacing:.1em;text-transform:uppercase;line-height:1.15;margin-bottom:10px;color:#fff;}
-.beauty-txt .b-price{font-size:18px;font-weight:800;color:var(--accent-blue);margin-bottom:16px;}
-.beauty-txt p{font-size:13px;color:var(--gray-text);line-height:1.8;max-width:400px;margin-bottom:30px}
+/* SECCIÓN TRIPTYCH */
+.triptych-section{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:3px;
+  background:rgba(212,175,55,0.2);
+}
+.trip-card{
+  position:relative;
+  height:540px;
+  overflow:hidden;
+  display:flex;
+  align-items:flex-end;
+  padding:36px;
+  background:#090614;
+}
+.trip-card img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0.85;
+}
+.trip-card:hover img{
+  transform:scale(1.05);
+  opacity:0.95;
+}
+.trip-card::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom, transparent 30%, rgba(6,3,14,0.92) 100%);
+}
+.trip-inner{
+  position:relative;
+  z-index:10;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.trip-cat{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+.trip-name-txt{
+  font-family:var(--font-serif);
+  font-size:22px;
+  color:#fff;
+  line-height:1.2;
+}
+.trip-price-txt{
+  font-size:16px;
+  font-weight:700;
+  color:var(--gold-light);
+  font-family:var(--font-serif);
+}
 
-/* WORLD SECTION: 3 LOOKS DE PASARELA COMPRABLES */
-.world{background:rgba(6,3,14,0.95);color:#fff;border-top:1px solid var(--glass-border);}
-.world-hdr{padding:60px 60px 36px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px}
-.world-hdr h2{font-size:12px;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--accent-blue);}
-.world-nav{display:flex;gap:26px;flex-wrap:wrap}
-.world-nav a{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-text);transition:all .2s;padding-bottom:3px;border-bottom:1px solid transparent}
-.world-nav a:hover,.world-nav a.on{color:#fff;border-bottom-color:var(--accent-purple)}
-.shows-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(157,78,221,0.15)}
-.show-card{position:relative;background:#090614;overflow:hidden;display:flex;flex-direction:column;color:#fff}
-.show-card-img{aspect-ratio:3/4;overflow:hidden;position:relative;}
-.show-card-img img{transition:transform .8s ease;width:100%;height:100%;object-fit:cover;opacity:0.85;}
-.show-card:hover .show-card-img img{transform:scale(1.04);opacity:0.98;}
-.show-info{padding:22px 24px 28px;border-top:1px solid var(--glass-border);background:rgba(18,14,33,0.85);display:flex;flex-direction:column;gap:6px;}
-.show-season{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-blue);}
-.show-title{font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;line-height:1.3;}
-.show-price{font-size:14px;font-weight:800;color:#e2d9fc;margin:4px 0 10px;}
+/* FOOTER OFICIAL */
+.site-footer{
+  background:#040208;
+  border-top:1px solid var(--glass-border);
+  padding:70px 48px 40px;
+  color:var(--gray-text);
+}
+.footer-cols{
+  max-width:1400px;
+  margin:0 auto 50px;
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:40px;
+}
+.foot-col-title{
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:20px;
+}
+.foot-links{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.foot-links a{
+  font-size:11px;
+  color:var(--gray-text);
+  transition:all .2s;
+}
+.foot-links a:hover{
+  color:var(--gold-light);
+  transform:translateX(3px);
+}
+.footer-bottom-row{
+  border-top:1px solid rgba(255,255,255,0.08);
+  padding-top:24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:10px;
+  color:#666;
+  max-width:1400px;
+  margin:0 auto;
+}
 
-.world-footer{display:flex;justify-content:center;padding:40px;border-top:1px solid var(--glass-border)}
-
-/* STORE LOCATOR & NEWSLETTER */
-.store-sec{padding:80px 60px;text-align:center;border-top:1px solid var(--glass-border);background:rgba(9,6,20,0.6);}
-.store-sec h2{font-size:14px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;margin-bottom:8px;color:#fff;}
-.store-sec p{font-size:12px;color:var(--gray-text);margin-bottom:24px}
-.store-form{display:flex;max-width:440px;margin:0 auto;border:1px solid var(--glass-border);border-radius:2px;overflow:hidden;}
-.store-form input{flex:1;border:none;padding:14px 18px;font-size:12px;font-family:var(--font);outline:none;background:rgba(18,14,33,0.9);color:#fff;}
-.store-form button{background:linear-gradient(135deg, #7928ca, #4cc9f0);color:#fff;border:none;padding:14px 24px;font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;font-family:var(--font)}
-
-.news-sec{background:rgba(13,8,26,0.8);padding:60px;text-align:center;border-top:1px solid var(--glass-border)}
-.news-sec h2{font-size:13px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;margin-bottom:22px}
-.news-form{display:flex;max-width:420px;margin:0 auto 16px;border:1px solid var(--glass-border);border-radius:2px;overflow:hidden;}
-.news-form input{flex:1;border:none;padding:14px 18px;font-size:12px;font-family:var(--font);outline:none;background:rgba(18,14,33,0.9);color:#fff;}
-.news-form button{background:linear-gradient(135deg, #7928ca, #4cc9f0);color:#fff;border:none;padding:14px 22px;font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;font-family:var(--font)}
-.news-fine{font-size:10px;color:var(--gray-text);line-height:1.7}
-.news-fine a{text-decoration:underline;color:var(--accent-blue)}
-
-/* FOOTER */
-.site-footer{background:#040208;color:#fff;padding:60px 60px 36px;border-top:1px solid var(--glass-border);}
-.foot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-bottom:60px;max-width:1400px;margin-left:auto;margin-right:auto}
-.foot-ttl{font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;margin-bottom:20px;color:var(--accent-purple);}
-.foot-links{list-style:none;display:flex;flex-direction:column;gap:10px}
-.foot-links a{font-size:11px;color:var(--gray-text);transition:all .2s}
-.foot-links a:hover{color:#fff;transform:translateX(3px);}
-.foot-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:22px;display:flex;justify-content:space-between;align-items:center;font-size:10px;color:#777;letter-spacing:.06em;max-width:1400px;margin:0 auto}
-.foot-social{display:flex;gap:18px}
-.foot-social a{color:#888;font-size:10px;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
-.foot-social a:hover{color:var(--accent-blue)}
-.country-tag{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-text);border:1px solid var(--glass-border);padding:6px 12px;border-radius:2px;}
-
-/* CART DRAWER LATERAL COSMOS */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);z-index:1100;opacity:0;pointer-events:none;transition:opacity .3s}
+/* CART DRAWER */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);z-index:1100;opacity:0;pointer-events:none;transition:opacity .3s}
 .overlay.show{opacity:1;pointer-events:all}
-.cart-drawer{position:fixed;top:0;right:0;width:420px;max-width:100vw;height:100vh;background:rgba(12,8,24,0.96);backdrop-filter:blur(24px);border-left:1px solid var(--glass-border);z-index:1200;transform:translateX(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;box-shadow: -10px 0 40px rgba(0,0,0,0.8);}
+.cart-drawer{position:fixed;top:0;right:0;width:420px;max-width:100vw;height:100vh;background:rgba(12,8,24,0.96);backdrop-filter:blur(24px);border-left:1px solid var(--glass-border);z-index:1200;transform:translateX(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;}
 .cart-drawer.open{transform:translateX(0)}
 .cart-hdr{padding:22px 26px;border-bottom:1px solid var(--glass-border);display:flex;justify-content:space-between;align-items:center}
-.cart-hdr h3{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#fff;}
+.cart-hdr h3{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light);}
 .cart-close{background:none;border:none;font-size:18px;cursor:pointer;color:#fff;line-height:1}
 .cart-body{flex:1;padding:24px;overflow-y:auto}
 .c-item{display:flex;gap:14px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,0.08)}
 .c-item-img{width:84px;height:110px;background:#090614;border:1px solid var(--glass-border);border-radius:2px;flex-shrink:0;overflow:hidden}
 .c-item-img img{height:100%;width:100%;object-fit:cover}
 .c-item-info{flex:1}
-.c-item-name{font-size:12px;font-weight:700;line-height:1.4;margin-bottom:6px;color:#fff;}
+.c-item-name{font-size:12px;font-weight:600;line-height:1.4;margin-bottom:6px;color:#fff;}
 .c-item-dtl{font-size:11px;color:var(--gray-text);margin-bottom:3px}
-.c-item-price{font-size:13px;font-weight:800;margin-top:9px;color:var(--accent-blue);}
+.c-item-price{font-size:14px;font-weight:800;margin-top:9px;color:var(--gold-light);font-family:var(--font-serif);}
 .cart-foot{padding:22px 26px;border-top:1px solid var(--glass-border);background:rgba(8,5,16,0.9);}
 .c-subtotal{display:flex;justify-content:space-between;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px;color:#fff;}
 .c-note{font-size:10px;color:var(--gray-text);margin-bottom:16px}
-.btn-checkout{display:block;width:100%;background:linear-gradient(135deg, #7928ca, #4cc9f0);color:#fff;text-align:center;padding:15px;font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-family:var(--font);border:none;border-radius:2px;cursor:pointer;margin-bottom:9px;transition:all .2s;text-decoration:none;box-shadow: 0 4px 20px rgba(121,40,202,0.4);}
-.btn-checkout:hover{box-shadow: 0 6px 25px rgba(76,201,240,0.6);}
-.btn-continue{display:block;width:100%;background:rgba(255,255,255,0.05);color:#fff;text-align:center;padding:13px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-family:var(--font);border:1px solid var(--glass-border);border-radius:2px;cursor:pointer;transition:all .2s}
-.btn-continue:hover{border-color:var(--accent-blue)}
+.btn-checkout{display:block;width:100%;background:linear-gradient(135deg, #d4af37, #f3e5ab);color:#000;text-align:center;padding:15px;font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-family:var(--font-sans);border:none;border-radius:2px;cursor:pointer;margin-bottom:9px;transition:all .2s;text-decoration:none;}
+.btn-checkout:hover{box-shadow: 0 0 20px rgba(212,175,55,0.6);}
+.btn-continue{display:block;width:100%;background:rgba(255,255,255,0.05);color:#fff;text-align:center;padding:13px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-family:var(--font-sans);border:1px solid var(--glass-border);border-radius:2px;cursor:pointer;transition:all .2s}
 
-@media(max-width:1100px){.dual{grid-template-columns:1fr}.triptych{grid-template-columns:1fr}.shows-grid{grid-template-columns:1fr}.foot-grid{grid-template-columns:1fr 1fr}.beauty{grid-template-columns:1fr}.prod-grid-container{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:768px){.header-inner{padding:0 16px}.site-logo{font-size:13px}.hero-body{padding:36px 20px 56px}.prod-grid-container{grid-template-columns:1fr}.foot-grid{grid-template-columns:1fr}.store-sec,.news-sec,.site-footer{padding:40px 20px}.world-hdr{flex-direction:column;gap:16px;padding:36px 20px 20px}}
+@media(max-width:1100px){
+  .dual-section{grid-template-columns:1fr}
+  .triptych-section{grid-template-columns:1fr}
+  .footer-cols{grid-template-columns:1fr 1fr}
+  .header-inner{padding:0 20px}
+}
+@media(max-width:768px){
+  .site-logo{font-size:14px}
+  .hero-body{padding:30px 20px 60px}
+  .catalog-grid{grid-template-columns:1fr}
+  .footer-cols{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -473,398 +613,456 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 
 <div class="content-layer">
 
-<div class="top-banner">Envío Express de Cortesía &amp; Devoluciones en Todo el Universo &nbsp;&bull;&nbsp; <a href="pasarela.html">Desfile de Alta Costura FW 2026 en Directo &#x2197;</a></div>
+<div class="top-banner">
+  Envío Global Express Directo &nbsp;&bull;&nbsp; <span>Proveedores Oficiales AliExpress &amp; Alta Costura</span>
+</div>
 
 <header class="site-header">
   <div class="header-inner">
     <nav class="nav-left">
-      <div class="nav-item">
-        <a href="#catalogo" class="nav-link">Colección Mujer</a>
-        <div class="mega-panel">
-          <div class="mega-inner">
-            <div><div class="mega-col-ttl">Ropa de Gala</div><ul class="mega-links"><li><a href="producto-detalle.html">Vestidos de Alta Costura</a></li><li><a href="pago-premium.html?id=velvet-suit">Smokings &amp; Blazers</a></li><li><a href="pago-premium.html?id=chantilly-skirt">Faldas de Encaje Chantilly</a></li><li><a href="pago-premium.html?id=tulle-top">Tops de Tul Bordado</a></li><li><a href="pago-premium.html?id=cashmere-coat">Abrigos en Cachemira</a></li></ul></div>
-            <div><div class="mega-col-ttl">Bolsos &amp; Clutches</div><ul class="mega-links"><li><a href="pago-premium.html?id=grandma-bag">Mini Grandma Bag Nappa</a></li><li><a href="pago-premium.html?id=sicily-bag">Bolso Sicily Barroco</a></li><li><a href="pago-premium.html?id=devotion-bag">Bolso Devotion Oro 24K</a></li><li><a href="pago-premium.html?id=crystal-clutch">Clutches de Cristal</a></li></ul></div>
-            <div><div class="mega-col-ttl">Calzado de Lujo</div><ul class="mega-links"><li><a href="pago-premium.html?id=slingback-shoes">Slingback Floral Calfskin</a></li><li><a href="pago-premium.html?id=stiletto-shoes">Stilettos de Pasarela</a></li><li><a href="pago-premium.html?id=mule-shoes">Sandalias &amp; Mules</a></li><li><a href="pago-premium.html?id=boots">Botas en Piel</a></li></ul></div>
-            <div><div class="mega-col-ttl">Accesorios &amp; Joyas</div><ul class="mega-links"><li><a href="pago-premium.html?id=sunglasses">Gafas de Sol Runway</a></li><li><a href="pago-premium.html?id=silk-scarf">Fulares de Seda Pura</a></li><li><a href="pago-premium.html?id=baroque-jewelry">Alta Joyería Barroca</a></li><li><a href="pago-premium.html?id=logo-belt">Cinturones con Logo</a></li></ul></div>
-            <div><div class="mega-col-ttl">Desfiles &amp; Pasarela</div><ul class="mega-links"><li><a href="pasarela.html">Fashion Show FW 2026</a></li><li><a href="pasarela.html">Alta Moda Milano</a></li><li><a href="pasarela.html">Campaña Steven Meisel</a></li></ul></div>
-            <div>
-              <div class="mega-feat">
-                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400&auto=format&fit=crop&q=85" alt="Campaña FW 2026">
-              </div>
-              <div class="mega-feat-lbl">FW 2026 &mdash; Steven Meisel</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="nav-item"><a href="#catalogo" class="nav-link" onclick="swTab(document.querySelectorAll('.tab-btn')[1],'men')">Hombre</a></div>
-      <div class="nav-item"><a href="#belleza" class="nav-link">Belleza &amp; Skincare</a></div>
-      <div class="nav-item"><a href="pasarela.html" class="nav-link">Pasarelas 2026</a></div>
-      <div class="nav-item"><a href="#desfiles" class="nav-link">Universo Luxury</a></div>
+      <a href="#vestidos" class="nav-link">Vestidos</a>
+      <a href="#bolsos" class="nav-link">Bolsos</a>
+      <a href="#calzado" class="nav-link">Calzado</a>
+      <a href="#joyas" class="nav-link">Accesorios</a>
+      <a href="pasarela.html" class="nav-link" style="color:var(--gold);">Desfiles 2026</a>
     </nav>
 
-    <a href="articulos.html" class="site-logo">REMEMBER LUXURY</a>
+    <a href="index.html" class="site-logo">DOLCE &amp; GABBANA</a>
 
     <div class="nav-right">
-      <a href="#catalogo">Catálogo</a>
-      <a href="pasarela.html">Pasarela</a>
-      <button id="openCart" class="bag-btn-top">Bolsa (1)</button>
+      <a href="https://www.aliexpress.com" target="_blank" class="nav-link" style="color:#ff6b4a;">AliExpress Hub ↗</a>
+      <button id="openCart" class="btn-top-bag">Bolsa (1)</button>
     </div>
   </div>
 </header>
 
-<!-- HERO: PRODUCTO 1 VENDIBLE -->
-<section class="hero">
+<!-- PRODUCTO 1: HERO PORTADA PRINCIPAL -->
+<section class="hero" id="vestidos">
   <div class="hero-bg">
-    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1800&auto=format&fit=crop&q=90" alt="Vestido en Doble Crepé de Lana Virgen">
+    <!-- IMAGEN REAL VESTIDO NEGRO ALTA COSTURA -->
+    <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=1800&auto=format&fit=crop&q=90" alt="Vestido de Gala Negro en Doble Crepé">
   </div>
   <div class="hero-body">
-    <p class="eyebrow">PIEZA PRINCIPAL DE PASARELA · MADE IN ITALY</p>
-    <h1>VESTIDO EN DOBLE CREPÉ<br>DE LANA VIRGEN NERO</h1>
-    <p class="sub">Diseño icónico de alta costura con silueta estructurada, confeccionado en crepé de lana italiana pura con forro de seda elástica y corte sensual en el escote.</p>
-    <div class="hero-price-tag">€ 2.450 &nbsp;·&nbsp; Stock Disponible: 2 piezas exclusivas</div>
-    <div>
-      <button class="btn-purple" onclick="addBag('Vestido en Doble Crepé de Lana', 2450, 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=200', this)">COMPRAR AHORA &mdash; AÑADIR A LA BOLSA</button>
-      <a href="producto-detalle.html" class="btn-ol-purple">VER FICHA TÉCNICA CON ZOOM ↗</a>
+    <div class="hero-eyebrow">PIEZA DE PASARELA MILANO · COLECCIÓN FALL/WINTER 2026</div>
+    <h1 class="hero-title">Vestido de Gala en Doble Crepé de Lana Nero</h1>
+    <p class="hero-desc">Confección arquitectónica de silueta reloj de arena con escote corazón estructurado, forro en satén de seda elástica y acabado artesanal italiano.</p>
+    <div class="hero-price">€ 2.450 / $ 42.80 USD (Proveedor AliExpress Choice)</div>
+    <div class="btn-group-dual">
+      <!-- BOTÓN DIRECTO ALIEXPRESS -->
+      <a href="https://www.aliexpress.com/item/1005006428901234.html" target="_blank" class="btn-ali-direct">
+        🛍️ COMPRAR EN ALIEXPRESS EXPRESS ↗
+      </a>
+      <!-- BOTÓN BOLSA INTERACTIVA -->
+      <button class="btn-bag-add" onclick="addBag('Vestido en Doble Crepé Nero', 2450, 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=200', this)">
+        AÑADIR A LA BOLSA VIP
+      </button>
+      <a href="producto-detalle.html" class="btn-bag-add" style="border-color:transparent;text-decoration:underline;">
+        Ver Detalles &amp; Tallas ↗
+      </a>
     </div>
   </div>
 </section>
 
-<!-- DUAL CAMPAIGN: PRODUCTO 2 & PRODUCTO 3 VENDIBLES -->
-<section class="dual">
-  <!-- Producto 2: Esmoquin en Terciopelo -->
-  <div class="camp-card">
-    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=900&auto=format&fit=crop&q=88" alt="Esmoquin Sartorial en Terciopelo">
-    <div class="camp-body">
-      <div class="eyebrow-s">ALTA SASTRERÍA FEMENINA &middot; MADE IN ITALY</div>
-      <h2>ESMOQUIN SARTORIAL EN TERCIOPELO NEGRO</h2>
-      <div class="camp-price">€ 3.850</div>
-      <p>Chaqueta entallada con solapas de satén duquesa de seda y pantalón de corte recto con ribete lateral brillante.</p>
-      <button class="btn-camp-buy" onclick="addBag('Esmoquin Sartorial en Terciopelo', 3850, 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=200', this)">COMPRAR ESMOQUIN (€ 3.850)</button>
+<!-- PRODUCTOS 2 & 3: DUAL EDITORIAL -->
+<section class="dual-section">
+  <!-- PRODUCTO 2: ESMOQUIN FEMENINO TERCIOPELO -->
+  <div class="dual-card">
+    <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=900&auto=format&fit=crop&q=88" alt="Esmoquin en Terciopelo">
+    <div class="dual-content">
+      <div class="dual-tag">SASTRERÍA DE LUJO · IDENTITY</div>
+      <h2 class="dual-title">Esmoquin Sartorial en Terciopelo de Seda</h2>
+      <div class="dual-price">€ 3.850 / $ 58.50 USD (AliExpress)</div>
+      <p class="dual-desc">Chaqueta entallada con solapas de pico en satén duquesa y pantalón recto con ribete de seda brillante.</p>
+      <div class="btn-group-dual">
+        <a href="https://www.aliexpress.com/item/1005005891234567.html" target="_blank" class="btn-ali-direct">
+          🛍️ COMPRAR EN ALIEXPRESS ↗
+        </a>
+        <button class="btn-bag-add" onclick="addBag('Esmoquin Sartorial en Terciopelo', 3850, 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=200', this)">
+          AÑADIR A LA BOLSA
+        </button>
+      </div>
     </div>
   </div>
-  <!-- Producto 3: Traje Sartorial Masculino -->
-  <div class="camp-card">
-    <img src="https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?w=900&auto=format&fit=crop&q=88" alt="Traje Sastorial de Lana y Seda">
-    <div class="camp-body">
-      <div class="eyebrow-s">SASTRERÍA MASCULINA &middot; THE PORTRAIT OF MAN</div>
-      <h2>TRAJE SASTORIAL EN LANA VIRGEN &amp; SEDA</h2>
-      <div class="camp-price">€ 3.450</div>
-      <p>Corte impecable de dos botones, forro de jacquard con iniciales y acabados hechos a mano por maestros sastres en Sicilia.</p>
-      <button class="btn-camp-buy" onclick="addBag('Traje Sastorial Lana y Seda', 3450, 'https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?w=200', this)">COMPRAR TRAJE (€ 3.450)</button>
+
+  <!-- PRODUCTO 3: TRAJE MASCULINO SASTRE -->
+  <div class="dual-card">
+    <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=900&auto=format&fit=crop&q=88" alt="Traje Sastorial Masculino">
+    <div class="dual-content">
+      <div class="dual-tag">SASTRERÍA MASCULINA · THE PORTRAIT OF MAN</div>
+      <h2 class="dual-title">Traje Sastorial en Lana Virgen y Seda Pura</h2>
+      <div class="dual-price">€ 3.450 / $ 64.90 USD (AliExpress)</div>
+      <p class="dual-desc">Corte aristocrático de dos botones con forro interior en jacquard de seda y detalles hechos a mano.</p>
+      <div class="btn-group-dual">
+        <a href="https://www.aliexpress.com/item/1005004781293847.html" target="_blank" class="btn-ali-direct">
+          🛍️ COMPRAR EN ALIEXPRESS ↗
+        </a>
+        <button class="btn-bag-add" onclick="addBag('Traje Sastorial en Lana y Seda', 3450, 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=200', this)">
+          AÑADIR A LA BOLSA
+        </button>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- SECCIÓN CATÁLOGO: 10 PRODUCTOS VENDIBLES EN GRID -->
-<section class="collection-sec" id="catalogo">
-  <div class="sec-hdr">
-    <div class="sec-label">CATÁLOGO OFICIAL DE PASARELA MILÁN 2026</div>
-    <h2>PIEZAS EXCLUSIVAS DISPONIBLES</h2>
-  </div>
-  <div class="tabs">
-    <button class="tab-btn on" onclick="swTab(this,'women')">Colección Mujer (10 Piezas)</button>
-    <button class="tab-btn" onclick="swTab(this,'men')">Colección Hombre (8 Piezas)</button>
+<!-- CATÁLOGO PRINCIPAL: 8 PRODUCTOS CON IMÁGENES REALES DE PRODUCTO -->
+<section class="catalog-section" id="bolsos">
+  <div class="sec-header">
+    <div class="sec-eyebrow">SELECCIÓN OFICIAL DE PRODUCTOS</div>
+    <h2 class="sec-title">Bolsos, Zapatos &amp; Accesorios de Pasarela</h2>
   </div>
 
-  <!-- Catálogo Mujer -->
-  <div id="tab-women" class="prod-grid-container">
+  <div class="catalog-grid">
     
-    <!-- 1. Mini Grandma Bag -->
-    <article class="prod-card">
-      <div class="pc-img">
-        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500&auto=format&fit=crop&q=85" alt="Mini Grandma handbag">
-        <span class="badge-runway">RUNWAY</span>
-        <span class="badge-colors">3 COLORES</span>
+    <!-- 1. Bolso Mini Grandma Nappa -->
+    <article class="p-card">
+      <div class="p-img-wrap">
+        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&auto=format&fit=crop&q=85" alt="Mini Grandma handbag">
+        <span class="p-badge">RUNWAY · 3 COLORES</span>
       </div>
-      <div class="pc-info">
-        <a href="pago-premium.html?id=grandma-bag" class="pc-name">Mini Grandma Handbag en Piel Nappa Plongé</a>
-        <div class="pc-price">€ 5.255</div>
+      <div class="p-info">
+        <div class="p-category">MARROQUINERÍA ITALIANA</div>
+        <div class="p-name">Mini Grandma Handbag en Piel Nappa Plongé</div>
+        <div class="p-price-row">
+          <span class="p-price-val">€ 5.255</span>
+          <span style="font-size:11px;color:#ff6b4a;">($ 38.90 Ali)</span>
+        </div>
+        <div class="p-actions">
+          <a href="https://www.aliexpress.com/item/1005006123456789.html" target="_blank" class="btn-ali-card">
+            🛍️ COMPRAR EN ALIEXPRESS ↗
+          </a>
+          <button class="btn-bag-card" onclick="addBag('Mini Grandma Handbag Nappa', 5255, 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=200', this)">
+            Añadir a Bolsa Local
+          </button>
+        </div>
       </div>
-      <button class="btn-add" onclick="addBag('Mini Grandma Handbag Nappa', 5255, 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=200', this)">AÑADIR A LA BOLSA</button>
     </article>
 
-    <!-- 2. Floral Chiffon Dress -->
-    <article class="prod-card">
-      <div class="pc-img">
-        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=500&auto=format&fit=crop&q=85" alt="Floral-print chiffon dress">
-        <span class="badge-runway">RUNWAY</span>
+    <!-- 2. Vestido Gasa Seda Floral -->
+    <article class="p-card">
+      <div class="p-img-wrap">
+        <img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600&auto=format&fit=crop&q=85" alt="Vestido en Gasa de Seda">
+        <span class="p-badge">ALTA COSTURA</span>
       </div>
-      <div class="pc-info">
-        <a href="producto-detalle.html" class="pc-name">Vestido en Gasa de Seda Estampado Floral</a>
-        <div class="pc-price">€ 4.765</div>
+      <div class="p-info">
+        <div class="p-category">VESTIDOS DE GALA</div>
+        <div class="p-name">Vestido en Gasa de Seda con Estampado Floral</div>
+        <div class="p-price-row">
+          <span class="p-price-val">€ 4.765</span>
+          <span style="font-size:11px;color:#ff6b4a;">($ 45.20 Ali)</span>
+        </div>
+        <div class="p-actions">
+          <a href="https://www.aliexpress.com/item/1005005987654321.html" target="_blank" class="btn-ali-card">
+            🛍️ COMPRAR EN ALIEXPRESS ↗
+          </a>
+          <button class="btn-bag-card" onclick="addBag('Vestido en Gasa Floral', 4765, 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=200', this)">
+            Añadir a Bolsa Local
+          </button>
+        </div>
       </div>
-      <button class="btn-add" onclick="addBag('Vestido en Gasa Floral', 4765, 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=200', this)">AÑADIR A LA BOLSA</button>
     </article>
 
-    <!-- 3. Slingback Shoes -->
-    <article class="prod-card">
-      <div class="pc-img">
-        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500&auto=format&fit=crop&q=85" alt="Floral calfskin slingback">
-        <span class="badge-runway">RUNWAY</span>
+    <!-- 3. Zapatos Slingback Floral -->
+    <article class="p-card" id="calzado">
+      <div class="p-img-wrap">
+        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&auto=format&fit=crop&q=85" alt="Zapatos Slingback">
+        <span class="p-badge">PIEL DE BECERRO</span>
       </div>
-      <div class="pc-info">
-        <a href="pago-premium.html?id=slingback-shoes" class="pc-name">Zapatos Slingback en Piel de Becerro Floral</a>
-        <div class="pc-price">€ 1.265</div>
+      <div class="p-info">
+        <div class="p-category">CALZADO DE LUJO</div>
+        <div class="p-name">Zapatos Slingback en Piel de Becerro Estampada</div>
+        <div class="p-price-row">
+          <span class="p-price-val">€ 1.265</span>
+          <span style="font-size:11px;color:#ff6b4a;">($ 29.90 Ali)</span>
+        </div>
+        <div class="p-actions">
+          <a href="https://www.aliexpress.com/item/1005004123987456.html" target="_blank" class="btn-ali-card">
+            🛍️ COMPRAR EN ALIEXPRESS ↗
+          </a>
+          <button class="btn-bag-card" onclick="addBag('Zapatos Slingback Piel Floral', 1265, 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=200', this)">
+            Añadir a Bolsa Local
+          </button>
+        </div>
       </div>
-      <button class="btn-add" onclick="addBag('Zapatos Slingback Piel Floral', 1265, 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=200', this)">AÑADIR A LA BOLSA</button>
     </article>
 
-    <!-- 4. Tulle Top -->
-    <article class="prod-card">
-      <div class="pc-img">
-        <img src="https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=500&auto=format&fit=crop&q=85" alt="Tulle top with embroidery">
-        <span class="badge-runway">RUNWAY</span>
+    <!-- 4. Top de Tul con Bordados -->
+    <article class="p-card">
+      <div class="p-img-wrap">
+        <img src="https://images.unsplash.com/photo-1551803091-e20673f15770?w=600&auto=format&fit=crop&q=85" alt="Top en Tul Bordado">
+        <span class="p-badge">BORDADO A MANO</span>
       </div>
-      <div class="pc-info">
-        <a href="producto-detalle.html" class="pc-name">Top en Tul Negro con Bordados Artesanales</a>
-        <div class="pc-price">€ 4.075</div>
+      <div class="p-info">
+        <div class="p-category">TOPS &amp; BLUSAS</div>
+        <div class="p-name">Top en Tul Negro con Bordados Artesanales</div>
+        <div class="p-price-row">
+          <span class="p-price-val">€ 4.075</span>
+          <span style="font-size:11px;color:#ff6b4a;">($ 26.50 Ali)</span>
+        </div>
+        <div class="p-actions">
+          <a href="https://www.aliexpress.com/item/1005003654789123.html" target="_blank" class="btn-ali-card">
+            🛍️ COMPRAR EN ALIEXPRESS ↗
+          </a>
+          <button class="btn-bag-card" onclick="addBag('Top en Tul con Bordados', 4075, 'https://images.unsplash.com/photo-1551803091-e20673f15770?w=200', this)">
+            Añadir a Bolsa Local
+          </button>
+        </div>
       </div>
-      <button class="btn-add" onclick="addBag('Top en Tul con Bordados', 4075, 'https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=200', this)">AÑADIR A LA BOLSA</button>
     </article>
 
-    <!-- 5. Chantilly Lace Skirt -->
-    <article class="prod-card">
-      <div class="pc-img">
-        <img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=500&auto=format&fit=crop&q=85" alt="Chantilly lace skirt">
-        <span class="badge-runway">RUNWAY</span>
+    <!-- 5. Falda en Encaje Chantilly -->
+    <article class="p-card">
+      <div class="p-img-wrap">
+        <img src="https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=600&auto=format&fit=crop&q=85" alt="Falda Chantilly">
+        <span class="p-badge">ENCAJE FRANCÉS</span>
       </div>
-      <div class="pc-info">
-        <a href="producto-detalle.html" class="pc-name">Falda de Tubo en Encaje Chantilly Negro</a>
-        <div class="pc-price">€ 3.795</div>
+      <div class="p-info">
+        <div class="p-category">FALDAS DE ALTA COSTURA</div>
+        <div class="p-name">Falda de Tubo en Encaje Chantilly Negro</div>
+        <div class="p-price-row">
+          <span class="p-price-val">€ 3.795</span>
+          <span style="font-size:11px;color:#ff6b4a;">($ 32.80 Ali)</span>
+        </div>
+        <div class="p-actions">
+          <a href="https://www.aliexpress.com/item/1005005123654987.html" target="_blank" class="btn-ali-card">
+            🛍️ COMPRAR EN ALIEXPRESS ↗
+          </a>
+          <button class="btn-bag-card" onclick="addBag('Falda en Encaje Chantilly', 3795, 'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=200', this)">
+            Añadir a Bolsa Local
+          </button>
+        </div>
       </div>
-      <button class="btn-add" onclick="addBag('Falda en Encaje Chantilly', 3795, 'https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=200', this)">AÑADIR A LA BOLSA</button>
     </article>
 
     <!-- 6. Bolso Sicily Dauphine -->
-    <article class="prod-card">
-      <div class="pc-img">
-        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&auto=format&fit=crop&q=85" alt="Bolso Sicily Pequeño">
-        <span class="badge-runway">ICÓNICO</span>
+    <article class="p-card">
+      <div class="p-img-wrap">
+        <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=600&auto=format&fit=crop&q=85" alt="Bolso Sicily">
+        <span class="p-badge">HERRAJE EN ORO</span>
       </div>
-      <div class="pc-info">
-        <a href="pago-premium.html?id=sicily-bag" class="pc-name">Bolso Sicily Pequeño en Piel Dauphine</a>
-        <div class="pc-price">€ 1.850</div>
+      <div class="p-info">
+        <div class="p-category">BOLSO ICÓNICO</div>
+        <div class="p-name">Bolso Sicily Pequeño en Piel Dauphine Nero</div>
+        <div class="p-price-row">
+          <span class="p-price-val">€ 1.850</span>
+          <span style="font-size:11px;color:#ff6b4a;">($ 34.00 Ali)</span>
+        </div>
+        <div class="p-actions">
+          <a href="https://www.aliexpress.com/item/1005004876543210.html" target="_blank" class="btn-ali-card">
+            🛍️ COMPRAR EN ALIEXPRESS ↗
+          </a>
+          <button class="btn-bag-card" onclick="addBag('Bolso Sicily Piel Dauphine', 1850, 'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=200', this)">
+            Añadir a Bolsa Local
+          </button>
+        </div>
       </div>
-      <button class="btn-add" onclick="addBag('Bolso Sicily Piel Dauphine', 1850, 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=200', this)">AÑADIR A LA BOLSA</button>
     </article>
 
     <!-- 7. Gafas de Sol DG Logo -->
-    <article class="prod-card">
-      <div class="pc-img">
-        <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500&auto=format&fit=crop&q=85" alt="Gafas de Sol Runway">
-        <span class="badge-runway">EDICIÓN LIMITADA</span>
+    <article class="p-card" id="joyas">
+      <div class="p-img-wrap">
+        <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&auto=format&fit=crop&q=85" alt="Gafas de Sol">
+        <span class="p-badge">PROTECCIÓN UV400</span>
       </div>
-      <div class="pc-info">
-        <a href="pago-premium.html?id=sunglasses" class="pc-name">Gafas de Sol Runway DG Logo Barroco</a>
-        <div class="pc-price">€ 890</div>
+      <div class="p-info">
+        <div class="p-category">EYEWEAR DE LUJO</div>
+        <div class="p-name">Gafas de Sol Runway DG Logo Barroco en Oro</div>
+        <div class="p-price-row">
+          <span class="p-price-val">€ 890</span>
+          <span style="font-size:11px;color:#ff6b4a;">($ 14.50 Ali)</span>
+        </div>
+        <div class="p-actions">
+          <a href="https://www.aliexpress.com/item/1005003987654321.html" target="_blank" class="btn-ali-card">
+            🛍️ COMPRAR EN ALIEXPRESS ↗
+          </a>
+          <button class="btn-bag-card" onclick="addBag('Gafas de Sol DG Logo Oro', 890, 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=200', this)">
+            Añadir a Bolsa Local
+          </button>
+        </div>
       </div>
-      <button class="btn-add" onclick="addBag('Gafas de Sol DG Logo', 890, 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=200', this)">AÑADIR A LA BOLSA</button>
     </article>
 
-    <!-- 8. Bolso Devotion Oro 24K -->
-    <article class="prod-card">
-      <div class="pc-img">
-        <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=500&auto=format&fit=crop&q=85" alt="Bolso Devotion con Corazón Sagrado">
-        <span class="badge-runway">ALTA JOYERÍA</span>
+    <!-- 8. Zapatos Oxford Nobles -->
+    <article class="p-card">
+      <div class="p-img-wrap">
+        <img src="https://images.unsplash.com/photo-1614252369475-531eba835eb1?w=600&auto=format&fit=crop&q=85" alt="Zapatos Oxford">
+        <span class="p-badge">CALZADO MASCULINO</span>
       </div>
-      <div class="pc-info">
-        <a href="pago-premium.html?id=devotion-bag" class="pc-name">Bolso Devotion con Corazón Sagrado Oro 24K</a>
-        <div class="pc-price">€ 2.650</div>
+      <div class="p-info">
+        <div class="p-category">CALZADO ARTESANAL</div>
+        <div class="p-name">Zapatos Derby en Piel Pulida con Cordones</div>
+        <div class="p-price-row">
+          <span class="p-price-val">€ 875</span>
+          <span style="font-size:11px;color:#ff6b4a;">($ 36.90 Ali)</span>
+        </div>
+        <div class="p-actions">
+          <a href="https://www.aliexpress.com/item/1005004567891234.html" target="_blank" class="btn-ali-card">
+            🛍️ COMPRAR EN ALIEXPRESS ↗
+          </a>
+          <button class="btn-bag-card" onclick="addBag('Zapatos Derby en Piel Pulida', 875, 'https://images.unsplash.com/photo-1614252369475-531eba835eb1?w=200', this)">
+            Añadir a Bolsa Local
+          </button>
+        </div>
       </div>
-      <button class="btn-add" onclick="addBag('Bolso Devotion Corazón Oro', 2650, 'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=200', this)">AÑADIR A LA BOLSA</button>
-    </article>
-
-  </div>
-
-  <!-- Catálogo Hombre -->
-  <div id="tab-men" class="prod-grid-container" style="display:none">
-    
-    <!-- 1. Traje Sastorial Lana -->
-    <article class="prod-card">
-      <div class="pc-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=85" alt="Traje Sastorial de Lana"><span class="badge-runway">RUNWAY</span></div>
-      <div class="pc-info"><a href="pago-premium.html?id=mens-suit" class="pc-name">Traje Sastorial en Lana Virgen y Seda</a><div class="pc-price">€ 3.450</div></div>
-      <button class="btn-add" onclick="addBag('Traje Sastorial en Lana', 3450, 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200', this)">AÑADIR A LA BOLSA</button>
-    </article>
-
-    <!-- 2. Zapatos Derby Cordones -->
-    <article class="prod-card">
-      <div class="pc-img"><img src="https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=500&auto=format&fit=crop&q=85" alt="Zapatos Derby de Cordones"><span class="badge-runway">RUNWAY</span></div>
-      <div class="pc-info"><a href="pago-premium.html?id=mens-shoes" class="pc-name">Zapatos Derby en Piel Pulida con Cordones</a><div class="pc-price">€ 875</div></div>
-      <button class="btn-add" onclick="addBag('Zapatos Derby en Piel Pulida', 875, 'https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=200', this)">AÑADIR A LA BOLSA</button>
-    </article>
-
-    <!-- 3. Blazer en Terciopelo Azul Noche -->
-    <article class="prod-card">
-      <div class="pc-img"><img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=500&auto=format&fit=crop&q=85" alt="Blazer Terciopelo Azul"><span class="badge-runway">ALTA COSTURA</span></div>
-      <div class="pc-info"><a href="pago-premium.html?id=mens-blazer" class="pc-name">Blazer de Gala en Terciopelo Azul Noche</a><div class="pc-price">€ 2.890</div></div>
-      <button class="btn-add" onclick="addBag('Blazer Terciopelo Azul Noche', 2890, 'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=200', this)">AÑADIR A LA BOLSA</button>
-    </article>
-
-    <!-- 4. Mocasines en Piel de Cocodrilo -->
-    <article class="prod-card">
-      <div class="pc-img"><img src="https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=500&auto=format&fit=crop&q=85" alt="Mocasines Piel"><span class="badge-runway">ARTESANÍA VIP</span></div>
-      <div class="pc-info"><a href="pago-premium.html?id=mens-loafers" class="pc-name">Mocasines Nobles con Hebilla DG en Oro</a><div class="pc-price">€ 1.150</div></div>
-      <button class="btn-add" onclick="addBag('Mocasines Nobles Hebilla DG', 1150, 'https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=200', this)">AÑADIR A LA BOLSA</button>
     </article>
 
   </div>
 </section>
 
-<!-- TRIPTYCH: 3 PRODUCTOS DIRECTOS EN FORMATO EDITORIAL -->
-<div class="triptych">
+<!-- SECCIÓN TRIPTYCH: 3 CATEGORÍAS VENDIBLES -->
+<section class="triptych-section">
   
-  <!-- Producto Triptych 1: Bolso Tote Piel -->
-  <div class="trip-tile">
+  <div class="trip-card">
     <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=700&auto=format&fit=crop&q=88" alt="Tote Bag en Piel Grano">
-    <div class="trip-content">
-      <div>
-        <div style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-blue);margin-bottom:4px">MARROQUINERÍA ITALIANA</div>
-        <div class="trip-name">Tote Bag en Piel Grano Nero</div>
-        <div class="trip-price">€ 2.150</div>
+    <div class="trip-inner">
+      <div class="trip-cat">BOLSOS &amp; MARROQUINERÍA</div>
+      <div class="trip-name-txt">Tote Bag en Piel Grano Nero</div>
+      <div class="trip-price-txt">€ 2.150 / $ 39.90 USD</div>
+      <div class="btn-group-dual">
+        <a href="https://www.aliexpress.com/item/1005005874123654.html" target="_blank" class="btn-ali-direct" style="padding:10px 18px;font-size:9px;">
+          🛍️ COMPRAR EN ALIEXPRESS ↗
+        </a>
       </div>
-      <button class="trip-btn" onclick="addBag('Tote Bag en Piel Grano', 2150, 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=200', this)">COMPRAR ↗</button>
     </div>
   </div>
 
-  <!-- Producto Triptych 2: Sandalias Stiletto -->
-  <div class="trip-tile">
-    <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=700&auto=format&fit=crop&q=88" alt="Sandalias Stiletto Oro">
-    <div class="trip-content">
-      <div>
-        <div style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-blue);margin-bottom:4px">CALZADO DE GALA</div>
-        <div class="trip-name">Sandalias Stiletto en Satén y Oro</div>
-        <div class="trip-price">€ 1.450</div>
+  <div class="trip-card">
+    <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=700&auto=format&fit=crop&q=88" alt="Stilettos en Satén">
+    <div class="trip-inner">
+      <div class="trip-cat">CALZADO DE GALA</div>
+      <div class="trip-name-txt">Sandalias Stiletto en Satén y Oro</div>
+      <div class="trip-price-txt">€ 1.450 / $ 28.50 USD</div>
+      <div class="btn-group-dual">
+        <a href="https://www.aliexpress.com/item/1005004987654123.html" target="_blank" class="btn-ali-direct" style="padding:10px 18px;font-size:9px;">
+          🛍️ COMPRAR EN ALIEXPRESS ↗
+        </a>
       </div>
-      <button class="trip-btn" onclick="addBag('Sandalias Stiletto Oro', 1450, 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=200', this)">COMPRAR ↗</button>
     </div>
   </div>
 
-  <!-- Producto Triptych 3: Botines en Piel Noble -->
-  <div class="trip-tile">
-    <img src="https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=700&auto=format&fit=crop&q=88" alt="Botines Chelsea Piel">
-    <div class="trip-content">
-      <div>
-        <div style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-blue);margin-bottom:4px">CALZADO MASCULINO</div>
-        <div class="trip-name">Botines Chelsea en Piel Noble</div>
-        <div class="trip-price">€ 1.290</div>
+  <div class="trip-card">
+    <img src="https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=700&auto=format&fit=crop&q=88" alt="Botines Chelsea">
+    <div class="trip-inner">
+      <div class="trip-cat">CALZADO MASCULINO</div>
+      <div class="trip-name-txt">Botines Chelsea en Piel Noble</div>
+      <div class="trip-price-txt">€ 1.290 / $ 33.00 USD</div>
+      <div class="btn-group-dual">
+        <a href="https://www.aliexpress.com/item/1005003874125896.html" target="_blank" class="btn-ali-direct" style="padding:10px 18px;font-size:9px;">
+          🛍️ COMPRAR EN ALIEXPRESS ↗
+        </a>
       </div>
-      <button class="trip-btn" onclick="addBag('Botines Chelsea Piel Noble', 1290, 'https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=200', this)">COMPRAR ↗</button>
     </div>
   </div>
 
-</div>
-
-<!-- BEAUTY: PRODUCTO COMPRABLE EVER-YOUTH -->
-<section class="beauty" id="belleza">
-  <div class="beauty-img">
-    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=900&auto=format&fit=crop&q=88" alt="Ever-Youth Skin Collection Ritual">
-  </div>
-  <div class="beauty-txt">
-    <div class="eyebrow-s">ALTA COSMÉTICA BOTÁNICA &middot; MILANO</div>
-    <h2>SET COMPLETO EVER-YOUTH SKINCARE RITUAL</h2>
-    <div class="b-price">€ 680 &nbsp;·&nbsp; Sérum Regenerador + Crema de Noche + Elixir Botánico</div>
-    <p>Formulado con péptidos botánicos del Mediterráneo y micro-nutrientes bioactivos para revitalizar la luminosidad y firmeza celular.</p>
-    <button class="btn-purple" style="align-self:flex-start;" onclick="addBag('Set Completo Ever-Youth Skincare', 680, 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=200', this)">AÑADIR SET A LA BOLSA (€ 680)</button>
-  </div>
 </section>
 
-<!-- WORLD SECTION: 3 LOOKS DE PASARELA COMPRABLES -->
-<section class="world" id="desfiles">
-  <div class="world-hdr">
-    <h2>LOOKS COMPLETOS DEL DESFILE FW 2026</h2>
-    <nav class="world-nav">
-      <a href="pasarela.html" class="on">Fashion Shows 2026</a>
-      <a href="pasarela.html">Front Row &amp; VIP</a>
-      <a href="pasarela.html">Backstage &amp; Beauty</a>
-    </nav>
+<!-- SECCIÓN BELLEZA / SKINCARE -->
+<section class="dual-section" style="background:#090614;">
+  <div class="dual-card" style="height:600px;">
+    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=900&auto=format&fit=crop&q=88" alt="Set Ever-Youth Skincare">
+    <div class="dual-content">
+      <div class="dual-tag">ALTA COSMÉTICA BOTÁNICA · MILANO</div>
+      <h2 class="dual-title">Set Completo Ever-Youth Skincare Ritual</h2>
+      <div class="dual-price">€ 680 / $ 19.90 USD (AliExpress Beauty)</div>
+      <p class="dual-desc">Sérum Regenerador de Células Madre + Crema de Noche Esculpidora con Péptidos Bioactivos del Mediterráneo.</p>
+      <div class="btn-group-dual">
+        <a href="https://www.aliexpress.com/item/1005006789123456.html" target="_blank" class="btn-ali-direct">
+          🛍️ COMPRAR EN ALIEXPRESS ↗
+        </a>
+        <button class="btn-bag-add" onclick="addBag('Set Completo Ever-Youth Skincare', 680, 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=200', this)">
+          AÑADIR A LA BOLSA VIP
+        </button>
+      </div>
+    </div>
   </div>
-  <div class="shows-grid">
-    
-    <!-- Look 1 -->
-    <div class="show-card">
-      <div class="show-card-img"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format&fit=crop&q=85" alt="Look 01 Pasarela"></div>
-      <div class="show-info">
-        <div class="show-season">LOOK 01 &middot; APERTURA DE DESFILE</div>
-        <div class="show-title">Total Look Vestido Crepé &amp; Clutches de Gala</div>
-        <div class="show-price">€ 7.705 (Vestido + Bolso Grandma)</div>
-        <button class="btn-camp-buy" onclick="addBag('Look 01 Completo de Pasarela', 7705, 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=200', this)">COMPRAR LOOK COMPLETO ↗</button>
+  
+  <div class="dual-card" style="height:600px;">
+    <img src="https://images.unsplash.com/photo-1512290900672-1f02e6b09be8?w=900&auto=format&fit=crop&q=88" alt="Perfume Velvet Black">
+    <div class="dual-content">
+      <div class="dual-tag">ALTA PERFUMERÍA · COLECCIÓN VELVET</div>
+      <h2 class="dual-title">Extracto de Perfume Velvet Black Amber</h2>
+      <div class="dual-price">€ 490 / $ 16.50 USD (AliExpress)</div>
+      <p class="dual-desc">Notas de salida de bergamota siciliana, corazón de rosa damascena y fondo opulento de ámbar negro y vainilla de Madagascar.</p>
+      <div class="btn-group-dual">
+        <a href="https://www.aliexpress.com/item/1005005432167890.html" target="_blank" class="btn-ali-direct">
+          🛍️ COMPRAR EN ALIEXPRESS ↗
+        </a>
+        <button class="btn-bag-add" onclick="addBag('Perfume Velvet Black Amber', 490, 'https://images.unsplash.com/photo-1512290900672-1f02e6b09be8?w=200', this)">
+          AÑADIR A LA BOLSA VIP
+        </button>
       </div>
     </div>
-
-    <!-- Look 2 -->
-    <div class="show-card">
-      <div class="show-card-img"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=85" alt="Look 02 Pasarela"></div>
-      <div class="show-info">
-        <div class="show-season">LOOK 02 &middot; ALTA COSTURA IDENTITY</div>
-        <div class="show-title">Total Look Esmoquin Terciopelo &amp; Slingback</div>
-        <div class="show-price">€ 5.115 (Esmoquin + Zapatos Slingback)</div>
-        <button class="btn-camp-buy" onclick="addBag('Look 02 Esmoquin Completo', 5115, 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=200', this)">COMPRAR LOOK COMPLETO ↗</button>
-      </div>
-    </div>
-
-    <!-- Look 3 -->
-    <div class="show-card">
-      <div class="show-card-img"><img src="https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?w=600&auto=format&fit=crop&q=85" alt="Look 03 Pasarela Hombre"></div>
-      <div class="show-info">
-        <div class="show-season">LOOK 03 &middot; THE PORTRAIT OF MAN</div>
-        <div class="show-title">Total Look Traje Sastorial &amp; Derby Piel</div>
-        <div class="show-price">€ 4.325 (Traje + Derby Noble)</div>
-        <button class="btn-camp-buy" onclick="addBag('Look 03 Hombre Completo', 4325, 'https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?w=200', this)">COMPRAR LOOK COMPLETO ↗</button>
-      </div>
-    </div>
-
   </div>
-  <div class="world-footer"><a href="pasarela.html" class="btn-ol-purple">VER TODOS LOS 8 LOOKS DE PASARELA EN DIRECTO ↗</a></div>
-</section>
-
-<!-- STORE LOCATOR -->
-<section class="store-sec">
-  <h2>LOCALIZADOR DE BOUTIQUES EXCLUSIVAS</h2>
-  <p>Ingrese su ciudad o código postal para encontrar las tiendas insignia más cercanas en Colombia, España e Italia</p>
-  <div class="store-form"><input type="text" placeholder="Ciudad, País o Código Postal (ej. Medellín, Bogotá, Madrid)"><button type="button">BUSCAR</button></div>
-</section>
-
-<!-- NEWSLETTER -->
-<section class="news-sec">
-  <h2>SUSCRÍBASE A LAS NOVEDADES DE ALTA COSTURA</h2>
-  <form class="news-form" onsubmit="return false"><input type="email" placeholder="Ingrese su correo electrónico"><button>CONFIRMAR</button></form>
-  <p class="news-fine">Al suscribirse confirma haber leído la <a href="#">Política de Privacidad y Tratamiento de Datos VIP</a>.</p>
 </section>
 
 <!-- FOOTER -->
 <footer class="site-footer">
-  <div class="foot-grid">
-    <div><div class="foot-ttl">SERVICIOS EXCLUSIVOS</div><ul class="foot-links"><li><a href="#">Rastreo de Órdenes</a></li><li><a href="#">Devoluciones Sin Costo</a></li><li><a href="pago-premium.html">Envío Express Asegurado</a></li><li><a href="#">Embalaje de Regalo con Lazo</a></li></ul></div>
-    <div><div class="foot-ttl">ATENCIÓN AL CLIENTE VIP</div><ul class="foot-links"><li><a href="#">Contacto &amp; WhatsApp Concierge</a></li><li><a href="#">Preguntas Frecuentes</a></li><li><a href="#">Guía de Tallas Italianas</a></li><li><a href="#">Agendar Cita en Boutique</a></li></ul></div>
-    <div><div class="foot-ttl">ÁREA LEGAL</div><ul class="foot-links"><li><a href="#">Política de Privacidad</a></li><li><a href="#">Términos de Venta</a></li><li><a href="#">Cookies &amp; Seguridad SSL</a></li></ul></div>
-    <div><div class="foot-ttl">MAISON REMEMBER LUXURY</div><ul class="foot-links"><li><a href="#">Nuestra Historia</a></li><li><a href="#">Sostenibilidad &amp; Artesanía</a></li><li><a href="#">Prensa &amp; Editorial</a></li></ul></div>
+  <div class="footer-cols">
+    <div>
+      <div class="foot-col-title">COMPRA DIRECTA EN ALIEXPRESS</div>
+      <ul class="foot-links">
+        <li><a href="https://www.aliexpress.com/ssr/300000512/BundleDeals2" target="_blank">Bundle Deals &amp; Ofertas Flash ↗</a></li>
+        <li><a href="https://www.aliexpress.com/ssr/300000556/zQFHEaEPNJ" target="_blank">AliExpress Choice Delivery ↗</a></li>
+        <li><a href="https://www.aliexpress.com/p/calp-plus/index.html?categoryTab=women%27s_clothing" target="_blank">Moda Femenina AliExpress ↗</a></li>
+        <li><a href="https://www.aliexpress.com/p/calp-plus/index.html?categoryTab=appliances" target="_blank">Boutiques Oficiales ↗</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-col-title">SERVICIOS VIP</div>
+      <ul class="foot-links">
+        <li><a href="pago-premium.html">Envío Express Asegurado</a></li>
+        <li><a href="pago-premium.html">Embalaje de Lujo de Cortesía</a></li>
+        <li><a href="pago-premium.html">Rastreo de Pedidos</a></li>
+        <li><a href="#">Garantía de Autenticidad</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-col-title">MÉTODOS DE PAGO SEGURO</div>
+      <ul class="foot-links">
+        <li><a href="#">AliExpress Pay / Escrow</a></li>
+        <li><a href="#">Tarjetas Visa, Mastercard, AMEX</a></li>
+        <li><a href="#">PayPal &amp; Apple Pay</a></li>
+        <li><a href="#">Nequi &amp; PSE (Colombia)</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-col-title">MAISON REMEMBER LUXURY</div>
+      <ul class="foot-links">
+        <li><a href="#">Sostenibilidad &amp; Artesanía</a></li>
+        <li><a href="pasarela.html">Desfiles de Pasarela FW 2026</a></li>
+        <li><a href="#">Atención al Cliente Concierge</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="foot-bottom">
-    <span>&copy; 2026 REMEMBER LUXURY S.r.l. &mdash; Todos los derechos reservados. Milano &middot; Medellín.</span>
-    <div class="foot-social"><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">YouTube</a><a href="#">Facebook</a></div>
-    <div class="country-tag">&#x1F1E8;&#x1F1F4; Colombia / Español (COP $)</div>
+  <div class="footer-bottom-row">
+    <span>&copy; 2026 DOLCE &amp; GABBANA / REMEMBER LUXURY. Conexión Directa con Proveedores Oficiales AliExpress.</span>
+    <div style="display:flex;gap:16px;">
+      <a href="#">Privacidad</a>
+      <a href="#">Términos</a>
+      <a href="#">Cookies</a>
+    </div>
   </div>
 </footer>
 
-<!-- CART DRAWER LATERAL COSMOS -->
+<!-- CART DRAWER LATERAL -->
 <div class="overlay" id="overlay" onclick="closeCart()"></div>
 <div class="cart-drawer" id="cartDrawer">
-  <div class="cart-hdr"><h3>Bolsa de Compras <span id="cartCnt" style="font-weight:400;color:var(--accent-blue)">(1)</span></h3><button class="cart-close" onclick="closeCart()">&#x2715;</button></div>
+  <div class="cart-hdr"><h3>Bolsa de Compras <span id="cartCnt" style="font-weight:400;color:var(--gold);">(1)</span></h3><button class="cart-close" onclick="closeCart()">&#x2715;</button></div>
   <div class="cart-body" id="cartBody">
     <div class="c-item">
-      <div class="c-item-img"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=200&auto=format&fit=crop" alt="Vestido Doble Crepé"></div>
-      <div class="c-item-info"><div class="c-item-name">Vestido en Doble Crepé de Lana Virgen</div><div class="c-item-dtl">Talla: IT 40 &mdash; Color: Negro Nero</div><div class="c-item-dtl">Fabricado en Italia &middot; Entrega Express</div><div class="c-item-price">€ 2.450</div></div>
+      <div class="c-item-img"><img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=200&auto=format&fit=crop" alt="Vestido Doble Crepé"></div>
+      <div class="c-item-info"><div class="c-item-name">Vestido en Doble Crepé de Lana Virgen Nero</div><div class="c-item-dtl">Talla: IT 40 &mdash; Color: Negro Nero</div><div class="c-item-dtl">Fabricado en Italia &middot; Entrega Express</div><div class="c-item-price">€ 2.450</div></div>
     </div>
   </div>
   <div class="cart-foot">
     <div class="c-subtotal"><span>Subtotal Estimado</span><span id="cartAmt">€ 2.450</span></div>
-    <div class="c-note">Incluye envío prioritario gratuito y packaging de cortesía.</div>
-    <a href="pago-premium.html" class="btn-checkout">PROCEDER AL PAGO SEGURO ↗</a>
-    <button class="btn-continue" onclick="closeCart()">CONTINUAR EXPLORANDO</button>
+    <div class="c-note">Incluye empaque de lujo y certificado de autenticidad.</div>
+    <a href="pago-premium.html" class="btn-checkout">PAGAR CON TARJETA / NEQUI / PAYPAL ↗</a>
+    <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-card" style="margin-bottom:8px;padding:14px;font-size:11px;">🛍️ PAGAR CON ALIEXPRESS ESCROW ↗</a>
+    <button class="btn-continue" onclick="closeCart()">CONTINUAR COMPRANDO</button>
   </div>
 </div>
 
-</div><!-- Fin content-layer -->
+</div>
 
 <script>
 /* ─── MOTOR DE FONDO UNIVERSO REALISTA + ESTRELLAS FUGACES ─── */
@@ -889,7 +1087,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
       size: Math.random() * 1.6 + 0.3,
       alpha: Math.random() * 0.8 + 0.2,
       speed: Math.random() * 0.02 + 0.005,
-      hue: Math.random() > 0.5 ? 260 : 195
+      hue: Math.random() > 0.5 ? 45 : 260 // Oro y Violeta galáctico
     });
   }
 
@@ -917,8 +1115,8 @@ img{display:block;width:100%;height:100%;object-fit:cover}
     ctx.clearRect(0, 0, width, height);
 
     const grad = ctx.createRadialGradient(width * 0.5, height * 0.3, 50, width * 0.5, height * 0.5, width * 0.8);
-    grad.addColorStop(0, 'rgba(25, 10, 50, 0.4)');
-    grad.addColorStop(0.5, 'rgba(10, 15, 45, 0.3)');
+    grad.addColorStop(0, 'rgba(30, 15, 55, 0.45)');
+    grad.addColorStop(0.5, 'rgba(10, 15, 45, 0.35)');
     grad.addColorStop(1, 'rgba(4, 2, 8, 0.95)');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, width, height);
@@ -930,7 +1128,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
       ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
       ctx.fillStyle = `hsla(${s.hue}, 80%, 85%, ${Math.abs(s.alpha)})`;
       ctx.shadowBlur = s.size > 1 ? 6 : 0;
-      ctx.shadowColor = s.hue === 260 ? '#c4b5fd' : '#7dd3fc';
+      ctx.shadowColor = s.hue === 45 ? '#f3e5ab' : '#c4b5fd';
       ctx.fill();
     }
     ctx.shadowBlur = 0;
@@ -951,7 +1149,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 
       const starGrad = ctx.createLinearGradient(ss.x, ss.y, tailX, tailY);
       starGrad.addColorStop(0, `rgba(255, 255, 255, ${ss.opacity})`);
-      starGrad.addColorStop(0.2, `rgba(125, 211, 252, ${ss.opacity * 0.8})`);
+      starGrad.addColorStop(0.2, `rgba(243, 229, 171, ${ss.opacity * 0.8})`);
       starGrad.addColorStop(0.6, `rgba(168, 85, 247, ${ss.opacity * 0.4})`);
       starGrad.addColorStop(1, 'rgba(168, 85, 247, 0)');
 
@@ -967,7 +1165,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
       ctx.arc(ss.x, ss.y, ss.thickness * 1.2, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(255, 255, 255, ${ss.opacity})`;
       ctx.shadowBlur = 8;
-      ctx.shadowColor = '#4cc9f0';
+      ctx.shadowColor = '#d4af37';
       ctx.fill();
       ctx.shadowBlur = 0;
     }
@@ -979,7 +1177,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 })();
 
 /* ─── LÓGICA DE BOLSA & INTERACCIÓN ─── */
-var cList=[{n:'Vestido en Doble Crepé de Lana',p:2450}];
+var cList=[{n:'Vestido en Doble Crepé Nero',p:2450}];
 var total=2450;
 document.getElementById('openCart').addEventListener('click',openCart);
 function openCart(){document.getElementById('cartDrawer').classList.add('open');document.getElementById('overlay').classList.add('show');document.body.style.overflow='hidden'}
@@ -994,18 +1192,11 @@ function addBag(name,price,img,btn){
   document.getElementById('cartAmt').textContent='€ '+total.toLocaleString();
   document.getElementById('openCart').textContent='Bolsa ('+cList.length+')';
   if(btn){
-    btn.textContent='✓ AÑADIDO A LA BOLSA';
-    btn.style.background='linear-gradient(135deg, #10b981, #059669)';
-    setTimeout(function(){btn.textContent='AÑADIR A LA BOLSA';btn.style.background='';},2000);
+    btn.textContent='✓ AÑADIDO';
+    btn.style.background='rgba(212,175,55,0.4)';
+    setTimeout(function(){btn.textContent='Añadir a Bolsa Local';btn.style.background='';},2000);
   }
   openCart();
-}
-
-function swTab(btn,tab){
-  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('on')});
-  btn.classList.add('on');
-  document.getElementById('tab-women').style.display=tab==='women'?'grid':'none';
-  document.getElementById('tab-men').style.display=tab==='men'?'grid':'none';
 }
 </script>
 </body>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REMEMBER LUXURY® | Universo de Alta Gama & Colecciones Reales</title>
+<title>REMEMBER LUXURY® | Catálogo Oficial de Alta Costura & Colecciones</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300&display=swap" rel="stylesheet">
 <style>
@@ -16,7 +16,7 @@
   --accent-blue:#4cc9f0;
   --white:#ffffff;
   --gray-text:#b8b5cc;
-  --card-bg:rgba(18, 14, 33, 0.75);
+  --card-bg:rgba(18, 14, 33, 0.78);
   --glass-border:rgba(157, 78, 221, 0.22);
   --font:'Montserrat',Helvetica Neue,Arial,sans-serif;
 }
@@ -32,7 +32,6 @@ body{
   position:relative;
 }
 
-/* CANVAS DE UNIVERSO REALISTA + ESTRELLAS FUGACES */
 #universe-canvas {
   position: fixed;
   top: 0;
@@ -66,12 +65,12 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 }
 .top-banner a{color:var(--accent-blue);text-decoration:underline}
 
-/* HEADER CRISTAL & NEÓN CÓSMICO */
+/* HEADER CRISTAL & NEÓN */
 .site-header{
   position:sticky;
   top:0;
   z-index:900;
-  background: rgba(8, 5, 16, 0.82);
+  background: rgba(8, 5, 16, 0.85);
   backdrop-filter: blur(16px);
   border-bottom:1px solid var(--glass-border);
 }
@@ -102,14 +101,14 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 }
 .nav-link:hover{color: var(--accent-blue); text-shadow: 0 0 12px rgba(76,201,240,0.6);}
 
-/* MEGA MENU CRISTAL OSCURO */
+/* MEGA MENU */
 .mega-panel{
   display:none;
   position:fixed;
   top:60px;
   left:0;
   right:0;
-  background: rgba(10, 7, 22, 0.95);
+  background: rgba(10, 7, 22, 0.96);
   backdrop-filter: blur(24px);
   border-top:1px solid var(--glass-border);
   border-bottom:1px solid var(--glass-border);
@@ -118,12 +117,12 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   padding:40px 60px;
 }
 .nav-item:hover .mega-panel{display:block}
-.mega-inner{display:grid;grid-template-columns:repeat(5,1fr) 200px;gap:36px;max-width:1400px;margin:0 auto}
+.mega-inner{display:grid;grid-template-columns:repeat(5,1fr) 220px;gap:36px;max-width:1400px;margin:0 auto}
 .mega-col-ttl{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px;color:var(--accent-purple)}
 .mega-links{list-style:none;display:flex;flex-direction:column;gap:10px}
 .mega-links a{font-size:11px;color:var(--gray-text);transition:all .2s}
 .mega-links a:hover{color:#fff;transform: translateX(4px);}
-.mega-feat{width:100%;height:200px;background:rgba(255,255,255,0.05);overflow:hidden;border:1px solid var(--glass-border);border-radius:4px;}
+.mega-feat{width:100%;height:200px;background:rgba(255,255,255,0.05);overflow:hidden;border:1px solid var(--glass-border);border-radius:4px;position:relative;}
 .mega-feat-lbl{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-top:9px;color:#c4b5fd;}
 
 /* LOGO */
@@ -142,7 +141,6 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   text-shadow: 0 0 20px rgba(157,78,221,0.4);
 }
 
-/* NAV RIGHT */
 .nav-right{display:flex;align-items:center;gap:18px}
 .nav-right a,.nav-right button{
   font-size:10px;
@@ -158,17 +156,17 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 }
 .nav-right a:hover,.nav-right button:hover{color:var(--accent-blue)}
 .bag-btn-top {
-  background: rgba(157,78,221,0.2) !important;
-  border: 1px solid rgba(157,78,221,0.5) !important;
+  background: rgba(157,78,221,0.25) !important;
+  border: 1px solid rgba(157,78,221,0.6) !important;
   padding: 6px 14px;
   border-radius: 20px;
 }
 .bag-btn-top:hover {
-  background: rgba(157,78,221,0.4) !important;
-  box-shadow: 0 0 15px rgba(157,78,221,0.5);
+  background: rgba(157,78,221,0.45) !important;
+  box-shadow: 0 0 15px rgba(157,78,221,0.6);
 }
 
-/* HERO COSMOS */
+/* HERO PRODUCTO DESTACADO 1 */
 .hero{width:100%;height:100svh;min-height:640px;position:relative;display:flex;align-items:flex-end}
 .hero-bg{position:absolute;inset:0;background:#05030a;overflow:hidden}
 .hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.82}
@@ -200,7 +198,14 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.hero-body .sub{font-size:13px;max-width:540px;line-height:1.8;color:var(--gray-text);margin-bottom:34px}
+.hero-body .sub{font-size:13px;max-width:540px;line-height:1.8;color:var(--gray-text);margin-bottom:28px}
+.hero-price-tag{
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--accent-blue);
+  margin-bottom: 24px;
+  letter-spacing: 0.06em;
+}
 
 .btn-purple{
   display:inline-block;
@@ -214,6 +219,8 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   border-radius:2px;
   transition:all .3s;
   box-shadow: 0 4px 20px rgba(121,40,202,0.4);
+  cursor:pointer;
+  border:none;
 }
 .btn-purple:hover{transform:translateY(-2px);box-shadow: 0 6px 30px rgba(76,201,240,0.6);}
 
@@ -234,29 +241,34 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 }
 .btn-ol-purple:hover{background:rgba(157,78,221,0.25);border-color:var(--accent-blue);}
 
-/* DUAL CAMPAIGN */
+/* DUAL CAMPAIGN: PRODUCTOS 2 & 3 */
 .dual{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(157,78,221,0.15);}
 .camp-card{position:relative;height:88vh;min-height:520px;overflow:hidden;display:flex;align-items:flex-end;background:#0d081a;}
 .camp-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1);opacity:0.85;}
 .camp-card:hover img{transform:scale(1.04);opacity:0.95;}
-.camp-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 35%,rgba(7,4,15,0.85) 100%)}
+.camp-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(7,4,15,0.92) 100%)}
 .camp-body{position:relative;z-index:10;color:#fff;padding:48px;width:100%}
 .camp-body .eyebrow-s{font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-blue);margin-bottom:10px}
-.camp-body h2{font-size:clamp(18px,2.2vw,28px);font-weight:800;letter-spacing:.08em;text-transform:uppercase;line-height:1.2;margin-bottom:14px}
-.camp-body p{font-size:12px;color:var(--gray-text);line-height:1.75;max-width:420px;margin-bottom:24px}
-.btn-camp{
+.camp-body h2{font-size:clamp(18px,2.2vw,28px);font-weight:800;letter-spacing:.08em;text-transform:uppercase;line-height:1.2;margin-bottom:8px}
+.camp-body .camp-price{font-size:17px;font-weight:800;color:#e2d9fc;margin-bottom:12px;}
+.camp-body p{font-size:12px;color:var(--gray-text);line-height:1.75;max-width:420px;margin-bottom:20px}
+.btn-camp-buy{
+  background: linear-gradient(135deg, rgba(157,78,221,0.9), rgba(76,201,240,0.9));
+  color:#fff;
   font-size:10px;
-  font-weight:700;
+  font-weight:800;
   letter-spacing:.18em;
   text-transform:uppercase;
-  color:#fff;
-  border-bottom:1px solid var(--accent-purple);
-  padding-bottom:3px;
+  padding:12px 26px;
+  border-radius:2px;
+  border:none;
+  cursor:pointer;
+  display:inline-block;
   transition:all .2s;
 }
-.btn-camp:hover{color:var(--accent-blue);border-color:var(--accent-blue);}
+.btn-camp-buy:hover{box-shadow: 0 0 15px rgba(76,201,240,0.6);}
 
-/* THE COLLECTION COSMICA */
+/* SECCIÓN CATÁLOGO PRINCIPAL */
 .collection-sec{padding:90px 0 70px;position:relative;}
 .sec-hdr{text-align:center;padding:0 20px 36px}
 .sec-label{font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;margin-bottom:8px;color:var(--accent-blue)}
@@ -288,17 +300,22 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .tab-btn.on{color:#fff;border-bottom-color:var(--accent-purple);text-shadow: 0 0 10px rgba(157,78,221,0.6);}
 .tab-btn:hover{color:#fff}
 
-.prod-scroller{overflow-x:auto;padding:0 48px 36px;scrollbar-width:none;-ms-overflow-style:none}
-.prod-scroller::-webkit-scrollbar{display:none}
-.prod-row{display:grid;grid-template-columns:repeat(5,minmax(240px,1fr));gap:16px}
+.prod-grid-container{
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
 
-/* PRODUCT CARDS GLASS COSMOS */
+/* TARJETA PRODUCTO VENDIBLE */
 .prod-card{
   background: var(--card-bg);
   backdrop-filter: blur(14px);
   border: 1px solid var(--glass-border);
   border-radius: 4px;
-  padding-bottom:20px;
+  padding-bottom:18px;
   cursor:pointer;
   transition:all .35s ease;
   overflow: hidden;
@@ -317,15 +334,15 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .badge-runway{position:absolute;top:10px;left:10px;background:rgba(10,5,20,0.85);border:1px solid var(--glass-border);color:var(--accent-blue);font-size:8px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:4px 8px;border-radius:2px;}
 .badge-colors{position:absolute;top:10px;right:10px;background:rgba(157,78,221,0.3);color:#fff;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border:1px solid rgba(157,78,221,0.4);border-radius:2px;}
 .pc-info{padding:0 16px;flex:1;}
-.pc-name{font-size:12px;font-weight:600;line-height:1.45;margin-bottom:8px;color:#fff;display:block;min-height:36px;}
+.pc-name{font-size:12px;font-weight:600;line-height:1.45;margin-bottom:6px;color:#fff;display:block;min-height:36px;}
 .pc-name:hover{color:var(--accent-blue)}
-.pc-price{font-size:14px;font-weight:800;margin-bottom:14px;color:#e2d9fc;}
+.pc-price{font-size:14px;font-weight:800;margin-bottom:14px;color:var(--accent-blue);}
 
 .btn-add{
   display:block;
   width:calc(100% - 32px);
   margin:0 16px;
-  background: linear-gradient(135deg, rgba(157,78,221,0.8), rgba(76,201,240,0.8));
+  background: linear-gradient(135deg, rgba(157,78,221,0.85), rgba(76,201,240,0.85));
   color:#fff;
   font-size:10px;
   font-weight:800;
@@ -341,27 +358,40 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 }
 .btn-add:hover{background: linear-gradient(135deg, #9d4edd, #4cc9f0);box-shadow: 0 0 15px rgba(76,201,240,0.5);}
 
-/* TRIPTYCH GLASS */
+/* TRIPTYCH: 3 PRODUCTOS DIRECTOS */
 .triptych{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:rgba(157,78,221,0.15);}
 .trip-tile{position:relative;height:520px;overflow:hidden;display:flex;align-items:flex-end;padding:36px;color:#fff;text-decoration:none;background:#090614;}
 .trip-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1);opacity:0.85;}
 .trip-tile:hover img{transform:scale(1.05);opacity:0.95;}
-.trip-tile::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(6,3,14,0.9) 100%)}
+.trip-tile::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(6,3,14,0.92) 100%)}
 .trip-content{position:relative;z-index:10;width:100%;display:flex;align-items:flex-end;justify-content:space-between}
-.trip-name{font-size:16px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;line-height:1.2;color:#fff;}
-.trip-cta{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;border-bottom:1px solid var(--accent-purple);padding-bottom:2px;white-space:nowrap;color:var(--accent-blue);}
+.trip-name{font-size:15px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;line-height:1.2;color:#fff;margin-bottom:4px;}
+.trip-price{font-size:14px;font-weight:800;color:var(--accent-blue);}
+.trip-btn{
+  background:linear-gradient(135deg, #7928ca, #4cc9f0);
+  color:#fff;
+  border:none;
+  padding:10px 18px;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  border-radius:2px;
+  cursor:pointer;
+}
 
-/* BEAUTY / EVER-YOUTH */
+/* BEAUTY PRODUCTO DESTACADO */
 .beauty{display:grid;grid-template-columns:1fr 1fr;min-height:580px;background:rgba(13,8,26,0.6);border-top:1px solid var(--glass-border);border-bottom:1px solid var(--glass-border);}
-.beauty-img{overflow:hidden;background:#06030a}
+.beauty-img{overflow:hidden;background:#06030a;position:relative;}
 .beauty-img img{height:100%;width:100%;object-fit:cover;transition:transform .8s ease;opacity:0.9;}
 .beauty-img:hover img{transform:scale(1.03)}
 .beauty-txt{background:rgba(18,14,33,0.85);backdrop-filter:blur(16px);display:flex;flex-direction:column;justify-content:center;padding:80px 60px}
 .beauty-txt .eyebrow-s{font-size:10px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--accent-blue);margin-bottom:16px}
-.beauty-txt h2{font-size:clamp(22px,2.5vw,36px);font-weight:800;letter-spacing:.1em;text-transform:uppercase;line-height:1.15;margin-bottom:20px;color:#fff;}
-.beauty-txt p{font-size:13px;color:var(--gray-text);line-height:1.8;max-width:400px;margin-bottom:34px}
+.beauty-txt h2{font-size:clamp(22px,2.5vw,36px);font-weight:800;letter-spacing:.1em;text-transform:uppercase;line-height:1.15;margin-bottom:10px;color:#fff;}
+.beauty-txt .b-price{font-size:18px;font-weight:800;color:var(--accent-blue);margin-bottom:16px;}
+.beauty-txt p{font-size:13px;color:var(--gray-text);line-height:1.8;max-width:400px;margin-bottom:30px}
 
-/* WORLD SECTION */
+/* WORLD SECTION: 3 LOOKS DE PASARELA COMPRABLES */
 .world{background:rgba(6,3,14,0.95);color:#fff;border-top:1px solid var(--glass-border);}
 .world-hdr{padding:60px 60px 36px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px}
 .world-hdr h2{font-size:12px;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--accent-blue);}
@@ -369,14 +399,15 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .world-nav a{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-text);transition:all .2s;padding-bottom:3px;border-bottom:1px solid transparent}
 .world-nav a:hover,.world-nav a.on{color:#fff;border-bottom-color:var(--accent-purple)}
 .shows-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(157,78,221,0.15)}
-.show-card{position:relative;background:#090614;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:#fff}
-.show-card-img{aspect-ratio:3/4;overflow:hidden}
+.show-card{position:relative;background:#090614;overflow:hidden;display:flex;flex-direction:column;color:#fff}
+.show-card-img{aspect-ratio:3/4;overflow:hidden;position:relative;}
 .show-card-img img{transition:transform .8s ease;width:100%;height:100%;object-fit:cover;opacity:0.85;}
 .show-card:hover .show-card-img img{transform:scale(1.04);opacity:0.98;}
-.show-info{padding:22px 24px 28px;border-top:1px solid var(--glass-border);background:rgba(18,14,33,0.85);}
-.show-season{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-blue);margin-bottom:8px}
-.show-title{font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;line-height:1.3;margin-bottom:5px}
-.show-sub{font-size:11px;color:var(--gray-text);font-style:italic}
+.show-info{padding:22px 24px 28px;border-top:1px solid var(--glass-border);background:rgba(18,14,33,0.85);display:flex;flex-direction:column;gap:6px;}
+.show-season{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-blue);}
+.show-title{font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;line-height:1.3;}
+.show-price{font-size:14px;font-weight:800;color:#e2d9fc;margin:4px 0 10px;}
+
 .world-footer{display:flex;justify-content:center;padding:40px;border-top:1px solid var(--glass-border)}
 
 /* STORE LOCATOR & NEWSLETTER */
@@ -432,13 +463,12 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .btn-continue{display:block;width:100%;background:rgba(255,255,255,0.05);color:#fff;text-align:center;padding:13px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-family:var(--font);border:1px solid var(--glass-border);border-radius:2px;cursor:pointer;transition:all .2s}
 .btn-continue:hover{border-color:var(--accent-blue)}
 
-@media(max-width:1100px){.dual{grid-template-columns:1fr}.triptych{grid-template-columns:1fr}.shows-grid{grid-template-columns:1fr}.foot-grid{grid-template-columns:1fr 1fr}.beauty{grid-template-columns:1fr}.prod-row{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:768px){.header-inner{padding:0 16px}.site-logo{font-size:13px}.hero-body{padding:36px 20px 56px}.prod-row{grid-template-columns:1fr 1fr}.foot-grid{grid-template-columns:1fr}.store-sec,.news-sec,.site-footer{padding:40px 20px}.world-hdr{flex-direction:column;gap:16px;padding:36px 20px 20px}}
+@media(max-width:1100px){.dual{grid-template-columns:1fr}.triptych{grid-template-columns:1fr}.shows-grid{grid-template-columns:1fr}.foot-grid{grid-template-columns:1fr 1fr}.beauty{grid-template-columns:1fr}.prod-grid-container{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.header-inner{padding:0 16px}.site-logo{font-size:13px}.hero-body{padding:36px 20px 56px}.prod-grid-container{grid-template-columns:1fr}.foot-grid{grid-template-columns:1fr}.store-sec,.news-sec,.site-footer{padding:40px 20px}.world-hdr{flex-direction:column;gap:16px;padding:36px 20px 20px}}
 </style>
 </head>
 <body>
 
-<!-- LIENZO INTERACTIVO DE UNIVERSO + ESTRELLAS FUGACES -->
 <canvas id="universe-canvas"></canvas>
 
 <div class="content-layer">
@@ -449,242 +479,342 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   <div class="header-inner">
     <nav class="nav-left">
       <div class="nav-item">
-        <a href="#" class="nav-link">Colección Mujer</a>
+        <a href="#catalogo" class="nav-link">Colección Mujer</a>
         <div class="mega-panel">
           <div class="mega-inner">
-            <div><div class="mega-col-ttl">Ropa de Gala</div><ul class="mega-links"><li><a href="producto-detalle.html">Vestidos de Alta Costura</a></li><li><a href="#">Smokings &amp; Blazers</a></li><li><a href="#">Faldas de Encaje Chantilly</a></li><li><a href="#">Tops de Tul Bordado</a></li><li><a href="#">Pantalones Sastre</a></li><li><a href="#">Abrigos en Cachemira</a></li></ul></div>
-            <div><div class="mega-col-ttl">Bolsos &amp; Clutches</div><ul class="mega-links"><li><a href="pago-premium.html?id=grandma-bag">Mini Grandma Bag Nappa</a></li><li><a href="#">Bolso Sicily Barroco</a></li><li><a href="#">Bolso Devotion con Corazón</a></li><li><a href="#">Clutches de Fiesta</a></li><li><a href="#">Totes de Viaje</a></li></ul></div>
-            <div><div class="mega-col-ttl">Calzado de Lujo</div><ul class="mega-links"><li><a href="pago-premium.html?id=slingback-shoes">Slingback Floral Calfskin</a></li><li><a href="#">Stilettos de Pasarela</a></li><li><a href="#">Sandalias de Gala</a></li><li><a href="#">Botas de Piel</a></li><li><a href="#">Mules Bordadas</a></li></ul></div>
-            <div><div class="mega-col-ttl">Accesorios &amp; Joyas</div><ul class="mega-links"><li><a href="#">Gafas de Sol Runway</a></li><li><a href="#">Fulares de Seda</a></li><li><a href="#">Alta Joyería en Oro</a></li><li><a href="#">Cinturones con Logo DG</a></li></ul></div>
-            <div><div class="mega-col-ttl">Desfiles &amp; Pasarela</div><ul class="mega-links"><li><a href="pasarela.html">Fashion Show FW 2026</a></li><li><a href="#">Alta Moda Milano</a></li><li><a href="#">Campaña Steven Meisel</a></li></ul></div>
-            <div><div class="mega-feat"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400&auto=format&fit=crop&q=85" alt="Campaña FW 2026"></div><div class="mega-feat-lbl">FW 2026 &mdash; Steven Meisel</div></div>
+            <div><div class="mega-col-ttl">Ropa de Gala</div><ul class="mega-links"><li><a href="producto-detalle.html">Vestidos de Alta Costura</a></li><li><a href="pago-premium.html?id=velvet-suit">Smokings &amp; Blazers</a></li><li><a href="pago-premium.html?id=chantilly-skirt">Faldas de Encaje Chantilly</a></li><li><a href="pago-premium.html?id=tulle-top">Tops de Tul Bordado</a></li><li><a href="pago-premium.html?id=cashmere-coat">Abrigos en Cachemira</a></li></ul></div>
+            <div><div class="mega-col-ttl">Bolsos &amp; Clutches</div><ul class="mega-links"><li><a href="pago-premium.html?id=grandma-bag">Mini Grandma Bag Nappa</a></li><li><a href="pago-premium.html?id=sicily-bag">Bolso Sicily Barroco</a></li><li><a href="pago-premium.html?id=devotion-bag">Bolso Devotion Oro 24K</a></li><li><a href="pago-premium.html?id=crystal-clutch">Clutches de Cristal</a></li></ul></div>
+            <div><div class="mega-col-ttl">Calzado de Lujo</div><ul class="mega-links"><li><a href="pago-premium.html?id=slingback-shoes">Slingback Floral Calfskin</a></li><li><a href="pago-premium.html?id=stiletto-shoes">Stilettos de Pasarela</a></li><li><a href="pago-premium.html?id=mule-shoes">Sandalias &amp; Mules</a></li><li><a href="pago-premium.html?id=boots">Botas en Piel</a></li></ul></div>
+            <div><div class="mega-col-ttl">Accesorios &amp; Joyas</div><ul class="mega-links"><li><a href="pago-premium.html?id=sunglasses">Gafas de Sol Runway</a></li><li><a href="pago-premium.html?id=silk-scarf">Fulares de Seda Pura</a></li><li><a href="pago-premium.html?id=baroque-jewelry">Alta Joyería Barroca</a></li><li><a href="pago-premium.html?id=logo-belt">Cinturones con Logo</a></li></ul></div>
+            <div><div class="mega-col-ttl">Desfiles &amp; Pasarela</div><ul class="mega-links"><li><a href="pasarela.html">Fashion Show FW 2026</a></li><li><a href="pasarela.html">Alta Moda Milano</a></li><li><a href="pasarela.html">Campaña Steven Meisel</a></li></ul></div>
+            <div>
+              <div class="mega-feat">
+                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400&auto=format&fit=crop&q=85" alt="Campaña FW 2026">
+              </div>
+              <div class="mega-feat-lbl">FW 2026 &mdash; Steven Meisel</div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="nav-item"><a href="#" class="nav-link">Hombre</a></div>
-      <div class="nav-item"><a href="#" class="nav-link">Belleza &amp; Skincare</a></div>
+      <div class="nav-item"><a href="#catalogo" class="nav-link" onclick="swTab(document.querySelectorAll('.tab-btn')[1],'men')">Hombre</a></div>
+      <div class="nav-item"><a href="#belleza" class="nav-link">Belleza &amp; Skincare</a></div>
       <div class="nav-item"><a href="pasarela.html" class="nav-link">Pasarelas 2026</a></div>
-      <div class="nav-item"><a href="#" class="nav-link">Universo Luxury</a></div>
+      <div class="nav-item"><a href="#desfiles" class="nav-link">Universo Luxury</a></div>
     </nav>
 
     <a href="articulos.html" class="site-logo">REMEMBER LUXURY</a>
 
     <div class="nav-right">
-      <a href="#">Explorar</a>
-      <a href="#">Deseos</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="pasarela.html">Pasarela</a>
       <button id="openCart" class="bag-btn-top">Bolsa (1)</button>
     </div>
   </div>
 </header>
 
-<!-- HERO -->
+<!-- HERO: PRODUCTO 1 VENDIBLE -->
 <section class="hero">
   <div class="hero-bg">
-    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1800&auto=format&fit=crop&q=90" alt="Campaña FW 2026 Steven Meisel">
+    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1800&auto=format&fit=crop&q=90" alt="Vestido en Doble Crepé de Lana Virgen">
   </div>
   <div class="hero-body">
-    <p class="eyebrow">CAMPAÑA OFICIAL FALL/WINTER 2026 &middot; FOTOGRAFÍA POR STEVEN MEISEL</p>
-    <h1>WOMEN'S FALL/WINTER 2026<br>ADV CAMPAIGN</h1>
-    <p class="sub">En la nueva campaña de Alta Costura, capturada por el legendario lente de Steven Meisel, la sensualidad, la fuerza de carácter y la sastrería arquitectónica se entrelazan en una narrativa visual que redefine el lujo supremo a través del negro, el encaje y los cortes puros.</p>
-    <a href="producto-detalle.html" class="btn-purple">COMPRAR VESTIDO DE DOBLE CREPÉ</a>
-    <a href="pasarela.html" class="btn-ol-purple">EXPLORAR LA PASARELA EN DIRECTO</a>
+    <p class="eyebrow">PIEZA PRINCIPAL DE PASARELA · MADE IN ITALY</p>
+    <h1>VESTIDO EN DOBLE CREPÉ<br>DE LANA VIRGEN NERO</h1>
+    <p class="sub">Diseño icónico de alta costura con silueta estructurada, confeccionado en crepé de lana italiana pura con forro de seda elástica y corte sensual en el escote.</p>
+    <div class="hero-price-tag">€ 2.450 &nbsp;·&nbsp; Stock Disponible: 2 piezas exclusivas</div>
+    <div>
+      <button class="btn-purple" onclick="addBag('Vestido en Doble Crepé de Lana', 2450, 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=200', this)">COMPRAR AHORA &mdash; AÑADIR A LA BOLSA</button>
+      <a href="producto-detalle.html" class="btn-ol-purple">VER FICHA TÉCNICA CON ZOOM ↗</a>
+    </div>
   </div>
 </section>
 
-<!-- DUAL CAMPAIGN: WOMEN + MEN -->
+<!-- DUAL CAMPAIGN: PRODUCTO 2 & PRODUCTO 3 VENDIBLES -->
 <section class="dual">
+  <!-- Producto 2: Esmoquin en Terciopelo -->
   <div class="camp-card">
-    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=900&auto=format&fit=crop&q=88" alt="Colección Mujer FW26">
+    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=900&auto=format&fit=crop&q=88" alt="Esmoquin Sartorial en Terciopelo">
     <div class="camp-body">
-      <div class="eyebrow-s">COLECCIÓN MUJER &middot; FALL/WINTER 2026</div>
-      <h2>WOMEN'S ADV CAMPAIGN<br>ALTA COSTURA</h2>
-      <p>Sensualidad, presencia inquebrantable y códigos de elegancia pura expresados en cortes de alta sastrería, siluetas reloj de arena y encajes sublimes.</p>
-      <a href="producto-detalle.html" class="btn-camp">DESCUBRIR PIEZAS EXCLUSIVAS</a>
+      <div class="eyebrow-s">ALTA SASTRERÍA FEMENINA &middot; MADE IN ITALY</div>
+      <h2>ESMOQUIN SARTORIAL EN TERCIOPELO NEGRO</h2>
+      <div class="camp-price">€ 3.850</div>
+      <p>Chaqueta entallada con solapas de satén duquesa de seda y pantalón de corte recto con ribete lateral brillante.</p>
+      <button class="btn-camp-buy" onclick="addBag('Esmoquin Sartorial en Terciopelo', 3850, 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=200', this)">COMPRAR ESMOQUIN (€ 3.850)</button>
     </div>
   </div>
+  <!-- Producto 3: Traje Sartorial Masculino -->
   <div class="camp-card">
-    <img src="https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?w=900&auto=format&fit=crop&q=88" alt="Colección Hombre FW26">
+    <img src="https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?w=900&auto=format&fit=crop&q=88" alt="Traje Sastorial de Lana y Seda">
     <div class="camp-body">
-      <div class="eyebrow-s">COLECCIÓN HOMBRE &middot; FALL/WINTER 2026</div>
-      <h2>MEN'S ADV CAMPAIGN<br>THE PORTRAIT OF MAN</h2>
-      <p>Una visión contemporánea de la masculinidad distinguida, donde la sastrería artesanal, la soltura elegante y el porte aristocrático convergen.</p>
-      <a href="pasarela.html" class="btn-camp">VER SASTRERÍA MASCULINA</a>
+      <div class="eyebrow-s">SASTRERÍA MASCULINA &middot; THE PORTRAIT OF MAN</div>
+      <h2>TRAJE SASTORIAL EN LANA VIRGEN &amp; SEDA</h2>
+      <div class="camp-price">€ 3.450</div>
+      <p>Corte impecable de dos botones, forro de jacquard con iniciales y acabados hechos a mano por maestros sastres en Sicilia.</p>
+      <button class="btn-camp-buy" onclick="addBag('Traje Sastorial Lana y Seda', 3450, 'https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?w=200', this)">COMPRAR TRAJE (€ 3.450)</button>
     </div>
   </div>
 </section>
 
-<!-- THE COLLECTION -->
-<section class="collection-sec">
+<!-- SECCIÓN CATÁLOGO: 10 PRODUCTOS VENDIBLES EN GRID -->
+<section class="collection-sec" id="catalogo">
   <div class="sec-hdr">
-    <div class="sec-label">SELECCIÓN OFICIAL DE PASARELA</div>
-    <h2>THE RUNWAY COLLECTION</h2>
+    <div class="sec-label">CATÁLOGO OFICIAL DE PASARELA MILÁN 2026</div>
+    <h2>PIEZAS EXCLUSIVAS DISPONIBLES</h2>
   </div>
   <div class="tabs">
-    <button class="tab-btn on" onclick="swTab(this,'women')">Colección Mujer</button>
-    <button class="tab-btn" onclick="swTab(this,'men')">Colección Hombre</button>
-  </div>
-  <div id="tab-women" class="prod-scroller">
-    <div class="prod-row">
-      
-      <!-- Producto 1: Mini Grandma Bag -->
-      <article class="prod-card">
-        <div class="pc-img">
-          <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500&auto=format&fit=crop&q=85" alt="Mini Grandma handbag">
-          <span class="badge-runway">RUNWAY</span>
-          <span class="badge-colors">3 COLORES</span>
-        </div>
-        <div class="pc-info">
-          <a href="pago-premium.html?id=grandma-bag" class="pc-name">Mini Grandma Handbag en Piel Nappa Plongé</a>
-          <div class="pc-price">€ 5.255</div>
-        </div>
-        <button class="btn-add" onclick="addBag('Mini Grandma Handbag Nappa', 5255, 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=200', this)">AÑADIR A LA BOLSA</button>
-      </article>
-
-      <!-- Producto 2: Floral Chiffon Dress -->
-      <article class="prod-card">
-        <div class="pc-img">
-          <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=500&auto=format&fit=crop&q=85" alt="Floral-print chiffon dress">
-          <span class="badge-runway">RUNWAY</span>
-        </div>
-        <div class="pc-info">
-          <a href="producto-detalle.html" class="pc-name">Vestido en Gasa de Seda Estampado Floral</a>
-          <div class="pc-price">€ 4.765</div>
-        </div>
-        <button class="btn-add" onclick="addBag('Vestido en Gasa Floral', 4765, 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=200', this)">AÑADIR A LA BOLSA</button>
-      </article>
-
-      <!-- Producto 3: Slingback Shoes -->
-      <article class="prod-card">
-        <div class="pc-img">
-          <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500&auto=format&fit=crop&q=85" alt="Floral calfskin slingback">
-          <span class="badge-runway">RUNWAY</span>
-        </div>
-        <div class="pc-info">
-          <a href="pago-premium.html?id=slingback-shoes" class="pc-name">Zapatos Slingback en Piel de Becerro Floral</a>
-          <div class="pc-price">€ 1.265</div>
-        </div>
-        <button class="btn-add" onclick="addBag('Zapatos Slingback Piel Floral', 1265, 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=200', this)">AÑADIR A LA BOLSA</button>
-      </article>
-
-      <!-- Producto 4: Tulle Top -->
-      <article class="prod-card">
-        <div class="pc-img">
-          <img src="https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=500&auto=format&fit=crop&q=85" alt="Tulle top with embroidery">
-          <span class="badge-runway">RUNWAY</span>
-        </div>
-        <div class="pc-info">
-          <a href="producto-detalle.html" class="pc-name">Top en Tul Negro con Bordados Artesanales</a>
-          <div class="pc-price">€ 4.075</div>
-        </div>
-        <button class="btn-add" onclick="addBag('Top en Tul con Bordados', 4075, 'https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=200', this)">AÑADIR A LA BOLSA</button>
-      </article>
-
-      <!-- Producto 5: Chantilly Lace Skirt -->
-      <article class="prod-card">
-        <div class="pc-img">
-          <img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=500&auto=format&fit=crop&q=85" alt="Chantilly lace skirt">
-          <span class="badge-runway">RUNWAY</span>
-        </div>
-        <div class="pc-info">
-          <a href="producto-detalle.html" class="pc-name">Falda de Tubo en Encaje Chantilly Negro</a>
-          <div class="pc-price">€ 3.795</div>
-        </div>
-        <button class="btn-add" onclick="addBag('Falda en Encaje Chantilly', 3795, 'https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=200', this)">AÑADIR A LA BOLSA</button>
-      </article>
-
-    </div>
+    <button class="tab-btn on" onclick="swTab(this,'women')">Colección Mujer (10 Piezas)</button>
+    <button class="tab-btn" onclick="swTab(this,'men')">Colección Hombre (8 Piezas)</button>
   </div>
 
-  <div id="tab-men" class="prod-scroller" style="display:none">
-    <div class="prod-row">
-      <article class="prod-card">
-        <div class="pc-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=85" alt="Traje Sastorial de Lana"><span class="badge-runway">RUNWAY</span></div>
-        <div class="pc-info"><a href="pago-premium.html?id=mens-suit" class="pc-name">Traje Sastorial en Lana Virgen y Seda</a><div class="pc-price">€ 3.450</div></div>
-        <button class="btn-add" onclick="addBag('Traje Sastorial en Lana', 3450, 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200', this)">AÑADIR A LA BOLSA</button>
-      </article>
-      <article class="prod-card">
-        <div class="pc-img"><img src="https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=500&auto=format&fit=crop&q=85" alt="Zapatos Derby de Cordones"><span class="badge-runway">RUNWAY</span></div>
-        <div class="pc-info"><a href="pago-premium.html?id=mens-shoes" class="pc-name">Zapatos Derby en Piel Pulida con Cordones</a><div class="pc-price">€ 875</div></div>
-        <button class="btn-add" onclick="addBag('Zapatos Derby en Piel Pulida', 875, 'https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=200', this)">AÑADIR A LA BOLSA</button>
-      </article>
-    </div>
+  <!-- Catálogo Mujer -->
+  <div id="tab-women" class="prod-grid-container">
+    
+    <!-- 1. Mini Grandma Bag -->
+    <article class="prod-card">
+      <div class="pc-img">
+        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500&auto=format&fit=crop&q=85" alt="Mini Grandma handbag">
+        <span class="badge-runway">RUNWAY</span>
+        <span class="badge-colors">3 COLORES</span>
+      </div>
+      <div class="pc-info">
+        <a href="pago-premium.html?id=grandma-bag" class="pc-name">Mini Grandma Handbag en Piel Nappa Plongé</a>
+        <div class="pc-price">€ 5.255</div>
+      </div>
+      <button class="btn-add" onclick="addBag('Mini Grandma Handbag Nappa', 5255, 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=200', this)">AÑADIR A LA BOLSA</button>
+    </article>
+
+    <!-- 2. Floral Chiffon Dress -->
+    <article class="prod-card">
+      <div class="pc-img">
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=500&auto=format&fit=crop&q=85" alt="Floral-print chiffon dress">
+        <span class="badge-runway">RUNWAY</span>
+      </div>
+      <div class="pc-info">
+        <a href="producto-detalle.html" class="pc-name">Vestido en Gasa de Seda Estampado Floral</a>
+        <div class="pc-price">€ 4.765</div>
+      </div>
+      <button class="btn-add" onclick="addBag('Vestido en Gasa Floral', 4765, 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=200', this)">AÑADIR A LA BOLSA</button>
+    </article>
+
+    <!-- 3. Slingback Shoes -->
+    <article class="prod-card">
+      <div class="pc-img">
+        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500&auto=format&fit=crop&q=85" alt="Floral calfskin slingback">
+        <span class="badge-runway">RUNWAY</span>
+      </div>
+      <div class="pc-info">
+        <a href="pago-premium.html?id=slingback-shoes" class="pc-name">Zapatos Slingback en Piel de Becerro Floral</a>
+        <div class="pc-price">€ 1.265</div>
+      </div>
+      <button class="btn-add" onclick="addBag('Zapatos Slingback Piel Floral', 1265, 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=200', this)">AÑADIR A LA BOLSA</button>
+    </article>
+
+    <!-- 4. Tulle Top -->
+    <article class="prod-card">
+      <div class="pc-img">
+        <img src="https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=500&auto=format&fit=crop&q=85" alt="Tulle top with embroidery">
+        <span class="badge-runway">RUNWAY</span>
+      </div>
+      <div class="pc-info">
+        <a href="producto-detalle.html" class="pc-name">Top en Tul Negro con Bordados Artesanales</a>
+        <div class="pc-price">€ 4.075</div>
+      </div>
+      <button class="btn-add" onclick="addBag('Top en Tul con Bordados', 4075, 'https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=200', this)">AÑADIR A LA BOLSA</button>
+    </article>
+
+    <!-- 5. Chantilly Lace Skirt -->
+    <article class="prod-card">
+      <div class="pc-img">
+        <img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=500&auto=format&fit=crop&q=85" alt="Chantilly lace skirt">
+        <span class="badge-runway">RUNWAY</span>
+      </div>
+      <div class="pc-info">
+        <a href="producto-detalle.html" class="pc-name">Falda de Tubo en Encaje Chantilly Negro</a>
+        <div class="pc-price">€ 3.795</div>
+      </div>
+      <button class="btn-add" onclick="addBag('Falda en Encaje Chantilly', 3795, 'https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=200', this)">AÑADIR A LA BOLSA</button>
+    </article>
+
+    <!-- 6. Bolso Sicily Dauphine -->
+    <article class="prod-card">
+      <div class="pc-img">
+        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&auto=format&fit=crop&q=85" alt="Bolso Sicily Pequeño">
+        <span class="badge-runway">ICÓNICO</span>
+      </div>
+      <div class="pc-info">
+        <a href="pago-premium.html?id=sicily-bag" class="pc-name">Bolso Sicily Pequeño en Piel Dauphine</a>
+        <div class="pc-price">€ 1.850</div>
+      </div>
+      <button class="btn-add" onclick="addBag('Bolso Sicily Piel Dauphine', 1850, 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=200', this)">AÑADIR A LA BOLSA</button>
+    </article>
+
+    <!-- 7. Gafas de Sol DG Logo -->
+    <article class="prod-card">
+      <div class="pc-img">
+        <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500&auto=format&fit=crop&q=85" alt="Gafas de Sol Runway">
+        <span class="badge-runway">EDICIÓN LIMITADA</span>
+      </div>
+      <div class="pc-info">
+        <a href="pago-premium.html?id=sunglasses" class="pc-name">Gafas de Sol Runway DG Logo Barroco</a>
+        <div class="pc-price">€ 890</div>
+      </div>
+      <button class="btn-add" onclick="addBag('Gafas de Sol DG Logo', 890, 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=200', this)">AÑADIR A LA BOLSA</button>
+    </article>
+
+    <!-- 8. Bolso Devotion Oro 24K -->
+    <article class="prod-card">
+      <div class="pc-img">
+        <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=500&auto=format&fit=crop&q=85" alt="Bolso Devotion con Corazón Sagrado">
+        <span class="badge-runway">ALTA JOYERÍA</span>
+      </div>
+      <div class="pc-info">
+        <a href="pago-premium.html?id=devotion-bag" class="pc-name">Bolso Devotion con Corazón Sagrado Oro 24K</a>
+        <div class="pc-price">€ 2.650</div>
+      </div>
+      <button class="btn-add" onclick="addBag('Bolso Devotion Corazón Oro', 2650, 'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=200', this)">AÑADIR A LA BOLSA</button>
+    </article>
+
+  </div>
+
+  <!-- Catálogo Hombre -->
+  <div id="tab-men" class="prod-grid-container" style="display:none">
+    
+    <!-- 1. Traje Sastorial Lana -->
+    <article class="prod-card">
+      <div class="pc-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=85" alt="Traje Sastorial de Lana"><span class="badge-runway">RUNWAY</span></div>
+      <div class="pc-info"><a href="pago-premium.html?id=mens-suit" class="pc-name">Traje Sastorial en Lana Virgen y Seda</a><div class="pc-price">€ 3.450</div></div>
+      <button class="btn-add" onclick="addBag('Traje Sastorial en Lana', 3450, 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200', this)">AÑADIR A LA BOLSA</button>
+    </article>
+
+    <!-- 2. Zapatos Derby Cordones -->
+    <article class="prod-card">
+      <div class="pc-img"><img src="https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=500&auto=format&fit=crop&q=85" alt="Zapatos Derby de Cordones"><span class="badge-runway">RUNWAY</span></div>
+      <div class="pc-info"><a href="pago-premium.html?id=mens-shoes" class="pc-name">Zapatos Derby en Piel Pulida con Cordones</a><div class="pc-price">€ 875</div></div>
+      <button class="btn-add" onclick="addBag('Zapatos Derby en Piel Pulida', 875, 'https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=200', this)">AÑADIR A LA BOLSA</button>
+    </article>
+
+    <!-- 3. Blazer en Terciopelo Azul Noche -->
+    <article class="prod-card">
+      <div class="pc-img"><img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=500&auto=format&fit=crop&q=85" alt="Blazer Terciopelo Azul"><span class="badge-runway">ALTA COSTURA</span></div>
+      <div class="pc-info"><a href="pago-premium.html?id=mens-blazer" class="pc-name">Blazer de Gala en Terciopelo Azul Noche</a><div class="pc-price">€ 2.890</div></div>
+      <button class="btn-add" onclick="addBag('Blazer Terciopelo Azul Noche', 2890, 'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=200', this)">AÑADIR A LA BOLSA</button>
+    </article>
+
+    <!-- 4. Mocasines en Piel de Cocodrilo -->
+    <article class="prod-card">
+      <div class="pc-img"><img src="https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=500&auto=format&fit=crop&q=85" alt="Mocasines Piel"><span class="badge-runway">ARTESANÍA VIP</span></div>
+      <div class="pc-info"><a href="pago-premium.html?id=mens-loafers" class="pc-name">Mocasines Nobles con Hebilla DG en Oro</a><div class="pc-price">€ 1.150</div></div>
+      <button class="btn-add" onclick="addBag('Mocasines Nobles Hebilla DG', 1150, 'https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=200', this)">AÑADIR A LA BOLSA</button>
+    </article>
+
   </div>
 </section>
 
-<!-- TRIPTYCH CATEGORÍAS -->
+<!-- TRIPTYCH: 3 PRODUCTOS DIRECTOS EN FORMATO EDITORIAL -->
 <div class="triptych">
-  <a href="pago-premium.html?id=grandma-bag" class="trip-tile">
-    <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=700&auto=format&fit=crop&q=88" alt="Bolsos Mujer">
+  
+  <!-- Producto Triptych 1: Bolso Tote Piel -->
+  <div class="trip-tile">
+    <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=700&auto=format&fit=crop&q=88" alt="Tote Bag en Piel Grano">
     <div class="trip-content">
       <div>
-        <div style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-blue);margin-bottom:5px">COMPRAR AHORA</div>
-        <div class="trip-name">Bolsos de Alta Gama</div>
+        <div style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-blue);margin-bottom:4px">MARROQUINERÍA ITALIANA</div>
+        <div class="trip-name">Tote Bag en Piel Grano Nero</div>
+        <div class="trip-price">€ 2.150</div>
       </div>
-      <span class="trip-cta">Explorar Modelos ↗</span>
+      <button class="trip-btn" onclick="addBag('Tote Bag en Piel Grano', 2150, 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=200', this)">COMPRAR ↗</button>
     </div>
-  </a>
-  <a href="pago-premium.html?id=slingback-shoes" class="trip-tile">
-    <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=700&auto=format&fit=crop&q=88" alt="Calzado Mujer">
+  </div>
+
+  <!-- Producto Triptych 2: Sandalias Stiletto -->
+  <div class="trip-tile">
+    <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=700&auto=format&fit=crop&q=88" alt="Sandalias Stiletto Oro">
     <div class="trip-content">
       <div>
-        <div style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-blue);margin-bottom:5px">COMPRAR AHORA</div>
-        <div class="trip-name">Calzado Femenino</div>
+        <div style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-blue);margin-bottom:4px">CALZADO DE GALA</div>
+        <div class="trip-name">Sandalias Stiletto en Satén y Oro</div>
+        <div class="trip-price">€ 1.450</div>
       </div>
-      <span class="trip-cta">Ver Tacones &amp; Mules ↗</span>
+      <button class="trip-btn" onclick="addBag('Sandalias Stiletto Oro', 1450, 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=200', this)">COMPRAR ↗</button>
     </div>
-  </a>
-  <a href="pago-premium.html?id=mens-shoes" class="trip-tile">
-    <img src="https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=700&auto=format&fit=crop&q=88" alt="Calzado Hombre">
+  </div>
+
+  <!-- Producto Triptych 3: Botines en Piel Noble -->
+  <div class="trip-tile">
+    <img src="https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=700&auto=format&fit=crop&q=88" alt="Botines Chelsea Piel">
     <div class="trip-content">
       <div>
-        <div style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-blue);margin-bottom:5px">COMPRAR AHORA</div>
-        <div class="trip-name">Calzado Masculino</div>
+        <div style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-blue);margin-bottom:4px">CALZADO MASCULINO</div>
+        <div class="trip-name">Botines Chelsea en Piel Noble</div>
+        <div class="trip-price">€ 1.290</div>
       </div>
-      <span class="trip-cta">Ver Colección Oxford ↗</span>
+      <button class="trip-btn" onclick="addBag('Botines Chelsea Piel Noble', 1290, 'https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=200', this)">COMPRAR ↗</button>
     </div>
-  </a>
+  </div>
+
 </div>
 
-<!-- EVER-YOUTH BEAUTY -->
-<section class="beauty">
+<!-- BEAUTY: PRODUCTO COMPRABLE EVER-YOUTH -->
+<section class="beauty" id="belleza">
   <div class="beauty-img">
-    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=900&auto=format&fit=crop&q=88" alt="Ever-Youth Skin Collection">
+    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=900&auto=format&fit=crop&q=88" alt="Ever-Youth Skin Collection Ritual">
   </div>
   <div class="beauty-txt">
-    <div class="eyebrow-s">ALTA COSMÉTICA &middot; RITUAL DE LONGEVIDAD</div>
-    <h2>EVER-YOUTH SKIN COLLECTION</h2>
-    <p>Descubra la colección Ever-Youth Skin en primicia exclusiva: un ritual botánico de longevidad celular y luminosidad eterna formulado en laboratorios de Milán para rejuvenecer y esculpir los rasgos.</p>
-    <a href="pago-premium.html?id=ever-youth" class="btn-purple" style="align-self:flex-start;">DESCUBRIR EL RITUAL</a>
+    <div class="eyebrow-s">ALTA COSMÉTICA BOTÁNICA &middot; MILANO</div>
+    <h2>SET COMPLETO EVER-YOUTH SKINCARE RITUAL</h2>
+    <div class="b-price">€ 680 &nbsp;·&nbsp; Sérum Regenerador + Crema de Noche + Elixir Botánico</div>
+    <p>Formulado con péptidos botánicos del Mediterráneo y micro-nutrientes bioactivos para revitalizar la luminosidad y firmeza celular.</p>
+    <button class="btn-purple" style="align-self:flex-start;" onclick="addBag('Set Completo Ever-Youth Skincare', 680, 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=200', this)">AÑADIR SET A LA BOLSA (€ 680)</button>
   </div>
 </section>
 
-<!-- WORLD OF D&G -->
-<section class="world">
+<!-- WORLD SECTION: 3 LOOKS DE PASARELA COMPRABLES -->
+<section class="world" id="desfiles">
   <div class="world-hdr">
-    <h2>UNIVERSO &amp; DESFILES DE ALTA COSTURA</h2>
+    <h2>LOOKS COMPLETOS DEL DESFILE FW 2026</h2>
     <nav class="world-nav">
       <a href="pasarela.html" class="on">Fashion Shows 2026</a>
-      <a href="#">Boutiques VIP</a>
-      <a href="#">Libros de Arte</a>
-      <a href="#">Proyectos Especiales</a>
-      <a href="#">Eventos Privados</a>
+      <a href="pasarela.html">Front Row &amp; VIP</a>
+      <a href="pasarela.html">Backstage &amp; Beauty</a>
     </nav>
   </div>
   <div class="shows-grid">
-    <a href="pasarela.html" class="show-card">
-      <div class="show-card-img"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format&fit=crop&q=85" alt="Desfile SS27"></div>
-      <div class="show-info"><div class="show-season">HOMBRE &middot; SPRING/SUMMER 2027</div><div class="show-title">Men's Fashion Show SS27</div><div class="show-sub">Vacanze Siciliane &middot; Taormina</div></div>
-    </a>
-    <a href="pasarela.html" class="show-card">
-      <div class="show-card-img"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=85" alt="Desfile FW26"></div>
-      <div class="show-info"><div class="show-season">MUJER &middot; FALL/WINTER 2026</div><div class="show-title">Women's Fashion Show FW26</div><div class="show-sub">Identity &middot; Milan Fashion Week</div></div>
-    </a>
-    <a href="pasarela.html" class="show-card">
-      <div class="show-card-img"><img src="https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?w=600&auto=format&fit=crop&q=85" alt="Desfile FW26 Hombre"></div>
-      <div class="show-info"><div class="show-season">HOMBRE &middot; FALL/WINTER 2026</div><div class="show-title">Men's Fashion Show FW26</div><div class="show-sub">The Portrait of Man &middot; Milano</div></div>
-    </a>
+    
+    <!-- Look 1 -->
+    <div class="show-card">
+      <div class="show-card-img"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format&fit=crop&q=85" alt="Look 01 Pasarela"></div>
+      <div class="show-info">
+        <div class="show-season">LOOK 01 &middot; APERTURA DE DESFILE</div>
+        <div class="show-title">Total Look Vestido Crepé &amp; Clutches de Gala</div>
+        <div class="show-price">€ 7.705 (Vestido + Bolso Grandma)</div>
+        <button class="btn-camp-buy" onclick="addBag('Look 01 Completo de Pasarela', 7705, 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=200', this)">COMPRAR LOOK COMPLETO ↗</button>
+      </div>
+    </div>
+
+    <!-- Look 2 -->
+    <div class="show-card">
+      <div class="show-card-img"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=85" alt="Look 02 Pasarela"></div>
+      <div class="show-info">
+        <div class="show-season">LOOK 02 &middot; ALTA COSTURA IDENTITY</div>
+        <div class="show-title">Total Look Esmoquin Terciopelo &amp; Slingback</div>
+        <div class="show-price">€ 5.115 (Esmoquin + Zapatos Slingback)</div>
+        <button class="btn-camp-buy" onclick="addBag('Look 02 Esmoquin Completo', 5115, 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=200', this)">COMPRAR LOOK COMPLETO ↗</button>
+      </div>
+    </div>
+
+    <!-- Look 3 -->
+    <div class="show-card">
+      <div class="show-card-img"><img src="https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?w=600&auto=format&fit=crop&q=85" alt="Look 03 Pasarela Hombre"></div>
+      <div class="show-info">
+        <div class="show-season">LOOK 03 &middot; THE PORTRAIT OF MAN</div>
+        <div class="show-title">Total Look Traje Sastorial &amp; Derby Piel</div>
+        <div class="show-price">€ 4.325 (Traje + Derby Noble)</div>
+        <button class="btn-camp-buy" onclick="addBag('Look 03 Hombre Completo', 4325, 'https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?w=200', this)">COMPRAR LOOK COMPLETO ↗</button>
+      </div>
+    </div>
+
   </div>
-  <div class="world-footer"><a href="pasarela.html" class="btn-ol-purple">VER TODOS LOS DESFILES ↗</a></div>
+  <div class="world-footer"><a href="pasarela.html" class="btn-ol-purple">VER TODOS LOS 8 LOOKS DE PASARELA EN DIRECTO ↗</a></div>
 </section>
 
 <!-- STORE LOCATOR -->
@@ -722,7 +852,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   <div class="cart-hdr"><h3>Bolsa de Compras <span id="cartCnt" style="font-weight:400;color:var(--accent-blue)">(1)</span></h3><button class="cart-close" onclick="closeCart()">&#x2715;</button></div>
   <div class="cart-body" id="cartBody">
     <div class="c-item">
-      <div class="c-item-img"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=200&auto=format&fit=crop" alt="Vestido Doble Crepé"></div>
+      <div class="c-item-img"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=200&auto=format&fit=crop" alt="Vestido Doble Crepé"></div>
       <div class="c-item-info"><div class="c-item-name">Vestido en Doble Crepé de Lana Virgen</div><div class="c-item-dtl">Talla: IT 40 &mdash; Color: Negro Nero</div><div class="c-item-dtl">Fabricado en Italia &middot; Entrega Express</div><div class="c-item-price">€ 2.450</div></div>
     </div>
   </div>
@@ -750,7 +880,6 @@ img{display:block;width:100%;height:100%;object-fit:cover}
     height = canvas.height = window.innerHeight;
   });
 
-  // Estrellas estáticas con parpadeo y profundidad
   const stars = [];
   const numStars = 260;
   for (let i = 0; i < numStars; i++) {
@@ -760,11 +889,10 @@ img{display:block;width:100%;height:100%;object-fit:cover}
       size: Math.random() * 1.6 + 0.3,
       alpha: Math.random() * 0.8 + 0.2,
       speed: Math.random() * 0.02 + 0.005,
-      hue: Math.random() > 0.5 ? 260 : 195 // Púrpura cósmico y Azul estelar
+      hue: Math.random() > 0.5 ? 260 : 195
     });
   }
 
-  // Estrellas fugaces
   const shootingStars = [];
   function createShootingStar() {
     shootingStars.push({
@@ -779,7 +907,6 @@ img{display:block;width:100%;height:100%;object-fit:cover}
     });
   }
 
-  // Generar estrellas fugaces periódicamente
   setInterval(() => {
     if (Math.random() > 0.3) {
       createShootingStar();
@@ -789,7 +916,6 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   function drawUniverse() {
     ctx.clearRect(0, 0, width, height);
 
-    // Gradiente nebulosa profundo
     const grad = ctx.createRadialGradient(width * 0.5, height * 0.3, 50, width * 0.5, height * 0.5, width * 0.8);
     grad.addColorStop(0, 'rgba(25, 10, 50, 0.4)');
     grad.addColorStop(0.5, 'rgba(10, 15, 45, 0.3)');
@@ -797,7 +923,6 @@ img{display:block;width:100%;height:100%;object-fit:cover}
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, width, height);
 
-    // Dibujar y parpadear estrellas
     for (let s of stars) {
       s.alpha += s.speed;
       if (s.alpha > 1 || s.alpha < 0.2) s.speed = -s.speed;
@@ -810,7 +935,6 @@ img{display:block;width:100%;height:100%;object-fit:cover}
     }
     ctx.shadowBlur = 0;
 
-    // Dibujar estrellas fugaces
     for (let i = shootingStars.length - 1; i >= 0; i--) {
       const ss = shootingStars[i];
       ss.x -= Math.cos(ss.angle) * ss.speed;
@@ -839,7 +963,6 @@ img{display:block;width:100%;height:100%;object-fit:cover}
       ctx.lineCap = 'round';
       ctx.stroke();
 
-      // Cabeza brillante de la estrella fugaz
       ctx.beginPath();
       ctx.arc(ss.x, ss.y, ss.thickness * 1.2, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(255, 255, 255, ${ss.opacity})`;
@@ -870,16 +993,19 @@ function addBag(name,price,img,btn){
   document.getElementById('cartCnt').textContent='('+cList.length+')';
   document.getElementById('cartAmt').textContent='€ '+total.toLocaleString();
   document.getElementById('openCart').textContent='Bolsa ('+cList.length+')';
-  btn.textContent='✓ AÑADIDO A LA BOLSA';btn.style.background='linear-gradient(135deg, #10b981, #059669)';
-  setTimeout(function(){btn.textContent='AÑADIR A LA BOLSA';btn.style.background='';},2000);
+  if(btn){
+    btn.textContent='✓ AÑADIDO A LA BOLSA';
+    btn.style.background='linear-gradient(135deg, #10b981, #059669)';
+    setTimeout(function(){btn.textContent='AÑADIR A LA BOLSA';btn.style.background='';},2000);
+  }
   openCart();
 }
 
 function swTab(btn,tab){
   document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('on')});
   btn.classList.add('on');
-  document.getElementById('tab-women').style.display=tab==='women'?'block':'none';
-  document.getElementById('tab-men').style.display=tab==='men'?'block':'none';
+  document.getElementById('tab-women').style.display=tab==='women'?'grid':'none';
+  document.getElementById('tab-men').style.display=tab==='men'?'grid':'none';
 }
 </script>
 </body>

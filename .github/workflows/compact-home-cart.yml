@@ -1,0 +1,42 @@
+name: Compact homepage cart
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  compact-cart:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Compact homepage cart
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path("index.html")
+          s = p.read_text(encoding="utf-8")
+          replacements = {
+              "width:min(1200px,98vw)": "width:min(520px,92vw)",
+              "width:min(1050px,98vw)": "width:min(520px,92vw)",
+          }
+          old = s
+          for a, b in replacements.items():
+              s = s.replace(a, b)
+          if s == old:
+              raise SystemExit("Cart width markers not found; refusing to make an unrelated change.")
+          p.write_text(s, encoding="utf-8")
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Compact homepage cart drawer"
+          git push

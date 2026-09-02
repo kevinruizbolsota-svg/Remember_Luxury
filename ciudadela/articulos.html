@@ -1072,5 +1072,25 @@ function updateMasterCartUI(){
 document.addEventListener('DOMContentLoaded', updateMasterCartUI);
 </script>
 
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Conectar botones a búsqueda directa en AliExpress con el nombre del producto
+  const cards = document.querySelectorAll('.snake-card, .catalog-item-card, .prod-card');
+  cards.forEach(card => {
+    const titleEl = card.querySelector('.snake-name, .cat-name, .prod-title, h3, h4');
+    const btn = card.querySelector('a.btn-ali-champagne, a.btn-action-gold');
+    if(titleEl && btn){
+      const name = titleEl.textContent.trim();
+      const encoded = encodeURIComponent(name);
+      // Enlace de búsqueda real en AliExpress Choice / Direct
+      btn.href = `https://www.aliexpress.com/wholesale?SearchText=${encoded}`;
+      btn.target = "_blank";
+      btn.rel = "noopener noreferrer";
+    }
+  });
+});
+</script>
+
 </body>
 </html>

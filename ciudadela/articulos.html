@@ -3,20 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dolce&amp;Gabbana — Women's Fall/Winter 2026 Fashion Show</title>
+<title>Dolce&amp;Gabbana — Women's Fall/Winter 2026 Fashion Show | World Live</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg-black:#000000;
+  --dark:#070709;
+  --dark-glass:rgba(10,10,14,0.92);
+  --gold:#e6ca65;
+  --gold-light:#fff5c0;
+  --gold-gradient:linear-gradient(135deg, #ffffff 0%, #fff2b2 45%, #e6ca65 100%);
   --white:#ffffff;
-  --gray-dim:#666666;
-  --gray-light:#a1a1aa;
+  --gray-dim:#71717a;
+  --gray-light:#d4d4d8;
+  --border-subtle:rgba(255,255,255,0.12);
   --font-serif:'Cormorant Garamond', Georgia, serif;
-  --font-sans:'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans:'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
 }
-html, body{
+html{scroll-behavior:smooth}
+body{
   background-color:var(--bg-black);
   color:var(--white);
   font-family:var(--font-sans);
@@ -24,24 +31,24 @@ html, body{
   -webkit-font-smoothing:antialiased;
 }
 a{text-decoration:none;color:inherit}
-img{display:block;width:100%;height:100%;object-fit:cover}
+img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);}
 
-/* 1. TOP HEADER EXACTO D&G WORLD CON TEXTO GIGANTE MARQUEE AL FONDO */
+/* 1. TOP HEADER D&G WORLD CON MARCA DE AGUA EN MARQUEE */
 .dg-header-wrap{
-  position:relative;
+  position:sticky;
+  top:0;
   width:100%;
   height:76px;
-  background:#000000;
-  border-bottom:1px solid rgba(255,255,255,0.12);
+  background:rgba(0,0,0,0.95);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border-subtle);
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 32px;
-  z-index:100;
+  padding:0 36px;
+  z-index:999;
   overflow:hidden;
 }
-
-/* MARQUEE REPETIDO "WORLD WORLD WORLD" EN MARCA DE AGUA */
 .marquee-bg{
   position:absolute;
   inset:0;
@@ -50,134 +57,56 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   pointer-events:none;
   z-index:1;
   white-space:nowrap;
-  opacity:0.18;
+  opacity:0.16;
   font-family:var(--font-serif);
   font-size:52px;
-  font-weight:400;
   letter-spacing:0.35em;
   text-transform:uppercase;
   color:#ffffff;
-  user-select:none;
 }
+.header-left, .header-right{position:relative;z-index:10;display:flex;align-items:center;gap:20px}
+.menu-hamburger{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:6px}
+.menu-hamburger span{display:block;width:24px;height:2px;background:#ffffff}
+.header-center-logo{position:absolute;left:50%;transform:translateX(-50%);z-index:10}
+.dg-logo{font-size:22px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:#ffffff}
+.dg-logo span{font-size:16px;font-weight:300;margin:0 2px}
 
-.header-left{
-  position:relative;
-  z-index:10;
-  display:flex;
-  align-items:center;
-}
-.menu-hamburger{
-  background:none;
-  border:none;
-  cursor:pointer;
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-  padding:8px;
-}
-.menu-hamburger span{
-  display:block;
-  width:24px;
-  height:2px;
-  background:#ffffff;
-}
-
-.header-center-logo{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  z-index:10;
-}
-.dg-logo{
-  font-family:var(--font-sans);
-  font-size:22px;
-  font-weight:700;
-  letter-spacing:0.24em;
-  text-transform:uppercase;
-  color:#ffffff;
-}
-.dg-logo span{
-  font-size:16px;
-  font-weight:300;
-  margin:0 2px;
-}
-
-.header-right{
-  position:relative;
-  z-index:10;
-  display:flex;
-  align-items:center;
-  gap:24px;
-}
-.hdr-icon{
-  background:none;
-  border:none;
-  color:#ffffff;
-  font-size:16px;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-}
-.lang-badge{
-  font-size:12px;
-  font-weight:600;
-  letter-spacing:0.1em;
-  cursor:pointer;
-}
-
-/* 2. EL TRIPTYCH 3-SCREEN RUNWAY PLAYER (EXACTO A TU CAPTURA) */
+/* 2. TRIPTYCH RUNWAY 3 PANELES (SINCRONIZADO Y ANIMADO) */
 .triptych-stage{
   position:relative;
   width:100vw;
   height:calc(100vh - 76px);
-  min-height:600px;
+  min-height:620px;
   background:#000000;
   display:flex;
   align-items:stretch;
   overflow:hidden;
 }
-
 .pane{
   position:relative;
   height:100%;
   overflow:hidden;
   background:#050505;
-}
-
-/* PANEL IZQUIERDO: DETALLE/CLOSE-UP (33.333%) */
-.pane-left{
   flex:1;
   border-right:2px solid #000000;
 }
-/* PANEL CENTRAL: PASARELA FRONTAL COMPLETA (33.333%) */
-.pane-center{
-  flex:1;
-  border-right:2px solid #000000;
-}
-/* PANEL DERECHO: VISTA GENERAL/PUBLICO (33.333%) */
-.pane-right{
-  flex:1;
-}
-
+.pane:last-child{border-right:none}
 .pane img{
   width:100%;
   height:100%;
   object-fit:cover;
-  transition:transform 0.6s ease;
 }
-.triptych-stage:hover .pane img{
-  transform:scale(1.02);
-}
+.triptych-stage:hover .pane img{transform:scale(1.03)}
 
-/* BOTONES DE UNMUTE EN LAS ESQUINAS INFERIORES DE LOS VIDEOS/FOTOS */
+/* BOTONES UNMUTE ESQUINAS */
 .pane-unmute-btn{
   position:absolute;
-  bottom:24px;
-  background:rgba(0,0,0,0.5);
-  border:1px solid rgba(255,255,255,0.3);
+  bottom:28px;
+  background:rgba(0,0,0,0.65);
+  border:1px solid rgba(255,255,255,0.35);
   color:#ffffff;
-  width:36px;
-  height:36px;
+  width:38px;
+  height:38px;
   border-radius:50%;
   display:flex;
   align-items:center;
@@ -185,16 +114,13 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   cursor:pointer;
   z-index:20;
   transition:all .3s;
-  backdrop-filter:blur(6px);
+  backdrop-filter:blur(10px);
 }
-.pane-unmute-btn:hover{
-  background:rgba(255,255,255,0.25);
-  border-color:#ffffff;
-}
-.unmute-left{ left:24px; }
-.unmute-right{ right:24px; }
+.pane-unmute-btn:hover{background:rgba(255,255,255,0.25);border-color:#ffffff}
+.unmute-left{left:28px}
+.unmute-right{right:28px}
 
-/* 3. BARRA FLOTANTE DE PESTAÑAS D&G EN EL CENTRO INFERIOR */
+/* BARRA FLOTANTE D&G */
 .runway-tabs-bar{
   position:absolute;
   bottom:24px;
@@ -205,12 +131,10 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   border:1px solid rgba(255,255,255,0.25);
   display:flex;
   align-items:center;
-  padding:0;
-  box-shadow:0 10px 30px rgba(0,0,0,0.9);
+  box-shadow:0 12px 36px rgba(0,0,0,0.95);
 }
-
 .tab-btn{
-  padding:12px 24px;
+  padding:12px 22px;
   font-size:12px;
   font-weight:500;
   letter-spacing:0.16em;
@@ -222,51 +146,31 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   cursor:pointer;
   transition:all .25s;
   white-space:nowrap;
-  display:flex;
-  align-items:center;
-  gap:8px;
 }
-.tab-btn:last-child{
-  border-right:none;
-}
-.tab-btn:hover, .tab-btn.active{
-  background:rgba(255,255,255,0.12);
-  color:#ffffff;
-}
+.tab-btn:hover, .tab-btn.active{background:rgba(255,255,255,0.14)}
 .tab-arrow{
-  padding:12px 16px;
+  padding:12px 18px;
   color:#ffffff;
   cursor:pointer;
   display:flex;
   align-items:center;
   justify-content:center;
-  border-left:1px solid rgba(255,255,255,0.18);
   background:transparent;
-  border-top:none;
-  border-bottom:none;
-  border-right:none;
-}
-.tab-arrow:hover{
-  background:rgba(255,255,255,0.12);
+  border:none;
 }
 
-/* 4. COMPRA RÁPIDA ALIEXPRESS DE LOS LOOKS DE PASARELA */
-.ali-quick-buy-bar{
-  background:#0a0a0c;
-  border-top:1px solid rgba(255,255,255,0.1);
-  border-bottom:1px solid rgba(255,255,255,0.1);
-  padding:20px 32px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:16px;
+/* 3. SECCIÓN IDENTITY MANIFIESTO */
+.identity-section{
+  padding:120px 48px 90px;
+  max-width:1400px;
+  margin:0 auto;
 }
-.quick-info{
-  display:flex;
-  align-items:center;
-  gap:16px;
-}
+.id-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.id-title{font-family:var(--font-serif);font-size:clamp(46px,7vw,84px);font-weight:300;font-style:italic;line-height:1.05;margin-bottom:24px;background:var(--gold-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.id-statement{font-family:var(--font-serif);font-size:clamp(20px,2.4vw,28px);font-style:italic;line-height:1.6;color:#f4f4f5;margin-bottom:24px;max-width:1050px}
+.id-text{font-family:var(--font-serif);font-size:17px;font-style:italic;line-height:1.9;color:var(--gray-light);margin-bottom:36px;max-width:980px}
+
+/* BOTONES CHAMPAGNE CLAROS Y REFINADOS */
 .btn-ali-champagne{
   background:linear-gradient(135deg, rgba(245, 230, 179, 0.28) 0%, rgba(212, 175, 55, 0.38) 100%);
   color:#ffffff !important;
@@ -275,7 +179,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   font-weight:600;
   letter-spacing:.22em;
   text-transform:uppercase;
-  padding:12px 30px;
+  padding:14px 34px;
   border-radius:25px;
   border:1px solid rgba(255, 242, 178, 0.7);
   transition:all .35s;
@@ -283,199 +187,253 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   align-items:center;
   gap:10px;
   cursor:pointer;
-  box-shadow:0 4px 15px rgba(230, 202, 101, 0.2);
+  box-shadow:0 4px 20px rgba(230, 202, 101, 0.25);
+  backdrop-filter:blur(8px);
 }
 .btn-ali-champagne:hover{
-  transform:translateY(-2px);
+  transform:translateY(-3px);
   border-color:#ffffff;
-  box-shadow:0 6px 25px rgba(230, 202, 101, 0.45);
+  box-shadow:0 8px 30px rgba(230, 202, 101, 0.55);
 }
 
-/* 5. SECCIÓN IDENTITY MANIFIESTO COMPLETO D&G */
-.identity-section{
-  padding:100px 48px;
-  max-width:1200px;
-  margin:0 auto;
+/* 4. CARRUSEL INFINITO DE FOTOS HORIZONTAL INTERACTIVO */
+.carousel-showcase{
+  position:relative;
+  width:100vw;
+  padding:40px 0 60px;
+  background:#070709;
+  border-top:1px solid var(--border-subtle);
+  border-bottom:1px solid var(--border-subtle);
+  overflow:hidden;
 }
-.id-title{
-  font-family:var(--font-serif);
-  font-size:clamp(42px, 6vw, 76px);
-  font-weight:400;
-  letter-spacing:0.04em;
-  margin-bottom:28px;
-  text-transform:uppercase;
+.carousel-hdr{
+  padding:0 48px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
-.id-statement{
-  font-family:var(--font-serif);
-  font-size:24px;
-  font-style:italic;
-  line-height:1.6;
-  color:#f4f4f5;
-  margin-bottom:24px;
+.carousel-track{
+  display:flex;
+  gap:16px;
+  padding:0 48px;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  scrollbar-width:none;
 }
-.id-text{
-  font-family:var(--font-serif);
-  font-size:17px;
-  font-style:italic;
-  line-height:1.9;
-  color:var(--gray-light);
-  margin-bottom:40px;
+.carousel-track::-webkit-scrollbar{display:none}
+.slide-card{
+  flex:0 0 340px;
+  height:520px;
+  position:relative;
+  background:#111;
+  overflow:hidden;
+  border:1px solid var(--border-subtle);
+  transition:all .4s ease;
 }
-.id-link{
-  font-size:12px;
-  font-weight:600;
-  letter-spacing:0.24em;
-  text-transform:uppercase;
-  border-bottom:1px solid #ffffff;
-  padding-bottom:6px;
-  display:inline-block;
-  transition:opacity .2s;
+.slide-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(230,202,101,0.8);
+  box-shadow:0 15px 35px rgba(0,0,0,0.9);
 }
-.id-link:hover{opacity:0.7}
+.slide-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.slide-card:hover img{transform:scale(1.08)}
+.slide-caption{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,0.92) 15%, transparent 60%);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:24px;
+}
+.slide-cat{font-size:10px;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.slide-name{font-family:var(--font-serif);font-size:17px;font-style:italic;color:#fff;line-height:1.3;margin-bottom:6px}
+.slide-price{font-size:15px;font-weight:600;font-style:italic;color:var(--gold-light);margin-bottom:12px}
 
-/* 6. CAPÍTULOS DE HISTORIA EDITORIAL (TAILORING, SENSUALITY, ETC.) */
-.chapter-block{
-  border-top:1px solid rgba(255,255,255,0.12);
+/* 5. SECCIONES SPLIT STICKY SCREEN CON MÚLTIPLES FOTOS PEGADAS */
+.editorial-story{
+  border-top:1px solid var(--border-subtle);
+  position:relative;
+}
+.story-container{
   display:grid;
   grid-template-columns:1fr 1.2fr;
-  min-height:90vh;
+  min-height:100vh;
 }
-.chapter-text{
-  padding:100px 60px;
+.story-text-pane{
+  padding:120px 60px;
   position:sticky;
-  top:0;
-  height:100vh;
+  top:76px;
+  height:calc(100vh - 76px);
   display:flex;
   flex-direction:column;
   justify-content:center;
 }
-.chap-heading{
-  font-family:var(--font-serif);
-  font-size:42px;
-  font-weight:400;
-  font-style:italic;
-  line-height:1.2;
-  margin-bottom:20px;
-}
-.chap-desc{
-  font-family:var(--font-serif);
-  font-size:16px;
-  font-style:italic;
-  line-height:1.85;
-  color:var(--gray-light);
-  margin-bottom:30px;
-}
-.chapter-media{
+.story-num{font-size:11px;font-weight:700;letter-spacing:0.34em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.story-title{font-family:var(--font-serif);font-size:clamp(32px,3.8vw,52px);font-weight:400;font-style:italic;line-height:1.15;margin-bottom:20px;color:#ffffff}
+.story-desc{font-family:var(--font-serif);font-size:16px;font-style:italic;line-height:1.85;color:var(--gray-light);margin-bottom:28px;max-width:540px}
+.story-price{font-size:22px;font-weight:600;font-style:italic;color:var(--gold-light);margin-bottom:28px;letter-spacing:0.04em}
+
+.story-media-stream{
   display:flex;
   flex-direction:column;
+  gap:2px;
+  background:rgba(230,202,101,0.15);
 }
-.chap-img-box{
+.stream-img-box{
   width:100%;
   height:100vh;
   position:relative;
+  overflow:hidden;
+  background:#090614;
 }
+.stream-img-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0.92;
+}
+.stream-img-box:hover img{transform:scale(1.05);opacity:1}
+.stream-tag{
+  position:absolute;
+  bottom:30px;
+  left:30px;
+  background:rgba(0,0,0,0.85);
+  border:1px solid var(--border-subtle);
+  color:var(--gold-light);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  padding:8px 20px;
+  border-radius:20px;
+  backdrop-filter:blur(10px);
+}
+
+/* 6. MOSAICO COMPLETO DE LOOKS RUNWAY (30+ LOOKS) */
+.mosaic-section{
+  padding:120px 48px 100px;
+  max-width:1600px;
+  margin:0 auto;
+}
+.mosaic-hdr{text-align:center;margin-bottom:70px}
+.mosaic-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));
+  gap:24px;
+}
+.mosaic-card{
+  background:#0d0d11;
+  border:1px solid var(--border-subtle);
+  overflow:hidden;
+  position:relative;
+  transition:all .4s ease;
+  display:flex;
+  flex-direction:column;
+}
+.mosaic-card:hover{
+  transform:translateY(-10px);
+  border-color:rgba(230,202,101,0.8);
+  box-shadow:0 20px 45px rgba(0,0,0,0.95);
+}
+.mosaic-img{
+  aspect-ratio:3/4;
+  overflow:hidden;
+  background:#111;
+  position:relative;
+}
+.mosaic-img img{width:100%;height:100%;object-fit:cover}
+.mosaic-card:hover .mosaic-img img{transform:scale(1.07)}
+.mosaic-info{padding:24px;display:flex;flex-direction:column;flex:1}
+.mosaic-cat{font-size:10px;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.mosaic-title{font-family:var(--font-serif);font-size:16px;font-weight:500;font-style:italic;color:#fff;line-height:1.4;margin-bottom:10px}
+.mosaic-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:18px}
+.mosaic-price{font-size:19px;font-weight:600;font-style:italic;color:var(--gold-light)}
 
 /* FOOTER D&G */
 .site-footer{
-  border-top:1px solid rgba(255,255,255,0.12);
-  padding:60px 48px;
-  font-size:11px;
+  background:#040208;
+  border-top:1px solid var(--border-subtle);
+  padding:90px 48px 50px;
   color:var(--gray-dim);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:20px;
 }
+.footer-cols{
+  max-width:1400px;
+  margin:0 auto 60px;
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:40px;
+}
+.foot-col-title{font-size:11px;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:12px}
+.foot-links a{font-size:12px;color:var(--gray-light);transition:all .2s;font-style:italic}
+.foot-links a:hover{color:var(--gold-light);transform:translateX(3px)}
 
-@media(max-width:992px){
-  .triptych-stage{flex-direction:column;height:auto;}
-  .pane{height:70vh;border-right:none;border-bottom:2px solid #000;}
-  .runway-tabs-bar{position:fixed;bottom:10px;width:95%;overflow-x:auto;justify-content:flex-start;}
-  .chapter-block{grid-template-columns:1fr}
-  .chapter-text{position:static;height:auto;padding:60px 24px}
+@media(max-width:1100px){
+  .story-container{grid-template-columns:1fr}
+  .story-text-pane{position:static;height:auto;padding:60px 24px}
+  .dg-header-wrap{padding:0 20px}
+}
+@media(max-width:768px){
+  .triptych-stage{flex-direction:column;height:auto}
+  .pane{height:70vh;border-right:none;border-bottom:2px solid #000}
+  .runway-tabs-bar{width:95%;overflow-x:auto}
+  .mosaic-grid{grid-template-columns:1fr}
+  .footer-cols{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- 1. HEADER D&G WORLD -->
+<!-- 1. HEADER D&G WORLD CON MARCA DE AGUA -->
 <header class="dg-header-wrap">
   <div class="marquee-bg">
     WORLD &nbsp;&nbsp;&nbsp; WORLD &nbsp;&nbsp;&nbsp; WORLD &nbsp;&nbsp;&nbsp; WORLD &nbsp;&nbsp;&nbsp; WORLD &nbsp;&nbsp;&nbsp; WORLD
   </div>
-
   <div class="header-left">
-    <button class="menu-hamburger" aria-label="Menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+    <button class="menu-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
-
   <div class="header-center-logo">
     <a href="index.html" class="dg-logo">DOLCE <span>&amp;</span> GABBANA</a>
   </div>
-
   <div class="header-right">
-    <button class="hdr-icon" aria-label="Search">🔍</button>
-    <button class="hdr-icon" aria-label="Theme">☼</button>
-    <span class="lang-badge">EN</span>
+    <button style="background:none;border:none;color:#fff;font-size:16px;cursor:pointer;">🔍</button>
+    <button style="background:none;border:none;color:#fff;font-size:16px;cursor:pointer;">☼</button>
+    <span style="font-size:12px;font-weight:600;letter-spacing:0.1em;cursor:pointer;">EN</span>
   </div>
 </header>
 
-<!-- 2. TRIPTYCH 3-SCREEN RUNWAY PLAYER (IGUAL A LA IMAGEN) -->
+<!-- 2. TRIPTYCH RUNWAY 3 PANELES (SINCRONIZADOS Y VIVOS) -->
 <section class="triptych-stage">
-  
-  <!-- PANEL IZQUIERDO: DETALLE LOOK PIEL & ENCAJE -->
-  <div class="pane pane-left">
+  <div class="pane">
     <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1000&auto=format&fit=crop&q=90" alt="Look Detail Left">
-    <!-- BOTÓN UNMUTE IZQUIERDO -->
-    <button class="pane-unmute-btn unmute-left" onclick="toggleAudio()" title="Unmute">
-      <span id="muteIcon1">🔇</span>
-    </button>
+    <button class="pane-unmute-btn unmute-left" onclick="toggleAudio()" title="Unmute"><span id="muteIcon1">🔇</span></button>
   </div>
-
-  <!-- PANEL CENTRAL: PASARELA FRONTAL COMPLETA -->
-  <div class="pane pane-center">
+  <div class="pane">
     <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1000&auto=format&fit=crop&q=90" alt="Runway Center Look">
   </div>
-
-  <!-- PANEL DERECHO: VISTA SALIENDO DE LA PASARELA -->
-  <div class="pane pane-right">
+  <div class="pane">
     <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1000&auto=format&fit=crop&q=90" alt="Runway Right Crowd View">
-    <!-- BOTÓN UNMUTE DERECHO -->
-    <button class="pane-unmute-btn unmute-right" onclick="toggleAudio()" title="Unmute">
-      <span id="muteIcon2">🔊</span>
-    </button>
+    <button class="pane-unmute-btn unmute-right" onclick="toggleAudio()" title="Unmute"><span id="muteIcon2">🔊</span></button>
   </div>
-
-  <!-- 3. BARRA FLOTANTE D&G EXACTA: Looks | Highlights | Celebrities | Behind the scenes | Beauty | Inspiration -->
   <div class="runway-tabs-bar">
     <button class="tab-btn active" onclick="scrollToSection('identity')">Looks</button>
     <button class="tab-btn" onclick="scrollToSection('tailoring')">Highlights</button>
     <button class="tab-btn" onclick="scrollToSection('frontrow')">Celebrities</button>
     <button class="tab-btn" onclick="scrollToSection('sensuality')">Behind the scenes</button>
-    <button class="tab-btn" onclick="scrollToSection('beauty')">Beauty</button>
-    <button class="tab-btn" onclick="scrollToSection('inspiration')">Inspiration</button>
-    <button class="tab-arrow" title="Next tab">❯</button>
+    <button class="tab-btn" onclick="scrollToSection('prints')">Beauty</button>
+    <button class="tab-btn" onclick="scrollToSection('carousel')">Inspiration</button>
+    <button class="tab-arrow">❯</button>
   </div>
-
 </section>
 
-<!-- 4. BARRA DE COMPRA ALIEXPRESS -->
-<div class="ali-quick-buy-bar">
-  <div class="quick-info">
-    <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#d4af37;">RUNWAY EXCLUSIVE</span>
-    <span style="font-family:var(--font-serif);font-size:16px;font-style:italic;">Look 01: Sastrería Doble Faz &middot; € 3.850 / $ 58.50 USD</span>
-  </div>
-  <a href="https://www.aliexpress.com/item/1005005891234567.html" target="_blank" class="btn-ali-champagne">
-    Comprar Look en AliExpress ↗
-  </a>
-</div>
-
-<!-- 5. SECCIÓN IDENTITY -->
+<!-- 3. SECCIÓN IDENTITY MANIFIESTO COMPLETO -->
 <section class="identity-section" id="identity">
+  <div class="id-eyebrow">WOMEN'S FALL/WINTER 2026 FASHION SHOW &middot; MILANO</div>
   <h1 class="id-title">IDENTITY</h1>
   <div class="id-statement">
     Dolce&amp;Gabbana Identity is a clear statement: identity is the ultimate luxury. This is not nostalgia. It is presence.
@@ -485,55 +443,327 @@ img{display:block;width:100%;height:100%;object-fit:cover}
     Dolce&amp;Gabbana is sensuality, devotion, glamour, and craftsmanship merged into an aesthetic that is instantly recognizable because it comes from authenticity and passion.<br>
     <strong>Dolce&amp;Gabbana Identity is the story of remaining true to yourself.</strong>
   </p>
-  <a href="#tailoring" class="id-link">View all looks</a>
+  <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center;">
+    <a href="#tailoring" class="btn-ali-champagne">View all looks ↓</a>
+    <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.3);">
+      Explorar Catálogo en AliExpress ↗
+    </a>
+  </div>
 </section>
 
-<!-- 6. CAPÍTULOS DE HISTORIA Y FOTOS GIGANTES (TAILORING, SENSUALITY, ETC.) -->
-<section class="chapter-block" id="tailoring">
-  <div class="chapter-text">
-    <h2 class="chap-heading">Tailoring: rules and exception</h2>
-    <p class="chap-desc">
-      In the Women’s Fall/Winter 2026 Fashion Show, a return to origins unfolds, where the rigor of tailoring is revived through precise cuts, studied silhouettes and classic patterns such as wool pinstripes. The technical features of the double-breasted construction are echoed on the back of jackets, mirroring the front.
-    </p>
+<!-- 4. CARRUSEL INTERACTIVO DE FOTOS RUNWAY LOOKS -->
+<section class="carousel-showcase" id="carousel">
+  <div class="carousel-hdr">
     <div>
-      <a href="https://www.aliexpress.com/item/1005005891234567.html" target="_blank" class="btn-ali-champagne">
-        Comprar en AliExpress ↗
-      </a>
+      <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">PASARELA EN VIVO</div>
+      <h2 style="font-family:var(--font-serif);font-size:28px;font-style:italic;color:#fff;">Looks de Pasarela FW 2026</h2>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button onclick="scrollTrack(-400)" style="background:rgba(255,255,255,0.1);border:1px solid var(--border-subtle);color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;">❮</button>
+      <button onclick="scrollTrack(400)" style="background:rgba(255,255,255,0.1);border:1px solid var(--border-subtle);color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;">❯</button>
     </div>
   </div>
-  <div class="chapter-media">
-    <div class="chap-img-box"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&auto=format&fit=crop&q=90" alt="Tailoring 1"></div>
-    <div class="chap-img-box"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1200&auto=format&fit=crop&q=90" alt="Tailoring 2"></div>
-  </div>
-</section>
 
-<section class="chapter-block" id="sensuality">
-  <div class="chapter-text">
-    <h2 class="chap-heading">Discreet sensuality</h2>
-    <p class="chap-desc">
-      The show highlights the brand’s immediately recognizable identity, connected to a return to its origins — to an archaic Sicily and its evocative imagery, expressed through total black, shawls, crochet craftsmanship and clear references to tradition. Lace assumes an essential role, tracing the contours of the body.
-    </p>
-    <div>
-      <a href="https://www.aliexpress.com/item/1005005987654321.html" target="_blank" class="btn-ali-champagne">
-        Comprar en AliExpress ↗
-      </a>
+  <div class="carousel-track" id="cTrack">
+    <!-- SLIDE 1 -->
+    <div class="slide-card">
+      <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=700&auto=format&fit=crop&q=88" alt="Vestido Crepé Nero">
+      <div class="slide-caption">
+        <div class="slide-cat">LOOK 01 &middot; GALA</div>
+        <div class="slide-name">Vestido en Doble Crepé Nero</div>
+        <div class="slide-price">€ 2.450 / $ 42.80 Ali</div>
+        <a href="https://www.aliexpress.com/item/1005006428901234.html" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a>
+      </div>
+    </div>
+    <!-- SLIDE 2 -->
+    <div class="slide-card">
+      <img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=700&auto=format&fit=crop&q=88" alt="Vestido Gasa Floral">
+      <div class="slide-caption">
+        <div class="slide-cat">LOOK 02 &middot; SEDA</div>
+        <div class="slide-name">Vestido en Gasa de Seda Floral</div>
+        <div class="slide-price">€ 4.765 / $ 45.20 Ali</div>
+        <a href="https://www.aliexpress.com/item/1005005987654321.html" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a>
+      </div>
+    </div>
+    <!-- SLIDE 3 -->
+    <div class="slide-card">
+      <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=700&auto=format&fit=crop&q=88" alt="Mini Grandma Bag">
+      <div class="slide-caption">
+        <div class="slide-cat">LOOK 03 &middot; MARROQUINERÍA</div>
+        <div class="slide-name">Mini Grandma Handbag Nappa</div>
+        <div class="slide-price">€ 5.255 / $ 38.90 Ali</div>
+        <a href="https://www.aliexpress.com/item/1005006123456789.html" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a>
+      </div>
+    </div>
+    <!-- SLIDE 4 -->
+    <div class="slide-card">
+      <img src="https://images.unsplash.com/photo-1551803091-e20673f15770?w=700&auto=format&fit=crop&q=88" alt="Top Tul Bordado">
+      <div class="slide-caption">
+        <div class="slide-cat">LOOK 04 &middot; ALTA COSTURA</div>
+        <div class="slide-name">Top en Tul Bordado a Mano</div>
+        <div class="slide-price">€ 4.075 / $ 26.50 Ali</div>
+        <a href="https://www.aliexpress.com/item/1005003654789123.html" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a>
+      </div>
+    </div>
+    <!-- SLIDE 5 -->
+    <div class="slide-card">
+      <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=700&auto=format&fit=crop&q=88" alt="Slingback Floral">
+      <div class="slide-caption">
+        <div class="slide-cat">LOOK 05 &middot; CALZADO</div>
+        <div class="slide-name">Slingbacks en Piel Floral</div>
+        <div class="slide-price">€ 1.265 / $ 29.90 Ali</div>
+        <a href="https://www.aliexpress.com/item/1005004123987456.html" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a>
+      </div>
+    </div>
+    <!-- SLIDE 6 -->
+    <div class="slide-card">
+      <img src="https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=700&auto=format&fit=crop&q=88" alt="Falda Chantilly">
+      <div class="slide-caption">
+        <div class="slide-cat">LOOK 06 &middot; ENCAJE</div>
+        <div class="slide-name">Falda de Tubo en Encaje Chantilly</div>
+        <div class="slide-price">€ 3.795 / $ 32.80 Ali</div>
+        <a href="https://www.aliexpress.com/item/1005005123654987.html" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a>
+      </div>
+    </div>
+    <!-- SLIDE 7 -->
+    <div class="slide-card">
+      <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=700&auto=format&fit=crop&q=88" alt="Bolso Sicily">
+      <div class="slide-caption">
+        <div class="slide-cat">LOOK 07 &middot; BOLSO ICÓNICO</div>
+        <div class="slide-name">Bolso Sicily Pequeño en Piel Dauphine</div>
+        <div class="slide-price">€ 1.850 / $ 34.00 Ali</div>
+        <a href="https://www.aliexpress.com/item/1005004876543210.html" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a>
+      </div>
     </div>
   </div>
-  <div class="chapter-media">
-    <div class="chap-img-box"><img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=1200&auto=format&fit=crop&q=90" alt="Sensuality 1"></div>
-    <div class="chap-img-box"><img src="https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=1200&auto=format&fit=crop&q=90" alt="Sensuality 2"></div>
+</section>
+
+<!-- 5. CAPÍTULOS CON MÚLTIPLES FOTOS GIGANTES PEGADAS -->
+<!-- CAPÍTULO I: TAILORING -->
+<section class="editorial-story" id="tailoring">
+  <div class="story-container">
+    <div class="story-text-pane">
+      <div class="story-num">CAPÍTULO I &middot; ALTA SASTRERÍA</div>
+      <h2 class="story-title">Tailoring: rules and exception</h2>
+      <p class="story-desc">
+        In the Women’s Fall/Winter 2026 Fashion Show, a return to origins unfolds, where the rigor of tailoring is revived through precise cuts, studied silhouettes and classic patterns such as wool pinstripes. The technical features of the double-breasted construction are echoed on the back of jackets, mirroring the front.
+      </p>
+      <div class="story-price">Esmoquin Sartorial Doble Faz &middot; € 3.850 / $ 58.50 USD</div>
+      <div>
+        <a href="https://www.aliexpress.com/item/1005005891234567.html" target="_blank" class="btn-ali-champagne">
+          Comprar en AliExpress ↗
+        </a>
+      </div>
+    </div>
+    <div class="story-media-stream">
+      <div class="stream-img-box">
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&auto=format&fit=crop&q=90" alt="Tailoring Look 1">
+        <span class="stream-tag">Look 01 &middot; Pinstripe Double-Breasted</span>
+      </div>
+      <div class="stream-img-box">
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1200&auto=format&fit=crop&q=90" alt="Tailoring Look 2">
+        <span class="stream-tag">Look 02 &middot; Sastrería de Terciopelo</span>
+      </div>
+      <div class="stream-img-box">
+        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1200&auto=format&fit=crop&q=90" alt="Tailoring Look 3">
+        <span class="stream-tag">Look 03 &middot; Traje Masculino &amp; Corbata</span>
+      </div>
+    </div>
   </div>
 </section>
 
+<!-- CAPÍTULO II: DISCREET SENSUALITY -->
+<section class="editorial-story" id="sensuality">
+  <div class="story-container">
+    <div class="story-text-pane">
+      <div class="story-num">CAPÍTULO II &middot; ENCAJE SICILIANO</div>
+      <h2 class="story-title">Discreet sensuality</h2>
+      <p class="story-desc">
+        The show highlights the brand’s immediately recognizable identity, connected to a return to its origins — to an archaic Sicily and its evocative imagery, expressed through total black, shawls, crochet craftsmanship and clear references to tradition. Lace assumes an essential role, tracing the contours of the body.
+      </p>
+      <div class="story-price">Vestido en Encaje Chantilly &middot; € 4.765 / $ 45.20 USD</div>
+      <div>
+        <a href="https://www.aliexpress.com/item/1005005987654321.html" target="_blank" class="btn-ali-champagne">
+          Comprar en AliExpress ↗
+        </a>
+      </div>
+    </div>
+    <div class="story-media-stream">
+      <div class="stream-img-box">
+        <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=1200&auto=format&fit=crop&q=90" alt="Sensuality 1">
+        <span class="stream-tag">Look 04 &middot; Sheer Lace Gown</span>
+      </div>
+      <div class="stream-img-box">
+        <img src="https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=1200&auto=format&fit=crop&q=90" alt="Sensuality 2">
+        <span class="stream-tag">Look 05 &middot; Layered Sicilian Silk</span>
+      </div>
+      <div class="stream-img-box">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1200&auto=format&fit=crop&q=90" alt="Sensuality 3">
+        <span class="stream-tag">Look 06 &middot; Corsetería Esculpida</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPÍTULO III: PRINTS & EMBROIDERY -->
+<section class="editorial-story" id="prints">
+  <div class="story-container">
+    <div class="story-text-pane">
+      <div class="story-num">CAPÍTULO III &middot; FLORES &amp; BORDADOS</div>
+      <h2 class="story-title">Between prints and embroidery</h2>
+      <p class="story-desc">
+        White flowers bloom across the lightest black fabrics, recalling Dolce&amp;Gabbana’s aesthetic codes. Archival prints inspired by Sicilian tradition find their purpose in garments with a distinctly contemporary spirit — crafted in chiffon and charmeuse, enriched with sequin applications.
+      </p>
+      <div class="story-price">Top Tul Bordado a Mano &middot; € 4.075 / $ 26.50 USD</div>
+      <div>
+        <a href="https://www.aliexpress.com/item/1005003654789123.html" target="_blank" class="btn-ali-champagne">
+          Comprar en AliExpress ↗
+        </a>
+      </div>
+    </div>
+    <div class="story-media-stream">
+      <div class="stream-img-box">
+        <img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=1200&auto=format&fit=crop&q=90" alt="Floral Prints">
+        <span class="stream-tag">Look 07 &middot; Chiffon Floral</span>
+      </div>
+      <div class="stream-img-box">
+        <img src="https://images.unsplash.com/photo-1551803091-e20673f15770?w=1200&auto=format&fit=crop&q=90" alt="Embroidered Top">
+        <span class="stream-tag">Look 08 &middot; Sequins &amp; Tulle</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. SPOTLIGHTS ON BAGS & ACCESSORIES -->
+<section class="editorial-story" id="bags">
+  <div class="story-container">
+    <div class="story-text-pane">
+      <div class="story-num">CAPÍTULO IV &middot; MARROQUINERÍA &amp; ZAPATOS</div>
+      <h2 class="story-title">Spotlights on bags &amp; shoes</h2>
+      <p class="story-desc">
+        A new model captures attention on the runway: the Mini Grandma Handbag, presented in supple plongé nappa with a refined concealed mirror within. Accompanied by the iconic My Sicily Bag in Dauphine leather, and floral calfskin slingbacks.
+      </p>
+      <div class="story-price">Mini Grandma Handbag Nappa &middot; € 5.255 / $ 38.90 USD</div>
+      <div>
+        <a href="https://www.aliexpress.com/item/1005006123456789.html" target="_blank" class="btn-ali-champagne">
+          Comprar Bolso en AliExpress ↗
+        </a>
+      </div>
+    </div>
+    <div class="story-media-stream">
+      <div class="stream-img-box">
+        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1200&auto=format&fit=crop&q=90" alt="Mini Grandma Handbag">
+        <span class="stream-tag">The New Mini Grandma Handbag</span>
+      </div>
+      <div class="stream-img-box">
+        <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=1200&auto=format&fit=crop&q=90" alt="Devotion Bag Gold">
+        <span class="stream-tag">Devotion Sacred Heart Bag</span>
+      </div>
+      <div class="stream-img-box">
+        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=1200&auto=format&fit=crop&q=90" alt="Floral Slingbacks">
+        <span class="stream-tag">Floral Calfskin Slingbacks</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. MOSAICO COMPLETO DE LOOKS RUNWAY (FRONT ROW & BACKSTAGE) -->
+<section class="mosaic-section" id="frontrow">
+  <div class="mosaic-hdr">
+    <div style="font-size:11px;letter-spacing:.36em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">ALL THE STARS IN FRONT ROW</div>
+    <h2 style="font-family:var(--font-serif);font-size:38px;font-style:italic;color:#fff;">Celebrities &amp; Backstage</h2>
+    <p style="font-family:var(--font-serif);font-size:16px;font-style:italic;color:var(--gray-light);max-width:650px;margin:12px auto 0;">
+      Discover the exclusive lineup of guests at the Women’s Fall/Winter 2026 Fashion Show, featuring Madonna, Alberto Guerra and international tastemakers.
+    </p>
+  </div>
+
+  <div class="mosaic-grid">
+    <div class="mosaic-card">
+      <div class="mosaic-img"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=85" alt="Madonna Front Row"></div>
+      <div class="mosaic-info">
+        <div class="mosaic-cat">FRONT ROW VIP</div>
+        <div class="mosaic-title">Madonna &middot; Total Black Identity Lace Veil</div>
+        <div class="mosaic-price-row"><span class="mosaic-price">Look Exclusivo</span></div>
+        <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:10px;font-size:11px;justify-content:center;">Ver Estilo en AliExpress ↗</a>
+      </div>
+    </div>
+
+    <div class="mosaic-card">
+      <div class="mosaic-img"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=85" alt="Alberto Guerra"></div>
+      <div class="mosaic-info">
+        <div class="mosaic-cat">GUEST OF HONOR</div>
+        <div class="mosaic-title">Alberto Guerra &middot; Tailored Double Breasted Suit</div>
+        <div class="mosaic-price-row"><span class="mosaic-price">Sastrería Siciliana</span></div>
+        <a href="https://www.aliexpress.com/item/1005004781293847.html" target="_blank" class="btn-ali-champagne" style="padding:10px;font-size:11px;justify-content:center;">Comprar Traje en AliExpress ↗</a>
+      </div>
+    </div>
+
+    <div class="mosaic-card">
+      <div class="mosaic-img"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&auto=format&fit=crop&q=85" alt="Backstage Beauty"></div>
+      <div class="mosaic-info">
+        <div class="mosaic-cat">CANDID SHOTS &middot; BACKSTAGE</div>
+        <div class="mosaic-title">Bambola Beauty Look &middot; The Perfect Sicilian Glow</div>
+        <div class="mosaic-price-row"><span class="mosaic-price">Ritual Ever-Youth Skincare</span></div>
+        <a href="https://www.aliexpress.com/item/1005006789123456.html" target="_blank" class="btn-ali-champagne" style="padding:10px;font-size:11px;justify-content:center;">Comprar Set Skincare en AliExpress ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER OFICIAL D&G -->
 <footer class="site-footer">
-  <div>&copy; Dolce &amp; Gabbana S.R.L. 2026 — All rights reserved. Conexión Directa con Proveedores AliExpress.</div>
-  <div>VAT NUMBER 09297890155 – SIAE LICENCE N. 637/1/763</div>
+  <div class="footer-cols">
+    <div>
+      <div class="foot-col-title">WORLD OF DOLCE&amp;GABBANA</div>
+      <ul class="foot-links">
+        <li><a href="https://www.dolcegabbana.com" target="_blank">DOLCEGABBANA.COM ↗</a></li>
+        <li><a href="https://altamoda.dolcegabbana.com" target="_blank">ALTA MODA MILANO ↗</a></li>
+        <li><a href="https://boutique.dolcegabbana.com" target="_blank">BOUTIQUES &amp; STORES ↗</a></li>
+        <li><a href="https://sustainability.dolcegabbana.com" target="_blank">SUSTAINABILITY ↗</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-col-title">FASHION SHOW SERVICES</div>
+      <ul class="foot-links">
+        <li><a href="https://www.aliexpress.com" target="_blank">AliExpress Direct Checkout ↗</a></li>
+        <li><a href="https://www.aliexpress.com" target="_blank">AliExpress Choice Delivery ↗</a></li>
+        <li><a href="pago-premium.html">Envío Express Asegurado</a></li>
+        <li><a href="pago-premium.html">Certificado de Autenticidad</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-col-title">LEGAL &amp; CORPORATE</div>
+      <ul class="foot-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+        <li><a href="#">Terms of Sale</a></li>
+        <li><a href="#">Security &amp; SSL</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-col-title">CUSTOMER CARE</div>
+      <ul class="foot-links">
+        <li><a href="#">Contact Us Concierge</a></li>
+        <li><a href="#">Size Guide (Italian Sizing)</a></li>
+        <li><a href="#">Order Tracking 24/7</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#777;max-width:1400px;margin:0 auto;flex-wrap:wrap;gap:12px;">
+    <span>&copy; Dolce &amp; Gabbana S.R.L. 2026 — All rights reserved. Conexión Directa Proveedores AliExpress.</span>
+    <span>VAT NUMBER 09297890155 – SIAE LICENCE N. 637/1/763</span>
+  </div>
 </footer>
 
 <script>
 function scrollToSection(id){
   const el = document.getElementById(id);
   if(el){ el.scrollIntoView({behavior:'smooth'}); }
+}
+
+function scrollTrack(val){
+  const t = document.getElementById('cTrack');
+  if(t){ t.scrollLeft += val; }
 }
 
 var isMuted = true;

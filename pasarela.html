@@ -836,5 +836,241 @@ function changeMannequin(imgSrc, title, desc){
   }, 300);
 }
 </script>
+
+<!-- ==================== ORIONIX MASTER MULTI-PROVIDER CART ==================== -->
+<div id="masterCartTrigger" onclick="toggleMasterCart()" style="position:fixed;bottom:28px;right:28px;z-index:99999;background:linear-gradient(135deg, #f5d77f 0%, #c59b27 100%);color:#000;width:65px;height:65px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;box-shadow:0 10px 30px rgba(245,215,127,0.4), 0 0 20px rgba(0,0,0,0.8);border:2px solid #fff;transition:transform .3s;">
+  🛒
+  <span id="masterCartBadge" style="position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;font-size:12px;font-weight:800;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #000;">0</span>
+</div>
+
+<div id="masterCartOverlay" onclick="toggleMasterCart()" style="position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);z-index:99998;opacity:0;pointer-events:none;transition:opacity .35s;"></div>
+
+<div id="masterCartDrawer" style="position:fixed;top:0;right:0;width:100%;max-width:480px;height:100vh;background:#0d0a14;border-left:1px solid rgba(245,215,127,0.3);z-index:99999;transform:translateX(100%);transition:transform .35s cubic-bezier(0.16, 1, 0.3, 1);display:flex;flex-direction:column;box-shadow:-15px 0 45px rgba(0,0,0,0.95);color:#fff;font-family:'Montserrat', sans-serif;">
+  
+  <div style="padding:22px 24px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;background:rgba(20,15,30,0.8);">
+    <div>
+      <div style="font-size:10px;font-weight:700;color:#f5d77f;letter-spacing:0.2em;text-transform:uppercase;">CARRITO MULTI-PROVEEDOR</div>
+      <div style="font-size:17px;font-weight:800;color:#fff;">Tu Selección Remember Luxury</div>
+    </div>
+    <button onclick="toggleMasterCart()" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer;padding:4px 8px;">✕</button>
+  </div>
+
+  <!-- PROGRESS SHIPPING INDICATOR -->
+  <div style="padding:12px 24px;background:rgba(245,215,127,0.06);border-bottom:1px solid rgba(245,215,127,0.15);font-size:11px;color:#d4d4d8;display:flex;align-items:center;gap:8px;">
+    <span>✨</span>
+    <span id="freeShippingText">¡Envío prioritario con seguimiento asegurado disponible!</span>
+  </div>
+
+  <div id="masterCartItems" style="flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:18px;">
+    <!-- ITEMS AGRUPADOS POR PROVEEDOR (ALIEXPRESS, AMAZON, HOTMART, ORIONIX) -->
+  </div>
+
+  <!-- CHECKOUT ACTIONS -->
+  <div style="padding:20px 24px;background:rgba(10,8,16,0.95);border-top:1px solid rgba(245,215,127,0.25);display:flex;flex-direction:column;gap:12px;">
+    <div style="display:flex;justify-content:space-between;font-size:13px;color:#a1a1aa;">
+      <span>Subtotal de productos:</span>
+      <span id="masterSubtotal" style="color:#fff;font-weight:700;">$0 COP</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:18px;font-weight:800;color:#fff;border-top:1px solid rgba(255,255,255,0.08);padding-top:10px;">
+      <span>TOTAL GENERAL:</span>
+      <span id="masterTotal" style="color:#f5d77f;">$0 COP</span>
+    </div>
+
+    <!-- BOTONES DE PAGO POR PROVEEDOR -->
+    <div id="providerCheckoutButtons" style="display:flex;flex-direction:column;gap:8px;margin-top:6px;">
+      <!-- RENDER BOTONES -->
+    </div>
+  </div>
+
+</div>
+
+<script>
+// CONFIGURACIÓN DE AFILIADOS Y PROVEEDORES
+const AFFILIATE_CONFIG = {
+  amazon_tag: "krcompany08-20",
+  aliexpress_channel: "remember_luxury",
+  hotmart_domain: "pay.hotmart.com"
+};
+
+// CARRITO PERSISTENTE EN LOCALSTORAGE
+let masterCart = JSON.parse(localStorage.getItem('rl_master_cart') || '[]');
+
+function saveMasterCart(){
+  localStorage.setItem('rl_master_cart', JSON.stringify(masterCart));
+  updateMasterCartUI();
+}
+
+function toggleMasterCart(){
+  const drawer = document.getElementById('masterCartDrawer');
+  const overlay = document.getElementById('masterCartOverlay');
+  const isOpen = drawer.style.transform === 'translateX(0px)';
+  if(isOpen){
+    drawer.style.transform = 'translateX(100%)';
+    overlay.style.opacity = '0';
+    overlay.style.pointerEvents = 'none';
+  } else {
+    drawer.style.transform = 'translateX(0px)';
+    overlay.style.opacity = '1';
+    overlay.style.pointerEvents = 'auto';
+    updateMasterCartUI();
+  }
+}
+
+function addToMasterCart(id, name, price, provider, img, link){
+  const existing = masterCart.find(i => i.id === id);
+  if(existing){
+    existing.qty += 1;
+  } else {
+    // Generar enlace con el Affiliate Tag si es Amazon
+    let finalLink = link;
+    if(provider === 'amazon'){
+      if(finalLink.includes('?')){
+        finalLink += '&tag=' + AFFILIATE_CONFIG.amazon_tag;
+      } else {
+        finalLink += '?tag=' + AFFILIATE_CONFIG.amazon_tag;
+      }
+    }
+    masterCart.push({ id, name, price, provider, img, link: finalLink, qty: 1 });
+  }
+  saveMasterCart();
+  
+  // Animación del botón flotante
+  const trigger = document.getElementById('masterCartTrigger');
+  trigger.style.transform = 'scale(1.2) rotate(15deg)';
+  setTimeout(() => { trigger.style.transform = 'scale(1) rotate(0deg)'; }, 300);
+}
+
+function changeMasterQty(id, delta){
+  const item = masterCart.find(i => i.id === id);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty <= 0){
+    masterCart = masterCart.filter(i => i.id !== id);
+  }
+  saveMasterCart();
+}
+
+function updateMasterCartUI(){
+  const badge = document.getElementById('masterCartBadge');
+  const itemsContainer = document.getElementById('masterCartItems');
+  const subtotalEl = document.getElementById('masterSubtotal');
+  const totalEl = document.getElementById('masterTotal');
+  const btnsContainer = document.getElementById('providerCheckoutButtons');
+
+  let totalCount = 0;
+  let totalPrice = 0;
+
+  masterCart.forEach(i => {
+    totalCount += i.qty;
+    totalPrice += i.price * i.qty;
+  });
+
+  if(badge) badge.textContent = totalCount;
+  if(subtotalEl) subtotalEl.textContent = '$' + totalPrice.toLocaleString('es-CO') + ' COP';
+  if(totalEl) totalEl.textContent = '$' + totalPrice.toLocaleString('es-CO') + ' COP';
+
+  if(!itemsContainer) return;
+
+  if(masterCart.length === 0){
+    itemsContainer.innerHTML = `
+      <div style="margin:auto;text-align:center;color:#71717a;font-size:13px;display:flex;flex-direction:column;gap:12px;align-items:center;">
+        <span style="font-size:36px;">🛒</span>
+        <span>Tu carrito está vacío.<br>Explora los productos y agrégalos con 1 clic.</span>
+      </div>
+    `;
+    if(btnsContainer) btnsContainer.innerHTML = '';
+    return;
+  }
+
+  // Agrupar por proveedor
+  const providers = {
+    aliexpress: { name: "AliExpress Choice & Direct", icon: "🔴", items: [] },
+    amazon: { name: "Amazon Prime (Tag: krcompany08-20)", icon: "🟠", items: [] },
+    hotmart: { name: "Hotmart Academy & Cursos", icon: "🟢", items: [] },
+    orionix: { name: "Orionix VIP Checkout", icon: "⚡", items: [] }
+  };
+
+  masterCart.forEach(item => {
+    const prov = item.provider || 'aliexpress';
+    if(providers[prov]) {
+      providers[prov].items.push(item);
+    } else {
+      providers.aliexpress.items.push(item);
+    }
+  });
+
+  let htmlMarkup = '';
+  let btnsMarkup = '';
+
+  for (const [key, group] of Object.entries(providers)) {
+    if(group.items.length > 0){
+      let groupTotal = 0;
+      let groupLinks = [];
+
+      htmlMarkup += `
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(245,215,127,0.2);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:12px;">
+          <div style="font-size:11px;font-weight:700;color:#f5d77f;letter-spacing:0.15em;text-transform:uppercase;display:flex;align-items:center;gap:6px;">
+            <span>${group.icon}</span> ${group.name} (${group.items.length})
+          </div>
+      `;
+
+      group.items.forEach(item => {
+        groupTotal += item.price * item.qty;
+        groupLinks.push(item.link);
+        htmlMarkup += `
+          <div style="display:flex;gap:12px;align-items:center;background:rgba(0,0,0,0.4);padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.05);">
+            <img src="${item.img}" style="width:45px;height:45px;border-radius:6px;object-fit:cover;">
+            <div style="flex:1;">
+              <div style="font-size:12px;font-weight:600;color:#fff;line-height:1.2;">${item.name}</div>
+              <div style="font-size:11px;color:#f5d77f;font-weight:700;">$${(item.price * item.qty).toLocaleString('es-CO')} COP</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;background:rgba(0,0,0,0.6);border-radius:6px;padding:2px 6px;">
+              <button onclick="changeMasterQty('${item.id}', -1)" style="background:none;border:none;color:#fff;cursor:pointer;font-weight:700;font-size:13px;">-</button>
+              <span style="font-size:11px;font-weight:700;">${item.qty}</span>
+              <button onclick="changeMasterQty('${item.id}', 1)" style="background:none;border:none;color:#fff;cursor:pointer;font-weight:700;font-size:13px;">+</button>
+            </div>
+          </div>
+        `;
+      });
+
+      htmlMarkup += `</div>`;
+
+      // BOTÓN DE ACCIÓN ESPECÍFICO POR PROVEEDOR
+      if(key === 'amazon'){
+        btnsMarkup += `
+          <a href="${group.items[0].link}" target="_blank" rel="noopener" style="background:linear-gradient(135deg, #ff9900 0%, #cc7a00 100%);color:#000;text-decoration:none;padding:12px;border-radius:8px;font-size:12px;font-weight:800;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:0.05em;">
+            🟠 COMPRAR EN AMAZON (Tag: krcompany08-20) ↗
+          </a>
+        `;
+      } else if(key === 'aliexpress'){
+        btnsMarkup += `
+          <a href="${group.items[0].link}" target="_blank" rel="noopener" style="background:linear-gradient(135deg, #ff4747 0%, #d11a1a 100%);color:#fff;text-decoration:none;padding:12px;border-radius:8px;font-size:12px;font-weight:800;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:0.05em;">
+            🔴 COMPRAR EN ALIEXPRESS DIRECTO ↗
+          </a>
+        `;
+      } else if(key === 'hotmart'){
+        btnsMarkup += `
+          <a href="${group.items[0].link}" target="_blank" rel="noopener" style="background:linear-gradient(135deg, #00c853 0%, #009624 100%);color:#fff;text-decoration:none;padding:12px;border-radius:8px;font-size:12px;font-weight:800;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:0.05em;">
+            🟢 ACCEDER EN HOTMART CHECKOUT ↗
+          </a>
+        `;
+      } else {
+        btnsMarkup += `
+          <a href="pago-premium.html" style="background:linear-gradient(135deg, #f5d77f 0%, #c59b27 100%);color:#000;text-decoration:none;padding:12px;border-radius:8px;font-size:12px;font-weight:800;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:0.05em;">
+            ⚡ CHECKOUT DIRECTO ORIONIX ↗
+          </a>
+        `;
+      }
+    }
+  }
+
+  itemsContainer.innerHTML = htmlMarkup;
+  if(btnsContainer) btnsContainer.innerHTML = btnsMarkup;
+}
+
+// INICIALIZAR EN EL LOAD
+document.addEventListener('DOMContentLoaded', updateMasterCartUI);
+</script>
+
 </body>
 </html>

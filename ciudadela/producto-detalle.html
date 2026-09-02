@@ -3,584 +3,712 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vestido en doble crepé de lana en Negro para Mujer | DOLCE&GABBANA®</title>
+<title>Double wool crepe dress in Black for Women | DOLCE&GABBANA®</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
   --black: #000000;
   --white: #ffffff;
-  --gray-100: #f7f7f7;
-  --gray-200: #e5e5e5;
-  --gray-400: #999999;
-  --gray-700: #333333;
-  --gold: #d4af37;
-  --font-serif: 'Cinzel', serif;
-  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --gray-bg: #f7f7f7;
+  --gray-border: #e2e2e2;
+  --gray-text: #666666;
+  --gray-dark: #222222;
+  --font: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
-  background-color: var(--white);
+  background: var(--white);
   color: var(--black);
-  font-family: var(--font-sans);
-  font-size: 13px;
-  line-height: 1.6;
+  font-family: var(--font);
+  font-size: 12px;
+  line-height: 1.5;
   letter-spacing: 0.04em;
   -webkit-font-smoothing: antialiased;
 }
 
 /* TOP BANNER */
-.top-banner {
-  background: var(--black);
-  color: var(--white);
+.top-notice {
+  background: #000;
+  color: #fff;
   text-align: center;
   font-size: 10px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 8px 16px;
-  font-weight: 400;
+  padding: 8px 20px;
+  font-weight: 500;
 }
 
-/* HEADER */
+/* HEADER EXACTO D&G */
 header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: var(--white);
-  border-bottom: 1px solid var(--gray-200);
+  background: #fff;
+  border-bottom: 1px solid var(--gray-border);
 }
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 48px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--gray-text);
+  border-bottom: 1px solid #f2f2f2;
+}
+.header-top a { color: var(--gray-text); text-decoration: none; }
+.header-top a:hover { color: #000; }
+
 .header-main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 40px;
+  padding: 18px 48px;
+  position: relative;
 }
-.header-nav {
-  display: flex;
-  gap: 24px;
-}
-.header-nav a {
-  text-decoration: none;
-  color: var(--black);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  transition: opacity 0.2s;
-}
-.header-nav a:hover { opacity: 0.6; }
-
-.logo-brand {
+.logo-dng {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   text-decoration: none;
-  color: var(--black);
-  font-family: var(--font-serif);
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: 0.28em;
-  text-align: center;
+  color: #000;
+  font-family: var(--font);
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
 }
 
-.header-icons {
+.main-nav {
+  display: flex;
+  gap: 24px;
+}
+.main-nav a {
+  text-decoration: none;
+  color: #000;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+}
+.main-nav a:hover { opacity: 0.5; }
+
+.header-tools {
   display: flex;
   gap: 20px;
   align-items: center;
 }
-.header-icon-btn {
+.tool-btn {
   text-decoration: none;
-  color: var(--black);
+  color: #000;
   font-size: 11px;
-  letter-spacing: 0.12em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-weight: 500;
 }
 
 /* BREADCRUMBS */
 .breadcrumbs {
-  padding: 14px 40px;
+  padding: 16px 48px 0;
   font-size: 10px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--gray-700);
-  border-bottom: 1px solid var(--gray-100);
+  color: var(--gray-text);
 }
-.breadcrumbs a {
-  color: var(--gray-700);
-  text-decoration: none;
-}
-.breadcrumbs a:hover { text-decoration: underline; }
-.breadcrumbs span { margin: 0 8px; color: var(--gray-400); }
+.breadcrumbs a { color: var(--gray-text); text-decoration: none; }
+.breadcrumbs span { margin: 0 8px; color: #ccc; }
 
-/* PRODUCT CONTAINER */
-.product-page {
+/* PRODUCT VIEW (2-COLUMN LUXURY LAYOUT) */
+.product-layout {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 40px 40px 100px;
+  padding: 24px 48px 100px;
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1.25fr 0.75fr;
   gap: 60px;
 }
 
-/* GALLERY */
-.product-gallery {
+/* LEFT COLUMN: VERTICAL IMAGE STACK (6 FOTOS DE ALTA RESOLUCIÓN) */
+.image-stack {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 12px;
 }
-.gallery-item {
-  background: var(--gray-100);
-  position: relative;
+.stack-img-wrap {
+  background: #f7f7f7;
   overflow: hidden;
 }
-.gallery-item.full-width {
+.stack-img-wrap.full {
   grid-column: span 2;
 }
-.gallery-img {
+.stack-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.6s ease;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.gallery-item:hover .gallery-img {
+.stack-img-wrap:hover .stack-img {
   transform: scale(1.03);
 }
 
-/* DETAILS PANEL */
-.product-details-panel {
+/* RIGHT COLUMN: STICKY BUY BOX */
+.sticky-buybox {
   position: sticky;
-  top: 100px;
+  top: 90px;
   height: fit-content;
   padding-left: 20px;
 }
 
-.collection-tag {
+.p-season {
   font-size: 10px;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--gray-400);
-  margin-bottom: 8px;
+  color: var(--gray-text);
+  margin-bottom: 6px;
   font-weight: 600;
 }
-.product-title {
-  font-family: var(--font-serif);
-  font-size: 24px;
-  font-weight: 600;
+.p-title {
+  font-size: 22px;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   line-height: 1.3;
 }
-.product-code {
+.p-ref {
   font-size: 10px;
-  letter-spacing: 0.14em;
-  color: var(--gray-400);
+  letter-spacing: 0.1em;
+  color: var(--gray-text);
   margin-bottom: 20px;
-  text-transform: uppercase;
 }
-.product-price {
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  margin-bottom: 28px;
+.p-price {
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 30px;
 }
-.product-tax {
+.p-tax {
   font-size: 11px;
-  color: var(--gray-400);
+  color: var(--gray-text);
   font-weight: 400;
-  margin-left: 8px;
+  margin-left: 6px;
 }
 
 /* COLOR SELECTION */
-.section-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+.section-title-sm {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
 }
-.color-swatch-box {
+.color-selector-row {
   display: flex;
-  gap: 12px;
   align-items: center;
-  margin-bottom: 32px;
+  gap: 12px;
+  margin-bottom: 28px;
 }
-.color-circle {
-  width: 24px;
-  height: 24px;
+.swatch-circle {
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   background: #000;
-  border: 2px solid var(--black);
-  outline: 2px solid var(--black);
-  outline-offset: 2px;
+  border: 2px solid #fff;
+  outline: 1.5px solid #000;
   cursor: pointer;
 }
-.color-name {
+.swatch-label {
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--gray-700);
+  letter-spacing: 0.08em;
+  font-weight: 500;
 }
 
-/* SIZE SELECTOR */
-.size-selector-wrap {
-  margin-bottom: 36px;
+/* SIZES */
+.sizes-wrap {
+  margin-bottom: 32px;
 }
-.size-grid {
+.sizes-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 8px;
   margin-top: 10px;
 }
-.size-btn {
-  background: var(--white);
-  border: 1px solid var(--gray-200);
+.size-box {
+  background: #fff;
+  border: 1px solid var(--gray-border);
   padding: 12px 0;
   text-align: center;
   font-size: 11px;
-  letter-spacing: 0.1em;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   cursor: pointer;
   transition: all 0.2s;
 }
-.size-btn:hover {
-  border-color: var(--black);
+.size-box:hover {
+  border-color: #000;
 }
-.size-btn.active {
-  background: var(--black);
-  color: var(--white);
-  border-color: var(--black);
+.size-box.selected {
+  background: #000;
+  color: #fff;
+  border-color: #000;
 }
-.size-guide-link {
+.size-helper {
   font-size: 10px;
   text-decoration: underline;
-  color: var(--gray-700);
+  color: var(--gray-text);
   cursor: pointer;
-  letter-spacing: 0.1em;
 }
 
-/* ACTION BUTTONS */
-.action-buttons {
+/* CTAS */
+.cta-group {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 40px;
+  gap: 10px;
+  margin-bottom: 36px;
 }
-.btn-primary-dg {
-  background: var(--black);
-  color: var(--white);
-  border: 1px solid var(--black);
-  padding: 18px 24px;
+.btn-black {
+  background: #000;
+  color: #fff;
+  border: 1px solid #000;
+  padding: 16px;
+  text-align: center;
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   cursor: pointer;
-  text-align: center;
   text-decoration: none;
   transition: all 0.3s;
 }
-.btn-primary-dg:hover {
-  background: var(--white);
-  color: var(--black);
+.btn-black:hover {
+  background: #fff;
+  color: #000;
 }
-.btn-secondary-dg {
-  background: var(--white);
-  color: var(--black);
-  border: 1px solid var(--black);
-  padding: 18px 24px;
+.btn-outline-black {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+  padding: 16px;
+  text-align: center;
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   cursor: pointer;
-  text-align: center;
   text-decoration: none;
   transition: all 0.3s;
 }
-.btn-secondary-dg:hover {
-  background: var(--black);
-  color: var(--white);
+.btn-outline-black:hover {
+  background: #000;
+  color: #fff;
 }
 
-/* ACCORDIONS */
-.accordion-list {
-  border-top: 1px solid var(--gray-200);
+/* SERVICE BULLETS */
+.perks-box {
+  background: var(--gray-bg);
+  padding: 20px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--gray-dark);
 }
-.accordion-item {
-  border-bottom: 1px solid var(--gray-200);
+.perk-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.accordion-header {
-  padding: 18px 0;
+
+/* ACCORDIONS EXACTOS D&G */
+.accordion-stack {
+  border-top: 1px solid var(--gray-border);
+}
+.acc-row {
+  border-bottom: 1px solid var(--gray-border);
+}
+.acc-btn {
+  width: 100%;
+  padding: 16px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: var(--font);
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  cursor: pointer;
 }
-.accordion-icon {
+.acc-icon {
   font-size: 14px;
+  font-weight: 300;
   transition: transform 0.3s;
 }
-.accordion-content {
-  padding-bottom: 20px;
-  color: var(--gray-700);
-  font-size: 12px;
-  line-height: 1.8;
+.acc-panel {
   display: none;
-}
-.accordion-item.open .accordion-content {
-  display: block;
-}
-.accordion-item.open .accordion-icon {
-  transform: rotate(45deg);
-}
-
-/* SERVICE HIGHLIGHTS */
-.service-highlights {
-  margin-top: 36px;
-  padding: 24px;
-  background: var(--gray-100);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.service-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
+  padding-bottom: 18px;
+  color: var(--gray-text);
   font-size: 11px;
-  letter-spacing: 0.08em;
-  color: var(--gray-700);
+  line-height: 1.8;
 }
-.service-icon {
-  font-size: 14px;
-}
+.acc-row.open .acc-panel { display: block; }
+.acc-row.open .acc-icon { transform: rotate(45deg); }
 
-/* FOOTER */
-footer {
-  background: var(--black);
-  color: var(--white);
-  padding: 60px 40px;
-  text-align: center;
+/* COMPLETE THE LOOK SECTION */
+.cross-sell-section {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 48px 100px;
+  border-top: 1px solid var(--gray-border);
 }
-.footer-logo {
-  font-family: var(--font-serif);
-  font-size: 20px;
-  letter-spacing: 0.3em;
-  margin-bottom: 24px;
-}
-.footer-links {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-}
-.footer-links a {
-  color: var(--gray-400);
-  text-decoration: none;
-  font-size: 10px;
+.cross-title {
+  font-size: 16px;
+  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  margin-bottom: 30px;
+  text-align: center;
 }
-.footer-copy {
+.cross-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.cross-card {
+  text-decoration: none;
+  color: #000;
+}
+.cross-img-wrap {
+  background: #f7f7f7;
+  height: 380px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.cross-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.cross-card:hover .cross-img {
+  transform: scale(1.04);
+}
+.cross-name {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.cross-price {
+  font-size: 12px;
+  color: var(--gray-text);
+}
+
+/* FOOTER EXACTO D&G */
+footer {
+  background: #000;
+  color: #fff;
+  padding: 70px 48px 40px;
+}
+.footer-cols {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  margin-bottom: 60px;
+}
+.footer-heading {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: #fff;
+}
+.footer-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-list a {
+  color: #999;
+  text-decoration: none;
+  font-size: 11px;
+  transition: color 0.2s;
+}
+.footer-list a:hover { color: #fff; }
+.footer-bottom-row {
+  border-top: 1px solid #222;
+  padding-top: 24px;
+  text-align: center;
   font-size: 10px;
-  color: var(--gray-400);
-  letter-spacing: 0.12em;
+  color: #666;
+  letter-spacing: 0.1em;
 }
 
 @media(max-width: 992px) {
-  .product-page { grid-template-columns: 1fr; }
-  .product-gallery { grid-template-columns: 1fr; }
-  .gallery-item.full-width { grid-column: span 1; }
-  .header-nav { display: none; }
+  .product-layout { grid-template-columns: 1fr; padding: 20px; }
+  .image-stack { grid-template-columns: 1fr; }
+  .stack-img-wrap.full { grid-column: span 1; }
+  .cross-grid { grid-template-columns: 1fr; }
+  .header-main { padding: 14px 20px; }
+  .main-nav { display: none; }
 }
 </style>
 </head>
 <body>
 
-<div class="top-banner">
-  ENVÍO EXPRESS DE CORTESÍA Y EMBALAJE DE LUJO EN TODOS LOS PEDIDOS
+<div class="top-notice">
+  COMPLIMENTARY EXPRESS SHIPPING AND SIGNATURE PACKAGING ON ALL ORDERS
 </div>
 
 <header>
+  <div class="header-top">
+    <span>COLOMBIA (COP $) / INTERNATIONAL</span>
+    <div>
+      <a href="#">CLIENT SERVICE</a> &nbsp;·&nbsp;
+      <a href="#">BOUTIQUES</a> &nbsp;·&nbsp;
+      <a href="pasarela.html">FASHION SHOW 2026</a>
+    </div>
+  </div>
+
   <div class="header-main">
-    <nav class="header-nav">
-      <a href="articulos.html">MUJER</a>
-      <a href="articulos.html">HOMBRE</a>
-      <a href="pasarela.html">FASHION SHOWS 2026</a>
+    <nav class="main-nav">
+      <a href="articulos.html">WOMEN</a>
+      <a href="articulos.html">MEN</a>
+      <a href="pasarela.html">RUNWAY 2026</a>
       <a href="articulos.html">ALTA MODA</a>
     </nav>
 
-    <a href="articulos.html" class="logo-brand">DOLCE & GABBANA</a>
+    <a href="articulos.html" class="logo-dng">DOLCE & GABBANA</a>
 
-    <div class="header-icons">
-      <a href="pasarela.html" class="header-icon-btn">PASARELA</a>
-      <a href="pago-premium.html" class="header-icon-btn">BOLSA (1)</a>
+    <div class="header-tools">
+      <a href="pasarela.html" class="tool-btn">RUNWAY SHOW</a>
+      <a href="pago-premium.html" class="tool-btn">BAG (1)</a>
     </div>
   </div>
 </header>
 
 <div class="breadcrumbs">
-  <a href="articulos.html">INICIO</a><span>/</span>
-  <a href="articulos.html">MUJER</a><span>/</span>
-  <a href="articulos.html">ROPA</a><span>/</span>
-  <a href="articulos.html">VESTIDOS</a><span>/</span>
-  <span>VESTIDO EN DOBLE CREPÉ DE LANA</span>
+  <a href="articulos.html">HOME</a><span>/</span>
+  <a href="articulos.html">WOMEN</a><span>/</span>
+  <a href="articulos.html">CLOTHING</a><span>/</span>
+  <a href="articulos.html">DRESSES</a><span>/</span>
+  <span>DOUBLE WOOL CREPE DRESS</span>
 </div>
 
-<main class="product-page">
-  <!-- GALERÍA DE MODELOS DE ALTA GAMA -->
-  <div class="product-gallery">
-    <div class="gallery-item full-width">
-      <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1200&auto=format&fit=crop&q=85" alt="Dolce & Gabbana Vestido Doble Crepé Editorial" class="gallery-img">
+<main class="product-layout">
+  <!-- STACK DE FOTOS VERTICAL 100% ALTA COSTURA -->
+  <div class="image-stack">
+    <div class="stack-img-wrap full">
+      <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1200&auto=format&fit=crop&q=90" alt="Double wool crepe dress front look" class="stack-img">
     </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=85" alt="Modelo Pasarela Runway Look Frontal" class="gallery-img">
+    <div class="stack-img-wrap">
+      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=900&auto=format&fit=crop&q=90" alt="Model runway catwalk motion" class="stack-img">
     </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&auto=format&fit=crop&q=85" alt="Detalle Confección y Escote" class="gallery-img">
+    <div class="stack-img-wrap">
+      <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=900&auto=format&fit=crop&q=90" alt="Structured neckline detail" class="stack-img">
     </div>
-    <div class="gallery-item full-width">
-      <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&auto=format&fit=crop&q=85" alt="Modelo Pasarela Sesión Completa" class="gallery-img">
+    <div class="stack-img-wrap full">
+      <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&auto=format&fit=crop&q=90" alt="Full length editorial model shoot" class="stack-img">
     </div>
   </div>
 
-  <!-- PANEL DE DETALLES Y COMPRA -->
-  <div class="product-details-panel">
-    <div class="collection-tag">DESFILE MUJER FALL WINTER 2026 · ALTA MODA</div>
-    <h1 class="product-title">Vestido en doble crepé de lana</h1>
-    <div class="product-code">REF: F630OTFU2L8N0000 · MADE IN ITALY</div>
+  <!-- BUY BOX LATERAL STICKY -->
+  <div class="sticky-buybox">
+    <div class="p-season">FALL WINTER 2026/27 RUNWAY COLLECTION</div>
+    <h1 class="p-title">Double wool crepe dress</h1>
+    <div class="p-ref">ART. REF: F630OTFU2L8N0000 · MADE IN ITALY</div>
     
-    <div class="product-price">
-      € 2.450 <span class="product-tax">(Impuestos incluidos)</span>
+    <div class="p-price">
+      € 2.450 <span class="p-tax">(Taxes & duties included · $ 11.500.000 COP)</span>
     </div>
 
     <!-- COLOR -->
-    <div class="section-label">
-      <span>Color: Negro Intenso</span>
+    <div class="section-title-sm">
+      <span>Color: Nero Sicilia (Black)</span>
     </div>
-    <div class="color-swatch-box">
-      <div class="color-circle" title="Negro"></div>
-      <span class="color-name">N0000 Nero Sicilia</span>
+    <div class="color-selector-row">
+      <div class="swatch-circle" title="Nero Sicilia"></div>
+      <span class="swatch-label">N0000 Black</span>
     </div>
 
-    <!-- TALLAS -->
-    <div class="size-selector-wrap">
-      <div class="section-label">
-        <span>Seleccionar Talla (Italiana IT)</span>
-        <span class="size-guide-link">Guía de Tallas</span>
+    <!-- SIZES -->
+    <div class="sizes-wrap">
+      <div class="section-title-sm">
+        <span>Select Italian Size (IT)</span>
+        <span class="size-helper">Size Guide</span>
       </div>
-      <div class="size-grid">
-        <button class="size-btn">IT 36</button>
-        <button class="size-btn">IT 38</button>
-        <button class="size-btn active">IT 40</button>
-        <button class="size-btn">IT 42</button>
-        <button class="size-btn">IT 44</button>
-        <button class="size-btn">IT 46</button>
+      <div class="sizes-grid">
+        <button class="size-box" onclick="selectSize(this)">36</button>
+        <button class="size-box" onclick="selectSize(this)">38</button>
+        <button class="size-box selected" onclick="selectSize(this)">40</button>
+        <button class="size-box" onclick="selectSize(this)">42</button>
+        <button class="size-box" onclick="selectSize(this)">44</button>
+        <button class="size-box" onclick="selectSize(this)">46</button>
       </div>
     </div>
 
-    <!-- BOTONES DE COMPRA DIRECTA -->
-    <div class="action-buttons">
-      <a href="pago-premium.html?id=lux-dg-dress" class="btn-primary-dg">AÑADIR A LA BOLSA & PAGAR</a>
-      <a href="pasarela.html" class="btn-secondary-dg">VER EN PASARELA 2026 ↗</a>
+    <!-- CTAS -->
+    <div class="cta-group">
+      <a href="pago-premium.html?id=f630-dress" class="btn-black">ADD TO BAG & PROCEED</a>
+      <a href="pasarela.html" class="btn-outline-black">VIEW ON 2026 RUNWAY ↗</a>
     </div>
 
-    <!-- ACORDEONES DE DETALLES -->
-    <div class="accordion-list">
-      <div class="accordion-item open">
-        <div class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
-          <span>Descripción y Detalles del Diseño</span>
-          <span class="accordion-icon">+</span>
-        </div>
-        <div class="accordion-content">
-          Vestido midi sin mangas confeccionado en refinado doble crepé de lana virgen de gramaje superior. La silueta entallada esculpe la figura femenina con cortes sartoriales inspirados en la sastrería clásica siciliana de Dolce&Gabbana.
+    <!-- PERKS -->
+    <div class="perks-box">
+      <div class="perk-item">
+        <span>✓</span> <span>Complimentary express delivery in 24-48 hours</span>
+      </div>
+      <div class="perk-item">
+        <span>✓</span> <span>Signature Dolce & Gabbana gift box packaging</span>
+      </div>
+      <div class="perk-item">
+        <span>✓</span> <span>Complimentary returns within 14 days</span>
+      </div>
+    </div>
+
+    <!-- ACCORDIONS -->
+    <div class="accordion-stack">
+      <div class="acc-row open">
+        <button class="acc-btn" onclick="toggleAcc(this)">
+          <span>Description & Tailoring Details</span>
+          <span class="acc-icon">+</span>
+        </button>
+        <div class="acc-panel">
+          Sleeveless midi dress in refined double virgin wool crepe. Structured round neckline with precise darts that contour the feminine silhouette, celebrating Dolce&Gabbana's signature Sicilian sartorial mastery.
           <br><br>
-          • Escote redondo estructurado<br>
-          • Sin mangas con sisas ribeteadas<br>
-          • Forro interior en seda elástica con icónico estampado leopardo<br>
-          • Cierre con cremallera y corchete invisible en la parte trasera<br>
-          • Longitud de la prenda desde el hombro: 110 cm en talla 40 IT<br>
-          • La modelo mide 178 cm y viste una talla 40 IT<br>
-          • Hecho en Italia (Made in Italy)
+          • Round neckline with contoured bust darts<br>
+          • Sleeveless with tailored armhole binding<br>
+          • Stretch silk lining with iconic leopard print<br>
+          • Rear invisible zip and hook-and-eye fastening<br>
+          • The piece measures 110 cm from the shoulder on a size IT 40<br>
+          • The model is 178 cm tall and wears a size IT 40<br>
+          • Made in Italy
         </div>
       </div>
 
-      <div class="accordion-item">
-        <div class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
-          <span>Composición y Cuidados</span>
-          <span class="accordion-icon">+</span>
-        </div>
-        <div class="accordion-content">
-          Composición exterior: 98% Lana Virgen, 2% Elastano<br>
-          Composición interior: 92% Seda Natural, 8% Elastano<br><br>
-          Limpieza en seco profesional con percloroetileno. No lavar con agua. No usar blanqueador. Planchar a temperatura máxima de 110 °C sin vapor.
+      <div class="acc-row">
+        <button class="acc-btn" onclick="toggleAcc(this)">
+          <span>Composition & Care</span>
+          <span class="acc-icon">+</span>
+        </button>
+        <div class="acc-panel">
+          External composition: 98% Virgin Wool, 2% Elastane<br>
+          Internal composition: 92% Silk, 8% Elastane<br><br>
+          Professional dry clean only with perchlorethylene. Do not bleach. Cool iron at maximum 110°C without steam. Do not tumble dry.
         </div>
       </div>
 
-      <div class="accordion-item">
-        <div class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
-          <span>Envío y Devoluciones de Cortesía</span>
-          <span class="accordion-icon">+</span>
+      <div class="acc-row">
+        <button class="acc-btn" onclick="toggleAcc(this)">
+          <span>Complimentary Delivery & Packaging</span>
+          <span class="acc-icon">+</span>
         </div>
-        <div class="accordion-content">
-          • Envío Express asegurado gratuito (entrega en 24-48 horas)<br>
-          • Embalaje de lujo exclusivo de Dolce & Gabbana con caja rígida y lazo de raso negro<br>
-          • Devoluciones gratuitas en un plazo de 14 días naturales
+        <div class="acc-panel">
+          All orders are delivered in signature Dolce&Gabbana packaging with archival box, tissue paper and black grosgrain ribbon. Free carbon-neutral express courier shipping.
         </div>
       </div>
     </div>
-
-    <!-- SERVICIOS EXCLUSIVOS -->
-    <div class="service-highlights">
-      <div class="service-row">
-        <span class="service-icon">✦</span>
-        <span>Asesoría personalizada y atención privada por estilistas de la Maison</span>
-      </div>
-      <div class="service-row">
-        <span class="service-icon">🛡️</span>
-        <span>Autenticidad certificada con chip NFC y etiqueta holográfica</span>
-      </div>
-      <div class="service-row">
-        <span class="service-icon">🎁</span>
-        <span>Incluye caja de presentación de archivo y funda protectora de viaje</span>
-      </div>
-    </div>
-
   </div>
 </main>
 
-<footer>
-  <div class="footer-logo">DOLCE & GABBANA</div>
-  <div class="footer-links">
-    <a href="articulos.html">Colección Mujer</a>
-    <a href="pasarela.html">Fashion Show Fall Winter 2026</a>
-    <a href="pago-premium.html">Bolsa & Métodos de Pago</a>
-    <a href="#">Sostenibilidad</a>
-    <a href="#">Servicio al Cliente</a>
+<!-- COMPLETE THE LOOK -->
+<section class="cross-sell-section">
+  <h2 class="cross-title">Complete The Runway Look</h2>
+  <div class="cross-grid">
+    <a href="pago-premium.html?id=sicily-bag" class="cross-card">
+      <div class="cross-img-wrap">
+        <img src="https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=600&auto=format&fit=crop&q=85" alt="Sicily Bag Small" class="cross-img">
+      </div>
+      <div class="cross-name">Small Sicily Bag in Dauphine Leather</div>
+      <div class="cross-price">€ 1.850</div>
+    </a>
+
+    <a href="pago-premium.html?id=runway-shades" class="cross-card">
+      <div class="cross-img-wrap">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=85" alt="Runway Eyewear" class="cross-img">
+      </div>
+      <div class="cross-name">Runway Oversized DG Logo Sunglasses</div>
+      <div class="cross-price">€ 890</div>
+    </a>
+
+    <a href="pago-premium.html?id=velvet-tux" class="cross-card">
+      <div class="cross-img-wrap">
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=85" alt="Velvet Tuxedo" class="cross-img">
+      </div>
+      <div class="cross-name">Double-Breasted Velvet Tuxedo Blazer</div>
+      <div class="cross-price">€ 3.850</div>
+    </a>
   </div>
-  <div class="footer-copy">
-    &copy; 2026 DOLCE & GABBANA S.r.l. Todos los derechos reservados.
+</section>
+
+<footer>
+  <div class="footer-cols">
+    <div>
+      <div class="footer-heading">COLLECTIONS</div>
+      <ul class="footer-list">
+        <li><a href="articulos.html">Women Fall Winter 2026</a></li>
+        <li><a href="producto-detalle.html">Double Wool Crepe Dress</a></li>
+        <li><a href="pasarela.html">Runway Fashion Shows</a></li>
+        <li><a href="articulos.html">Alta Moda</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">SERVICES</div>
+      <ul class="footer-list">
+        <li><a href="pago-premium.html">Complimentary Shipping</a></li>
+        <li><a href="pago-premium.html">Signature Gift Packaging</a></li>
+        <li><a href="pago-premium.html">Free 14-Day Returns</a></li>
+        <li><a href="#">Private Stylist Consultation</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">PAYMENT METHODS</div>
+      <ul class="footer-list">
+        <li><a href="pago-premium.html">Nequi & Bancolombia Direct</a></li>
+        <li><a href="pago-premium.html">Visa / MasterCard / AMEX</a></li>
+        <li><a href="pago-premium.html">Apple Pay / PayPal</a></li>
+        <li><a href="pago-premium.html">KRC Dynasty Token</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">THE MAISON</div>
+      <ul class="footer-list">
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">World of Dolce&Gabbana</a></li>
+        <li><a href="#">Boutique Locator</a></li>
+        <li><a href="#">VIP Customer Support</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom-row">
+    &copy; 2026 DOLCE & GABBANA S.r.l. All rights reserved. Milano, Italia.
   </div>
 </footer>
 
 <script>
-document.querySelectorAll('.size-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  });
-});
+function selectSize(btn) {
+  document.querySelectorAll('.size-box').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function toggleAcc(btn) {
+  btn.closest('.acc-row').classList.toggle('open');
+}
 </script>
+
 </body>
 </html>

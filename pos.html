@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIONIX POS &middot; Sistema de Gestión, Ventas y Caja Registradora</title>
+<title>ORIONIX POS &middot; Caja Registradora &amp; Tienda Completa</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
@@ -73,7 +73,7 @@ body{
 .pos-container{
   flex:1;
   display:grid;
-  grid-template-columns:1fr 440px;
+  grid-template-columns:1fr 460px;
   height:calc(100vh - 70px);
 }
 @media(max-width:1024px){
@@ -129,8 +129,8 @@ body{
 /* PRODUCT GRID */
 .products-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
-  gap:18px;
+  grid-template-columns:repeat(auto-fill, minmax(210px, 1fr));
+  gap:16px;
 }
 .prod-card{
   background:var(--panel-bg);
@@ -161,7 +161,7 @@ body{
   position:absolute;
   top:8px;
   left:8px;
-  background:rgba(0,0,0,0.8);
+  background:rgba(0,0,0,0.85);
   border:1px solid var(--border);
   color:var(--gold);
   font-size:9px;
@@ -201,14 +201,14 @@ body{
   background:rgba(245,215,127,0.15);
   border:1px solid var(--border);
   color:var(--gold);
-  width:30px;
-  height:30px;
+  width:28px;
+  height:28px;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
   font-weight:800;
-  font-size:16px;
+  font-size:15px;
   transition:all .2s;
 }
 .prod-card:hover .btn-add{
@@ -354,7 +354,7 @@ body{
   background:linear-gradient(135deg, #ffe599 0%, #d4aa33 100%);
 }
 
-/* HISTORIAL DIARIO MODAL / BOTTOM */
+/* HISTORIAL DIARIO */
 .sales-audit-bar{
   background:rgba(10,8,16,0.9);
   border-top:1px solid var(--border);
@@ -373,7 +373,7 @@ body{
 <!-- HEADER -->
 <header class="pos-header">
   <div class="brand">
-    ⚡ ORIONIX <span>POS MASTER</span>
+    ⚡ ORIONIX <span>POS &middot; CAJA REGISTRADORA</span>
   </div>
   <div class="header-actions">
     <a href="../index.html" class="btn-nav">🏠 Tienda Principal</a>
@@ -388,14 +388,17 @@ body{
   <!-- CATALOG LEFT -->
   <div class="catalog-pane">
     <div class="filter-bar">
-      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar licor, cerveza, víveres..." oninput="filterProducts()">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar licor, moda, víveres, accesorios..." oninput="filterProducts()">
       <div class="cat-pills">
-        <button class="cat-pill active" onclick="setCategory('all', this)">Todos</button>
-        <button class="cat-pill" onclick="setCategory('licores', this)">Licores &amp; Ron</button>
-        <button class="cat-pill" onclick="setCategory('cervezas', this)">Cervezas</button>
-        <button class="cat-pill" onclick="setCategory('cocteles', this)">Cócteles &amp; Latas</button>
-        <button class="cat-pill" onclick="setCategory('bebidas', this)">Gaseosas &amp; Agua</button>
-        <button class="cat-pill" onclick="setCategory('viveres', this)">Víveres &amp; Casa</button>
+        <button class="cat-pill active" onclick="setCategory('all', this)">Todos (30+)</button>
+        <button class="cat-pill" onclick="setCategory('licores', this)">🍾 Licores &amp; Ron</button>
+        <button class="cat-pill" onclick="setCategory('cervezas', this)">🍺 Cervezas</button>
+        <button class="cat-pill" onclick="setCategory('cocteles', this)">🍹 Cócteles &amp; Latas</button>
+        <button class="cat-pill" onclick="setCategory('bebidas', this)">🥤 Bebidas &amp; Agua</button>
+        <button class="cat-pill" onclick="setCategory('viveres', this)">🛒 Víveres &amp; Cocina</button>
+        <button class="cat-pill" onclick="setCategory('moda', this)">👗 Moda &amp; Joyas</button>
+        <button class="cat-pill" onclick="setCategory('fitness', this)">🏋️ Fitness &amp; Hogar</button>
+        <button class="cat-pill" onclick="setCategory('cursos', this)">🎓 Cursos VIP</button>
       </div>
     </div>
 
@@ -455,36 +458,64 @@ body{
 </div>
 
 <script>
-// PRODUCTOS DEL ANÁLISIS DE VIDEO Y VÍVERES
+// INVENTARIO COMPLETO: VIDEO AUDITADO + CATÁLOGO REMEMBER LUXURY + VÍVERES + MODA + FITNESS + CURSOS
 const inventory = [
+  // 1. LICORES & RON
   { id: "lic-01", name: "Aguardiente Antioqueño Tradicional 750ml", cat: "licores", price: 60000, cost: 47000, img: "https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=500&auto=format&fit=crop", badge: "🔥 ALTA ROTACIÓN" },
   { id: "lic-02", name: "Aguardiente Antioqueño Tapa Verde Sin Azúcar 750ml", cat: "licores", price: 58000, cost: 46000, img: "https://images.unsplash.com/photo-1527061011665-3652c757a4d4?w=500&auto=format&fit=crop", badge: "🔥 POPULAR" },
   { id: "lic-03", name: "Ron Medellín Añejo 3 Años 750ml", cat: "licores", price: 65000, cost: 51000, img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=500&auto=format&fit=crop", badge: "🔥 CLÁSICO" },
   { id: "lic-04", name: "Ron Medellín Extra Añejo 8 Años 750ml", cat: "licores", price: 95000, cost: 78000, img: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=500&auto=format&fit=crop", badge: "⭐ PREMIUM" },
   { id: "lic-05", name: "Aguardiente Antioqueño Media 375ml", cat: "licores", price: 35000, cost: 26000, img: "https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=500&auto=format&fit=crop", badge: "MEDIA BOTELLA" },
-  
+  { id: "lic-06", name: "Ron Medellín Añejo Media 375ml", cat: "licores", price: 38000, cost: 28000, img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=500&auto=format&fit=crop", badge: "MEDIA BOTELLA" },
+
+  // 2. CERVEZAS
   { id: "crv-01", name: "Cerveza Pilsen Botella 330ml", cat: "cervezas", price: 4500, cost: 3100, img: "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=500&auto=format&fit=crop", badge: "🔥 VOLUMEN" },
   { id: "crv-02", name: "Cerveza Águila Original 330ml", cat: "cervezas", price: 4500, cost: 3100, img: "https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=500&auto=format&fit=crop", badge: "🔥 MUY ALTA" },
   { id: "crv-03", name: "Cerveza Corona Extra 330ml", cat: "cervezas", price: 7000, cost: 4700, img: "https://images.unsplash.com/photo-1584225064785-c62a8b43d148?w=500&auto=format&fit=crop", badge: "PREMIUM" },
-  
-  { id: "coc-01", name: "Los Cuates Cóctel Margarita Limón Lata 269ml", cat: "cocteles", price: 8000, cost: 4600, img: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=500&auto=format&fit=crop", badge: "🟢 LIMÓN" },
-  { id: "coc-02", name: "Los Cuates Cóctel Fresa Lata 269ml", cat: "cocteles", price: 8000, cost: 4600, img: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=500&auto=format&fit=crop", badge: "🔴 FRESA" },
-  { id: "coc-03", name: "Los Cuates Cóctel Mango Lata 269ml", cat: "cocteles", price: 8000, cost: 4600, img: "https://images.unsplash.com/photo-1536935338788-846bb9981813?w=500&auto=format&fit=crop", badge: "🟡 MANGO" },
-  { id: "coc-04", name: "Red Bull Energy Drink Lata 250ml", cat: "cocteles", price: 9000, cost: 5800, img: "https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=500&auto=format&fit=crop", badge: "⚡ ENERGIZANTE" },
-  
+  { id: "crv-04", name: "Six-Pack Cerveza Corona Extra 6x330ml", cat: "cervezas", price: 38000, cost: 26000, img: "https://images.unsplash.com/photo-1584225064785-c62a8b43d148?w=500&auto=format&fit=crop", badge: "SIX PACK" },
+
+  // 3. CÓCTELES & LATAS
+  { id: "coc-01", name: "Los Cuates Cóctel Margarita Limón 269ml", cat: "cocteles", price: 8000, cost: 4600, img: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=500&auto=format&fit=crop", badge: "🟢 LIMÓN" },
+  { id: "coc-02", name: "Los Cuates Cóctel Fresa 269ml", cat: "cocteles", price: 8000, cost: 4600, img: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=500&auto=format&fit=crop", badge: "🔴 FRESA" },
+  { id: "coc-03", name: "Los Cuates Cóctel Mango 269ml", cat: "cocteles", price: 8000, cost: 4600, img: "https://images.unsplash.com/photo-1536935338788-846bb9981813?w=500&auto=format&fit=crop", badge: "🟡 MANGO" },
+  { id: "coc-04", name: "Red Bull Energy Drink 250ml", cat: "cocteles", price: 9000, cost: 5800, img: "https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=500&auto=format&fit=crop", badge: "⚡ ENERGIZANTE" },
+
+  // 4. BEBIDAS & REFRESCOS
   { id: "beb-01", name: "Coca-Cola Original 400ml PET", cat: "bebidas", price: 4000, cost: 2600, img: "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=500&auto=format&fit=crop", badge: "REFRESCO" },
-  { id: "beb-02", name: "Agua Cristalina 600ml sin gas", cat: "bebidas", price: 3000, cost: 1500, img: "https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=500&auto=format&fit=crop", badge: "HIDRATACIÓN" },
-  
-  { id: "viv-01", name: "Paquete de Arepas de Queso x 5 unidades", cat: "viveres", price: 6500, cost: 3800, img: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=500&auto=format&fit=crop", badge: "VÍVERES" },
+  { id: "beb-02", name: "Coca-Cola Zero Sugar 400ml PET", cat: "bebidas", price: 4000, cost: 2600, img: "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=500&auto=format&fit=crop", badge: "ZERO" },
+  { id: "beb-03", name: "Agua Cristalina 600ml sin gas", cat: "bebidas", price: 3000, cost: 1500, img: "https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=500&auto=format&fit=crop", badge: "HIDRATACIÓN" },
+  { id: "beb-04", name: "Pack Coca-Cola 24x330ml Latas", cat: "bebidas", price: 65000, cost: 48000, img: "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=500&auto=format&fit=crop", badge: "PACK 24" },
+
+  // 5. VÍVERES & COCINA
+  { id: "viv-01", name: "Paquete de Arepas de Queso x 5 uds", cat: "viveres", price: 6500, cost: 3800, img: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=500&auto=format&fit=crop", badge: "VÍVERES" },
   { id: "viv-02", name: "Arroz Blanco Diana / FlorHuila 1000g", cat: "viveres", price: 4800, cost: 3400, img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&auto=format&fit=crop", badge: "GRANOS" },
-  { id: "viv-03", name: "Aceite Vegetal 1000ml Premier", cat: "viveres", price: 12500, cost: 9200, img: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500&auto=format&fit=crop", badge: "COCINA" }
+  { id: "viv-03", name: "Aceite Vegetal 1000ml Premier", cat: "viveres", price: 12500, cost: 9200, img: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500&auto=format&fit=crop", badge: "COCINA" },
+  { id: "viv-04", name: "Huevos Tipo AA Cubeta x 30 uds", cat: "viveres", price: 18500, cost: 14000, img: "https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=500&auto=format&fit=crop", badge: "CANASTA" },
+
+  // 6. MODA, ACCESORIOS & JOYERÍA
+  { id: "mod-01", name: "Reloj Cronógrafo LIGE Oro & Zafiro", cat: "moda", price: 125000, cost: 68000, img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500&auto=format&fit=crop", badge: "ALTA GAMA" },
+  { id: "mod-02", name: "Gafas Polarizadas Aviador Titanio UV400", cat: "moda", price: 78000, cost: 38000, img: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500&auto=format&fit=crop", badge: "ACCESORIOS" },
+  { id: "mod-03", name: "Billetera Táctica Fibra de Carbono RFID", cat: "moda", price: 55000, cost: 24000, img: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=500&auto=format&fit=crop", badge: "MARROQUINERÍA" },
+  { id: "mod-04", name: "Camiseta Cosmos ORIONIX Black Edition", cat: "moda", price: 60000, cost: 28000, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&auto=format&fit=crop", badge: "ORIONIX WEAR" },
+  { id: "mod-05", name: "Gorra AXEL Gold Edición Bordada", cat: "moda", price: 45000, cost: 20000, img: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500&auto=format&fit=crop", badge: "GOLD EDITION" },
+
+  // 7. FITNESS & HOGAR
+  { id: "fit-01", name: "Mancuernas Ajustables 10 a 50kg Pro", cat: "fitness", price: 185000, cost: 110000, img: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=500&auto=format&fit=crop", badge: "FITNESS" },
+  { id: "fit-02", name: "Zapatillas Li-Ning Running Light Foam", cat: "fitness", price: 195000, cost: 120000, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop", badge: "RUNNING" },
+  { id: "fit-03", name: "Auriculares QCY MeloBuds N70 ANC", cat: "fitness", price: 145000, cost: 85000, img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&auto=format&fit=crop", badge: "AUDIO" },
+  { id: "fit-04", name: "Lámpara Luna 3D Levitación Magnética", cat: "fitness", price: 135000, cost: 72000, img: "https://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?w=500&auto=format&fit=crop", badge: "HOGAR" },
+  { id: "fit-05", name: "Aspiradora Inalámbrica de Mano Portátil", cat: "fitness", price: 89000, cost: 45000, img: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500&auto=format&fit=crop", badge: "TECNOLOGÍA" },
+
+  // 8. CURSOS VIP & MEMBRESÍAS
+  { id: "cur-01", name: "Masterclass: De la Aguja a la Pasarela", cat: "cursos", price: 195000, cost: 0, img: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=500&auto=format&fit=crop", badge: "🎓 CURSO VIP" },
+  { id: "cur-02", name: "E-Commerce de Ultra Lujo & Automatización IA", cat: "cursos", price: 275000, cost: 0, img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&auto=format&fit=crop", badge: "🎓 CURSO VIP" },
+  { id: "cur-03", name: "Inversión Inmobiliaria & Tokenomics KRC", cat: "cursos", price: 395000, cost: 0, img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop", badge: "🎓 CURSO VIP" }
 ];
 
 let cart = [];
 let currentCategory = 'all';
 let currentPayment = 'Efectivo';
 
-// INICIALIZAR
 function init(){
   renderProducts();
   loadDailyStats();
@@ -533,7 +564,6 @@ function filterProducts(){
   renderProducts();
 }
 
-// CARRITO Y CAJA
 function addToCart(id){
   const prod = inventory.find(p => p.id === id);
   if(!prod) return;
@@ -613,7 +643,6 @@ function setPayment(method, btn){
   btn.classList.add('selected');
 }
 
-// REGISTRAR VENTA
 function processSale(){
   if(cart.length === 0){
     alert("⚠️ No hay productos en la caja registradora.");
@@ -628,7 +657,7 @@ function processSale(){
   });
 
   const saleRecord = {
-    date: new Date().toISOString(),
+    date: new Date().toLocaleString('es-CO'),
     payment: currentPayment,
     items: [...cart],
     total: totalSale,

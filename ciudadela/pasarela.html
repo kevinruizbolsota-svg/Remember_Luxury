@@ -5,29 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Desfile Mujer Fall Winter 2026/27 | Dolce&Gabbana® Fashion Shows</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --black: #050505;
+  --black: #000000;
   --black-pure: #000000;
   --white: #ffffff;
-  --gold: #d4af37;
-  --gold-glow: rgba(212, 175, 55, 0.4);
-  --gray-900: #0d0d0f;
-  --gray-800: #18181c;
+  --gray-900: #0a0a0c;
+  --gray-800: #141418;
   --gray-600: #555555;
   --gray-400: #999999;
-  --font-serif: 'Cinzel', serif;
-  --font-sans: 'Montserrat', sans-serif;
+  --font: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
   background-color: var(--black-pure);
   color: var(--white);
-  font-family: var(--font-sans);
-  font-size: 13px;
-  line-height: 1.6;
+  font-family: var(--font);
+  font-size: 12px;
+  line-height: 1.5;
   letter-spacing: 0.04em;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -42,17 +39,10 @@ body {
   justify-content: space-between;
   align-items: center;
   font-size: 10px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--gray-400);
 }
-.top-bar-links a {
-  color: var(--gray-400);
-  text-decoration: none;
-  margin-left: 20px;
-  transition: color 0.2s;
-}
-.top-bar-links a:hover { color: var(--gold); }
 
 /* HEADER */
 header {
@@ -73,11 +63,12 @@ header {
   transform: translateX(-50%);
   text-decoration: none;
   color: var(--white);
-  font-family: var(--font-serif);
-  font-size: 26px;
-  font-weight: 800;
-  letter-spacing: 0.3em;
+  font-family: var(--font);
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 0.22em;
   text-align: center;
+  text-transform: uppercase;
 }
 .nav-links {
   display: flex;
@@ -87,37 +78,32 @@ header {
   color: var(--gray-400);
   text-decoration: none;
   font-size: 11px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   transition: color 0.2s;
-  font-weight: 500;
+  font-weight: 600;
 }
 .nav-links a:hover, .nav-links a.active {
   color: var(--white);
 }
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
 .btn-gold-nav {
-  color: var(--gold);
+  color: #fff;
   text-decoration: none;
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 700;
-  border: 1px solid var(--gold);
+  border: 1px solid rgba(255,255,255,0.4);
   padding: 8px 18px;
   transition: all 0.3s;
 }
 .btn-gold-nav:hover {
-  background: var(--gold);
-  color: var(--black);
+  background: #fff;
+  color: #000;
 }
 
-/* HERO PASARELA CON SIMULADOR DE VIDEO Y SONIDO */
-.runway-theater {
+/* HERO PASARELA CINEMATOGRÁFICA CON VIDEO Y AUDIO EQ */
+.runway-hero {
   position: relative;
   width: 100vw;
   height: 94vh;
@@ -128,101 +114,118 @@ header {
   background: #000;
   overflow: hidden;
 }
-.theater-video-bg {
+.hero-video-bg {
   position: absolute;
   inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  opacity: 0.65;
+  opacity: 0.7;
   filter: brightness(0.9);
-  transition: transform 10s ease;
+  transition: transform 8s ease;
 }
-.runway-theater:hover .theater-video-bg {
+.runway-hero:hover .hero-video-bg {
   transform: scale(1.04);
 }
-.theater-overlay {
+.hero-gradient {
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.95) 100%);
 }
-.theater-content {
+.hero-inner {
   position: relative;
   z-index: 10;
-  max-width: 960px;
+  max-width: 900px;
   padding: 0 24px;
 }
-.theater-tag {
-  font-family: var(--font-serif);
+.hero-season-tag {
   font-size: 11px;
-  letter-spacing: 0.45em;
-  color: var(--gold);
+  letter-spacing: 0.35em;
   text-transform: uppercase;
   margin-bottom: 16px;
+  font-weight: 700;
+  color: #fff;
 }
-.theater-title {
-  font-family: var(--font-serif);
-  font-size: clamp(34px, 5.5vw, 70px);
+.hero-title-main {
+  font-size: clamp(34px, 5.5vw, 68px);
   font-weight: 900;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   line-height: 1.12;
   margin-bottom: 20px;
 }
-.theater-desc {
+.hero-desc-main {
   font-size: 13px;
   color: var(--gray-400);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   max-width: 650px;
   margin: 0 auto 36px;
   line-height: 1.8;
 }
-.theater-controls {
+.hero-actions-row {
   display: flex;
   justify-content: center;
-  gap: 18px;
+  gap: 16px;
   flex-wrap: wrap;
 }
-.btn-theater-primary {
-  background: var(--gold);
-  color: var(--black);
+.btn-hero-white {
+  background: #fff;
+  color: #000;
   padding: 16px 38px;
-  font-family: var(--font-serif);
   font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.22em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   text-decoration: none;
-  border: 1px solid var(--gold);
   transition: all 0.3s;
 }
-.btn-theater-primary:hover {
-  background: transparent;
-  color: var(--gold);
-  box-shadow: 0 0 30px var(--gold-glow);
+.btn-hero-white:hover {
+  background: #000;
+  color: #fff;
+  outline: 1px solid #fff;
 }
-.btn-sound-toggle {
+.btn-sound-eq {
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.3);
-  color: var(--white);
+  color: #fff;
   padding: 16px 28px;
   font-size: 11px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 10px;
+  font-family: var(--font);
   transition: all 0.3s;
 }
-.btn-sound-toggle:hover {
-  border-color: var(--white);
+.btn-sound-eq:hover {
+  border-color: #fff;
   background: rgba(255,255,255,0.18);
 }
+.sound-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 14px;
+}
+.sound-bar {
+  width: 3px;
+  background: #fff;
+  border-radius: 1px;
+  animation: soundBounce 1s infinite alternate ease-in-out;
+}
+.sound-bar:nth-child(1) { height: 6px; animation-delay: 0.1s; }
+.sound-bar:nth-child(2) { height: 14px; animation-delay: 0.3s; }
+.sound-bar:nth-child(3) { height: 9px; animation-delay: 0.2s; }
+@keyframes soundBounce {
+  0% { height: 4px; }
+  100% { height: 14px; }
+}
 
-/* PASARELA TABS BAR (THE LOOKS, HIGHLIGHTS, FRONT ROW, BACKSTAGE) */
-.runway-tabs-bar {
+/* PASARELA TABS BAR */
+.runway-nav-bar {
   position: sticky;
-  top: 69px;
+  top: 68px;
   z-index: 900;
   background: #08080a;
   border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -231,63 +234,62 @@ header {
   padding: 0 24px;
   gap: 36px;
 }
-.runway-tab-btn {
+.runway-tab-link {
   background: transparent;
   border: none;
   color: var(--gray-400);
-  font-family: var(--font-serif);
+  font-family: var(--font);
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   padding: 18px 6px;
   cursor: pointer;
   position: relative;
   transition: color 0.3s;
 }
-.runway-tab-btn:hover, .runway-tab-btn.active {
-  color: var(--white);
+.runway-tab-link:hover, .runway-tab-link.active {
+  color: #fff;
 }
-.runway-tab-btn.active::after {
+.runway-tab-link.active::after {
   content: '';
   position: absolute;
   bottom: -1px;
   left: 0; right: 0;
   height: 2px;
-  background: var(--gold);
-  box-shadow: 0 0 10px var(--gold);
+  background: #fff;
 }
 
-/* GRID DE LOOKS DE PASARELA (MODELOS 100% REALES) */
-.tab-content-panel {
+/* LOOKS PANEL GRID */
+.tab-content {
   display: none;
   max-width: 1440px;
   margin: 0 auto;
   padding: 60px 48px 120px;
 }
-.tab-content-panel.active {
+.tab-content.active {
   display: block;
 }
 
 .looks-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-  gap: 32px;
+  gap: 28px;
 }
 
-.look-card {
+.runway-look-card {
   background: var(--gray-900);
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: all 0.4s ease;
+  transition: all 0.35s ease;
 }
-.look-card:hover {
-  transform: translateY(-8px);
-  border-color: var(--gold);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.9), 0 0 25px rgba(212, 175, 55, 0.25);
+.runway-look-card:hover {
+  transform: translateY(-6px);
+  border-color: #fff;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.8);
 }
 
 .look-media-box {
@@ -301,68 +303,66 @@ header {
 .look-img {
   width: 100%; height: 100%;
   object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.look-card:hover .look-img {
-  transform: scale(1.06);
+.runway-look-card:hover .look-img {
+  transform: scale(1.05);
 }
 
 .look-badge {
   position: absolute;
   top: 14px;
   left: 14px;
-  background: rgba(0,0,0,0.85);
-  border: 1px solid var(--gold);
-  color: var(--gold);
-  font-family: var(--font-serif);
+  background: #000;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   padding: 5px 12px;
-  backdrop-filter: blur(8px);
 }
-.look-zoom-icon {
+.look-quick-view {
   position: absolute;
   bottom: 14px;
   right: 14px;
-  background: rgba(0,0,0,0.7);
-  color: var(--white);
-  padding: 8px 12px;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 8px 14px;
   font-size: 10px;
+  font-weight: 700;
   letter-spacing: 0.12em;
-  border: 1px solid rgba(255,255,255,0.2);
+  text-transform: uppercase;
   opacity: 0;
   transition: opacity 0.3s;
 }
-.look-card:hover .look-zoom-icon {
+.runway-look-card:hover .look-quick-view {
   opacity: 1;
 }
 
-.look-info-box {
+.look-info-panel {
   padding: 24px;
   display: flex;
   flex-direction: column;
   flex: 1;
   background: #09090b;
 }
-.look-tag {
+.look-category {
   font-size: 9px;
-  letter-spacing: 0.22em;
-  color: var(--gold);
+  letter-spacing: 0.18em;
+  color: var(--gray-400);
   text-transform: uppercase;
   margin-bottom: 6px;
   font-weight: 600;
 }
-.look-name {
-  font-family: var(--font-serif);
-  font-size: 15px;
+.look-title {
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--white);
+  letter-spacing: 0.06em;
+  color: #fff;
   margin-bottom: 8px;
   text-transform: uppercase;
 }
-.look-desc-text {
+.look-desc-snippet {
   font-size: 11px;
   color: var(--gray-400);
   line-height: 1.6;
@@ -374,178 +374,173 @@ header {
   justify-content: space-between;
   align-items: center;
   padding-top: 14px;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(255,255,255,0.1);
   margin-bottom: 16px;
 }
 .look-price-val {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
-  color: var(--white);
+  color: #fff;
 }
-.look-made-tag {
-  font-size: 9px;
-  color: var(--gold);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-.btn-buy-look {
+.btn-shop-look-pro {
   display: block;
-  background: var(--black-pure);
-  border: 1px solid var(--gold);
-  color: var(--gold);
+  background: #000;
+  border: 1px solid #fff;
+  color: #fff;
   text-align: center;
   text-decoration: none;
   padding: 12px;
-  font-family: var(--font-serif);
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  transition: all 0.3s;
+  transition: all 0.25s;
 }
-.btn-buy-look:hover {
-  background: var(--gold);
-  color: var(--black);
+.btn-shop-look-pro:hover {
+  background: #fff;
+  color: #000;
 }
 
-/* MODAL LIGHTBOX INTERACTIVO DE MODELOS */
-.lightbox-modal {
+/* SLIDE-OUT SHOP THE LOOK DRAWER */
+.shop-look-drawer-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.92);
-  backdrop-filter: blur(14px);
-  z-index: 3000;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(6px);
+  z-index: 2500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
-.lightbox-modal.open {
-  display: flex;
+.shop-look-drawer-overlay.open {
+  opacity: 1;
+  pointer-events: all;
 }
-.lightbox-card {
-  max-width: 1000px;
-  width: 100%;
-  max-height: 90vh;
-  background: var(--gray-900);
-  border: 1px solid var(--gold);
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.95);
-}
-.lightbox-close {
-  position: absolute;
-  top: 16px;
-  right: 20px;
-  background: none;
-  border: none;
-  color: var(--white);
-  font-size: 24px;
-  cursor: pointer;
-  z-index: 10;
-  transition: color 0.2s;
-}
-.lightbox-close:hover { color: var(--gold); }
-.lightbox-img-box {
-  width: 100%;
-  height: 100%;
-  background: #000;
-}
-.lightbox-img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
-.lightbox-details {
-  padding: 40px;
+.shop-look-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 480px;
+  max-width: 90vw;
+  height: 100vh;
+  background: #0c0c0e;
+  color: #fff;
+  z-index: 2600;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  padding: 36px;
+  border-left: 1px solid rgba(255,255,255,0.15);
 }
-.lightbox-tag {
-  font-size: 10px;
-  letter-spacing: 0.3em;
-  color: var(--gold);
-  margin-bottom: 8px;
+.shop-look-drawer.open {
+  transform: translateX(0);
 }
-.lightbox-title {
-  font-family: var(--font-serif);
-  font-size: 24px;
+.drawer-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.drawer-title-main {
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.1em;
-  margin-bottom: 14px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
-.lightbox-desc {
-  font-size: 12px;
-  color: var(--gray-400);
-  line-height: 1.8;
-  margin-bottom: 24px;
+.drawer-close-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
 }
-.lightbox-price {
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--gold);
-  margin-bottom: 30px;
+.drawer-scroll-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-.btn-lightbox-buy {
-  background: var(--gold);
-  color: var(--black);
+.drawer-look-img-large {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.drawer-item-breakdown {
+  background: #141418;
   padding: 16px;
-  text-align: center;
-  font-family: var(--font-serif);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.drawer-item-head {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.drawer-item-sub {
   font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.2em;
+  color: var(--gray-400);
+  margin-bottom: 12px;
+}
+.drawer-item-price-tag {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.btn-drawer-buy-now {
+  display: block;
+  background: #fff;
+  color: #000;
+  text-align: center;
+  padding: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: all 0.3s;
-}
-.btn-lightbox-buy:hover {
-  background: var(--white);
-  color: var(--black);
 }
 
 /* FOOTER */
 footer {
   background: var(--black-pure);
-  padding: 80px 48px;
+  padding: 70px 48px;
   border-top: 1px solid rgba(255,255,255,0.1);
   text-align: center;
 }
 .footer-brand {
-  font-family: var(--font-serif);
-  font-size: 26px;
-  font-weight: 800;
-  letter-spacing: 0.3em;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
   margin-bottom: 24px;
 }
-.footer-nav {
+.footer-links-row {
   display: flex;
   justify-content: center;
   gap: 28px;
   margin-bottom: 30px;
   flex-wrap: wrap;
 }
-.footer-nav a {
+.footer-links-row a {
   color: var(--gray-400);
   text-decoration: none;
   font-size: 10px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
-.footer-nav a:hover { color: var(--gold); }
+.footer-links-row a:hover { color: #fff; }
 .footer-copy {
   font-size: 10px;
   color: var(--gray-600);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
 }
 
-@media(max-width: 992px) {
-  .lightbox-card { grid-template-columns: 1fr; }
-  .lightbox-img-box { height: 350px; }
-  .runway-tabs-bar { gap: 16px; overflow-x: auto; justify-content: flex-start; }
+@media(max-width: 768px) {
+  .runway-nav-bar { gap: 16px; overflow-x: auto; justify-content: flex-start; }
   .nav-links { display: none; }
 }
 </style>
@@ -554,325 +549,242 @@ footer {
 
 <div class="top-bar">
   <span>MILAN FASHION WEEK · WOMEN'S FALL WINTER 2026/27</span>
-  <div class="top-bar-links">
-    <span>AUDIO OFICIAL DE PASARELA EN DIRECTO</span>
-  </div>
+  <span>OFFICIAL RUNWAY BROADCAST</span>
 </div>
 
 <header>
   <nav class="nav-links">
-    <a href="articulos.html">COLECCIÓN</a>
-    <a href="producto-detalle.html">VESTIDO DOBLE CREPÉ</a>
-    <a href="pasarela.html" class="active">PASARELA 2026</a>
-    <a href="pago-premium.html">CHECKOUT & BOLSA</a>
+    <a href="articulos.html">WOMEN</a>
+    <a href="producto-detalle.html">DOUBLE WOOL CREPE DRESS</a>
+    <a href="pasarela.html" class="active">FASHION SHOW 2026</a>
+    <a href="pago-premium.html">CHECKOUT & BAG</a>
   </nav>
 
   <a href="articulos.html" class="logo-brand">DOLCE & GABBANA</a>
 
   <div class="nav-right">
-    <a href="pago-premium.html" class="btn-gold-nav">MI BOLSA (1)</a>
+    <a href="pago-premium.html" class="btn-gold-nav">MY BAG (1)</a>
   </div>
 </header>
 
-<!-- HERO TEATRO PASARELA -->
-<section class="runway-theater">
-  <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1800&auto=format&fit=crop&q=90" alt="Dolce & Gabbana Runway Stage" class="theater-video-bg">
-  <div class="theater-overlay"></div>
+<!-- HERO PASARELA CINEMATOGRÁFICA -->
+<section class="runway-hero">
+  <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1800&auto=format&fit=crop&q=90" alt="Dolce & Gabbana Runway Stage" class="hero-video-bg">
+  <div class="hero-gradient"></div>
   
-  <div class="theater-content">
-    <div class="theater-tag">✦ ALTA COSTURA MILANO ✦</div>
-    <h1 class="theater-title">WOMEN'S FALL WINTER 2026 FASHION SHOW</h1>
-    <p class="theater-desc">Una oda a la sastrería inmortal de Sicilia, el esmoquin femenino, la lana virgen de crepé doble y las sedas translúcidas. Recorre los looks desfilados por las modelos en la pasarela de Milán.</p>
+  <div class="hero-inner">
+    <div class="hero-season-tag">MILAN FASHION SHOW · FW 2026/27</div>
+    <h1 class="hero-title-main">WOMEN'S FALL WINTER 2026 FASHION SHOW</h1>
+    <p class="hero-desc-main">Una celebración monumental de la sastrería clásica siciliana, el esmoquin femenino y la sensualidad de las lanas nobles y sedas. Descubre los looks desfilados por las modelos en la pasarela oficial.</p>
     
-    <div class="theater-controls">
-      <a href="#looksTab" class="btn-theater-primary">EXPLORAR TODOS LOS LOOKS</a>
-      <button class="btn-sound-toggle" id="soundBtn" onclick="toggleRunwayAudio()">
-        <span id="soundIcon">🔊</span> <span id="soundText">SONIDO DE PASARELA: ACTIVO</span>
+    <div class="hero-actions-row">
+      <a href="#looksNav" class="btn-hero-white">EXPLORAR TODOS LOS LOOKS</a>
+      <button class="btn-sound-eq" id="eqBtn" onclick="toggleRunwaySound()">
+        <div class="sound-bars">
+          <div class="sound-bar"></div>
+          <div class="sound-bar"></div>
+          <div class="sound-bar"></div>
+        </div>
+        <span id="eqText">AUDIO DE PASARELA EN VIVO</span>
       </button>
     </div>
   </div>
 </section>
 
-<!-- BARRA DE PESTAÑAS DEL DESFILE -->
-<div class="runway-tabs-bar" id="looksTab">
-  <button class="runway-tab-btn active" onclick="switchRunwayTab('looks', this)">LOS LOOKS (01 - 08)</button>
-  <button class="runway-tab-btn" onclick="switchRunwayTab('frontrow', this)">FRONT ROW & CELEBRIDADES</button>
-  <button class="runway-tab-btn" onclick="switchRunwayTab('backstage', this)">BACKSTAGE & DETALLES</button>
-  <button class="runway-tab-btn" onclick="switchRunwayTab('beauty', this)">D&G BEAUTY</button>
+<!-- PESTAÑAS DE PASARELA -->
+<div class="runway-nav-bar" id="looksNav">
+  <button class="runway-tab-link active" onclick="switchTab('looks', this)">LOS LOOKS (01 - 08)</button>
+  <button class="runway-tab-link" onclick="switchTab('frontrow', this)">FRONT ROW & CELEBRIDADES</button>
+  <button class="runway-tab-link" onclick="switchTab('backstage', this)">BACKSTAGE</button>
+  <button class="runway-tab-link" onclick="switchTab('beauty', this)">D&G BEAUTY</button>
 </div>
 
-<!-- PESTAÑA 1: LOS LOOKS DE PASARELA -->
-<section class="tab-content-panel active" id="tab-looks">
+<!-- PESTAÑA 1: LOOKS DE PASARELA -->
+<section class="tab-content active" id="pane-looks">
   <div class="looks-grid">
 
     <!-- LOOK 01 -->
-    <article class="look-card">
-      <div class="look-media-box" onclick="openLightbox('LOOK 01 · APERTURA', 'Vestido en Doble Crepé de Lana Virgen', 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1200', '€ 2.450', 'El vestido insignia del desfile. Silueta entallada con hombreras estructuradas, forro en seda elástica con estampado de leopardo y confección artesanal en Italia.', 'producto-detalle.html')">
-        <span class="look-badge">LOOK 01 · APERTURA</span>
-        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&auto=format&fit=crop&q=85" alt="Look 01" class="look-img">
-        <span class="look-zoom-icon">🔍 VER DETALLE</span>
+    <article class="runway-look-card">
+      <div class="look-media-box" onclick="openShopLook('LOOK 01 · APERTURA', 'Vestido en Doble Crepé de Lana', '€ 2.450', 'Silueta midi entallada con hombreras estructuradas y forro de seda leopardo.', 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1000', 'producto-detalle.html')">
+        <span class="look-badge">LOOK 01 · OPENING</span>
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&auto=format&fit=crop&q=90" alt="Look 01" class="look-img">
+        <span class="look-quick-view">👁️ VER DETALLES</span>
       </div>
-      <div class="look-info-box">
-        <span class="look-tag">ALTA COSTURA · VESTIDO</span>
-        <h3 class="look-name">Vestido en Doble Crepé de Lana</h3>
-        <p class="look-desc-text">Silueta midi esculpida en lana virgen doble con forro de leopardo icónico.</p>
+      <div class="look-info-panel">
+        <span class="look-category">ALTA COSTURA · VESTIDO</span>
+        <h3 class="look-title">Vestido en Doble Crepé de Lana</h3>
+        <p class="look-desc-snippet">Corte esculpido en lana virgen doble con forro de seda con estampado leopardo.</p>
         <div class="look-price-row">
           <span class="look-price-val">€ 2.450</span>
-          <span class="look-made-tag">MADE IN ITALY</span>
+          <span style="font-size:9px; color:#aaa;">MADE IN ITALY</span>
         </div>
-        <a href="producto-detalle.html" class="btn-buy-look">COMPRAR LOOK 01</a>
+        <a href="producto-detalle.html" class="btn-shop-look-pro">COMPRAR LOOK 01</a>
       </div>
     </article>
 
     <!-- LOOK 02 -->
-    <article class="look-card">
-      <div class="look-media-box" onclick="openLightbox('LOOK 02', 'Esmoquin Sartorial en Terciopelo', 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200', '€ 3.850', 'Chaqueta de esmoquin cruzada en terciopelo de seda negro con solapas de raso brillante y pantalón sartorial a juego.', 'pago-premium.html?id=lux-dg-smoking')">
+    <article class="runway-look-card">
+      <div class="look-media-box" onclick="openShopLook('LOOK 02', 'Esmoquin Sartorial en Terciopelo', '€ 3.850', 'Traje cruzado en terciopelo de seda con solapas en raso brillante.', 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1000', 'pago-premium.html?id=velvet-tux')">
         <span class="look-badge">LOOK 02</span>
-        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=85" alt="Look 02" class="look-img">
-        <span class="look-zoom-icon">🔍 VER DETALLE</span>
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=90" alt="Look 02" class="look-img">
+        <span class="look-quick-view">👁️ VER DETALLES</span>
       </div>
-      <div class="look-info-box">
-        <span class="look-tag">SMOKING · SASTRERÍA</span>
-        <h3 class="look-name">Esmoquin Sartorial en Terciopelo</h3>
-        <p class="look-desc-text">Traje de corte cruzado con solapas en raso de seda y cuerpo de terciopelo.</p>
+      <div class="look-info-panel">
+        <span class="look-category">SMOKING · SASTRERÍA</span>
+        <h3 class="look-title">Esmoquin Sartorial en Terciopelo</h3>
+        <p class="look-desc-snippet">Chaqueta cruzada con solapas en raso y pantalón sartorial a medida.</p>
         <div class="look-price-row">
           <span class="look-price-val">€ 3.850</span>
-          <span class="look-made-tag">MADE IN ITALY</span>
+          <span style="font-size:9px; color:#aaa;">MADE IN ITALY</span>
         </div>
-        <a href="pago-premium.html?id=lux-dg-smoking" class="btn-buy-look">COMPRAR LOOK 02</a>
+        <a href="pago-premium.html?id=velvet-tux" class="btn-shop-look-pro">COMPRAR LOOK 02</a>
       </div>
     </article>
 
     <!-- LOOK 03 -->
-    <article class="look-card">
-      <div class="look-media-box" onclick="openLightbox('LOOK 03', 'Maxi Abrigo en Cachemira & Lana', 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200', '€ 4.200', 'Abrigo largo envolvente en mezcla de cachemira y lana virgen con botonadura dorada de escudo nobiliario.', 'pago-premium.html?id=lux-dg-coat')">
+    <article class="runway-look-card">
+      <div class="look-media-box" onclick="openShopLook('LOOK 03', 'Maxi Abrigo en Cachemira & Lana', '€ 4.200', 'Abrigo largo envolvente con botones dorados labrados a mano.', 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1000', 'pago-premium.html?id=cashmere-coat')">
         <span class="look-badge">LOOK 03</span>
-        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop&q=85" alt="Look 03" class="look-img">
-        <span class="look-zoom-icon">🔍 VER DETALLE</span>
+        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop&q=90" alt="Look 03" class="look-img">
+        <span class="look-quick-view">👁️ VER DETALLES</span>
       </div>
-      <div class="look-info-box">
-        <span class="look-tag">OUTERWEAR · CACHEMIRA</span>
-        <h3 class="look-name">Maxi Abrigo en Cachemira</h3>
-        <p class="look-desc-text">Corte envolvente de gran volumen con botones dorados labrados a mano.</p>
+      <div class="look-info-panel">
+        <span class="look-category">OUTERWEAR · CACHEMIRA</span>
+        <h3 class="look-title">Maxi Abrigo en Cachemira</h3>
+        <p class="look-desc-snippet">Corte envolvente de gran volumen con hombreras estructuradas.</p>
         <div class="look-price-row">
           <span class="look-price-val">€ 4.200</span>
-          <span class="look-made-tag">MADE IN ITALY</span>
+          <span style="font-size:9px; color:#aaa;">MADE IN ITALY</span>
         </div>
-        <a href="pago-premium.html?id=lux-dg-coat" class="btn-buy-look">COMPRAR LOOK 03</a>
+        <a href="pago-premium.html?id=cashmere-coat" class="btn-shop-look-pro">COMPRAR LOOK 03</a>
       </div>
     </article>
 
     <!-- LOOK 04 -->
-    <article class="look-card">
-      <div class="look-media-box" onclick="openLightbox('LOOK 04', 'Vestido Lencero en Gasa de Seda', 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=1200', '€ 3.200', 'Vestido fluido con transparencias de seda, bordados de encaje siciliano y microlentejuelas reflectantes.', 'pago-premium.html?id=lux-dg-silk')">
+    <article class="runway-look-card">
+      <div class="look-media-box" onclick="openShopLook('LOOK 04', 'Vestido Lencero en Gasa de Seda', '€ 3.200', 'Transparencias sensuales con encaje siciliano y caída de seda.', 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=1000', 'pago-premium.html?id=silk-dress')">
         <span class="look-badge">LOOK 04</span>
-        <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&auto=format&fit=crop&q=85" alt="Look 04" class="look-img">
-        <span class="look-zoom-icon">🔍 VER DETALLE</span>
+        <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&auto=format&fit=crop&q=90" alt="Look 04" class="look-img">
+        <span class="look-quick-view">👁️ VER DETALLES</span>
       </div>
-      <div class="look-info-box">
-        <span class="look-tag">SEDA · ENCAJE SICILIANO</span>
-        <h3 class="look-name">Vestido Lencero en Gasa</h3>
-        <p class="look-desc-text">Transparencias sensuales con encaje artesanal y caída vaporosa de seda pura.</p>
+      <div class="look-info-panel">
+        <span class="look-category">SEDA · ENCAJE SICILIANO</span>
+        <h3 class="look-title">Vestido Lencero en Gasa</h3>
+        <p class="look-desc-snippet">Transparencias sensuales con encaje artesanal y seda vaporosa.</p>
         <div class="look-price-row">
           <span class="look-price-val">€ 3.200</span>
-          <span class="look-made-tag">MADE IN ITALY</span>
+          <span style="font-size:9px; color:#aaa;">MADE IN ITALY</span>
         </div>
-        <a href="pago-premium.html?id=lux-dg-silk" class="btn-buy-look">COMPRAR LOOK 04</a>
-      </div>
-    </article>
-
-    <!-- LOOK 05 -->
-    <article class="look-card">
-      <div class="look-media-box" onclick="openLightbox('LOOK 05', 'Bolso Sicily Pequeño en Piel Dauphine', 'https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=1200', '€ 1.850', 'El icono absoluto de la Maison en piel granulada Dauphine con placa frontal bitono en baño de oro de 18K.', 'pago-premium.html?id=lux-dg-sicily')">
-        <span class="look-badge">LOOK 05</span>
-        <img src="https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=800&auto=format&fit=crop&q=85" alt="Look 05" class="look-img">
-        <span class="look-zoom-icon">🔍 VER DETALLE</span>
-      </div>
-      <div class="look-info-box">
-        <span class="look-tag">MARROQUINERÍA · PIEL DAUPHINE</span>
-        <h3 class="look-name">Bolso Sicily Pequeño en Piel</h3>
-        <p class="look-desc-text">Herrajes en oro pulido con placa grabada D&G y forro interior de leopardo.</p>
-        <div class="look-price-row">
-          <span class="look-price-val">€ 1.850</span>
-          <span class="look-made-tag">MADE IN ITALY</span>
-        </div>
-        <a href="pago-premium.html?id=lux-dg-sicily" class="btn-buy-look">COMPRAR LOOK 05</a>
-      </div>
-    </article>
-
-    <!-- LOOK 06 -->
-    <article class="look-card">
-      <div class="look-media-box" onclick="openLightbox('LOOK 06', 'Gafas de Sol Runway DG Logo & Joyería', 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1200', '€ 890', 'Gafas de sol de pasarela oversize con monograma DG en oro pulido y cristales degradados de protección UV400.', 'pago-premium.html?id=lux-dg-glasses')">
-        <span class="look-badge">LOOK 06</span>
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=85" alt="Look 06" class="look-img">
-        <span class="look-zoom-icon">🔍 VER DETALLE</span>
-      </div>
-      <div class="look-info-box">
-        <span class="look-tag">ALTA JOYERÍA & EYEWEAR</span>
-        <h3 class="look-name">Gafas de Sol Runway DG Logo</h3>
-        <p class="look-desc-text">Montura en acetato negro profundo con detalles esculpidos en oro de 18K.</p>
-        <div class="look-price-row">
-          <span class="look-price-val">€ 890</span>
-          <span class="look-made-tag">MADE IN ITALY</span>
-        </div>
-        <a href="pago-premium.html?id=lux-dg-glasses" class="btn-buy-look">COMPRAR LOOK 06</a>
-      </div>
-    </article>
-
-    <!-- LOOK 07 -->
-    <article class="look-card">
-      <div class="look-media-box" onclick="openLightbox('LOOK 07', 'Conjunto Corsé & Falda Lápiz de Encaje', 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200', '€ 2.950', 'Corsé estructurado con ballenas interiores y falda lápiz en encaje de chantilly negro semitransparente.', 'pago-premium.html?id=lux-dg-corset')">
-        <span class="look-badge">LOOK 07</span>
-        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&auto=format&fit=crop&q=85" alt="Look 07" class="look-img">
-        <span class="look-zoom-icon">🔍 VER DETALLE</span>
-      </div>
-      <div class="look-info-box">
-        <span class="look-tag">ALTA COSTURA · CORSETERÍA</span>
-        <h3 class="look-name">Corsé & Falda Lápiz Encaje</h3>
-        <p class="look-desc-text">Corsetería histórica reinterpretada con ballenas y encaje floral siciliano.</p>
-        <div class="look-price-row">
-          <span class="look-price-val">€ 2.950</span>
-          <span class="look-made-tag">MADE IN ITALY</span>
-        </div>
-        <a href="pago-premium.html?id=lux-dg-corset" class="btn-buy-look">COMPRAR LOOK 07</a>
-      </div>
-    </article>
-
-    <!-- LOOK 08 -->
-    <article class="look-card">
-      <div class="look-media-box" onclick="openLightbox('LOOK 08 · FINALE', 'Capa Imperial en Terciopelo con Bordados de Oro', 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=1200', '€ 6.500', 'Capa de gala de largo completo en terciopelo negro pesado con bordados de hilo de oro inspirados en el barroco siciliano.', 'pago-premium.html?id=lux-dg-cape')">
-        <span class="look-badge">LOOK 08 · FINALE</span>
-        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&auto=format&fit=crop&q=85" alt="Look 08" class="look-img">
-        <span class="look-zoom-icon">🔍 VER DETALLE</span>
-      </div>
-      <div class="look-info-box">
-        <span class="look-tag">ALTA MODA · PIEZA DE ARCHIVO</span>
-        <h3 class="look-name">Capa Imperial en Terciopelo</h3>
-        <p class="look-desc-text">Bordados barrocos de oro de 18K realizados a mano por los maestros sastres de Milán.</p>
-        <div class="look-price-row">
-          <span class="look-price-val">€ 6.500</span>
-          <span class="look-made-tag">PIEZA ÚNICA</span>
-        </div>
-        <a href="pago-premium.html?id=lux-dg-cape" class="btn-buy-look">COMPRAR LOOK 08</a>
+        <a href="pago-premium.html?id=silk-dress" class="btn-shop-look-pro">COMPRAR LOOK 04</a>
       </div>
     </article>
 
   </div>
 </section>
 
-<!-- PESTAÑA 2: FRONT ROW CELEBRITIES -->
-<section class="tab-content-panel" id="tab-frontrow">
+<!-- PESTAÑA 2: FRONT ROW -->
+<section class="tab-content" id="pane-frontrow">
   <div style="text-align:center; max-width:700px; margin:0 auto 40px;">
-    <h2 style="font-family:var(--font-serif); font-size:26px; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:12px;">CELEBRIDADES EN PRIMERA FILA</h2>
-    <p style="color:var(--gray-400); font-size:12px;">Los invitados de honor que vivieron el desfile desde la primera fila del teatro oficial de Dolce & Gabbana en Milán.</p>
+    <h2 style="font-size:24px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:10px;">FRONT ROW & CELEBRIDADES</h2>
+    <p style="color:var(--gray-400); font-size:12px;">Los invitados de honor que vivieron el desfile desde la primera fila del teatro oficial Dolce & Gabbana en Milán.</p>
   </div>
   <div class="looks-grid">
-    <div class="look-card">
+    <div class="runway-look-card">
       <div class="look-media-box"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800" class="look-img"></div>
-      <div class="look-info-box"><div class="look-tag">INVITADA DE HONOR</div><h3 class="look-name">Madonna</h3><p class="look-desc-text">Ícono cultural y musa eterna de la Maison luciendo velo de encaje y corsé de archivo.</p></div>
+      <div class="look-info-panel"><div class="look-category">INVITADA DE HONOR</div><h3 class="look-title">Madonna</h3><p class="look-desc-snippet">Ícono cultural y musa eterna de la Maison vistiendo corsetería siciliana.</p></div>
     </div>
-    <div class="look-card">
+    <div class="runway-look-card">
       <div class="look-media-box"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800" class="look-img"></div>
-      <div class="look-info-box"><div class="look-tag">EMBAJADOR GLOBAL</div><h3 class="look-name">Alberto Guerra</h3><p class="look-desc-text">Actor internacional vistiendo traje sastre a medida en crepé de lana negro.</p></div>
-    </div>
-    <div class="look-card">
-      <div class="look-media-box"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800" class="look-img"></div>
-      <div class="look-info-box"><div class="look-tag">HUÉSPED VIP</div><h3 class="look-name">Zuria Vega</h3><p class="look-desc-text">Actriz luciendo vestido midi de terciopelo con bolso Sicily en oro.</p></div>
-    </div>
-    <div class="look-card">
-      <div class="look-media-box"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800" class="look-img"></div>
-      <div class="look-info-box"><div class="look-tag">ARTISTA GLOBAL</div><h3 class="look-name">Choi San</h3><p class="look-desc-text">Estrella internacional de la música con esmoquin cruzado y broche joya.</p></div>
+      <div class="look-info-panel"><div class="look-category">EMBAJADOR GLOBAL</div><h3 class="look-title">Alberto Guerra</h3><p class="look-desc-snippet">Actor internacional luciendo esmoquin sastre a medida.</p></div>
     </div>
   </div>
 </section>
 
 <!-- PESTAÑA 3: BACKSTAGE -->
-<section class="tab-content-panel" id="tab-backstage">
+<section class="tab-content" id="pane-backstage">
   <div style="text-align:center; max-width:700px; margin:0 auto 40px;">
-    <h2 style="font-family:var(--font-serif); font-size:26px; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:12px;">EL ARTE DETRÁS DE ESCENA</h2>
-    <p style="color:var(--gray-400); font-size:12px;">Los minutos previos al desfile: la preparación de las modelos, los ajustes sartoriales de Domenico y Stefano y la atmósfera de la pasarela.</p>
+    <h2 style="font-size:24px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:10px;">BACKSTAGE SARTORIAL</h2>
+    <p style="color:var(--gray-400); font-size:12px;">Los momentos previos a la salida a escena: costura milimétrica y preparación.</p>
   </div>
   <div class="looks-grid">
-    <div class="look-card"><div class="look-media-box"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800" class="look-img"></div><div class="look-info-box"><div class="look-tag">BACKSTAGE 01</div><h3 class="look-name">Últimos Ajustes de Sastrería</h3><p class="look-desc-text">Revisión milimétrica de las caídas de hombro y el planchado de seda.</p></div></div>
-    <div class="look-card"><div class="look-media-box"><img src="https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?w=800" class="look-img"></div><div class="look-info-box"><div class="look-tag">BACKSTAGE 02</div><h3 class="look-name">Colocación de Joyas & Accesorios</h3><p class="look-desc-text">Montaje de las piezas de alta joyería barroca y los bolsos Sicily.</p></div></div>
+    <div class="runway-look-card"><div class="look-media-box"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800" class="look-img"></div><div class="look-info-panel"><div class="look-category">BACKSTAGE 01</div><h3 class="look-title">Ajustes de Sastrería</h3><p class="look-desc-snippet">Revisión de hombreras y planchado de sedas.</p></div></div>
   </div>
 </section>
 
-<!-- PESTAÑA 4: D&G BEAUTY -->
-<section class="tab-content-panel" id="tab-beauty">
+<!-- PESTAÑA 4: BEAUTY -->
+<section class="tab-content" id="pane-beauty">
   <div style="text-align:center; max-width:700px; margin:0 auto 40px;">
-    <h2 style="font-family:var(--font-serif); font-size:26px; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:12px;">DOLCE & GABBANA BEAUTY</h2>
-    <p style="color:var(--gray-400); font-size:12px;">Piel radiante con acabado aterciopelado, delineado felino 'Feline Eyes' y labios rojo pasión intenso 'Devotion'.</p>
+    <h2 style="font-size:24px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:10px;">DOLCE & GABBANA BEAUTY</h2>
+    <p style="color:var(--gray-400); font-size:12px;">Piel aterciopelada y labios 'Devotion Red'.</p>
   </div>
   <div class="looks-grid">
-    <div class="look-card"><div class="look-media-box"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800" class="look-img"></div><div class="look-info-box"><div class="look-tag">BEAUTY LOOK 01</div><h3 class="look-name">Labios Red Devotion</h3><p class="look-desc-text">Labial líquido mate de larga duración con micropartículas de oro.</p><a href="pago-premium.html?id=beauty-red" class="btn-buy-look">COMPRAR BEAUTY</a></div></div>
-    <div class="look-card"><div class="look-media-box"><img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=800" class="look-img"></div><div class="look-info-box"><div class="look-tag">BEAUTY LOOK 02</div><h3 class="look-name">Ojos Feline Eye Shadow</h3><p class="look-desc-text">Paleta de sombras ahumadas intensas con pigmentos minerales puros.</p><a href="pago-premium.html?id=beauty-eyes" class="btn-buy-look">COMPRAR BEAUTY</a></div></div>
+    <div class="runway-look-card"><div class="look-media-box"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800" class="look-img"></div><div class="look-info-panel"><div class="look-category">BEAUTY LOOK</div><h3 class="look-title">Labial Red Devotion</h3><p class="look-desc-snippet">Fórmula líquida mate de larga fijación.</p><a href="pago-premium.html?id=beauty-red" class="btn-shop-look-pro">COMPRAR BEAUTY</a></div></div>
   </div>
 </section>
 
-<!-- LIGHTBOX INTERACTIVO -->
-<div class="lightbox-modal" id="lightboxModal">
-  <div class="lightbox-card">
-    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-    <div class="lightbox-img-box">
-      <img src="" alt="" class="lightbox-img" id="lbImg">
-    </div>
-    <div class="lightbox-details">
-      <div class="lightbox-tag" id="lbTag">LOOK 01</div>
-      <h2 class="lightbox-title" id="lbTitle">Vestido en Doble Crepé</h2>
-      <p class="lightbox-desc" id="lbDesc">Descripción completa del look.</p>
-      <div class="lightbox-price" id="lbPrice">€ 2.450</div>
-      <a href="producto-detalle.html" class="btn-lightbox-buy" id="lbBtn">VER FICHA Y COMPRAR LOOK</a>
+<!-- DRAWER LATERAL SLIDE-OUT SHOP THE LOOK -->
+<div class="shop-look-drawer-overlay" id="lookDrawerOverlay" onclick="closeShopLook()"></div>
+<div class="shop-look-drawer" id="lookDrawer">
+  <div class="drawer-top-bar">
+    <span class="drawer-title-main" id="dLookTag">LOOK 01</span>
+    <button class="drawer-close-btn" onclick="closeShopLook()">✕</button>
+  </div>
+  <div class="drawer-scroll-body">
+    <img src="" class="drawer-look-img-large" id="dLookImg" alt="">
+    <div class="drawer-item-breakdown">
+      <div class="drawer-item-head" id="dLookTitle">Vestido en Doble Crepé</div>
+      <div class="drawer-item-sub" id="dLookDesc">Detalles completos del look desfilado.</div>
+      <div class="drawer-item-price-tag" id="dLookPrice">€ 2.450</div>
+      <a href="producto-detalle.html" class="btn-drawer-buy-now" id="dLookBtn">COMPRAR PIEZA DEL DESFILE</a>
     </div>
   </div>
 </div>
 
 <footer>
   <div class="footer-brand">DOLCE & GABBANA</div>
-  <div class="footer-nav">
-    <a href="articulos.html">Colección Mujer</a>
-    <a href="producto-detalle.html">Vestido Doble Crepé</a>
-    <a href="pasarela.html">Fashion Show Fall Winter 2026</a>
-    <a href="pago-premium.html">Bolsa & Pagos Seguros</a>
-    <a href="#">Sostenibilidad</a>
+  <div class="footer-links-row">
+    <a href="articulos.html">Women FW 2026</a>
+    <a href="producto-detalle.html">Double Wool Crepe Dress</a>
+    <a href="pasarela.html">Runway Fashion Shows</a>
+    <a href="pago-premium.html">Checkout & Bag</a>
   </div>
   <div class="footer-copy">
-    &copy; 2026 DOLCE & GABBANA S.r.l. Todos los derechos reservados. Milano, Italia.
+    &copy; 2026 DOLCE & GABBANA S.r.l. All rights reserved. Milano, Italia.
   </div>
 </footer>
 
 <script>
-function switchRunwayTab(tabId, btn) {
-  document.querySelectorAll('.runway-tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab-content-panel').forEach(p => p.classList.remove('active'));
+function switchTab(tabId, btn) {
+  document.querySelectorAll('.runway-tab-link').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
-  const target = document.getElementById('tab-' + tabId);
+  const target = document.getElementById('pane-' + tabId);
   if(target) target.classList.add('active');
 }
 
-function openLightbox(tag, title, img, price, desc, link) {
-  document.getElementById('lbTag').textContent = tag;
-  document.getElementById('lbTitle').textContent = title;
-  document.getElementById('lbImg').src = img;
-  document.getElementById('lbPrice').textContent = price;
-  document.getElementById('lbDesc').textContent = desc;
-  document.getElementById('lbBtn').href = link;
-  document.getElementById('lightboxModal').classList.add('open');
+function openShopLook(tag, title, price, desc, img, link) {
+  document.getElementById('dLookTag').textContent = tag;
+  document.getElementById('dLookTitle').textContent = title;
+  document.getElementById('dLookPrice').textContent = price;
+  document.getElementById('dLookDesc').textContent = desc;
+  document.getElementById('dLookImg').src = img;
+  document.getElementById('dLookBtn').href = link;
+  document.getElementById('lookDrawer').classList.add('open');
+  document.getElementById('lookDrawerOverlay').classList.add('open');
 }
 
-function closeLightbox() {
-  document.getElementById('lightboxModal').classList.remove('open');
+function closeShopLook() {
+  document.getElementById('lookDrawer').classList.remove('open');
+  document.getElementById('lookDrawerOverlay').classList.remove('open');
 }
 
-document.getElementById('lightboxModal').addEventListener('click', (e) => {
-  if(e.target === document.getElementById('lightboxModal')) closeLightbox();
-});
-
-let soundActive = true;
-function toggleRunwayAudio() {
-  soundActive = !soundActive;
-  document.getElementById('soundIcon').textContent = soundActive ? '🔊' : '🔇';
-  document.getElementById('soundText').textContent = soundActive ? 'SONIDO DE PASARELA: ACTIVO' : 'SONIDO SILENCIADO';
+let isSound = true;
+function toggleRunwaySound() {
+  isSound = !isSound;
+  document.getElementById('eqText').textContent = isSound ? 'AUDIO DE PASARELA EN VIVO' : 'AUDIO SILENCIADO';
+  document.querySelectorAll('.sound-bar').forEach(b => {
+    b.style.animationPlayState = isSound ? 'running' : 'paused';
+  });
 }
 </script>
 

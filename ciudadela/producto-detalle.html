@@ -11,9 +11,9 @@
   --black: #000000;
   --white: #ffffff;
   --gray-bg: #f7f7f7;
-  --gray-border: #e2e2e2;
+  --gray-border: #e5e5e5;
   --gray-text: #666666;
-  --gray-dark: #222222;
+  --gray-dark: #111111;
   --font: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -34,13 +34,13 @@ body {
   color: #fff;
   text-align: center;
   font-size: 10px;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   padding: 8px 20px;
   font-weight: 500;
 }
 
-/* HEADER EXACTO D&G */
+/* HEADER EXACTO D&G CON MEGA-MENU */
 header {
   position: sticky;
   top: 0;
@@ -84,16 +84,66 @@ header {
   display: flex;
   gap: 24px;
 }
-.main-nav a {
+.nav-item {
+  position: relative;
+}
+.nav-link-btn {
   text-decoration: none;
   color: #000;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  transition: opacity 0.2s;
+  padding: 10px 0;
+  display: block;
 }
-.main-nav a:hover { opacity: 0.5; }
+.nav-link-btn:hover { opacity: 0.5; }
+
+/* MEGA MENU DESPLEGABLE */
+.mega-menu {
+  position: absolute;
+  top: 100%;
+  left: -48px;
+  right: -48px;
+  width: 100vw;
+  background: #fff;
+  border-bottom: 1px solid var(--gray-border);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+  padding: 40px 60px;
+  display: none;
+  grid-template-columns: repeat(4, 1fr) 1.5fr;
+  gap: 40px;
+  z-index: 999;
+}
+.nav-item:hover .mega-menu {
+  display: grid;
+}
+.mega-col-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.mega-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mega-list a {
+  color: var(--gray-text);
+  text-decoration: none;
+  font-size: 11px;
+  transition: color 0.2s;
+}
+.mega-list a:hover { color: #000; }
+.mega-featured-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
 
 .header-tools {
   display: flex;
@@ -107,6 +157,10 @@ header {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: var(--font);
 }
 
 /* BREADCRUMBS */
@@ -120,6 +174,63 @@ header {
 .breadcrumbs a { color: var(--gray-text); text-decoration: none; }
 .breadcrumbs span { margin: 0 8px; color: #ccc; }
 
+/* STICKY TOP MINI BUY BAR ON SCROLL */
+.mini-buybar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: rgba(255,255,255,0.98);
+  border-bottom: 1px solid var(--gray-border);
+  backdrop-filter: blur(10px);
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  transform: translateY(-100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mini-buybar.visible {
+  transform: translateY(0);
+}
+.mini-p-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.mini-p-thumb {
+  width: 36px;
+  height: 48px;
+  object-fit: cover;
+}
+.mini-p-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.mini-p-price {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-text);
+}
+.mini-buy-btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  font-family: var(--font);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.mini-buy-btn:hover { background: #333; }
+
 /* PRODUCT VIEW (2-COLUMN LUXURY LAYOUT) */
 .product-layout {
   max-width: 1440px;
@@ -130,7 +241,7 @@ header {
   gap: 60px;
 }
 
-/* LEFT COLUMN: VERTICAL IMAGE STACK (6 FOTOS DE ALTA RESOLUCIÓN) */
+/* LEFT COLUMN: VERTICAL IMAGE STACK CON EFECTO LUPA ZOOM */
 .image-stack {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -139,6 +250,8 @@ header {
 .stack-img-wrap {
   background: #f7f7f7;
   overflow: hidden;
+  position: relative;
+  cursor: crosshair;
 }
 .stack-img-wrap.full {
   grid-column: span 2;
@@ -148,10 +261,10 @@ header {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.4s ease-out;
 }
 .stack-img-wrap:hover .stack-img {
-  transform: scale(1.03);
+  transform: scale(1.35);
 }
 
 /* RIGHT COLUMN: STICKY BUY BOX */
@@ -248,6 +361,7 @@ header {
   letter-spacing: 0.06em;
   cursor: pointer;
   transition: all 0.2s;
+  font-family: var(--font);
 }
 .size-box:hover {
   border-color: #000;
@@ -257,11 +371,12 @@ header {
   color: #fff;
   border-color: #000;
 }
-.size-helper {
+.stock-note {
   font-size: 10px;
-  text-decoration: underline;
-  color: var(--gray-text);
-  cursor: pointer;
+  color: #2e7d32;
+  margin-top: 8px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 /* CTAS */
@@ -308,7 +423,7 @@ header {
   color: #fff;
 }
 
-/* SERVICE BULLETS */
+/* PERKS */
 .perks-box {
   background: var(--gray-bg);
   padding: 20px;
@@ -363,7 +478,124 @@ header {
 .acc-row.open .acc-panel { display: block; }
 .acc-row.open .acc-icon { transform: rotate(45deg); }
 
-/* COMPLETE THE LOOK SECTION */
+/* SLIDE-OUT CART DRAWER (BOLSA LATERAL DESLIZANTE) */
+.cart-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.cart-drawer-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 440px;
+  max-width: 90vw;
+  height: 100vh;
+  background: #fff;
+  z-index: 2100;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+.cart-drawer.open {
+  transform: translateX(0);
+}
+.cart-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--gray-border);
+}
+.cart-drawer-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.cart-drawer-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+.cart-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 0;
+}
+.cart-drawer-item {
+  display: flex;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f2f2f2;
+}
+.drawer-thumb {
+  width: 80px;
+  height: 110px;
+  object-fit: cover;
+  background: #f7f7f7;
+}
+.drawer-item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+.drawer-item-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.drawer-item-meta {
+  font-size: 11px;
+  color: var(--gray-text);
+}
+.drawer-item-price {
+  font-size: 13px;
+  font-weight: 600;
+}
+.cart-drawer-footer {
+  border-top: 1px solid var(--gray-border);
+  padding-top: 20px;
+}
+.drawer-subtotal-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+.btn-drawer-checkout {
+  display: block;
+  width: 100%;
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 16px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-drawer-checkout:hover { background: #333; }
+
+/* COMPLETE THE LOOK */
 .cross-sell-section {
   max-width: 1440px;
   margin: 0 auto;
@@ -473,6 +705,18 @@ footer {
   COMPLIMENTARY EXPRESS SHIPPING AND SIGNATURE PACKAGING ON ALL ORDERS
 </div>
 
+<!-- MINI BUY BAR STICKY AL HACER SCROLL -->
+<div class="mini-buybar" id="miniBuyBar">
+  <div class="mini-p-info">
+    <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=200" alt="" class="mini-p-thumb">
+    <div>
+      <div class="mini-p-title">Double wool crepe dress</div>
+      <div class="mini-p-price">€ 2.450 · IT <span id="miniSizeSelected">40</span></div>
+    </div>
+  </div>
+  <button class="mini-buy-btn" onclick="openCartDrawer()">ADD TO BAG</button>
+</div>
+
 <header>
   <div class="header-top">
     <span>COLOMBIA (COP $) / INTERNATIONAL</span>
@@ -485,17 +729,57 @@ footer {
 
   <div class="header-main">
     <nav class="main-nav">
-      <a href="articulos.html">WOMEN</a>
-      <a href="articulos.html">MEN</a>
-      <a href="pasarela.html">RUNWAY 2026</a>
-      <a href="articulos.html">ALTA MODA</a>
+      <div class="nav-item">
+        <a href="articulos.html" class="nav-link-btn">WOMEN</a>
+        <div class="mega-menu">
+          <div>
+            <div class="mega-col-title">CLOTHING</div>
+            <ul class="mega-list">
+              <li><a href="producto-detalle.html">Dresses</a></li>
+              <li><a href="articulos.html">Tuxedos & Blazers</a></li>
+              <li><a href="articulos.html">Skirts & Pants</a></li>
+              <li><a href="articulos.html">Coats & Jackets</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="mega-col-title">BAGS</div>
+            <ul class="mega-list">
+              <li><a href="pago-premium.html?id=sicily-bag">Sicily Bag</a></li>
+              <li><a href="articulos.html">Devotion Bag</a></li>
+              <li><a href="articulos.html">Totes & Clutches</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="mega-col-title">SHOES & JEWELRY</div>
+            <ul class="mega-list">
+              <li><a href="articulos.html">Stilettos</a></li>
+              <li><a href="articulos.html">High Jewelry</a></li>
+              <li><a href="articulos.html">Eyewear</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="mega-col-title">HIGHLIGHTS</div>
+            <ul class="mega-list">
+              <li><a href="pasarela.html">Fashion Show FW 2026</a></li>
+              <li><a href="articulos.html">Alta Moda Milano</a></li>
+            </ul>
+          </div>
+          <div>
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600" class="mega-featured-img" alt="">
+            <div style="font-weight:700; text-transform:uppercase;">FALL WINTER 2026 CAMPAIGN</div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item"><a href="articulos.html" class="nav-link-btn">MEN</a></div>
+      <div class="nav-item"><a href="pasarela.html" class="nav-link-btn">RUNWAY 2026</a></div>
+      <div class="nav-item"><a href="articulos.html" class="nav-link-btn">ALTA MODA</a></div>
     </nav>
 
     <a href="articulos.html" class="logo-dng">DOLCE & GABBANA</a>
 
     <div class="header-tools">
       <a href="pasarela.html" class="tool-btn">RUNWAY SHOW</a>
-      <a href="pago-premium.html" class="tool-btn">BAG (1)</a>
+      <button class="tool-btn" onclick="openCartDrawer()">BAG (1)</button>
     </div>
   </div>
 </header>
@@ -508,19 +792,19 @@ footer {
   <span>DOUBLE WOOL CREPE DRESS</span>
 </div>
 
-<main class="product-layout">
-  <!-- STACK DE FOTOS VERTICAL 100% ALTA COSTURA -->
+<main class="product-layout" id="mainBuySection">
+  <!-- STACK DE FOTOS VERTICAL CON ZOOM DINÁMICO -->
   <div class="image-stack">
-    <div class="stack-img-wrap full">
+    <div class="stack-img-wrap full" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
       <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1200&auto=format&fit=crop&q=90" alt="Double wool crepe dress front look" class="stack-img">
     </div>
-    <div class="stack-img-wrap">
+    <div class="stack-img-wrap" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
       <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=900&auto=format&fit=crop&q=90" alt="Model runway catwalk motion" class="stack-img">
     </div>
-    <div class="stack-img-wrap">
+    <div class="stack-img-wrap" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
       <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=900&auto=format&fit=crop&q=90" alt="Structured neckline detail" class="stack-img">
     </div>
-    <div class="stack-img-wrap full">
+    <div class="stack-img-wrap full" onmousemove="zoomImg(event, this)" onmouseleave="resetImg(this)">
       <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&auto=format&fit=crop&q=90" alt="Full length editorial model shoot" class="stack-img">
     </div>
   </div>
@@ -551,19 +835,20 @@ footer {
         <span class="size-helper">Size Guide</span>
       </div>
       <div class="sizes-grid">
-        <button class="size-box" onclick="selectSize(this)">36</button>
-        <button class="size-box" onclick="selectSize(this)">38</button>
-        <button class="size-box selected" onclick="selectSize(this)">40</button>
-        <button class="size-box" onclick="selectSize(this)">42</button>
-        <button class="size-box" onclick="selectSize(this)">44</button>
-        <button class="size-box" onclick="selectSize(this)">46</button>
+        <button class="size-box" onclick="selectSize(this, 36)">36</button>
+        <button class="size-box" onclick="selectSize(this, 38)">38</button>
+        <button class="size-box selected" onclick="selectSize(this, 40)">40</button>
+        <button class="size-box" onclick="selectSize(this, 42)">42</button>
+        <button class="size-box" onclick="selectSize(this, 44)">44</button>
+        <button class="size-box" onclick="selectSize(this, 46)">46</button>
       </div>
+      <div class="stock-note" id="stockNote">● Solo quedan 2 piezas disponibles en talla IT 40</div>
     </div>
 
     <!-- CTAS -->
     <div class="cta-group">
-      <a href="pago-premium.html?id=f630-dress" class="btn-black">ADD TO BAG & PROCEED</a>
-      <a href="pasarela.html" class="btn-outline-black">VIEW ON 2026 RUNWAY ↗</a>
+      <button class="btn-black" onclick="openCartDrawer()">ADD TO BAG</button>
+      <a href="pago-premium.html?id=f630-dress" class="btn-outline-black">BUY WITH 1-CLICK (CHECKOUT)</a>
     </div>
 
     <!-- PERKS -->
@@ -623,6 +908,34 @@ footer {
     </div>
   </div>
 </main>
+
+<!-- CART DRAWER LATERAL SLIDE-OUT -->
+<div class="cart-drawer-overlay" id="cartOverlay" onclick="closeCartDrawer()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer-header">
+    <span class="cart-drawer-title">SHOPPING BAG (1 ITEM)</span>
+    <button class="cart-drawer-close" onclick="closeCartDrawer()">✕</button>
+  </div>
+  <div class="cart-drawer-body">
+    <div class="cart-drawer-item">
+      <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=300" class="drawer-thumb" alt="">
+      <div class="drawer-item-info">
+        <div>
+          <div class="drawer-item-title">Double wool crepe dress</div>
+          <div class="drawer-item-meta">Size: IT <span id="drawerSize">40</span> · Color: Nero</div>
+        </div>
+        <div class="drawer-item-price">€ 2.450,00</div>
+      </div>
+    </div>
+  </div>
+  <div class="cart-drawer-footer">
+    <div class="drawer-subtotal-row">
+      <span>SUBTOTAL</span>
+      <span>€ 2.450,00</span>
+    </div>
+    <a href="pago-premium.html?id=f630-dress" class="btn-drawer-checkout">PROCEED TO CHECKOUT</a>
+  </div>
+</div>
 
 <!-- COMPLETE THE LOOK -->
 <section class="cross-sell-section">
@@ -700,14 +1013,54 @@ footer {
 </footer>
 
 <script>
-function selectSize(btn) {
+function selectSize(btn, sz) {
   document.querySelectorAll('.size-box').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
+  document.getElementById('miniSizeSelected').textContent = sz;
+  document.getElementById('drawerSize').textContent = sz;
+  document.getElementById('stockNote').textContent = `● Solo quedan 2 piezas disponibles en talla IT ${sz}`;
 }
 
 function toggleAcc(btn) {
   btn.closest('.acc-row').classList.toggle('open');
 }
+
+// LOUPE ZOOM EFFECT
+function zoomImg(e, wrap) {
+  const img = wrap.querySelector('.stack-img');
+  const rect = wrap.getBoundingClientRect();
+  const x = ((e.clientX - rect.left) / rect.width) * 100;
+  const y = ((e.clientY - rect.top) / rect.height) * 100;
+  img.style.transformOrigin = `${x}% ${y}%`;
+}
+function resetImg(wrap) {
+  const img = wrap.querySelector('.stack-img');
+  img.style.transformOrigin = `center center`;
+}
+
+// CART DRAWER
+function openCartDrawer() {
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('open');
+}
+function closeCartDrawer() {
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('open');
+}
+
+// STICKY MINI BUYBAR ON SCROLL
+window.addEventListener('scroll', () => {
+  const buySection = document.getElementById('mainBuySection');
+  const miniBar = document.getElementById('miniBuyBar');
+  if(buySection && miniBar) {
+    const rect = buySection.getBoundingClientRect();
+    if(rect.top < -300) {
+      miniBar.classList.add('visible');
+    } else {
+      miniBar.classList.remove('visible');
+    }
+  }
+});
 </script>
 
 </body>

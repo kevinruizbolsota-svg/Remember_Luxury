@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MANSIÓN DE LUXE® &middot; Haute Couture, Cursos VIP &amp; Ecosistema Oficial</title>
+<title>MANSIÓN DE LUXE® &middot; Haute Couture, Hypercars, High Jewelry, Horology, Estates &amp; Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -34,6 +34,7 @@ body{
 }
 a{text-decoration:none;color:inherit}
 img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);}
+video{display:block;width:100%;height:100%;object-fit:cover;}
 
 /* 1. TOP HEADER CON MARCA DE AGUA WORLD */
 .dg-header-wrap{
@@ -93,7 +94,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   border-right:2px solid #000000;
 }
 .pane:last-child{border-right:none}
-.pane img{width:100%;height:100%;object-fit:cover}
+.pane img, .pane video{width:100%;height:100%;object-fit:cover}
 .triptych-stage:hover .pane img{transform:scale(1.03)}
 
 .pane-unmute-btn{
@@ -146,18 +147,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
 .tab-btn:hover, .tab-btn.active{background:rgba(255,255,255,0.14)}
 .tab-arrow{padding:12px 18px;color:#ffffff;cursor:pointer;background:transparent;border:none}
 
-/* 3. SECCIÓN IDENTITY */
-.identity-section{
-  padding:120px 48px 90px;
-  max-width:1400px;
-  margin:0 auto;
-}
-.id-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
-.id-title{font-family:var(--font-serif);font-size:clamp(46px,7vw,84px);font-weight:300;font-style:italic;line-height:1.05;margin-bottom:24px;background:var(--gold-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.id-statement{font-family:var(--font-serif);font-size:clamp(20px,2.4vw,28px);font-style:italic;line-height:1.6;color:#f4f4f5;margin-bottom:24px;max-width:1050px}
-.id-text{font-family:var(--font-serif);font-size:17px;font-style:italic;line-height:1.9;color:var(--gray-light);margin-bottom:36px;max-width:980px}
-
-/* BOTONES VISIBLES, RELIEVE Y BRILLO */
+/* BOTONES VISIBLES CON MÁXIMO RELIEVE */
 .btn-ali-champagne{
   background: linear-gradient(135deg, rgba(245, 215, 127, 0.42) 0%, rgba(197, 155, 39, 0.65) 100%);
   color:#ffffff !important;
@@ -185,7 +175,18 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   box-shadow:0 12px 35px rgba(245, 215, 127, 0.75), inset 0 0 25px rgba(255,255,255,0.5);
 }
 
-/* 4. SERPIENTE DIVERGENTE */
+/* 3. SECCIÓN IDENTITY */
+.identity-section{
+  padding:120px 48px 90px;
+  max-width:1400px;
+  margin:0 auto;
+}
+.id-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.id-title{font-family:var(--font-serif);font-size:clamp(46px,7vw,84px);font-weight:300;font-style:italic;line-height:1.05;margin-bottom:24px;background:var(--gold-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.id-statement{font-family:var(--font-serif);font-size:clamp(20px,2.4vw,28px);font-style:italic;line-height:1.6;color:#f4f4f5;margin-bottom:24px;max-width:1050px}
+.id-text{font-family:var(--font-serif);font-size:17px;font-style:italic;line-height:1.9;color:var(--gray-light);margin-bottom:36px;max-width:980px}
+
+/* 4. SERPIENTE HORIZONTAL DIVERGENTE (CRUZADA BIDIRECCIONAL) */
 .snake-universe{
   background:#050508;
   padding:80px 0;
@@ -193,21 +194,9 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   border-bottom:1px solid var(--border-subtle);
   overflow:hidden;
 }
-.snake-header{
-  text-align:center;
-  margin-bottom:40px;
-  padding:0 24px;
-}
-.snake-track-container{
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-}
-.snake-row{
-  display:flex;
-  gap:20px;
-  width:max-content;
-}
+.snake-header{text-align:center;margin-bottom:40px;padding:0 24px}
+.snake-track-container{display:flex;flex-direction:column;gap:20px}
+.snake-row{display:flex;gap:20px;width:max-content}
 .snake-left{animation:scrollLeftAnim 38s linear infinite;}
 .snake-right{animation:scrollRightAnim 38s linear infinite;}
 .snake-universe:hover .snake-row{animation-play-state:paused;}
@@ -244,209 +233,124 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
 .snake-cat{font-size:10px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
 .snake-name{font-family:var(--font-serif);font-size:17px;font-style:italic;color:#fff;line-height:1.3;margin-bottom:12px}
 
-/* 5. NUEVA SECCIÓN: CURSOS & MENTORÍAS VIP (DE LA AGUJA A LA MANSIÓN ACADEMY) */
+/* 5. SERPIENTE VERTICAL CONTINUA CON FOTOS GIGANTES (STICKY STREAM) */
+.vertical-snake-section{
+  border-top:1px solid var(--border-subtle);
+  background:#020204;
+}
+.editorial-story{border-top:1px solid var(--border-subtle);position:relative}
+.story-container{display:grid;grid-template-columns:1fr 1.2fr;min-height:100vh}
+.story-text-pane{padding:120px 60px;position:sticky;top:76px;height:calc(100vh - 76px);display:flex;flex-direction:column;justify-content:center}
+.story-num{font-size:11px;font-weight:700;letter-spacing:0.34em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.story-title{font-family:var(--font-serif);font-size:clamp(32px,3.8vw,52px);font-weight:400;font-style:italic;line-height:1.15;margin-bottom:20px;color:#ffffff}
+.story-desc{font-family:var(--font-serif);font-size:16px;font-style:italic;line-height:1.85;color:var(--gray-light);margin-bottom:34px;max-width:540px}
+
+.story-media-stream{display:flex;flex-direction:column;gap:2px;background:rgba(230,202,101,0.15)}
+.stream-img-box{width:100%;height:100vh;position:relative;overflow:hidden;background:#090614}
+.stream-img-box img{width:100%;height:100%;object-fit:cover;opacity:0.92}
+.stream-img-box:hover img{transform:scale(1.05);opacity:1}
+.stream-tag{position:absolute;bottom:30px;left:30px;background:rgba(0,0,0,0.85);border:1px solid var(--border-subtle);color:var(--gold-light);font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;padding:8px 20px;border-radius:20px;backdrop-filter:blur(10px)}
+
+/* 6. HOLOGRAM ATELIER 3D INSPECTOR */
+.atelier-inspector{
+  background:radial-gradient(circle at 70% 30%, #150d28 0%, #030206 70%);
+  padding:120px 48px;
+  border-top:1px solid rgba(230,202,101,0.25);
+  border-bottom:1px solid rgba(230,202,101,0.25);
+}
+.atelier-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:center}
+.atelier-display{position:relative;height:600px;background:#08060e;border:1px solid rgba(230,202,101,0.3);border-radius:8px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,0.9), inset 0 0 40px rgba(230,202,101,0.1)}
+.atelier-display img{width:100%;height:100%;object-fit:cover;transition:all .5s cubic-bezier(0.16, 1, 0.3, 1)}
+.atelier-tag-float{position:absolute;top:24px;left:24px;background:rgba(5,3,10,0.85);border:1px solid var(--border-subtle);color:var(--gold-light);font-size:11px;font-weight:600;letter-spacing:0.2em;padding:8px 18px;border-radius:20px;backdrop-filter:blur(8px)}
+.atelier-nav{display:flex;flex-direction:column;gap:18px}
+.atelier-item-btn{background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);padding:22px 26px;border-radius:6px;text-align:left;cursor:pointer;transition:all .3s ease;display:flex;justify-content:space-between;align-items:center}
+.atelier-item-btn:hover, .atelier-item-btn.active{background:rgba(230,202,101,0.18);border-color:var(--gold);transform:translateX(8px);box-shadow:0 10px 25px rgba(0,0,0,0.5)}
+.btn-title{font-family:var(--font-serif);font-size:19px;font-style:italic;color:#fff;margin-bottom:4px;}
+.btn-sub{font-size:11px;color:var(--gray-dim);letter-spacing:0.1em;text-transform:uppercase;}
+
+/* 7. CINEMATOGRAFÍA & VIDEOS DE ALTA DEFINICIÓN */
+.video-cinema-section{
+  padding:120px 48px;
+  background:#06040a;
+  border-top:1px solid var(--border-subtle);
+}
+.cinema-grid{
+  max-width:1400px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+}
+.cinema-card{
+  position:relative;
+  height:480px;
+  border-radius:8px;
+  overflow:hidden;
+  border:1px solid var(--border-subtle);
+  background:#000;
+  box-shadow:0 20px 45px rgba(0,0,0,0.9);
+}
+.cinema-card:hover video{transform:scale(1.03)}
+.cinema-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,0.92) 20%, transparent 60%);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:32px;
+}
+
+/* 8. ACADEMY & CURSOS */
 .academy-section{
   background:radial-gradient(circle at 30% 20%, #150a28 0%, #030206 75%);
   padding:130px 48px;
   border-top:1px solid rgba(245, 215, 127, 0.3);
   border-bottom:1px solid rgba(245, 215, 127, 0.3);
 }
-.academy-header{
-  text-align:center;
-  max-width:900px;
-  margin:0 auto 70px;
-}
-.academy-grid{
-  max-width:1400px;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));
-  gap:30px;
-}
-.course-card{
-  background:rgba(12, 10, 20, 0.85);
-  border:1px solid rgba(245, 215, 127, 0.3);
-  border-radius:10px;
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  transition:all .4s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow:0 15px 35px rgba(0,0,0,0.8);
-}
-.course-card:hover{
-  transform:translateY(-8px);
-  border-color:var(--gold);
-  box-shadow:0 25px 50px rgba(0,0,0,0.95), 0 0 30px rgba(245, 215, 127, 0.25);
-}
-.course-img-wrap{
-  height:240px;
-  position:relative;
-  overflow:hidden;
-}
-.course-badge{
-  position:absolute;
-  top:16px;
-  left:16px;
-  background:rgba(5,3,10,0.9);
-  border:1px solid var(--gold);
-  color:var(--gold-light);
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:0.2em;
-  padding:6px 14px;
-  border-radius:20px;
-  backdrop-filter:blur(8px);
-}
-.course-content{
-  padding:32px;
-  display:flex;
-  flex-direction:column;
-  flex:1;
-}
-.course-topic{
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:0.26em;
-  text-transform:uppercase;
-  color:var(--gold);
-  margin-bottom:8px;
-}
-.course-title{
-  font-family:var(--font-serif);
-  font-size:24px;
-  font-style:italic;
-  color:#fff;
-  line-height:1.25;
-  margin-bottom:14px;
-}
-.course-desc{
-  font-family:var(--font-serif);
-  font-size:15px;
-  font-style:italic;
-  color:var(--gray-light);
-  line-height:1.75;
-  margin-bottom:24px;
-}
-.course-features{
-  list-style:none;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  margin-bottom:28px;
-  padding-top:16px;
-  border-top:1px solid rgba(255,255,255,0.08);
-}
-.course-features li{
-  font-size:12px;
-  color:#e4e4e7;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
+.academy-header{text-align:center;max-width:900px;margin:0 auto 70px}
+.academy-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));gap:30px}
+.course-card{background:rgba(12, 10, 20, 0.85);border:1px solid rgba(245, 215, 127, 0.3);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:all .4s cubic-bezier(0.16, 1, 0.3, 1);box-shadow:0 15px 35px rgba(0,0,0,0.8)}
+.course-card:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 25px 50px rgba(0,0,0,0.95), 0 0 30px rgba(245, 215, 127, 0.25)}
+.course-img-wrap{height:240px;position:relative;overflow:hidden}
+.course-badge{position:absolute;top:16px;left:16px;background:rgba(5,3,10,0.9);border:1px solid var(--gold);color:var(--gold-light);font-size:10px;font-weight:700;letter-spacing:0.2em;padding:6px 14px;border-radius:20px;backdrop-filter:blur(8px)}
+.course-content{padding:32px;display:flex;flex-direction:column;flex:1}
+.course-topic{font-size:11px;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.course-title{font-family:var(--font-serif);font-size:24px;font-style:italic;color:#fff;line-height:1.25;margin-bottom:14px}
+.course-desc{font-family:var(--font-serif);font-size:15px;font-style:italic;color:var(--gray-light);line-height:1.75;margin-bottom:24px}
+.course-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08)}
+.course-features li{font-size:12px;color:#e4e4e7;display:flex;align-items:center;gap:8px}
 .course-features li span{color:var(--gold);}
 
-/* 6. NUEVA SECCIÓN: PRODUCTOS ACTIVOS DEL ECOSISTEMA REMEMBER LUXURY */
-.active-products-section{
-  padding:120px 48px;
-  max-width:1500px;
-  margin:0 auto;
-}
-.active-prod-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
-  gap:26px;
-}
-.prod-active-card{
-  background:#0c0a14;
-  border:1px solid var(--border-subtle);
-  border-radius:6px;
-  overflow:hidden;
-  transition:all .35s ease;
-  display:flex;
-  flex-direction:column;
-}
-.prod-active-card:hover{
-  transform:translateY(-8px);
-  border-color:rgba(245, 215, 127, 0.8);
-  box-shadow:0 20px 40px rgba(0,0,0,0.9);
-}
-.prod-active-img{
-  aspect-ratio:4/3;
-  overflow:hidden;
-  position:relative;
-}
-.prod-active-info{
-  padding:26px;
-  display:flex;
-  flex-direction:column;
-  flex:1;
-}
+/* 9. PRODUCTOS FÍSICOS ACTIVOS EN STOCK */
+.active-products-section{padding:120px 48px;max-width:1500px;margin:0 auto}
+.active-prod-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:26px}
+.prod-active-card{background:#0c0a14;border:1px solid var(--border-subtle);border-radius:6px;overflow:hidden;transition:all .35s ease;display:flex;flex-direction:column}
+.prod-active-card:hover{transform:translateY(-8px);border-color:rgba(245, 215, 127, 0.8);box-shadow:0 20px 40px rgba(0,0,0,0.9)}
+.prod-active-img{aspect-ratio:4/3;overflow:hidden;position:relative}
+.prod-active-info{padding:26px;display:flex;flex-direction:column;flex:1}
 
-/* 7. MANIQUÍ 360° GIRATORIO */
-.mannequin-360-section{
-  background:radial-gradient(ellipse at center, #190c33 0%, #030206 80%);
-  padding:140px 48px;
-  border-top:1px solid rgba(245, 215, 127, 0.35);
-  border-bottom:1px solid rgba(245, 215, 127, 0.35);
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-}
-.mannequin-stage-wrap{
-  max-width:1100px;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:60px;
-  align-items:center;
-}
-.podium-container{
-  position:relative;
-  width:100%;
-  aspect-ratio:3/4;
-  max-height:600px;
-  margin:0 auto;
-  perspective:1000px;
-}
-.podium-base{
-  position:absolute;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:85%;
-  height:30px;
-  background:radial-gradient(ellipse at center, #f5d77f 0%, rgba(245, 215, 127, 0) 70%);
-  filter:blur(8px);
-  border-radius:50%;
-  animation:podiumGlow 3s infinite alternate ease-in-out;
-}
+/* 10. MANIQUÍ 360° GIRATORIO */
+.mannequin-360-section{background:radial-gradient(ellipse at center, #190c33 0%, #030206 80%);padding:140px 48px;border-top:1px solid rgba(245, 215, 127, 0.35);border-bottom:1px solid rgba(245, 215, 127, 0.35);text-align:center;position:relative;overflow:hidden}
+.mannequin-stage-wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.podium-container{position:relative;width:100%;aspect-ratio:3/4;max-height:600px;margin:0 auto;perspective:1000px}
+.podium-base{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:85%;height:30px;background:radial-gradient(ellipse at center, #f5d77f 0%, rgba(245, 215, 127, 0) 70%);filter:blur(8px);border-radius:50%;animation:podiumGlow 3s infinite alternate ease-in-out}
 @keyframes podiumGlow{0%{opacity:0.4;transform:translateX(-50%) scale(0.9);}100%{opacity:1;transform:translateX(-50%) scale(1.1);}}
+.mannequin-turntable{width:100%;height:100%;position:relative;border:1px solid rgba(245, 215, 127, 0.4);border-radius:12px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,0.95), 0 0 40px rgba(245, 215, 127, 0.2);background:#090614}
+.mannequin-turntable img{width:100%;height:100%;object-fit:cover;animation:turntableSpin 14s infinite ease-in-out alternate}
+@keyframes turntableSpin{0%{transform:scale(1) rotate(0deg);}50%{transform:scale(1.08) rotate(1.5deg);}100%{transform:scale(1) rotate(-1.5deg);}}
+.mannequin-info-box{text-align:left;display:flex;flex-direction:column;gap:20px}
+.exotic-badge{display:inline-block;background:rgba(245, 215, 127, 0.15);border:1px solid var(--gold);color:var(--gold-light);font-size:11px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;padding:8px 18px;border-radius:20px;width:max-content}
+.exotic-title{font-family:var(--font-serif);font-size:clamp(32px, 4vw, 48px);font-style:italic;color:#fff;line-height:1.15}
+.exotic-desc{font-family:var(--font-serif);font-size:17px;font-style:italic;line-height:1.85;color:var(--gray-light)}
 
-.mannequin-turntable{
-  width:100%;
-  height:100%;
-  position:relative;
-  border:1px solid rgba(245, 215, 127, 0.4);
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 25px 60px rgba(0,0,0,0.95), 0 0 40px rgba(245, 215, 127, 0.2);
-  background:#090614;
-}
-.mannequin-turntable img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  animation:turntableSpin 14s infinite ease-in-out alternate;
-}
-@keyframes turntableSpin{
-  0%{transform:scale(1) rotate(0deg);}
-  50%{transform:scale(1.08) rotate(1.5deg);}
-  100%{transform:scale(1) rotate(-1.5deg);}
-}
-.mannequin-info-box{text-align:left;display:flex;flex-direction:column;gap:20px;}
-.exotic-badge{display:inline-block;background:rgba(245, 215, 127, 0.15);border:1px solid var(--gold);color:var(--gold-light);font-size:11px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;padding:8px 18px;border-radius:20px;width:max-content;}
-.exotic-title{font-family:var(--font-serif);font-size:clamp(32px, 4vw, 48px);font-style:italic;color:#fff;line-height:1.15;}
-.exotic-desc{font-family:var(--font-serif);font-size:17px;font-style:italic;line-height:1.85;color:var(--gray-light);}
+/* 11. SIMULADOR FINANCIERO DE LA AGUJA A LA MANSIÓN */
+.vision-calculator{background:radial-gradient(ellipse at center, #150d2a 0%, #050308 100%);border-top:1px solid rgba(230,202,101,0.3);border-bottom:1px solid rgba(230,202,101,0.3);padding:120px 48px;text-align:center}
+.calc-inner{max-width:900px;margin:0 auto}
+.calc-slider-wrap{margin:40px 0;display:flex;flex-direction:column;align-items:center;gap:20px}
+.calc-range{width:100%;max-width:600px;accent-color:var(--gold);height:6px;cursor:pointer}
+.calc-result-box{background:rgba(10,8,20,0.85);border:1px solid rgba(230,202,101,0.4);padding:36px;border-radius:12px;backdrop-filter:blur(20px);margin-top:30px}
+.calc-estate-title{font-family:var(--font-serif);font-size:32px;font-style:italic;color:var(--gold-light);margin-bottom:10px}
 
 /* FOOTER */
 .site-footer{background:#040208;border-top:1px solid var(--border-subtle);padding:90px 48px 50px;color:var(--gray-dim)}
@@ -457,6 +361,9 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
 .foot-links a:hover{color:var(--gold-light);transform:translateX(3px)}
 
 @media(max-width:1100px){
+  .story-container{grid-template-columns:1fr}
+  .story-text-pane{position:static;height:auto;padding:60px 24px}
+  .cinema-grid{grid-template-columns:1fr}
   .academy-grid{grid-template-columns:1fr}
   .mannequin-stage-wrap{grid-template-columns:1fr}
   .dg-header-wrap{padding:0 20px}
@@ -499,8 +406,9 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   <div class="runway-tabs-bar">
     <button class="tab-btn active" onclick="scrollToSection('identity')">Identity</button>
     <button class="tab-btn" onclick="scrollToSection('snake')">Serpiente</button>
+    <button class="tab-btn" onclick="scrollToSection('vertical-snake')">Pasarela Vertical</button>
+    <button class="tab-btn" onclick="scrollToSection('cinema')">Cinematografía</button>
     <button class="tab-btn" onclick="scrollToSection('cursos')">Cursos VIP</button>
-    <button class="tab-btn" onclick="scrollToSection('activos')">Productos Activos</button>
     <button class="tab-btn" onclick="scrollToSection('mannequin')">Maniquí 360°</button>
     <button class="tab-arrow">❯</button>
   </div>
@@ -508,21 +416,21 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
 
 <!-- 3. SECCIÓN IDENTITY -->
 <section class="identity-section" id="identity">
-  <div class="id-eyebrow">DE LA AGUJA A LA MANSIÓN &middot; ECOSISTEMA COMPLETO</div>
-  <h1 class="id-title">IDENTITY &amp; MAESTRÍA</h1>
+  <div class="id-eyebrow">DE LA AGUJA A LA MANSIÓN &middot; ECOSISTEMA INTEGRAL</div>
+  <h1 class="id-title">IDENTITY &amp; OPULENCIA</h1>
   <div class="id-statement">
-    El verdadero lujo no solo se viste, se aprende y se conquista. De la Aguja a la Mansión.
+    Identity is a clear statement: identity is the ultimate luxury. De la Aguja a la Mansión.
   </div>
   <p class="id-text">
-    Accede a nuestros productos físicos exclusivos de pasarela y fórmate con nuestros programas de alta costura, finanzas de lujo y visión empresarial para alcanzar tu propia mansión.
+    La fusión definitiva de alta costura, precisión de tourbillones suizos, velocidad de hypercars V12, arquitectura de mansiones frente al mar y la academia de formación de élite.
   </p>
   <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center;">
-    <a href="#cursos" class="btn-ali-champagne">Explorar Cursos &amp; Mentorías VIP ↓</a>
-    <a href="#activos" class="btn-ali-champagne">Ver Productos Físicos Activos ↗</a>
+    <a href="#snake" class="btn-ali-champagne">Explorar Serpiente Dual ↓</a>
+    <a href="#vertical-snake" class="btn-ali-champagne">Ver Pasarela Gigante Vertical ↗</a>
   </div>
 </section>
 
-<!-- 4. SERPIENTE BIDIRECCIONAL CRUZADA -->
+<!-- 4. SERPIENTE HORIZONTAL DIVERGENTE (CRUZADA EN 2 SENTIDOS) -->
 <section class="snake-universe" id="snake">
   <div class="snake-header">
     <div style="font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">SERPIENTE DIVERGENTE DE PRODUCTOS</div>
@@ -552,7 +460,177 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   </div>
 </section>
 
-<!-- 5. NUEVA SECCIÓN: CURSOS & ACADEMIA VIP -->
+<!-- 5. SERPIENTE VERTICAL CONTINUA CON FOTOS GIGANTES (STICKY STREAM MULTI-FOTOS) -->
+<div class="vertical-snake-section" id="vertical-snake">
+  
+  <!-- CAPÍTULO I: SASTRERÍA -->
+  <section class="editorial-story" id="tailoring">
+    <div class="story-container">
+      <div class="story-text-pane">
+        <div class="story-num">CAPÍTULO I &middot; ALTA SASTRERÍA</div>
+        <h2 class="story-title">Tailoring: rules and exception</h2>
+        <p class="story-desc">El rigor de la sastrería italiana: cortes precisos, rayas tiza en lana virgen y la doble botonadura invertida que redefine la silueta de alta costura.</p>
+        <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Comprar en AliExpress ↗</a></div>
+      </div>
+      <div class="story-media-stream">
+        <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&auto=format&fit=crop" alt="Tailoring 1"><span class="stream-tag">Look 01 &middot; Pinstripe Double Breasted</span></div>
+        <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1200&auto=format&fit=crop" alt="Tailoring 2"><span class="stream-tag">Look 02 &middot; Sastrería de Terciopelo</span></div>
+        <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1200&auto=format&fit=crop" alt="Tailoring 3"><span class="stream-tag">Look 03 &middot; Traje Masculino &amp; Corbata</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO II: RELOJERÍA TOURBILLON -->
+  <section class="editorial-story" id="horology">
+    <div class="story-container">
+      <div class="story-text-pane">
+        <div class="story-num">CAPÍTULO II &middot; ALTA RELOJERÍA SUIZA</div>
+        <h2 class="story-title">Master Tourbillon Skeleton &amp; Oro Rosa</h2>
+        <p class="story-desc">La cúspide de la micromecánica: calibre esqueleto con Tourbillon flotante, oro rosa de 18 quilates, cristal de zafiro y 72h de reserva de marcha.</p>
+        <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Comprar Reloj en AliExpress Hub ↗</a></div>
+      </div>
+      <div class="story-media-stream">
+        <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1200&auto=format&fit=crop" alt="Watch Skeleton"><span class="stream-tag">Calibre Tourbillon Esqueleto &middot; Oro 18K</span></div>
+        <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=1200&auto=format&fit=crop" alt="Cronógrafo Suizo"><span class="stream-tag">Cronógrafo Suizo de Precisión</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO III: ALTA JOYERÍA & DIAMANTES -->
+  <section class="editorial-story" id="jewelry">
+    <div class="story-container">
+      <div class="story-text-pane">
+        <div class="story-num">CAPÍTULO III &middot; ALTA JOYERÍA &amp; DIAMANTES</div>
+        <h2 class="story-title">Gargantilla Riviera &amp; Diamantes Flawless</h2>
+        <p class="story-desc">Diamantes talla esmeralda y brillante engastados en platino 950. Piedras seleccionadas en color D y pureza absoluta.</p>
+        <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Comprar Joyas en AliExpress ↗</a></div>
+      </div>
+      <div class="story-media-stream">
+        <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1200&auto=format&fit=crop" alt="Diamantes Riviera"><span class="stream-tag">Collar Riviera en Diamantes &amp; Platino</span></div>
+        <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=1200&auto=format&fit=crop" alt="Pendientes Oro Blanco"><span class="stream-tag">Pendientes Cascada en Oro Blanco</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO IV: HYPERCARS -->
+  <section class="editorial-story" id="hypercars">
+    <div class="story-container">
+      <div class="story-text-pane">
+        <div class="story-num">CAPÍTULO IV &middot; HYPERCARS V12</div>
+        <h2 class="story-title">Scuderia Monoplaza V12 &middot; Fibra de Carbono</h2>
+        <p class="story-desc">Motor V12 atmosférico de 850 CV, monocasco de carbono forjado e interiores cosidos a mano en piel Alcántara e hilo de oro.</p>
+        <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Ver Accesorios Motor en AliExpress ↗</a></div>
+      </div>
+      <div class="story-media-stream">
+        <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&auto=format&fit=crop" alt="Hypercar Stealth"><span class="stream-tag">Hypercar V12 &middot; Carbono Forjado</span></div>
+        <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=1200&auto=format&fit=crop" alt="Cockpit Alcántara"><span class="stream-tag">Cockpit Alcántara &amp; Oro</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO V: MANSIONES -->
+  <section class="editorial-story" id="estates">
+    <div class="story-container">
+      <div class="story-text-pane">
+        <div class="story-num">CAPÍTULO V &middot; ARQUITECTURA &amp; MANSIONES</div>
+        <h2 class="story-title">Villa Paradiso &middot; Lago de Como</h2>
+        <p class="story-desc">La culminación del viaje: "De la Aguja a la Mansión". Propiedades frente al mar con helipuerto privado y piscina infinita.</p>
+        <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Comprar Decoración de Mansión ↗</a></div>
+      </div>
+      <div class="story-media-stream">
+        <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&auto=format&fit=crop" alt="Mansión Lago Como"><span class="stream-tag">Villa Paradiso &middot; Helipuerto &amp; Piscina</span></div>
+        <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&auto=format&fit=crop" alt="Salón Mármol"><span class="stream-tag">Salón Principal Mármol de Carrara</span></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- 6. THE HOLOGRAM ATELIER 3D INSPECTOR -->
+<section class="atelier-inspector" id="atelier">
+  <div class="atelier-grid">
+    <div class="atelier-display">
+      <img id="atelierMainImg" src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1200&auto=format&fit=crop" alt="Atelier Main Focus">
+      <span class="atelier-tag-float" id="atelierTag">INSPECTOR EN VIVO &middot; CALIBRE TOURBILLON SKELETON</span>
+    </div>
+
+    <div class="atelier-nav">
+      <div style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">INSPECTOR INTERACTIVO ATELIER VIP</div>
+      <h2 style="font-family:var(--font-serif);font-size:36px;font-style:italic;color:#fff;margin-bottom:20px;">Toca para Inspeccionar la Obra</h2>
+
+      <div class="atelier-item-btn active" onclick="setAtelier('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1200&auto=format&fit=crop', 'ALTA RELOJERÍA · TOURBILLON EN ORO ROSA 18K', this)">
+        <div>
+          <div class="btn-title">Tourbillon Skeleton Oro Rosa 18K</div>
+          <div class="btn-sub">72h Reserva de Marcha &middot; Zafiro Antirreflejo Doble</div>
+        </div>
+      </div>
+
+      <div class="atelier-item-btn" onclick="setAtelier('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&auto=format&fit=crop', 'HYPERCAR V12 · MONOCASCO FIBRA DE CARBONO FORJADA', this)">
+        <div>
+          <div class="btn-title">Scuderia Monoplaza V12 Stealth</div>
+          <div class="btn-sub">850 Caballos &middot; 0-100 en 2.6s &middot; Alcántara Oro</div>
+        </div>
+      </div>
+
+      <div class="atelier-item-btn" onclick="setAtelier('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1200&auto=format&fit=crop', 'ALTA JOYERÍA · DIAMANTES COLOR D FLAWLESS EN PLATINO', this)">
+        <div>
+          <div class="btn-title">Gargantilla Riviera Imperial</div>
+          <div class="btn-sub">Diamantes Talla Esmeralda &middot; Platino 950</div>
+        </div>
+      </div>
+
+      <div class="atelier-item-btn" onclick="setAtelier('https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&auto=format&fit=crop', 'ARQUITECTURA & MANSIONES · VILLA PARADISO LAGO DE COMO', this)">
+        <div>
+          <div class="btn-title">Villa Paradiso &middot; Lago de Como</div>
+          <div class="btn-sub">Helipuerto Privado &middot; Piscina Infinita Acantilado</div>
+        </div>
+      </div>
+
+      <div style="margin-top:14px;">
+        <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Comprar Obra Seleccionada en AliExpress ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. CINEMATOGRAFÍA & VIDEOS DE PASARELA EN VIVO -->
+<section class="video-cinema-section" id="cinema">
+  <div style="text-align:center;max-width:900px;margin:0 auto 60px;">
+    <div style="font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">CINEMATOGRAFÍA &amp; PASARELA VIVA</div>
+    <h2 style="font-family:var(--font-serif);font-size:42px;font-style:italic;color:#fff;">Desfiles &amp; Producción en Video 4K</h2>
+    <p style="font-family:var(--font-serif);font-size:16px;font-style:italic;color:var(--gray-light);">
+      Siente la energía de la pasarela y la maestría artesanal a través de nuestras producciones audiovisuales exclusivas.
+    </p>
+  </div>
+
+  <div class="cinema-grid">
+    <!-- VIDEO 1: PASARELA ALTA COSTURA -->
+    <div class="cinema-card">
+      <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&auto=format&fit=crop">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-fashion-model-in-a-black-outfit-walking-down-the-runway-41228-large.mp4" type="video/mp4">
+      </video>
+      <div class="cinema-overlay">
+        <div style="font-size:10px;font-weight:700;color:var(--gold);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:6px;">VIDEO OFICIAL &middot; PASARELA FW 2026</div>
+        <h3 style="font-family:var(--font-serif);font-size:24px;font-style:italic;color:#fff;margin-bottom:14px;">Women's Fall/Winter Identity Runway</h3>
+        <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:10px 22px;font-size:11px;">Comprar Look del Video ↗</a></div>
+      </div>
+    </div>
+
+    <!-- VIDEO 2: HYPERCAR & PRECISIÓN MECÁNICA -->
+    <div class="cinema-card">
+      <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&auto=format&fit=crop">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-luxury-sports-car-driving-through-the-city-at-night-42517-large.mp4" type="video/mp4">
+      </video>
+      <div class="cinema-overlay">
+        <div style="font-size:10px;font-weight:700;color:var(--gold);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:6px;">HYPERCAR V12 &middot; NOCHE EN MILÁN</div>
+        <h3 style="font-family:var(--font-serif);font-size:24px;font-style:italic;color:#fff;margin-bottom:14px;">Ingeniería V12 &amp; Fibra de Carbono</h3>
+        <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:10px 22px;font-size:11px;">Ver Accesorios Motor ↗</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. ACADEMY & CURSOS VIP -->
 <section class="academy-section" id="cursos">
   <div class="academy-header">
     <div style="font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">MANSIÓN DE LUXE ACADEMY</div>
@@ -563,8 +641,6 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   </div>
 
   <div class="academy-grid">
-    
-    <!-- CURSO 1: DE LA AGUJA A LA PASARELA -->
     <div class="course-card">
       <div class="course-img-wrap">
         <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&auto=format&fit=crop" alt="Curso Alta Costura">
@@ -583,7 +659,6 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
       </div>
     </div>
 
-    <!-- CURSO 2: E-COMMERCE & DROPSHIPPING DE LUJO -->
     <div class="course-card">
       <div class="course-img-wrap">
         <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop" alt="Curso E-commerce Lujo">
@@ -602,7 +677,6 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
       </div>
     </div>
 
-    <!-- CURSO 3: MENTALIDAD & BIENES RAÍCES (A LA MANSIÓN) -->
     <div class="course-card">
       <div class="course-img-wrap">
         <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop" alt="Curso Inversión Inmobiliaria">
@@ -620,11 +694,10 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
         <a href="pago-premium.html" class="btn-ali-champagne" style="justify-content:center;">Inscribirme al Curso ↗</a>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- 6. SECCIÓN: PRODUCTOS FÍSICOS ACTIVOS DEL CATÁLOGO -->
+<!-- 9. PRODUCTOS FÍSICOS ACTIVOS -->
 <section class="active-products-section" id="activos">
   <div style="text-align:center;max-width:850px;margin:0 auto 60px;">
     <div style="font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">CATÁLOGO EN VIVO</div>
@@ -633,12 +706,8 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   </div>
 
   <div class="active-prod-grid">
-    
-    <!-- PRODUCTO ACTIVO 1 -->
     <div class="prod-active-card">
-      <div class="prod-active-img">
-        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=700&auto=format&fit=crop" alt="Bolso Mini Grandma">
-      </div>
+      <div class="prod-active-img"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=700&auto=format&fit=crop" alt="Bolso Mini Grandma"></div>
       <div class="prod-active-info">
         <div style="font-size:10px;font-weight:700;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;">MARROQUINERÍA ITALIANA</div>
         <h4 style="font-family:var(--font-serif);font-size:18px;font-style:italic;color:#fff;margin-bottom:8px;">Mini Grandma Handbag en Piel Nappa</h4>
@@ -647,11 +716,8 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
       </div>
     </div>
 
-    <!-- PRODUCTO ACTIVO 2 -->
     <div class="prod-active-card">
-      <div class="prod-active-img">
-        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=700&auto=format&fit=crop" alt="Zapatos Slingback">
-      </div>
+      <div class="prod-active-img"><img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=700&auto=format&fit=crop" alt="Zapatos Slingback"></div>
       <div class="prod-active-info">
         <div style="font-size:10px;font-weight:700;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;">CALZADO DE ALTA GAMA</div>
         <h4 style="font-family:var(--font-serif);font-size:18px;font-style:italic;color:#fff;margin-bottom:8px;">Zapatos Slingback en Piel de Becerro</h4>
@@ -660,11 +726,8 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
       </div>
     </div>
 
-    <!-- PRODUCTO ACTIVO 3 -->
     <div class="prod-active-card">
-      <div class="prod-active-img">
-        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=700&auto=format&fit=crop" alt="Alta Cosmética Skincare">
-      </div>
+      <div class="prod-active-img"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=700&auto=format&fit=crop" alt="Alta Cosmética Skincare"></div>
       <div class="prod-active-info">
         <div style="font-size:10px;font-weight:700;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;">ALTA COSMÉTICA MILANO</div>
         <h4 style="font-family:var(--font-serif);font-size:18px;font-style:italic;color:#fff;margin-bottom:8px;">Set Ever-Youth Skincare Ritual</h4>
@@ -672,11 +735,10 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
         <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="justify-content:center;padding:12px 20px;">Comprar en AliExpress ↗</a>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- 7. MANIQUÍ 360° GIRATORIO -->
+<!-- 10. MANIQUÍ 360° GIRATORIO -->
 <section class="mannequin-360-section" id="mannequin">
   <div class="mannequin-stage-wrap">
     <div class="podium-container">
@@ -711,16 +773,47 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   </div>
 </section>
 
+<!-- 11. SIMULADOR DE VISIÓN FINANCIERA -->
+<section class="vision-calculator">
+  <div class="calc-inner">
+    <div style="font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">SIMULADOR DE VISIÓN FINANCIERA</div>
+    <h2 style="font-family:var(--font-serif);font-size:42px;font-style:italic;color:#fff;margin-bottom:18px;">¿Cuál es tu siguiente Mansión?</h2>
+    <p style="font-family:var(--font-serif);font-size:17px;font-style:italic;color:var(--gray-light);">Desliza tu nivel de ambición e inversión para proyectar tu ecosistema de lujo completo:</p>
+    
+    <div class="calc-slider-wrap">
+      <input type="range" min="1" max="5" value="3" class="calc-range" id="ambitionSlider" oninput="updateEstateCalc(this.value)">
+      <div style="display:flex;justify-content:space-between;width:100%;max-width:600px;font-size:11px;color:var(--gray-dim);letter-spacing:0.1em;">
+        <span>1. La Aguja</span>
+        <span>2. Relojería</span>
+        <span>3. Joyas</span>
+        <span>4. Hypercar</span>
+        <span>5. La Mansión</span>
+      </div>
+    </div>
+
+    <div class="calc-result-box" id="calcResult">
+      <div class="calc-estate-title" id="resTitle">Nivel 3: Joyas Imperiales &amp; Suite Presidencial</div>
+      <p style="font-family:var(--font-serif);font-size:16px;font-style:italic;color:var(--gray-light);" id="resDesc">
+        Colección de diamantes solitarios, suite con vistas a la Costa Azul y vestidor a medida de alta costura.
+      </p>
+      <div style="margin-top:20px;">
+        <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Equipar este Estilo en AliExpress ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-cols">
     <div>
       <div class="foot-col-title">DE LA AGUJA A LA MANSIÓN</div>
       <ul class="foot-links">
+        <li><a href="#tailoring">Alta Costura &middot; La Aguja</a></li>
+        <li><a href="#horology">Relojería Suiza Tourbillon</a></li>
+        <li><a href="#cinema">Cinematografía &amp; Videos 4K</a></li>
         <li><a href="#cursos">Cursos &amp; Academia VIP</a></li>
-        <li><a href="#activos">Productos en Stock Inmediato</a></li>
-        <li><a href="#mannequin">Maniquí 360° Giratorio</a></li>
-        <li><a href="#snake">Serpiente Divergente</a></li>
+        <li><a href="#estates">Mansiones Lago de Como</a></li>
       </ul>
     </div>
     <div>
@@ -748,7 +841,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
       </ul>
     </div>
   </div>
-  <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#777;max-width:1400px;margin:0 auto;flex-wrap:wrap;gap:12px;">
+  <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#777;max-width:1400px;margin:0 auto;flex-wrap:gap:12px;">
     <span>&copy; 2026 MANSIÓN DE LUXE &middot; De la Aguja a la Mansión. Conexión Directa Proveedores Oficiales.</span>
     <span>VAT NUMBER 09297890155 – SIAE LICENCE N. 637/1/763</span>
   </div>
@@ -774,14 +867,27 @@ function toggleAudio(){
   }
 }
 
+function setAtelier(imgSrc, tagText, btnElement){
+  const mainImg = document.getElementById('atelierMainImg');
+  const tag = document.getElementById('atelierTag');
+  mainImg.style.opacity = '0.3';
+  mainImg.style.transform = 'scale(0.96)';
+  setTimeout(() => {
+    mainImg.src = imgSrc;
+    tag.textContent = 'INSPECTOR EN VIVO · ' + tagText;
+    mainImg.style.opacity = '1';
+    mainImg.style.transform = 'scale(1)';
+  }, 250);
+  document.querySelectorAll('.atelier-item-btn').forEach(b => b.classList.remove('active'));
+  if(btnElement) btnElement.classList.add('active');
+}
+
 function changeMannequin(imgSrc, title, desc){
   const mImg = document.getElementById('mannequinImg');
   const mTitle = document.getElementById('exoticTitle');
   const mDesc = document.getElementById('exoticDesc');
-
   mImg.style.opacity = '0.2';
   mImg.style.transform = 'scale(0.92) rotate(10deg)';
-
   setTimeout(() => {
     mImg.src = imgSrc;
     mTitle.textContent = title;
@@ -789,6 +895,22 @@ function changeMannequin(imgSrc, title, desc){
     mImg.style.opacity = '1';
     mImg.style.transform = 'scale(1) rotate(0deg)';
   }, 300);
+}
+
+function updateEstateCalc(val){
+  const t = document.getElementById('resTitle');
+  const d = document.getElementById('resDesc');
+  const steps = {
+    "1": { title: "Nivel 1: La Aguja — Alta Sastrería & Vestidos de Pasarela", desc: "Comienza tu legado con prendas exclusivas hechas a mano en seda italiana y encaje Chantilly." },
+    "2": { title: "Nivel 2: Precisión Horológica — Cronógrafos Tourbillon", desc: "El dominio del tiempo con calibres automáticos en oro macizo de 18K y cristal de zafiro." },
+    "3": { title: "Nivel 3: Joyas Imperiales & Diamantes Solitarios", desc: "Gargantillas Riviera y anillos de compromiso de pureza Flawless engastados en platino 950." },
+    "4": { title: "Nivel 4: Hypercar V12 & Garaje de Ensueño", desc: "Monocasco de fibra de carbono forjada, 850 caballos de fuerza y tapicería Alcántara en hilo de oro." },
+    "5": { title: "Nivel 5: La Mansión — Villa Paradiso Lago de Como", desc: "La cima absoluta: propiedad arquitectónica frente al agua con helipuerto, piscina infinita y bodega subterránea." }
+  };
+  if(steps[val]){
+    t.textContent = steps[val].title;
+    d.textContent = steps[val].desc;
+  }
 }
 </script>
 </body>

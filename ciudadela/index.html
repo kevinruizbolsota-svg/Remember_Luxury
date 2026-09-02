@@ -1072,5 +1072,60 @@ function updateMasterCartUI(){
 document.addEventListener('DOMContentLoaded', updateMasterCartUI);
 </script>
 
+
+<script>
+// CONECTAR AUTOMÁTICAMENTE TODOS LOS PRODUCTOS DE LA PÁGINA AL CARRITO MAESTRO
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Escanear cards de productos y añadir botón "Añadir al Carrito"
+  const cards = document.querySelectorAll('.snake-card, .catalog-item-card, .prod-active-card, .course-card, .course-main-card');
+  
+  cards.forEach((card, idx) => {
+    const titleEl = card.querySelector('.snake-name, .cat-name, .prod-title, .course-title, h3, h4');
+    const imgEl = card.querySelector('img');
+    const existingBtn = card.querySelector('a.btn-ali-champagne, a.btn-action-gold');
+    
+    if(titleEl && imgEl && existingBtn){
+      const name = titleEl.textContent.trim();
+      const img = imgEl.src;
+      const link = existingBtn.href;
+      
+      // Determinar proveedor
+      let provider = 'aliexpress';
+      if(link.includes('amazon.')) provider = 'amazon';
+      else if(link.includes('hotmart.')) provider = 'hotmart';
+      else if(link.includes('pago-premium') || name.toLowerCase().includes('curso') || name.toLowerCase().includes('masterclass')) provider = 'hotmart';
+
+      // Precio estimado si no tiene
+      let price = 65000;
+      if(name.toLowerCase().includes('reloj') || name.toLowerCase().includes('tourbillon')) price = 125000;
+      else if(name.toLowerCase().includes('diamante') || name.toLowerCase().includes('oro')) price = 195000;
+      else if(name.toLowerCase().includes('curso') || name.toLowerCase().includes('masterclass')) price = 195000;
+      else if(name.toLowerCase().includes('gafas') || name.toLowerCase().includes('billetera')) price = 75000;
+
+      const prodId = 'prod-auto-' + idx;
+
+      // Crear botón secundario de "Añadir al Carrito"
+      const addBtn = document.createElement('button');
+      addBtn.className = 'btn-add-to-master-cart';
+      addBtn.innerHTML = '🛒 Añadir al Carrito';
+      addBtn.style.cssText = 'width:100%;margin-top:8px;padding:10px 14px;background:rgba(245,215,127,0.15);border:1px solid #f5d77f;color:#f5d77f;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;';
+      
+      addBtn.onmouseover = () => { addBtn.style.background = '#f5d77f'; addBtn.style.color = '#000'; };
+      addBtn.onmouseout = () => { addBtn.style.background = 'rgba(245,215,127,0.15)'; addBtn.style.color = '#f5d77f'; };
+      
+      addBtn.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        addToMasterCart(prodId, name, price, provider, img, link);
+        addBtn.innerHTML = '✓ ¡Añadido!';
+        setTimeout(() => { addBtn.innerHTML = '🛒 Añadir al Carrito'; }, 1200);
+      };
+
+      existingBtn.parentNode.insertBefore(addBtn, existingBtn.nextSibling);
+    }
+  });
+});
+</script>
+
 </body>
 </html>

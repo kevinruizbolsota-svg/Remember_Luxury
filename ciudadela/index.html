@@ -182,29 +182,150 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   box-shadow:0 8px 30px rgba(230, 202, 101, 0.55);
 }
 
-/* 4. CARRUSEL HORIZONTAL INTERACTIVO */
-.carousel-showcase{
-  position:relative;
-  width:100vw;
-  padding:40px 0 60px;
-  background:#07070a;
+/* 4. NUEVA SERPIENTE BIDIRECCIONAL CRUZADA (DUAL INFINITE STREAM) */
+.snake-universe{
+  background:#050508;
+  padding:80px 0;
   border-top:1px solid var(--border-subtle);
   border-bottom:1px solid var(--border-subtle);
   overflow:hidden;
 }
-.carousel-hdr{padding:0 48px 24px;display:flex;justify-content:space-between;align-items:center}
-.carousel-track{display:flex;gap:16px;padding:0 48px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none}
-.carousel-track::-webkit-scrollbar{display:none}
-.slide-card{flex:0 0 340px;height:520px;position:relative;background:#111;overflow:hidden;border:1px solid var(--border-subtle);transition:all .4s ease}
-.slide-card:hover{transform:translateY(-8px);border-color:rgba(230,202,101,0.8);box-shadow:0 15px 35px rgba(0,0,0,0.9)}
-.slide-card img{width:100%;height:100%;object-fit:cover}
-.slide-card:hover img{transform:scale(1.08)}
-.slide-caption{position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.92) 15%, transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:24px}
-.slide-cat{font-size:10px;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
-.slide-name{font-family:var(--font-serif);font-size:17px;font-style:italic;color:#fff;line-height:1.3;margin-bottom:6px}
-.slide-price{font-size:15px;font-weight:600;font-style:italic;color:var(--gold-light);margin-bottom:12px}
+.snake-header{
+  text-align:center;
+  margin-bottom:40px;
+  padding:0 24px;
+}
+.snake-track-container{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+.snake-row{
+  display:flex;
+  gap:20px;
+  width:max-content;
+}
+.snake-left{
+  animation:scrollLeftAnim 38s linear infinite;
+}
+.snake-right{
+  animation:scrollRightAnim 38s linear infinite;
+}
+.snake-universe:hover .snake-row{
+  animation-play-state:paused;
+}
 
-/* 5. SECCIONES SPLIT STICKY SCREEN */
+@keyframes scrollLeftAnim{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-50%);}
+}
+@keyframes scrollRightAnim{
+  0%{transform:translateX(-50%);}
+  100%{transform:translateX(0);}
+}
+
+.snake-card{
+  width:320px;
+  height:460px;
+  position:relative;
+  background:#0c0c10;
+  border:1px solid var(--border-subtle);
+  border-radius:4px;
+  overflow:hidden;
+  flex-shrink:0;
+  transition:all .4s ease;
+}
+.snake-card:hover{
+  transform:scale(1.04) translateY(-6px);
+  border-color:rgba(230,202,101,0.8);
+  box-shadow:0 20px 40px rgba(0,0,0,0.9);
+  z-index:20;
+}
+.snake-card img{width:100%;height:100%;object-fit:cover;}
+.snake-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,0.92) 20%, transparent 65%);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:22px;
+}
+.snake-cat{font-size:10px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.snake-name{font-family:var(--font-serif);font-size:16px;font-style:italic;color:#fff;line-height:1.3;margin-bottom:4px}
+.snake-price{font-size:14px;font-weight:600;font-style:italic;color:var(--gold-light);margin-bottom:10px}
+
+/* 5. NUEVO MÉTODO DE PRESENTACIÓN: THE HOLOGRAM ATELIER 3D INSPECTOR */
+.atelier-inspector{
+  background:radial-gradient(circle at 70% 30%, #150d28 0%, #030206 70%);
+  padding:120px 48px;
+  border-top:1px solid rgba(230,202,101,0.25);
+  border-bottom:1px solid rgba(230,202,101,0.25);
+}
+.atelier-grid{
+  max-width:1400px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:60px;
+  align-items:center;
+}
+.atelier-display{
+  position:relative;
+  height:600px;
+  background:#08060e;
+  border:1px solid rgba(230,202,101,0.3);
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 30px 60px rgba(0,0,0,0.9), inset 0 0 40px rgba(230,202,101,0.1);
+}
+.atelier-display img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:all .5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.atelier-tag-float{
+  position:absolute;
+  top:24px;
+  left:24px;
+  background:rgba(5,3,10,0.85);
+  border:1px solid var(--border-subtle);
+  color:var(--gold-light);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0.2em;
+  padding:8px 18px;
+  border-radius:20px;
+  backdrop-filter:blur(8px);
+}
+.atelier-nav{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+.atelier-item-btn{
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border-subtle);
+  padding:20px 24px;
+  border-radius:6px;
+  text-align:left;
+  cursor:pointer;
+  transition:all .3s ease;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.atelier-item-btn:hover, .atelier-item-btn.active{
+  background:rgba(230,202,101,0.15);
+  border-color:var(--gold);
+  transform:translateX(8px);
+}
+.btn-title{font-family:var(--font-serif);font-size:18px;font-style:italic;color:#fff;margin-bottom:4px;}
+.btn-sub{font-size:11px;color:var(--gray-dim);letter-spacing:0.1em;text-transform:uppercase;}
+.btn-cost{font-size:15px;font-weight:600;font-style:italic;color:var(--gold-light);}
+
+/* 6. CAPÍTULOS DE HISTORIAS CON STICKY MULTI-FOTOS GIGANTES */
 .editorial-story{border-top:1px solid var(--border-subtle);position:relative}
 .story-container{display:grid;grid-template-columns:1fr 1.2fr;min-height:100vh}
 .story-text-pane{padding:120px 60px;position:sticky;top:76px;height:calc(100vh - 76px);display:flex;flex-direction:column;justify-content:center}
@@ -219,7 +340,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
 .stream-img-box:hover img{transform:scale(1.05);opacity:1}
 .stream-tag{position:absolute;bottom:30px;left:30px;background:rgba(0,0,0,0.85);border:1px solid var(--border-subtle);color:var(--gold-light);font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;padding:8px 20px;border-radius:20px;backdrop-filter:blur(10px)}
 
-/* 6. CALCULADORA DE VISIÓN & SIMULADOR DE INVERSIÓN "DE LA AGUJA A LA MANSIÓN" */
+/* 7. SIMULADOR DE VISIÓN FINANCIERA */
 .vision-calculator{
   background:radial-gradient(ellipse at center, #150d2a 0%, #050308 100%);
   border-top:1px solid rgba(230,202,101,0.3);
@@ -228,37 +349,12 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   text-align:center;
 }
 .calc-inner{max-width:900px;margin:0 auto}
-.calc-slider-wrap{
-  margin:40px 0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:20px;
-}
-.calc-range{
-  width:100%;
-  max-width:600px;
-  accent-color:var(--gold);
-  height:6px;
-  cursor:pointer;
-}
-.calc-result-box{
-  background:rgba(10,8,20,0.85);
-  border:1px solid rgba(230,202,101,0.4);
-  padding:36px;
-  border-radius:12px;
-  backdrop-filter:blur(20px);
-  margin-top:30px;
-}
-.calc-estate-title{
-  font-family:var(--font-serif);
-  font-size:32px;
-  font-style:italic;
-  color:var(--gold-light);
-  margin-bottom:10px;
-}
+.calc-slider-wrap{margin:40px 0;display:flex;flex-direction:column;align-items:center;gap:20px}
+.calc-range{width:100%;max-width:600px;accent-color:var(--gold);height:6px;cursor:pointer}
+.calc-result-box{background:rgba(10,8,20,0.85);border:1px solid rgba(230,202,101,0.4);padding:36px;border-radius:12px;backdrop-filter:blur(20px);margin-top:30px}
+.calc-estate-title{font-family:var(--font-serif);font-size:32px;font-style:italic;color:var(--gold-light);margin-bottom:10px}
 
-/* 7. MOSAICO CELEBRIDADES & FOOTER */
+/* 8. MOSAICO CELEBRIDADES & FOOTER */
 .mosaic-section{padding:120px 48px 100px;max-width:1600px;margin:0 auto}
 .mosaic-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:24px}
 .mosaic-card{background:#0d0d11;border:1px solid var(--border-subtle);overflow:hidden;position:relative;transition:all .4s ease;display:flex;flex-direction:column}
@@ -278,6 +374,8 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
 @media(max-width:1100px){
   .story-container{grid-template-columns:1fr}
   .story-text-pane{position:static;height:auto;padding:60px 24px}
+  .atelier-grid{grid-template-columns:1fr}
+  .atelier-display{height:450px}
   .dg-header-wrap{padding:0 20px}
 }
 @media(max-width:768px){
@@ -324,10 +422,10 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   </div>
   <div class="runway-tabs-bar">
     <button class="tab-btn active" onclick="scrollToSection('identity')">Identity</button>
-    <button class="tab-btn" onclick="scrollToSection('tailoring')">Tailoring</button>
+    <button class="tab-btn" onclick="scrollToSection('snake')">Serpiente Dual</button>
+    <button class="tab-btn" onclick="scrollToSection('atelier')">Atelier 3D</button>
     <button class="tab-btn" onclick="scrollToSection('horology')">Relojes</button>
     <button class="tab-btn" onclick="scrollToSection('hypercars')">Hypercars</button>
-    <button class="tab-btn" onclick="scrollToSection('jewelry')">Diamantes</button>
     <button class="tab-btn" onclick="scrollToSection('estates')">Mansiones</button>
     <button class="tab-arrow">❯</button>
   </div>
@@ -341,38 +439,116 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
     Identity is a clear statement: identity is the ultimate luxury. De la Aguja a la Mansión.
   </div>
   <p class="id-text">
-    Una visión integral de la grandeza humana: desde la primera puntada de alta costura artesanal hasta el rugido de los motores V12, la precisión del tourbillon de diamantes y la arquitectura de las grandes propiedades del mundo.
+    Desde la primera puntada de alta costura artesanal hasta el rugido de los motores V12, la precisión del tourbillon de diamantes y la arquitectura de las grandes propiedades del mundo.
   </p>
   <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center;">
-    <a href="#horology" class="btn-ali-champagne">Explorar Alta Relojería &amp; Joyas ↓</a>
-    <a href="#hypercars" class="btn-ali-champagne" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.3);">
-      Ver Hypercars &amp; Mansiones ↗
+    <a href="#snake" class="btn-ali-champagne">Explorar Serpiente Cruzada ↓</a>
+    <a href="#atelier" class="btn-ali-champagne" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.3);">
+      Abrir Atelier Inspector 3D ↗
     </a>
   </div>
 </section>
 
-<!-- 4. CARRUSEL HORIZONTAL RUNWAY LOOKS -->
-<section class="carousel-showcase" id="carousel">
-  <div class="carousel-hdr">
-    <div>
-      <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">PASARELA &amp; ALTA COSTURA</div>
-      <h2 style="font-family:var(--font-serif);font-size:28px;font-style:italic;color:#fff;">Looks de Pasarela FW 2026</h2>
-    </div>
-    <div style="display:flex;gap:10px;">
-      <button onclick="scrollTrack(-400)" style="background:rgba(255,255,255,0.1);border:1px solid var(--border-subtle);color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;">❮</button>
-      <button onclick="scrollTrack(400)" style="background:rgba(255,255,255,0.1);border:1px solid var(--border-subtle);color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;">❯</button>
-    </div>
+<!-- 4. NUEVA SERPIENTE BIDIRECCIONAL CRUZADA (FILA SUPERIOR VA A LA IZQUIERDA / FILA INFERIOR A LA DERECHA) -->
+<section class="snake-universe" id="snake">
+  <div class="snake-header">
+    <div style="font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">SERPIENTE DIVERGENTE DE PRODUCTOS</div>
+    <h2 style="font-family:var(--font-serif);font-size:36px;font-style:italic;color:#fff;">Flujo Continuo de Lujo en Dos Sentidos</h2>
   </div>
-  <div class="carousel-track" id="cTrack">
-    <div class="slide-card"><img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=700&auto=format&fit=crop" alt="Vestido Nero"><div class="slide-caption"><div class="slide-cat">LOOK 01 &middot; GALA</div><div class="slide-name">Vestido en Doble Crepé Nero</div><div class="slide-price">€ 2.450 / $ 42.80 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a></div></div>
-    <div class="slide-card"><img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=700&auto=format&fit=crop" alt="Vestido Floral"><div class="slide-caption"><div class="slide-cat">LOOK 02 &middot; SEDA</div><div class="slide-name">Vestido en Gasa de Seda Floral</div><div class="slide-price">€ 4.765 / $ 45.20 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a></div></div>
-    <div class="slide-card"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=700&auto=format&fit=crop" alt="Mini Grandma"><div class="slide-caption"><div class="slide-cat">LOOK 03 &middot; BOLSO</div><div class="slide-name">Mini Grandma Handbag Nappa</div><div class="slide-price">€ 5.255 / $ 38.90 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a></div></div>
-    <div class="slide-card"><img src="https://images.unsplash.com/photo-1551803091-e20673f15770?w=700&auto=format&fit=crop" alt="Top Tul"><div class="slide-caption"><div class="slide-cat">LOOK 04 &middot; BORDADOS</div><div class="slide-name">Top en Tul Bordado a Mano</div><div class="slide-price">€ 4.075 / $ 26.50 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a></div></div>
+
+  <div class="snake-track-container">
+    
+    <!-- FILA SUPERIOR: VIAJA HACIA LA IZQUIERDA (MODA & ALTA COSTURA) -->
+    <div class="snake-row snake-left">
+      <!-- SET 1 -->
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=700&auto=format&fit=crop" alt="Vestido Nero"><div class="snake-overlay"><div class="snake-cat">ALTA COSTURA</div><div class="snake-name">Vestido en Doble Crepé Nero</div><div class="snake-price">€ 2.450 / $ 42.80 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=700&auto=format&fit=crop" alt="Vestido Floral"><div class="snake-overlay"><div class="snake-cat">SEDA PURA</div><div class="snake-name">Vestido en Gasa de Seda Floral</div><div class="snake-price">€ 4.765 / $ 45.20 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=700&auto=format&fit=crop" alt="Mini Grandma"><div class="snake-overlay"><div class="snake-cat">MARROQUINERÍA</div><div class="snake-name">Mini Grandma Handbag Nappa</div><div class="snake-price">€ 5.255 / $ 38.90 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1551803091-e20673f15770?w=700&auto=format&fit=crop" alt="Top Tul"><div class="snake-overlay"><div class="snake-cat">BORDADOS</div><div class="snake-name">Top en Tul con Lentejuelas</div><div class="snake-price">€ 4.075 / $ 26.50 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=700&auto=format&fit=crop" alt="Slingback Floral"><div class="snake-overlay"><div class="snake-cat">CALZADO</div><div class="snake-name">Slingbacks en Piel Floral</div><div class="snake-price">€ 1.265 / $ 29.90 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+      <!-- DUPLICADO PARA LOOP INFINITO -->
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=700&auto=format&fit=crop" alt="Vestido Nero"><div class="snake-overlay"><div class="snake-cat">ALTA COSTURA</div><div class="snake-name">Vestido en Doble Crepé Nero</div><div class="snake-price">€ 2.450 / $ 42.80 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=700&auto=format&fit=crop" alt="Vestido Floral"><div class="snake-overlay"><div class="snake-cat">SEDA PURA</div><div class="snake-name">Vestido en Gasa de Seda Floral</div><div class="snake-price">€ 4.765 / $ 45.20 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=700&auto=format&fit=crop" alt="Mini Grandma"><div class="snake-overlay"><div class="snake-cat">MARROQUINERÍA</div><div class="snake-name">Mini Grandma Handbag Nappa</div><div class="snake-price">€ 5.255 / $ 38.90 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1551803091-e20673f15770?w=700&auto=format&fit=crop" alt="Top Tul"><div class="snake-overlay"><div class="snake-cat">BORDADOS</div><div class="snake-name">Top en Tul con Lentejuelas</div><div class="snake-price">€ 4.075 / $ 26.50 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=700&auto=format&fit=crop" alt="Slingback Floral"><div class="snake-overlay"><div class="snake-cat">CALZADO</div><div class="snake-name">Slingbacks en Piel Floral</div><div class="snake-price">€ 1.265 / $ 29.90 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+    </div>
+
+    <!-- FILA INFERIOR: VIAJA HACIA LA DERECHA (RELOJES, HYPERCARS, DIAMANTES & MANSIONES) -->
+    <div class="snake-row snake-right">
+      <!-- SET 1 -->
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=700&auto=format&fit=crop" alt="Reloj Tourbillon"><div class="snake-overlay"><div class="snake-cat">ALTA RELOJERÍA</div><div class="snake-name">Tourbillon Skeleton Oro 18K</div><div class="snake-price">€ 85.000 / $ 68.00 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=700&auto=format&fit=crop" alt="Collar Diamantes"><div class="snake-overlay"><div class="snake-cat">ALTA JOYERÍA</div><div class="snake-name">Collier Riviera Platino 950</div><div class="snake-price">€ 140.000 / $ 45.00 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=700&auto=format&fit=crop" alt="Hypercar Stealth"><div class="snake-overlay"><div class="snake-cat">HYPERCAR V12</div><div class="snake-name">Monocasco Fibra de Carbono</div><div class="snake-price">€ 3.200.000 / VIP Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&auto=format&fit=crop" alt="Mansión Lago Como"><div class="snake-overlay"><div class="snake-cat">MANSIÓN &amp; PROPIEDAD</div><div class="snake-name">Villa Paradiso Lago de Como</div><div class="snake-price">€ 18.500.000 / Home Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=700&auto=format&fit=crop" alt="Pendientes Oro"><div class="snake-overlay"><div class="snake-cat">JOYAS FLORENTINAS</div><div class="snake-name">Pendientes Cascada Diamantes</div><div class="snake-price">€ 28.000 / $ 35.00 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+      <!-- DUPLICADO PARA LOOP INFINITO -->
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=700&auto=format&fit=crop" alt="Reloj Tourbillon"><div class="snake-overlay"><div class="snake-cat">ALTA RELOJERÍA</div><div class="snake-name">Tourbillon Skeleton Oro 18K</div><div class="snake-price">€ 85.000 / $ 68.00 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=700&auto=format&fit=crop" alt="Collar Diamantes"><div class="snake-overlay"><div class="snake-cat">ALTA JOYERÍA</div><div class="snake-name">Collier Riviera Platino 950</div><div class="snake-price">€ 140.000 / $ 45.00 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=700&auto=format&fit=crop" alt="Hypercar Stealth"><div class="snake-overlay"><div class="snake-cat">HYPERCAR V12</div><div class="snake-name">Monocasco Fibra de Carbono</div><div class="snake-price">€ 3.200.000 / VIP Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&auto=format&fit=crop" alt="Mansión Lago Como"><div class="snake-overlay"><div class="snake-cat">MANSIÓN &amp; PROPIEDAD</div><div class="snake-name">Villa Paradiso Lago de Como</div><div class="snake-price">€ 18.500.000 / Home Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+      <div class="snake-card"><img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=700&auto=format&fit=crop" alt="Pendientes Oro"><div class="snake-overlay"><div class="snake-cat">JOYAS FLORENTINAS</div><div class="snake-name">Pendientes Cascada Diamantes</div><div class="snake-price">€ 28.000 / $ 35.00 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:6px 14px;font-size:10px;">Comprar ↗</a></div></div>
+    </div>
+
   </div>
 </section>
 
-<!-- 5. CAPÍTULOS DE HISTORIAS CON STICKY MULTI-FOTOS GIGANTES -->
+<!-- 5. NUEVO MÉTODO DE PRESENTACIÓN: THE HOLOGRAM ATELIER 3D INSPECTOR -->
+<section class="atelier-inspector" id="atelier">
+  <div class="atelier-grid">
+    <div class="atelier-display">
+      <img id="atelierMainImg" src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1200&auto=format&fit=crop" alt="Atelier Main Focus">
+      <span class="atelier-tag-float" id="atelierTag">INSPECTOR EN VIVO &middot; CALIBRE TOURBILLON SKELETON</span>
+    </div>
 
+    <div class="atelier-nav">
+      <div style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">INSPECTOR INTERACTIVO ATELIER VIP</div>
+      <h2 style="font-family:var(--font-serif);font-size:36px;font-style:italic;color:#fff;margin-bottom:20px;">Toca para Inspeccionar la Obra</h2>
+
+      <!-- BOTÓN 1: RELOJ TOURBILLON -->
+      <div class="atelier-item-btn active" onclick="setAtelier('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1200&auto=format&fit=crop', 'ALTA RELOJERÍA · TOURBILLON EN ORO ROSA 18K', this)">
+        <div>
+          <div class="btn-title">Tourbillon Skeleton Oro Rosa 18K</div>
+          <div class="btn-sub">72h Reserva de Marcha &middot; Zafiro Antirreflejo</div>
+        </div>
+        <div class="btn-cost">€ 85.000</div>
+      </div>
+
+      <!-- BOTÓN 2: HYPERCAR CARBONO -->
+      <div class="atelier-item-btn" onclick="setAtelier('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&auto=format&fit=crop', 'HYPERCAR V12 · MONOCASCO FIBRA DE CARBONO FORJADA', this)">
+        <div>
+          <div class="btn-title">Scuderia Monoplaza V12 Stealth</div>
+          <div class="btn-sub">850 Caballos &middot; 0-100 en 2.6s &middot; Alcántara Oro</div>
+        </div>
+        <div class="btn-cost">€ 3.200.000</div>
+      </div>
+
+      <!-- BOTÓN 3: COLLIER DIAMANTES -->
+      <div class="atelier-item-btn" onclick="setAtelier('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1200&auto=format&fit=crop', 'ALTA JOYERÍA · DIAMANTES COLOR D FLAWLESS EN PLATINO', this)">
+        <div>
+          <div class="btn-title">Gargantilla Riviera Imperial</div>
+          <div class="btn-sub">Diamantes Talla Esmeralda &middot; Platino 950</div>
+        </div>
+        <div class="btn-cost">€ 140.000</div>
+      </div>
+
+      <!-- BOTÓN 4: MANSIÓN LAGO DE COMO -->
+      <div class="atelier-item-btn" onclick="setAtelier('https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&auto=format&fit=crop', 'ARQUITECTURA & MANSIONES · VILLA PARADISO LAGO DE COMO', this)">
+        <div>
+          <div class="btn-title">Villa Paradiso &middot; Lago de Como</div>
+          <div class="btn-sub">Helipuerto Privado &middot; Piscina Infinita Acantilado</div>
+        </div>
+        <div class="btn-cost">€ 18.500.000</div>
+      </div>
+
+      <div style="margin-top:10px;">
+        <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Comprar Obra Seleccionada en AliExpress ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. CAPÍTULOS DE HISTORIAS STICKY SPLIT SCREEN -->
 <!-- CAPÍTULO I: ALTA SASTRERÍA -->
 <section class="editorial-story" id="tailoring">
   <div class="story-container">
@@ -409,52 +585,33 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   </div>
 </section>
 
-<!-- CAPÍTULO III: ALTA JOYERÍA & DIAMANTES SOLITARIOS -->
-<section class="editorial-story" id="jewelry">
-  <div class="story-container">
-    <div class="story-text-pane">
-      <div class="story-num">CAPÍTULO III &middot; ALTA JOYERÍA &amp; DIAMANTES</div>
-      <h2 class="story-title">Gargantilla Riviera &amp; Diamantes Pureza Flawless</h2>
-      <p class="story-desc">
-        Inspirada en el esplendor de la nobleza mediterránea: diamantes talla brillante y esmeralda engastados en platino 950. Piedras seleccionadas a mano bajo los estándares más estrictos de color D y claridad Flawless, reflejando el fuego y la eternidad del lujo más puro.
-      </p>
-      <div class="story-price">Collier Riviera Imperial &middot; € 140.000 / $ 45.00 Ali Edition</div>
-      <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Comprar Joyas en AliExpress ↗</a></div>
-    </div>
-    <div class="story-media-stream">
-      <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1200&auto=format&fit=crop" alt="Diamantes y Joyas de Lujo"><span class="stream-tag">Collar Riviera en Diamantes &amp; Platino</span></div>
-      <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=1200&auto=format&fit=crop" alt="Pendientes de Diamantes"><span class="stream-tag">Pendientes Cascada en Oro Blanco</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- CAPÍTULO IV: HYPERCARS & INGENIERÍA ITALIANA -->
+<!-- CAPÍTULO III: HYPERCARS & VELOCIDAD -->
 <section class="editorial-story" id="hypercars">
   <div class="story-container">
     <div class="story-text-pane">
-      <div class="story-num">CAPÍTULO IV &middot; HYPERCARS &amp; VELOCIDAD PURA</div>
+      <div class="story-num">CAPÍTULO III &middot; HYPERCARS &amp; VELOCIDAD PURA</div>
       <h2 class="story-title">Scuderia Monoplaza V12 &middot; Fibra de Carbono</h2>
       <p class="story-desc">
-        La máxima expresión del diseño aerodinámico y la potencia mecánica: motor V12 atmosférico de 850 CV, chasis monocasco de fibra de carbono forjada e interiores cosidos a mano en piel Alcántara Nero con pespuntes en hilo de oro. De 0 a 100 km/h en 2.6 segundos.
+        Motor V12 atmosférico de 850 CV, chasis monocasco de fibra de carbono forjada e interiores cosidos a mano en piel Alcántara Nero con pespuntes en hilo de oro. De 0 a 100 km/h en 2.6 segundos.
       </p>
       <div class="story-price">Hypercar Monocasco Nero &middot; € 3.200.000 / Accesorios VIP Ali</div>
       <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Ver Accesorios Motor en AliExpress ↗</a></div>
     </div>
     <div class="story-media-stream">
       <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&auto=format&fit=crop" alt="Hypercar Black Stealth"><span class="stream-tag">Hypercar V12 &middot; Chasis Carbono Forjado</span></div>
-      <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=1200&auto=format&fit=crop" alt="Hypercar Detail Cockpit"><span class="stream-tag">Cockpit en Piel Alcántara &amp; Oro</span></div>
+      <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=1200&auto=format&fit=crop" alt="Hypercar Cockpit"><span class="stream-tag">Cockpit en Piel Alcántara &amp; Oro</span></div>
     </div>
   </div>
 </section>
 
-<!-- CAPÍTULO V: MANSIONES & PROPIEDADES DE ÉLITE -->
+<!-- CAPÍTULO IV: MANSIONES & PROPIEDADES -->
 <section class="editorial-story" id="estates">
   <div class="story-container">
     <div class="story-text-pane">
-      <div class="story-num">CAPÍTULO V &middot; ARQUITECTURA &amp; MANSIONES</div>
-      <h2 class="story-title">Villa Paradiso &middot; Lago de Como &amp; Costa Esmeralda</h2>
+      <div class="story-num">CAPÍTULO IV &middot; ARQUITECTURA &amp; MANSIONES</div>
+      <h2 class="story-title">Villa Paradiso &middot; Lago de Como</h2>
       <p class="story-desc">
-        La culminación del viaje: "De la Aguja a la Mansión". Propiedades monumentales frente al mar con helipuerto privado, piscina infinita climatizada sobre el acantilado, bodega subterránea de añadas históricas y diseño interior de autor con mármol de Carrara y maderas nobles.
+        La culminación del viaje: "De la Aguja a la Mansión". Propiedades monumentales frente al mar con helipuerto privado, piscina infinita climatizada sobre el acantilado y salones en mármol de Carrara.
       </p>
       <div class="story-price">Mansión Villa Paradiso &middot; € 18.500.000 / Decoración Ali Home</div>
       <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Comprar Decoración de Mansión ↗</a></div>
@@ -466,7 +623,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   </div>
 </section>
 
-<!-- 6. SIMULADOR INTERACTIVO "DE LA AGUJA A LA MANSIÓN" -->
+<!-- 7. SIMULADOR DE VISIÓN FINANCIERA -->
 <section class="vision-calculator">
   <div class="calc-inner">
     <div style="font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">SIMULADOR DE VISIÓN FINANCIERA</div>
@@ -496,7 +653,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   </div>
 </section>
 
-<!-- 7. MOSAICO CELEBRIDADES FRONT ROW -->
+<!-- 8. MOSAICO CELEBRIDADES FRONT ROW -->
 <section class="mosaic-section" id="frontrow">
   <div class="mosaic-hdr">
     <div style="font-size:11px;letter-spacing:.36em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">ALL THE STARS IN FRONT ROW</div>
@@ -517,7 +674,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
       <ul class="foot-links">
         <li><a href="#tailoring">Alta Costura &middot; La Aguja</a></li>
         <li><a href="#horology">Relojería Suiza Tourbillon</a></li>
-        <li><a href="#jewelry">Diamantes &amp; Joyas Riviera</a></li>
+        <li><a href="#atelier">Atelier Holográfico 3D</a></li>
         <li><a href="#hypercars">Hypercars V12 Stealth</a></li>
         <li><a href="#estates">Mansiones Lago de Como</a></li>
       </ul>
@@ -559,11 +716,6 @@ function scrollToSection(id){
   if(el){ el.scrollIntoView({behavior:'smooth'}); }
 }
 
-function scrollTrack(val){
-  const t = document.getElementById('cTrack');
-  if(t){ t.scrollLeft += val; }
-}
-
 var isMuted = true;
 function toggleAudio(){
   isMuted = !isMuted;
@@ -576,6 +728,24 @@ function toggleAudio(){
     icon1.textContent = '🔇';
     icon2.textContent = '🔇';
   }
+}
+
+function setAtelier(imgSrc, tagText, btnElement){
+  const mainImg = document.getElementById('atelierMainImg');
+  const tag = document.getElementById('atelierTag');
+  
+  mainImg.style.opacity = '0.3';
+  mainImg.style.transform = 'scale(0.96)';
+  
+  setTimeout(() => {
+    mainImg.src = imgSrc;
+    tag.textContent = 'INSPECTOR EN VIVO · ' + tagText;
+    mainImg.style.opacity = '1';
+    mainImg.style.transform = 'scale(1)';
+  }, 250);
+
+  document.querySelectorAll('.atelier-item-btn').forEach(b => b.classList.remove('active'));
+  if(btnElement) btnElement.classList.add('active');
 }
 
 function updateEstateCalc(val){

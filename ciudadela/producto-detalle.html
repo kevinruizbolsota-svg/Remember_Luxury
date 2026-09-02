@@ -1,0 +1,586 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vestido en doble crepé de lana en Negro para Mujer | DOLCE&GABBANA®</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --gray-100: #f7f7f7;
+  --gray-200: #e5e5e5;
+  --gray-400: #999999;
+  --gray-700: #333333;
+  --gold: #d4af37;
+  --font-serif: 'Cinzel', serif;
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background-color: var(--white);
+  color: var(--black);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* TOP BANNER */
+.top-banner {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  font-weight: 400;
+}
+
+/* HEADER */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+}
+.header-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 40px;
+}
+.header-nav {
+  display: flex;
+  gap: 24px;
+}
+.header-nav a {
+  text-decoration: none;
+  color: var(--black);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+}
+.header-nav a:hover { opacity: 0.6; }
+
+.logo-brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-decoration: none;
+  color: var(--black);
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  text-align: center;
+}
+
+.header-icons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.header-icon-btn {
+  text-decoration: none;
+  color: var(--black);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* BREADCRUMBS */
+.breadcrumbs {
+  padding: 14px 40px;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-700);
+  border-bottom: 1px solid var(--gray-100);
+}
+.breadcrumbs a {
+  color: var(--gray-700);
+  text-decoration: none;
+}
+.breadcrumbs a:hover { text-decoration: underline; }
+.breadcrumbs span { margin: 0 8px; color: var(--gray-400); }
+
+/* PRODUCT CONTAINER */
+.product-page {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 40px 100px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 60px;
+}
+
+/* GALLERY */
+.product-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.gallery-item {
+  background: var(--gray-100);
+  position: relative;
+  overflow: hidden;
+}
+.gallery-item.full-width {
+  grid-column: span 2;
+}
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.gallery-item:hover .gallery-img {
+  transform: scale(1.03);
+}
+
+/* DETAILS PANEL */
+.product-details-panel {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+  padding-left: 20px;
+}
+
+.collection-tag {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.product-title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.product-code {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--gray-400);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.product-price {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  margin-bottom: 28px;
+}
+.product-tax {
+  font-size: 11px;
+  color: var(--gray-400);
+  font-weight: 400;
+  margin-left: 8px;
+}
+
+/* COLOR SELECTION */
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.color-swatch-box {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 32px;
+}
+.color-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #000;
+  border: 2px solid var(--black);
+  outline: 2px solid var(--black);
+  outline-offset: 2px;
+  cursor: pointer;
+}
+.color-name {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gray-700);
+}
+
+/* SIZE SELECTOR */
+.size-selector-wrap {
+  margin-bottom: 36px;
+}
+.size-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-top: 10px;
+}
+.size-btn {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  padding: 12px 0;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.size-btn:hover {
+  border-color: var(--black);
+}
+.size-btn.active {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+.size-guide-link {
+  font-size: 10px;
+  text-decoration: underline;
+  color: var(--gray-700);
+  cursor: pointer;
+  letter-spacing: 0.1em;
+}
+
+/* ACTION BUTTONS */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+.btn-primary-dg {
+  background: var(--black);
+  color: var(--white);
+  border: 1px solid var(--black);
+  padding: 18px 24px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btn-primary-dg:hover {
+  background: var(--white);
+  color: var(--black);
+}
+.btn-secondary-dg {
+  background: var(--white);
+  color: var(--black);
+  border: 1px solid var(--black);
+  padding: 18px 24px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btn-secondary-dg:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+/* ACCORDIONS */
+.accordion-list {
+  border-top: 1px solid var(--gray-200);
+}
+.accordion-item {
+  border-bottom: 1px solid var(--gray-200);
+}
+.accordion-header {
+  padding: 18px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.accordion-icon {
+  font-size: 14px;
+  transition: transform 0.3s;
+}
+.accordion-content {
+  padding-bottom: 20px;
+  color: var(--gray-700);
+  font-size: 12px;
+  line-height: 1.8;
+  display: none;
+}
+.accordion-item.open .accordion-content {
+  display: block;
+}
+.accordion-item.open .accordion-icon {
+  transform: rotate(45deg);
+}
+
+/* SERVICE HIGHLIGHTS */
+.service-highlights {
+  margin-top: 36px;
+  padding: 24px;
+  background: var(--gray-100);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.service-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--gray-700);
+}
+.service-icon {
+  font-size: 14px;
+}
+
+/* FOOTER */
+footer {
+  background: var(--black);
+  color: var(--white);
+  padding: 60px 40px;
+  text-align: center;
+}
+.footer-logo {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  letter-spacing: 0.3em;
+  margin-bottom: 24px;
+}
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+.footer-links a {
+  color: var(--gray-400);
+  text-decoration: none;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.footer-copy {
+  font-size: 10px;
+  color: var(--gray-400);
+  letter-spacing: 0.12em;
+}
+
+@media(max-width: 992px) {
+  .product-page { grid-template-columns: 1fr; }
+  .product-gallery { grid-template-columns: 1fr; }
+  .gallery-item.full-width { grid-column: span 1; }
+  .header-nav { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-banner">
+  ENVÍO EXPRESS DE CORTESÍA Y EMBALAJE DE LUJO EN TODOS LOS PEDIDOS
+</div>
+
+<header>
+  <div class="header-main">
+    <nav class="header-nav">
+      <a href="articulos.html">MUJER</a>
+      <a href="articulos.html">HOMBRE</a>
+      <a href="pasarela.html">FASHION SHOWS 2026</a>
+      <a href="articulos.html">ALTA MODA</a>
+    </nav>
+
+    <a href="articulos.html" class="logo-brand">DOLCE & GABBANA</a>
+
+    <div class="header-icons">
+      <a href="pasarela.html" class="header-icon-btn">PASARELA</a>
+      <a href="pago-premium.html" class="header-icon-btn">BOLSA (1)</a>
+    </div>
+  </div>
+</header>
+
+<div class="breadcrumbs">
+  <a href="articulos.html">INICIO</a><span>/</span>
+  <a href="articulos.html">MUJER</a><span>/</span>
+  <a href="articulos.html">ROPA</a><span>/</span>
+  <a href="articulos.html">VESTIDOS</a><span>/</span>
+  <span>VESTIDO EN DOBLE CREPÉ DE LANA</span>
+</div>
+
+<main class="product-page">
+  <!-- GALERÍA DE MODELOS DE ALTA GAMA -->
+  <div class="product-gallery">
+    <div class="gallery-item full-width">
+      <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1200&auto=format&fit=crop&q=85" alt="Dolce & Gabbana Vestido Doble Crepé Editorial" class="gallery-img">
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=85" alt="Modelo Pasarela Runway Look Frontal" class="gallery-img">
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&auto=format&fit=crop&q=85" alt="Detalle Confección y Escote" class="gallery-img">
+    </div>
+    <div class="gallery-item full-width">
+      <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&auto=format&fit=crop&q=85" alt="Modelo Pasarela Sesión Completa" class="gallery-img">
+    </div>
+  </div>
+
+  <!-- PANEL DE DETALLES Y COMPRA -->
+  <div class="product-details-panel">
+    <div class="collection-tag">DESFILE MUJER FALL WINTER 2026 · ALTA MODA</div>
+    <h1 class="product-title">Vestido en doble crepé de lana</h1>
+    <div class="product-code">REF: F630OTFU2L8N0000 · MADE IN ITALY</div>
+    
+    <div class="product-price">
+      € 2.450 <span class="product-tax">(Impuestos incluidos)</span>
+    </div>
+
+    <!-- COLOR -->
+    <div class="section-label">
+      <span>Color: Negro Intenso</span>
+    </div>
+    <div class="color-swatch-box">
+      <div class="color-circle" title="Negro"></div>
+      <span class="color-name">N0000 Nero Sicilia</span>
+    </div>
+
+    <!-- TALLAS -->
+    <div class="size-selector-wrap">
+      <div class="section-label">
+        <span>Seleccionar Talla (Italiana IT)</span>
+        <span class="size-guide-link">Guía de Tallas</span>
+      </div>
+      <div class="size-grid">
+        <button class="size-btn">IT 36</button>
+        <button class="size-btn">IT 38</button>
+        <button class="size-btn active">IT 40</button>
+        <button class="size-btn">IT 42</button>
+        <button class="size-btn">IT 44</button>
+        <button class="size-btn">IT 46</button>
+      </div>
+    </div>
+
+    <!-- BOTONES DE COMPRA DIRECTA -->
+    <div class="action-buttons">
+      <a href="pago-premium.html?id=lux-dg-dress" class="btn-primary-dg">AÑADIR A LA BOLSA & PAGAR</a>
+      <a href="pasarela.html" class="btn-secondary-dg">VER EN PASARELA 2026 ↗</a>
+    </div>
+
+    <!-- ACORDEONES DE DETALLES -->
+    <div class="accordion-list">
+      <div class="accordion-item open">
+        <div class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
+          <span>Descripción y Detalles del Diseño</span>
+          <span class="accordion-icon">+</span>
+        </div>
+        <div class="accordion-content">
+          Vestido midi sin mangas confeccionado en refinado doble crepé de lana virgen de gramaje superior. La silueta entallada esculpe la figura femenina con cortes sartoriales inspirados en la sastrería clásica siciliana de Dolce&Gabbana.
+          <br><br>
+          • Escote redondo estructurado<br>
+          • Sin mangas con sisas ribeteadas<br>
+          • Forro interior en seda elástica con icónico estampado leopardo<br>
+          • Cierre con cremallera y corchete invisible en la parte trasera<br>
+          • Longitud de la prenda desde el hombro: 110 cm en talla 40 IT<br>
+          • La modelo mide 178 cm y viste una talla 40 IT<br>
+          • Hecho en Italia (Made in Italy)
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
+          <span>Composición y Cuidados</span>
+          <span class="accordion-icon">+</span>
+        </div>
+        <div class="accordion-content">
+          Composición exterior: 98% Lana Virgen, 2% Elastano<br>
+          Composición interior: 92% Seda Natural, 8% Elastano<br><br>
+          Limpieza en seco profesional con percloroetileno. No lavar con agua. No usar blanqueador. Planchar a temperatura máxima de 110 °C sin vapor.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
+          <span>Envío y Devoluciones de Cortesía</span>
+          <span class="accordion-icon">+</span>
+        </div>
+        <div class="accordion-content">
+          • Envío Express asegurado gratuito (entrega en 24-48 horas)<br>
+          • Embalaje de lujo exclusivo de Dolce & Gabbana con caja rígida y lazo de raso negro<br>
+          • Devoluciones gratuitas en un plazo de 14 días naturales
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICIOS EXCLUSIVOS -->
+    <div class="service-highlights">
+      <div class="service-row">
+        <span class="service-icon">✦</span>
+        <span>Asesoría personalizada y atención privada por estilistas de la Maison</span>
+      </div>
+      <div class="service-row">
+        <span class="service-icon">🛡️</span>
+        <span>Autenticidad certificada con chip NFC y etiqueta holográfica</span>
+      </div>
+      <div class="service-row">
+        <span class="service-icon">🎁</span>
+        <span>Incluye caja de presentación de archivo y funda protectora de viaje</span>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-logo">DOLCE & GABBANA</div>
+  <div class="footer-links">
+    <a href="articulos.html">Colección Mujer</a>
+    <a href="pasarela.html">Fashion Show Fall Winter 2026</a>
+    <a href="pago-premium.html">Bolsa & Métodos de Pago</a>
+    <a href="#">Sostenibilidad</a>
+    <a href="#">Servicio al Cliente</a>
+  </div>
+  <div class="footer-copy">
+    &copy; 2026 DOLCE & GABBANA S.r.l. Todos los derechos reservados.
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.size-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,673 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desfile Mujer Fall Winter 2026 | Fashion Show DOLCE&GABBANA®</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #050505;
+  --black-pure: #000000;
+  --white: #ffffff;
+  --gold: #d4af37;
+  --gold-glow: rgba(212, 175, 55, 0.4);
+  --gray-800: #1a1a1a;
+  --gray-600: #666666;
+  --gray-400: #a0a0a0;
+  --font-serif: 'Cinzel', serif;
+  --font-sans: 'Montserrat', sans-serif;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background-color: var(--black-pure);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* TOP BANNER */
+.top-bar {
+  background: var(--black);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 8px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* HEADER */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo-brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-decoration: none;
+  color: var(--white);
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+}
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+.nav-links a {
+  color: var(--gray-400);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--white);
+}
+.nav-right a {
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px solid var(--gold);
+  padding: 8px 18px;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.nav-right a:hover {
+  background: var(--gold);
+  color: var(--black);
+}
+
+/* HERO FASHION SHOW */
+.runway-hero {
+  position: relative;
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: #000;
+}
+.hero-backdrop-img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+  filter: brightness(0.85);
+}
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.95) 100%);
+}
+.hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 900px;
+  padding: 0 20px;
+}
+.hero-tagline {
+  font-family: var(--font-serif);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.9);
+}
+.hero-subtitle {
+  font-size: 13px;
+  color: var(--gray-400);
+  letter-spacing: 0.12em;
+  max-width: 600px;
+  margin: 0 auto 36px;
+  font-weight: 300;
+}
+.hero-btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.btn-gold {
+  background: var(--gold);
+  color: var(--black);
+  padding: 16px 36px;
+  font-family: var(--font-serif);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--gold);
+  transition: all 0.3s;
+}
+.btn-gold:hover {
+  background: transparent;
+  color: var(--gold);
+  box-shadow: 0 0 25px var(--gold-glow);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  padding: 16px 36px;
+  font-family: var(--font-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.4);
+  transition: all 0.3s;
+}
+.btn-outline:hover {
+  border-color: var(--white);
+  background: rgba(255,255,255,0.1);
+}
+
+/* SECTION HEADER */
+.section-header {
+  text-align: center;
+  padding: 80px 20px 40px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.section-pretitle {
+  font-family: var(--font-serif);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.section-main-title {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.section-desc {
+  font-size: 12px;
+  color: var(--gray-400);
+  line-height: 1.8;
+  letter-spacing: 0.06em;
+}
+
+/* RUNWAY LOOKS GRID (MODELOS EN PASARELA) */
+.runway-grid {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px 100px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 36px;
+}
+
+.runway-card {
+  background: var(--gray-800);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: all 0.4s ease;
+}
+.runway-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--gold);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 25px rgba(212, 175, 55, 0.2);
+}
+
+.model-media-wrap {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+  background: #0d0d0d;
+}
+.model-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.runway-card:hover .model-img {
+  transform: scale(1.06);
+}
+
+.look-number-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--font-serif);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  padding: 6px 14px;
+  backdrop-filter: blur(8px);
+}
+
+.runway-card-info {
+  padding: 24px;
+  background: #0c0c0e;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.look-category {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.look-title {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--white);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.look-desc {
+  font-size: 11px;
+  color: var(--gray-400);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex: 1;
+}
+.look-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 16px;
+}
+.look-price {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--white);
+}
+.look-origin {
+  font-size: 9px;
+  color: var(--gold);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.btn-shop-look {
+  display: block;
+  background: var(--black);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  text-align: center;
+  text-decoration: none;
+  padding: 12px;
+  font-family: var(--font-serif);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+.btn-shop-look:hover {
+  background: var(--gold);
+  color: var(--black);
+}
+
+/* FRONT ROW & CELEBRITIES */
+.front-row-section {
+  background: #08080a;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 80px 40px;
+}
+.front-row-grid {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+.celeb-card {
+  position: relative;
+  height: 340px;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.celeb-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.celeb-card:hover .celeb-img {
+  transform: scale(1.08);
+}
+.celeb-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.9) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+}
+.celeb-name {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--white);
+  text-transform: uppercase;
+}
+.celeb-role {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+/* FOOTER */
+footer {
+  background: var(--black-pure);
+  padding: 80px 40px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+}
+.footer-brand {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+.footer-nav a {
+  color: var(--gray-400);
+  text-decoration: none;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.footer-nav a:hover { color: var(--gold); }
+.footer-copy {
+  font-size: 10px;
+  color: var(--gray-600);
+  letter-spacing: 0.12em;
+}
+
+@media(max-width: 768px) {
+  .runway-grid { grid-template-columns: 1fr; padding: 0 20px 60px; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <span>MILAN FASHION WEEK · WOMEN'S FALL WINTER 2026</span>
+  <span>ALTA MODA & HIGH FASHION SHOW</span>
+</div>
+
+<header>
+  <nav class="nav-links">
+    <a href="articulos.html">COLECCIÓN</a>
+    <a href="producto-detalle.html">VESTIDO DOBLE CREPÉ</a>
+    <a href="pasarela.html" class="active">PASARELA 2026</a>
+    <a href="pago-premium.html">MÉTODOS DE PAGO</a>
+  </nav>
+
+  <a href="articulos.html" class="logo-brand">DOLCE & GABBANA</a>
+
+  <div class="nav-right">
+    <a href="pago-premium.html">BOLSA & CHECKOUT</a>
+  </div>
+</header>
+
+<!-- HERO RUNWAY -->
+<section class="runway-hero">
+  <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1600&auto=format&fit=crop&q=85" alt="Dolce & Gabbana Runway Fashion Show 2026" class="hero-backdrop-img">
+  <div class="hero-gradient"></div>
+  
+  <div class="hero-content">
+    <div class="hero-tagline">✦ MILANO RUNWAY EXPERIENCE ✦</div>
+    <h1 class="hero-title">WOMEN'S FALL WINTER 2026 FASHION SHOW</h1>
+    <p class="hero-subtitle">La máxima expresión de la sensualidad, el corte sartorial siciliano y la artesanía eterna. Una oda al esmoquin, la lana virgen, el encaje y la elegancia contemporánea.</p>
+    
+    <div class="hero-btn-group">
+      <a href="#looks" class="btn-gold">EXPLORAR LOS LOOKS DE PASARELA</a>
+      <a href="producto-detalle.html" class="btn-outline">VER PRODUCTO DESTACADO</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN DE MODELOS EN PASARELA -->
+<section id="looks">
+  <div class="section-header">
+    <div class="section-pretitle">ALTA COSTURA & CONFECCIÓN ITALIANA</div>
+    <h2 class="section-main-title">LOS LOOKS DE LA PASARELA</h2>
+    <p class="section-desc">Descubre cada conjunto desfilado por las modelos internacionales en la pasarela oficial de Milán. Selecciona cualquier look para adquirirlo directamente.</p>
+  </div>
+
+  <div class="runway-grid">
+    <!-- LOOK 01 -->
+    <article class="runway-card">
+      <div class="model-media-wrap">
+        <span class="look-number-badge">LOOK 01 · OPENING</span>
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&auto=format&fit=crop&q=85" alt="Look 01 Vestido Doble Crepé Negro" class="model-img">
+      </div>
+      <div class="runway-card-info">
+        <span class="look-category">ALTA COSTURA · VESTIDO ICÓNICO</span>
+        <h3 class="look-title">Vestido en Doble Crepé de Lana</h3>
+        <p class="look-desc">Corte midi entallado con hombros estructurados y forro en seda elástica de leopardo. El emblema del desfile.</p>
+        <div class="look-price-row">
+          <span class="look-price">€ 2.450</span>
+          <span class="look-origin">MADE IN ITALY</span>
+        </div>
+        <a href="producto-detalle.html" class="btn-shop-look">COMPRAR LOOK 01</a>
+      </div>
+    </article>
+
+    <!-- LOOK 02 -->
+    <article class="runway-card">
+      <div class="model-media-wrap">
+        <span class="look-number-badge">LOOK 02</span>
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=85" alt="Look 02 Traje Sartorial Negro con Encaje" class="model-img">
+      </div>
+      <div class="runway-card-info">
+        <span class="look-category">SASTRERÍA · SMOKING SICILIANO</span>
+        <h3 class="look-title">Esmoquin Sartorial en Terciopelo</h3>
+        <p class="look-desc">Chaqueta cruzada con solapas en raso de seda, pantalón palazzo y corpiño transparente de encaje chantilly.</p>
+        <div class="look-price-row">
+          <span class="look-price">€ 3.850</span>
+          <span class="look-origin">MADE IN ITALY</span>
+        </div>
+        <a href="pago-premium.html?id=lux-dg-smoking" class="btn-shop-look">COMPRAR LOOK 02</a>
+      </div>
+    </article>
+
+    <!-- LOOK 03 -->
+    <article class="runway-card">
+      <div class="model-media-wrap">
+        <span class="look-number-badge">LOOK 03</span>
+        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop&q=85" alt="Look 03 Abrigo Maxi Lana y Seda" class="model-img">
+      </div>
+      <div class="runway-card-info">
+        <span class="look-category">OUTERWEAR · ABRIGO MAXI</span>
+        <h3 class="look-title">Maxi Abrigo en Cachemira & Lana</h3>
+        <p class="look-desc">Corte envolvente con hombreras pronunciadas, botonadura dorada con escudo de armas D&G y cinturón a juego.</p>
+        <div class="look-price-row">
+          <span class="look-price">€ 4.200</span>
+          <span class="look-origin">MADE IN ITALY</span>
+        </div>
+        <a href="pago-premium.html?id=lux-dg-coat" class="btn-shop-look">COMPRAR LOOK 03</a>
+      </div>
+    </article>
+
+    <!-- LOOK 04 -->
+    <article class="runway-card">
+      <div class="model-media-wrap">
+        <span class="look-number-badge">LOOK 04</span>
+        <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&auto=format&fit=crop&q=85" alt="Look 04 Vestido Seda Estampado Floral & Oro" class="model-img">
+      </div>
+      <div class="runway-card-info">
+        <span class="look-category">ALTA MODA · SEDA ESTAMPADA</span>
+        <h3 class="look-title">Vestido Lencero en Gasa de Seda</h3>
+        <p class="look-desc">Transparencias sofisticadas con aplicaciones de microlentejuelas y bordados barrocos en hilo de oro.</p>
+        <div class="look-price-row">
+          <span class="look-price">€ 3.200</span>
+          <span class="look-origin">MADE IN ITALY</span>
+        </div>
+        <a href="pago-premium.html?id=lux-dg-silk" class="btn-shop-look">COMPRAR LOOK 04</a>
+      </div>
+    </article>
+
+    <!-- LOOK 05 -->
+    <article class="runway-card">
+      <div class="model-media-wrap">
+        <span class="look-number-badge">LOOK 05</span>
+        <img src="https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=800&auto=format&fit=crop&q=85" alt="Look 05 Bolso Sicily & Joyería Alta Gama" class="model-img">
+      </div>
+      <div class="runway-card-info">
+        <span class="look-category">ACCESORIOS · BOLSO SICILY</span>
+        <h3 class="look-title">Bolso Sicily Pequeño en Piel Dauphine</h3>
+        <p class="look-desc">Herrajes en oro pulido con placa bitono, correa de hombro ajustable y forro interior con estampado animal print.</p>
+        <div class="look-price-row">
+          <span class="look-price">€ 1.850</span>
+          <span class="look-origin">MADE IN ITALY</span>
+        </div>
+        <a href="pago-premium.html?id=lux-dg-sicily" class="btn-shop-look">COMPRAR LOOK 05</a>
+      </div>
+    </article>
+
+    <!-- LOOK 06 -->
+    <article class="runway-card">
+      <div class="model-media-wrap">
+        <span class="look-number-badge">LOOK 06 · FINALE</span>
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=85" alt="Look 06 Gafas de Sol y Alta Joyería Oro" class="model-img">
+      </div>
+      <div class="runway-card-info">
+        <span class="look-category">ALTA JOYERÍA & EYEWEAR</span>
+        <h3 class="look-title">Gafas de Sol Runway DG Logo & Pendientes</h3>
+        <p class="look-desc">Montura oversize en acetato negro con logotipo DG barroco en oro de 18K y cristales tallados a mano.</p>
+        <div class="look-price-row">
+          <span class="look-price">€ 890</span>
+          <span class="look-origin">MADE IN ITALY</span>
+        </div>
+        <a href="pago-premium.html?id=lux-dg-glasses" class="btn-shop-look">COMPRAR LOOK 06</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- FRONT ROW CELEBRITIES -->
+<section class="front-row-section">
+  <div class="section-header" style="padding-top:0">
+    <div class="section-pretitle">FRONT ROW & INVITADOS DE HONOR</div>
+    <h2 class="section-main-title">CELEBRIDADES EN PRIMERA FILA</h2>
+    <p class="section-desc">Las figuras más influyentes del cine, la música y el arte reunidas en la alfombra roja del desfile Dolce&Gabbana 2026.</p>
+  </div>
+
+  <div class="front-row-grid">
+    <div class="celeb-card">
+      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80" alt="Madonna Front Row D&G" class="celeb-img">
+      <div class="celeb-overlay">
+        <div class="celeb-name">Madonna</div>
+        <div class="celeb-role">Ícono Global & Huésped de Honor</div>
+      </div>
+    </div>
+
+    <div class="celeb-card">
+      <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=80" alt="Alberto Guerra Front Row" class="celeb-img">
+      <div class="celeb-overlay">
+        <div class="celeb-name">Alberto Guerra</div>
+        <div class="celeb-role">Embajador Internacional</div>
+      </div>
+    </div>
+
+    <div class="celeb-card">
+      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80" alt="Zuria Vega Front Row" class="celeb-img">
+      <div class="celeb-overlay">
+        <div class="celeb-name">Zuria Vega</div>
+        <div class="celeb-role">Actriz & Huésped VIP</div>
+      </div>
+    </div>
+
+    <div class="celeb-card">
+      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80" alt="Choi San Front Row" class="celeb-img">
+      <div class="celeb-overlay">
+        <div class="celeb-name">Choi San</div>
+        <div class="celeb-role">Artista Global D&G</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">DOLCE & GABBANA</div>
+  <div class="footer-nav">
+    <a href="articulos.html">Colección Mujer</a>
+    <a href="producto-detalle.html">Vestido Doble Crepé</a>
+    <a href="pasarela.html">Desfile Fall Winter 2026</a>
+    <a href="pago-premium.html">Bolsa & Pagos Seguros</a>
+    <a href="#">Sostenibilidad</a>
+  </div>
+  <div class="footer-copy">
+    &copy; 2026 DOLCE & GABBANA S.r.l. Todos los derechos reservados. Milano, Italia.
+  </div>
+</footer>
+
+</body>
+</html>

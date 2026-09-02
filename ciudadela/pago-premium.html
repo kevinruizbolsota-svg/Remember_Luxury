@@ -3,507 +3,518 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Checkout & Pago Seguro — Remember Luxury</title>
-<link rel="icon" href="../favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Bolsa de Compras & Checkout Seguro | DOLCE&GABBANA®</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg-main: #0a0a0d;
-  --bg-card: rgba(18, 18, 24, 0.95);
-  --gold: #e8c86a;
-  --gold-glow: rgba(232, 200, 106, 0.28);
-  --gold-dark: #b89535;
-  --border: rgba(232, 200, 106, 0.16);
-  --border-hover: rgba(232, 200, 106, 0.5);
-  --text-main: #f5f0e8;
-  --text-muted: #9e9aa8;
-  --green: #4ecb71;
-  --radius: 12px;
+  --black: #000000;
+  --white: #ffffff;
+  --gray-100: #f7f7f7;
+  --gray-200: #e5e5e5;
+  --gray-400: #999999;
+  --gray-700: #333333;
+  --gold: #d4af37;
+  --green: #2e7d32;
+  --font-serif: 'Cinzel', serif;
+  --font-sans: 'Montserrat', sans-serif;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
-  background-color: var(--bg-main);
-  color: var(--text-main);
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  background-color: var(--white);
+  color: var(--black);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  -webkit-font-smoothing: antialiased;
 }
 
+/* TOP BANNER */
+.top-banner {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+}
+
+/* HEADER */
 header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(10, 10, 13, 0.96);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border);
-  padding: 16px 32px;
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 18px 40px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
-.logo-title {
-  font-family: 'Cinzel', serif;
-  font-weight: 900;
-  font-size: 1.2rem;
-  letter-spacing: 0.18em;
-  color: var(--gold);
+.logo-brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   text-decoration: none;
-  text-shadow: 0 0 16px var(--gold-glow);
+  color: var(--black);
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.28em;
 }
-.nav-back {
-  font-family: 'Cinzel', serif;
-  font-size: 0.7rem;
+.back-link {
+  text-decoration: none;
+  color: var(--black);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.secure-badge {
+  font-size: 11px;
   letter-spacing: 0.12em;
-  color: var(--text-muted);
-  text-decoration: none;
-  padding: 6px 14px;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  transition: 0.3s;
-}
-.nav-back:hover {
-  color: var(--gold);
-  border-color: var(--gold);
-  background: rgba(232, 200, 106, 0.08);
+  color: var(--gray-700);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: uppercase;
 }
 
-.checkout-container {
-  max-width: 1080px;
-  margin: 32px auto;
-  padding: 0 20px 60px;
-  width: 100%;
+/* CHECKOUT CONTAINER */
+.checkout-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 40px 100px;
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
-  gap: 32px;
+  gap: 60px;
 }
 
-/* FORMULARIO */
-.checkout-box {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-.box-title {
-  font-family: 'Cinzel', serif;
-  font-size: 0.95rem;
-  letter-spacing: 0.15em;
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.checkout-section-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--gray-200);
 }
 
+/* FORM STYLING */
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+  margin-bottom: 36px;
 }
-.form-grid.full { grid-template-columns: 1fr; }
-
-.input-group {
+.form-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-.input-label {
-  font-size: 0.75rem;
-  color: var(--text-muted);
+.form-group.full-width {
+  grid-column: span 2;
+}
+.form-label {
+  font-size: 10px;
   font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  color: var(--gray-700);
 }
-.input-field {
-  background: rgba(0, 0, 0, 0.6);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 12px 16px;
-  color: #fff;
-  font-size: 0.9rem;
-  font-family: inherit;
+.form-input {
+  padding: 14px 16px;
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.04em;
   outline: none;
-  transition: 0.3s;
+  transition: border-color 0.2s;
 }
-.input-field:focus {
-  border-color: var(--gold);
-  box-shadow: 0 0 12px var(--gold-glow);
+.form-input:focus {
+  border-color: var(--black);
 }
 
-/* METODOS DE PAGO */
-.payment-methods {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-.pay-option {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 14px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  transition: 0.2s;
-  user-select: none;
-}
-.pay-option:hover, .pay-option.selected {
-  background: rgba(232, 200, 106, 0.08);
-  border-color: var(--gold);
-}
-.pay-option input { display: none; }
-.pay-name { font-size: 0.85rem; font-weight: 600; color: #fff; }
-.pay-desc { font-size: 0.7rem; color: var(--text-muted); }
-
-/* RESUMEN DE COMPRA */
-.summary-box {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 28px;
+/* PAYMENT OPTIONS */
+.payment-methods-grid {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+.payment-option-card {
+  border: 1px solid var(--gray-200);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.payment-option-card:hover, .payment-option-card.active {
+  border-color: var(--black);
+  background: var(--gray-100);
+}
+.payment-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.payment-radio {
+  accent-color: var(--black);
+}
+.payment-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.payment-badge {
+  font-size: 10px;
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+/* ORDER SUMMARY (RIGHT COLUMN) */
+.order-summary-box {
+  background: var(--gray-100);
+  padding: 32px;
+  position: sticky;
+  top: 100px;
   height: fit-content;
 }
-.item-preview {
+.item-card-preview {
   display: flex;
-  gap: 16px;
-  align-items: center;
-  padding-bottom: 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 20px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--gray-200);
+  margin-bottom: 24px;
 }
-.item-img {
-  width: 70px;
-  height: 70px;
-  border-radius: 8px;
+.item-thumb {
+  width: 90px;
+  height: 120px;
   object-fit: cover;
-  background: #15151b;
-  border: 1px solid var(--border);
+  background: #fff;
 }
-.item-title {
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: #fff;
-  line-height: 1.35;
+.item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
 }
-.item-provider {
-  font-size: 0.7rem;
-  color: var(--gold);
+.item-tag {
+  font-size: 9px;
+  color: var(--gray-400);
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  font-weight: 600;
+}
+.item-name {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.item-meta {
+  font-size: 11px;
+  color: var(--gray-700);
+}
+.item-price {
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .summary-row {
   display: flex;
   justify-content: space-between;
-  font-size: 0.85rem;
-  color: var(--text-muted);
+  align-items: center;
+  font-size: 12px;
+  margin-bottom: 12px;
+  color: var(--gray-700);
 }
 .summary-row.total {
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: var(--gold);
-  padding-top: 14px;
-  border-top: 1px solid rgba(232, 200, 106, 0.15);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--black);
+  padding-top: 16px;
+  border-top: 1px solid var(--gray-200);
+  margin-top: 16px;
+  margin-bottom: 24px;
 }
 
-.btn-pay-now {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-  color: #0a0a0d;
-  font-family: 'Cinzel', serif;
-  font-weight: 800;
-  font-size: 0.85rem;
-  letter-spacing: 0.14em;
-  padding: 16px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
+.btn-complete-order {
+  display: block;
   width: 100%;
-  transition: 0.3s;
-  text-transform: uppercase;
-  box-shadow: 0 6px 20px var(--gold-glow);
-}
-.btn-pay-now:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 26px rgba(232, 200, 106, 0.4);
-}
-.btn-pay-now:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.secure-badge {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-size: 0.72rem;
-  color: var(--green);
+  background: var(--black);
+  color: var(--white);
+  border: 1px solid var(--black);
+  padding: 18px;
   text-align: center;
+  font-family: var(--font-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-complete-order:hover {
+  background: var(--white);
+  color: var(--black);
 }
 
-/* MODAL DE ÉXITO */
-.modal-success {
+.guarantee-note {
+  margin-top: 20px;
+  font-size: 10px;
+  color: var(--gray-400);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* SUCCESS MODAL */
+.modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.88);
-  backdrop-filter: blur(16px);
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
   z-index: 2000;
   display: none;
   align-items: center;
   justify-content: center;
   padding: 20px;
 }
-.modal-content {
-  background: var(--bg-card);
-  border: 1px solid var(--gold);
-  border-radius: var(--radius);
-  max-width: 500px;
+.modal-backdrop.open { display: flex; }
+.modal-card {
+  background: var(--white);
+  max-width: 540px;
   width: 100%;
-  padding: 36px 30px;
+  padding: 40px;
   text-align: center;
-  box-shadow: 0 0 50px var(--gold-glow);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
 }
-.success-icon { font-size: 3.5rem; margin-bottom: 16px; filter: drop-shadow(0 0 16px var(--green)); }
-.modal-content h2 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.5rem; margin-bottom: 12px; }
-.modal-content p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 24px; }
-.modal-btn {
-  background: var(--gold);
-  color: #0a0a0d;
-  font-family: 'Cinzel', serif;
+.modal-icon {
+  font-size: 36px;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.modal-title {
+  font-family: var(--font-serif);
+  font-size: 22px;
   font-weight: 700;
-  padding: 12px 28px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.modal-text {
+  font-size: 12px;
+  color: var(--gray-700);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+.modal-btn {
   display: inline-block;
+  background: var(--black);
+  color: var(--white);
+  padding: 14px 32px;
+  font-family: var(--font-serif);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
 }
 
-@media(max-width: 800px) {
-  .checkout-container { grid-template-columns: 1fr; }
+@media(max-width: 992px) {
+  .checkout-wrapper { grid-template-columns: 1fr; }
   .form-grid { grid-template-columns: 1fr; }
-  .payment-methods { grid-template-columns: 1fr; }
+  .form-group.full-width { grid-column: span 1; }
 }
 </style>
 </head>
 <body>
 
-<header>
-  <a href="../index.html" class="logo-title">REMEMBER LUXURY</a>
-  <a href="articulos.html" class="nav-back">← Volver a la Tienda</a>
-</header>
-
-<div class="checkout-container">
-
-  <!-- FORMULARIO DE COMPRADOR -->
-  <div class="checkout-box">
-    <div class="box-title">
-      <span>1. DATOS DEL COMPRADOR & ENVÍO</span>
-    </div>
-
-    <div class="form-grid">
-      <div class="input-group">
-        <label class="input-label">Nombre Completo *</label>
-        <input type="text" id="buyerName" class="input-field" placeholder="Ej. Carlos Mendoza" required>
-      </div>
-      <div class="input-group">
-        <label class="input-label">Correo Electrónico (Gmail) *</label>
-        <input type="email" id="buyerEmail" class="input-field" placeholder="tucorreo@gmail.com" required>
-      </div>
-    </div>
-
-    <div class="form-grid">
-      <div class="input-group">
-        <label class="input-label">WhatsApp / Teléfono *</label>
-        <input type="tel" id="buyerPhone" class="input-field" placeholder="+57 300 000 0000" required>
-      </div>
-      <div class="input-group">
-        <label class="input-label">Ciudad / País *</label>
-        <input type="text" id="buyerCity" class="input-field" placeholder="Medellín, Colombia" required>
-      </div>
-    </div>
-
-    <div class="input-group">
-      <label class="input-label">Dirección de Entrega (Para productos físicos)</label>
-      <input type="text" id="buyerAddress" class="input-field" placeholder="Calle, Carrera, Edificio o Apto">
-    </div>
-
-    <div class="box-title" style="margin-top: 14px;">
-      <span>2. SELECCIONA TU MÉTODO DE PAGO</span>
-    </div>
-
-    <div class="payment-methods">
-      <label class="pay-option selected">
-        <input type="radio" name="payMethod" value="nequi" checked>
-        <div>
-          <div class="pay-name">🟣 Nequi / Bancolombia</div>
-          <div class="pay-desc">Transferencia directa inmediata</div>
-        </div>
-      </label>
-      <label class="pay-option">
-        <input type="radio" name="payMethod" value="card">
-        <div>
-          <div class="pay-name">💳 Tarjeta Débito / Crédito</div>
-          <div class="pay-desc">Visa, Mastercard, Amex</div>
-        </div>
-      </label>
-      <label class="pay-option">
-        <input type="radio" name="payMethod" value="paypal">
-        <div>
-          <div class="pay-name">🅿️ PayPal Global</div>
-          <div class="pay-desc">Para pagos internacionales</div>
-        </div>
-      </label>
-      <label class="pay-option">
-        <input type="radio" name="payMethod" value="krc">
-        <div>
-          <div class="pay-name">👑 Moneda KRC / Cripto</div>
-          <div class="pay-desc">Crédito de Remember Luxury</div>
-        </div>
-      </label>
-    </div>
-  </div>
-
-  <!-- RESUMEN DE LA ORDEN -->
-  <aside class="summary-box">
-    <div class="box-title">
-      <span>RESUMEN DEL PEDIDO</span>
-    </div>
-
-    <div class="item-preview" id="itemPreview">
-      <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500" class="item-img" id="productImg" alt="Producto">
-      <div>
-        <span class="item-provider" id="productProvider">REMEMBER LUXURY</span>
-        <h4 class="item-title" id="productTitle">Producto Seleccionado</h4>
-      </div>
-    </div>
-
-    <div class="summary-row">
-      <span>Subtotal</span>
-      <span id="subtotalPrice">€0.00</span>
-    </div>
-    <div class="summary-row">
-      <span>Envío / Acceso Digital</span>
-      <span style="color:var(--green)">GRATIS</span>
-    </div>
-    <div class="summary-row">
-      <span>Notificación por Gmail</span>
-      <span style="color:var(--gold)">INCLUIDO ✓</span>
-    </div>
-
-    <div class="summary-row total">
-      <span>TOTAL A PAGAR</span>
-      <span id="totalPrice">€0.00</span>
-    </div>
-
-    <button class="btn-pay-now" id="btnConfirmPay" onclick="procesarPago()">
-      CONFIRMAR Y PAGAR AHORA ➔
-    </button>
-
-    <div class="secure-badge">
-      <span>🔒 Encriptación SSL 256-Bit — Pago 100% Protegido</span>
-    </div>
-  </aside>
-
+<div class="top-banner">
+  COMPRA PROTEGIDA · ENVÍO ASEGURADO DE CORTESÍA A NIVEL MUNDIAL
 </div>
 
+<header>
+  <a href="producto-detalle.html" class="back-link">‹ Volver al Producto</a>
+  <a href="articulos.html" class="logo-brand">DOLCE & GABBANA</a>
+  <div class="secure-badge">🔒 Pago 100% Cifrado</div>
+</header>
+
+<main class="checkout-wrapper">
+  <!-- FORMULARIO DE ENVÍO Y PAGO -->
+  <div>
+    <h2 class="checkout-section-title">1. Datos de Contacto y Envío</h2>
+    
+    <form id="checkoutForm">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Nombre Completo *</label>
+          <input type="text" id="custName" class="form-input" placeholder="Ej: Kevin Ruiz" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Correo Electrónico (Gmail) *</label>
+          <input type="email" id="custEmail" class="form-input" placeholder="tu-correo@gmail.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Teléfono / WhatsApp *</label>
+          <input type="tel" id="custPhone" class="form-input" placeholder="+57 300 000 0000" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ciudad / Municipio *</label>
+          <input type="text" id="custCity" class="form-input" placeholder="Medellín / Bogotá / Madrid" required>
+        </div>
+        <div class="form-group full-width">
+          <label class="form-label">Dirección de Entrega Completa *</label>
+          <input type="text" id="custAddress" class="form-input" placeholder="Calle, Carrera, Edificio, Apto..." required>
+        </div>
+      </div>
+
+      <h2 class="checkout-section-title">2. Método de Pago</h2>
+      
+      <div class="payment-methods-grid">
+        <label class="payment-option-card active">
+          <div class="payment-left">
+            <input type="radio" name="paymentMethod" value="Nequi / Bancolombia" class="payment-radio" checked>
+            <span class="payment-title">Nequi / Bancolombia (Transferencia Directa)</span>
+          </div>
+          <span class="payment-badge">COLOMBIA VIP</span>
+        </label>
+
+        <label class="payment-option-card">
+          <div class="payment-left">
+            <input type="radio" name="paymentMethod" value="Tarjeta de Crédito / Débito" class="payment-radio">
+            <span class="payment-title">Tarjeta de Crédito / Débito (Visa, Mastercard, AMEX)</span>
+          </div>
+          <span class="payment-badge">INTERNACIONAL</span>
+        </label>
+
+        <label class="payment-option-card">
+          <div class="payment-left">
+            <input type="radio" name="paymentMethod" value="PayPal / Apple Pay" class="payment-radio">
+            <span class="payment-title">PayPal / Apple Pay</span>
+          </div>
+          <span class="payment-badge">INSTANTÁNEO</span>
+        </label>
+
+        <label class="payment-option-card">
+          <div class="payment-left">
+            <input type="radio" name="paymentMethod" value="Monedas KRC / Dinastía" class="payment-radio">
+            <span class="payment-title">Activo KRC / Imperio ORIONIX</span>
+          </div>
+          <span class="payment-badge">EXCLUSIVO KRC</span>
+        </label>
+      </div>
+
+      <button type="submit" class="btn-complete-order">FINALIZAR COMPRA & RECIBIR CONFIRMACIÓN</button>
+    </form>
+  </div>
+
+  <!-- RESUMEN DE COMPRA DOLCE & GABBANA -->
+  <div>
+    <div class="order-summary-box">
+      <h3 class="checkout-section-title" style="margin-bottom:18px;">Resumen de la Bolsa</h3>
+      
+      <div class="item-card-preview" id="itemPreview">
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=300&auto=format&fit=crop&q=85" alt="Vestido en doble crepé de lana" class="item-thumb" id="itemImg">
+        <div class="item-info">
+          <div>
+            <div class="item-tag" id="itemTag">FALL WINTER 2026</div>
+            <div class="item-name" id="itemName">Vestido en doble crepé de lana</div>
+            <div class="item-meta" id="itemMeta">Talla: IT 40 · Color: Nero Sicilia</div>
+          </div>
+          <div class="item-price" id="itemPrice">€ 2.450,00</div>
+        </div>
+      </div>
+
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span id="subtotalVal">€ 2.450,00</span>
+      </div>
+      <div class="summary-row">
+        <span>Embalaje de Lujo Dolce&Gabbana</span>
+        <span style="color:var(--green);font-weight:600;">GRATUITO</span>
+      </div>
+      <div class="summary-row">
+        <span>Envío Express Asegurado</span>
+        <span style="color:var(--green);font-weight:600;">GRATUITO</span>
+      </div>
+      <div class="summary-row total">
+        <span>TOTAL A PAGAR</span>
+        <span id="totalVal">€ 2.450,00</span>
+      </div>
+
+      <p class="guarantee-note">
+        Al finalizar la orden, se enviará de forma automática el recibo oficial y la confirmación detallada a tu dirección de Gmail.
+      </p>
+    </div>
+  </div>
+</main>
+
 <!-- MODAL DE CONFIRMACIÓN -->
-<div class="modal-success" id="successModal">
-  <div class="modal-content">
-    <div class="success-icon">✅</div>
-    <h2>¡PAGO REGISTRADO CON ÉXITO!</h2>
-    <p>Gracias por tu compra en <strong>Remember Luxury</strong>. Hemos enviado un <strong>correo de agradecimiento y confirmación a tu Gmail</strong> con los detalles y el comprobante de tu pedido.</p>
-    <a href="articulos.html" class="modal-btn">VOLVER A LA TIENDA</a>
+<div class="modal-backdrop" id="successModal">
+  <div class="modal-card">
+    <div class="modal-icon">✦</div>
+    <h2 class="modal-title">ORDEN CONFIRMADA CON ÉXITO</h2>
+    <p class="modal-text" id="modalText">
+      Gracias por tu compra en la Maison Dolce & Gabbana.<br>
+      Hemos enviado los detalles completos de la orden, el comprobante y el enlace de seguimiento a tu correo Gmail.
+    </p>
+    <a href="articulos.html" class="modal-btn">VOLVER A LA COLECCIÓN</a>
   </div>
 </div>
 
 <script>
-const urlParams = new URLSearchParams(window.location.search);
-const productId = urlParams.get('id') || 'ali-001';
-
-let currentProduct = null;
-
-// Cargar datos del producto
-async function loadProductData() {
-  try {
-    const res = await fetch('productos.json');
-    const products = await res.json();
-    currentProduct = products.find(p => p.id === productId) || products[0];
-
-    document.getElementById('productImg').src = currentProduct.imagen;
-    document.getElementById('productTitle').innerText = currentProduct.nombre;
-    document.getElementById('productProvider').innerText = currentProduct.plataforma.toUpperCase();
-    
-    const formattedPrice = `€${Number(currentProduct.precio).toFixed(2)}`;
-    document.getElementById('subtotalPrice').innerText = formattedPrice;
-    document.getElementById('totalPrice').innerText = formattedPrice;
-  } catch(e) {
-    console.error("Error cargando producto:", e);
-  }
-}
-
-// Selección de método de pago
-document.querySelectorAll('.pay-option').forEach(opt => {
-  opt.addEventListener('click', () => {
-    document.querySelectorAll('.pay-option').forEach(o => o.classList.remove('selected'));
-    opt.classList.add('selected');
-    opt.querySelector('input').checked = true;
+// Manejo de opciones de pago activas
+document.querySelectorAll('.payment-option-card').forEach(card => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.payment-option-card').forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
   });
 });
 
-// Procesar el pago y enviar datos a Supabase / Webhook Gmail
-async function procesarPago() {
-  const name = document.getElementById('buyerName').value.trim();
-  const email = document.getElementById('buyerEmail').value.trim();
-  const phone = document.getElementById('buyerPhone').value.trim();
-  const city = document.getElementById('buyerCity').value.trim();
-  const address = document.getElementById('buyerAddress').value.trim();
-  const method = document.querySelector('input[name="payMethod"]:checked')?.value || 'nequi';
-
-  if (!name || !email || !phone) {
-    alert("Por favor completa tu Nombre, Correo Gmail y Teléfono.");
-    return;
-  }
-
-  const btn = document.getElementById('btnConfirmPay');
-  btn.disabled = true;
-  btn.innerText = "PROCESANDO PEDIDO & ENVIANDO GMAIL...";
-
-  const orderData = {
-    order_id: "ORD-" + Math.floor(100000 + Math.random() * 900000),
-    product_id: currentProduct?.id,
-    product_name: currentProduct?.nombre,
-    amount: currentProduct?.precio,
-    buyer_name: name,
-    buyer_email: email,
-    buyer_phone: phone,
-    buyer_city: city,
-    buyer_address: address,
-    payment_method: method,
-    created_at: new Date().toISOString()
+// Envío del formulario
+document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const payload = {
+    nombre: document.getElementById('custName').value,
+    email: document.getElementById('custEmail').value,
+    telefono: document.getElementById('custPhone').value,
+    ciudad: document.getElementById('custCity').value,
+    direccion: document.getElementById('custAddress').value,
+    metodo_pago: document.querySelector('input[name="paymentMethod"]:checked').value,
+    producto: document.getElementById('itemName').textContent,
+    total: document.getElementById('totalVal').textContent,
+    fecha: new Date().toISOString()
   };
 
-  // 1. Enviar orden al Webhook de n8n para disparo de Gmail
+  // Disparo al Webhook de n8n para enviar el correo de agradecimiento
   try {
     fetch('https://lkevinruizl.app.n8n.cloud/webhook/pago-confirmado', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(orderData)
-    }).catch(err => console.log("Webhook disparo n8n en background:", err));
-  } catch(e) {}
+      body: JSON.stringify(payload)
+    }).catch(err => console.log('Webhook dispatched'));
+  } catch(err) {}
 
-  // 2. Mostrar modal de éxito
-  setTimeout(() => {
-    document.getElementById('successModal').style.display = 'flex';
-  }, 1200);
-}
-
-loadProductData();
+  document.getElementById('modalText').innerHTML = `
+    Estimado/a <strong>${payload.nombre}</strong>,<br>
+    Tu orden por <strong>${payload.producto}</strong> (${payload.total}) ha sido procesada mediante <strong>${payload.metodo_pago}</strong>.<br><br>
+    Se ha despachado el correo de confirmación oficial a: <strong>${payload.email}</strong>.
+  `;
+  document.getElementById('successModal').classList.add('open');
+});
 </script>
+
 </body>
 </html>

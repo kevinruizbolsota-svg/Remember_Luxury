@@ -3,696 +3,733 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Remember Luxury — Colección Privada & Activos ORIONIX</title>
-<meta name="description" content="Tienda de élite: productos físicos seleccionados, membresías KRC y activos digitales del Imperio ORIONIX. Pago directo a tu Nequi.">
+<title>DOLCE&GABBANA® — Sitio Oficial | Moda, Desfiles & Alta Costura</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --gold:#e8c86a;--gd:#b89a40;--gl:#f5e0a0;
-  --text:#f0e8d0;--dim:rgba(240,232,208,0.6);
-  --card:rgba(10,15,8,0.82);--card-b:rgba(232,200,106,0.18);
-  --green-dark:#0d1a0a;--green-mid:#1a2e14;
-  --shadow:rgba(0,0,0,0.6);
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-
-/* ===== FONDO NATURALEZA ===== */
-body{
-  font-family:'Cormorant Garamond',serif;
-  color:var(--text);
-  min-height:100vh;
-  background:#0a1208;
-  overflow-x:hidden;
-  position:relative;
+:root {
+  --black: #000000;
+  --black-pure: #050505;
+  --white: #ffffff;
+  --gray-100: #f7f7f7;
+  --gray-200: #e5e5e5;
+  --gray-400: #999999;
+  --gray-700: #333333;
+  --gold: #d4af37;
+  --gold-glow: rgba(212, 175, 55, 0.35);
+  --font-serif: 'Cinzel', serif;
+  --font-sans: 'Montserrat', sans-serif;
 }
 
-/* Paisaje SVG como fondo fijo */
-#nature-bg{
-  position:fixed;inset:0;z-index:0;
-  background:
-    linear-gradient(180deg,
-      #040c02 0%,
-      #0a1a06 15%,
-      #122806 30%,
-      #0f2008 50%,
-      #081506 70%,
-      #050d04 100%
-    );
-  overflow:hidden;
-}
-/* Cielo con lunas y estrellas */
-#nature-bg::before{
-  content:'';
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 60% 40% at 50% -10%, rgba(100,180,60,0.12) 0%, transparent 70%),
-    radial-gradient(circle at 80% 15%, rgba(232,200,106,0.25) 0%, rgba(232,200,106,0.08) 15%, transparent 30%),
-    radial-gradient(circle at 20% 10%, rgba(200,220,150,0.08) 0%, transparent 25%);
-}
-/* Niebla de selva */
-#nature-bg::after{
-  content:'';
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 120% 30% at 50% 100%, rgba(15,40,10,0.9) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 20% at 30% 85%, rgba(20,60,12,0.6) 0%, transparent 50%),
-    radial-gradient(ellipse 80% 20% at 70% 90%, rgba(20,60,12,0.5) 0%, transparent 50%);
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background-color: var(--white);
+  color: var(--black);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* SVG Paisaje */
-#landscape-svg{
-  position:absolute;
-  bottom:0;left:0;right:0;
-  height:55%;
-  opacity:0.7;
+/* TOP BANNER */
+.top-banner {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 9px 20px;
+  font-weight: 400;
 }
 
-/* Canvas de part├¡culas (luci├®rnagas) */
-#fireflies{position:absolute;inset:0;pointer-events:none}
-
-/* ===== OVERLAY ===== */
-#overlay{
-  position:fixed;inset:0;z-index:1;
-  background:linear-gradient(180deg,
-    rgba(4,10,2,0.55) 0%,
-    rgba(4,10,2,0.2) 40%,
-    rgba(4,10,2,0.65) 100%
-  );
-  pointer-events:none;
+/* HEADER */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--gray-200);
+  transition: all 0.3s;
+}
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+}
+.header-nav {
+  display: flex;
+  gap: 28px;
+}
+.header-nav a {
+  text-decoration: none;
+  color: var(--black);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+}
+.header-nav a:hover, .header-nav a.highlight {
+  opacity: 0.6;
+}
+.header-nav a.highlight {
+  color: var(--gold);
+  font-weight: 700;
+  opacity: 1;
 }
 
-/* ===== NAV ===== */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  height:62px;display:flex;align-items:center;padding:0 24px;gap:16px;
-  background:rgba(6,14,4,0.88);
-  border-bottom:1px solid rgba(100,180,60,0.2);
-  backdrop-filter:blur(20px);
-}
-.brand{
-  font-family:'Cinzel',serif;font-size:1rem;font-weight:900;
-  letter-spacing:.22em;color:var(--gold);text-decoration:none;
-}
-.nav-links{display:flex;gap:4px;flex:1}
-.nl{
-  font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.1em;
-  color:var(--dim);text-decoration:none;padding:7px 12px;
-  border-radius:6px;transition:all .2s;text-transform:uppercase;
-}
-.nl:hover,.nl.on{color:var(--gold);background:rgba(100,180,60,0.1)}
-.nav-r{display:flex;align-items:center;gap:10px;margin-left:auto}
-.cart-btn{
-  display:flex;align-items:center;gap:8px;padding:8px 18px;
-  border:1px solid rgba(232,200,106,0.35);border-radius:8px;
-  font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.1em;
-  color:var(--gold);background:rgba(232,200,106,0.06);
-  cursor:pointer;transition:all .25s;position:relative;
-}
-.cart-btn:hover{background:rgba(232,200,106,0.14);box-shadow:0 0 20px rgba(100,200,60,0.15)}
-.cart-count{
-  position:absolute;top:-7px;right:-7px;width:20px;height:20px;
-  border-radius:50%;background:var(--gold);color:#0a1208;
-  font-size:.62rem;font-weight:900;display:flex;align-items:center;justify-content:center;
-}
-@media(max-width:750px){.nav-links{display:none}}
-
-/* ===== HERO ===== */
-.hero{
-  position:relative;z-index:10;
-  text-align:center;padding:120px 24px 60px;
-}
-.hero-tag{
-  font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.4em;
-  color:rgba(100,200,60,0.8);text-transform:uppercase;margin-bottom:12px;
-}
-.hero-title{
-  font-family:'Cinzel',serif;
-  font-size:clamp(2rem,5vw,3.5rem);
-  font-weight:900;color:var(--text);
-  letter-spacing:.05em;line-height:1.1;
-  text-shadow:0 4px 30px rgba(0,0,0,0.8),0 0 60px rgba(100,200,60,0.15);
-}
-.hero-title span{color:var(--gold)}
-.hero-sub{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.05rem;color:var(--dim);
-  margin-top:10px;font-style:italic;
+.logo-brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-decoration: none;
+  color: var(--black);
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  text-align: center;
 }
 
-/* ===== BARRA B├ÜSQUEDA ===== */
-.search-wrap{
-  position:relative;z-index:10;
-  max-width:580px;margin:0 auto 32px;padding:0 24px;
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
 }
-.search-bar{
-  width:100%;padding:14px 52px 14px 20px;
-  background:rgba(10,20,8,0.85);
-  border:1px solid rgba(100,180,60,0.3);
-  border-radius:50px;
-  font-family:'Cormorant Garamond',serif;font-size:1rem;
-  color:var(--text);outline:none;backdrop-filter:blur(12px);
-  transition:border-color .3s,box-shadow .3s;
+.action-link {
+  text-decoration: none;
+  color: var(--black);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
 }
-.search-bar:focus{
-  border-color:rgba(100,200,60,0.6);
-  box-shadow:0 0 25px rgba(100,200,60,0.15);
+.btn-pasarela-header {
+  background: var(--black);
+  color: var(--white);
+  padding: 8px 18px;
+  font-family: var(--font-serif);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--black);
+  transition: all 0.3s;
 }
-.search-bar::placeholder{color:var(--dim)}
-.search-icon{
-  position:absolute;right:38px;top:50%;transform:translateY(-50%);
-  color:rgba(100,200,60,0.6);font-size:1.1rem;pointer-events:none;
-}
-
-/* ===== FILTROS ===== */
-.filter-wrap{
-  position:relative;z-index:10;
-  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
-  padding:0 24px 28px;
-}
-.fb{
-  font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.12em;
-  padding:8px 16px;border-radius:50px;border:1px solid rgba(100,180,60,0.25);
-  color:var(--dim);background:rgba(10,20,8,0.7);cursor:pointer;
-  transition:all .25s;text-transform:uppercase;backdrop-filter:blur(8px);
-}
-.fb:hover{border-color:rgba(100,200,60,0.5);color:rgba(150,230,80,0.9)}
-.fb.on{
-  background:rgba(60,120,20,0.4);
-  border-color:rgba(100,200,60,0.7);
-  color:#b8f078;
-  box-shadow:0 0 15px rgba(100,200,60,0.2);
+.btn-pasarela-header:hover {
+  background: var(--gold);
+  color: var(--black);
+  border-color: var(--gold);
 }
 
-/* ===== INFO BAR ===== */
-.info-bar{
-  position:relative;z-index:10;
-  display:flex;justify-content:space-between;align-items:center;
-  max-width:1320px;margin:0 auto 16px;padding:0 24px;
-  font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.1em;
-  color:var(--dim);
+/* HERO SECTION EDITORIAL */
+.hero-editorial {
+  position: relative;
+  width: 100vw;
+  height: 92vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 80px 48px;
+  background: var(--black);
+  overflow: hidden;
+}
+.hero-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.9) 100%);
+}
+.hero-caption {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
+  color: var(--white);
+}
+.hero-eyebrow {
+  font-family: var(--font-serif);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 5.5vw, 68px);
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero-btn-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.hero-btn-white {
+  background: var(--white);
+  color: var(--black);
+  padding: 16px 36px;
+  font-family: var(--font-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.hero-btn-white:hover {
+  background: var(--black);
+  color: var(--white);
+  border: 1px solid var(--white);
+}
+.hero-btn-gold {
+  background: var(--gold);
+  color: var(--black);
+  padding: 16px 36px;
+  font-family: var(--font-serif);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--gold);
+  transition: all 0.3s;
+}
+.hero-btn-gold:hover {
+  background: transparent;
+  color: var(--gold);
 }
 
-/* ===== GRID ===== */
-.catalog{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:0 20px 80px}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:20px;
+/* SECTION HEADERS */
+.section-title-wrap {
+  text-align: center;
+  padding: 90px 20px 40px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.section-tag {
+  font-family: var(--font-serif);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.section-heading {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.section-sub {
+  font-size: 12px;
+  color: var(--gray-700);
+  letter-spacing: 0.06em;
 }
 
-/* ===== TARJETAS ===== */
-.card{
-  background:var(--card);
-  border:1px solid var(--card-b);
-  border-radius:14px;
-  overflow:hidden;
-  transition:transform .3s,box-shadow .3s,border-color .3s;
-  cursor:pointer;
-  backdrop-filter:blur(16px);
+/* EDITORIAL SPLIT CATEGORIES */
+.editorial-grid {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 48px 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
-.card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 20px 50px rgba(0,0,0,0.5),0 0 30px rgba(100,200,60,0.12);
-  border-color:rgba(100,200,60,0.4);
+.editorial-card {
+  position: relative;
+  height: 580px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 36px;
+  text-decoration: none;
+  color: var(--white);
 }
-.card-img{
-  width:100%;aspect-ratio:1;object-fit:cover;
-  transition:transform .4s;display:block;
+.editorial-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.card:hover .card-img{transform:scale(1.04)}
-.card-body{padding:14px}
-.card-cat{
-  font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.18em;
-  color:rgba(100,200,60,0.75);text-transform:uppercase;margin-bottom:6px;
+.editorial-card:hover .editorial-img {
+  transform: scale(1.06);
 }
-.card-name{
-  font-family:'Cinzel',serif;font-size:.78rem;font-weight:600;
-  color:var(--text);line-height:1.3;margin-bottom:6px;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+.editorial-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.85) 100%);
 }
-.card-desc{
-  font-size:.78rem;color:var(--dim);line-height:1.4;margin-bottom:12px;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+.editorial-content {
+  position: relative;
+  z-index: 10;
 }
-.card-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.card-price{
-  font-family:'Cinzel',serif;font-size:.95rem;font-weight:700;color:var(--gold);
+.editorial-category {
+  font-family: var(--font-serif);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 6px;
 }
-.add-btn{
-  font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.1em;
-  padding:7px 12px;border-radius:6px;cursor:pointer;
-  background:rgba(60,120,20,0.35);
-  border:1px solid rgba(100,200,60,0.5);
-  color:rgba(150,230,80,0.9);transition:all .2s;
-  white-space:nowrap;
+.editorial-name {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
 }
-.add-btn:hover{background:rgba(60,120,20,0.6);box-shadow:0 0 12px rgba(100,200,60,0.25)}
-
-/* ===== PAGINACI├ôN ===== */
-.pagination{
-  display:flex;justify-content:center;align-items:center;
-  gap:6px;padding:40px 24px 20px;position:relative;z-index:10;
-}
-.pg{
-  font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.08em;
-  padding:8px 14px;border-radius:8px;cursor:pointer;
-  border:1px solid rgba(100,180,60,0.25);
-  color:var(--dim);background:rgba(10,20,8,0.7);
-  transition:all .2s;
-}
-.pg:hover{border-color:rgba(100,200,60,0.5);color:rgba(150,230,80,0.9)}
-.pg.on{background:rgba(60,120,20,0.5);border-color:rgba(100,200,60,0.7);color:#b8f078}
-
-/* ===== CARRITO ===== */
-.cart-overlay{
-  display:none;position:fixed;inset:0;z-index:400;
-  background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);
-}
-.cart-overlay.open{display:block}
-.cart-panel{
-  position:fixed;top:0;right:-400px;width:380px;height:100vh;z-index:500;
-  background:rgba(8,16,6,0.97);border-left:1px solid rgba(100,200,60,0.2);
-  backdrop-filter:blur(20px);transition:right .35s cubic-bezier(.4,0,.2,1);
-  display:flex;flex-direction:column;padding:24px;
-}
-.cart-panel.open{right:0}
-.cart-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.cart-head h2{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.15em;color:var(--gold)}
-.close-cart{background:none;border:none;color:var(--dim);font-size:1.4rem;cursor:pointer}
-.cart-items{flex:1;overflow-y:auto}
-.cart-item{
-  display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(100,200,60,0.1);
-}
-.cart-item img{width:60px;height:60px;object-fit:cover;border-radius:8px}
-.ci-info{flex:1}
-.ci-name{font-family:'Cinzel',serif;font-size:.7rem;color:var(--text);margin-bottom:4px}
-.ci-price{font-size:.8rem;color:var(--gold)}
-.remove-item{background:none;border:none;color:rgba(200,80,80,0.7);cursor:pointer;font-size:1rem}
-.empty-cart{text-align:center;padding:40px;color:var(--dim);font-style:italic}
-.cart-foot{padding-top:16px;border-top:1px solid rgba(100,200,60,0.15)}
-.cart-total{display:flex;justify-content:space-between;font-family:'Cinzel',serif;font-size:.85rem;color:var(--text);margin-bottom:16px}
-.checkout-btn{
-  width:100%;padding:14px;border-radius:10px;cursor:pointer;
-  font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.12em;
-  background:linear-gradient(135deg,rgba(60,120,20,0.7),rgba(100,180,40,0.5));
-  border:1px solid rgba(100,200,60,0.5);color:#b8f078;
-  transition:all .25s;
-}
-.checkout-btn:hover{background:linear-gradient(135deg,rgba(80,150,30,0.8),rgba(120,200,50,0.6));box-shadow:0 0 20px rgba(100,200,60,0.3)}
-
-/* ===== TOAST ===== */
-.toast{
-  position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
-  background:rgba(10,20,6,0.97);border:1px solid rgba(100,200,60,0.4);
-  border-radius:10px;padding:12px 24px;font-family:'Cinzel',serif;font-size:.7rem;
-  letter-spacing:.08em;color:var(--text);z-index:9999;
-  opacity:0;transition:all .3s;pointer-events:none;
-}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-@media(max-width:600px){
-  .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
-  .cart-panel{width:100%;right:-100%;border-left:none}
+.editorial-link-text {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-weight: 500;
 }
 
-/* ===== LUCI├ëRNAGAS CSS (backup) ===== */
-@keyframes float{0%,100%{transform:translateY(0) translateX(0);opacity:.3}50%{transform:translateY(-30px) translateX(15px);opacity:.9}}
-</style>
+/* PRODUCT COLLECTION GRID */
+.product-grid-section {
+  background: var(--gray-100);
+  padding: 80px 48px 100px;
+}
+.products-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 32px;
+}
 
-<style>
-/* ===== ESTILOS ADICIONALES PARA CARDS DE PRODUCTO ===== */
-.card{
-  background:var(--card);
-  border:1px solid var(--card-b);
-  border-radius:14px;overflow:hidden;
-  display:flex;flex-direction:column;
-  transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .35s;
-  backdrop-filter:blur(10px);
+.dg-product-card {
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--gray-200);
+  transition: all 0.35s ease;
+  position: relative;
 }
-.card:hover{
-  transform:translateY(-7px);
-  border-color:rgba(232,200,106,0.5);
-  box-shadow:0 16px 40px rgba(0,0,0,.7),0 0 20px rgba(100,200,60,0.12);
+.dg-product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.08);
+  border-color: var(--black);
 }
-.card-img{
-  width:100%;height:200px;object-fit:cover;
-  transition:transform .5s ease;
-  background:#0a1208;
+.card-photo-box {
+  position: relative;
+  height: 380px;
+  background: #fbfbfb;
+  overflow: hidden;
 }
-.card:hover .card-img{transform:scale(1.07)}
-.card-badge{
-  position:absolute;top:10px;left:10px;
-  padding:4px 10px;border-radius:20px;font-size:.6rem;font-weight:700;
-  font-family:'Cinzel',serif;letter-spacing:.1em;
-  background:rgba(6,14,4,.9);border:1px solid rgba(232,200,106,.6);
-  color:var(--gold);backdrop-filter:blur(6px);
+.card-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
 }
-.card-img-wrap{position:relative}
-.card-body{padding:16px;display:flex;flex-direction:column;flex:1;gap:8px}
-.card-cat{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.18em;color:rgba(120,210,60,.9);text-transform:uppercase}
-.card-name{font-family:'Cinzel',serif;font-size:.9rem;font-weight:700;color:var(--text);line-height:1.35;min-height:42px}
-.card-meta{display:flex;justify-content:space-between;align-items:center;font-size:.72rem}
-.card-stars{color:#e8c86a}
-.card-sold{color:var(--dim);font-size:.65rem}
-.card-desc{font-size:.78rem;color:var(--dim);line-height:1.5;min-height:48px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.card-footer{margin-top:auto;padding-top:12px;border-top:1px solid rgba(100,180,60,.15)}
-.price-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.card-price{font-size:1.2rem;font-weight:700;color:var(--gold)}
-.card-old-price{font-size:.72rem;text-decoration:line-through;color:var(--dim)}
-.card-guarantee{font-size:.65rem;color:#7fd060;font-weight:600}
-.btn-tienda{
-  display:block;width:100%;padding:10px;
-  background:linear-gradient(135deg,var(--gold) 0%,var(--gd) 100%);
-  color:#050d04;font-family:'Cinzel',serif;font-size:.7rem;font-weight:900;
-  letter-spacing:.1em;border:none;border-radius:8px;cursor:pointer;
-  text-align:center;text-decoration:none;
-  box-shadow:0 4px 14px rgba(100,180,40,.25);
-  transition:all .25s;margin-bottom:6px;
+.dg-product-card:hover .card-photo {
+  transform: scale(1.05);
 }
-.btn-tienda:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(130,220,50,.35)}
-.btn-proveedor{
-  display:block;width:100%;padding:7px;
-  background:rgba(255,255,255,.04);border:1px solid rgba(100,180,60,.25);
-  color:var(--dim);font-family:'Cinzel',serif;font-size:.62rem;
-  border-radius:8px;text-align:center;text-decoration:none;
-  transition:all .2s;cursor:pointer;
+.card-tag-exclusive {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--white);
+  padding: 4px 10px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border: 1px solid var(--gray-200);
 }
-.btn-proveedor:hover{border-color:rgba(100,200,60,.6);color:var(--text)}
 
-/* Cart panel */
-.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:500;opacity:0;pointer-events:none;transition:opacity .3s}
-.cart-overlay.open{opacity:1;pointer-events:all}
-.cart-panel{
-  position:fixed;top:0;right:-420px;width:380px;height:100vh;
-  background:rgba(8,16,6,.98);border-left:1px solid rgba(100,180,60,.25);
-  z-index:600;transition:right .35s cubic-bezier(.16,1,.3,1);
-  display:flex;flex-direction:column;backdrop-filter:blur(20px);padding:20px;gap:16px;
+.card-details-box {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
-.cart-panel.open{right:0}
-.cart-header{display:flex;justify-content:space-between;align-items:center}
-.cart-title{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);letter-spacing:.15em}
-.close-cart{background:none;border:none;color:var(--dim);font-size:1.4rem;cursor:pointer;transition:color .2s}
-.close-cart:hover{color:var(--gold)}
-.cart-items{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
-.cart-item{display:flex;gap:12px;align-items:center;padding:10px;border-radius:10px;background:rgba(100,180,40,.06);border:1px solid rgba(100,180,40,.12)}
-.cart-item img{width:56px;height:56px;object-fit:cover;border-radius:8px}
-.ci-info{flex:1}
-.ci-name{font-size:.8rem;font-weight:600;color:var(--text);line-height:1.3}
-.ci-price{font-size:.75rem;color:var(--gold);margin-top:4px}
-.remove-item{background:none;border:none;color:var(--dim);cursor:pointer;font-size:1rem;padding:4px}
-.remove-item:hover{color:#f87171}
-.cart-footer{border-top:1px solid rgba(100,180,60,.2);padding-top:16px}
-.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.cart-total-label{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.12em;color:var(--dim)}
-.cart-total-amount{font-size:1.2rem;font-weight:700;color:var(--gold)}
-.btn-checkout{
-  display:block;width:100%;padding:13px;
-  background:linear-gradient(135deg,var(--gold),var(--gd));
-  color:#050d04;font-family:'Cinzel',serif;font-size:.8rem;font-weight:900;
-  letter-spacing:.1em;border:none;border-radius:10px;cursor:pointer;
-  text-align:center;text-decoration:none;
-  box-shadow:0 4px 16px rgba(100,180,40,.3);transition:all .25s;
+.card-cat-name {
+  font-size: 9px;
+  color: var(--gray-400);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-weight: 600;
 }
-.btn-checkout:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(130,220,50,.4)}
-.empty-cart{text-align:center;padding:40px 20px;color:var(--dim);font-style:italic}
-.toast{
-  position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);
-  padding:12px 24px;background:rgba(40,100,20,.95);border:1px solid rgba(100,200,60,.5);
-  border-radius:50px;color:#c8f0a0;font-size:.85rem;z-index:9999;
-  transition:transform .3s cubic-bezier(.16,1,.3,1);pointer-events:none;backdrop-filter:blur(12px);
+.card-item-title {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  min-height: 40px;
 }
-.toast.show{transform:translateX(-50%) translateY(0)}
+.card-price-tag {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 18px;
+  color: var(--black);
+}
+.card-btns-row {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.btn-card-buy {
+  background: var(--black);
+  color: var(--white);
+  padding: 12px;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.btn-card-buy:hover {
+  background: var(--gold);
+  color: var(--black);
+}
+.btn-card-details {
+  background: transparent;
+  color: var(--gray-700);
+  border: 1px solid var(--gray-200);
+  padding: 10px;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-card-details:hover {
+  border-color: var(--black);
+  color: var(--black);
+}
+
+/* BANNER PASARELA TEASER */
+.runway-teaser-banner {
+  background: var(--black-pure);
+  color: var(--white);
+  padding: 100px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.runway-teaser-content {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.runway-teaser-title {
+  font-family: var(--font-serif);
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  color: var(--gold);
+}
+.runway-teaser-desc {
+  font-size: 13px;
+  color: var(--gray-400);
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+
+/* FOOTER */
+footer {
+  background: var(--black);
+  color: var(--white);
+  padding: 80px 48px 40px;
+}
+.footer-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  margin-bottom: 60px;
+}
+.footer-col-title {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.footer-menu {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-menu a {
+  color: var(--gray-400);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  transition: color 0.2s;
+}
+.footer-menu a:hover {
+  color: var(--white);
+}
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 30px;
+  text-align: center;
+  font-size: 10px;
+  color: var(--gray-400);
+  letter-spacing: 0.14em;
+}
+
+@media(max-width: 992px) {
+  .editorial-grid { grid-template-columns: 1fr; }
+  .editorial-card { height: 420px; }
+  .footer-container { grid-template-columns: 1fr 1fr; }
+  .header-nav { display: none; }
+}
 </style>
 </head>
 <body>
 
-<!-- FONDO NATURALEZA -->
-<div id="nature-bg">
-  <canvas id="fireflies"></canvas>
-  <svg id="landscape-svg" viewBox="0 0 1440 500" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="1150" cy="80" r="55" fill="#f5e8b0" opacity="0.18"/>
-    <circle cx="1150" cy="80" r="48" fill="#fdf5d0" opacity="0.22"/>
-    <ellipse cx="720" cy="500" rx="900" ry="120" fill="#0d2208" opacity="0.8"/>
-    <polygon points="0,500 0,300 200,180 400,280 600,160 800,260 1000,140 1200,240 1440,160 1440,500" fill="#0f2010" opacity="0.9"/>
-    <polygon points="0,500 0,360 100,290 300,340 500,240 700,300 900,200 1100,280 1300,220 1440,260 1440,500" fill="#132a10" opacity="0.85"/>
-    <polygon points="0,500 0,400 60,350 120,390 180,340 240,380 300,330 360,370 420,320 480,365 540,310 600,360 660,300 720,350 780,290 840,345 900,285 960,340 1020,280 1080,335 1140,270 1200,325 1260,260 1320,315 1380,255 1440,300 1440,500" fill="#163512" opacity="0.9"/>
-    <path d="M-20,500 Q10,350 40,280 Q70,200 100,500Z" fill="#1a4012"/><path d="M60,500 Q90,340 120,260 Q150,180 180,500Z" fill="#1d4a14"/>
-    <path d="M200,500 Q230,360 260,280 Q290,200 320,500Z" fill="#18400f"/><path d="M380,500 Q415,345 445,265 Q475,185 500,500Z" fill="#1a4512"/>
-    <path d="M520,500 Q560,335 590,255 Q620,175 650,500Z" fill="#163a0e"/><path d="M700,500 Q735,350 765,270 Q795,190 820,500Z" fill="#1c4814"/>
-    <path d="M870,500 Q905,340 935,260 Q965,180 990,500Z" fill="#1a4210"/><path d="M1060,500 Q1095,345 1125,265 Q1155,185 1180,500Z" fill="#174010"/>
-    <path d="M1250,500 Q1285,360 1315,280 Q1345,200 1375,500Z" fill="#1b4513"/><path d="M1400,500 Q1420,370 1440,300 L1440,500Z" fill="#163a0e"/>
-    <ellipse cx="720" cy="500" rx="800" ry="60" fill="#0d2008" opacity="0.7"/>
-  </svg>
-</div>
-<div id="overlay"></div>
-
-<!-- NAV -->
-<nav>
-  <a href="../index.html" class="brand">REMEMBER LUXURY</a>
-  <div class="nav-links">
-    <a href="articulos.html" class="nl on">💎 Colección</a>
-    <a href="la_forja/plaza.html" class="nl">⚡ Ciudadela</a>
-    <a href="../index.html" class="nl">🏠 Inicio</a>
-  </div>
-  <div class="nav-r">
-    <button class="cart-btn" id="cartBtn">
-      🛒 Carrito
-      <span class="cart-count" id="cartCount">0</span>
-    </button>
-  </div>
-</nav>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-tag">✦ COLECCIÓN PRIVADA DE ÉLITE ✦</div>
-  <h1 class="hero-title">REMEMBER <span>LUXURY</span></h1>
-  <div class="hero-sub" id="heroSub">Artículos físicos seleccionados · Activos del Imperio ORIONIX · Pago directo</div>
+<div class="top-banner">
+  DESFILE WOMEN'S FALL WINTER 2026 DISPONIBLE · ENVÍO Y EMBALAJE DE LUJO DE CORTESÍA
 </div>
 
-<!-- BUSCADOR -->
-<div class="search-wrap">
-  <input type="text" id="searchInput" class="search-bar" placeholder="Buscar reloj, gafas, luna, KRC...">
-  <span class="search-icon">🔍</span>
-</div>
+<header>
+  <div class="header-container">
+    <nav class="header-nav">
+      <a href="articulos.html">MUJER</a>
+      <a href="articulos.html">HOMBRE</a>
+      <a href="pasarela.html" class="highlight">✦ FASHION SHOWS 2026</a>
+      <a href="producto-detalle.html">ALTA MODA</a>
+    </nav>
 
-<!-- FILTROS -->
-<div class="filter-wrap" id="filters">
-  <button class="fb on" data-cat="TODOS">⚡ Todos</button>
-  <button class="fb" data-cat="FISICO">💎 Físicos</button>
-  <button class="fb" data-cat="DIGITAL">👑 Digital & KRC</button>
-  <button class="fb" data-cat="FITNESS">🏋️ Fitness</button>
-  <button class="fb" data-cat="TECH">⚡ Tech</button>
-  <button class="fb" data-cat="BEBIDAS">🥤 Bebidas</button>
-  <button class="fb" data-cat="HOGAR">🏠 Hogar</button>
-  <button class="fb" data-cat="MODA">👗 Moda</button>
-</div>
+    <a href="articulos.html" class="logo-brand">DOLCE & GABBANA</a>
 
-<!-- INFO BAR -->
-<div class="info-bar">
-  <span id="resultCount">18 productos</span>
-  <span>💚 Entrega VIP · Pago directo Nequi/Tarjeta</span>
-</div>
-
-<!-- GRID DE PRODUCTOS -->
-<div class="catalog">
-  <div class="grid" id="grid"></div>
-  <div id="pagination" style="display:flex;justify-content:center;gap:8px;margin-top:40px;flex-wrap:wrap;position:relative;z-index:10"></div>
-</div>
-
-<!-- CART OVERLAY + PANEL -->
-<div class="cart-overlay" id="cartOverlay"></div>
-<div class="cart-panel" id="cartPanel">
-  <div class="cart-header">
-    <span class="cart-title">🛒 Mi Carrito</span>
-    <button class="close-cart" id="closeCart">✕</button>
-  </div>
-  <div class="cart-items" id="cartItems">
-    <div class="empty-cart">Tu carrito está vacío</div>
-  </div>
-  <div class="cart-footer">
-    <div class="cart-total-row">
-      <span class="cart-total-label">TOTAL</span>
-      <span class="cart-total-amount" id="cartTotal">€0.00</span>
+    <div class="header-actions">
+      <a href="pasarela.html" class="btn-pasarela-header">VER PASARELA 2026</a>
+      <a href="pago-premium.html" class="action-link">BOLSA (1)</a>
     </div>
-    <a href="pago-premium.html" class="btn-checkout" id="checkoutBtn">⚡ PROCEDER AL PAGO SEGURO</a>
   </div>
-</div>
+</header>
 
-<div class="toast" id="toast"></div>
+<!-- HERO PRINCIPAL DE DOLCE & GABBANA -->
+<section class="hero-editorial">
+  <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1600&auto=format&fit=crop&q=85" alt="Dolce & Gabbana Fall Winter 2026 Hero" class="hero-bg-img">
+  <div class="hero-overlay"></div>
+  
+  <div class="hero-caption">
+    <div class="hero-eyebrow">✦ COLECCIÓN ALTA MODA MILANO ✦</div>
+    <h1 class="hero-title">WOMEN'S FALL WINTER 2026</h1>
+    <div class="hero-btn-row">
+      <a href="producto-detalle.html" class="hero-btn-white">COMPRAR VESTIDO DOBLE CREPÉ</a>
+      <a href="pasarela.html" class="hero-btn-gold">DESCUBRIR EL DESFILE</a>
+    </div>
+  </div>
+</section>
 
-<script>
-// ====== LUCIÉRNAGAS ======
-(function(){
-  const c=document.getElementById('fireflies');
-  const cx=c.getContext('2d');
-  let ff=[];
-  function resize(){c.width=window.innerWidth;c.height=window.innerHeight}
-  function initFF(){
-    ff=Array.from({length:55},()=>({
-      x:Math.random()*c.width,y:Math.random()*c.height*0.8+c.height*0.1,
-      r:Math.random()*2+1,
-      vx:(Math.random()-.5)*0.4,vy:(Math.random()-.5)*0.3,
-      phase:Math.random()*Math.PI*2,speed:Math.random()*.02+.008,
-      hue:Math.random()<0.7?100+Math.random()*40:45+Math.random()*20
-    }));
-  }
-  function animFF(){
-    cx.clearRect(0,0,c.width,c.height);
-    ff.forEach(f=>{
-      f.phase+=f.speed;f.x+=f.vx;f.y+=f.vy;
-      if(f.x<0)f.x=c.width;if(f.x>c.width)f.x=0;
-      if(f.y<0)f.y=c.height*0.8;if(f.y>c.height)f.y=0;
-      const a=Math.sin(f.phase)*.5+.5;
-      cx.beginPath();cx.arc(f.x,f.y,f.r,0,Math.PI*2);
-      cx.fillStyle=hsla(,90%,65%,);cx.fill();
-      cx.beginPath();cx.arc(f.x,f.y,f.r*3,0,Math.PI*2);
-      cx.fillStyle=hsla(,90%,65%,);cx.fill();
-    });
-    requestAnimationFrame(animFF);
-  }
-  window.addEventListener('resize',()=>{resize();initFF()});
-  resize();initFF();animFF();
-})();
+<!-- SECCIÓN EDITORIAL EN TRES BLOQUES -->
+<section>
+  <div class="section-title-wrap">
+    <div class="section-tag">UNIVERSO DE LA MAISON</div>
+    <h2 class="section-heading">LAS COLECCIONES 2026</h2>
+    <p class="section-sub">Tradición sartorial, sensualidad italiana y modernidad absoluta.</p>
+  </div>
 
-// ====== CATÁLOGO ======
-const PRODUCTOS = [
-  {id:"real-001",n:"Coca-Cola Original Pack 24x330ml / Zero Sugar",d:"Pack de 24 latas Coca-Cola original, Zero Sugar, Fanta o Nestea. Directo desde distribuidor oficial.",p:15.92,po:30.00,c:"BEBIDAS",ct:"Alimentos & Bebidas",t:"FISICO",img:"https://images.unsplash.com/photo-1554866585-cd94860890b7?w=500&auto=format&fit=crop&q=80",link:"https://www.aliexpress.com/wholesale?SearchText=coca+cola+pack+24+330ml",r:4.7,rv:"10K+",badge:"SUPER PRECIO"},
-  {id:"real-002",n:"Mancuernas Ajustables 10 a 50kg con Barra",d:"Set de mancuernas ajustables que se combinan libremente para entrenamientos en casa desde 10 hasta 50 kg.",p:25.61,po:67.20,c:"FITNESS",ct:"Fitness & Salud",t:"FISICO",img:"https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=500&auto=format&fit=crop&q=80",link:"https://www.aliexpress.com/wholesale?SearchText=adjustable+dumbbell+barbell+10kg+50kg",r:4.7,rv:"1.5K+",badge:"POTENCIA"},
-  {id:"real-003",n:"Aspiradora Inalámbrica Portátil Auto & Casa",d:"Succión ciclónica de alta potencia sin cable, ideal para polvo, pelos de mascotas y superficies de auto.",p:15.81,po:52.94,c:"HOGAR",ct:"Casa & Hogar",t:"FISICO",img:"https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500&auto=format&fit=crop&q=80",link:"https://www.aliexpress.com/wholesale?SearchText=cordless+handheld+vacuum+cleaner",r:4.5,rv:"2K+",badge:"VIRAL"},
-  {id:"real-004",n:"Zapatillas Li-Ning Red Hare 8 Running Ultra",d:"Zapatillas de competición con tecnología LIGHT FOAM ULTRA, suela reflectante y diseño aerodinámico.",p:47.39,po:74.05,c:"FITNESS",ct:"Calzado Deportivo",t:"FISICO",img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop&q=80",link:"https://www.aliexpress.com/wholesale?SearchText=li-ning+red+hare+8+running+shoes",r:4.8,rv:"10K+",badge:"RUNNING PRO"},
-  {id:"real-005",n:"Auriculares QCY MeloBuds N70 ANC Bluetooth 6.0 LDAC",d:"ANC adaptativo, LDAC Hi-Res Audio, 6 micrófonos, carga inalámbrica y 50 horas de autonomía con IPX5.",p:45.23,po:111.31,c:"TECH",ct:"Audio & Tech",t:"FISICO",img:"https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=500&auto=format&fit=crop&q=80",link:"https://www.aliexpress.com/wholesale?SearchText=QCY+MeloBuds+N70+ANC+earbuds+bluetooth",r:4.7,rv:"10K+",badge:"HI-RES"},
-  {id:"real-006",n:"Barra Dominadas en Pared Heavy Duty Gym Casa",d:"Barra multi-agarre de acero reforzado para montaje en pared. Entrena espalda, brazos y hombros.",p:32.41,po:130.34,c:"FITNESS",ct:"Calistenia",t:"FISICO",img:"https://images.unsplash.com/photo-1598971639058-fab3c3109a47?w=500&auto=format&fit=crop&q=80",link:"https://www.aliexpress.com/wholesale?SearchText=wall+mounted+pull+up+bar+heavy+duty",r:4.8,rv:"500+",badge:"CALISTENIA"},
-  {id:"real-007",n:"🌕 Lámpara Luna 3D Levitación Magnética Giratoria",d:"Esfera lunar 3D fotorrealista que levita y gira en el aire mediante levitación electromagnética y base de madera.",p:63.99,po:145.43,c:"HOGAR",ct:"Decoración Futurista",t:"FISICO",img:"https://images.unsplash.com/photo-1532767153582-b1a0e5145009?w=500&auto=format&fit=crop&q=80",link:"https://www.aliexpress.com/wholesale?SearchText=moon+lamp+3d+magnetic+levitation+floating",r:4.8,rv:"8K+",badge:"🌕 LUNA 3D"},
-  {id:"real-008",n:"Push-Up Board 28 en 1 con Asas y Bandas",d:"Sistema de colores guiado para pecho, hombros, tríceps y core. Plegable, con asas incluidas.",p:11.07,po:42.02,c:"FITNESS",ct:"Fitness & Salud",t:"FISICO",img:"https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=500&auto=format&fit=crop&q=80",link:"https://www.aliexpress.com/wholesale?SearchText=push+up+board+28+holes+foldable+fitness",r:4.9,rv:"15K+",badge:"MÁS VENDIDO"},
-  {id:"real-009",n:"Lima Eléctrica Pedicura 9 Velocidades USB-C",d:"Exfoliador eléctrico de pies con 9 velocidades para piel seca y callos. Recargable e impermeable.",p:26.01,po:155.48,c:"MODA",ct:"Cuidado Personal",t:"FISICO",img:"https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&auto=format&fit=crop&q=80",link:"https://www.aliexpress.com/wholesale?SearchText=electric+foot+grinder+9+speed+rechargeable",r:4.6,rv:"3K+",badge:"-83% HOY"},
-  {id:"real-010",n:"Shorts Deportivos Quick Dry Hombre 2025",d:"Pantalón corto de secado ultrarrápido para running y gym con tejido transpirable de primera calidad.",p:8.29,po:17.26,c:"FITNESS",ct:"Ropa Deportiva",t:"FISICO",img:"https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=500&auto=format&fit=crop&q=80",link:"https://www.aliexpress.com/wholesale?SearchText=mens+shorts+quick+dry+running+gym+2025",r:4.7,rv:"5K+",badge:"TENDENCIA"},
-  {id:"real-011",n:"Shorts Multi-Bolsillo Fitness Camo & Malla",d:"Short multipocket con forro interior anti-rozaduras, diseño camouflage y tejido de malla respirable.",p:6.79,po:14.45,c:"FITNESS",ct:"Ropa Deportiva",t:"FISICO",img:"https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=500&auto=format&fit=crop&q=80",link:"https://www.aliexpress.com/wholesale?SearchText=mens+multi+pocket+shorts+camouflage+mesh",r:4.6,rv:"2K+",badge:"STREET"},
-  {id:"real-012",n:"Gel Frío Reutilizable para Labios Post-Cirugía",d:"Almohadillas de gel flexible para alivio de dolor post-cirugía y lesiones cosméticas. Reutilizable.",p:2.94,po:5.77,c:"MODA",ct:"Bienestar",t:"FISICO",img:"https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=500&auto=format&fit=crop&q=80",link:"https://www.aliexpress.com/wholesale?SearchText=lip+gel+ice+packs+cold+compress+flexible",r:4.6,rv:"1K+",badge:"BIENESTAR"},
-  {id:"lux-001",n:"Reloj Cronógrafo Lujo LIGE Oro & Cristal Zafiro",d:"Maquinaria japonesa de cuarzo, caja de acero dorada, sumergible 30M y cristal zafiro antirrayaduras.",p:49.90,po:120.00,c:"MODA",ct:"Alta Relojería",t:"FISICO",img:"https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500&auto=format&fit=crop&q=80",link:"https://www.aliexpress.com/wholesale?SearchText=LIGE+chronograph+luxury+gold+watch+sapphire",r:4.9,rv:"15K+",badge:"ÉLITE"},
-  {id:"lux-002",n:"Gafas Polarizadas Aviador en Titanio UV400",d:"Montura de titanio aeronáutico, lentes HD polarizados de 9 capas con protección UV400 y antirreflejo.",p:29.90,po:65.00,c:"MODA",ct:"Accesorios Lujo",t:"FISICO",img:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500&auto=format&fit=crop&q=80",link:"https://www.aliexpress.com/wholesale?SearchText=polarized+aviator+sunglasses+titanium+UV400",r:4.9,rv:"25K+",badge:"MÁS VENDIDO"},
-  {id:"lux-004",n:"Billetera Fibra de Carbono con Bloqueo RFID",d:"Ultradelgada, expulsión de 7 tarjetas con 1 clic y blindaje magnético antifraude total.",p:18.90,po:45.00,c:"MODA",ct:"Accesorios Lujo",t:"FISICO",img:"https://images.unsplash.com/photo-1627123424574-724758594e93?w=500&auto=format&fit=crop&q=80",link:"https://www.aliexpress.com/wholesale?SearchText=carbon+fiber+wallet+RFID+blocking+slim",r:4.9,rv:"40K+",badge:"TOP RFID"},
-  {id:"lux-006",n:"Teclado Mecánico Custom K86 Pantalla TFT & RGB",d:"Switches silenciosos prelubricados, pantalla a color con GIFs, perilla multimedia y wireless triple.",p:55.00,po:110.00,c:"TECH",ct:"Gaming Setup",t:"FISICO",img:"https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500&auto=format&fit=crop&q=80",link:"https://www.aliexpress.com/wholesale?SearchText=custom+mechanical+keyboard+TFT+screen+RGB",r:4.9,rv:"10K+",badge:"CUSTOM"},
-  {id:"krc-001",n:"👑 Pase Kether VIP — Acceso Vitalicio Ciudadela Gaia",d:"Acceso total a las 22 Casas de Agentes de IA, La Forja, El Oráculo y todas las actualizaciones del Imperio.",p:99.00,po:299.00,c:"DIGITAL",ct:"Imperio ORIONIX",t:"DIGITAL",img:"https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=80",link:"pago-premium.html?id=krc-001",r:5.0,rv:"1.5K+",badge:"👑 KETHER VIP"},
-  {id:"krc-002",n:"🪙 Cofre Imperial 10.000 Monedas KRC",d:"Activo digital canjeable por productos físicos, servicios de IA y consultorías en el ecosistema Remember Luxury.",p:49.00,po:100.00,c:"DIGITAL",ct:"Activos KRC",t:"DIGITAL",img:"https://images.unsplash.com/photo-1622979135225-d2ba269bc1df?w=500&auto=format&fit=crop&q=80",link:"pago-premium.html?id=krc-002",r:5.0,rv:"4K+",badge:"🪙 KRC"}
-];
+  <div class="editorial-grid">
+    <a href="producto-detalle.html" class="editorial-card">
+      <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&auto=format&fit=crop&q=85" alt="Colección Mujer 2026" class="editorial-img">
+      <div class="editorial-gradient"></div>
+      <div class="editorial-content">
+        <div class="editorial-category">ALTA COSTURA</div>
+        <div class="editorial-name">Colección Mujer</div>
+        <span class="editorial-link-text">Comprar la Selección ↗</span>
+      </div>
+    </a>
 
-const PER_PAGE = 18;
-let filtered = [], currentCat = 'TODOS', currentSearch = '', currentPage = 1;
-let cart = [];
-try{ cart = JSON.parse(localStorage.getItem('rl_cart')||'[]'); }catch(e){}
+    <a href="pasarela.html" class="editorial-card">
+      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=85" alt="Desfile Fashion Show" class="editorial-img">
+      <div class="editorial-gradient"></div>
+      <div class="editorial-content">
+        <div class="editorial-category">PASARELA MILÁN</div>
+        <div class="editorial-name">Fashion Show 2026</div>
+        <span class="editorial-link-text">Ver los 16 Looks ↗</span>
+      </div>
+    </a>
 
-function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    <a href="pago-premium.html" class="editorial-card">
+      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=85" alt="Alta Joyería y Accesorios" class="editorial-img">
+      <div class="editorial-gradient"></div>
+      <div class="editorial-content">
+        <div class="editorial-category">ACCESORIOS & JOYAS</div>
+        <div class="editorial-name">Alta Joyería & Bolsos</div>
+        <span class="editorial-link-text">Explorar Activos ↗</span>
+      </div>
+    </a>
+  </div>
+</section>
 
-function applyFilters(){
-  const q = currentSearch.toLowerCase().trim();
-  filtered = PRODUCTOS.filter(p => {
-    const cat = currentCat === 'TODOS' || p.c === currentCat;
-    const s = !q || p.n.toLowerCase().includes(q) || (p.d||'').toLowerCase().includes(q) || (p.ct||'').toLowerCase().includes(q);
-    return cat && s;
-  });
-  currentPage = 1; renderPage();
-}
+<!-- CATÁLOGO DE PRODUCTOS DE ALTA GAMA -->
+<section class="product-grid-section">
+  <div class="section-title-wrap" style="padding-top:0;">
+    <div class="section-tag">SELECCIÓN ICÓNICA</div>
+    <h2 class="section-heading">PIEZAS DE ALTA COSTURA</h2>
+    <p class="section-sub">Disponibles para compra inmediata con entrega express asegurada.</p>
+  </div>
 
-function renderPage(){
-  const start = (currentPage-1)*PER_PAGE;
-  const page = filtered.slice(start, start+PER_PAGE);
-  const grid = document.getElementById('grid');
-  document.getElementById('resultCount').textContent = filtered.length + ' artículos';
-  document.getElementById('heroSub').textContent = filtered.length + ' artículos · Pago directo · Entrega VIP garantizada';
-  if(!filtered.length){
-    grid.innerHTML = '<div style="grid-column:1/-1;padding:80px;text-align:center;color:var(--dim);font-style:italic">No se encontraron artículos...</div>';
-    document.getElementById('pagination').innerHTML = '';
-    return;
-  }
-  grid.innerHTML = page.map(p => {
-    const isDigital = p.t === 'DIGITAL';
-    const buyLabel = isDigital ? '⚡ ADQUIRIR ACCESO' : '⚡ COMPRAR EN LA TIENDA';
-    const provLabel = isDigital ? '🌐 VER EN HOTMART ↗' : '🌐 VER EN PROVEEDOR ↗';
-    const provLink = isDigital ? p.link : p.link;
-    const tiendaLink = isDigital ? p.link : 'pago-premium.html?id=' + p.id;
-    const stars = '⭐'.repeat(Math.floor(p.r));
-    return '<div class="card">' +
-      '<div class="card-img-wrap">' +
-        '<img class="card-img" src="' + esc(p.img) + '" alt="' + esc(p.n) + '" loading="lazy" onerror="this.src=\'https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=400\'">' +
-        '<span class="card-badge">' + esc(p.badge||'EXCLUSIVO') + '</span>' +
-      '</div>' +
-      '<div class="card-body">' +
-        '<div class="card-cat">' + esc(p.ct) + '</div>' +
-        '<div class="card-name">' + esc(p.n) + '</div>' +
-        '<div class="card-meta"><span class="card-stars">' + stars + ' ' + p.r + '</span><span class="card-sold">(' + p.rv + ' entregados)</span></div>' +
-        '<div class="card-desc">' + esc(p.d) + '</div>' +
-        '<div class="card-footer">' +
-          '<div class="price-row">' +
-            '<div><span class="card-price">€' + Number(p.p).toFixed(2) + '</span> <span class="card-old-price">€' + Number(p.po).toFixed(2) + '</span></div>' +
-            '<span class="card-guarantee">✓ VIP</span>' +
-          '</div>' +
-          '<a href="' + tiendaLink + '" class="btn-tienda">' + buyLabel + '</a>' +
-          '<a href="' + provLink + '" target="_blank" rel="noopener noreferrer" class="btn-proveedor">' + provLabel + '</a>' +
-        '</div>' +
-      '</div>' +
-    '</div>';
-  }).join('');
-  renderPagination();
-}
+  <div class="products-wrapper">
+    <!-- PRODUCTO 1: VESTIDO DOBLE CREPÉ -->
+    <article class="dg-product-card">
+      <div class="card-photo-box">
+        <span class="card-tag-exclusive">LOOK 01 · DESFILE</span>
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&auto=format&fit=crop&q=85" alt="Vestido en doble crepé de lana" class="card-photo">
+      </div>
+      <div class="card-details-box">
+        <span class="card-cat-name">VESTIDOS · MADE IN ITALY</span>
+        <h3 class="card-item-title">Vestido en doble crepé de lana</h3>
+        <div class="card-price-tag">€ 2.450</div>
+        <div class="card-btns-row">
+          <a href="pago-premium.html?id=lux-dg-dress" class="btn-card-buy">COMPRAR AHORA</a>
+          <a href="producto-detalle.html" class="btn-card-details">VER DETALLES COMPLETOS</a>
+        </div>
+      </div>
+    </article>
 
-function renderPagination(){
-  const total = Math.ceil(filtered.length/PER_PAGE);
-  if(total<=1){document.getElementById('pagination').innerHTML='';return;}
-  let html='';
-  if(currentPage>1) html+='<button class="fb" onclick="goPage('+(currentPage-1)+')">‹</button>';
-  for(let i=1;i<=total;i++) html+='<button class="fb'+(i===currentPage?' on':'')+'" onclick="goPage('+i+')">'+i+'</button>';
-  if(currentPage<total) html+='<button class="fb" onclick="goPage('+(currentPage+1)+')">›</button>';
-  document.getElementById('pagination').innerHTML=html;
-}
+    <!-- PRODUCTO 2: ESMOQUIN TERCIOPELO -->
+    <article class="dg-product-card">
+      <div class="card-photo-box">
+        <span class="card-tag-exclusive">LOOK 02 · SASTRERÍA</span>
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=85" alt="Esmoquin en terciopelo y encaje" class="card-photo">
+      </div>
+      <div class="card-details-box">
+        <span class="card-cat-name">SMOKING · MADE IN ITALY</span>
+        <h3 class="card-item-title">Esmoquin Sartorial en Terciopelo</h3>
+        <div class="card-price-tag">€ 3.850</div>
+        <div class="card-btns-row">
+          <a href="pago-premium.html?id=lux-dg-smoking" class="btn-card-buy">COMPRAR AHORA</a>
+          <a href="pasarela.html" class="btn-card-details">VER EN PASARELA</a>
+        </div>
+      </div>
+    </article>
 
-function goPage(n){currentPage=n;renderPage();window.scrollTo({top:0,behavior:'smooth'});}
+    <!-- PRODUCTO 3: BOLSO SICILY -->
+    <article class="dg-product-card">
+      <div class="card-photo-box">
+        <span class="card-tag-exclusive">BOLSO ICÓNICO</span>
+        <img src="https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=600&auto=format&fit=crop&q=85" alt="Bolso Sicily Piel Dauphine" class="card-photo">
+      </div>
+      <div class="card-details-box">
+        <span class="card-cat-name">MARROQUINERÍA · ORO 18K</span>
+        <h3 class="card-item-title">Bolso Sicily Pequeño Piel Dauphine</h3>
+        <div class="card-price-tag">€ 1.850</div>
+        <div class="card-btns-row">
+          <a href="pago-premium.html?id=lux-dg-sicily" class="btn-card-buy">COMPRAR AHORA</a>
+          <a href="pasarela.html" class="btn-card-details">VER DETALLES</a>
+        </div>
+      </div>
+    </article>
 
-function addCart(id){
-  const p = PRODUCTOS.find(x=>x.id===id); if(!p) return;
-  const ex = cart.find(i=>i.id===id);
-  if(ex) ex.qty=(ex.qty||1)+1; else cart.push({...p,qty:1});
-  saveCart(); updateCartUI(); showToast('🌿 ' + p.n.substring(0,35) + '... añadido');
-}
-function removeCart(id){cart=cart.filter(i=>i.id!==id);saveCart();updateCartUI();}
-function saveCart(){try{localStorage.setItem('rl_cart',JSON.stringify(cart));}catch(e){}}
+    <!-- PRODUCTO 4: GAFAS LOGO BARROCO -->
+    <article class="dg-product-card">
+      <div class="card-photo-box">
+        <span class="card-tag-exclusive">ALTA JOYERÍA</span>
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=85" alt="Gafas de Sol Runway DG" class="card-photo">
+      </div>
+      <div class="card-details-box">
+        <span class="card-cat-name">EYEWEAR · ALTA GAMA</span>
+        <h3 class="card-item-title">Gafas de Sol Runway DG Barroco</h3>
+        <div class="card-price-tag">€ 890</div>
+        <div class="card-btns-row">
+          <a href="pago-premium.html?id=lux-dg-glasses" class="btn-card-buy">COMPRAR AHORA</a>
+          <a href="pasarela.html" class="btn-card-details">VER DETALLES</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
 
-function updateCartUI(){
-  const count = cart.reduce((s,i)=>s+(i.qty||1),0);
-  document.getElementById('cartCount').textContent = count;
-  const items = document.getElementById('cartItems');
-  if(!cart.length){items.innerHTML='<div class="empty-cart">Tu carrito está vacío 🌿</div>';document.getElementById('cartTotal').textContent='€0.00';return;}
-  items.innerHTML = cart.map(i=>'<div class="cart-item"><img src="'+esc(i.img||'')+'" alt="'+esc(i.n||'')+'" onerror="this.src=\'https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=80\'"><div class="ci-info"><div class="ci-name">'+esc(i.n||'')+'</div><div class="ci-price">€'+Number(i.p).toFixed(2)+' x'+(i.qty||1)+'</div></div><button class="remove-item" onclick="removeCart(\''+i.id+'\')">✕</button></div>').join('');
-  const total = cart.reduce((s,i)=>s+(Number(i.p)*(i.qty||1)),0);
-  document.getElementById('cartTotal').textContent='€'+total.toFixed(2);
-  const chk = document.getElementById('checkoutBtn');
-  if(chk) chk.href = 'pago-premium.html?cart=' + encodeURIComponent(JSON.stringify(cart.map(i=>i.id)));
-}
+<!-- BANNER TEASER DE LA PASARELA -->
+<section class="runway-teaser-banner">
+  <div class="runway-teaser-content">
+    <div style="font-size:11px; letter-spacing:0.3em; margin-bottom:12px; color:var(--white);">MILAN FASHION WEEK 2026</div>
+    <h2 class="runway-teaser-title">VIVE LA PASARELA OFICIAL EN DIRECTO</h2>
+    <p class="runway-teaser-desc">Recorre la sesión completa de modelaje, los 16 looks de alta costura, los momentos de backstage y las celebridades invitadas en primera fila.</p>
+    <a href="pasarela.html" class="hero-btn-gold">ENTRAR AL DESFILE FALL WINTER 2026</a>
+  </div>
+</section>
 
-function toggleCart(){
-  document.getElementById('cartPanel').classList.toggle('open');
-  document.getElementById('cartOverlay').classList.toggle('open');
-}
+<!-- FOOTER OFICIAL -->
+<footer>
+  <div class="footer-container">
+    <div>
+      <div class="footer-col-title">COLECCIONES</div>
+      <ul class="footer-menu">
+        <li><a href="articulos.html">Mujer Fall Winter 2026</a></li>
+        <li><a href="producto-detalle.html">Vestido en Doble Crepé</a></li>
+        <li><a href="pasarela.html">Desfile & Pasarela</a></li>
+        <li><a href="articulos.html">Alta Sastrería</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">SERVICIOS EXCLUSIVOS</div>
+      <ul class="footer-menu">
+        <li><a href="pago-premium.html">Envío Express de Cortesía</a></li>
+        <li><a href="pago-premium.html">Embalaje de Lujo</a></li>
+        <li><a href="pago-premium.html">Devoluciones Gratuitas</a></li>
+        <li><a href="pago-premium.html">Asesoría de Estilismo</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">MÉTODOS DE PAGO</div>
+      <ul class="footer-menu">
+        <li><a href="pago-premium.html">Nequi & Bancolombia</a></li>
+        <li><a href="pago-premium.html">Tarjetas Visa / Mastercard / AMEX</a></li>
+        <li><a href="pago-premium.html">PayPal & Apple Pay</a></li>
+        <li><a href="pago-premium.html">Monedas KRC / Dinastía</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">MAISON DOLCE&GABBANA</div>
+      <ul class="footer-menu">
+        <li><a href="#">Sostenibilidad</a></li>
+        <li><a href="#">La Historia de la Casa</a></li>
+        <li><a href="#">Boutiques en el Mundo</a></li>
+        <li><a href="#">Contacto & Atención VIP</a></li>
+      </ul>
+    </div>
+  </div>
 
-function showToast(msg){
-  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2800);
-}
+  <div class="footer-bottom">
+    &copy; 2026 DOLCE & GABBANA S.r.l. Todos los derechos reservados. Remember Luxury Oficial.
+  </div>
+</footer>
 
-document.getElementById('cartBtn').addEventListener('click',toggleCart);
-document.getElementById('closeCart').addEventListener('click',toggleCart);
-document.getElementById('cartOverlay').addEventListener('click',toggleCart);
-
-document.getElementById('filters').addEventListener('click',e=>{
-  const btn=e.target.closest('.fb');if(!btn||!btn.dataset.cat)return;
-  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');currentCat=btn.dataset.cat;applyFilters();
-});
-document.getElementById('searchInput').addEventListener('input',e=>{currentSearch=e.target.value;applyFilters();});
-
-updateCartUI();
-applyFilters();
-</script>
 </body>
 </html>

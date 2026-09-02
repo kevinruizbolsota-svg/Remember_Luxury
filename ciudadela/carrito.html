@@ -1,1 +1,381 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Remember Luxury — Tu selección</title><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet"><style>:root{--bg:#070708;--gold:#e7c76a;--soft:#f5e8c2;--muted:#9d978b;--line:rgba(231,199,106,.16)}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#211d12,#070708 55%);color:var(--soft);font-family:'Cormorant Garamond',serif;min-height:100vh}header{height:68px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(7,7,8,.86);backdrop-filter:blur(18px);position:sticky;top:0;z-index:5}.brand{font:800 14px Cinzel;letter-spacing:.22em;color:var(--gold)}header a{color:var(--muted);font:600 10px Cinzel;letter-spacing:.15em;text-decoration:none;text-transform:uppercase}.wrap{max-width:1100px;margin:auto;padding:70px 24px}.ey{font:600 10px Cinzel;letter-spacing:.32em;color:var(--gold)}h1{font:400 clamp(44px,7vw,76px);line-height:.95;margin:12px 0 40px}.empty,.item{background:rgba(16,15,18,.9);border:1px solid var(--line);padding:28px}.empty{text-align:center;color:var(--muted);font-size:18px}.item{display:grid;grid-template-columns:120px 1fr auto;gap:24px;align-items:center}.thumb{width:120px;height:140px;background:linear-gradient(145deg,#181714,#090909);border:1px solid var(--line);display:grid;place-items:center;font:9px Cinzel;color:var(--muted);text-align:center;overflow:hidden}.thumb img{width:100%;height:100%;object-fit:cover}.name{font-size:28px}.meta{color:var(--muted);font-size:16px;margin-top:6px}.price{font:600 16px Cinzel;color:var(--soft);margin-top:12px}.cta{display:inline-block;margin-top:26px;padding:16px 26px;background:linear-gradient(100deg,#cda949,#f1d47c,#c29c3d);color:#080706;text-decoration:none;font:700 10px Cinzel;letter-spacing:.18em;text-transform:uppercase}.remove{background:none;border:0;color:#7f786c;font:10px Cinzel;letter-spacing:.12em;cursor:pointer;margin-top:14px}@media(max-width:700px){.item{grid-template-columns:80px 1fr}.thumb{width:80px;height:100px}.item>div:last-child{grid-column:1/-1}.name{font-size:23px}}</style></head><body><header><div class="brand">REMEMBER LUXURY</div><a href="articulos.html">← Continuar descubriendo</a></header><main class="wrap"><div class="ey">CURATED SELECTION</div><h1>Tu selección.</h1><div id="list"></div></main><script>(function(){const list=document.getElementById('list');const keys=['orionix_cart','orx_cart','cart'];let cart=[];for(const key of keys){try{const raw=localStorage.getItem(key);if(!raw)continue;const parsed=JSON.parse(raw);const arr=Array.isArray(parsed)?parsed:(parsed&&Array.isArray(parsed.items)?parsed.items:(parsed&&Array.isArray(parsed.products)?parsed.products:[]));if(arr.length){cart=arr;break}}catch(e){}}function save(){localStorage.setItem('orionix_cart',JSON.stringify(cart));localStorage.setItem('orx_cart',JSON.stringify(cart));localStorage.setItem('cart',JSON.stringify(cart))}function render(){if(!Array.isArray(cart)||!cart.length){list.innerHTML='<div class="empty">Tu selección está esperando una pieza especial.<br><a class="cta" href="articulos.html">Explorar la colección →</a></div>';return}list.innerHTML=cart.map((p,i)=>{const name=p.nombre||p.name||p.title||'Pieza seleccionada';const price=p.precio??p.price??'';const merchant=p.merchant||p.tienda||p.store||p.proveedor||'Proveedor';const img=p.imagen_url||p.image||p.imagen||p.image_url||p.imageUrl||'';const u=p.affiliate_url||p.affiliateUrl||p.affiliate||p.url||p.link||'';const qs=new URLSearchParams({name,merchant,price:String(price),affiliate_url:u});return '<article class="item"><div class="thumb">'+(img?'<img src="'+esc(img)+'" alt="'+esc(name)+'" onerror="this.parentElement.innerHTML=\'REMEMBER<br>LUXURY\'">':'REMEMBER<br>LUXURY')+'</div><div><div class="name">'+esc(name)+'</div><div class="meta">'+esc(merchant)+'</div><div class="price">'+(price!==''?esc(String(price)):'Precio según proveedor')+'</div><button class="remove" onclick="removeItem('+i+')">RETIRAR PIEZA</button></div><div><a class="cta" href="pago-premium.html?'+qs.toString()+'">Revisar compra →</a></div></article>'}).join('')}function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}window.removeItem=function(i){cart.splice(i,1);save();render()}render()})();</script><script src="orionix-profile.js"></script><script src="orionix-krc.js"></script></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Remember Luxury &mdash; Carrito Multi-Proveedor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07070a;
+  --panel:#0e0a16;
+  --gold:#f5d77f;
+  --gold-glow:#ffd700;
+  --white:#ffffff;
+  --muted:#a1a1aa;
+  --line:rgba(245,215,127,0.25);
+  --font:'Montserrat', sans-serif;
+  --serif:'Cormorant Garamond', serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:radial-gradient(circle at 50% -20%, #201335 0%, #07070a 65%);
+  color:var(--white);
+  font-family:var(--font);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+header{
+  height:74px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 5vw;
+  background:rgba(10,8,16,0.92);
+  backdrop-filter:blur(20px);
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+.brand{
+  font-size:16px;
+  font-weight:800;
+  letter-spacing:0.2em;
+  color:var(--gold);
+  text-transform:uppercase;
+  text-decoration:none;
+}
+.brand span{color:#fff;font-weight:300}
+.btn-back{
+  color:#fff;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.1em;
+  padding:8px 16px;
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:20px;
+  transition:all .2s;
+}
+.btn-back:hover{background:rgba(245,215,127,0.15);border-color:var(--gold);color:var(--gold)}
+
+main{
+  flex:1;
+  max-width:1000px;
+  width:100%;
+  margin:40px auto;
+  padding:0 24px;
+  display:grid;
+  grid-template-columns:1fr 380px;
+  gap:32px;
+}
+@media(max-width:860px){
+  main{grid-template-columns:1fr}
+}
+
+.cart-box{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+.cart-title{
+  font-family:var(--serif);
+  font-size:28px;
+  font-style:italic;
+  color:#fff;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  padding-bottom:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.provider-group{
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(245,215,127,0.15);
+  border-radius:10px;
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.provider-header{
+  font-size:11px;
+  font-weight:700;
+  color:var(--gold);
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.cart-item{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  background:rgba(0,0,0,0.4);
+  padding:12px 14px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.05);
+}
+.cart-item img{
+  width:55px;
+  height:55px;
+  border-radius:6px;
+  object-fit:cover;
+}
+.item-info{flex:1}
+.item-name{font-size:13px;font-weight:600;color:#fff;margin-bottom:4px}
+.item-price{font-size:12px;color:var(--gold);font-weight:700}
+.qty-ctrl{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(0,0,0,0.6);
+  padding:4px 8px;
+  border-radius:6px;
+}
+.btn-q{background:none;border:none;color:#fff;cursor:pointer;font-weight:700;font-size:14px}
+.btn-q:hover{color:var(--gold)}
+
+/* SUMMARY PANE */
+.summary-box{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  height:max-content;
+  position:sticky;
+  top:100px;
+}
+.sum-row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.sum-row.total{
+  font-size:20px;
+  font-weight:800;
+  color:#fff;
+  border-top:1px solid rgba(255,255,255,0.08);
+  padding-top:14px;
+}
+.sum-row.total span:last-child{color:var(--gold)}
+
+.btn-provider{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:14px;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  text-decoration:none;
+  cursor:pointer;
+  transition:transform .2s;
+}
+.btn-provider:hover{transform:translateY(-2px)}
+.btn-amazon{background:linear-gradient(135deg, #ff9900 0%, #cc7a00 100%);color:#000}
+.btn-ali{background:linear-gradient(135deg, #ff4747 0%, #d11a1a 100%);color:#fff}
+.btn-hotmart{background:linear-gradient(135deg, #00c853 0%, #009624 100%);color:#fff}
+.btn-orionix{background:linear-gradient(135deg, #f5d77f 0%, #c59b27 100%);color:#000}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="brand">MANSIÓN <span>DE</span> LUXE</a>
+  <a href="index.html" class="btn-back">← Volver a la Tienda</a>
+</header>
+
+<main>
+  <div class="cart-box">
+    <div class="cart-title">
+      <span>Tu Selección de Lujo</span>
+      <button onclick="clearAllCart()" style="background:none;border:none;color:#ef4444;font-size:12px;font-weight:700;cursor:pointer;">Vaciar Todo</button>
+    </div>
+
+    <div id="cartContent">
+      <!-- RENDER PRODUCTOS AGRUPADOS -->
+    </div>
+  </div>
+
+  <div class="summary-box">
+    <div style="font-size:11px;font-weight:700;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;">RESUMEN DE COMPRA</div>
+    
+    <div class="sum-row">
+      <span>Artículos totales:</span>
+      <span id="sumQty">0</span>
+    </div>
+    <div class="sum-row">
+      <span>Envío internacional:</span>
+      <span style="color:#10b981;font-weight:700;">GRATIS (Choice)</span>
+    </div>
+    <div class="sum-row total">
+      <span>TOTAL ESTIMADO:</span>
+      <span id="sumTotal">$0 COP</span>
+    </div>
+
+    <div id="checkoutButtonsContainer" style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+      <!-- BOTONES DE COMPRA POR CADA PROVEEDOR -->
+    </div>
+  </div>
+</main>
+
+<script>
+const AMAZON_TAG = "krcompany08-20";
+
+function getCartData(){
+  const raw = localStorage.getItem('rl_master_cart') || localStorage.getItem('orionix_cart') || '[]';
+  try {
+    let parsed = JSON.parse(raw);
+    if(Array.isArray(parsed) && parsed.length > 0) return parsed;
+  } catch(e){}
+  
+  // Si está vacío, cargar ejemplos para probar
+  return [
+    { id: "amz-01", name: "Reloj Automático de Lujo Oro 18K", price: 185000, provider: "amazon", img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500&auto=format&fit=crop", link: "https://www.amazon.com/dp/B08N5WRWNW?tag=" + AMAZON_TAG, qty: 1 },
+    { id: "ali-01", name: "Bolso Mini Grandma en Piel Nappa", price: 95000, provider: "aliexpress", img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&auto=format&fit=crop", link: "https://www.aliexpress.com/wholesale?SearchText=nappa+leather+handbag", qty: 2 },
+    { id: "hot-01", name: "Masterclass: De la Aguja a la Pasarela", price: 195000, provider: "hotmart", img: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=500&auto=format&fit=crop", link: "pago-premium.html?id=curso-aguja", qty: 1 }
+  ];
+}
+
+let cart = getCartData();
+
+function save(){
+  localStorage.setItem('rl_master_cart', JSON.stringify(cart));
+  localStorage.setItem('orionix_cart', JSON.stringify(cart));
+  render();
+}
+
+function changeQty(id, delta){
+  const item = cart.find(i => i.id === id);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty <= 0){
+    cart = cart.filter(i => i.id !== id);
+  }
+  save();
+}
+
+function clearAllCart(){
+  cart = [];
+  save();
+}
+
+function render(){
+  const container = document.getElementById('cartContent');
+  const qtyEl = document.getElementById('sumQty');
+  const totalEl = document.getElementById('sumTotal');
+  const btnsBox = document.getElementById('checkoutButtonsContainer');
+
+  if(cart.length === 0){
+    container.innerHTML = `
+      <div style="text-align:center;padding:40px;color:#71717a;display:flex;flex-direction:column;gap:12px;align-items:center;">
+        <span style="font-size:42px;">🛒</span>
+        <span>Tu carrito está vacío.</span>
+        <a href="index.html" class="btn-back" style="margin-top:10px;">Explorar Productos →</a>
+      </div>
+    `;
+    qtyEl.textContent = '0';
+    totalEl.textContent = '$0 COP';
+    btnsBox.innerHTML = '';
+    return;
+  }
+
+  let totalQty = 0;
+  let totalPrice = 0;
+
+  const groups = {
+    amazon: { name: "Amazon Prime (Tag: " + AMAZON_TAG + ")", icon: "🟠", items: [] },
+    aliexpress: { name: "AliExpress Choice & Direct", icon: "🔴", items: [] },
+    hotmart: { name: "Hotmart & Cursos Digitales", icon: "🟢", items: [] },
+    orionix: { name: "Orionix Direct VIP", icon: "⚡", items: [] }
+  };
+
+  cart.forEach(item => {
+    totalQty += item.qty;
+    totalPrice += item.price * item.qty;
+    const p = item.provider || 'aliexpress';
+    if(groups[p]) groups[p].items.push(item);
+    else groups.aliexpress.items.push(item);
+  });
+
+  qtyEl.textContent = totalQty;
+  totalEl.textContent = '$' + totalPrice.toLocaleString('es-CO') + ' COP';
+
+  let html = '';
+  let btns = '';
+
+  for (const [key, g] of Object.entries(groups)) {
+    if(g.items.length > 0){
+      html += `
+        <div class="provider-group">
+          <div class="provider-header">
+            <span>${g.icon}</span> ${g.name} (${g.items.length})
+          </div>
+      `;
+
+      g.items.forEach(item => {
+        html += `
+          <div class="cart-item">
+            <img src="${item.img}" alt="${item.name}">
+            <div class="item-info">
+              <div class="item-name">${item.name}</div>
+              <div class="item-price">$${(item.price * item.qty).toLocaleString('es-CO')} COP ($${item.price.toLocaleString('es-CO')} c/u)</div>
+            </div>
+            <div class="qty-ctrl">
+              <button class="btn-q" onclick="changeQty('${item.id}', -1)">-</button>
+              <span style="font-size:12px;font-weight:700;">${item.qty}</span>
+              <button class="btn-q" onclick="changeQty('${item.id}', 1)">+</button>
+            </div>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+
+      if(key === 'amazon'){
+        btns += `
+          <a href="${g.items[0].link}" target="_blank" rel="noopener" class="btn-provider btn-amazon">
+            🟠 PAGAR EN AMAZON (Tag: ${AMAZON_TAG}) ↗
+          </a>
+        `;
+      } else if(key === 'aliexpress'){
+        btns += `
+          <a href="${g.items[0].link}" target="_blank" rel="noopener" class="btn-provider btn-ali">
+            🔴 PAGAR EN ALIEXPRESS DIRECTO ↗
+          </a>
+        `;
+      } else if(key === 'hotmart'){
+        btns += `
+          <a href="${g.items[0].link}" target="_blank" rel="noopener" class="btn-provider btn-hotmart">
+            🟢 ACCEDER A CURSOS HOTMART ↗
+          </a>
+        `;
+      } else {
+        btns += `
+          <a href="pago-premium.html" class="btn-provider btn-orionix">
+            ⚡ CHECKOUT ORIONIX VIP ↗
+          </a>
+        `;
+      }
+    }
+  }
+
+  container.innerHTML = html;
+  btnsBox.innerHTML = btns;
+}
+
+render();
+</script>
+</body>
+</html>

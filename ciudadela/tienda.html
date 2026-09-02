@@ -1,115 +1,821 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIONIX · Tienda Imperial</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+<title>DOLCE&GABBANA® — Sitio Oficial | Moda, Desfiles & Alta Costura</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0b0b0d;--gold:#e8c86a;--gd:#b89a40;--text:#f0e8d0;--dim:rgba(240,232,208,.45);--card:#111118;--b:rgba(232,200,106,.10);}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',serif;min-height:100vh}
-nav{background:rgba(11,11,13,.96);border-bottom:1px solid var(--b);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:58px;position:sticky;top:0;z-index:100;backdrop-filter:blur(20px)}
-.nav-brand{font-family:'Cinzel',serif;font-size:.85rem;font-weight:900;letter-spacing:.18em;color:var(--gold);text-decoration:none}
-.nav-links{display:flex;gap:6px}
-.nav-links a{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.1em;color:var(--dim);text-decoration:none;padding:7px 12px;border-radius:8px;transition:all .2s}
-.nav-links a:hover{color:var(--gold)}
-.nav-cart{display:flex;align-items:center;gap:8px;padding:7px 18px;border:1px solid var(--b);border-radius:10px;font-family:'Cinzel',serif;font-size:.52rem;color:var(--gold);text-decoration:none;transition:all .25s}
-.nav-cart:hover{background:rgba(232,200,106,.06)}
-.hero{padding:70px 24px 44px;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(106,61,154,.07) 0%,transparent 70%)}
-.hero-tag{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:.28em;color:var(--dim);margin-bottom:14px}
-.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:900;letter-spacing:.1em;color:var(--gold);margin-bottom:10px}
-.hero p{color:var(--dim);font-size:1.05rem;margin-bottom:8px}
-.hero-count{font-family:'Cinzel',serif;font-size:.52rem;color:var(--gold);letter-spacing:.14em}
-.controls{max-width:1280px;margin:0 auto;padding:24px 24px 8px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.search-box{flex:1;min-width:220px;background:var(--card);border:1px solid var(--b);border-radius:10px;padding:11px 18px;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:1.05rem;outline:none;transition:border-color .2s}
-.search-box:focus{border-color:var(--gold)}
-.search-box::placeholder{color:var(--dim)}
-.filters{display:flex;gap:8px;flex-wrap:wrap}
-.filt{font-family:'Cinzel',serif;font-size:.44rem;letter-spacing:.08em;padding:9px 18px;border:1px solid var(--b);border-radius:8px;color:var(--dim);background:transparent;cursor:pointer;transition:all .2s;white-space:nowrap}
-.filt:hover,.filt.on{color:var(--gold);border-color:var(--gold);background:rgba(232,200,106,.06)}
-.count-bar{max-width:1280px;margin:0 auto;padding:8px 24px 14px;font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.1em;color:var(--dim)}
-.grid{max-width:1280px;margin:0 auto;padding:0 24px 80px;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:22px}
-.card{background:var(--card);border:1px solid var(--b);border-radius:14px;overflow:hidden;transition:all .3s;cursor:pointer}
-.card:hover{transform:translateY(-4px);border-color:rgba(232,200,106,.3);box-shadow:0 14px 44px rgba(232,200,106,.09)}
-.card img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:#0d0d15}
-.card-body{padding:14px}
-.card-cat{font-family:'Cinzel',serif;font-size:.36rem;letter-spacing:.16em;color:var(--dim);margin-bottom:6px;text-transform:uppercase}
-.card-name{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:6px;line-height:1.3;min-height:2.6em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.card-desc{font-size:.82rem;color:var(--dim);margin-bottom:12px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.card-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.card-price{font-family:'Cinzel',serif;font-size:1rem;font-weight:600;color:var(--gold);white-space:nowrap}
-.btn-add{font-family:'Cinzel',serif;font-size:.4rem;letter-spacing:.08em;padding:7px 14px;background:linear-gradient(135deg,var(--gd),var(--gold));border:none;border-radius:8px;color:#000;cursor:pointer;font-weight:700;transition:all .2s}
-.btn-add:hover{opacity:.85;transform:scale(1.04)}
-.toast{position:fixed;bottom:24px;right:24px;background:var(--card);border:1px solid var(--gold);border-radius:10px;padding:12px 20px;font-family:'Cinzel',serif;font-size:.52rem;color:var(--gold);opacity:0;pointer-events:none;transition:opacity .3s;z-index:999}
-.toast.on{opacity:1}
-.badge{display:inline-block;background:var(--gold);color:#000;border-radius:50%;width:18px;height:18px;font-size:.5rem;font-weight:700;text-align:center;line-height:18px;margin-left:5px;vertical-align:middle}
-.empty{text-align:center;padding:80px 24px;color:var(--dim);grid-column:1/-1}
-@media(max-width:700px){.nav-links{display:none}.grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}}
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --gray-bg: #f7f7f7;
+  --gray-border: #e5e5e5;
+  --gray-text: #666666;
+  --font: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font);
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* TOP NOTICE */
+.top-notice {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  font-weight: 500;
+}
+
+/* HEADER EXACTO D&G CON MEGA-MENU */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  border-bottom: 1px solid var(--gray-border);
+}
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 48px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--gray-text);
+  border-bottom: 1px solid #f2f2f2;
+}
+.header-top a { color: var(--gray-text); text-decoration: none; }
+.header-top a:hover { color: #000; }
+
+.header-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 48px;
+  position: relative;
+}
+.logo-dng {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-decoration: none;
+  color: #000;
+  font-family: var(--font);
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.main-nav {
+  display: flex;
+  gap: 24px;
+}
+.nav-item {
+  position: relative;
+}
+.nav-link-btn {
+  text-decoration: none;
+  color: #000;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px 0;
+  display: block;
+}
+.nav-link-btn:hover { opacity: 0.5; }
+
+/* MEGA MENU DESPLEGABLE */
+.mega-menu {
+  position: absolute;
+  top: 100%;
+  left: -48px;
+  right: -48px;
+  width: 100vw;
+  background: #fff;
+  border-bottom: 1px solid var(--gray-border);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+  padding: 40px 60px;
+  display: none;
+  grid-template-columns: repeat(4, 1fr) 1.5fr;
+  gap: 40px;
+  z-index: 999;
+}
+.nav-item:hover .mega-menu {
+  display: grid;
+}
+.mega-col-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.mega-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mega-list a {
+  color: var(--gray-text);
+  text-decoration: none;
+  font-size: 11px;
+  transition: color 0.2s;
+}
+.mega-list a:hover { color: #000; }
+.mega-featured-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.header-tools {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.tool-btn {
+  text-decoration: none;
+  color: #000;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: var(--font);
+}
+.btn-runway-header {
+  background: #000;
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-runway-header:hover {
+  background: #333;
+}
+
+/* HERO EDITORIAL FULLSCREEN */
+.hero-editorial {
+  position: relative;
+  width: 100vw;
+  height: 92vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 80px 48px;
+  background: #000;
+  overflow: hidden;
+}
+.hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.85) 100%);
+}
+.hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
+  color: #fff;
+}
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.hero-title {
+  font-size: clamp(34px, 5.5vw, 64px);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero-btns {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.btn-hero-white {
+  background: #fff;
+  color: #000;
+  padding: 16px 36px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btn-hero-white:hover {
+  background: #000;
+  color: #fff;
+  border: 1px solid #fff;
+}
+.btn-hero-outline {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 16px 36px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btn-hero-outline:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* SECTION TITLES */
+.section-header {
+  text-align: center;
+  padding: 80px 20px 36px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.section-tag {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--gray-text);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.section-title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.section-desc {
+  font-size: 12px;
+  color: var(--gray-text);
+}
+
+/* EDITORIAL GRID (3-COLUMN SPLIT) */
+.editorial-split-grid {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 48px 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.split-card {
+  position: relative;
+  height: 560px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 36px;
+  text-decoration: none;
+  color: #fff;
+}
+.split-img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.split-card:hover .split-img {
+  transform: scale(1.05);
+}
+.split-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.85) 100%);
+}
+.split-content {
+  position: relative;
+  z-index: 10;
+}
+.split-tag {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.split-name {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.split-cta {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* LUXURY PRODUCTS SHOWCASE CON HOVER ANGLE SWITCH */
+.products-section {
+  background: var(--gray-bg);
+  padding: 80px 48px 100px;
+}
+.products-grid {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+.p-card {
+  background: #fff;
+  border: 1px solid var(--gray-border);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.p-card:hover {
+  transform: translateY(-6px);
+  border-color: #000;
+  box-shadow: 0 16px 36px rgba(0,0,0,0.06);
+}
+.p-img-box {
+  position: relative;
+  height: 380px;
+  background: #f7f7f7;
+  overflow: hidden;
+}
+.p-card-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s ease, transform 0.6s ease;
+}
+.p-card-img.alt {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+.p-card:hover .p-card-img.alt {
+  opacity: 1;
+}
+.p-card:hover .p-card-img.main {
+  opacity: 0;
+}
+.p-badge-exclusive {
+  position: absolute;
+  top: 12px; left: 12px;
+  background: #fff;
+  border: 1px solid var(--gray-border);
+  padding: 4px 10px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  z-index: 5;
+}
+.p-info-box {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.p-cat-name {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  color: var(--gray-text);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.p-item-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  min-height: 38px;
+}
+.p-price-row {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+.p-btn-stack {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.btn-p-buy {
+  background: #000;
+  color: #fff;
+  padding: 12px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-p-buy:hover {
+  background: #333;
+}
+.btn-p-details {
+  background: transparent;
+  color: var(--black);
+  border: 1px solid var(--gray-border);
+  padding: 10px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-p-details:hover {
+  border-color: #000;
+}
+
+/* RUNWAY TEASER BANNER */
+.runway-teaser {
+  background: #000;
+  color: #fff;
+  padding: 100px 48px;
+  text-align: center;
+}
+.runway-teaser-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.runway-teaser-title {
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.runway-teaser-desc {
+  font-size: 13px;
+  color: #999;
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+
+/* FOOTER EXACTO D&G */
+footer {
+  background: #000;
+  color: #fff;
+  padding: 70px 48px 40px;
+}
+.footer-cols {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  margin-bottom: 60px;
+}
+.footer-heading {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: #fff;
+}
+.footer-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-list a {
+  color: #999;
+  text-decoration: none;
+  font-size: 11px;
+  transition: color 0.2s;
+}
+.footer-list a:hover { color: #fff; }
+.footer-bottom-row {
+  border-top: 1px solid #222;
+  padding-top: 24px;
+  text-align: center;
+  font-size: 10px;
+  color: #666;
+  letter-spacing: 0.1em;
+}
+
+@media(max-width: 992px) {
+  .editorial-split-grid { grid-template-columns: 1fr; }
+  .split-card { height: 420px; }
+  .footer-cols { grid-template-columns: 1fr 1fr; }
+  .header-main { padding: 14px 20px; }
+  .main-nav { display: none; }
+}
 </style>
 </head>
 <body>
-<nav>
-  <a class="nav-brand" href="hub.html">✦ ORIONIX</a>
-  <div class="nav-links">
-    <a href="hub.html">Hub</a>
-    <a href="agentes.html">Agentes</a>
-    <a href="comunidad.html">Comunidad</a>
-    <a href="mi-universo.html">Universo</a>
+
+<div class="top-notice">
+  WOMEN'S FALL WINTER 2026/27 FASHION SHOW · COMPLIMENTARY EXPRESS DELIVERY & PACKAGING
+</div>
+
+<header>
+  <div class="header-top">
+    <span>COLOMBIA (COP $) / ESPAÑA (EUR €)</span>
+    <div>
+      <a href="#">ATENCIÓN AL CLIENTE</a> &nbsp;·&nbsp;
+      <a href="#">BOUTIQUES</a> &nbsp;·&nbsp;
+      <a href="pasarela.html">FASHION SHOW 2026</a>
+    </div>
   </div>
-  <a class="nav-cart" href="carrito.html">
-    🛒 Carrito <span class="badge" id="cart-badge">0</span>
-  </a>
-</nav>
 
-<div class="hero">
-  <div class="hero-tag">✦ ORIONIX · CENTRO COMERCIAL IMPERIAL</div>
-  <h1>La Tienda del Imperio</h1>
-  <p>Moda, tecnología, lujo y productos digitales seleccionados para el Imperio.</p>
-  <div class="hero-count" id="hero-count">450 productos en colección</div>
-</div>
+  <div class="header-main">
+    <nav class="main-nav">
+      <div class="nav-item">
+        <a href="articulos.html" class="nav-link-btn">MUJER</a>
+        <div class="mega-menu">
+          <div>
+            <div class="mega-col-title">ROPA</div>
+            <ul class="mega-list">
+              <li><a href="producto-detalle.html">Vestidos de Gala</a></li>
+              <li><a href="articulos.html">Smokings & Blazers</a></li>
+              <li><a href="articulos.html">Faldas & Pantalones</a></li>
+              <li><a href="articulos.html">Abrigos en Cachemira</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="mega-col-title">BOLSOS</div>
+            <ul class="mega-list">
+              <li><a href="pago-premium.html?id=sicily-bag">Bolso Sicily</a></li>
+              <li><a href="articulos.html">Bolso Devotion</a></li>
+              <li><a href="articulos.html">Clutches de Fiesta</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="mega-col-title">ACCESORIOS & JOYAS</div>
+            <ul class="mega-list">
+              <li><a href="articulos.html">Stilettos</a></li>
+              <li><a href="articulos.html">Alta Joyería Barroca</a></li>
+              <li><a href="articulos.html">Gafas de Sol Runway</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="mega-col-title">PASARELA</div>
+            <ul class="mega-list">
+              <li><a href="pasarela.html">Fashion Show FW 2026</a></li>
+              <li><a href="articulos.html">Alta Moda Milano</a></li>
+            </ul>
+          </div>
+          <div>
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600" class="mega-featured-img" alt="">
+            <div style="font-weight:700; text-transform:uppercase;">CAMPAÑA FALL WINTER 2026</div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item"><a href="articulos.html" class="nav-link-btn">HOMBRE</a></div>
+      <div class="nav-item"><a href="pasarela.html" class="nav-link-btn">FASHION SHOWS 2026</a></div>
+      <div class="nav-item"><a href="producto-detalle.html" class="nav-link-btn">ALTA MODA</a></div>
+    </nav>
 
-<div class="controls">
-  <input class="search-box" id="q" type="text" placeholder="Buscar productos…" oninput="render()">
-  <div class="filters" id="filt-wrap"></div>
-</div>
-<div class="count-bar"><span id="count">450</span> productos encontrados</div>
-<div class="grid" id="grid"></div>
-<div class="toast" id="toast"></div>
+    <a href="articulos.html" class="logo-dng">DOLCE & GABBANA</a>
 
-<script>
-var PRODUCTOS = [{"id":2,"nombre":"Camiseta Cosmos ORIONIX","descripcion":"Camiseta negra con logo ORIONIX dorado bordado. Algod├│n 100%.","precio":9.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/orionix1/400/400"},{"id":3,"nombre":"Gorra AXEL Gold","descripcion":"Gorra snapback negra con bordado AXEL en hilo dorado.","precio":24.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/orionix6/400/400"},{"id":4,"nombre":"Camisa Cinzel Blanca","descripcion":"Camisa slim fit blanca con detalles dorados en el cuello.","precio":34.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/orionix7/400/400"},{"id":5,"nombre":"Sudadera Imperio Gold","descripcion":"Sudadera premium con capucha, estampado Kabalion en oro.","precio":49.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/orionix2/400/400"},{"id":6,"nombre":"Perfume Cosmos Noir","descripcion":"Fragancia exclusiva de la colecci├│n ORIONIX. 50ml.","precio":89.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/orionix5/400/400"},{"id":7,"nombre":"Zapatillas Cosmos Limited","descripcion":"Zapatillas edici├│n limitada con suela dorada y logo ORIONIX.","precio":129.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/orionix9/400/400"},{"id":8,"nombre":"Chaqueta Kabalion Limited","descripcion":"Chaqueta de cuero vegano con ├írbol Kabalion grabado en la espalda.","precio":149.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/orionix3/400/400"},{"id":9,"nombre":"Bolso P├║rpura Sombra","descripcion":"Bolso de mano en cuero negro con interior p├║rpura y herrajes dorados.","precio":199.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/orionix8/400/400"},{"id":10,"nombre":"Reloj Sefirot Edition","descripcion":"Reloj autom├ítico con esfera negra y marcadores dorados, grabado Sefirot.","precio":299.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/orionix4/400/400"},{"id":11,"nombre":"Set Lujo Kabalion","descripcion":"Set exclusivo: reloj + perfume + pa├▒uelo de seda ORIONIX. Edici├│n numerada.","precio":599.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/orionix10/400/400"},{"id":12,"nombre":"Calcetines ORIONIX Pack 3","descripcion":"Pack de 3 calcetines negros con franja dorada y logo ORIONIX.","precio":9.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/orionix11/400/400"},{"id":13,"nombre":"Pa├▒uelo Cosmos Silk","descripcion":"Pa├▒uelo de microfibra negra con constelaciones doradas.","precio":12.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/orionix12/400/400"},{"id":14,"nombre":"Taza Kabalion Gold","descripcion":"Taza cer├ímica negra con ├írbol Kabalion en dorado. 350ml.","precio":14.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/orionix13/400/400"},{"id":15,"nombre":"Llavero Sefirot","descripcion":"Llavero met├ílico con s├¡mbolo de las Sefirot grabado en dorado.","precio":9.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/orionix14/400/400"},{"id":16,"nombre":"Notebook ORIONIX A5","descripcion":"Libreta tapa dura negra con logo dorado. 200 p├íginas rayadas.","precio":16.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/orionix15/400/400"},{"id":17,"nombre":"Camiseta AXEL Kether","descripcion":"Camiseta premium con mandala Kether bordado en hilo dorado. Algod├│n org├ínico.","precio":19.9,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/orionix16/400/400"},{"id":18,"nombre":"Parche Cosmos Bordado","descripcion":"Parche termoadhesivo con dise├▒o cosmos ORIONIX. 8cm x 8cm.","precio":9.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/orionix17/400/400"},{"id":19,"nombre":"Cintur├│n Kabalion","descripcion":"Cintur├│n de cuero PU negro con hebilla dorada grabada.","precio":28.75,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/orionix18/400/400"},{"id":20,"nombre":"Cartera Slim ORIONIX","descripcion":"Cartera minimalista en cuero negro con grabado Sefirot.","precio":38.5,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/orionix19/400/400"},{"id":21,"nombre":"Bufanda Cosmos Premium","descripcion":"Bufanda de lana merino negra con motivos dorados de constelaciones.","precio":45.9,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/orionix20/400/400"},{"id":22,"nombre":"Polo Imperio Slim","descripcion":"Polo slim fit negro con escudo ORIONIX bordado en el pecho.","precio":52,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/orionix21/400/400"},{"id":23,"nombre":"Gafas Sol Kether","descripcion":"Gafas de sol con montura negra mate y cristales dorados espejados.","precio":68.5,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/orionix22/400/400"},{"id":24,"nombre":"Mochila Kabalion Urban","descripcion":"Mochila 20L negra con ├írbol Kabalion en relieve dorado.","precio":78.5,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/orionix23/400/400"},{"id":25,"nombre":"Anillo Tiferet Gold","descripcion":"Anillo ba├▒ado en oro 18k con s├¡mbolo Tiferet. Acero inoxidable.","precio":135.9,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/orionix24/400/400"},{"id":26,"nombre":"Pulsera Cosmos Titan","descripcion":"Pulsera de titanio negra con incrustaciones doradas. Edici├│n limitada.","precio":189,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/orionix25/400/400"},{"id":27,"nombre":"Chaqueta Blazer Imperio","descripcion":"Blazer negro slim fit con forro dorado y botones Kabalion. Lana premium.","precio":248,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/orionix26/400/400"},{"id":28,"nombre":"Malet├¡n Sefirot Executive","descripcion":"Malet├¡n de cuero genuino negro con ├írbol Sefirot grabado.","precio":320,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/orionix27/400/400"},{"id":29,"nombre":"Traje AXEL Completo","descripcion":"Traje de dos piezas negro con detalles dorados. Corte italiano. Edici├│n AXEL.","precio":498,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/orionix28/400/400"},{"id":30,"nombre":"Perfume Kether Absolut","descripcion":"Perfume oud y s├índalo negro, 100ml. La fragancia definitiva de ORIONIX.","precio":245,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/orionix29/400/400"},{"id":31,"nombre":"Collar ├ürbol de Vida","descripcion":"Collar en oro 18k con colgante ├írbol de vida Kabalion. Cadena 50cm.","precio":380,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/orionix30/400/400"},{"id":32,"nombre":"Camiseta B├ísica Algod├│n Blanca","descripcion":"Camiseta unisex 100% algod├│n, corte recto, ideal para el d├¡a a d├¡a","precio":12.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/tshirtwhite/400/400"},{"id":33,"nombre":"Pantal├│n Lino Holgado Verano Viral","descripcion":"Pantal├│n holgado de lino natural, transpirable, +56M vendidos en TikTok 2025","precio":19.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/linenpants/400/400"},{"id":34,"nombre":"Leggings Deportivos Push-Up","descripcion":"Leggings de compresi├│n con efecto push-up, cintura alta","precio":14.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/leggings/400/400"},{"id":35,"nombre":"Camiseta Logo Bordado TrendyBoutique","descripcion":"Camiseta con logo bordado en relieve, tendencia viral","precio":15.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/embroidered/400/400"},{"id":36,"nombre":"Pantal├│n Ancho Cord├│n Tie-Dye","descripcion":"Pantal├│n palazzo con cord├│n ajustable, dise├▒o tie-dye","precio":17.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/tiedye/400/400"},{"id":37,"nombre":"Top Crop Fruncido Tirantes","descripcion":"Top corto fruncido con tirantes finos, perfecto para verano","precio":11.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/croptop/400/400"},{"id":38,"nombre":"Calcetines Pack 5 Pares Algod├│n","descripcion":"Pack 5 pares calcetines 100% algod├│n, colores surtidos","precio":9.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/socks/400/400"},{"id":39,"nombre":"Gorro Beanie Lana Invierno","descripcion":"Gorro tejido unisex de lana suave, disponible en 12 colores","precio":12.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/beanie/400/400"},{"id":40,"nombre":"Cintur├│n Cuero Sint├®tico Negro","descripcion":"Cintur├│n cl├ísico de cuero sint├®tico con hebilla met├ílica dorada","precio":13.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/beltblack/400/400"},{"id":41,"nombre":"Bufanda Ligera Degradada","descripcion":"Bufanda ligera efecto degradado, perfecta para entretiempo","precio":14.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/scarf/400/400"},{"id":42,"nombre":"Camiseta Oversized Aesthetic Y2K","descripcion":"Camiseta oversized estilo Y2K con print gr├ífico","precio":16.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/oversized/400/400"},{"id":43,"nombre":"Shorts Ciclismo Compresi├│n","descripcion":"Shorts de ciclismo con almohadilla gel y compresi├│n muscular","precio":13.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/cycling/400/400"},{"id":44,"nombre":"Vestido Casual Floral Verano","descripcion":"Vestido midi floral con tirantes, perfecto para playa o ciudad","precio":22.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/floraldress/400/400"},{"id":45,"nombre":"Falda Mini Vaquera","descripcion":"Mini falda vaquera de tiro alto con botones al frente","precio":19.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/denimskirt/400/400"},{"id":46,"nombre":"Sudadera B├ísica Sin Capucha","descripcion":"Sudadera crew neck de algod├│n grueso, interior afelpado","precio":24.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/sweatshirt/400/400"},{"id":47,"nombre":"Pantal├│n Cargo Multi-bolsillos","descripcion":"Pantal├│n cargo unisex con 6 bolsillos, estilo militar urban","precio":29.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/cargo/400/400"},{"id":48,"nombre":"Camiseta Rayas Marineras","descripcion":"Camiseta cl├ísica marinera de rayas horizontales azul y blanco","precio":14.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/stripes/400/400"},{"id":49,"nombre":"Top Deportivo Sin Mangas","descripcion":"Top deportivo de secado r├ípido, ideal para gym o yoga","precio":12.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/sporttop/400/400"},{"id":50,"nombre":"Gorra Snapback Negra","descripcion":"Gorra snapback plana unisex, talla ajustable, bordado lateral","precio":11.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/snapback/400/400"},{"id":51,"nombre":"Aretes Perla Artificial Pack 3","descripcion":"Set 3 pares de aretes con perla artificial","precio":9.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/pearlearrings/400/400"},{"id":52,"nombre":"Collar Cadena Dorada Fina","descripcion":"Collar cadena dorada fina tipo snake chain, longitud 45cm","precio":12.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/goldchain/400/400"},{"id":53,"nombre":"Pulsera El├ística Piedras Naturales","descripcion":"Pulsera el├ística con piedras semipreciosas, estilo boho","precio":9.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/stonebracelet/400/400"},{"id":54,"nombre":"Anillo Ajustable Acero Inoxidable","descripcion":"Anillo de apertura ajustable en acero quir├║rgico","precio":8.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/ring/400/400"},{"id":55,"nombre":"Bolso Tela Canvas Peque├▒o","descripcion":"Bolso tote peque├▒o de canvas reciclado con cremallera","precio":14.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/canvasbag/400/400"},{"id":56,"nombre":"Mochila Plegable Impermeable","descripcion":"Mochila ultraligera plegable en su bolsillo, resistente al agua","precio":19.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/foldablebackpack/400/400"},{"id":57,"nombre":"Chanclas Plataforma Verano","descripcion":"Chanclas con plataforma de corcho, tira de PU dorada","precio":16.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/platformflip/400/400"},{"id":58,"nombre":"Zapatillas Lona Blancas B├ísicas","descripcion":"Zapatillas de lona cl├ísicas blancas unisex, suela de goma","precio":24.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/whitesneakers/400/400"},{"id":59,"nombre":"Vestido Midi Crochet Playero","descripcion":"Vestido midi de crochet tejido a mano, perfecto sobre el ba├▒ador","precio":27.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/crochetdress/400/400"},{"id":60,"nombre":"Camisa Hawaiana Hombre","descripcion":"Camisa manga corta hawaiana con print tropical, 100% viscosa","precio":18.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/hawaiian/400/400"},{"id":61,"nombre":"Pantal├│n Pijama Franela Cuadros","descripcion":"Pantal├│n de pijama de franela suave con el├ístico en cintura","precio":15.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/pajama/400/400"},{"id":62,"nombre":"Bralette Encaje Floral","descripcion":"Bralette de encaje floral sin aro, ajuste por espalda","precio":13.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/bralette/400/400"},{"id":63,"nombre":"Medias Rejilla Negras Pack 3","descripcion":"Pack 3 pares de medias de rejilla negras, tendencia retro","precio":9.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/fishnets/400/400"},{"id":64,"nombre":"Diadema Sat├®n Lazos","descripcion":"Diadema de sat├®n con lazo lateral, estilo coquette tendencia 2025","precio":8.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/hairband/400/400"},{"id":65,"nombre":"Clips Cabello Mariposa Pack 10","descripcion":"Set 10 clips mariposa de acetato en colores pastel","precio":7.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/hairclips/400/400"},{"id":66,"nombre":"Cintur├│n Cadena Metal Dorado","descripcion":"Cintur├│n de cadena met├ílica dorada para vestidos y faldas","precio":12.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/chainbelt/400/400"},{"id":67,"nombre":"Paraguas Plegable Autom├ítico","descripcion":"Paraguas plegable apertura autom├ítica, resistente al viento","precio":14.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/umbrella/400/400"},{"id":68,"nombre":"Gafas Sol B├ísicas Ovaladas","descripcion":"Gafas de sol ovaladas con protecci├│n UV400","precio":9.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/sunglasses/400/400"},{"id":69,"nombre":"Funda Gafas Cuero Sint├®tico","descripcion":"Funda para gafas de cuero sint├®tico con cierre magn├®tico","precio":7.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/glasscase/400/400"},{"id":70,"nombre":"Guantes Cuero Sint├®tico Invierno","descripcion":"Guantes de cuero sint├®tico con forro polar interior","precio":17.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/gloves/400/400"},{"id":71,"nombre":"Calcetines T├®rmicos Pack 3","descripcion":"Pack 3 pares calcetines t├®rmicos de lana merino, trekking","precio":10.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/thermalsocks/400/400"},{"id":72,"nombre":"Sudadera Capucha B├ísica Negra","descripcion":"Hoodie oversized unisex negro, forro polar suave interior","precio":28.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/hoodie/400/400"},{"id":73,"nombre":"Shorts Vaqueros Deshilachados","descripcion":"Shorts vaqueros tiro alto con borde deshilachado, estilo vintage","precio":21.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/denimshorts/400/400"},{"id":74,"nombre":"Falda Plisada Mini Colores","descripcion":"Mini falda plisada en colores pastel, cintura el├ística","precio":18.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/pleatedskirt/400/400"},{"id":75,"nombre":"Camiseta Crop Universitaria","descripcion":"Camiseta crop con logo universitario vintage, manga corta","precio":13.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/college/400/400"},{"id":76,"nombre":"Pantal├│n Ch├índal Algod├│n","descripcion":"Pantal├│n de ch├índal cl├ísico con bolsillos laterales y cord├│n","precio":22.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/sweatpants/400/400"},{"id":77,"nombre":"Vestido Camisero Lino","descripcion":"Vestido camisero de lino con botones y cintur├│n incluido","precio":25.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/shirrdress/400/400"},{"id":78,"nombre":"Top Halter Nudo Frontal","descripcion":"Top halter con nudo frontal ajustable, tela cr├¬pe el├ística","precio":12.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/haltertop/400/400"},{"id":79,"nombre":"Minibolso Bandolera PU","descripcion":"Mini bolso bandolera de PU con cadena dorada, varios colores","precio":16.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/minibag/400/400"},{"id":80,"nombre":"Ri├▒onera Tela Estampada","descripcion":"Ri├▒onera de tela con estampado geom├®trico, multi-bolsillos","precio":14.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/fanny/400/400"},{"id":81,"nombre":"Sombrero Paja Playa","descripcion":"Sombrero de paja natural ala ancha para playa y festivales","precio":12.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/strawhat/400/400"},{"id":82,"nombre":"Leggings Vinilo Efecto Piel","descripcion":"Leggings de vinilo efecto cuero PU, tiro alto, tendencia dark","precio":19.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/leatherleggings/400/400"},{"id":83,"nombre":"Camiseta Print Galaxia Cosmos","descripcion":"Camiseta con dise├▒o de galaxia y cosmos, print sublimaci├│n","precio":15.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/galaxy/400/400"},{"id":84,"nombre":"Pantal├│n Palazzo Fluido","descripcion":"Pantal├│n palazzo de tela fluida, vuelo amplio, cintura alta","precio":24.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/palazzo/400/400"},{"id":85,"nombre":"Blusa Transparente Bordada","descripcion":"Blusa semitransparente con bordado floral en mangas y cuello","precio":21.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/embroideredblouse/400/400"},{"id":86,"nombre":"Chaqueta Vaquera B├ísica","descripcion":"Chaqueta vaquera cl├ísica de denim azul lavado, corte recto","precio":34.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/denimjacket/400/400"},{"id":87,"nombre":"Jersey Punto Grueso Oto├▒o","descripcion":"Jersey de punto grueso texturizado, cuello redondo","precio":29.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/knitwear/400/400"},{"id":88,"nombre":"Mono Overol Vaquero Mujer","descripcion":"Mono peto vaquero completo con pernera ancha, tiro alto","precio":32.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/overalls/400/400"},{"id":89,"nombre":"Camiseta Tie-Dye Colores Vivos","descripcion":"Camiseta tie-dye hecha a mano, colores vivos ├║nicos","precio":13.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/tiedyeshirt/400/400"},{"id":90,"nombre":"Set Bandanas Multiusos Pack 3","descripcion":"Pack 3 bandanas de tela 100% algod├│n, m├║ltiples usos","precio":11.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/bandana/400/400"},{"id":91,"nombre":"Camiseta Corta Manga Larga Acanalada","descripcion":"Camiseta manga larga de tela acanalada el├ística, corte ce├▒ido","precio":16.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/ribbed/400/400"},{"id":92,"nombre":"Zapatillas Sneaker Plataforma Chunky","descripcion":"Zapatillas chunky con suela plataforma 5cm, cuero sint├®tico premium","precio":59.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/chunky/400/400"},{"id":93,"nombre":"Bolso Bandolera Cuero PU Premium","descripcion":"Bolso bandolera de PU de alta calidad con herrajes dorados","precio":49.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/puleatherbag/400/400"},{"id":94,"nombre":"Smartwatch Fitness B├ísico","descripcion":"Smartwatch con monitor card├¡aco, SpO2, GPS y 7 d├¡as bater├¡a","precio":44.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/smartwatch/400/400"},{"id":95,"nombre":"Auriculares Bluetooth Inal├ímbricos","descripcion":"Auriculares TWS con cancelaci├│n de ruido b├ísica, 30h bater├¡a","precio":39.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/earbuds/400/400"},{"id":96,"nombre":"Gafas Sol Polarizadas Marco Acetato","descripcion":"Gafas de sol polarizadas con montura de acetato italiano","precio":45.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/acetatesun/400/400"},{"id":97,"nombre":"Perfume Mujer Eau de Toilette 50ml","descripcion":"Fragancia femenina floral amaderada, duraci├│n 8h, caja de regalo","precio":42.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/perfume/400/400"},{"id":98,"nombre":"Perfume Hombre Woody Intense 50ml","descripcion":"Fragancia masculina amaderada intensa, notas de oud y cuero","precio":44.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/manperfume/400/400"},{"id":99,"nombre":"Camisa Oxford Premium Hombre","descripcion":"Camisa oxford de algod├│n peinado, cuello button-down, slim fit","precio":45.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/oxfordshirt/400/400"},{"id":100,"nombre":"Pantal├│n Chino Slim Fit","descripcion":"Pantal├│n chino de algod├│n el├ístico, slim fit, varios colores","precio":49.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/chinopants/400/400"},{"id":101,"nombre":"Vestido Midi Sat├®n Elegante","descripcion":"Vestido midi de sat├®n brillante con abertura lateral, evento","precio":65.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/satendress/400/400"},{"id":102,"nombre":"Blazer Entallado Mujer","descripcion":"Blazer entallado de crepe, hombros estructurados, forro interior","precio":79.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/womansblazer/400/400"},{"id":103,"nombre":"Chaqueta Bomber Streetwear","descripcion":"Chaqueta bomber de sat├®n reversible, estilo street premium","precio":69.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/bomberjacket/400/400"},{"id":104,"nombre":"Abrigo Corto Lana Mezcla","descripcion":"Abrigo corto de lana y poli├®ster, estructura elegante","precio":99.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/woolencoat/400/400"},{"id":105,"nombre":"Bolso Shopper Tote Premium","descripcion":"Bolso tote XL de PU premium con refuerzo base y bolsillo interior","precio":55.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/totebag/400/400"},{"id":106,"nombre":"Mochila Urban Style Premium","descripcion":"Mochila urbana de PU con conector USB, compartimento laptop 15","precio":65.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/urbanbackpack/400/400"},{"id":107,"nombre":"Cartera Cuero Slim RFID","descripcion":"Cartera minimalista de cuero genuino con protecci├│n RFID","precio":39.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/slimwallet/400/400"},{"id":108,"nombre":"Cintur├│n Cuero Genuino Trenzado","descripcion":"Cintur├│n de cuero genuino trenzado artesanal, hebilla met├ílica","precio":45.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/leatherbelt/400/400"},{"id":109,"nombre":"Botines Tac├│n Bajo Mujer","descripcion":"Botines de PU premium con tac├│n cuadrado bajo 4cm, cremallera","precio":79.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/ankleboot/400/400"},{"id":110,"nombre":"Mocasines Cuero Sint├®tico Hombre","descripcion":"Mocasines de cuero sint├®tico de alta calidad, suela antideslizante","precio":55.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/loafers/400/400"},{"id":111,"nombre":"Deportivas Running Ligeras","descripcion":"Zapatillas de running ultra ligeras, amortiguaci├│n EVA, transpirables","precio":89.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/running/400/400"},{"id":112,"nombre":"Sandalias Tiras Verano Elegantes","descripcion":"Sandalias de tiras entrelazadas con tac├│n de cuna, verano","precio":59.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/sandals/400/400"},{"id":113,"nombre":"Collar Acero Inoxidable Colgante","descripcion":"Collar con colgante de acero inoxidable IP dorado, minimalista","precio":38.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/steelnecklace/400/400"},{"id":114,"nombre":"Pendientes Aro Grandes Dorados","descripcion":"Pendientes aro XL de acero inoxidable con ba├▒o de oro 18K","precio":35.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/goldhoops/400/400"},{"id":115,"nombre":"Pulsera Hombre Cuero Acero","descripcion":"Pulsera de cuero genuino con cierre de acero inoxidable magn├®tico","precio":42.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/manbracelet/400/400"},{"id":116,"nombre":"Anillo Solitario Plata 925","descripcion":"Anillo solitario en plata 925 con circonita incolora 6mm","precio":45.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/silverring/400/400"},{"id":117,"nombre":"Smartwatch Dama Pantalla Circular","descripcion":"Smartwatch femenino pantalla circular AMOLED, correa intercambiable","precio":79.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/ladywatch/400/400"},{"id":118,"nombre":"Pulsera Fitness Banda Inteligente","descripcion":"Banda de actividad con monitor sue├▒o, pasos, calor├¡as y notificaciones","precio":49.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/fitband/400/400"},{"id":119,"nombre":"Auriculares ANC Over-Ear","descripcion":"Auriculares over-ear con cancelaci├│n activa de ruido y 40h bater├¡a","precio":89.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/headphones/400/400"},{"id":120,"nombre":"Altavoz Bluetooth Port├ítil Impermeable","descripcion":"Altavoz port├ítil IP67 con sonido 360┬░ y 24h bater├¡a","precio":55.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/speaker/400/400"},{"id":121,"nombre":"Cargador Inal├ímbrico Premium 3 en 1","descripcion":"Cargador inal├ímbrico para m├│vil, auriculares y smartwatch","precio":45.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/wirelesscharger/400/400"},{"id":122,"nombre":"Power Bank 20000mAh Slim Design","descripcion":"Bater├¡a externa ultraslim 20000mAh con carga r├ípida PD 65W","precio":39.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/powerbank/400/400"},{"id":123,"nombre":"Funda Premium Cuero iPhone","descripcion":"Funda de cuero genuino con tarjetero integrado para iPhone","precio":39.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/phonecase/400/400"},{"id":124,"nombre":"Traje Ba├▒o Mujer Una Pieza Luxury","descripcion":"Ba├▒ador de una pieza con recortes estrat├®gicos y detalle dorado","precio":45.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/swimsuit/400/400"},{"id":125,"nombre":"Bikini Set Premium Estampado","descripcion":"Bikini triangular con lazo ajustable, estampado tropical premium","precio":49.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/bikini/400/400"},{"id":126,"nombre":"Pijama Seda Premium Estampado","descripcion":"Conjunto pijama de seda artificial con estampado geom├®trico","precio":79.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/silkpajama/400/400"},{"id":127,"nombre":"Masajeador Facial Rodillo Cuarzo","descripcion":"Rodillo facial de cuarzo rosa natural para drenaje linf├ítico","precio":39.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/facialroller/400/400"},{"id":128,"nombre":"S├®rum Vitamina C Premium 30ml","descripcion":"S├®rum vitamina C 20% con ├ícido hialur├│nico y niacinamida","precio":42.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/serum/400/400"},{"id":129,"nombre":"Set Pinceles Maquillaje 12 Piezas","descripcion":"Set 12 pinceles de maquillaje profesionales pelo sint├®tico premium","precio":35.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/makeupbrush/400/400"},{"id":130,"nombre":"Plancha Pelo Cer├ímica I├│n Negativa","descripcion":"Plancha alisadora de cer├ímica turmalina con iones negativos 230┬░C","precio":49.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/hairstraightener/400/400"},{"id":131,"nombre":"Rizador Autom├ítico Digital","descripcion":"Rizador autom├ítico con pantalla digital y 5 temperaturas, cer├ímica","precio":59.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/curlerwand/400/400"},{"id":132,"nombre":"Secador Pelo I├│nico Potente","descripcion":"Secador i├│nico 2200W con difusor y concentrador incluidos","precio":55.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/hairdryer/400/400"},{"id":133,"nombre":"Paleta Sombras 24 Tonos Luxury","descripcion":"Paleta de sombras 24 tonos con mattes, shimmer y duochrome","precio":39.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/eyeshadow/400/400"},{"id":134,"nombre":"Set Manicura Gel UV Completo","descripcion":"Kit manicura gel con l├ímpara UV 48W, 12 esmaltes y accesorios","precio":45.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/manicure/400/400"},{"id":135,"nombre":"Depiladora El├®ctrica Mujer IPL","descripcion":"Depiladora de luz pulsada IPL para uso en casa, 500.000 pulsos","precio":89.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/ipl/400/400"},{"id":136,"nombre":"Afeitadora Hombre El├®ctrica 5D","descripcion":"Afeitadora el├®ctrica 5D flotante, impermeable IPX7, recargable","precio":79.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/shaver/400/400"},{"id":137,"nombre":"B├íscula Inteligente WiFi Corporal","descripcion":"B├íscula WiFi 13 m├®tricas corporales, app compatible Fitbit y Apple Health","precio":49.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/scale/400/400"},{"id":138,"nombre":"Esterilla Yoga Premium Antideslizante","descripcion":"Esterilla yoga 6mm NBR antideslizante extra ancha con correa","precio":45.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/yogamat/400/400"},{"id":139,"nombre":"Set Pesas Mano Ajustables 10kg","descripcion":"Par de mancuernas ajustables de 1 a 10kg, agarre ergon├│mico","precio":55.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/dumbbells/400/400"},{"id":140,"nombre":"Cuerda Saltar Inteligente Contador","descripcion":"Cuerda de saltar con contador digital de saltos y calor├¡as","precio":39.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/jumprop/400/400"},{"id":141,"nombre":"Botella Agua Inteligente LED Temp","descripcion":"Botella inteligente con pantalla LED de temperatura, acero inoxidable","precio":45.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/smartbottle/400/400"},{"id":142,"nombre":"Termo Stanley R├®plica Premium 1L","descripcion":"Termo de acero inoxidable doble pared 1L, mantiene 24h fr├¡o/calor","precio":49.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/stanleycup/400/400"},{"id":143,"nombre":"Mochila Monta├▒a 40L Impermeable","descripcion":"Mochila de monta├▒a 40L con funda de lluvia integrada y soporte lumbar","precio":89.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/hikingbag/400/400"},{"id":144,"nombre":"Chaqueta Softshell Outdoor","descripcion":"Chaqueta softshell cortavientos y resistente al agua, 3 capas","precio":99.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/softshell/400/400"},{"id":145,"nombre":"Pantal├│n Trekking Convertible","descripcion":"Pantal├│n de trekking convertible en bermuda, secado r├ípido","precio":69.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/trekking/400/400"},{"id":146,"nombre":"Gafas Deportivas Espejo UV400","descripcion":"Gafas deportivas con lente espejo intercambiable, UV400","precio":45.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/sportglasses/400/400"},{"id":147,"nombre":"Banda Resistencia El├ística Pack 5","descripcion":"Set 5 bandas de resistencia el├ística de l├ítex, diferentes intensidades","precio":35.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/resistancebands/400/400"},{"id":148,"nombre":"Rodillo Foam Masaje Muscular","descripcion":"Rodillo de espuma de alta densidad para masaje miofascial","precio":38.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/foamroller/400/400"},{"id":149,"nombre":"Collar Running GPS Premium","descripcion":"Collar GPS para perro, compatible con app, 20 d├¡as bater├¡a","precio":79.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/gpspet/400/400"},{"id":150,"nombre":"Gafas Luz Azul Anti-fatiga","descripcion":"Gafas filtro luz azul, montura TR90 flexible, unisex","precio":35.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/bluelight/400/400"},{"id":151,"nombre":"Set Skincare Coreano 5 Pasos","descripcion":"Rutina coreana completa: limpiador, t├│nico, esencia, s├®rum y crema","precio":55.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/kbeauty/400/400"},{"id":152,"nombre":"Reloj Hombre Autom├ítico Acero 316L","descripcion":"Reloj autom├ítico mec├ínico con caja de acero 316L, cristal zafiro","precio":299.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/automaticwatch/400/400"},{"id":153,"nombre":"Reloj Mujer Dorado Cristales Luxury","descripcion":"Reloj femenino con brazalete dorado y cristales Swarovski","precio":249.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/ladywatchluxury/400/400"},{"id":154,"nombre":"Bolso Mujer Piel Genuina Mano","descripcion":"Bolso de mano en piel genuina italiana, herrajes plateados","precio":349.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/genuineleatherbag/400/400"},{"id":155,"nombre":"Malet├¡n Cuero Genuino Hombre","descripcion":"Malet├¡n ejecutivo de cuero full grain, compartimento laptop 15","precio":299.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/briefcase/400/400"},{"id":156,"nombre":"Perfume Niche Extrait Parfum 50ml","descripcion":"Extrait de parfum niche, concentraci├│n 30%, duraci├│n 24h","precio":185.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/nicheperfume/400/400"},{"id":157,"nombre":"Perfume Oud Luxury Collection 100ml","descripcion":"Perfume oriental oud premium 100ml, mezcla de oud, rosa y vainilla","precio":199.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/oud/400/400"},{"id":158,"nombre":"Traje Hombre Lana Italiana Slim","descripcion":"Traje slim fit de lana italiana, forro completo, cuello solapa pico","precio":499.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/suit/400/400"},{"id":159,"nombre":"Vestido Gala Seda Natural Premium","descripcion":"Vestido de gala en seda natural, escote V, cola semilarga, bordado","precio":449.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/galadress/400/400"},{"id":160,"nombre":"Abrigo Cachemira Premium Mujer","descripcion":"Abrigo de cachemira 100% mongoliana, corte midi, botones n├ícar","precio":599.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/cashmere/400/400"},{"id":161,"nombre":"Chaqueta Cuero Genuino Hombre","descripcion":"Chaqueta de cuero de cordero genuino, forro de seda, estilo biker","precio":399.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/leatherjacket/400/400"},{"id":162,"nombre":"Zapatillas Edici├│n Limitada Premium","descripcion":"Zapatillas de cuero genuino edici├│n limitada, suela de goma premium","precio":249.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/luxurysneakers/400/400"},{"id":163,"nombre":"Botines Cuero Genuino Mujer Luxury","descripcion":"Botines de cuero genuino con tac├│n geom├®trico 7cm, punta cuadrada","precio":299.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/luxuryboots/400/400"},{"id":164,"nombre":"Oxford Cuero Full Grain Hombre","descripcion":"Zapato Oxford de cuero full grain, punta recta, suela cuero Goodyear","precio":349.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/oxfordshoes/400/400"},{"id":165,"nombre":"Collar Plata 925 Diamante Lab","descripcion":"Collar de plata 925 con diamante de laboratorio 0.5ct certificado GIA","precio":299.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/diamondnecklace/400/400"},{"id":166,"nombre":"Pulsera Oro 18K Ba├▒o Premium","descripcion":"Pulsera de acero con ba├▒o de oro 18K de 5 micras, ancho 10mm","precio":249.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/goldbracelet/400/400"},{"id":167,"nombre":"Pendientes Perla Cultivada Natural","descripcion":"Pendientes de perla cultivada Akoya 8mm con montura de oro blanco","precio":199.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/pearlsearrings/400/400"},{"id":168,"nombre":"Anillo Compromiso Plata 925","descripcion":"Anillo de compromiso plata 925 con piedra principal y pav├® lateral","precio":179.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/engagementring/400/400"},{"id":169,"nombre":"Smartwatch Premium AMOLED GPS","descripcion":"Smartwatch de alta gama con pantalla AMOLED, GPS integrado y ECG","precio":299.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/premiumsmartwatch/400/400"},{"id":170,"nombre":"Auriculares ANC Premium Over-Ear","descripcion":"Auriculares premium con cancelaci├│n activa de ruido de ├®lite","precio":249.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/premiumheadphones/400/400"},{"id":171,"nombre":"Altavoz Premium Hi-Fi Bluetooth","descripcion":"Altavoz port├ítil premium 60W con sonido Hi-Fi, IP67, 18h bater├¡a","precio":349.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/hifispeaker/400/400"},{"id":172,"nombre":"Drone Fotogr├ífico 4K Plegable","descripcion":"Drone plegable 4K con gimbal 3 ejes, 30min vuelo","precio":399.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/drone/400/400"},{"id":173,"nombre":"C├ímara Acci├│n 4K 60FPS Estabilizaci├│n","descripcion":"C├ímara de acci├│n 4K/60fps con estabilizaci├│n HorizonSteady 360┬░","precio":299.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/actioncam/400/400"},{"id":174,"nombre":"Proyector 4K Port├ítil Ultra HD","descripcion":"Proyector port├ítil 4K con 1000 l├║menes, altavoz integrado, HDMI","precio":549.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/projector/400/400"},{"id":175,"nombre":"Set Skincare Luxury Premium 7 Piezas","descripcion":"Rutina completa de lujo: limpiador, t├│nico, esencia, 2 s├®rums","precio":199.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/luxuryskincare/400/400"},{"id":176,"nombre":"Crema Antiedad Retinol Luxury 50ml","descripcion":"Crema antiedad con retinol 0.5%, p├®ptidos y ceramidas, cl├¡nica probada","precio":175.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/retinolcream/400/400"},{"id":177,"nombre":"Set Fragancias Niche Colecci├│n 4","descripcion":"Colecci├│n 4 miniatures de parfum niche, 15ml cada una, estuche premium","precio":299.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/fragranceset/400/400"},{"id":178,"nombre":"Difusor Aromas Ultras├│nico Premium","descripcion":"Difusor ultras├│nico 500ml con luz ambiental LED, silencioso 25dB","precio":189.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/diffuser/400/400"},{"id":179,"nombre":"Set Whisky Cristal Tallado 6 Piezas","descripcion":"Set 6 vasos de whisky en cristal tallado a mano, caja madera","precio":299.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/crystalwhisky/400/400"},{"id":180,"nombre":"Vajilla Premium Porcelana 12 Servicios","descripcion":"Vajilla completa de porcelana bone china, 12 servicios, 48 piezas","precio":349.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/chinaware/400/400"},{"id":181,"nombre":"Set Cuchillos Damasco Cocina Pro","descripcion":"Set 8 cuchillos de acero damasco VG10, mangos pakkawood, con taco","precio":259.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/damascusknives/400/400"},{"id":182,"nombre":"Cafetera Espresso Autom├ítica","descripcion":"Cafetera espresso autom├ítica con molinillo integrado y vaporizador","precio":499.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/espressomachine/400/400"},{"id":183,"nombre":"Robot Cocina Multifunci├│n Premium","descripcion":"Robot de cocina 1500W con 15 funciones, b├íscula integrada","precio":399.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/foodprocessor/400/400"},{"id":184,"nombre":"Aspiradora Robot IA Auto-Vaciado","descripcion":"Robot aspirador con IA, mapeo l├íser, base auto-vaciado 60 d├¡as","precio":449.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/robotvacuum/400/400"},{"id":185,"nombre":"Purificador Aire HEPA 360┬░ Luxury","descripcion":"Purificador de aire HEPA H13, cubre 60m┬▓, sensor PM2.5 en tiempo real","precio":299.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/airpurifier/400/400"},{"id":186,"nombre":"Cuadro Canvas Arte Abstracto XXL","descripcion":"Impresi├│n en canvas de arte abstracto 120x80cm, marco flotante","precio":199.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/abstractart/400/400"},{"id":187,"nombre":"L├ímpara Pie Arco LED Luxury","descripcion":"L├ímpara de pie de arco con LED regulable y temperatura de color ajustable","precio":249.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/arclamp/400/400"},{"id":188,"nombre":"Espejo Inteligente LED Ba├▒o","descripcion":"Espejo de ba├▒o con iluminaci├│n LED integrada, antivaho y bluetooth","precio":299.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/smartmirror/400/400"},{"id":189,"nombre":"Set Ropa Cama Seda Natural 200H","descripcion":"Juego de s├íbanas de seda natural 22 momme, 200 hilos","precio":399.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/silkbedding/400/400"},{"id":190,"nombre":"Almohada Memory Foam Premium","descripcion":"Almohada ergon├│mica de memory foam con cubierta de bamb├║ OEKO-TEX","precio":189.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/memorypillow/400/400"},{"id":191,"nombre":"Bicicleta Est├ítica Premium App","descripcion":"Bicicleta est├ítica de carbono 1200W con pantalla t├íctil 21 y clases live","precio":499.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/exercisebike/400/400"},{"id":192,"nombre":"Pesas Ajustables Selectoras 32kg","descripcion":"Par de mancuernas selectoras ajustables de 2.5 a 32kg por mancuerna","precio":399.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/selectordumbbells/400/400"},{"id":193,"nombre":"Masajeador Percusi├│n Muscular Pro","descripcion":"Pistola de masaje percutiva profesional 6 cabezales, silenciosa 40dB","precio":249.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/massagegun/400/400"},{"id":194,"nombre":"Monitor Gaming 27 165Hz QHD","descripcion":"Monitor gaming 27 165Hz resoluci├│n QHD, 1ms, panel IPS, HDR400","precio":549.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/gamingmonitor/400/400"},{"id":195,"nombre":"Silla Gaming Premium Lumbar","descripcion":"Silla gaming de cuero PU con soporte lumbar ajustable y reposacabezas","precio":399.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/gamingchair/400/400"},{"id":196,"nombre":"Casco VR Standalone 4K","descripcion":"Casco de realidad virtual standalone, pantalla 4K por ojo, 120Hz","precio":499.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/vrheadset/400/400"},{"id":197,"nombre":"Patinete El├®ctrico Pro 500W 45km","descripcion":"Patinete el├®ctrico motor 500W, autonom├¡a 45km, frenos hidr├íulicos","precio":599.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/electricscooter/400/400"},{"id":198,"nombre":"Maleta Cabina Policarbonato Luxury","descripcion":"Maleta de cabina de policarbonato ultraligera con TSA lock y USB","precio":249.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/luggagecase/400/400"},{"id":199,"nombre":"Lentes Smart AR Premium","descripcion":"Gafas inteligentes con realidad aumentada, altavoz y c├ímara integrada","precio":349.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/smartglasses/400/400"},{"id":200,"nombre":"Bicicleta Urbana El├®ctrica Plegable","descripcion":"Bicicleta el├®ctrica plegable 250W, bater├¡a 36V 10Ah, 50km autonom├¡a","precio":799.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/ebike/400/400"},{"id":201,"nombre":"Altavoz HiFi Tower 2.1 200W","descripcion":"Sistema de sonido tower 2.1, 200W RMS, Bluetooth 5.0, l├¡nea ├│ptica","precio":499.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/towerspeaker/400/400"},{"id":202,"nombre":"Set Decoraci├│n Hogar Oro Luxury","descripcion":"Set 7 piezas decoraci├│n sala de estar en acabado dorado premium","precio":299.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/golddecor/400/400"},{"id":203,"nombre":"Tablet Profesional 12 256GB","descripcion":"Tablet 12 con chip M2, 256GB, pantalla Liquid Retina, stylus incluido","precio":699.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/propad/400/400"},{"id":204,"nombre":"Reloj Cron├│grafo Acero Premium","descripcion":"Reloj cron├│grafo de cuarzo suizo, caja 42mm, correa acero milanesa","precio":319.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/chronograph/400/400"},{"id":205,"nombre":"Collar Acero Titanio con Diamante","descripcion":"Collar en titanio grado aeron├íutico con diamante de laboratorio 1ct","precio":459.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/titaniumcollar/400/400"},{"id":206,"nombre":"Perfume Creator ORIONIX Signature","descripcion":"Fragancia exclusiva ORIONIX, notas de ├ímbar, cosmos y madera de cedro","precio":229.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/orionixperfume/400/400"},{"id":207,"nombre":"Traje de Ba├▒o Hombre Luxury Print","descripcion":"Ba├▒ador hombre de microfibra premium con print exclusivo ORIONIX","precio":159.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/luxuryswim/400/400"},{"id":208,"nombre":"Bolso Clutch Boda Seda Cristales","descripcion":"Clutch nupcial de seda con cristales Swarovski, cadena dorada","precio":249.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/weddingclutch/400/400"},{"id":209,"nombre":"Set Viaje Luxury Amenities 10 Piezas","descripcion":"Kit de viaje de lujo: perfume, crema, s├®rum, champ├║, acondicionador premium","precio":175.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/travelkit/400/400"},{"id":210,"nombre":"Auriculares Conducci├│n ├ôsea Titanio","descripcion":"Auriculares de conducci├│n ├│sea en titanio, IP68, sport premium","precio":199.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/boneconduction/400/400"},{"id":211,"nombre":"C├ímara Polaroid Edici├│n Luxury","descripcion":"C├ímara instant├ínea Polaroid edici├│n especial con marco dorado","precio":169.99,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/polaroid/400/400"},{"id":212,"nombre":"Funda M├│vil Silicona MagSafe","descripcion":"Funda de silicona l├¡quida compatible MagSafe, tacto premium","precio":12.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/magcase/400/400"},{"id":213,"nombre":"Soporte M├│vil Escritorio Ajustable","descripcion":"Soporte de tel├®fono articulado para escritorio, cuello flexible 360┬░","precio":14.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/phonestand/400/400"},{"id":214,"nombre":"Cable USB-C Trenzado 2m","descripcion":"Cable USB-C trenzado nylon, carga r├ípida 65W, longitud 2 metros","precio":9.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/usbcable/400/400"},{"id":215,"nombre":"Protector Pantalla Cristal Templado","descripcion":"Protector de pantalla cristal templado 9H anti-ara├▒azos, pack 2","precio":7.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/screenprotect/400/400"},{"id":216,"nombre":"Mascarilla Facial Hidratante Pack 10","descripcion":"Pack 10 mascarillas faciales de hidrataci├│n con ├ícido hialur├│nico","precio":12.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/facemask/400/400"},{"id":217,"nombre":"Parche Anti-Acn├® Hidrocaloide 36u","descripcion":"Parches hidrocaloide anti espinillas, absorbentes 100%, 36 unidades","precio":9.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/acnepatch/400/400"},{"id":218,"nombre":"Labial L├¡quido Matte Larga Duraci├│n","descripcion":"Labial l├¡quido matte de larga duraci├│n, 12h sin retoques, 12 tonos","precio":10.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/lipstick/400/400"},{"id":219,"nombre":"Pesta├▒a Postiza Natural Sin Cola","descripcion":"Pesta├▒as postizas sin adhesivo, reposicionables, aspecto natural","precio":11.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/lashes/400/400"},{"id":220,"nombre":"Esponja Maquillaje Gota Set 3","descripcion":"Set 3 esponjas de maquillaje tipo beauty blender en tono nude","precio":8.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/beautyblender/400/400"},{"id":221,"nombre":"Corrector Ojeras Efecto Lifting","descripcion":"Corrector de ojeras con efecto lifting y cobertura total, 3 tonos","precio":9.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/concealer/400/400"},{"id":222,"nombre":"Vela Arom├ítica Soja Natural 200g","descripcion":"Vela de cera de soja natural con aceites esenciales de lavanda","precio":14.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/soywax/400/400"},{"id":223,"nombre":"Posavasos Corcho Natural Pack 6","descripcion":"Set 6 posavasos de corcho natural con dise├▒o geom├®trico","precio":9.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/coasters/400/400"},{"id":224,"nombre":"Maceta Cer├ímica Minimalista","descripcion":"Maceta de cer├ímica artesanal blanca con plato, dise├▒o minimalista","precio":13.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/flowerpot/400/400"},{"id":225,"nombre":"Agenda Dot Grid A5 2026","descripcion":"Agenda punto grid A5 para bullet journaling, tapa dura reciclada","precio":14.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/dotgrid/400/400"},{"id":226,"nombre":"Resaltadores Pastel Pack 6 Colores","descripcion":"Set 6 resaltadores de punta doble en colores pastel, tinta al agua","precio":8.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/highlighters/400/400"},{"id":227,"nombre":"Juguete Interactivo Gato Rolling Ball","descripcion":"Pelota interactiva autom├│vile para gatos, movimiento aleatorio, recargable","precio":19.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/catball/400/400"},{"id":228,"nombre":"Comedero Autom├ítico Mascotas Wifi","descripcion":"Comedero autom├ítico con c├ímara HD, control app, capacidad 6L","precio":29.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/petfeeder/400/400"},{"id":229,"nombre":"Cama Mascota Redonda Peluche","descripcion":"Cama redonda de peluche suave para perros y gatos hasta 15kg","precio":24.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/petbed/400/400"},{"id":230,"nombre":"Correa Perro Antitir├│n Reflectante","descripcion":"Correa antitir├│n con mango acolchado y tira reflectante de seguridad","precio":16.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/dogcollar/400/400"},{"id":231,"nombre":"Transport├¡n Mochila Mascotas Aireado","descripcion":"Transport├¡n-mochila para mascotas hasta 8kg, ventana burbuja extra├¡ble","precio":29.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/petcarrier/400/400"},{"id":232,"nombre":"Fuente Agua Filtrada Gatos 2L","descripcion":"Fuente de agua con filtro UV para gatos, 2L, silenciosa 25dB","precio":34.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/catfountain/400/400"},{"id":233,"nombre":"GPS Tracker Mascotas Miniatura","descripcion":"Rastreador GPS ultra peque├▒o para collar de mascotas, app en tiempo real","precio":49.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/petgps/400/400"},{"id":234,"nombre":"C├ímara Seguridad IP 360┬░ WiFi","descripcion":"C├ímara de vigilancia IP 4K WiFi con rotaci├│n 360┬░ y detecci├│n IA","precio":59.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/ipcam/400/400"},{"id":235,"nombre":"Bombilla Inteligente RGBW WiFi E27","descripcion":"Bombilla LED inteligente RGBW 12W E27, compatible Alexa y Google","precio":14.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/smartbulb/400/400"},{"id":236,"nombre":"Tira LED Inteligente 5m RGBIC","descripcion":"Tira LED 5m RGBIC sync m├║sica, segmentos independientes, WiFi","precio":39.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/ledstrip/400/400"},{"id":237,"nombre":"Enchufe Inteligente WiFi Monitor","descripcion":"Enchufe inteligente con medidor de consumo, programaci├│n y voz","precio":19.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/smartplug/400/400"},{"id":238,"nombre":"Termostato Inteligente WiFi","descripcion":"Termostato programable WiFi, pantalla t├íctil, compatible HVAC","precio":79.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/smartthermostat/400/400"},{"id":239,"nombre":"Freidora Aire Digital 7L Familia","descripcion":"Freidora de aire digital 7L con 12 programas, pantalla LCD, sin aceite","precio":89.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/airfryer/400/400"},{"id":240,"nombre":"Batidora Vaso Potente 2000W","descripcion":"Batidora de vaso profesional 2000W, vaso tritan 2L, 10 velocidades","precio":79.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/blender/400/400"},{"id":241,"nombre":"M├íquina Hielo Dom├®stica 15kg/d├¡a","descripcion":"M├íquina de hielo dom├®stica 15kg/d├¡a, ciclo 10 minutos","precio":99.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/icemachine/400/400"},{"id":242,"nombre":"Termo Inteligente Pantalla LED 500ml","descripcion":"Botella t├®rmica con pantalla LED temperatura, acero 316L, 500ml","precio":49.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/smartthermo/400/400"},{"id":243,"nombre":"Impresora Foto Bolsillo Bluetooth","descripcion":"Impresora foto port├ítil bluetooth papel ZINK sin tinta, 10x15cm","precio":59.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/photoprinter/400/400"},{"id":244,"nombre":"Luz LED Escritorio Anti-fatiga","descripcion":"L├ímpara LED escritorio regulable, temperatura color ajustable","precio":45.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/desklamp/400/400"},{"id":245,"nombre":"Gamepad Bluetooth PC y M├│vil","descripcion":"Mando inal├ímbrico Bluetooth para PC Android iOS, gatillos hall effect","precio":49.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/gamepad/400/400"},{"id":246,"nombre":"Teclado Mec├ínico 65% Hot-Swap","descripcion":"Teclado mec├ínico compacto 65% hot-swap, RGB, switches intercambiables","precio":89.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/meckeyboard/400/400"},{"id":247,"nombre":"Rat├│n Gaming Inal├ímbrico 26000DPI","descripcion":"Rat├│n gaming inal├ímbrico 26000 DPI, 100h bater├¡a, 7 botones","precio":69.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/gamingmouse/400/400"},{"id":248,"nombre":"Webcam 4K Autofoco IA","descripcion":"Webcam 4K con encuadre autom├ítico IA, micr├│fono estero integrado","precio":79.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/webcam/400/400"},{"id":249,"nombre":"Micr├│fono Lavalier Inal├ímbrico USB-C","descripcion":"Micr├│fono corbatero inal├ímbrico para m├│vil, 0 latencia, plug USB-C","precio":59.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/lavalier/400/400"},{"id":250,"nombre":"Estabilizador Gimbal 3 Ejes M├│vil","descripcion":"Gimbal 3 ejes para smartphone, seguimiento facial IA, plegable","precio":79.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/gimbal/400/400"},{"id":251,"nombre":"Disco Duro SSD Externo 1TB","descripcion":"SSD externo 1TB USB-C 3.2, transferencia 1000MB/s, ultra compacto","precio":99.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/ssd/400/400"},{"id":252,"nombre":"Hub USB-C 12 en 1 Multifunci├│n","descripcion":"Hub USB-C 12 puertos: 4K HDMI, USB-A, SD, PD 100W, RJ45 Gigabit","precio":49.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/usbhub/400/400"},{"id":253,"nombre":"L├ímpara Luz D├¡a SAD Therapy 10000lux","descripcion":"L├ímpara terapia SAD 10000 lux, temporizador, UV-free","precio":69.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/sadlamp/400/400"},{"id":254,"nombre":"Humidificador Ultrasonico 4L Aromas","descripcion":"Humidificador ultras├│nico 4L con difusor aromas y luz LED RGB","precio":45.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/humidifier/400/400"},{"id":255,"nombre":"Colchoneta Camping Autoinflable","descripcion":"Esterilla de camping autoinflable 5cm grosor, aislamiento t├®rmico R4","precio":49.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/sleepingpad/400/400"},{"id":256,"nombre":"Saco Dormir 3 Estaciones -10┬░C","descripcion":"Saco de dormir 3 estaciones hasta -10┬░C, ultraligero, compresible","precio":79.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/sleepingbag/400/400"},{"id":257,"nombre":"Tienda Camping 2 Personas 3000mm","descripcion":"Tienda de campa├▒a 2 personas impermeabilidad 3000mm, montaje r├ípido","precio":99.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/tent/400/400"},{"id":258,"nombre":"Linterna Frontal LED 1000lm Recargable","descripcion":"Linterna frontal LED 1000 l├║menes recargable USB-C, IP67","precio":39.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/headlamp/400/400"},{"id":259,"nombre":"Navaja Multifunci├│n 12 Herramientas","descripcion":"Multiherramienta tipo Leatherman acero inox con 12 funciones y funda","precio":45.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/multitool/400/400"},{"id":260,"nombre":"Filtro Agua Grifo NSF Certificado","descripcion":"Filtro de agua para grifo NSF-42 certificado, quita clor├│ y sedimentos","precio":35.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/waterfilter/400/400"},{"id":261,"nombre":"Suplemento Prote├¡na Whey Optimum 2kg","descripcion":"Whey protein Gold Standard 100% 2kg, 30 sabores, 24g prote├¡na/dosis","precio":79.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/whey/400/400"},{"id":262,"nombre":"Pantal├│n Yoga Mujer Tiro Alto","descripcion":"Leggings de yoga tiro alto con bolsillo lateral, tela 4-way stretch","precio":22.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/yogapants/400/400"},{"id":263,"nombre":"Calcetines Tobilleros Deportivos Pack 10","descripcion":"Pack 10 pares calcetines tobilleros deportivos acolchados","precio":14.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/anklesocks/400/400"},{"id":264,"nombre":"Sudadera Oversize Bordado Floral","descripcion":"Sudadera oversized con bordado floral en pecho, 100% algod├│n org├ínico","precio":29.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/floralhoodie/400/400"},{"id":265,"nombre":"Top Deportivo Estampado Tie-Dye","descripcion":"Sports bra con estampado tie-dye, espalda cruzada, alta sujeci├│n","precio":19.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/sportsbra/400/400"},{"id":266,"nombre":"Chandal Conjunto 2 Piezas Mujer","descripcion":"Conjunto de ch├índal 2 piezas sudadera + pantal├│n, colores pastel","precio":34.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/tracksuit/400/400"},{"id":267,"nombre":"Ri├▒onera Impermeable Running","descripcion":"Ri├▒onera impermeabilidad 100% para running y ciclismo","precio":13.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/runbag/400/400"},{"id":268,"nombre":"Gorro Bucket Hat Aesthetic","descripcion":"Bucket hat aesthetic unisex, ala ancha, varios colores pastel","precio":12.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/bucket/400/400"},{"id":269,"nombre":"Chaqueta Cortavientos Ultraligera","descripcion":"Cortavientos ultraligero plegable en bolsillo, impermeable DWR","precio":29.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/windbreaker/400/400"},{"id":270,"nombre":"Camiseta Vintage Lavada Efecto","descripcion":"Camiseta con efecto lavado vintage, print gr├ífico retro a├▒os 90","precio":18.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/vintage90/400/400"},{"id":271,"nombre":"Bolsa Tela Estampada Ecol├│gica","descripcion":"Bolsa tote de tela org├ínica con estampado art├¡stico, asa larga","precio":10.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/ecobag/400/400"},{"id":272,"nombre":"Reloj An├ílogo Minimalista Cuarzo","descripcion":"Reloj de cuarzo minimalista con correa de malla milanesa dorada","precio":39.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/minimalwatch/400/400"},{"id":273,"nombre":"Set Regalo Hombre Cuidado Barba","descripcion":"Kit completo cuidado barba: aceite, b├ílsamo, peine y tijera en estuche","precio":35.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/beardkit/400/400"},{"id":274,"nombre":"Crema Solar SPF50+ Toque Seco 50ml","descripcion":"Protector solar SPF50+ toque seco, sin alcohol, apto pieles grasas","precio":22.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/sunscreen/400/400"},{"id":275,"nombre":"Almohada Viaje Memoria Foam Compacta","descripcion":"Almohada de viaje memory foam compacta, funda lavable de microfibra","precio":24.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/travelpillow/400/400"},{"id":276,"nombre":"Bolsa Organizaci├│n Maleta Pack 6","descripcion":"Set 6 organizadores para maleta en diferentes tallas, nylon impermeable","precio":29.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/packcubes/400/400"},{"id":277,"nombre":"Despertador Proyector Temperatura Lunar","descripcion":"Despertador con proyector de luna, temperatura ambiente y cargador QI","precio":45.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/moonalarm/400/400"},{"id":278,"nombre":"Sudoku Puzzle Madera 3D Complejo","descripcion":"Puzzle 3D de madera tipo sudoku, 1000 piezas, nivel avanzado","precio":35.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/woodpuzzle/400/400"},{"id":279,"nombre":"Set Pinturas Acr├¡licas 24 Colores Pro","descripcion":"Set 24 pinturas acr├¡licas profesionales, pigmento extra-fino, 120ml","precio":39.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/acrylicpaint/400/400"},{"id":280,"nombre":"Caja M├║sica Madera Giratoria Personalizable","descripcion":"Caja de m├║sica de madera con mecanismo de manivela y bailarina giratoria","precio":45.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/musicbox/400/400"},{"id":281,"nombre":"Libro Ilustrado Arte Digital 2025","descripcion":"Libro de arte digital tendencias 2025, 300 p├íginas, papel couch├®","precio":49.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/artbook/400/400"},{"id":282,"nombre":"Set Cocteler├¡a Profesional 10 Piezas","descripcion":"Kit bartender profesional: shaker, jigger, colador, muddler y m├ís","precio":55.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/cocktailset/400/400"},{"id":283,"nombre":"Cafetera Italiana Moka 6 Tazas Acero","descripcion":"Cafetera italiana moka de acero inoxidable 6 tazas, inducci├│n","precio":35.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/moka/400/400"},{"id":284,"nombre":"Artilugio Slime Kit Completo","descripcion":"Kit completo para hacer slime, 20 colores y texturas, para ni├▒os","precio":19.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/slime/400/400"},{"id":285,"nombre":"Fidget Cube Alivio Estr├®s","descripcion":"Cubo antiestr├®s con 6 caras de actividad t├íctil, silencioso","precio":9.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/fidget/400/400"},{"id":286,"nombre":"Pop It Jumbo Silicona Colores","descripcion":"Pop It gigante XXL de silicona con 90 burbujas, colores ne├│n","precio":7.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/popit/400/400"},{"id":287,"nombre":"Figura Coleccionable Anime Premium","descripcion":"Figura de anime premium 20cm, detalle ultra realista, base incluida","precio":29.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/animefigure/400/400"},{"id":288,"nombre":"Cartas Tarot Premium Ilustradas","descripcion":"Baraja de tarot 78 cartas con ilustraci├│n art├¡stica, libro de gu├¡a","precio":22.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/tarot/400/400"},{"id":289,"nombre":"Cristal Cuarzo Rosa Natural Bruto","descripcion":"Piedra de cuarzo rosa natural bruto 200-300g, energ├¡a positiva","precio":14.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/rosequartz/400/400"},{"id":290,"nombre":"Incienso Premium Set 12 Aromas","descripcion":"Set 12 cajas incienso natural: s├índalo, lavanda, rosa, oud y m├ís","precio":16.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/incense/400/400"},{"id":291,"nombre":"Tapiz Decoraci├│n Boho Pared Grande","descripcion":"Tapiz de pared 150x130cm estilo boho con mandala, tela de algod├│n","precio":24.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/tapestry/400/400"},{"id":292,"nombre":"Luces Hada Cobre 10m 100 LEDs","descripcion":"Guirnalda luces hada 10m 100 LEDs cobre, bater├¡a + USB, warm white","precio":11.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/fairylights/400/400"},{"id":293,"nombre":"C├ímara Instant├ínea Retro Pel├¡cula","descripcion":"C├ímara instant├ínea retro con impresi├│n en pel├¡cula formato cr├®dito","precio":55.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/instaxmini/400/400"},{"id":294,"nombre":"Mando Selfie Bluetooth Plegable","descripcion":"Palo selfie con tr├¡pode y mando bluetooth, longitud 110cm","precio":19.99,"categoria":"MODA","imagen_url":"https://picsum.photos/seed/selfiestick/400/400"},{"id":295,"nombre":"Luz LED Aro Fotograf├¡a 18 RGB","descripcion":"Ring light LED 18 RGB para fotograf├¡a y streaming con tr├¡pode 2m","precio":49.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/ringlight/400/400"},{"id":296,"nombre":"Fondo Verde Streaming Pantalla Verde","descripcion":"Tela chroma key verde 2x3m con soporte y pinzas para streaming","precio":35.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/greenscreen/400/400"},{"id":297,"nombre":"Carta de Colores Pantone 2026 Edition","descripcion":"Gu├¡a de colores Pantone actualizada 2026, referencia para dise├▒o","precio":39.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/pantone/400/400"},{"id":298,"nombre":"Tablet Gr├ífica Dise├▒o Profesional","descripcion":"Tableta gr├ífica A5 8192 niveles presi├│n, 4 teclas y rueda t├íctil","precio":79.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/graphictablet/400/400"},{"id":299,"nombre":"Bol├¡grafo Stylus Digital iPad Pro","descripcion":"L├ípiz stylus digital compatible iPad, inclinaci├│n, recarga magn├®tica","precio":49.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/stylus/400/400"},{"id":300,"nombre":"Auriculares Gaming RGB Surround 7.1","descripcion":"Auriculares gaming con sonido virtual 7.1, RGB y micr├│fono retr├íctil","precio":49.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/gamingheadset/400/400"},{"id":301,"nombre":"Tarjeta Capturadora HDMI 4K USB-C","descripcion":"Capturadora de v├¡deo HDMI 4K60fps USB-C, 0 latencia para streaming","precio":55.99,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/capture/400/400"},{"id":302,"nombre":"Curso IA para Negocios ÔÇö AXEL Method","descripcion":"Curso completo: automatiza tu negocio con IA. 40 lecciones + comunidad privada.","precio":97,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/courseai/400/400"},{"id":303,"nombre":"Ebook: El ├ürbol Kabalion ÔÇö Gu├¡a Completa","descripcion":"Gu├¡a digital de 200 p├íginas sobre el sistema KRC/Kabalion de 46 Sefirot.","precio":19.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/ebook1/400/400"},{"id":304,"nombre":"Pack Templates Redes Sociales ORIONIX","descripcion":"100 plantillas Canva para Instagram, TikTok y YouTube en paleta ORIONIX.","precio":27,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/templates1/400/400"},{"id":305,"nombre":"Curso Dropshipping desde Cero","descripcion":"De Ôé¼0 a tu primera venta en 30 d├¡as. AliExpress + Shopify + publicidad.","precio":47,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/coursedrop/400/400"},{"id":306,"nombre":"Masterclass Marketing de Afiliados","descripcion":"Aprende a generar comisiones pasivas 24/7. Estrategias 2025. 6 horas de contenido.","precio":67,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/courseaffiliate/400/400"},{"id":307,"nombre":"Kit Emprendedor Digital ORIONIX","descripcion":"Bundle: 5 ebooks + 200 templates + 3 minicursos + checklist de lanzamiento.","precio":149,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/kitdigital/400/400"},{"id":308,"nombre":"Ebook: Finanzas Personales ÔÇö De la Aguja a la Mansi├│n","descripcion":"Sistema financiero para salir de deudas y construir patrimonio.","precio":14.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/ebook2/400/400"},{"id":309,"nombre":"Curso Crea tu Agencia de IA","descripcion":"Construye una agencia de automatizaci├│n con n8n, Claude y ChatGPT.","precio":197,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/courseagency/400/400"},{"id":310,"nombre":"Pack Wallpapers ORIONIX HD","descripcion":"50 fondos de pantalla en 4K con dise├▒o Kabalion y cosmos. Para m├│vil y PC.","precio":9.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/wallpapers/400/400"},{"id":311,"nombre":"Gu├¡a: Obsidian para tu Negocio","descripcion":"Sistema de gesti├│n de conocimiento con Obsidian + IA. Flujos de trabajo, plantillas.","precio":24.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/obsidian/400/400"},{"id":312,"nombre":"Minicurso TikTok Ventas Org├ínicas","descripcion":"0 a 10k seguidores y tus primeras ventas en 21 d├¡as. Sin publicidad.","precio":37,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/tiktok/400/400"},{"id":313,"nombre":"Template Pack Tienda Online Canva","descripcion":"80 plantillas para tienda online: banners, fichas de producto, stories y anuncios.","precio":19.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/storetemplate/400/400"},{"id":314,"nombre":"Ebook: Mentalidad Millonaria","descripcion":"Los 21 principios mentales de los emprendedores exitosos. Basado en el sistema KRC.","precio":12.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/ebook3/400/400"},{"id":315,"nombre":"Curso Email Marketing que Convierte","descripcion":"Construye tu lista, escribe emails que venden y automatiza todo.","precio":57,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/emailmkt/400/400"},{"id":316,"nombre":"Pack M├║sica Lo-Fi ORIONIX ÔÇö Royalty Free","descripcion":"30 tracks lo-fi y ambient exclusivos para tus v├¡deos y streams. Sin copyright.","precio":29.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/lofi/400/400"},{"id":317,"nombre":"Curso Criptomonedas para Principiantes","descripcion":"Bitcoin, ETH, DeFi y NFTs explicados desde cero. Gesti├│n de riesgo y estrategias 2025.","precio":77,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/crypto/400/400"},{"id":318,"nombre":"Gu├¡a SEO Local para Negocios F├¡sicos","descripcion":"Aparecer primero en Google Maps y b├║squedas locales. Paso a paso sin tecnicismos.","precio":19.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/seo/400/400"},{"id":319,"nombre":"Pack Fuentes Premium Cinzel & Garamond","descripcion":"Licencia extendida para las fuentes oficiales ORIONIX. Uso comercial ilimitado.","precio":14.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/fonts/400/400"},{"id":320,"nombre":"Masterclass Copywriting con IA","descripcion":"Escribe textos de ventas que convierten usando ChatGPT y Claude como tu asistente.","precio":47,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/copywriting/400/400"},{"id":321,"nombre":"Ebook: 365 Misiones para tu Agencia","descripcion":"Un reto de acci├│n diaria para construir y escalar tu agencia digital en un a├▒o.","precio":9.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/365/400/400"},{"id":322,"nombre":"L├ímpara LED Cosmos Ambiente","descripcion":"L├ímpara de ambiente con proyecci├│n de galaxia y estrellado. RGB 16 colores.","precio":29.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/cosmoslamp/400/400"},{"id":323,"nombre":"Set Velas Arom├íticas Lujo Pack 3","descripcion":"3 velas de soja con esencias s├índalo, oud y vainilla negra. 60h de combusti├│n cada una.","precio":34.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/candles/400/400"},{"id":324,"nombre":"Difusor Aromas Madera Bamb├║","descripcion":"Difusor ultras├│nico de aceites esenciales en bamb├║ natural. 500ml, temporizador.","precio":39.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/diffuserbamboo/400/400"},{"id":325,"nombre":"Cuadro Canvas ├ürbol de Vida","descripcion":"Cuadro impreso en canvas 60x80cm del ├írbol de vida Kabalion. Marco negro incluido.","precio":49.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/treecvas/400/400"},{"id":326,"nombre":"Alfombra Cosmos Redonda 120cm","descripcion":"Alfombra circular con dise├▒o de galaxia y mandala en tonos negro y dorado.","precio":59.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/cosmorug/400/400"},{"id":327,"nombre":"Set Cojines Decorativos Noche x2","descripcion":"2 cojines de terciopelo negro con bordado dorado. 45x45cm. Relleno incluido.","precio":44.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/pillows/400/400"},{"id":328,"nombre":"Reloj Pared Silencioso Minimalista","descripcion":"Reloj de pared silencioso en metal negro con agujas doradas. Di├ímetro 35cm.","precio":29.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/wallclock/400/400"},{"id":329,"nombre":"Planta Artificial Monstera XL","descripcion":"Monstera artificial de 120cm de altura con maceta cer├ímica negra incluida.","precio":55.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/monstera/400/400"},{"id":330,"nombre":"Cortinas Blackout Terciopelo Negro","descripcion":"Par de cortinas opacas de terciopelo negro con ojales dorados. 140x260cm.","precio":69.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/curtains/400/400"},{"id":331,"nombre":"Set Cristales y Minerales Decorativos","descripcion":"Set 7 cristales naturales: amatista, cuarzo rosa, obsidiana y m├ís.","precio":24.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/crystals/400/400"},{"id":332,"nombre":"Caja Madera Organizadora Joyas","descripcion":"Caja de madera con espejo interior y 3 cajones forrados en terciopelo negro.","precio":39.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/jewelbox/400/400"},{"id":333,"nombre":"Set Portavelas Geom├®tricos Pack 3","descripcion":"3 portavelas en metal dorado: hex├ígono, tri├íngulo y rombo.","precio":27.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/candholder/400/400"},{"id":334,"nombre":"Espejo Pared Marco Dorado Vintage","descripcion":"Espejo decorativo redondo 60cm con marco met├ílico dorado estilo vintage.","precio":79.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/mirror/400/400"},{"id":335,"nombre":"Set Vasos Cristal Negro Dorado x4","descripcion":"4 vasos de cristal ├ímbar oscuro con borde dorado. Apto lavavajillas. 350ml.","precio":34.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/glasses/400/400"},{"id":336,"nombre":"Bandeja Decorativa M├írmol Dorado","descripcion":"Bandeja de resina efecto m├írmol negro con asas y bordes dorados. 40x30cm.","precio":44.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/marbletray/400/400"},{"id":337,"nombre":"Incensario Madera Tallada","descripcion":"Soporte incensario en madera tallada con dise├▒o de ├írbol de la vida.","precio":19.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/incenseholder/400/400"},{"id":338,"nombre":"Manta Sof├í Terciopelo Premium","descripcion":"Manta de sof├í en terciopelo negro suave 150x200cm. Ultra esponjosa.","precio":49.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/blanket/400/400"},{"id":339,"nombre":"Set Servilletas Lino Negro x6","descripcion":"6 servilletas de lino 100% color negro con monograma dorado bordado. 45x45cm.","precio":22.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/napkins/400/400"},{"id":340,"nombre":"Macetas Cer├ímica Negra Set x3","descripcion":"Set 3 macetas de cer├ímica negra mate en tama├▒os S/M/L con plato incluido.","precio":37.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/pots/400/400"},{"id":341,"nombre":"Cuadro Abstracto Gold & Black","descripcion":"Pintura acr├¡lica sobre lienzo 50x70cm con pan de oro. Pieza ├║nica artesanal.","precio":89.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/painting/400/400"},{"id":342,"nombre":"Cargador Inal├ímbrico 15W Magn├®tico","descripcion":"Cargador Qi magn├®tico compatible iPhone MagSafe y Android.","precio":29.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/charger/400/400"},{"id":343,"nombre":"Auriculares Gaming RGB Wired","descripcion":"Auriculares gaming con micr├│fono retr├íctil, sonido surround 7.1 y luces RGB.","precio":49.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/gaming/400/400"},{"id":344,"nombre":"Mini Proyector Port├ítil 1080p","descripcion":"Proyector pocket de 1080p con WiFi integrado. Bater├¡a 3h. Compatible Netflix.","precio":89.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/miniprojector/400/400"},{"id":345,"nombre":"Power Bank 20000mAh Slim","descripcion":"Bater├¡a externa ultradelgada de 20000mAh con carga r├ípida PD 65W y 3 puertos.","precio":44.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/slimpower/400/400"},{"id":346,"nombre":"Teclado Mec├ínico Compacto 75%","descripcion":"Teclado mec├ínico TKL con switches hot-swap, RGB y carcasa de aluminio.","precio":79.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/keyboard/400/400"},{"id":347,"nombre":"Rat├│n Inal├ímbrico Silencioso","descripcion":"Rat├│n ergon├│mico inal├ímbrico 2.4G con bater├¡a recargable. 4000 DPI.","precio":34.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/mouse/400/400"},{"id":348,"nombre":"Soporte Port├ítil Ajustable","descripcion":"Soporte para port├ítil de aluminio ajustable en altura y ├íngulo. Plegable.","precio":39.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/laptopstand/400/400"},{"id":349,"nombre":"Webcam 1080p Streaming","descripcion":"Webcam Full HD 1080p con micr├│fono integrado y correcci├│n autom├ítica de luz.","precio":54.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/webcam1080/400/400"},{"id":350,"nombre":"Hub USB-C 7 en 1","descripcion":"Hub multiport: HDMI 4K, USB-A x3, USB-C PD, SD/MicroSD. Aluminio slim.","precio":44.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/hub7/400/400"},{"id":351,"nombre":"Micr├│fono Condensador USB Cardioide","descripcion":"Micro USB plug-and-play para podcasts y streaming. 192kHz/24bit.","precio":69.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/microphone/400/400"},{"id":352,"nombre":"Altavoz Bluetooth Impermeable IPX7","descripcion":"Altavoz port├ítil 30W con sonido 360┬░, IPX7 waterproof y 24h bater├¡a.","precio":59.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/techspeaker/400/400"},{"id":353,"nombre":"Smart Plug WiFi con Monitor Energ├¡a","descripcion":"Enchufe inteligente WiFi con control de consumo, compatible Alexa y Google.","precio":19.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/techplug/400/400"},{"id":354,"nombre":"Pantalla Port├ítil 15.6 1080p USB-C","descripcion":"Monitor portable Full HD USB-C con funda protectora. Ideal para doble pantalla.","precio":149.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/portablemonitor/400/400"},{"id":355,"nombre":"C├ímara de Seguridad WiFi Indoor 2K","descripcion":"C├ímara interior 2K con detecci├│n de movimiento, visi├│n nocturna y audio bidireccional.","precio":34.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/securitycam/400/400"},{"id":356,"nombre":"Adaptador HDMI a USB-C 4K","descripcion":"Adaptador USB-C a HDMI 4K@60Hz plug-and-play. Compatible MacBook y Android.","precio":18.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/hdmiusbc/400/400"},{"id":357,"nombre":"Termostato Inteligente WiFi OLED","descripcion":"Termostato smart con pantalla t├íctil OLED, app m├│vil y ahorro de energ├¡a autom├ítico.","precio":79.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/thermostat/400/400"},{"id":358,"nombre":"Luz LED Escritorio Anti-fatiga Pro","descripcion":"L├ímpara escritorio LED regulable con puerto USB-C y sensor de luz ambiental.","precio":44.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/desklampro/400/400"},{"id":359,"nombre":"Soporte Telef├│nico Coche Magn├®tico","descripcion":"Soporte magn├®tico universal para coche, rejilla ventilaci├│n 360┬░.","precio":14.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/carphone/400/400"},{"id":360,"nombre":"Luz Anular LED 10 Fotograf├¡a","descripcion":"Ring light LED 26cm con 3 temperaturas de color y soporte tr├¡pode flexible.","precio":34.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/ringlighttech/400/400"},{"id":361,"nombre":"Cable USB-C a USB-C 100W 2m Trenzado","descripcion":"Cable trenzado nylon 100W PD, 40Gbps datos, 8K v├¡deo. Duraci├│n 25.000 dobleces.","precio":16.99,"categoria":"TECH","imagen_url":"https://picsum.photos/seed/usbcable100/400/400"},{"id":362,"nombre":"Set Resistencias El├ísticas Fitness Pack 5","descripcion":"5 bandas el├ísticas de l├ítex de distintas resistencias.","precio":19.99,"categoria":"BIENESTAR","imagen_url":"https://picsum.photos/seed/bands/400/400"},{"id":363,"nombre":"Esterilla Yoga Antideslizante Premium","descripcion":"Esterilla de yoga 6mm en TPE ecol├│gico, antideslizante, con correa de transporte.","precio":29.99,"categoria":"BIENESTAR","imagen_url":"https://picsum.photos/seed/yogamatprem/400/400"},{"id":364,"nombre":"Botellas de Agua Vidrio 1L con Funda","descripcion":"Botella de vidrio borosilicato 1L con funda de silicona protectora.","precio":22.99,"categoria":"BIENESTAR","imagen_url":"https://picsum.photos/seed/waterbottle/400/400"},{"id":365,"nombre":"Aceite Esencial Lavanda Puro 30ml","descripcion":"Aceite esencial de lavanda 100% puro. Aromaterapia, sue├▒o y relajaci├│n.","precio":12.99,"categoria":"BIENESTAR","imagen_url":"https://picsum.photos/seed/lavender/400/400"},{"id":366,"nombre":"Set Aceites Esenciales Top 6","descripcion":"6 aceites esenciales: lavanda, menta, eucalipto, lim├│n, ├írbol de t├® y naranja.","precio":24.99,"categoria":"BIENESTAR","imagen_url":"https://picsum.photos/seed/essentials/400/400"},{"id":367,"nombre":"Masajeador Facial Rodillo Jade","descripcion":"Rodillo de jade natural para masaje facial anti-aging. Incluye gua sha.","precio":17.99,"categoria":"BIENESTAR","imagen_url":"https://picsum.photos/seed/jaderoller/400/400"},{"id":368,"nombre":"Protector Solar SPF 50+ Invisible","descripcion":"Fotoprotector facial SPF50+ de textura ultraligera invisible. Sin alcohol. 50ml.","precio":16.99,"categoria":"BIENESTAR","imagen_url":"https://picsum.photos/seed/sunscreenb/400/400"},{"id":369,"nombre":"Crema Hidratante Corporal Karit├® 500ml","descripcion":"Crema corporal con manteca de karit├® y vitamina E. Absorci├│n r├ípida.","precio":19.99,"categoria":"BIENESTAR","imagen_url":"https://picsum.photos/seed/bodycream/400/400"},{"id":370,"nombre":"Collag├®n + Vitamina C Suplemento 60 caps","descripcion":"Col├ígeno hidrolizado marino con vitamina C y ├ícido hialur├│nico. 60 c├ípsulas.","precio":27.99,"categoria":"BIENESTAR","imagen_url":"https://picsum.photos/seed/collagen/400/400"},{"id":371,"nombre":"Almohada Viscoel├ística Cervical","descripcion":"Almohada cervical de espuma viscoel├ística con funda de bamb├║ hipoalerg├®nica.","precio":44.99,"categoria":"BIENESTAR","imagen_url":"https://picsum.photos/seed/pillow/400/400"},{"id":372,"nombre":"S├®rum Noche Vitamina C 30ml","descripcion":"S├®rum de noche concentrado con vitamina C 20% y ├ícido hialur├│nico. 30ml.","precio":22.99,"categoria":"BIENESTAR","imagen_url":"https://picsum.photos/seed/vitaminc/400/400"},{"id":373,"nombre":"Termo Caf├® Acero Inoxidable 500ml","descripcion":"Termo de acero inoxidable 500ml. Mant├®n fr├¡o 24h o calor 12h. Tapa antigoteo.","precio":24.99,"categoria":"BIENESTAR","imagen_url":"https://picsum.photos/seed/thermos/400/400"},{"id":374,"nombre":"Meditaci├│n Guiada Audio ÔÇö Pack 30 d├¡as","descripcion":"30 sesiones de meditaci├│n guiada en audio MP3. Desde 5 hasta 40 minutos.","precio":19.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/meditation/400/400"},{"id":375,"nombre":"Suplemento Magnesio Bisglicinato 400mg","descripcion":"Magnesio bisglicinato de alta absorci├│n. 60 c├ípsulas. Para sue├▒o y recuperaci├│n muscular.","precio":21.99,"categoria":"BIENESTAR","imagen_url":"https://picsum.photos/seed/magnesium/400/400"},{"id":376,"nombre":"Set Mascarillas Tela Pack 3 Premium","descripcion":"3 mascarillas de tela premium lavables con filtro de carb├│n activado.","precio":14.99,"categoria":"BIENESTAR","imagen_url":"https://picsum.photos/seed/masks/400/400"},{"id":377,"nombre":"Vestido Largo Seda Natural Kabalion","descripcion":"Vestido largo de seda natural negra con bordado dorado del ├írbol Kabalion.","precio":489,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/silkdress/400/400"},{"id":378,"nombre":"Cartera Cuero Cocodrilo Genuino","descripcion":"Cartera en cuero de cocodrilo genuino. Compartimentos para tarjetas y billetes.","precio":420,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/croco/400/400"},{"id":379,"nombre":"Anillo Sello Plata 925 + Ojo de Tigre","descripcion":"Anillo sello de plata 925 con piedra ojo de tigre natural tallada. Edici├│n ├║nica.","precio":340,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/signetring/400/400"},{"id":380,"nombre":"Paraguas Lord Kether ÔÇö Seda Italiana","descripcion":"Paraguas de caballero con mango de bamb├║ lacado y tela de seda italiana negra.","precio":285,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/umbrellagold/400/400"},{"id":381,"nombre":"Portadocumentos Cuero Full Grain","descripcion":"Portadocumentos A4 en cuero full grain negro. 3 compartimentos. Cierre de lat├│n.","precio":310,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/portfolio/400/400"},{"id":382,"nombre":"Camisa Ceremonia Lino & Seda Japonesa","descripcion":"Camisa de mezcla lino-seda japonesa. Cuello mandarina. Edici├│n Kabalion numerada.","precio":395,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/ceremon/400/400"},{"id":383,"nombre":"Set Escritura Pluma Plata + Estuche","descripcion":"Pluma estilogr├ífica de plata 925 con grabado Sefirot y estuche de madera de ├®bano.","precio":520,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/fpen/400/400"},{"id":384,"nombre":"Fular Seda Twill 100% 90x90cm","descripcion":"Fular de seda twill premium 90x90cm con patr├│n exclusivo Kabalion.","precio":265,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/scarf90/400/400"},{"id":385,"nombre":"Estuche Habanos Cuero Artesanal","descripcion":"Estuche para 4 habanos en cuero negro genuino con interior de cedro.","precio":385,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/cigar/400/400"},{"id":386,"nombre":"Cintur├│n Hombre Cocodrilo Genuino","descripcion":"Cintur├│n de cocodrilo genuino con hebilla maciza en lat├│n dorado. Ancho 3.5cm.","precio":450,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/crocbelt/400/400"},{"id":387,"nombre":"Pijama Seda Natural Hombre Negro","descripcion":"Conjunto de pijama en seda natural 100% momme19. Camisa + pantal├│n.","precio":340,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/silkpj/400/400"},{"id":388,"nombre":"Marco Fotos Plata Maciza 20x25","descripcion":"Marco portafotos de plata maciza 925 con grabado floral.","precio":480,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/silverframe/400/400"},{"id":389,"nombre":"Zapatos Oxford Horma Italiana","descripcion":"Zapatos Oxford de horma italiana en cuero box calf negro. Suela de cuero Goodyear welt.","precio":590,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/oxford/400/400"},{"id":390,"nombre":"Bufanda Cachemira 100% Pura","descripcion":"Bufanda de cachemira pura grado A en negro. 200x70cm. Peso pluma, calor extremo.","precio":295,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/cashmerebuf/400/400"},{"id":391,"nombre":"Botines Cuero Bison Labrado","descripcion":"Botines de cuero de bis├│n labrado, punta cuadrada, suela Vibram. Edici├│n AXEL.","precio":680,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/boots/400/400"},{"id":392,"nombre":"Cartera Art├¡stica Cuero Vegetal Toscano","descripcion":"Cartera bifold en cuero vegetal toscano curtido al vegetal.","precio":280,"categoria":"MI DINASTIA","imagen_url":"https://picsum.photos/seed/toscana/400/400"},{"id":393,"nombre":"Camiseta Algod├│n Pima Premium ORIONIX","descripcion":"Camiseta de algod├│n Pima 200gsm con logo ORIONIX bordado en hilo de oro real.","precio":85,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/pimatee/400/400"},{"id":394,"nombre":"Sudadera French Terry Premium","descripcion":"Sudadera french terry 380gsm sin capucha. Cuello redondo. Logo tonal bordado.","precio":110,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/frenchterry/400/400"},{"id":395,"nombre":"Short Deportivo Pro 7 ORIONIX","descripcion":"Short running 7 pulgadas con forro integrado, bolsillo trasero y tejido Quick-Dry.","precio":65,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/runshort/400/400"},{"id":396,"nombre":"Chaqueta Tec Light Packable","descripcion":"Chaqueta ultraligera impermeable DWR plegable en su bolsillo. 145g. Negro.","precio":139,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/packable/400/400"},{"id":397,"nombre":"Pantal├│n Chino El├ístico 4-Way","descripcion":"Pantal├│n chino slim con tela el├ística 4 direcciones. Aspecto formal, comodidad casual.","precio":95,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/chinoelastic/400/400"},{"id":398,"nombre":"Polo Piqu├® 100% Algod├│n Egipcio","descripcion":"Polo de piqu├® en algod├│n egipcio 180gsm. Cuello y pu├▒os de punto doble.","precio":79,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/poloshirt/400/400"},{"id":399,"nombre":"Sneaker Low ORIONIX Edition Negro","descripcion":"Zapatilla low-top en cuero napa negro con suela Eva extra-cushion. Edici├│n limitada.","precio":175,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/sneakerblack/400/400"},{"id":400,"nombre":"Cintur├│n Cuero Full Grain Reversible","descripcion":"Cintur├│n full grain reversible negro/caf├® con hebilla dorada desmontable. 3.5cm.","precio":89,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/reversiblebelt/400/400"},{"id":401,"nombre":"Mochila Cuero Toro 30L Executive","descripcion":"Mochila de cuero de toro full grain 30L con compartimento laptop 17.","precio":229,"categoria":"FASHION STYLE","imagen_url":"https://picsum.photos/seed/leatherpack/400/400"},{"id":402,"nombre":"Cuchillo Chef Japon├®s Santoku 18cm","descripcion":"Cuchillo santoku de acero japon├®s VG-10, hoja 18cm, mango de pakka.","precio":89.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/santoku/400/400"},{"id":403,"nombre":"Set Tablas Cortar Bamb├║ x3","descripcion":"3 tablas de bamb├║ org├ínico S/M/L con ranura para jugos.","precio":34.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/cuttingboards/400/400"},{"id":404,"nombre":"Cafetera de ├ëmbolo Francesa 1L","descripcion":"Prensa francesa 1000ml en acero inoxidable doble pared. Aislamiento t├®rmico 4h.","precio":44.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/frenchpress/400/400"},{"id":405,"nombre":"B├íscula Cocina Digital Precisi├│n 5kg","descripcion":"B├íscula digital de cocina precisi├│n 1g hasta 5kg, pantalla LCD, tara autom├ítica.","precio":19.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/scalekitchen/400/400"},{"id":406,"nombre":"Organizador Cajones Bamb├║ Modular","descripcion":"Sistema modular de organizaci├│n de cajones en bamb├║. 9 compartimentos ajustables.","precio":27.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/drawer/400/400"},{"id":407,"nombre":"Sart├®n Cer├ímica Antiadherente 28cm","descripcion":"Sart├®n de cer├ímica antiadherente sin PFOA 28cm. Compatible inducci├│n y horno.","precio":39.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/pan/400/400"},{"id":408,"nombre":"Molinillo Caf├® Manual Cer├ímica","descripcion":"Molinillo de caf├® manual con muelas de cer├ímica. Regulaci├│n de grosor 5 niveles.","precio":29.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/grinder/400/400"},{"id":409,"nombre":"Set Especieros Magn├®ticos Pared x12","descripcion":"12 tarros de especias con base magn├®tica para pared o nevera.","precio":34.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/spices/400/400"},{"id":410,"nombre":"Delantal Cuero Genuino Cocinero","descripcion":"Delantal de cuero genuino estilo chef profesional. 3 bolsillos. Ajustable.","precio":59.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/apron/400/400"},{"id":411,"nombre":"Hervidor Agua Temperatura Variable","descripcion":"Hervidor el├®ctrico 1.7L con control de temperatura 60-100┬░C.","precio":54.99,"categoria":"HOGAR","imagen_url":"https://picsum.photos/seed/kettle/400/400"},{"id":412,"nombre":"Maleta Cabina R├¡gida Spinner 55cm","descripcion":"Trolley de cabina 55x40x20cm, policarbonato r├¡gido, 4 ruedas 360, candado TSA.","precio":89.99,"categoria":"VIAJE","imagen_url":"https://picsum.photos/seed/suitcase/400/400"},{"id":413,"nombre":"Mochila Viaje Carry-On 40L","descripcion":"Mochila 40L aprobada como cabina, compartimento laptop 17, cubierta impermeable.","precio":79.99,"categoria":"VIAJE","imagen_url":"https://picsum.photos/seed/carryon/400/400"},{"id":414,"nombre":"Organizadores Maleta Set x7","descripcion":"7 cubos compresores de nylon para maleta: XL/L/M/S/XS + zapatos + higiene.","precio":29.99,"categoria":"VIAJE","imagen_url":"https://picsum.photos/seed/packcubesv/400/400"},{"id":415,"nombre":"Almohada Viaje Inflable Compacta","descripcion":"Almohada inflable de viaje en memory foam, funda lavable. Pesa solo 80g.","precio":19.99,"categoria":"VIAJE","imagen_url":"https://picsum.photos/seed/travelpillowv/400/400"},{"id":416,"nombre":"Adaptador Universal Viaje 4-en-1","descripcion":"Adaptador universal con 4 tipos de enchufe y 2 USB-A + 1 USB-C. 100-240V.","precio":24.99,"categoria":"VIAJE","imagen_url":"https://picsum.photos/seed/traveladapter/400/400"},{"id":417,"nombre":"Candado TSA Combinaci├│n 4 D├¡gitos","descripcion":"Candado de combinaci├│n 4 d├¡gitos aprobado TSA. Cable de acero 70cm. Pack x2.","precio":16.99,"categoria":"VIAJE","imagen_url":"https://picsum.photos/seed/padlock/400/400"},{"id":418,"nombre":"Bolsa Higiene Viaje Colgante","descripcion":"Neceser colgante impermeable con compartimentos transparentes para aeropuerto.","precio":22.99,"categoria":"VIAJE","imagen_url":"https://picsum.photos/seed/toiletbag/400/400"},{"id":419,"nombre":"Tarjeta eSIM Internacional 50 Pa├¡ses","descripcion":"eSIM digital para viajes internacionales. 50 pa├¡ses, 10GB, 30 d├¡as.","precio":34.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/esim/400/400"},{"id":420,"nombre":"Gu├¡a Viaje Barcelona PDF Premium","descripcion":"Gu├¡a digital Barcelona 2025: 200 lugares, mapas interactivos, rutas y restaurantes.","precio":9.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/barcelona/400/400"},{"id":421,"nombre":"App Itinerario Viaje ORIONIX Travel","descripcion":"Acceso premium a la plataforma de planificaci├│n de viajes IA. 1 a├▒o.","precio":49.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/travelapp/400/400"},{"id":422,"nombre":"Cama Ortop├®dica Perros Memoria Premium","descripcion":"Cama ortop├®dica 90x70cm para perros grandes. Espuma viscoel├ística, funda lavable.","precio":59.99,"categoria":"MASCOTAS","imagen_url":"https://picsum.photos/seed/dogbed/400/400"},{"id":423,"nombre":"Arn├®s Perro No-Pull Reflectante","descripcion":"Arn├®s anti-tirones con clips frontal y dorsal, reflectante. S/M/L/XL.","precio":29.99,"categoria":"MASCOTAS","imagen_url":"https://picsum.photos/seed/harness/400/400"},{"id":424,"nombre":"Fuente Agua Gatos Silenciosa 2.5L","descripcion":"Fuente autom├ítica 2.5L con filtro de carb├│n activo. Silenciosa. Acero inoxidable.","precio":39.99,"categoria":"MASCOTAS","imagen_url":"https://picsum.photos/seed/petfountain/400/400"},{"id":425,"nombre":"Collar LED Recargable Perro USB","descripcion":"Collar de seguridad LED para perros. Recargable USB, 5 modos luz, impermeable.","precio":19.99,"categoria":"MASCOTAS","imagen_url":"https://picsum.photos/seed/dogcollarled/400/400"},{"id":426,"nombre":"Transport├¡n Gatos Tela Expandible","descripcion":"Transport├¡n de tela expandible para gatos hasta 8kg. Aprobado cabina avi├│n.","precio":44.99,"categoria":"MASCOTAS","imagen_url":"https://picsum.photos/seed/carrier/400/400"},{"id":427,"nombre":"Snacks Premios Perro Natural x200g","descripcion":"Premios naturales deshidratados para perros. Sin aditivos. Pato y batata.","precio":14.99,"categoria":"MASCOTAS","imagen_url":"https://picsum.photos/seed/treats/400/400"},{"id":428,"nombre":"Juguete Interactivo Gatos Plumas","descripcion":"Juguete con plumas naturales y cascabel. Palo extensible 60cm.","precio":12.99,"categoria":"MASCOTAS","imagen_url":"https://picsum.photos/seed/cattoy/400/400"},{"id":429,"nombre":"Manta Polar Mascotas 80x100cm","descripcion":"Manta ultra-suave para mascotas en polar 300gsm. Lavable. Tono gris perla.","precio":19.99,"categoria":"MASCOTAS","imagen_url":"https://picsum.photos/seed/petblanket/400/400"},{"id":430,"nombre":"Corta├║├▒as Perros con Sensor Seguridad","descripcion":"Corta├║├▒as profesional con sensor de corte seguro y lima integrada.","precio":17.99,"categoria":"MASCOTAS","imagen_url":"https://picsum.photos/seed/petnail/400/400"},{"id":431,"nombre":"Cepillo Mascotas Autolimpiante","descripcion":"Cepillo deslanador con bot├│n de autolimpieza. Elimina subpelo y suciedad.","precio":24.99,"categoria":"MASCOTAS","imagen_url":"https://picsum.photos/seed/petbrush/400/400"},{"id":432,"nombre":"Formaci├│n Agentes IA ÔÇö Bootcamp 8 semanas","descripcion":"Bootcamp intensivo: construye tu propia agencia de IA en 8 semanas.","precio":497,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/bootcamp/400/400"},{"id":433,"nombre":"Curso n8n Automatizaci├│n Avanzada","descripcion":"Domina n8n: workflows, integraciones, webhooks y agentes IA. 50 lecciones pr├ícticas.","precio":127,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/n8ncourse/400/400"},{"id":434,"nombre":"Pack Logos ORIONIX Vectoriales","descripcion":"12 variaciones del logo ORIONIX en SVG, PNG y PDF. Uso comercial.","precio":29.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/logos/400/400"},{"id":435,"nombre":"Ebook: De Cero a Afiliado Pro","descripcion":"Gu├¡a paso a paso: plataformas, nichos, SEO y email marketing para afiliados.","precio":17.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/affiliate/400/400"},{"id":436,"nombre":"Plantilla Web Landing Page ORIONIX","descripcion":"Landing page HTML/CSS de alta conversi├│n. Dise├▒o ORIONIX dorado.","precio":39.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/landing/400/400"},{"id":437,"nombre":"Video Pack Intros YouTube 4K","descripcion":"20 intros animadas para YouTube en 4K. Formato MP4 y After Effects.","precio":34.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/intro/400/400"},{"id":438,"nombre":"Gu├¡a Completa Obsidian + Notion 2025","descripcion":"Sistema de productividad dual con Obsidian y Notion. Plantillas, flujos y hacks.","precio":22.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/pkm/400/400"},{"id":439,"nombre":"Curso Fotograf├¡a Producto para Tienda","descripcion":"Aprende a fotografiar productos en casa con tu m├│vil. Iluminaci├│n, edici├│n y escenas.","precio":57,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/prodphoto/400/400"},{"id":440,"nombre":"Calendario Editorial 2025 Canva","descripcion":"Calendario de contenidos 2025 en Canva: 365 ideas de post, stories y reels.","precio":14.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/calendar/400/400"},{"id":441,"nombre":"Audiolibro: El Arte de la Guerra Digital","descripcion":"Audiolibro 4h con estrategias de Sun Tzu aplicadas al mundo digital.","precio":16.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/audiobook/400/400"},{"id":442,"nombre":"Pack SFX Sonidos Ambiente Cosmos 60","descripcion":"60 efectos de sonido y ambientes cosmos royalty-free. WAV 48kHz.","precio":19.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/sfx/400/400"},{"id":443,"nombre":"Curso Canva Dise├▒o Gr├ífico Desde Cero","descripcion":"Aprende Canva de cero a nivel profesional. Logos, merch, videos y presentaciones.","precio":37,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/canvacourse/400/400"},{"id":444,"nombre":"Set 5 Fondos Video Chromakey Virtuales","descripcion":"5 escenarios virtuales para streaming en 4K: oficina luxury, cosmos, ciudad y m├ís.","precio":24.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/chromakey/400/400"},{"id":445,"nombre":"Preset Lightroom ORIONIX Dark & Gold","descripcion":"Pack de 25 presets Lightroom para fotograf├¡a dark & gold luxury.","precio":19.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/presets/400/400"},{"id":446,"nombre":"Stickers Pack Digital ORIONIX 200","descripcion":"200 stickers digitales PNG para Telegram, Discord y redes.","precio":9.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/stickers/400/400"},{"id":447,"nombre":"Gu├¡a Monetizar tu Conocimiento Online","descripcion":"De experto a educador digital: cursos, comunidades y consultor├¡as.","precio":27.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/knowledge/400/400"},{"id":448,"nombre":"Contrato Freelance Template Legal Pack","descripcion":"Pack de 10 contratos legales para freelancers: servicios, confidencialidad, NDAs.","precio":34.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/contracts/400/400"},{"id":449,"nombre":"Ebook: 100 Prompts ChatGPT para Negocios","descripcion":"100 prompts optimizados para marketing, ventas, atenci├│n al cliente y estrategia.","precio":12.99,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/prompts/400/400"},{"id":450,"nombre":"Masterclass Personal Branding 2025","descripcion":"Construye tu marca personal irresistible. LinkedIn, Instagram, YouTube.","precio":77,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/branding/400/400"},{"id":451,"nombre":"Kit Inicio ORIONIX Emprendedor ÔÇö TODO","descripcion":"El bundle definitivo: 10 cursos + 500 templates + 30 ebooks + soporte 6 meses.","precio":997,"categoria":"DIGITAL","imagen_url":"https://picsum.photos/seed/megakit/400/400"}];
-var ALL = PRODUCTOS;
-var CAT = 'TODOS';
-var CAT_LABELS = {'TODOS':'Todos','MODA':'Moda','FASHION STYLE':'Fashion Style','MI DINASTIA':'Mi Dinastía','DIGITAL':'Digital','HOGAR':'Hogar','TECH':'Tech','BIENESTAR':'Bienestar','VIAJE':'Viaje','MASCOTAS':'Mascotas'};
+    <div class="header-tools">
+      <a href="pasarela.html" class="btn-runway-header">VER PASARELA 2026</a>
+      <a href="pago-premium.html" class="tool-btn">BOLSA (1)</a>
+    </div>
+  </div>
+</header>
 
-function getCart(){try{return JSON.parse(localStorage.getItem('orionix_cart')||'[]')}catch(e){return[]}}
-function saveCart(c){localStorage.setItem('orionix_cart',JSON.stringify(c))}
-function updateBadge(){var b=document.getElementById('cart-badge');if(b)b.textContent=getCart().reduce(function(a,x){return a+(x.qty||1)},0)}
-function addToCart(id,nombre,precio,imagen){var c=getCart();var ex=c.find(function(x){return x.id===id});if(ex){ex.qty=(ex.qty||1)+1}else{c.push({id:id,nombre:nombre,precio:precio,imagen:imagen,qty:1})}saveCart(c);updateBadge();showToast('✦ Añadido: '+nombre.substring(0,32))}
-function showToast(m){var t=document.getElementById('toast');if(!t)return;t.textContent=m;t.classList.add('on');setTimeout(function(){t.classList.remove('on')},2500)}
+<!-- HERO EDITORIAL FULLSCREEN -->
+<section class="hero-editorial">
+  <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1600&auto=format&fit=crop&q=90" alt="Dolce & Gabbana Fall Winter 2026 Hero" class="hero-img">
+  <div class="hero-gradient"></div>
+  
+  <div class="hero-content">
+    <div class="hero-eyebrow">MILAN FASHION WEEK · RUNWAY COLLECTION</div>
+    <h1 class="hero-title">WOMEN'S FALL WINTER 2026/27</h1>
+    <div class="hero-btns">
+      <a href="producto-detalle.html" class="btn-hero-white">COMPRAR VESTIDO DOBLE CREPÉ</a>
+      <a href="pasarela.html" class="btn-hero-outline">EXPLORAR LA PASARELA</a>
+    </div>
+  </div>
+</section>
 
-function buildFilters(){
-  var cats=Array.from(new Set(ALL.map(function(p){return p.categoria}).filter(Boolean))).sort();
-  var wrap=document.getElementById('filt-wrap');if(!wrap)return;
-  wrap.innerHTML=['TODOS'].concat(cats).map(function(c){return '<button class="filt'+(c===CAT?' on':'')+'" onclick="setCat(''+c+'')">'+(CAT_LABELS[c]||c)+'</button>';}).join('');
-}
-function setCat(c){CAT=c;buildFilters();render()}
-function render(){
-  var q=(document.getElementById('q')||{}).value||'';q=q.toLowerCase();
-  var f=ALL.filter(function(p){return(CAT==='TODOS'||(p.categoria||'')===CAT)&&(!q||p.nombre.toLowerCase().indexOf(q)>-1||(p.descripcion||'').toLowerCase().indexOf(q)>-1)});
-  var cnt=document.getElementById('count');if(cnt)cnt.textContent=f.length;
-  var g=document.getElementById('grid');if(!g)return;
-  if(!f.length){g.innerHTML='<div class="empty"><p>Sin resultados para "'+q+'"</p></div>';return}
-  g.innerHTML=f.map(function(p){
-    var img=p.imagen_url||('https://picsum.photos/seed/'+p.id+'/400/400');
-    var pr='€'+(+p.precio).toFixed(2);
-    var n=String(p.nombre).replace(/\/g,'\\').replace(/'/g,"\'");
-    var im=img.replace(/'/g,"\'");
-    return '<div class="card"><img src="'+img+'" alt="'+p.nombre+'" loading="lazy" onerror="this.src=\'https://picsum.photos/seed/'+p.id+'/400/400\'"><div class="card-body"><div class="card-cat">'+(p.categoria||'')+'</div><div class="card-name">'+p.nombre+'</div><div class="card-desc">'+(p.descripcion||'')+'</div><div class="card-footer"><span class="card-price">'+pr+'</span><button class="btn-add" onclick="addToCart('+p.id+',\''+n+'\','+p.precio+',\''+im+'\')">+ Carrito</button></div></div></div>';
-  }).join('');
-}
-updateBadge();buildFilters();render();
-</script>
+<!-- TRES BLOQUES EDITORIALES -->
+<section>
+  <div class="section-header">
+    <div class="section-tag">UNIVERSO DOLCE & GABBANA</div>
+    <h2 class="section-title">LAS COLECCIONES 2026</h2>
+    <p class="section-desc">Sastrería clásica siciliana, transparencias sensuales y cortes arquitectónicos.</p>
+  </div>
+
+  <div class="editorial-split-grid">
+    <a href="producto-detalle.html" class="split-card">
+      <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&auto=format&fit=crop&q=90" alt="Colección Mujer 2026" class="split-img">
+      <div class="split-overlay"></div>
+      <div class="split-content">
+        <div class="split-tag">ALTA COSTURA</div>
+        <div class="split-name">Colección Mujer</div>
+        <span class="split-cta">Ver la Selección ↗</span>
+      </div>
+    </a>
+
+    <a href="pasarela.html" class="split-card">
+      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=90" alt="Desfile Fashion Show" class="split-img">
+      <div class="split-overlay"></div>
+      <div class="split-content">
+        <div class="split-tag">PASARELA MILÁN</div>
+        <div class="split-name">Fashion Show 2026</div>
+        <span class="split-cta">Ver los 8 Looks ↗</span>
+      </div>
+    </a>
+
+    <a href="pago-premium.html" class="split-card">
+      <img src="https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=800&auto=format&fit=crop&q=90" alt="Alta Joyería y Bolsos" class="split-img">
+      <div class="split-overlay"></div>
+      <div class="split-content">
+        <div class="split-tag">MARROQUINERÍA</div>
+        <div class="split-name">Bolso Sicily & Joyas</div>
+        <span class="split-cta">Comprar Piezas ↗</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- CATÁLOGO DE PIEZAS DE PASARELA CON EFECTO HOVER ÁNGULO -->
+<section class="products-section">
+  <div class="section-header" style="padding-top:0;">
+    <div class="section-tag">SELECCIÓN OFICIAL</div>
+    <h2 class="section-title">PIEZAS DE PASARELA DISPONIBLES</h2>
+    <p class="section-desc">Pasa el cursor por cada prenda para ver el ángulo de pasarela en movimiento.</p>
+  </div>
+
+  <div class="products-grid">
+    <!-- PRODUCTO 1: VESTIDO DOBLE CREPE -->
+    <article class="p-card">
+      <div class="p-img-box">
+        <span class="p-badge-exclusive">LOOK 01 · DESFILE</span>
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&auto=format&fit=crop&q=90" alt="Vestido en doble crepé de lana" class="p-card-img main">
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=90" alt="Vestido en pasarela" class="p-card-img alt">
+      </div>
+      <div class="p-info-box">
+        <span class="p-cat-name">VESTIDOS · MADE IN ITALY</span>
+        <h3 class="p-item-title">Vestido en doble crepé de lana</h3>
+        <div class="p-price-row">€ 2.450</div>
+        <div class="p-btn-stack">
+          <a href="pago-premium.html?id=f630-dress" class="btn-p-buy">COMPRAR AHORA</a>
+          <a href="producto-detalle.html" class="btn-p-details">VER DETALLES COMPLETOS</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- PRODUCTO 2: ESMOQUIN TERCIOPELO -->
+    <article class="p-card">
+      <div class="p-img-box">
+        <span class="p-badge-exclusive">LOOK 02 · SASTRERÍA</span>
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=90" alt="Esmoquin en terciopelo y encaje" class="p-card-img main">
+        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format&fit=crop&q=90" alt="Detalle sastre" class="p-card-img alt">
+      </div>
+      <div class="p-info-box">
+        <span class="p-cat-name">SMOKING · MADE IN ITALY</span>
+        <h3 class="p-item-title">Esmoquin Sartorial en Terciopelo</h3>
+        <div class="p-price-row">€ 3.850</div>
+        <div class="p-btn-stack">
+          <a href="pago-premium.html?id=velvet-tux" class="btn-p-buy">COMPRAR AHORA</a>
+          <a href="pasarela.html" class="btn-p-details">VER EN PASARELA</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- PRODUCTO 3: BOLSO SICILY -->
+    <article class="p-card">
+      <div class="p-img-box">
+        <span class="p-badge-exclusive">BOLSO ICÓNICO</span>
+        <img src="https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=600&auto=format&fit=crop&q=90" alt="Bolso Sicily Piel Dauphine" class="p-card-img main">
+        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&auto=format&fit=crop&q=90" alt="Bolso Sicily detalle" class="p-card-img alt">
+      </div>
+      <div class="p-info-box">
+        <span class="p-cat-name">MARROQUINERÍA · ORO 18K</span>
+        <h3 class="p-item-title">Bolso Sicily Pequeño Piel Dauphine</h3>
+        <div class="p-price-row">€ 1.850</div>
+        <div class="p-btn-stack">
+          <a href="pago-premium.html?id=sicily-bag" class="btn-p-buy">COMPRAR AHORA</a>
+          <a href="pasarela.html" class="btn-p-details">VER EN PASARELA</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- PRODUCTO 4: GAFAS LOGO BARROCO -->
+    <article class="p-card">
+      <div class="p-img-box">
+        <span class="p-badge-exclusive">ALTA JOYERÍA</span>
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=90" alt="Gafas de Sol Runway DG" class="p-card-img main">
+        <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&auto=format&fit=crop&q=90" alt="Gafas detalle" class="p-card-img alt">
+      </div>
+      <div class="p-info-box">
+        <span class="p-cat-name">EYEWEAR · ALTA GAMA</span>
+        <h3 class="p-item-title">Gafas de Sol Runway DG Logo</h3>
+        <div class="p-price-row">€ 890</div>
+        <div class="p-btn-stack">
+          <a href="pago-premium.html?id=runway-shades" class="btn-p-buy">COMPRAR AHORA</a>
+          <a href="pasarela.html" class="btn-p-details">VER EN PASARELA</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- BANNER TEASER DE LA PASARELA -->
+<section class="runway-teaser">
+  <div class="runway-teaser-inner">
+    <div style="font-size:10px; letter-spacing:0.3em; margin-bottom:12px; color:#aaa;">MILAN FASHION WEEK 2026</div>
+    <h2 class="runway-teaser-title">EXPERIENCIA PASARELA EN DIRECTO</h2>
+    <p class="runway-teaser-desc">Recorre la sesión completa de desfile con modelos de alta costura, los 8 looks principales, el backstage y los invitados de honor en primera fila.</p>
+    <a href="pasarela.html" class="btn-hero-white">ENTRAR AL DESFILE FALL WINTER 2026</a>
+  </div>
+</section>
+
+<!-- FOOTER EXACTO D&G -->
+<footer>
+  <div class="footer-cols">
+    <div>
+      <div class="footer-heading">COLECCIONES</div>
+      <ul class="footer-list">
+        <li><a href="articulos.html">Mujer Fall Winter 2026</a></li>
+        <li><a href="producto-detalle.html">Vestido en Doble Crepé</a></li>
+        <li><a href="pasarela.html">Desfile & Pasarela</a></li>
+        <li><a href="articulos.html">Alta Sastrería</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">SERVICIOS EXCLUSIVOS</div>
+      <ul class="footer-list">
+        <li><a href="pago-premium.html">Envío Express de Cortesía</a></li>
+        <li><a href="pago-premium.html">Embalaje de Lujo</a></li>
+        <li><a href="pago-premium.html">Devoluciones Gratuitas</a></li>
+        <li><a href="#">Asesoría de Estilismo</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">MÉTODOS DE PAGO</div>
+      <ul class="footer-list">
+        <li><a href="pago-premium.html">Nequi & Bancolombia</a></li>
+        <li><a href="pago-premium.html">Tarjetas Visa / Mastercard / AMEX</a></li>
+        <li><a href="pago-premium.html">PayPal & Apple Pay</a></li>
+        <li><a href="pago-premium.html">Monedas KRC / Dinastía</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">MAISON DOLCE&GABBANA</div>
+      <ul class="footer-list">
+        <li><a href="#">Sostenibilidad</a></li>
+        <li><a href="#">La Historia de la Casa</a></li>
+        <li><a href="#">Boutiques en el Mundo</a></li>
+        <li><a href="#">Contacto & Atención VIP</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom-row">
+    &copy; 2026 DOLCE & GABBANA S.r.l. Todos los derechos reservados. Milano, Italia.
+  </div>
+</footer>
+
 </body>
 </html>

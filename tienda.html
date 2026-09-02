@@ -1,50 +1,821 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-<script src="/Remember_Luxury/ciudadela/orionix-guard.js"></script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Remember Luxury · Curated Shopping</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOLCE&GABBANA® — Sitio Oficial | Moda, Desfiles & Alta Costura</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#090909;--surface:#111;--surface2:#171717;--text:#f5f1e8;--muted:#9a958b;--gold:#d8bd72;--line:rgba(216,189,114,.18);--white:#fff}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}a{text-decoration:none;color:inherit}button,input{font:inherit}
-.nav{height:72px;position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 4vw;background:rgba(9,9,9,.84);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07)}
-.brand{font:700 16px Cinzel,serif;letter-spacing:.22em;color:var(--gold)}.navlinks{display:flex;gap:28px;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:#aaa}.navlinks a:hover{color:var(--gold)}.navcta{border:1px solid var(--line);padding:10px 16px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
-.hero{min-height:72vh;display:grid;place-items:center;text-align:center;position:relative;padding:100px 24px;overflow:hidden;background:radial-gradient(circle at 50% 15%,rgba(216,189,114,.12),transparent 35%),linear-gradient(180deg,#111 0%,#090909 72%)}
-.hero:before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.75),transparent 50%,rgba(0,0,0,.75));pointer-events:none}.hero-inner{position:relative;z-index:1;max-width:920px}.eyebrow{font:500 10px Cinzel,serif;letter-spacing:.42em;color:var(--gold);margin-bottom:24px;text-transform:uppercase}.hero h1{font:900 clamp(42px,8vw,96px)/.95 Cinzel,serif;letter-spacing:.05em;text-transform:uppercase}.hero h1 span{display:block;color:transparent;-webkit-text-stroke:1px rgba(245,241,232,.55)}.hero p{max-width:650px;margin:28px auto 34px;color:#aaa;font-size:15px;line-height:1.8}.hero-btn{display:inline-flex;align-items:center;gap:16px;padding:15px 26px;background:var(--gold);color:#080808;font:700 10px Cinzel,serif;letter-spacing:.18em;text-transform:uppercase}.hero-btn:after{content:'→';font-size:16px}.hero-note{margin-top:18px;font-size:10px;letter-spacing:.12em;color:#666;text-transform:uppercase}
-.section{max-width:1400px;margin:auto;padding:80px 4vw}.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:30px}.kicker{font:500 10px Cinzel,serif;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:9px}.section h2{font:600 clamp(25px,3vw,40px) Cinzel,serif;letter-spacing:.04em}.section-head p{color:#777;font-size:12px;max-width:360px;line-height:1.7}
-.featured{display:grid;grid-template-columns:1.4fr 1fr;gap:2px}.feature{min-height:480px;position:relative;overflow:hidden;background:#151515}.feature:first-child{min-height:620px}.feature img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.78);transition:transform .8s ease}.feature:hover img{transform:scale(1.045)}.feature:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.86))}.feature-copy{position:absolute;z-index:2;left:30px;right:30px;bottom:28px}.feature-copy .mini{font:500 9px Cinzel,serif;letter-spacing:.24em;color:var(--gold);text-transform:uppercase}.feature-copy h3{font:600 30px Cinzel,serif;margin:9px 0}.feature-copy p{font-size:12px;color:#bbb;max-width:430px}.feature-copy a{display:inline-block;margin-top:17px;border-bottom:1px solid var(--gold);padding-bottom:5px;color:var(--gold);font:600 9px Cinzel,serif;letter-spacing:.18em;text-transform:uppercase}
-.controls{padding:20px 4vw;position:sticky;top:72px;z-index:80;background:rgba(9,9,9,.94);backdrop-filter:blur(16px);border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.07)}.control-inner{max-width:1400px;margin:auto;display:flex;gap:12px;align-items:center}.search{flex:1;background:#111;border:1px solid #292929;color:var(--text);padding:13px 16px;outline:none;font-size:13px}.search:focus{border-color:var(--gold)}.filters{display:flex;gap:7px;overflow:auto}.filter{white-space:nowrap;background:transparent;border:1px solid #292929;color:#777;padding:11px 14px;font:500 9px Cinzel,serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}.filter:hover,.filter.active{color:var(--gold);border-color:var(--gold)}
-.catalog{max-width:1400px;margin:auto;padding:20px 4vw 100px}.catalog-meta{display:flex;justify-content:space-between;align-items:center;margin:12px 0 22px;color:#666;font:500 9px Cinzel,serif;letter-spacing:.14em;text-transform:uppercase}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}.card{background:#101010;position:relative;overflow:hidden;cursor:pointer;min-width:0}.card-media{aspect-ratio:4/5;background:#171717;position:relative;overflow:hidden}.card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .65s ease,filter .65s ease;filter:saturate(.82)}.card:hover img{transform:scale(1.035);filter:saturate(1)}.pill{position:absolute;top:12px;left:12px;z-index:2;background:rgba(9,9,9,.75);backdrop-filter:blur(10px);border:1px solid rgba(216,189,114,.28);padding:6px 9px;color:var(--gold);font:500 8px Cinzel,serif;letter-spacing:.12em;text-transform:uppercase}.buy{position:absolute;right:12px;bottom:12px;z-index:2;background:rgba(245,241,232,.94);color:#080808;border:0;padding:10px 13px;font:700 8px Cinzel,serif;letter-spacing:.13em;text-transform:uppercase;cursor:pointer;transform:translateY(8px);opacity:0;transition:.25s}.card:hover .buy{transform:none;opacity:1}.card-body{padding:16px 14px 20px}.card-cat{font:500 8px Cinzel,serif;letter-spacing:.16em;color:#6f6a61;text-transform:uppercase}.card-name{font:500 16px/1.3 Cinzel,serif;margin:7px 0;color:#eee}.card-desc{font-size:11px;line-height:1.6;color:#777;min-height:34px}.card-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:15px}.price{font:600 13px Cinzel,serif;color:var(--gold)}.store{font-size:9px;color:#666;text-transform:uppercase;letter-spacing:.1em}.empty,.loading{text-align:center;padding:100px 20px;color:#666;grid-column:1/-1}.spinner{width:30px;height:30px;border:1px solid #333;border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 18px}@keyframes spin{to{transform:rotate(360deg)}}
-.modal{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.82);backdrop-filter:blur(14px);display:none;align-items:center;justify-content:center;padding:24px}.modal.open{display:flex}.modal-box{width:min(1000px,100%);max-height:90vh;overflow:auto;background:#101010;border:1px solid #292929;display:grid;grid-template-columns:1fr 1fr;position:relative}.modal-media{min-height:520px;background:#171717}.modal-media img{width:100%;height:100%;object-fit:cover}.modal-copy{padding:48px 42px;display:flex;flex-direction:column;justify-content:center}.modal-copy .close{position:absolute;right:18px;top:16px;background:none;border:0;color:#aaa;font-size:24px;cursor:pointer}.modal-copy h3{font:600 clamp(25px,3vw,42px) Cinzel,serif;margin:10px 0 14px}.modal-copy .desc{color:#999;line-height:1.8;font-size:13px}.modal-price{font:600 22px Cinzel,serif;color:var(--gold);margin:24px 0}.modal-buy{display:inline-flex;justify-content:center;padding:16px 20px;background:var(--gold);color:#080808;font:700 10px Cinzel,serif;letter-spacing:.18em;text-transform:uppercase}.modal-buy.disabled{opacity:.35;pointer-events:none}.disclosure{max-width:1400px;margin:auto;padding:0 4vw 60px;color:#555;font-size:10px;line-height:1.7}.footer{border-top:1px solid #1d1d1d;padding:50px 4vw;color:#555;text-align:center;font-size:10px;letter-spacing:.1em;text-transform:uppercase}
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.featured{grid-template-columns:1fr}.feature:first-child{min-height:480px}.modal-box{grid-template-columns:1fr}.modal-media{min-height:350px}.navlinks{display:none}.control-inner{flex-direction:column;align-items:stretch}}
-@media(max-width:520px){.grid{grid-template-columns:1fr 1fr;gap:1px}.card-name{font-size:13px}.hero{min-height:64vh}.section{padding-top:60px}.buy{opacity:1;transform:none}.nav{padding:0 18px}}
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --gray-bg: #f7f7f7;
+  --gray-border: #e5e5e5;
+  --gray-text: #666666;
+  --font: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font);
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* TOP NOTICE */
+.top-notice {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  font-weight: 500;
+}
+
+/* HEADER EXACTO D&G CON MEGA-MENU */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  border-bottom: 1px solid var(--gray-border);
+}
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 48px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--gray-text);
+  border-bottom: 1px solid #f2f2f2;
+}
+.header-top a { color: var(--gray-text); text-decoration: none; }
+.header-top a:hover { color: #000; }
+
+.header-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 48px;
+  position: relative;
+}
+.logo-dng {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-decoration: none;
+  color: #000;
+  font-family: var(--font);
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.main-nav {
+  display: flex;
+  gap: 24px;
+}
+.nav-item {
+  position: relative;
+}
+.nav-link-btn {
+  text-decoration: none;
+  color: #000;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px 0;
+  display: block;
+}
+.nav-link-btn:hover { opacity: 0.5; }
+
+/* MEGA MENU DESPLEGABLE */
+.mega-menu {
+  position: absolute;
+  top: 100%;
+  left: -48px;
+  right: -48px;
+  width: 100vw;
+  background: #fff;
+  border-bottom: 1px solid var(--gray-border);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+  padding: 40px 60px;
+  display: none;
+  grid-template-columns: repeat(4, 1fr) 1.5fr;
+  gap: 40px;
+  z-index: 999;
+}
+.nav-item:hover .mega-menu {
+  display: grid;
+}
+.mega-col-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.mega-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mega-list a {
+  color: var(--gray-text);
+  text-decoration: none;
+  font-size: 11px;
+  transition: color 0.2s;
+}
+.mega-list a:hover { color: #000; }
+.mega-featured-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.header-tools {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.tool-btn {
+  text-decoration: none;
+  color: #000;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: var(--font);
+}
+.btn-runway-header {
+  background: #000;
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-runway-header:hover {
+  background: #333;
+}
+
+/* HERO EDITORIAL FULLSCREEN */
+.hero-editorial {
+  position: relative;
+  width: 100vw;
+  height: 92vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 80px 48px;
+  background: #000;
+  overflow: hidden;
+}
+.hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.85) 100%);
+}
+.hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
+  color: #fff;
+}
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.hero-title {
+  font-size: clamp(34px, 5.5vw, 64px);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero-btns {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.btn-hero-white {
+  background: #fff;
+  color: #000;
+  padding: 16px 36px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btn-hero-white:hover {
+  background: #000;
+  color: #fff;
+  border: 1px solid #fff;
+}
+.btn-hero-outline {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 16px 36px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btn-hero-outline:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* SECTION TITLES */
+.section-header {
+  text-align: center;
+  padding: 80px 20px 36px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.section-tag {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--gray-text);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.section-title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.section-desc {
+  font-size: 12px;
+  color: var(--gray-text);
+}
+
+/* EDITORIAL GRID (3-COLUMN SPLIT) */
+.editorial-split-grid {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 48px 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.split-card {
+  position: relative;
+  height: 560px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 36px;
+  text-decoration: none;
+  color: #fff;
+}
+.split-img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.split-card:hover .split-img {
+  transform: scale(1.05);
+}
+.split-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.85) 100%);
+}
+.split-content {
+  position: relative;
+  z-index: 10;
+}
+.split-tag {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.split-name {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.split-cta {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* LUXURY PRODUCTS SHOWCASE CON HOVER ANGLE SWITCH */
+.products-section {
+  background: var(--gray-bg);
+  padding: 80px 48px 100px;
+}
+.products-grid {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+.p-card {
+  background: #fff;
+  border: 1px solid var(--gray-border);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.p-card:hover {
+  transform: translateY(-6px);
+  border-color: #000;
+  box-shadow: 0 16px 36px rgba(0,0,0,0.06);
+}
+.p-img-box {
+  position: relative;
+  height: 380px;
+  background: #f7f7f7;
+  overflow: hidden;
+}
+.p-card-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s ease, transform 0.6s ease;
+}
+.p-card-img.alt {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+.p-card:hover .p-card-img.alt {
+  opacity: 1;
+}
+.p-card:hover .p-card-img.main {
+  opacity: 0;
+}
+.p-badge-exclusive {
+  position: absolute;
+  top: 12px; left: 12px;
+  background: #fff;
+  border: 1px solid var(--gray-border);
+  padding: 4px 10px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  z-index: 5;
+}
+.p-info-box {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.p-cat-name {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  color: var(--gray-text);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.p-item-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  min-height: 38px;
+}
+.p-price-row {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+.p-btn-stack {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.btn-p-buy {
+  background: #000;
+  color: #fff;
+  padding: 12px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-p-buy:hover {
+  background: #333;
+}
+.btn-p-details {
+  background: transparent;
+  color: var(--black);
+  border: 1px solid var(--gray-border);
+  padding: 10px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-p-details:hover {
+  border-color: #000;
+}
+
+/* RUNWAY TEASER BANNER */
+.runway-teaser {
+  background: #000;
+  color: #fff;
+  padding: 100px 48px;
+  text-align: center;
+}
+.runway-teaser-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.runway-teaser-title {
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.runway-teaser-desc {
+  font-size: 13px;
+  color: #999;
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+
+/* FOOTER EXACTO D&G */
+footer {
+  background: #000;
+  color: #fff;
+  padding: 70px 48px 40px;
+}
+.footer-cols {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  margin-bottom: 60px;
+}
+.footer-heading {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: #fff;
+}
+.footer-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-list a {
+  color: #999;
+  text-decoration: none;
+  font-size: 11px;
+  transition: color 0.2s;
+}
+.footer-list a:hover { color: #fff; }
+.footer-bottom-row {
+  border-top: 1px solid #222;
+  padding-top: 24px;
+  text-align: center;
+  font-size: 10px;
+  color: #666;
+  letter-spacing: 0.1em;
+}
+
+@media(max-width: 992px) {
+  .editorial-split-grid { grid-template-columns: 1fr; }
+  .split-card { height: 420px; }
+  .footer-cols { grid-template-columns: 1fr 1fr; }
+  .header-main { padding: 14px 20px; }
+  .main-nav { display: none; }
+}
 </style>
 </head>
 <body>
-<nav class="nav"><a class="brand" href="/Remember_Luxury/tienda.html">REMEMBER LUXURY</a><div class="navlinks"><a href="#collections">Collections</a><a href="#catalogo">Shop</a><a href="#catalogo">New In</a></div><a class="navcta" href="#catalogo">Enter Edit</a></nav>
-<header class="hero"><div class="hero-inner"><div class="eyebrow">The curated shopping edit</div><h1>Remember <span>Luxury</span></h1><p>Una selección editorial de moda, belleza, tecnología y objetos que merecen ser descubiertos. Elegimos; tú decides dónde comprar.</p><a class="hero-btn" href="#catalogo">Explorar colección</a><div class="hero-note">Curated products · Direct purchase · Affiliate shopping</div></div></header>
-<section class="section" id="collections"><div class="section-head"><div><div class="kicker">The Edit</div><h2>Colecciones que hablan por sí solas.</h2></div><p>La portada muestra lo mejor. El catálogo guarda el universo completo.</p></div><div class="featured"><article class="feature"><img src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1400&q=85" alt="Fashion edit"><div class="feature-copy"><div class="mini">01 · Fashion</div><h3>The Fashion Edit</h3><p>Piezas, accesorios y detalles seleccionados para elevar el look.</p><a href="#catalogo" data-jump="FASHION STYLE">Discover the edit →</a></div></article><article class="feature"><img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&w=1000&q=85" alt="Beauty edit"><div class="feature-copy"><div class="mini">02 · Beauty</div><h3>Modern Rituals</h3><p>Belleza, cuidado y pequeños lujos para todos los días.</p><a href="#catalogo" data-jump="BIENESTAR">Discover the edit →</a></div></article></div></section>
-<div class="controls"><div class="control-inner"><input id="q" class="search" placeholder="Search the edit…" autocomplete="off"><div id="filters" class="filters"></div></div></div>
-<section class="catalog" id="catalogo"><div class="catalog-meta"><span id="count">0 products</span><span>Curated for Remember Luxury</span></div><div id="grid" class="grid"><div class="loading"><div class="spinner"></div>Preparing the collection…</div></div></section>
-<div class="disclosure">Remember Luxury may receive a commission when you purchase through certain product links. Prices, availability and merchant policies are controlled by the destination store and may change.</div>
-<footer class="footer">Remember Luxury · Curated, not crowded.</footer>
-<div id="modal" class="modal" aria-hidden="true"><div class="modal-box"><div class="modal-media"><img id="mimg" src="" alt=""></div><div class="modal-copy"><button class="close" id="close" aria-label="Cerrar">×</button><div class="kicker" id="mcat">Collection</div><h3 id="mname">Product</h3><div class="desc" id="mdesc"></div><div class="modal-price" id="mprice"></div><div id="mstore" class="store"></div><a id="mbuy" class="modal-buy" target="_blank" rel="nofollow sponsored noopener">Comprar en la tienda →</a></div></div></div>
-<script>
-const API='https://lkevinruizl.app.n8n.cloud/webhook/orionix-tienda';let ALL=[],CAT='TODOS';
-const labels={'TODOS':'All','MODA':'Moda','FASHION STYLE':'Fashion Style','MI DINASTIA':'Mi Dinastía','DIGITAL':'Digital','HOGAR':'Hogar','TECH':'Tech','BIENESTAR':'Bienestar','VIAJE':'Viaje','MASCOTAS':'Mascotas'};
-const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;').replace(/'/g,'&#39;');
-function money(p){let n=Number(p);if(!Number.isFinite(n))return '';let cur=(p&&typeof p==='object'&&p.moneda)||'€';return cur+n.toFixed(2)}
-function productUrl(p){return p.affiliate_url||p.enlace_afiliado||p.affiliateUrl||p.tienda_url||p.url||p.link||''}
-function imageUrl(p){return p.imagen_url||p.imagen||p.image||('https://picsum.photos/seed/'+encodeURIComponent(p.id||p.nombre||Math.random())+'/900/1100')}
-function buildFilters(){let cats=[...new Set(ALL.map(p=>p.categoria).filter(Boolean))].sort();document.getElementById('filters').innerHTML=['TODOS',...cats].map(c=>`<button class="filter ${c===CAT?'active':''}" data-cat="${esc(c)}">${esc(labels[c]||c)}</button>`).join('')}
-function render(){let q=(document.getElementById('q').value||'').toLowerCase().trim();let list=ALL.filter(p=>(CAT==='TODOS'||String(p.categoria||'')===CAT)&&(!q||[p.nombre,p.descripcion,p.categoria,p.tienda,p.merchant].some(v=>String(v||'').toLowerCase().includes(q))));document.getElementById('count').textContent=list.length+' products';let g=document.getElementById('grid');if(!list.length){g.innerHTML='<div class="empty">No products found in this edit.</div>';return}g.innerHTML=list.map((p,i)=>{let img=imageUrl(p),url=productUrl(p),cat=p.categoria||'Selected';let actions=['Discover','View offer','Explore piece','See details'];let action=actions[i%actions.length];return `<article class="card" data-product="${esc(p.id??i)}"><div class="card-media"><img src="${esc(img)}" alt="${esc(p.nombre)}" loading="lazy"><span class="pill">${esc(cat)}</span><button class="buy" data-buy="${esc(p.id??i)}">${action} →</button></div><div class="card-body"><div class="card-cat">${esc(cat)}</div><div class="card-name">${esc(p.nombre||'Untitled piece')}</div><div class="card-desc">${esc(p.descripcion||'Curated for the Remember Luxury edit.')}</div><div class="card-bottom"><span class="price">${p.precio!=null?esc(money(p.precio)):''}</span><span class="store">${esc(p.tienda||p.merchant||'Selected store')}</span></div></div></article>`}).join('')}
-function openProduct(p){document.getElementById('mimg').src=imageUrl(p);document.getElementById('mimg').alt=p.nombre||'';document.getElementById('mcat').textContent=p.categoria||'Collection';document.getElementById('mname').textContent=p.nombre||'Selected piece';document.getElementById('mdesc').textContent=p.descripcion||'A selected piece from the Remember Luxury edit.';document.getElementById('mprice').textContent=p.precio!=null?money(p.precio):'';document.getElementById('mstore').textContent=p.tienda||p.merchant||'Destination store';let b=document.getElementById('mbuy'),url=productUrl(p);b.href=url||'#';b.classList.toggle('disabled',!url);b.textContent=url?'Comprar en la tienda →':'Enlace de compra pendiente';document.getElementById('modal').classList.add('open');document.getElementById('modal').setAttribute('aria-hidden','false')}
-function closeModal(){document.getElementById('modal').classList.remove('open');document.getElementById('modal').setAttribute('aria-hidden','true')}
-document.addEventListener('click',e=>{let f=e.target.closest('[data-cat]');if(f){CAT=f.dataset.cat;buildFilters();render();return}let buy=e.target.closest('[data-buy]');let card=e.target.closest('[data-product]');if(buy||card){let id=String((buy||card).dataset.buy??(card&&card.dataset.product));let p=ALL.find((x,i)=>String(x.id??i)===id);if(p)openProduct(p)}});document.getElementById('close').onclick=closeModal;document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});document.getElementById('q').addEventListener('input',render);document.querySelectorAll('[data-jump]').forEach(a=>a.addEventListener('click',()=>{CAT=a.dataset.jump;buildFilters();render()}));
-async function loadProducts(){let g=document.getElementById('grid');try{let r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({accion:'catalogo',limite:1000,modo:'afiliados'})});let data=await r.json();let prods=data.productos||data.items||data; if(!Array.isArray(prods))throw Error('invalid catalog');ALL=prods;buildFilters();render()}catch(err){g.innerHTML='<div class="empty">The collection could not be loaded.<br><br><button class="filter active" onclick="loadProducts()">Retry</button></div>'}}
-loadProducts();
-</script>
-</body></html>
+
+<div class="top-notice">
+  WOMEN'S FALL WINTER 2026/27 FASHION SHOW · COMPLIMENTARY EXPRESS DELIVERY & PACKAGING
+</div>
+
+<header>
+  <div class="header-top">
+    <span>COLOMBIA (COP $) / ESPAÑA (EUR €)</span>
+    <div>
+      <a href="#">ATENCIÓN AL CLIENTE</a> &nbsp;·&nbsp;
+      <a href="#">BOUTIQUES</a> &nbsp;·&nbsp;
+      <a href="pasarela.html">FASHION SHOW 2026</a>
+    </div>
+  </div>
+
+  <div class="header-main">
+    <nav class="main-nav">
+      <div class="nav-item">
+        <a href="articulos.html" class="nav-link-btn">MUJER</a>
+        <div class="mega-menu">
+          <div>
+            <div class="mega-col-title">ROPA</div>
+            <ul class="mega-list">
+              <li><a href="producto-detalle.html">Vestidos de Gala</a></li>
+              <li><a href="articulos.html">Smokings & Blazers</a></li>
+              <li><a href="articulos.html">Faldas & Pantalones</a></li>
+              <li><a href="articulos.html">Abrigos en Cachemira</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="mega-col-title">BOLSOS</div>
+            <ul class="mega-list">
+              <li><a href="pago-premium.html?id=sicily-bag">Bolso Sicily</a></li>
+              <li><a href="articulos.html">Bolso Devotion</a></li>
+              <li><a href="articulos.html">Clutches de Fiesta</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="mega-col-title">ACCESORIOS & JOYAS</div>
+            <ul class="mega-list">
+              <li><a href="articulos.html">Stilettos</a></li>
+              <li><a href="articulos.html">Alta Joyería Barroca</a></li>
+              <li><a href="articulos.html">Gafas de Sol Runway</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="mega-col-title">PASARELA</div>
+            <ul class="mega-list">
+              <li><a href="pasarela.html">Fashion Show FW 2026</a></li>
+              <li><a href="articulos.html">Alta Moda Milano</a></li>
+            </ul>
+          </div>
+          <div>
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600" class="mega-featured-img" alt="">
+            <div style="font-weight:700; text-transform:uppercase;">CAMPAÑA FALL WINTER 2026</div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item"><a href="articulos.html" class="nav-link-btn">HOMBRE</a></div>
+      <div class="nav-item"><a href="pasarela.html" class="nav-link-btn">FASHION SHOWS 2026</a></div>
+      <div class="nav-item"><a href="producto-detalle.html" class="nav-link-btn">ALTA MODA</a></div>
+    </nav>
+
+    <a href="articulos.html" class="logo-dng">DOLCE & GABBANA</a>
+
+    <div class="header-tools">
+      <a href="pasarela.html" class="btn-runway-header">VER PASARELA 2026</a>
+      <a href="pago-premium.html" class="tool-btn">BOLSA (1)</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO EDITORIAL FULLSCREEN -->
+<section class="hero-editorial">
+  <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1600&auto=format&fit=crop&q=90" alt="Dolce & Gabbana Fall Winter 2026 Hero" class="hero-img">
+  <div class="hero-gradient"></div>
+  
+  <div class="hero-content">
+    <div class="hero-eyebrow">MILAN FASHION WEEK · RUNWAY COLLECTION</div>
+    <h1 class="hero-title">WOMEN'S FALL WINTER 2026/27</h1>
+    <div class="hero-btns">
+      <a href="producto-detalle.html" class="btn-hero-white">COMPRAR VESTIDO DOBLE CREPÉ</a>
+      <a href="pasarela.html" class="btn-hero-outline">EXPLORAR LA PASARELA</a>
+    </div>
+  </div>
+</section>
+
+<!-- TRES BLOQUES EDITORIALES -->
+<section>
+  <div class="section-header">
+    <div class="section-tag">UNIVERSO DOLCE & GABBANA</div>
+    <h2 class="section-title">LAS COLECCIONES 2026</h2>
+    <p class="section-desc">Sastrería clásica siciliana, transparencias sensuales y cortes arquitectónicos.</p>
+  </div>
+
+  <div class="editorial-split-grid">
+    <a href="producto-detalle.html" class="split-card">
+      <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&auto=format&fit=crop&q=90" alt="Colección Mujer 2026" class="split-img">
+      <div class="split-overlay"></div>
+      <div class="split-content">
+        <div class="split-tag">ALTA COSTURA</div>
+        <div class="split-name">Colección Mujer</div>
+        <span class="split-cta">Ver la Selección ↗</span>
+      </div>
+    </a>
+
+    <a href="pasarela.html" class="split-card">
+      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=90" alt="Desfile Fashion Show" class="split-img">
+      <div class="split-overlay"></div>
+      <div class="split-content">
+        <div class="split-tag">PASARELA MILÁN</div>
+        <div class="split-name">Fashion Show 2026</div>
+        <span class="split-cta">Ver los 8 Looks ↗</span>
+      </div>
+    </a>
+
+    <a href="pago-premium.html" class="split-card">
+      <img src="https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=800&auto=format&fit=crop&q=90" alt="Alta Joyería y Bolsos" class="split-img">
+      <div class="split-overlay"></div>
+      <div class="split-content">
+        <div class="split-tag">MARROQUINERÍA</div>
+        <div class="split-name">Bolso Sicily & Joyas</div>
+        <span class="split-cta">Comprar Piezas ↗</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- CATÁLOGO DE PIEZAS DE PASARELA CON EFECTO HOVER ÁNGULO -->
+<section class="products-section">
+  <div class="section-header" style="padding-top:0;">
+    <div class="section-tag">SELECCIÓN OFICIAL</div>
+    <h2 class="section-title">PIEZAS DE PASARELA DISPONIBLES</h2>
+    <p class="section-desc">Pasa el cursor por cada prenda para ver el ángulo de pasarela en movimiento.</p>
+  </div>
+
+  <div class="products-grid">
+    <!-- PRODUCTO 1: VESTIDO DOBLE CREPE -->
+    <article class="p-card">
+      <div class="p-img-box">
+        <span class="p-badge-exclusive">LOOK 01 · DESFILE</span>
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&auto=format&fit=crop&q=90" alt="Vestido en doble crepé de lana" class="p-card-img main">
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=90" alt="Vestido en pasarela" class="p-card-img alt">
+      </div>
+      <div class="p-info-box">
+        <span class="p-cat-name">VESTIDOS · MADE IN ITALY</span>
+        <h3 class="p-item-title">Vestido en doble crepé de lana</h3>
+        <div class="p-price-row">€ 2.450</div>
+        <div class="p-btn-stack">
+          <a href="pago-premium.html?id=f630-dress" class="btn-p-buy">COMPRAR AHORA</a>
+          <a href="producto-detalle.html" class="btn-p-details">VER DETALLES COMPLETOS</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- PRODUCTO 2: ESMOQUIN TERCIOPELO -->
+    <article class="p-card">
+      <div class="p-img-box">
+        <span class="p-badge-exclusive">LOOK 02 · SASTRERÍA</span>
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=90" alt="Esmoquin en terciopelo y encaje" class="p-card-img main">
+        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format&fit=crop&q=90" alt="Detalle sastre" class="p-card-img alt">
+      </div>
+      <div class="p-info-box">
+        <span class="p-cat-name">SMOKING · MADE IN ITALY</span>
+        <h3 class="p-item-title">Esmoquin Sartorial en Terciopelo</h3>
+        <div class="p-price-row">€ 3.850</div>
+        <div class="p-btn-stack">
+          <a href="pago-premium.html?id=velvet-tux" class="btn-p-buy">COMPRAR AHORA</a>
+          <a href="pasarela.html" class="btn-p-details">VER EN PASARELA</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- PRODUCTO 3: BOLSO SICILY -->
+    <article class="p-card">
+      <div class="p-img-box">
+        <span class="p-badge-exclusive">BOLSO ICÓNICO</span>
+        <img src="https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=600&auto=format&fit=crop&q=90" alt="Bolso Sicily Piel Dauphine" class="p-card-img main">
+        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&auto=format&fit=crop&q=90" alt="Bolso Sicily detalle" class="p-card-img alt">
+      </div>
+      <div class="p-info-box">
+        <span class="p-cat-name">MARROQUINERÍA · ORO 18K</span>
+        <h3 class="p-item-title">Bolso Sicily Pequeño Piel Dauphine</h3>
+        <div class="p-price-row">€ 1.850</div>
+        <div class="p-btn-stack">
+          <a href="pago-premium.html?id=sicily-bag" class="btn-p-buy">COMPRAR AHORA</a>
+          <a href="pasarela.html" class="btn-p-details">VER EN PASARELA</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- PRODUCTO 4: GAFAS LOGO BARROCO -->
+    <article class="p-card">
+      <div class="p-img-box">
+        <span class="p-badge-exclusive">ALTA JOYERÍA</span>
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=90" alt="Gafas de Sol Runway DG" class="p-card-img main">
+        <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&auto=format&fit=crop&q=90" alt="Gafas detalle" class="p-card-img alt">
+      </div>
+      <div class="p-info-box">
+        <span class="p-cat-name">EYEWEAR · ALTA GAMA</span>
+        <h3 class="p-item-title">Gafas de Sol Runway DG Logo</h3>
+        <div class="p-price-row">€ 890</div>
+        <div class="p-btn-stack">
+          <a href="pago-premium.html?id=runway-shades" class="btn-p-buy">COMPRAR AHORA</a>
+          <a href="pasarela.html" class="btn-p-details">VER EN PASARELA</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- BANNER TEASER DE LA PASARELA -->
+<section class="runway-teaser">
+  <div class="runway-teaser-inner">
+    <div style="font-size:10px; letter-spacing:0.3em; margin-bottom:12px; color:#aaa;">MILAN FASHION WEEK 2026</div>
+    <h2 class="runway-teaser-title">EXPERIENCIA PASARELA EN DIRECTO</h2>
+    <p class="runway-teaser-desc">Recorre la sesión completa de desfile con modelos de alta costura, los 8 looks principales, el backstage y los invitados de honor en primera fila.</p>
+    <a href="pasarela.html" class="btn-hero-white">ENTRAR AL DESFILE FALL WINTER 2026</a>
+  </div>
+</section>
+
+<!-- FOOTER EXACTO D&G -->
+<footer>
+  <div class="footer-cols">
+    <div>
+      <div class="footer-heading">COLECCIONES</div>
+      <ul class="footer-list">
+        <li><a href="articulos.html">Mujer Fall Winter 2026</a></li>
+        <li><a href="producto-detalle.html">Vestido en Doble Crepé</a></li>
+        <li><a href="pasarela.html">Desfile & Pasarela</a></li>
+        <li><a href="articulos.html">Alta Sastrería</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">SERVICIOS EXCLUSIVOS</div>
+      <ul class="footer-list">
+        <li><a href="pago-premium.html">Envío Express de Cortesía</a></li>
+        <li><a href="pago-premium.html">Embalaje de Lujo</a></li>
+        <li><a href="pago-premium.html">Devoluciones Gratuitas</a></li>
+        <li><a href="#">Asesoría de Estilismo</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">MÉTODOS DE PAGO</div>
+      <ul class="footer-list">
+        <li><a href="pago-premium.html">Nequi & Bancolombia</a></li>
+        <li><a href="pago-premium.html">Tarjetas Visa / Mastercard / AMEX</a></li>
+        <li><a href="pago-premium.html">PayPal & Apple Pay</a></li>
+        <li><a href="pago-premium.html">Monedas KRC / Dinastía</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">MAISON DOLCE&GABBANA</div>
+      <ul class="footer-list">
+        <li><a href="#">Sostenibilidad</a></li>
+        <li><a href="#">La Historia de la Casa</a></li>
+        <li><a href="#">Boutiques en el Mundo</a></li>
+        <li><a href="#">Contacto & Atención VIP</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom-row">
+    &copy; 2026 DOLCE & GABBANA S.r.l. Todos los derechos reservados. Milano, Italia.
+  </div>
+</footer>
+
+</body>
+</html>

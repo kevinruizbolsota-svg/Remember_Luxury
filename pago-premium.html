@@ -1,0 +1,510 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopping Bag & Checkout | DOLCE&GABBANA®</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --gray-bg: #f7f7f7;
+  --gray-border: #e5e5e5;
+  --gray-text: #666666;
+  --gray-dark: #222222;
+  --green: #2e7d32;
+  --font: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font);
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* TOP BANNER */
+.top-notice {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  font-weight: 500;
+}
+
+/* HEADER EXACTO D&G */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  border-bottom: 1px solid var(--gray-border);
+  padding: 16px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo-dng {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-decoration: none;
+  color: #000;
+  font-family: var(--font);
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.back-link {
+  text-decoration: none;
+  color: var(--black);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.secure-note {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--gray-text);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* MAIN CHECKOUT LAYOUT */
+.checkout-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 48px 100px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 60px;
+}
+
+.step-heading {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--gray-border);
+}
+
+/* FORM FIELDS */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-group.full {
+  grid-column: span 2;
+}
+.form-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-dark);
+}
+.form-input {
+  padding: 14px 16px;
+  border: 1px solid var(--gray-border);
+  background: #fff;
+  font-family: var(--font);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-input:focus {
+  border-color: #000;
+}
+
+/* PAYMENT METHODS */
+.payment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+.payment-card {
+  border: 1px solid var(--gray-border);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.payment-card:hover, .payment-card.active {
+  border-color: #000;
+  background: var(--gray-bg);
+}
+.payment-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.payment-radio {
+  accent-color: #000;
+}
+.payment-name {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.payment-tag {
+  font-size: 10px;
+  color: var(--gray-text);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+/* RIGHT COLUMN: BAG SUMMARY */
+.bag-summary-box {
+  background: var(--gray-bg);
+  padding: 32px;
+  position: sticky;
+  top: 90px;
+  height: fit-content;
+}
+.item-row-preview {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--gray-border);
+  margin-bottom: 24px;
+}
+.item-img-thumb {
+  width: 90px;
+  height: 120px;
+  object-fit: cover;
+  background: #fff;
+}
+.item-desc-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+.item-season {
+  font-size: 9px;
+  color: var(--gray-text);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.item-title-text {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.item-details-meta {
+  font-size: 11px;
+  color: var(--gray-text);
+}
+.item-price-tag {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.calc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  margin-bottom: 12px;
+  color: var(--gray-dark);
+}
+.calc-row.total {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+  padding-top: 16px;
+  border-top: 1px solid var(--gray-border);
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+
+.btn-place-order {
+  display: block;
+  width: 100%;
+  background: #000;
+  color: #fff;
+  border: 1px solid #000;
+  padding: 18px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-place-order:hover {
+  background: #fff;
+  color: #000;
+}
+
+.order-note {
+  margin-top: 20px;
+  font-size: 10px;
+  color: var(--gray-text);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* SUCCESS MODAL */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal-window {
+  background: #fff;
+  max-width: 520px;
+  width: 100%;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+.modal-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+.modal-head {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.modal-body {
+  font-size: 12px;
+  color: var(--gray-text);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+.btn-modal-return {
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  padding: 14px 32px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+@media(max-width: 992px) {
+  .checkout-container { grid-template-columns: 1fr; padding: 20px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-group.full { grid-column: span 1; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-notice">
+  COMPLIMENTARY INSURED EXPRESS SHIPPING & SIGNATURE PACKAGING ON ALL ORDERS
+</div>
+
+<header>
+  <a href="producto-detalle.html" class="back-link">‹ Return to Product</a>
+  <a href="articulos.html" class="logo-dng">DOLCE & GABBANA</a>
+  <div class="secure-note">🔒 100% Encrypted Checkout</div>
+</header>
+
+<main class="checkout-container">
+  <!-- FORMULARIO DE ENVÍO Y CONTACTO -->
+  <div>
+    <h2 class="step-heading">1. Shipping & Contact Information</h2>
+    
+    <form id="orderForm">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Full Name *</label>
+          <input type="text" id="nameInput" class="form-input" placeholder="Kevin Ruiz" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address (Gmail) *</label>
+          <input type="email" id="emailInput" class="form-input" placeholder="kevin@gmail.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone / WhatsApp *</label>
+          <input type="tel" id="phoneInput" class="form-input" placeholder="+57 300 000 0000" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">City / State *</label>
+          <input type="text" id="cityInput" class="form-input" placeholder="Medellín / Bogotá / Madrid" required>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Full Delivery Address *</label>
+          <input type="text" id="addressInput" class="form-input" placeholder="Street, Building, Apt, Suite..." required>
+        </div>
+      </div>
+
+      <h2 class="step-heading">2. Payment Method</h2>
+      
+      <div class="payment-list">
+        <label class="payment-card active">
+          <div class="payment-left">
+            <input type="radio" name="payOption" value="Nequi / Bancolombia" class="payment-radio" checked>
+            <span class="payment-name">Nequi / Bancolombia Direct Transfer</span>
+          </div>
+          <span class="payment-tag">COLOMBIA VIP</span>
+        </label>
+
+        <label class="payment-card">
+          <div class="payment-left">
+            <input type="radio" name="payOption" value="Credit Card" class="payment-radio">
+            <span class="payment-name">Credit / Debit Card (Visa, Mastercard, AMEX)</span>
+          </div>
+          <span class="payment-tag">GLOBAL</span>
+        </label>
+
+        <label class="payment-card">
+          <div class="payment-left">
+            <input type="radio" name="payOption" value="Apple Pay / PayPal" class="payment-radio">
+            <span class="payment-name">Apple Pay / PayPal</span>
+          </div>
+          <span class="payment-tag">INSTANT</span>
+        </label>
+
+        <label class="payment-card">
+          <div class="payment-left">
+            <input type="radio" name="payOption" value="KRC Dynasty Token" class="payment-radio">
+            <span class="payment-name">KRC Token / Orionix Dynasty</span>
+          </div>
+          <span class="payment-tag">EXCLUSIVE</span>
+        </label>
+      </div>
+
+      <button type="submit" class="btn-place-order">PLACE ORDER & SEND GMAIL RECEIPT</button>
+    </form>
+  </div>
+
+  <!-- BAG SUMMARY (COLUMNA DERECHA) -->
+  <div>
+    <div class="bag-summary-box">
+      <h3 class="step-heading" style="margin-bottom:18px;">Order Summary (1 Item)</h3>
+      
+      <div class="item-row-preview">
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=300&auto=format&fit=crop&q=90" alt="Double wool crepe dress" class="item-img-thumb" id="pThumb">
+        <div class="item-desc-col">
+          <div>
+            <div class="item-season">FALL WINTER 2026/27</div>
+            <div class="item-title-text" id="pTitle">Double wool crepe dress</div>
+            <div class="item-details-meta">Size: IT 40 · Color: Nero Sicilia</div>
+          </div>
+          <div class="item-price-tag" id="pPrice">€ 2.450,00</div>
+        </div>
+      </div>
+
+      <div class="calc-row">
+        <span>Item Subtotal</span>
+        <span id="subTotal">€ 2.450,00</span>
+      </div>
+      <div class="calc-row">
+        <span>Signature Dolce&Gabbana Gift Packaging</span>
+        <span style="color:var(--green);font-weight:600;">COMPLIMENTARY</span>
+      </div>
+      <div class="calc-row">
+        <span>Insured Express Courier Delivery</span>
+        <span style="color:var(--green);font-weight:600;">COMPLIMENTARY</span>
+      </div>
+      <div class="calc-row total">
+        <span>TOTAL</span>
+        <span id="grandTotal">€ 2.450,00</span>
+      </div>
+
+      <p class="order-note">
+        Upon completing your order, an official Dolce & Gabbana receipt with tracking details will be dispatched immediately to your Gmail account.
+      </p>
+    </div>
+  </div>
+</main>
+
+<!-- MODAL DE CONFIRMACIÓN -->
+<div class="modal-overlay" id="orderModal">
+  <div class="modal-window">
+    <div class="modal-icon">✦</div>
+    <h2 class="modal-head">ORDER CONFIRMED</h2>
+    <p class="modal-body" id="modalDesc">
+      Thank you for shopping at Dolce & Gabbana.<br>
+      Your order details and tracking link have been dispatched to your Gmail.
+    </p>
+    <a href="articulos.html" class="btn-modal-return">RETURN TO HOME</a>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.payment-card').forEach(c => {
+  c.addEventListener('click', () => {
+    document.querySelectorAll('.payment-card').forEach(x => x.classList.remove('active'));
+    c.classList.add('active');
+  });
+});
+
+document.getElementById('orderForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const orderData = {
+    customer_name: document.getElementById('nameInput').value,
+    email: document.getElementById('emailInput').value,
+    phone: document.getElementById('phoneInput').value,
+    city: document.getElementById('cityInput').value,
+    address: document.getElementById('addressInput').value,
+    payment_method: document.querySelector('input[name="payOption"]:checked').value,
+    item: document.getElementById('pTitle').textContent,
+    total: document.getElementById('grandTotal').textContent,
+    timestamp: new Date().toISOString()
+  };
+
+  try {
+    fetch('https://lkevinruizl.app.n8n.cloud/webhook/pago-confirmado', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(orderData)
+    }).catch(err => console.log('Dispatched webhook'));
+  } catch(err) {}
+
+  document.getElementById('modalDesc').innerHTML = `
+    Dear <strong>${orderData.customer_name}</strong>,<br>
+    Your order for <strong>${orderData.item}</strong> (${orderData.total}) has been received via <strong>${orderData.payment_method}</strong>.<br><br>
+    The official receipt has been sent to: <strong>${orderData.email}</strong>.
+  `;
+  document.getElementById('orderModal').classList.add('open');
+});
+</script>
+
+</body>
+</html>

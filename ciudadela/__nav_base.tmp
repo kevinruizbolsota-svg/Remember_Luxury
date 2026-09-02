@@ -1,0 +1,15 @@
+<nav>
+  <a class="brand" href="hub.html">ORIONIX</a>
+  <div class="nav-links">
+    <a class="nl" href="hub.html">Inicio</a>
+    <a class="nl on" href="articulos.html">Tienda</a>
+    <a class="nl" href="carrito.html">Carrito</a>
+    <a class="nl" href="agentes.html">Agentes</a>
+    <a class="nl" href="comunidad.html">Comunidad</a>
+  </div>
+  <div class="nav-r">
+    <button class="cart-btn" id="cartBtn">
+      ­ƒî┐ Carrito <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>

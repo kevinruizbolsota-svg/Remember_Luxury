@@ -3,239 +3,811 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tienda - Remember Luxury</title>
+<title>Marketplace Oficial — Remember Luxury</title>
 <link rel="icon" href="../favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:#0a0a0c;color:#d4c5a0;font-family:'Cormorant Garamond',serif;min-height:100vh;}
-header{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;background:rgba(10,10,12,0.97);border-bottom:1px solid rgba(232,200,106,0.12);position:sticky;top:0;z-index:99;backdrop-filter:blur(12px);}
-.logo{font-family:'Cinzel',serif;font-size:1rem;font-weight:700;color:#e8c86a;letter-spacing:0.22em;}
-.nav{display:flex;gap:8px;}
-.nav a{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.12em;color:rgba(212,197,160,0.55);text-decoration:none;padding:6px 14px;border:1px solid transparent;transition:0.3s;}
-.nav a:hover,.nav a.active{color:#e8c86a;border-color:rgba(232,200,106,0.3);}
-main{max-width:1100px;margin:0 auto;padding:48px 24px 80px;}
+:root {
+  --bg-main: #0a0a0d;
+  --bg-card: rgba(18, 18, 24, 0.85);
+  --bg-sidebar: #0e0e13;
+  --gold: #e8c86a;
+  --gold-glow: rgba(232, 200, 106, 0.25);
+  --gold-dark: #b89535;
+  --ali-orange: #ff5000;
+  --hotmart-green: #25d366;
+  --border: rgba(232, 200, 106, 0.12);
+  --border-hover: rgba(232, 200, 106, 0.4);
+  --text-main: #f5f0e8;
+  --text-muted: #9e9aa8;
+  --radius: 12px;
+}
 
-/* HERO */
-.hero{text-align:center;margin-bottom:60px;}
-.eyebrow{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.35em;color:rgba(232,200,106,0.6);margin-bottom:14px;}
-.hero h1{font-family:'Cinzel',serif;font-size:2.2rem;font-weight:700;letter-spacing:0.18em;color:#e8c86a;margin-bottom:16px;}
-.hero p{font-size:1rem;color:rgba(212,197,160,0.7);max-width:560px;margin:0 auto 20px;line-height:1.75;font-style:italic;}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-/* SEPARADOR DE SECCIÓN */
-.seccion-titulo{display:flex;align-items:center;gap:16px;margin:48px 0 28px;}
-.seccion-titulo h2{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.28em;color:#e8c86a;white-space:nowrap;}
-.seccion-titulo::before,.seccion-titulo::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(232,200,106,0.25),transparent);}
+/* NAVBAR SUPERIOR ESTILO AMAZON / LUXURY */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(10, 10, 13, 0.95);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 
-/* BADGE */
-.badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.18em;padding:4px 14px;border-radius:1px;margin-bottom:32px;}
-.badge.aliexpress{background:rgba(255,102,0,0.12);border:1px solid rgba(255,102,0,0.35);color:#ff8533;}
-.badge.hotmart{background:rgba(232,200,106,0.08);border:1px solid rgba(232,200,106,0.3);color:#e8c86a;}
+.logo-area {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+.logo-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  font-size: 1.15rem;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  text-shadow: 0 0 16px var(--gold-glow);
+}
+.logo-sub {
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
 
-/* GRID */
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+/* BUSCADOR CENTRAL */
+.search-container {
+  flex: 1;
+  max-width: 650px;
+  position: relative;
+  display: flex;
+}
+.search-input {
+  width: 100%;
+  padding: 11px 45px 11px 18px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: #fff;
+  font-size: 0.88rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.3s;
+}
+.search-input:focus {
+  border-color: var(--gold);
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 15px var(--gold-glow);
+}
+.search-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  pointer-events: none;
+  font-size: 0.95rem;
+}
 
-/* CARD */
-.card{background:rgba(18,16,12,0.9);border:1px solid rgba(232,200,106,0.12);padding:0;overflow:hidden;transition:0.3s;display:flex;flex-direction:column;}
-.card:hover{border-color:rgba(232,200,106,0.4);transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,0.5);}
-.card-img{width:100%;height:200px;object-fit:cover;background:#111;display:block;border-bottom:1px solid rgba(232,200,106,0.08);}
-.card-img-placeholder{width:100%;height:200px;background:linear-gradient(135deg,#111 0%,#1a1610 100%);display:flex;align-items:center;justify-content:center;font-size:3rem;border-bottom:1px solid rgba(232,200,106,0.08);}
-.card-body{padding:20px;flex:1;display:flex;flex-direction:column;gap:10px;}
-.cat{font-family:'Cinzel',serif;font-size:0.5rem;letter-spacing:0.2em;color:rgba(232,200,106,0.55);}
-.card h3{font-family:'Cinzel',serif;font-size:0.82rem;font-weight:600;color:#f0e8d0;line-height:1.5;}
-.card p{font-size:0.82rem;color:rgba(212,197,160,0.6);line-height:1.65;font-style:italic;flex:1;}
-.card-meta{font-family:'Cinzel',serif;font-size:0.5rem;letter-spacing:0.12em;color:rgba(212,197,160,0.35);margin-top:auto;}
-.buy{display:block;margin-top:14px;padding:11px 18px;text-align:center;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.16em;font-weight:600;text-decoration:none;transition:0.3s;border-radius:1px;}
-.buy.ali{background:linear-gradient(135deg,#cc4400,#ff6600);color:#fff;border:1px solid rgba(255,102,0,0.4);}
-.buy.ali:hover{background:linear-gradient(135deg,#dd5500,#ff7700);box-shadow:0 4px 16px rgba(255,102,0,0.3);}
-.buy.hot{background:linear-gradient(135deg,#7a4f00,#c9a227);color:#0a0a0c;border:1px solid rgba(232,200,106,0.4);}
-.buy.hot:hover{background:linear-gradient(135deg,#8a5f00,#d9b237);box-shadow:0 4px 16px rgba(232,200,106,0.25);}
+/* ACCIONES DE CABECERA */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.nav-link-btn {
+  text-decoration: none;
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-link-btn:hover, .nav-link-btn.active {
+  color: var(--gold);
+  border-color: var(--border-hover);
+  background: rgba(232, 200, 106, 0.05);
+}
 
-/* NOTA AFILIADO */
-.nota{background:rgba(232,200,106,0.04);border:1px solid rgba(232,200,106,0.1);border-left:3px solid rgba(232,200,106,0.5);padding:16px 20px;margin-top:48px;font-size:0.8rem;color:rgba(212,197,160,0.6);line-height:1.7;}
-.nota strong{color:#e8c86a;}
+/* CONTENEDOR PRINCIPAL: SIDEBAR + GRID */
+.marketplace-layout {
+  display: flex;
+  flex: 1;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 24px;
+  gap: 28px;
+}
 
-footer{text-align:center;padding:28px;font-family:'Cinzel',serif;font-size:0.5rem;letter-spacing:0.22em;color:rgba(212,197,160,0.25);border-top:1px solid rgba(232,200,106,0.07);}
+/* SIDEBAR DE FILTROS */
+aside.sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
 
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:580px){.grid{grid-template-columns:1fr;}.hero h1{font-size:1.5rem;}header{flex-direction:column;gap:12px;}}
+.filter-box {
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.filter-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(232, 200, 106, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+.cat-item:hover, .cat-item.selected {
+  background: rgba(232, 200, 106, 0.1);
+  color: var(--gold);
+  font-weight: 600;
+  transform: translateX(3px);
+}
+.cat-count {
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+
+.platform-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.plat-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.plat-btn:hover, .plat-btn.active {
+  border-color: var(--gold);
+  color: #fff;
+  background: rgba(232, 200, 106, 0.08);
+}
+.plat-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.dot-all { background: var(--gold); }
+.dot-ali { background: var(--ali-orange); box-shadow: 0 0 8px var(--ali-orange); }
+.dot-hot { background: #ff9900; box-shadow: 0 0 8px #ff9900; }
+
+/* CONTENIDO PRINCIPAL */
+main.marketplace-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* BANNER SUPERIOR INFORMATIVO */
+.hero-banner {
+  background: linear-gradient(135deg, rgba(232, 200, 106, 0.12) 0%, rgba(14, 14, 19, 0.9) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-banner::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+.banner-info h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+.banner-info p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  max-width: 600px;
+}
+.stats-badge {
+  text-align: right;
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  color: var(--gold);
+}
+.stats-number {
+  font-size: 1.8rem;
+  font-weight: 900;
+  display: block;
+}
+
+/* BARRA DE HERRAMIENTAS / ORDENACIÓN */
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 20px;
+}
+.results-info {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+.results-info strong {
+  color: var(--gold);
+}
+.sort-select {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  outline: none;
+  cursor: pointer;
+}
+
+/* PRODUCT GRID */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* TARJETA DE PRODUCTO */
+.product-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-hover);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+}
+
+.img-wrapper {
+  width: 100%;
+  height: 200px;
+  position: relative;
+  background: #15151b;
+  overflow: hidden;
+}
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.product-card:hover .product-img {
+  transform: scale(1.06);
+}
+
+.card-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+.badge-ali {
+  background: rgba(255, 80, 0, 0.9);
+  color: #fff;
+}
+.badge-hot {
+  background: rgba(232, 200, 106, 0.9);
+  color: #0a0a0d;
+}
+
+.card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 8px;
+}
+
+.card-cat {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  font-weight: 600;
+}
+.card-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #fff;
+  height: 38px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.card-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #ffc107;
+}
+.reviews-count {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+}
+
+.card-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  height: 48px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.card-footer {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price-box {
+  display: flex;
+  flex-direction: column;
+}
+.current-price {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--gold);
+}
+.old-price {
+  font-size: 0.75rem;
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.action-btn {
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+.btn-ali {
+  background: var(--ali-orange);
+  color: #fff;
+}
+.btn-ali:hover {
+  background: #e04600;
+  box-shadow: 0 4px 14px rgba(255, 80, 0, 0.4);
+}
+.btn-hot {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  color: #0a0a0d;
+}
+.btn-hot:hover {
+  box-shadow: 0 4px 14px var(--gold-glow);
+  transform: translateY(-2px);
+}
+
+/* PAGINACIÓN */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 30px 0;
+}
+.page-btn {
+  padding: 8px 14px;
+  border-radius: 6px;
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.82rem;
+  transition: 0.2s;
+}
+.page-btn:hover, .page-btn.active {
+  background: var(--gold);
+  color: #0a0a0d;
+  font-weight: 700;
+  border-color: var(--gold);
+}
+
+/* FOOTER */
+footer {
+  background: #08080a;
+  border-top: 1px solid var(--border);
+  padding: 30px 24px;
+  text-align: center;
+  margin-top: auto;
+}
+.footer-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.footer-note {
+  font-size: 0.72rem;
+  color: rgba(212, 197, 160, 0.4);
+  margin-top: 8px;
+}
+
+@media(max-width: 900px) {
+  .marketplace-layout { flex-direction: column; }
+  aside.sidebar { width: 100%; }
+  .hero-banner { flex-direction: column; gap: 16px; text-align: center; }
+  .stats-badge { text-align: center; }
+}
 </style>
 </head>
 <body>
+
 <header>
-  <div class="logo">REMEMBER LUXURY</div>
-  <nav class="nav">
-    <a href="articulos.html" class="active">TIENDA</a>
-    <a href="carrito.html">CARRITO &#128722;</a>
-    <a href="pago-premium.html">CHECKOUT</a>
-  </nav>
+  <a href="../index.html" class="logo-area">
+    <span class="logo-title">REMEMBER LUXURY</span>
+    <span class="logo-sub">GLOBAL MARKETPLACE</span>
+  </a>
+
+  <div class="search-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="Buscar entre millones de productos y cursos...">
+    <span class="search-icon">&#128269;</span>
+  </div>
+
+  <div class="header-actions">
+    <a href="articulos.html" class="nav-link-btn active">&#128717; Tienda</a>
+    <a href="carrito.html" class="nav-link-btn">&#128722; Carrito</a>
+    <a href="la_forja/plaza.html" class="nav-link-btn">&#9889; Ciudadela</a>
+  </div>
 </header>
-<main>
 
-  <div class="hero">
-    <div class="eyebrow">COLECCION CURADA &mdash; REMEMBER LUXURY</div>
-    <h1>TIENDA OFFICIAL</h1>
-    <p>Productos fisicos seleccionados de AliExpress y cursos digitales de Hotmart. Cada enlace te lleva directamente al producto real.</p>
-  </div>
+<div class="marketplace-layout">
 
-  <!-- ===== SECCION ALIEXPRESS ===== -->
-  <div class="seccion-titulo"><h2>&#128230; PRODUCTOS FISICOS &mdash; ALIEXPRESS</h2></div>
-  <div class="badge aliexpress">&#9679; AFILIADO ALIEXPRESS &mdash; ENVIO MUNDIAL</div>
-
-  <div class="grid">
-
-    <article class="card">
-      <img class="card-img"
-           src="https://ae01.alicdn.com/kf/Efa6f810b1dd6419f88f183388de019d0m.png_400x400.png"
-           alt="Producto AliExpress 1"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="card-img-placeholder" style="display:none;">&#127974;</div>
-      <div class="card-body">
-        <div class="cat">ALIEXPRESS &mdash; PRODUCTO FISICO</div>
-        <h3>Articulo Seleccionado &mdash; Remember Luxury</h3>
-        <p>Producto curado con envio mundial desde AliExpress. Haz clic en el boton para ver precio actual, variantes y disponibilidad.</p>
-        <div class="card-meta">AliExpress &mdash; Enlace de afiliado</div>
-        <a class="buy ali"
-           href="https://s.click.aliexpress.com/e/_c4VqxlHH"
-           target="_blank" rel="noopener noreferrer sponsored">
-          VER EN ALIEXPRESS &#8599;
-        </a>
+  <!-- SIDEBAR CON CATEGORÍAS & PLATAFORMAS -->
+  <aside class="sidebar">
+    <div class="filter-box">
+      <div class="filter-title">
+        <span>PLATAFORMAS</span>
       </div>
-    </article>
-
-    <article class="card">
-      <img class="card-img"
-           src="https://ae01.alicdn.com/kf/Sf6b7dc5932b640a2b868e85ee190218aV.jpg_400x400.jpg"
-           alt="Producto AliExpress 2"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="card-img-placeholder" style="display:none;">&#127974;</div>
-      <div class="card-body">
-        <div class="cat">ALIEXPRESS &mdash; PRODUCTO FISICO</div>
-        <h3>Articulo Seleccionado &mdash; Remember Luxury</h3>
-        <p>Producto curado con envio mundial desde AliExpress. Haz clic en el boton para ver precio actual, variantes y disponibilidad.</p>
-        <div class="card-meta">AliExpress &mdash; Enlace de afiliado</div>
-        <a class="buy ali"
-           href="https://s.click.aliexpress.com/e/_c3Oxe06x"
-           target="_blank" rel="noopener noreferrer sponsored">
-          VER EN ALIEXPRESS &#8599;
-        </a>
+      <div class="platform-filter-group">
+        <button class="plat-btn active" data-platform="all">
+          <span class="plat-dot dot-all"></span> Todos los Catálogos
+        </button>
+        <button class="plat-btn" data-platform="aliexpress">
+          <span class="plat-dot dot-ali"></span> AliExpress (Físicos)
+        </button>
+        <button class="plat-btn" data-platform="hotmart">
+          <span class="plat-dot dot-hot"></span> Hotmart (Digitales)
+        </button>
       </div>
-    </article>
+    </div>
 
-  </div>
-
-  <!-- ===== SECCION HOTMART ===== -->
-  <div class="seccion-titulo"><h2>&#127891; CURSOS DIGITALES &mdash; HOTMART</h2></div>
-  <div class="badge hotmart">&#9679; AFILIADO HOTMART &mdash; ACCESO INMEDIATO</div>
-
-  <div class="grid">
-
-    <article class="card">
-      <div class="card-img-placeholder">&#129504;</div>
-      <div class="card-body">
-        <div class="cat">INTELIGENCIA ARTIFICIAL</div>
-        <h3>Curso en Inteligencia Artificial &mdash; Universidad Lux</h3>
-        <p>Programa online de 14 semanas, con sesiones en vivo y nivel inicial para publico general.</p>
-        <div class="card-meta">Hotmart &mdash; Marketplace oficial</div>
-        <a class="buy hot" href="https://hotmart.com/es/marketplace/productos/curso-en-inteligencia-artificial/U97296985K" target="_blank" rel="noopener noreferrer sponsored">VER EN HOTMART &#8599;</a>
+    <div class="filter-box">
+      <div class="filter-title">
+        <span>CATEGORÍAS</span>
+        <span style="font-size:0.6rem; opacity:0.6;">FILTRO</span>
       </div>
-    </article>
+      <ul class="category-list" id="categoryList">
+        <li class="cat-item selected" data-category="all">
+          <span>⚡ Todas las Categorías</span>
+          <span class="cat-count" id="totalCount">(0)</span>
+        </li>
+      </ul>
+    </div>
+  </aside>
 
-    <article class="card">
-      <div class="card-img-placeholder">&#129504;</div>
-      <div class="card-body">
-        <div class="cat">IA GENERATIVA</div>
-        <h3>IA Generativa &mdash; Curso practico y completo</h3>
-        <p>Formacion practica sobre LLM, prompts, herramientas de IA, contenido y automatizacion.</p>
-        <div class="card-meta">Hotmart &mdash; Marketplace oficial</div>
-        <a class="buy hot" href="https://hotmart.com/es/marketplace/productos/ia-generativa-tu-curso-de-inteligencia-artificial-para-2025/G100623172W" target="_blank" rel="noopener noreferrer sponsored">VER EN HOTMART &#8599;</a>
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="marketplace-main">
+
+    <div class="hero-banner">
+      <div class="banner-info">
+        <h1>EDAD DORADA DEL MARKETPLACE</h1>
+        <p>Catálogo global masivo con enlace directo oficial de afiliación. Actualizaciones automáticas y productos seleccionados de alta demanda.</p>
       </div>
-    </article>
-
-    <article class="card">
-      <div class="card-img-placeholder">&#129504;</div>
-      <div class="card-body">
-        <div class="cat">IA &mdash; 2026</div>
-        <h3>Curso Inteligencia Artificial 2026 &mdash; Digisoft</h3>
-        <p>Programa con 98 modulos en video y enfoque aplicado desde fundamentos hasta usos avanzados.</p>
-        <div class="card-meta">Hotmart &mdash; Marketplace oficial</div>
-        <a class="buy hot" href="https://hotmart.com/es/marketplace/productos/hagsxd-curso-inteligencia-artificial-ia-spu35/N102534120B" target="_blank" rel="noopener noreferrer sponsored">VER EN HOTMART &#8599;</a>
+      <div class="stats-badge">
+        <span class="stats-number" id="statsTotal">21+</span>
+        <span>PRODUCTOS ACTIVOS</span>
       </div>
-    </article>
+    </div>
 
-    <article class="card">
-      <div class="card-img-placeholder">&#128200;</div>
-      <div class="card-body">
-        <div class="cat">MARKETING DIGITAL</div>
-        <h3>Curso de Marketing Digital &mdash; DIGITALMIND</h3>
-        <p>Fundamentos, social media, contenidos, landing pages, UX, e-commerce, SEO y publicidad.</p>
-        <div class="card-meta">Hotmart &mdash; Marketplace oficial</div>
-        <a class="buy hot" href="https://hotmart.com/es/marketplace/productos/marketingdigitaldigitalmind/B62699040R" target="_blank" rel="noopener noreferrer sponsored">VER EN HOTMART &#8599;</a>
+    <div class="toolbar">
+      <div class="results-info">
+        Mostrando <strong id="visibleCount">0</strong> artículos seleccionados
       </div>
-    </article>
-
-    <article class="card">
-      <div class="card-img-placeholder">&#128200;</div>
-      <div class="card-body">
-        <div class="cat">MARKETING &mdash; 2026</div>
-        <h3>Curso de Marketing Digital 2026 &mdash; CAMEX</h3>
-        <p>Programa virtual para estudiar a tu ritmo, con acompanamiento y tutores online.</p>
-        <div class="card-meta">Hotmart &mdash; Marketplace oficial</div>
-        <a class="buy hot" href="https://hotmart.com/es/marketplace/productos/marketing-digital-219/C50798645L" target="_blank" rel="noopener noreferrer sponsored">VER EN HOTMART &#8599;</a>
+      <div>
+        <select id="sortSelect" class="sort-select">
+          <option value="relevance">Ordenar por: Relevancia</option>
+          <option value="price-asc">Precio: De menor a mayor</option>
+          <option value="price-desc">Precio: De mayor a menor</option>
+          <option value="rating">Mejor Calificados ⭐</option>
+        </select>
       </div>
-    </article>
+    </div>
 
-    <article class="card">
-      <div class="card-img-placeholder">&#128202;</div>
-      <div class="card-body">
-        <div class="cat">EXCEL</div>
-        <h3>Microsoft Excel &mdash; Educacion Master</h3>
-        <p>Curso online de Excel desde basico hasta avanzado, con formulas, tablas, graficos y herramientas practicas.</p>
-        <div class="card-meta">Hotmart &mdash; Marketplace oficial</div>
-        <a class="buy hot" href="https://hotmart.com/es/marketplace/productos/microsoft-excel-44zj1/V71230229S" target="_blank" rel="noopener noreferrer sponsored">VER EN HOTMART &#8599;</a>
-      </div>
-    </article>
+    <!-- GRID DE PRODUCTOS DINÁMICO -->
+    <div class="product-grid" id="productGrid">
+      <!-- Inyectado por JavaScript -->
+    </div>
 
-    <article class="card">
-      <div class="card-img-placeholder">&#128202;</div>
-      <div class="card-body">
-        <div class="cat">EXCEL</div>
-        <h3>Curso Excel Completo &mdash; Desde Cero a Experto</h3>
-        <p>Formacion desde cero hasta experto, con clases en video, plantillas y proyectos practicos.</p>
-        <div class="card-meta">Hotmart &mdash; Marketplace oficial</div>
-        <a class="buy hot" href="https://hotmart.com/es/marketplace/productos/hagsxd-curso-excel-completo-awgbf/Q104565735U" target="_blank" rel="noopener noreferrer sponsored">VER EN HOTMART &#8599;</a>
-      </div>
-    </article>
+    <!-- PAGINACIÓN -->
+    <div class="pagination" id="paginationBox">
+      <!-- Inyectado por JavaScript -->
+    </div>
 
-    <article class="card">
-      <div class="card-img-placeholder">&#127760;</div>
-      <div class="card-body">
-        <div class="cat">IDIOMAS</div>
-        <h3>Curso de Ingles Facil y Claro</h3>
-        <p>Curso para principiantes con vocabulario, estructuras, pronunciacion y ejercicios practicos.</p>
-        <div class="card-meta">Hotmart &mdash; Marketplace oficial</div>
-        <a class="buy hot" href="https://hotmart.com/es/marketplace/productos/curso-de-ingles-facil-y-claro/X104104681G" target="_blank" rel="noopener noreferrer sponsored">VER EN HOTMART &#8599;</a>
-      </div>
-    </article>
+  </main>
+</div>
 
-    <article class="card">
-      <div class="card-img-placeholder">&#129302;</div>
-      <div class="card-body">
-        <div class="cat">IA &mdash; PROGRAMACION</div>
-        <h3>Curso Completo de IA con Python</h3>
-        <p>Programa orientado a IA, Machine Learning y Deep Learning con Python y proyectos practicos.</p>
-        <div class="card-meta">Hotmart &mdash; Marketplace oficial</div>
-        <a class="buy hot" href="https://hotmart.com/es/marketplace/productos/hagsxd-curso-completo-de-inteligencia-artificial-con-python-22y03/D103499522L" target="_blank" rel="noopener noreferrer sponsored">VER EN HOTMART &#8599;</a>
-      </div>
-    </article>
+<footer>
+  <p class="footer-text">&copy; 2026 REMEMBER LUXURY — Global Affiliate Marketplace Network</p>
+  <p class="footer-note">Los precios y disponibilidad pueden variar según la plataforma de origen (AliExpress / Hotmart). Al comprar apoyas a Remember Luxury mediante enlaces verificados.</p>
+</footer>
 
-  </div>
+<script>
+// --- MOTOR DINÁMICO DEL MARKETPLACE ---
+let allProducts = [];
+let filteredProducts = [];
+let currentCategory = 'all';
+let currentPlatform = 'all';
+let searchQuery = '';
+let currentSort = 'relevance';
+let currentPage = 1;
+const itemsPerPage = 12;
 
-  <div class="nota">
-    <strong>Nota de afiliacion:</strong> Los enlaces de AliExpress y Hotmart son enlaces de afiliado. Al comprar a traves de ellos, recibes el mismo precio y Remember Luxury recibe una comision. Los precios, disponibilidad y condiciones dependen de cada vendedor o productor. Para Hotmart, cada enlace debe ser reemplazado por tu HotLink personal una vez aprobada la afiliacion.
-  </div>
+async function loadProducts() {
+  try {
+    const res = await fetch('productos.json?v=' + Date.now());
+    allProducts = await res.json();
+    document.getElementById('statsTotal').innerText = allProducts.length + "+";
+    buildCategories();
+    applyFilters();
+  } catch (err) {
+    console.error("Error cargando productos.json:", err);
+    document.getElementById('productGrid').innerHTML = `
+      <div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--gold);">
+        <h3>Cargando catálogo maestro...</h3>
+      </div>`;
+  }
+}
 
-</main>
-<footer>&copy; 2026 REMEMBER LUXURY &mdash; CURATED COLLECTION</footer>
+function buildCategories() {
+  const catMap = {};
+  allProducts.forEach(p => {
+    catMap[p.categoria] = (catMap[p.categoria] || { name: p.categoria_nombre, count: 0 });
+    catMap[p.categoria].count++;
+  });
+
+  const catListEl = document.getElementById('categoryList');
+  document.getElementById('totalCount').innerText = `(${allProducts.length})`;
+
+  let html = `<li class="cat-item selected" data-category="all">
+    <span>⚡ Todas las Categorías</span>
+    <span class="cat-count">(${allProducts.length})</span>
+  </li>`;
+
+  for (const [key, val] of Object.entries(catMap)) {
+    html += `<li class="cat-item" data-category="${key}">
+      <span>${val.name}</span>
+      <span class="cat-count">(${val.count})</span>
+    </li>`;
+  }
+  catListEl.innerHTML = html;
+
+  catListEl.querySelectorAll('.cat-item').forEach(el => {
+    el.addEventListener('click', () => {
+      catListEl.querySelectorAll('.cat-item').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      currentCategory = el.getAttribute('data-category');
+      currentPage = 1;
+      applyFilters();
+    });
+  });
+}
+
+function applyFilters() {
+  filteredProducts = allProducts.filter(p => {
+    const matchesCategory = currentCategory === 'all' || p.categoria === currentCategory;
+    const matchesPlatform = currentPlatform === 'all' || p.plataforma === currentPlatform;
+    const matchesSearch = !searchQuery || 
+      p.nombre.toLowerCase().includes(searchQuery) || 
+      p.descripcion.toLowerCase().includes(searchQuery) ||
+      p.categoria_nombre.toLowerCase().includes(searchQuery);
+    return matchesCategory && matchesPlatform && matchesSearch;
+  });
+
+  // Ordenación
+  if (currentSort === 'price-asc') {
+    filteredProducts.sort((a,b) => a.precio - b.precio);
+  } else if (currentSort === 'price-desc') {
+    filteredProducts.sort((a,b) => b.precio - a.precio);
+  } else if (currentSort === 'rating') {
+    filteredProducts.sort((a,b) => b.rating - a.rating);
+  }
+
+  document.getElementById('visibleCount').innerText = filteredProducts.length;
+  renderProducts();
+  renderPagination();
+}
+
+function renderProducts() {
+  const grid = document.getElementById('productGrid');
+  if (filteredProducts.length === 0) {
+    grid.innerHTML = `
+      <div style="grid-column:1/-1; text-align:center; padding:60px; color:var(--text-muted);">
+        <p style="font-size:1.1rem; margin-bottom:8px;">No se encontraron artículos con estos filtros.</p>
+        <p style="font-size:0.8rem;">Prueba con otra palabra clave o categoría.</p>
+      </div>`;
+    return;
+  }
+
+  const start = (currentPage - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  const pageItems = filteredProducts.slice(start, end);
+
+  grid.innerHTML = pageItems.map(p => {
+    const isAli = p.plataforma === 'aliexpress';
+    const badgeClass = isAli ? 'badge-ali' : 'badge-hot';
+    const btnClass = isAli ? 'btn-ali' : 'btn-hot';
+    const btnText = isAli ? 'VER EN ALIEXPRESS ↗' : 'VER EN HOTMART ↗';
+
+    return `
+      <article class="product-card">
+        <div class="img-wrapper">
+          <img src="${p.imagen}" alt="${p.nombre}" class="product-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500'">
+          <span class="card-badge ${badgeClass}">${p.badge || (isAli ? 'ALIEXPRESS' : 'HOTMART')}</span>
+        </div>
+        <div class="card-content">
+          <span class="card-cat">${p.categoria_nombre}</span>
+          <h3 class="card-title" title="${p.nombre}">${p.nombre}</h3>
+          <div class="card-rating">
+            <span>⭐ ${p.rating.toFixed(1)}</span>
+            <span class="reviews-count">(${p.reviews || 100}+ ventas)</span>
+          </div>
+          <p class="card-desc">${p.descripcion}</p>
+          <div class="card-footer">
+            <div class="price-box">
+              <span class="current-price">€${p.precio.toFixed(2)}</span>
+              ${p.precio_anterior ? `<span class="old-price">€${p.precio_anterior.toFixed(2)}</span>` : ''}
+            </div>
+            <a href="${p.link}" target="_blank" rel="noopener noreferrer sponsored" class="action-btn ${btnClass}">
+              ${btnText}
+            </a>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+function renderPagination() {
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const box = document.getElementById('paginationBox');
+  if (totalPages <= 1) {
+    box.innerHTML = '';
+    return;
+  }
+
+  let html = '';
+  for (let i = 1; i <= totalPages; i++) {
+    html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+  }
+  box.innerHTML = html;
+}
+
+window.goToPage = function(page) {
+  currentPage = page;
+  renderProducts();
+  renderPagination();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Event Listeners
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  searchQuery = e.target.value.toLowerCase().trim();
+  currentPage = 1;
+  applyFilters();
+});
+
+document.querySelectorAll('.plat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.plat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentPlatform = btn.getAttribute('data-platform');
+    currentPage = 1;
+    applyFilters();
+  });
+});
+
+document.getElementById('sortSelect').addEventListener('change', (e) => {
+  currentSort = e.target.value;
+  applyFilters();
+});
+
+// Inicio
+loadProducts();
+</script>
 </body>
 </html>

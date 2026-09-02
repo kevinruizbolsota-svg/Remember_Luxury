@@ -1,0 +1,44 @@
+name: Luxury cart effects
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/cart-effects.yml'
+permissions:
+  contents: write
+jobs:
+  enhance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add premium checkout interaction
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html'); s=p.read_text(encoding='utf-8')
+          # Remove any existing checkout-method block and leave one functional payment CTA.
+          s=re.sub(r'<div class="lux-checkouts">.*?</div>', '<div class="lux-checkouts"><a class="lux-checkout-btn secondary" href="ciudadela/metodo-pago.html?from=cart">FINALIZAR COMPRA · TARJETA / PAYPAL</a></div>', s, count=1, flags=re.S)
+          css='''<style id="lux-premium-cart-effects">
+          .lux-checkout-btn{position:relative;isolation:isolate;overflow:hidden;display:flex!important;align-items:center;justify-content:center;min-height:52px;border-radius:14px!important;border:1px solid rgba(245,215,127,.72)!important;background:linear-gradient(135deg,#17130a,#6f5720 48%,#17130a)!important;color:#fff8d8!important;box-shadow:0 10px 30px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.08),0 0 0 rgba(245,215,127,0);font-weight:800!important;letter-spacing:.16em;transition:transform .28s cubic-bezier(.2,.9,.2,1),box-shadow .28s,border-color .28s,filter .28s!important;cursor:pointer}
+          .lux-checkout-btn:before{content:"";position:absolute;inset:-120% 45% -120% -45%;z-index:-1;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.75) 48%,rgba(255,255,255,.08) 56%,transparent 70%);transform:translateX(-130%) rotate(8deg);transition:transform .7s ease}
+          .lux-checkout-btn:after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at 50% 120%,rgba(245,215,127,.38),transparent 55%);opacity:.35;transition:opacity .28s}
+          .lux-checkout-btn:hover{transform:translateY(-4px) scale(1.018);border-color:#fff1a8!important;box-shadow:0 18px 48px rgba(0,0,0,.72),0 0 32px rgba(245,215,127,.24),inset 0 0 22px rgba(255,255,255,.08)!important;filter:brightness(1.12)}
+          .lux-checkout-btn:hover:before{transform:translateX(230%) rotate(8deg)}
+          .lux-checkout-btn:hover:after{opacity:.75}
+          .lux-checkout-btn:active{transform:translateY(1px) scale(.965);box-shadow:0 5px 15px rgba(0,0,0,.75),0 0 42px rgba(245,215,127,.42)!important;filter:brightness(1.3)}
+          .lux-checkouts{position:relative;padding-top:6px}
+          .lux-checkouts:after{content:"";position:absolute;left:8%;right:8%;bottom:-9px;height:1px;background:linear-gradient(90deg,transparent,rgba(245,215,127,.6),transparent);opacity:.55}
+          @media (prefers-reduced-motion:reduce){.lux-checkout-btn,.lux-checkout-btn:before,.lux-checkout-btn:after{transition:none!important}.lux-checkout-btn:hover{transform:none!important}}
+          </style>'''
+          if 'id="lux-premium-cart-effects"' not in s:
+              s=s.replace('</head>',css+'</head>',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Add premium hover and click effects to cart checkout'
+          git push

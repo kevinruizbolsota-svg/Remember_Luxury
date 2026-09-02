@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MANSIÓN DE LUXE® &middot; Haute Couture, Hypercars, High Jewelry, Horology, Estates &amp; Academy</title>
+<title>MANSIÓN DE LUXE® &middot; Haute Couture, Hypercars, High Jewelry, Horology, Estates, Active Store &amp; Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -131,7 +131,7 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
   box-shadow:0 12px 36px rgba(0,0,0,0.95);
 }
 .tab-btn{
-  padding:12px 18px;
+  padding:12px 16px;
   font-size:11px;
   font-weight:600;
   letter-spacing:0.16em;
@@ -186,7 +186,7 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
 .id-statement{font-family:var(--font-serif);font-size:clamp(20px,2.4vw,28px);font-style:italic;line-height:1.6;color:#f4f4f5;margin-bottom:24px;max-width:1050px}
 .id-text{font-family:var(--font-serif);font-size:17px;font-style:italic;line-height:1.9;color:var(--gray-light);margin-bottom:36px;max-width:980px}
 
-/* 4. SERPIENTE HORIZONTAL DIVERGENTE (CRUZADA BIDIRECCIONAL) */
+/* 4. SERPIENTE HORIZONTAL DIVERGENTE */
 .snake-universe{
   background:#050508;
   padding:80px 0;
@@ -268,46 +268,77 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
 .btn-title{font-family:var(--font-serif);font-size:19px;font-style:italic;color:#fff;margin-bottom:4px;}
 .btn-sub{font-size:11px;color:var(--gray-dim);letter-spacing:0.1em;text-transform:uppercase;}
 
-/* 7. CINEMATOGRAFÍA & VIDEOS DE ALTA DEFINICIÓN */
-.video-cinema-section{
-  padding:120px 48px;
-  background:#06040a;
-  border-top:1px solid var(--border-subtle);
-}
-.cinema-grid{
-  max-width:1400px;
+/* 7. CINEMATOGRAFÍA & VIDEOS 4K */
+.video-cinema-section{padding:120px 48px;background:#06040a;border-top:1px solid var(--border-subtle)}
+.cinema-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.cinema-card{position:relative;height:480px;border-radius:8px;overflow:hidden;border:1px solid var(--border-subtle);background:#000;box-shadow:0 20px 45px rgba(0,0,0,0.9)}
+.cinema-card:hover video{transform:scale(1.03)}
+.cinema-overlay{position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.92) 20%, transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:32px}
+
+/* 8. NUEVO CATÁLOGO MASIVO COMPLETO DE PRODUCTOS (GRID DE 12 PIEZAS DE LUJO) */
+.full-products-catalog{
+  padding:130px 48px 100px;
+  max-width:1600px;
   margin:0 auto;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:40px;
 }
-.cinema-card{
-  position:relative;
-  height:480px;
+.catalog-header{
+  text-align:center;
+  max-width:900px;
+  margin:0 auto 70px;
+}
+.catalog-masonry{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+  gap:30px;
+}
+.catalog-item-card{
+  background:#0b0814;
+  border:1px solid var(--border-subtle);
   border-radius:8px;
   overflow:hidden;
-  border:1px solid var(--border-subtle);
-  background:#000;
-  box-shadow:0 20px 45px rgba(0,0,0,0.9);
-}
-.cinema-card:hover video{transform:scale(1.03)}
-.cinema-overlay{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to top, rgba(0,0,0,0.92) 20%, transparent 60%);
   display:flex;
   flex-direction:column;
-  justify-content:flex-end;
-  padding:32px;
+  transition:all .4s ease;
 }
+.catalog-item-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(245, 215, 127, 0.85);
+  box-shadow:0 20px 45px rgba(0,0,0,0.95);
+}
+.cat-img-box{
+  aspect-ratio:3/4;
+  overflow:hidden;
+  position:relative;
+  background:#06040a;
+}
+.cat-img-box img{width:100%;height:100%;object-fit:cover;}
+.catalog-item-card:hover .cat-img-box img{transform:scale(1.06);}
+.cat-tag{
+  position:absolute;
+  top:14px;
+  left:14px;
+  background:rgba(5,3,10,0.85);
+  border:1px solid var(--border-subtle);
+  color:var(--gold-light);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.2em;
+  padding:5px 12px;
+  border-radius:12px;
+  backdrop-filter:blur(6px);
+}
+.cat-body{
+  padding:26px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+.cat-type{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:6px;}
+.cat-name{font-family:var(--font-serif);font-size:18px;font-style:italic;color:#fff;line-height:1.35;margin-bottom:10px;}
+.cat-desc{font-family:var(--font-serif);font-size:14px;font-style:italic;color:var(--gray-light);line-height:1.7;margin-bottom:20px;}
 
-/* 8. ACADEMY & CURSOS */
-.academy-section{
-  background:radial-gradient(circle at 30% 20%, #150a28 0%, #030206 75%);
-  padding:130px 48px;
-  border-top:1px solid rgba(245, 215, 127, 0.3);
-  border-bottom:1px solid rgba(245, 215, 127, 0.3);
-}
+/* 9. ACADEMY & CURSOS VIP */
+.academy-section{background:radial-gradient(circle at 30% 20%, #150a28 0%, #030206 75%);padding:130px 48px;border-top:1px solid rgba(245, 215, 127, 0.3);border-bottom:1px solid rgba(245, 215, 127, 0.3)}
 .academy-header{text-align:center;max-width:900px;margin:0 auto 70px}
 .academy-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));gap:30px}
 .course-card{background:rgba(12, 10, 20, 0.85);border:1px solid rgba(245, 215, 127, 0.3);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:all .4s cubic-bezier(0.16, 1, 0.3, 1);box-shadow:0 15px 35px rgba(0,0,0,0.8)}
@@ -321,14 +352,6 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
 .course-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08)}
 .course-features li{font-size:12px;color:#e4e4e7;display:flex;align-items:center;gap:8px}
 .course-features li span{color:var(--gold);}
-
-/* 9. PRODUCTOS FÍSICOS ACTIVOS EN STOCK */
-.active-products-section{padding:120px 48px;max-width:1500px;margin:0 auto}
-.active-prod-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:26px}
-.prod-active-card{background:#0c0a14;border:1px solid var(--border-subtle);border-radius:6px;overflow:hidden;transition:all .35s ease;display:flex;flex-direction:column}
-.prod-active-card:hover{transform:translateY(-8px);border-color:rgba(245, 215, 127, 0.8);box-shadow:0 20px 40px rgba(0,0,0,0.9)}
-.prod-active-img{aspect-ratio:4/3;overflow:hidden;position:relative}
-.prod-active-info{padding:26px;display:flex;flex-direction:column;flex:1}
 
 /* 10. MANIQUÍ 360° GIRATORIO */
 .mannequin-360-section{background:radial-gradient(ellipse at center, #190c33 0%, #030206 80%);padding:140px 48px;border-top:1px solid rgba(245, 215, 127, 0.35);border-bottom:1px solid rgba(245, 215, 127, 0.35);text-align:center;position:relative;overflow:hidden}
@@ -344,7 +367,7 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
 .exotic-title{font-family:var(--font-serif);font-size:clamp(32px, 4vw, 48px);font-style:italic;color:#fff;line-height:1.15}
 .exotic-desc{font-family:var(--font-serif);font-size:17px;font-style:italic;line-height:1.85;color:var(--gray-light)}
 
-/* 11. SIMULADOR FINANCIERO DE LA AGUJA A LA MANSIÓN */
+/* 11. SIMULADOR FINANCIERO */
 .vision-calculator{background:radial-gradient(ellipse at center, #150d2a 0%, #050308 100%);border-top:1px solid rgba(230,202,101,0.3);border-bottom:1px solid rgba(230,202,101,0.3);padding:120px 48px;text-align:center}
 .calc-inner{max-width:900px;margin:0 auto}
 .calc-slider-wrap{margin:40px 0;display:flex;flex-direction:column;align-items:center;gap:20px}
@@ -365,8 +388,12 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
   .story-text-pane{position:static;height:auto;padding:60px 24px}
   .cinema-grid{grid-template-columns:1fr}
   .academy-grid{grid-template-columns:1fr}
+  .catalog-masonry{grid-template-columns:repeat(2, 1fr)}
   .mannequin-stage-wrap{grid-template-columns:1fr}
   .dg-header-wrap{padding:0 20px}
+}
+@media(max-width:768px){
+  .catalog-masonry{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -406,10 +433,11 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
   <div class="runway-tabs-bar">
     <button class="tab-btn active" onclick="scrollToSection('identity')">Identity</button>
     <button class="tab-btn" onclick="scrollToSection('snake')">Serpiente</button>
-    <button class="tab-btn" onclick="scrollToSection('vertical-snake')">Pasarela Vertical</button>
-    <button class="tab-btn" onclick="scrollToSection('cinema')">Cinematografía</button>
-    <button class="tab-btn" onclick="scrollToSection('cursos')">Cursos VIP</button>
-    <button class="tab-btn" onclick="scrollToSection('mannequin')">Maniquí 360°</button>
+    <button class="tab-btn" onclick="scrollToSection('vertical-snake')">Pasarela</button>
+    <button class="tab-btn" onclick="scrollToSection('catalog')">Productos</button>
+    <button class="tab-btn" onclick="scrollToSection('cinema')">Videos</button>
+    <button class="tab-btn" onclick="scrollToSection('cursos')">Cursos</button>
+    <button class="tab-btn" onclick="scrollToSection('mannequin')">Maniquí</button>
     <button class="tab-arrow">❯</button>
   </div>
 </section>
@@ -422,15 +450,15 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
     Identity is a clear statement: identity is the ultimate luxury. De la Aguja a la Mansión.
   </div>
   <p class="id-text">
-    La fusión definitiva de alta costura, precisión de tourbillones suizos, velocidad de hypercars V12, arquitectura de mansiones frente al mar y la academia de formación de élite.
+    Accede al catálogo más exclusivo del mundo: alta costura, calzado de autor, bolsos icónicos, relojería suiza, diamantes, hypercars y la academia de formación de élite.
   </p>
   <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center;">
-    <a href="#snake" class="btn-ali-champagne">Explorar Serpiente Dual ↓</a>
-    <a href="#vertical-snake" class="btn-ali-champagne">Ver Pasarela Gigante Vertical ↗</a>
+    <a href="#catalog" class="btn-ali-champagne">Explorar Catálogo de Productos ↓</a>
+    <a href="#cursos" class="btn-ali-champagne">Ver Cursos &amp; Mentorías ↗</a>
   </div>
 </section>
 
-<!-- 4. SERPIENTE HORIZONTAL DIVERGENTE (CRUZADA EN 2 SENTIDOS) -->
+<!-- 4. SERPIENTE HORIZONTAL DIVERGENTE -->
 <section class="snake-universe" id="snake">
   <div class="snake-header">
     <div style="font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">SERPIENTE DIVERGENTE DE PRODUCTOS</div>
@@ -460,10 +488,8 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
   </div>
 </section>
 
-<!-- 5. SERPIENTE VERTICAL CONTINUA CON FOTOS GIGANTES (STICKY STREAM MULTI-FOTOS) -->
+<!-- 5. SERPIENTE VERTICAL CONTINUA CON FOTOS GIGANTES (STICKY STREAM) -->
 <div class="vertical-snake-section" id="vertical-snake">
-  
-  <!-- CAPÍTULO I: SASTRERÍA -->
   <section class="editorial-story" id="tailoring">
     <div class="story-container">
       <div class="story-text-pane">
@@ -480,7 +506,6 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
     </div>
   </section>
 
-  <!-- CAPÍTULO II: RELOJERÍA TOURBILLON -->
   <section class="editorial-story" id="horology">
     <div class="story-container">
       <div class="story-text-pane">
@@ -496,27 +521,10 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
     </div>
   </section>
 
-  <!-- CAPÍTULO III: ALTA JOYERÍA & DIAMANTES -->
-  <section class="editorial-story" id="jewelry">
-    <div class="story-container">
-      <div class="story-text-pane">
-        <div class="story-num">CAPÍTULO III &middot; ALTA JOYERÍA &amp; DIAMANTES</div>
-        <h2 class="story-title">Gargantilla Riviera &amp; Diamantes Flawless</h2>
-        <p class="story-desc">Diamantes talla esmeralda y brillante engastados en platino 950. Piedras seleccionadas en color D y pureza absoluta.</p>
-        <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Comprar Joyas en AliExpress ↗</a></div>
-      </div>
-      <div class="story-media-stream">
-        <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1200&auto=format&fit=crop" alt="Diamantes Riviera"><span class="stream-tag">Collar Riviera en Diamantes &amp; Platino</span></div>
-        <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=1200&auto=format&fit=crop" alt="Pendientes Oro Blanco"><span class="stream-tag">Pendientes Cascada en Oro Blanco</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CAPÍTULO IV: HYPERCARS -->
   <section class="editorial-story" id="hypercars">
     <div class="story-container">
       <div class="story-text-pane">
-        <div class="story-num">CAPÍTULO IV &middot; HYPERCARS V12</div>
+        <div class="story-num">CAPÍTULO III &middot; HYPERCARS V12</div>
         <h2 class="story-title">Scuderia Monoplaza V12 &middot; Fibra de Carbono</h2>
         <p class="story-desc">Motor V12 atmosférico de 850 CV, monocasco de carbono forjado e interiores cosidos a mano en piel Alcántara e hilo de oro.</p>
         <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Ver Accesorios Motor en AliExpress ↗</a></div>
@@ -527,23 +535,6 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
       </div>
     </div>
   </section>
-
-  <!-- CAPÍTULO V: MANSIONES -->
-  <section class="editorial-story" id="estates">
-    <div class="story-container">
-      <div class="story-text-pane">
-        <div class="story-num">CAPÍTULO V &middot; ARQUITECTURA &amp; MANSIONES</div>
-        <h2 class="story-title">Villa Paradiso &middot; Lago de Como</h2>
-        <p class="story-desc">La culminación del viaje: "De la Aguja a la Mansión". Propiedades frente al mar con helipuerto privado y piscina infinita.</p>
-        <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Comprar Decoración de Mansión ↗</a></div>
-      </div>
-      <div class="story-media-stream">
-        <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&auto=format&fit=crop" alt="Mansión Lago Como"><span class="stream-tag">Villa Paradiso &middot; Helipuerto &amp; Piscina</span></div>
-        <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&auto=format&fit=crop" alt="Salón Mármol"><span class="stream-tag">Salón Principal Mármol de Carrara</span></div>
-      </div>
-    </div>
-  </section>
-
 </div>
 
 <!-- 6. THE HOLOGRAM ATELIER 3D INSPECTOR -->
@@ -579,13 +570,6 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
         </div>
       </div>
 
-      <div class="atelier-item-btn" onclick="setAtelier('https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&auto=format&fit=crop', 'ARQUITECTURA & MANSIONES · VILLA PARADISO LAGO DE COMO', this)">
-        <div>
-          <div class="btn-title">Villa Paradiso &middot; Lago de Como</div>
-          <div class="btn-sub">Helipuerto Privado &middot; Piscina Infinita Acantilado</div>
-        </div>
-      </div>
-
       <div style="margin-top:14px;">
         <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Comprar Obra Seleccionada en AliExpress ↗</a>
       </div>
@@ -593,36 +577,143 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
   </div>
 </section>
 
-<!-- 7. CINEMATOGRAFÍA & VIDEOS DE PASARELA EN VIVO -->
+<!-- 7. NUEVO GRAN CATÁLOGO COMPLETO DE PRODUCTOS (MODA, BOLSOS, JOYAS, RELOJES, ZAPATOS) -->
+<section class="full-products-catalog" id="catalog">
+  <div class="catalog-header">
+    <div style="font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">CATÁLOGO COMPLETO DE PIEZAS DE LUJO</div>
+    <h2 style="font-family:var(--font-serif);font-size:46px;font-style:italic;color:#fff;margin-bottom:16px;">Colección Oficial de Productos Activos</h2>
+    <p style="font-family:var(--font-serif);font-size:17px;font-style:italic;color:var(--gray-light);">
+      Cada pieza ha sido curada bajo los más altos estándares de alta costura, artesanía italiana y materiales nobles:
+    </p>
+  </div>
+
+  <div class="catalog-masonry">
+    
+    <!-- PRODUCTO 1: VESTIDO DOBLE CREPÉ -->
+    <div class="catalog-item-card">
+      <div class="cat-img-box"><img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=700&auto=format&fit=crop" alt="Vestido Gala Nero"><span class="cat-tag">RUNWAY FW26</span></div>
+      <div class="cat-body">
+        <div class="cat-type">ALTA COSTURA &middot; GALA</div>
+        <h3 class="cat-name">Vestido en Doble Crepé de Lana Nero</h3>
+        <p class="cat-desc">Silueta esculpida con escote corazón, forro en satén de seda italiana y drapeado artesanal.</p>
+        <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="justify-content:center;padding:12px 20px;">Comprar en AliExpress ↗</a>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 2: MINI GRANDMA HANDBAG -->
+    <div class="catalog-item-card">
+      <div class="cat-img-box"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=700&auto=format&fit=crop" alt="Bolso Mini Grandma"><span class="cat-tag">PIEL NAPPA</span></div>
+      <div class="cat-body">
+        <div class="cat-type">MARROQUINERÍA &middot; BOLSO</div>
+        <h3 class="cat-name">Mini Grandma Handbag en Piel Plongé</h3>
+        <p class="cat-desc">Piel plongé ultrasuave, espejo interior oculto y correa tubular en acabado de oro pulido.</p>
+        <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="justify-content:center;padding:12px 20px;">Comprar en AliExpress ↗</a>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 3: VESTIDO GASA FLORAL -->
+    <div class="catalog-item-card">
+      <div class="cat-img-box"><img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=700&auto=format&fit=crop" alt="Vestido Floral"><span class="cat-tag">SEDA PURA</span></div>
+      <div class="cat-body">
+        <div class="cat-type">VESTIDOS &middot; SEDA</div>
+        <h3 class="cat-name">Vestido en Gasa de Seda Floral</h3>
+        <p class="cat-desc">Estampado botánico siciliano sobre gasa transparente con caída ligera y vuelo etéreo.</p>
+        <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="justify-content:center;padding:12px 20px;">Comprar en AliExpress ↗</a>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 4: ZAPATOS SLINGBACK -->
+    <div class="catalog-item-card">
+      <div class="cat-img-box"><img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=700&auto=format&fit=crop" alt="Zapatos Slingback"><span class="cat-tag">CALZADO NOBLE</span></div>
+      <div class="cat-body">
+        <div class="cat-type">CALZADO DE LUJO</div>
+        <h3 class="cat-name">Zapatos Slingback en Piel Floral</h3>
+        <p class="cat-desc">Piel de becerro grabada, tacón aguja fino y plantilla acolchada en piel nappa.</p>
+        <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="justify-content:center;padding:12px 20px;">Comprar en AliExpress ↗</a>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 5: TOP TUL BORDADO -->
+    <div class="catalog-item-card">
+      <div class="cat-img-box"><img src="https://images.unsplash.com/photo-1551803091-e20673f15770?w=700&auto=format&fit=crop" alt="Top Tul Bordado"><span class="cat-tag">HECHO A MANO</span></div>
+      <div class="cat-body">
+        <div class="cat-type">TOPS &middot; BORDADOS</div>
+        <h3 class="cat-name">Top en Tul Negro con Lentejuelas</h3>
+        <p class="cat-desc">Bordado artesanal de alta costura con lentejuelas microscópicas que capturan la luz de pasarela.</p>
+        <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="justify-content:center;padding:12px 20px;">Comprar en AliExpress ↗</a>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 6: FALDA CHANTILLY -->
+    <div class="catalog-item-card">
+      <div class="cat-img-box"><img src="https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=700&auto=format&fit=crop" alt="Falda Chantilly"><span class="cat-tag">ENCAJE FRANCÉS</span></div>
+      <div class="cat-body">
+        <div class="cat-type">FALDAS &middot; ALTA COSTURA</div>
+        <h3 class="cat-name">Falda de Tubo en Encaje Chantilly</h3>
+        <p class="cat-desc">Encaje floral transparente con forro interior en crepé y cremallera oculta en oro.</p>
+        <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="justify-content:center;padding:12px 20px;">Comprar en AliExpress ↗</a>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 7: BOLSO SICILY PEQUEÑO -->
+    <div class="catalog-item-card">
+      <div class="cat-img-box"><img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=700&auto=format&fit=crop" alt="Bolso Sicily"><span class="cat-tag">ICÓNICO D&G</span></div>
+      <div class="cat-body">
+        <div class="cat-type">BOLSO &middot; PIEL DAUPHINE</div>
+        <h3 class="cat-name">Bolso Sicily Pequeño en Piel Nero</h3>
+        <p class="cat-desc">Herraje dorado pulido, asa rígida estructurada y correa de hombro ajustable en piel.</p>
+        <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="justify-content:center;padding:12px 20px;">Comprar en AliExpress ↗</a>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 8: GAFAS BARROCO GOLD -->
+    <div class="catalog-item-card">
+      <div class="cat-img-box"><img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=700&auto=format&fit=crop" alt="Gafas de Sol"><span class="cat-tag">EYEWEAR</span></div>
+      <div class="cat-body">
+        <div class="cat-type">ACCESORIOS &middot; GAFAS</div>
+        <h3 class="cat-name">Gafas de Sol Runway Logo Barroco</h3>
+        <p class="cat-desc">Montura bañada en oro con filigrana artesanal y lentes polarizadas con filtro UV400.</p>
+        <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="justify-content:center;padding:12px 20px;">Comprar en AliExpress ↗</a>
+      </div>
+    </div>
+
+    <!-- PRODUCTO 9: SET EVER-YOUTH SKINCARE -->
+    <div class="catalog-item-card">
+      <div class="cat-img-box"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=700&auto=format&fit=crop" alt="Set Skincare"><span class="cat-tag">ALTA COSMÉTICA</span></div>
+      <div class="cat-body">
+        <div class="cat-type">BELLEZA &middot; SKINCARE</div>
+        <h3 class="cat-name">Set Ever-Youth Skincare Ritual</h3>
+        <p class="cat-desc">Sérum regenerador de células madre botánicas y crema esculpidora con péptidos bioactivos.</p>
+        <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="justify-content:center;padding:12px 20px;">Comprar en AliExpress ↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 8. CINEMATOGRAFÍA & VIDEOS 4K -->
 <section class="video-cinema-section" id="cinema">
   <div style="text-align:center;max-width:900px;margin:0 auto 60px;">
     <div style="font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">CINEMATOGRAFÍA &amp; PASARELA VIVA</div>
     <h2 style="font-family:var(--font-serif);font-size:42px;font-style:italic;color:#fff;">Desfiles &amp; Producción en Video 4K</h2>
-    <p style="font-family:var(--font-serif);font-size:16px;font-style:italic;color:var(--gray-light);">
-      Siente la energía de la pasarela y la maestría artesanal a través de nuestras producciones audiovisuales exclusivas.
-    </p>
   </div>
-
   <div class="cinema-grid">
-    <!-- VIDEO 1: PASARELA ALTA COSTURA -->
     <div class="cinema-card">
       <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&auto=format&fit=crop">
         <source src="https://assets.mixkit.co/videos/preview/mixkit-fashion-model-in-a-black-outfit-walking-down-the-runway-41228-large.mp4" type="video/mp4">
       </video>
       <div class="cinema-overlay">
-        <div style="font-size:10px;font-weight:700;color:var(--gold);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:6px;">VIDEO OFICIAL &middot; PASARELA FW 2026</div>
+        <div style="font-size:10px;font-weight:700;color:var(--gold);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:6px;">PASARELA FW 2026</div>
         <h3 style="font-family:var(--font-serif);font-size:24px;font-style:italic;color:#fff;margin-bottom:14px;">Women's Fall/Winter Identity Runway</h3>
         <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:10px 22px;font-size:11px;">Comprar Look del Video ↗</a></div>
       </div>
     </div>
-
-    <!-- VIDEO 2: HYPERCAR & PRECISIÓN MECÁNICA -->
     <div class="cinema-card">
       <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&auto=format&fit=crop">
         <source src="https://assets.mixkit.co/videos/preview/mixkit-luxury-sports-car-driving-through-the-city-at-night-42517-large.mp4" type="video/mp4">
       </video>
       <div class="cinema-overlay">
-        <div style="font-size:10px;font-weight:700;color:var(--gold);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:6px;">HYPERCAR V12 &middot; NOCHE EN MILÁN</div>
+        <div style="font-size:10px;font-weight:700;color:var(--gold);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:6px;">HYPERCAR V12 STEALTH</div>
         <h3 style="font-family:var(--font-serif);font-size:24px;font-style:italic;color:#fff;margin-bottom:14px;">Ingeniería V12 &amp; Fibra de Carbono</h3>
         <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:10px 22px;font-size:11px;">Ver Accesorios Motor ↗</a></div>
       </div>
@@ -630,7 +721,7 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
   </div>
 </section>
 
-<!-- 8. ACADEMY & CURSOS VIP -->
+<!-- 9. ACADEMY & CURSOS VIP -->
 <section class="academy-section" id="cursos">
   <div class="academy-header">
     <div style="font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">MANSIÓN DE LUXE ACADEMY</div>
@@ -642,10 +733,7 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
 
   <div class="academy-grid">
     <div class="course-card">
-      <div class="course-img-wrap">
-        <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&auto=format&fit=crop" alt="Curso Alta Costura">
-        <span class="course-badge">CERTIFICACIÓN VIP</span>
-      </div>
+      <div class="course-img-wrap"><img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&auto=format&fit=crop" alt="Curso Alta Costura"><span class="course-badge">CERTIFICACIÓN VIP</span></div>
       <div class="course-content">
         <div class="course-topic">MÓDULO DE ALTA MODA</div>
         <h3 class="course-title">Masterclass: De la Aguja a la Pasarela</h3>
@@ -653,17 +741,13 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
         <ul class="course-features">
           <li><span>✓</span> 12 Módulos en Video 4K + Manuales de Taller</li>
           <li><span>✓</span> Conexión Directa con Proveedores y Fibras Nobles</li>
-          <li><span>✓</span> Tutoría Personalizada de Alta Costura</li>
         </ul>
         <a href="pago-premium.html" class="btn-ali-champagne" style="justify-content:center;">Inscribirme al Curso ↗</a>
       </div>
     </div>
 
     <div class="course-card">
-      <div class="course-img-wrap">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop" alt="Curso E-commerce Lujo">
-        <span class="course-badge">NEGOCIOS DIGITALES</span>
-      </div>
+      <div class="course-img-wrap"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop" alt="Curso E-commerce"><span class="course-badge">NEGOCIOS DIGITALES</span></div>
       <div class="course-content">
         <div class="course-topic">MONETIZACIÓN &amp; VENTAS</div>
         <h3 class="course-title">E-Commerce de Ultra Lujo &amp; Automatización</h3>
@@ -671,17 +755,13 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
         <ul class="course-features">
           <li><span>✓</span> Estrategias de Tráfico VIP y Branding Visual</li>
           <li><span>✓</span> Integración con Nequi, PSE, Tarjetas y PayPal</li>
-          <li><span>✓</span> Plantillas Web Listas para Convertir</li>
         </ul>
         <a href="pago-premium.html" class="btn-ali-champagne" style="justify-content:center;">Inscribirme al Curso ↗</a>
       </div>
     </div>
 
     <div class="course-card">
-      <div class="course-img-wrap">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop" alt="Curso Inversión Inmobiliaria">
-        <span class="course-badge">VISIÓN &amp; PATRIMONIO</span>
-      </div>
+      <div class="course-img-wrap"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop" alt="Curso Inversión"><span class="course-badge">VISIÓN &amp; PATRIMONIO</span></div>
       <div class="course-content">
         <div class="course-topic">FINANZAS &amp; MANSIÓN</div>
         <h3 class="course-title">Inversión Inmobiliaria &amp; Tokenomics KRC</h3>
@@ -689,50 +769,8 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
         <ul class="course-features">
           <li><span>✓</span> Análisis de Rentabilidad en Propiedades VIP</li>
           <li><span>✓</span> Ecosistema Token KRC &amp; Criptoactivos</li>
-          <li><span>✓</span> Comunidad Exclusiva de Inversores</li>
         </ul>
         <a href="pago-premium.html" class="btn-ali-champagne" style="justify-content:center;">Inscribirme al Curso ↗</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 9. PRODUCTOS FÍSICOS ACTIVOS -->
-<section class="active-products-section" id="activos">
-  <div style="text-align:center;max-width:850px;margin:0 auto 60px;">
-    <div style="font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">CATÁLOGO EN VIVO</div>
-    <h2 style="font-family:var(--font-serif);font-size:42px;font-style:italic;color:#fff;">Piezas Activas en Stock Inmediato</h2>
-    <p style="font-family:var(--font-serif);font-size:16px;font-style:italic;color:var(--gray-light);">Disponibles para envío internacional con embalaje de cortesía y certificado.</p>
-  </div>
-
-  <div class="active-prod-grid">
-    <div class="prod-active-card">
-      <div class="prod-active-img"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=700&auto=format&fit=crop" alt="Bolso Mini Grandma"></div>
-      <div class="prod-active-info">
-        <div style="font-size:10px;font-weight:700;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;">MARROQUINERÍA ITALIANA</div>
-        <h4 style="font-family:var(--font-serif);font-size:18px;font-style:italic;color:#fff;margin-bottom:8px;">Mini Grandma Handbag en Piel Nappa</h4>
-        <p style="font-family:var(--font-serif);font-size:14px;font-style:italic;color:var(--gray-light);margin-bottom:18px;">Piel plongé ultrasuave, espejo interior oculto y correa tubular en oro.</p>
-        <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="justify-content:center;padding:12px 20px;">Comprar en AliExpress ↗</a>
-      </div>
-    </div>
-
-    <div class="prod-active-card">
-      <div class="prod-active-img"><img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=700&auto=format&fit=crop" alt="Zapatos Slingback"></div>
-      <div class="prod-active-info">
-        <div style="font-size:10px;font-weight:700;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;">CALZADO DE ALTA GAMA</div>
-        <h4 style="font-family:var(--font-serif);font-size:18px;font-style:italic;color:#fff;margin-bottom:8px;">Zapatos Slingback en Piel de Becerro</h4>
-        <p style="font-family:var(--font-serif);font-size:14px;font-style:italic;color:var(--gray-light);margin-bottom:18px;">Estampado floral artesanal, tacón aguja refinado y suela pulida.</p>
-        <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="justify-content:center;padding:12px 20px;">Comprar en AliExpress ↗</a>
-      </div>
-    </div>
-
-    <div class="prod-active-card">
-      <div class="prod-active-img"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=700&auto=format&fit=crop" alt="Alta Cosmética Skincare"></div>
-      <div class="prod-active-info">
-        <div style="font-size:10px;font-weight:700;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;">ALTA COSMÉTICA MILANO</div>
-        <h4 style="font-family:var(--font-serif);font-size:18px;font-style:italic;color:#fff;margin-bottom:8px;">Set Ever-Youth Skincare Ritual</h4>
-        <p style="font-family:var(--font-serif);font-size:14px;font-style:italic;color:var(--gray-light);margin-bottom:18px;">Sérum regenerador de células madre y crema esculpidora con péptidos.</p>
-        <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="justify-content:center;padding:12px 20px;">Comprar en AliExpress ↗</a>
       </div>
     </div>
   </div>
@@ -811,9 +849,9 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
       <ul class="foot-links">
         <li><a href="#tailoring">Alta Costura &middot; La Aguja</a></li>
         <li><a href="#horology">Relojería Suiza Tourbillon</a></li>
+        <li><a href="#catalog">Catálogo de Productos</a></li>
         <li><a href="#cinema">Cinematografía &amp; Videos 4K</a></li>
         <li><a href="#cursos">Cursos &amp; Academia VIP</a></li>
-        <li><a href="#estates">Mansiones Lago de Como</a></li>
       </ul>
     </div>
     <div>
@@ -841,7 +879,7 @@ video{display:block;width:100%;height:100%;object-fit:cover;}
       </ul>
     </div>
   </div>
-  <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#777;max-width:1400px;margin:0 auto;flex-wrap:gap:12px;">
+  <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#777;max-width:1400px;margin:0 auto;flex-wrap:wrap;gap:12px;">
     <span>&copy; 2026 MANSIÓN DE LUXE &middot; De la Aguja a la Mansión. Conexión Directa Proveedores Oficiales.</span>
     <span>VAT NUMBER 09297890155 – SIAE LICENCE N. 637/1/763</span>
   </div>

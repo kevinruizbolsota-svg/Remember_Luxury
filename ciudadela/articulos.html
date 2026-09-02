@@ -3,24 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marketplace Oficial — Remember Luxury</title>
+<title>Remember Luxury — Colección Privada & Imperio ORIONIX</title>
 <link rel="icon" href="../favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg-main: #0a0a0d;
-  --bg-card: rgba(18, 18, 24, 0.85);
-  --bg-sidebar: #0e0e13;
+  --bg-main: #070709;
+  --bg-card: rgba(15, 15, 22, 0.85);
   --gold: #e8c86a;
-  --gold-glow: rgba(232, 200, 106, 0.25);
+  --gold-glow: rgba(232, 200, 106, 0.35);
   --gold-dark: #b89535;
-  --ali-orange: #ff5000;
-  --hotmart-green: #25d366;
-  --border: rgba(232, 200, 106, 0.12);
-  --border-hover: rgba(232, 200, 106, 0.4);
+  --border: rgba(232, 200, 106, 0.16);
+  --border-hover: rgba(232, 200, 106, 0.6);
   --text-main: #f5f0e8;
   --text-muted: #9e9aa8;
-  --radius: 12px;
+  --green: #4ecb71;
+  --radius: 16px;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -29,21 +27,32 @@ body {
   color: var(--text-main);
   font-family: 'Plus Jakarta Sans', sans-serif;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(232, 200, 106, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.04) 0%, transparent 40%);
 }
 
-/* NAVBAR SUPERIOR ESTILO AMAZON / LUXURY */
+#stars {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* HEADER */
 header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(10, 10, 13, 0.95);
-  backdrop-filter: blur(14px);
+  background: rgba(7, 7, 9, 0.95);
+  backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
-  padding: 12px 28px;
+  padding: 14px 36px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 20px;
 }
 
@@ -55,713 +64,512 @@ header {
 .logo-title {
   font-family: 'Cinzel', serif;
   font-weight: 900;
-  font-size: 1.15rem;
-  letter-spacing: 0.18em;
+  font-size: 1.25rem;
+  letter-spacing: 0.2em;
   color: var(--gold);
-  text-shadow: 0 0 16px var(--gold-glow);
+  text-shadow: 0 0 20px var(--gold-glow);
 }
 .logo-sub {
-  font-size: 0.55rem;
-  letter-spacing: 0.25em;
+  font-size: 0.52rem;
+  letter-spacing: 0.28em;
   color: var(--text-muted);
   text-transform: uppercase;
 }
 
-/* BUSCADOR CENTRAL */
-.search-container {
-  flex: 1;
-  max-width: 650px;
-  position: relative;
+.header-nav {
   display: flex;
+  gap: 10px;
+}
+.nav-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  transition: 0.3s;
+}
+.nav-btn:hover, .nav-btn.active {
+  color: var(--gold);
+  border-color: var(--border-hover);
+  background: rgba(232, 200, 106, 0.08);
+}
+
+/* HERO SECTION */
+.hero-wrapper {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 24px 30px;
+  text-align: center;
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  padding: 5px 18px;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background: rgba(232, 200, 106, 0.06);
+  margin-bottom: 18px;
+}
+.hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  margin-bottom: 14px;
+  text-shadow: 0 0 30px var(--gold-glow);
+}
+.hero-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 650px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* FILTROS Y BUSCADOR */
+.controls-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto 36px;
+  padding: 0 24px;
+  position: relative;
+  z-index: 10;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  background: rgba(15, 15, 22, 0.9);
+  padding: 6px;
+  border-radius: 30px;
+  border: 1px solid var(--border);
+}
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  padding: 8px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.tab-btn.active, .tab-btn:hover {
+  background: var(--gold);
+  color: #070709;
+  font-weight: 700;
+  box-shadow: 0 0 16px var(--gold-glow);
+}
+
+.search-box {
+  position: relative;
+  min-width: 280px;
 }
 .search-input {
   width: 100%;
-  padding: 11px 45px 11px 18px;
+  padding: 10px 40px 10px 18px;
   border-radius: 30px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(15, 15, 22, 0.9);
   border: 1px solid var(--border);
   color: #fff;
-  font-size: 0.88rem;
-  font-family: inherit;
+  font-size: 0.85rem;
   outline: none;
-  transition: all 0.3s;
+  transition: 0.3s;
 }
 .search-input:focus {
   border-color: var(--gold);
-  background: rgba(0, 0, 0, 0.6);
   box-shadow: 0 0 15px var(--gold-glow);
 }
 .search-icon {
   position: absolute;
-  right: 16px;
+  right: 14px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--gold);
   pointer-events: none;
-  font-size: 0.95rem;
 }
 
-/* ACCIONES DE CABECERA */
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.nav-link-btn {
-  text-decoration: none;
-  font-family: 'Cinzel', serif;
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  color: var(--text-muted);
-  padding: 8px 14px;
-  border-radius: 20px;
-  border: 1px solid transparent;
-  transition: 0.3s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.nav-link-btn:hover, .nav-link-btn.active {
-  color: var(--gold);
-  border-color: var(--border-hover);
-  background: rgba(232, 200, 106, 0.05);
-}
-
-/* CONTENEDOR PRINCIPAL: SIDEBAR + GRID */
-.marketplace-layout {
-  display: flex;
-  flex: 1;
-  max-width: 1440px;
+/* GRID DE CARTAS HOLOGRÁFICAS */
+.gallery-grid {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
   margin: 0 auto;
-  width: 100%;
-  padding: 24px;
+  padding: 0 24px 80px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 28px;
 }
 
-/* SIDEBAR DE FILTROS */
-aside.sidebar {
-  width: 260px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.filter-box {
-  background: var(--bg-sidebar);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-}
-.filter-title {
-  font-family: 'Cinzel', serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  color: var(--gold);
-  margin-bottom: 14px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(232, 200, 106, 0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.category-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.cat-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;
-  border-radius: 8px;
-  color: var(--text-muted);
-  font-size: 0.82rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  user-select: none;
-}
-.cat-item:hover, .cat-item.selected {
-  background: rgba(232, 200, 106, 0.1);
-  color: var(--gold);
-  font-weight: 600;
-  transform: translateX(3px);
-}
-.cat-count {
-  font-size: 0.7rem;
-  opacity: 0.6;
-}
-
-.platform-filter-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.plat-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  font-size: 0.82rem;
-  cursor: pointer;
-  transition: 0.2s;
-}
-.plat-btn:hover, .plat-btn.active {
-  border-color: var(--gold);
-  color: #fff;
-  background: rgba(232, 200, 106, 0.08);
-}
-.plat-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-.dot-all { background: var(--gold); }
-.dot-ali { background: var(--ali-orange); box-shadow: 0 0 8px var(--ali-orange); }
-.dot-hot { background: #ff9900; box-shadow: 0 0 8px #ff9900; }
-
-/* CONTENIDO PRINCIPAL */
-main.marketplace-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* BANNER SUPERIOR INFORMATIVO */
-.hero-banner {
-  background: linear-gradient(135deg, rgba(232, 200, 106, 0.12) 0%, rgba(14, 14, 19, 0.9) 100%);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 24px 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-}
-.hero-banner::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -20%;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
-  pointer-events: none;
-}
-.banner-info h1 {
-  font-family: 'Cinzel', serif;
-  font-size: 1.4rem;
-  color: var(--gold);
-  letter-spacing: 0.1em;
-  margin-bottom: 6px;
-}
-.banner-info p {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  max-width: 600px;
-}
-.stats-badge {
-  text-align: right;
-  font-family: 'Cinzel', serif;
-  font-size: 0.7rem;
-  color: var(--gold);
-}
-.stats-number {
-  font-size: 1.8rem;
-  font-weight: 900;
-  display: block;
-}
-
-/* BARRA DE HERRAMIENTAS / ORDENACIÓN */
-.toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--bg-sidebar);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 12px 20px;
-}
-.results-info {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-}
-.results-info strong {
-  color: var(--gold);
-}
-.sort-select {
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  border: 1px solid var(--border);
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  outline: none;
-  cursor: pointer;
-}
-
-/* PRODUCT GRID */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-/* TARJETA DE PRODUCTO */
-.product-card {
+/* CARTA HOLOGRÁFICA */
+.holo-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
+  backdrop-filter: blur(12px);
 }
-.product-card:hover {
-  transform: translateY(-6px);
+.holo-card:hover {
+  transform: translateY(-8px);
   border-color: var(--border-hover);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 25px var(--gold-glow);
 }
 
-.img-wrapper {
+.card-media {
   width: 100%;
-  height: 200px;
+  height: 220px;
   position: relative;
-  background: #15151b;
+  background: #111116;
   overflow: hidden;
 }
-.product-img {
+.card-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s ease;
 }
-.product-card:hover .product-img {
-  transform: scale(1.06);
+.holo-card:hover .card-img {
+  transform: scale(1.08);
 }
 
-.card-badge {
+.holo-badge {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 0.6rem;
-  font-weight: 700;
+  top: 12px;
+  left: 12px;
+  padding: 5px 12px;
+  border-radius: 20px;
   font-family: 'Cinzel', serif;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  background: rgba(7, 7, 9, 0.85);
+  border: 1px solid var(--gold);
+  color: var(--gold);
   backdrop-filter: blur(8px);
 }
-.badge-ali {
-  background: rgba(255, 80, 0, 0.9);
-  color: #fff;
-}
-.badge-hot {
-  background: rgba(232, 200, 106, 0.9);
-  color: #0a0a0d;
-}
 
-.card-content {
-  padding: 16px;
+.card-info {
+  padding: 20px;
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 8px;
+  gap: 10px;
 }
 
-.card-cat {
+.card-category {
   font-size: 0.65rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
   color: var(--gold);
   font-weight: 600;
 }
 .card-title {
-  font-size: 0.92rem;
-  font-weight: 600;
-  line-height: 1.35;
+  font-family: 'Cinzel', serif;
+  font-size: 0.98rem;
+  font-weight: 700;
   color: #fff;
-  height: 38px;
+  line-height: 1.4;
+  height: 42px;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
-.card-rating {
+.card-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+}
+.star-rating {
+  color: #ffd700;
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.75rem;
-  color: #ffc107;
+  gap: 4px;
 }
-.reviews-count {
+.sales-count {
   color: var(--text-muted);
   font-size: 0.7rem;
 }
 
 .card-desc {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
-  line-height: 1.5;
-  height: 48px;
+  line-height: 1.55;
+  height: 50px;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
 
-.card-footer {
+.card-actions {
   margin-top: auto;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.price-box {
+  padding-top: 16px;
+  border-top: 1px solid rgba(232, 200, 106, 0.12);
   display: flex;
   flex-direction: column;
+  gap: 12px;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .current-price {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: var(--gold);
 }
 .old-price {
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   text-decoration: line-through;
   color: var(--text-muted);
 }
-
-.action-btn {
-  padding: 9px 16px;
-  border-radius: 8px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.2s;
-}
-.btn-ali {
-  background: var(--ali-orange);
-  color: #fff;
-}
-.btn-ali:hover {
-  background: #e04600;
-  box-shadow: 0 4px 14px rgba(255, 80, 0, 0.4);
-}
-.btn-hot {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-  color: #0a0a0d;
-}
-.btn-hot:hover {
-  box-shadow: 0 4px 14px var(--gold-glow);
-  transform: translateY(-2px);
+.guarantee-tag {
+  font-size: 0.68rem;
+  color: var(--green);
+  font-weight: 600;
 }
 
-/* PAGINACIÓN */
-.pagination {
+.btn-group {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin: 30px 0;
+  flex-direction: column;
+  gap: 6px;
 }
-.page-btn {
-  padding: 8px 14px;
-  border-radius: 6px;
-  background: var(--bg-sidebar);
+.btn-buy-direct {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  color: #070709;
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 11px;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.3s;
+  box-shadow: 0 4px 14px var(--gold-glow);
+}
+.btn-buy-direct:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(232, 200, 106, 0.45);
+}
+
+.btn-provider {
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border);
   color: var(--text-muted);
-  cursor: pointer;
-  font-size: 0.82rem;
+  font-size: 0.7rem;
+  padding: 8px;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
   transition: 0.2s;
 }
-.page-btn:hover, .page-btn.active {
-  background: var(--gold);
-  color: #0a0a0d;
-  font-weight: 700;
+.btn-provider:hover {
   border-color: var(--gold);
+  color: #fff;
 }
 
 /* FOOTER */
 footer {
-  background: #08080a;
+  position: relative;
+  z-index: 10;
   border-top: 1px solid var(--border);
-  padding: 30px 24px;
+  background: #050507;
+  padding: 36px 24px;
   text-align: center;
-  margin-top: auto;
 }
 .footer-text {
+  font-family: 'Cinzel', serif;
   font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.footer-sub {
+  font-size: 0.75rem;
   color: var(--text-muted);
 }
-.footer-note {
-  font-size: 0.72rem;
-  color: rgba(212, 197, 160, 0.4);
-  margin-top: 8px;
-}
 
-@media(max-width: 900px) {
-  .marketplace-layout { flex-direction: column; }
-  aside.sidebar { width: 100%; }
-  .hero-banner { flex-direction: column; gap: 16px; text-align: center; }
-  .stats-badge { text-align: center; }
+@media(max-width: 768px) {
+  .hero-title { font-size: 1.8rem; }
+  .controls-bar { flex-direction: column; align-items: stretch; }
+  .filter-tabs { overflow-x: auto; }
 }
 </style>
 </head>
 <body>
 
+<canvas id="stars"></canvas>
+
 <header>
   <a href="../index.html" class="logo-area">
     <span class="logo-title">REMEMBER LUXURY</span>
-    <span class="logo-sub">GLOBAL MARKETPLACE</span>
+    <span class="logo-sub">DINASTÍA & IMPERIO ORIONIX</span>
   </a>
 
-  <div class="search-container">
-    <input type="text" id="searchInput" class="search-input" placeholder="Buscar entre millones de productos y cursos...">
-    <span class="search-icon">&#128269;</span>
-  </div>
-
-  <div class="header-actions">
-    <a href="articulos.html" class="nav-link-btn active">&#128717; Tienda</a>
-    <a href="carrito.html" class="nav-link-btn">&#128722; Carrito</a>
-    <a href="la_forja/plaza.html" class="nav-link-btn">&#9889; Ciudadela</a>
+  <div class="header-nav">
+    <a href="articulos.html" class="nav-btn active">💎 Colección</a>
+    <a href="carrito.html" class="nav-btn">🛒 Carrito</a>
+    <a href="la_forja/plaza.html" class="nav-btn">⚡ Ciudadela</a>
   </div>
 </header>
 
-<div class="marketplace-layout">
+<div class="hero-wrapper">
+  <div class="hero-eyebrow">✦ SELECCIÓN CURADA DE ÉLITE ✦</div>
+  <h1 class="hero-title">COLECCIÓN PRIVADA & ACTIVOS</h1>
+  <p class="hero-desc">Artículos físicos seleccionados con compra directa y activos digitales del Imperio ORIONIX. Cada adquisición incluye confirmación inmediata a tu Gmail.</p>
+</div>
 
-  <!-- SIDEBAR CON CATEGORÍAS & PLATAFORMAS -->
-  <aside class="sidebar">
-    <div class="filter-box">
-      <div class="filter-title">
-        <span>PLATAFORMAS</span>
-      </div>
-      <div class="platform-filter-group">
-        <button class="plat-btn active" data-platform="all">
-          <span class="plat-dot dot-all"></span> Todos los Catálogos
-        </button>
-        <button class="plat-btn" data-platform="aliexpress">
-          <span class="plat-dot dot-ali"></span> AliExpress (Físicos)
-        </button>
-        <button class="plat-btn" data-platform="hotmart">
-          <span class="plat-dot dot-hot"></span> Hotmart (Digitales)
-        </button>
-      </div>
-    </div>
+<div class="controls-bar">
+  <div class="filter-tabs">
+    <button class="tab-btn active" data-filter="all">⚡ Todos los Activos</button>
+    <button class="tab-btn" data-filter="fisico">💎 Colección Privada</button>
+    <button class="tab-btn" data-filter="digital">👑 Imperio & KRC</button>
+  </div>
 
-    <div class="filter-box">
-      <div class="filter-title">
-        <span>CATEGORÍAS</span>
-        <span style="font-size:0.6rem; opacity:0.6;">FILTRO</span>
-      </div>
-      <ul class="category-list" id="categoryList">
-        <li class="cat-item selected" data-category="all">
-          <span>⚡ Todas las Categorías</span>
-          <span class="cat-count" id="totalCount">(0)</span>
-        </li>
-      </ul>
-    </div>
-  </aside>
+  <div class="search-box">
+    <input type="text" id="searchInput" class="search-input" placeholder="Buscar por nombre o categoría...">
+    <span class="search-icon">&#128269;</span>
+  </div>
+</div>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="marketplace-main">
-
-    <div class="hero-banner">
-      <div class="banner-info">
-        <h1>EDAD DORADA DEL MARKETPLACE</h1>
-        <p>Catálogo global masivo con enlace directo oficial de afiliación. Actualizaciones automáticas y productos seleccionados de alta demanda.</p>
-      </div>
-      <div class="stats-badge">
-        <span class="stats-number" id="statsTotal">21+</span>
-        <span>PRODUCTOS ACTIVOS</span>
-      </div>
-    </div>
-
-    <div class="toolbar">
-      <div class="results-info">
-        Mostrando <strong id="visibleCount">0</strong> artículos seleccionados
-      </div>
-      <div>
-        <select id="sortSelect" class="sort-select">
-          <option value="relevance">Ordenar por: Relevancia</option>
-          <option value="price-asc">Precio: De menor a mayor</option>
-          <option value="price-desc">Precio: De mayor a menor</option>
-          <option value="rating">Mejor Calificados ⭐</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- GRID DE PRODUCTOS DINÁMICO -->
-    <div class="product-grid" id="productGrid">
-      <!-- Inyectado por JavaScript -->
-    </div>
-
-    <!-- PAGINACIÓN -->
-    <div class="pagination" id="paginationBox">
-      <!-- Inyectado por JavaScript -->
-    </div>
-
-  </main>
+<div class="gallery-grid" id="galleryGrid">
+  <!-- Inyectado dinámicamente -->
 </div>
 
 <footer>
-  <p class="footer-text">&copy; 2026 REMEMBER LUXURY — Global Affiliate Marketplace Network</p>
-  <p class="footer-note">Los precios y disponibilidad pueden variar según la plataforma de origen (AliExpress / Hotmart). Al comprar apoyas a Remember Luxury mediante enlaces verificados.</p>
+  <div class="footer-text">&copy; 2026 REMEMBER LUXURY — IMPERIO ORIONIX</div>
+  <p class="footer-sub">Transacciones cifradas de alta fidelidad. Soporte y seguimiento directo a través de la Ciudadela Gaia.</p>
 </footer>
 
 <script>
-// --- MOTOR DINÁMICO DEL MARKETPLACE ---
+// --- ESTRELLAS ---
+const c = document.getElementById('stars');
+const cx = c.getContext('2d');
+let st = [];
+function initS() {
+  c.width = window.innerWidth;
+  c.height = window.innerHeight;
+  st = Array.from({length:120}, () => ({
+    x: Math.random() * c.width,
+    y: Math.random() * c.height,
+    r: Math.random() * 1.2 + 0.2,
+    o: Math.random() * 0.5 + 0.1,
+    s: Math.random() * 0.003,
+    g: Math.random() < 0.15
+  }));
+}
+function drawS() {
+  cx.clearRect(0, 0, c.width, c.height);
+  st.forEach(s => {
+    s.o += s.s * (Math.random() > .5 ? 1 : -1);
+    s.o = Math.max(0.05, Math.min(0.8, s.o));
+    cx.beginPath();
+    cx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    cx.fillStyle = s.g ? `rgba(232,200,106,${s.o})` : `rgba(245,240,232,${s.o})`;
+    cx.fill();
+  });
+  requestAnimationFrame(drawS);
+}
+window.addEventListener('resize', initS);
+initS(); drawS();
+
+// --- CARGA DE PRODUCTOS ---
 let allProducts = [];
-let filteredProducts = [];
-let currentCategory = 'all';
-let currentPlatform = 'all';
-let searchQuery = '';
-let currentSort = 'relevance';
-let currentPage = 1;
-const itemsPerPage = 12;
+let activeFilter = 'all';
+let searchKeyword = '';
 
 async function loadProducts() {
   try {
     const res = await fetch('productos.json?v=' + Date.now());
     allProducts = await res.json();
-    document.getElementById('statsTotal').innerText = allProducts.length + "+";
-    buildCategories();
-    applyFilters();
-  } catch (err) {
-    console.error("Error cargando productos.json:", err);
-    document.getElementById('productGrid').innerHTML = `
-      <div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--gold);">
-        <h3>Cargando catálogo maestro...</h3>
-      </div>`;
+    renderGallery();
+  } catch(e) {
+    console.error("Error cargando productos.json:", e);
   }
 }
 
-function buildCategories() {
-  const catMap = {};
-  allProducts.forEach(p => {
-    catMap[p.categoria] = (catMap[p.categoria] || { name: p.categoria_nombre, count: 0 });
-    catMap[p.categoria].count++;
+function renderGallery() {
+  const grid = document.getElementById('galleryGrid');
+  const filtered = allProducts.filter(p => {
+    const matchesTab = activeFilter === 'all' || p.tipo === activeFilter;
+    const matchesSearch = !searchKeyword || 
+      p.nombre.toLowerCase().includes(searchKeyword) || 
+      p.categoria_nombre.toLowerCase().includes(searchKeyword) ||
+      p.descripcion.toLowerCase().includes(searchKeyword);
+    return matchesTab && matchesSearch;
   });
 
-  const catListEl = document.getElementById('categoryList');
-  document.getElementById('totalCount').innerText = `(${allProducts.length})`;
-
-  let html = `<li class="cat-item selected" data-category="all">
-    <span>⚡ Todas las Categorías</span>
-    <span class="cat-count">(${allProducts.length})</span>
-  </li>`;
-
-  for (const [key, val] of Object.entries(catMap)) {
-    html += `<li class="cat-item" data-category="${key}">
-      <span>${val.name}</span>
-      <span class="cat-count">(${val.count})</span>
-    </li>`;
-  }
-  catListEl.innerHTML = html;
-
-  catListEl.querySelectorAll('.cat-item').forEach(el => {
-    el.addEventListener('click', () => {
-      catListEl.querySelectorAll('.cat-item').forEach(c => c.classList.remove('selected'));
-      el.classList.add('selected');
-      currentCategory = el.getAttribute('data-category');
-      currentPage = 1;
-      applyFilters();
-    });
-  });
-}
-
-function applyFilters() {
-  filteredProducts = allProducts.filter(p => {
-    const matchesCategory = currentCategory === 'all' || p.categoria === currentCategory;
-    const matchesPlatform = currentPlatform === 'all' || p.plataforma === currentPlatform;
-    const matchesSearch = !searchQuery || 
-      p.nombre.toLowerCase().includes(searchQuery) || 
-      p.descripcion.toLowerCase().includes(searchQuery) ||
-      p.categoria_nombre.toLowerCase().includes(searchQuery);
-    return matchesCategory && matchesPlatform && matchesSearch;
-  });
-
-  // Ordenación
-  if (currentSort === 'price-asc') {
-    filteredProducts.sort((a,b) => a.precio - b.precio);
-  } else if (currentSort === 'price-desc') {
-    filteredProducts.sort((a,b) => b.precio - a.precio);
-  } else if (currentSort === 'rating') {
-    filteredProducts.sort((a,b) => b.rating - a.rating);
-  }
-
-  document.getElementById('visibleCount').innerText = filteredProducts.length;
-  renderProducts();
-  renderPagination();
-}
-
-function renderProducts() {
-  const grid = document.getElementById('productGrid');
-  if (filteredProducts.length === 0) {
-    grid.innerHTML = `
-      <div style="grid-column:1/-1; text-align:center; padding:60px; color:var(--text-muted);">
-        <p style="font-size:1.1rem; margin-bottom:8px;">No se encontraron artículos con estos filtros.</p>
-        <p style="font-size:0.8rem;">Prueba con otra palabra clave o categoría.</p>
-      </div>`;
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px; color:var(--text-muted);">
+      <p style="font-size:1.1rem;">No se encontraron artículos con estos criterios.</p>
+    </div>`;
     return;
   }
 
-  const start = (currentPage - 1) * itemsPerPage;
-  const end = start + itemsPerPage;
-  const pageItems = filteredProducts.slice(start, end);
-
-  grid.innerHTML = pageItems.map(p => {
-    const isAli = p.plataforma === 'aliexpress';
-    const badgeClass = isAli ? 'badge-ali' : 'badge-hot';
-    const btnClass = isAli ? 'btn-ali' : 'btn-hot';
-    const provName = isAli ? 'AliExpress' : 'Hotmart';
+  grid.innerHTML = filtered.map(p => {
+    const isDigital = p.tipo === 'digital';
+    const buyBtnText = isDigital ? '⚡ ADQUIRIR ACCESO DIRECTO' : '⚡ COMPRAR EN LA TIENDA';
+    const providerText = isDigital ? '🌐 VER EN HOTMART ↗' : '🌐 VER EN PROVEEDOR ↗';
 
     return `
-      <article class="product-card">
-        <div class="img-wrapper">
-          <img src="${p.imagen}" alt="${p.nombre}" class="product-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500'">
-          <span class="card-badge ${badgeClass}">${p.badge || provName.toUpperCase()}</span>
+      <article class="holo-card">
+        <div class="card-media">
+          <img src="${p.imagen}" alt="${p.nombre}" class="card-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600'">
+          <span class="holo-badge">${p.badge || 'EXCLUSIVO'}</span>
         </div>
-        <div class="card-content">
-          <span class="card-cat">${p.categoria_nombre}</span>
+        <div class="card-info">
+          <span class="card-category">${p.categoria_nombre}</span>
           <h3 class="card-title" title="${p.nombre}">${p.nombre}</h3>
-          <div class="card-rating">
-            <span>⭐ ${p.rating.toFixed(1)}</span>
-            <span class="reviews-count">(${p.reviews || 100}+ ventas)</span>
+          
+          <div class="card-meta-row">
+            <span class="star-rating">⭐ ${Number(p.rating).toFixed(1)}</span>
+            <span class="sales-count">(${p.ventas || '1K+'} entregados)</span>
           </div>
+
           <p class="card-desc">${p.descripcion}</p>
-          <div class="card-footer" style="flex-direction:column; gap:10px; align-items:stretch; margin-top:auto; padding-top:12px; border-top:1px solid rgba(255,255,255,0.06);">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <div class="price-box">
+
+          <div class="card-actions">
+            <div class="price-row">
+              <div>
                 <span class="current-price">€${Number(p.precio).toFixed(2)}</span>
                 ${p.precio_anterior ? `<span class="old-price">€${Number(p.precio_anterior).toFixed(2)}</span>` : ''}
               </div>
-              <span style="font-size:0.65rem; color:var(--green); font-weight:600;">✓ Envío Seguro</span>
+              <span class="guarantee-tag">✓ Entrega VIP</span>
             </div>
-            
-            <div style="display:flex; flex-direction:column; gap:6px;">
-              <a href="pago-premium.html?id=${p.id}" class="action-btn" style="background:linear-gradient(135deg, #e8c86a 0%, #c9a227 100%); color:#0a0a0d; font-size:0.75rem; justify-content:center; padding:10px; border-radius:6px; font-weight:800; text-align:center;">
-                ⚡ COMPRAR EN LA TIENDA
+
+            <div class="btn-group">
+              <a href="pago-premium.html?id=${p.id}" class="btn-buy-direct">
+                ${buyBtnText}
               </a>
-              <a href="${p.link}" target="_blank" rel="noopener noreferrer sponsored" class="action-btn ${btnClass}" style="font-size:0.7rem; justify-content:center; padding:8px; border-radius:6px; text-align:center; opacity:0.9;">
-                🌐 COMPRAR EN EL PROVEEDOR (${provName}) ↗
+              <a href="${p.link}" target="_blank" rel="noopener noreferrer sponsored" class="btn-provider">
+                ${providerText}
               </a>
             </div>
           </div>
@@ -770,51 +578,22 @@ function renderProducts() {
     `;
   }).join('');
 }
-function renderPagination() {
-  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
-  const box = document.getElementById('paginationBox');
-  if (totalPages <= 1) {
-    box.innerHTML = '';
-    return;
-  }
 
-  let html = '';
-  for (let i = 1; i <= totalPages; i++) {
-    html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
-  }
-  box.innerHTML = html;
-}
-
-window.goToPage = function(page) {
-  currentPage = page;
-  renderProducts();
-  renderPagination();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// Event Listeners
-document.getElementById('searchInput').addEventListener('input', (e) => {
-  searchQuery = e.target.value.toLowerCase().trim();
-  currentPage = 1;
-  applyFilters();
-});
-
-document.querySelectorAll('.plat-btn').forEach(btn => {
+// Filtros
+document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.plat-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    currentPlatform = btn.getAttribute('data-platform');
-    currentPage = 1;
-    applyFilters();
+    activeFilter = btn.getAttribute('data-filter');
+    renderGallery();
   });
 });
 
-document.getElementById('sortSelect').addEventListener('change', (e) => {
-  currentSort = e.target.value;
-  applyFilters();
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  searchKeyword = e.target.value.toLowerCase().trim();
+  renderGallery();
 });
 
-// Inicio
 loadProducts();
 </script>
 </body>

@@ -3,23 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TAJ MAHAL® — Alta Costura, Pasarela & Marroquinería de Lujo</title>
+<title>MANSION DE LUXE® | De la Aguja a la Mansión — Alta Costura & Lifestyle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Italianno&family=Great+Vibes&family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
   --black:#05030a;
   --gold:#e6ca65;
   --gold-light:#fff2b2;
-  --gold-glow:#f9d976;
-  --gold-dark:#b38728;
-  --gold-gradient:linear-gradient(135deg, #fff7c2 0%, #e6ca65 45%, #b38728 85%, #fbf5b7 100%);
+  --gold-gradient:linear-gradient(135deg, #ffffff 0%, #fff2b2 45%, #e6ca65 100%);
   --white:#ffffff;
   --gray-text:#c4bfd6;
   --card-bg:rgba(12, 8, 24, 0.82);
-  --glass-border:rgba(230, 202, 101, 0.25);
-  --font-script:'Alex Brush', 'Great Vibes', 'Italianno', cursive;
+  --glass-border:rgba(230, 202, 101, 0.22);
+  --font-script:'Alex Brush', cursive;
   --font-serif:'Cormorant Garamond', 'Times New Roman', serif;
   --font-sans:'Montserrat', sans-serif;
 }
@@ -53,7 +51,29 @@ body{
 a{text-decoration:none;color:inherit}
 img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);}
 
-/* HEADER LUXURY TAJ MAHAL */
+/* BARRA SUPERIOR ELEGANTE Y SUTIL */
+.top-motto-bar{
+  background: rgba(8, 5, 16, 0.85);
+  border-bottom: 1px solid rgba(230,202,101,0.2);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  backdrop-filter: blur(10px);
+}
+.motto-highlight{
+  color: #ffffff;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+}
+
+/* HEADER MANSION DE LUXE */
 .site-header{
   position:sticky;
   top:0;
@@ -85,7 +105,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
 }
 .nav-link:hover{color:var(--gold);text-shadow:0 0 14px rgba(230,202,101,0.6);}
 
-/* LOGO TAJ MAHAL CALIGRÁFICO & CURVO DE ALTO LUJO */
+/* LOGO MANSION DE LUXE */
 .site-logo{
   position:absolute;
   left:50%;
@@ -97,7 +117,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
 }
 .logo-script{
   font-family:var(--font-script);
-  font-size:44px;
+  font-size:46px;
   font-weight:400;
   line-height:0.9;
   background: var(--gold-gradient);
@@ -196,29 +216,31 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
   letter-spacing:0.08em;
 }
 
-/* BOTÓN DORADO ELEGANTE, CURVO Y REFINADO */
-.btn-gold-classic{
-  background: var(--gold-gradient);
-  color:#110b01;
-  font-family:var(--font-serif);
-  font-size:13px;
-  font-weight:600;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  padding:14px 34px;
-  border-radius:25px;
-  border:1px solid #fbf5b7;
-  transition:all .35s cubic-bezier(0.16, 1, 0.3, 1);
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  box-shadow: 0 6px 25px rgba(230,202,101,0.35);
-  cursor:pointer;
+/* BOTÓN ALIEXPRESS MÁS CLARO (DORADO SUAVE/CHAMPAGNE) CON LETRAS BLANCAS */
+.btn-ali-champagne{
+  background: linear-gradient(135deg, rgba(245, 230, 179, 0.28) 0%, rgba(212, 175, 55, 0.38) 100%);
+  color: #ffffff !important;
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  padding: 14px 34px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 242, 178, 0.7);
+  transition: all .35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 20px rgba(230, 202, 101, 0.25), inset 0 0 12px rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  backdrop-filter: blur(8px);
 }
-.btn-gold-classic:hover{
-  transform:translateY(-3px) scale(1.02);
-  box-shadow: 0 10px 35px rgba(230,202,101,0.65);
-  background: linear-gradient(135deg, #fffbf0 0%, #e6ca65 100%);
+.btn-ali-champagne:hover{
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(230, 202, 101, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.3);
+  border-color: #ffffff;
+  background: linear-gradient(135deg, rgba(255, 245, 204, 0.45) 0%, rgba(212, 175, 55, 0.55) 100%);
 }
 
 .btn-bag-add{
@@ -449,29 +471,30 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
   flex-direction:column;
   gap:10px;
 }
-.btn-gold-card{
-  background: var(--gold-gradient);
-  color:#110b01;
-  font-family:var(--font-serif);
-  font-size:12px;
-  font-weight:600;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  padding:12px;
-  text-align:center;
-  border-radius:20px;
-  transition:all .3s;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  border:none;
-  box-shadow: 0 4px 15px rgba(230,202,101,0.3);
+.btn-ali-card{
+  background: linear-gradient(135deg, rgba(245, 230, 179, 0.25) 0%, rgba(212, 175, 55, 0.35) 100%);
+  color: #ffffff !important;
+  font-family: var(--font-serif);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  padding: 12px;
+  text-align: center;
+  border-radius: 20px;
+  transition: all .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 242, 178, 0.6);
+  box-shadow: 0 4px 15px rgba(230,202,101,0.2);
 }
-.btn-gold-card:hover{
-  background: linear-gradient(135deg, #fffbf0 0%, #e6ca65 100%);
-  box-shadow: 0 6px 20px rgba(230,202,101,0.55);
-  transform:translateY(-2px);
+.btn-ali-card:hover{
+  background: linear-gradient(135deg, rgba(255, 245, 204, 0.4) 0%, rgba(212, 175, 55, 0.5) 100%);
+  box-shadow: 0 6px 20px rgba(230,202,101,0.45);
+  border-color: #ffffff;
+  transform: translateY(-2px);
 }
 .btn-bag-card{
   background: rgba(255,255,255,0.03);
@@ -626,7 +649,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
 .cart-foot{padding:22px 26px;border-top:1px solid var(--glass-border);background:rgba(8,5,16,0.9);}
 .c-subtotal{display:flex;justify-content:space-between;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;color:#fff;}
 .c-note{font-size:11px;color:var(--gray-text);margin-bottom:16px;font-style:italic;}
-.btn-checkout{display:block;width:100%;background:var(--gold-gradient);color:#110b01;text-align:center;padding:15px;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;border:none;border-radius:20px;cursor:pointer;margin-bottom:9px;transition:all .2s;text-decoration:none;}
+.btn-checkout{display:block;width:100%;background:linear-gradient(135deg, #fff2b2, #e6ca65);color:#110b01;text-align:center;padding:15px;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;border:none;border-radius:20px;cursor:pointer;margin-bottom:9px;transition:all .2s;text-decoration:none;}
 .btn-checkout:hover{box-shadow: 0 0 20px rgba(230,202,101,0.6);}
 .btn-continue{display:block;width:100%;background:rgba(255,255,255,0.05);color:#fff;text-align:center;padding:13px;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--glass-border);border-radius:20px;cursor:pointer;transition:all .2s}
 
@@ -650,6 +673,13 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
 
 <div class="content-layer">
 
+<!-- BARRA SUPERIOR CON EL LEMA DE LA EMPRESA BIEN ORGANIZADO -->
+<div class="top-motto-bar">
+  <span>✦ Maison de Haute Couture</span>
+  <span class="motto-highlight">“De la Aguja a la Mansión”</span>
+  <span>✦ Lifestyle &amp; Colección Global</span>
+</div>
+
 <header class="site-header">
   <div class="header-inner">
     <nav class="nav-left">
@@ -660,10 +690,10 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
       <a href="pasarela.html" class="nav-link" style="color:var(--gold);">Desfiles 2026</a>
     </nav>
 
-    <!-- LOGO EL TAJ MAHAL CON TIPOGRAFÍA CURVA, DELGADA & ORO REFINADO -->
+    <!-- LOGO MANSION DE LUXE -->
     <a href="index.html" class="site-logo">
-      <span class="logo-script">El Taj Mahal</span>
-      <span class="logo-subtitle">Haute Couture &middot; Maison de Luxe</span>
+      <span class="logo-script">Mansión de Luxe</span>
+      <span class="logo-subtitle">De la Aguja a la Mansión</span>
     </a>
 
     <div class="nav-right">
@@ -681,17 +711,18 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
   <div class="hero-body">
     <div class="hero-eyebrow">PIEZA MAESTRA DE PASARELA · FALL/WINTER 2026</div>
     <h1 class="hero-title">Vestido de Gala en Doble Crepé de Lana Nero</h1>
-    <p class="hero-desc">Una oda a la elegancia pura inmortal: corte arquitectónico con silueta estilizada, escote corazón estructurado y forro en satén de seda italiana.</p>
+    <p class="hero-desc">Una oda a la elegancia pura: confección arquitectónica con silueta estructurada, escote corazón y forro en satén de seda italiana.</p>
     <div class="hero-price">€ 2.450 / $ 42.80 USD &nbsp;·&nbsp; Stock Disponible: 2 Piezas</div>
     <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
-      <a href="https://www.aliexpress.com/item/1005006428901234.html" target="_blank" class="btn-gold-classic">
+      <!-- BOTÓN ALIEXPRESS MÁS CLARO CON LETRAS BLANCAS -->
+      <a href="https://www.aliexpress.com/item/1005006428901234.html" target="_blank" class="btn-ali-champagne">
         Comprar en AliExpress ↗
       </a>
       <button class="btn-bag-add" onclick="addBag('Vestido en Doble Crepé Nero', 2450, 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=200', this)">
         Añadir a la Bolsa VIP
       </button>
       <a href="producto-detalle.html" class="btn-bag-add" style="border-color:transparent;text-decoration:underline;">
-        Ver Ficha Técnica con Lupa ↗
+        Ver Ficha Técnica ↗
       </a>
     </div>
   </div>
@@ -708,7 +739,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
       <div class="dual-price">€ 3.850 / $ 58.50 USD</div>
       <p class="dual-desc">Chaqueta entallada con solapas de pico en satén duquesa y pantalón recto con ribete de seda brillante.</p>
       <div style="display:flex;gap:14px;flex-wrap:wrap;">
-        <a href="https://www.aliexpress.com/item/1005005891234567.html" target="_blank" class="btn-gold-classic">
+        <a href="https://www.aliexpress.com/item/1005005891234567.html" target="_blank" class="btn-ali-champagne">
           Comprar en AliExpress ↗
         </a>
         <button class="btn-bag-add" onclick="addBag('Esmoquin Sartorial en Terciopelo', 3850, 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=200', this)">
@@ -727,7 +758,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
       <div class="dual-price">€ 3.450 / $ 64.90 USD</div>
       <p class="dual-desc">Corte aristocrático de dos botones con forro interior en jacquard de seda y acabados hechos a mano.</p>
       <div style="display:flex;gap:14px;flex-wrap:wrap;">
-        <a href="https://www.aliexpress.com/item/1005004781293847.html" target="_blank" class="btn-gold-classic">
+        <a href="https://www.aliexpress.com/item/1005004781293847.html" target="_blank" class="btn-ali-champagne">
           Comprar en AliExpress ↗
         </a>
         <button class="btn-bag-add" onclick="addBag('Traje Sastorial en Lana y Seda', 3450, 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=200', this)">
@@ -738,10 +769,10 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
   </div>
 </section>
 
-<!-- CATÁLOGO PRINCIPAL D&G EN GRID -->
+<!-- CATÁLOGO PRINCIPAL EN GRID -->
 <section class="catalog-section" id="bolsos">
   <div class="sec-header">
-    <div class="sec-eyebrow">CATÁLOGO OFICIAL EL TAJ MAHAL</div>
+    <div class="sec-eyebrow">CATÁLOGO OFICIAL MANSIÓN DE LUXE</div>
     <h2 class="sec-title">Bolsos, Zapatos &amp; Accesorios de Colección</h2>
   </div>
 
@@ -762,7 +793,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
           <span style="font-size:12px;color:var(--gold);">($ 38.90 Ali)</span>
         </div>
         <div class="p-actions">
-          <a href="https://www.aliexpress.com/item/1005006123456789.html" target="_blank" class="btn-gold-card">
+          <a href="https://www.aliexpress.com/item/1005006123456789.html" target="_blank" class="btn-ali-card">
             Comprar en AliExpress ↗
           </a>
           <button class="btn-bag-card" onclick="addBag('Mini Grandma Handbag Nappa', 5255, 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=200', this)">
@@ -787,7 +818,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
           <span style="font-size:12px;color:var(--gold);">($ 45.20 Ali)</span>
         </div>
         <div class="p-actions">
-          <a href="https://www.aliexpress.com/item/1005005987654321.html" target="_blank" class="btn-gold-card">
+          <a href="https://www.aliexpress.com/item/1005005987654321.html" target="_blank" class="btn-ali-card">
             Comprar en AliExpress ↗
           </a>
           <button class="btn-bag-card" onclick="addBag('Vestido en Gasa Floral', 4765, 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=200', this)">
@@ -812,7 +843,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
           <span style="font-size:12px;color:var(--gold);">($ 29.90 Ali)</span>
         </div>
         <div class="p-actions">
-          <a href="https://www.aliexpress.com/item/1005004123987456.html" target="_blank" class="btn-gold-card">
+          <a href="https://www.aliexpress.com/item/1005004123987456.html" target="_blank" class="btn-ali-card">
             Comprar en AliExpress ↗
           </a>
           <button class="btn-bag-card" onclick="addBag('Zapatos Slingback Piel Floral', 1265, 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=200', this)">
@@ -837,7 +868,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
           <span style="font-size:12px;color:var(--gold);">($ 26.50 Ali)</span>
         </div>
         <div class="p-actions">
-          <a href="https://www.aliexpress.com/item/1005003654789123.html" target="_blank" class="btn-gold-card">
+          <a href="https://www.aliexpress.com/item/1005003654789123.html" target="_blank" class="btn-ali-card">
             Comprar en AliExpress ↗
           </a>
           <button class="btn-bag-card" onclick="addBag('Top en Tul con Bordados', 4075, 'https://images.unsplash.com/photo-1551803091-e20673f15770?w=200', this)">
@@ -862,7 +893,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
           <span style="font-size:12px;color:var(--gold);">($ 32.80 Ali)</span>
         </div>
         <div class="p-actions">
-          <a href="https://www.aliexpress.com/item/1005005123654987.html" target="_blank" class="btn-gold-card">
+          <a href="https://www.aliexpress.com/item/1005005123654987.html" target="_blank" class="btn-ali-card">
             Comprar en AliExpress ↗
           </a>
           <button class="btn-bag-card" onclick="addBag('Falda en Encaje Chantilly', 3795, 'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=200', this)">
@@ -887,7 +918,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
           <span style="font-size:12px;color:var(--gold);">($ 34.00 Ali)</span>
         </div>
         <div class="p-actions">
-          <a href="https://www.aliexpress.com/item/1005004876543210.html" target="_blank" class="btn-gold-card">
+          <a href="https://www.aliexpress.com/item/1005004876543210.html" target="_blank" class="btn-ali-card">
             Comprar en AliExpress ↗
           </a>
           <button class="btn-bag-card" onclick="addBag('Bolso Sicily Piel Dauphine', 1850, 'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=200', this)">
@@ -912,7 +943,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
           <span style="font-size:12px;color:var(--gold);">($ 14.50 Ali)</span>
         </div>
         <div class="p-actions">
-          <a href="https://www.aliexpress.com/item/1005003987654321.html" target="_blank" class="btn-gold-card">
+          <a href="https://www.aliexpress.com/item/1005003987654321.html" target="_blank" class="btn-ali-card">
             Comprar en AliExpress ↗
           </a>
           <button class="btn-bag-card" onclick="addBag('Gafas de Sol DG Logo Oro', 890, 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=200', this)">
@@ -937,7 +968,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
           <span style="font-size:12px;color:var(--gold);">($ 36.90 Ali)</span>
         </div>
         <div class="p-actions">
-          <a href="https://www.aliexpress.com/item/1005004567891234.html" target="_blank" class="btn-gold-card">
+          <a href="https://www.aliexpress.com/item/1005004567891234.html" target="_blank" class="btn-ali-card">
             Comprar en AliExpress ↗
           </a>
           <button class="btn-bag-card" onclick="addBag('Zapatos Derby en Piel Pulida', 875, 'https://images.unsplash.com/photo-1614252369475-531eba835eb1?w=200', this)">
@@ -959,7 +990,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
       <div class="trip-cat">BOLSOS &amp; MARROQUINERÍA</div>
       <div class="trip-name-txt">Tote Bag en Piel Grano Nero</div>
       <div class="trip-price-txt">€ 2.150 / $ 39.90 USD</div>
-      <a href="https://www.aliexpress.com/item/1005005874123654.html" target="_blank" class="btn-gold-classic" style="padding:12px 24px;font-size:11px;">
+      <a href="https://www.aliexpress.com/item/1005005874123654.html" target="_blank" class="btn-ali-champagne" style="padding:12px 24px;font-size:11px;">
         Comprar en AliExpress ↗
       </a>
     </div>
@@ -971,7 +1002,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
       <div class="trip-cat">CALZADO DE GALA</div>
       <div class="trip-name-txt">Sandalias Stiletto en Satén y Oro</div>
       <div class="trip-price-txt">€ 1.450 / $ 28.50 USD</div>
-      <a href="https://www.aliexpress.com/item/1005004987654123.html" target="_blank" class="btn-gold-classic" style="padding:12px 24px;font-size:11px;">
+      <a href="https://www.aliexpress.com/item/1005004987654123.html" target="_blank" class="btn-ali-champagne" style="padding:12px 24px;font-size:11px;">
         Comprar en AliExpress ↗
       </a>
     </div>
@@ -983,7 +1014,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
       <div class="trip-cat">CALZADO MASCULINO</div>
       <div class="trip-name-txt">Botines Chelsea en Piel Noble</div>
       <div class="trip-price-txt">€ 1.290 / $ 33.00 USD</div>
-      <a href="https://www.aliexpress.com/item/1005003874125896.html" target="_blank" class="btn-gold-classic" style="padding:12px 24px;font-size:11px;">
+      <a href="https://www.aliexpress.com/item/1005003874125896.html" target="_blank" class="btn-ali-champagne" style="padding:12px 24px;font-size:11px;">
         Comprar en AliExpress ↗
       </a>
     </div>
@@ -1001,7 +1032,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
       <div class="dual-price">€ 680 / $ 19.90 USD</div>
       <p class="dual-desc">Sérum Regenerador de Células Madre + Crema de Noche Esculpidora con Péptidos Bioactivos del Mediterráneo.</p>
       <div style="display:flex;gap:14px;flex-wrap:wrap;">
-        <a href="https://www.aliexpress.com/item/1005006789123456.html" target="_blank" class="btn-gold-classic">
+        <a href="https://www.aliexpress.com/item/1005006789123456.html" target="_blank" class="btn-ali-champagne">
           Comprar en AliExpress ↗
         </a>
         <button class="btn-bag-add" onclick="addBag('Set Completo Ever-Youth Skincare', 680, 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=200', this)">
@@ -1019,7 +1050,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
       <div class="dual-price">€ 490 / $ 16.50 USD</div>
       <p class="dual-desc">Notas de salida de bergamota siciliana, corazón de rosa damascena y fondo opulento de ámbar negro y vainilla de Madagascar.</p>
       <div style="display:flex;gap:14px;flex-wrap:wrap;">
-        <a href="https://www.aliexpress.com/item/1005005432167890.html" target="_blank" class="btn-gold-classic">
+        <a href="https://www.aliexpress.com/item/1005005432167890.html" target="_blank" class="btn-ali-champagne">
           Comprar en AliExpress ↗
         </a>
         <button class="btn-bag-add" onclick="addBag('Perfume Velvet Black Amber', 490, 'https://images.unsplash.com/photo-1512290900672-1f02e6b09be8?w=200', this)">
@@ -1061,7 +1092,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
       </ul>
     </div>
     <div>
-      <div class="foot-col-title">MAISON EL TAJ MAHAL</div>
+      <div class="foot-col-title">MANSIÓN DE LUXE</div>
       <ul class="foot-links">
         <li><a href="#">Sostenibilidad &amp; Artesanía</a></li>
         <li><a href="pasarela.html">Desfiles de Pasarela FW 2026</a></li>
@@ -1070,7 +1101,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
     </div>
   </div>
   <div class="footer-bottom-row">
-    <span>&copy; 2026 EL TAJ MAHAL &middot; Haute Couture. Conexión Directa con Proveedores Oficiales AliExpress.</span>
+    <span>&copy; 2026 MANSIÓN DE LUXE &middot; De la Aguja a la Mansión. Conexión Directa con Proveedores Oficiales.</span>
     <div style="display:flex;gap:16px;">
       <a href="#">Privacidad</a>
       <a href="#">Términos</a>
@@ -1093,7 +1124,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition: transform 
     <div class="c-subtotal"><span>Subtotal Estimado</span><span id="cartAmt">€ 2.450</span></div>
     <div class="c-note">Incluye empaque de lujo y certificado de autenticidad.</div>
     <a href="pago-premium.html" class="btn-checkout">PAGAR CON TARJETA / NEQUI / PAYPAL ↗</a>
-    <a href="https://www.aliexpress.com" target="_blank" class="btn-gold-card" style="margin-bottom:8px;padding:14px;font-size:11px;">Comprar en AliExpress Escrow ↗</a>
+    <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-card" style="margin-bottom:8px;padding:14px;font-size:11px;">Comprar en AliExpress Escrow ↗</a>
     <button class="btn-continue" onclick="closeCart()">CONTINUAR COMPRANDO</button>
   </div>
 </div>

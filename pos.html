@@ -74,16 +74,15 @@ body{
   flex:1;
   display:grid;
   grid-template-columns:1fr 460px;
-  height:calc(100vh - 70px);
+  min-height:calc(100vh - 70px);
 }
 @media(max-width:1024px){
-  .pos-container{grid-template-columns:1fr;height:auto;display:flex;flex-direction:column}
+  .pos-container{grid-template-columns:1fr;min-height:auto;display:flex;flex-direction:column}
 }
 
 /* PANEL IZQUIERDO: PRODUCTOS */
 .catalog-pane{
   padding:24px 28px;
-  overflow-y:auto;
   display:flex;
   flex-direction:column;
   gap:20px;
@@ -223,7 +222,7 @@ body{
   border-left:1px solid var(--border);
   display:flex;
   flex-direction:column;
-  height:100%;
+  min-height:100%;
 }
 .register-top{
   padding:20px 24px;
@@ -236,6 +235,8 @@ body{
 
 .cart-items-list{
   flex:1;
+  min-height:280px;
+  max-height:400px;
   overflow-y:auto;
   padding:16px 24px;
   display:flex;
@@ -376,7 +377,7 @@ body{
     ⚡ ORIONIX <span>POS &middot; CAJA REGISTRADORA</span>
   </div>
   <div class="header-actions">
-    <a href="../index.html" class="btn-nav">🏠 Tienda Principal</a>
+    <a href="index.html" class="btn-nav">🏠 Tienda Principal</a>
     <button class="btn-nav" onclick="exportDailyAudit()">📊 Descargar Reporte Diario</button>
     <button class="btn-nav" onclick="clearDayData()" style="color:var(--red);">🗑️ Cerrar Turno</button>
   </div>
@@ -403,7 +404,7 @@ body{
     </div>
 
     <div class="products-grid" id="productsGrid">
-      <!-- RENDER DINÁMICO -->
+      <!-- RENDER DINÁMICO DE PRODUCTOS -->
     </div>
   </div>
 
@@ -516,14 +517,12 @@ let cart = [];
 let currentCategory = 'all';
 let currentPayment = 'Efectivo';
 
-function init(){
-  renderProducts();
-  loadDailyStats();
-}
-
 function renderProducts(){
   const grid = document.getElementById('productsGrid');
-  const query = document.getElementById('searchInput').value.toLowerCase();
+  if(!grid) return;
+
+  const searchEl = document.getElementById('searchInput');
+  const query = searchEl ? searchEl.value.toLowerCase() : '';
   
   const filtered = inventory.filter(p => {
     const matchCat = (currentCategory === 'all' || p.cat === currentCategory);
@@ -556,7 +555,7 @@ function renderProducts(){
 function setCategory(cat, btn){
   currentCategory = cat;
   document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  if(btn) btn.classList.add('active');
   renderProducts();
 }
 
@@ -597,6 +596,7 @@ function updateCartUI(){
   const countEl = document.getElementById('itemsCount');
   const subtotalEl = document.getElementById('subtotalVal');
   const totalEl = document.getElementById('totalVal');
+  if(!list) return;
 
   if(cart.length === 0){
     list.innerHTML = `
@@ -605,9 +605,9 @@ function updateCartUI(){
         <span>No hay productos en la orden.<br>Haz clic en cualquier producto de la izquierda para sumar.</span>
       </div>
     `;
-    countEl.textContent = "0";
-    subtotalEl.textContent = "$0 COP";
-    totalEl.textContent = "$0 COP";
+    if(countEl) countEl.textContent = "0";
+    if(subtotalEl) subtotalEl.textContent = "$0 COP";
+    if(totalEl) totalEl.textContent = "$0 COP";
     return;
   }
 
@@ -632,15 +632,15 @@ function updateCartUI(){
     `;
   }).join('');
 
-  countEl.textContent = totalItems;
-  subtotalEl.textContent = "$" + totalPrice.toLocaleString('es-CO') + " COP";
-  totalEl.textContent = "$" + totalPrice.toLocaleString('es-CO') + " COP";
+  if(countEl) countEl.textContent = totalItems;
+  if(subtotalEl) subtotalEl.textContent = "$" + totalPrice.toLocaleString('es-CO') + " COP";
+  if(totalEl) totalEl.textContent = "$" + totalPrice.toLocaleString('es-CO') + " COP";
 }
 
 function setPayment(method, btn){
   currentPayment = method;
   document.querySelectorAll('.pay-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
+  if(btn) btn.classList.add('selected');
 }
 
 function processSale(){
@@ -683,8 +683,10 @@ function loadDailyStats(){
   let total = 0;
   history.forEach(s => total += s.total);
   
-  document.getElementById('dailyCount').textContent = history.length;
-  document.getElementById('dailyTotal').textContent = "$" + total.toLocaleString('es-CO') + " COP";
+  const countEl = document.getElementById('dailyCount');
+  const totalEl = document.getElementById('dailyTotal');
+  if(countEl) countEl.textContent = history.length;
+  if(totalEl) totalEl.textContent = "$" + total.toLocaleString('es-CO') + " COP";
 }
 
 function exportDailyAudit(){
@@ -693,12 +695,10 @@ function exportDailyAudit(){
     alert("No hay ventas registradas hoy.");
     return;
   }
-  let csv = "Fecha,Metodo,Total,Costo,Ganancia,Items
-";
+  let csv = "Fecha,Metodo,Total,Costo,Ganancia,Items\n";
   history.forEach(s => {
     const itemsSummary = s.items.map(i => `${i.qty}x ${i.name}`).join(' | ');
-    csv += `"${s.date}","${s.payment}",${s.total},${s.cost},${s.profit},"${itemsSummary}"
-`;
+    csv += `"${s.date}","${s.payment}",${s.total},${s.cost},${s.profit},"${itemsSummary}"\n`;
   });
   
   const blob = new Blob([csv], { type: 'text/csv' });
@@ -720,7 +720,13 @@ function clearDayData(){
   }
 }
 
-window.onload = init;
+// EJECUTAR DE INMEDIATO
+renderProducts();
+loadDailyStats();
+document.addEventListener('DOMContentLoaded', () => {
+  renderProducts();
+  loadDailyStats();
+});
 </script>
 </body>
 </html>

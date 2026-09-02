@@ -1037,20 +1037,22 @@ function updateMasterCartUI(){
 
       // BOTÓN DE ACCIÓN ESPECÍFICO POR PROVEEDOR
       if(key === 'amazon'){
+        const amazonLink = group.items[0] && group.items[0].link ? group.items[0].link : 'https://www.amazon.com?tag=krcompany08-20';
         btnsMarkup += `
-          <a href="${group.items[0].link}" target="_blank" rel="noopener" style="background:linear-gradient(135deg, #ff9900 0%, #cc7a00 100%);color:#000;text-decoration:none;padding:12px;border-radius:8px;font-size:12px;font-weight:800;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:0.05em;">
+          <a href="${amazonLink}" target="_blank" rel="noopener" style="background:linear-gradient(135deg, #ff9900 0%, #cc7a00 100%);color:#000;text-decoration:none;padding:12px;border-radius:8px;font-size:12px;font-weight:800;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:0.05em;">
             🟠 COMPRAR EN AMAZON (Tag: krcompany08-20) ↗
           </a>
         `;
       } else if(key === 'aliexpress'){
+        const aliLink = group.items[0] && group.items[0].link ? group.items[0].link : 'https://www.aliexpress.com/wholesale?SearchText=remember+luxury';
         btnsMarkup += `
-          <a href="${group.items[0].link}" target="_blank" rel="noopener" style="background:linear-gradient(135deg, #ff4747 0%, #d11a1a 100%);color:#fff;text-decoration:none;padding:12px;border-radius:8px;font-size:12px;font-weight:800;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:0.05em;">
+          <a href="${aliLink}" target="_blank" rel="noopener" style="background:linear-gradient(135deg, #ff4747 0%, #d11a1a 100%);color:#fff;text-decoration:none;padding:12px;border-radius:8px;font-size:12px;font-weight:800;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:0.05em;">
             🔴 COMPRAR EN ALIEXPRESS DIRECTO ↗
           </a>
         `;
       } else if(key === 'hotmart'){
         btnsMarkup += `
-          <a href="${group.items[0].link}" target="_blank" rel="noopener" style="background:linear-gradient(135deg, #00c853 0%, #009624 100%);color:#fff;text-decoration:none;padding:12px;border-radius:8px;font-size:12px;font-weight:800;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:0.05em;">
+          <a href="#" target="_blank" rel="noopener" style="background:linear-gradient(135deg, #00c853 0%, #009624 100%);color:#fff;text-decoration:none;padding:12px;border-radius:8px;font-size:12px;font-weight:800;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:0.05em;">
             🟢 ACCEDER EN HOTMART CHECKOUT ↗
           </a>
         `;

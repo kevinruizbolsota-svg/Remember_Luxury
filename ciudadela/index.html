@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dolce&amp;Gabbana — Women's Fall/Winter 2026 Fashion Show | World Live</title>
+<title>MANSIÓN DE LUXE® &middot; Haute Couture, Hypercars, High Jewelry &amp; Horology</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg-black:#000000;
-  --dark:#070709;
-  --dark-glass:rgba(10,10,14,0.92);
+  --dark:#07070a;
+  --dark-glass:rgba(10,10,16,0.92);
   --gold:#e6ca65;
   --gold-light:#fff5c0;
   --gold-gradient:linear-gradient(135deg, #ffffff 0%, #fff2b2 45%, #e6ca65 100%);
@@ -19,6 +19,7 @@
   --gray-dim:#71717a;
   --gray-light:#d4d4d8;
   --border-subtle:rgba(255,255,255,0.12);
+  --font-script:'Alex Brush', cursive;
   --font-serif:'Cormorant Garamond', Georgia, serif;
   --font-sans:'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
 }
@@ -33,7 +34,7 @@ body{
 a{text-decoration:none;color:inherit}
 img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);}
 
-/* 1. TOP HEADER D&G WORLD CON MARCA DE AGUA EN MARQUEE */
+/* 1. TOP HEADER CON MARCA DE AGUA WORLD */
 .dg-header-wrap{
   position:sticky;
   top:0;
@@ -68,10 +69,10 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
 .menu-hamburger{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:6px}
 .menu-hamburger span{display:block;width:24px;height:2px;background:#ffffff}
 .header-center-logo{position:absolute;left:50%;transform:translateX(-50%);z-index:10}
-.dg-logo{font-size:22px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:#ffffff}
-.dg-logo span{font-size:16px;font-weight:300;margin:0 2px}
+.dg-logo{font-size:20px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:#ffffff}
+.dg-logo span{font-size:14px;font-weight:300;margin:0 2px}
 
-/* 2. TRIPTYCH RUNWAY 3 PANELES (SINCRONIZADO Y ANIMADO) */
+/* 2. TRIPTYCH RUNWAY 3 PANELES */
 .triptych-stage{
   position:relative;
   width:100vw;
@@ -91,14 +92,9 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   border-right:2px solid #000000;
 }
 .pane:last-child{border-right:none}
-.pane img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+.pane img{width:100%;height:100%;object-fit:cover}
 .triptych-stage:hover .pane img{transform:scale(1.03)}
 
-/* BOTONES UNMUTE ESQUINAS */
 .pane-unmute-btn{
   position:absolute;
   bottom:28px;
@@ -120,7 +116,6 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
 .unmute-left{left:28px}
 .unmute-right{right:28px}
 
-/* BARRA FLOTANTE D&G */
 .runway-tabs-bar{
   position:absolute;
   bottom:24px;
@@ -134,11 +129,11 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   box-shadow:0 12px 36px rgba(0,0,0,0.95);
 }
 .tab-btn{
-  padding:12px 22px;
-  font-size:12px;
-  font-weight:500;
+  padding:12px 20px;
+  font-size:11px;
+  font-weight:600;
   letter-spacing:0.16em;
-  text-transform:capitalize;
+  text-transform:uppercase;
   color:#ffffff;
   background:transparent;
   border:none;
@@ -148,18 +143,9 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   white-space:nowrap;
 }
 .tab-btn:hover, .tab-btn.active{background:rgba(255,255,255,0.14)}
-.tab-arrow{
-  padding:12px 18px;
-  color:#ffffff;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:transparent;
-  border:none;
-}
+.tab-arrow{padding:12px 18px;color:#ffffff;cursor:pointer;background:transparent;border:none}
 
-/* 3. SECCIÓN IDENTITY MANIFIESTO */
+/* 3. SECCIÓN IDENTITY */
 .identity-section{
   padding:120px 48px 90px;
   max-width:1400px;
@@ -196,178 +182,94 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   box-shadow:0 8px 30px rgba(230, 202, 101, 0.55);
 }
 
-/* 4. CARRUSEL INFINITO DE FOTOS HORIZONTAL INTERACTIVO */
+/* 4. CARRUSEL HORIZONTAL INTERACTIVO */
 .carousel-showcase{
   position:relative;
   width:100vw;
   padding:40px 0 60px;
-  background:#070709;
+  background:#07070a;
   border-top:1px solid var(--border-subtle);
   border-bottom:1px solid var(--border-subtle);
   overflow:hidden;
 }
-.carousel-hdr{
-  padding:0 48px 24px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-.carousel-track{
-  display:flex;
-  gap:16px;
-  padding:0 48px;
-  overflow-x:auto;
-  scroll-behavior:smooth;
-  scrollbar-width:none;
-}
+.carousel-hdr{padding:0 48px 24px;display:flex;justify-content:space-between;align-items:center}
+.carousel-track{display:flex;gap:16px;padding:0 48px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none}
 .carousel-track::-webkit-scrollbar{display:none}
-.slide-card{
-  flex:0 0 340px;
-  height:520px;
-  position:relative;
-  background:#111;
-  overflow:hidden;
-  border:1px solid var(--border-subtle);
-  transition:all .4s ease;
-}
-.slide-card:hover{
-  transform:translateY(-8px);
-  border-color:rgba(230,202,101,0.8);
-  box-shadow:0 15px 35px rgba(0,0,0,0.9);
-}
-.slide-card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+.slide-card{flex:0 0 340px;height:520px;position:relative;background:#111;overflow:hidden;border:1px solid var(--border-subtle);transition:all .4s ease}
+.slide-card:hover{transform:translateY(-8px);border-color:rgba(230,202,101,0.8);box-shadow:0 15px 35px rgba(0,0,0,0.9)}
+.slide-card img{width:100%;height:100%;object-fit:cover}
 .slide-card:hover img{transform:scale(1.08)}
-.slide-caption{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to top, rgba(0,0,0,0.92) 15%, transparent 60%);
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  padding:24px;
-}
+.slide-caption{position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.92) 15%, transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:24px}
 .slide-cat{font-size:10px;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
 .slide-name{font-family:var(--font-serif);font-size:17px;font-style:italic;color:#fff;line-height:1.3;margin-bottom:6px}
 .slide-price{font-size:15px;font-weight:600;font-style:italic;color:var(--gold-light);margin-bottom:12px}
 
-/* 5. SECCIONES SPLIT STICKY SCREEN CON MÚLTIPLES FOTOS PEGADAS */
-.editorial-story{
-  border-top:1px solid var(--border-subtle);
-  position:relative;
-}
-.story-container{
-  display:grid;
-  grid-template-columns:1fr 1.2fr;
-  min-height:100vh;
-}
-.story-text-pane{
-  padding:120px 60px;
-  position:sticky;
-  top:76px;
-  height:calc(100vh - 76px);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
+/* 5. SECCIONES SPLIT STICKY SCREEN */
+.editorial-story{border-top:1px solid var(--border-subtle);position:relative}
+.story-container{display:grid;grid-template-columns:1fr 1.2fr;min-height:100vh}
+.story-text-pane{padding:120px 60px;position:sticky;top:76px;height:calc(100vh - 76px);display:flex;flex-direction:column;justify-content:center}
 .story-num{font-size:11px;font-weight:700;letter-spacing:0.34em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
 .story-title{font-family:var(--font-serif);font-size:clamp(32px,3.8vw,52px);font-weight:400;font-style:italic;line-height:1.15;margin-bottom:20px;color:#ffffff}
 .story-desc{font-family:var(--font-serif);font-size:16px;font-style:italic;line-height:1.85;color:var(--gray-light);margin-bottom:28px;max-width:540px}
 .story-price{font-size:22px;font-weight:600;font-style:italic;color:var(--gold-light);margin-bottom:28px;letter-spacing:0.04em}
 
-.story-media-stream{
+.story-media-stream{display:flex;flex-direction:column;gap:2px;background:rgba(230,202,101,0.15)}
+.stream-img-box{width:100%;height:100vh;position:relative;overflow:hidden;background:#090614}
+.stream-img-box img{width:100%;height:100%;object-fit:cover;opacity:0.92}
+.stream-img-box:hover img{transform:scale(1.05);opacity:1}
+.stream-tag{position:absolute;bottom:30px;left:30px;background:rgba(0,0,0,0.85);border:1px solid var(--border-subtle);color:var(--gold-light);font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;padding:8px 20px;border-radius:20px;backdrop-filter:blur(10px)}
+
+/* 6. CALCULADORA DE VISIÓN & SIMULADOR DE INVERSIÓN "DE LA AGUJA A LA MANSIÓN" */
+.vision-calculator{
+  background:radial-gradient(ellipse at center, #150d2a 0%, #050308 100%);
+  border-top:1px solid rgba(230,202,101,0.3);
+  border-bottom:1px solid rgba(230,202,101,0.3);
+  padding:120px 48px;
+  text-align:center;
+}
+.calc-inner{max-width:900px;margin:0 auto}
+.calc-slider-wrap{
+  margin:40px 0;
   display:flex;
   flex-direction:column;
-  gap:2px;
-  background:rgba(230,202,101,0.15);
+  align-items:center;
+  gap:20px;
 }
-.stream-img-box{
+.calc-range{
   width:100%;
-  height:100vh;
-  position:relative;
-  overflow:hidden;
-  background:#090614;
+  max-width:600px;
+  accent-color:var(--gold);
+  height:6px;
+  cursor:pointer;
 }
-.stream-img-box img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  opacity:0.92;
+.calc-result-box{
+  background:rgba(10,8,20,0.85);
+  border:1px solid rgba(230,202,101,0.4);
+  padding:36px;
+  border-radius:12px;
+  backdrop-filter:blur(20px);
+  margin-top:30px;
 }
-.stream-img-box:hover img{transform:scale(1.05);opacity:1}
-.stream-tag{
-  position:absolute;
-  bottom:30px;
-  left:30px;
-  background:rgba(0,0,0,0.85);
-  border:1px solid var(--border-subtle);
+.calc-estate-title{
+  font-family:var(--font-serif);
+  font-size:32px;
+  font-style:italic;
   color:var(--gold-light);
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:0.2em;
-  text-transform:uppercase;
-  padding:8px 20px;
-  border-radius:20px;
-  backdrop-filter:blur(10px);
+  margin-bottom:10px;
 }
 
-/* 6. MOSAICO COMPLETO DE LOOKS RUNWAY (30+ LOOKS) */
-.mosaic-section{
-  padding:120px 48px 100px;
-  max-width:1600px;
-  margin:0 auto;
-}
-.mosaic-hdr{text-align:center;margin-bottom:70px}
-.mosaic-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));
-  gap:24px;
-}
-.mosaic-card{
-  background:#0d0d11;
-  border:1px solid var(--border-subtle);
-  overflow:hidden;
-  position:relative;
-  transition:all .4s ease;
-  display:flex;
-  flex-direction:column;
-}
-.mosaic-card:hover{
-  transform:translateY(-10px);
-  border-color:rgba(230,202,101,0.8);
-  box-shadow:0 20px 45px rgba(0,0,0,0.95);
-}
-.mosaic-img{
-  aspect-ratio:3/4;
-  overflow:hidden;
-  background:#111;
-  position:relative;
-}
+/* 7. MOSAICO CELEBRIDADES & FOOTER */
+.mosaic-section{padding:120px 48px 100px;max-width:1600px;margin:0 auto}
+.mosaic-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:24px}
+.mosaic-card{background:#0d0d11;border:1px solid var(--border-subtle);overflow:hidden;position:relative;transition:all .4s ease;display:flex;flex-direction:column}
+.mosaic-card:hover{transform:translateY(-10px);border-color:rgba(230,202,101,0.8);box-shadow:0 20px 45px rgba(0,0,0,0.95)}
+.mosaic-img{aspect-ratio:3/4;overflow:hidden;background:#111;position:relative}
 .mosaic-img img{width:100%;height:100%;object-fit:cover}
 .mosaic-card:hover .mosaic-img img{transform:scale(1.07)}
 .mosaic-info{padding:24px;display:flex;flex-direction:column;flex:1}
-.mosaic-cat{font-size:10px;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
-.mosaic-title{font-family:var(--font-serif);font-size:16px;font-weight:500;font-style:italic;color:#fff;line-height:1.4;margin-bottom:10px}
-.mosaic-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:18px}
-.mosaic-price{font-size:19px;font-weight:600;font-style:italic;color:var(--gold-light)}
 
-/* FOOTER D&G */
-.site-footer{
-  background:#040208;
-  border-top:1px solid var(--border-subtle);
-  padding:90px 48px 50px;
-  color:var(--gray-dim);
-}
-.footer-cols{
-  max-width:1400px;
-  margin:0 auto 60px;
-  display:grid;
-  grid-template-columns:repeat(4, 1fr);
-  gap:40px;
-}
+.site-footer{background:#040208;border-top:1px solid var(--border-subtle);padding:90px 48px 50px;color:var(--gray-dim)}
+.footer-cols{max-width:1400px;margin:0 auto 60px;display:grid;grid-template-columns:repeat(4, 1fr);gap:40px}
 .foot-col-title{font-size:11px;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
 .foot-links{list-style:none;display:flex;flex-direction:column;gap:12px}
 .foot-links a{font-size:12px;color:var(--gray-light);transition:all .2s;font-style:italic}
@@ -389,7 +291,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
 </head>
 <body>
 
-<!-- 1. HEADER D&G WORLD CON MARCA DE AGUA -->
+<!-- 1. HEADER CON MARCA DE AGUA WORLD -->
 <header class="dg-header-wrap">
   <div class="marquee-bg">
     WORLD &nbsp;&nbsp;&nbsp; WORLD &nbsp;&nbsp;&nbsp; WORLD &nbsp;&nbsp;&nbsp; WORLD &nbsp;&nbsp;&nbsp; WORLD &nbsp;&nbsp;&nbsp; WORLD
@@ -398,7 +300,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
     <button class="menu-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
   <div class="header-center-logo">
-    <a href="index.html" class="dg-logo">DOLCE <span>&amp;</span> GABBANA</a>
+    <a href="index.html" class="dg-logo">MANSIÓN <span>DE</span> LUXE</a>
   </div>
   <div class="header-right">
     <button style="background:none;border:none;color:#fff;font-size:16px;cursor:pointer;">🔍</button>
@@ -407,7 +309,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
   </div>
 </header>
 
-<!-- 2. TRIPTYCH RUNWAY 3 PANELES (SINCRONIZADOS Y VIVOS) -->
+<!-- 2. TRIPTYCH RUNWAY 3 PANELES -->
 <section class="triptych-stage">
   <div class="pane">
     <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1000&auto=format&fit=crop&q=90" alt="Look Detail Left">
@@ -421,41 +323,39 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
     <button class="pane-unmute-btn unmute-right" onclick="toggleAudio()" title="Unmute"><span id="muteIcon2">🔊</span></button>
   </div>
   <div class="runway-tabs-bar">
-    <button class="tab-btn active" onclick="scrollToSection('identity')">Looks</button>
-    <button class="tab-btn" onclick="scrollToSection('tailoring')">Highlights</button>
-    <button class="tab-btn" onclick="scrollToSection('frontrow')">Celebrities</button>
-    <button class="tab-btn" onclick="scrollToSection('sensuality')">Behind the scenes</button>
-    <button class="tab-btn" onclick="scrollToSection('prints')">Beauty</button>
-    <button class="tab-btn" onclick="scrollToSection('carousel')">Inspiration</button>
+    <button class="tab-btn active" onclick="scrollToSection('identity')">Identity</button>
+    <button class="tab-btn" onclick="scrollToSection('tailoring')">Tailoring</button>
+    <button class="tab-btn" onclick="scrollToSection('horology')">Relojes</button>
+    <button class="tab-btn" onclick="scrollToSection('hypercars')">Hypercars</button>
+    <button class="tab-btn" onclick="scrollToSection('jewelry')">Diamantes</button>
+    <button class="tab-btn" onclick="scrollToSection('estates')">Mansiones</button>
     <button class="tab-arrow">❯</button>
   </div>
 </section>
 
-<!-- 3. SECCIÓN IDENTITY MANIFIESTO COMPLETO -->
+<!-- 3. SECCIÓN IDENTITY -->
 <section class="identity-section" id="identity">
-  <div class="id-eyebrow">WOMEN'S FALL/WINTER 2026 FASHION SHOW &middot; MILANO</div>
-  <h1 class="id-title">IDENTITY</h1>
+  <div class="id-eyebrow">DE LA AGUJA A LA MANSIÓN &middot; COLECCIÓN GLOBAL</div>
+  <h1 class="id-title">IDENTITY &amp; OPULENCIA</h1>
   <div class="id-statement">
-    Dolce&amp;Gabbana Identity is a clear statement: identity is the ultimate luxury. This is not nostalgia. It is presence.
+    Identity is a clear statement: identity is the ultimate luxury. De la Aguja a la Mansión.
   </div>
   <p class="id-text">
-    A language built on roots that are still alive – Sicily as emotion, black as strength, lace as intimacy, tailoring as authority. A vision where femininity and masculinity are in constant dialogue, where the body is not hidden but affirmed.<br>
-    Dolce&amp;Gabbana is sensuality, devotion, glamour, and craftsmanship merged into an aesthetic that is instantly recognizable because it comes from authenticity and passion.<br>
-    <strong>Dolce&amp;Gabbana Identity is the story of remaining true to yourself.</strong>
+    Una visión integral de la grandeza humana: desde la primera puntada de alta costura artesanal hasta el rugido de los motores V12, la precisión del tourbillon de diamantes y la arquitectura de las grandes propiedades del mundo.
   </p>
   <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center;">
-    <a href="#tailoring" class="btn-ali-champagne">View all looks ↓</a>
-    <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.3);">
-      Explorar Catálogo en AliExpress ↗
+    <a href="#horology" class="btn-ali-champagne">Explorar Alta Relojería &amp; Joyas ↓</a>
+    <a href="#hypercars" class="btn-ali-champagne" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.3);">
+      Ver Hypercars &amp; Mansiones ↗
     </a>
   </div>
 </section>
 
-<!-- 4. CARRUSEL INTERACTIVO DE FOTOS RUNWAY LOOKS -->
+<!-- 4. CARRUSEL HORIZONTAL RUNWAY LOOKS -->
 <section class="carousel-showcase" id="carousel">
   <div class="carousel-hdr">
     <div>
-      <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">PASARELA EN VIVO</div>
+      <div style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">PASARELA &amp; ALTA COSTURA</div>
       <h2 style="font-family:var(--font-serif);font-size:28px;font-style:italic;color:#fff;">Looks de Pasarela FW 2026</h2>
     </div>
     <div style="display:flex;gap:10px;">
@@ -463,267 +363,167 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
       <button onclick="scrollTrack(400)" style="background:rgba(255,255,255,0.1);border:1px solid var(--border-subtle);color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;">❯</button>
     </div>
   </div>
-
   <div class="carousel-track" id="cTrack">
-    <!-- SLIDE 1 -->
-    <div class="slide-card">
-      <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=700&auto=format&fit=crop&q=88" alt="Vestido Crepé Nero">
-      <div class="slide-caption">
-        <div class="slide-cat">LOOK 01 &middot; GALA</div>
-        <div class="slide-name">Vestido en Doble Crepé Nero</div>
-        <div class="slide-price">€ 2.450 / $ 42.80 Ali</div>
-        <a href="https://www.aliexpress.com/item/1005006428901234.html" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a>
-      </div>
-    </div>
-    <!-- SLIDE 2 -->
-    <div class="slide-card">
-      <img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=700&auto=format&fit=crop&q=88" alt="Vestido Gasa Floral">
-      <div class="slide-caption">
-        <div class="slide-cat">LOOK 02 &middot; SEDA</div>
-        <div class="slide-name">Vestido en Gasa de Seda Floral</div>
-        <div class="slide-price">€ 4.765 / $ 45.20 Ali</div>
-        <a href="https://www.aliexpress.com/item/1005005987654321.html" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a>
-      </div>
-    </div>
-    <!-- SLIDE 3 -->
-    <div class="slide-card">
-      <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=700&auto=format&fit=crop&q=88" alt="Mini Grandma Bag">
-      <div class="slide-caption">
-        <div class="slide-cat">LOOK 03 &middot; MARROQUINERÍA</div>
-        <div class="slide-name">Mini Grandma Handbag Nappa</div>
-        <div class="slide-price">€ 5.255 / $ 38.90 Ali</div>
-        <a href="https://www.aliexpress.com/item/1005006123456789.html" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a>
-      </div>
-    </div>
-    <!-- SLIDE 4 -->
-    <div class="slide-card">
-      <img src="https://images.unsplash.com/photo-1551803091-e20673f15770?w=700&auto=format&fit=crop&q=88" alt="Top Tul Bordado">
-      <div class="slide-caption">
-        <div class="slide-cat">LOOK 04 &middot; ALTA COSTURA</div>
-        <div class="slide-name">Top en Tul Bordado a Mano</div>
-        <div class="slide-price">€ 4.075 / $ 26.50 Ali</div>
-        <a href="https://www.aliexpress.com/item/1005003654789123.html" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a>
-      </div>
-    </div>
-    <!-- SLIDE 5 -->
-    <div class="slide-card">
-      <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=700&auto=format&fit=crop&q=88" alt="Slingback Floral">
-      <div class="slide-caption">
-        <div class="slide-cat">LOOK 05 &middot; CALZADO</div>
-        <div class="slide-name">Slingbacks en Piel Floral</div>
-        <div class="slide-price">€ 1.265 / $ 29.90 Ali</div>
-        <a href="https://www.aliexpress.com/item/1005004123987456.html" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a>
-      </div>
-    </div>
-    <!-- SLIDE 6 -->
-    <div class="slide-card">
-      <img src="https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=700&auto=format&fit=crop&q=88" alt="Falda Chantilly">
-      <div class="slide-caption">
-        <div class="slide-cat">LOOK 06 &middot; ENCAJE</div>
-        <div class="slide-name">Falda de Tubo en Encaje Chantilly</div>
-        <div class="slide-price">€ 3.795 / $ 32.80 Ali</div>
-        <a href="https://www.aliexpress.com/item/1005005123654987.html" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a>
-      </div>
-    </div>
-    <!-- SLIDE 7 -->
-    <div class="slide-card">
-      <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=700&auto=format&fit=crop&q=88" alt="Bolso Sicily">
-      <div class="slide-caption">
-        <div class="slide-cat">LOOK 07 &middot; BOLSO ICÓNICO</div>
-        <div class="slide-name">Bolso Sicily Pequeño en Piel Dauphine</div>
-        <div class="slide-price">€ 1.850 / $ 34.00 Ali</div>
-        <a href="https://www.aliexpress.com/item/1005004876543210.html" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a>
-      </div>
-    </div>
+    <div class="slide-card"><img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=700&auto=format&fit=crop" alt="Vestido Nero"><div class="slide-caption"><div class="slide-cat">LOOK 01 &middot; GALA</div><div class="slide-name">Vestido en Doble Crepé Nero</div><div class="slide-price">€ 2.450 / $ 42.80 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a></div></div>
+    <div class="slide-card"><img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=700&auto=format&fit=crop" alt="Vestido Floral"><div class="slide-caption"><div class="slide-cat">LOOK 02 &middot; SEDA</div><div class="slide-name">Vestido en Gasa de Seda Floral</div><div class="slide-price">€ 4.765 / $ 45.20 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a></div></div>
+    <div class="slide-card"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=700&auto=format&fit=crop" alt="Mini Grandma"><div class="slide-caption"><div class="slide-cat">LOOK 03 &middot; BOLSO</div><div class="slide-name">Mini Grandma Handbag Nappa</div><div class="slide-price">€ 5.255 / $ 38.90 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a></div></div>
+    <div class="slide-card"><img src="https://images.unsplash.com/photo-1551803091-e20673f15770?w=700&auto=format&fit=crop" alt="Top Tul"><div class="slide-caption"><div class="slide-cat">LOOK 04 &middot; BORDADOS</div><div class="slide-name">Top en Tul Bordado a Mano</div><div class="slide-price">€ 4.075 / $ 26.50 Ali</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:8px 16px;font-size:10px;">Comprar ↗</a></div></div>
   </div>
 </section>
 
-<!-- 5. CAPÍTULOS CON MÚLTIPLES FOTOS GIGANTES PEGADAS -->
-<!-- CAPÍTULO I: TAILORING -->
+<!-- 5. CAPÍTULOS DE HISTORIAS CON STICKY MULTI-FOTOS GIGANTES -->
+
+<!-- CAPÍTULO I: ALTA SASTRERÍA -->
 <section class="editorial-story" id="tailoring">
   <div class="story-container">
     <div class="story-text-pane">
       <div class="story-num">CAPÍTULO I &middot; ALTA SASTRERÍA</div>
       <h2 class="story-title">Tailoring: rules and exception</h2>
-      <p class="story-desc">
-        In the Women’s Fall/Winter 2026 Fashion Show, a return to origins unfolds, where the rigor of tailoring is revived through precise cuts, studied silhouettes and classic patterns such as wool pinstripes. The technical features of the double-breasted construction are echoed on the back of jackets, mirroring the front.
-      </p>
+      <p class="story-desc">El rigor de la sastrería italiana: cortes precisos, rayas tiza en lana virgen y la doble botonadura invertida que redefine la silueta de alta costura.</p>
       <div class="story-price">Esmoquin Sartorial Doble Faz &middot; € 3.850 / $ 58.50 USD</div>
-      <div>
-        <a href="https://www.aliexpress.com/item/1005005891234567.html" target="_blank" class="btn-ali-champagne">
-          Comprar en AliExpress ↗
-        </a>
-      </div>
+      <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Comprar en AliExpress ↗</a></div>
     </div>
     <div class="story-media-stream">
-      <div class="stream-img-box">
-        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&auto=format&fit=crop&q=90" alt="Tailoring Look 1">
-        <span class="stream-tag">Look 01 &middot; Pinstripe Double-Breasted</span>
-      </div>
-      <div class="stream-img-box">
-        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1200&auto=format&fit=crop&q=90" alt="Tailoring Look 2">
-        <span class="stream-tag">Look 02 &middot; Sastrería de Terciopelo</span>
-      </div>
-      <div class="stream-img-box">
-        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1200&auto=format&fit=crop&q=90" alt="Tailoring Look 3">
-        <span class="stream-tag">Look 03 &middot; Traje Masculino &amp; Corbata</span>
-      </div>
+      <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&auto=format&fit=crop" alt="Tailoring 1"><span class="stream-tag">Look 01 &middot; Pinstripe Double Breasted</span></div>
+      <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1200&auto=format&fit=crop" alt="Tailoring 2"><span class="stream-tag">Look 02 &middot; Sastrería de Terciopelo</span></div>
     </div>
   </div>
 </section>
 
-<!-- CAPÍTULO II: DISCREET SENSUALITY -->
-<section class="editorial-story" id="sensuality">
+<!-- CAPÍTULO II: ALTA RELOJERÍA (HOROLOGY) -->
+<section class="editorial-story" id="horology">
   <div class="story-container">
     <div class="story-text-pane">
-      <div class="story-num">CAPÍTULO II &middot; ENCAJE SICILIANO</div>
-      <h2 class="story-title">Discreet sensuality</h2>
+      <div class="story-num">CAPÍTULO II &middot; ALTA RELOJERÍA SUIZA</div>
+      <h2 class="story-title">Master Tourbillon Skeleton &amp; Oro Rosa</h2>
       <p class="story-desc">
-        The show highlights the brand’s immediately recognizable identity, connected to a return to its origins — to an archaic Sicily and its evocative imagery, expressed through total black, shawls, crochet craftsmanship and clear references to tradition. Lace assumes an essential role, tracing the contours of the body.
+        La cúspide de la micromecánica: calibre esqueleto con complicación de Tourbillon flotante de un minuto. Caja en oro rosa de 18 quilates, cristal de zafiro antirreflejo doble y reserva de marcha de 72 horas. Cada puente ha sido biselado y pulido a mano durante más de 120 horas por maestros relojeros en Ginebra.
       </p>
-      <div class="story-price">Vestido en Encaje Chantilly &middot; € 4.765 / $ 45.20 USD</div>
-      <div>
-        <a href="https://www.aliexpress.com/item/1005005987654321.html" target="_blank" class="btn-ali-champagne">
-          Comprar en AliExpress ↗
-        </a>
-      </div>
+      <div class="story-price">Cronógrafo Royal Skeleton &middot; € 85.000 / $ 68.00 Ali Edition</div>
+      <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Comprar Reloj en AliExpress Hub ↗</a></div>
     </div>
     <div class="story-media-stream">
-      <div class="stream-img-box">
-        <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=1200&auto=format&fit=crop&q=90" alt="Sensuality 1">
-        <span class="stream-tag">Look 04 &middot; Sheer Lace Gown</span>
-      </div>
-      <div class="stream-img-box">
-        <img src="https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=1200&auto=format&fit=crop&q=90" alt="Sensuality 2">
-        <span class="stream-tag">Look 05 &middot; Layered Sicilian Silk</span>
-      </div>
-      <div class="stream-img-box">
-        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1200&auto=format&fit=crop&q=90" alt="Sensuality 3">
-        <span class="stream-tag">Look 06 &middot; Corsetería Esculpida</span>
-      </div>
+      <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1200&auto=format&fit=crop" alt="Watch Skeleton Close Up"><span class="stream-tag">Calibre Tourbillon Esqueleto &middot; Oro 18K</span></div>
+      <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=1200&auto=format&fit=crop" alt="Luxury Chronograph Detail"><span class="stream-tag">Cronógrafo Suizo de Precisión</span></div>
     </div>
   </div>
 </section>
 
-<!-- CAPÍTULO III: PRINTS & EMBROIDERY -->
-<section class="editorial-story" id="prints">
+<!-- CAPÍTULO III: ALTA JOYERÍA & DIAMANTES SOLITARIOS -->
+<section class="editorial-story" id="jewelry">
   <div class="story-container">
     <div class="story-text-pane">
-      <div class="story-num">CAPÍTULO III &middot; FLORES &amp; BORDADOS</div>
-      <h2 class="story-title">Between prints and embroidery</h2>
+      <div class="story-num">CAPÍTULO III &middot; ALTA JOYERÍA &amp; DIAMANTES</div>
+      <h2 class="story-title">Gargantilla Riviera &amp; Diamantes Pureza Flawless</h2>
       <p class="story-desc">
-        White flowers bloom across the lightest black fabrics, recalling Dolce&amp;Gabbana’s aesthetic codes. Archival prints inspired by Sicilian tradition find their purpose in garments with a distinctly contemporary spirit — crafted in chiffon and charmeuse, enriched with sequin applications.
+        Inspirada en el esplendor de la nobleza mediterránea: diamantes talla brillante y esmeralda engastados en platino 950. Piedras seleccionadas a mano bajo los estándares más estrictos de color D y claridad Flawless, reflejando el fuego y la eternidad del lujo más puro.
       </p>
-      <div class="story-price">Top Tul Bordado a Mano &middot; € 4.075 / $ 26.50 USD</div>
-      <div>
-        <a href="https://www.aliexpress.com/item/1005003654789123.html" target="_blank" class="btn-ali-champagne">
-          Comprar en AliExpress ↗
-        </a>
-      </div>
+      <div class="story-price">Collier Riviera Imperial &middot; € 140.000 / $ 45.00 Ali Edition</div>
+      <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Comprar Joyas en AliExpress ↗</a></div>
     </div>
     <div class="story-media-stream">
-      <div class="stream-img-box">
-        <img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=1200&auto=format&fit=crop&q=90" alt="Floral Prints">
-        <span class="stream-tag">Look 07 &middot; Chiffon Floral</span>
-      </div>
-      <div class="stream-img-box">
-        <img src="https://images.unsplash.com/photo-1551803091-e20673f15770?w=1200&auto=format&fit=crop&q=90" alt="Embroidered Top">
-        <span class="stream-tag">Look 08 &middot; Sequins &amp; Tulle</span>
-      </div>
+      <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1200&auto=format&fit=crop" alt="Diamantes y Joyas de Lujo"><span class="stream-tag">Collar Riviera en Diamantes &amp; Platino</span></div>
+      <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=1200&auto=format&fit=crop" alt="Pendientes de Diamantes"><span class="stream-tag">Pendientes Cascada en Oro Blanco</span></div>
     </div>
   </div>
 </section>
 
-<!-- 6. SPOTLIGHTS ON BAGS & ACCESSORIES -->
-<section class="editorial-story" id="bags">
+<!-- CAPÍTULO IV: HYPERCARS & INGENIERÍA ITALIANA -->
+<section class="editorial-story" id="hypercars">
   <div class="story-container">
     <div class="story-text-pane">
-      <div class="story-num">CAPÍTULO IV &middot; MARROQUINERÍA &amp; ZAPATOS</div>
-      <h2 class="story-title">Spotlights on bags &amp; shoes</h2>
+      <div class="story-num">CAPÍTULO IV &middot; HYPERCARS &amp; VELOCIDAD PURA</div>
+      <h2 class="story-title">Scuderia Monoplaza V12 &middot; Fibra de Carbono</h2>
       <p class="story-desc">
-        A new model captures attention on the runway: the Mini Grandma Handbag, presented in supple plongé nappa with a refined concealed mirror within. Accompanied by the iconic My Sicily Bag in Dauphine leather, and floral calfskin slingbacks.
+        La máxima expresión del diseño aerodinámico y la potencia mecánica: motor V12 atmosférico de 850 CV, chasis monocasco de fibra de carbono forjada e interiores cosidos a mano en piel Alcántara Nero con pespuntes en hilo de oro. De 0 a 100 km/h en 2.6 segundos.
       </p>
-      <div class="story-price">Mini Grandma Handbag Nappa &middot; € 5.255 / $ 38.90 USD</div>
-      <div>
-        <a href="https://www.aliexpress.com/item/1005006123456789.html" target="_blank" class="btn-ali-champagne">
-          Comprar Bolso en AliExpress ↗
-        </a>
-      </div>
+      <div class="story-price">Hypercar Monocasco Nero &middot; € 3.200.000 / Accesorios VIP Ali</div>
+      <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Ver Accesorios Motor en AliExpress ↗</a></div>
     </div>
     <div class="story-media-stream">
-      <div class="stream-img-box">
-        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1200&auto=format&fit=crop&q=90" alt="Mini Grandma Handbag">
-        <span class="stream-tag">The New Mini Grandma Handbag</span>
+      <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&auto=format&fit=crop" alt="Hypercar Black Stealth"><span class="stream-tag">Hypercar V12 &middot; Chasis Carbono Forjado</span></div>
+      <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=1200&auto=format&fit=crop" alt="Hypercar Detail Cockpit"><span class="stream-tag">Cockpit en Piel Alcántara &amp; Oro</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPÍTULO V: MANSIONES & PROPIEDADES DE ÉLITE -->
+<section class="editorial-story" id="estates">
+  <div class="story-container">
+    <div class="story-text-pane">
+      <div class="story-num">CAPÍTULO V &middot; ARQUITECTURA &amp; MANSIONES</div>
+      <h2 class="story-title">Villa Paradiso &middot; Lago de Como &amp; Costa Esmeralda</h2>
+      <p class="story-desc">
+        La culminación del viaje: "De la Aguja a la Mansión". Propiedades monumentales frente al mar con helipuerto privado, piscina infinita climatizada sobre el acantilado, bodega subterránea de añadas históricas y diseño interior de autor con mármol de Carrara y maderas nobles.
+      </p>
+      <div class="story-price">Mansión Villa Paradiso &middot; € 18.500.000 / Decoración Ali Home</div>
+      <div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Comprar Decoración de Mansión ↗</a></div>
+    </div>
+    <div class="story-media-stream">
+      <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&auto=format&fit=crop" alt="Mansión Villa de Lujo"><span class="stream-tag">Villa Paradiso &middot; Piscina Infinita &amp; Helipuerto</span></div>
+      <div class="stream-img-box"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&auto=format&fit=crop" alt="Interior Mansión Mármol"><span class="stream-tag">Salón Principal en Mármol de Carrara</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. SIMULADOR INTERACTIVO "DE LA AGUJA A LA MANSIÓN" -->
+<section class="vision-calculator">
+  <div class="calc-inner">
+    <div style="font-size:11px;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">SIMULADOR DE VISIÓN FINANCIERA</div>
+    <h2 style="font-family:var(--font-serif);font-size:42px;font-style:italic;color:#fff;margin-bottom:18px;">¿Cuál es tu siguiente Mansión?</h2>
+    <p style="font-family:var(--font-serif);font-size:17px;font-style:italic;color:var(--gray-light);">Desliza tu nivel de ambición e inversión para proyectar tu ecosistema de lujo completo:</p>
+    
+    <div class="calc-slider-wrap">
+      <input type="range" min="1" max="5" value="3" class="calc-range" id="ambitionSlider" oninput="updateEstateCalc(this.value)">
+      <div style="display:flex;justify-content:space-between;width:100%;max-width:600px;font-size:11px;color:var(--gray-dim);letter-spacing:0.1em;">
+        <span>1. La Aguja (Moda)</span>
+        <span>2. Relojería</span>
+        <span>3. Joyas &amp; Oro</span>
+        <span>4. Hypercar</span>
+        <span>5. La Mansión</span>
       </div>
-      <div class="stream-img-box">
-        <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=1200&auto=format&fit=crop&q=90" alt="Devotion Bag Gold">
-        <span class="stream-tag">Devotion Sacred Heart Bag</span>
-      </div>
-      <div class="stream-img-box">
-        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=1200&auto=format&fit=crop&q=90" alt="Floral Slingbacks">
-        <span class="stream-tag">Floral Calfskin Slingbacks</span>
+    </div>
+
+    <div class="calc-result-box" id="calcResult">
+      <div class="calc-estate-title" id="resTitle">Nivel 3: Joyas Imperiales &amp; Suite Presidencial</div>
+      <p style="font-family:var(--font-serif);font-size:16px;font-style:italic;color:var(--gray-light);" id="resDesc">
+        Colección de diamantes solitarios, suite con vistas a la Costa Azul y vestidor a medida de alta costura.
+      </p>
+      <div style="margin-top:20px;">
+        <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne">Equipar este Estilo en AliExpress ↗</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 7. MOSAICO COMPLETO DE LOOKS RUNWAY (FRONT ROW & BACKSTAGE) -->
+<!-- 7. MOSAICO CELEBRIDADES FRONT ROW -->
 <section class="mosaic-section" id="frontrow">
   <div class="mosaic-hdr">
     <div style="font-size:11px;letter-spacing:.36em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">ALL THE STARS IN FRONT ROW</div>
-    <h2 style="font-family:var(--font-serif);font-size:38px;font-style:italic;color:#fff;">Celebrities &amp; Backstage</h2>
-    <p style="font-family:var(--font-serif);font-size:16px;font-style:italic;color:var(--gray-light);max-width:650px;margin:12px auto 0;">
-      Discover the exclusive lineup of guests at the Women’s Fall/Winter 2026 Fashion Show, featuring Madonna, Alberto Guerra and international tastemakers.
-    </p>
+    <h2 style="font-family:var(--font-serif);font-size:38px;font-style:italic;color:#fff;">Celebrities, Hypercars &amp; Backstage</h2>
   </div>
-
   <div class="mosaic-grid">
-    <div class="mosaic-card">
-      <div class="mosaic-img"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=85" alt="Madonna Front Row"></div>
-      <div class="mosaic-info">
-        <div class="mosaic-cat">FRONT ROW VIP</div>
-        <div class="mosaic-title">Madonna &middot; Total Black Identity Lace Veil</div>
-        <div class="mosaic-price-row"><span class="mosaic-price">Look Exclusivo</span></div>
-        <a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:10px;font-size:11px;justify-content:center;">Ver Estilo en AliExpress ↗</a>
-      </div>
-    </div>
-
-    <div class="mosaic-card">
-      <div class="mosaic-img"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=85" alt="Alberto Guerra"></div>
-      <div class="mosaic-info">
-        <div class="mosaic-cat">GUEST OF HONOR</div>
-        <div class="mosaic-title">Alberto Guerra &middot; Tailored Double Breasted Suit</div>
-        <div class="mosaic-price-row"><span class="mosaic-price">Sastrería Siciliana</span></div>
-        <a href="https://www.aliexpress.com/item/1005004781293847.html" target="_blank" class="btn-ali-champagne" style="padding:10px;font-size:11px;justify-content:center;">Comprar Traje en AliExpress ↗</a>
-      </div>
-    </div>
-
-    <div class="mosaic-card">
-      <div class="mosaic-img"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&auto=format&fit=crop&q=85" alt="Backstage Beauty"></div>
-      <div class="mosaic-info">
-        <div class="mosaic-cat">CANDID SHOTS &middot; BACKSTAGE</div>
-        <div class="mosaic-title">Bambola Beauty Look &middot; The Perfect Sicilian Glow</div>
-        <div class="mosaic-price-row"><span class="mosaic-price">Ritual Ever-Youth Skincare</span></div>
-        <a href="https://www.aliexpress.com/item/1005006789123456.html" target="_blank" class="btn-ali-champagne" style="padding:10px;font-size:11px;justify-content:center;">Comprar Set Skincare en AliExpress ↗</a>
-      </div>
-    </div>
+    <div class="mosaic-card"><div class="mosaic-img"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop" alt="Madonna Front Row"></div><div class="mosaic-info"><div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;">FRONT ROW VIP</div><div style="font-family:var(--font-serif);font-size:16px;font-style:italic;color:#fff;margin-bottom:10px;">Madonna &middot; Total Black Identity Lace Veil</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:10px;font-size:11px;justify-content:center;">Ver Look ↗</a></div></div>
+    <div class="mosaic-card"><div class="mosaic-img"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop" alt="Alberto Guerra"></div><div class="mosaic-info"><div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;">GUEST OF HONOR</div><div style="font-family:var(--font-serif);font-size:16px;font-style:italic;color:#fff;margin-bottom:10px;">Alberto Guerra &middot; Tailored Double Breasted Suit</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:10px;font-size:11px;justify-content:center;">Comprar Traje ↗</a></div></div>
+    <div class="mosaic-card"><div class="mosaic-img"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&auto=format&fit=crop" alt="Backstage Beauty"></div><div class="mosaic-info"><div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;">CANDID SHOTS &middot; BACKSTAGE</div><div style="font-family:var(--font-serif);font-size:16px;font-style:italic;color:#fff;margin-bottom:10px;">Bambola Beauty Look &middot; Sicilian Glow</div><a href="https://www.aliexpress.com" target="_blank" class="btn-ali-champagne" style="padding:10px;font-size:11px;justify-content:center;">Comprar Set ↗</a></div></div>
   </div>
 </section>
 
-<!-- FOOTER OFICIAL D&G -->
+<!-- FOOTER OFICIAL -->
 <footer class="site-footer">
   <div class="footer-cols">
     <div>
-      <div class="foot-col-title">WORLD OF DOLCE&amp;GABBANA</div>
+      <div class="foot-col-title">DE LA AGUJA A LA MANSIÓN</div>
       <ul class="foot-links">
-        <li><a href="https://www.dolcegabbana.com" target="_blank">DOLCEGABBANA.COM ↗</a></li>
-        <li><a href="https://altamoda.dolcegabbana.com" target="_blank">ALTA MODA MILANO ↗</a></li>
-        <li><a href="https://boutique.dolcegabbana.com" target="_blank">BOUTIQUES &amp; STORES ↗</a></li>
-        <li><a href="https://sustainability.dolcegabbana.com" target="_blank">SUSTAINABILITY ↗</a></li>
+        <li><a href="#tailoring">Alta Costura &middot; La Aguja</a></li>
+        <li><a href="#horology">Relojería Suiza Tourbillon</a></li>
+        <li><a href="#jewelry">Diamantes &amp; Joyas Riviera</a></li>
+        <li><a href="#hypercars">Hypercars V12 Stealth</a></li>
+        <li><a href="#estates">Mansiones Lago de Como</a></li>
       </ul>
     </div>
     <div>
-      <div class="foot-col-title">FASHION SHOW SERVICES</div>
+      <div class="foot-col-title">COMPRA DIRECTA ALIEXPRESS</div>
       <ul class="foot-links">
         <li><a href="https://www.aliexpress.com" target="_blank">AliExpress Direct Checkout ↗</a></li>
         <li><a href="https://www.aliexpress.com" target="_blank">AliExpress Choice Delivery ↗</a></li>
@@ -735,22 +535,20 @@ img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 0
       <div class="foot-col-title">LEGAL &amp; CORPORATE</div>
       <ul class="foot-links">
         <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Cookie Policy</a></li>
         <li><a href="#">Terms of Sale</a></li>
         <li><a href="#">Security &amp; SSL</a></li>
       </ul>
     </div>
     <div>
-      <div class="foot-col-title">CUSTOMER CARE</div>
+      <div class="foot-col-title">CUSTOMER CONCIERGE</div>
       <ul class="foot-links">
-        <li><a href="#">Contact Us Concierge</a></li>
-        <li><a href="#">Size Guide (Italian Sizing)</a></li>
-        <li><a href="#">Order Tracking 24/7</a></li>
+        <li><a href="#">VIP Private Advisor 24/7</a></li>
+        <li><a href="#">Worldwide Delivery Tracking</a></li>
       </ul>
     </div>
   </div>
   <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#777;max-width:1400px;margin:0 auto;flex-wrap:wrap;gap:12px;">
-    <span>&copy; Dolce &amp; Gabbana S.R.L. 2026 — All rights reserved. Conexión Directa Proveedores AliExpress.</span>
+    <span>&copy; 2026 MANSIÓN DE LUXE &middot; De la Aguja a la Mansión. Conexión Directa Proveedores Oficiales.</span>
     <span>VAT NUMBER 09297890155 – SIAE LICENCE N. 637/1/763</span>
   </div>
 </footer>
@@ -777,6 +575,22 @@ function toggleAudio(){
   } else {
     icon1.textContent = '🔇';
     icon2.textContent = '🔇';
+  }
+}
+
+function updateEstateCalc(val){
+  const t = document.getElementById('resTitle');
+  const d = document.getElementById('resDesc');
+  const steps = {
+    "1": { title: "Nivel 1: La Aguja — Alta Sastrería & Vestidos de Pasarela", desc: "Comienza tu legado con prendas exclusivas hechas a mano en seda italiana y encaje Chantilly." },
+    "2": { title: "Nivel 2: Precisión Horológica — Cronógrafos Tourbillon", desc: "El dominio del tiempo con calibres automáticos en oro macizo de 18K y cristal de zafiro." },
+    "3": { title: "Nivel 3: Joyas Imperiales & Diamantes Solitarios", desc: "Gargantillas Riviera y anillos de compromiso de pureza Flawless engastados en platino 950." },
+    "4": { title: "Nivel 4: Hypercar V12 & Garaje de Ensueño", desc: "Monocasco de fibra de carbono forjada, 850 caballos de fuerza y tapicería Alcántara en hilo de oro." },
+    "5": { title: "Nivel 5: La Mansión — Villa Paradiso Lago de Como", desc: "La cima absoluta: propiedad arquitectónica frente al agua con helipuerto, piscina infinita y bodega subterránea." }
+  };
+  if(steps[val]){
+    t.textContent = steps[val].title;
+    d.textContent = steps[val].desc;
   }
 }
 </script>

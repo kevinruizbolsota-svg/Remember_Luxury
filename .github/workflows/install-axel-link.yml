@@ -1,0 +1,43 @@
+name: Install AXEL AI link
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add shared AXEL bridge to three pages
+        shell: bash
+        run: |
+          set -e
+          for f in ciudadela/axel.html ciudadela/agentes.html ciudadela/nexus.html; do
+            if [ -f "$f" ] && ! grep -q 'axel-ai-link.js' "$f"; then
+              python - "$f" <<'PY'
+import sys
+p=sys.argv[1]
+s=open(p,encoding='utf-8').read()
+tag='<script src="axel-ai-link.js"></script>'
+if 'axel-ai-link.js' not in s:
+    i=s.lower().rfind('</body>')
+    s=s[:i]+tag+'\n'+s[i:] if i>=0 else s+'\n'+tag+'\n'
+    open(p,'w',encoding='utf-8').write(s)
+PY
+            fi
+          done
+          git config user.name 'orionix-axel-bot'
+          git config user.email 'actions@github.com'
+          git add ciudadela/axel.html ciudadela/agentes.html ciudadela/nexus.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Connect AXEL AI link across core pages'
+          git push
+      - name: Remove temporary installer
+        shell: bash
+        run: |
+          git rm .github/workflows/install-axel-link.yml || true
+          git config user.name 'orionix-axel-bot'
+          git config user.email 'actions@github.com'
+          git commit -m 'Remove temporary AXEL installer' || true
+          git push || true

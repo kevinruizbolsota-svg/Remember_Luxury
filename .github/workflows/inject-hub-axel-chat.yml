@@ -1,0 +1,32 @@
+name: Install AXEL chat in Nexus Central
+on:
+  push:
+    paths:
+      - 'ciudadela/hub-axel-chat.js'
+      - '.github/workflows/inject-hub-axel-chat.yml'
+permissions:
+  contents: write
+jobs:
+  install:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inject AXEL chat
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('ciudadela/hub.html')
+          s=p.read_text(encoding='utf-8')
+          tag='<script src="hub-axel-chat.js"></script>'
+          if tag not in s:
+              s=s.replace('</body>',tag+'\n</body>',1)
+              p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add ciudadela/hub.html
+          git diff --cached --quiet || git commit -m 'feat: enable AXEL chat in Nexus Central'
+          git push

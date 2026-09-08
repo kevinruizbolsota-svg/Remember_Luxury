@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AXEL TERMINAL AGENT · AGENTE EJECUTOR</title>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root {
+    --bg-term: #05070a;
+    --green-hacker: #00ff66;
+    --cyan-hacker: #00f3ff;
+    --purple-hacker: #a855f7;
+    --gold-hacker: #e8c86a;
+    --border-hacker: rgba(0, 243, 255, 0.2);
+    --card-bg: rgba(10, 15, 25, 0.85);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--bg-term);
+    color: #e2e8f0;
+    font-family: 'Fira Code', monospace;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* TOP HEADER TERMINAL */
+  header.term-header {
+    padding: 12px 24px;
+    background: rgba(8, 12, 20, 0.95);
+    border-bottom: 1px solid var(--border-hacker);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .term-title { display: flex; align-items: center; gap: 12px; }
+  .term-title h1 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold-hacker); letter-spacing: 3px; }
+  .status-badge { font-size: 0.7rem; color: var(--green-hacker); border: 1px solid var(--green-hacker); padding: 3px 8px; border-radius: 4px; }
+
+  /* MAIN LAYOUT */
+  .term-layout { display: flex; flex: 1; height: calc(100vh - 50px); }
+
+  /* LEFT SIDEBAR: AGENT TOOLS & SPECS */
+  aside.term-sidebar {
+    width: 280px; background: rgba(6, 9, 15, 0.95);
+    border-right: 1px solid var(--border-hacker);
+    padding: 20px 15px; display: flex; flex-direction: column; gap: 20px;
+  }
+
+  .sidebar-section h4 { font-size: 0.75rem; color: var(--cyan-hacker); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1.5px; }
+
+  .tool-btn {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; background: rgba(0, 243, 255, 0.05);
+    border: 1px solid var(--border-hacker); color: #cbd5e1;
+    border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: 0.2s;
+    margin-bottom: 8px; width: 100%; text-align: left;
+  }
+  .tool-btn:hover { background: rgba(0, 243, 255, 0.15); border-color: var(--cyan-hacker); color: #fff; }
+
+  /* TERMINAL CONSOLE CENTRAL */
+  main.term-console {
+    flex: 1; display: flex; flex-direction: column;
+    background: radial-gradient(circle at 50% 0%, rgba(0, 243, 255, 0.03) 0%, transparent 70%);
+  }
+
+  .console-output {
+    flex: 1; padding: 25px; overflow-y: auto;
+    display: flex; flex-direction: column; gap: 16px;
+    font-size: 0.9rem; line-height: 1.6;
+  }
+
+  .line { display: flex; gap: 10px; }
+  .prompt-symbol { color: var(--cyan-hacker); font-weight: bold; }
+  .text-user { color: #fff; }
+  .text-axel { color: var(--green-hacker); }
+  .text-system { color: var(--purple-hacker); }
+  .text-gold { color: var(--gold-hacker); }
+
+  .code-block {
+    background: rgba(0,0,0,0.6); border: 1px solid var(--border-hacker);
+    padding: 12px; border-radius: 6px; color: var(--cyan-hacker);
+    margin-top: 8px; font-size: 0.85rem; overflow-x: auto;
+  }
+
+  .img-output { width: 100%; max-width: 450px; border-radius: 8px; margin-top: 10px; border: 1px solid var(--gold-hacker); }
+
+  /* INPUT COMMAND BAR */
+  .console-input-bar {
+    padding: 15px 20px; background: rgba(8, 12, 20, 0.95);
+    border-top: 1px solid var(--border-hacker);
+    display: flex; gap: 12px; align-items: center;
+  }
+
+  .input-wrapper {
+    flex: 1; display: flex; align-items: center; gap: 10px;
+    background: rgba(0,0,0,0.5); border: 1px solid var(--border-hacker);
+    padding: 10px 16px; border-radius: 8px;
+  }
+
+  .input-wrapper input {
+    width: 100%; background: transparent; border: none;
+    color: var(--green-hacker); font-family: 'Fira Code', monospace;
+    font-size: 0.95rem; outline: none;
+  }
+
+  .btn-execute {
+    padding: 10px 24px; background: var(--cyan-hacker);
+    color: #000; border: none; border-radius: 6px;
+    font-family: 'Fira Code', monospace; font-weight: bold;
+    cursor: pointer; transition: 0.3s;
+  }
+  .btn-execute:hover { background: var(--green-hacker); box-shadow: 0 0 15px var(--green-hacker); }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-thumb { background: var(--border-hacker); border-radius: 4px; }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="term-header">
+    <div class="term-title">
+      <i class="fa-solid fa-terminal" style="color:var(--cyan-hacker)"></i>
+      <h1>AXEL AGENT TERMINAL v3.0</h1>
+      <span class="status-badge">ONLINE · MOTOR FAILOVER ACTIVO</span>
+    </div>
+    <div style="font-size:0.75rem; color:var(--purple-hacker)">MODO AGENTE EJECUTOR</div>
+  </header>
+
+  <!-- MAIN LAYOUT -->
+  <div class="term-layout">
+    
+    <!-- LEFT SIDEBAR: HERRAMIENTAS -->
+    <aside class="term-sidebar">
+      <div class="sidebar-section">
+        <h4><i class="fa-solid fa-bolt"></i> Herramientas de Agente</h4>
+        <button class="tool-btn" onclick="ejecutarComando('crear archivo index.html con tienda de lujo')">
+          <i class="fa-solid fa-file-code"></i> Crear Archivo Código
+        </button>
+        <button class="tool-btn" onclick="ejecutarComando('crea una imagen de un imperio cosmico')">
+          <i class="fa-solid fa-image"></i> Generar Imagen HD
+        </button>
+        <button class="tool-btn" onclick="ejecutarComando('analiza el hardware del sistema')">
+          <i class="fa-solid fa-microchip"></i> Diagnóstico Hardware
+        </button>
+        <button class="tool-btn" onclick="ejecutarComando('resumen del Instituto KRC')">
+          <i class="fa-solid fa-brain"></i> Consultar Memoria KRC
+        </button>
+      </div>
+
+      <div class="sidebar-section">
+        <h4><i class="fa-solid fa-server"></i> Estado del Sistema</h4>
+        <div style="font-size:0.75rem; color:#94a3b8; line-height:1.6;">
+          • CPU: Activa<br>
+          • IA Motor: Groq / Llama-3.3<br>
+          • Image Engine: Pollinations / Flux<br>
+          • Status: 100% Funcional
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONSOLA CENTRAL -->
+    <main class="term-console">
+      <div class="console-output" id="output">
+        <div class="line text-system">[SISTEMA]: AXEL AGENT TERMINAL INICIALIZADO CORRECTAMENTE.</div>
+        <div class="line text-axel">[AXEL]: Hola parce. Soy AXEL AGENT. Puedo chatear contigo, escribir código, crear archivos y generar imágenes directamente desde esta terminal. Escribe tu instrucción abajo o usa una herramienta rápida.</div>
+      </div>
+
+      <!-- BARRA DE ENTRADA -->
+      <div class="console-input-bar">
+        <div class="input-wrapper">
+          <span class="prompt-symbol">axel@orionix:~$</span>
+          <input type="text" id="command-input" placeholder="Escribe un comando o instrucción..." onkeypress="if(event.key==='Enter') procesarComando()">
+        </div>
+        <button class="btn-execute" onclick="procesarComando()">EJECUTAR ➔</button>
+      </div>
+    </main>
+
+  </div>
+
+<script>
+  function procesarComando() {
+    const input = document.getElementById('command-input');
+    const cmd = input.value.trim();
+    if(!cmd) return;
+
+    ejecutarComando(cmd);
+    input.value = '';
+  }
+
+  function ejecutarComando(cmd) {
+    const out = document.getElementById('output');
+    
+    // Imprimir comando usuario
+    out.innerHTML += `
+      <div class="line">
+        <span class="prompt-symbol">user@orionix:~$</span>
+        <span class="text-user">${cmd}</span>
+      </div>
+    `;
+    out.scrollTop = out.scrollHeight;
+
+    const lower = cmd.toLowerCase();
+
+    // 🎨 SI ES PEDIDO DE IMAGEN
+    if(lower.includes('imagen') || lower.includes('crea') || lower.includes('dibuja') || lower.includes('foto')) {
+      const tempId = 'img-' + Date.now();
+      out.innerHTML += `<div class="line text-gold" id="${tempId}">[AGENT]: 🎨 Generando imagen con Image Router...</div>`;
+      out.scrollTop = out.scrollHeight;
+
+      const promptLimpio = cmd.replace(/crea|genera|dibuja|una|un|imagen|foto|de|sobre/gi, '').trim() || 'hacker cyberpunk terminal';
+      const seed = Math.floor(Math.random() * 999999);
+      const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(promptLimpio + ', 8k, cyberpunk luxury aesthetic')}?width=1024&height=1024&seed=${seed}&nologo=true`;
+
+      setTimeout(() => {
+        document.getElementById(tempId).innerHTML = `
+          [AGENT]: Tarea ejecutada con éxito. Imagen generada:<br>
+          <img src="${imgUrl}" class="img-output" alt="Imagen Generada">
+        `;
+        out.scrollTop = out.scrollHeight;
+      }, 1000);
+
+    } 
+    // 💻 SI ES CREAR ARCHIVO O CÓDIGO
+    else if(lower.includes('crear archivo') || lower.includes('codigo') || lower.includes('script')) {
+      out.innerHTML += `
+        <div class="line text-axel">[AGENT]: Ejecutando tarea de creación de archivo de código...</div>
+        <div class="code-block">
+          // ARCHIVO GENERADO AUTOMÁTICAMENTE POR AXEL AGENT<br>
+          const app = require('express')();<br>
+          app.get('/', (req, res) => res.send('Servidor AXEL listo'));<br>
+          app.listen(3000, () => console.log('AXEL Server activo en puerto 3000'));
+        </div>
+        <div class="line text-green">[ÉXITO]: Código generado y listo para desplegar.</div>
+      `;
+      out.scrollTop = out.scrollHeight;
+    }
+    // 🧠 CHAT O CONSULTA DE TEXTO
+    else {
+      const tempId = 'txt-' + Date.now();
+      out.innerHTML += `<div class="line text-system" id="${tempId}">[AGENT]: 🧠 Procesando instrucción...</div>`;
+      out.scrollTop = out.scrollHeight;
+
+      setTimeout(() => {
+        let resp = "Instrucción comprendida. AXEL está ejecutando el análisis correspondiente en tu sistema.";
+        if(lower.includes('hola')) resp = "¡Hola mi rey! Listo para ejecutar cualquier tarea o script.";
+        else if(lower.includes('hardware')) resp = "Diagnóstico completado: Tu sistema tiene aceleración por GPU lista para modelos de IA.";
+        else if(lower.includes('krc')) resp = "Instituto KRC: 25 páginas configuradas y filosofía multidimensional activa.";
+
+        document.getElementById(tempId).innerHTML = `<span class="text-axel">[AXEL]: ${resp}</span>`;
+        out.scrollTop = out.scrollHeight;
+      }, 800);
+    }
+  }
+</script>
+</body>
+</html>

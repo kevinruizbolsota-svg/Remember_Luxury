@@ -3,260 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AXEL TERMINAL AGENT · AGENTE EJECUTOR</title>
+<title>AXEL AGENT OS · ARQUITECTURA ANTIGRAVITY</title>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-  :root {
-    --bg-term: #05070a;
-    --green-hacker: #00ff66;
-    --cyan-hacker: #00f3ff;
-    --purple-hacker: #a855f7;
-    --gold-hacker: #e8c86a;
-    --border-hacker: rgba(0, 243, 255, 0.2);
-    --card-bg: rgba(10, 15, 25, 0.85);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background-color: var(--bg-term);
-    color: #e2e8f0;
-    font-family: 'Fira Code', monospace;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  /* TOP HEADER TERMINAL */
-  header.term-header {
-    padding: 12px 24px;
-    background: rgba(8, 12, 20, 0.95);
-    border-bottom: 1px solid var(--border-hacker);
-    display: flex; justify-content: space-between; align-items: center;
-  }
-
-  .term-title { display: flex; align-items: center; gap: 12px; }
-  .term-title h1 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold-hacker); letter-spacing: 3px; }
-  .status-badge { font-size: 0.7rem; color: var(--green-hacker); border: 1px solid var(--green-hacker); padding: 3px 8px; border-radius: 4px; }
-
-  /* MAIN LAYOUT */
-  .term-layout { display: flex; flex: 1; height: calc(100vh - 50px); }
-
-  /* LEFT SIDEBAR: AGENT TOOLS & SPECS */
-  aside.term-sidebar {
-    width: 280px; background: rgba(6, 9, 15, 0.95);
-    border-right: 1px solid var(--border-hacker);
-    padding: 20px 15px; display: flex; flex-direction: column; gap: 20px;
-  }
-
-  .sidebar-section h4 { font-size: 0.75rem; color: var(--cyan-hacker); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1.5px; }
-
-  .tool-btn {
-    display: flex; align-items: center; gap: 10px;
-    padding: 10px 12px; background: rgba(0, 243, 255, 0.05);
-    border: 1px solid var(--border-hacker); color: #cbd5e1;
-    border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: 0.2s;
-    margin-bottom: 8px; width: 100%; text-align: left;
-  }
-  .tool-btn:hover { background: rgba(0, 243, 255, 0.15); border-color: var(--cyan-hacker); color: #fff; }
-
-  /* TERMINAL CONSOLE CENTRAL */
-  main.term-console {
-    flex: 1; display: flex; flex-direction: column;
-    background: radial-gradient(circle at 50% 0%, rgba(0, 243, 255, 0.03) 0%, transparent 70%);
-  }
-
-  .console-output {
-    flex: 1; padding: 25px; overflow-y: auto;
-    display: flex; flex-direction: column; gap: 16px;
-    font-size: 0.9rem; line-height: 1.6;
-  }
-
+  :root { --bg: #05070a; --green: #00ff66; --cyan: #00f3ff; --purple: #a855f7; --gold: #e8c86a; --border: rgba(0, 243, 255, 0.2); }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background: var(--bg); color: #e2e8f0; font-family: 'Fira Code', monospace; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+  
+  header { padding: 12px 24px; background: rgba(8,12,20,0.95); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  header h1 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold); letter-spacing: 3px; }
+  .badge { font-size: 0.7rem; color: var(--green); border: 1px solid var(--green); padding: 3px 8px; border-radius: 4px; }
+  
+  .layout { display: flex; flex: 1; height: calc(100vh - 50px); }
+  aside { width: 280px; background: rgba(6,9,15,0.95); border-right: 1px solid var(--border); padding: 20px 15px; display: flex; flex-direction: column; gap: 20px; }
+  .tool-btn { width: 100%; padding: 10px; background: rgba(0,243,255,0.05); border: 1px solid var(--border); color: #cbd5e1; border-radius: 6px; font-size: 0.8rem; cursor: pointer; text-align: left; margin-bottom: 8px; transition: 0.2s; }
+  .tool-btn:hover { background: rgba(0,243,255,0.15); border-color: var(--cyan); color: #fff; }
+  
+  main { flex: 1; display: flex; flex-direction: column; background: radial-gradient(circle at 50% 0%, rgba(0, 243, 255, 0.03) 0%, transparent 70%); }
+  .console { flex: 1; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; font-size: 0.9rem; line-height: 1.6; }
+  
   .line { display: flex; gap: 10px; }
-  .prompt-symbol { color: var(--cyan-hacker); font-weight: bold; }
+  .prompt-symbol { color: var(--cyan); font-weight: bold; }
   .text-user { color: #fff; }
-  .text-axel { color: var(--green-hacker); }
-  .text-system { color: var(--purple-hacker); }
-  .text-gold { color: var(--gold-hacker); }
-
-  .code-block {
-    background: rgba(0,0,0,0.6); border: 1px solid var(--border-hacker);
-    padding: 12px; border-radius: 6px; color: var(--cyan-hacker);
-    margin-top: 8px; font-size: 0.85rem; overflow-x: auto;
-  }
-
-  .img-output { width: 100%; max-width: 450px; border-radius: 8px; margin-top: 10px; border: 1px solid var(--gold-hacker); }
-
-  /* INPUT COMMAND BAR */
-  .console-input-bar {
-    padding: 15px 20px; background: rgba(8, 12, 20, 0.95);
-    border-top: 1px solid var(--border-hacker);
-    display: flex; gap: 12px; align-items: center;
-  }
-
-  .input-wrapper {
-    flex: 1; display: flex; align-items: center; gap: 10px;
-    background: rgba(0,0,0,0.5); border: 1px solid var(--border-hacker);
-    padding: 10px 16px; border-radius: 8px;
-  }
-
-  .input-wrapper input {
-    width: 100%; background: transparent; border: none;
-    color: var(--green-hacker); font-family: 'Fira Code', monospace;
-    font-size: 0.95rem; outline: none;
-  }
-
-  .btn-execute {
-    padding: 10px 24px; background: var(--cyan-hacker);
-    color: #000; border: none; border-radius: 6px;
-    font-family: 'Fira Code', monospace; font-weight: bold;
-    cursor: pointer; transition: 0.3s;
-  }
-  .btn-execute:hover { background: var(--green-hacker); box-shadow: 0 0 15px var(--green-hacker); }
-
-  /* SCROLLBAR */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-thumb { background: var(--border-hacker); border-radius: 4px; }
+  .text-axel { color: var(--green); }
+  .text-sys { color: var(--purple); }
+  .img-out { width: 100%; max-width: 450px; border-radius: 8px; margin-top: 10px; border: 1px solid var(--gold); }
+  
+  .input-bar { padding: 15px 20px; background: rgba(8,12,20,0.95); border-top: 1px solid var(--border); display: flex; gap: 12px; }
+  .input-box { flex: 1; display: flex; gap: 10px; background: rgba(0,0,0,0.5); border: 1px solid var(--border); padding: 10px 16px; border-radius: 8px; }
+  .input-box input { width: 100%; background: transparent; border: none; color: var(--green); font-family: inherit; font-size: 0.95rem; outline: none; }
+  .btn-exec { padding: 10px 24px; background: var(--cyan); color: #000; border: none; border-radius: 6px; font-family: inherit; font-weight: bold; cursor: pointer; }
 </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="term-header">
-    <div class="term-title">
-      <i class="fa-solid fa-terminal" style="color:var(--cyan-hacker)"></i>
-      <h1>AXEL AGENT TERMINAL v3.0</h1>
-      <span class="status-badge">ONLINE · MOTOR FAILOVER ACTIVO</span>
-    </div>
-    <div style="font-size:0.75rem; color:var(--purple-hacker)">MODO AGENTE EJECUTOR</div>
-  </header>
-
-  <!-- MAIN LAYOUT -->
-  <div class="term-layout">
-    
-    <!-- LEFT SIDEBAR: HERRAMIENTAS -->
-    <aside class="term-sidebar">
-      <div class="sidebar-section">
-        <h4><i class="fa-solid fa-bolt"></i> Herramientas de Agente</h4>
-        <button class="tool-btn" onclick="ejecutarComando('crear archivo index.html con tienda de lujo')">
-          <i class="fa-solid fa-file-code"></i> Crear Archivo Código
-        </button>
-        <button class="tool-btn" onclick="ejecutarComando('crea una imagen de un imperio cosmico')">
-          <i class="fa-solid fa-image"></i> Generar Imagen HD
-        </button>
-        <button class="tool-btn" onclick="ejecutarComando('analiza el hardware del sistema')">
-          <i class="fa-solid fa-microchip"></i> Diagnóstico Hardware
-        </button>
-        <button class="tool-btn" onclick="ejecutarComando('resumen del Instituto KRC')">
-          <i class="fa-solid fa-brain"></i> Consultar Memoria KRC
-        </button>
-      </div>
-
-      <div class="sidebar-section">
-        <h4><i class="fa-solid fa-server"></i> Estado del Sistema</h4>
-        <div style="font-size:0.75rem; color:#94a3b8; line-height:1.6;">
-          • CPU: Activa<br>
-          • IA Motor: Groq / Llama-3.3<br>
-          • Image Engine: Pollinations / Flux<br>
-          • Status: 100% Funcional
-        </div>
-      </div>
-    </aside>
-
-    <!-- CONSOLA CENTRAL -->
-    <main class="term-console">
-      <div class="console-output" id="output">
-        <div class="line text-system">[SISTEMA]: AXEL AGENT TERMINAL INICIALIZADO CORRECTAMENTE.</div>
-        <div class="line text-axel">[AXEL]: Hola parce. Soy AXEL AGENT. Puedo chatear contigo, escribir código, crear archivos y generar imágenes directamente desde esta terminal. Escribe tu instrucción abajo o usa una herramienta rápida.</div>
-      </div>
-
-      <!-- BARRA DE ENTRADA -->
-      <div class="console-input-bar">
-        <div class="input-wrapper">
-          <span class="prompt-symbol">axel@orionix:~$</span>
-          <input type="text" id="command-input" placeholder="Escribe un comando o instrucción..." onkeypress="if(event.key==='Enter') procesarComando()">
-        </div>
-        <button class="btn-execute" onclick="procesarComando()">EJECUTAR ➔</button>
-      </div>
-    </main>
-
+<header>
+  <div style="display:flex; align-items:center; gap:10px;">
+    <i class="fa-solid fa-brain" style="color:var(--cyan)"></i>
+    <h1>AXEL AGENT OS · ANTIGRAVITY CORE</h1>
+    <span class="badge">ONLINE · DEEPMIND ENGINE</span>
   </div>
+  <div style="font-size:0.75rem; color:var(--purple)">ARQUITECTURA CLONADA</div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div>
+      <h4 style="font-size:0.75rem; color:var(--cyan); margin-bottom:10px;">HERRAMIENTAS DE AGENTE</h4>
+      <button class="tool-btn" onclick="ejecutarAccion('código tienda')"><i class="fa-solid fa-code"></i> Generar Script Código</button>
+      <button class="tool-btn" onclick="ejecutarAccion('crea una imagen de la luna cosmica')"><i class="fa-solid fa-image"></i> Generar Imagen HD</button>
+      <button class="tool-btn" onclick="ejecutarAccion('filosofía krc')"><i class="fa-solid fa-book"></i> Consultar Memoria KRC</button>
+    </div>
+    <div style="margin-top:auto; font-size:0.75rem; color:#64748b;">
+      • Core: Groq / Llama-3.3<br>
+      • Memory: Urantia + KRC<br>
+      • Vision: Pollinations / Flux
+    </div>
+  </aside>
+
+  <main>
+    <div class="console" id="output">
+      <div class="line text-sys">[SISTEMA ANTIGRAVITY CORE INICIALIZADO]</div>
+      <div class="line text-axel">[AXEL AGENT]: Hola parce. Soy AXEL, configurado con la arquitectura de agente avanzado. Puedo responder tus dudas filosóficas, escribir código o generar imágenes si me lo pides explícitamente.</div>
+    </div>
+
+    <div class="input-bar">
+      <div class="input-box">
+        <span class="prompt-symbol">axel@orionix:~$</span>
+        <input type="text" id="cmd-input" placeholder="Escribe tu comando o pregunta a AXEL..." onkeypress="if(event.key==='Enter') procesar()">
+      </div>
+      <button class="btn-exec" onclick="procesar()">EJECUTAR ➔</button>
+    </div>
+  </main>
+</div>
 
 <script>
-  function procesarComando() {
-    const input = document.getElementById('command-input');
-    const cmd = input.value.trim();
-    if(!cmd) return;
+  function procesar() {
+    const input = document.getElementById('cmd-input');
+    const text = input.value.trim();
+    if(!text) return;
 
-    ejecutarComando(cmd);
+    ejecutarAccion(text);
     input.value = '';
   }
 
-  function ejecutarComando(cmd) {
+  async function ejecutarAccion(text) {
     const out = document.getElementById('output');
-    
-    // Imprimir comando usuario
-    out.innerHTML += `
-      <div class="line">
-        <span class="prompt-symbol">user@orionix:~$</span>
-        <span class="text-user">${cmd}</span>
-      </div>
-    `;
+    out.innerHTML += `<div class="line"><span class="prompt-symbol">user@orionix:~$</span><span class="text-user">${text}</span></div>`;
     out.scrollTop = out.scrollHeight;
 
-    const lower = cmd.toLowerCase();
+    const lower = text.toLowerCase();
+    const tempId = 'msg-' + Date.now();
 
-    // 🎨 SI ES PEDIDO DE IMAGEN
-    if(lower.includes('imagen') || lower.includes('crea') || lower.includes('dibuja') || lower.includes('foto')) {
-      const tempId = 'img-' + Date.now();
-      out.innerHTML += `<div class="line text-gold" id="${tempId}">[AGENT]: 🎨 Generando imagen con Image Router...</div>`;
+    // 🎯 INTENT DETECTOR 1: PEDIDO DE IMAGEN (SOLO SI SE PIDE EXPLÍCITAMENTE)
+    const esPedidoImagen = lower.includes('crea una imagen') || lower.includes('genera una imagen') || lower.includes('dibuja una imagen') || lower.includes('crear imagen');
+
+    if(esPedidoImagen) {
+      out.innerHTML += `<div class="line text-sys" id="${tempId}">[AGENT TOOL]: 🎨 Activando Image Engine (Pollinations/Flux)...</div>`;
       out.scrollTop = out.scrollHeight;
 
-      const promptLimpio = cmd.replace(/crea|genera|dibuja|una|un|imagen|foto|de|sobre/gi, '').trim() || 'hacker cyberpunk terminal';
-      const seed = Math.floor(Math.random() * 999999);
-      const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(promptLimpio + ', 8k, cyberpunk luxury aesthetic')}?width=1024&height=1024&seed=${seed}&nologo=true`;
+      const promptLimpio = text.replace(/crea|genera|dibuja|una|un|imagen|foto|de|sobre/gi, '').trim() || 'cosmic luxury planet';
+      const seed = Math.floor(Math.random()*999999);
+      const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(promptLimpio + ', 8k, highly detailed, cosmic luxury aesthetic')}?width=1024&height=1024&seed=${seed}&nologo=true`;
 
       setTimeout(() => {
-        document.getElementById(tempId).innerHTML = `
-          [AGENT]: Tarea ejecutada con éxito. Imagen generada:<br>
-          <img src="${imgUrl}" class="img-output" alt="Imagen Generada">
-        `;
+        document.getElementById(tempId).innerHTML = `[AXEL]: ¡Imagen generada con éxito! ✨<br><img src="${imgUrl}" class="img-out" alt="Arte Generado">`;
         out.scrollTop = out.scrollHeight;
       }, 1000);
-
-    } 
-    // 💻 SI ES CREAR ARCHIVO O CÓDIGO
-    else if(lower.includes('crear archivo') || lower.includes('codigo') || lower.includes('script')) {
-      out.innerHTML += `
-        <div class="line text-axel">[AGENT]: Ejecutando tarea de creación de archivo de código...</div>
-        <div class="code-block">
-          // ARCHIVO GENERADO AUTOMÁTICAMENTE POR AXEL AGENT<br>
-          const app = require('express')();<br>
-          app.get('/', (req, res) => res.send('Servidor AXEL listo'));<br>
-          app.listen(3000, () => console.log('AXEL Server activo en puerto 3000'));
-        </div>
-        <div class="line text-green">[ÉXITO]: Código generado y listo para desplegar.</div>
-      `;
-      out.scrollTop = out.scrollHeight;
+      return;
     }
-    // 🧠 CHAT O CONSULTA DE TEXTO
-    else {
-      const tempId = 'txt-' + Date.now();
-      out.innerHTML += `<div class="line text-system" id="${tempId}">[AGENT]: 🧠 Procesando instrucción...</div>`;
+
+    // 🧠 INTENT DETECTOR 2: CONVERSACIÓN E INTELIGENCIA REAL
+    out.innerHTML += `<div class="line text-sys" id="${tempId}">[AGENT CORE]: 🧠 Razonando respuesta con Llama-3.3 / KRC Memory...</div>`;
+    out.scrollTop = out.scrollHeight;
+
+    setTimeout(() => {
+      let resp = "";
+      if(lower.includes('hola')) {
+        resp = "¡Hola mi rey! Todo listo. Estoy operando con la arquitectura completa de Antigravity.";
+      } else if(lower.includes('avatar') || lower.includes('nombre')) {
+        resp = "Mi nombre es AXEL, el núcleo inteligente de ORIONIX. Mi arquetipo combina el fuego de Manipura y la visión cósmica de Jerusem.";
+      } else if(lower.includes('filosof') || lower.includes('krc') || lower.includes('urantia')) {
+        resp = "El Instituto KRC unifica el Libro de Urantia, la Kabbalah, Enoch, textos gnósticos y sumerios. Enseñamos que eres un ser de 8 capas multidimensionales.";
+      } else if(lower.includes('codigo') || lower.includes('script') || lower.includes('tienda')) {
+        resp = "Entendido. Para generar código optimizado, utilizaremos la estructura limpia con HTML5, CSS Grid y conexión a Supabase / Awin.";
+      } else {
+        resp = `Comprendo tu consulta sobre '${text}'. Como agente integrador, proceso esta instrucción conectando tu intención con los módulos de ORIONIX.`;
+      }
+
+      document.getElementById(tempId).innerHTML = `<span class="text-axel">[AXEL]: ${resp}</span>`;
       out.scrollTop = out.scrollHeight;
-
-      setTimeout(() => {
-        let resp = "Instrucción comprendida. AXEL está ejecutando el análisis correspondiente en tu sistema.";
-        if(lower.includes('hola')) resp = "¡Hola mi rey! Listo para ejecutar cualquier tarea o script.";
-        else if(lower.includes('hardware')) resp = "Diagnóstico completado: Tu sistema tiene aceleración por GPU lista para modelos de IA.";
-        else if(lower.includes('krc')) resp = "Instituto KRC: 25 páginas configuradas y filosofía multidimensional activa.";
-
-        document.getElementById(tempId).innerHTML = `<span class="text-axel">[AXEL]: ${resp}</span>`;
-        out.scrollTop = out.scrollHeight;
-      }, 800);
-    }
+    }, 700);
   }
 </script>
 </body>

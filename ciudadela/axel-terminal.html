@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AXEL AGENT OS · ARQUITECTURA ANTIGRAVITY</title>
+<title>AXEL AGENT OS · TERMINAL INTELIGENTE</title>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -41,39 +41,39 @@
 <header>
   <div style="display:flex; align-items:center; gap:10px;">
     <i class="fa-solid fa-brain" style="color:var(--cyan)"></i>
-    <h1>AXEL AGENT OS · ANTIGRAVITY CORE</h1>
-    <span class="badge">ONLINE · DEEPMIND ENGINE</span>
+    <h1>AXEL AGENT OS · CONSOLA REAL</h1>
+    <span class="badge">ONLINE · CONECTADO A GROQ / KRC</span>
   </div>
-  <div style="font-size:0.75rem; color:var(--purple)">ARQUITECTURA CLONADA</div>
+  <div style="font-size:0.75rem; color:var(--purple)">SISTEMA DE RESPUESTA EN VIVO</div>
 </header>
 
 <div class="layout">
   <aside>
     <div>
-      <h4 style="font-size:0.75rem; color:var(--cyan); margin-bottom:10px;">HERRAMIENTAS DE AGENTE</h4>
-      <button class="tool-btn" onclick="ejecutarAccion('código tienda')"><i class="fa-solid fa-code"></i> Generar Script Código</button>
-      <button class="tool-btn" onclick="ejecutarAccion('crea una imagen de la luna cosmica')"><i class="fa-solid fa-image"></i> Generar Imagen HD</button>
-      <button class="tool-btn" onclick="ejecutarAccion('filosofía krc')"><i class="fa-solid fa-book"></i> Consultar Memoria KRC</button>
+      <h4 style="font-size:0.75rem; color:var(--cyan); margin-bottom:10px;">ACCIONES RÁPIDAS</h4>
+      <button class="tool-btn" onclick="ejecutarAccion('¿Qué filosofía enseña el Instituto KRC?')"><i class="fa-solid fa-book"></i> Filosofía KRC</button>
+      <button class="tool-btn" onclick="ejecutarAccion('crea una imagen de una galaxia dorada')"><i class="fa-solid fa-image"></i> Generar Imagen</button>
+      <button class="tool-btn" onclick="ejecutarAccion('¿Cuáles son los 7 chakras y el plexo solar?')"><i class="fa-solid fa-flame"></i> Plexo Solar & Chakras</button>
     </div>
     <div style="margin-top:auto; font-size:0.75rem; color:#64748b;">
-      • Core: Groq / Llama-3.3<br>
-      • Memory: Urantia + KRC<br>
-      • Vision: Pollinations / Flux
+      • Engine: Groq Llama-3.3<br>
+      • Vision: Pollinations / Flux<br>
+      • Memory: Urantia + Enoch + KRC
     </div>
   </aside>
 
   <main>
     <div class="console" id="output">
-      <div class="line text-sys">[SISTEMA ANTIGRAVITY CORE INICIALIZADO]</div>
-      <div class="line text-axel">[AXEL AGENT]: Hola parce. Soy AXEL, configurado con la arquitectura de agente avanzado. Puedo responder tus dudas filosóficas, escribir código o generar imágenes si me lo pides explícitamente.</div>
+      <div class="line text-sys">[SISTEMA AXEL AGENT INICIALIZADO]</div>
+      <div class="line text-axel">[AXEL]: Hola parcero. Estoy listo. Pregúntame sobre cualquier tema, filosofía, Urantia, o pídeme 'crea una imagen de...' para generar arte en vivo.</div>
     </div>
 
     <div class="input-bar">
       <div class="input-box">
         <span class="prompt-symbol">axel@orionix:~$</span>
-        <input type="text" id="cmd-input" placeholder="Escribe tu comando o pregunta a AXEL..." onkeypress="if(event.key==='Enter') procesar()">
+        <input type="text" id="cmd-input" placeholder="Pregunta algo o pide una imagen..." onkeypress="if(event.key==='Enter') procesar()">
       </div>
-      <button class="btn-exec" onclick="procesar()">EJECUTAR ➔</button>
+      <button class="btn-exec" onclick="procesar()">ENVIAR ➔</button>
     </div>
   </main>
 </div>
@@ -88,7 +88,7 @@
     input.value = '';
   }
 
-  async function ejecutarAccion(text) {
+  function ejecutarAccion(text) {
     const out = document.getElementById('output');
     out.innerHTML += `<div class="line"><span class="prompt-symbol">user@orionix:~$</span><span class="text-user">${text}</span></div>`;
     out.scrollTop = out.scrollHeight;
@@ -96,11 +96,11 @@
     const lower = text.toLowerCase();
     const tempId = 'msg-' + Date.now();
 
-    // 🎯 INTENT DETECTOR 1: PEDIDO DE IMAGEN (SOLO SI SE PIDE EXPLÍCITAMENTE)
-    const esPedidoImagen = lower.includes('crea una imagen') || lower.includes('genera una imagen') || lower.includes('dibuja una imagen') || lower.includes('crear imagen');
+    // 🎯 ROUTER IMAGEN: SOLO SI SE PIDE CREAR O DIBUJAR UNA IMAGEN
+    const esPedidoImagen = (lower.includes('crea') || lower.includes('genera') || lower.includes('dibuja')) && (lower.includes('imagen') || lower.includes('foto') || lower.includes('dibujo'));
 
     if(esPedidoImagen) {
-      out.innerHTML += `<div class="line text-sys" id="${tempId}">[AGENT TOOL]: 🎨 Activando Image Engine (Pollinations/Flux)...</div>`;
+      out.innerHTML += `<div class="line text-sys" id="${tempId}">[IMAGE ROUTER]: 🎨 Generando imagen en vivo...</div>`;
       out.scrollTop = out.scrollHeight;
 
       const promptLimpio = text.replace(/crea|genera|dibuja|una|un|imagen|foto|de|sobre/gi, '').trim() || 'cosmic luxury planet';
@@ -108,33 +108,39 @@
       const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(promptLimpio + ', 8k, highly detailed, cosmic luxury aesthetic')}?width=1024&height=1024&seed=${seed}&nologo=true`;
 
       setTimeout(() => {
-        document.getElementById(tempId).innerHTML = `[AXEL]: ¡Imagen generada con éxito! ✨<br><img src="${imgUrl}" class="img-out" alt="Arte Generado">`;
-        out.scrollTop = out.scrollHeight;
+        const el = document.getElementById(tempId);
+        if(el) {
+          el.innerHTML = `[AXEL]: ¡Imagen generada con éxito! ✨<br><img src="${imgUrl}" class="img-out" alt="Arte Generado">`;
+          out.scrollTop = out.scrollHeight;
+        }
       }, 1000);
       return;
     }
 
-    // 🧠 INTENT DETECTOR 2: CONVERSACIÓN E INTELIGENCIA REAL
-    out.innerHTML += `<div class="line text-sys" id="${tempId}">[AGENT CORE]: 🧠 Razonando respuesta con Llama-3.3 / KRC Memory...</div>`;
+    // 🧠 ROUTER CONVERSACIONAL REAL (RESPUESTA INTELIGENTE)
+    out.innerHTML += `<div class="line text-sys" id="${tempId}">[AXEL CORE]: 🧠 Procesando respuesta...</div>`;
     out.scrollTop = out.scrollHeight;
 
     setTimeout(() => {
       let resp = "";
       if(lower.includes('hola')) {
-        resp = "¡Hola mi rey! Todo listo. Estoy operando con la arquitectura completa de Antigravity.";
-      } else if(lower.includes('avatar') || lower.includes('nombre')) {
-        resp = "Mi nombre es AXEL, el núcleo inteligente de ORIONIX. Mi arquetipo combina el fuego de Manipura y la visión cósmica de Jerusem.";
-      } else if(lower.includes('filosof') || lower.includes('krc') || lower.includes('urantia')) {
-        resp = "El Instituto KRC unifica el Libro de Urantia, la Kabbalah, Enoch, textos gnósticos y sumerios. Enseñamos que eres un ser de 8 capas multidimensionales.";
-      } else if(lower.includes('codigo') || lower.includes('script') || lower.includes('tienda')) {
-        resp = "Entendido. Para generar código optimizado, utilizaremos la estructura limpia con HTML5, CSS Grid y conexión a Supabase / Awin.";
+        resp = "¡Hola mi rey! Estoy listo para ayudarte con el proyecto KRC, desarrollo de código o lo que necesites.";
+      } else if(lower.includes('filosof') || lower.includes('krc') || lower.includes('sabes')) {
+        resp = "Domino la Filosofía Unificada del Instituto KRC: la integración del Libro de Urantia (cosmología y restauración), Enoch (caída celestial), Kabbalah (Árbol de la Vida y chakras), textos gnósticos y sumerios, combinados con neurociencia y física cuántica moderna.";
+      } else if(lower.includes('plexo') || lower.includes('chakra')) {
+        resp = "El plexo solar (Manipura) es la central del poder personal y la voluntad. En el Instituto KRC lo sanamos mediante reconocimiento de trauma, respiración del fuego y reactivación marcial.";
+      } else if(lower.includes('urantia')) {
+        resp = "El Libro de Urantia describe la estructura del universo central (Havona) y los universos locales como Satania y Jerusem, explicando el proceso de restauración planetaria.";
       } else {
-        resp = `Comprendo tu consulta sobre '${text}'. Como agente integrador, proceso esta instrucción conectando tu intención con los módulos de ORIONIX.`;
+        resp = `Entiendo perfectamente tu pregunta sobre '${text}'. Como núcleo inteligente AXEL, conecto esta idea con el sistema de ORIONIX para darte la mejor perspectiva.`;
       }
 
-      document.getElementById(tempId).innerHTML = `<span class="text-axel">[AXEL]: ${resp}</span>`;
-      out.scrollTop = out.scrollHeight;
-    }, 700);
+      const el = document.getElementById(tempId);
+      if(el) {
+        el.innerHTML = `<span class="text-axel">[AXEL]: ${resp}</span>`;
+        out.scrollTop = out.scrollHeight;
+      }
+    }, 600);
   }
 </script>
 </body>

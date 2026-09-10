@@ -8,5 +8,17 @@ if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
   exit 1
 }
 
+Write-Host ''
+Write-Host '==============================================' -ForegroundColor Cyan
+Write-Host ' AXEL BRIDGE · CABEZA + CUERPO' -ForegroundColor Cyan
+Write-Host '==============================================' -ForegroundColor Cyan
+Write-Host ''
+
+if (-not $env:GROQ_API_KEY) {
+  $key = Read-Host 'Pega tu GROQ_API_KEY (Enter para dejar solo el cuerpo/terminal)'
+  if ($key) { $env:GROQ_API_KEY = $key }
+}
+
+Write-Host ''
 Write-Host 'Iniciando AXEL Bridge...' -ForegroundColor Cyan
 node .\server.js

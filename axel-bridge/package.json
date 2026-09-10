@@ -1,0 +1,10 @@
+{
+  "name": "axel-bridge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Puente local AXEL para conectar axel-terminal.html con PowerShell en Windows",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

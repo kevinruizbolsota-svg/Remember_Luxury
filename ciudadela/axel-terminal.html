@@ -3,145 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AXEL AGENT OS · TERMINAL INTELIGENTE</title>
+<title>AXEL AGENT OS · CABEZA + CUERPO</title>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-  :root { --bg: #05070a; --green: #00ff66; --cyan: #00f3ff; --purple: #a855f7; --gold: #e8c86a; --border: rgba(0, 243, 255, 0.2); }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background: var(--bg); color: #e2e8f0; font-family: 'Fira Code', monospace; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
-  
-  header { padding: 12px 24px; background: rgba(8,12,20,0.95); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-  header h1 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold); letter-spacing: 3px; }
-  .badge { font-size: 0.7rem; color: var(--green); border: 1px solid var(--green); padding: 3px 8px; border-radius: 4px; }
-  
-  .layout { display: flex; flex: 1; height: calc(100vh - 50px); }
-  aside { width: 280px; background: rgba(6,9,15,0.95); border-right: 1px solid var(--border); padding: 20px 15px; display: flex; flex-direction: column; gap: 20px; }
-  .tool-btn { width: 100%; padding: 10px; background: rgba(0,243,255,0.05); border: 1px solid var(--border); color: #cbd5e1; border-radius: 6px; font-size: 0.8rem; cursor: pointer; text-align: left; margin-bottom: 8px; transition: 0.2s; }
-  .tool-btn:hover { background: rgba(0,243,255,0.15); border-color: var(--cyan); color: #fff; }
-  
-  main { flex: 1; display: flex; flex-direction: column; background: radial-gradient(circle at 50% 0%, rgba(0, 243, 255, 0.03) 0%, transparent 70%); }
-  .console { flex: 1; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; font-size: 0.9rem; line-height: 1.6; }
-  
-  .line { display: flex; gap: 10px; }
-  .prompt-symbol { color: var(--cyan); font-weight: bold; }
-  .text-user { color: #fff; }
-  .text-axel { color: var(--green); }
-  .text-sys { color: var(--purple); }
-  .img-out { width: 100%; max-width: 450px; border-radius: 8px; margin-top: 10px; border: 1px solid var(--gold); }
-  
-  .input-bar { padding: 15px 20px; background: rgba(8,12,20,0.95); border-top: 1px solid var(--border); display: flex; gap: 12px; }
-  .input-box { flex: 1; display: flex; gap: 10px; background: rgba(0,0,0,0.5); border: 1px solid var(--border); padding: 10px 16px; border-radius: 8px; }
-  .input-box input { width: 100%; background: transparent; border: none; color: var(--green); font-family: inherit; font-size: 0.95rem; outline: none; }
-  .btn-exec { padding: 10px 24px; background: var(--cyan); color: #000; border: none; border-radius: 6px; font-family: inherit; font-weight: bold; cursor: pointer; }
+:root{--bg:#05070a;--panel:#080c14;--green:#00ff66;--cyan:#00f3ff;--purple:#a855f7;--gold:#e8c86a;--red:#ff4d6d;--muted:#64748b;--border:rgba(0,243,255,.2)}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:#e2e8f0;font-family:'Fira Code',monospace;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+header{min-height:58px;padding:10px 20px;background:rgba(8,12,20,.97);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:15px}
+.brand{display:flex;align-items:center;gap:10px}.brand i{color:var(--cyan);font-size:1.25rem}.brand h1{font-family:Cinzel,serif;font-size:1rem;color:var(--gold);letter-spacing:2px}.badge{font-size:.65rem;padding:4px 8px;border:1px solid var(--muted);color:var(--muted);border-radius:4px}.badge.live{color:var(--green);border-color:var(--green)}.badge.warn{color:var(--gold);border-color:var(--gold)}
+.layout{display:flex;flex:1;min-height:0}aside{width:290px;background:rgba(6,9,15,.98);border-right:1px solid var(--border);padding:16px;display:flex;flex-direction:column;gap:14px;overflow:auto}
+.section-title{font-size:.68rem;color:var(--cyan);margin-bottom:8px;letter-spacing:1px}.tool-btn{width:100%;padding:9px 10px;background:rgba(0,243,255,.04);border:1px solid var(--border);color:#cbd5e1;border-radius:6px;font:inherit;font-size:.72rem;cursor:pointer;text-align:left;margin-bottom:7px}.tool-btn:hover{background:rgba(0,243,255,.13);border-color:var(--cyan);color:#fff}
+.core{border:1px solid rgba(168,85,247,.35);background:radial-gradient(circle at 50% 35%,rgba(168,85,247,.13),transparent 65%);border-radius:10px;padding:14px;text-align:center}.core-orb{width:72px;height:72px;margin:0 auto 10px;border:1px solid var(--cyan);border-radius:50%;display:grid;place-items:center;box-shadow:0 0 25px rgba(0,243,255,.25),inset 0 0 20px rgba(168,85,247,.15);animation:pulse 2.4s infinite}.core-orb i{color:var(--cyan);font-size:1.8rem}.core-name{color:var(--gold);font-weight:700;font-size:.82rem}.core-sub{color:var(--muted);font-size:.62rem;margin-top:4px}
+.connection{border:1px solid var(--border);border-radius:8px;padding:10px}.connection label{display:block;font-size:.62rem;color:var(--muted);margin-bottom:5px}.connection input{width:100%;background:#030507;color:var(--green);border:1px solid var(--border);border-radius:5px;padding:8px;font:inherit;font-size:.68rem;outline:none}.connection input:focus{border-color:var(--cyan)}.row{display:flex;gap:7px;margin-top:7px}.small-btn{flex:1;padding:7px;background:#0b1320;color:#cbd5e1;border:1px solid var(--border);border-radius:5px;font:inherit;font-size:.65rem;cursor:pointer}.small-btn:hover{border-color:var(--cyan);color:#fff}
+main{flex:1;min-width:0;display:flex;flex-direction:column;background:radial-gradient(circle at 50% 0%,rgba(0,243,255,.05),transparent 65%)}.statusbar{padding:8px 16px;border-bottom:1px solid rgba(0,243,255,.1);font-size:.65rem;color:var(--muted);display:flex;gap:16px;flex-wrap:wrap}.statusbar span b{color:#cbd5e1}.ok{color:var(--green)!important}.bad{color:var(--red)!important}
+.console{flex:1;min-height:0;padding:20px;overflow-y:auto;display:flex;flex-direction:column;gap:11px;font-size:.82rem;line-height:1.55}.line{display:flex;gap:9px;align-items:flex-start;white-space:pre-wrap;word-break:break-word}.prompt{color:var(--cyan);font-weight:700}.user{color:#fff}.axel{color:var(--green)}.sys{color:var(--purple)}.terminal{color:#cbd5e1}.error{color:var(--red)}.output-box{background:#020305;border:1px solid rgba(0,243,255,.13);border-radius:7px;padding:10px;max-height:340px;overflow:auto;color:#d1d5db;white-space:pre-wrap}.img-out{width:100%;max-width:520px;border-radius:8px;margin-top:7px;border:1px solid var(--gold)}
+.input-bar{padding:12px 16px;background:rgba(8,12,20,.98);border-top:1px solid var(--border);display:flex;gap:9px}.input-box{flex:1;display:flex;gap:9px;align-items:center;background:#030507;border:1px solid var(--border);padding:9px 12px;border-radius:7px}.input-box input{width:100%;background:transparent;border:none;color:var(--green);font:inherit;font-size:.82rem;outline:none}.btn-exec{padding:9px 18px;background:var(--cyan);color:#000;border:none;border-radius:6px;font:inherit;font-weight:700;cursor:pointer}.btn-exec:hover{filter:brightness(1.1)}
+@keyframes pulse{50%{transform:scale(1.06);box-shadow:0 0 38px rgba(0,243,255,.4),inset 0 0 25px rgba(168,85,247,.2)}}
+@media(max-width:800px){aside{width:220px}.brand h1{font-size:.75rem}.badge{display:none}}@media(max-width:600px){aside{display:none}}
 </style>
 </head>
 <body>
-
 <header>
-  <div style="display:flex; align-items:center; gap:10px;">
-    <i class="fa-solid fa-brain" style="color:var(--cyan)"></i>
-    <h1>AXEL AGENT OS · CONSOLA REAL</h1>
-    <span class="badge">ONLINE · CONECTADO A GROQ / KRC</span>
-  </div>
-  <div style="font-size:0.75rem; color:var(--purple)">SISTEMA DE RESPUESTA EN VIVO</div>
+  <div class="brand"><i class="fa-solid fa-brain"></i><h1>AXEL AGENT OS · CABEZA + CUERPO</h1><span id="main-badge" class="badge">BRIDGE OFFLINE</span></div>
+  <div style="font-size:.65rem;color:var(--purple)">KRC · ORIONIX · WINDOWS AGENT</div>
 </header>
-
 <div class="layout">
-  <aside>
-    <div>
-      <h4 style="font-size:0.75rem; color:var(--cyan); margin-bottom:10px;">ACCIONES RÁPIDAS</h4>
-      <button class="tool-btn" onclick="ejecutarAccion('¿Qué filosofía enseña el Instituto KRC?')"><i class="fa-solid fa-book"></i> Filosofía KRC</button>
-      <button class="tool-btn" onclick="ejecutarAccion('crea una imagen de una galaxia dorada')"><i class="fa-solid fa-image"></i> Generar Imagen</button>
-      <button class="tool-btn" onclick="ejecutarAccion('¿Cuáles son los 7 chakras y el plexo solar?')"><i class="fa-solid fa-flame"></i> Plexo Solar & Chakras</button>
-    </div>
-    <div style="margin-top:auto; font-size:0.75rem; color:#64748b;">
-      • Engine: Groq Llama-3.3<br>
-      • Vision: Pollinations / Flux<br>
-      • Memory: Urantia + Enoch + KRC
-    </div>
-  </aside>
-
-  <main>
-    <div class="console" id="output">
-      <div class="line text-sys">[SISTEMA AXEL AGENT INICIALIZADO]</div>
-      <div class="line text-axel">[AXEL]: Hola parcero. Estoy listo. Pregúntame sobre cualquier tema, filosofía, Urantia, o pídeme 'crea una imagen de...' para generar arte en vivo.</div>
-    </div>
-
-    <div class="input-bar">
-      <div class="input-box">
-        <span class="prompt-symbol">axel@orionix:~$</span>
-        <input type="text" id="cmd-input" placeholder="Pregunta algo o pide una imagen..." onkeypress="if(event.key==='Enter') procesar()">
-      </div>
-      <button class="btn-exec" onclick="procesar()">ENVIAR ➔</button>
-    </div>
-  </main>
+<aside>
+  <div class="core"><div class="core-orb"><i class="fa-solid fa-microchip"></i></div><div class="core-name">AXEL CORE</div><div class="core-sub">CABEZA = IA · CUERPO = WINDOWS</div></div>
+  <div class="connection">
+    <label>TOKEN DEL AXEL BRIDGE</label>
+    <input id="token" type="password" placeholder="Pega el AXEL TOKEN de la consola">
+    <div class="row"><button class="small-btn" onclick="saveToken()">GUARDAR</button><button class="small-btn" onclick="checkBridge()">CONECTAR</button></div>
+  </div>
+  <div>
+    <div class="section-title">ACCIONES RÁPIDAS</div>
+    <button class="tool-btn" onclick="askAXEL('¿Qué filosofía enseña el Instituto KRC?')"><i class="fa-solid fa-book"></i> Filosofía KRC</button>
+    <button class="tool-btn" onclick="askAXEL('crea una imagen de una galaxia dorada')"><i class="fa-solid fa-image"></i> Generar Imagen</button>
+    <button class="tool-btn" onclick="askAXEL('¿Cuáles son los 7 chakras y el plexo solar?')"><i class="fa-solid fa-fire"></i> Plexo Solar & Chakras</button>
+    <button class="tool-btn" onclick="runCommand('Get-Date')"><i class="fa-solid fa-clock"></i> Hora de Windows</button>
+    <button class="tool-btn" onclick="runCommand('Get-Location')"><i class="fa-solid fa-folder-open"></i> Ubicación real</button>
+    <button class="tool-btn" onclick="runCommand('whoami')"><i class="fa-solid fa-user"></i> Usuario Windows</button>
+  </div>
+  <div style="margin-top:auto;font-size:.62rem;color:var(--muted);line-height:1.7">• Brain: Groq Llama<br>• Body: PowerShell local<br>• Bridge: 127.0.0.1:8765<br>• Origin: GitHub Pages</div>
+</aside>
+<main>
+  <div class="statusbar"><span>BRIDGE: <b id="bridge-status">DESCONECTADO</b></span><span>IA: <b id="brain-status">—</b></span><span>CUERPO: <b id="body-status">—</b></span><span>MODELO: <b id="model-status">—</b></span></div>
+  <div class="console" id="output">
+    <div class="line sys">[AXEL CORE] Inicializado.</div>
+    <div class="line axel">[AXEL] Ahora sí: tengo cabeza y cuerpo. La cabeza razona mediante el Bridge; el cuerpo ejecuta PowerShell en tu Windows.</div>
+    <div class="line terminal">[AYUDA] Pega el AXEL TOKEN que aparece al ejecutar <b>start-axel-bridge.ps1</b>, luego escribe una pregunta o un comando.</div>
+  </div>
+  <div class="input-bar"><div class="input-box"><span class="prompt">axel@orionix:~$</span><input id="cmd-input" autocomplete="off" placeholder="Pregunta a AXEL o escribe: dir, python --version, git status..." onkeydown="if(event.key==='Enter') procesar()"></div><button class="btn-exec" onclick="procesar()">ENVIAR ➜</button></div>
+</main>
 </div>
-
 <script>
-  function procesar() {
-    const input = document.getElementById('cmd-input');
-    const text = input.value.trim();
-    if(!text) return;
-
-    ejecutarAccion(text);
-    input.value = '';
-  }
-
-  function ejecutarAccion(text) {
-    const out = document.getElementById('output');
-    out.innerHTML += `<div class="line"><span class="prompt-symbol">user@orionix:~$</span><span class="text-user">${text}</span></div>`;
-    out.scrollTop = out.scrollHeight;
-
-    const lower = text.toLowerCase();
-    const tempId = 'msg-' + Date.now();
-
-    // 🎯 ROUTER IMAGEN: SOLO SI SE PIDE CREAR O DIBUJAR UNA IMAGEN
-    const esPedidoImagen = (lower.includes('crea') || lower.includes('genera') || lower.includes('dibuja')) && (lower.includes('imagen') || lower.includes('foto') || lower.includes('dibujo'));
-
-    if(esPedidoImagen) {
-      out.innerHTML += `<div class="line text-sys" id="${tempId}">[IMAGE ROUTER]: 🎨 Generando imagen en vivo...</div>`;
-      out.scrollTop = out.scrollHeight;
-
-      const promptLimpio = text.replace(/crea|genera|dibuja|una|un|imagen|foto|de|sobre/gi, '').trim() || 'cosmic luxury planet';
-      const seed = Math.floor(Math.random()*999999);
-      const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(promptLimpio + ', 8k, highly detailed, cosmic luxury aesthetic')}?width=1024&height=1024&seed=${seed}&nologo=true`;
-
-      setTimeout(() => {
-        const el = document.getElementById(tempId);
-        if(el) {
-          el.innerHTML = `[AXEL]: ¡Imagen generada con éxito! ✨<br><img src="${imgUrl}" class="img-out" alt="Arte Generado">`;
-          out.scrollTop = out.scrollHeight;
-        }
-      }, 1000);
-      return;
-    }
-
-    // 🧠 ROUTER CONVERSACIONAL REAL (RESPUESTA INTELIGENTE)
-    out.innerHTML += `<div class="line text-sys" id="${tempId}">[AXEL CORE]: 🧠 Procesando respuesta...</div>`;
-    out.scrollTop = out.scrollHeight;
-
-    setTimeout(() => {
-      let resp = "";
-      if(lower.includes('hola')) {
-        resp = "¡Hola mi rey! Estoy listo para ayudarte con el proyecto KRC, desarrollo de código o lo que necesites.";
-      } else if(lower.includes('filosof') || lower.includes('krc') || lower.includes('sabes')) {
-        resp = "Domino la Filosofía Unificada del Instituto KRC: la integración del Libro de Urantia (cosmología y restauración), Enoch (caída celestial), Kabbalah (Árbol de la Vida y chakras), textos gnósticos y sumerios, combinados con neurociencia y física cuántica moderna.";
-      } else if(lower.includes('plexo') || lower.includes('chakra')) {
-        resp = "El plexo solar (Manipura) es la central del poder personal y la voluntad. En el Instituto KRC lo sanamos mediante reconocimiento de trauma, respiración del fuego y reactivación marcial.";
-      } else if(lower.includes('urantia')) {
-        resp = "El Libro de Urantia describe la estructura del universo central (Havona) y los universos locales como Satania y Jerusem, explicando el proceso de restauración planetaria.";
-      } else {
-        resp = `Entiendo perfectamente tu pregunta sobre '${text}'. Como núcleo inteligente AXEL, conecto esta idea con el sistema de ORIONIX para darte la mejor perspectiva.`;
-      }
-
-      const el = document.getElementById(tempId);
-      if(el) {
-        el.innerHTML = `<span class="text-axel">[AXEL]: ${resp}</span>`;
-        out.scrollTop = out.scrollHeight;
-      }
-    }, 600);
-  }
+const BRIDGE='http://127.0.0.1:8765';
+let history=[];
+const $=id=>document.getElementById(id);
+function token(){return $('token').value.trim()||sessionStorage.getItem('axel_token')||''}
+function saveToken(){const t=$('token').value.trim();if(t){sessionStorage.setItem('axel_token',t);$('token').value=t;log('sys','[AXEL] Token guardado solo en esta sesión.');checkBridge();}else log('error','[ERROR] Falta el token del Bridge.')}
+function log(type,text,html=false){const out=$('output');const el=document.createElement('div');el.className='line '+type;if(html)el.innerHTML=text;else el.textContent=text;out.appendChild(el);out.scrollTop=out.scrollHeight;return el}
+function setStatus(bridge,brain,body,model){$('bridge-status').textContent=bridge;$('brain-status').textContent=brain;$('body-status').textContent=body;$('model-status').textContent=model||'—';$('bridge-status').className=bridge==='ONLINE'?'ok':'bad';$('brain-status').className=brain==='ONLINE'?'ok':'';$('body-status').className=body==='ONLINE'?'ok':''}
+async function checkBridge(){try{const r=await fetch(BRIDGE+'/status',{cache:'no-store'});const d=await r.json();if(!d.ok)throw new Error('Bridge no disponible');setStatus('ONLINE',d.brain?'ONLINE':'SIN CLAVE','ONLINE',d.model);$('main-badge').textContent=d.brain?'ONLINE · CABEZA + CUERPO':'ONLINE · SOLO CUERPO';$('main-badge').className='badge '+(d.brain?'live':'warn');log('sys',d.brain?'[BRIDGE] Cabeza y cuerpo conectados.':'[BRIDGE] Cuerpo conectado. Falta GROQ_API_KEY para activar la cabeza.');}catch(e){setStatus('OFFLINE','—','—','—');$('main-badge').textContent='BRIDGE OFFLINE';$('main-badge').className='badge';log('error','[BRIDGE] No responde. Ejecuta axel-bridge/start-axel-bridge.ps1 en Windows.')}}
+function looksLikeCommand(text){const s=text.trim().toLowerCase();if(s.startsWith('>'))return true;const commands=['dir','ls','pwd','cd ','git ','npm ','node ','python','py ','pip ','ipconfig','whoami','systeminfo','tasklist','Get-','set-','where ','where.exe','echo ','mkdir ','rmdir ','type ','cat ','code ','winget ','docker ','curl ','ping '];return commands.some(c=>s===c||s.startsWith(c))}
+async function runCommand(command){command=command.replace(/^>\s*/,'').trim();if(!command)return;const t=token();log('user','user@orionix:~$ '+command);if(!t){log('error','[CUERPO] Falta el AXEL TOKEN.');return}const wait=log('sys','[CUERPO] Ejecutando en Windows...');try{const r=await fetch(BRIDGE+'/exec',{method:'POST',headers:{'Content-Type':'application/json','X-AXEL-Token':t},body:JSON.stringify({command})});const d=await r.json();wait.remove();if(!r.ok||!d.ok){log('error','[CUERPO ERROR] '+(d.error||d.stderr||'Error de ejecución'));return}const box=document.createElement('div');box.className='output-box';box.textContent=(d.stdout||d.stderr||'(sin salida)').trim();$('output').appendChild(box);$('output').scrollTop=$('output').scrollHeight;}catch(e){wait.remove();log('error','[CUERPO] '+e.message)}}
+async function askAXEL(text){text=text.trim();if(!text)return;log('user','user@orionix:~$ '+text);const lower=text.toLowerCase();if((lower.includes('crea')||lower.includes('genera')||lower.includes('dibuja'))&&(lower.includes('imagen')||lower.includes('foto')||lower.includes('dibujo'))){const wait=log('sys','[IMAGE ROUTER] Generando imagen...');const clean=text.replace(/crea|genera|dibuja|una|un|imagen|foto|de|sobre/gi,'').trim()||'cosmic luxury planet';const seed=Math.floor(Math.random()*999999);const url=`https://image.pollinations.ai/prompt/${encodeURIComponent(clean+', 8k, highly detailed, cosmic luxury aesthetic')}?width=1024&height=1024&seed=${seed}&nologo=true`;setTimeout(()=>{wait.innerHTML='[AXEL] Imagen generada.<br><img src="'+url+'" class="img-out" alt="Arte AXEL">';},700);return}
+const t=token();if(!t){log('error','[CABEZA] Falta el AXEL TOKEN.');return}const wait=log('sys','[CABEZA] Pensando con AXEL CORE...');try{const r=await fetch(BRIDGE+'/chat',{method:'POST',headers:{'Content-Type':'application/json','X-AXEL-Token':t},body:JSON.stringify({message:text,history})});const d=await r.json();wait.remove();if(!r.ok||!d.ok){log('error','[CABEZA] '+(d.error||'La IA no está configurada.'));return}log('axel','[AXEL]: '+d.answer);history.push({role:'user',content:text},{role:'assistant',content:d.answer});if(history.length>20)history=history.slice(-20)}catch(e){wait.remove();log('error','[CABEZA] '+e.message)}}
+function procesar(){const input=$('cmd-input');const text=input.value.trim();if(!text)return;input.value='';if(looksLikeCommand(text))runCommand(text);else askAXEL(text)}
+const saved=sessionStorage.getItem('axel_token');if(saved)$('token').value=saved;checkBridge();
 </script>
 </body>
 </html>

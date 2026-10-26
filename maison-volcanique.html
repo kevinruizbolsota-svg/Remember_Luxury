@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maison Volcanique Imperial KRC™ | Haute Alchimie — Remember Luxury</title>
+  
+  <!-- Favicon & Meta -->
+  <link rel="icon" type="image/svg+xml" href="ciudadela/og.svg">
+  <meta name="description" content="El Brasero Alquímico de Fuego Frío y Bruma Ultrasónica. Pieza de devoción y atmósfera consagrada por Remember Luxury y KRC Universe.">
+  <meta property="og:title" content="Maison Volcanique Imperial KRC™ | Remember Luxury">
+  <meta property="og:description" content="Efecto de carbón ardiendo en 3D, silencio monástico absoluto y 7 espectros lumínicos.">
+  <meta property="og:image" content="https://oss.teemdrop.com/goods-admin/2026/09/21/0add5033-4705-422a-88b4-243edd07c608.jpeg">
+
+  <!-- Fuentes de Alta Costura & Misticismo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       SISTEMA VISUAL MAISON KRC & DOLCE & GABBANA IMPERIAL
+       ========================================================= */
+    :root {
+      --bg-dark: #050608;
+      --card-bg: rgba(14, 16, 23, 0.75);
+      --card-border: rgba(223, 186, 103, 0.22);
+      --gold-light: #fbe3a1;
+      --gold-primary: #dfba67;
+      --gold-dark: #9e7924;
+      --gold-glow: rgba(223, 186, 103, 0.25);
+      --gold-gradient: linear-gradient(135deg, #fbe3a1 0%, #dfba67 50%, #8c6819 100%);
+      --fire-ember: #ff6026;
+      --fire-glow: rgba(255, 96, 38, 0.4);
+      --text-pure: #ffffff;
+      --text-muted: #9fa7b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-pure);
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Canvas de Partículas Doradas en Fondo */
+    #ambient-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.55;
+    }
+
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Barra Superior de Urgencia Imperial */
+    .top-strip {
+      background: linear-gradient(90deg, #120e03 0%, #7d601b 25%, #dfba67 50%, #7d601b 75%, #120e03 100%);
+      color: #000;
+      font-family: 'Cinzel', serif;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 9px 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+    }
+
+    /* Navegación Aristocrática */
+    nav.krc-nav {
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(5, 6, 8, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-cluster {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+
+    .brand-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.55rem;
+      font-weight: 900;
+      letter-spacing: 3px;
+      color: #fff;
+    }
+
+    .brand-name span {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-tag {
+      font-size: 0.65rem;
+      color: var(--gold-primary);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--gold-light);
+    }
+
+    /* Control de Frecuencia Sonora 432 Hz */
+    .sound-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(223, 186, 103, 0.08);
+      border: 1px solid var(--card-border);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      color: var(--gold-primary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .sound-pill:hover {
+      background: rgba(223, 186, 103, 0.16);
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 15px var(--gold-glow);
+    }
+
+    .sound-wave {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 12px;
+    }
+
+    .sound-wave span {
+      width: 2px;
+      background: var(--gold-primary);
+      border-radius: 2px;
+      animation: soundPulse 1.2s infinite ease-in-out;
+    }
+
+    .sound-wave span:nth-child(2) { animation-delay: 0.2s; height: 12px; }
+    .sound-wave span:nth-child(3) { animation-delay: 0.4s; height: 7px; }
+
+    @keyframes soundPulse {
+      0%, 100% { height: 4px; }
+      50% { height: 12px; }
+    }
+
+    /* Contenedor */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 50px 24px;
+    }
+
+    /* Hero Layout */
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-bottom: 100px;
+    }
+
+    @media (max-width: 950px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .nav-links a:not(.shop-link) {
+        display: none;
+      }
+    }
+
+    /* Galería */
+    .gallery-sticky {
+      position: sticky;
+      top: 110px;
+    }
+
+    .master-view {
+      width: 100%;
+      height: 500px;
+      background: radial-gradient(circle at center, #1b1e2a 0%, #0a0b10 100%);
+      border-radius: 20px;
+      border: 1px solid var(--card-border);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.85), inset 0 0 40px rgba(223, 186, 103, 0.04);
+    }
+
+    .master-view img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .view-seal {
+      position: absolute;
+      top: 22px;
+      left: 22px;
+      background: rgba(6, 7, 9, 0.9);
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-light);
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      padding: 7px 16px;
+      border-radius: 4px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+    }
+
+    .thumb-strip {
+      display: flex;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .thumb-node {
+      width: 92px;
+      height: 92px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      background: #0d0f16;
+      cursor: pointer;
+      overflow: hidden;
+      opacity: 0.6;
+      transition: all 0.3s ease;
+    }
+
+    .thumb-node.active, .thumb-node:hover {
+      border-color: var(--gold-primary);
+      opacity: 1;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px var(--gold-glow);
+    }
+
+    .thumb-node img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Columna de Conversión */
+    .buy-panel {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .consecration-tag {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: var(--gold-primary);
+      margin-bottom: 14px;
+    }
+
+    .stars {
+      color: var(--gold-primary);
+      letter-spacing: 2px;
+    }
+
+    .title-h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.35rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.25;
+      color: #fff;
+      margin-bottom: 15px;
+    }
+
+    .title-h1 span {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .abstract {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.7;
+      margin-bottom: 26px;
+      font-weight: 300;
+    }
+
+    /* Caja de Precio */
+    .price-chambre {
+      background: linear-gradient(145deg, rgba(223, 186, 103, 0.08) 0%, rgba(14, 16, 23, 0.8) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 24px 28px;
+      margin-bottom: 26px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    }
+
+    .price-left {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+
+    .amt-curr {
+      font-family: 'Cinzel', serif;
+      font-size: 2.45rem;
+      font-weight: 900;
+      color: var(--gold-light);
+    }
+
+    .amt-past {
+      font-size: 1.25rem;
+      color: #5d6373;
+      text-decoration: line-through;
+    }
+
+    .badge-privilege {
+      background: var(--gold-gradient);
+      color: #000;
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(223, 186, 103, 0.35);
+    }
+
+    .live-stock {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: #f79d5c;
+      margin-bottom: 25px;
+      font-weight: 500;
+    }
+
+    .live-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--fire-ember);
+      box-shadow: 0 0 14px var(--fire-glow);
+      animation: emberBlink 1.8s infinite;
+    }
+
+    @keyframes emberBlink {
+      0%, 100% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.3); opacity: 1; }
+    }
+
+    /* Selector de Color de Reliquia */
+    .label-krc {
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      margin-bottom: 12px;
+    }
+
+    .tone-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .tone-card {
+      background: var(--card-bg);
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 16px 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .tone-card.active {
+      border-color: var(--gold-primary);
+      background: linear-gradient(145deg, rgba(223, 186, 103, 0.14) 0%, rgba(14, 16, 23, 0.95) 100%);
+      box-shadow: 0 0 25px rgba(223, 186, 103, 0.15);
+    }
+
+    .tone-gem {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 1px solid var(--card-border);
+      box-shadow: inset 0 2px 4px rgba(255,255,255,0.25);
+    }
+
+    .tone-gem.obsidian { background: #0b0c10; }
+    .tone-gem.alabaster { background: #eef0f5; }
+
+    .tone-meta h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .tone-meta p {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* Packs de Consagración (Upsell) */
+    .pack-wrap {
+      margin-bottom: 30px;
+    }
+
+    .pack-row {
+      border: 1.5px solid var(--card-border);
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 18px 24px;
+      margin-bottom: 15px;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .pack-row.active {
+      border-color: var(--gold-primary);
+      background: linear-gradient(145deg, rgba(223, 186, 103, 0.12) 0%, rgba(14, 16, 23, 0.95) 100%);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .pack-flag {
+      position: absolute;
+      top: -12px;
+      right: 22px;
+      background: var(--gold-gradient);
+      color: #000;
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      padding: 3px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(223, 186, 103, 0.35);
+    }
+
+    .pack-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .pack-head .name {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+    }
+
+    .pack-head .cost {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 1.15rem;
+      color: var(--gold-primary);
+    }
+
+    .pack-sub {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* Botón Maestro KRC */
+    .btn-imperial-order {
+      width: 100%;
+      background: var(--gold-gradient);
+      color: #000;
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      padding: 22px 30px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      box-shadow: 0 12px 40px rgba(223, 186, 103, 0.45);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      text-align: center;
+      display: block;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-imperial-order::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(60deg, transparent, rgba(255,255,255,0.45), transparent);
+      transform: rotate(30deg);
+      animation: royalGlance 4s infinite;
+    }
+
+    @keyframes royalGlance {
+      0% { transform: translateX(-100%) rotate(30deg); }
+      20% { transform: translateX(100%) rotate(30deg); }
+      100% { transform: translateX(100%) rotate(30deg); }
+    }
+
+    .btn-imperial-order:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 50px rgba(223, 186, 103, 0.65);
+      filter: brightness(1.08);
+    }
+
+    .btn-concierge-wire {
+      width: 100%;
+      background: #0d1017;
+      color: #27a7e7;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 1.5px;
+      padding: 16px 22px;
+      border: 1px solid rgba(39, 167, 231, 0.3);
+      border-radius: 14px;
+      margin-top: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .btn-concierge-wire:hover {
+      background: rgba(39, 167, 231, 0.1);
+      border-color: #27a7e7;
+    }
+
+    /* Trust Pillars */
+    .pillar-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 32px;
+      padding-top: 26px;
+      border-top: 1px solid var(--card-border);
+    }
+
+    .pillar-item {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .pillar-item strong {
+      display: block;
+      color: #fff;
+      font-family: 'Cinzel', serif;
+      font-size: 0.86rem;
+      margin-bottom: 3px;
+    }
+
+    /* Manifiesto Alquímico KRC */
+    .altar-manifesto {
+      background: linear-gradient(180deg, #10131d 0%, #07080c 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 26px;
+      padding: 60px 45px;
+      margin-bottom: 100px;
+      text-align: center;
+      box-shadow: 0 35px 70px rgba(0,0,0,0.85);
+    }
+
+    .manifesto-crest {
+      font-family: 'Cinzel', serif;
+      color: var(--gold-primary);
+      font-size: 0.78rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .manifesto-header {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      color: #fff;
+      letter-spacing: 1.5px;
+      max-width: 850px;
+      margin: 0 auto 24px auto;
+      line-height: 1.35;
+    }
+
+    .manifesto-body {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+      line-height: 1.85;
+      max-width: 780px;
+      margin: 0 auto 40px auto;
+      font-weight: 300;
+    }
+
+    /* Tabla de Nobleza Comparativa */
+    .imperial-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 35px;
+      text-align: left;
+    }
+
+    .imperial-table th {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--gold-primary);
+    }
+
+    .imperial-table td {
+      padding: 18px 24px;
+      font-size: 0.92rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: var(--text-muted);
+    }
+
+    .imperial-table tr:hover td {
+      background: rgba(223, 186, 103, 0.04);
+    }
+
+    .imperial-table td.pure-gold {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* 4 Virtudes */
+    .virtues-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+      margin-bottom: 100px;
+    }
+
+    .virtue-box {
+      background: var(--card-bg);
+      border: 1px solid rgba(223, 186, 103, 0.18);
+      border-radius: 20px;
+      padding: 38px 28px;
+      text-align: center;
+      transition: all 0.35s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .virtue-box:hover {
+      transform: translateY(-8px);
+      border-color: var(--gold-primary);
+      box-shadow: 0 18px 45px rgba(223, 186, 103, 0.18);
+    }
+
+    .virtue-symbol {
+      font-size: 2.6rem;
+      margin-bottom: 18px;
+      display: inline-block;
+      filter: drop-shadow(0 0 12px var(--gold-glow));
+    }
+
+    .virtue-box h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      color: #fff;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .virtue-box p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* Footer Remember Luxury */
+    footer.krc-footer {
+      border-top: 1px solid var(--card-border);
+      background: #040507;
+      padding: 60px 30px 40px 30px;
+      text-align: center;
+    }
+
+    .footer-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      letter-spacing: 3px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    /* Sticky Mobile Bar */
+    .sticky-krc-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(5, 6, 8, 0.96);
+      border-top: 1px solid var(--card-border);
+      padding: 14px 24px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(14px);
+      z-index: 999;
+      box-shadow: 0 -8px 35px rgba(0, 0, 0, 0.8);
+    }
+
+    @media (max-width: 768px) {
+      .sticky-krc-bar {
+        display: flex;
+      }
+      body {
+        padding-bottom: 90px;
+      }
+    }
+
+    .sticky-details span.label {
+      font-size: 0.68rem;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: 'Cinzel', serif;
+    }
+
+    .sticky-details span.val {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .sticky-cta {
+      background: var(--gold-gradient);
+      color: #000;
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      padding: 12px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 4px 18px rgba(223, 186, 103, 0.45);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Lienzo de Partículas Místicas -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <div class="page-wrap">
+
+    <!-- Top Announcement -->
+    <div class="top-strip">
+      ❖ MAISON KRC • 40% OFF + ENVÍO PRIORITARIO HOY EN COLOMBIA | PAGO CONTRA ENTREGA DISPONIBLE ❖
+    </div>
+
+    <!-- Header -->
+    <nav class="krc-nav">
+      <a href="index.html" class="brand-cluster">
+        <span class="brand-name">REMEMBER <span>LUXURY</span></span>
+        <span class="brand-tag">Haute Alchimie & Reliquias Cósmicas</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="tienda.html" class="shop-link">Colección</a>
+        <a href="universo.html">Cosmología KRC</a>
+        <a href="ciudadela/portal.html">La Ciudadela</a>
+        
+        <!-- Toggle de Frecuencia 432Hz -->
+        <div class="sound-pill" id="sound-btn" onclick="toggleAudioFrequency()">
+          <div class="sound-wave">
+            <span></span><span></span><span></span>
+          </div>
+          <span id="sound-label">Frecuencia 432 Hz: Inactiva</span>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <!-- Hero Grid -->
+      <div class="product-grid">
+
+        <!-- Gallery Column -->
+        <div class="gallery-sticky">
+          <div class="master-view">
+            <span class="view-seal">ARTEFACTO N° 01 • FORJA KRC</span>
+            <img id="krc-img-display" src="https://oss.teemdrop.com/goods-admin/2026/09/21/0add5033-4705-422a-88b4-243edd07c608.jpeg" alt="Maison Volcanique Imperial">
+          </div>
+
+          <div class="thumb-strip">
+            <div class="thumb-node active" onclick="switchKrcGallery('https://oss.teemdrop.com/goods-admin/2026/09/21/0add5033-4705-422a-88b4-243edd07c608.jpeg', this)">
+              <img src="https://oss.teemdrop.com/goods-admin/2026/09/21/0add5033-4705-422a-88b4-243edd07c608.jpeg" alt="Fuego de Carbón Real">
+            </div>
+            <div class="thumb-node" onclick="switchKrcGallery('https://oss.teemdrop.com/goods-admin/2026/09/21/0c2b34fa-39be-49c9-8367-6a151c0843fa.jpg', this)">
+              <img src="https://oss.teemdrop.com/goods-admin/2026/09/21/0c2b34fa-39be-49c9-8367-6a151c0843fa.jpg" alt="Obsidiana Imperial">
+            </div>
+          </div>
+        </div>
+
+        <!-- Buy Panel Column -->
+        <div class="buy-panel">
+          <div class="consecration-tag">
+            <span class="stars">★★★★★</span>
+            <span><strong>4.98/5</strong> — Consagrado por 642 Iniciados</span>
+          </div>
+
+          <h1 class="title-h1">Maison <span>Volcanique</span> Imperial</h1>
+          <p class="abstract">
+            El Brasero Alquímico de Fuego Frío. Transmuta la atmósfera de tu templo personal mediante micronización ultrasónica, simulación de brasas incandescentes y siete espectros lumínicos de alta vibración.
+          </p>
+
+          <!-- Price Chambre -->
+          <div class="price-chambre">
+            <div class="price-left">
+              <div class="amt-curr" id="krc-price-display">$169.000 COP</div>
+              <div class="amt-past">$280.000 COP</div>
+            </div>
+            <span class="badge-privilege">Privilegio 40%</span>
+          </div>
+
+          <!-- Urgency -->
+          <div class="live-stock">
+            <span class="live-dot"></span>
+            <span>Forja activa: Solo 5 piezas reservadas para despacho asegurado hoy</span>
+          </div>
+
+          <!-- Color Selector -->
+          <div class="label-krc">1. Selecciona la Tonalidad Sagrada:</div>
+          <div class="tone-grid">
+            <div class="tone-card active" onclick="selectKrcTone('Obsidiana Imperial (Negro Ónix)', this)">
+              <div class="tone-gem obsidian"></div>
+              <div class="tone-meta">
+                <h4>Obsidiana Imperial</h4>
+                <p>Negro Carbón Forjado</p>
+              </div>
+            </div>
+            <div class="tone-card" onclick="selectKrcTone('Mármol Alabastro (Blanco Sacro)', this)">
+              <div class="tone-gem alabaster"></div>
+              <div class="tone-meta">
+                <h4>Mármol Alabastro</h4>
+                <p>Blanco Sacro Nórdico</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pack Selector (Upsell) -->
+          <div class="label-krc">2. Selecciona la Cobertura de tu Espacio:</div>
+          <div class="pack-wrap">
+            <div class="pack-row active" onclick="selectKrcPack(1, 169000, this)">
+              <div class="pack-flag">OPCIÓN MAESTRA</div>
+              <div class="pack-head">
+                <span class="name">1x Altar Maison Volcanique 3D™</span>
+                <span class="cost">$169.000 COP</span>
+              </div>
+              <div class="pack-sub">Incluye Control Remoto Multifunción + Despacho Prioritario Asegurado</div>
+            </div>
+
+            <div class="pack-row" onclick="selectKrcPack(2, 279000, this)">
+              <div class="pack-flag" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">SANTUARIO DUAL (AHORRA $59.000)</div>
+              <div class="pack-head">
+                <span class="name">2x Maison Volcanique (Altar Alcoba + Despacho)</span>
+                <span class="cost">$279.000 COP</span>
+              </div>
+              <div class="pack-sub">La segunda reliquia al 50% de su valor para armonizar dos estancias simultáneas.</div>
+            </div>
+          </div>
+
+          <!-- CTA Buttons -->
+          <a id="btn-master-action" href="https://wa.me/573000000000?text=Saludos%20Remember%20Luxury.%20Deseo%20reclamar%20mi%20Maison%20Volcanique%20Imperial%20en%20Obsidiana%20Imperial%20por%20$169.000%20COP%20con%20despacho%20asegurado%20y%20pago%20contra%20entrega." class="btn-imperial-order">
+            ❖ RECLAMAR RELIQUIA — PAGO EN CASA ❖
+          </a>
+
+          <a href="https://t.me/RememberLuxuryOficial" class="btn-concierge-wire">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+            Conserjería Privada por Telegram (@RememberLuxuryOficial)
+          </a>
+
+          <!-- Pillars -->
+          <div class="pillar-row">
+            <div class="pillar-item">
+              <strong>Despacho Sellado</strong>
+              2 a 4 días en tu morada
+            </div>
+            <div class="pillar-item">
+              <strong>Garantía Real</strong>
+              30 días de satisfacción
+            </div>
+            <div class="pillar-item">
+              <strong>Pago In Situ</strong>
+              Cancela al mensajero
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Manifiesto KRC -->
+      <div class="altar-manifesto">
+        <span class="manifesto-crest">Doctrina de la Atmósfera • KRC Luxury</span>
+        <h2 class="manifesto-header">El Entorno es la Antena que Dicta tu Destino</h2>
+        <p class="manifesto-body">
+          La mente creadora no puede manifestar pensamientos de alto calibre en un espacio seco, ruidoso e inerte. Maison Volcanique canaliza el elemento primordial del fuego sin su peligro cáustico: apacigua el sistema nervioso, purifica el aire de tu templo y sella tu estancia con la dignidad de una logia privada.
+        </p>
+
+        <!-- Comparativa de Nobleza -->
+        <table class="imperial-table">
+          <thead>
+            <tr>
+              <th>Criterio Alquímico</th>
+              <th>Difusores Comunes del Mercado</th>
+              <th>Maison Volcanique Imperial KRC</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="pure-gold">Efecto Visual</td>
+              <td>Plástico traslúcido genérico</td>
+              <td class="pure-gold">Brasas de Carbón 3D y Llama Volcánica Viva</td>
+            </tr>
+            <tr>
+              <td class="pure-gold">Nivel de Silencio</td>
+              <td>Zumbido de turbina continua (>45 dB)</td>
+              <td class="pure-gold">Silencio Monástico Absoluto (&lt;25 dB)</td>
+            </tr>
+            <tr>
+              <td class="pure-gold">Protección</td>
+              <td>Sobrecalentamiento al acabarse el agua</td>
+              <td class="pure-gold">Sensor de Ausencia con Desconexión Inteligente</td>
+            </tr>
+            <tr>
+              <td class="pure-gold">Control del Fuego</td>
+              <td>Botones manuales ordinarios</td>
+              <td class="pure-gold">Controlador de Radiofrecuencia de 8 Metros</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Cuatro Virtudes -->
+      <div class="virtues-grid">
+        <div class="virtue-box">
+          <span class="virtue-symbol">🔥</span>
+          <h3>Fuego Frío Inofensivo</h3>
+          <p>La ilusión de fuego más avanzada del mundo: microgotas ultrasónicas refractadas por luz cálida. Puedes tocar el fuego con tus manos con total seguridad.</p>
+        </div>
+
+        <div class="virtue-box">
+          <span class="virtue-symbol">🌌</span>
+          <h3>7 Espectros de Luz</h3>
+          <p>Del ámbar solar de la forja al violeta místico de la corona. Modula la energía y cromoterapia de tu habitación con un solo toque.</p>
+        </div>
+
+        <div class="virtue-box">
+          <span class="virtue-symbol">🪔</span>
+          <h3>Aromaterapia Pura</h3>
+          <p>Diseñado para aceites esenciales puros de sándalo, mirra y cedro. Difunde las notas olfativas sin quemar sus propiedades terapéuticas.</p>
+        </div>
+
+        <div class="virtue-box">
+          <span class="virtue-symbol">🛡️</span>
+          <h3>Apagado Sacro Automático</h3>
+          <p>Al consumirse la última gota de agua, el circuito se desactiva en silencio total, garantizando una vida útil de años.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="krc-footer">
+      <div class="footer-brand">REMEMBER <span>LUXURY</span></div>
+      <p class="footer-copy">© 2026 KRC UNIVERSE • TODOS LOS DERECHOS CONSAGRADOS • CIUDADELA FORJADORA</p>
+    </footer>
+
+  </div>
+
+  <!-- Sticky Bar Mobile -->
+  <div class="sticky-krc-bar">
+    <div class="sticky-details">
+      <span class="label">Maison Volcanique</span>
+      <span class="val" id="sticky-krc-amt">$169.000 COP</span>
+    </div>
+    <a href="#btn-master-action" class="sticky-cta">ORDENAR AHORA</a>
+  </div>
+
+  <!-- Scripts: Audio Alquímico 432Hz + Canvas + Lógica de Compra -->
+  <script>
+    // 1. Selector de Estado
+    let krcActiveTone = 'Obsidiana Imperial (Negro Ónix)';
+    let krcActiveQty = 1;
+    let krcActivePrice = 169000;
+
+    function switchKrcGallery(url, el) {
+      document.getElementById('krc-img-display').src = url;
+      document.querySelectorAll('.thumb-node').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function selectKrcTone(toneName, el) {
+      krcActiveTone = toneName;
+      document.querySelectorAll('.tone-card').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      refreshKrcOrder();
+    }
+
+    function selectKrcPack(qty, price, el) {
+      krcActiveQty = qty;
+      krcActivePrice = price;
+      document.querySelectorAll('.pack-row').forEach(p => p.classList.remove('active'));
+      el.classList.add('active');
+
+      const fmt = '$' + price.toLocaleString('es-CO') + ' COP';
+      document.getElementById('krc-price-display').innerText = fmt;
+      document.getElementById('sticky-krc-amt').innerText = fmt;
+      refreshKrcOrder();
+    }
+
+    function refreshKrcOrder() {
+      const msg = encodeURIComponent(`Saludos Remember Luxury. Deseo reclamar mi ${krcActiveQty}x Maison Volcanique Imperial KRC en ${krcActiveTone} por valor de $${krcActivePrice.toLocaleString('es-CO')} COP con despacho prioritario y pago contra entrega.`);
+      document.getElementById('btn-master-action').href = `https://wa.me/573000000000?text=${msg}`;
+    }
+
+    // 2. Audio Web API: Generador Sintético de Frecuencia 432 Hz y Crepitar
+    let audioCtx = null;
+    let isPlaying = false;
+    let osc = null;
+    let gainNode = null;
+
+    function toggleAudioFrequency() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+
+      const label = document.getElementById('sound-label');
+
+      if (!isPlaying) {
+        // Iniciar tono 432 Hz sagrado con envolvente suave
+        osc = audioCtx.createOscillator();
+        gainNode = audioCtx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(432, audioCtx.currentTime);
+
+        gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 1.5); // Volumen muy suave para meditación
+
+        osc.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        osc.start();
+
+        isPlaying = true;
+        label.innerText = 'Frecuencia 432 Hz: Activa ✨';
+        document.getElementById('sound-btn').style.borderColor = '#dfba67';
+      } else {
+        if (gainNode) {
+          gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.8);
+          setTimeout(() => {
+            if (osc) osc.stop();
+            isPlaying = false;
+            label.innerText = 'Frecuencia 432 Hz: Inactiva';
+            document.getElementById('sound-btn').style.borderColor = 'rgba(223, 186, 103, 0.22)';
+          }, 800);
+        }
+      }
+    }
+
+    // 3. Canvas de Partículas Doradas
+    const canvas = document.getElementById('ambient-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < 45; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 1.8 + 0.4,
+        speedY: Math.random() * 0.4 + 0.15,
+        opacity: Math.random() * 0.6 + 0.2
+      });
+    }
+
+    function renderCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#dfba67';
+
+      particles.forEach(p => {
+        ctx.globalAlpha = p.opacity;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        p.y -= p.speedY;
+        if (p.y < 0) {
+          p.y = canvas.height;
+          p.x = Math.random() * canvas.width;
+        }
+      });
+
+      requestAnimationFrame(renderCanvas);
+    }
+    renderCanvas();
+  </script>
+</body>
+</html>

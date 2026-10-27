@@ -945,8 +945,8 @@
           </div>
 
           <!-- CTA Buttons -->
-          <a id="btn-master-action" href="https://wa.me/573000000000?text=Saludos%20Remember%20Luxury.%20Deseo%20reclamar%20mi%20Maison%20Volcanique%20Imperial%20en%20Obsidiana%20Imperial%20por%20$169.000%20COP%20con%20despacho%20asegurado%20y%20pago%20contra%20entrega." class="btn-imperial-order">
-            ❖ RECLAMAR RELIQUIA — PAGO EN CASA ❖
+          <a id="btn-master-action" href="https://50e6f7-2.myshopify.com/cart/54522117292379:1?checkout" class="btn-imperial-order">
+            ❖ RECLAMAR RELIQUIA — COMPRAR AHORA ❖
           </a>
 
           <a href="https://t.me/RememberLuxuryOficial" class="btn-concierge-wire">
@@ -1095,8 +1095,8 @@
     }
 
     function refreshKrcOrder() {
-      const msg = encodeURIComponent(`Saludos Remember Luxury. Deseo reclamar mi ${krcActiveQty}x Maison Volcanique Imperial KRC en ${krcActiveTone} por valor de $${krcActivePrice.toLocaleString('es-CO')} COP con despacho prioritario y pago contra entrega.`);
-      document.getElementById('btn-master-action').href = `https://wa.me/573000000000?text=${msg}`;
+      const variantId = '54522117292379';
+      document.getElementById('btn-master-action').href = `https://50e6f7-2.myshopify.com/cart/${variantId}:${krcActiveQty}?checkout`;
     }
 
     // 2. Audio Web API: Generador Sintético de Frecuencia 432 Hz y Crepitar

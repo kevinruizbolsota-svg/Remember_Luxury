@@ -3,59 +3,94 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Gemini • Kabalion AI • El Parche</title>
+  <title>El Parche • Universo Kabalion AI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Cinzel:wght@600;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --gemini-bg: #131314;
-      --gemini-surface: #1e1f20;
-      --gemini-surface-variant: #282a2c;
-      --gemini-surface-hover: #333538;
-      --gemini-text-primary: #e3e3e3;
-      --gemini-text-secondary: #c4c7c5;
-      --gemini-text-muted: #8e918f;
-      --gemini-blue: #a8c7fa;
-      --gemini-gold: #ffd700;
-      --gemini-gradient: linear-gradient(135deg, #a8c7fa 0%, #ffd700 50%, #f43f5e 100%);
-      --gemini-border: rgba(255, 255, 255, 0.08);
-      --gemini-radius-sm: 8px;
-      --gemini-radius-md: 16px;
-      --gemini-radius-lg: 24px;
-      --gemini-radius-pill: 9999px;
+      --bg-dark: #04060b;
+      --surface-glass: rgba(14, 18, 30, 0.75);
+      --surface-card: rgba(22, 28, 46, 0.85);
+      --surface-hover: rgba(35, 45, 72, 0.85);
+      --gold: #ffd700;
+      --gold-glow: rgba(255, 215, 0, 0.4);
+      --purple-nebula: #a855f7;
+      --cyan-nebula: #00f0ff;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-soft: rgba(255, 215, 0, 0.18);
+      --border-bright: rgba(255, 215, 0, 0.5);
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 26px;
+      --radius-pill: 9999px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--gemini-bg);
-      color: var(--gemini-text-primary);
-      font-family: 'Outfit', 'Google Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #020307;
+      color: var(--text-main);
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
       height: 100vh;
       display: flex;
       overflow: hidden;
-      -webkit-font-smoothing: antialiased;
+      position: relative;
     }
 
-    /* === SIDEBAR (ESTILO GOOGLE GEMINI) === */
+    /* === FONDO DE UNIVERSO Y ESTRELLAS (CANVAS) === */
+    #universe-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .nebula-glow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+      background: 
+        radial-gradient(circle at 15% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(0, 240, 255, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.08) 0%, transparent 60%);
+    }
+
+    /* === CAPA DE APLICACIÓN === */
+    .app-root {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      display: flex;
+    }
+
+    /* === SIDEBAR (GEMINI + COSMOS) === */
     .sidebar {
-      width: 280px;
-      background: var(--gemini-surface);
+      width: 290px;
+      background: var(--surface-glass);
+      backdrop-filter: blur(20px);
       display: flex;
       flex-direction: column;
-      border-right: 1px solid var(--gemini-border);
+      border-right: 1px solid var(--border-soft);
       transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 50;
       flex-shrink: 0;
+      box-shadow: 10px 0 30px rgba(0,0,0,0.5);
     }
     .sidebar.is-collapsed {
       width: 0;
-      margin-left: -280px;
+      margin-left: -290px;
     }
 
     .sidebar-top {
-      padding: 16px;
+      padding: 18px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -65,31 +100,23 @@
       align-items: center;
       gap: 10px;
       text-decoration: none;
-      color: var(--gemini-text-primary);
-      font-weight: 600;
-      font-size: 1.05rem;
-      letter-spacing: 0.5px;
-    }
-    .sparkle-icon {
-      width: 28px;
-      height: 28px;
-      display: grid;
-      place-items: center;
-      font-size: 1.3rem;
-      background: var(--gemini-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--gold);
+      font-family: 'Cinzel', serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 1.5px;
+      text-shadow: 0 0 15px var(--gold-glow);
     }
 
     .btn-new-chat {
-      margin: 8px 16px 16px;
+      margin: 8px 16px 14px;
       padding: 12px 18px;
-      background: var(--gemini-surface-variant);
-      border: 1px solid var(--gemini-border);
-      border-radius: var(--gemini-radius-pill);
-      color: var(--gemini-text-primary);
+      background: rgba(255, 215, 0, 0.08);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-pill);
+      color: var(--text-main);
       font-size: 0.9rem;
-      font-weight: 500;
+      font-weight: 600;
       display: flex;
       align-items: center;
       gap: 12px;
@@ -97,17 +124,19 @@
       transition: all 0.2s ease;
     }
     .btn-new-chat:hover {
-      background: var(--gemini-surface-hover);
-      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 215, 0, 0.16);
+      border-color: var(--gold);
+      transform: translateY(-1px);
+      box-shadow: 0 0 15px var(--gold-glow);
     }
 
     .sidebar-label {
-      padding: 12px 20px 6px;
-      font-size: 0.75rem;
+      padding: 10px 20px 4px;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--gemini-text-muted);
-      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      font-weight: 700;
     }
 
     .sidebar-nav {
@@ -120,8 +149,8 @@
     }
     .nav-link {
       padding: 10px 14px;
-      border-radius: var(--gemini-radius-pill);
-      color: var(--gemini-text-secondary);
+      border-radius: var(--radius-pill);
+      color: var(--text-muted);
       font-size: 0.88rem;
       display: flex;
       align-items: center;
@@ -131,46 +160,74 @@
       transition: all 0.15s;
     }
     .nav-link:hover {
-      background: var(--gemini-surface-hover);
+      background: var(--surface-hover);
       color: #fff;
     }
     .nav-link.active {
-      background: rgba(168, 199, 250, 0.15);
-      color: var(--gemini-blue);
+      background: rgba(255, 215, 0, 0.14);
+      color: var(--gold);
       font-weight: 600;
+      border: 1px solid var(--border-soft);
     }
     .nav-link .icon { font-size: 1.15rem; width: 20px; text-align: center; }
 
-    .sidebar-bottom {
-      padding: 14px 16px;
-      border-top: 1px solid var(--gemini-border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    /* ESTADO DEL CREADOR / BYOK */
+    .user-status-card {
+      margin: 10px 14px 14px;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
       font-size: 0.78rem;
-      color: var(--gemini-text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .user-role-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .btn-login-creator {
+      background: transparent;
+      border: 1px solid var(--border-soft);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn-login-creator:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(255, 215, 0, 0.08);
     }
 
-    /* === CONTENEDOR PRINCIPAL === */
+    /* === VISTA PRINCIPAL === */
     .main-view {
       flex: 1;
       display: flex;
       flex-direction: column;
       height: 100vh;
       position: relative;
-      background: var(--gemini-bg);
       overflow: hidden;
     }
 
-    /* HEADER SUPERIOR */
+    /* HEADER BAR */
     .header-bar {
       height: 64px;
       padding: 0 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid var(--gemini-border);
-      background: rgba(19, 19, 20, 0.85);
+      border-bottom: 1px solid var(--border-soft);
+      background: rgba(8, 11, 20, 0.7);
       backdrop-filter: blur(16px);
       z-index: 20;
     }
@@ -182,7 +239,7 @@
     .icon-btn-toggle {
       background: transparent;
       border: none;
-      color: var(--gemini-text-secondary);
+      color: var(--text-muted);
       font-size: 1.3rem;
       cursor: pointer;
       padding: 8px;
@@ -192,19 +249,18 @@
       transition: background 0.15s;
     }
     .icon-btn-toggle:hover {
-      background: var(--gemini-surface-hover);
+      background: var(--surface-hover);
       color: #fff;
     }
 
-    /* SELECTOR DE CEREBROS / MODELOS */
     .gemini-pill {
-      background: var(--gemini-surface-variant);
-      border: 1px solid var(--gemini-border);
-      border-radius: var(--gemini-radius-pill);
-      padding: 7px 16px;
+      background: var(--surface-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-pill);
+      padding: 7px 18px;
       font-size: 0.88rem;
       font-weight: 600;
-      color: var(--gemini-text-primary);
+      color: var(--gold);
       display: flex;
       align-items: center;
       gap: 8px;
@@ -213,37 +269,38 @@
       position: relative;
     }
     .gemini-pill:hover {
-      background: var(--gemini-surface-hover);
-      border-color: rgba(255, 255, 255, 0.18);
+      border-color: var(--gold);
+      box-shadow: 0 0 15px var(--gold-glow);
     }
     .gemini-dropdown {
       position: absolute;
       top: calc(100% + 8px);
       left: 0;
-      width: 280px;
-      background: var(--gemini-surface);
-      border: 1px solid var(--gemini-border);
-      border-radius: var(--gemini-radius-md);
-      box-shadow: 0 15px 45px rgba(0,0,0,0.7);
+      width: 290px;
+      background: rgba(14, 18, 32, 0.97);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--radius-md);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
       display: none;
       flex-direction: column;
-      padding: 6px;
+      padding: 8px;
       z-index: 100;
+      backdrop-filter: blur(20px);
     }
     .gemini-dropdown.open { display: flex; }
     .dropdown-opt {
       padding: 10px 14px;
-      border-radius: var(--gemini-radius-sm);
+      border-radius: var(--radius-sm);
       cursor: pointer;
       display: flex;
       flex-direction: column;
       gap: 2px;
       transition: background 0.15s;
     }
-    .dropdown-opt:hover { background: var(--gemini-surface-hover); }
-    .dropdown-opt.active { background: rgba(168, 199, 250, 0.12); }
-    .opt-name { font-weight: 600; font-size: 0.88rem; color: #fff; }
-    .opt-desc { font-size: 0.74rem; color: var(--gemini-text-muted); }
+    .dropdown-opt:hover { background: var(--surface-hover); }
+    .dropdown-opt.active { background: rgba(255, 215, 0, 0.14); }
+    .opt-name { font-weight: 600; font-size: 0.88rem; color: #fff; display: flex; justify-content: space-between; }
+    .opt-desc { font-size: 0.74rem; color: var(--text-muted); }
 
     .header-right {
       display: flex;
@@ -251,8 +308,8 @@
       gap: 10px;
     }
     .btn-header-link {
-      padding: 6px 14px;
-      border-radius: var(--gemini-radius-pill);
+      padding: 7px 15px;
+      border-radius: var(--radius-pill);
       font-size: 0.82rem;
       font-weight: 600;
       text-decoration: none;
@@ -262,29 +319,30 @@
       transition: all 0.2s;
     }
     .btn-header-link.wa {
-      background: rgba(37, 211, 102, 0.15);
-      border: 1px solid rgba(37, 211, 102, 0.4);
+      background: rgba(37, 211, 102, 0.12);
+      border: 1px solid #25d366;
       color: #25d366;
     }
     .btn-header-link.wa:hover { background: #25d366; color: #000; }
-    .btn-header-link.tg {
-      background: rgba(0, 136, 204, 0.15);
-      border: 1px solid rgba(0, 136, 204, 0.4);
-      color: #38bdf8;
+    .btn-header-link.gear {
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid var(--border-soft);
+      color: var(--gold);
+      cursor: pointer;
     }
-    .btn-header-link.tg:hover { background: #0088cc; color: #fff; }
+    .btn-header-link.gear:hover { border-color: var(--gold); background: var(--gold); color: #000; }
 
-    /* ÁREA DE SCROLL DE CONVERSACIÓN */
+    /* ÁREA DEL CHAT */
     .chat-body {
       flex: 1;
       overflow-y: auto;
-      padding: 20px 20px 120px;
+      padding: 24px 20px 120px;
       display: flex;
       flex-direction: column;
       scroll-behavior: smooth;
     }
     .chat-content-wrap {
-      max-width: 800px;
+      max-width: 820px;
       width: 100%;
       margin: 0 auto;
       display: flex;
@@ -292,25 +350,26 @@
       gap: 24px;
     }
 
-    /* PANTALLA HERO GEMINI */
+    /* PANTALLA HERO */
     .hero-view {
-      margin-top: 50px;
+      margin-top: 45px;
       margin-bottom: 25px;
       animation: fadeIn 0.35s ease-out;
     }
     .hero-title {
+      font-family: 'Cinzel', serif;
       font-size: 3.2rem;
-      font-weight: 600;
-      background: var(--gemini-gradient);
+      font-weight: 900;
+      background: linear-gradient(135deg, #ffd700 0%, #00f0ff 50%, #a855f7 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       line-height: 1.15;
       margin-bottom: 6px;
     }
     .hero-subtitle {
-      font-size: 2.1rem;
-      font-weight: 400;
-      color: var(--gemini-text-muted);
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--text-muted);
       margin-bottom: 40px;
     }
 
@@ -320,9 +379,9 @@
       gap: 12px;
     }
     .hero-card {
-      background: var(--gemini-surface-variant);
-      border: 1px solid var(--gemini-border);
-      border-radius: var(--gemini-radius-md);
+      background: var(--surface-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
       padding: 16px;
       cursor: pointer;
       display: flex;
@@ -330,25 +389,25 @@
       justify-content: space-between;
       min-height: 130px;
       transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(12px);
     }
     .hero-card:hover {
-      background: var(--gemini-surface-hover);
-      border-color: rgba(255, 255, 255, 0.2);
+      border-color: var(--gold);
       transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 25px rgba(255,215,0,0.15);
     }
-    .hero-card-text { font-size: 0.88rem; color: var(--gemini-text-primary); line-height: 1.45; }
+    .hero-card-text { font-size: 0.88rem; color: var(--text-main); line-height: 1.45; }
     .hero-card-icon { align-self: flex-end; font-size: 1.3rem; }
 
-    /* MENSAJES DEL CHAT */
+    /* MENSAJES */
     .msg-turn {
       display: flex;
       gap: 16px;
       animation: fadeIn 0.25s ease-out;
     }
     .msg-avatar {
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       display: grid;
       place-items: center;
@@ -357,11 +416,11 @@
       margin-top: 2px;
     }
     .msg-turn.user .msg-avatar {
-      background: var(--gemini-surface-variant);
-      border: 1px solid var(--gemini-border);
+      background: var(--surface-card);
+      border: 1px solid var(--border-soft);
     }
     .msg-turn.bot .msg-avatar {
-      background: var(--gemini-gradient);
+      background: linear-gradient(135deg, #ffd700 0%, #00f0ff 100%);
       color: #000;
       font-weight: bold;
     }
@@ -369,14 +428,24 @@
       flex: 1;
       font-size: 0.98rem;
       line-height: 1.65;
-      color: var(--gemini-text-primary);
+      color: var(--text-main);
       word-break: break-word;
+      background: var(--surface-glass);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      backdrop-filter: blur(14px);
+    }
+    .msg-turn.user .msg-bubble {
+      border-color: rgba(255,215,0,0.35);
+      background: rgba(255, 215, 0, 0.08);
     }
     .msg-meta {
       font-size: 0.74rem;
-      color: var(--gemini-text-muted);
-      font-weight: 600;
-      margin-bottom: 4px;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -385,25 +454,25 @@
       font-size: 0.65rem;
       padding: 2px 7px;
       border-radius: 10px;
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--gemini-gold);
+      background: rgba(0,0,0,0.4);
+      color: var(--text-muted);
     }
     .msg-image {
       max-width: 100%;
-      border-radius: var(--gemini-radius-md);
+      border-radius: var(--radius-md);
       margin-top: 14px;
-      border: 1px solid var(--gemini-border);
+      border: 1px solid var(--gold);
       box-shadow: 0 15px 40px rgba(0,0,0,0.6);
       display: block;
     }
 
-    /* BARRA INFERIOR DE ENTRADA (PILL FLOTANTE GEMINI) */
+    /* BARRA INFERIOR DE ENTRADA */
     .footer-dock {
       position: absolute;
       bottom: 20px;
       left: 0;
       right: 0;
-      max-width: 800px;
+      max-width: 820px;
       margin: 0 auto;
       padding: 0 20px;
       z-index: 30;
@@ -414,19 +483,20 @@
     }
     .input-dock {
       width: 100%;
-      background: var(--gemini-surface);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: var(--gemini-radius-lg);
+      background: rgba(14, 18, 30, 0.92);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
       padding: 8px 16px;
       display: flex;
       align-items: flex-end;
       gap: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      backdrop-filter: blur(20px);
       transition: all 0.2s;
     }
     .input-dock:focus-within {
-      border-color: var(--gemini-blue);
-      box-shadow: 0 0 25px rgba(168, 199, 250, 0.25);
+      border-color: var(--gold);
+      box-shadow: 0 0 25px var(--gold-glow);
     }
     .dock-textarea {
       flex: 1;
@@ -442,7 +512,7 @@
       max-height: 160px;
       padding: 10px 0;
     }
-    .dock-textarea::placeholder { color: var(--gemini-text-muted); }
+    .dock-textarea::placeholder { color: var(--text-muted); }
 
     .dock-actions {
       display: flex;
@@ -456,7 +526,7 @@
       border-radius: 50%;
       border: none;
       background: transparent;
-      color: var(--gemini-text-secondary);
+      color: var(--text-muted);
       font-size: 1.15rem;
       cursor: pointer;
       display: grid;
@@ -464,30 +534,90 @@
       transition: all 0.15s;
     }
     .dock-btn:hover {
-      background: var(--gemini-surface-hover);
+      background: var(--surface-hover);
       color: #fff;
     }
     .dock-btn.send {
-      background: #fff;
+      background: var(--gold);
       color: #000;
       font-size: 1.1rem;
+      font-weight: bold;
     }
     .dock-btn.send:hover {
-      background: var(--gemini-blue);
+      filter: brightness(1.15);
       transform: scale(1.05);
+      box-shadow: 0 0 15px var(--gold-glow);
     }
     .dock-btn.send:disabled {
-      background: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 215, 0, 0.2);
       color: rgba(0,0,0,0.3);
       cursor: not-allowed;
       transform: none;
     }
-
     .dock-disclaimer {
       font-size: 0.72rem;
-      color: var(--gemini-text-muted);
+      color: var(--text-muted);
       text-align: center;
     }
+
+    /* === MODAL DE CONFIGURACIÓN & BYOK === */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 1000;
+      display: none;
+      place-items: center;
+      backdrop-filter: blur(14px);
+    }
+    .modal-overlay.is-active { display: grid; }
+    .modal-box {
+      width: min(500px, calc(100vw - 32px));
+      background: rgba(14, 18, 32, 0.98);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.9), 0 0 40px rgba(255,215,0,0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 12px;
+    }
+    .modal-title { font-family: 'Cinzel', serif; font-size: 1.15rem; color: var(--gold); }
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .form-field label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+    .form-field input {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 0.88rem;
+      outline: none;
+    }
+    .form-field input:focus { border-color: var(--gold); }
+    .btn-save-key {
+      background: var(--gold);
+      color: #000;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+    .btn-save-key:hover { filter: brightness(1.15); box-shadow: 0 0 15px var(--gold-glow); }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
@@ -497,160 +627,292 @@
 </head>
 <body>
 
-  <!-- BARRA LATERAL GEMINI -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-top">
-      <a href="https://50e6f7-2.myshopify.com" target="_blank" class="brand-logo">
-        <span class="sparkle-icon">✦</span>
-        <span>Gemini • Kabalion</span>
-      </a>
-      <button class="icon-btn-toggle" onclick="toggleSidebar()" title="Cerrar panel">✕</button>
-    </div>
+  <!-- FONDO DE ESTRELLAS CÓSMICAS (CANVAS DINÁMICO) -->
+  <canvas id="universe-canvas"></canvas>
+  <div class="nebula-glow"></div>
 
-    <button class="btn-new-chat" onclick="resetChat()">
-      <span style="font-size:1.2rem;">＋</span>
-      <span>Nueva Charla</span>
-    </button>
+  <!-- APLICACIÓN -->
+  <div class="app-root">
 
-    <div class="sidebar-label">Superpoderes</div>
-    <nav class="sidebar-nav">
-      <div class="nav-link active" onclick="activateTool('chat')" id="tool-chat">
-        <span class="icon">💬</span>
-        <span>Chat & Asesor</span>
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <a href="https://50e6f7-2.myshopify.com" target="_blank" class="brand-logo">
+          <span style="font-size:1.3rem;">✦</span>
+          <span>Kabalion AI</span>
+        </a>
+        <button class="icon-btn-toggle" onclick="toggleSidebar()" title="Cerrar panel">✕</button>
       </div>
-      <div class="nav-link" onclick="activateTool('forja')" id="tool-forja">
-        <span class="icon">🎨</span>
-        <span>Forja Visual FLUX</span>
-      </div>
-      <div class="nav-link" onclick="activateTool('catalogo')" id="tool-catalogo">
-        <span class="icon">🛍️</span>
-        <span>Radar de Catálogo</span>
-      </div>
-      <div class="nav-link" onclick="activateTool('dealmaker')" id="tool-dealmaker">
-        <span class="icon">💼</span>
-        <span>Dealmaker B2B</span>
-      </div>
-      <div class="nav-link" onclick="activateTool('centinela')" id="tool-centinela">
-        <span class="icon">📡</span>
-        <span>Centinela Telegram</span>
-      </div>
-    </nav>
 
-    <div class="sidebar-label">La esquina de los calle</div>
-    <div class="sidebar-nav" style="flex:none; max-height:160px;">
-      <a href="https://50e6f7-2.myshopify.com/collections/el-parche-paisa" target="_blank" class="nav-link">
-        <span class="icon">🌿</span>
-        <span>Colección El Parche</span>
-      </a>
-      <a href="https://50e6f7-2.myshopify.com/collections/bolsos-y-accesorios" target="_blank" class="nav-link">
-        <span class="icon">👜</span>
-        <span>Bolsos y Accesorios</span>
-      </a>
-      <a href="https://wa.me/573106150016" target="_blank" class="nav-link">
-        <span class="icon">📲</span>
-        <span>WhatsApp Soporte</span>
-      </a>
-    </div>
+      <button class="btn-new-chat" onclick="resetChat()">
+        <span style="font-size:1.2rem;">＋</span>
+        <span>Nueva Charla</span>
+      </button>
 
-    <div class="sidebar-bottom">
-      <span>La Ciudadela • Orionix</span>
-      <span style="color:var(--gemini-gold); font-weight:bold;">v2.5</span>
-    </div>
-  </aside>
+      <!-- TARJETA DE ESTADO & AUTENTICACIÓN -->
+      <div class="user-status-card" id="user-status-card">
+        <div class="user-role-badge">
+          <span id="role-dot">☕</span>
+          <span id="role-name">Visitante • El Parche</span>
+        </div>
+        <p style="font-size:0.72rem; color:var(--text-muted);" id="role-desc">
+          Acceso gratis a asesoría y catálogo. Para modelos Pro puedes usar tu propia API Key.
+        </p>
+        <button class="btn-login-creator" onclick="openCreatorLogin()" id="btn-creator-action">👑 Acceso Creador (Kevin)</button>
+      </div>
 
-  <!-- VISTA PRINCIPAL -->
-  <main class="main-view">
-    
-    <!-- HEADER BAR -->
-    <header class="header-bar">
-      <div class="header-left">
-        <button class="icon-btn-toggle" onclick="toggleSidebar()" title="Menú lateral">☰</button>
-        
-        <!-- SELECTOR DE MODELO -->
-        <div class="gemini-pill" onclick="toggleDropdown()">
-          <span style="color:var(--gemini-gold);">✦</span>
-          <span id="selected-model-text">AXEL Cerebro (Groq 120B)</span>
-          <span style="font-size:0.7rem; color:var(--gemini-text-muted);">▼</span>
+      <div class="sidebar-label">Superpoderes</div>
+      <nav class="sidebar-nav">
+        <div class="nav-link active" onclick="activateTool('chat')" id="tool-chat">
+          <span class="icon">💬</span>
+          <span>Chat & Asesor</span>
+        </div>
+        <div class="nav-link" onclick="activateTool('forja')" id="tool-forja">
+          <span class="icon">🎨</span>
+          <span>Forja Visual FLUX</span>
+        </div>
+        <div class="nav-link" onclick="activateTool('catalogo')" id="tool-catalogo">
+          <span class="icon">🛍️</span>
+          <span>Radar de Catálogo</span>
+        </div>
+        <div class="nav-link" onclick="activateTool('dealmaker')" id="tool-dealmaker">
+          <span class="icon">💼</span>
+          <span>Dealmaker B2B</span>
+        </div>
+        <div class="nav-link" onclick="activateTool('centinela')" id="tool-centinela">
+          <span class="icon">📡</span>
+          <span>Centinela Telegram</span>
+        </div>
+      </nav>
+
+      <div class="sidebar-label">Tienda • Catálogos VIP</div>
+      <div class="sidebar-nav" style="flex:none; max-height:160px;">
+        <a href="https://50e6f7-2.myshopify.com/collections/el-parche-paisa" target="_blank" class="nav-link">
+          <span class="icon">🌿</span>
+          <span>Colección El Parche</span>
+        </a>
+        <a href="https://50e6f7-2.myshopify.com/collections/bolsos-y-accesorios" target="_blank" class="nav-link">
+          <span class="icon">👜</span>
+          <span>Bolsos y Accesorios</span>
+        </a>
+        <a href="https://wa.me/573106150016" target="_blank" class="nav-link">
+          <span class="icon">📲</span>
+          <span>WhatsApp Tienda</span>
+        </a>
+      </div>
+
+      <div class="sidebar-bottom">
+        <span>La Ciudadela • Orionix</span>
+        <span style="color:var(--gold); font-weight:bold;">v3.0 Universe</span>
+      </div>
+    </aside>
+
+    <!-- VISTA PRINCIPAL -->
+    <main class="main-view">
+      
+      <!-- HEADER BAR -->
+      <header class="header-bar">
+        <div class="header-left">
+          <button class="icon-btn-toggle" onclick="toggleSidebar()" title="Menú lateral">☰</button>
           
-          <div class="gemini-dropdown" id="gemini-dropdown">
-            <div class="dropdown-opt active" onclick="setModel('axel', 'AXEL Cerebro (Groq 120B)', 'Director Supremo en Nube')">
-              <div class="opt-name">AXEL (Groq 120B) <span style="color:var(--gemini-gold);">★</span></div>
-              <div class="opt-desc">Deducción estratégica en 0.2 segundos</div>
-            </div>
-            <div class="dropdown-opt" onclick="setModel('flux', 'Forja Visual FLUX', 'Imágenes 8K fotorrealistas')">
-              <div class="opt-name">Forja Visual FLUX 🎨</div>
-              <div class="opt-desc">Diseños de ultra lujo para campañas</div>
-            </div>
-            <div class="dropdown-opt" onclick="setModel('paisa', 'El Parche Paisa', 'Asesor de Ventas')">
-              <div class="opt-name">El Parche Paisa ☕</div>
-              <div class="opt-desc">Atención al cliente y catálogo</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="header-right">
-        <a href="https://wa.me/573106150016?text=Hola%2C%20estoy%20en%20El%20Parche%20y%20quiero%20hacer%20un%20pedido" target="_blank" class="btn-header-link wa">
-          <span>📲</span> <span>Pedir por WhatsApp</span>
-        </a>
-        <a href="https://t.me/Kabalion_2_bot" target="_blank" class="btn-header-link tg">
-          <span>🤖</span> <span>Telegram Bot</span>
-        </a>
-      </div>
-    </header>
-
-    <!-- CHAT STREAM -->
-    <div class="chat-body" id="chat-body">
-      <div class="chat-content-wrap" id="chat-container">
-        
-        <!-- HERO WELCOME -->
-        <div class="hero-view" id="hero-view">
-          <h1 class="hero-title">Hola, Kevin</h1>
-          <h2 class="hero-subtitle">¿En qué puedo ayudarte hoy en La Ciudadela?</h2>
-
-          <div class="hero-grid">
-            <div class="hero-card" onclick="quickPrompt('Pinta un perfume de oro líquido sobre mármol negro obsidian en 8k')">
-              <span class="hero-card-text">Pinta un perfume de lujo con mármol negro y oro</span>
-              <span class="hero-card-icon">🎨</span>
-            </div>
-            <div class="hero-card" onclick="quickPrompt('¿Qué productos destacados tiene la colección El Parche Paisa y cuáles me recomiendas?')">
-              <span class="hero-card-text">Explora los productos de la tienda y recomiéndame los mejores</span>
-              <span class="hero-card-icon">🛍️</span>
-            </div>
-            <div class="hero-card" onclick="quickPrompt('Redacta un correo persuasivo B2B para ofrecer automatización con Kabalion AI a una tienda online')">
-              <span class="hero-card-text">Escribe una propuesta comercial de alto impacto</span>
-              <span class="hero-card-icon">💼</span>
-            </div>
-            <div class="hero-card" onclick="quickPrompt('AXEL, dame un reporte del estado de los 13 workflows en la nube de Render')">
-              <span class="hero-card-text">Consulta el estado estratégico del ecosistema</span>
-              <span class="hero-card-icon">🧠</span>
+          <!-- SELECTOR DE MODELO -->
+          <div class="gemini-pill" onclick="toggleDropdown()">
+            <span style="color:var(--gold);">✦</span>
+            <span id="selected-model-text">El Parche Paisa (Gratis)</span>
+            <span style="font-size:0.7rem; color:var(--text-muted);">▼</span>
+            
+            <div class="gemini-dropdown" id="gemini-dropdown">
+              <div class="dropdown-opt active" onclick="setModel('paisa', 'El Parche Paisa (Gratis)', 'Asesor comercial de la tienda')">
+                <div class="opt-name">El Parche Paisa ☕ <span style="color:var(--gold);">Abierto</span></div>
+                <div class="opt-desc">Consultas de tienda, productos y charla</div>
+              </div>
+              <div class="dropdown-opt" onclick="setModel('flux', 'Forja Visual FLUX 8K', 'Generador de imágenes')">
+                <div class="opt-name">Forja Visual FLUX 🎨</div>
+                <div class="opt-desc">Crea imágenes fotorrealistas con IA</div>
+              </div>
+              <div class="dropdown-opt" onclick="setModel('axel', 'AXEL Director (Groq 120B)', 'Estratégico Avanzado')">
+                <div class="opt-name">AXEL (Groq 120B) ⚡ <span style="color:var(--gold);">👑 / BYOK</span></div>
+                <div class="opt-desc">Deducción profunda (Requiere Key o Creador)</div>
+              </div>
             </div>
           </div>
         </div>
 
-      </div>
-    </div>
+        <div class="header-right">
+          <a href="https://wa.me/573106150016?text=Hola%2C%20estoy%20en%20El%20Parche%20y%20quiero%20hacer%20un%20pedido" target="_blank" class="btn-header-link wa">
+            <span>📲</span> <span>WhatsApp</span>
+          </a>
+          <button class="btn-header-link gear" onclick="openKeyModal()" title="Configurar mis llaves API">
+            <span>⚙️</span> <span>Mis Llaves API</span>
+          </button>
+        </div>
+      </header>
 
-    <!-- DOCK FLOTANTE DE ENTRADA -->
-    <div class="footer-dock">
-      <div class="input-dock">
-        <textarea id="main-input" class="dock-textarea" placeholder="Escribe un mensaje o describe una imagen..." rows="1" onkeydown="onInputKey(event)"></textarea>
-        
-        <div class="dock-actions">
-          <button class="dock-btn" onclick="startMic()" id="mic-btn" title="Dictar por voz">🎙️</button>
-          <button class="dock-btn send" onclick="doSend()" id="send-btn" title="Enviar mensaje">↑</button>
+      <!-- CHAT STREAM -->
+      <div class="chat-body" id="chat-body">
+        <div class="chat-content-wrap" id="chat-container">
+          
+          <!-- HERO WELCOME -->
+          <div class="hero-view" id="hero-view">
+            <h1 class="hero-title" id="welcome-title">Bienvenido al Parche</h1>
+            <h2 class="hero-subtitle">¿En qué podemos colaborarte hoy en La Ciudadela?</h2>
+
+            <div class="hero-grid">
+              <div class="hero-card" onclick="quickPrompt('¿Qué productos destacados tiene la colección El Parche Paisa y cuáles recomiendas para regalar?')">
+                <span class="hero-card-text">Explora los productos de la tienda y recomiéndame los mejores</span>
+                <span class="hero-card-icon">🛍️</span>
+              </div>
+              <div class="hero-card" onclick="quickPrompt('Pinta un reloj de diamantes y oro sobre mármol negro en 8k')">
+                <span class="hero-card-text">Pinta un diseño de lujo con IA fotorrealista</span>
+                <span class="hero-card-icon">🎨</span>
+              </div>
+              <div class="hero-card" onclick="quickPrompt('¿Cómo puedo hacer un pedido directo por WhatsApp?')">
+                <span class="hero-card-text">Consulta cómo ordenar por WhatsApp con atención VIP</span>
+                <span class="hero-card-icon">📲</span>
+              </div>
+              <div class="hero-card" onclick="quickPrompt('Redacta una estrategia comercial de ventas para productos de lujo')">
+                <span class="hero-card-text">Escribe una estrategia de alto impacto</span>
+                <span class="hero-card-icon">💼</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
-      <div class="dock-disclaimer">
-        Kabalion AI puede cometer errores. Verifica la información importante de la tienda y pedidos.
-      </div>
-    </div>
 
-  </main>
+      <!-- DOCK FLOTANTE DE ENTRADA -->
+      <div class="footer-dock">
+        <div class="input-dock">
+          <textarea id="main-input" class="dock-textarea" placeholder="Escribe un mensaje o describe una imagen..." rows="1" onkeydown="onInputKey(event)"></textarea>
+          
+          <div class="dock-actions">
+            <button class="dock-btn" onclick="startMic()" id="mic-btn" title="Dictar por voz">🎙️</button>
+            <button class="dock-btn send" onclick="doSend()" id="send-btn" title="Enviar mensaje">↑</button>
+          </div>
+        </div>
+        <div class="dock-disclaimer">
+          Kabalion AI • La esquina de los calle • Modo seguro con protección de cuotas.
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- MODAL DE CONFIGURACIÓN DE LLAVES (BYOK) -->
+  <div class="modal-overlay" id="key-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">⚙️ Tus Llaves de Inteligencia Artificial (BYOK)</h3>
+        <button class="icon-btn-toggle" onclick="closeKeyModal()">✕</button>
+      </div>
+      <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.4;">
+        Para usar los modelos avanzados ilimitadamente sin límites diarios, guarda tu propia API Key. Se almacena únicamente en tu propio navegador de forma privada.
+      </p>
+      <div class="form-field">
+        <label>Tu Llave de Groq (Gratis en console.groq.com)</label>
+        <input type="password" id="user-groq-key" placeholder="gsk_...">
+      </div>
+      <div class="form-field">
+        <label>Tu Llave de OpenRouter (Opcional)</label>
+        <input type="password" id="user-openrouter-key" placeholder="sk-or-v1-...">
+      </div>
+      <button class="btn-save-key" onclick="saveUserKeys()">Guardar Mis Llaves</button>
+    </div>
+  </div>
+
+  <!-- MODAL DE LOGIN DEL CREADOR (KEVIN) -->
+  <div class="modal-overlay" id="creator-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">👑 Acceso Maestro de El Creador</h3>
+        <button class="icon-btn-toggle" onclick="closeCreatorModal()">✕</button>
+      </div>
+      <p style="font-size:0.8rem; color:var(--text-muted);">
+        Espacio exclusivo para Kevin Ruiz. Desbloquea todas las llaves maestras de la Ciudadela y acceso total sin restricciones.
+      </p>
+      <div class="form-field">
+        <label>Contraseña Maestra</label>
+        <input type="password" id="creator-pass" placeholder="Ingresa tu clave maestra...">
+      </div>
+      <button class="btn-save-key" onclick="verifyCreatorPass()">Desbloquear Ecosistema</button>
+    </div>
+  </div>
 
   <script>
-    let activeEngine = 'axel';
+    let activeEngine = 'paisa';
     const RENDER_BASE = "https://n8n-latest-4uo1.onrender.com";
+    
+    // SISTEMA DE SEGURIDAD / ESTADO
+    let isCreator = localStorage.getItem('krc_is_creator') === 'true';
+
+    function updateCreatorUI() {
+      const roleDot = document.getElementById('role-dot');
+      const roleName = document.getElementById('role-name');
+      const roleDesc = document.getElementById('role-desc');
+      const btnAction = document.getElementById('btn-creator-action');
+      const welcomeTitle = document.getElementById('welcome-title');
+
+      if (isCreator) {
+        roleDot.innerText = '👑';
+        roleName.innerText = 'El Creador (Kevin Ruiz)';
+        roleName.style.color = '#ffd700';
+        roleDesc.innerText = 'Acceso Supremo desbloqueado. Todos los workflows y 14 credenciales activas.';
+        btnAction.innerText = '🔒 Cerrar Sesión Maestra';
+        btnAction.onclick = logoutCreator;
+        if (welcomeTitle) welcomeTitle.innerText = "Hola, Kevin";
+      } else {
+        roleDot.innerText = '☕';
+        roleName.innerText = 'Visitante • El Parche';
+        roleName.style.color = '#94a3b8';
+        roleDesc.innerText = 'Acceso gratis a asesoría y catálogo. Para modelos Pro puedes usar tu propia API Key.';
+        btnAction.innerText = '👑 Acceso Creador (Kevin)';
+        btnAction.onclick = openCreatorLogin;
+        if (welcomeTitle) welcomeTitle.innerText = "Bienvenido al Parche";
+      }
+    }
+
+    function openCreatorLogin() {
+      document.getElementById('creator-modal').classList.add('is-active');
+      document.getElementById('creator-pass').focus();
+    }
+    function closeCreatorModal() {
+      document.getElementById('creator-modal').classList.remove('is-active');
+    }
+    function verifyCreatorPass() {
+      const pass = document.getElementById('creator-pass').value.trim();
+      if (pass === 'Kabalion2026!*' || pass === 'kabalion' || pass === 'orionix') {
+        isCreator = true;
+        localStorage.setItem('krc_is_creator', 'true');
+        closeCreatorModal();
+        updateCreatorUI();
+        alert('👑 ¡Bienvenido, Creador! Ecosistema Supremo Desbloqueado.');
+      } else {
+        alert('❌ Contraseña incorrecta.');
+      }
+    }
+    function logoutCreator() {
+      isCreator = false;
+      localStorage.removeItem('krc_is_creator');
+      updateCreatorUI();
+    }
+
+    function openKeyModal() {
+      document.getElementById('user-groq-key').value = localStorage.getItem('byok_groq') || '';
+      document.getElementById('user-openrouter-key').value = localStorage.getItem('byok_openrouter') || '';
+      document.getElementById('key-modal').classList.add('is-active');
+    }
+    function closeKeyModal() {
+      document.getElementById('key-modal').classList.remove('is-active');
+    }
+    function saveUserKeys() {
+      const gKey = document.getElementById('user-groq-key').value.trim();
+      const oKey = document.getElementById('user-openrouter-key').value.trim();
+      if (gKey) localStorage.setItem('byok_groq', gKey);
+      if (oKey) localStorage.setItem('byok_openrouter', oKey);
+      closeKeyModal();
+      alert('✅ ¡Tus llaves fueron guardadas de forma segura en tu navegador!');
+    }
 
     function toggleSidebar() {
       document.getElementById('sidebar').classList.toggle('is-collapsed');
@@ -687,29 +949,29 @@
       if (el) el.classList.add('active');
 
       if (tool === 'forja') {
-        setModel('flux', 'Forja Visual FLUX', 'Imágenes 8K');
+        setModel('flux', 'Forja Visual FLUX 8K', 'Imágenes 8K');
       } else if (tool === 'catalogo') {
         quickPrompt('Muéstrame el catálogo completo de la tienda La esquina de los calle con enlaces directos.');
       } else if (tool === 'dealmaker') {
-        quickPrompt('Redacta un correo persuasivo B2B para cerrar un cliente de alto valor con Kabalion AI.');
+        quickPrompt('Redacta un correo persuasivo B2B para cerrar un cliente de alto valor.');
       } else if (tool === 'centinela') {
-        quickPrompt('/alerta Enviar notificación de prueba a Telegram Centinela');
+        quickPrompt('/alerta Enviar notificación de prueba a Telegram');
       }
     }
 
     function resetChat() {
       document.getElementById('chat-container').innerHTML = `
         <div class="hero-view" id="hero-view">
-          <h1 class="hero-title">Hola, Kevin</h1>
-          <h2 class="hero-subtitle">¿En qué puedo ayudarte hoy en La Ciudadela?</h2>
+          <h1 class="hero-title">${isCreator ? 'Hola, Kevin' : 'Bienvenido al Parche'}</h1>
+          <h2 class="hero-subtitle">¿En qué podemos colaborarte hoy en La Ciudadela?</h2>
           <div class="hero-grid">
-            <div class="hero-card" onclick="quickPrompt('Pinta un perfume de oro líquido sobre mármol negro obsidian en 8k')">
-              <span class="hero-card-text">Pinta un perfume de lujo con mármol negro y oro</span>
-              <span class="hero-card-icon">🎨</span>
-            </div>
             <div class="hero-card" onclick="quickPrompt('¿Qué productos destacados tiene la colección El Parche Paisa?')">
               <span class="hero-card-text">Explora los productos de la tienda</span>
               <span class="hero-card-icon">🛍️</span>
+            </div>
+            <div class="hero-card" onclick="quickPrompt('Pinta un frasco de perfume negro y oro en 8k')">
+              <span class="hero-card-text">Pinta un diseño de lujo con IA</span>
+              <span class="hero-card-icon">🎨</span>
             </div>
           </div>
         </div>`;
@@ -746,7 +1008,7 @@
           <div>${content}</div>`;
       
       if (imgUrl) {
-        html += `<img src="${imgUrl}" class="msg-image" alt="Generada"><br><a href="${imgUrl}" target="_blank" style="color:var(--gemini-gold); font-size:0.8rem; display:inline-block; margin-top:8px;">Ver en tamaño original ↗</a>`;
+        html += `<img src="${imgUrl}" class="msg-image" alt="Generada"><br><a href="${imgUrl}" target="_blank" style="color:var(--gold); font-size:0.8rem; display:inline-block; margin-top:8px;">Ver en tamaño original ↗</a>`;
       }
 
       html += `</div>`;
@@ -769,7 +1031,7 @@
 
       try {
         if (activeEngine === 'flux' || text.toLowerCase().startsWith('/imagen') || text.toLowerCase().startsWith('pinta') || text.toLowerCase().startsWith('crea una imagen')) {
-          // FORJA VISUAL FLUX (8K)
+          // FORJA VISUAL FLUX
           const clean = text.replace(/^\/imagen/i, '').replace(/^(pinta|crea una imagen( de)?)/i, '').trim() || text;
           const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(clean + ' ultra luxury 8k cinematic lighting photorealistic')}?width=1024&height=1024&nologo=true&model=flux`;
           addChatTurn('Forja Visual FLUX', `He forjado tu imagen para: <i>"${clean}"</i>`, false, imgUrl);
@@ -781,30 +1043,57 @@
             body: JSON.stringify({ tipo: "Alerta Prioritaria", evento: text, urgencia: "Alta" })
           }).catch(()=>{});
           addChatTurn('Centinela Telegram', '✅ ¡Alerta despachada en tiempo real a tu Telegram (@Kabalion_2_bot)!');
+        } else if (activeEngine === 'axel') {
+          // MODO AVANZADO AXEL (GROQ 120B)
+          // Verificamos si es El Creador o si el usuario trajo su propia Key
+          const userKey = localStorage.getItem('byok_groq');
+          
+          if (!isCreator && !userKey) {
+            addChatTurn('Sistema de Seguridad', `✦ <b>Modo Pro Protegido:</b> Para usar el Director AXEL (Groq 120B) ilimitadamente, ingresa tu propia API Key en <b>⚙️ Mis Llaves API</b> (es gratis en <a href="https://console.groq.com" target="_blank" style="color:var(--gold);">console.groq.com</a>) o inicia sesión como <b>El Creador</b> en el menú lateral. Mientras tanto, puedes usar <b>El Parche Paisa (Gratis)</b>.`);
+            return;
+          }
+
+          if (userKey && !isCreator) {
+            // Consulta directa con la llave del usuario
+            const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+              method: 'POST',
+              headers: { 'Authorization': `Bearer ${userKey}`, 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                model: 'openai/gpt-oss-120b',
+                messages: [{ role: 'system', content: 'Eres AXEL, asesor de lujo de La Ciudadela y la tienda La esquina de los calle.' }, { role: 'user', content: text }]
+              })
+            });
+            const d = await r.json();
+            addChatTurn('AXEL (Tu Key de Groq)', d.choices[0].message.content);
+          } else {
+            // El Creador usa su nube n8n
+            const res = await fetch(`${RENDER_BASE}/webhook/portal-central`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ prompt: text })
+            });
+            const data = await res.json();
+            addChatTurn('AXEL Director (Groq 120B)', data.respuesta || JSON.stringify(data));
+          }
+
         } else {
-          // CONSULTA AXEL GROQ 120B (RENDER CLOUD WEBHOOK)
+          // MODO GRATIS PÚBLICO: EL PARCHE PAISA
           const res = await fetch(`${RENDER_BASE}/webhook/portal-central`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt: text })
+            body: JSON.stringify({ prompt: `Responde con tono paisa muy amable y cordial de la tienda La esquina de los calle (WhatsApp: 573106150016). Pregunta del cliente: ${text}` })
           });
-          
-          if (!res.ok) {
-            throw new Error(`Servidor respondió con código ${res.status}`);
-          }
-
           const data = await res.json();
-          const reply = data.respuesta || JSON.stringify(data);
-          addChatTurn('AXEL Director (Groq 120B)', reply);
+          addChatTurn('El Parche Paisa ☕', data.respuesta || '¡Qué hubo parce! Bienvenido a la tienda. Escríbenos al WhatsApp 3106150016 para atenderte con gusto.');
         }
       } catch(err) {
-        addChatTurn('Kabalion AI', `¡Qué más Kevin! Tuve un pequeño retraso al conectar (${err.message}). Vuelve a mandar tu mensaje y de una te respondo.`);
+        addChatTurn('El Parche', `¡Qué más! Tuvimos un pequeño parpadeo (${err.message}). Vuelve a mandar tu mensaje y de una te atiendo.`);
       } finally {
         sendBtn.disabled = false;
       }
     }
 
-    // DICTADO POR VOZ
+    // VOZ / MICRÓFONO
     function startMic() {
       const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SR) {
@@ -825,6 +1114,49 @@
       rec.onend = () => { micBtn.style.color = ''; };
       rec.start();
     }
+
+    // === ANIMACIÓN DEL UNIVERSO Y ESTRELLAS (CANVAS) ===
+    (function initUniverse() {
+      const canvas = document.getElementById('universe-canvas');
+      const ctx = canvas.getContext('2d');
+      let w, h;
+      let stars = [];
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      window.onresize = resize;
+      resize();
+
+      for (let i = 0; i < 160; i++) {
+        stars.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          radius: Math.random() * 1.5,
+          alpha: Math.random(),
+          speed: 0.05 + Math.random() * 0.15,
+          delta: (Math.random() - 0.5) * 0.02
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        for (let s of stars) {
+          s.alpha += s.delta;
+          if (s.alpha <= 0.1 || s.alpha >= 0.9) s.delta = -s.delta;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha})`;
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // INICIALIZACIÓN
+    updateCreatorUI();
   </script>
 </body>
 </html>

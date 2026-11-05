@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>El Parche IA • La esquina de los calle • Kabalion Suite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #080b11;
+      --panel-bg: rgba(13, 17, 28, 0.88);
+      --gold: #d9b465;
+      --gold-bright: #ffd700;
+      --gold-glow: rgba(217, 180, 101, 0.35);
+      --emerald: #10b981;
+      --cyan: #06b6d4;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-soft: rgba(217, 180, 101, 0.22);
+      --border-active: rgba(217, 180, 101, 0.6);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #172138 0%, var(--bg-dark) 85%);
+      color: var(--text-main);
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* HEADER DE LUJO */
+    header {
+      background: rgba(8, 11, 17, 0.95);
+      border-bottom: 1px solid var(--border-soft);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-emblem {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      box-shadow: 0 0 15px var(--gold-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      color: var(--gold-bright);
+      background: rgba(217, 180, 101, 0.1);
+    }
+    .brand-text h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      letter-spacing: 2px;
+      color: var(--gold-bright);
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+    .brand-text span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+    .header-pills {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .status-pill {
+      font-size: 0.72rem;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid var(--emerald);
+      color: var(--emerald);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+    }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 8px currentColor; }
+
+    /* CONTENEDOR PRINCIPAL */
+    .main-wrap {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 900px) {
+      .main-wrap { grid-template-columns: 1fr; padding: 12px; }
+    }
+
+    /* BARRA LATERAL (SUPERPODERES) */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .panel-box {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .panel-box h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      color: var(--gold-bright);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* SELECTOR DE CEREBROS */
+    .brain-selector {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .brain-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.88rem;
+    }
+    .brain-btn:hover {
+      border-color: var(--gold);
+      background: rgba(217, 180, 101, 0.08);
+      transform: translateX(3px);
+    }
+    .brain-btn.active {
+      border-color: var(--gold-bright);
+      background: rgba(217, 180, 101, 0.15);
+      color: var(--gold-bright);
+      font-weight: 600;
+      box-shadow: 0 0 15px rgba(217, 180, 101, 0.15);
+    }
+    .brain-tag {
+      font-size: 0.68rem;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background: rgba(0,0,0,0.4);
+      color: var(--text-muted);
+    }
+
+    /* BOTONES DE ACCIÓN RÁPIDA */
+    .quick-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .action-btn {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 12px 10px;
+      color: var(--text-main);
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .action-btn:hover {
+      border-color: var(--gold);
+      background: rgba(217, 180, 101, 0.12);
+      transform: translateY(-2px);
+    }
+    .action-btn .icon { font-size: 1.4rem; }
+
+    /* CHAT PRINCIPAL */
+    .chat-container {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 120px);
+      min-height: 550px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+    }
+    .chat-header {
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.2);
+    }
+    .chat-model-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .chat-model-info span {
+      font-size: 0.85rem;
+      color: var(--gold-bright);
+      font-weight: 600;
+    }
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      scroll-behavior: smooth;
+    }
+    .msg {
+      max-width: 82%;
+      padding: 14px 18px;
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      animation: fadeIn 0.25s ease-out;
+      word-break: break-word;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .msg.user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, rgba(217, 180, 101, 0.22) 0%, rgba(217, 180, 101, 0.12) 100%);
+      border: 1px solid var(--border-active);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+    .msg.bot {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #e2e8f0;
+      border-bottom-left-radius: 4px;
+    }
+    .msg-author {
+      font-size: 0.72rem;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .msg-img {
+      max-width: 100%;
+      border-radius: var(--radius-sm);
+      margin-top: 10px;
+      border: 1px solid var(--gold);
+      display: block;
+    }
+
+    /* INPUT ROW */
+    .chat-input-bar {
+      padding: 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0, 0, 0, 0.35);
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+    }
+    .chat-input {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.94rem;
+      resize: none;
+      min-height: 48px;
+      max-height: 140px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .chat-input:focus {
+      border-color: var(--gold-bright);
+      box-shadow: 0 0 12px var(--gold-glow);
+    }
+    .send-btn {
+      background: linear-gradient(135deg, var(--gold-bright) 0%, #c59b27 100%);
+      color: #080b11;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 14px 22px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      flex-shrink: 0;
+      height: 48px;
+    }
+    .send-btn:hover {
+      filter: brightness(1.15);
+      box-shadow: 0 0 20px var(--gold-glow);
+      transform: translateY(-1px);
+    }
+    .send-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    /* PRODUCT CARD GRID */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .prod-card {
+      background: rgba(0,0,0,0.5);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .prod-card:hover {
+      border-color: var(--gold-bright);
+      transform: translateY(-2px);
+    }
+    .prod-title { font-size: 0.82rem; font-weight: 600; color: var(--gold); }
+    .prod-desc { font-size: 0.72rem; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="https://50e6f7-2.myshopify.com" class="brand" target="_blank">
+      <div class="brand-emblem">✦</div>
+      <div class="brand-text">
+        <h1>El Parche IA</h1>
+        <span>La esquina de los calle • Kabalion Suite</span>
+      </div>
+    </a>
+    <div class="header-pills">
+      <div class="status-pill"><span class="dot"></span> Ecosistema Activo</div>
+      <a href="https://wa.me/573106150016?text=Hola%2C%20estoy%20en%20El%20Parche%20y%20quiero%20hacer%20un%20pedido" target="_blank" style="text-decoration:none;">
+        <div class="status-pill" style="border-color:var(--gold); color:var(--gold); background:rgba(217,180,101,0.12);">
+          📲 Pedir WhatsApp
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR MAESTRO -->
+  <div class="main-wrap">
+
+    <!-- LATERAL: CEREBROS & HERRAMIENTAS -->
+    <aside class="sidebar">
+
+      <!-- SELECTOR DE IA -->
+      <div class="panel-box">
+        <h3>🧠 Cerebro Activo</h3>
+        <div class="brain-selector">
+          <div class="brain-btn active" onclick="setBrain('paisa')" id="brain-paisa">
+            <span>☕ El Parche Paisa</span>
+            <span class="brain-tag">Asesor de Ventas</span>
+          </div>
+          <div class="brain-btn" onclick="setBrain('axel')" id="brain-axel">
+            <span>⚡ AXEL Director (Groq 120B)</span>
+            <span class="brain-tag">Estratégico</span>
+          </div>
+          <div class="brain-btn" onclick="setBrain('r1')" id="brain-r1">
+            <span>🔬 DeepSeek R1</span>
+            <span class="brain-tag">Razonamiento</span>
+          </div>
+          <div class="brain-btn" onclick="setBrain('flux')" id="brain-flux">
+            <span>🎨 Forja Visual FLUX</span>
+            <span class="brain-tag">Generador 8K</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUPERPODERES EN UN CLIC -->
+      <div class="panel-box">
+        <h3>⚡ Acciones Rápidas</h3>
+        <div class="quick-actions">
+          <div class="action-btn" onclick="quickAction('catalogo')">
+            <span class="icon">🛍️</span>
+            <span>Ver Catálogo</span>
+          </div>
+          <div class="action-btn" onclick="quickAction('imagen')">
+            <span class="icon">🖼️</span>
+            <span>Pintar Imagen</span>
+          </div>
+          <div class="action-btn" onclick="quickAction('tintico')">
+            <span class="icon">☕</span>
+            <span>Pedir Tintico</span>
+          </div>
+          <div class="action-btn" onclick="quickAction('centinela')">
+            <span class="icon">📡</span>
+            <span>Avisar a Kevin</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATÁLOGOS DESTACADOS -->
+      <div class="panel-box">
+        <h3>💎 Colecciones VIP</h3>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <a href="https://50e6f7-2.myshopify.com/collections/el-parche-paisa" target="_blank" class="prod-card">
+            <div class="prod-title">🌿 El Parche Paisa (282 items)</div>
+            <div class="prod-desc">Cultura, prendas y estilo callejero de lujo.</div>
+          </a>
+          <a href="https://50e6f7-2.myshopify.com/collections/bolsos-y-accesorios" target="_blank" class="prod-card">
+            <div class="prod-title">👜 Bolsos & Accesorios (35 items)</div>
+            <div class="prod-desc">Marroquinería y complementos exclusivos.</div>
+          </a>
+          <a href="https://50e6f7-2.myshopify.com/collections/difusores-fuego-alquimico" target="_blank" class="prod-card">
+            <div class="prod-title">🔥 Fuego Alquímico & Difusores</div>
+            <div class="prod-desc">Aromas místicos para elevar tu espacio.</div>
+          </a>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ÁREA DE CHAT -->
+    <main class="chat-container">
+      
+      <div class="chat-header">
+        <div class="chat-model-info">
+          <span id="active-model-title">☕ Modo: El Parche Paisa • Asesor Oficial</span>
+        </div>
+        <button onclick="clearChat()" style="background:transparent; border:1px solid rgba(255,255,255,0.15); color:var(--text-muted); padding:4px 10px; border-radius:6px; cursor:pointer; font-size:0.75rem;">
+          Limpiar Charla
+        </button>
+      </div>
+
+      <div class="chat-messages" id="chat-msgs">
+        <div class="msg bot">
+          <div class="msg-author">✦ El Parche • La esquina de los calle</div>
+          ¡Buenas, bienvenido al Parche! Siéntese, tómese un tintico y cuénteme qué está buscando hoy. Desde la aguja hasta la mansión, aquí le asesoramos con lo mejor de nuestra tienda o le generamos ideas de lujo con inteligencia artificial. ¿Qué se le antoja?
+        </div>
+      </div>
+
+      <div class="chat-input-bar">
+        <textarea id="chat-input" class="chat-input" placeholder="Escribe aquí tu pregunta o describe una imagen para crearla..." rows="1" onkeydown="handleKey(event)"></textarea>
+        <button class="send-btn" id="send-btn" onclick="sendMessage()">
+          Enviar →
+        </button>
+      </div>
+
+    </main>
+
+  </div>
+
+  <script>
+    let currentBrain = 'paisa';
+    const RENDER_BASE = "https://n8n-latest-4uo1.onrender.com";
+    const FREEAPI_BASE = "http://127.0.0.1:3001";
+    const FREEAPI_KEY = "freellmapi-30210e5c6f16e8177bfb1fb99050ccdbe7f251a1697d9396";
+
+    function setBrain(brain) {
+      currentBrain = brain;
+      document.querySelectorAll('.brain-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('brain-' + brain).classList.add('active');
+
+      const titleEl = document.getElementById('active-model-title');
+      const inputEl = document.getElementById('chat-input');
+      
+      if (brain === 'paisa') {
+        titleEl.innerText = "☕ Modo: El Parche Paisa • Asesor Oficial";
+        inputEl.placeholder = "Pregunta sobre productos, pedidos o charla conmigo...";
+      } else if (brain === 'axel') {
+        titleEl.innerText = "⚡ Modo: AXEL Cerebro Central • Groq 120B";
+        inputEl.placeholder = "Comando estratégico, análisis de negocio o táctica...";
+      } else if (brain === 'r1') {
+        titleEl.innerText = "🔬 Modo: DeepSeek R1 • Razonamiento Puro";
+        inputEl.placeholder = "Problema complejo, código, lógica o finanzas...";
+      } else if (brain === 'flux') {
+        titleEl.innerText = "🎨 Modo: Forja Visual FLUX • Generador 8K";
+        inputEl.placeholder = "Describe la imagen que quieres pintar en 8K ultra lujo...";
+      }
+    }
+
+    function addMessage(author, text, isUser = false, imgUrl = null) {
+      const container = document.getElementById('chat-msgs');
+      const div = document.createElement('div');
+      div.className = `msg ${isUser ? 'user' : 'bot'}`;
+      
+      let html = `<div class="msg-author">${author}</div><div>${text}</div>`;
+      if (imgUrl) {
+        html += `<img src="${imgUrl}" class="msg-img" alt="Generada"><br><a href="${imgUrl}" target="_blank" style="color:var(--gold); font-size:0.75rem; display:inline-block; margin-top:5px;">Ver en tamaño original ↗</a>`;
+      }
+      div.innerHTML = html;
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function clearChat() {
+      document.getElementById('chat-msgs').innerHTML = `
+        <div class="msg bot">
+          <div class="msg-author">✦ El Parche • La esquina de los calle</div>
+          ¡Charla reiniciada! ¿Qué más se dice mi rey? Cuéntame en qué te colaboro.
+        </div>`;
+    }
+
+    function handleKey(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById('chat-input');
+      const btn = document.getElementById('send-btn');
+      const text = input.value.trim();
+      if (!text || btn.disabled) return;
+
+      input.value = '';
+      addMessage('Tú', text, true);
+      btn.disabled = true;
+      btn.innerText = 'Pensando...';
+
+      try {
+        if (currentBrain === 'flux' || text.toLowerCase().startsWith('/imagen') || text.toLowerCase().startsWith('pinta') || text.toLowerCase().startsWith('crea una imagen')) {
+          // GENERACIÓN DE IMAGEN FLUX
+          const cleanPrompt = text.replace(/^\/imagen/i, '').replace(/^(pinta|crea una imagen( de)?)/i, '').trim() || text;
+          const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(cleanPrompt + ' ultra luxury cinematic lighting 8k')}?width=1024&height=1024&nologo=true&model=flux`;
+          
+          addMessage('🎨 Forja Visual FLUX', `He forjado tu imagen con éxito para: "${cleanPrompt}"`, false, imageUrl);
+        } else if (currentBrain === 'axel') {
+          // AXEL VIA RENDER N8N
+          const res = await fetch(`${RENDER_BASE}/webhook/portal-central`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ accion: 'consultar', prompt: text })
+          });
+          const data = await res.json();
+          addMessage('⚡ AXEL (Groq 120B)', data.respuesta || JSON.stringify(data));
+        } else if (currentBrain === 'r1') {
+          // DEEPSEEK R1 VIA FREELMMAPI LOCAL
+          const res = await fetch(`${FREEAPI_BASE}/v1/chat/completions`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${FREEAPI_KEY}`
+            },
+            body: JSON.stringify({
+              model: 'deepseek-r1',
+              messages: [{ role: 'user', content: text }]
+            })
+          });
+          const data = await res.json();
+          const reply = data.choices && data.choices[0] ? data.choices[0].message.content : 'Sin respuesta de DeepSeek R1';
+          addMessage('🔬 DeepSeek R1', reply);
+        } else {
+          // MODO PAISA ASESOR (SUPABASE PARCHE O FALLBACK GROQ)
+          try {
+            const res = await fetch("https://bedixienygfeqtadzeng.supabase.co/functions/v1/parche_paisa", {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                message: text,
+                mode: 'parche',
+                style: 'paisa',
+                store: "La esquina de los calle: Tienda colombiana. WhatsApp: 573106150016."
+              })
+            });
+            const data = await res.json();
+            if (data.answer) {
+              addMessage('☕ El Parche Paisa', data.answer);
+            } else {
+              throw new Error('Fallback to AXEL');
+            }
+          } catch (e) {
+            // Fallback a AXEL Render
+            const res2 = await fetch(`${RENDER_BASE}/webhook/portal-central`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                accion: 'consultar',
+                prompt: `Responde con tono paisa amable, profesional y comercial de la tienda La esquina de los calle (WhatsApp 573106150016). Pregunta del cliente: ${text}`
+              })
+            });
+            const d2 = await res2.json();
+            addMessage('☕ El Parche Paisa', d2.respuesta || '¡Qué hubo parce! Estamos listos para atenderle con todo el gusto.');
+          }
+        }
+      } catch (err) {
+        addMessage('⚠️ Sistema', `No pude conectar al cerebro activo (${err.message}). Intenta cambiar de modo arriba.`);
+      } finally {
+        btn.disabled = false;
+        btn.innerText = 'Enviar →';
+      }
+    }
+
+    function quickAction(action) {
+      if (action === 'catalogo') {
+        addMessage('🛍️ Radar de Productos', `Aquí tienes acceso directo a nuestros catálogos de lujo:<br><br>
+        • <a href="https://50e6f7-2.myshopify.com/collections/el-parche-paisa" target="_blank" style="color:var(--gold);">🌿 Colección El Parche Paisa (282 productos)</a><br>
+        • <a href="https://50e6f7-2.myshopify.com/collections/bolsos-y-accesorios" target="_blank" style="color:var(--gold);">👜 Bolsos y Accesorios Exclusivos (35 productos)</a><br>
+        • <a href="https://50e6f7-2.myshopify.com/collections/difusores-fuego-alquimico" target="_blank" style="color:var(--gold);">🔥 Difusores & Fuego Alquímico (11 productos)</a><br>
+        • <a href="https://50e6f7-2.myshopify.com/collections/all" target="_blank" style="color:var(--gold);">✨ Todo el Catálogo Completo</a><br><br>
+        ¿Te interesa algún producto en particular? Dime y te paso detalles de una.`);
+      } else if (action === 'imagen') {
+        setBrain('flux');
+        addMessage('🎨 Forja Visual FLUX', 'Modo Forja activado. Escribe lo que te gustaría ver (ej: "Un perfume dorado sobre mármol negro") y te la pinto en segundos.');
+        document.getElementById('chat-input').focus();
+      } else if (action === 'tintico') {
+        addMessage('☕ El Parche', '¡Servido mi rey! Un buen café colombiano bien cargado. Mientras se lo toma, cuénteme qué proyecto o compra estamos tramando hoy.');
+      } else if (action === 'centinela') {
+        fetch(`${RENDER_BASE}/webhook/centinela-telegram`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            tipo: "Notificación de Cliente",
+            evento: "Un cliente en El Parche de la tienda Shopify solicita atención prioritaria.",
+            urgencia: "Normal"
+          })
+        }).catch(() => {});
+        addMessage('📡 Centinela Telegram', '✅ Le acabo de mandar una notificación privada a Kevin por Telegram para que esté pendiente de tu mensaje.');
+      }
+    }
+  </script>
+</body>
+</html>

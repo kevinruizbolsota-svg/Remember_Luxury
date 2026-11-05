@@ -3,1130 +3,1815 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Kabalion AI • Suite Profesional Orionix</title>
+  <title>Kabalion AI • Suite Profesional</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@600;700;900&display=swap" rel="stylesheet">
-  
+
   <style>
     :root {
       --bg-base: #06080d;
       --bg-surface: #0c1019;
       --bg-panel: #111726;
       --bg-hover: #192237;
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-focus: rgba(212, 175, 55, 0.5);
-      --gold-primary: #d4af37;
+      --border-subtle: rgba(255,255,255,0.07);
+      --border-focus: rgba(212,175,55,0.5);
+      --gold: #d4af37;
       --gold-light: #f5e08b;
-      --gold-glow: rgba(212, 175, 55, 0.25);
+      --gold-glow: rgba(212,175,55,0.2);
       --text-main: #f1f5f9;
       --text-secondary: #94a3b8;
       --text-muted: #64748b;
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 24px;
-      --radius-pill: 9999px;
+      --blue-accent: #4f8ef7;
+      --green: #22c55e;
+      --red: #ef4444;
+      --r-sm: 8px;
+      --r-md: 14px;
+      --r-lg: 22px;
+      --r-pill: 9999px;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      background-color: var(--bg-base);
+      background: var(--bg-base);
       color: var(--text-main);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      height: 100vh;
+      font-family: 'Inter', sans-serif;
+      height: 100dvh;
       display: flex;
       overflow: hidden;
       position: relative;
       letter-spacing: -0.01em;
     }
 
-    /* === FONDO CÓSMICO SUTIL Y PROFESIONAL === */
+    /* ═══════════════════════════════
+       FONDO UNIVERSO
+    ═══════════════════════════════ */
     #space-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
+      position: fixed; inset: 0;
+      z-index: 0;
       pointer-events: none;
-      opacity: 0.85;
     }
-    .nebula-depth {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      pointer-events: none;
-      background: radial-gradient(circle at 50% 10%, rgba(30, 41, 59, 0.4) 0%, transparent 60%),
-                  radial-gradient(circle at 90% 90%, rgba(212, 175, 55, 0.04) 0%, transparent 40%);
+    .nebula {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(79,142,247,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 80%, rgba(212,175,55,0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 0%, rgba(30,41,59,0.5) 0%, transparent 60%);
     }
 
+    /* ═══════════════════════════════
+       APP SHELL
+    ═══════════════════════════════ */
     .app-shell {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      height: 100%;
+      position: relative; z-index: 10;
+      width: 100%; height: 100%;
       display: flex;
     }
 
-    /* === BARRA LATERAL (MINIMALISTA & PROFESIONAL) === */
+    /* ═══════════════════════════════
+       SIDEBAR
+    ═══════════════════════════════ */
     .sidebar {
-      width: 270px;
-      background: rgba(12, 16, 25, 0.88);
-      backdrop-filter: blur(24px);
+      width: 260px;
+      background: rgba(11,15,26,0.92);
+      backdrop-filter: blur(28px);
       border-right: 1px solid var(--border-subtle);
       display: flex;
       flex-direction: column;
       flex-shrink: 0;
-      transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .sidebar.is-collapsed {
-      width: 0;
+      transition: width 0.28s cubic-bezier(0.4,0,0.2,1), opacity 0.2s;
       overflow: hidden;
-      border-right: none;
     }
+    .sidebar.collapsed { width: 0; border: none; }
 
     .sidebar-header {
-      padding: 18px 20px 14px;
+      padding: 18px 16px 12px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 10px;
     }
-    .brand-title {
+    .brand-logo {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--gold) 0%, #b8930f 100%);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; flex-shrink: 0;
+      box-shadow: 0 0 12px var(--gold-glow);
+    }
+    .brand-name {
       font-family: 'Cinzel', serif;
-      font-size: 1rem;
+      font-size: 0.85rem;
       font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--gold-primary);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-new-chat {
-      margin: 8px 16px 14px;
-      padding: 11px 16px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-sm);
+      letter-spacing: 0.08em;
       color: var(--text-main);
-      font-size: 0.86rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .btn-new-chat:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: var(--border-focus);
-      color: #fff;
-    }
-
-    /* HISTORIAL DE CHATS */
-    .chat-history-list {
-      flex: 1;
-      overflow-y: auto;
-      padding: 4px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-    .history-item {
-      padding: 9px 12px;
-      border-radius: var(--radius-sm);
-      color: var(--text-secondary);
-      font-size: 0.84rem;
-      cursor: pointer;
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      transition: all 0.15s;
     }
-    .history-item:hover {
-      background: var(--bg-hover);
-      color: #fff;
-    }
-    .history-item.active {
-      background: rgba(212, 175, 55, 0.12);
-      color: var(--gold-light);
-      font-weight: 500;
-    }
-
-    /* MENÚ INFERIOR DE CONFIGURACIÓN & PERFIL */
-    .sidebar-footer {
-      border-top: 1px solid var(--border-subtle);
-      padding: 12px 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      background: rgba(8, 11, 18, 0.6);
-    }
-    .sidebar-btn {
-      padding: 9px 12px;
-      border-radius: var(--radius-sm);
-      color: var(--text-secondary);
-      font-size: 0.84rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      text-align: left;
-      width: 100%;
-      transition: all 0.15s;
-    }
-    .sidebar-btn:hover {
-      background: var(--bg-hover);
-      color: #fff;
-    }
-    .user-pill {
-      margin-top: 6px;
-      padding: 8px 12px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.8rem;
-    }
-    .badge-tier {
-      font-size: 0.68rem;
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
+    .brand-sub {
+      font-size: 0.6rem;
+      color: var(--gold);
+      letter-spacing: 0.15em;
       text-transform: uppercase;
+      margin-top: 1px;
     }
-    .tier-classic { background: rgba(148, 163, 184, 0.15); color: #cbd5e1; }
-    .tier-vip { background: rgba(212, 175, 55, 0.2); color: var(--gold-light); border: 1px solid var(--gold-primary); }
 
-    /* === ÁREA PRINCIPAL === */
-    .main-viewport {
+    .sidebar-btn-row {
+      padding: 0 10px 10px;
+    }
+    .new-chat-btn {
+      width: 100%;
+      padding: 10px 14px;
+      background: rgba(212,175,55,0.1);
+      border: 1px solid rgba(212,175,55,0.25);
+      border-radius: var(--r-md);
+      color: var(--gold-light);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+    }
+    .new-chat-btn:hover {
+      background: rgba(212,175,55,0.18);
+      border-color: rgba(212,175,55,0.5);
+      box-shadow: 0 0 16px var(--gold-glow);
+    }
+
+    .sidebar-divider {
+      height: 1px;
+      background: var(--border-subtle);
+      margin: 0 16px 10px;
+    }
+
+    /* Modos de cerebro */
+    .brain-section { padding: 0 10px 8px; }
+    .section-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      padding: 4px 8px 8px;
+      font-weight: 600;
+    }
+    .brain-btn {
+      width: 100%;
+      padding: 9px 12px;
+      border-radius: var(--r-sm);
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 10px;
+      transition: all 0.18s;
+      font-family: 'Inter', sans-serif;
+      text-align: left;
+      margin-bottom: 2px;
+      white-space: nowrap;
+    }
+    .brain-btn:hover {
+      background: var(--bg-hover);
+      color: var(--text-main);
+    }
+    .brain-btn.active {
+      background: rgba(212,175,55,0.1);
+      border-color: rgba(212,175,55,0.3);
+      color: var(--gold-light);
+    }
+    .brain-icon { font-size: 1rem; flex-shrink: 0; }
+    .brain-info { flex: 1; overflow: hidden; }
+    .brain-label { font-weight: 600; font-size: 0.82rem; }
+    .brain-desc { font-size: 0.68rem; color: var(--text-muted); margin-top: 1px; }
+    .brain-btn.active .brain-desc { color: rgba(212,175,55,0.7); }
+    .tier-badge {
+      font-size: 0.6rem;
+      padding: 2px 6px;
+      border-radius: var(--r-pill);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+    }
+    .badge-free { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+    .badge-pro { background: rgba(79,142,247,0.15); color: #93c5fd; border: 1px solid rgba(79,142,247,0.3); }
+    .badge-vip { background: rgba(212,175,55,0.15); color: var(--gold); border: 1px solid rgba(212,175,55,0.3); }
+
+    /* Acciones rápidas */
+    .quick-section { padding: 0 10px 8px; }
+    .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .quick-btn {
+      padding: 8px 6px;
+      border-radius: var(--r-sm);
+      border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.03);
+      color: var(--text-secondary);
+      font-size: 0.72rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      transition: all 0.18s;
+      font-family: 'Inter', sans-serif;
+    }
+    .quick-btn:hover {
+      background: var(--bg-hover);
+      border-color: rgba(212,175,55,0.3);
+      color: var(--gold-light);
+    }
+    .quick-btn .qi { font-size: 1.1rem; }
+
+    /* Colecciones */
+    .coll-section { padding: 0 10px; flex: 1; overflow-y: auto; }
+    .coll-section::-webkit-scrollbar { width: 3px; }
+    .coll-section::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+    .coll-link {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 10px;
+      border-radius: var(--r-sm);
+      border: 1px solid transparent;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 500;
+      transition: all 0.18s;
+      margin-bottom: 3px;
+    }
+    .coll-link:hover {
+      background: var(--bg-hover);
+      border-color: var(--border-subtle);
+      color: var(--text-main);
+    }
+    .coll-link .ci { font-size: 1rem; flex-shrink: 0; }
+    .coll-name { font-weight: 600; font-size: 0.78rem; }
+    .coll-count { font-size: 0.65rem; color: var(--text-muted); }
+
+    /* Sidebar footer */
+    .sidebar-footer {
+      padding: 10px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .footer-btn {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: var(--r-sm);
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all 0.18s;
+      font-family: 'Inter', sans-serif;
+      text-align: left;
+      white-space: nowrap;
+    }
+    .footer-btn:hover { background: var(--bg-hover); color: var(--text-main); }
+    .footer-btn.gold { color: var(--gold); }
+    .footer-btn.gold:hover { background: rgba(212,175,55,0.1); }
+
+    /* ═══════════════════════════════
+       MAIN CHAT AREA
+    ═══════════════════════════════ */
+    .main {
       flex: 1;
       display: flex;
       flex-direction: column;
-      height: 100vh;
-      position: relative;
-      background: transparent;
+      overflow: hidden;
+      min-width: 0;
     }
 
-    /* BARRA SUPERIOR */
-    .navbar {
-      height: 60px;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    /* Topbar */
+    .topbar {
+      height: 56px;
+      display: flex; align-items: center; gap: 10px;
+      padding: 0 16px;
       border-bottom: 1px solid var(--border-subtle);
-      background: rgba(10, 14, 22, 0.75);
-      backdrop-filter: blur(20px);
-      z-index: 30;
+      background: rgba(11,15,26,0.7);
+      backdrop-filter: blur(16px);
+      flex-shrink: 0;
     }
-    .navbar-left {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .toggle-icon {
-      background: transparent;
-      border: none;
-      color: var(--text-secondary);
-      font-size: 1.25rem;
-      cursor: pointer;
-      padding: 6px;
-      border-radius: var(--radius-sm);
-      display: grid;
-      place-items: center;
-      transition: background 0.15s;
-    }
-    .toggle-icon:hover { background: var(--bg-hover); color: #fff; }
-
-    /* SELECTOR DE MODALIDAD (3 NIVELES) */
-    .tier-selector {
-      display: flex;
-      background: rgba(255, 255, 255, 0.04);
+    .toggle-sidebar-btn {
+      width: 36px; height: 36px;
+      border-radius: var(--r-sm);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-pill);
-      padding: 3px;
-      gap: 4px;
-    }
-    .tier-btn {
-      padding: 5px 14px;
-      border-radius: var(--radius-pill);
-      border: none;
       background: transparent;
       color: var(--text-secondary);
-      font-size: 0.8rem;
-      font-weight: 600;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      transition: all 0.18s;
+      flex-shrink: 0;
     }
-    .tier-btn.active {
-      background: var(--bg-panel);
-      color: var(--gold-light);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-      border: 1px solid var(--border-focus);
-    }
+    .toggle-sidebar-btn:hover { background: var(--bg-hover); color: var(--text-main); }
 
-    .navbar-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .nav-action-btn {
-      padding: 6px 14px;
-      border-radius: var(--radius-pill);
+    .topbar-brain-pill {
+      display: flex; align-items: center; gap: 7px;
+      padding: 6px 12px;
+      border-radius: var(--r-pill);
+      background: rgba(212,175,55,0.08);
+      border: 1px solid rgba(212,175,55,0.2);
       font-size: 0.8rem;
       font-weight: 600;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      color: var(--gold-light);
+    }
+    .topbar-brain-pill .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
+
+    .topbar-spacer { flex: 1; }
+
+    .topbar-action {
+      height: 34px;
+      padding: 0 14px;
+      border-radius: var(--r-pill);
       border: 1px solid var(--border-subtle);
-      background: rgba(255, 255, 255, 0.03);
+      background: transparent;
       color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 500;
       cursor: pointer;
-      transition: all 0.2s;
+      display: flex; align-items: center; gap: 6px;
+      transition: all 0.18s;
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
     }
-    .nav-action-btn:hover {
-      border-color: var(--gold-primary);
-      color: #fff;
+    .topbar-action:hover { background: var(--bg-hover); color: var(--text-main); border-color: rgba(255,255,255,0.15); }
+    .topbar-action.gold {
+      border-color: rgba(212,175,55,0.3);
+      color: var(--gold);
     }
-    .nav-action-btn.primary {
-      background: rgba(212, 175, 55, 0.15);
-      border-color: var(--gold-primary);
-      color: var(--gold-light);
-    }
-    .nav-action-btn.primary:hover {
-      background: var(--gold-primary);
-      color: #000;
-    }
+    .topbar-action.gold:hover { background: rgba(212,175,55,0.1); }
 
-    /* CONTENEDOR DE CONVERSACIÓN */
-    .chat-view {
+    /* Avatar usuario */
+    .user-avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-accent), #7c3aed);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.2s;
+      flex-shrink: 0;
+    }
+    .user-avatar:hover { border-color: var(--gold); }
+    .user-avatar.guest { background: rgba(255,255,255,0.1); border: 1px solid var(--border-subtle); font-size: 0.9rem; }
+
+    /* ═══════════════════════════════
+       CHAT MESSAGES
+    ═══════════════════════════════ */
+    .messages-area {
       flex: 1;
       overflow-y: auto;
-      padding: 24px 24px 130px;
-      display: flex;
-      flex-direction: column;
+      padding: 24px 0;
       scroll-behavior: smooth;
     }
-    .chat-column {
-      max-width: 800px;
-      width: 100%;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
+    .messages-area::-webkit-scrollbar { width: 4px; }
+    .messages-area::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 4px; }
 
-    /* HERO WELCOME ESTILO GEMINI */
-    .welcome-hero {
-      margin-top: 48px;
-      margin-bottom: 24px;
-      animation: fadeIn 0.3s ease-out;
-    }
-    .hero-title {
-      font-size: 3rem;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      background: linear-gradient(135deg, #f8fafc 0%, #cbd5e1 50%, var(--gold-primary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 6px;
-    }
-    .hero-subtitle {
-      font-size: 1.6rem;
-      font-weight: 300;
-      color: var(--text-muted);
-      margin-bottom: 36px;
-      letter-spacing: -0.01em;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
-    }
-    .preset-card {
-      background: rgba(17, 23, 38, 0.7);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 16px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 120px;
-      backdrop-filter: blur(12px);
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .preset-card:hover {
-      border-color: var(--border-focus);
-      background: rgba(25, 34, 55, 0.85);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    }
-    .preset-card-text { font-size: 0.86rem; color: var(--text-main); line-height: 1.45; }
-    .preset-card-icon { align-self: flex-end; font-size: 1.25rem; color: var(--gold-primary); }
-
-    /* BURBUJAS DE MENSAJES */
-    .chat-row {
-      display: flex;
-      gap: 16px;
-      animation: fadeIn 0.25s ease-out;
-    }
-    .avatar-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-size: 0.95rem;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .chat-row.user .avatar-icon {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-main);
-    }
-    .chat-row.bot .avatar-icon {
-      background: linear-gradient(135deg, var(--gold-primary) 0%, #00f0ff 100%);
-      color: #000;
-      font-weight: 700;
-    }
-    .message-body {
-      flex: 1;
-      font-size: 0.96rem;
-      line-height: 1.65;
-      color: var(--text-main);
-      word-break: break-word;
-    }
-    .message-meta {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .message-meta span.tag {
-      font-size: 0.62rem;
-      padding: 1px 6px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--gold-light);
-    }
-    .message-media-img {
-      max-width: 100%;
-      border-radius: var(--radius-md);
-      margin-top: 12px;
-      border: 1px solid var(--border-subtle);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-      display: block;
-    }
-
-    /* BARRA INFERIOR DE ENTRADA (PILL MINIMALISTA) */
-    .dock-container {
-      position: absolute;
-      bottom: 20px;
-      left: 0;
-      right: 0;
-      max-width: 800px;
+    .messages-inner {
+      max-width: 760px;
       margin: 0 auto;
       padding: 0 20px;
-      z-index: 30;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 8px;
+      gap: 20px;
     }
-    .dock-pill {
-      width: 100%;
-      background: rgba(17, 23, 38, 0.94);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
+
+    /* Welcome screen */
+    .welcome-screen {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      text-align: center;
+      gap: 16px;
+    }
+    .welcome-gem {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, var(--gold) 0%, #9b6f00 100%);
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 0 40px rgba(212,175,55,0.3);
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    .welcome-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 60%, #b8930f 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .welcome-sub {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      max-width: 420px;
+      line-height: 1.6;
+    }
+    .welcome-chips {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      justify-content: center;
+      margin-top: 8px;
+    }
+    .chip {
       padding: 8px 16px;
-      display: flex;
-      align-items: flex-end;
-      gap: 12px;
-      box-shadow: 0 12px 35px rgba(0,0,0,0.6);
-      backdrop-filter: blur(20px);
-      transition: all 0.2s ease;
+      border-radius: var(--r-pill);
+      border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.03);
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.18s;
     }
-    .dock-pill:focus-within {
-      border-color: var(--border-focus);
-      box-shadow: 0 0 25px var(--gold-glow);
+    .chip:hover {
+      border-color: rgba(212,175,55,0.4);
+      background: rgba(212,175,55,0.07);
+      color: var(--gold-light);
     }
-    .dock-input {
+
+    /* Mensajes */
+    .msg { display: flex; gap: 12px; }
+    .msg.user { flex-direction: row-reverse; }
+    .msg-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; flex-shrink: 0; margin-top: 2px;
+    }
+    .msg-avatar.ai {
+      background: linear-gradient(135deg, var(--gold) 0%, #9b6f00 100%);
+      box-shadow: 0 0 10px var(--gold-glow);
+    }
+    .msg-avatar.user { background: linear-gradient(135deg, var(--blue-accent), #7c3aed); }
+    .msg-bubble {
+      max-width: 75%;
+      padding: 12px 16px;
+      border-radius: var(--r-md);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+    .msg.ai .msg-bubble {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px var(--r-md) var(--r-md) var(--r-md);
+    }
+    .msg.user .msg-bubble {
+      background: rgba(79,142,247,0.15);
+      border: 1px solid rgba(79,142,247,0.25);
+      border-radius: var(--r-md) 4px var(--r-md) var(--r-md);
+      text-align: right;
+    }
+    .msg-sender {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .msg.user .msg-sender { color: var(--blue-accent); text-align: right; }
+
+    /* Imagen generada */
+    .img-result {
+      max-width: 340px;
+      border-radius: var(--r-md);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+    .img-result img { width: 100%; display: block; }
+    .img-result-link {
+      display: block;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.04);
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--gold);
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .img-result-link:hover { background: rgba(212,175,55,0.1); }
+
+    /* Typing indicator */
+    .typing {
+      display: flex; gap: 5px; align-items: center;
+      padding: 12px 16px;
+    }
+    .typing span {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--gold);
+      animation: bounce 1.2s infinite;
+    }
+    .typing span:nth-child(2) { animation-delay: 0.2s; }
+    .typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce { 0%,100% { transform: translateY(0); opacity:0.4; } 50% { transform: translateY(-5px); opacity:1; } }
+
+    /* ═══════════════════════════════
+       INPUT AREA
+    ═══════════════════════════════ */
+    .input-area {
+      padding: 12px 20px 20px;
+      flex-shrink: 0;
+    }
+    .input-wrapper {
+      max-width: 760px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-lg);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      overflow: hidden;
+    }
+    .input-wrapper:focus-within {
+      border-color: rgba(212,175,55,0.4);
+      box-shadow: 0 0 20px rgba(212,175,55,0.08);
+    }
+    .input-top {
+      display: flex; align-items: flex-end; gap: 8px;
+      padding: 12px 14px 8px;
+    }
+    #chat-input {
       flex: 1;
       background: transparent;
       border: none;
       outline: none;
-      color: #fff;
-      font-family: inherit;
-      font-size: 0.96rem;
-      line-height: 1.5;
+      color: var(--text-main);
+      font-size: 0.92rem;
+      font-family: 'Inter', sans-serif;
       resize: none;
-      min-height: 42px;
       max-height: 160px;
-      padding: 9px 0;
+      line-height: 1.6;
+      padding: 2px 0;
     }
-    .dock-input::placeholder { color: var(--text-muted); }
+    #chat-input::placeholder { color: var(--text-muted); }
+    .send-btn {
+      width: 36px; height: 36px;
+      border-radius: var(--r-sm);
+      background: var(--gold);
+      border: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: all 0.18s;
+      box-shadow: 0 2px 10px var(--gold-glow);
+    }
+    .send-btn:hover { background: var(--gold-light); transform: scale(1.05); }
+    .send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+    .input-bottom {
+      display: flex; align-items: center; gap: 6px;
+      padding: 0 14px 10px;
+    }
+    .input-pill {
+      padding: 4px 10px;
+      border-radius: var(--r-pill);
+      border: 1px solid var(--border-subtle);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: 'Inter', sans-serif;
+    }
+    .input-pill:hover { border-color: rgba(212,175,55,0.3); color: var(--gold-light); background: rgba(212,175,55,0.07); }
+    .input-hint { margin-left: auto; font-size: 0.68rem; color: var(--text-muted); }
 
-    .dock-btn {
-      width: 36px;
-      height: 36px;
+    /* ═══════════════════════════════
+       MODALES BASE
+    ═══════════════════════════════ */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal-box {
+      background: rgba(14,20,35,0.98);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-lg);
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(212,175,55,0.08);
+      overflow: hidden;
+      transform: translateY(16px);
+      transition: transform 0.25s;
+    }
+    .modal-overlay.open .modal-box { transform: translateY(0); }
+
+    .modal-box.wide { max-width: 560px; }
+
+    .modal-header {
+      padding: 20px 22px 16px;
+      display: flex; align-items: flex-start; justify-content: space-between;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .modal-title { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; }
+    .modal-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 3px; }
+    .modal-close {
+      width: 30px; height: 30px;
       border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.06);
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s;
+    }
+    .modal-close:hover { background: rgba(239,68,68,0.15); color: var(--red); }
+
+    .modal-body { padding: 20px 22px; }
+
+    /* ═══════════════════════════════
+       MODAL LOGIN
+    ═══════════════════════════════ */
+    .login-tabs {
+      display: flex; gap: 4px;
+      background: rgba(255,255,255,0.04);
+      padding: 4px;
+      border-radius: var(--r-sm);
+      margin-bottom: 20px;
+    }
+    .login-tab {
+      flex: 1;
+      padding: 8px;
+      border-radius: 6px;
       border: none;
       background: transparent;
       color: var(--text-secondary);
-      font-size: 1.15rem;
+      font-size: 0.82rem;
+      font-weight: 600;
       cursor: pointer;
-      display: grid;
-      place-items: center;
-      transition: all 0.15s;
+      transition: all 0.18s;
+      font-family: 'Inter', sans-serif;
     }
-    .dock-btn:hover { background: var(--bg-hover); color: #fff; }
-    .dock-btn.send {
-      background: var(--gold-primary);
-      color: #000;
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
-    .dock-btn.send:hover {
-      background: var(--gold-light);
-      transform: scale(1.05);
-    }
-    .dock-btn.send:disabled {
-      background: rgba(255, 255, 255, 0.12);
-      color: rgba(255, 255, 255, 0.3);
-      cursor: not-allowed;
-      transform: none;
-    }
+    .login-tab.active { background: rgba(212,175,55,0.15); color: var(--gold-light); }
 
-    .legal-notice {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      text-align: center;
+    .form-group { margin-bottom: 14px; }
+    .form-label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
     }
-
-    /* === MODALES (PLUGINS, API KEYS, LOGIN) === */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
+    .form-input {
       width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      z-index: 1000;
-      display: none;
-      place-items: center;
-      backdrop-filter: blur(14px);
-    }
-    .modal-overlay.open { display: grid; }
-    .modal-card {
-      width: min(520px, calc(100vw - 32px));
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.9);
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    .modal-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border-subtle);
-      padding-bottom: 12px;
-    }
-    .modal-head h3 { font-size: 1.05rem; font-weight: 600; color: #fff; }
-    
-    /* PLUGIN TOGGLES */
-    .plugin-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .plugin-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 14px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-sm);
-    }
-    .plugin-info h4 { font-size: 0.88rem; color: #fff; margin-bottom: 2px; }
-    .plugin-info p { font-size: 0.75rem; color: var(--text-muted); }
-    .switch {
-      position: relative; display: inline-block; width: 44px; height: 24px;
-    }
-    .switch input { opacity: 0; width: 0; height: 0; }
-    .slider {
-      position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(255, 255, 255, 0.15); transition: .2s; border-radius: 24px;
-    }
-    .slider:before {
-      position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
-      background-color: white; transition: .2s; border-radius: 50%;
-    }
-    input:checked + .slider { background-color: var(--gold-primary); }
-    input:checked + .slider:before { transform: translateX(20px); background-color: #000; }
-
-    /* INPUTS DE FORMULARIO */
-    .form-group { display: flex; flex-direction: column; gap: 6px; }
-    .form-group label { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px; }
-    .form-control {
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-sm);
       padding: 10px 14px;
-      color: #fff;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-sm);
+      color: var(--text-main);
       font-size: 0.88rem;
+      font-family: 'Inter', sans-serif;
       outline: none;
+      transition: border-color 0.2s;
     }
-    .form-control:focus { border-color: var(--gold-primary); }
-    .btn-submit {
-      background: var(--gold-primary);
-      color: #000;
-      border: none;
-      border-radius: var(--radius-sm);
+    .form-input:focus { border-color: rgba(212,175,55,0.5); }
+    .form-input::placeholder { color: var(--text-muted); }
+
+    .btn-primary {
+      width: 100%;
       padding: 12px;
+      background: linear-gradient(135deg, var(--gold) 0%, #b8930f 100%);
+      border: none;
+      border-radius: var(--r-sm);
+      color: #000;
+      font-size: 0.9rem;
       font-weight: 700;
-      font-size: 0.88rem;
       cursor: pointer;
       transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+      margin-top: 4px;
     }
-    .btn-submit:hover { background: var(--gold-light); }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 16px var(--gold-glow); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
+    .or-divider {
+      text-align: center;
+      position: relative;
+      margin: 14px 0;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+    .or-divider::before, .or-divider::after {
+      content: '';
+      position: absolute; top: 50%;
+      width: calc(50% - 24px);
+      height: 1px;
+      background: var(--border-subtle);
+    }
+    .or-divider::before { left: 0; }
+    .or-divider::after { right: 0; }
+
+    .btn-ghost {
+      width: 100%;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-sm);
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.18s;
+      font-family: 'Inter', sans-serif;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); color: var(--text-main); }
+
+    .login-note {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════
+       MODAL PLUGINS / API KEYS / TIERS
+    ═══════════════════════════════ */
+    .settings-tabs {
+      display: flex; gap: 2px;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 20px;
+    }
+    .stab {
+      padding: 10px 16px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: all 0.18s;
+      font-family: 'Inter', sans-serif;
+    }
+    .stab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    .stab-panel { display: none; }
+    .stab-panel.active { display: block; }
+
+    /* Tiers */
+    .tier-cards { display: flex; flex-direction: column; gap: 10px; }
+    .tier-card {
+      padding: 16px;
+      border-radius: var(--r-md);
+      border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.02);
+      transition: all 0.2s;
+      position: relative;
+    }
+    .tier-card.active-tier {
+      border-color: rgba(212,175,55,0.4);
+      background: rgba(212,175,55,0.05);
+    }
+    .tier-card:hover { border-color: rgba(255,255,255,0.15); }
+    .tier-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .tier-emoji { font-size: 1.3rem; }
+    .tier-title { font-weight: 700; font-size: 0.95rem; }
+    .tier-price { margin-left: auto; font-size: 0.85rem; font-weight: 700; color: var(--gold); }
+    .tier-features { list-style: none; }
+    .tier-features li {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      padding: 3px 0;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .tier-features li::before { content: '✓'; color: var(--green); font-weight: 700; }
+    .tier-features li.locked::before { content: '🔒'; }
+    .tier-btn {
+      width: 100%;
+      padding: 9px;
+      border-radius: var(--r-sm);
+      border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.05);
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: all 0.18s;
+      font-family: 'Inter', sans-serif;
+    }
+    .tier-btn.current { border-color: rgba(212,175,55,0.3); color: var(--gold); background: rgba(212,175,55,0.07); cursor: default; }
+    .tier-btn.upgrade { background: linear-gradient(135deg, var(--gold), #b8930f); color: #000; border-color: transparent; cursor: pointer; }
+    .tier-btn.upgrade:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* API Keys panel */
+    .key-row {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 10px;
+    }
+    .key-row .form-input { flex: 1; font-size: 0.8rem; font-family: monospace; }
+    .key-label-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+    .key-info { font-size: 0.7rem; color: var(--text-muted); }
+
+    /* Plugins */
+    .plugin-list { display: flex; flex-direction: column; gap: 8px; }
+    .plugin-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px;
+      border-radius: var(--r-md);
+      border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.02);
+    }
+    .plugin-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .plugin-info { flex: 1; }
+    .plugin-name { font-weight: 600; font-size: 0.85rem; }
+    .plugin-desc { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+    .toggle-switch {
+      width: 40px; height: 22px;
+      border-radius: var(--r-pill);
+      background: rgba(255,255,255,0.1);
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: white;
+      top: 3px; left: 3px;
+      transition: transform 0.2s;
+    }
+    .toggle-switch.on { background: var(--gold); }
+    .toggle-switch.on::after { transform: translateX(18px); }
+    .plugin-tier-lock { font-size: 0.7rem; color: var(--text-muted); padding: 3px 8px; border: 1px solid var(--border-subtle); border-radius: var(--r-pill); }
+
+    /* ═══════════════════════════════
+       TOAST NOTIFICATIONS
+    ═══════════════════════════════ */
+    .toast-container {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      z-index: 2000;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .toast {
+      padding: 12px 18px;
+      border-radius: var(--r-sm);
+      background: rgba(14,20,35,0.97);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      display: flex; align-items: center; gap: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      animation: slideIn 0.3s, fadeOut 0.3s 2.7s forwards;
+      max-width: 320px;
+    }
+    .toast.success { border-color: rgba(34,197,94,0.3); }
+    .toast.error { border-color: rgba(239,68,68,0.3); }
+    @keyframes slideIn { from { transform: translateX(40px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes fadeOut { to { opacity: 0; transform: translateX(20px); } }
+
+    /* ═══════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════ */
+    @media (max-width: 640px) {
+      .sidebar { position: fixed; z-index: 500; height: 100%; }
+      .sidebar.collapsed { display: none; }
+      .topbar-action span { display: none; }
+      .topbar-action { padding: 0 10px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- CANVAS UNIVERSO SUTIL -->
-  <canvas id="space-canvas"></canvas>
-  <div class="nebula-depth"></div>
+<!-- FONDO UNIVERSO -->
+<canvas id="space-canvas"></canvas>
+<div class="nebula"></div>
 
-  <div class="app-shell">
+<!-- APP -->
+<div class="app-shell">
 
-    <!-- SIDEBAR MINIMALISTA -->
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-header">
-        <a href="https://50e6f7-2.myshopify.com" target="_blank" class="brand-title">
-          <span style="font-size:1.2rem;">✦</span>
-          <span>Kabalion</span>
-        </a>
-        <button class="toggle-icon" onclick="toggleSidebar()" title="Ocultar menú">✕</button>
+  <!-- ══════════ SIDEBAR ══════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="brand-logo">⚡</div>
+      <div>
+        <div class="brand-name">KABALION</div>
+        <div class="brand-sub">AI Suite</div>
       </div>
+    </div>
 
-      <button class="btn-new-chat" onclick="startNewChat()">
-        <span style="font-size:1.1rem; line-height:1;">＋</span>
-        <span>Nuevo Chat</span>
+    <div class="sidebar-btn-row">
+      <button class="new-chat-btn" onclick="newChat()">
+        ✦ <span>Nuevo Chat</span>
+      </button>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <!-- Selector de cerebro -->
+    <div class="brain-section">
+      <div class="section-label">Cerebro Activo</div>
+
+      <button class="brain-btn active" id="btn-paisa" onclick="selectBrain('paisa')">
+        <span class="brain-icon">☕</span>
+        <div class="brain-info">
+          <div class="brain-label">El Parche Paisa</div>
+          <div class="brain-desc">Asesor de ventas</div>
+        </div>
+        <span class="tier-badge badge-free">FREE</span>
       </button>
 
-      <!-- HISTORIAL RECIENTE -->
-      <div class="chat-history-list" id="chat-history">
-        <div class="history-item active">Conversación actual</div>
-      </div>
+      <button class="brain-btn" id="btn-axel" onclick="selectBrain('axel')">
+        <span class="brain-icon">⚡</span>
+        <div class="brain-info">
+          <div class="brain-label">AXEL (Groq 120B)</div>
+          <div class="brain-desc">Estratégico</div>
+        </div>
+        <span class="tier-badge badge-free">FREE</span>
+      </button>
 
-      <!-- MENÚ INFERIOR PROFESIONAL -->
-      <div class="sidebar-footer">
-        <button class="sidebar-btn" onclick="openModal('modal-plugins')">
-          <span>🧩</span> <span>Plugins & Habilidades</span>
+      <button class="brain-btn" id="btn-deepseek" onclick="selectBrain('deepseek')">
+        <span class="brain-icon">🔬</span>
+        <div class="brain-info">
+          <div class="brain-label">DeepSeek R1</div>
+          <div class="brain-desc">Razonamiento puro</div>
+        </div>
+        <span class="tier-badge badge-pro">PRO</span>
+      </button>
+
+      <button class="brain-btn" id="btn-flux" onclick="selectBrain('flux')">
+        <span class="brain-icon">🎨</span>
+        <div class="brain-info">
+          <div class="brain-label">Forja Visual FLUX</div>
+          <div class="brain-desc">Genera imágenes 8K</div>
+        </div>
+        <span class="tier-badge badge-vip">VIP</span>
+      </button>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <!-- Acciones rápidas -->
+    <div class="quick-section">
+      <div class="section-label">Acciones Rápidas</div>
+      <div class="quick-grid">
+        <button class="quick-btn" onclick="quickAction('catalog')">
+          <span class="qi">🛍️</span>Ver Catálogo
         </button>
-        <button class="sidebar-btn" onclick="openModal('modal-apikeys')">
-          <span>🔑</span> <span>API Keys & Configuración</span>
+        <button class="quick-btn" onclick="quickAction('image')">
+          <span class="qi">🖼️</span>Pintar Imagen
         </button>
-        
-        <div class="user-pill" id="user-pill">
-          <div>
-            <div id="user-name-display" style="font-weight:600; color:#fff;">Visitante</div>
-            <div id="user-tier-display" style="font-size:0.7rem; color:var(--text-muted);">Modo Clásico (Gratis)</div>
-          </div>
-          <button class="nav-action-btn" onclick="openModal('modal-login')" id="btn-login-label" style="padding:4px 10px; font-size:0.72rem;">
-            Entrar
-          </button>
-        </div>
+        <button class="quick-btn" onclick="quickAction('whatsapp')">
+          <span class="qi">☕</span>Pedir Tintico
+        </button>
+        <button class="quick-btn" onclick="quickAction('telegram')">
+          <span class="qi">📡</span>Avisar a Kevin
+        </button>
       </div>
-    </aside>
+    </div>
 
-    <!-- ÁREA PRINCIPAL -->
-    <main class="main-viewport">
-      
-      <!-- NAVBAR -->
-      <header class="navbar">
-        <div class="navbar-left">
-          <button class="toggle-icon" onclick="toggleSidebar()" title="Mostrar/ocultar menú">☰</button>
-          
-          <!-- SELECTOR DE 3 MODALIDADES (CLÁSICO / PRO / EXCLUSIVO) -->
-          <div class="tier-selector">
-            <button class="tier-btn active" id="btn-tier-classic" onclick="setTier('classic')">
-              <span>☕</span> <span>Clásico</span>
-            </button>
-            <button class="tier-btn" id="btn-tier-pro" onclick="setTier('pro')">
-              <span>⚡</span> <span>Pro</span>
-            </button>
-            <button class="tier-btn" id="btn-tier-vip" onclick="setTier('vip')">
-              <span>👑</span> <span>Exclusivo</span>
-            </button>
-          </div>
+    <div class="sidebar-divider"></div>
+
+    <!-- Colecciones -->
+    <div class="coll-section">
+      <div class="section-label">Colecciones VIP</div>
+      <a href="https://50e6f7-2.myshopify.com/collections/el-parche-paisa" target="_blank" class="coll-link">
+        <span class="ci">🌿</span>
+        <div>
+          <div class="coll-name">El Parche Paisa</div>
+          <div class="coll-count">282 artículos • Cultura & estilo</div>
         </div>
-
-        <div class="navbar-right">
-          <a href="https://wa.me/573106150016?text=Hola%2C%20estoy%20en%20El%20Parche%20y%20quiero%20hacer%20un%20pedido" target="_blank" class="nav-action-btn">
-            <span>📲</span> <span>WhatsApp</span>
-          </a>
-          <button class="nav-action-btn primary" onclick="openModal('modal-apikeys')">
-            <span>⚙️</span> <span>Mis Llaves</span>
-          </button>
+      </a>
+      <a href="https://50e6f7-2.myshopify.com/collections/bolsos-y-accesorios" target="_blank" class="coll-link">
+        <span class="ci">👜</span>
+        <div>
+          <div class="coll-name">Bolsos & Accesorios</div>
+          <div class="coll-count">35 artículos • Marroquinería</div>
         </div>
-      </header>
-
-      <!-- STREAM DEL CHAT -->
-      <div class="chat-view" id="chat-scroll">
-        <div class="chat-column" id="chat-column">
-          
-          <!-- HERO BIENVENIDA -->
-          <div class="welcome-hero" id="welcome-hero">
-            <h1 class="hero-title" id="hero-greeting">Hola, Kevin</h1>
-            <h2 class="hero-subtitle">¿En qué puedo ayudarte hoy en La Ciudadela?</h2>
-
-            <div class="cards-grid">
-              <div class="preset-card" onclick="runPreset('Pinta un frasco de perfume negro y oro con fondo de mármol en 8k')">
-                <span class="preset-card-text">Pinta un frasco de perfume en 8K ultra lujo con FLUX</span>
-                <span class="preset-card-icon">🎨</span>
-              </div>
-              <div class="preset-card" onclick="runPreset('¿Qué productos destacados tiene la colección El Parche Paisa y cuáles recomiendas?')">
-                <span class="preset-card-text">Explora los productos de la tienda y recomiéndame los mejores</span>
-                <span class="preset-card-icon">🛍️</span>
-              </div>
-              <div class="preset-card" onclick="runPreset('Redacta una propuesta comercial persuasiva B2B de alto impacto')">
-                <span class="preset-card-text">Escribe una propuesta de ventas para cerrar clientes VIP</span>
-                <span class="preset-card-icon">💼</span>
-              </div>
-              <div class="preset-card" onclick="runPreset('AXEL, reporte del estado de los workflows y módulos de automatización')">
-                <span class="preset-card-text">Reporte estratégico del ecosistema autónomo</span>
-                <span class="preset-card-icon">🧠</span>
-              </div>
-            </div>
-          </div>
-
+      </a>
+      <a href="https://50e6f7-2.myshopify.com/collections/difusores-fuego-alquimico" target="_blank" class="coll-link">
+        <span class="ci">🔥</span>
+        <div>
+          <div class="coll-name">Fuego Alquímico</div>
+          <div class="coll-count">Difusores & aromas</div>
         </div>
+      </a>
+      <a href="https://50e6f7-2.myshopify.com" target="_blank" class="coll-link">
+        <span class="ci">🏪</span>
+        <div>
+          <div class="coll-name">Tienda Completa</div>
+          <div class="coll-count">La esquina de los calle</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Footer sidebar -->
+    <div class="sidebar-footer">
+      <button class="footer-btn" onclick="openModal('settings-modal')">⚙️ Configuración & Plugins</button>
+      <button class="footer-btn gold" onclick="openModal('settings-modal'); switchTab('tiers')">💎 Ver Planes</button>
+    </div>
+  </aside>
+
+  <!-- ══════════ MAIN ══════════ -->
+  <main class="main">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <button class="toggle-sidebar-btn" onclick="toggleSidebar()" title="Menú">☰</button>
+
+      <div class="topbar-brain-pill">
+        <div class="dot"></div>
+        <span id="topbar-brain-name">El Parche Paisa</span>
       </div>
 
-      <!-- DOCK DE ENTRADA -->
-      <div class="dock-container">
-        <div class="dock-pill">
-          <textarea id="chat-input" class="dock-input" placeholder="Escribe un mensaje o describe una imagen..." rows="1" onkeydown="onInputKey(event)"></textarea>
-          
-          <div style="display:flex; align-items:center; gap:6px;">
-            <button class="dock-btn" onclick="toggleVoiceDictation()" id="mic-btn" title="Dictar por voz">🎙️</button>
-            <button class="dock-btn send" onclick="sendMessage()" id="send-btn" title="Enviar mensaje">↑</button>
+      <div class="topbar-spacer"></div>
+
+      <button class="topbar-action" onclick="openModal('settings-modal')">
+        🔑 <span>API Keys</span>
+      </button>
+      <button class="topbar-action" onclick="openModal('settings-modal')">
+        🧩 <span>Plugins</span>
+      </button>
+      <button class="topbar-action gold" onclick="openModal('settings-modal'); switchTab('tiers')">
+        💎 <span>Planes</span>
+      </button>
+
+      <!-- Avatar / Login -->
+      <div class="user-avatar guest" id="user-avatar" onclick="openModal('login-modal')" title="Iniciar sesión">
+        👤
+      </div>
+    </div>
+
+    <!-- Mensajes -->
+    <div class="messages-area" id="messages-area">
+      <div class="messages-inner" id="messages-inner">
+        <div class="welcome-screen" id="welcome-screen">
+          <div class="welcome-gem">⚡</div>
+          <div class="welcome-title">El Parche IA</div>
+          <div class="welcome-sub">
+            Bienvenido a la suite de inteligencia artificial de <strong>La esquina de los calle</strong>. 
+            Asesoría de lujo, generación de imágenes y superpoderes digitales, todo en un solo lugar.
           </div>
-        </div>
-        <div class="legal-notice">
-          Kabalion AI • La esquina de los calle • Ecosistema seguro con protección de cuotas.
+          <div class="welcome-chips">
+            <div class="chip" onclick="sendPrompt('¿Qué bolsos tienen disponibles?')">🛍️ Ver bolsos disponibles</div>
+            <div class="chip" onclick="sendPrompt('Genera una imagen de lujo para mi tienda')">🎨 Generar imagen</div>
+            <div class="chip" onclick="sendPrompt('¿Cuáles son sus mejores productos?')">⭐ Mejores productos</div>
+            <div class="chip" onclick="sendPrompt('Quiero hacer un pedido')">📦 Hacer un pedido</div>
+          </div>
         </div>
       </div>
+    </div>
 
-    </main>
-
-  </div>
-
-  <!-- MODAL: PLUGINS & HABILIDADES -->
-  <div class="modal-overlay" id="modal-plugins">
-    <div class="modal-card">
-      <div class="modal-head">
-        <h3>🧩 Plugins & Habilidades Activas</h3>
-        <button class="toggle-icon" onclick="closeModal('modal-plugins')">✕</button>
-      </div>
-      <div class="plugin-list">
-        <div class="plugin-item">
-          <div class="plugin-info">
-            <h4>🎨 Forja Visual FLUX (8K)</h4>
-            <p>Generación de imágenes fotorrealistas con IA sin marcas de agua.</p>
-          </div>
-          <label class="switch"><input type="checkbox" id="plug-flux" checked><span class="slider"></span></label>
+    <!-- Input -->
+    <div class="input-area">
+      <div class="input-wrapper">
+        <div class="input-top">
+          <textarea id="chat-input" placeholder="Pregunta algo, genera una imagen, o pide lo que necesites..." rows="1"
+            onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+          <button class="send-btn" id="send-btn" onclick="sendMessage()">➤</button>
         </div>
-        <div class="plugin-item">
-          <div class="plugin-info">
-            <h4>🛍️ Radar de Catálogo Shopify</h4>
-            <p>Búsqueda inteligente en los 282 productos de La esquina de los calle.</p>
-          </div>
-          <label class="switch"><input type="checkbox" id="plug-catalog" checked><span class="slider"></span></label>
-        </div>
-        <div class="plugin-item">
-          <div class="plugin-info">
-            <h4>💼 Dealmaker B2B Copywriter</h4>
-            <p>Redacción persuasiva de correos en frío y propuestas comerciales.</p>
-          </div>
-          <label class="switch"><input type="checkbox" id="plug-deal" checked><span class="slider"></span></label>
-        </div>
-        <div class="plugin-item">
-          <div class="plugin-info">
-            <h4>📡 Centinela Telegram</h4>
-            <p>Envío de alertas de alta prioridad directamente a tu celular.</p>
-          </div>
-          <label class="switch"><input type="checkbox" id="plug-telegram" checked><span class="slider"></span></label>
+        <div class="input-bottom">
+          <button class="input-pill" onclick="selectBrain('paisa')">☕ Paisa</button>
+          <button class="input-pill" onclick="selectBrain('axel')">⚡ AXEL</button>
+          <button class="input-pill" onclick="selectBrain('flux')">🎨 FLUX</button>
+          <span class="input-hint">↵ Enviar • Shift+↵ Salto de línea</span>
         </div>
       </div>
-      <button class="btn-submit" onclick="closeModal('modal-plugins')">Guardar Preferencias</button>
+    </div>
+  </main>
+</div>
+
+<!-- ═══════════════════════════════════
+     MODAL LOGIN
+═══════════════════════════════════ -->
+<div class="modal-overlay" id="login-modal" onclick="overlayClose(event,'login-modal')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">⚡ Acceder a Kabalion AI</div>
+        <div class="modal-sub">Inicia sesión para guardar tu historial y tus preferencias</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('login-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="login-tabs">
+        <button class="login-tab active" onclick="switchLoginTab('login')">Iniciar Sesión</button>
+        <button class="login-tab" onclick="switchLoginTab('register')">Registrarse</button>
+      </div>
+
+      <!-- Panel login -->
+      <div id="tab-login">
+        <div class="form-group">
+          <label class="form-label">Correo electrónico</label>
+          <input type="email" class="form-input" id="login-email" placeholder="tu@correo.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Contraseña</label>
+          <input type="password" class="form-input" id="login-pass" placeholder="••••••••">
+        </div>
+        <button class="btn-primary" onclick="doLogin()">Entrar al Parche ⚡</button>
+        <div class="or-divider">o continúa como</div>
+        <button class="btn-ghost" onclick="guestMode()">👤 Invitado (modo gratis limitado)</button>
+        <div class="login-note">Al acceder aceptas los términos de uso. Plan Clásico es gratis siempre.</div>
+      </div>
+
+      <!-- Panel register -->
+      <div id="tab-register" style="display:none">
+        <div class="form-group">
+          <label class="form-label">Nombre</label>
+          <input type="text" class="form-input" id="reg-name" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Correo electrónico</label>
+          <input type="email" class="form-input" id="reg-email" placeholder="tu@correo.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Contraseña</label>
+          <input type="password" class="form-input" id="reg-pass" placeholder="Mínimo 8 caracteres">
+        </div>
+        <button class="btn-primary" onclick="doRegister()">Crear Cuenta Gratis ⚡</button>
+        <div class="login-note">Empieza con el Plan Clásico gratuito. Mejora cuando quieras.</div>
+      </div>
     </div>
   </div>
+</div>
 
-  <!-- MODAL: API KEYS (BYOK) -->
-  <div class="modal-overlay" id="modal-apikeys">
-    <div class="modal-card">
-      <div class="modal-head">
-        <h3>🔑 Gestión de Llaves API (BYOK)</h3>
-        <button class="toggle-icon" onclick="closeModal('modal-apikeys')">✕</button>
+<!-- ═══════════════════════════════════
+     MODAL CONFIGURACIÓN (Plugins + API Keys + Tiers)
+═══════════════════════════════════ -->
+<div class="modal-overlay" id="settings-modal" onclick="overlayClose(event,'settings-modal')">
+  <div class="modal-box wide">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">⚙️ Configuración</div>
+        <div class="modal-sub">Plugins, claves API y planes de acceso</div>
       </div>
-      <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.4;">
-        Para usar los modos <b>Pro</b> y <b>Exclusivo</b> sin límites de saldo, guarda tus propias credenciales. Se almacenan cifradas en tu navegador local.
-      </p>
-      <div class="form-group">
-        <label>Groq API Key (Gratis en console.groq.com)</label>
-        <input type="password" class="form-control" id="input-byok-groq" placeholder="gsk_...">
+      <button class="modal-close" onclick="closeModal('settings-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="settings-tabs">
+        <button class="stab active" onclick="switchTab('plugins')">🧩 Plugins</button>
+        <button class="stab" onclick="switchTab('keys')">🔑 API Keys</button>
+        <button class="stab" onclick="switchTab('tiers')">💎 Planes</button>
       </div>
-      <div class="form-group">
-        <label>OpenRouter / OpenAI API Key (Opcional)</label>
-        <input type="password" class="form-control" id="input-byok-openrouter" placeholder="sk-...">
+
+      <!-- PLUGINS -->
+      <div class="stab-panel active" id="panel-plugins">
+        <div class="plugin-list">
+
+          <div class="plugin-item">
+            <div class="plugin-icon">🛍️</div>
+            <div class="plugin-info">
+              <div class="plugin-name">Radar de Tienda</div>
+              <div class="plugin-desc">Consulta el catálogo real de La esquina de los calle en tiempo real</div>
+            </div>
+            <button class="toggle-switch on" id="plug-catalog" onclick="togglePlugin(this)"></button>
+          </div>
+
+          <div class="plugin-item">
+            <div class="plugin-icon">🎨</div>
+            <div class="plugin-info">
+              <div class="plugin-name">Forja Visual FLUX</div>
+              <div class="plugin-desc">Genera imágenes ultrarrealistas con IA (Pollinations FLUX)</div>
+            </div>
+            <button class="toggle-switch on" id="plug-flux" onclick="togglePlugin(this)"></button>
+          </div>
+
+          <div class="plugin-item">
+            <div class="plugin-icon">📲</div>
+            <div class="plugin-info">
+              <div class="plugin-name">WhatsApp Directo</div>
+              <div class="plugin-desc">Botón de pedido directo al +573106150016</div>
+            </div>
+            <button class="toggle-switch on" id="plug-wa" onclick="togglePlugin(this)"></button>
+          </div>
+
+          <div class="plugin-item">
+            <div class="plugin-icon">📡</div>
+            <div class="plugin-info">
+              <div class="plugin-name">Alertas Telegram</div>
+              <div class="plugin-desc">Envía notas directas al bot @Kabalion_2_bot</div>
+            </div>
+            <button class="toggle-switch" id="plug-tg" onclick="togglePlugin(this)"></button>
+          </div>
+
+          <div class="plugin-item">
+            <div class="plugin-icon">🧠</div>
+            <div class="plugin-info">
+              <div class="plugin-name">Multi-Modelo (AXEL + DeepSeek)</div>
+              <div class="plugin-desc">Accede a Groq 120B y DeepSeek R1 vía n8n</div>
+            </div>
+            <span class="plugin-tier-lock">PRO</span>
+          </div>
+
+          <div class="plugin-item">
+            <div class="plugin-icon">📊</div>
+            <div class="plugin-info">
+              <div class="plugin-name">Análisis de Ventas</div>
+              <div class="plugin-desc">Estadísticas de tu tienda Shopify en tiempo real</div>
+            </div>
+            <span class="plugin-tier-lock">VIP</span>
+          </div>
+
+        </div>
       </div>
-      <button class="btn-submit" onclick="saveApiKeys()">Guardar Mis Credenciales</button>
+
+      <!-- API KEYS -->
+      <div class="stab-panel" id="panel-keys">
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:16px;line-height:1.6;">
+          🔒 Tus claves se guardan <strong>solo en tu navegador</strong>, nunca en nuestros servidores. 
+          Sin clave, usamos el cerebro compartido gratuito.
+        </p>
+
+        <div class="form-group">
+          <div class="key-label-row">
+            <label class="form-label" style="margin:0">🔑 Groq API Key</label>
+            <span class="key-info">Modelos: llama, mixtral, gemma</span>
+          </div>
+          <div class="key-row">
+            <input type="password" class="form-input" id="key-groq" placeholder="gsk_••••••••••••">
+            <button class="input-pill" onclick="saveKey('groq')">Guardar</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="key-label-row">
+            <label class="form-label" style="margin:0">🔑 OpenRouter API Key</label>
+            <span class="key-info">Acceso a 200+ modelos</span>
+          </div>
+          <div class="key-row">
+            <input type="password" class="form-input" id="key-openrouter" placeholder="sk-or-••••••••••••">
+            <button class="input-pill" onclick="saveKey('openrouter')">Guardar</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="key-label-row">
+            <label class="form-label" style="margin:0">🔑 DeepSeek API Key</label>
+            <span class="key-info">Razonamiento matemático R1</span>
+          </div>
+          <div class="key-row">
+            <input type="password" class="form-input" id="key-deepseek" placeholder="sk-••••••••••••">
+            <button class="input-pill" onclick="saveKey('deepseek')">Guardar</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="key-label-row">
+            <label class="form-label" style="margin:0">🔑 Gemini API Key</label>
+            <span class="key-info">Google Gemini 2.0 Flash</span>
+          </div>
+          <div class="key-row">
+            <input type="password" class="form-input" id="key-gemini" placeholder="AIza••••••••••••">
+            <button class="input-pill" onclick="saveKey('gemini')">Guardar</button>
+          </div>
+        </div>
+
+        <button class="btn-primary" style="margin-top:8px" onclick="loadKeys()">🔄 Cargar mis claves guardadas</button>
+      </div>
+
+      <!-- TIERS -->
+      <div class="stab-panel" id="panel-tiers">
+        <div class="tier-cards">
+
+          <div class="tier-card active-tier" id="tier-clasico">
+            <div class="tier-header">
+              <div class="tier-emoji">☕</div>
+              <div>
+                <div class="tier-title">Clásico</div>
+                <div style="font-size:0.72rem;color:var(--text-muted)">El Parche de siempre</div>
+              </div>
+              <div class="tier-price">Gratis</div>
+            </div>
+            <ul class="tier-features">
+              <li>Chat El Parche Paisa (asesor de ventas)</li>
+              <li>Chat AXEL vía n8n (limitado)</li>
+              <li>Generador de imágenes FLUX</li>
+              <li>Acceso al catálogo de la tienda</li>
+              <li class="locked">DeepSeek R1 (bloqueado)</li>
+              <li class="locked">API Keys personales (bloqueado)</li>
+            </ul>
+            <button class="tier-btn current">✓ Plan actual</button>
+          </div>
+
+          <div class="tier-card" id="tier-pro">
+            <div class="tier-header">
+              <div class="tier-emoji">⚡</div>
+              <div>
+                <div class="tier-title">Pro</div>
+                <div style="font-size:0.72rem;color:var(--text-muted)">Para los que van en serio</div>
+              </div>
+              <div class="tier-price">$9.99/mes</div>
+            </div>
+            <ul class="tier-features">
+              <li>Todo lo del Clásico</li>
+              <li>DeepSeek R1 (razonamiento ilimitado)</li>
+              <li>API Keys propias (Groq, OpenRouter)</li>
+              <li>Sin límite de mensajes</li>
+              <li>Historial completo</li>
+              <li class="locked">Análisis de ventas (Exclusivo)</li>
+            </ul>
+            <button class="tier-btn upgrade" onclick="showUpgrade('pro')">⚡ Actualizar a Pro</button>
+          </div>
+
+          <div class="tier-card" id="tier-vip">
+            <div class="tier-header">
+              <div class="tier-emoji">💎</div>
+              <div>
+                <div class="tier-title">Exclusivo VIP</div>
+                <div style="font-size:0.72rem;color:var(--text-muted)">El poder total del Parche</div>
+              </div>
+              <div class="tier-price">$29.99/mes</div>
+            </div>
+            <ul class="tier-features">
+              <li>Todo lo del Pro</li>
+              <li>Acceso prioritario a todos los modelos</li>
+              <li>Análisis de ventas Shopify en tiempo real</li>
+              <li>Soporte directo con Kevin por WhatsApp</li>
+              <li>Modelos Gemini 2.5 Pro y GPT-4o</li>
+              <li>Personalización total del asistente</li>
+            </ul>
+            <button class="tier-btn upgrade" onclick="showUpgrade('vip')">💎 Conseguir VIP</button>
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
+</div>
 
-  <!-- MODAL: LOGIN / ACCESO MAESTRO -->
-  <div class="modal-overlay" id="modal-login">
-    <div class="modal-card">
-      <div class="modal-head">
-        <h3>👑 Acceso Maestro • El Creador</h3>
-        <button class="toggle-icon" onclick="closeModal('modal-login')">✕</button>
-      </div>
-      <p style="font-size:0.8rem; color:var(--text-muted);">
-        Ingresa con tus credenciales de Creador para desbloquear todos los 13 workflows y modelos sin restricciones.
-      </p>
-      <div class="form-group">
-        <label>Correo Electrónico</label>
-        <input type="email" class="form-control" id="login-email" value="kevin@kabalion.ai">
-      </div>
-      <div class="form-group">
-        <label>Contraseña Maestra</label>
-        <input type="password" class="form-control" id="login-pass" placeholder="••••••••••••">
-      </div>
-      <button class="btn-submit" onclick="performLogin()">Ingresar como Creador</button>
+<!-- Toast container -->
+<div class="toast-container" id="toasts"></div>
+
+<!-- ═══════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════ -->
+<script>
+// ════════════════════════════════════
+// ESTADO GLOBAL
+// ════════════════════════════════════
+const STATE = {
+  brain: 'paisa',
+  user: null,
+  messages: [],
+  typing: false,
+  plugins: { catalog: true, flux: true, wa: true, tg: false }
+};
+
+const BRAINS = {
+  paisa: { name: 'El Parche Paisa', icon: '☕', tier: 'free' },
+  axel:  { name: 'AXEL (Groq 120B)', icon: '⚡', tier: 'free' },
+  deepseek: { name: 'DeepSeek R1', icon: '🔬', tier: 'pro' },
+  flux:  { name: 'Forja Visual FLUX', icon: '🎨', tier: 'vip' }
+};
+
+const N8N_WEBHOOK = 'https://n8n-latest-4uo1.onrender.com/webhook/portal-central';
+const SUPABASE_URL = 'https://bedixienygfeqtadzeng.supabase.co/functions/v1/parche_paisa';
+const TELEGRAM_BOT = '8084499817:AAG0nrN8ViZJ7PJLxfA6qPJdJl96UvhCFy4';
+const TELEGRAM_CHAT = '7748395590';
+
+// ════════════════════════════════════
+// FONDO UNIVERSO
+// ════════════════════════════════════
+(function initSpace() {
+  const canvas = document.getElementById('space-canvas');
+  const ctx = canvas.getContext('2d');
+  let stars = [], W, H;
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    stars = Array.from({ length: 200 }, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      r: Math.random() * 1.4 + 0.3,
+      a: Math.random(), speed: Math.random() * 0.4 + 0.1,
+      twinkle: Math.random() * Math.PI * 2
+    }));
+  }
+
+  function draw(ts) {
+    ctx.clearRect(0, 0, W, H);
+    stars.forEach(s => {
+      s.twinkle += s.speed * 0.025;
+      const alpha = s.a * (0.5 + 0.5 * Math.sin(s.twinkle));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  requestAnimationFrame(draw);
+})();
+
+// ════════════════════════════════════
+// SIDEBAR
+// ════════════════════════════════════
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('collapsed');
+}
+
+// ════════════════════════════════════
+// CEREBROS
+// ════════════════════════════════════
+function selectBrain(id) {
+  STATE.brain = id;
+  document.querySelectorAll('.brain-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('btn-' + id);
+  if (btn) btn.classList.add('active');
+  document.getElementById('topbar-brain-name').textContent = BRAINS[id].name;
+  toast(`${BRAINS[id].icon} Cerebro activo: ${BRAINS[id].name}`, 'success');
+}
+
+// ════════════════════════════════════
+// MODALES
+// ════════════════════════════════════
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function overlayClose(e, id) { if (e.target.id === id) closeModal(id); }
+
+function switchLoginTab(tab) {
+  document.querySelectorAll('.login-tab').forEach((t,i) => {
+    t.classList.toggle('active', (i === 0 && tab==='login') || (i === 1 && tab==='register'));
+  });
+  document.getElementById('tab-login').style.display = tab === 'login' ? '' : 'none';
+  document.getElementById('tab-register').style.display = tab === 'register' ? '' : 'none';
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.stab').forEach((s,i) => {
+    const tabs = ['plugins','keys','tiers'];
+    s.classList.toggle('active', tabs[i] === tab);
+  });
+  document.querySelectorAll('.stab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + tab).classList.add('active');
+}
+
+// ════════════════════════════════════
+// AUTH (simulado — conectar a Supabase Auth si deseas)
+// ════════════════════════════════════
+function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-pass').value;
+  if (!email || !pass) { toast('Llena todos los campos', 'error'); return; }
+  // Simulación — aquí conectarías Supabase Auth
+  STATE.user = { email, name: email.split('@')[0] };
+  updateAvatar();
+  closeModal('login-modal');
+  toast(`✅ Bienvenido, ${STATE.user.name}!`, 'success');
+}
+
+function doRegister() {
+  const name  = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const pass  = document.getElementById('reg-pass').value;
+  if (!name || !email || !pass) { toast('Llena todos los campos', 'error'); return; }
+  STATE.user = { email, name };
+  updateAvatar();
+  closeModal('login-modal');
+  toast(`🎉 Cuenta creada, ${name}! Bienvenido al Parche.`, 'success');
+}
+
+function guestMode() {
+  STATE.user = { name: 'Invitado', guest: true };
+  updateAvatar();
+  closeModal('login-modal');
+  toast('👤 Modo invitado activo', 'success');
+}
+
+function updateAvatar() {
+  const av = document.getElementById('user-avatar');
+  if (STATE.user && STATE.user.name) {
+    av.textContent = STATE.user.name[0].toUpperCase();
+    av.classList.remove('guest');
+  } else {
+    av.textContent = '👤';
+    av.classList.add('guest');
+  }
+}
+
+// ════════════════════════════════════
+// API KEYS (localStorage BYOK)
+// ════════════════════════════════════
+function saveKey(provider) {
+  const val = document.getElementById('key-' + provider).value.trim();
+  if (!val) { toast('Pega tu clave primero', 'error'); return; }
+  localStorage.setItem('krc_key_' + provider, val);
+  toast(`🔑 Clave ${provider} guardada en tu navegador`, 'success');
+}
+
+function loadKeys() {
+  ['groq','openrouter','deepseek','gemini'].forEach(p => {
+    const v = localStorage.getItem('krc_key_' + p);
+    if (v) {
+      const el = document.getElementById('key-' + p);
+      if (el) el.value = v;
+    }
+  });
+  toast('🔑 Claves cargadas desde tu dispositivo', 'success');
+}
+
+// Cargar al inicio
+loadKeys();
+
+// ════════════════════════════════════
+// PLUGINS
+// ════════════════════════════════════
+function togglePlugin(btn) {
+  btn.classList.toggle('on');
+}
+
+// ════════════════════════════════════
+// TIERS
+// ════════════════════════════════════
+function showUpgrade(tier) {
+  const url = tier === 'pro'
+    ? 'https://wa.me/573106150016?text=Hola%20Kevin%2C%20quiero%20el%20Plan%20Pro%20de%20El%20Parche%20IA'
+    : 'https://wa.me/573106150016?text=Hola%20Kevin%2C%20quiero%20el%20Plan%20VIP%20de%20El%20Parche%20IA';
+  window.open(url, '_blank');
+  toast('📲 Te conectamos con Kevin para activar tu plan', 'success');
+}
+
+// ════════════════════════════════════
+// CHAT
+// ════════════════════════════════════
+function newChat() {
+  STATE.messages = [];
+  const inner = document.getElementById('messages-inner');
+  inner.innerHTML = `<div class="welcome-screen" id="welcome-screen">
+    <div class="welcome-gem">⚡</div>
+    <div class="welcome-title">El Parche IA</div>
+    <div class="welcome-sub">Bienvenido a la suite de inteligencia artificial de <strong>La esquina de los calle</strong>. Asesoría de lujo, generación de imágenes y superpoderes digitales.</div>
+    <div class="welcome-chips">
+      <div class="chip" onclick="sendPrompt('¿Qué bolsos tienen disponibles?')">🛍️ Ver bolsos disponibles</div>
+      <div class="chip" onclick="sendPrompt('Genera una imagen de lujo para mi tienda')">🎨 Generar imagen</div>
+      <div class="chip" onclick="sendPrompt('¿Cuáles son sus mejores productos?')">⭐ Mejores productos</div>
+      <div class="chip" onclick="sendPrompt('Quiero hacer un pedido')">📦 Hacer un pedido</div>
     </div>
-  </div>
+  </div>`;
+  toast('✦ Nuevo chat iniciado', 'success');
+}
 
-  <script>
-    let activeTier = 'classic';
-    const RENDER_BASE = "https://n8n-latest-4uo1.onrender.com";
+function sendPrompt(text) {
+  document.getElementById('chat-input').value = text;
+  sendMessage();
+}
 
-    // ESTADO DE SESIÓN
-    let isCreator = localStorage.getItem('krc_is_creator') === 'true';
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
 
-    function updateSessionUI() {
-      const nameDisp = document.getElementById('user-name-display');
-      const tierDisp = document.getElementById('user-tier-display');
-      const btnLogin = document.getElementById('btn-login-label');
-      const heroGreeting = document.getElementById('hero-greeting');
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 160) + 'px';
+}
 
-      if (isCreator) {
-        nameDisp.innerText = "Kevin Ruiz";
-        tierDisp.innerHTML = `<span class="badge-tier tier-vip">Creador VIP</span>`;
-        btnLogin.innerText = "Salir";
-        btnLogin.onclick = logoutUser;
-        if (heroGreeting) heroGreeting.innerText = "Hola, Kevin";
-        setTier('vip');
-      } else {
-        nameDisp.innerText = "Visitante";
-        tierDisp.innerHTML = `<span class="badge-tier tier-classic">Modo Clásico</span>`;
-        btnLogin.innerText = "Entrar";
-        btnLogin.onclick = () => openModal('modal-login');
-        if (heroGreeting) heroGreeting.innerText = "Bienvenido al Parche";
+function hideWelcome() {
+  const ws = document.getElementById('welcome-screen');
+  if (ws) ws.remove();
+}
+
+function appendMsg(role, content, sender) {
+  hideWelcome();
+  const inner = document.getElementById('messages-inner');
+  const div = document.createElement('div');
+  div.className = `msg ${role}`;
+  div.innerHTML = `
+    <div class="msg-avatar ${role}">${role === 'ai' ? '⚡' : (STATE.user ? STATE.user.name[0].toUpperCase() : '👤')}</div>
+    <div class="msg-bubble">
+      <div class="msg-sender">${sender}</div>
+      <div class="msg-content">${content}</div>
+    </div>`;
+  inner.appendChild(div);
+  div.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  return div;
+}
+
+function appendImg(prompt) {
+  hideWelcome();
+  const inner = document.getElementById('messages-inner');
+  const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt + ' ultra luxury cinematic lighting 8k')}?width=1024&height=1024&nologo=true&model=flux`;
+  const div = document.createElement('div');
+  div.className = 'msg ai';
+  div.innerHTML = `
+    <div class="msg-avatar ai">🎨</div>
+    <div class="msg-bubble">
+      <div class="msg-sender">Forja Visual FLUX</div>
+      <div class="img-result">
+        <img src="${url}" alt="${prompt}" loading="lazy" onerror="this.parentElement.innerHTML='<p style=padding:12px;color:var(--text-muted)>⚠️ Error generando la imagen. Intenta de nuevo.</p>'">
+        <a href="${url}" target="_blank" class="img-result-link">Ver en tamaño completo ↗</a>
+      </div>
+    </div>`;
+  inner.appendChild(div);
+  div.scrollIntoView({ behavior: 'smooth', block: 'end' });
+}
+
+function showTyping() {
+  hideWelcome();
+  const inner = document.getElementById('messages-inner');
+  const div = document.createElement('div');
+  div.className = 'msg ai';
+  div.id = 'typing-indicator';
+  div.innerHTML = `<div class="msg-avatar ai">⚡</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>`;
+  inner.appendChild(div);
+  div.scrollIntoView({ behavior: 'smooth', block: 'end' });
+}
+
+function hideTyping() {
+  const t = document.getElementById('typing-indicator');
+  if (t) t.remove();
+}
+
+async function sendMessage() {
+  if (STATE.typing) return;
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+  document.getElementById('send-btn').disabled = true;
+  STATE.typing = true;
+
+  // Mensaje del usuario
+  appendMsg('user', escHtml(text), STATE.user ? STATE.user.name : 'Tú');
+
+  // ═══ FLUX: generación de imagen ═══
+  if (STATE.brain === 'flux' || isImageRequest(text)) {
+    appendMsg('ai', '🎨 Forjando tu imagen, un momento...', 'Forja Visual FLUX');
+    setTimeout(() => {
+      appendImg(text);
+    }, 800);
+    done();
+    return;
+  }
+
+  showTyping();
+
+  try {
+    let reply = '';
+
+    // ═══ AXEL vía n8n ═══
+    if (STATE.brain === 'axel') {
+      const res = await fetch(N8N_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, session: 'parche-' + (STATE.user?.email || 'guest') })
+      });
+      if (!res.ok) throw new Error(`n8n error ${res.status}`);
+      const data = await res.json();
+      reply = data.reply || data.message || data.output || JSON.stringify(data);
+    }
+
+    // ═══ DeepSeek R1 con clave BYOK ═══
+    else if (STATE.brain === 'deepseek') {
+      const key = localStorage.getItem('krc_key_deepseek') || localStorage.getItem('krc_key_openrouter');
+      if (!key) {
+        hideTyping();
+        appendMsg('ai', '🔒 DeepSeek R1 requiere tu API Key. Ve a <strong>⚙️ Configuración → API Keys</strong> y pega tu clave de DeepSeek o OpenRouter.', BRAINS.deepseek.name);
+        done(); return;
       }
+      const isOR = key.startsWith('sk-or-');
+      const endpoint = isOR ? 'https://openrouter.ai/api/v1/chat/completions' : 'https://api.deepseek.com/v1/chat/completions';
+      const model = isOR ? 'deepseek/deepseek-r1' : 'deepseek-reasoner';
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model, messages: [{ role:'user', content: text }], max_tokens: 1024 })
+      });
+      if (!res.ok) throw new Error(`DeepSeek error ${res.status}`);
+      const data = await res.json();
+      reply = data.choices?.[0]?.message?.content || 'Sin respuesta';
     }
 
-    function setTier(tier) {
-      activeTier = tier;
-      document.querySelectorAll('.tier-btn').forEach(b => b.classList.remove('active'));
-      const btn = document.getElementById('btn-tier-' + tier);
-      if (btn) btn.classList.add('active');
-
-      const input = document.getElementById('chat-input');
-      if (tier === 'classic') {
-        input.placeholder = "Haz una pregunta sobre productos o tienda (Modo Gratis)...";
-      } else if (tier === 'pro') {
-        input.placeholder = "Consulta estratégica o pide código (Modo Pro)...";
-      } else if (tier === 'vip') {
-        input.placeholder = "Comando de Director Supremo o forja visual 8K...";
-      }
-    }
-
-    function toggleSidebar() {
-      document.getElementById('sidebar').classList.toggle('is-collapsed');
-    }
-
-    function openModal(id) {
-      if (id === 'modal-apikeys') {
-        document.getElementById('input-byok-groq').value = localStorage.getItem('byok_groq') || '';
-        document.getElementById('input-byok-openrouter').value = localStorage.getItem('byok_openrouter') || '';
-      }
-      document.getElementById(id).classList.add('open');
-    }
-
-    function closeModal(id) {
-      document.getElementById(id).classList.remove('open');
-    }
-
-    function saveApiKeys() {
-      const g = document.getElementById('input-byok-groq').value.trim();
-      const o = document.getElementById('input-byok-openrouter').value.trim();
-      if (g) localStorage.setItem('byok_groq', g);
-      if (o) localStorage.setItem('byok_openrouter', o);
-      closeModal('modal-apikeys');
-      alert('✅ Credenciales guardadas de forma segura en tu navegador.');
-    }
-
-    function performLogin() {
-      const pass = document.getElementById('login-pass').value.trim();
-      if (pass === 'Kabalion2026!*' || pass === 'kabalion' || pass === 'orionix') {
-        isCreator = true;
-        localStorage.setItem('krc_is_creator', 'true');
-        closeModal('modal-login');
-        updateSessionUI();
-        alert('👑 ¡Acceso Maestro desbloqueado! Bienvenido Kevin.');
-      } else {
-        alert('❌ Contraseña incorrecta.');
-      }
-    }
-
-    function logoutUser() {
-      isCreator = false;
-      localStorage.removeItem('krc_is_creator');
-      updateSessionUI();
-      setTier('classic');
-    }
-
-    function startNewChat() {
-      document.getElementById('chat-column').innerHTML = `
-        <div class="welcome-hero" id="welcome-hero">
-          <h1 class="hero-title">${isCreator ? 'Hola, Kevin' : 'Bienvenido al Parche'}</h1>
-          <h2 class="hero-subtitle">¿En qué puedo ayudarte hoy en La Ciudadela?</h2>
-          <div class="cards-grid">
-            <div class="preset-card" onclick="runPreset('Pinta un frasco de perfume negro y oro con fondo de mármol en 8k')">
-              <span class="preset-card-text">Pinta un frasco de perfume en 8K ultra lujo con FLUX</span>
-              <span class="preset-card-icon">🎨</span>
-            </div>
-            <div class="preset-card" onclick="runPreset('¿Qué productos destacados tiene la colección El Parche Paisa?')">
-              <span class="preset-card-text">Explora los productos de la tienda</span>
-              <span class="preset-card-icon">🛍️</span>
-            </div>
-          </div>
-        </div>`;
-    }
-
-    function runPreset(text) {
-      document.getElementById('chat-input').value = text;
-      sendMessage();
-    }
-
-    function onInputKey(e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-      }
-    }
-
-    function appendMessage(author, content, isUser = false, imgUrl = null, tierTag = 'CLÁSICO') {
-      const hero = document.getElementById('welcome-hero');
-      if (hero) hero.remove();
-
-      const container = document.getElementById('chat-column');
-      const row = document.createElement('div');
-      row.className = `chat-row ${isUser ? 'user' : 'bot'}`;
-
-      let avatar = isUser ? '👤' : '✦';
-      let html = `
-        <div class="avatar-icon">${avatar}</div>
-        <div class="message-body">
-          <div class="message-meta">
-            ${author}
-            ${!isUser ? `<span class="tag">${tierTag}</span>` : ''}
-          </div>
-          <div>${content}</div>`;
-      
-      if (imgUrl) {
-        html += `<img src="${imgUrl}" class="message-media-img" alt="Generada"><br><a href="${imgUrl}" target="_blank" style="color:var(--gold-primary); font-size:0.78rem; display:inline-block; margin-top:8px;">Ver en tamaño original ↗</a>`;
-      }
-
-      html += `</div>`;
-      row.innerHTML = html;
-      container.appendChild(row);
-
-      const scroll = document.getElementById('chat-scroll');
-      scroll.scrollTop = scroll.scrollHeight;
-    }
-
-    async function sendMessage() {
-      const input = document.getElementById('chat-input');
-      const text = input.value.trim();
-      const sendBtn = document.getElementById('send-btn');
-      if (!text || sendBtn.disabled) return;
-
-      input.value = '';
-      appendMessage('Tú', text, true);
-      sendBtn.disabled = true;
-
+    // ═══ El Parche Paisa (Supabase) ═══
+    else {
       try {
-        const isFluxEnabled = document.getElementById('plug-flux').checked;
-        const isImageReq = text.toLowerCase().startsWith('/imagen') || text.toLowerCase().startsWith('pinta') || text.toLowerCase().startsWith('crea una imagen');
-
-        if (isFluxEnabled && isImageReq) {
-          // FORJA VISUAL FLUX
-          const clean = text.replace(/^\/imagen/i, '').replace(/^(pinta|crea una imagen( de)?)/i, '').trim() || text;
-          const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(clean + ' ultra luxury 8k photorealistic dramatic lighting')}?width=1024&height=1024&nologo=true&model=flux`;
-          appendMessage('Forja Visual FLUX', `He forjado tu imagen para: <i>"${clean}"</i>`, false, imgUrl, 'FLUX 8K');
-        } else if (text.startsWith('/alerta')) {
-          // CENTINELA TELEGRAM
-          fetch(`${RENDER_BASE}/webhook/centinela-telegram`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ tipo: "Alerta Prioritaria", evento: text, urgencia: "Alta" })
-          }).catch(()=>{});
-          appendMessage('Centinela Telegram', '✅ ¡Alerta despachada en tiempo real a tu Telegram (@Kabalion_2_bot)!', false, null, 'TELEGRAM');
-        } else if (activeTier === 'pro' || activeTier === 'vip') {
-          // MODO PRO / VIP
-          const byokKey = localStorage.getItem('byok_groq');
-          
-          if (!isCreator && !byokKey) {
-            appendMessage('Sistema de Seguridad', `✦ <b>Modo Pro / Exclusivo Protegido:</b> Para usar razonamiento avanzado de 120B ilimitadamente, ingresa tu propia API Key en <b>⚙️ Mis Llaves</b> (es gratis en console.groq.com) o inicia sesión como Creador en el menú lateral. Mientras tanto, puedes usar el <b>Modo Clásico Gratis</b>.`, false, null, 'SEGURIDAD');
-            return;
-          }
-
-          if (byokKey && !isCreator) {
-            // Usuario con su propia llave
-            const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-              method: 'POST',
-              headers: { 'Authorization': `Bearer ${byokKey}`, 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                model: 'openai/gpt-oss-120b',
-                messages: [{ role: 'system', content: 'Eres AXEL, asesor inteligente de La Ciudadela y la tienda La esquina de los calle.' }, { role: 'user', content: text }]
-              })
-            });
-            const d = await r.json();
-            appendMessage('AXEL Director (Tu Key)', d.choices[0].message.content, false, null, 'PRO BYOK');
-          } else {
-            // El Creador en nube n8n
-            const res = await fetch(`${RENDER_BASE}/webhook/portal-central`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ prompt: text })
-            });
-            const data = await res.json();
-            appendMessage('AXEL Director (Groq 120B)', data.respuesta || JSON.stringify(data), false, null, 'EXCLUSIVO VIP');
-          }
-
-        } else {
-          // MODO CLÁSICO (GRATIS)
-          const res = await fetch(`${RENDER_BASE}/webhook/portal-central`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt: `Responde con tono paisa muy amable, profesional y comercial de la tienda La esquina de los calle (WhatsApp: 573106150016). Pregunta del cliente: ${text}` })
-          });
-          const data = await res.json();
-          appendMessage('Asesor El Parche', data.respuesta || '¡Qué hubo parce! Con todo el gusto le atiendo en La esquina de los calle.', false, null, 'CLÁSICO');
-        }
-      } catch(err) {
-        appendMessage('El Parche', `Hubo un pequeño retraso al conectar (${err.message}). Intenta enviar tu mensaje nuevamente.`, false, null, 'SISTEMA');
-      } finally {
-        sendBtn.disabled = false;
-      }
-    }
-
-    // VOZ
-    function toggleVoiceDictation() {
-      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SR) {
-        alert('Reconocimiento de voz no soportado en este navegador. Usa Chrome o Edge.');
-        return;
-      }
-      const rec = new SR();
-      rec.lang = 'es-CO';
-      const mic = document.getElementById('mic-btn');
-      mic.style.color = '#ef4444';
-
-      rec.onresult = (e) => {
-        document.getElementById('chat-input').value = e.results[0][0].transcript;
-        mic.style.color = '';
-      };
-      rec.onerror = () => { mic.style.color = ''; };
-      rec.onend = () => { mic.style.color = ''; };
-      rec.start();
-    }
-
-    // CANVAS ESTRELLAS SUTILES
-    (function initCosmos() {
-      const canvas = document.getElementById('space-canvas');
-      const ctx = canvas.getContext('2d');
-      let w, h;
-      let stars = [];
-
-      function resize() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-      }
-      window.onresize = resize;
-      resize();
-
-      for (let i = 0; i < 110; i++) {
-        stars.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          radius: Math.random() * 1.3,
-          alpha: Math.random() * 0.7,
-          delta: (Math.random() - 0.5) * 0.012
+        const res = await fetch(SUPABASE_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text })
         });
+        if (!res.ok) throw new Error('supabase');
+        const data = await res.json();
+        reply = data.reply || data.message || data.response || '¡Qué hubo parce! ¿En qué le puedo ayudar hoy?';
+      } catch {
+        // Fallback: n8n si Supabase falla
+        const res = await fetch(N8N_WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text, mode: 'paisa' })
+        });
+        const data = await res.json();
+        reply = data.reply || data.message || '¡Qué hubo parce! Estamos listos para atenderle.';
       }
+    }
 
-      function render() {
-        ctx.clearRect(0, 0, w, h);
-        for (let s of stars) {
-          s.alpha += s.delta;
-          if (s.alpha <= 0.1 || s.alpha >= 0.8) s.delta = -s.delta;
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha})`;
-          ctx.fill();
-        }
-        requestAnimationFrame(render);
-      }
-      render();
-    })();
+    hideTyping();
+    appendMsg('ai', formatReply(reply), BRAINS[STATE.brain].name);
 
-    // INICIAR
-    updateSessionUI();
-  </script>
+  } catch (err) {
+    hideTyping();
+    appendMsg('ai', `⚠️ No pude conectar con el cerebro activo. Verifica tu conexión o cambia de modo.<br><small style="color:var(--text-muted)">${err.message}</small>`, 'Sistema');
+  }
+
+  done();
+}
+
+function done() {
+  STATE.typing = false;
+  document.getElementById('send-btn').disabled = false;
+}
+
+function isImageRequest(text) {
+  const keywords = ['genera','crea','diseña','dibuja','pinta','imagen','foto','ilustra','render'];
+  return keywords.some(k => text.toLowerCase().includes(k));
+}
+
+function escHtml(t) { return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>'); }
+
+function formatReply(text) {
+  return text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g,'<em>$1</em>')
+    .replace(/\n/g,'<br>');
+}
+
+// ════════════════════════════════════
+// ACCIONES RÁPIDAS
+// ════════════════════════════════════
+function quickAction(action) {
+  switch(action) {
+    case 'catalog':
+      sendPrompt('Muéstrame los productos más populares de La esquina de los calle');
+      break;
+    case 'image':
+      selectBrain('flux');
+      sendPrompt('Crea una imagen de lujo para una tienda de moda callejera colombiana');
+      break;
+    case 'whatsapp':
+      window.open('https://wa.me/573106150016?text=Hola%2C%20estoy%20en%20El%20Parche%20y%20quiero%20hacer%20un%20pedido', '_blank');
+      toast('📲 Abriendo WhatsApp...', 'success');
+      break;
+    case 'telegram':
+      sendTelegram();
+      break;
+  }
+}
+
+async function sendTelegram() {
+  const msg = prompt('📡 ¿Qué le dices a Kevin?');
+  if (!msg) return;
+  try {
+    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: TELEGRAM_CHAT, text: `⚡ ALERTA EL PARCHE:\n${msg}`, parse_mode: 'Markdown' })
+    });
+    toast('📡 Mensaje enviado a Kevin vía Telegram', 'success');
+  } catch {
+    toast('⚠️ No se pudo enviar el mensaje Telegram', 'error');
+  }
+}
+
+// ════════════════════════════════════
+// TOAST NOTIFICATIONS
+// ════════════════════════════════════
+function toast(msg, type = '') {
+  const container = document.getElementById('toasts');
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.innerHTML = msg;
+  container.appendChild(el);
+  setTimeout(() => el.remove(), 3200);
+}
+
+// ════════════════════════════════════
+// INIT
+// ════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  // Verificar sesión guardada
+  const saved = localStorage.getItem('krc_user');
+  if (saved) {
+    try { STATE.user = JSON.parse(saved); updateAvatar(); } catch {}
+  }
+});
+</script>
 </body>
 </html>
